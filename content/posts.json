@@ -1,0 +1,532 @@
+[
+  {
+    "slug": "is-this-website-a-scam",
+    "title": "Is This Website a Scam? A Practical Checklist Before You Buy",
+    "description": "A plain-English checklist for judging whether a website is legitimate before you enter payment details.",
+    "category": "Website Scams",
+    "date": "2026-04-10",
+    "keywords": [
+      "is this website a scam",
+      "website scam checker",
+      "fake online shop"
+    ],
+    "hero": "Use this checklist before you buy from an unfamiliar online store.",
+    "sections": [
+      [
+        "Start with the basics",
+        "Look at the domain name, the spelling, and the overall quality of the site. Scam stores often rely on domains that mimic a real brand, use odd hyphens, or feel rushed in their wording. A legitimate business can still have a simple website, but a cluster of warning signs matters more than any single issue."
+      ],
+      [
+        "Check contact details and policies",
+        "A trustworthy retailer usually provides a real business name, an address, customer support details, shipping information, returns, and privacy terms. Read them. Scam sites often have generic policy text, broken links, or copied paragraphs that do not match the products being sold."
+      ],
+      [
+        "Review payment methods",
+        "Credit cards generally provide better consumer protection than bank transfer, cryptocurrency, or direct payment apps. If a site pushes you towards irreversible payment methods, treat that as a major warning. The less recourse you have after sending money, the more attractive the site is to fraudsters."
+      ],
+      [
+        "Inspect product pages",
+        "Scam stores frequently reuse the same product description across dozens of items, show inconsistent sizing information, and pair luxury-looking photography with very low prices. Reverse-searching a product image or checking whether the wording appears on other sites can expose copied listings."
+      ],
+      [
+        "Look for external reputation signals",
+        "Search the domain name alongside words such as review, scam, refund, and delivery. One angry review is not enough to convict a business, but patterns matter. Repeated complaints about items never arriving, fake tracking numbers, or impossible refunds should change your decision immediately."
+      ],
+      [
+        "What to do if you are still unsure",
+        "Pause the purchase. Search for the business on Companies House if it claims to be UK-based, look for independent reviews, and test the support email with a simple pre-sales question. If the response is evasive or never arrives, that tells you something useful before your money is at risk."
+      ]
+    ],
+    "faq": [
+      [
+        "Can a secure padlock prove a website is legitimate?",
+        "No. HTTPS only means the connection is encrypted. It does not prove the business is honest."
+      ],
+      [
+        "What is the biggest red flag?",
+        "Pressure to pay quickly with a non-reversible method is one of the strongest warning signs."
+      ],
+      [
+        "Should I trust social media ads?",
+        "Treat them as an introduction, not proof. Always check the site independently before buying."
+      ]
+    ]
+  },
+  {
+    "slug": "royal-mail-text-scam-guide",
+    "title": "Royal Mail Text Scam Guide: How to Spot the Common Delivery Message Trap",
+    "description": "How fake parcel delivery texts work, what signs to check, and what to do if you clicked the link.",
+    "category": "Text Message Scams",
+    "date": "2026-04-09",
+    "keywords": [
+      "royal mail scam text",
+      "parcel delivery text scam",
+      "smishing uk"
+    ],
+    "hero": "Fake delivery texts are designed to catch you when you are already expecting a parcel.",
+    "sections": [
+      [
+        "Why these messages work",
+        "Delivery scams succeed because they feel routine. A small unpaid fee, a missed-delivery message, or a request to confirm your address can sound plausible when you genuinely have parcels on the way. Fraudsters rely on speed, distraction, and volume."
+      ],
+      [
+        "Typical warning signs",
+        "Watch for shortened links, unusual sender numbers, urgent language, bad spelling, and requests for payment details. Some scam messages mention a tiny redelivery fee because it lowers your guard. Others imitate a brand style but take you to a domain that has nothing to do with the courier."
+      ],
+      [
+        "How to verify safely",
+        "Do not use the link in the message. Open the official courier app or type the courier website address into your browser yourself. If the message contains a tracking number, check it on the official site. Independent verification removes the scammer's main advantage."
+      ],
+      [
+        "If you clicked the link",
+        "Close the page. If you entered payment card details, contact your bank or card provider promptly and explain that you may have submitted details to a fraudulent site. If you entered passwords, change them immediately and turn on two-factor authentication where possible."
+      ],
+      [
+        "If you installed an app",
+        "Delete the app, run a security scan, review device permissions, and change important passwords from a clean device if possible. Mobile malware campaigns often try to capture messages, banking details, or authentication prompts."
+      ],
+      [
+        "How to reduce future risk",
+        "Use parcel apps from official app stores, be careful with unexpected texts, and treat any payment request in a delivery message as suspicious until proven otherwise."
+      ]
+    ],
+    "faq": [
+      [
+        "Are all parcel fee texts fake?",
+        "Not automatically, but you should never trust the embedded link. Verify through the official courier site or app instead."
+      ],
+      [
+        "Can scammers spoof sender names?",
+        "Yes. The sender name on a text is not reliable proof of authenticity."
+      ],
+      [
+        "Should I report the message?",
+        "Yes. Reporting helps carriers and networks disrupt repeat campaigns."
+      ]
+    ]
+  },
+  {
+    "slug": "paypal-email-scam-signs",
+    "title": "PayPal Email Scam Signs: How to Check a Message Without Panicking",
+    "description": "A checklist for reviewing suspicious PayPal emails and deciding whether a message is genuine.",
+    "category": "Email Scams",
+    "date": "2026-04-08",
+    "keywords": [
+      "paypal scam email",
+      "fake paypal email",
+      "phishing signs"
+    ],
+    "hero": "A genuine-looking payment email can still be a phishing attempt.",
+    "sections": [
+      [
+        "Slow the process down",
+        "Phishing emails rely on stress. They mention locked accounts, unauthorised payments, or urgent disputes because they want you to react before you inspect the details. The fastest way to reduce risk is to stop and verify through your account directly."
+      ],
+      [
+        "Check how the message addresses you",
+        "Generic greetings are common in phishing campaigns, although not universal. More important is whether the message asks you to click a link to solve a problem that you can instead verify by logging in through the official PayPal website or app."
+      ],
+      [
+        "Inspect links without clicking",
+        "On desktop, hover over a link to preview where it goes. On mobile, press and hold if your mail client supports previews. A message can mention PayPal in visible text while the real link leads elsewhere. That mismatch is a classic sign of phishing."
+      ],
+      [
+        "Review the sender and formatting",
+        "A scam email may use lookalike domains, inconsistent branding, or odd sentence structure. But do not rely solely on cosmetic quality. Some phishing campaigns are polished. The safest habit is independent verification through the official site, not the email pathway."
+      ],
+      [
+        "What to do if you clicked",
+        "If you entered credentials, change your PayPal password immediately, review account activity, update reused passwords elsewhere, and enable two-factor authentication. If card or bank details were involved, contact the relevant provider as well."
+      ],
+      [
+        "What a good routine looks like",
+        "Treat every money-related email as a prompt to open the real app or website separately. That single habit neutralises a large share of email scams."
+      ]
+    ],
+    "faq": [
+      [
+        "Can a phishing email look exactly like the real brand?",
+        "Yes. Branding is easy to copy, so appearance is never enough."
+      ],
+      [
+        "What if the email mentions a real invoice?",
+        "Log in through the official site and check there. Never trust the email path alone."
+      ],
+      [
+        "Should I forward scam emails to friends as a warning?",
+        "You can warn people, but avoid forwarding the malicious link itself."
+      ]
+    ]
+  },
+  {
+    "slug": "bank-transfer-scam-warning-signs",
+    "title": "Bank Transfer Scam Warning Signs Before You Send Money",
+    "description": "How to assess pressure tactics, fake invoices, account changes, and impersonation before a transfer.",
+    "category": "Payment Scams",
+    "date": "2026-04-07",
+    "keywords": [
+      "bank transfer scam",
+      "invoice fraud",
+      "authorised push payment scam"
+    ],
+    "hero": "A bank transfer is fast. Recovery can be much slower or impossible.",
+    "sections": [
+      [
+        "Why transfer scams are dangerous",
+        "Fraudsters like bank transfers because the payment is quick and often difficult to reverse. They may impersonate a tradesperson, solicitor, buyer, seller, employer, or even a family member. Once trust is established, the request itself can sound ordinary."
+      ],
+      [
+        "Common scenarios",
+        "Look out for last-minute changes to invoice details, messages claiming a supplier has a new bank account, emergency requests from a relative, and marketplace buyers pushing you to move off-platform. The pattern is usually the same: urgency plus a payment channel with limited protection."
+      ],
+      [
+        "Verification steps that matter",
+        "Verify account changes using a trusted phone number you already hold, not the number in the message. For high-value payments, confirm bank details by a second route and ask a specific question only the real counterparty would know. Independent verification is essential."
+      ],
+      [
+        "Pressure language to watch for",
+        "Scammers often claim a deadline is closing, work will stop, or legal consequences will follow unless you pay immediately. They want to collapse your decision window. Slowing down is not rude; it is a security measure."
+      ],
+      [
+        "If the payment has already gone",
+        "Contact your bank immediately and explain that you may have been tricked into an authorised push payment. Save screenshots, emails, invoices, and numbers used by the scammer. Early reporting improves the odds of intervention, even if recovery is not guaranteed."
+      ],
+      [
+        "A safer default",
+        "When money is moving, assume nothing and verify everything. The few minutes spent checking can prevent a much larger loss."
+      ]
+    ],
+    "faq": [
+      [
+        "Is a PDF invoice proof that a request is genuine?",
+        "No. Fraudsters can send polished invoices and fake letterheads."
+      ],
+      [
+        "What about messages from a known email address?",
+        "Accounts can be compromised or spoofed. Verify by another channel."
+      ],
+      [
+        "Should small transfers worry me less?",
+        "Not really. Scammers often start small to build trust before asking for more."
+      ]
+    ]
+  },
+  {
+    "slug": "crypto-investment-scam-checklist",
+    "title": "Crypto Investment Scam Checklist: What to Check Before You Send Funds",
+    "description": "A practical pre-send checklist for crypto investment offers, recovery rooms, and fake trading platforms.",
+    "category": "Investment Scams",
+    "date": "2026-04-06",
+    "keywords": [
+      "crypto scam",
+      "investment scam crypto",
+      "fake trading platform"
+    ],
+    "hero": "Crypto scams often look polished precisely because they need to overcome your caution.",
+    "sections": [
+      [
+        "The most common setup",
+        "A scam may begin with social media, messaging apps, online dating, or a referral from a so-called mentor. The platform then shows attractive returns, smooth withdrawals at first, and a convincing dashboard. The display is designed to simulate trust, not prove legitimacy."
+      ],
+      [
+        "Warning signs in the offer",
+        "Guaranteed returns, pressure to act quickly, private groups that discourage outside advice, and requests to top up an account to unlock withdrawals are all serious concerns. Recovery scams are another layer: once someone has lost money, a second fraudster offers to recover it for a fee."
+      ],
+      [
+        "How to verify claims",
+        "Check whether the company is regulated where it claims to operate, whether the team is real, and whether independent reporting raises concerns. Search the platform name with words like complaint, withdrawal, scam, and review. Look for detailed reports, not only star ratings."
+      ],
+      [
+        "Wallet and transfer precautions",
+        "Once crypto is sent, reversal is unlikely. That means you should treat every transfer as final unless you have independently validated the destination and purpose. Never rely on screenshots of profits or testimonials from strangers in a group chat."
+      ],
+      [
+        "If you already deposited",
+        "Stop sending more. Save transaction hashes, wallet addresses, account emails, and chat logs. Contact your exchange if relevant and report the case to the appropriate authorities in your country. Evidence matters, even when recovery is uncertain."
+      ],
+      [
+        "A good investor mindset",
+        "Real investing tolerates questions. Anything that punishes scrutiny, shames caution, or demands secrecy deserves immediate suspicion."
+      ]
+    ],
+    "faq": [
+      [
+        "Can small test withdrawals prove the platform is real?",
+        "No. Some scams allow early withdrawals to build confidence before blocking larger amounts."
+      ],
+      [
+        "Are celebrity endorsements reliable?",
+        "No. Images and endorsements are frequently fabricated or taken out of context."
+      ],
+      [
+        "What is a recovery scam?",
+        "It is a second scam targeting previous victims with promises to recover lost funds for an upfront fee."
+      ]
+    ]
+  },
+  {
+    "slug": "phone-call-scam-red-flags",
+    "title": "Phone Call Scam Red Flags: What to Do When a Caller Sounds Convincing",
+    "description": "How to handle urgent, persuasive calls that claim to be from your bank, HMRC, police, or a delivery firm.",
+    "category": "Phone Scams",
+    "date": "2026-04-05",
+    "keywords": [
+      "phone scam",
+      "bank phone scam",
+      "spoofed caller id"
+    ],
+    "hero": "A convincing voice and a familiar caller ID are not proof that the call is genuine.",
+    "sections": [
+      [
+        "Why phone scams still work",
+        "Voice pressure is powerful. A caller can sound calm, informed, and authoritative while steering you away from verification. Some scams also use spoofed caller ID, which means the displayed number may appear familiar even when the caller is fraudulent."
+      ],
+      [
+        "Classic tactics",
+        "A fake bank fraud team may say your account is under attack and urge you to move money. A fake tax official may threaten penalties. A fake technical support caller may claim your device is infected. The shared pattern is urgency plus control over the conversation."
+      ],
+      [
+        "What you should do in the moment",
+        "Do not confirm sensitive details. Do not install remote software. Do not move funds because a caller tells you to. End the call, wait a moment if needed, and call the organisation back using a number from its official website, app, card, or previous correspondence."
+      ],
+      [
+        "Questions that expose fraud",
+        "Ask for a case number, full name, department, and a number you can call back independently. Fraudsters dislike anything that delays the script or creates an audit trail. Legitimate organisations can tolerate verification."
+      ],
+      [
+        "If you already acted",
+        "Contact the bank or service involved immediately. If remote access was granted, disconnect the device from the internet, uninstall the software if safe to do so, and change important passwords from a clean device."
+      ],
+      [
+        "Build a repeatable habit",
+        "Treat inbound calls as unverified until you independently reconnect through an official route."
+      ]
+    ],
+    "faq": [
+      [
+        "Can scammers spoof my bank's phone number?",
+        "Yes. Caller ID can be falsified, so it should never be your only check."
+      ],
+      [
+        "Is hanging up rude?",
+        "No. Ending the call to verify independently is the correct security response."
+      ],
+      [
+        "What if the caller knows some personal details?",
+        "That does not prove legitimacy. Personal data can be bought, leaked, or guessed."
+      ]
+    ]
+  },
+  {
+    "slug": "facebook-marketplace-scam-signs",
+    "title": "Facebook Marketplace Scam Signs for Buyers and Sellers",
+    "description": "Common payment, courier, and account-verification tricks used on online marketplaces.",
+    "category": "Marketplace Scams",
+    "date": "2026-04-04",
+    "keywords": [
+      "facebook marketplace scam",
+      "marketplace courier scam",
+      "buyer seller scam"
+    ],
+    "hero": "Marketplace scams exploit trust, speed, and the desire for a quick deal.",
+    "sections": [
+      [
+        "How buyer scams usually start",
+        "A fake buyer may act very eager, avoid detailed questions, and push a courier arrangement that requires you to pay a fee or share information. They want to move the conversation off-platform quickly because platform protections and moderation are a problem for them."
+      ],
+      [
+        "How seller scams usually work",
+        "A fake seller may advertise a high-demand item at a very attractive price, create urgency, and request payment outside the platform before you can inspect the goods. If the price seems designed to shut down your scepticism, assume that is part of the tactic."
+      ],
+      [
+        "Safe process for sellers",
+        "Keep the conversation on-platform, prefer cash on collection or another protected method suited to the platform, and refuse courier-payment stories that require your email, verification code, or bank login. No genuine collection needs your one-time codes."
+      ],
+      [
+        "Safe process for buyers",
+        "Inspect items locally where possible, verify seller history, and avoid bank transfers to strangers for shipped items unless you clearly understand the risk. Ask specific questions that a real owner should answer easily."
+      ],
+      [
+        "Signs the other party is not genuine",
+        "Template replies, mismatched names, refusal to meet, pressure to move to email, and links that claim to confirm payment or delivery are all warning signs. The conversation may feel smooth because the scam is rehearsed."
+      ],
+      [
+        "Best default rule",
+        "Do not let urgency choose the payment method for you."
+      ]
+    ],
+    "faq": [
+      [
+        "Why do scammers ask for my email address?",
+        "Often to send fake payment confirmations or phishing links outside the platform."
+      ],
+      [
+        "Is a screenshot of payment proof enough?",
+        "No. Screenshots can be faked and do not confirm cleared funds."
+      ],
+      [
+        "Should I trust a buyer who offers extra money for delivery?",
+        "Treat that as suspicious. Overpayment stories are a common scam pattern."
+      ]
+    ]
+  },
+  {
+    "slug": "romance-scam-slow-burn-patterns",
+    "title": "Romance Scam Slow-Burn Patterns: The Emotional Signs People Miss",
+    "description": "How long-form trust building works in romance scams and why the request for money often comes later.",
+    "category": "Romance Scams",
+    "date": "2026-04-03",
+    "keywords": [
+      "romance scam signs",
+      "online dating scam",
+      "catfishing money scam"
+    ],
+    "hero": "Many romance scams do not begin with money. They begin with attention.",
+    "sections": [
+      [
+        "Why this scam is different",
+        "Romance scams are often patient. The fraudster builds familiarity, routine, and emotional dependence before introducing a crisis, a travel problem, an investment opportunity, or a request for secrecy. By that stage, the victim may feel they are helping someone they know well."
+      ],
+      [
+        "Common behavioural patterns",
+        "The scammer may move quickly into intense language, avoid normal video verification, claim to work overseas, and provide reasons why meeting is temporarily impossible. They may be consistently available in messages but strangely unavailable for the kinds of checks that would prove identity."
+      ],
+      [
+        "How money requests are framed",
+        "The request rarely appears as obvious theft. It is cast as temporary help, loyalty, proof of trust, or a way to unlock a future together. That framing matters because it bypasses the victim's normal fraud defences."
+      ],
+      [
+        "How to reality-check the situation",
+        "Slow the relationship down. Ask for live video at a natural time, verify the claimed workplace or story where possible, and describe the situation to someone outside it. External perspective is one of the most effective counterweights to emotional manipulation."
+      ],
+      [
+        "If you think it may be a scam",
+        "Stop sending money. Save chats, images, names, numbers, and payment details. Report the account to the platform and contact your payment provider if funds were sent recently."
+      ],
+      [
+        "What people get wrong",
+        "Intelligence is not a shield here. Loneliness, hope, and trust are part of normal human behaviour. The issue is not gullibility; it is targeted manipulation."
+      ]
+    ],
+    "faq": [
+      [
+        "Is refusing video always proof of a scam?",
+        "Not by itself, but repeated excuses combined with money requests are highly concerning."
+      ],
+      [
+        "Can scammers use real photos?",
+        "Yes. They often steal images from unrelated people."
+      ],
+      [
+        "Should I confront the person directly?",
+        "Prioritise your safety and records first. Once confronted, scammers often vanish or change tactics."
+      ]
+    ]
+  },
+  {
+    "slug": "job-scam-checklist-uk",
+    "title": "Job Scam Checklist for UK Applicants",
+    "description": "What to check before responding to remote-work offers, recruiter messages, and paid-task schemes.",
+    "category": "Job Scams",
+    "date": "2026-04-02",
+    "keywords": [
+      "job scam uk",
+      "remote work scam",
+      "task scam"
+    ],
+    "hero": "A fake job can look attractive because it is designed to exploit urgency around work and income.",
+    "sections": [
+      [
+        "The modern versions",
+        "Job scams now range from fake recruiter messages to paid-task scams and bogus admin roles that ask you to process funds or open accounts. Some are crude. Others are polished and exploit legitimate-sounding job titles and remote-work language."
+      ],
+      [
+        "Red flags in the offer",
+        "Watch for high pay for simple work, interviews conducted only by chat, requests for identity documents too early, pressure to communicate on encrypted apps, or instructions to pay for training, equipment, or account activation. Genuine employers do not need secrecy to hire you."
+      ],
+      [
+        "How task scams operate",
+        "A platform may ask you to complete repetitive actions that appear to generate commission. Early withdrawals can create trust. Then you are told you must deposit funds to unlock the next level or release earnings. That is the pivot from engagement to extraction."
+      ],
+      [
+        "Verification steps",
+        "Check the company website, the recruiter's email domain, public staff listings, and whether the role appears on the company's official careers page. Search the job title plus the company name and terms such as scam, review, or fake recruiter."
+      ],
+      [
+        "If you submitted documents",
+        "Monitor for identity theft risks, change passwords if you reused them, and contact relevant institutions if banking details were involved. Keep records of who contacted you and through which channels."
+      ],
+      [
+        "A safer approach",
+        "Real hiring allows questions, time to review, and formal documentation. Scams dislike all three."
+      ]
+    ],
+    "faq": [
+      [
+        "Is a WhatsApp job offer automatically fake?",
+        "Not automatically, but it is a risk signal that warrants strict verification."
+      ],
+      [
+        "Should I send passport details before a formal offer?",
+        "Be very cautious. Identity documents should not be sent casually to unverified parties."
+      ],
+      [
+        "Are paid-task platforms legitimate?",
+        "Some may be legitimate, but many scam reports follow the same deposit-to-unlock pattern."
+      ]
+    ]
+  },
+  {
+    "slug": "google-voice-verification-scam",
+    "title": "Google Voice Verification Scam: Why Someone Wants Your Code",
+    "description": "How verification-code scams work and why you should never share one-time codes with strangers.",
+    "category": "Account Scams",
+    "date": "2026-04-01",
+    "keywords": [
+      "google voice scam",
+      "verification code scam",
+      "share code scam"
+    ],
+    "hero": "When someone asks for a verification code, they are often trying to use your number or account access for their own purpose.",
+    "sections": [
+      [
+        "The basic mechanism",
+        "A scammer persuades you to send them a one-time code that was generated for your phone number or account. They may claim the code is needed to prove you are genuine, safe, or serious about a sale. In reality, the code can help them register or access something tied to you."
+      ],
+      [
+        "Why the story sounds reasonable",
+        "On classifieds and marketplaces, buyers and sellers often want reassurance. Scammers exploit that by presenting the code request as a harmless identity check. The problem is that one-time codes are not neutral; they are security credentials."
+      ],
+      [
+        "Rules that prevent most losses",
+        "Do not share verification codes. Do not read them out on a call. Do not forward them in a chat. If a real platform needs you to verify something, it will do so inside its official workflow, not through another person."
+      ],
+      [
+        "What to do if you shared a code",
+        "Review the service involved, secure affected accounts, and watch for signs of account misuse. If the code related to a phone-based service, follow the provider's recovery process as soon as possible."
+      ],
+      [
+        "A useful mindset",
+        "Treat every verification code as equivalent to a temporary key. If you would not hand over your key to a stranger, do not send the code either."
+      ],
+      [
+        "Why this still catches people",
+        "The scam is simple and low-friction. It asks for one small action that seems disconnected from money, which is exactly why people underestimate it."
+      ]
+    ],
+    "faq": [
+      [
+        "Can a scammer do harm with only a code?",
+        "Potentially yes, depending on what the code was generated for."
+      ],
+      [
+        "What if they say the code is only to prove I am real?",
+        "That is a common pretext. Do not share it."
+      ],
+      [
+        "Is this limited to Google Voice?",
+        "No. The same principle applies to many one-time verification codes."
+      ]
+    ]
+  }
+]

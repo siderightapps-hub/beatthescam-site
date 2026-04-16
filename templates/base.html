@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{{title}}</title>
+  <meta name="description" content="{{description}}">
+  <link rel="canonical" href="{{canonical}}">
+  <meta name="robots" content="{{robots}}">
+  <meta name="theme-color" content="#111827">
+  <meta property="og:type" content="{{og_type}}">
+  <meta property="og:title" content="{{title}}">
+  <meta property="og:description" content="{{description}}">
+  <meta property="og:url" content="{{canonical}}">
+  <meta property="og:site_name" content="{{site_name}}">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="{{title}}">
+  <meta name="twitter:description" content="{{description}}">
+  <link rel="stylesheet" href="{{asset_prefix}}/assets/styles.css">
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-JXNF856NBF"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-JXNF856NBF');
+  </script>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=pub-1606633100797174" crossorigin="anonymous"></script>
+  {{schema}}
+</head>
+<body>
+  <header class="site-header">
+    <div class="wrap header-inner">
+      <a href="{{asset_prefix}}/" class="brand">{{site_name}}</a>
+      <nav class="nav">
+        <a href="{{asset_prefix}}/">Home</a>
+        <a href="{{asset_prefix}}/guides/">Guides</a>
+        <a href="{{asset_prefix}}/categories/">Categories</a>
+        <a href="{{asset_prefix}}/about/">About</a>
+        <a href="{{asset_prefix}}/contact/">Contact</a>
+      </nav>
+    </div>
+  </header>
+  <main>
+    {{content}}
+  </main>
+  <footer class="site-footer">
+    <div class="wrap footer-grid">
+      <div>
+        <h3>{{site_name}}</h3>
+        <p>{{tagline}}</p>
+      </div>
+      <div>
+        <h3>Site</h3>
+        <ul>
+          <li><a href="{{asset_prefix}}/privacy/">Privacy</a></li>
+          <li><a href="{{asset_prefix}}/terms/">Terms</a></li>
+          <li><a href="{{asset_prefix}}/about/">About</a></li>
+          <li><a href="{{asset_prefix}}/contact/">Contact</a></li>
+        </ul>
+      </div>
+      <div>
+        <h3>Most Read</h3>
+        <ul>
+          <li><a href="{{asset_prefix}}/guides/is-this-website-a-scam/">Website scam checklist</a></li>
+          <li><a href="{{asset_prefix}}/guides/royal-mail-text-scam-guide/">Delivery text scam guide</a></li>
+          <li><a href="{{asset_prefix}}/guides/crypto-investment-scam-checklist/">Crypto scam checklist</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="wrap footer-meta">
+      <p>© {{year}} {{site_name}}. Educational content only; not legal or financial advice.</p>
+    </div>
+  </footer>
+</body>
+</html>
