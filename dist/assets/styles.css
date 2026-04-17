@@ -149,3 +149,8 @@ p{margin:.75rem 0}
   .table-row{grid-template-columns:1fr}
   .cookie-banner{left:.75rem;right:.75rem;bottom:.75rem;flex-direction:column;align-items:flex-start}
 }
+
+.category-card p{margin-bottom:0}
+.link-button{appearance:none;border:none;background:none;padding:0;color:var(--accent);font:inherit;font-weight:700;cursor:pointer}
+.link-button:hover{text-decoration:underline}
+.cookie-status{font-size:.92rem;color:rgba(255,255,255,.72)}

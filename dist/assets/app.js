@@ -1,4 +1,3 @@
-
 (function(){
   const navToggle = document.querySelector('.nav-toggle');
   const nav = document.getElementById('site-nav');
@@ -14,6 +13,27 @@
   const banner = document.getElementById('cookieBanner');
   const accept = document.getElementById('cookieAccept');
   const reject = document.getElementById('cookieReject');
+  const openSettings = document.getElementById('openCookieSettings');
+  const status = document.getElementById('cookieStatus');
+
+  function safeGet(key){
+    try { return window.localStorage.getItem(key); } catch (err) { return null; }
+  }
+
+  function safeSet(key, value){
+    try { window.localStorage.setItem(key, value); return true; } catch (err) { return false; }
+  }
+
+  function updateStatus(mode){
+    if(!status) return;
+    if(mode === 'accepted'){
+      status.textContent = 'Non-essential cookies are enabled.';
+    } else if(mode === 'rejected'){
+      status.textContent = 'Non-essential cookies are disabled.';
+    } else {
+      status.textContent = 'No choice saved yet.';
+    }
+  }
 
   function applyConsent(mode){
     if(typeof gtag !== 'function') return;
@@ -29,26 +49,37 @@
   function hideBanner(){ if(banner) banner.hidden = true; }
   function showBanner(){ if(banner) banner.hidden = false; }
 
-  const current = localStorage.getItem(storageKey);
-  if(current){
+  function setPreference(mode){
+    safeSet(storageKey, mode);
+    applyConsent(mode);
+    updateStatus(mode);
+    hideBanner();
+  }
+
+  const current = safeGet(storageKey);
+  if(current === 'accepted' || current === 'rejected'){
     applyConsent(current);
+    updateStatus(current);
     hideBanner();
   } else {
+    updateStatus(null);
     showBanner();
   }
 
   if(accept){
     accept.addEventListener('click', function(){
-      localStorage.setItem(storageKey, 'accepted');
-      applyConsent('accepted');
-      hideBanner();
+      setPreference('accepted');
     });
   }
   if(reject){
     reject.addEventListener('click', function(){
-      localStorage.setItem(storageKey, 'rejected');
-      applyConsent('rejected');
-      hideBanner();
+      setPreference('rejected');
+    });
+  }
+  if(openSettings){
+    openSettings.addEventListener('click', function(){
+      showBanner();
+      banner && banner.scrollIntoView({behavior:'smooth', block:'nearest'});
     });
   }
 

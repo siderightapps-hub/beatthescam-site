@@ -29,7 +29,7 @@ def slugify(value: str) -> str:
 def abs_url(site, path: str) -> str:
     if path.startswith("http"):
         return path
-    return site["domain"].rstrip("/") + site.get("site_path", "") + path
+    return site["domain"].rstrip("/") + path
 
 
 def json_ld(data) -> str:
@@ -50,7 +50,7 @@ def make_base(content: str, *, title: str, description: str, canonical: str, sch
         "{{tagline}}": html.escape(site["tagline"]),
         "{{content}}": content,
         "{{schema}}": schema,
-        "{{asset_prefix}}": site.get("site_path", ""),
+        "{{asset_prefix}}": "",
         "{{adsense_client}}": site["adsense_client"],
         "{{ga4_id}}": site["ga4_id"],
         "{{year}}": str(datetime.utcnow().year),
@@ -157,7 +157,6 @@ def render_home(site, posts, categories):
     for cat, items in sorted(categories.items(), key=lambda item: len(item[1]), reverse=True)[:8]:
         category_cards.append(f'''
         <article class="card category-card">
-          <div class="eyebrow">Cluster</div>
           <h3><a href="/categories/{slugify(cat)}/">{html.escape(cat)}</a></h3>
           <p>{len(items)} guide{'s' if len(items) != 1 else ''} covering common verification patterns and recovery steps.</p>
         </article>
@@ -482,7 +481,7 @@ def build_legal_bodies(site):
     <h2>Advertising cookies</h2>
     <p>If advertising is active and you consent, Google AdSense may use cookies or similar technologies to support ad delivery, frequency management, measurement, and related services.</p>
     <h2>How to manage cookies</h2>
-    <p>You can change browser cookie settings at any time. You can also clear the stored preference locally if you want the banner to appear again on your device.</p>
+    <p>You can change browser cookie settings at any time. You can also use the site's Cookie settings link in the footer to reopen the consent banner on your device.</p>
     <h2>Contact</h2>
     <p>Questions about cookies or data use can be sent to <a href="mailto:{site['contact_email']}">{site['contact_email']}</a>.</p>
     '''

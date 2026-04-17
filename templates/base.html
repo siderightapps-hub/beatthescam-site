@@ -54,7 +54,7 @@
         <a href="{{asset_prefix}}/categories/">Categories</a>
         <a href="{{asset_prefix}}/about/">About</a>
         <a href="{{asset_prefix}}/privacy/">Privacy</a>
-        <a href="{{asset_prefix}}/cookies/">Cookies</a>
+        <a href="{{asset_prefix}}/cookies/">Cookie Policy</a>
         <a href="{{asset_prefix}}/contact/">Contact</a>
       </nav>
     </div>
@@ -84,6 +84,7 @@
           <li><a href="{{asset_prefix}}/about/">About</a></li>
           <li><a href="{{asset_prefix}}/privacy/">Privacy Policy</a></li>
           <li><a href="{{asset_prefix}}/cookies/">Cookie Policy</a></li>
+          <li><button class="link-button" type="button" id="openCookieSettings">Cookie settings</button></li>
           <li><a href="{{asset_prefix}}/terms/">Terms</a></li>
           <li><a href="{{asset_prefix}}/contact/">Contact</a></li>
         </ul>
@@ -93,14 +94,15 @@
       <p>© {{year}} {{site_name}}. Built for fast-loading, indexable scam-prevention content.</p>
     </div>
   </footer>
-  <div class="cookie-banner" id="cookieBanner" hidden>
+  <div class="cookie-banner" id="cookieBanner" hidden aria-live="polite">
     <div class="cookie-copy">
       <strong>Cookies & privacy</strong>
-      <p>We use analytics and advertising cookies to understand performance and support the site. You can accept or reject non-essential cookies.</p>
+      <p>We use analytics and advertising cookies to understand performance and support the site. Choose whether to allow non-essential cookies.</p>
+      <p class="cookie-status" id="cookieStatus">No choice saved yet.</p>
     </div>
     <div class="cookie-actions">
-      <button class="btn btn-secondary" id="cookieReject">Reject</button>
-      <button class="btn btn-primary" id="cookieAccept">Accept</button>
+      <button class="btn btn-secondary" id="cookieReject" type="button">Reject</button>
+      <button class="btn btn-primary" id="cookieAccept" type="button">Accept</button>
     </div>
   </div>
   <script src="{{asset_prefix}}/assets/app.js" defer></script>
