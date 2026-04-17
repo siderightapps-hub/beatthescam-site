@@ -617,7 +617,7 @@ sitemap.append('</urlset>')
 
 write(DIST / 'sitemap.xml', '\n'.join(sitemap))
 
-    robots = f'''User-agent: *
+robots = f'''User-agent: *
 Allow: /
 
 Sitemap: {site['domain']}/sitemap.xml
