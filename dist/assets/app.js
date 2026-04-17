@@ -46,8 +46,8 @@
     });
   }
 
-  function hideBanner(){ if(banner) banner.hidden = true; }
-  function showBanner(){ if(banner) banner.hidden = false; }
+  function hideBanner(){ if(banner){ banner.hidden = true; banner.setAttribute('aria-hidden','true'); } }
+  function showBanner(){ if(banner){ banner.hidden = false; banner.setAttribute('aria-hidden','false'); } }
 
   function setPreference(mode){
     safeSet(storageKey, mode);
@@ -67,17 +67,20 @@
   }
 
   if(accept){
-    accept.addEventListener('click', function(){
+    accept.addEventListener('click', function(e){
+      e.preventDefault();
       setPreference('accepted');
     });
   }
   if(reject){
-    reject.addEventListener('click', function(){
+    reject.addEventListener('click', function(e){
+      e.preventDefault();
       setPreference('rejected');
     });
   }
   if(openSettings){
-    openSettings.addEventListener('click', function(){
+    openSettings.addEventListener('click', function(e){
+      e.preventDefault();
       showBanner();
       banner && banner.scrollIntoView({behavior:'smooth', block:'nearest'});
     });

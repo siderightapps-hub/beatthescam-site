@@ -347,7 +347,7 @@ def render_categories_index(site, categories):
     items = []
     for cat, posts in sorted(categories.items(), key=lambda item: len(item[1]), reverse=True):
         items.append(f'''
-        <article class="card category-card guide-card">
+        <article class="card category-card">
           <h3><a href="/categories/{slugify(cat)}/">{html.escape(cat)}</a></h3>
           <p>{len(posts)} guide{'s' if len(posts) != 1 else ''} currently published in this cluster.</p>
         </article>
