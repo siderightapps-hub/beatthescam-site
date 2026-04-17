@@ -7,40 +7,59 @@
   <meta name="description" content="{{description}}">
   <link rel="canonical" href="{{canonical}}">
   <meta name="robots" content="{{robots}}">
-  <meta name="theme-color" content="#111827">
+  <meta name="theme-color" content="#0b1220">
+  <meta name="format-detection" content="telephone=no">
   <meta property="og:type" content="{{og_type}}">
-  <meta property="og:title" content="{{title}}">
+  <meta property="og:title" content="{{og_title}}">
   <meta property="og:description" content="{{description}}">
   <meta property="og:url" content="{{canonical}}">
   <meta property="og:site_name" content="{{site_name}}">
+  <meta property="og:image" content="{{og_image}}">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="{{title}}">
+  <meta name="twitter:title" content="{{og_title}}">
   <meta name="twitter:description" content="{{description}}">
+  <meta name="twitter:image" content="{{og_image}}">
   <link rel="stylesheet" href="{{asset_prefix}}/assets/styles.css">
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-JXNF856NBF"></script>
+  <script async src="https://www.googletagmanager.com/gtag/js?id={{ga4_id}}"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
     gtag('js', new Date());
-    gtag('config', 'G-JXNF856NBF');
+    gtag('consent', 'default', {
+      ad_storage: 'denied',
+      analytics_storage: 'denied',
+      ad_user_data: 'denied',
+      ad_personalization: 'denied',
+      wait_for_update: 500
+    });
+    gtag('config', '{{ga4_id}}', { anonymize_ip: true });
   </script>
-  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=pub-1606633100797174" crossorigin="anonymous"></script>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client={{adsense_client}}" crossorigin="anonymous"></script>
   {{schema}}
 </head>
 <body>
+  <a class="skip-link" href="#main">Skip to content</a>
   <header class="site-header">
     <div class="wrap header-inner">
-      <a href="{{asset_prefix}}/" class="brand">{{site_name}}</a>
-      <nav class="nav">
+      <div class="brand-wrap">
+        <a href="{{asset_prefix}}/" class="brand">{{site_name}}</a>
+        <span class="brand-sub">Scam checks, alerts, and consumer protection guides</span>
+      </div>
+      <button class="nav-toggle" aria-expanded="false" aria-controls="site-nav">Menu</button>
+      <nav class="nav" id="site-nav">
         <a href="{{asset_prefix}}/">Home</a>
         <a href="{{asset_prefix}}/guides/">Guides</a>
         <a href="{{asset_prefix}}/categories/">Categories</a>
         <a href="{{asset_prefix}}/about/">About</a>
+        <a href="{{asset_prefix}}/privacy/">Privacy</a>
+        <a href="{{asset_prefix}}/cookies/">Cookies</a>
         <a href="{{asset_prefix}}/contact/">Contact</a>
       </nav>
     </div>
   </header>
-  <main>
+  <main id="main">
     {{content}}
   </main>
   <footer class="site-footer">
@@ -48,28 +67,42 @@
       <div>
         <h3>{{site_name}}</h3>
         <p>{{tagline}}</p>
+        <p class="note">Educational content only. Not legal, regulatory, or financial advice.</p>
       </div>
       <div>
-        <h3>Site</h3>
+        <h3>Explore</h3>
         <ul>
-          <li><a href="{{asset_prefix}}/privacy/">Privacy</a></li>
-          <li><a href="{{asset_prefix}}/terms/">Terms</a></li>
-          <li><a href="{{asset_prefix}}/about/">About</a></li>
-          <li><a href="{{asset_prefix}}/contact/">Contact</a></li>
+          <li><a href="{{asset_prefix}}/guides/">All guides</a></li>
+          <li><a href="{{asset_prefix}}/categories/payment-scams/">Payment scams</a></li>
+          <li><a href="{{asset_prefix}}/categories/email-scams/">Email scams</a></li>
+          <li><a href="{{asset_prefix}}/categories/phone-scams/">Phone scams</a></li>
         </ul>
       </div>
       <div>
-        <h3>Most Read</h3>
+        <h3>Trust & legal</h3>
         <ul>
-          <li><a href="{{asset_prefix}}/guides/is-this-website-a-scam/">Website scam checklist</a></li>
-          <li><a href="{{asset_prefix}}/guides/royal-mail-text-scam-guide/">Delivery text scam guide</a></li>
-          <li><a href="{{asset_prefix}}/guides/crypto-investment-scam-checklist/">Crypto scam checklist</a></li>
+          <li><a href="{{asset_prefix}}/about/">About</a></li>
+          <li><a href="{{asset_prefix}}/privacy/">Privacy Policy</a></li>
+          <li><a href="{{asset_prefix}}/cookies/">Cookie Policy</a></li>
+          <li><a href="{{asset_prefix}}/terms/">Terms</a></li>
+          <li><a href="{{asset_prefix}}/contact/">Contact</a></li>
         </ul>
       </div>
     </div>
     <div class="wrap footer-meta">
-      <p>© {{year}} {{site_name}}. Educational content only; not legal or financial advice.</p>
+      <p>© {{year}} {{site_name}}. Built for fast-loading, indexable scam-prevention content.</p>
     </div>
   </footer>
+  <div class="cookie-banner" id="cookieBanner" hidden>
+    <div class="cookie-copy">
+      <strong>Cookies & privacy</strong>
+      <p>We use analytics and advertising cookies to understand performance and support the site. You can accept or reject non-essential cookies.</p>
+    </div>
+    <div class="cookie-actions">
+      <button class="btn btn-secondary" id="cookieReject">Reject</button>
+      <button class="btn btn-primary" id="cookieAccept">Accept</button>
+    </div>
+  </div>
+  <script src="{{asset_prefix}}/assets/app.js" defer></script>
 </body>
 </html>

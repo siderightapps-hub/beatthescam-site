@@ -1,9 +1,10 @@
 {
   "site_name": "Beat the Scam",
   "domain": "https://beatthescam.com",
-  "tagline": "Plain-English guides to help people spot online scams before money or data is lost.",
-  "adsense_client": "ca-pub-XXXXXXXXXXXXXXXX",
+  "tagline": "Scam alerts, plain-English checks, and practical guides to help people verify suspicious emails, texts, websites, calls, and offers.",
+  "adsense_client": "ca-pub-1606633100797174",
   "contact_email": "hello@beatthescam.com",
   "author": "Beat the Scam Editorial Team",
-  "twitter": "@beatthescam"
+  "twitter": "@beatthescam",
+  "ga4_id": "G-JXNF856NBF"
 }
