@@ -620,9 +620,9 @@ write(DIST / 'sitemap.xml', '\n'.join(sitemap))
 robots = f'''User-agent: *
 Allow: /
 
-Sitemap: {site['domain']}/sitemap.xml
+Sitemap: {site["domain"]}/sitemap.xml
 '''
-    write(DIST / 'robots.txt', robots)
+write(DIST / 'robots.txt', robots)
 
 
 if __name__ == '__main__':
