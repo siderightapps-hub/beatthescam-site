@@ -26,10 +26,29 @@ def slugify(value: str) -> str:
     return value.strip("-")
 
 
+def rel_url(site, path: str) -> str:
+    prefix = site.get("site_path", "") or ""
+    return prefix + path
+
+
 def abs_url(site, path: str) -> str:
     if path.startswith("http"):
         return path
-    return site["domain"].rstrip("/") + site.get("site_path", "") + path
+    return site["domain"].rstrip("/") + rel_url(site, path)
+
+
+def localize_content_paths(content: str, site: dict) -> str:
+    prefix = site.get("site_path", "") or ""
+    if not prefix:
+        return content
+    return (content
+            .replace('href="/', f'href="{prefix}/')
+            .replace("href='/", f"href='{prefix}/")
+            .replace('src="/', f'src="{prefix}/')
+            .replace("src='/", f"src='{prefix}/")
+            .replace('action="/', f'action="{prefix}/')
+            .replace("action='/", f"action='{prefix}/"))
+
 
 def json_ld(data) -> str:
     return '<script type="application/ld+json">' + json.dumps(data, ensure_ascii=False, separators=(",", ":")) + "</script>"
@@ -47,7 +66,7 @@ def make_base(content: str, *, title: str, description: str, canonical: str, sch
         "{{og_image}}": abs_url(site, "/assets/og-image.png"),
         "{{site_name}}": html.escape(site["site_name"]),
         "{{tagline}}": html.escape(site["tagline"]),
-        "{{content}}": content,
+        "{{content}}": localize_content_paths(content, site),
         "{{schema}}": schema,
         "{{asset_prefix}}": site.get("site_path", ""),
         "{{adsense_client}}": site["adsense_client"],
@@ -329,7 +348,6 @@ def render_categories_index(site, categories):
     for cat, posts in sorted(categories.items(), key=lambda item: len(item[1]), reverse=True):
         items.append(f'''
         <article class="card category-card guide-card">
-          <div class="eyebrow">Category</div>
           <h3><a href="/categories/{slugify(cat)}/">{html.escape(cat)}</a></h3>
           <p>{len(posts)} guide{'s' if len(posts) != 1 else ''} currently published in this cluster.</p>
         </article>
@@ -460,9 +478,9 @@ def build_legal_bodies(site):
     <h2>What information we collect</h2>
     <p>The site does not offer user accounts, comments, or direct purchases. Standard server logs may record technical information such as browser type, device type, approximate location, referral source, and requested pages.</p>
     <h2>Google Analytics</h2>
-    <p>The site uses Google Analytics 4 to understand page performance and traffic trends. The configured measurement ID is <strong>{html.escape(site['ga4_id'])}</strong>. Analytics cookies are only enabled after consent where required.</p>
+    <p>The site uses Google Analytics 4 to understand page performance and traffic trends. Analytics cookies are only enabled after consent where required.</p>
     <h2>Advertising</h2>
-    <p>The site uses Google AdSense with publisher ID <strong>{html.escape(site['adsense_client'])}</strong>. If advertising is active, Google and its partners may use cookies or similar technologies to deliver and measure ads, subject to your consent choices and applicable law.</p>
+    <p>The site uses Google AdSense. If advertising is active, Google and its partners may use cookies or similar technologies to deliver and measure ads, subject to your consent choices and applicable law.</p>
     <h2>Cookie choices</h2>
     <p>A cookie banner allows you to accept or reject non-essential cookies. Your preference is stored locally in your browser so the site can remember that choice.</p>
     <h2>Your rights</h2>
