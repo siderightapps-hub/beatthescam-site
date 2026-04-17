@@ -29,7 +29,7 @@ def slugify(value: str) -> str:
 def abs_url(site, path: str) -> str:
     if path.startswith("http"):
         return path
-    return site["domain"].rstrip("/") + path
+    return site["domain"].rstrip("/") + site.get("site_path", "") + path
 
 
 def json_ld(data) -> str:
@@ -50,7 +50,7 @@ def make_base(content: str, *, title: str, description: str, canonical: str, sch
         "{{tagline}}": html.escape(site["tagline"]),
         "{{content}}": content,
         "{{schema}}": schema,
-        "{{asset_prefix}}": "",
+        "{{asset_prefix}}": site.get("site_path", ""),
         "{{adsense_client}}": site["adsense_client"],
         "{{ga4_id}}": site["ga4_id"],
         "{{year}}": str(datetime.utcnow().year),

@@ -1,6 +1,7 @@
 {
   "site_name": "Beat the Scam",
   "domain": "https://beatthescam.com",
+  "site_path": "/beatthescam-site",
   "tagline": "Scam alerts, plain-English checks, and practical guides to help people verify suspicious emails, texts, websites, calls, and offers.",
   "adsense_client": "ca-pub-1606633100797174",
   "contact_email": "hello@beatthescam.com",

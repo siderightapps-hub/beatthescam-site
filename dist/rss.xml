@@ -3,7 +3,7 @@
       <channel>
         <title>Beat the Scam</title>
         <link>https://beatthescam.com</link>
-        <description>Plain-English guides to help people spot online scams before money or data is lost.</description>
+        <description>Scam alerts, plain-English checks, and practical guides to help people verify suspicious emails, texts, websites, calls, and offers.</description>
         
         <item>
           <title>Is This Website a Scam? A Practical Checklist Before You Buy</title>
@@ -12,6 +12,7 @@
           <pubDate>Fri, 10 Apr 2026 00:00:00 +0000</pubDate>
           <description>A plain-English checklist for judging whether a website is legitimate before you enter payment details.</description>
         </item>
+        
         <item>
           <title>Royal Mail Text Scam Guide: How to Spot the Common Delivery Message Trap</title>
           <link>https://beatthescam.com/guides/royal-mail-text-scam-guide/</link>
@@ -19,6 +20,7 @@
           <pubDate>Thu, 09 Apr 2026 00:00:00 +0000</pubDate>
           <description>How fake parcel delivery texts work, what signs to check, and what to do if you clicked the link.</description>
         </item>
+        
         <item>
           <title>PayPal Email Scam Signs: How to Check a Message Without Panicking</title>
           <link>https://beatthescam.com/guides/paypal-email-scam-signs/</link>
@@ -26,54 +28,150 @@
           <pubDate>Wed, 08 Apr 2026 00:00:00 +0000</pubDate>
           <description>A checklist for reviewing suspicious PayPal emails and deciding whether a message is genuine.</description>
         </item>
+        
         <item>
           <title>Bank Transfer Scam Warning Signs Before You Send Money</title>
           <link>https://beatthescam.com/guides/bank-transfer-scam-warning-signs/</link>
           <guid>https://beatthescam.com/guides/bank-transfer-scam-warning-signs/</guid>
           <pubDate>Tue, 07 Apr 2026 00:00:00 +0000</pubDate>
-          <description>How to assess pressure tactics, fake invoices, account changes, and impersonation before a transfer.</description>
+          <description>Why fraudsters push bank transfers and what to check before sending funds to a person or business.</description>
         </item>
+        
         <item>
-          <title>Crypto Investment Scam Checklist: What to Check Before You Send Funds</title>
+          <title>Crypto Investment Scam Checklist: Fast Tests Before You Deposit</title>
           <link>https://beatthescam.com/guides/crypto-investment-scam-checklist/</link>
           <guid>https://beatthescam.com/guides/crypto-investment-scam-checklist/</guid>
           <pubDate>Mon, 06 Apr 2026 00:00:00 +0000</pubDate>
-          <description>A practical pre-send checklist for crypto investment offers, recovery rooms, and fake trading platforms.</description>
+          <description>A practical list of checks for judging high-return crypto offers, trading groups, and recovery services.</description>
         </item>
+        
         <item>
-          <title>Phone Call Scam Red Flags: What to Do When a Caller Sounds Convincing</title>
+          <title>Phone Call Scam Red Flags: What to Listen For Before You Trust the Caller</title>
           <link>https://beatthescam.com/guides/phone-call-scam-red-flags/</link>
           <guid>https://beatthescam.com/guides/phone-call-scam-red-flags/</guid>
           <pubDate>Sun, 05 Apr 2026 00:00:00 +0000</pubDate>
-          <description>How to handle urgent, persuasive calls that claim to be from your bank, HMRC, police, or a delivery firm.</description>
+          <description>How to handle suspicious calls claiming to be from banks, government bodies, couriers, or tech support.</description>
         </item>
+        
         <item>
-          <title>Facebook Marketplace Scam Signs for Buyers and Sellers</title>
+          <title>Facebook Marketplace Scam Signs Before You Buy, Sell, or Ship</title>
           <link>https://beatthescam.com/guides/facebook-marketplace-scam-signs/</link>
           <guid>https://beatthescam.com/guides/facebook-marketplace-scam-signs/</guid>
           <pubDate>Sat, 04 Apr 2026 00:00:00 +0000</pubDate>
-          <description>Common payment, courier, and account-verification tricks used on online marketplaces.</description>
+          <description>A practical guide to spotting common Marketplace fraud patterns for both buyers and sellers.</description>
         </item>
+        
         <item>
-          <title>Romance Scam Slow-Burn Patterns: The Emotional Signs People Miss</title>
+          <title>Romance Scam Slow-Burn Patterns: Why Long Conversations Still End in Fraud</title>
           <link>https://beatthescam.com/guides/romance-scam-slow-burn-patterns/</link>
           <guid>https://beatthescam.com/guides/romance-scam-slow-burn-patterns/</guid>
           <pubDate>Fri, 03 Apr 2026 00:00:00 +0000</pubDate>
-          <description>How long-form trust building works in romance scams and why the request for money often comes later.</description>
+          <description>How trust-building romance scams develop over time and the signs to notice before money is requested.</description>
         </item>
+        
         <item>
-          <title>Job Scam Checklist for UK Applicants</title>
+          <title>Job Scam Checklist UK: Warning Signs Before You Share Documents or Pay Fees</title>
           <link>https://beatthescam.com/guides/job-scam-checklist-uk/</link>
           <guid>https://beatthescam.com/guides/job-scam-checklist-uk/</guid>
           <pubDate>Thu, 02 Apr 2026 00:00:00 +0000</pubDate>
-          <description>What to check before responding to remote-work offers, recruiter messages, and paid-task schemes.</description>
+          <description>How to assess suspicious job offers, recruiter messages, and work-from-home opportunities in the UK.</description>
         </item>
+        
         <item>
-          <title>Google Voice Verification Scam: Why Someone Wants Your Code</title>
+          <title>Google Voice Verification Scam: Why a &#x27;Simple Code&#x27; Can Still Be a Problem</title>
           <link>https://beatthescam.com/guides/google-voice-verification-scam/</link>
           <guid>https://beatthescam.com/guides/google-voice-verification-scam/</guid>
           <pubDate>Wed, 01 Apr 2026 00:00:00 +0000</pubDate>
-          <description>How verification-code scams work and why you should never share one-time codes with strangers.</description>
+          <description>How verification-code scams work on marketplaces and why you should never hand over one-time codes to strangers.</description>
         </item>
+        
+        <item>
+          <title>HMRC Tax Refund Scam Checklist: Fast Checks for Emails, Texts, and Calls</title>
+          <link>https://beatthescam.com/guides/hmrc-tax-refund-scam-checklist/</link>
+          <guid>https://beatthescam.com/guides/hmrc-tax-refund-scam-checklist/</guid>
+          <pubDate>Tue, 31 Mar 2026 00:00:00 +0000</pubDate>
+          <description>How to review messages claiming you are due a tax refund or owe HMRC money.</description>
+        </item>
+        
+        <item>
+          <title>Evri Delivery Scam Guide: What to Check Before You Tap the Tracking Link</title>
+          <link>https://beatthescam.com/guides/evri-delivery-scam-guide/</link>
+          <guid>https://beatthescam.com/guides/evri-delivery-scam-guide/</guid>
+          <pubDate>Mon, 30 Mar 2026 00:00:00 +0000</pubDate>
+          <description>Common signs of fake parcel messages using the Evri name and what to do if you clicked.</description>
+        </item>
+        
+        <item>
+          <title>Puppy Sale Scam Checklist: Warning Signs Before You Pay a Deposit</title>
+          <link>https://beatthescam.com/guides/puppy-sale-scam-checklist/</link>
+          <guid>https://beatthescam.com/guides/puppy-sale-scam-checklist/</guid>
+          <pubDate>Sun, 29 Mar 2026 00:00:00 +0000</pubDate>
+          <description>How to assess suspicious puppy adverts, breeder claims, shipping stories, and deposit requests.</description>
+        </item>
+        
+        <item>
+          <title>WhatsApp Family Emergency Scam: How to Check the &#x27;New Number&#x27; Message</title>
+          <link>https://beatthescam.com/guides/whatsapp-family-emergency-scam/</link>
+          <guid>https://beatthescam.com/guides/whatsapp-family-emergency-scam/</guid>
+          <pubDate>Sat, 28 Mar 2026 00:00:00 +0000</pubDate>
+          <description>How impersonation scams work when someone claims to be your child, partner, or relative from a new phone.</description>
+        </item>
+        
+        <item>
+          <title>Travel Booking Scam Checklist: Hotels, Holiday Lets, and Fake Confirmation Emails</title>
+          <link>https://beatthescam.com/guides/travel-booking-scam-checklist/</link>
+          <guid>https://beatthescam.com/guides/travel-booking-scam-checklist/</guid>
+          <pubDate>Fri, 27 Mar 2026 00:00:00 +0000</pubDate>
+          <description>What to check before paying for accommodation or travel bookings through unfamiliar sites or messages.</description>
+        </item>
+        
+        <item>
+          <title>Ticket Resale Scam Checklist: Concert and Event Warning Signs Before You Pay</title>
+          <link>https://beatthescam.com/guides/ticket-resale-scam-checklist/</link>
+          <guid>https://beatthescam.com/guides/ticket-resale-scam-checklist/</guid>
+          <pubDate>Thu, 26 Mar 2026 00:00:00 +0000</pubDate>
+          <description>How to review ticket resale offers on social media, messaging apps, and listing platforms.</description>
+        </item>
+        
+        <item>
+          <title>Invoice Redirection Scam Checklist: How to Check Payment Detail Changes</title>
+          <link>https://beatthescam.com/guides/invoice-redirection-scam-checklist/</link>
+          <guid>https://beatthescam.com/guides/invoice-redirection-scam-checklist/</guid>
+          <pubDate>Wed, 25 Mar 2026 00:00:00 +0000</pubDate>
+          <description>A guide for spotting fake invoice updates and altered bank details in supplier communications.</description>
+        </item>
+        
+        <item>
+          <title>Refund Recovery Scam Warning Signs After You Have Already Been Scammed</title>
+          <link>https://beatthescam.com/guides/refund-recovery-scam-warning-signs/</link>
+          <guid>https://beatthescam.com/guides/refund-recovery-scam-warning-signs/</guid>
+          <pubDate>Tue, 24 Mar 2026 00:00:00 +0000</pubDate>
+          <description>How follow-on recovery scams target previous victims with promises of refunds, tracing, or legal help.</description>
+        </item>
+        
+        <item>
+          <title>QR Code Payment Scam Guide: What to Check Before You Scan</title>
+          <link>https://beatthescam.com/guides/qr-code-payment-scam-guide/</link>
+          <guid>https://beatthescam.com/guides/qr-code-payment-scam-guide/</guid>
+          <pubDate>Mon, 23 Mar 2026 00:00:00 +0000</pubDate>
+          <description>How malicious or substituted QR codes are used in parking, payments, and public-place scams.</description>
+        </item>
+        
+        <item>
+          <title>Charity Donation Scam Checklist: How to Verify Appeals Before You Give</title>
+          <link>https://beatthescam.com/guides/charity-donation-scam-checklist/</link>
+          <guid>https://beatthescam.com/guides/charity-donation-scam-checklist/</guid>
+          <pubDate>Sun, 22 Mar 2026 00:00:00 +0000</pubDate>
+          <description>How to assess urgent donation appeals, cloned fundraising pages, and impersonated charity campaigns.</description>
+        </item>
+        
+        <item>
+          <title>Amazon Order Scam Email Checklist: Fast Checks Before You Click</title>
+          <link>https://beatthescam.com/guides/amazon-order-scam-email-checklist/</link>
+          <guid>https://beatthescam.com/guides/amazon-order-scam-email-checklist/</guid>
+          <pubDate>Sat, 21 Mar 2026 00:00:00 +0000</pubDate>
+          <description>How to review suspicious Amazon order, refund, and account emails safely.</description>
+        </item>
+        
       </channel>
     </rss>
