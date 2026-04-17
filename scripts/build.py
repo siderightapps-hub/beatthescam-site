@@ -603,27 +603,31 @@ def build():
     </rss>'''
     write(DIST / 'rss.xml', rss)
 
+    # ─── SITEMAP ─────────────────────────────────────────────
+
     urls = ['/', '/guides/', '/categories/', '/about/', '/privacy/', '/cookies/', '/terms/', '/contact/']
     urls += [f'/guides/{p["slug"]}/' for p in posts]
     urls += [f'/categories/{slugify(cat)}/' for cat in categories]
+
     sitemap = []
-sitemap.append('<?xml version="1.0" encoding="UTF-8"?>')
-sitemap.append('<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">')
+    sitemap.append('<?xml version="1.0" encoding="UTF-8"?>')
+    sitemap.append('<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">')
 
-for url in urls:
-    sitemap.append(f'<url><loc>{site["domain"]}{url}</loc></url>')
+    for url in urls:
+        sitemap.append(f'<url><loc>{site["domain"]}{url}</loc></url>')
 
-sitemap.append('</urlset>')
+    sitemap.append('</urlset>')
 
-write(DIST / 'sitemap.xml', '\n'.join(sitemap))
+    write(DIST / 'sitemap.xml', '\n'.join(sitemap))
 
-robots = f'''User-agent: *
+    # ─── ROBOTS ─────────────────────────────────────────────
+
+    robots = f'''User-agent: *
 Allow: /
 
 Sitemap: {site["domain"]}/sitemap.xml
 '''
-write(DIST / 'robots.txt', robots)
-
+    write(DIST / 'robots.txt', robots)
 
 if __name__ == '__main__':
     build()
