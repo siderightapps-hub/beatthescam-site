@@ -606,11 +606,16 @@ def build():
     urls = ['/', '/guides/', '/categories/', '/about/', '/privacy/', '/cookies/', '/terms/', '/contact/']
     urls += [f'/guides/{p["slug"]}/' for p in posts]
     urls += [f'/categories/{slugify(cat)}/' for cat in categories]
-    sitemap = ['<?xml version="1.0" encoding="UTF-8"?>', '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">']
-    for url in urls:
-        sitemap.append(f'  <url><loc>{site["domain"]}{url}</loc></url>')
-    sitemap.append('</urlset>')
-    write(DIST / 'sitemap.xml', '\n'.join(sitemap))
+    sitemap = []
+sitemap.append('<?xml version="1.0" encoding="UTF-8"?>')
+sitemap.append('<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">')
+
+for url in urls:
+    sitemap.append(f'<url><loc>{site["domain"]}{url}</loc></url>')
+
+sitemap.append('</urlset>')
+
+write(DIST / 'sitemap.xml', '\n'.join(sitemap))
 
     robots = f'''User-agent: *
 Allow: /
