@@ -1,0 +1,6 @@
+keyword,type,category,entity,money_angle,urgency,risk_hint,publish
+is temu a scam,brand,website,Temu,payment security,medium,marketplace impersonation,yes
+royal mail text scam,sms,sms,Royal Mail,delivery fees,high,tracking/payment lure,yes
+paypal email scam,email,payment,PayPal,account access,high,credential theft,yes
+bank transfer scam warning signs,payment,payment,,bank transfer,high,authorised push payment risk,yes
+crypto withdrawal fee scam,crypto,crypto,,recovery/fees,medium,advance fee pattern,yes
