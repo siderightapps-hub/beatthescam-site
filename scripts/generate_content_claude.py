@@ -1,121 +1,229 @@
-import os, csv, json, re, sys
-from pathlib import Path
-from typing import List, Dict
+import argparse
+import csv
+import json
+import os
+from datetime import datetime
+from typing import Dict, List
 
-try:
-    import anthropic
-except Exception:
-    anthropic = None
+from anthropic import Anthropic
 
-ROOT = Path(__file__).resolve().parents[1]
+
+# ---------------------------
+# Helpers
+# ---------------------------
+
+def slugify(text: str) -> str:
+    return text.lower().strip().replace(" ", "-").replace("?", "").replace(",", "")
+
+
+def load_posts(path: str) -> List[Dict]:
+    if not os.path.exists(path):
+        return []
+    with open(path, "r", encoding="utf-8") as f:
+        return json.load(f)
+import argparse
+import csv
+import json
+import os
+import re
+from dataclasses import dataclass
+from typing import Dict, List, Sequence
+
+from anthropic import Anthropic
+
+
+DEFAULT_MODEL = "claude-haiku-4-5-20251001"
+REQUIRED_FIELDS = [
+    "title",
+    "slug",
+    "category",
+    "excerpt",
+    "description",
+    "hero",
+    "date",
+    "content",
+    "sections",
+    "faq",
+    "keywords",
+]
+
+
+@dataclass
+class Topic:
+    keyword: str
+    entity: str
+    category: str
 
 
 def slugify(text: str) -> str:
     text = text.lower().strip()
-    text = re.sub(r"[^a-z0-9]+", "-", text)
-    return re.sub(r"-+", "-", text).strip("-")
+    text = re.sub(r"[^a-z0-9\s-]", "", text)
+    text = re.sub(r"\s+", "-", text)
+    text = re.sub(r"-{2,}", "-", text)
+    return text.strip("-")
 
 
-def read_topics(path: Path) -> List[Dict[str, str]]:
-    with path.open("r", encoding="utf-8-sig", newline="") as f:
-        return list(csv.DictReader(f))
+def clean_text(value: str) -> str:
+    return (value or "").strip()
 
 
-def read_posts(path: Path) -> List[Dict]:
-    if not path.exists():
+def load_posts(path: str) -> List[Dict]:
+    if not os.path.exists(path):
         return []
-    return json.loads(path.read_text(encoding="utf-8"))
+    with open(path, "r", encoding="utf-8") as f:
+        return json.load(f)
 
 
-def write_posts(path: Path, posts: List[Dict]):
-    path.write_text(json.dumps(posts, indent=2, ensure_ascii=False), encoding="utf-8")
+def save_posts(path: str, posts: List[Dict]) -> None:
+    with open(path, "w", encoding="utf-8") as f:
+        json.dump(posts, f, indent=2, ensure_ascii=False)
 
 
-def fallback_post(topic: Dict[str, str], date: str) -> Dict:
-    keyword = topic["keyword"].strip()
-    entity = topic.get("entity", "this service").strip() or "this service"
-    slug = slugify(keyword)
-    category = topic.get("category", "website").strip() or "website"
-    title = keyword.title() if "?" in keyword else f"{keyword.title()} (2026 Guide)"
-    excerpt = f"A practical UK-focused guide to {keyword}, with warning signs, verification steps, and what to do if you have already engaged."
-    content = f"""## Quick answer
+def topic_exists(posts: Sequence[Dict], slug: str) -> bool:
+    return any(post.get("slug") == slug for post in posts)
 
-{entity} may be legitimate in some contexts, but scammers often imitate brands, websites, texts, emails, or payment flows. You should verify the source independently before taking any action.
 
-## Warning signs
+def read_topics(csv_path: str) -> List[Topic]:
+    topics: List[Topic] = []
+    with open(csv_path, "r", encoding="utf-8-sig", newline="") as f:
+        reader = csv.DictReader(f)
+        for row in reader:
+            keyword = clean_text(row.get("keyword", ""))
+            entity = clean_text(row.get("entity", ""))
+            category = clean_text(row.get("category", ""))
 
-- Pressure to act immediately
-- Requests for payment, login details, or one-time codes
-- Mismatched domains, email addresses, or phone numbers
-- Links that do not clearly match the official brand
-- Claims that you must pay first to release funds or prizes
+            if not keyword:
+                continue
 
-## How this scam usually works
+            if not entity:
+                entity = keyword
 
-Scammers often copy the branding or tone of a real business, then push the target to click a link, sign in, transfer money, or disclose sensitive information. The tactic varies by channel, but the pattern is usually urgency plus impersonation.
+            if not category:
+                category = "website"
 
-## How to verify safely
+            topics.append(Topic(keyword=keyword, entity=entity, category=category))
+    return topics
 
-1. Go to the official website manually rather than using a message link.
-2. Check whether the email domain or website domain exactly matches the real brand.
-3. Contact the company using contact details from its official website.
-4. Do not share one-time passcodes, card details, or ID documents until you have verified the source.
 
-## What to do if you already interacted
-
-- Change passwords immediately if you entered them anywhere suspicious.
-- Contact your bank or card provider if you made a payment.
-- Report the incident to Action Fraud or the relevant UK reporting channel.
-- Keep screenshots, transaction records, and message copies for evidence.
-"""
-    sections = [
-        {
-            "title": "Quick answer",
-            "body": f"{entity} may be legitimate in some contexts, but scammers often imitate brands, websites, texts, emails, or payment flows. You should verify the source independently before taking any action."
-        },
-        {
-            "title": "Warning signs",
-            "body": "- Pressure to act immediately\n- Requests for payment, login details, or one-time codes\n- Mismatched domains, email addresses, or phone numbers\n- Links that do not clearly match the official brand\n- Claims that you must pay first to release funds or prizes"
-        },
-        {
-            "title": "How this scam usually works",
-            "body": "Scammers often copy the branding or tone of a real business, then push the target to click a link, sign in, transfer money, or disclose sensitive information."
-        },
-        {
-            "title": "How to verify safely",
-            "body": "1. Go to the official website manually rather than using a message link.\n2. Check whether the domain exactly matches the real brand.\n3. Contact the company using official details.\n4. Do not share sensitive data until verified."
-        },
-        {
-            "title": "What to do if you already interacted",
-            "body": "Change passwords, contact your bank, keep evidence, and report the incident to the appropriate UK authority."
-        }
-    ]
-
-    faq = [
+def build_sections(keyword: str, entity: str, category: str, excerpt: str) -> List[List[str]]:
+    return [
         [
-            f"How can I check whether {entity} is real?",
-            "Go to the official website manually, verify the domain carefully, and contact the organisation using details published on its real site."
+            "Quick answer",
+            excerpt,
         ],
         [
-            "What should I do if I clicked a suspicious link?",
-            "Stop interacting, close the page, change any affected passwords, run a device security check, and monitor your accounts."
+            "Warning signs",
+            "- Pressure to act immediately\n- Requests for payment, login details, or one-time codes\n- Suspicious links or domains\n- Requests for upfront payment\n- Messages that create urgency or fear",
         ],
         [
-            "What if I already paid money?",
-            "Contact your bank or card provider immediately, explain what happened, and ask what fraud or chargeback options are available."
-        ]
+            "How this scam usually works",
+            f"Scammers impersonate trusted names such as {entity} to extract money, account access, or personal information. The usual pattern is urgency, impersonation, and a push to click a link or send payment.",
+        ],
+        [
+            "How to verify safely",
+            "Go to the official website manually, verify the domain carefully, and use independently verified contact details before taking any action.",
+        ],
+        [
+            "What to do if you already interacted",
+            "Change passwords immediately, contact your bank if payment details were involved, keep evidence, and report the incident through the relevant UK channel such as Action Fraud.",
+        ],
     ]
-    
+
+
+def markdown_from_sections(sections: List[List[str]]) -> str:
+    parts: List[str] = []
+    for title, body in sections:
+        parts.append(f"## {title}\n\n{body}")
+    return "\n\n".join(parts)
+
+
+def build_faq(keyword: str, entity: str) -> List[List[str]]:
+    return [
+        [
+            f"Is {entity} a scam?",
+            f"{entity} itself may be legitimate, but scammers often impersonate it. Always verify the source independently before acting.",
+        ],
+        [
+            f"How can I verify {entity} safely?",
+            "Use the official website directly, avoid message links, and confirm contact details through trusted public sources.",
+        ],
+        [
+            "What should I do if I already interacted?",
+            "Change passwords, contact your bank if needed, keep evidence, and report the incident through the relevant UK reporting route.",
+        ],
+    ]
+
+
+def validate_post(post: Dict) -> None:
+    for field in REQUIRED_FIELDS:
+        if field not in post:
+            raise ValueError(f"Missing required field: {field}")
+
+    if not isinstance(post["sections"], list) or not post["sections"]:
+        raise ValueError("Post sections must be a non-empty list")
+
+    if not isinstance(post["faq"], list) or not post["faq"]:
+        raise ValueError("Post faq must be a non-empty list")
+
+    if not isinstance(post["keywords"], list) or not post["keywords"]:
+        raise ValueError("Post keywords must be a non-empty list")
+
+
+def enforce_structure(data: Dict, topic: Topic, date: str) -> Dict:
+    keyword = topic.keyword
+    entity = topic.entity
+    category = topic.category
+
+    title = clean_text(data.get("title", "")) or f"{keyword.title()} (2026 Guide)"
+    slug = slugify(clean_text(data.get("slug", "")) or keyword)
+    excerpt = clean_text(data.get("excerpt", "")) or f"A practical UK-focused guide to {keyword}, including warning signs, verification steps, and what to do if targeted."
+    description = clean_text(data.get("description", "")) or excerpt
+    hero = clean_text(data.get("hero", "")) or description
+    post_category = clean_text(data.get("category", "")) or category
+
+    sections = build_sections(keyword, entity, post_category, description)
+    faq = build_faq(keyword, entity)
+    content = markdown_from_sections(sections)
+
+    keywords = data.get("keywords") or [
+        keyword,
+        post_category,
+        entity,
+        f"{keyword} uk",
+        f"{keyword} scam",
+    ]
+    keywords = [clean_text(k) for k in keywords if clean_text(str(k))]
+
     post = {
         "title": title,
         "slug": slug,
-        "category": category,
+        "category": post_category,
         "excerpt": excerpt,
-        "description": excerpt,
+        "description": description,
+        "hero": hero,
         "date": date,
         "content": content,
         "sections": sections,
         "faq": faq,
+        "keywords": keywords,
+    }
+
+    validate_post(post)
+    return post
+
+
+def template_post(topic: Topic, date: str) -> Dict:
+    keyword = topic.keyword
+    entity = topic.entity
+    category = topic.category
+
+    raw = {
+        "title": f"{keyword.title()} (2026 Guide)",
+        "slug": slugify(keyword),
+        "category": category,
+        "excerpt": f"A practical UK-focused guide to {keyword}, including warning signs, verification steps, and what to do if targeted.",
+        "description": f"A practical UK-focused guide to {keyword}, including warning signs, verification steps, and what to do if targeted.",
+        "hero": f"A practical UK-focused guide to {keyword}, including warning signs, verification steps, and what to do if targeted.",
         "keywords": [
             keyword,
             category,
@@ -124,83 +232,137 @@ Scammers often copy the branding or tone of a real business, then push the targe
             f"{keyword} scam",
         ],
     }
+    return enforce_structure(raw, topic, date)
 
-    post["keywords"] = [k for k in post["keywords"] if k]
 
-    return post
-    
-def claude_post(topic: Dict[str, str], date: str, model: str = "claude-3-5-sonnet-latest") -> Dict:
-    if anthropic is None:
-        raise RuntimeError("anthropic SDK not installed")
+def extract_json_object(text: str) -> Dict:
+    text = text.strip()
+
+    try:
+        return json.loads(text)
+    except json.JSONDecodeError:
+        pass
+
+    match = re.search(r"\{.*\}", text, re.DOTALL)
+    if not match:
+        raise ValueError("No JSON object found in Claude response")
+
+    return json.loads(match.group(0))
+
+
+def claude_post(topic: Topic, date: str, model: str) -> Dict:
     api_key = os.getenv("ANTHROPIC_API_KEY")
     if not api_key:
-        raise RuntimeError("ANTHROPIC_API_KEY not set")
+        raise RuntimeError("ANTHROPIC_API_KEY not set in this terminal session")
 
-    client = anthropic.Anthropic(api_key=api_key)
+    client = Anthropic(api_key=api_key)
 
-    keyword = topic["keyword"].strip()
-    entity = topic.get("entity", "").strip()
-    category = topic.get("category", "website").strip() or "website"
-    type_ = topic.get("type", "website").strip() or "website"
-    money_angle = topic.get("money_angle", "").strip()
-    urgency = topic.get("urgency", "").strip()
-    risk_hint = topic.get("risk_hint", "").strip()
+    prompt = f"""Write a UK-focused scam-awareness article seed as JSON only.
 
-    prompt = f'''You are generating one UK-focused scam-awareness article for a static website.
-Return ONLY valid JSON with these keys exactly:
-- title
-- slug
-- category
-- excerpt
-- description
-- keywords
-- date
-- content
+Topic keyword: {topic.keyword}
+Entity: {topic.entity}
+Category: {topic.category}
+
+Return JSON only with these keys:
+title
+slug
+category
+excerpt
+description
+hero
+keywords
 
 Rules:
-- Target keyword: {keyword}
-- Category: {category}
-- Type: {type_}
-- Entity: {entity}
-- Money angle: {money_angle}
-- Urgency: {urgency}
-- Risk hint: {risk_hint}
-- Date: {date}
-- Slug must be lowercase with hyphens only.
-- Excerpt must be 20-35 words.
-- Description should match the excerpt closely and be suitable for SEO.
-- Keywords must be a short JSON array of 4 to 6 relevant strings.
-- Content must be markdown and include these H2 sections exactly:
-  1. Quick answer
-  2. Warning signs
-  3. How this scam usually works
-  4. How to verify safely
-  5. What to do if you already interacted
-- Keep tone practical, clear, non-alarmist, UK-focused.
-- Do not make unsupported legal or financial guarantees.
-- Do not use placeholders.
-- Output JSON only. No code fences.
-'''
+- Keep it factual and practical.
+- Do not use markdown.
+- slug must be lowercase with hyphens.
+- excerpt and description should be concise and useful.
+- hero should be one short lead sentence.
+- keywords should be a short array of strings.
+"""
 
-    resp = client.messages.create(
+    response = client.messages.create(
         model=model,
-        max_tokens=1800,
-        temperature=0.7,
+        max_tokens=900,
         messages=[{"role": "user", "content": prompt}],
     )
 
-    text = "".join(
-        block.text for block in resp.content
-        if getattr(block, "type", None) == "text"
-    ).strip()
+    text_blocks = []
+    for block in response.content:
+        if getattr(block, "type", None) == "text":
+            text_blocks.append(block.text)
 
-    data = json.loads(text)
+    raw_text = "\n".join(text_blocks).strip()
+    raw_data = extract_json_object(raw_text)
+    return enforce_structure(raw_data, topic, date)
+
+
+def main() -> int:
+    parser = argparse.ArgumentParser()
+    parser.add_argument("csv_file")
+    parser.add_argument("--posts", required=True)
+    parser.add_argument("--mode", choices=["claude", "template"], default="template")
+    parser.add_argument("--model", default=DEFAULT_MODEL)
+    parser.add_argument("--date", default="2026-04-17")
+    parser.add_argument("--force", action="store_true")
+    args = parser.parse_args()
+
+    posts = load_posts(args.posts)
+    topics = read_topics(args.csv_file)
+
+    added = 0
+
+    for topic in topics:
+        slug = slugify(topic.keyword)
+
+        if topic_exists(posts, slug) and not args.force:
+            continue
+
+        if args.mode == "claude":
+            post = claude_post(topic, args.date, args.model)
+        else:
+            post = template_post(topic, args.date)
+
+        if args.force:
+            posts = [p for p in posts if p.get("slug") != post["slug"]]
+
+        posts.append(post)
+        added += 1
+
+    save_posts(args.posts, posts)
+    print(f"Added {added} post(s) to {args.posts}")
+    return 0
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())
+
+def save_posts(path: str, posts: List[Dict]):
+    with open(path, "w", encoding="utf-8") as f:
+        json.dump(posts, f, indent=2, ensure_ascii=False)
+
+
+def topic_exists(posts: List[Dict], slug: str) -> bool:
+    return any(p.get("slug") == slug for p in posts)
+
+
+# ---------------------------
+# STRUCTURE ENFORCER (CRITICAL)
+# ---------------------------
+
+def enforce_structure(data: Dict, topic: Dict, date: str) -> Dict:
+    keyword = topic.get("keyword", "").strip()
+    entity = topic.get("entity", keyword)
+    category = topic.get("category", "website")
 
     data["slug"] = slugify(data.get("slug") or keyword)
     data["category"] = data.get("category") or category
-    data["excerpt"] = data.get("excerpt") or f"A practical UK-focused guide to {keyword}, with warning signs, verification steps, and what to do if you have already engaged."
+
+    data["excerpt"] = data.get("excerpt") or f"A practical UK-focused guide to {keyword}."
     data["description"] = data.get("description") or data["excerpt"]
+    data["hero"] = data.get("hero") or data["description"]
     data["date"] = date
+
     data["keywords"] = data.get("keywords") or [
         keyword,
         category,
@@ -208,90 +370,129 @@ Rules:
         f"{keyword} uk",
         f"{keyword} scam",
     ]
-    data["keywords"] = [k for k in data["keywords"] if k]
+
+    # FORCE SECTIONS
     data["sections"] = [
-        {
-            "title": "Quick answer",
-            "body": data.get("description") or data.get("excerpt") or f"A practical UK-focused guide to {keyword}."
-        },
-        {
-            "title": "Warning signs",
-            "body": "- Pressure to act immediately\n- Requests for payment, login details, or one-time codes\n- Mismatched domains, email addresses, or phone numbers\n- Links that do not clearly match the official brand\n- Claims that you must pay first to release funds or prizes"
-        },
-        {
-            "title": "How this scam usually works",
-            "body": f"This guide covers the common pattern behind {keyword}, including impersonation, urgency, suspicious links, and attempts to extract money or sensitive information."
-        },
-        {
-            "title": "How to verify safely",
-            "body": "1. Go to the official website manually rather than using a message link.\n2. Check whether the sender, website, or number exactly matches the real brand.\n3. Contact the organisation using contact details from its official site.\n4. Do not share passcodes, payment details, or ID documents until verified."
-        },
-        {
-            "title": "What to do if you already interacted",
-            "body": "If you entered details or made a payment, change passwords immediately, contact your bank or card provider, keep evidence, and report the incident through the relevant UK channel."
-        }
+        {"title": "Quick answer", "body": data["description"]},
+        {"title": "Warning signs", "body": "- Urgency\n- Payment requests\n- Suspicious links\n- Impersonation"},
+        {"title": "How this scam usually works", "body": f"Scammers impersonate {entity} to extract money or data."},
+        {"title": "How to verify safely", "body": "Check official sites, avoid message links, verify domains."},
+        {"title": "What to do if you already interacted", "body": "Change passwords, contact bank, report to Action Fraud."}
     ]
 
+    # FORCE FAQ
     data["faq"] = [
-        [
-            f"How can I verify {entity or keyword} safely?",
-            "Use the official website, check the sender or domain carefully, and contact the organisation through independently verified contact details."
-        ],
-        [
-            "What should I do if I shared information already?",
-            "Change passwords, secure affected accounts, contact your bank if payment details were involved, and keep evidence of what happened."
-        ],
-        [
-            "Where can I report a scam in the UK?",
-            "You can report scams through the relevant UK reporting channels such as Action Fraud, your bank, or the impersonated organisation."
-        ]
+        [f"Is {entity} a scam?", f"{entity} may be legitimate, but scams often impersonate it."],
+        [f"How do I verify {entity}?", "Use official website and trusted sources."],
+        ["What should I do if scammed?", "Contact your bank and report it immediately."]
     ]
 
     return data
-    
+
+
+# ---------------------------
+# CLAUDE GENERATION
+# ---------------------------
+
+def claude_post(topic: Dict, date: str) -> Dict:
+    api_key = os.getenv("ANTHROPIC_API_KEY")
+    if not api_key:
+        raise RuntimeError("ANTHROPIC_API_KEY not set")
+
+    client = Anthropic(api_key=api_key)
+
+    keyword = topic["keyword"]
+    entity = topic.get("entity", keyword)
+    category = topic.get("category", "website")
+
+    prompt = f"""
+Write a UK-focused scam awareness article.
+
+Topic: {keyword}
+
+Return JSON only with:
+title, slug, excerpt, description, content, keywords
+"""
+
+    response = client.messages.create(
+        model="claude-haiku-4-5-20251001",
+        max_tokens=1500,
+        messages=[{"role": "user", "content": prompt}],
+    )
+
+    raw = response.content[0].text.strip()
+
+    try:
+        data = json.loads(raw)
+    except:
+        data = {
+            "title": f"{keyword.title()} (2026 Guide)",
+            "slug": slugify(keyword),
+            "excerpt": f"A guide to {keyword}.",
+            "description": f"A guide to {keyword}.",
+            "content": f"Guide about {keyword}.",
+            "keywords": [keyword],
+        }
+
+    return enforce_structure(data, topic, date)
+
+
+# ---------------------------
+# FALLBACK TEMPLATE
+# ---------------------------
+
+def template_post(topic: Dict, date: str) -> Dict:
+    keyword = topic["keyword"]
+
+    data = {
+        "title": f"{keyword.title()} (2026 Guide)",
+        "slug": slugify(keyword),
+        "excerpt": f"A guide to {keyword}.",
+        "description": f"A guide to {keyword}.",
+        "content": f"Guide about {keyword}.",
+        "keywords": [keyword],
+    }
+
+    return enforce_structure(data, topic, date)
+
+
+# ---------------------------
+# MAIN
+# ---------------------------
+
 def main():
-    import argparse
     parser = argparse.ArgumentParser()
-    parser.add_argument("topics")
-    parser.add_argument("--posts", default="content/posts.json")
-    parser.add_argument("--mode", choices=["claude", "template"], default="claude")
-    parser.add_argument("--date", default="2026-04-17")
-    parser.add_argument("--force", action="store_true")
-    parser.add_argument("--dry-run", action="store_true")
-    parser.add_argument("--model", default="claude-3-5-sonnet-latest")
+    parser.add_argument("csv_file")
+    parser.add_argument("--posts", required=True)
+    parser.add_argument("--mode", choices=["claude", "template"], default="template")
+    parser.add_argument("--date", default=datetime.now().strftime("%Y-%m-%d"))
     args = parser.parse_args()
 
-    topics = read_topics(Path(args.topics))
-    posts_path = Path(args.posts)
-    posts = read_posts(posts_path)
-    existing = {p.get("slug") for p in posts}
-    generated = []
+    posts = load_posts(args.posts)
 
-    for topic in topics:
-        keyword = (topic.get("keyword") or "").strip()
-        if not keyword:
-            continue
-        slug = slugify(keyword)
-        if slug in existing and not args.force:
-            continue
-        if args.mode == "claude":
-            try:
-                post = claude_post(topic, args.date, model=args.model)
-            except Exception:
-                post = fallback_post(topic, args.date)
-        else:
-            post = fallback_post(topic, args.date)
-        generated.append(post)
-        existing.add(post["slug"])
+    added = 0
 
-    if args.dry_run:
-        print(json.dumps(generated[:3], indent=2, ensure_ascii=False))
-        print(f"Generated {len(generated)} post(s) in dry-run mode")
-        return
+    with open(args.csv_file, newline="", encoding="utf-8") as f:
+        reader = csv.DictReader(f)
 
-    posts.extend(generated)
-    write_posts(posts_path, posts)
-    print(f"Added {len(generated)} post(s) to {posts_path}")
+        for topic in reader:
+            slug = slugify(topic["keyword"])
+
+            if topic_exists(posts, slug):
+                continue
+
+            if args.mode == "claude":
+                post = claude_post(topic, args.date)
+            else:
+                post = template_post(topic, args.date)
+
+            posts.append(post)
+            added += 1
+
+    save_posts(args.posts, posts)
+
+    print(f"Added {added} post(s) to {args.posts}")
+
 
 if __name__ == "__main__":
     main()
