@@ -1,0 +1,62 @@
+name: Daily AI Publish
+
+on:
+  workflow_dispatch:
+    inputs:
+      batch_size:
+        description: "Number of topics to publish this run"
+        required: false
+        default: "3"
+  schedule:
+    # Daily at 06:15 UTC
+    - cron: '15 6 * * *'
+
+permissions:
+  contents: write
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    env:
+      ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+      BATCH_SIZE: ${{ github.event.inputs.batch_size || '3' }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install anthropic
+
+      - name: Run daily publisher
+        run: |
+          python scripts/run_daily_publish.py \
+            --queue content/daily-publish-queue.csv \
+            --topics content/topics-claude-template.csv \
+            --posts content/posts.json \
+            --batch-size "$BATCH_SIZE" \
+            --model claude-haiku-4-5-20251001
+
+      - name: Build site
+        run: |
+          python scripts/build.py
+
+      - name: Commit and push if changed
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add content/posts.json content/topics-claude-template.csv content/daily-publish-queue.csv dist
+          if git diff --cached --quiet; then
+            echo "No changes to commit"
+            exit 0
+          fi
+          git commit -m "Daily AI publishing batch"
+          git push
