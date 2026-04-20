@@ -1,7 +1,7 @@
 keyword,entity,category,published,published_at,slug
-facebook marketplace scam,Facebook,marketplace,,,
-gumtree scam uk,Gumtree,marketplace,,,
-evri text scam,Evri,sms,,,
+facebook marketplace scam,Facebook,marketplace,true,2026-04-20T08:39:33Z,facebook-marketplace-scam
+gumtree scam uk,Gumtree,marketplace,true,2026-04-20T08:39:33Z,gumtree-scam-uk
+evri text scam,Evri,sms,true,2026-04-20T08:39:33Z,evri-text-scam
 paypal email scam,PayPal,payment,,,
 hmrc tax refund scam,HMRC,government,,,
 crypto investment scam,Crypto,crypto,,,
