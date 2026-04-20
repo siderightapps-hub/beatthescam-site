@@ -19,12 +19,14 @@ def write(path: Path, text: str):
     path.parent.mkdir(parents=True, exist_ok=True)
     path.write_text(text.strip() + "\n", encoding="utf-8")
 
-
 def slugify(value: str) -> str:
-    value = value.lower().strip()
-    value = re.sub(r"[^a-z0-9]+", "-", value)
-    return value.strip("-")
+    return value.lower().strip().replace(" ", "-")
 
+def topic_signature(post: dict) -> str:
+    title = post.get("title", "").lower()
+    title = re.sub(r"\b(guide|checklist|warning signs|uk guide|uk)\b", "", title)
+    title = re.sub(r"[^a-z0-9]+", " ", title)
+    return re.sub(r"\s+", " ", title).strip()
 
 def rel_url(site, path: str) -> str:
     prefix = site.get("site_path", "") or ""
@@ -227,10 +229,10 @@ def render_home(site, posts, categories):
     <section class="section">
       <div class="wrap">
         <div class="stat-strip">
-          <div class="metric-card"><strong>Organic-ready</strong><span>Structured titles, meta descriptions, schema, sitemap, RSS, and internal linking built in.</span></div>
-          <div class="metric-card"><strong>GA4</strong><span>Analytics installed with consent-aware configuration and outbound-click tracking.</span></div>
-          <div class="metric-card"><strong>AdSense-ready</strong><span>Publisher ID inserted and ads.txt generated for review and monetisation setup.</span></div>
-          <div class="metric-card"><strong>Trust pages</strong><span>Privacy, cookies, about, terms, and contact pages included for compliance and review.</span></div>
+          <div class="metric-card"><strong>Practical checks</strong><span>Fast steps you can use before clicking a link, paying a fee, or sharing personal information.</span></div>
+          <div class="metric-card"><strong>UK-focused advice</strong><span>Guides written for common scams targeting UK consumers, delivery services, marketplaces, and payment methods.</span></div>
+          <div class="metric-card"><strong>Plain-English alerts</strong><span>No jargon, no panic language, and no assumptions that every suspicious message is genuine.</span></div>
+          <div class="metric-card"><strong>Action steps</strong><span>Clear guidance on what to verify, what to avoid, and what to do if you have already interacted.</span></div>
         </div>
       </div>
     </section>
@@ -381,9 +383,23 @@ def render_category_page(site, category, posts):
 
 
 def related_posts(posts, current, count=4):
+    current_sig = topic_signature(current)
+    seen = {current_sig}
+    ordered = []
+
     same_cat = [p for p in posts if p['slug'] != current['slug'] and p['category'] == current['category']]
     others = [p for p in posts if p['slug'] != current['slug'] and p['category'] != current['category']]
-    return (same_cat + others)[:count]
+
+    for p in same_cat + others:
+        sig = topic_signature(p)
+        if sig in seen:
+            continue
+        seen.add(sig)
+        ordered.append(p)
+        if len(ordered) >= count:
+            break
+
+    return ordered
 
 
 def render_post(site, post, all_posts):
@@ -414,7 +430,6 @@ def render_post(site, post, all_posts):
         <div class="notice"><strong>Key rule:</strong> verify through an official route you opened yourself, not the link, number, app, or payment details supplied by the suspicious message.</div>
         <div class="toc"><strong>On this page</strong><ol>{toc}</ol></div>
         {''.join(section_html)}
-        <div class="inline-ad">AdSense Auto Ads can fill this article naturally after site approval. Keep content value higher than ad density.</div>
         <h2>Frequently asked questions</h2>
         <div class="faq">{faq_html}</div>
       </article>
@@ -434,7 +449,9 @@ def render_post(site, post, all_posts):
         </section>
         <section class="sidebar-card">
           <h3>Need more context?</h3>
-          <p class="note">Read the legal and trust pages so AdSense reviewers and users can see a complete, transparent publication footprint.</p>
+          <section class="sidebar-card">
+          <h3>Need more help?</h3>
+          <p class="note">Read the site policies and background pages for more context on how the guides are written and how the site handles privacy and cookies.</p>
           <p><a href="/about/">About the site</a><br><a href="/privacy/">Privacy Policy</a><br><a href="/cookies/">Cookie Policy</a></p>
         </section>
       </aside>

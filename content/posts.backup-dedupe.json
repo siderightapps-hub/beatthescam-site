@@ -53,6 +53,59 @@
     ]
   },
   {
+    "slug": "royal-mail-text-scam-guide",
+    "title": "Royal Mail Text Scam Guide: How to Spot the Common Delivery Message Trap",
+    "description": "How fake parcel delivery texts work, what signs to check, and what to do if you clicked the link.",
+    "category": "Text Message Scams",
+    "date": "2026-04-09",
+    "keywords": [
+      "royal mail scam text",
+      "parcel delivery text scam",
+      "smishing uk"
+    ],
+    "hero": "Fake delivery texts are designed to catch you when you are already expecting a parcel.",
+    "sections": [
+      [
+        "Why these messages work",
+        "Delivery scams exploit routine. A small unpaid fee, missed delivery claim, or address check sounds plausible when you genuinely have parcels on the way. Fraudsters win by sounding ordinary, not dramatic."
+      ],
+      [
+        "Typical warning signs",
+        "Watch for shortened links, random sender numbers, bad spelling, or a domain that does not belong to the courier. Some messages ask for a tiny fee because small amounts trigger less scepticism."
+      ],
+      [
+        "How to verify safely",
+        "Do not tap the link in the text. Open the official courier app or type the courier website into your browser manually. If a tracking number is shown, check it only through the official channel you opened yourself."
+      ],
+      [
+        "If you clicked the link",
+        "Close the page. If you entered card details, contact your bank or card issuer quickly and explain that the information may have been submitted to a fraudulent page. If you entered a password, change it immediately and enable two-factor authentication."
+      ],
+      [
+        "If you installed an app",
+        "Delete the app, review permissions, run a device security scan, and change important credentials from a clean device if possible. Some smishing campaigns are designed to capture messages and banking prompts."
+      ],
+      [
+        "Reducing future risk",
+        "Use official parcel apps, be sceptical of small-payment requests, and treat any text that creates urgency around delivery or customs fees as suspicious until independently confirmed."
+      ]
+    ],
+    "faq": [
+      [
+        "Are all parcel fee texts fake?",
+        "Not automatically, but you should never trust the link inside the message. Verify through the official courier site or app instead."
+      ],
+      [
+        "Can scammers spoof sender names?",
+        "Yes. The name shown above the message is not reliable proof of authenticity."
+      ],
+      [
+        "Should I report the message?",
+        "Yes. Reporting helps carriers and networks identify repeat campaigns."
+      ]
+    ]
+  },
+  {
     "slug": "paypal-email-scam-signs",
     "title": "PayPal Email Scam Signs: How to Check a Message Without Panicking",
     "description": "A checklist for reviewing suspicious PayPal emails and deciding whether a message is genuine.",
@@ -1275,6 +1328,61 @@
       "fake listings",
       "delivery fraud",
       "seller verification"
+    ]
+  },
+  {
+    "title": "How to Spot and Avoid Scam Sellers on Etsy in the UK",
+    "slug": "etsy-scam-sellers-uk-guide",
+    "category": "marketplace",
+    "excerpt": "Learn how to identify fraudulent Etsy sellers, protect your purchases, and know your rights as a UK buyer on the platform.",
+    "description": "Etsy's popularity has attracted scammers alongside legitimate craftspeople. This guide helps UK shoppers recognise warning signs like unrealistic prices, poor reviews, and suspiciously new accounts, whilst explaining how to use Etsy's buyer protection and report fraudulent sellers to Trading Standards if needed.",
+    "hero": "Etsy scams range from non-delivery to counterfeit goods, but UK buyers have strong protections if they know how to use them.",
+    "date": "2026-04-17",
+    "content": "## Quick answer\n\nEtsy's popularity has attracted scammers alongside legitimate craftspeople. This guide helps UK shoppers recognise warning signs like unrealistic prices, poor reviews, and suspiciously new accounts, whilst explaining how to use Etsy's buyer protection and report fraudulent sellers to Trading Standards if needed.\n\n## Warning signs\n\n- Pressure to act immediately\n- Requests for payment, login details, or one-time codes\n- Suspicious links or domains\n- Requests for upfront payment\n- Messages that create urgency or fear\n\n## How this scam usually works\n\nScammers impersonate trusted names such as Etsy to extract money, account access, or personal information. The usual pattern is urgency, impersonation, and a push to click a link or send payment.\n\n## How to verify safely\n\nGo to the official website manually, verify the domain carefully, and use independently verified contact details before taking any action.\n\n## What to do if you already interacted\n\nChange passwords immediately, contact your bank if payment details were involved, keep evidence, and report the incident through the relevant UK channel such as Action Fraud.",
+    "sections": [
+      [
+        "Quick answer",
+        "Etsy's popularity has attracted scammers alongside legitimate craftspeople. This guide helps UK shoppers recognise warning signs like unrealistic prices, poor reviews, and suspiciously new accounts, whilst explaining how to use Etsy's buyer protection and report fraudulent sellers to Trading Standards if needed."
+      ],
+      [
+        "Warning signs",
+        "- Pressure to act immediately\n- Requests for payment, login details, or one-time codes\n- Suspicious links or domains\n- Requests for upfront payment\n- Messages that create urgency or fear"
+      ],
+      [
+        "How this scam usually works",
+        "Scammers impersonate trusted names such as Etsy to extract money, account access, or personal information. The usual pattern is urgency, impersonation, and a push to click a link or send payment."
+      ],
+      [
+        "How to verify safely",
+        "Go to the official website manually, verify the domain carefully, and use independently verified contact details before taking any action."
+      ],
+      [
+        "What to do if you already interacted",
+        "Change passwords immediately, contact your bank if payment details were involved, keep evidence, and report the incident through the relevant UK channel such as Action Fraud."
+      ]
+    ],
+    "faq": [
+      [
+        "Is Etsy a scam?",
+        "Etsy itself may be legitimate, but scammers often impersonate it. Always verify the source independently before acting."
+      ],
+      [
+        "How can I verify Etsy safely?",
+        "Use the official website directly, avoid message links, and confirm contact details through trusted public sources."
+      ],
+      [
+        "What should I do if I already interacted?",
+        "Change passwords, contact your bank if needed, keep evidence, and report the incident through the relevant UK reporting route."
+      ]
+    ],
+    "keywords": [
+      "Etsy scams",
+      "fake sellers",
+      "counterfeit goods",
+      "buyer protection",
+      "UK consumer rights",
+      "non-delivery",
+      "refund disputes"
     ]
   },
   {
@@ -3495,6 +3603,60 @@
     ]
   },
   {
+    "title": "How to Spot and Avoid Loan Scams in the UK",
+    "slug": "loan-scam-uk-awareness-guide",
+    "category": "finance",
+    "excerpt": "Learn how to identify common loan scam tactics used against UK borrowers, including upfront fee schemes, fake lenders, and pressure-based tactics.",
+    "description": "A practical guide to recognising loan scams targeting UK consumers. Covers warning signs such as guaranteed approval claims, requests for upfront payments, unregistered lenders, and pressure to act quickly. Includes steps to verify legitimate lenders with the FCA and advice on reporting fraudulent activity to Action Fraud.",
+    "hero": "Loan scammers target vulnerable borrowers with promises of quick cash and guaranteed approval - here's how to protect yourself.",
+    "date": "2026-04-17",
+    "content": "## Quick answer\n\nA practical guide to recognising loan scams targeting UK consumers. Covers warning signs such as guaranteed approval claims, requests for upfront payments, unregistered lenders, and pressure to act quickly. Includes steps to verify legitimate lenders with the FCA and advice on reporting fraudulent activity to Action Fraud.\n\n## Warning signs\n\n- Pressure to act immediately\n- Requests for payment, login details, or one-time codes\n- Suspicious links or domains\n- Requests for upfront payment\n- Messages that create urgency or fear\n\n## How this scam usually works\n\nScammers impersonate trusted names such as Loans to extract money, account access, or personal information. The usual pattern is urgency, impersonation, and a push to click a link or send payment.\n\n## How to verify safely\n\nGo to the official website manually, verify the domain carefully, and use independently verified contact details before taking any action.\n\n## What to do if you already interacted\n\nChange passwords immediately, contact your bank if payment details were involved, keep evidence, and report the incident through the relevant UK channel such as Action Fraud.",
+    "sections": [
+      [
+        "Quick answer",
+        "A practical guide to recognising loan scams targeting UK consumers. Covers warning signs such as guaranteed approval claims, requests for upfront payments, unregistered lenders, and pressure to act quickly. Includes steps to verify legitimate lenders with the FCA and advice on reporting fraudulent activity to Action Fraud."
+      ],
+      [
+        "Warning signs",
+        "- Pressure to act immediately\n- Requests for payment, login details, or one-time codes\n- Suspicious links or domains\n- Requests for upfront payment\n- Messages that create urgency or fear"
+      ],
+      [
+        "How this scam usually works",
+        "Scammers impersonate trusted names such as Loans to extract money, account access, or personal information. The usual pattern is urgency, impersonation, and a push to click a link or send payment."
+      ],
+      [
+        "How to verify safely",
+        "Go to the official website manually, verify the domain carefully, and use independently verified contact details before taking any action."
+      ],
+      [
+        "What to do if you already interacted",
+        "Change passwords immediately, contact your bank if payment details were involved, keep evidence, and report the incident through the relevant UK channel such as Action Fraud."
+      ]
+    ],
+    "faq": [
+      [
+        "Is Loans a scam?",
+        "Loans itself may be legitimate, but scammers often impersonate it. Always verify the source independently before acting."
+      ],
+      [
+        "How can I verify Loans safely?",
+        "Use the official website directly, avoid message links, and confirm contact details through trusted public sources."
+      ],
+      [
+        "What should I do if I already interacted?",
+        "Change passwords, contact your bank if needed, keep evidence, and report the incident through the relevant UK reporting route."
+      ]
+    ],
+    "keywords": [
+      "loan scams UK",
+      "fake lenders",
+      "upfront fee scams",
+      "FCA regulated lenders",
+      "loan fraud protection",
+      "guaranteed loan scams"
+    ]
+  },
+  {
     "title": "Credit Score Scams in the UK: How to Protect Yourself",
     "slug": "credit-score-scam-uk",
     "category": "finance",
@@ -3816,6 +3978,60 @@
       "fake listings",
       "payment fraud",
       "secondhand buying scams"
+    ]
+  },
+  {
+    "title": "Evri Text Scam: How to Spot and Avoid Fake Delivery Messages",
+    "slug": "evri-text-scam-awareness",
+    "category": "sms",
+    "excerpt": "Scammers are impersonating Evri with fake SMS messages claiming failed deliveries. Learn how to identify these texts and protect yourself from phishing attempts and financial fraud.",
+    "description": "Evri text scams trick UK residents into clicking malicious links by pretending to be the national parcel delivery service. These SMS messages typically claim a package failed to deliver and prompt you to update delivery details or pay a fee. Clicking the link leads to phishing sites that steal personal and banking information. This guide explains how to recognise genuine Evri communications, verify suspicious messages, and report scams to protect your identity and money.",
+    "hero": "Evri text scams are spreading across the UK, with criminals sending fake SMS messages to steal your personal and financial information.",
+    "date": "2026-04-17",
+    "content": "## Quick answer\n\nEvri text scams trick UK residents into clicking malicious links by pretending to be the national parcel delivery service. These SMS messages typically claim a package failed to deliver and prompt you to update delivery details or pay a fee. Clicking the link leads to phishing sites that steal personal and banking information. This guide explains how to recognise genuine Evri communications, verify suspicious messages, and report scams to protect your identity and money.\n\n## Warning signs\n\n- Pressure to act immediately\n- Requests for payment, login details, or one-time codes\n- Suspicious links or domains\n- Requests for upfront payment\n- Messages that create urgency or fear\n\n## How this scam usually works\n\nScammers impersonate trusted names such as Evri to extract money, account access, or personal information. The usual pattern is urgency, impersonation, and a push to click a link or send payment.\n\n## How to verify safely\n\nGo to the official website manually, verify the domain carefully, and use independently verified contact details before taking any action.\n\n## What to do if you already interacted\n\nChange passwords immediately, contact your bank if payment details were involved, keep evidence, and report the incident through the relevant UK channel such as Action Fraud.",
+    "sections": [
+      [
+        "Quick answer",
+        "Evri text scams trick UK residents into clicking malicious links by pretending to be the national parcel delivery service. These SMS messages typically claim a package failed to deliver and prompt you to update delivery details or pay a fee. Clicking the link leads to phishing sites that steal personal and banking information. This guide explains how to recognise genuine Evri communications, verify suspicious messages, and report scams to protect your identity and money."
+      ],
+      [
+        "Warning signs",
+        "- Pressure to act immediately\n- Requests for payment, login details, or one-time codes\n- Suspicious links or domains\n- Requests for upfront payment\n- Messages that create urgency or fear"
+      ],
+      [
+        "How this scam usually works",
+        "Scammers impersonate trusted names such as Evri to extract money, account access, or personal information. The usual pattern is urgency, impersonation, and a push to click a link or send payment."
+      ],
+      [
+        "How to verify safely",
+        "Go to the official website manually, verify the domain carefully, and use independently verified contact details before taking any action."
+      ],
+      [
+        "What to do if you already interacted",
+        "Change passwords immediately, contact your bank if payment details were involved, keep evidence, and report the incident through the relevant UK channel such as Action Fraud."
+      ]
+    ],
+    "faq": [
+      [
+        "Is Evri a scam?",
+        "Evri itself may be legitimate, but scammers often impersonate it. Always verify the source independently before acting."
+      ],
+      [
+        "How can I verify Evri safely?",
+        "Use the official website directly, avoid message links, and confirm contact details through trusted public sources."
+      ],
+      [
+        "What should I do if I already interacted?",
+        "Change passwords, contact your bank if needed, keep evidence, and report the incident through the relevant UK reporting route."
+      ]
+    ],
+    "keywords": [
+      "Evri scam",
+      "text message scam",
+      "SMS fraud",
+      "phishing",
+      "fake delivery message",
+      "UK parcel scam"
     ]
   }
 ]
