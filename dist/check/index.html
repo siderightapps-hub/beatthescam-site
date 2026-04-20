@@ -1,0 +1,279 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>AI Scam Checker | Beat the Scam</title>
+  <meta name="description" content="Paste a suspicious text, email, URL, or job offer and get an instant scam verdict powered by Claude AI. Free, no account needed.">
+  <link rel="canonical" href="https://beatthescam.com/check/">
+  <meta name="robots" content="index,follow">
+  <meta name="theme-color" content="#0b1220">
+  <meta name="format-detection" content="telephone=no">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="AI Scam Checker | Beat the Scam">
+  <meta property="og:description" content="Paste a suspicious text, email, URL, or job offer and get an instant scam verdict powered by Claude AI. Free, no account needed.">
+  <meta property="og:url" content="https://beatthescam.com/check/">
+  <meta property="og:site_name" content="Beat the Scam">
+  <meta property="og:image" content="https://beatthescam.com/assets/og-image.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="AI Scam Checker | Beat the Scam">
+  <meta name="twitter:description" content="Paste a suspicious text, email, URL, or job offer and get an instant scam verdict powered by Claude AI. Free, no account needed.">
+  <meta name="twitter:image" content="https://beatthescam.com/assets/og-image.png">
+  <link rel="stylesheet" href="/assets/styles.css">
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-JXNF856NBF"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('consent', 'default', {
+      ad_storage: 'denied',
+      analytics_storage: 'denied',
+      ad_user_data: 'denied',
+      ad_personalization: 'denied',
+      wait_for_update: 500
+    });
+    gtag('config', 'G-JXNF856NBF', { anonymize_ip: true });
+  </script>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1606633100797174" crossorigin="anonymous"></script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebPage","name":"AI Scam Checker","description":"Paste a suspicious message and get an instant plain-English verdict powered by Claude AI.","url":"https://beatthescam.com/check/","isPartOf":{"@type":"WebSite","name":"Beat the Scam","url":"https://beatthescam.com"}}</script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="site-header">
+    <div class="wrap header-inner">
+      <div class="brand-wrap">
+        <a href="/" class="brand">Beat the Scam</a>
+        <span class="brand-sub">Scam checks, alerts, and consumer protection guides</span>
+      </div>
+      <button class="nav-toggle" aria-expanded="false" aria-controls="site-nav">Menu</button>
+      <nav class="nav" id="site-nav">
+        <a href="/">Home</a>
+        <a href="/guides/">Guides</a>
+        <a href="/check/">Check a message</a>
+        <a href="/categories/">Categories</a>
+        <a href="/about/">About</a>
+        <a href="/privacy/">Privacy</a>
+        <a href="/cookies/">Cookie Policy</a>
+        <a href="/contact/">Contact</a>
+      </nav>
+    </div>
+  </header>
+  <main id="main">
+    
+    <section class="hero">
+      <div class="wrap">
+        <div class="breadcrumbs"><a href="/">Home</a> / Check a message</div>
+        <h1>AI scam checker</h1>
+        <p class="lead">Paste a suspicious message, email, URL, or job offer below and get an instant plain-English verdict powered by Claude AI.</p>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="wrap checker-layout">
+        <div class="checker-form-col">
+          <div class="card checker-card">
+            <div class="checker-type-row">
+              <label for="scamType" class="checker-label">What type of message is it?</label>
+              <select id="scamType" class="checker-select">
+                <option value="SMS or text message">SMS or text message</option>
+                <option value="email">Email</option>
+                <option value="phone call">Phone call</option>
+                <option value="website or URL">Website or URL</option>
+                <option value="job offer">Job offer</option>
+                <option value="social media message">Social media message</option>
+                <option value="investment opportunity">Investment or crypto opportunity</option>
+                <option value="other message">Other</option>
+              </select>
+            </div>
+            <label for="scamInput" class="checker-label">Paste the message, URL, or describe the call</label>
+            <textarea
+              id="scamInput"
+              class="checker-textarea"
+              placeholder="e.g. Your Royal Mail parcel is on hold. Pay 1.45 to release it: rm-parcel-uk.com/pay"
+              rows="7"
+              maxlength="3000"
+            ></textarea>
+            <div class="checker-footer-row">
+              <span class="checker-char-count" id="charCount">0 / 3000</span>
+              <button id="checkBtn" class="btn btn-primary checker-submit">Analyse message</button>
+            </div>
+            <p class="note" style="margin-top:.75rem">Your message is sent to Claude AI for analysis and is not stored by Beat the Scam. Do not include passwords or full bank account numbers.</p>
+          </div>
+        </div>
+
+        <div class="checker-result-col" id="resultCol" hidden>
+          <div class="card checker-result" id="checkerResult">
+            <div id="resultLoading" class="checker-loading" hidden>
+              <div class="checker-spinner"></div>
+              <p>Analysing&hellip;</p>
+            </div>
+            <div id="resultContent" hidden></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="wrap" style="margin-top:2rem">
+        <div class="notice">
+          <strong>This tool provides educational guidance only.</strong>
+          It is not a definitive fraud verdict. If you have already sent money or shared personal details,
+          contact your bank immediately and report to
+          <a href="https://www.actionfraud.police.uk/report-a-fraud/report-a-fraud-online" rel="noopener noreferrer" target="_blank">Action Fraud</a>.
+        </div>
+      </div>
+    </section>
+
+    <script>
+    (function() {
+      var input      = document.getElementById("scamInput");
+      var typeEl     = document.getElementById("scamType");
+      var btn        = document.getElementById("checkBtn");
+      var resultCol  = document.getElementById("resultCol");
+      var resultContent = document.getElementById("resultContent");
+      var loadingEl  = document.getElementById("resultLoading");
+      var charCount  = document.getElementById("charCount");
+
+      input.addEventListener("input", function() {
+        charCount.textContent = input.value.length + " / 3000";
+      });
+
+      btn.addEventListener("click", function() {
+        var message = input.value.trim();
+        if (!message || message.length < 10) { input.focus(); return; }
+        btn.disabled = true;
+        btn.textContent = "Analysing…";
+        resultCol.hidden = false;
+        loadingEl.hidden = false;
+        resultContent.hidden = true;
+
+        fetch("/api/check-scam", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ message: message, type: typeEl.value })
+        })
+        .then(function(res) {
+          if (!res.ok) throw new Error("status " + res.status);
+          return res.json();
+        })
+        .then(function(data) {
+          renderResult(data);
+        })
+        .catch(function() {
+          renderError();
+        })
+        .finally(function() {
+          btn.disabled = false;
+          btn.textContent = "Analyse message";
+          loadingEl.hidden = true;
+        });
+      });
+
+      function verdictClass(v) {
+        if (v === "likely_scam")         return "verdict-scam";
+        if (v === "possibly_scam")       return "verdict-warn";
+        if (v === "probably_legitimate") return "verdict-ok";
+        return "verdict-unclear";
+      }
+
+      function verdictLabel(v) {
+        if (v === "likely_scam")         return "&#9888; Likely a scam";
+        if (v === "possibly_scam")       return "&#9888; Possibly a scam";
+        if (v === "probably_legitimate") return "&#10003; Probably legitimate";
+        return "&#63; Unclear &mdash; proceed with caution";
+      }
+
+      function e(s) {
+        return String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;");
+      }
+
+      function renderResult(data) {
+        var vc = verdictClass(data.verdict);
+        var vl = verdictLabel(data.verdict);
+        var out = "";
+        out += "<div class=\"checker-verdict " + vc + "\">";
+        out += "<strong>" + vl + "</strong>";
+        if (data.confidence) out += " <span class=\"checker-confidence\">(" + e(data.confidence) + " confidence)</span>";
+        out += "</div>";
+        if (data.summary) out += "<p style=\"margin:.75rem 0\">" + e(data.summary) + "</p>";
+        if (data.red_flags && data.red_flags.length) {
+          out += "<h3>Red flags identified</h3><ul>";
+          data.red_flags.forEach(function(f){ out += "<li>" + e(f) + "</li>"; });
+          out += "</ul>";
+        }
+        if (data.green_flags && data.green_flags.length) {
+          out += "<h3>Reassuring signs</h3><ul>";
+          data.green_flags.forEach(function(f){ out += "<li>" + e(f) + "</li>"; });
+          out += "</ul>";
+        }
+        if (data.recommended_actions && data.recommended_actions.length) {
+          out += "<h3>Recommended actions</h3><ol>";
+          data.recommended_actions.forEach(function(a){ out += "<li>" + e(a) + "</li>"; });
+          out += "</ol>";
+        }
+        if (data.reporting_links && data.reporting_links.length) {
+          out += "<h3>Reporting links</h3><ul>";
+          data.reporting_links.forEach(function(l){
+            out += "<li><a href=\"" + e(l.url) + "\" rel=\"noopener noreferrer\" target=\"_blank\">" + e(l.name) + "</a></li>";
+          });
+          out += "</ul>";
+        }
+        resultContent.innerHTML = out;
+        resultContent.hidden = false;
+        resultCol.scrollIntoView({ behavior: "smooth", block: "start" });
+      }
+
+      function renderError() {
+        resultContent.innerHTML = "<p class=\"notice\">Sorry, the checker could not be reached right now. Please try again in a moment, or <a href=\"https://www.actionfraud.police.uk/\" rel=\"noopener noreferrer\" target=\"_blank\">report directly to Action Fraud</a>.</p>";
+        resultContent.hidden = false;
+      }
+    })();
+    </script>
+    
+  </main>
+  <footer class="site-footer">
+    <div class="wrap footer-grid">
+      <div>
+        <h3>Beat the Scam</h3>
+        <p>Scam alerts, plain-English checks, and practical guides to help people verify suspicious emails, texts, websites, calls, and offers.</p>
+        <p class="note">Educational content only. Not legal, regulatory, or financial advice.</p>
+      </div>
+      <div>
+        <h3>Explore</h3>
+        <ul>
+          <li><a href="/guides/">All guides</a></li>
+          <li><a href="/categories/payment-scams/">Payment scams</a></li>
+          <li><a href="/categories/email-scams/">Email scams</a></li>
+          <li><a href="/categories/phone-scams/">Phone scams</a></li>
+        </ul>
+      </div>
+      <div>
+        <h3>Trust & legal</h3>
+        <ul>
+          <li><a href="/about/">About</a></li>
+          <li><a href="/privacy/">Privacy Policy</a></li>
+          <li><a href="/cookies/">Cookie Policy</a></li>
+          <li><button class="link-button" type="button" id="openCookieSettings">Cookie settings</button></li>
+          <li><a href="/terms/">Terms</a></li>
+          <li><a href="/contact/">Contact</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="wrap footer-meta">
+      <p>© 2026 Beat the Scam. Consumer protection guides for UK residents. Educational content only — not legal or financial advice.</p>
+    </div>
+  </footer>
+  <div class="cookie-banner" id="cookieBanner" hidden aria-live="polite">
+    <div class="cookie-copy">
+      <strong>Cookies & privacy</strong>
+      <p>We use analytics and advertising cookies to understand performance and support the site. Choose whether to allow non-essential cookies.</p>
+      <p class="cookie-status" id="cookieStatus">No choice saved yet.</p>
+    </div>
+    <div class="cookie-actions">
+      <button class="btn btn-secondary" id="cookieReject" type="button">Reject</button>
+      <button class="btn btn-primary" id="cookieAccept" type="button">Accept</button>
+    </div>
+  </div>
+  <script src="/assets/app.js" defer></script>
+</body>
+</html>

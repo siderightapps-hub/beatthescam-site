@@ -157,3 +157,44 @@ p{margin:.75rem 0}
 .cookie-status{font-size:.92rem;color:rgba(255,255,255,.72)}
 
 .category-card .eyebrow{display:none !important}
+
+/* ─── SCAM CHECKER ────────────────────────────────────────────────────── */
+.checker-layout{display:grid;grid-template-columns:1fr 1fr;gap:1.2rem;align-items:start}
+.checker-form-col,.checker-result-col{display:flex;flex-direction:column}
+.checker-card{padding:1.5rem;display:flex;flex-direction:column;gap:1rem}
+.checker-label{font-weight:700;font-size:.95rem;color:var(--brand);display:block;margin-bottom:.35rem}
+.checker-type-row{display:flex;flex-direction:column}
+.checker-select{width:100%;padding:.75rem 1rem;border:1px solid var(--line);border-radius:14px;font-size:1rem;font-family:inherit;background:#fff;color:var(--text);cursor:pointer}
+.checker-select:focus{outline:2px solid var(--accent);outline-offset:2px}
+.checker-textarea{width:100%;padding:.9rem 1rem;border:1px solid var(--line);border-radius:14px;font-size:1rem;font-family:inherit;resize:vertical;background:#fff;color:var(--text);line-height:1.55}
+.checker-textarea:focus{outline:2px solid var(--accent);outline-offset:2px}
+.checker-footer-row{display:flex;align-items:center;justify-content:space-between;gap:1rem}
+.checker-char-count{font-size:.88rem;color:var(--muted)}
+.checker-submit{min-width:160px}
+.checker-result{padding:1.5rem;min-height:120px}
+.checker-loading{display:flex;align-items:center;gap:.9rem;color:var(--muted)}
+.checker-spinner{width:24px;height:24px;border:3px solid var(--line);border-top-color:var(--accent);border-radius:50%;animation:spin .8s linear infinite;flex-shrink:0}
+@keyframes spin{to{transform:rotate(360deg)}}
+.checker-verdict{padding:.9rem 1.1rem;border-radius:16px;margin-bottom:.5rem;font-size:1.05rem}
+.verdict-scam{background:#fff1f2;border:1px solid #fca5a5;color:#991b1b}
+.verdict-warn{background:#fffbeb;border:1px solid #fcd34d;color:#92400e}
+.verdict-ok{background:#f0fdf4;border:1px solid #86efac;color:#166534}
+.verdict-unclear{background:var(--panel-alt);border:1px solid var(--line);color:var(--text)}
+.checker-confidence{font-size:.88rem;font-weight:400;opacity:.8}
+#resultContent h3{font-size:1rem;margin:1rem 0 .4rem}
+#resultContent ul,#resultContent ol{padding-left:1.2rem;margin:.3rem 0}
+#resultContent li{margin:.3rem 0;font-size:.97rem}
+#resultContent a{color:var(--accent)}
+
+/* Scam checker promo block on homepage */
+.checker-promo{display:grid;grid-template-columns:1.4fr 1fr;gap:1.5rem;padding:1.8rem 2rem;background:radial-gradient(circle at top right,#223453 0,#111b2d 36%,#0b1220 100%);border-radius:var(--radius);color:#fff;align-items:center}
+.checker-promo h2{color:#fff;margin:0 0 .6rem}
+.checker-promo p{color:rgba(255,255,255,.85);margin:.5rem 0 1.2rem}
+.checker-promo-examples .note{color:rgba(255,255,255,.6);margin-bottom:.5rem}
+.checker-promo-examples .note strong{color:rgba(255,255,255,.85)}
+.checker-promo-examples .list-clean li{color:rgba(255,255,255,.82);border-color:rgba(255,255,255,.12);padding:.45rem 0;font-size:.97rem}
+
+@media(max-width:1100px){
+  .checker-layout{grid-template-columns:1fr}
+  .checker-promo{grid-template-columns:1fr}
+}

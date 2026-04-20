@@ -1,10 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-    <rss version="2.0">
-      <channel>
-        <title>Beat the Scam</title>
-        <link>https://beatthescam.com</link>
-        <description>Scam alerts, plain-English checks, and practical guides to help people verify suspicious emails, texts, websites, calls, and offers.</description>
-        
+<rss version="2.0"><channel><title>Beat the Scam</title><link>https://beatthescam.com</link><description>Scam alerts, plain-English checks, and practical guides to help people verify suspicious emails, texts, websites, calls, and offers.</description>
         <item>
           <title>Facebook Marketplace Scams: How to Protect Yourself in the UK</title>
           <link>https://beatthescam.com/guides/facebook-marketplace-scam-uk-guide/</link>
@@ -12,15 +7,6 @@
           <pubDate>Mon, 20 Apr 2026 00:00:00 +0000</pubDate>
           <description>Facebook Marketplace has become a popular platform for buying and selling items in the UK, but scammers are increasingly targeting unsuspecting users. This guide covers the most common scams, warning signs to watch for, and practical steps you can take to protect yourself when using the platform.</description>
         </item>
-        
-        <item>
-          <title>Gumtree Scams in the UK: How to Spot and Avoid Them</title>
-          <link>https://beatthescam.com/guides/gumtree-scam-uk/</link>
-          <guid>https://beatthescam.com/guides/gumtree-scam-uk/</guid>
-          <pubDate>Mon, 20 Apr 2026 00:00:00 +0000</pubDate>
-          <description>Gumtree remains one of the UK&#x27;s largest online marketplaces, but scammers frequently target buyers and sellers. This guide covers common fraud tactics including fake listings, payment schemes, overpayment tricks, and advance-fee scams. Discover practical steps to verify sellers, secure transactions, and report suspicious activity to stay safe.</description>
-        </item>
-        
         <item>
           <title>Evri Text Message Scam: How to Spot and Avoid It</title>
           <link>https://beatthescam.com/guides/evri-text-scam-uk/</link>
@@ -28,7 +14,13 @@
           <pubDate>Mon, 20 Apr 2026 00:00:00 +0000</pubDate>
           <description>Evri text scams trick UK residents with fake delivery notifications claiming packages need attention. These messages contain malicious links designed to steal personal and financial information. This guide explains how to recognise the scam, what to do if you receive one, and how to report it to authorities.</description>
         </item>
-        
+        <item>
+          <title>Gumtree Scams in the UK: How to Spot and Avoid Them</title>
+          <link>https://beatthescam.com/guides/gumtree-scam-uk/</link>
+          <guid>https://beatthescam.com/guides/gumtree-scam-uk/</guid>
+          <pubDate>Mon, 20 Apr 2026 00:00:00 +0000</pubDate>
+          <description>Gumtree remains one of the UK&#x27;s largest online marketplaces, but scammers frequently target buyers and sellers. This guide covers common fraud tactics including fake listings, payment schemes, overpayment tricks, and advance-fee scams. Discover practical steps to verify sellers, secure transactions, and report suspicious activity to stay safe.</description>
+        </item>
         <item>
           <title>Is Temu a Scam? What UK Consumers Need to Know</title>
           <link>https://beatthescam.com/guides/is-temu-a-scam-uk/</link>
@@ -36,7 +28,6 @@
           <pubDate>Fri, 17 Apr 2026 00:00:00 +0000</pubDate>
           <description>Temu is a Chinese-owned e-commerce platform that has gained millions of UK users by offering extremely cheap products. While not technically a scam, the platform raises legitimate concerns about data privacy, product quality, and manufacturing standards that consumers should consider.</description>
         </item>
-        
         <item>
           <title>Is SHEIN Legit or a Scam? What UK Shoppers Need to Know</title>
           <link>https://beatthescam.com/guides/shein-scam-or-legit-uk/</link>
@@ -44,7 +35,6 @@
           <pubDate>Fri, 17 Apr 2026 00:00:00 +0000</pubDate>
           <description>SHEIN operates as a legal business, but shoppers in the UK face real risks including delays of 2-4 weeks, inconsistent product quality, unexpected import fees, and limited consumer protections. This guide explains what to expect, how to spot problems, and your rights when ordering from SHEIN to the UK.</description>
         </item>
-        
         <item>
           <title>Is AliExpress Safe? A UK Buyer&#x27;s Guide to Avoiding Scams</title>
           <link>https://beatthescam.com/guides/aliexpress-scam-or-legit-uk-guide/</link>
@@ -52,7 +42,6 @@
           <pubDate>Fri, 17 Apr 2026 00:00:00 +0000</pubDate>
           <description>AliExpress is a genuine Chinese marketplace, but it operates differently from UK retailers. This guide explains genuine risks UK customers face, red flags to watch for, how the platform&#x27;s buyer protection works, and practical steps to shop more safely on AliExpress.</description>
         </item>
-        
         <item>
           <title>Vinted Scam Warning: How to Stay Safe on the UK Marketplace</title>
           <link>https://beatthescam.com/guides/vinted-scam-warning-uk/</link>
@@ -60,15 +49,6 @@
           <pubDate>Fri, 17 Apr 2026 00:00:00 +0000</pubDate>
           <description>A comprehensive guide to common Vinted scams affecting UK users, including advance payment schemes, counterfeit goods, and non-delivery fraud. Discover practical steps to verify sellers, use secure payment methods, and report suspicious activity to keep your transactions safe.</description>
         </item>
-        
-        <item>
-          <title>Facebook Marketplace Scams: How to Stay Safe When Buying and Selling in the UK</title>
-          <link>https://beatthescam.com/guides/facebook-marketplace-scam-uk-guide/</link>
-          <guid>https://beatthescam.com/guides/facebook-marketplace-scam-uk-guide/</guid>
-          <pubDate>Fri, 17 Apr 2026 00:00:00 +0000</pubDate>
-          <description>Facebook Marketplace has become a popular platform for buying and selling items in the UK, but scammers are increasingly targeting users through fake listings, payment manipulation, and phishing tactics. This guide explains the most common scams, warning signs to watch for, and practical steps to protect yourself when using the platform.</description>
-        </item>
-        
         <item>
           <title>Gumtree Scams UK: How to Spot and Avoid Common Fraud Risks</title>
           <link>https://beatthescam.com/guides/gumtree-scam-uk-guide/</link>
@@ -76,7 +56,6 @@
           <pubDate>Fri, 17 Apr 2026 00:00:00 +0000</pubDate>
           <description>Gumtree is one of the UK&#x27;s largest classifieds platforms, but it attracts scammers targeting both buyers and sellers. This guide covers the most prevalent Gumtree scams, red flags to watch for, safe payment methods, and steps to take if you suspect fraudulent activity. Follow our advice to buy and sell safely.</description>
         </item>
-        
         <item>
           <title>eBay Buyer Protection in the UK: What You Need to Know to Stay Safe</title>
           <link>https://beatthescam.com/guides/ebay-scam-buyer-protection-uk/</link>
@@ -84,7 +63,6 @@
           <pubDate>Fri, 17 Apr 2026 00:00:00 +0000</pubDate>
           <description>This guide explains eBay&#x27;s buyer protection programme for UK customers, including how to file claims for non-delivery and item not as described cases. Discover red flags to watch for, best practices when purchasing, and what to do if you fall victim to a scam on the platform.</description>
         </item>
-        
         <item>
           <title>Royal Mail Text Scam: How to Spot and Avoid Fraudulent SMS Messages</title>
           <link>https://beatthescam.com/guides/royal-mail-text-scam-uk/</link>
@@ -92,15 +70,6 @@
           <pubDate>Fri, 17 Apr 2026 00:00:00 +0000</pubDate>
           <description>Royal Mail text scams are increasingly common in the UK, with criminals sending fake SMS messages claiming delivery issues or requiring payment. These messages contain malicious links designed to steal banking details, addresses, and personal information. This guide explains how to recognise these scams, what to do if you receive one, and how to report fraudulent messages to Royal Mail and authorities.</description>
         </item>
-        
-        <item>
-          <title>Evri Text Scam: How to Spot and Avoid Fake Delivery Messages</title>
-          <link>https://beatthescam.com/guides/evri-text-scam-uk/</link>
-          <guid>https://beatthescam.com/guides/evri-text-scam-uk/</guid>
-          <pubDate>Fri, 17 Apr 2026 00:00:00 +0000</pubDate>
-          <description>Evri text scams trick UK residents into clicking malicious links by posing as delivery notifications. These fraudulent SMS messages often claim a package failed to deliver and direct victims to fake websites designed to steal personal and financial information. This guide explains the warning signs, what legitimate Evri messages look like, and the steps you should take if you receive a suspicious text.</description>
-        </item>
-        
         <item>
           <title>DPD Delivery Scam Text Messages: How to Spot and Avoid Them</title>
           <link>https://beatthescam.com/guides/dpd-delivery-scam-text/</link>
@@ -108,7 +77,6 @@
           <pubDate>Fri, 17 Apr 2026 00:00:00 +0000</pubDate>
           <description>DPD delivery scam texts are a common fraud tactic in the UK where criminals send SMS messages pretending to be from the parcel delivery company. These messages typically claim a delivery failed or ask you to confirm details, urging you to click a link. Clicking these links can lead to credential theft, malware installation, or financial fraud. This guide explains how to recognise fake DPD texts, what to do if you receive one, and how to stay safe when expecting deliveries.</description>
         </item>
-        
         <item>
           <title>Yodel Scam Text Messages: How to Spot and Avoid Them</title>
           <link>https://beatthescam.com/guides/yodel-scam-text-messages/</link>
@@ -116,7 +84,6 @@
           <pubDate>Fri, 17 Apr 2026 00:00:00 +0000</pubDate>
           <description>Yodel scam text messages trick UK consumers into clicking malicious links by posing as delivery notifications. These SMS messages typically claim your parcel is pending delivery or requires action, directing you to fake websites designed to harvest login credentials, card details, and personal data. This guide explains the warning signs of fraudulent Yodel texts and the steps you should take if you receive one.</description>
         </item>
-        
         <item>
           <title>UPS Delivery Scam Text Messages: How to Spot and Avoid Them in the UK</title>
           <link>https://beatthescam.com/guides/ups-delivery-scam-text-messages-uk/</link>
@@ -124,7 +91,6 @@
           <pubDate>Fri, 17 Apr 2026 00:00:00 +0000</pubDate>
           <description>UPS delivery scam texts are designed to trick you into clicking malicious links or providing personal information. This guide explains how these scams work, what warning signs to look for, and the steps you should take if you receive a suspicious message claiming to be from UPS.</description>
         </item>
-        
         <item>
           <title>PayPal Email Scams: How to Spot and Avoid Them in the UK</title>
           <link>https://beatthescam.com/guides/paypal-email-scam-uk/</link>
@@ -132,7 +98,6 @@
           <pubDate>Fri, 17 Apr 2026 00:00:00 +0000</pubDate>
           <description>Scammers regularly impersonate PayPal in phishing emails designed to steal login credentials and personal information from UK customers. This guide explains the warning signs of PayPal email scams, how fraudsters operate, and the steps you should take if you receive a suspicious message claiming to be from PayPal.</description>
         </item>
-        
         <item>
           <title>Bank Transfer Scams in the UK: How to Protect Yourself</title>
           <link>https://beatthescam.com/guides/bank-transfer-scam-uk/</link>
@@ -140,7 +105,6 @@
           <pubDate>Fri, 17 Apr 2026 00:00:00 +0000</pubDate>
           <description>Bank transfer scams are increasingly sophisticated in the UK, targeting individuals and businesses through impersonation, fake invoices, and pressure tactics. This guide explains common schemes, red flags to watch for, and essential protection measures including verification protocols and reporting procedures.</description>
         </item>
-        
         <item>
           <title>Invoice Scam Emails: How to Protect Your Business from Fraudulent Invoices</title>
           <link>https://beatthescam.com/guides/invoice-scam-email-uk/</link>
@@ -148,7 +112,6 @@
           <pubDate>Fri, 17 Apr 2026 00:00:00 +0000</pubDate>
           <description>Invoice scam emails trick businesses into paying fraudulent invoices by impersonating trusted suppliers or vendors. Scammers intercept genuine purchase orders, create fake invoices with altered bank details, or spoof email addresses to redirect payments. This guide explains common tactics used in UK invoice fraud, practical steps to verify authenticity, and procedures to implement to prevent costly mistakes.</description>
         </item>
-        
         <item>
           <title>Refund Scams in the UK: How to Protect Yourself from Payment Fraud</title>
           <link>https://beatthescam.com/guides/refund-scam-uk/</link>
@@ -156,7 +119,6 @@
           <pubDate>Fri, 17 Apr 2026 00:00:00 +0000</pubDate>
           <description>Refund scams are a growing threat in the UK where fraudsters impersonate businesses, tax authorities, or payment providers to steal money and personal information. Scammers typically contact victims via email, phone, or text claiming an overpayment or tax rebate, then direct them to fake websites or request upfront fees. This guide explains how these scams work, warning signs to watch for, and practical steps to protect yourself and report suspected fraud to Action Fraud.</description>
         </item>
-        
         <item>
           <title>Chargeback Scams: How Fraudsters Exploit Card Payment Disputes in the UK</title>
           <link>https://beatthescam.com/guides/chargeback-scam-uk/</link>
@@ -164,7 +126,6 @@
           <pubDate>Fri, 17 Apr 2026 00:00:00 +0000</pubDate>
           <description>Chargeback scams exploit the consumer protection mechanisms built into card payment systems. Fraudsters purchase items, receive goods or services, then dispute the charge with their bank claiming the transaction was unauthorised or the goods never arrived. UK businesses lose millions annually to this type of fraud. Understanding how these scams work and implementing verification procedures can significantly reduce your risk.</description>
         </item>
-        
         <item>
           <title>Direct Debit Scams in the UK: How to Protect Your Bank Account</title>
           <link>https://beatthescam.com/guides/direct-debit-scam-uk/</link>
@@ -172,7 +133,6 @@
           <pubDate>Fri, 17 Apr 2026 00:00:00 +0000</pubDate>
           <description>Direct debit fraud is a growing threat in the UK where scammers trick customers into authorizing unauthorized payments from their bank accounts. This guide explains common tactics used by fraudsters, warning signs to watch for, how to cancel fraudulent direct debits, and your rights under the Direct Debit Guarantee scheme. Discover practical steps to verify legitimacy before authorizing any direct debit and how to report suspicious activity to your bank and the authorities.</description>
         </item>
-        
         <item>
           <title>HMRC Tax Refund Scams: How to Spot and Avoid Them</title>
           <link>https://beatthescam.com/guides/hmrc-tax-refund-scam-awareness/</link>
@@ -180,7 +140,6 @@
           <pubDate>Fri, 17 Apr 2026 00:00:00 +0000</pubDate>
           <description>HMRC tax refund scams are increasingly common in the UK. Fraudsters impersonate HMRC staff via email, text, or phone calls claiming you are owed a refund. This guide explains how these scams work, red flags to watch for, and how to report suspicious contact claiming to be from HMRC.</description>
         </item>
-        
         <item>
           <title>DVLA Scam Emails: How to Spot and Avoid Them</title>
           <link>https://beatthescam.com/guides/dvla-scam-email-awareness/</link>
@@ -188,7 +147,6 @@
           <pubDate>Fri, 17 Apr 2026 00:00:00 +0000</pubDate>
           <description>DVLA scam emails are designed to steal your personal information and money by impersonating the UK&#x27;s Driver and Vehicle Licensing Agency. This guide explains common tactics used by scammers, warning signs to watch for, and steps to take if you receive a suspicious email claiming to be from DVLA.</description>
         </item>
-        
         <item>
           <title>NHS COVID Scam Messages: How to Spot and Report Them</title>
           <link>https://beatthescam.com/guides/nhs-covid-scam-message/</link>
@@ -196,7 +154,6 @@
           <pubDate>Fri, 17 Apr 2026 00:00:00 +0000</pubDate>
           <description>Scammers send fake SMS, email, and social media messages claiming to be from the NHS about COVID-19 vaccines, test results, or health updates. These messages often contain malicious links or request personal information. The real NHS will never ask for passwords, bank details, or payment via unsolicited messages. Always verify communications by contacting the NHS directly through official channels.</description>
         </item>
-        
         <item>
           <title>Crypto Investment Scams in the UK: How to Protect Yourself</title>
           <link>https://beatthescam.com/guides/crypto-investment-scams-uk-protection/</link>
@@ -204,7 +161,6 @@
           <pubDate>Fri, 17 Apr 2026 00:00:00 +0000</pubDate>
           <description>A practical guide for UK consumers on recognizing and avoiding cryptocurrency investment scams. Covers common tactics used by fraudsters, red flags to watch for, legitimate vs. fraudulent schemes, and steps to take if you have been targeted or scammed.</description>
         </item>
-        
         <item>
           <title>Bitcoin Scams in the UK: How to Protect Yourself from Crypto Fraud</title>
           <link>https://beatthescam.com/guides/bitcoin-scam-uk/</link>
@@ -212,7 +168,6 @@
           <pubDate>Fri, 17 Apr 2026 00:00:00 +0000</pubDate>
           <description>This guide explores the major Bitcoin scams affecting UK consumers, from pump-and-dump schemes to romance fraud involving cryptocurrency. It covers warning signs, prevention strategies, and guidance on reporting fraud to the FCA and Action Fraud, helping you safeguard your digital assets.</description>
         </item>
-        
         <item>
           <title>Forex Trading Scams in the UK: How to Protect Yourself</title>
           <link>https://beatthescam.com/guides/forex-trading-scams-uk-protection-guide/</link>
@@ -220,7 +175,6 @@
           <pubDate>Fri, 17 Apr 2026 00:00:00 +0000</pubDate>
           <description>This guide explains how forex trading scams operate in the UK, identifies red flags such as unregulated brokers and unrealistic profit promises, and provides practical steps to verify a broker&#x27;s FCA authorisation. It covers common tactics used by scammers, including social engineering and pressure sales, and advises readers on reporting fraud and recovering funds.</description>
         </item>
-        
         <item>
           <title>Trading Signal Scams: How UK Investors Are Being Targeted</title>
           <link>https://beatthescam.com/guides/trading-signal-scam-uk/</link>
@@ -228,7 +182,6 @@
           <pubDate>Fri, 17 Apr 2026 00:00:00 +0000</pubDate>
           <description>Trading signal scams target UK cryptocurrency investors with false promises of profitable trading tips delivered via Telegram, WhatsApp or exclusive websites. Scammers claim insider knowledge or advanced algorithms can predict market movements, charging subscription fees or requesting deposits that are never recovered. This guide explains how these schemes operate, common tactics used by fraudsters, and practical steps UK investors can take to protect themselves.</description>
         </item>
-        
         <item>
           <title>Job Offer Scams in the UK: How to Spot and Avoid Them</title>
           <link>https://beatthescam.com/guides/job-offer-scam-uk/</link>
@@ -236,7 +189,6 @@
           <pubDate>Fri, 17 Apr 2026 00:00:00 +0000</pubDate>
           <description>Job offer scams deceive UK applicants by posing as legitimate employers, often requesting upfront payments for training, equipment, or background checks. This guide explains common scam tactics, warning signs to watch for, and practical steps to verify job opportunities before committing time or money.</description>
         </item>
-        
         <item>
           <title>Work From Home Scams in the UK: How to Spot and Avoid Them</title>
           <link>https://beatthescam.com/guides/work-from-home-scams-uk/</link>
@@ -244,6 +196,17 @@
           <pubDate>Fri, 17 Apr 2026 00:00:00 +0000</pubDate>
           <description>Work from home opportunities attract millions of UK job seekers, but scammers exploit this demand with fake job postings and fraudulent schemes. This guide explains the most common work from home scams, red flags to watch for, how scammers operate, and practical steps to verify legitimate opportunities before applying or paying money.</description>
         </item>
-        
-      </channel>
-    </rss>
+        <item>
+          <title>LinkedIn Job Scams: How to Spot and Avoid Them in the UK</title>
+          <link>https://beatthescam.com/guides/linkedin-job-scam-guide-uk/</link>
+          <guid>https://beatthescam.com/guides/linkedin-job-scam-guide-uk/</guid>
+          <pubDate>Fri, 17 Apr 2026 00:00:00 +0000</pubDate>
+          <description>A comprehensive guide to understanding LinkedIn job scams targeting UK job seekers. This article explains common tactics used by scammers, warning signs to watch for, steps to verify legitimate opportunities, and how to report fraudulent activity to LinkedIn and relevant authorities.</description>
+        </item>
+        <item>
+          <title>Romance Scam Signs: How to Protect Yourself on UK Dating Apps</title>
+          <link>https://beatthescam.com/guides/romance-scam-signs-uk-dating/</link>
+          <guid>https://beatthescam.com/guides/romance-scam-signs-uk-dating/</guid>
+          <pubDate>Fri, 17 Apr 2026 00:00:00 +0000</pubDate>
+          <description>Romance scams cost UK victims thousands annually. This guide outlines common warning signs such as quick declarations of love, requests for money, reluctance to video call, and inconsistent personal details. Learn how to verify profiles, protect your information, and report suspicious activity on dating apps.</description>
+        </item></channel></rss>

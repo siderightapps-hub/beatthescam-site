@@ -1,0 +1,30 @@
+# netlify.toml — Netlify deployment config for beatthescam.com
+# The daily AI publishing workflow still runs via GitHub Actions and pushes
+# updated content/posts.json + dist/ to the repo. Netlify auto-deploys on push.
+
+[build]
+  # Netlify will rebuild on every push to main.
+  # If you want Netlify to build rather than using the pre-built dist/:
+  #   command = "python3 scripts/build.py"
+  # Otherwise just publish the pre-built dist/:
+  publish = "dist"
+
+[functions]
+  directory = "netlify/functions"
+
+# Route the scam checker API calls to the serverless function
+[[redirects]]
+  from   = "/api/check-scam"
+  to     = "/.netlify/functions/check-scam"
+  status = 200
+
+# SPA-style fallback — serve 404 page for unmatched routes
+[[redirects]]
+  from   = "/*"
+  to     = "/404.html"
+  status = 404
+
+[context.production.environment]
+  # Set ANTHROPIC_API_KEY in Netlify UI → Site settings → Environment variables.
+  # Never commit your key to this file.
+  NODE_VERSION = "20"
