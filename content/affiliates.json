@@ -1,0 +1,41 @@
+{
+  "_note": "Replace href values with your actual affiliate tracking URLs before going live.",
+  "products": [
+    {
+      "id": "experian-identity",
+      "name": "Experian IdentityPlus",
+      "tagline": "Monitor your credit file and get alerts if your details appear on the dark web.",
+      "cta": "Check your Experian report",
+      "href": "https://www.experian.co.uk/consumer/identity-plus.html",
+      "categories": ["payment", "fraud", "website", "email", "sms", "phone", "finance"],
+      "keywords": ["identity", "personal details", "bank", "credit", "data breach"]
+    },
+    {
+      "id": "cifas-protective",
+      "name": "Cifas Protective Registration",
+      "tagline": "Add a fraud flag to your credit file so lenders carry out extra checks before approving credit in your name.",
+      "cta": "Register with Cifas for £25",
+      "href": "https://www.cifas.org.uk/services/identity-fraud-protection/protective-registration/",
+      "categories": ["fraud", "payment", "finance", "email"],
+      "keywords": ["identity theft", "personal details stolen", "bank account", "credit"]
+    },
+    {
+      "id": "which-legal",
+      "name": "Which? Legal",
+      "tagline": "Get expert legal advice if you have lost money to a scam and need help recovering it.",
+      "cta": "Get advice from Which? Legal",
+      "href": "https://legalservice.which.co.uk/",
+      "categories": ["payment", "marketplace", "shopping", "travel", "employment"],
+      "keywords": ["lost money", "paid", "refund", "chargeback", "bank transfer"]
+    },
+    {
+      "id": "norton-360",
+      "name": "Norton 360",
+      "tagline": "Protect your devices from malware and phishing sites with real-time threat monitoring.",
+      "cta": "Try Norton 360",
+      "href": "https://uk.norton.com/products/norton-360",
+      "categories": ["tech", "website", "email", "social", "crypto"],
+      "keywords": ["malware", "virus", "link", "download", "install", "remote access"]
+    }
+  ]
+}

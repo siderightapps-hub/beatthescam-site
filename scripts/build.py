@@ -84,6 +84,58 @@ def category_description(cat: str) -> str:
     return CATEGORY_DESCRIPTIONS.get(cat, f"Guides covering common {cat.replace('-', ' ')} patterns and how to protect yourself.")
 
 
+
+
+# ─── AFFILIATES ────────────────────────────────────────────────────────────
+
+def load_affiliates(root: Path) -> list:
+    path = root / "content" / "affiliates.json"
+    if not path.exists():
+        return []
+    try:
+        return json.loads(path.read_text(encoding="utf-8")).get("products", [])
+    except Exception:
+        return []
+
+
+def affiliate_block(post: dict, affiliates: list) -> str:
+    """Return an HTML affiliate card relevant to this post, or empty string."""
+    if not affiliates:
+        return ""
+
+    cat      = post.get("category", "")
+    keywords = " ".join(post.get("keywords", [])).lower()
+    title    = post.get("title", "").lower()
+    haystack = keywords + " " + title
+
+    # Score each product by relevance
+    best_score   = 0
+    best_product = None
+
+    for product in affiliates:
+        score = 0
+        if cat in product.get("categories", []):
+            score += 2
+        for kw in product.get("keywords", []):
+            if kw.lower() in haystack:
+                score += 1
+        if score > best_score:
+            best_score   = score
+            best_product = product
+
+    if not best_product or best_score == 0:
+        return ""
+
+    p = best_product
+    return f'''
+    <section class="sidebar-card affiliate-card">
+      <p class="note" style="margin:0 0 .4rem;font-size:.8rem;text-transform:uppercase;letter-spacing:.06em;font-weight:800;color:var(--muted)">Sponsored</p>
+      <h3 style="margin:.15rem 0 .4rem">{html.escape(p["name"])}</h3>
+      <p class="note">{html.escape(p["tagline"])}</p>
+      <a class="btn btn-secondary" href="{html.escape(p["href"])}" rel="sponsored noopener noreferrer" target="_blank" style="width:100%;margin-top:.6rem;text-align:center">{html.escape(p["cta"])}</a>
+    </section>
+    '''
+
 # ─── HELPERS ──────────────────────────────────────────────────────────────────
 
 def read_json(path: Path):
@@ -526,7 +578,7 @@ def related_posts(posts, current, count=4):
     return ordered
 
 
-def render_post(site, post, all_posts):
+def render_post(site, post, all_posts, affiliates=None):
     url   = site['domain'] + f'/guides/{post["slug"]}/'
     label = category_label(post["category"])
     mins  = reading_time(post)
@@ -602,6 +654,7 @@ def render_post(site, post, all_posts):
           <p class="note">Paste the suspicious message into the free AI checker for an instant plain-English verdict.</p>
           <a class="btn btn-primary" href="/check/" style="width:100%;margin-top:.5rem;text-align:center">Check a message</a>
         </section>
+        {affiliate_block(post, affiliates or [])}
       </aside>
     </section>
     '''
@@ -910,6 +963,8 @@ def build():
     site     = read_json(ROOT / 'content/site.json')
     raw_posts = read_json(ROOT / 'content/posts.json')
 
+    affiliates = load_affiliates(ROOT)
+
     # Normalise category names
     for post in raw_posts:
         post["category"] = normalize_category(post["category"])
@@ -932,7 +987,7 @@ def build():
     for cat, items in categories.items():
         write(DIST / 'categories' / slugify(cat) / 'index.html', render_category_page(site, cat, items))
     for post in posts:
-        write(DIST / 'guides' / post['slug'] / 'index.html', render_post(site, post, posts))
+        write(DIST / 'guides' / post['slug'] / 'index.html', render_post(site, post, posts, affiliates))
 
     write(DIST / 'check/index.html', render_check_page(site))
 

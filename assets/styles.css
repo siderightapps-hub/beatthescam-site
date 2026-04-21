@@ -198,3 +198,8 @@ p{margin:.75rem 0}
   .checker-layout{grid-template-columns:1fr}
   .checker-promo{grid-template-columns:1fr}
 }
+
+/* ─── AFFILIATE CARD ─────────────────────────────────────────────────── */
+.affiliate-card{border-color:#e2d9f3;background:linear-gradient(135deg,#faf8ff,#f5f0ff)}
+.affiliate-card .btn-secondary{border-color:#c4b5fd;color:#5b21b6}
+.affiliate-card .btn-secondary:hover{background:#f3e8ff}

@@ -4,9 +4,17 @@ on:
   workflow_dispatch:
     inputs:
       batch_size:
-        description: "Number of topics to publish this run"
+        description: "Number of new topics to publish this run"
         required: false
-        default: "3"
+        default: "5"
+      rewrite_thin:
+        description: "Rewrite thin guides? (true/false)"
+        required: false
+        default: "false"
+      rewrite_limit:
+        description: "Max thin guides to rewrite per run"
+        required: false
+        default: "10"
   schedule:
     # Daily at 06:15 UTC
     - cron: '15 6 * * *'
@@ -19,7 +27,10 @@ jobs:
     runs-on: ubuntu-latest
     env:
       ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
-      BATCH_SIZE: ${{ github.event.inputs.batch_size || '3' }}
+      BATCH_SIZE: ${{ github.event.inputs.batch_size || '5' }}
+      REWRITE_THIN: ${{ github.event.inputs.rewrite_thin || 'false' }}
+      REWRITE_LIMIT: ${{ github.event.inputs.rewrite_limit || '10' }}
+
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -32,31 +43,40 @@ jobs:
           python-version: '3.12'
 
       - name: Install dependencies
-        run: |
-          python -m pip install --upgrade pip
-          pip install anthropic
+        run: pip install anthropic
 
-      - name: Run daily publisher
+      - name: Publish new topics
         run: |
           python scripts/run_daily_publish.py \
-            --queue content/daily-publish-queue.csv \
+            --queue  content/daily-publish-queue.csv \
             --topics content/topics-claude-template.csv \
-            --posts content/posts.json \
+            --posts  content/posts.json \
             --batch-size "$BATCH_SIZE" \
-            --model claude-haiku-4-5-20251001
+            --model  claude-haiku-4-5-20251001
+
+      - name: Rewrite thin guides (optional)
+        if: env.REWRITE_THIN == 'true'
+        run: |
+          python scripts/rewrite_thin_guides.py \
+            --posts     content/posts.json \
+            --threshold 400 \
+            --limit     "$REWRITE_LIMIT" \
+            --model     claude-haiku-4-5-20251001
 
       - name: Build site
-        run: |
-          python scripts/build.py
+        run: python scripts/build.py
 
       - name: Commit and push if changed
         run: |
-          git config user.name "github-actions[bot]"
+          git config user.name  "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add content/posts.json content/topics-claude-template.csv content/daily-publish-queue.csv dist
+          git add content/posts.json \
+                  content/topics-claude-template.csv \
+                  content/daily-publish-queue.csv \
+                  dist
           if git diff --cached --quiet; then
             echo "No changes to commit"
             exit 0
           fi
-          git commit -m "Daily AI publishing batch"
+          git commit -m "Daily AI publish: $(date -u +%Y-%m-%d)"
           git push
