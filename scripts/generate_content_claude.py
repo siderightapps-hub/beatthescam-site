@@ -245,7 +245,7 @@ def normalise(data: Dict, topic: Topic, today: str) -> Dict:
              f"Change passwords for any affected accounts. Enable two-factor authentication. "
              f"Document everything — screenshots, message text, dates — before reporting."],
             ["Reporting this scam in the UK",
-             f"Report to Action Fraud online at actionfraud.police.uk or by phone on 0300 123 2040. "
+             f"Report to Action Fraud online at reportfraud.police.uk or by phone on 0300 123 2040. "
              f"If you received a suspicious email, forward it to report@phishing.gov.uk (the NCSC's Suspicious Email Reporting Service). "
              f"If you received a suspicious text, forward it to 7726 — this is free on all UK networks and goes to your mobile operator. "
              f"You can also report to Citizens Advice on 0808 223 1133. "
@@ -268,12 +268,12 @@ def normalise(data: Dict, topic: Topic, today: str) -> Dict:
             ["What should I do if I already sent money?",
              f"Contact your bank immediately using the number on the back of your card. "
              f"Banks can sometimes recall bank transfers if reported quickly. "
-             f"Also report to Action Fraud at actionfraud.police.uk."],
+             f"Also report to Action Fraud at reportfraud.police.uk."],
             [f"How do I tell a fake {ent} website from the real one?",
              f"Check the domain name carefully — scammers use lookalike domains with extra words or different endings. "
              f"Always access the site by typing the address directly, not via a link in a message."],
             ["Who do I report this to in the UK?",
-             f"Report to Action Fraud (0300 123 2040 or actionfraud.police.uk). "
+             f"Report to Action Fraud (0300 123 2040 or reportfraud.police.uk). "
              f"Forward suspicious texts to 7726 and emails to report@phishing.gov.uk."],
         ]
 

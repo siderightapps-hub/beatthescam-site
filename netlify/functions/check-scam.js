@@ -50,7 +50,7 @@ Analyse the provided content and respond ONLY with a valid JSON object — no ma
   "green_flags": ["Reassuring sign 1"],
   "recommended_actions": ["Specific action 1", "Specific action 2", "Specific action 3"],
   "reporting_links": [
-    {"name": "Action Fraud", "url": "https://www.actionfraud.police.uk/report-a-fraud/report-a-fraud-online"},
+    {"name": "Action Fraud", "url": "https://www.reportfraud.police.uk"},
     {"name": "Forward to 7726 (SMS spam)", "url": "https://www.ncsc.gov.uk/collection/phishing-scams/report-scam-text-messages"}
   ]
 }

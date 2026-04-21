@@ -624,7 +624,7 @@ def render_post(site, post, all_posts, affiliates=None):
         <div class="notice" style="margin-top:2rem">
           <strong>Think you&#8217;ve spotted a scam?</strong>
           Use the <a href="/check/">AI scam checker</a> for an instant analysis, or report it to
-          <a href="https://www.actionfraud.police.uk/report-a-fraud/report-a-fraud-online" rel="noopener noreferrer" target="_blank">Action Fraud</a>.
+          <a href="https://www.reportfraud.police.uk" rel="noopener noreferrer" target="_blank">Action Fraud</a>.
         </div>
       </article>
       <aside class="sidebar">
@@ -644,7 +644,7 @@ def render_post(site, post, all_posts, affiliates=None):
         <section class="sidebar-card">
           <h3>Report this scam</h3>
           <ul class="list-clean">
-            <li><a href="https://www.actionfraud.police.uk/report-a-fraud/report-a-fraud-online" rel="noopener noreferrer" target="_blank">Action Fraud (UK)</a></li>
+            <li><a href="https://www.reportfraud.police.uk" rel="noopener noreferrer" target="_blank">Action Fraud (UK)</a></li>
             <li><a href="https://www.ncsc.gov.uk/collection/phishing-scams" rel="noopener noreferrer" target="_blank">NCSC &#8212; report phishing</a></li>
             <li><a href="https://www.citizensadvice.org.uk/consumer/scams/reporting-a-scam/" rel="noopener noreferrer" target="_blank">Citizens Advice</a></li>
           </ul>
@@ -730,7 +730,7 @@ def render_check_page(site):
           <strong>This tool provides educational guidance only.</strong>
           It is not a definitive fraud verdict. If you have already sent money or shared personal details,
           contact your bank immediately and report to
-          <a href="https://www.actionfraud.police.uk/report-a-fraud/report-a-fraud-online" rel="noopener noreferrer" target="_blank">Action Fraud</a>.
+          <a href="https://www.reportfraud.police.uk" rel="noopener noreferrer" target="_blank">Action Fraud</a>.
         </div>
       </div>
     </section>
@@ -835,7 +835,7 @@ def render_check_page(site):
       }
 
       function renderError() {
-        resultContent.innerHTML = "<p class=\\"notice\\">Sorry, the checker could not be reached right now. Please try again in a moment, or <a href=\\"https://www.actionfraud.police.uk/\\" rel=\\"noopener noreferrer\\" target=\\"_blank\\">report directly to Action Fraud</a>.</p>";
+        resultContent.innerHTML = "<p class=\\"notice\\">Sorry, the checker could not be reached right now. Please try again in a moment, or <a href=\\"https://www.reportfraud.police.uk/\\" rel=\\"noopener noreferrer\\" target=\\"_blank\\">report directly to Action Fraud</a>.</p>";
         resultContent.hidden = false;
       }
     })();
@@ -939,7 +939,7 @@ def build_legal_bodies(site):
       <div class="table-row"><strong>Advertising or partnerships</strong><span>Include the business name, proposal, and relevant website.</span></div>
       <div class="table-row"><strong>Privacy queries</strong><span>Reference &#8220;Privacy request&#8221; in the subject line.</span></div>
     </div>
-    <p class="note" style="margin-top:1.5rem">To report a scam to UK authorities directly, use <a href="https://www.actionfraud.police.uk/" rel="noopener noreferrer" target="_blank">Action Fraud</a> or forward suspicious texts to <strong>7726</strong> (free on all UK networks).</p>
+    <p class="note" style="margin-top:1.5rem">To report a scam to UK authorities directly, use <a href="https://www.reportfraud.police.uk/" rel="noopener noreferrer" target="_blank">Action Fraud</a> or forward suspicious texts to <strong>7726</strong> (free on all UK networks).</p>
     '''
 
     return about, privacy, cookies, terms, contact
