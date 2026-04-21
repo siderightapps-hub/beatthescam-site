@@ -93,10 +93,13 @@ Rules:
     const data = await response.json();
     const text = (data.content || []).find(b => b.type === "text")?.text || "";
 
+    // Strip markdown code fences if present (```json ... ``` or ``` ... ```)
+    const clean = text.replace(/^```(?:json)?\s*/i, "").replace(/\s*```$/, "").trim();
+
     // Validate it's parseable JSON before returning
     let parsed;
     try {
-      parsed = JSON.parse(text);
+      parsed = JSON.parse(clean);
     } catch {
       console.error("Claude returned non-JSON:", text);
       return { statusCode: 502, body: JSON.stringify({ error: "Invalid response from AI" }) };
