@@ -1,6 +1,20 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <rss version="2.0"><channel><title>Beat the Scam</title><link>https://beatthescam.com</link><description>Scam alerts, plain-English checks, and practical guides to help people verify suspicious emails, texts, websites, calls, and offers.</description>
         <item>
+          <title>Work from Home Scam UK: How to Spot and Avoid Fake Job Offers</title>
+          <link>https://beatthescam.com/guides/work-from-home-scam-uk/</link>
+          <guid>https://beatthescam.com/guides/work-from-home-scam-uk/</guid>
+          <pubDate>Wed, 22 Apr 2026 00:00:00 +0000</pubDate>
+          <description>Work from home scams target UK job seekers with promises of quick money for minimal effort, often using fake job boards and impersonated companies. This guide shows you exactly how these scams operate and what steps to take if you&#x27;ve been contacted.</description>
+        </item>
+        <item>
+          <title>WhatsApp Family Message Scam UK: How to Spot and Stop It</title>
+          <link>https://beatthescam.com/guides/whatsapp-scam-family-message-uk/</link>
+          <guid>https://beatthescam.com/guides/whatsapp-scam-family-message-uk/</guid>
+          <pubDate>Wed, 22 Apr 2026 00:00:00 +0000</pubDate>
+          <description>The WhatsApp family message scam tricks you into sending money by impersonating a family member in crisis. Scammers use hacked accounts, stolen contact lists, or spoofed numbers to make the message seem genuine.</description>
+        </item>
+        <item>
           <title>Amazon Scam Email: How to Spot and Avoid Fake Emails in the UK</title>
           <link>https://beatthescam.com/guides/amazon-order-scam-email-checklist/</link>
           <guid>https://beatthescam.com/guides/amazon-order-scam-email-checklist/</guid>
@@ -195,18 +209,4 @@
           <guid>https://beatthescam.com/guides/dpd-delivery-scam-text/</guid>
           <pubDate>Fri, 17 Apr 2026 00:00:00 +0000</pubDate>
           <description>DPD delivery scam texts are a common fraud tactic in the UK where criminals send SMS messages pretending to be from the parcel delivery company. These messages typically claim a delivery failed or ask you to confirm details, urging you to click a link. Clicking these links can lead to credential theft, malware installation, or financial fraud. This guide explains how to recognise fake DPD texts, what to do if you receive one, and how to stay safe when expecting deliveries.</description>
-        </item>
-        <item>
-          <title>Yodel Scam Text Messages: How to Spot and Avoid Them</title>
-          <link>https://beatthescam.com/guides/yodel-scam-text-messages/</link>
-          <guid>https://beatthescam.com/guides/yodel-scam-text-messages/</guid>
-          <pubDate>Fri, 17 Apr 2026 00:00:00 +0000</pubDate>
-          <description>Yodel scam text messages trick UK consumers into clicking malicious links by posing as delivery notifications. These SMS messages typically claim your parcel is pending delivery or requires action, directing you to fake websites designed to harvest login credentials, card details, and personal data. This guide explains the warning signs of fraudulent Yodel texts and the steps you should take if you receive one.</description>
-        </item>
-        <item>
-          <title>UPS Delivery Scam Text Messages: How to Spot and Avoid Them in the UK</title>
-          <link>https://beatthescam.com/guides/ups-delivery-scam-text-messages-uk/</link>
-          <guid>https://beatthescam.com/guides/ups-delivery-scam-text-messages-uk/</guid>
-          <pubDate>Fri, 17 Apr 2026 00:00:00 +0000</pubDate>
-          <description>UPS delivery scam texts are designed to trick you into clicking malicious links or providing personal information. This guide explains how these scams work, what warning signs to look for, and the steps you should take if you receive a suspicious message claiming to be from UPS.</description>
         </item></channel></rss>
