@@ -22,11 +22,11 @@ royal mail text scam,Royal Mail,sms,true,2026-04-23T10:57:29Z,royal-mail-text-sc
 HMRC tax refund text scam,HMRC,sms,true,2026-04-23T10:57:29Z,hmrc-tax-refund-text-scam
 Barclays bank text scam,Barclays,sms,true,2026-04-23T10:57:29Z,barclays-bank-text-scam
 Lloyds bank scam text,Lloyds Bank,sms,true,2026-04-23T10:57:29Z,lloyds-bank-scam-text
-NatWest fraud text message,NatWest,sms,,,
-Halifax bank scam text,Halifax,sms,,,
-DVLA vehicle tax text scam,DVLA,sms,,,
-TV licensing scam text message,TV Licensing,sms,,,
-NHS appointment scam text,NHS,sms,,,
+NatWest fraud text message,NatWest,sms,true,2026-04-24T10:54:20Z,natwest-fraud-text-message
+Halifax bank scam text,Halifax,sms,true,2026-04-24T10:54:20Z,halifax-bank-scam-text
+DVLA vehicle tax text scam,DVLA,sms,true,2026-04-24T10:54:20Z,dvla-vehicle-tax-text-scam
+TV licensing scam text message,TV Licensing,sms,true,2026-04-24T10:54:20Z,tv-licensing-scam-text-message
+NHS appointment scam text,NHS,sms,true,2026-04-24T10:54:20Z,nhs-appointment-scam-text
 council tax scam text UK,HMRC,sms,,,
 parking fine scam text UK,DVLA,sms,,,
 DPD delivery scam text,DPD,sms,,,
