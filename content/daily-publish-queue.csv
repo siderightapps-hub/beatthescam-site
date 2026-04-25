@@ -27,11 +27,11 @@ Halifax bank scam text,Halifax,sms,true,2026-04-24T10:54:20Z,halifax-bank-scam-t
 DVLA vehicle tax text scam,DVLA,sms,true,2026-04-24T10:54:20Z,dvla-vehicle-tax-text-scam
 TV licensing scam text message,TV Licensing,sms,true,2026-04-24T10:54:20Z,tv-licensing-scam-text-message
 NHS appointment scam text,NHS,sms,true,2026-04-24T10:54:20Z,nhs-appointment-scam-text
-council tax scam text UK,HMRC,sms,,,
-parking fine scam text UK,DVLA,sms,,,
-DPD delivery scam text,DPD,sms,,,
-Hermes parcel scam text,Hermes,sms,,,
-Amazon delivery scam text,Amazon,sms,,,
+council tax scam text UK,HMRC,sms,true,2026-04-25T09:15:59Z,council-tax-scam-text-uk
+parking fine scam text UK,DVLA,sms,true,2026-04-25T09:15:59Z,parking-fine-scam-text-uk
+DPD delivery scam text,DPD,sms,true,2026-04-25T09:15:59Z,dpd-delivery-scam-text
+Hermes parcel scam text,Hermes,sms,true,2026-04-25T09:15:59Z,hermes-parcel-scam-text
+Amazon delivery scam text,Amazon,sms,true,2026-04-25T09:15:59Z,amazon-delivery-scam-text
 HMRC tax rebate email scam,HMRC,email,,,
 Microsoft account suspended email scam,Microsoft,email,,,
 Netflix billing email scam UK,Netflix,email,,,

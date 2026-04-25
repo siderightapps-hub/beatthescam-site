@@ -1,6 +1,6 @@
 keyword,entity,category
-NatWest fraud text message,NatWest,sms
-Halifax bank scam text,Halifax,sms
-DVLA vehicle tax text scam,DVLA,sms
-TV licensing scam text message,TV Licensing,sms
-NHS appointment scam text,NHS,sms
+council tax scam text UK,HMRC,sms
+parking fine scam text UK,DVLA,sms
+DPD delivery scam text,DPD,sms
+Hermes parcel scam text,Hermes,sms
+Amazon delivery scam text,Amazon,sms
