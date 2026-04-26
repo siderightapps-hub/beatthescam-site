@@ -1,6 +1,6 @@
 keyword,entity,category
-council tax scam text UK,HMRC,sms
-parking fine scam text UK,DVLA,sms
-DPD delivery scam text,DPD,sms
-Hermes parcel scam text,Hermes,sms
-Amazon delivery scam text,Amazon,sms
+HMRC tax rebate email scam,HMRC,email
+Microsoft account suspended email scam,Microsoft,email
+Netflix billing email scam UK,Netflix,email
+HSBC phishing email UK,HSBC,email
+Santander email scam UK,Santander,email

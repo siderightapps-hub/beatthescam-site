@@ -32,11 +32,11 @@ parking fine scam text UK,DVLA,sms,true,2026-04-25T09:15:59Z,parking-fine-scam-t
 DPD delivery scam text,DPD,sms,true,2026-04-25T09:15:59Z,dpd-delivery-scam-text
 Hermes parcel scam text,Hermes,sms,true,2026-04-25T09:15:59Z,hermes-parcel-scam-text
 Amazon delivery scam text,Amazon,sms,true,2026-04-25T09:15:59Z,amazon-delivery-scam-text
-HMRC tax rebate email scam,HMRC,email,,,
-Microsoft account suspended email scam,Microsoft,email,,,
-Netflix billing email scam UK,Netflix,email,,,
-HSBC phishing email UK,HSBC,email,,,
-Santander email scam UK,Santander,email,,,
+HMRC tax rebate email scam,HMRC,email,true,2026-04-26T09:37:47Z,hmrc-tax-rebate-email-scam
+Microsoft account suspended email scam,Microsoft,email,true,2026-04-26T09:37:47Z,microsoft-account-suspended-email-scam
+Netflix billing email scam UK,Netflix,email,true,2026-04-26T09:37:47Z,netflix-billing-email-scam-uk
+HSBC phishing email UK,HSBC,email,true,2026-04-26T09:37:47Z,hsbc-phishing-email-uk
+Santander email scam UK,Santander,email,true,2026-04-26T09:37:47Z,santander-email-scam-uk
 PayPal account limited email scam,PayPal,email,,,
 DVLA email scam UK,DVLA,email,,,
 Companies House email scam UK,Companies House,email,,,
