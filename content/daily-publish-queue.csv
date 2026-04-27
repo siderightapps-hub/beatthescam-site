@@ -37,11 +37,11 @@ Microsoft account suspended email scam,Microsoft,email,true,2026-04-26T09:37:47Z
 Netflix billing email scam UK,Netflix,email,true,2026-04-26T09:37:47Z,netflix-billing-email-scam-uk
 HSBC phishing email UK,HSBC,email,true,2026-04-26T09:37:47Z,hsbc-phishing-email-uk
 Santander email scam UK,Santander,email,true,2026-04-26T09:37:47Z,santander-email-scam-uk
-PayPal account limited email scam,PayPal,email,,,
-DVLA email scam UK,DVLA,email,,,
-Companies House email scam UK,Companies House,email,,,
-TV licence email scam UK,TV Licensing,email,,,
-NatWest phishing email UK,NatWest,email,,,
+PayPal account limited email scam,PayPal,email,true,2026-04-27T12:12:19Z,paypal-account-limited-email-scam
+DVLA email scam UK,DVLA,email,true,2026-04-27T12:12:19Z,dvla-email-scam-uk
+Companies House email scam UK,Companies House,email,true,2026-04-27T12:12:19Z,companies-house-email-scam-uk
+TV licence email scam UK,TV Licensing,email,true,2026-04-27T12:12:19Z,tv-licence-email-scam-uk
+NatWest phishing email UK,NatWest,email,true,2026-04-27T12:12:19Z,natwest-phishing-email-uk
 HMRC phone call scam UK,HMRC,phone,,,
 bank impersonation phone scam UK,UK Banks,phone,,,
 Amazon phone call scam UK,Amazon,phone,,,
