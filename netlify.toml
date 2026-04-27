@@ -6,20 +6,54 @@
 [functions]
   directory = "netlify/functions"
 
-# Serve ads.txt explicitly before any redirect rules
+# ─── SECURITY HEADERS (applied to all pages) ────────────────────────────────
+[[headers]]
+  for = "/*"
+  [headers.values]
+    # Prevent clickjacking — disallow framing by other origins
+    X-Frame-Options = "DENY"
+    # Prevent MIME-type sniffing
+    X-Content-Type-Options = "nosniff"
+    # Enforce HTTPS for 1 year, include subdomains
+    Strict-Transport-Security = "max-age=31536000; includeSubDomains; preload"
+    # Control referrer data sent to third parties
+    Referrer-Policy = "strict-origin-when-cross-origin"
+    # Restrict browser feature access
+    Permissions-Policy = "camera=(), microphone=(), geolocation=(), payment=(), usb=(), interest-cohort=()"
+    # Remove server fingerprinting header
+    X-Powered-By = ""
+    Server = ""
+    # Content Security Policy
+    # unsafe-inline needed for inline scripts (GA4, checker page, AdSense)
+    # unsafe-eval NOT present
+    Content-Security-Policy = "default-src 'self'; script-src 'self' 'unsafe-inline' https://pagead2.googlesyndication.com https://www.googletagmanager.com https://www.google-analytics.com https://partner.googleadservices.com https://tpc.googlesyndication.com https://adservice.google.com https://adservice.google.co.uk; style-src 'self' 'unsafe-inline'; img-src 'self' data: https://pagead2.googlesyndication.com https://www.google-analytics.com https://www.googletagmanager.com https://tpc.googlesyndication.com; connect-src 'self' https://www.google-analytics.com https://analytics.google.com https://stats.g.doubleclick.net; frame-src https://googleads.g.doubleclick.net https://tpc.googlesyndication.com; font-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; upgrade-insecure-requests"
+
+# ─── STATIC ASSETS — long cache, immutable ───────────────────────────────────
+[[headers]]
+  for = "/assets/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+# ─── ADS.TXT — short cache so AdSense picks up changes quickly ───────────────
 [[headers]]
   for = "/ads.txt"
   [headers.values]
     Content-Type = "text/plain"
     Cache-Control = "public, max-age=86400"
 
-# Route scam checker API to serverless function
+# ─── API ROUTE — no caching on dynamic responses ─────────────────────────────
+[[headers]]
+  for = "/api/*"
+  [headers.values]
+    Cache-Control = "no-store"
+    X-Content-Type-Options = "nosniff"
+
+# ─── REDIRECTS ───────────────────────────────────────────────────────────────
 [[redirects]]
   from   = "/api/check-scam"
   to     = "/.netlify/functions/check-scam"
   status = 200
 
-# 404 fallback — must be last
 [[redirects]]
   from   = "/*"
   to     = "/404.html"

@@ -184,48 +184,72 @@
         return "&#63; Unclear &mdash; proceed with caution";
       }
 
-      function e(s) {
-        return String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;");
+      // Safe DOM builder — no innerHTML, eliminates XSS risk
+      function el(tag, attrs, text) {
+        var node = document.createElement(tag);
+        if (attrs) Object.keys(attrs).forEach(function(k){ node.setAttribute(k, attrs[k]); });
+        if (text !== undefined) node.textContent = text;
+        return node;
       }
 
       function renderResult(data) {
-        var vc = verdictClass(data.verdict);
-        var vl = verdictLabel(data.verdict);
-        var out = "";
-        out += "<div class=\"checker-verdict " + vc + "\">";
-        out += "<strong>" + vl + "</strong>";
-        if (data.confidence) out += " <span class=\"checker-confidence\">(" + e(data.confidence) + " confidence)</span>";
-        out += "</div>";
-        if (data.summary) out += "<p style=\"margin:.75rem 0\">" + e(data.summary) + "</p>";
+        var frag = document.createDocumentFragment();
+
+        var verdict = el("div", {"class": "checker-verdict " + verdictClass(data.verdict)});
+        var strong = document.createElement("strong");
+        strong.innerHTML = verdictLabel(data.verdict);
+        verdict.appendChild(strong);
+        if (data.confidence) {
+          verdict.appendChild(el("span", {"class": "checker-confidence"}, " (" + data.confidence + " confidence)"));
+        }
+        frag.appendChild(verdict);
+
+        if (data.summary) frag.appendChild(el("p", {"style": "margin:.75rem 0"}, data.summary));
+
         if (data.red_flags && data.red_flags.length) {
-          out += "<h3>Red flags identified</h3><ul>";
-          data.red_flags.forEach(function(f){ out += "<li>" + e(f) + "</li>"; });
-          out += "</ul>";
+          frag.appendChild(el("h3", null, "Red flags identified"));
+          var ul = el("ul");
+          data.red_flags.forEach(function(f){ ul.appendChild(el("li", null, f)); });
+          frag.appendChild(ul);
         }
         if (data.green_flags && data.green_flags.length) {
-          out += "<h3>Reassuring signs</h3><ul>";
-          data.green_flags.forEach(function(f){ out += "<li>" + e(f) + "</li>"; });
-          out += "</ul>";
+          frag.appendChild(el("h3", null, "Reassuring signs"));
+          var ul2 = el("ul");
+          data.green_flags.forEach(function(f){ ul2.appendChild(el("li", null, f)); });
+          frag.appendChild(ul2);
         }
         if (data.recommended_actions && data.recommended_actions.length) {
-          out += "<h3>Recommended actions</h3><ol>";
-          data.recommended_actions.forEach(function(a){ out += "<li>" + e(a) + "</li>"; });
-          out += "</ol>";
+          frag.appendChild(el("h3", null, "Recommended actions"));
+          var ol = el("ol");
+          data.recommended_actions.forEach(function(a){ ol.appendChild(el("li", null, a)); });
+          frag.appendChild(ol);
         }
         if (data.reporting_links && data.reporting_links.length) {
-          out += "<h3>Reporting links</h3><ul>";
-          data.reporting_links.forEach(function(l){
-            out += "<li><a href=\"" + e(l.url) + "\" rel=\"noopener noreferrer\" target=\"_blank\">" + e(l.name) + "</a></li>";
+          frag.appendChild(el("h3", null, "Reporting links"));
+          var ul3 = el("ul");
+          data.reporting_links.forEach(function(l) {
+            var href = String(l.url || "");
+            if (!href.startsWith("https://")) return;
+            var a = el("a", {"href": href, "rel": "noopener noreferrer", "target": "_blank"}, l.name);
+            var li = el("li");
+            li.appendChild(a);
+            ul3.appendChild(li);
           });
-          out += "</ul>";
+          frag.appendChild(ul3);
         }
-        resultContent.innerHTML = out;
+
+        resultContent.textContent = "";
+        resultContent.appendChild(frag);
         resultContent.hidden = false;
         resultCol.scrollIntoView({ behavior: "smooth", block: "start" });
       }
 
       function renderError() {
-        resultContent.innerHTML = "<p class=\"notice\">Sorry, the checker could not be reached right now. Please try again in a moment, or <a href=\"https://www.reportfraud.police.uk/\" rel=\"noopener noreferrer\" target=\"_blank\">report directly to Action Fraud</a>.</p>";
+        var p = el("p", {"class": "notice"}, "Sorry, the checker could not be reached right now. Please try again, or ");
+        var a = el("a", {"href": "https://www.reportfraud.police.uk", "rel": "noopener noreferrer", "target": "_blank"}, "report directly to the Police");
+        p.appendChild(a);
+        resultContent.textContent = "";
+        resultContent.appendChild(p);
         resultContent.hidden = false;
       }
     })();

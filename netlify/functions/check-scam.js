@@ -2,40 +2,117 @@
 // Proxies scam checker requests to the Anthropic Claude API.
 // Set ANTHROPIC_API_KEY in your Netlify environment variables.
 
+// ─── RATE LIMITING ───────────────────────────────────────────────────────────
+// In-memory store — resets on cold start. Good enough for basic abuse prevention
+// on a serverless function. Keyed by IP address.
+const rateLimitStore = new Map();
+const RATE_LIMIT_WINDOW_MS = 60 * 1000; // 1 minute
+const RATE_LIMIT_MAX        = 10;        // 10 requests per IP per minute
+
+function isRateLimited(ip) {
+  if (!ip) return false;
+  const now  = Date.now();
+  const entry = rateLimitStore.get(ip) || { count: 0, windowStart: now };
+
+  // Reset window if expired
+  if (now - entry.windowStart > RATE_LIMIT_WINDOW_MS) {
+    entry.count       = 0;
+    entry.windowStart = now;
+  }
+
+  entry.count++;
+  rateLimitStore.set(ip, entry);
+
+  // Prune old entries periodically to avoid memory leak
+  if (rateLimitStore.size > 5000) {
+    for (const [key, val] of rateLimitStore.entries()) {
+      if (now - val.windowStart > RATE_LIMIT_WINDOW_MS * 2) {
+        rateLimitStore.delete(key);
+      }
+    }
+  }
+
+  return entry.count > RATE_LIMIT_MAX;
+}
+
+// ─── ALLOWED ORIGINS ─────────────────────────────────────────────────────────
+const ALLOWED_ORIGINS = [
+  "https://beatthescam.com",
+  "https://www.beatthescam.com",
+];
+
+function getAllowedOrigin(requestOrigin) {
+  if (ALLOWED_ORIGINS.includes(requestOrigin)) return requestOrigin;
+  return ALLOWED_ORIGINS[0]; // Default to primary domain
+}
+
+// ─── HANDLER ─────────────────────────────────────────────────────────────────
 exports.handler = async function(event) {
+  const requestOrigin = event.headers["origin"] || event.headers["Origin"] || "";
+  const allowedOrigin = getAllowedOrigin(requestOrigin);
+
+  const corsHeaders = {
+    "Access-Control-Allow-Origin":  allowedOrigin,
+    "Access-Control-Allow-Headers": "Content-Type",
+    "Access-Control-Allow-Methods": "POST, OPTIONS",
+    "Vary": "Origin",
+  };
+
+  // Handle preflight
   if (event.httpMethod === "OPTIONS") {
-    return {
-      statusCode: 200,
-      headers: {
-        "Access-Control-Allow-Origin": "*",
-        "Access-Control-Allow-Headers": "Content-Type",
-        "Access-Control-Allow-Methods": "POST, OPTIONS",
-      },
-      body: "",
-    };
+    return { statusCode: 200, headers: corsHeaders, body: "" };
   }
 
   if (event.httpMethod !== "POST") {
-    return { statusCode: 405, body: "Method not allowed" };
+    return { statusCode: 405, headers: corsHeaders, body: "Method not allowed" };
   }
 
+  // Rate limiting — check client IP
+  const clientIp =
+    event.headers["x-forwarded-for"]?.split(",")[0].trim() ||
+    event.headers["x-real-ip"] ||
+    event.requestContext?.identity?.sourceIp ||
+    "";
+
+  if (isRateLimited(clientIp)) {
+    return {
+      statusCode: 429,
+      headers: { ...corsHeaders, "Retry-After": "60" },
+      body: JSON.stringify({ error: "Too many requests. Please wait a moment and try again." }),
+    };
+  }
+
+  // Auth
   const apiKey = process.env.ANTHROPIC_API_KEY;
   if (!apiKey) {
     console.error("ANTHROPIC_API_KEY not set");
-    return { statusCode: 500, body: JSON.stringify({ error: "Service not configured" }) };
+    return {
+      statusCode: 500,
+      headers: corsHeaders,
+      body: JSON.stringify({ error: "Service not configured" }),
+    };
   }
 
+  // Parse and validate input
   let message, type;
   try {
     const body = JSON.parse(event.body);
     message = (body.message || "").trim().slice(0, 3000);
-    type    = (body.type    || "message").slice(0, 100);
+    type    = (body.type    || "message").replace(/[^a-zA-Z0-9 ]/g, "").slice(0, 100);
   } catch {
-    return { statusCode: 400, body: JSON.stringify({ error: "Invalid request body" }) };
+    return {
+      statusCode: 400,
+      headers: corsHeaders,
+      body: JSON.stringify({ error: "Invalid request body" }),
+    };
   }
 
   if (!message || message.length < 5) {
-    return { statusCode: 400, body: JSON.stringify({ error: "Message too short" }) };
+    return {
+      statusCode: 400,
+      headers: corsHeaders,
+      body: JSON.stringify({ error: "Message too short" }),
+    };
   }
 
   const SYSTEM = `You are a UK consumer protection expert specialising in scam detection. You help ordinary people decide whether a message, email, URL, phone call, or job offer is likely to be fraudulent.
@@ -50,7 +127,7 @@ Analyse the provided content and respond ONLY with a valid JSON object — no ma
   "green_flags": ["Reassuring sign 1"],
   "recommended_actions": ["Specific action 1", "Specific action 2", "Specific action 3"],
   "reporting_links": [
-    {"name": "Action Fraud", "url": "https://www.reportfraud.police.uk"},
+    {"name": "Report Fraud (Police)", "url": "https://www.reportfraud.police.uk"},
     {"name": "Forward to 7726 (SMS spam)", "url": "https://www.ncsc.gov.uk/collection/phishing-scams/report-scam-text-messages"}
   ]
 }
@@ -87,34 +164,53 @@ Rules:
     if (!response.ok) {
       const err = await response.text();
       console.error("Anthropic API error:", response.status, err);
-      return { statusCode: 502, body: JSON.stringify({ error: "Upstream API error" }) };
+      return {
+        statusCode: 502,
+        headers: corsHeaders,
+        body: JSON.stringify({ error: "Upstream API error" }),
+      };
     }
 
     const data = await response.json();
     const text = (data.content || []).find(b => b.type === "text")?.text || "";
 
-    // Strip markdown code fences if present (```json ... ``` or ``` ... ```)
+    // Strip markdown code fences if Claude wraps the response
     const clean = text.replace(/^```(?:json)?\s*/i, "").replace(/\s*```$/, "").trim();
 
-    // Validate it's parseable JSON before returning
     let parsed;
     try {
       parsed = JSON.parse(clean);
     } catch {
       console.error("Claude returned non-JSON:", text);
-      return { statusCode: 502, body: JSON.stringify({ error: "Invalid response from AI" }) };
+      return {
+        statusCode: 502,
+        headers: corsHeaders,
+        body: JSON.stringify({ error: "Invalid response from AI" }),
+      };
+    }
+
+    // Validate the shape of the response before returning to client
+    const verdict = parsed.verdict;
+    if (!["likely_scam", "possibly_scam", "probably_legitimate", "unclear"].includes(verdict)) {
+      console.error("Unexpected verdict value:", verdict);
+      return {
+        statusCode: 502,
+        headers: { ...corsHeaders, "Content-Type": "application/json" },
+        body: JSON.stringify({ error: "Invalid response from AI" }),
+      };
     }
 
     return {
       statusCode: 200,
-      headers: {
-        "Content-Type": "application/json",
-        "Access-Control-Allow-Origin": "*",
-      },
+      headers: { ...corsHeaders, "Content-Type": "application/json" },
       body: JSON.stringify(parsed),
     };
   } catch (err) {
     console.error("Function error:", err);
-    return { statusCode: 500, body: JSON.stringify({ error: "Internal error" }) };
+    return {
+      statusCode: 500,
+      headers: corsHeaders,
+      body: JSON.stringify({ error: "Internal error" }),
+    };
   }
 };
