@@ -1,6 +1,34 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <rss version="2.0"><channel><title>Beat the Scam</title><link>https://beatthescam.com</link><description>Scam alerts, plain-English checks, and practical guides to help people verify suspicious emails, texts, websites, calls, and offers.</description>
         <item>
+          <title>HMRC Phone Call Scam UK: How to Spot and Stop Tax Fraud Calls</title>
+          <link>https://beatthescam.com/guides/hmrc-phone-call-scam-uk/</link>
+          <guid>https://beatthescam.com/guides/hmrc-phone-call-scam-uk/</guid>
+          <pubDate>Tue, 28 Apr 2026 00:00:00 +0000</pubDate>
+          <description>HMRC phone call scams trick UK residents into revealing personal details or paying fake tax bills by impersonating tax officials. These calls often create panic by claiming you face arrest or legal action, making victims act without thinking.</description>
+        </item>
+        <item>
+          <title>Bank Impersonation Phone Scam UK: How to Spot and Stop Fraudsters</title>
+          <link>https://beatthescam.com/guides/bank-impersonation-phone-scam-uk/</link>
+          <guid>https://beatthescam.com/guides/bank-impersonation-phone-scam-uk/</guid>
+          <pubDate>Tue, 28 Apr 2026 00:00:00 +0000</pubDate>
+          <description>Bank impersonation phone scams are becoming increasingly sophisticated, with fraudsters using caller ID spoofing to appear legitimate. UK banks will never call you asking for passwords, PINs, or verification codes—knowing this key fact could save you thousands of pounds.</description>
+        </item>
+        <item>
+          <title>BT Broadband Scam Calls UK: How to Spot and Stop Them</title>
+          <link>https://beatthescam.com/guides/bt-broadband-scam-calls-uk/</link>
+          <guid>https://beatthescam.com/guides/bt-broadband-scam-calls-uk/</guid>
+          <pubDate>Tue, 28 Apr 2026 00:00:00 +0000</pubDate>
+          <description>Scammers impersonate BT staff to trick you into paying for fake repairs, downloading remote access software, or handing over personal details. These calls often target existing BT customers by claiming urgent account issues or network problems.</description>
+        </item>
+        <item>
+          <title>Police Impersonation Scam Calls UK: How to Spot &amp; Stop Them</title>
+          <link>https://beatthescam.com/guides/police-impersonation-scam-call-uk/</link>
+          <guid>https://beatthescam.com/guides/police-impersonation-scam-call-uk/</guid>
+          <pubDate>Tue, 28 Apr 2026 00:00:00 +0000</pubDate>
+          <description>Police impersonation scams involve criminals calling you claiming to be from the police, Action Fraud, or the National Crime Agency to create urgency around fake criminal investigations. Victims are pressured to transfer money, buy gift cards, or reveal sensitive information like passwords and bank details.</description>
+        </item>
+        <item>
           <title>PayPal Account Limited Email Scam UK: How to Spot and Avoid It</title>
           <link>https://beatthescam.com/guides/paypal-account-limited-email-scam-uk/</link>
           <guid>https://beatthescam.com/guides/paypal-account-limited-email-scam-uk/</guid>
@@ -181,32 +209,4 @@
           <guid>https://beatthescam.com/guides/whatsapp-scam-family-message-uk/</guid>
           <pubDate>Wed, 22 Apr 2026 00:00:00 +0000</pubDate>
           <description>The WhatsApp family message scam tricks you into sending money by impersonating a family member in crisis. Scammers use hacked accounts, stolen contact lists, or spoofed numbers to make the message seem genuine.</description>
-        </item>
-        <item>
-          <title>Amazon Scam Email: How to Spot and Avoid Fake Emails in the UK</title>
-          <link>https://beatthescam.com/guides/amazon-order-scam-email-checklist/</link>
-          <guid>https://beatthescam.com/guides/amazon-order-scam-email-checklist/</guid>
-          <pubDate>Tue, 21 Apr 2026 00:00:00 +0000</pubDate>
-          <description>Amazon scam emails trick UK customers into clicking malicious links or entering login details on fake websites. Scammers impersonate Amazon to steal passwords, payment information, and personal data by creating urgent-sounding messages about account problems or suspicious activity.</description>
-        </item>
-        <item>
-          <title>Charity Scams UK: How to Spot Fake Charities and Protect Your Donation</title>
-          <link>https://beatthescam.com/guides/charity-donation-scam-checklist/</link>
-          <guid>https://beatthescam.com/guides/charity-donation-scam-checklist/</guid>
-          <pubDate>Tue, 21 Apr 2026 00:00:00 +0000</pubDate>
-          <description>Charity scams impersonate real charities or create fake ones to trick donors into sending money that never reaches those in need. Scammers use emotional appeals, fake websites, and convincing emails to steal donations—sometimes thousands of pounds.</description>
-        </item>
-        <item>
-          <title>Invoice Redirection Scam: UK Guide to Spotting Fake Payment Requests</title>
-          <link>https://beatthescam.com/guides/invoice-redirection-scam-checklist/</link>
-          <guid>https://beatthescam.com/guides/invoice-redirection-scam-checklist/</guid>
-          <pubDate>Tue, 21 Apr 2026 00:00:00 +0000</pubDate>
-          <description>Invoice redirection scams intercept legitimate business communications and redirect payment to fraudster bank accounts. This guide shows you how to spot fake invoices, verify genuine requests, and protect your business payments.</description>
-        </item>
-        <item>
-          <title>Recovery Scam UK: How Scammers Pose as Refund Services</title>
-          <link>https://beatthescam.com/guides/refund-recovery-scam-warning-signs/</link>
-          <guid>https://beatthescam.com/guides/refund-recovery-scam-warning-signs/</guid>
-          <pubDate>Tue, 21 Apr 2026 00:00:00 +0000</pubDate>
-          <description>Recovery scams target people who have already lost money to fraud, promising to retrieve their funds for an upfront fee. Scammers impersonate legitimate refund companies, lawyers, or financial investigators to gain trust and extract payment.</description>
         </item></channel></rss>

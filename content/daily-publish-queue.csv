@@ -42,11 +42,11 @@ DVLA email scam UK,DVLA,email,true,2026-04-27T12:12:19Z,dvla-email-scam-uk
 Companies House email scam UK,Companies House,email,true,2026-04-27T12:12:19Z,companies-house-email-scam-uk
 TV licence email scam UK,TV Licensing,email,true,2026-04-27T12:12:19Z,tv-licence-email-scam-uk
 NatWest phishing email UK,NatWest,email,true,2026-04-27T12:12:19Z,natwest-phishing-email-uk
-HMRC phone call scam UK,HMRC,phone,,,
-bank impersonation phone scam UK,UK Banks,phone,,,
-Amazon phone call scam UK,Amazon,phone,,,
-BT broadband scam calls UK,BT,phone,,,
-police impersonation scam call UK,Police,phone,,,
+HMRC phone call scam UK,HMRC,phone,true,2026-04-28T12:16:51Z,hmrc-phone-call-scam-uk
+bank impersonation phone scam UK,UK Banks,phone,true,2026-04-28T12:16:51Z,bank-impersonation-phone-scam-uk
+Amazon phone call scam UK,Amazon,phone,true,2026-04-28T12:16:51Z,amazon-phone-call-scam-uk
+BT broadband scam calls UK,BT,phone,true,2026-04-28T12:16:51Z,bt-broadband-scam-calls-uk
+police impersonation scam call UK,Police,phone,true,2026-04-28T12:16:51Z,police-impersonation-scam-call-uk
 pension liberation scam UK,Pension Provider,phone,,,
 DVLA phone scam UK,DVLA,phone,,,
 National Insurance scam call UK,HMRC,phone,,,
