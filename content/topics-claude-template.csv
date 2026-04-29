@@ -1,6 +1,6 @@
 keyword,entity,category
-HMRC phone call scam UK,HMRC,phone
-bank impersonation phone scam UK,UK Banks,phone
-Amazon phone call scam UK,Amazon,phone
-BT broadband scam calls UK,BT,phone
-police impersonation scam call UK,Police,phone
+pension liberation scam UK,Pension Provider,phone
+DVLA phone scam UK,DVLA,phone
+National Insurance scam call UK,HMRC,phone
+advance fee scam UK,Unknown,payment
+push payment fraud UK,UK Banks,payment

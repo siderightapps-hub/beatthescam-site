@@ -47,11 +47,11 @@ bank impersonation phone scam UK,UK Banks,phone,true,2026-04-28T12:16:51Z,bank-i
 Amazon phone call scam UK,Amazon,phone,true,2026-04-28T12:16:51Z,amazon-phone-call-scam-uk
 BT broadband scam calls UK,BT,phone,true,2026-04-28T12:16:51Z,bt-broadband-scam-calls-uk
 police impersonation scam call UK,Police,phone,true,2026-04-28T12:16:51Z,police-impersonation-scam-call-uk
-pension liberation scam UK,Pension Provider,phone,,,
-DVLA phone scam UK,DVLA,phone,,,
-National Insurance scam call UK,HMRC,phone,,,
-advance fee scam UK,Unknown,payment,,,
-push payment fraud UK,UK Banks,payment,,,
+pension liberation scam UK,Pension Provider,phone,true,2026-04-29T12:07:54Z,pension-liberation-scam-uk
+DVLA phone scam UK,DVLA,phone,true,2026-04-29T12:07:54Z,dvla-phone-scam-uk
+National Insurance scam call UK,HMRC,phone,true,2026-04-29T12:07:54Z,national-insurance-scam-call-uk
+advance fee scam UK,Unknown,payment,true,2026-04-29T12:07:54Z,advance-fee-scam-uk
+push payment fraud UK,UK Banks,payment,true,2026-04-29T12:07:54Z,push-payment-fraud-uk
 invoice fraud UK businesses,Business,payment,,,
 overpayment scam UK,Unknown,payment,,,
 cryptocurrency payment scam UK,Crypto Exchange,crypto,,,
