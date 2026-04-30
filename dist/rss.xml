@@ -1,6 +1,41 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <rss version="2.0"><channel><title>Beat the Scam</title><link>https://beatthescam.com</link><description>Scam alerts, plain-English checks, and practical guides to help people verify suspicious emails, texts, websites, calls, and offers.</description>
         <item>
+          <title>Invoice Fraud UK: How Businesses Fall Victim and How to Stop It</title>
+          <link>https://beatthescam.com/guides/invoice-fraud-uk-businesses/</link>
+          <guid>https://beatthescam.com/guides/invoice-fraud-uk-businesses/</guid>
+          <pubDate>Thu, 30 Apr 2026 00:00:00 +0000</pubDate>
+          <description>Invoice fraud is when criminals send fake invoices impersonating your genuine suppliers or posing as new vendors, tricking your finance team into paying them. This guide shows UK business owners and finance managers exactly how to spot these scams, verify invoices properly, and recover if money has already been sent.</description>
+        </item>
+        <item>
+          <title>Overpayment Scam UK: How to Spot and Avoid This Common Fraud</title>
+          <link>https://beatthescam.com/guides/overpayment-scam-uk/</link>
+          <guid>https://beatthescam.com/guides/overpayment-scam-uk/</guid>
+          <pubDate>Thu, 30 Apr 2026 00:00:00 +0000</pubDate>
+          <description>Overpayment scams trick you into sending money back after receiving a payment that appears legitimate but is actually fraudulent. We&#x27;ll show you how to recognise these scams and what to do if you&#x27;ve been targeted.</description>
+        </item>
+        <item>
+          <title>Cryptocurrency Payment Scam UK: How to Spot and Avoid Fake Crypto Exchanges</title>
+          <link>https://beatthescam.com/guides/cryptocurrency-payment-scam-uk/</link>
+          <guid>https://beatthescam.com/guides/cryptocurrency-payment-scam-uk/</guid>
+          <pubDate>Thu, 30 Apr 2026 00:00:00 +0000</pubDate>
+          <description>Scammers impersonate legitimate cryptocurrency exchanges to trick UK users into sending money or cryptocurrency that cannot be recovered. This guide explains the exact tactics used, how to verify genuine platforms, and what to do if you&#x27;ve been targeted.</description>
+        </item>
+        <item>
+          <title>Apple Pay Scam UK: How Fraudsters Steal Your Money &amp; What To Do</title>
+          <link>https://beatthescam.com/guides/apple-pay-scam-uk/</link>
+          <guid>https://beatthescam.com/guides/apple-pay-scam-uk/</guid>
+          <pubDate>Thu, 30 Apr 2026 00:00:00 +0000</pubDate>
+          <description>Scammers impersonate Apple or your bank to convince you that suspicious activity has occurred on your Apple Pay account, then steal your payment details or money. This guide explains exactly how these scams work, what warning signs to watch for, and the practical steps to protect yourself.</description>
+        </item>
+        <item>
+          <title>PayPal Friends and Family Scam UK: How to Spot and Avoid It</title>
+          <link>https://beatthescam.com/guides/paypal-friends-family-scam-uk/</link>
+          <guid>https://beatthescam.com/guides/paypal-friends-family-scam-uk/</guid>
+          <pubDate>Thu, 30 Apr 2026 00:00:00 +0000</pubDate>
+          <description>The PayPal Friends and Family scam tricks UK users into sending money to criminals by posing as sellers, buyers, or trusted contacts. Unlike standard PayPal transactions, Friends and Family payments offer no protection — once sent, the money is nearly impossible to recover.</description>
+        </item>
+        <item>
           <title>Pension Liberation Scam UK: How to Spot and Stop Cold Calls</title>
           <link>https://beatthescam.com/guides/pension-liberation-scam-uk/</link>
           <guid>https://beatthescam.com/guides/pension-liberation-scam-uk/</guid>
@@ -174,39 +209,4 @@
           <guid>https://beatthescam.com/guides/halifax-bank-scam-text-uk/</guid>
           <pubDate>Fri, 24 Apr 2026 00:00:00 +0000</pubDate>
           <description>Halifax bank scam texts trick customers into revealing passwords, PINs, and personal details by posing as urgent security alerts. These messages often claim suspicious activity or account verification issues, and direct you to fake login pages designed to steal your credentials.</description>
-        </item>
-        <item>
-          <title>DVLA Vehicle Tax Text Scam: How to Spot and Avoid It in the UK</title>
-          <link>https://beatthescam.com/guides/dvla-vehicle-tax-text-scam/</link>
-          <guid>https://beatthescam.com/guides/dvla-vehicle-tax-text-scam/</guid>
-          <pubDate>Fri, 24 Apr 2026 00:00:00 +0000</pubDate>
-          <description>This scam involves fraudsters sending SMS messages claiming your vehicle tax is expired or unpaid, urging you to click a link or provide payment details immediately. The messages appear to come from DVLA but actually lead to fake websites designed to steal your money, identity, or banking information.</description>
-        </item>
-        <item>
-          <title>TV Licensing Scam Text Message: How to Spot and Avoid It in the UK</title>
-          <link>https://beatthescam.com/guides/tv-licensing-scam-text-message-uk/</link>
-          <guid>https://beatthescam.com/guides/tv-licensing-scam-text-message-uk/</guid>
-          <pubDate>Fri, 24 Apr 2026 00:00:00 +0000</pubDate>
-          <description>TV Licensing scam texts trick people into clicking malicious links or sharing personal details by claiming you owe money or your licence has expired. We show you exactly how to spot these fraudulent messages and the safe steps to take if you&#x27;ve already engaged with one.</description>
-        </item>
-        <item>
-          <title>NHS Appointment Scam Text Messages: UK Warning Signs &amp; How to Report</title>
-          <link>https://beatthescam.com/guides/nhs-appointment-scam-text-uk/</link>
-          <guid>https://beatthescam.com/guides/nhs-appointment-scam-text-uk/</guid>
-          <pubDate>Fri, 24 Apr 2026 00:00:00 +0000</pubDate>
-          <description>NHS appointment scam texts trick you into clicking malicious links or calling fake numbers by claiming your appointment has been cancelled or needs confirming. These messages look convincing but are sent by criminals aiming to steal your money, NHS login details, or personal information.</description>
-        </item>
-        <item>
-          <title>Royal Mail Text Scam UK: How to Spot and Avoid the Delivery Fraud</title>
-          <link>https://beatthescam.com/guides/royal-mail-text-scam-uk/</link>
-          <guid>https://beatthescam.com/guides/royal-mail-text-scam-uk/</guid>
-          <pubDate>Thu, 23 Apr 2026 00:00:00 +0000</pubDate>
-          <description>Scammers send fake Royal Mail text messages claiming your parcel needs payment or rescheduling to steal your personal and financial data. This guide explains the exact tactics used and how to verify whether a text is genuinely from Royal Mail.</description>
-        </item>
-        <item>
-          <title>Is Temu a Scam? UK Guide to the Cheap Shopping App Risks</title>
-          <link>https://beatthescam.com/guides/is-temu-a-scam-uk/</link>
-          <guid>https://beatthescam.com/guides/is-temu-a-scam-uk/</guid>
-          <pubDate>Thu, 23 Apr 2026 00:00:00 +0000</pubDate>
-          <description>Temu itself isn&#x27;t a scam in the traditional sense, but the platform has serious concerns around data collection, account security, and counterfeit goods. UK consumers should understand the real risks before downloading or spending money.</description>
         </item></channel></rss>

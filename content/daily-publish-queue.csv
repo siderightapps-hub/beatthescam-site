@@ -52,11 +52,11 @@ DVLA phone scam UK,DVLA,phone,true,2026-04-29T12:07:54Z,dvla-phone-scam-uk
 National Insurance scam call UK,HMRC,phone,true,2026-04-29T12:07:54Z,national-insurance-scam-call-uk
 advance fee scam UK,Unknown,payment,true,2026-04-29T12:07:54Z,advance-fee-scam-uk
 push payment fraud UK,UK Banks,payment,true,2026-04-29T12:07:54Z,push-payment-fraud-uk
-invoice fraud UK businesses,Business,payment,,,
-overpayment scam UK,Unknown,payment,,,
-cryptocurrency payment scam UK,Crypto Exchange,crypto,,,
-Apple Pay scam UK,Apple,payment,,,
-PayPal friends family scam UK,PayPal,payment,,,
+invoice fraud UK businesses,Business,payment,true,2026-04-30T11:58:50Z,invoice-fraud-uk-businesses
+overpayment scam UK,Unknown,payment,true,2026-04-30T11:58:50Z,overpayment-scam-uk
+cryptocurrency payment scam UK,Crypto Exchange,crypto,true,2026-04-30T11:58:50Z,cryptocurrency-payment-scam-uk
+Apple Pay scam UK,Apple,payment,true,2026-04-30T11:58:50Z,apple-pay-scam-uk
+PayPal friends family scam UK,PayPal,payment,true,2026-04-30T11:58:50Z,paypal-friends-family-scam-uk
 Monzo scam transfer UK,Monzo,payment,,,
 eBay buyer scam UK,eBay,marketplace,,,
 Facebook Marketplace fake buyer UK,Facebook,marketplace,,,

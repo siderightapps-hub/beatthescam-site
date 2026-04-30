@@ -1,6 +1,6 @@
 keyword,entity,category
-pension liberation scam UK,Pension Provider,phone
-DVLA phone scam UK,DVLA,phone
-National Insurance scam call UK,HMRC,phone
-advance fee scam UK,Unknown,payment
-push payment fraud UK,UK Banks,payment
+invoice fraud UK businesses,Business,payment
+overpayment scam UK,Unknown,payment
+cryptocurrency payment scam UK,Crypto Exchange,crypto
+Apple Pay scam UK,Apple,payment
+PayPal friends family scam UK,PayPal,payment
