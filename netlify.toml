@@ -54,122 +54,221 @@
   to     = "/.netlify/functions/check-scam"
   status = 200
 
-# ─── Category slug normalisation (301s for old URLs) ──────────────────────
+## ─── Category slug normalisation (301s for old URLs) ──────────────────────
 # Old human-readable slugs → new canonical slugs (per CATEGORY_CANON in build.py)
 # Added 2026-05-01 to recover ranking signals from pre-normalisation URLs
 
+# website-scams → website
+[[redirects]]
+  from = "/categories/website-scams"
+  to = "/categories/website/"
+  status = 301
+  force = true
 [[redirects]]
   from = "/categories/website-scams/*"
   to = "/categories/website/:splat"
   status = 301
   force = true
 
+# email-scams → email
+[[redirects]]
+  from = "/categories/email-scams"
+  to = "/categories/email/"
+  status = 301
+  force = true
 [[redirects]]
   from = "/categories/email-scams/*"
   to = "/categories/email/:splat"
   status = 301
   force = true
 
+# payment-scams → payment
+[[redirects]]
+  from = "/categories/payment-scams"
+  to = "/categories/payment/"
+  status = 301
+  force = true
 [[redirects]]
   from = "/categories/payment-scams/*"
   to = "/categories/payment/:splat"
   status = 301
   force = true
 
+# crypto-scams → crypto
+[[redirects]]
+  from = "/categories/crypto-scams"
+  to = "/categories/crypto/"
+  status = 301
+  force = true
 [[redirects]]
   from = "/categories/crypto-scams/*"
   to = "/categories/crypto/:splat"
   status = 301
   force = true
 
+# phone-scams → phone
+[[redirects]]
+  from = "/categories/phone-scams"
+  to = "/categories/phone/"
+  status = 301
+  force = true
 [[redirects]]
   from = "/categories/phone-scams/*"
   to = "/categories/phone/:splat"
   status = 301
   force = true
 
+# marketplace-scams → marketplace
+[[redirects]]
+  from = "/categories/marketplace-scams"
+  to = "/categories/marketplace/"
+  status = 301
+  force = true
 [[redirects]]
   from = "/categories/marketplace-scams/*"
   to = "/categories/marketplace/:splat"
   status = 301
   force = true
 
+# romance-scams → dating
+[[redirects]]
+  from = "/categories/romance-scams"
+  to = "/categories/dating/"
+  status = 301
+  force = true
 [[redirects]]
   from = "/categories/romance-scams/*"
   to = "/categories/dating/:splat"
   status = 301
   force = true
 
+# job-scams → employment
+[[redirects]]
+  from = "/categories/job-scams"
+  to = "/categories/employment/"
+  status = 301
+  force = true
 [[redirects]]
   from = "/categories/job-scams/*"
   to = "/categories/employment/:splat"
   status = 301
   force = true
 
+# verification-scams → fraud
+[[redirects]]
+  from = "/categories/verification-scams"
+  to = "/categories/fraud/"
+  status = 301
+  force = true
 [[redirects]]
   from = "/categories/verification-scams/*"
   to = "/categories/fraud/:splat"
   status = 301
   force = true
 
+# government-impersonation-scams → government
+[[redirects]]
+  from = "/categories/government-impersonation-scams"
+  to = "/categories/government/"
+  status = 301
+  force = true
 [[redirects]]
   from = "/categories/government-impersonation-scams/*"
   to = "/categories/government/:splat"
   status = 301
   force = true
 
+# text-message-scams → sms
+[[redirects]]
+  from = "/categories/text-message-scams"
+  to = "/categories/sms/"
+  status = 301
+  force = true
 [[redirects]]
   from = "/categories/text-message-scams/*"
   to = "/categories/sms/:splat"
   status = 301
   force = true
 
+# pet-scams → shopping
+[[redirects]]
+  from = "/categories/pet-scams"
+  to = "/categories/shopping/"
+  status = 301
+  force = true
 [[redirects]]
   from = "/categories/pet-scams/*"
   to = "/categories/shopping/:splat"
   status = 301
   force = true
 
+# impersonation-scams → fraud
+[[redirects]]
+  from = "/categories/impersonation-scams"
+  to = "/categories/fraud/"
+  status = 301
+  force = true
 [[redirects]]
   from = "/categories/impersonation-scams/*"
   to = "/categories/fraud/:splat"
   status = 301
   force = true
 
+# travel-scams → travel
+[[redirects]]
+  from = "/categories/travel-scams"
+  to = "/categories/travel/"
+  status = 301
+  force = true
 [[redirects]]
   from = "/categories/travel-scams/*"
   to = "/categories/travel/:splat"
   status = 301
   force = true
 
+# ticket-scams → shopping
+[[redirects]]
+  from = "/categories/ticket-scams"
+  to = "/categories/shopping/"
+  status = 301
+  force = true
 [[redirects]]
   from = "/categories/ticket-scams/*"
   to = "/categories/shopping/:splat"
   status = 301
   force = true
 
+# business-email-scams → email
+[[redirects]]
+  from = "/categories/business-email-scams"
+  to = "/categories/email/"
+  status = 301
+  force = true
 [[redirects]]
   from = "/categories/business-email-scams/*"
   to = "/categories/email/:splat"
   status = 301
   force = true
 
+# recovery-scams → fraud
+[[redirects]]
+  from = "/categories/recovery-scams"
+  to = "/categories/fraud/"
+  status = 301
+  force = true
 [[redirects]]
   from = "/categories/recovery-scams/*"
   to = "/categories/fraud/:splat"
   status = 301
   force = true
 
+# donation-scams → fraud
 [[redirects]]
-  from = "/categories/donation-scams/*"
-  to = "/categories/fraud/:splat"
+  from = "/categories/donation-scams"
+  to = "/categories/fraud/"
   status = 301
   force = true
 
 [[redirects]]
-  from   = "/*"
-  to     = "/404.html"
-  status = 404
-
 [context.production.environment]
   NODE_VERSION = "20"
