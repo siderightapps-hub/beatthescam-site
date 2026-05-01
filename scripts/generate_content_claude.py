@@ -207,9 +207,16 @@ def normalise(data: Dict, topic: Topic, today: str) -> Dict:
     sections: List[List[str]] = []
     for item in raw_sections:
         if isinstance(item, (list, tuple)) and len(item) >= 2:
-            t, b = clean(str(item[0])), clean(str(item[1]))
-            if t and b:
-                sections.append([t, b])
+            heading = clean(str(item[0]))
+            raw_body = item[1]
+            # If Claude returned a list (e.g. for bullet-point sections),
+            # join with newlines so the renderer treats them as bullets.
+            if isinstance(raw_body, list):
+                body = clean("\n".join(str(x) for x in raw_body))
+            else:
+                body = clean(str(raw_body))
+            if heading and body:
+                sections.append([heading, body])
 
     # Fallback sections if Claude didn't deliver
     if len(sections) < 4:
