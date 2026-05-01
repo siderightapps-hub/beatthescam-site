@@ -1072,8 +1072,18 @@ def build():
     write(DIST / 'sitemap.xml', '\n'.join(sitemap_lines))
 
     # Robots
-    write(DIST / 'robots.txt', f'User-agent: *\nAllow: /\n\nSitemap: {site["domain"]}/sitemap.xml\n')
-
+    robots_content = (
+    'User-agent: *\n'
+    'Allow: /\n'
+    'Disallow: /search/\n'
+    'Disallow: /*.php$\n'
+    'Disallow: /*?l=\n'
+    'Disallow: /api/\n'
+    'Disallow: /.netlify/\n'
+    '\n'
+    f'Sitemap: {site["domain"]}/sitemap.xml\n'
+)
+write(DIST / 'robots.txt', robots_content)
     print(f"Built {len(posts)} posts across {len(categories)} categories -> {DIST}")
 
 

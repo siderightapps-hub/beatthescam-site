@@ -54,6 +54,118 @@
   to     = "/.netlify/functions/check-scam"
   status = 200
 
+# ─── Category slug normalisation (301s for old URLs) ──────────────────────
+# Old human-readable slugs → new canonical slugs (per CATEGORY_CANON in build.py)
+# Added 2026-05-01 to recover ranking signals from pre-normalisation URLs
+
+[[redirects]]
+  from = "/categories/website-scams/*"
+  to = "/categories/website/:splat"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/categories/email-scams/*"
+  to = "/categories/email/:splat"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/categories/payment-scams/*"
+  to = "/categories/payment/:splat"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/categories/crypto-scams/*"
+  to = "/categories/crypto/:splat"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/categories/phone-scams/*"
+  to = "/categories/phone/:splat"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/categories/marketplace-scams/*"
+  to = "/categories/marketplace/:splat"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/categories/romance-scams/*"
+  to = "/categories/dating/:splat"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/categories/job-scams/*"
+  to = "/categories/employment/:splat"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/categories/verification-scams/*"
+  to = "/categories/fraud/:splat"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/categories/government-impersonation-scams/*"
+  to = "/categories/government/:splat"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/categories/text-message-scams/*"
+  to = "/categories/sms/:splat"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/categories/pet-scams/*"
+  to = "/categories/shopping/:splat"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/categories/impersonation-scams/*"
+  to = "/categories/fraud/:splat"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/categories/travel-scams/*"
+  to = "/categories/travel/:splat"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/categories/ticket-scams/*"
+  to = "/categories/shopping/:splat"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/categories/business-email-scams/*"
+  to = "/categories/email/:splat"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/categories/recovery-scams/*"
+  to = "/categories/fraud/:splat"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/categories/donation-scams/*"
+  to = "/categories/fraud/:splat"
+  status = 301
+  force = true
+
 [[redirects]]
   from   = "/*"
   to     = "/404.html"
