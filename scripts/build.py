@@ -1073,19 +1073,32 @@ def build():
 
     # Robots
     robots_content = (
-    'User-agent: *\n'
-    'Allow: /\n'
-    'Disallow: /search/\n'
-    'Disallow: /*.php$\n'
-    'Disallow: /*?l=\n'
-    'Disallow: /api/\n'
-    'Disallow: /.netlify/\n'
-    '\n'
-    f'Sitemap: {site["domain"]}/sitemap.xml\n'
-)
-write(DIST / 'robots.txt', robots_content)
+        'User-agent: *\n'
+        'Allow: /\n'
+        'Disallow: /search/\n'
+        'Disallow: /*.php$\n'
+        'Disallow: /*?l=\n'
+        'Disallow: /api/\n'
+        'Disallow: /.netlify/\n'
+        '\n'
+        f'Sitemap: {site["domain"]}/sitemap.xml\n'
+    )
+    write(DIST / 'robots.txt', robots_content)
+
+    # _redirects (Netlify)
+    # Category slug 301s — auto-derived from CATEGORY_CANON.
+    # Lives in dist/_redirects rather than netlify.toml because [[redirects]]
+    # in toml weren't being applied at edge despite headers and the API
+    # redirect from the same toml working correctly.
+    redirect_lines = ["# Category slug normalisation (auto-generated from CATEGORY_CANON)"]
+    seen = set()
+    for old_label, new_slug in CATEGORY_CANON.items():
+        old_slug = old_label.replace(" ", "-")
+        if old_slug == new_slug or old_slug in seen:
+            continue
+        seen.add(old_slug)
+        redirect_lines.append(f"/categories/{old_slug}    /categories/{new_slug}/    301!")
+        redirect_lines.append(f"/categories/{old_slug}/*    /categories/{new_slug}/:splat    301!")
+    write(DIST / '_redirects', "\n".join(redirect_lines) + "\n")
+
     print(f"Built {len(posts)} posts across {len(categories)} categories -> {DIST}")
-
-
-if __name__ == '__main__':
-    build()
