@@ -148,6 +148,32 @@ def write(path: Path, text: str):
 def slugify(value: str) -> str:
     return re.sub(r"[^a-z0-9]+", "-", value.lower().strip()).strip("-")
 
+
+def _normalize_bullet_body(para) -> str:
+    """
+    Coerce a section body into clean text. Handles three shapes:
+      1. Plain string -> returned as-is.
+      2. Actual Python list of strings -> joined with newlines.
+      3. String containing a Python list literal like "['- item', '- item']"
+         (legacy bug where lists were str()'d before being saved to JSON)
+         -> parsed with ast.literal_eval and joined with newlines.
+    Output is always a string.
+    """
+    if isinstance(para, list):
+        return "\n".join(str(x) for x in para)
+    if not isinstance(para, str):
+        return str(para)
+    s = para.strip()
+    if (s.startswith("['") or s.startswith('["')) and s.endswith("]"):
+        try:
+            import ast
+            parsed = ast.literal_eval(s)
+            if isinstance(parsed, list):
+                return "\n".join(str(item) for item in parsed)
+        except (ValueError, SyntaxError):
+            pass
+    return para
+
 def reading_time(post: dict) -> int:
     words = sum(len((t + " " + b).split()) for t, b in post.get("sections", []))
     words += sum(len((q + " " + a).split()) for q, a in post.get("faq", []))
@@ -588,6 +614,7 @@ def render_post(site, post, all_posts, affiliates=None):
     for title, para in post['sections']:
         sid = slugify(title)
         section_ids.append((sid, title))
+        para = _normalize_bullet_body(para)
         if para.strip().startswith("-"):
             lines = [l.strip().lstrip("- ") for l in para.strip().splitlines() if l.strip().lstrip("- ")]
             inner = "".join(f"<li>{html.escape(l)}</li>" for l in lines)
