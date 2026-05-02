@@ -926,19 +926,49 @@ def render_simple_page(site, title, description, body, slug):
 def build_legal_bodies(site):
     about = f'''
     <p><strong>{html.escape(site["site_name"])}</strong> is a consumer-protection content site focused on helping UK residents recognise scam patterns before they send money, share credentials, or install malicious software.</p>
+
+    <div class="author-card" style="margin:1.5rem 0;padding:1.2rem;border:1px solid var(--line);border-radius:14px;background:#fafafa">
+      <p style="margin:0 0 .35rem 0"><strong>Edited by James Carter</strong> &middot; Editor, {html.escape(site["site_name"])}</p>
+      <p style="margin:0;font-size:.95rem;color:#555">Background in UK consumer affairs writing with a focus on fraud, online safety, and digital payment risk. Reviews scam patterns regularly and updates guides as new variants emerge.</p>
+    </div>
+
     <p>The editorial model is simple: fast checks, plain-English explanations, and practical actions. The site is not a law firm, bank, or regulator. It is a free educational publication designed to reduce avoidable losses.</p>
+
     <div class="tablelike">
       <div class="table-row"><strong>Editorial focus</strong><span>Scam alerts, payment risk, impersonation patterns, delivery fraud, marketplace abuse, crypto scams, and recovery scams.</span></div>
       <div class="table-row"><strong>Audience</strong><span>UK residents who have received a suspicious message, are considering an unfamiliar purchase, or want to understand current fraud tactics.</span></div>
       <div class="table-row"><strong>How guides are written</strong><span>Each guide targets a specific scam type and explains what to verify, what to avoid, and what to do if you have already interacted.</span></div>
-      <div class="table-row"><strong>AI scam checker</strong><span>The site includes a free tool powered by Claude AI that analyses suspicious messages and gives a plain-English verdict with recommended actions.</span></div>
+      <div class="table-row"><strong>AI scam checker</strong><span>A free tool that analyses suspicious messages and gives a plain-English verdict with recommended actions.</span></div>
       <div class="table-row"><strong>Commercial model</strong><span>Advertising-supported using Google AdSense, with scope for consumer-safety partnerships.</span></div>
     </div>
+
+    <h2>How content is researched and produced</h2>
+    <p>Each guide on this site goes through the same process: pick a specific scam type or pattern that is currently active in the UK, draft the content using AI assistance against a strict editorial template, then verify reporting routes and recommended actions against current sources before publishing.</p>
+    <p>The drafting step uses Anthropic&#8217;s Claude API. The model is given a structured prompt covering the scam type, target audience, and required sections (what the scam looks like, warning signs, step-by-step pattern, verification, recovery actions, reporting routes). It is not asked to invent statistics, predict outcomes, or generate fake quotes. The output is then checked for accuracy and corrected where needed.</p>
+    <p>Verification draws on UK-specific public sources, including:</p>
+    <ul>
+      <li><a href="https://www.actionfraud.police.uk/" rel="noopener noreferrer" target="_blank">Action Fraud</a> &mdash; the UK&#8217;s national reporting centre for fraud and cybercrime</li>
+      <li><a href="https://www.ncsc.gov.uk/" rel="noopener noreferrer" target="_blank">National Cyber Security Centre (NCSC)</a> &mdash; for phishing reporting routes and current threat patterns</li>
+      <li><a href="https://www.citizensadvice.org.uk/" rel="noopener noreferrer" target="_blank">Citizens Advice</a> &mdash; consumer protection guidance and helpline routes</li>
+      <li><a href="https://www.fca.org.uk/scamsmart" rel="noopener noreferrer" target="_blank">FCA ScamSmart</a> &mdash; for investment and financial services scams</li>
+      <li><a href="https://takefive-stopfraud.org.uk/" rel="noopener noreferrer" target="_blank">Take Five</a> &mdash; UK banking sector consumer fraud campaign</li>
+      <li>Government UK pages for HMRC, DVLA, TV Licensing, and other public bodies commonly impersonated</li>
+    </ul>
+
     <h2>Editorial standards</h2>
-    <p>Content is written to be understandable under pressure. That means short sections, clear headings, and advice that directs readers towards independent verification through official channels.</p>
-    <p>Where possible, guides link directly to official UK resources: Action Fraud, the NCSC, Citizens Advice, and relevant regulators.</p>
+    <p>Content is written to be understandable under pressure. That means short sections, clear headings, and advice that directs readers towards independent verification through official channels &mdash; never through links, numbers, or payment details supplied by a suspicious message.</p>
+    <p>Where the site recommends a reporting route, that route has been checked against the current public guidance from the relevant UK authority. Where the site cites a phone number or web address, it has been verified against the official source.</p>
+    <p>If a guide contains an error, email <a href="mailto:{site["contact_email"]}">{site["contact_email"]}</a> with the page URL and the issue. Corrections are made promptly.</p>
+
+    <h2>About the AI scam checker</h2>
+    <p>The free scam checker on this site sends the suspicious message text you paste to Anthropic&#8217;s Claude API for analysis. The text is processed in real time to produce a verdict, list of red flags, and recommended actions &mdash; then discarded. Beat the Scam does not store the text, your IP address, or any identifying data linked to your submission.</p>
+    <p>For your own safety, do not paste full passwords, full bank account numbers, or other sensitive credentials into the checker. The tool is designed to analyse the suspicious content itself (the message, link, or scam pattern), not your private credentials.</p>
+    <p>The checker&#8217;s output is educational. It is not a definitive fraud determination. If you are unsure about a real-world payment or account access decision, contact your bank&#8217;s fraud team using the number on the back of your card.</p>
+
     <h2>Contact</h2>
     <p>Editorial contact and correction requests: <a href="mailto:{site["contact_email"]}">{site["contact_email"]}</a></p>
+
+    <p class="note" style="margin-top:2rem;color:#666;font-size:.9rem">Last reviewed: May 2026. The site is reviewed periodically and updated as scam patterns and reporting routes change.</p>
     '''
 
     privacy = f'''
