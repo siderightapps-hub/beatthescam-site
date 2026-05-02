@@ -1129,3 +1129,6 @@ def build():
     write(DIST / '_redirects', "\n".join(redirect_lines) + "\n")
 
     print(f"Built {len(posts)} posts across {len(categories)} categories -> {DIST}")
+
+if __name__ == "__main__":
+    build()
