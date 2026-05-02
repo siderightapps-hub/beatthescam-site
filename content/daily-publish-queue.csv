@@ -57,11 +57,11 @@ overpayment scam UK,Unknown,payment,true,2026-04-30T11:58:50Z,overpayment-scam-u
 cryptocurrency payment scam UK,Crypto Exchange,crypto,true,2026-04-30T11:58:50Z,cryptocurrency-payment-scam-uk
 Apple Pay scam UK,Apple,payment,true,2026-04-30T11:58:50Z,apple-pay-scam-uk
 PayPal friends family scam UK,PayPal,payment,true,2026-04-30T11:58:50Z,paypal-friends-family-scam-uk
-Monzo scam transfer UK,Monzo,payment,,,
-eBay buyer scam UK,eBay,marketplace,,,
-Facebook Marketplace fake buyer UK,Facebook,marketplace,,,
-Vinted buyer scam UK,Vinted,marketplace,,,
-Depop scam UK,Depop,marketplace,,,
+Monzo scam transfer UK,Monzo,payment,true,2026-05-02T09:50:08Z,monzo-scam-transfer-uk
+eBay buyer scam UK,eBay,marketplace,true,2026-05-02T09:50:08Z,ebay-buyer-scam-uk
+Facebook Marketplace fake buyer UK,Facebook,marketplace,true,2026-05-02T09:50:08Z,facebook-marketplace-fake-buyer-uk
+Vinted buyer scam UK,Vinted,marketplace,true,2026-05-02T09:50:08Z,vinted-buyer-scam-uk
+Depop scam UK,Depop,marketplace,true,2026-05-02T09:50:08Z,depop-scam-uk
 AutoTrader car scam UK,AutoTrader,marketplace,,,
 Rightmove rental scam UK,Rightmove,marketplace,,,
 Airbnb scam UK listings,Airbnb,marketplace,,,
