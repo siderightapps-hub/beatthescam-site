@@ -37,6 +37,12 @@ jobs:
         with:
           fetch-depth: 0
 
+      - name: Sync with latest main (catch any manual pushes)
+        run: |
+          git config user.name  "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git pull --rebase origin main
+
       - name: Setup Python
         uses: actions/setup-python@v5
         with:
@@ -66,6 +72,27 @@ jobs:
       - name: Build site
         run: python scripts/build.py
 
+      - name: Verify build produced output (fail loudly on silent build failures)
+        run: |
+          if [ ! -f dist/index.html ]; then
+            echo "ERROR: dist/index.html not found — build.py exited silently without producing output"
+            exit 1
+          fi
+          if [ ! -f dist/robots.txt ]; then
+            echo "ERROR: dist/robots.txt not found — build.py did not generate robots.txt"
+            exit 1
+          fi
+          if [ ! -f dist/_redirects ]; then
+            echo "ERROR: dist/_redirects not found — build.py did not generate _redirects"
+            exit 1
+          fi
+          POST_COUNT=$(find dist/guides -mindepth 1 -maxdepth 1 -type d | wc -l)
+          if [ "$POST_COUNT" -lt 50 ]; then
+            echo "ERROR: only $POST_COUNT post directories found in dist/guides — build looks incomplete"
+            exit 1
+          fi
+          echo "Build verified: $POST_COUNT post directories, all required files present"
+
       - name: Check if dist changed
         id: dist_changed
         run: |
@@ -86,8 +113,24 @@ jobs:
                   content/topics-claude-template.csv \
                   content/daily-publish-queue.csv \
                   dist
+          if git diff --cached --quiet; then
+            echo "No changes to commit"
+            exit 0
+          fi
           git commit -m "Daily AI publish: $(date -u +%Y-%m-%d)"
-          git push
+
+          # Pull-rebase + retry on push rejection (manual pushes during build)
+          for attempt in 1 2 3; do
+            git pull --rebase origin main || true
+            if git push; then
+              echo "Push succeeded on attempt $attempt"
+              exit 0
+            fi
+            echo "Push attempt $attempt rejected — retrying after rebase"
+            sleep 5
+          done
+          echo "Push failed after 3 attempts"
+          exit 1
 
       - name: Commit content only (no dist change)
         if: steps.dist_changed.outputs.changed == 'false'
@@ -102,4 +145,15 @@ jobs:
             exit 0
           fi
           git commit -m "Daily AI publish (content only): $(date -u +%Y-%m-%d)"
-          git push
+
+          for attempt in 1 2 3; do
+            git pull --rebase origin main || true
+            if git push; then
+              echo "Push succeeded on attempt $attempt"
+              exit 0
+            fi
+            echo "Push attempt $attempt rejected — retrying after rebase"
+            sleep 5
+          done
+          echo "Push failed after 3 attempts"
+          exit 1
