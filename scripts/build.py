@@ -1038,6 +1038,102 @@ def deduplicate_posts(posts: list) -> list:
     return sorted(seen.values(), key=lambda p: p["date"], reverse=True)
 
 
+# ─── INTERNAL LINKING ──────────────────────────────────────────────────────
+
+# Regions inside these tags are skipped for auto-linking. Avoids:
+# - Double-wrapping existing <a>
+# - Linking inside headings (already strong signals)
+# - Mangling code/pre blocks
+_INTERNAL_LINK_EXCLUDED_RE = re.compile(
+    r'<a\s[^>]*>.*?</a>|<h[1-6][^>]*>.*?</h[1-6]>|<code[^>]*>.*?</code>|<pre[^>]*>.*?</pre>',
+    re.IGNORECASE | re.DOTALL,
+)
+
+# Phrases too generic to auto-link — would over-fire across the site.
+_INTERNAL_LINK_STOPWORDS = {
+    "uk bank", "text message", "text messages", "phone scam",
+    "email scam", "text scam", "scam email", "scam text",
+    "bank scam", "uk", "scam", "phone", "text",
+}
+
+
+def build_internal_link_map(posts):
+    """Build a phrase → guide-URL map from each post's keywords.
+
+    Filters keywords to phrases that are 2+ words long, lowercase, not
+    stop-listed, not duplicated. First post wins on duplicates (since
+    posts are deduped + date-sorted newest-first, this gives links to
+    the freshest authoritative post on a phrase).
+    """
+    link_map: dict = {}
+    for post in posts:
+        slug = post.get("slug")
+        if not slug:
+            continue
+        url = f"/guides/{slug}/"
+        for kw in post.get("keywords", []):
+            phrase = (kw or "").lower().strip()
+            if not phrase or len(phrase.split()) < 2:
+                continue
+            if phrase in _INTERNAL_LINK_STOPWORDS:
+                continue
+            if phrase in link_map:
+                continue
+            link_map[phrase] = url
+    return link_map
+
+
+def apply_internal_links(html_str: str, current_slug: str, link_map: dict, max_total: int = 5) -> str:
+    """Auto-link plain-text occurrences of mapped phrases inside post HTML.
+
+    Rules:
+    - Skips text inside <a>, <h1-6>, <code>, <pre>
+    - Skips phrases pointing to the current post (no self-links)
+    - Max one link per phrase, max max_total links per article
+    - Longer phrases matched first (avoids partial-overlap issues)
+    - Whole-word match, case-insensitive, original case preserved
+    """
+    if not link_map or not html_str:
+        return html_str
+
+    self_url = f"/guides/{current_slug}/"
+    candidates = sorted(
+        ((p, u) for p, u in link_map.items() if u != self_url),
+        key=lambda kv: -len(kv[0]),
+    )
+    if not candidates:
+        return html_str
+
+    zones = []
+    last_end = 0
+    for m in _INTERNAL_LINK_EXCLUDED_RE.finditer(html_str):
+        if m.start() > last_end:
+            zones.append(("plain", html_str[last_end:m.start()]))
+        zones.append(("excluded", m.group()))
+        last_end = m.end()
+    if last_end < len(html_str):
+        zones.append(("plain", html_str[last_end:]))
+
+    used = set()
+    added = 0
+    out = []
+    for kind, text in zones:
+        if kind == "excluded" or added >= max_total:
+            out.append(text)
+            continue
+        for phrase, url in candidates:
+            if phrase in used or added >= max_total:
+                continue
+            pat = re.compile(r"\b" + re.escape(phrase) + r"\b", re.IGNORECASE)
+            m = pat.search(text)
+            if m:
+                text = text[:m.start()] + f'<a href="{url}">{m.group()}</a>' + text[m.end():]
+                used.add(phrase)
+                added += 1
+        out.append(text)
+    return "".join(out)
+
+
 # ─── MAIN BUILD ────────────────────────────────────────────────────────────
 
 def build():
@@ -1075,8 +1171,15 @@ def build():
     write(DIST / 'categories/index.html', render_categories_index(site, categories))
     for cat, items in categories.items():
         write(DIST / 'categories' / slugify(cat) / 'index.html', render_category_page(site, cat, items))
+
+    # Build phrase → URL map once for the whole site, then auto-link
+    # contextual mentions inside each rendered guide before writing.
+    link_map = build_internal_link_map(posts)
+
     for post in posts:
-        write(DIST / 'guides' / post['slug'] / 'index.html', render_post(site, post, posts, affiliates))
+        html_out = render_post(site, post, posts, affiliates)
+        html_out = apply_internal_links(html_out, post['slug'], link_map)
+        write(DIST / 'guides' / post['slug'] / 'index.html', html_out)
 
     write(DIST / 'check/index.html', render_check_page(site))
 
