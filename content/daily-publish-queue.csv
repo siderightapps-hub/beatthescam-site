@@ -82,11 +82,11 @@ Universal Credit scam UK,DWP,government,true,2026-05-06T12:21:08Z,universal-cred
 TV licence scam letter UK,TV Licensing,government,true,2026-05-06T12:21:08Z,tv-licence-scam-letter-uk
 court summons scam email UK,HMCTS,government,true,2026-05-06T12:21:08Z,court-summons-scam-email-uk
 passport renewal scam UK,HMPO,government,true,2026-05-06T12:21:08Z,passport-renewal-scam-uk
-UKVI visa scam UK,Home Office,government,,,
-indeed job scam UK,Indeed,employment,,,
-remote work scam UK 2026,Unknown,employment,,,
-mystery shopper scam UK,Unknown,employment,,,
-data entry job scam UK,Unknown,employment,,,
+UKVI visa scam UK,Home Office,government,true,2026-05-07T12:24:22Z,ukvi-visa-scam-uk
+indeed job scam UK,Indeed,employment,true,2026-05-07T12:24:22Z,indeed-job-scam-uk
+remote work scam UK 2026,Unknown,employment,true,2026-05-07T12:24:22Z,remote-work-scam-uk-2026
+mystery shopper scam UK,Unknown,employment,true,2026-05-07T12:24:22Z,mystery-shopper-scam-uk
+data entry job scam UK,Unknown,employment,true,2026-05-07T12:24:22Z,data-entry-job-scam-uk
 recruitment agency scam UK,Unknown,employment,,,
 Tinder investment scam UK,Tinder,dating,,,
 Bumble romance scam UK,Bumble,dating,,,
