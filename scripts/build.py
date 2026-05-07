@@ -1062,6 +1062,14 @@ def build():
     DIST.mkdir(parents=True)
     shutil.copytree(ROOT / 'assets', DIST / 'assets')
 
+    # Copy root-level static files (favicons, webmanifest) → dist/ root
+    # so they're served from /favicon.svg, /favicon.ico, /site.webmanifest etc.
+    static_dir = ROOT / 'static'
+    if static_dir.is_dir():
+        for src in static_dir.iterdir():
+            if src.is_file():
+                shutil.copy2(src, DIST / src.name)
+
     write(DIST / 'index.html',       render_home(site, posts, categories))
     write(DIST / 'guides/index.html', render_guides_index(site, posts))
     write(DIST / 'categories/index.html', render_categories_index(site, categories))

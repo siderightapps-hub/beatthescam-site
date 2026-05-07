@@ -1,0 +1,23 @@
+{
+  "name": "Beat the Scam",
+  "short_name": "BeatTheScam",
+  "description": "UK consumer protection — scam awareness guides and a free AI scam checker.",
+  "icons": [
+    {
+      "src": "/favicon-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/favicon-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    }
+  ],
+  "theme_color": "#0b1220",
+  "background_color": "#ffffff",
+  "display": "standalone",
+  "start_url": "/"
+}
