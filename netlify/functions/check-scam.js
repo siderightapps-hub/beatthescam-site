@@ -35,6 +35,18 @@ function isRateLimited(ip) {
   return entry.count > RATE_LIMIT_MAX;
 }
 
+// ─── ALLOWED MESSAGE TYPES ───────────────────────────────────────────────────
+const ALLOWED_TYPES = new Set([
+  "SMS or text message",
+  "email",
+  "phone call",
+  "website or URL",
+  "job offer",
+  "social media message",
+  "investment opportunity",
+  "other message",
+]);
+
 // ─── ALLOWED ORIGINS ─────────────────────────────────────────────────────────
 const ALLOWED_ORIGINS = [
   "https://beatthescam.com",
@@ -68,7 +80,10 @@ exports.handler = async function(event) {
   }
 
   // Rate limiting — check client IP
+  // x-nf-client-connection-ip is set by Netlify's own edge and cannot be spoofed
+  // by a caller; it takes priority over x-forwarded-for which can be forged.
   const clientIp =
+    event.headers["x-nf-client-connection-ip"] ||
     event.headers["x-forwarded-for"]?.split(",")[0].trim() ||
     event.headers["x-real-ip"] ||
     event.requestContext?.identity?.sourceIp ||
@@ -98,7 +113,8 @@ exports.handler = async function(event) {
   try {
     const body = JSON.parse(event.body);
     message = (body.message || "").trim().slice(0, 3000);
-    type    = (body.type    || "message").replace(/[^a-zA-Z0-9 ]/g, "").slice(0, 100);
+    const rawType = (body.type || "").replace(/[^a-zA-Z0-9 ]/g, "").slice(0, 100);
+    type    = ALLOWED_TYPES.has(rawType) ? rawType : "other message";
   } catch {
     return {
       statusCode: 400,
@@ -189,21 +205,45 @@ Rules:
       };
     }
 
-    // Validate the shape of the response before returning to client
-    const verdict = parsed.verdict;
-    if (!["likely_scam", "possibly_scam", "probably_legitimate", "unclear"].includes(verdict)) {
-      console.error("Unexpected verdict value:", verdict);
-      return {
-        statusCode: 502,
-        headers: { ...corsHeaders, "Content-Type": "application/json" },
-        body: JSON.stringify({ error: "Invalid response from AI" }),
-      };
-    }
+    // Validate verdict enum
+    const verdict = ["likely_scam", "possibly_scam", "probably_legitimate", "unclear"]
+      .includes(parsed.verdict) ? parsed.verdict : "unclear";
+
+    const confidence = ["high", "medium", "low"]
+      .includes(parsed.confidence) ? parsed.confidence : "medium";
+
+    // Never claim high confidence that something is safe — scam tactics evolve
+    const finalConfidence = verdict === "probably_legitimate" ? "low" : confidence;
+
+    // Sanitise reporting_links — only forward https:// URLs to prevent open redirect
+    const safeLinks = Array.isArray(parsed.reporting_links)
+      ? parsed.reporting_links.filter(
+          l => l && typeof l.url === "string" && l.url.startsWith("https://")
+        )
+      : [];
+
+    const result = {
+      verdict:             verdict,
+      confidence:          finalConfidence,
+      summary:             typeof parsed.summary === "string"
+                             ? parsed.summary.slice(0, 500) : "",
+      red_flags:           Array.isArray(parsed.red_flags)
+                             ? parsed.red_flags.slice(0, 6).map(String) : [],
+      green_flags:         Array.isArray(parsed.green_flags)
+                             ? parsed.green_flags.slice(0, 6).map(String) : [],
+      recommended_actions: Array.isArray(parsed.recommended_actions)
+                             ? parsed.recommended_actions.slice(0, 5).map(String) : [],
+      reporting_links:     safeLinks.slice(0, 5),
+    };
 
     return {
       statusCode: 200,
-      headers: { ...corsHeaders, "Content-Type": "application/json" },
-      body: JSON.stringify(parsed),
+      headers: {
+        ...corsHeaders,
+        "Content-Type": "application/json",
+        "Cache-Control": "no-store",
+      },
+      body: JSON.stringify(result),
     };
   } catch (err) {
     console.error("Function error:", err);

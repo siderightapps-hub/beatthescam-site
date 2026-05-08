@@ -14,15 +14,17 @@
     X-Frame-Options = "DENY"
     # Prevent MIME-type sniffing
     X-Content-Type-Options = "nosniff"
-    # Enforce HTTPS for 1 year, include subdomains
-    Strict-Transport-Security = "max-age=31536000; includeSubDomains; preload"
+    # Enforce HTTPS for 2 years (63072000s) — required for HSTS preload list submission
+    # Once confirmed stable, submit at https://hstspreload.org
+    Strict-Transport-Security = "max-age=63072000; includeSubDomains; preload"
     # Control referrer data sent to third parties
     Referrer-Policy = "strict-origin-when-cross-origin"
     # Restrict browser feature access
     Permissions-Policy = "camera=(), microphone=(), geolocation=(), payment=(), usb=(), interest-cohort=()"
-    # Remove server fingerprinting header
-    X-Powered-By = ""
-    Server = ""
+    # Prevent cross-origin pop-up attacks (tab-napping)
+    Cross-Origin-Opener-Policy = "same-origin-allow-popups"
+    # Legacy XSS filter for older browsers (harmless on modern browsers)
+    X-XSS-Protection = "1; mode=block"
     # Content Security Policy
     # unsafe-inline needed for inline scripts (GA4, checker page, AdSense)
     # unsafe-eval NOT present

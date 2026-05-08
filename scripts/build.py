@@ -1044,8 +1044,18 @@ def deduplicate_posts(posts: list) -> list:
 # - Double-wrapping existing <a>
 # - Linking inside headings (already strong signals)
 # - Mangling code/pre blocks
+# - CRITICAL: injecting <a> tags into <title>, <meta>, or <script> inside <head>
+#   (previously caused raw HTML to appear in the <title> element when a guide's
+#   title contained a phrase matching another guide's keyword)
 _INTERNAL_LINK_EXCLUDED_RE = re.compile(
-    r'<a\s[^>]*>.*?</a>|<h[1-6][^>]*>.*?</h[1-6]>|<code[^>]*>.*?</code>|<pre[^>]*>.*?</pre>',
+    r'<head\b[^>]*>.*?</head>'           # entire <head> block — protects <title>, <meta>, <link>
+    r'|<script\b[^>]*>.*?</script>'      # inline/external scripts anywhere in the document
+    r'|<style\b[^>]*>.*?</style>'        # inline styles
+    r'|<noscript\b[^>]*>.*?</noscript>'  # noscript blocks
+    r'|<a\s[^>]*>.*?</a>'               # existing anchor tags (prevent double-wrapping)
+    r'|<h[1-6][^>]*>.*?</h[1-6]>'       # headings
+    r'|<code[^>]*>.*?</code>'            # inline code
+    r'|<pre[^>]*>.*?</pre>',             # code blocks
     re.IGNORECASE | re.DOTALL,
 )
 
@@ -1229,13 +1239,16 @@ def build():
     rss = f'<?xml version="1.0" encoding="UTF-8" ?>\n<rss version="2.0"><channel><title>{html.escape(site["site_name"])}</title><link>{site["domain"]}</link><description>{html.escape(site["tagline"])}</description>{"".join(rss_items)}</channel></rss>'
     write(DIST / 'rss.xml', rss)
 
-    # Sitemap
-    urls = ['/', '/guides/', '/categories/', '/check/', '/about/', '/privacy/', '/cookies/', '/terms/', '/contact/']
-    urls += [f'/guides/{p["slug"]}/' for p in posts]
-    urls += [f'/categories/{slugify(cat)}/' for cat in categories]
+    # Sitemap — includes lastmod dates so crawlers can prioritise fresh content
+    today = datetime.utcnow().strftime("%Y-%m-%d")
+    static_urls = ['/', '/guides/', '/categories/', '/check/', '/about/', '/privacy/', '/cookies/', '/terms/', '/contact/']
     sitemap_lines = ['<?xml version="1.0" encoding="UTF-8"?>', '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">']
-    for url in urls:
-        sitemap_lines.append(f'<url><loc>{site["domain"]}{url}</loc></url>')
+    for url in static_urls:
+        sitemap_lines.append(f'<url><loc>{site["domain"]}{url}</loc><lastmod>{today}</lastmod><changefreq>weekly</changefreq></url>')
+    for p in posts:
+        sitemap_lines.append(f'<url><loc>{site["domain"]}/guides/{p["slug"]}/</loc><lastmod>{p["date"]}</lastmod><changefreq>monthly</changefreq></url>')
+    for cat in categories:
+        sitemap_lines.append(f'<url><loc>{site["domain"]}/categories/{slugify(cat)}/</loc><lastmod>{today}</lastmod><changefreq>weekly</changefreq></url>')
     sitemap_lines.append('</urlset>')
     write(DIST / 'sitemap.xml', '\n'.join(sitemap_lines))
 
