@@ -231,7 +231,12 @@ def localize_content_paths(content: str, site: dict) -> str:
             .replace("src='/", f"src='{prefix}/"))
 
 def json_ld(data) -> str:
-    return '<script type="application/ld+json">' + json.dumps(data, ensure_ascii=False, separators=(",", ":")) + "</script>"
+    # json.dumps handles all special chars correctly, but if any string value
+    # contains "</script>" it would prematurely close the <script> block and
+    # break the JSON. Replace with the safe unicode escape <\/script>.
+    serialised = json.dumps(data, ensure_ascii=False, separators=(",", ":"))
+    serialised = serialised.replace("</script>", r"<\/script>").replace("<!--", r"<\!--")
+    return '<script type="application/ld+json">' + serialised + "</script>"
 
 def make_base(content: str, *, title: str, description: str, canonical: str, schema: str, site: dict,
               og_type: str = "website", robots: str = "index,follow", og_title: str = None):
@@ -302,12 +307,24 @@ def page_schema(site, title, description, url):
     })
 
 def faq_schema(pairs):
+    if not pairs:
+        return ""
+    # Skip any malformed entries — must be 2-element sequences with non-empty strings
+    valid = [
+        (str(q).strip(), str(a).strip())
+        for item in pairs
+        if isinstance(item, (list, tuple)) and len(item) == 2
+        for q, a in [item]
+        if str(q).strip() and str(a).strip()
+    ]
+    if not valid:
+        return ""
     return json_ld({
         "@context": "https://schema.org",
         "@type": "FAQPage",
         "mainEntity": [
             {"@type": "Question", "name": q, "acceptedAnswer": {"@type": "Answer", "text": a}}
-            for q, a in pairs
+            for q, a in valid
         ]
     })
 
