@@ -677,7 +677,7 @@ def render_post(site, post, all_posts, affiliates=None):
     content = f'''
     <section class="hero">
       <div class="wrap">
-        <div class="breadcrumbs"><a href="/">Home</a> / <a href="/guides/">Guides</a> / <a href="/categories/{post["category"]}/">{html.escape(label)}</a> / {html.escape(post["title"])}</div>
+        <div class="breadcrumbs"><a href="/">Home</a> / <a href="/guides/">Guides</a> / <a href="/categories/{post["category"]}/">{html.escape(label)}</a> / <span class="bc-title">{html.escape(post["title"])}</span></div>
       </div>
     </section>
     <section class="wrap article-layout">
@@ -1097,6 +1097,7 @@ _INTERNAL_LINK_EXCLUDED_RE = re.compile(
     r'|<style\b[^>]*>.*?</style>'        # inline styles
     r'|<noscript\b[^>]*>.*?</noscript>'  # noscript blocks
     r'|<a\s[^>]*>.*?</a>'               # existing anchor tags (prevent double-wrapping)
+    r'|<span[^>]*class="bc-title"[^>]*>.*?</span>'  # breadcrumb title text
     r'|<h[1-6][^>]*>.*?</h[1-6]>'       # headings
     r'|<code[^>]*>.*?</code>'            # inline code
     r'|<pre[^>]*>.*?</pre>',             # code blocks
