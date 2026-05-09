@@ -149,6 +149,33 @@ def slugify(value: str) -> str:
     return re.sub(r"[^a-z0-9]+", "-", value.lower().strip()).strip("-")
 
 
+# ─── SEO HELPERS ─────────────────────────────────────────────────────────────
+
+# Populated in build() before any page is rendered so make_base() can inject
+# the full category list into the footer without changing function signatures.
+_FOOTER_CATS_HTML = ""
+
+def seo_title(post_title: str, site_name: str, max_len: int = 60) -> str:
+    """Return a <title>-safe string truncated to max_len chars.
+
+    Appends ' | SiteName' suffix, then truncates the post_title portion at
+    the nearest word boundary so the full string fits within max_len.
+    """
+    suffix = f" | {site_name}"
+    available = max_len - len(suffix)
+    if len(post_title) <= available:
+        return post_title + suffix
+    truncated = post_title[:available].rsplit(" ", 1)[0].rstrip(" :,-–")
+    return truncated + suffix
+
+def seo_description(desc: str, max_len: int = 155) -> str:
+    """Truncate a meta description to max_len chars at a word boundary."""
+    if len(desc) <= max_len:
+        return desc
+    truncated = desc[:max_len].rsplit(" ", 1)[0].rstrip(" .,;:")
+    return truncated + "."
+
+
 def _normalize_bullet_body(para) -> str:
     """
     Coerce a section body into clean text. Handles three shapes:
@@ -224,6 +251,7 @@ def make_base(content: str, *, title: str, description: str, canonical: str, sch
         "{{adsense_client}}": site["adsense_client"],
         "{{ga4_id}}":         site["ga4_id"],
         "{{year}}":           str(datetime.utcnow().year),
+        "{{footer_cats}}":    _FOOTER_CATS_HTML,
     }
     page = BASE
     for key, value in replacements.items():
@@ -528,7 +556,7 @@ def render_guides_index(site, posts):
     </script>
     '''
     schema = page_schema(site, 'Guides', 'Browse all scam guides published on Beat the Scam.', site['domain'] + '/guides/')
-    return make_base(content, title=f'Guides | {site["site_name"]}', description='Browse all scam guides.', canonical=site['domain'] + '/guides/', schema=schema, site=site)
+    return make_base(content, title=f'Scam Guides | {site["site_name"]}', description='Browse all published UK scam guides by type — from phishing emails and fake texts to crypto fraud, job scams, and marketplace abuse. Free advice, no account needed.', canonical=site['domain'] + '/guides/', schema=schema, site=site)
 
 
 def render_categories_index(site, categories):
@@ -563,9 +591,25 @@ def render_categories_index(site, categories):
     )
 
 
-def render_category_page(site, category, posts):
+def render_category_page(site, category, posts, all_categories=None):
     label = category_label(category)
     desc  = category_description(category)
+    slug  = slugify(category)
+
+    # Related categories — up to 6 sibling categories, sorted by post count
+    related_cats_html = ""
+    if all_categories:
+        siblings = [
+            (cat, items) for cat, items in sorted(all_categories.items(), key=lambda x: len(x[1]), reverse=True)
+            if cat != category
+        ][:6]
+        if siblings:
+            links = "".join(
+                f'<li><a href="/categories/{slugify(c)}/">{html.escape(category_label(c))}</a> <span class="meta">({len(items)} guides)</span></li>'
+                for c, items in siblings
+            )
+            related_cats_html = f'<section class="section"><div class="wrap"><h2>Browse other scam categories</h2><ul class="list-clean">{links}</ul></div></section>'
+
     content = f'''
     <section class="hero">
       <div class="wrap">
@@ -575,12 +619,12 @@ def render_category_page(site, category, posts):
       </div>
     </section>
     <section class="section"><div class="wrap"><div class="grid-3">{"".join(render_card(p) for p in posts)}</div></div></section>
+    {related_cats_html}
     '''
-    slug = slugify(category)
     return make_base(
         content,
-        title=f'{label} | {site["site_name"]}',
-        description=desc,
+        title=seo_title(label, site["site_name"]),
+        description=seo_description(desc),
         canonical=site['domain'] + f'/categories/{slug}/',
         schema=page_schema(site, label, desc, site['domain'] + f'/categories/{slug}/'),
         site=site
@@ -633,7 +677,7 @@ def render_post(site, post, all_posts, affiliates=None):
     content = f'''
     <section class="hero">
       <div class="wrap">
-        <div class="breadcrumbs"><a href="/">Home</a> / <a href="/guides/">Guides</a> / {html.escape(post["title"])}</div>
+        <div class="breadcrumbs"><a href="/">Home</a> / <a href="/guides/">Guides</a> / <a href="/categories/{post["category"]}/">{html.escape(label)}</a> / {html.escape(post["title"])}</div>
       </div>
     </section>
     <section class="wrap article-layout">
@@ -688,9 +732,9 @@ def render_post(site, post, all_posts, affiliates=None):
     schema = article_schema(site, post, url) + faq_schema(post['faq'])
     return make_base(
         content,
-        title=f'{post["title"]} | {site["site_name"]}',
+        title=seo_title(post["title"], site["site_name"]),
         og_title=post['title'],
-        description=post['description'],
+        description=seo_description(post['description']),
         canonical=url,
         schema=schema,
         site=site,
@@ -1168,6 +1212,13 @@ def build():
     DIST.mkdir(parents=True)
     shutil.copytree(ROOT / 'assets', DIST / 'assets')
 
+    # Populate footer category links (used by make_base via {{footer_cats}})
+    global _FOOTER_CATS_HTML
+    _FOOTER_CATS_HTML = "\n".join(
+        f'<li><a href="/categories/{slugify(cat)}/">{html.escape(category_label(cat))}</a></li>'
+        for cat in sorted(categories.keys(), key=lambda c: len(categories[c]), reverse=True)
+    )
+
     # Copy root-level static files (favicons, webmanifest) → dist/ root
     # so they're served from /favicon.svg, /favicon.ico, /site.webmanifest etc.
     static_dir = ROOT / 'static'
@@ -1180,7 +1231,7 @@ def build():
     write(DIST / 'guides/index.html', render_guides_index(site, posts))
     write(DIST / 'categories/index.html', render_categories_index(site, categories))
     for cat, items in categories.items():
-        write(DIST / 'categories' / slugify(cat) / 'index.html', render_category_page(site, cat, items))
+        write(DIST / 'categories' / slugify(cat) / 'index.html', render_category_page(site, cat, items, categories))
 
     # Build phrase → URL map once for the whole site, then auto-link
     # contextual mentions inside each rendered guide before writing.
@@ -1265,6 +1316,11 @@ def build():
         f'Sitemap: {site["domain"]}/sitemap.xml\n'
     )
     write(DIST / 'robots.txt', robots_content)
+
+    # IndexNow key — tells Bing/Yandex about new/updated pages instantly.
+    # Key must match the filename. Generate once and keep stable.
+    indexnow_key = "b3c8e1f2a94d7056"
+    write(DIST / f'{indexnow_key}.txt', indexnow_key)
 
     # _redirects (Netlify)
     # Category slug 301s — auto-derived from CATEGORY_CANON.
