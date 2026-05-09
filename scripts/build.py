@@ -54,23 +54,23 @@ CATEGORY_LABELS = {
 }
 
 CATEGORY_DESCRIPTIONS = {
-    "marketplace": "Guides covering Facebook Marketplace, Gumtree, Vinted, eBay, and other UK buying and selling platforms.",
-    "sms":         "Guides covering fake delivery texts, bank impersonation SMS, HMRC alerts, and other smishing attacks targeting UK phones.",
-    "payment":     "Guides covering bank transfer fraud, advance fees, fake invoices, and payment-related scams targeting UK consumers.",
-    "crypto":      "Guides covering fake investment platforms, withdrawal fee traps, romance fraud, and cryptocurrency scam tactics.",
-    "tech":        "Guides covering fake tech support calls, remote access scams, and malicious software targeting UK users.",
-    "website":     "Guides covering fake online shops, lookalike domains, and how to verify an unfamiliar website before buying.",
-    "government":  "Guides covering HMRC, DVLA, TV Licensing, and other government impersonation scams targeting UK residents.",
-    "employment":  "Guides covering fake job ads, work-from-home schemes, and advance-fee employment fraud.",
-    "social":      "Guides covering scams on Facebook, Instagram, WhatsApp, and other social media platforms.",
-    "dating":      "Guides covering romance scams, fake profiles, and relationship fraud on dating apps and social platforms.",
-    "email":       "Guides covering phishing emails, business email compromise, fake invoices, and email impersonation tactics.",
-    "phone":       "Guides covering vishing calls, fake bank calls, HMRC phone scams, and other voice-based fraud.",
-    "travel":      "Guides covering fake holiday listings, advance-fee travel fraud, and ticket scams.",
-    "shopping":    "Guides covering fake online retailers, counterfeit goods, pet scams, and marketplace shopping fraud.",
-    "finance":     "Guides covering fake investment opportunities, pension fraud, and financial impersonation scams.",
-    "fraud":       "Guides covering recovery scams, impersonation fraud, and other scam patterns targeting UK consumers.",
-    "utility":     "Guides covering fake energy supplier calls, smart meter scams, and utility impersonation tactics.",
+    "marketplace": "Guides covering Facebook Marketplace, Gumtree, Vinted, and eBay scams targeting UK buyers and sellers. Spot fake payment fraud, advance fees, and collection scams.",
+    "sms":         "Guides covering fake delivery texts, bank impersonation SMS, HMRC alerts, and smishing attacks. Learn to identify and report suspicious texts targeting UK phones.",
+    "payment":     "Guides covering bank transfer fraud, advance fee scams, fake invoices, and APP fraud in the UK. Learn how to verify payment requests and protect your money.",
+    "crypto":      "Guides covering fake crypto investment platforms, withdrawal fee traps, and romance fraud. Learn to identify cryptocurrency scams before sending money.",
+    "tech":        "Guides covering fake tech support calls, remote access scams, and malicious software targeting UK users. Learn to spot and shut down tech support fraud.",
+    "website":     "Guides covering fake online shops, lookalike domains, and website verification. Learn how to check if a website is legitimate before buying or sharing details.",
+    "government":  "Guides covering HMRC, DVLA, TV Licensing, and government impersonation scams. Learn to verify official communications and avoid paying fake fines or fees.",
+    "employment":  "Guides covering fake job ads, work-from-home schemes, and advance-fee employment fraud targeting UK jobseekers. Learn to spot recruitment scams before applying.",
+    "social":      "Guides covering scams on Facebook, Instagram, WhatsApp, and other platforms. Learn to spot fake profiles, impersonation fraud, and social media scam tactics.",
+    "dating":      "Guides covering romance scams, fake profiles, and relationship fraud on dating apps. Learn to identify and avoid romance fraud before money or data is lost.",
+    "email":       "Guides covering phishing emails, business email compromise, fake invoices, and email impersonation. Learn to identify and report suspicious emails in the UK.",
+    "phone":       "Guides covering vishing calls, fake bank calls, HMRC phone scams, and voice fraud targeting UK residents. Learn to verify callers and avoid phone-based scams.",
+    "travel":      "Guides covering fake holiday listings, advance-fee travel fraud, and ticket scams targeting UK travellers. Learn to verify travel offers before paying a deposit.",
+    "shopping":    "Guides covering fake online retailers, counterfeit goods, pet scams, and marketplace fraud. Learn to shop safely and spot fraudulent sellers in the UK.",
+    "finance":     "Guides covering fake investment opportunities, pension fraud, clone firm scams, and financial impersonation targeting UK consumers. Learn to protect your savings.",
+    "fraud":       "Guides covering recovery scams, impersonation fraud, and advance-fee tactics targeting UK consumers. Learn to recognise fraud patterns and report them correctly.",
+    "utility":     "Guides covering fake energy supplier calls, smart meter scams, and utility impersonation. Learn to verify energy contacts and avoid utility fraud in the UK.",
 }
 
 
@@ -1246,11 +1246,11 @@ def build():
     write(DIST / 'check/index.html', render_check_page(site))
 
     about, privacy, cookies, terms, contact = build_legal_bodies(site)
-    write(DIST / 'about/index.html',   render_simple_page(site, 'About',          'Why the site exists, how it is written, and what it is designed to do.',        about,   'about'))
-    write(DIST / 'privacy/index.html', render_simple_page(site, 'Privacy Policy', 'How the site uses analytics, advertising, and limited technical data.',          privacy, 'privacy'))
-    write(DIST / 'cookies/index.html', render_simple_page(site, 'Cookie Policy',  'How cookies and local browser storage are used on the site.',                   cookies, 'cookies'))
-    write(DIST / 'terms/index.html',   render_simple_page(site, 'Terms',          'Terms for using this educational content site.',                                 terms,   'terms'))
-    write(DIST / 'contact/index.html', render_simple_page(site, 'Contact',        'How to reach the site for corrections, privacy questions, or partnerships.',     contact, 'contact'))
+    write(DIST / 'about/index.html',   render_simple_page(site, 'About',          'Beat the Scam is a free UK consumer protection site. Learn how guides are researched, who writes them, and how the AI scam checker works.',        about,   'about'))
+    write(DIST / 'privacy/index.html', render_simple_page(site, 'Privacy Policy', 'How Beat the Scam uses Google Analytics, Google AdSense, and the Anthropic Claude API. Understand your data choices and cookie consent options.',          privacy, 'privacy'))
+    write(DIST / 'cookies/index.html', render_simple_page(site, 'Cookie Policy',  'How Beat the Scam uses cookies for analytics, advertising, and consent preferences. Learn what is stored and how to manage your cookie settings.',                   cookies, 'cookies'))
+    write(DIST / 'terms/index.html',   render_simple_page(site, 'Terms',          'Terms of use for Beat the Scam. Educational scam guidance only — not legal or financial advice. Read before relying on any content for important decisions.',                                 terms,   'terms'))
+    write(DIST / 'contact/index.html', render_simple_page(site, 'Contact',        'Contact Beat the Scam for editorial corrections, privacy questions, or partnership enquiries. We aim to respond to all editorial requests promptly.',     contact, 'contact'))
 
     not_found_html = make_base(
         '<section class="hero"><div class="wrap"><h1>Page not found</h1><p class="lead">The page may have moved or the address may be incorrect.</p><div class="hero-actions"><a class="btn btn-primary" href="/">Home</a><a class="btn btn-secondary" href="/guides/">Guides</a></div></div></section>',
