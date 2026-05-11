@@ -43,7 +43,11 @@
       ],
       [
         "Remote access tools used in these scams",
-        "These are all legitimate software products used every day by genuine IT professionals. Criminals exploit them precisely because they are trusted and widely available. The tools most frequently reported in UK ISP impersonation scams are:\n- TeamViewer — the most commonly reported tool in UK remote access scams, according to Which? magazine\n- AnyDesk — used in large-scale campaigns; over 1,300 fake AnyDesk websites have been identified, some bundling Vidar infostealer malware, with infrastructure traced to Russia\n- UltraViewer — frequently used as an alternative when victims are familiar with the better-known tools\n- LogMeIn — reported in multiple UK cases documented by Which?\n- GoToAssist — used in customer support impersonation scams\nIn 2017, TalkTalk banned TeamViewer and similar software from its network entirely after sustained scam campaigns targeting its customers."
+        "These are legitimate software products used every day by genuine IT professionals. Criminals exploit them precisely because they are trusted and widely available. In 2017, TalkTalk banned TeamViewer and similar software from its network entirely after sustained scam campaigns targeting its customers."
+      ],
+      [
+        "Most commonly reported tools",
+        "- TeamViewer — the most commonly reported tool in UK remote access scams, according to Which? magazine\n- AnyDesk — used in large-scale campaigns; over 1,300 fake AnyDesk websites have been identified, some bundling Vidar infostealer malware, with infrastructure traced to Russia\n- UltraViewer — frequently used as an alternative when victims are familiar with the better-known tools\n- LogMeIn — reported in multiple UK cases documented by Which?\n- GoToAssist — used in customer support impersonation scams"
       ],
       [
         "Documented victim case",
