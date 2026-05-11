@@ -247,7 +247,7 @@ def make_base(content: str, *, title: str, description: str, canonical: str, sch
         "{{robots}}":         robots,
         "{{og_type}}":        og_type,
         "{{og_title}}":       html.escape(og_title or title),
-        "{{og_image}}":       abs_url(site, "/assets/og-image.png"),
+        "{{og_image}}":       abs_url(site, "/assets/og-image-v2.png"),
         "{{site_name}}":      html.escape(site["site_name"]),
         "{{tagline}}":        html.escape(site["tagline"]),
         "{{content}}":        localize_content_paths(content, site),
@@ -343,7 +343,7 @@ def article_schema(site, post, url):
             "logo": {"@type": "ImageObject", "url": abs_url(site, "/assets/logo-mark.svg")}
         },
         "mainEntityOfPage": url,
-        "image": [abs_url(site, "/assets/og-image.png")],
+        "image": [abs_url(site, "/assets/og-image-v2.png")],
         "articleSection": post["category"],
         "keywords": ", ".join(post["keywords"])
     })

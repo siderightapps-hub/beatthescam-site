@@ -1,9 +1,0 @@
-User-agent: *
-Allow: /
-Disallow: /search/
-Disallow: /*.php$
-Disallow: /*?l=
-Disallow: /api/
-Disallow: /.netlify/
-
-Sitemap: https://beatthescam.com/sitemap.xml
