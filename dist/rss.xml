@@ -1,6 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <rss version="2.0"><channel><title>Beat the Scam</title><link>https://beatthescam.com</link><description>Scam alerts, plain-English checks, and practical guides to help people verify suspicious emails, texts, websites, calls, and offers.</description>
         <item>
+          <title>ISP Impersonation Scams UK: BT, Sky, Virgin Media and Openreach Fraud Calls</title>
+          <link>https://beatthescam.com/guides/isp-impersonation-scam-bt-sky-virgin-media/</link>
+          <guid>https://beatthescam.com/guides/isp-impersonation-scam-bt-sky-virgin-media/</guid>
+          <pubDate>Mon, 11 May 2026 00:00:00 +0000</pubDate>
+          <description>Scammers are cold-calling UK households pretending to be from BT, Sky, Virgin Media, and Openreach — claiming line faults, broadband issues, or the PSTN switchover — then asking for remote access to your computer. Full investigation: how it works, what to do, and how to report it.</description>
+        </item>
+        <item>
           <title>Fake Nike Website UK Scams: How to Spot and Avoid Them</title>
           <link>https://beatthescam.com/guides/fake-nike-website-uk/</link>
           <guid>https://beatthescam.com/guides/fake-nike-website-uk/</guid>
@@ -202,11 +209,4 @@
           <guid>https://beatthescam.com/guides/fake-crypto-exchange-uk/</guid>
           <pubDate>Tue, 05 May 2026 00:00:00 +0000</pubDate>
           <description>Fake crypto exchanges are designed to look identical to legitimate platforms like Coinbase or Kraken, but they steal your login details and funds. This guide shows you the specific warning signs and verification steps UK residents need to know.</description>
-        </item>
-        <item>
-          <title>Crypto Recovery Scam UK: How Fraudsters Pose as Recovery Experts</title>
-          <link>https://beatthescam.com/guides/crypto-recovery-scam-uk/</link>
-          <guid>https://beatthescam.com/guides/crypto-recovery-scam-uk/</guid>
-          <pubDate>Tue, 05 May 2026 00:00:00 +0000</pubDate>
-          <description>Crypto recovery scams target people who have already lost money in investment fraud or hacking. Scammers impersonate recovery companies and charge upfront fees while stealing more funds or personal data.</description>
         </item></channel></rss>
