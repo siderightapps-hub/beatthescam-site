@@ -77,7 +77,7 @@ def build_tweet(post: dict) -> str:
     description = post.get("description", post.get("hero", ""))
     slug        = post["slug"]
     category    = post.get("category", "fraud").lower()
-    url         = f"{SITE_DOMAIN}/guides/{slug}/?utm_source=twitter&utm_medium=social&utm_campaign=article"
+    url         = f"{SITE_DOMAIN}/guides/{slug}/?utm_source=twitter&utm_medium=social&utm_campaign=article&utm_content=v2"
     cat_tag     = CATEGORY_TAGS.get(category, "#ScamAlert")
     base_tags   = f"#ScamAlert #UKScam {cat_tag}"
 
