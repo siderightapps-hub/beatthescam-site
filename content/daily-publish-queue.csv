@@ -84,7 +84,7 @@ court summons scam email UK,HMCTS,government,true,2026-05-06T12:21:08Z,court-sum
 passport renewal scam UK,HMPO,government,true,2026-05-06T12:21:08Z,passport-renewal-scam-uk
 UKVI visa scam UK,Home Office,government,true,2026-05-07T12:24:22Z,ukvi-visa-scam-uk
 indeed job scam UK,Indeed,employment,true,2026-05-07T12:24:22Z,indeed-job-scam-uk
-remote work scam UK 2026,Unknown,employment,true,2026-05-07T12:24:22Z,remote-work-scam-uk-2026
+remote work scam UK,Unknown,employment,true,2026-05-07T12:24:22Z,remote-work-scam-uk
 mystery shopper scam UK,Unknown,employment,true,2026-05-07T12:24:22Z,mystery-shopper-scam-uk
 data entry job scam UK,Unknown,employment,true,2026-05-07T12:24:22Z,data-entry-job-scam-uk
 recruitment agency scam UK,Unknown,employment,true,2026-05-08T10:58:09Z,recruitment-agency-scam-uk
@@ -102,20 +102,98 @@ ASOS copycat scam UK,ASOS,website,true,2026-05-10T10:48:49Z,asos-copycat-scam-uk
 fake UGG website UK,UGG,website,true,2026-05-10T10:48:49Z,fake-ugg-website-uk
 DHgate scam UK review,DHgate,website,true,2026-05-10T10:48:49Z,dhgate-scam-uk-review
 Wish scam UK review,Wish,website,true,2026-05-10T10:48:49Z,wish-scam-uk-review
-fake online pharmacy UK,Unknown,website,true,2026-05-11T16:21:01Z,fake-online-pharmacy-uk
-IVA scam UK,Unknown,finance,true,2026-05-11T16:21:01Z,iva-scam-uk
-debt management scam UK,Unknown,finance,true,2026-05-11T16:21:01Z,debt-management-scam-uk
-clone firm investment scam UK,FCA,finance,true,2026-05-11T16:21:01Z,clone-firm-investment-scam-uk
-bond scam UK,Unknown,finance,true,2026-05-11T16:21:01Z,bond-scam-uk
-land banking scam UK,Unknown,finance,true,2026-05-12T09:15:39Z,land-banking-scam-uk
-forex trading scam UK 2026,Unknown,finance,true,2026-05-12T09:15:39Z,forex-trading-scam-uk-2026
-package holiday scam UK,Unknown,travel,true,2026-05-12T09:15:39Z,package-holiday-scam-uk
-fake airline ticket scam UK,Unknown,travel,true,2026-05-12T09:15:39Z,fake-airline-ticket-scam-uk
-visa application scam UK,Unknown,travel,true,2026-05-12T09:15:39Z,visa-application-scam-uk
-holiday let scam UK,Unknown,travel,true,2026-05-13T09:22:47Z,holiday-let-scam-uk
-concert ticket scam UK 2026,Unknown,shopping,true,2026-05-13T09:22:47Z,concert-ticket-scam-uk-2026
-Glastonbury ticket scam UK,Unknown,shopping,true,2026-05-13T09:22:47Z,glastonbury-ticket-scam-uk
-Viagogo scam UK,Viagogo,shopping,true,2026-05-13T09:22:47Z,viagogo-scam-uk
-British Gas scam call UK,British Gas,utility,true,2026-05-13T09:22:47Z,british-gas-scam-call-uk
-smart meter scam call UK,Unknown,utility,true,2026-05-14T09:11:05Z,smart-meter-scam-call-uk
-solar panel scam UK,Unknown,utility,true,2026-05-14T09:11:05Z,solar-panel-scam-uk
+fake online pharmacy UK,Unknown,website,,,fake-online-pharmacy-uk
+IVA scam UK,Unknown,finance,,,iva-scam-uk
+debt management scam UK,Unknown,finance,,,debt-management-scam-uk
+clone firm investment scam UK,FCA,finance,,,clone-firm-investment-scam-uk
+bond scam UK,Unknown,finance,,,bond-scam-uk
+land banking scam UK,Unknown,finance,,,land-banking-scam-uk
+forex trading scam UK,Unknown,finance,,,forex-trading-scam-uk
+package holiday scam UK,Unknown,travel,,,package-holiday-scam-uk
+fake airline ticket scam UK,Unknown,travel,,,fake-airline-ticket-scam-uk
+visa application scam UK,Unknown,travel,,,visa-application-scam-uk
+holiday let scam UK,Unknown,travel,,,holiday-let-scam-uk
+concert ticket scam UK,Unknown,shopping,,,concert-ticket-scam-uk
+Glastonbury ticket scam UK,Unknown,shopping,,,glastonbury-ticket-scam-uk
+Viagogo scam UK,Viagogo,shopping,,,viagogo-scam-uk
+British Gas scam call UK,British Gas,utility,,,british-gas-scam-call-uk
+smart meter scam call UK,Unknown,utility,,,smart-meter-scam-call-uk
+solar panel scam UK,Unknown,utility,,,solar-panel-scam-uk
+Revolut scam UK,Revolut,payment,,,revolut-scam-uk
+Starling bank scam UK,Starling,payment,,,starling-bank-scam-uk
+Wise transfer scam UK,Wise,payment,,,wise-transfer-scam-uk
+TSB bank scam text,TSB,sms,,,tsb-bank-scam-text
+Nationwide scam text UK,Nationwide,sms,,,nationwide-scam-text-uk
+HSBC bank scam call UK,HSBC,phone,,,hsbc-bank-scam-call-uk
+Santander phone scam UK,Santander,phone,,,santander-phone-scam-uk
+AI voice cloning scam UK,Unknown,tech,,,ai-voice-cloning-scam-uk
+deepfake video scam UK,Unknown,tech,,,deepfake-video-scam-uk
+QR code scam UK,Unknown,tech,,,qr-code-scam-uk
+SIM swap fraud UK,Unknown,tech,,,sim-swap-fraud-uk
+number spoofing scam UK,Unknown,phone,,,number-spoofing-scam-uk
+fake Wi-Fi hotspot scam UK,Unknown,tech,,,fake-wi-fi-hotspot-scam-uk
+Shein fake website UK,Shein,website,,,shein-fake-website-uk
+fake Ray-Ban website UK,Ray-Ban,website,,,fake-ray-ban-website-uk
+fake Pandora website UK,Pandora,website,,,fake-pandora-website-uk
+StubHub ticket scam UK,StubHub,shopping,,,stubhub-ticket-scam-uk
+fake festival ticket scam UK,Unknown,shopping,,,fake-festival-ticket-scam-uk
+Amazon Prime scam UK,Amazon,shopping,,,amazon-prime-scam-uk
+eBay listing fee scam UK,eBay,marketplace,,,ebay-listing-fee-scam-uk
+Shpock scam UK,Shpock,marketplace,,,shpock-scam-uk
+Sky broadband scam call UK,Sky,phone,,,sky-broadband-scam-call-uk
+Virgin Media scam call UK,Virgin Media,phone,,,virgin-media-scam-call-uk
+O2 scam text UK,O2,sms,,,o2-scam-text-uk
+Vodafone scam text UK,Vodafone,sms,,,vodafone-scam-text-uk
+EE scam text UK,EE,sms,,,ee-scam-text-uk
+TalkTalk scam call UK,TalkTalk,phone,,,talktalk-scam-call-uk
+money mule scam UK,Unknown,finance,,,money-mule-scam-uk
+pension cold call scam UK,Unknown,finance,,,pension-cold-call-scam-uk
+fake trading platform UK,Unknown,finance,,,fake-trading-platform-uk
+recovery room scam UK,Unknown,finance,,,recovery-room-scam-uk
+share fraud UK,Unknown,finance,,,share-fraud-uk
+Ponzi scheme UK warning,Unknown,finance,,,ponzi-scheme-uk-warning
+identity theft UK,Unknown,fraud,,,identity-theft-uk
+deed fraud UK property,Unknown,fraud,,,deed-fraud-uk-property
+conveyancing fraud UK,Unknown,fraud,,,conveyancing-fraud-uk
+mandate fraud UK businesses,Unknown,fraud,,,mandate-fraud-uk-businesses
+CEO fraud email UK,Unknown,email,,,ceo-fraud-email-uk
+sextortion email UK,Unknown,email,,,sextortion-email-uk
+email account takeover UK,Unknown,email,,,email-account-takeover-uk
+Student Finance scam UK,Student Finance,government,,,student-finance-scam-uk
+council housing scam UK,Unknown,government,,,council-housing-scam-uk
+benefits fraud text scam UK,DWP,government,,,benefits-fraud-text-scam-uk
+HMRC self assessment scam UK,HMRC,government,,,hmrc-self-assessment-scam-uk
+Companies House scam letter UK,Companies House,government,,,companies-house-scam-letter-uk
+Booking.com scam UK,Booking.com,travel,,,booking-com-scam-uk
+fake travel agent scam UK,Unknown,travel,,,fake-travel-agent-scam-uk
+timeshare scam UK,Unknown,travel,,,timeshare-scam-uk
+holiday club scam UK,Unknown,travel,,,holiday-club-scam-uk
+cruise scam UK,Unknown,travel,,,cruise-scam-uk
+Hinge romance scam UK,Hinge,dating,,,hinge-romance-scam-uk
+Facebook dating scam UK,Facebook,dating,,,facebook-dating-scam-uk
+WhatsApp stranger scam UK,WhatsApp,social,,,whatsapp-stranger-scam-uk
+Instagram fake giveaway UK,Instagram,social,,,instagram-fake-giveaway-uk
+YouTube crypto scam UK,YouTube,social,,,youtube-crypto-scam-uk
+Snapchat scam UK,Snapchat,social,,,snapchat-scam-uk
+LinkedIn job scam guide UK,LinkedIn,employment,,,linkedin-job-scam-guide-uk
+fake DBS check scam UK,Unknown,employment,,,fake-dbs-check-scam-uk
+unpaid trial work scam UK,Unknown,employment,,,unpaid-trial-work-scam-uk
+fake nanny job scam UK,Unknown,employment,,,fake-nanny-job-scam-uk
+cash in hand job scam UK,Unknown,employment,,,cash-in-hand-job-scam-uk
+boiler scam UK doorstep,Unknown,utility,,,boiler-scam-uk-doorstep
+fake water company scam UK,Unknown,utility,,,fake-water-company-scam-uk
+rogue trader scam UK,Unknown,utility,,,rogue-trader-scam-uk
+driveway scam UK,Unknown,utility,,,driveway-scam-uk
+energy switching scam UK,Unknown,utility,,,energy-switching-scam-uk
+fake charity scam UK,Unknown,fraud,,,fake-charity-scam-uk
+NHS scam email UK,NHS,email,,,nhs-scam-email-uk
+medical device scam UK,Unknown,fraud,,,medical-device-scam-uk
+Coinbase impersonation scam UK,Coinbase,crypto,,,coinbase-impersonation-scam-uk
+fake Elon Musk crypto scam UK,Unknown,crypto,,,fake-elon-musk-crypto-scam-uk
+crypto airdrop scam UK,Unknown,crypto,,,crypto-airdrop-scam-uk
+MetaMask phishing scam UK,MetaMask,crypto,,,metamask-phishing-scam-uk
+Black Friday scam UK,Unknown,shopping,,,black-friday-scam-uk
+Christmas gift card scam UK,Unknown,shopping,,,christmas-gift-card-scam-uk
+tax return deadline scam UK,HMRC,government,,,tax-return-deadline-scam-uk
+UCAS scam UK students,UCAS,government,,,ucas-scam-uk-students
+student loan phishing UK,Student Finance,email,,,student-loan-phishing-uk
