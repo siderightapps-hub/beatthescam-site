@@ -107,11 +107,11 @@ IVA scam UK,Unknown,finance,true,2026-05-15T09:25:20Z,iva-scam-uk
 debt management scam UK,Unknown,finance,true,2026-05-15T09:25:20Z,debt-management-scam-uk
 clone firm investment scam UK,FCA,finance,true,2026-05-15T09:25:20Z,clone-firm-investment-scam-uk
 bond scam UK,Unknown,finance,true,2026-05-15T09:25:20Z,bond-scam-uk
-land banking scam UK,Unknown,finance,,,land-banking-scam-uk
-forex trading scam UK,Unknown,finance,,,forex-trading-scam-uk
-package holiday scam UK,Unknown,travel,,,package-holiday-scam-uk
-fake airline ticket scam UK,Unknown,travel,,,fake-airline-ticket-scam-uk
-visa application scam UK,Unknown,travel,,,visa-application-scam-uk
+land banking scam UK,Unknown,finance,true,2026-05-16T08:20:43Z,land-banking-scam-uk
+forex trading scam UK,Unknown,finance,true,2026-05-16T08:20:43Z,forex-trading-scam-uk
+package holiday scam UK,Unknown,travel,true,2026-05-16T08:20:43Z,package-holiday-scam-uk
+fake airline ticket scam UK,Unknown,travel,true,2026-05-16T08:20:43Z,fake-airline-ticket-scam-uk
+visa application scam UK,Unknown,travel,true,2026-05-16T08:20:43Z,visa-application-scam-uk
 holiday let scam UK,Unknown,travel,,,holiday-let-scam-uk
 concert ticket scam UK,Unknown,shopping,,,concert-ticket-scam-uk
 Glastonbury ticket scam UK,Unknown,shopping,,,glastonbury-ticket-scam-uk
