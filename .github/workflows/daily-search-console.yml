@@ -1,0 +1,187 @@
+name: Daily Search Console Articles
+
+on:
+  workflow_dispatch:
+    inputs:
+      dry_run:
+        description: "Dry run only — show gaps without generating (true/false)"
+        required: false
+        default: "false"
+      days:
+        description: "Days of Search Console data to analyse"
+        required: false
+        default: "28"
+  schedule:
+    # 06:30 UTC = 07:30 UK BST — runs after daily-publish (06:15 UTC)
+    - cron: '30 6 * * *'
+
+permissions:
+  contents: write
+
+jobs:
+  search-console-articles:
+    runs-on: ubuntu-latest
+    env:
+      ANTHROPIC_API_KEY:              ${{ secrets.ANTHROPIC_API_KEY }}
+      GOOGLE_SEARCH_CONSOLE_TOKEN:    ${{ secrets.GOOGLE_SEARCH_CONSOLE_TOKEN }}
+      GOOGLE_OAUTH_CREDENTIALS:       ${{ secrets.GOOGLE_OAUTH_CREDENTIALS }}
+      TWITTER_API_KEY:                ${{ secrets.TWITTER_API_KEY }}
+      TWITTER_API_KEY_SECRET:         ${{ secrets.TWITTER_API_KEY_SECRET }}
+      TWITTER_ACCESS_TOKEN:           ${{ secrets.TWITTER_ACCESS_TOKEN }}
+      TWITTER_ACCESS_TOKEN_SECRET:    ${{ secrets.TWITTER_ACCESS_TOKEN_SECRET }}
+      DRY_RUN:  ${{ github.event.inputs.dry_run || 'false' }}
+      SC_DAYS:  ${{ github.event.inputs.days    || '28'    }}
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Sync with latest main
+        run: |
+          git config user.name  "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git pull --rebase origin main
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install dependencies
+        run: |
+          pip install \
+            anthropic \
+            tweepy \
+            python-dotenv \
+            google-auth-oauthlib \
+            google-auth-httplib2 \
+            google-api-python-client
+
+      - name: Write Google token from secret
+        run: |
+          echo '${{ secrets.GOOGLE_SEARCH_CONSOLE_TOKEN }}' > token.json
+          echo "✅ token.json written"
+
+      - name: Run Search Console article generator
+        id: generate
+        run: |
+          if [ "$DRY_RUN" = "true" ]; then
+            python scripts/search_console_articles.py --dry-run --days "$SC_DAYS"
+          else
+            OUTPUT=$(python scripts/search_console_articles.py --days "$SC_DAYS" --limit 1 2>&1)
+            echo "$OUTPUT"
+            # Extract new slugs from output for tweeting
+            SLUGS=$(echo "$OUTPUT" | grep "^NEW_ARTICLE_SLUGS=" | cut -d= -f2)
+            echo "new_slugs=$SLUGS" >> $GITHUB_OUTPUT
+            echo "Generated slugs: $SLUGS"
+          fi
+
+      - name: Build site
+        if: env.DRY_RUN != 'true'
+        run: python scripts/build.py
+
+      - name: Verify build output
+        if: env.DRY_RUN != 'true'
+        run: |
+          if [ ! -f dist/index.html ]; then
+            echo "ERROR: dist/index.html not found"
+            exit 1
+          fi
+          if [ ! -f dist/robots.txt ]; then
+            echo "ERROR: dist/robots.txt not found"
+            exit 1
+          fi
+          POST_COUNT=$(find dist/guides -mindepth 1 -maxdepth 1 -type d | wc -l)
+          if [ "$POST_COUNT" -lt 50 ]; then
+            echo "ERROR: only $POST_COUNT post directories found"
+            exit 1
+          fi
+          echo "✅ Build verified: $POST_COUNT post directories"
+
+      - name: Check if content changed
+        if: env.DRY_RUN != 'true'
+        id: changed
+        run: |
+          git add content/posts.json dist/
+          if git diff --cached --quiet; then
+            echo "changed=false" >> $GITHUB_OUTPUT
+            echo "ℹ️  No new articles generated this run"
+          else
+            echo "changed=true" >> $GITHUB_OUTPUT
+          fi
+          git reset HEAD content/posts.json dist/
+
+      - name: Commit and push new article + dist
+        if: env.DRY_RUN != 'true' && steps.changed.outputs.changed == 'true'
+        run: |
+          git config user.name  "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add content/posts.json dist/
+          git commit -m "Search Console article: $(date -u +%Y-%m-%d)"
+
+          for attempt in 1 2 3; do
+            git pull --rebase origin main || true
+            if git push; then
+              echo "✅ Push succeeded on attempt $attempt"
+              exit 0
+            fi
+            echo "Push attempt $attempt rejected — retrying"
+            sleep 5
+          done
+          echo "Push failed after 3 attempts"
+          exit 1
+
+      - name: Tweet new article
+        if: >
+          env.DRY_RUN != 'true' &&
+          steps.changed.outputs.changed == 'true' &&
+          steps.generate.outputs.new_slugs != ''
+        run: |
+          # Write .env for tweet script
+          cat > .env << EOF
+          TWITTER_API_KEY=${{ secrets.TWITTER_API_KEY }}
+          TWITTER_API_KEY_SECRET=${{ secrets.TWITTER_API_KEY_SECRET }}
+          TWITTER_ACCESS_TOKEN=${{ secrets.TWITTER_ACCESS_TOKEN }}
+          TWITTER_ACCESS_TOKEN_SECRET=${{ secrets.TWITTER_ACCESS_TOKEN_SECRET }}
+          EOF
+
+          # Write tweeted_posts.json if it doesn't exist
+          if [ ! -f content/tweeted_posts.json ]; then
+            echo "{}" > content/tweeted_posts.json
+          fi
+
+          # Tweet each new slug
+          SLUGS="${{ steps.generate.outputs.new_slugs }}"
+          IFS=',' read -ra SLUG_ARRAY <<< "$SLUGS"
+          for SLUG in "${SLUG_ARRAY[@]}"; do
+            echo "🐦 Tweeting: $SLUG"
+            python scripts/tweet_new_articles.py --slug "$SLUG" || echo "Tweet failed for $SLUG"
+          done
+
+          # Clean up .env
+          rm -f .env
+
+      - name: Save updated tweeted_posts.json
+        if: >
+          env.DRY_RUN != 'true' &&
+          steps.changed.outputs.changed == 'true' &&
+          steps.generate.outputs.new_slugs != ''
+        run: |
+          git config user.name  "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add content/tweeted_posts.json || true
+          if ! git diff --cached --quiet; then
+            git commit -m "Update tweeted_posts.json after auto-tweet"
+            for attempt in 1 2 3; do
+              git pull --rebase origin main || true
+              if git push; then
+                echo "✅ tweeted_posts.json pushed"
+                exit 0
+              fi
+              sleep 5
+            done
+          else
+            echo "ℹ️  No changes to tweeted_posts.json"
+          fi
