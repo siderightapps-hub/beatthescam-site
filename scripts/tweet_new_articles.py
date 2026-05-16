@@ -58,7 +58,7 @@ CATEGORY_TAGS = {
     "shopping":    "#ShoppingScam",
     "travel":      "#TravelScam",
     "finance":     "#InvestmentScam",
-    "fraud":       "#ScamAlert",
+    "fraud":       "#FraudAlert",
     "utility":     "#EnergyScam",
     "crypto":      "#CryptoScam",
 }
