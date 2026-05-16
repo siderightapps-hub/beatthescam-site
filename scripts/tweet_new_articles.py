@@ -149,9 +149,18 @@ def main():
                         help="Tweet a specific article by slug only")
     args = parser.parse_args()
 
-    # Load posts
+    # Load posts — deduplicate by slug
     with open(POSTS_FILE) as f:
         posts = json.load(f)
+    seen = set()
+    deduped = []
+    for p in posts:
+        if p["slug"] not in seen:
+            deduped.append(p)
+            seen.add(p["slug"])
+    if len(deduped) < len(posts):
+        print(f"⚠️  Skipping {len(posts) - len(deduped)} duplicate slug(s)")
+    posts = deduped
 
     tweeted = load_tweeted()
 
