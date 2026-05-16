@@ -193,7 +193,7 @@ def find_content_gaps(queries: list, posts: list) -> list:
     return gaps
 
 # ── Article generation ────────────────────────────────────────────────────────
-def generate_article(query: dict, api_key: str) -> dict | None:
+def generate_article(query: dict, api_key: str):
     """Generate a complete article for a query gap using Claude API."""
     try:
         from anthropic import Anthropic
