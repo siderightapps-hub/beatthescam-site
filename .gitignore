@@ -4,3 +4,8 @@ beatthescam-project-handoff.md
 beatthescam_security_handoff.md
 .DS_Store
 .env
+
+# Google OAuth credentials - NEVER commit these
+client_secret*.json
+token.json
+google_token.json
