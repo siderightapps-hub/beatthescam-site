@@ -37,7 +37,14 @@
       "phone scam broadband",
       "ISP impersonation UK",
       "broadband fault scam",
-      "internet scam call UK"
+      "internet scam call UK",
+      "BT scam",
+      "BT phone scam",
+      "Sky scam",
+      "Sky TV scam",
+      "Sky engineer scam",
+      "Virgin Media scam",
+      "Openreach call scam"
     ],
     "sections": [
       [
@@ -134,7 +141,21 @@
       "bank sender id",
       "hmrc verification",
       "google verification code",
-      "microsoft authenticator"
+      "microsoft authenticator",
+      "Lloyds Bank scam",
+      "Lloyds fraud text",
+      "fake Lloyds email",
+      "NatWest scam",
+      "NatWest fraud text",
+      "fake NatWest email",
+      "Barclays scam",
+      "Barclays fraud text",
+      "fake Barclays email",
+      "Halifax scam",
+      "Halifax fraud text",
+      "fake Halifax email",
+      "text scam UK",
+      "SMS scam UK"
     ],
     "sections": [
       [
@@ -251,7 +272,10 @@
     "keywords": [
       "paypal scam email",
       "fake paypal email",
-      "phishing signs"
+      "phishing signs",
+      "PayPal scam UK",
+      "PayPal email scam",
+      "PayPal phishing"
     ],
     "hero": "A genuine-looking payment email can still be a phishing attempt.",
     "sections": [
@@ -357,7 +381,11 @@
     "keywords": [
       "crypto scam",
       "investment scam crypto",
-      "fake trading platform"
+      "fake trading platform",
+      "crypto scam UK",
+      "cryptocurrency scam",
+      "bitcoin scam UK",
+      "investment scam UK"
     ],
     "hero": "High returns, social proof, and smooth onboarding are common features of crypto fraud.",
     "sections": [
@@ -463,7 +491,9 @@
     "keywords": [
       "facebook marketplace scam",
       "marketplace buyer scam",
-      "marketplace seller scam"
+      "marketplace seller scam",
+      "Facebook scam UK",
+      "Facebook fraud"
     ],
     "hero": "Marketplace fraud often looks like ordinary buyer or seller friction until you examine the payment and delivery details.",
     "sections": [
@@ -516,7 +546,10 @@
     "keywords": [
       "romance scam signs",
       "online dating scam",
-      "catfishing money scam"
+      "catfishing money scam",
+      "romance scam UK",
+      "dating scam UK",
+      "online dating fraud"
     ],
     "hero": "A long conversation does not prove a real relationship. In romance fraud, time is often part of the method.",
     "sections": [
@@ -569,7 +602,9 @@
     "keywords": [
       "job scam uk",
       "fake recruiter scam",
-      "work from home scam"
+      "work from home scam",
+      "fake job offer",
+      "recruitment scam UK"
     ],
     "hero": "Job scams target urgency, optimism, and the normal pressure people feel when applying for work.",
     "sections": [
@@ -675,7 +710,11 @@
     "keywords": [
       "hmrc scam",
       "tax refund scam",
-      "hmrc phishing text"
+      "hmrc phishing text",
+      "HMRC tax scam",
+      "HMRC email scam",
+      "HMRC text scam",
+      "fake HMRC letter"
     ],
     "hero": "Tax messages create urgency because they sound official and financially important.",
     "sections": [
@@ -930,7 +969,9 @@
       "SHEIN quality issues",
       "SHEIN customs charges",
       "SHEIN consumer protection",
-      "SHEIN refunds"
+      "SHEIN refunds",
+      "fake website UK",
+      "scam website UK"
     ]
   },
   {
@@ -985,7 +1026,11 @@
       "selling safely online",
       "fake listings",
       "payment fraud protection",
-      "online marketplace safety"
+      "online marketplace safety",
+      "Facebook scam UK",
+      "Facebook fraud",
+      "online marketplace scam UK",
+      "buying and selling scam UK"
     ]
   },
   {
@@ -1040,7 +1085,9 @@
       "fake listings",
       "payment fraud",
       "rental property scams",
-      "buyer protection"
+      "buyer protection",
+      "online marketplace scam UK",
+      "buying and selling scam UK"
     ]
   },
   {
@@ -1094,7 +1141,12 @@
       "marketplace fraud",
       "non-delivery claims",
       "item not as described",
-      "online shopping safety"
+      "online shopping safety",
+      "delivery scam UK",
+      "parcel scam",
+      "fake delivery text",
+      "online marketplace scam UK",
+      "buying and selling scam UK"
     ]
   },
   {
@@ -1148,7 +1200,15 @@
       "text message scam",
       "fake delivery notification",
       "phishing SMS",
-      "UK scam awareness"
+      "UK scam awareness",
+      "Royal Mail text scam",
+      "Royal Mail parcel scam",
+      "fake Royal Mail text",
+      "delivery scam UK",
+      "parcel scam",
+      "fake delivery text",
+      "text scam UK",
+      "SMS scam UK"
     ]
   },
   {
@@ -1202,7 +1262,14 @@
       "SMS fraud",
       "phishing message",
       "parcel scam UK",
-      "text message fraud"
+      "text message fraud",
+      "Evri text scam",
+      "Evri parcel scam",
+      "fake Evri text",
+      "delivery scam UK",
+      "parcel scam",
+      "text scam UK",
+      "SMS scam UK"
     ]
   },
   {
@@ -1256,7 +1323,11 @@
       "SMS fraud",
       "parcel delivery scam",
       "UK delivery fraud",
-      "phishing text message"
+      "phishing text message",
+      "delivery scam UK",
+      "parcel scam",
+      "text scam UK",
+      "SMS scam UK"
     ]
   },
   {
@@ -1309,7 +1380,10 @@
       "fake delivery text",
       "SMS phishing",
       "parcel scam",
-      "smishing"
+      "smishing",
+      "delivery scam UK",
+      "text scam UK",
+      "SMS scam UK"
     ]
   },
   {
@@ -1363,7 +1437,12 @@
       "SMS fraud",
       "phishing text",
       "UPS impersonation",
-      "UK scams"
+      "UK scams",
+      "delivery scam UK",
+      "parcel scam",
+      "fake delivery text",
+      "text scam UK",
+      "SMS scam UK"
     ]
   },
   {
@@ -1416,7 +1495,12 @@
       "phishing email",
       "fake PayPal email",
       "account security",
-      "payment fraud UK"
+      "payment fraud UK",
+      "PayPal scam UK",
+      "PayPal email scam",
+      "PayPal phishing",
+      "bank transfer scam UK",
+      "payment scam UK"
     ]
   },
   {
@@ -1471,7 +1555,9 @@
       "payment fraud UK",
       "supplier fraud",
       "business email security",
-      "invoice verification"
+      "invoice verification",
+      "bank transfer scam UK",
+      "payment scam UK"
     ]
   },
   {
@@ -1526,7 +1612,9 @@
       "tax refund scam",
       "fake refund",
       "refund fraud protection",
-      "Action Fraud"
+      "Action Fraud",
+      "bank transfer scam UK",
+      "payment scam UK"
     ]
   },
   {
@@ -1580,7 +1668,9 @@
       "card payment disputes",
       "chargeback protection UK",
       "payment fraud prevention",
-      "merchant chargeback scams"
+      "merchant chargeback scams",
+      "bank transfer scam UK",
+      "payment scam UK"
     ]
   },
   {
@@ -1634,7 +1724,9 @@
       "unauthorized direct debit",
       "bank account protection",
       "direct debit guarantee",
-      "payment fraud prevention"
+      "payment fraud prevention",
+      "bank transfer scam UK",
+      "payment scam UK"
     ]
   },
   {
@@ -1688,7 +1780,13 @@
       "phishing email",
       "tax scam UK",
       "HMRC impersonation",
-      "government scam"
+      "government scam",
+      "HMRC tax scam",
+      "HMRC email scam",
+      "HMRC text scam",
+      "fake HMRC letter",
+      "government scam UK",
+      "official impersonation scam"
     ]
   },
   {
@@ -1742,7 +1840,11 @@
       "government email scam",
       "phishing",
       "driver scam",
-      "UK fraud"
+      "UK fraud",
+      "DVLA email scam",
+      "DVLA text scam",
+      "government scam UK",
+      "official impersonation scam"
     ]
   },
   {
@@ -1795,7 +1897,9 @@
       "COVID phishing",
       "fake NHS messages",
       "vaccine scams",
-      "NHS fraud"
+      "NHS fraud",
+      "government scam UK",
+      "official impersonation scam"
     ]
   },
   {
@@ -1848,7 +1952,9 @@
       "unregulated brokers",
       "FCA authorisation",
       "trading fraud",
-      "forex trading risks"
+      "forex trading risks",
+      "cryptocurrency scam UK",
+      "crypto fraud UK"
     ]
   },
   {
@@ -1902,7 +2008,16 @@
       "investment fraud",
       "cryptocurrency signals",
       "Telegram trading scams",
-      "fake trading tips"
+      "fake trading tips",
+      "WhatsApp scam UK",
+      "WhatsApp fraud",
+      "WhatsApp hi mum scam",
+      "WhatsApp new number scam",
+      "cryptocurrency scam",
+      "bitcoin scam UK",
+      "investment scam UK",
+      "cryptocurrency scam UK",
+      "crypto fraud UK"
     ]
   },
   {
@@ -1957,7 +2072,12 @@
       "remote job scams",
       "job application safety",
       "recruitment fraud",
-      "how to spot scams"
+      "how to spot scams",
+      "job scam UK",
+      "fake job offer",
+      "recruitment scam UK",
+      "work from home scam",
+      "recruitment fraud UK"
     ]
   },
   {
@@ -2012,7 +2132,10 @@
       "online dating fraud",
       "scam prevention",
       "UK dating safety",
-      "catfishing"
+      "catfishing",
+      "romance scam UK",
+      "dating scam UK",
+      "dating fraud UK"
     ]
   },
   {
@@ -2066,7 +2189,9 @@
       "online pet fraud",
       "puppy buying tips",
       "UK pet scams",
-      "legitimate dog breeders"
+      "legitimate dog breeders",
+      "online marketplace scam UK",
+      "buying and selling scam UK"
     ]
   },
   {
@@ -2122,7 +2247,9 @@
       "online ticket safety",
       "resale ticket scams",
       "Ticketmaster scams",
-      "event ticket protection"
+      "event ticket protection",
+      "online marketplace scam UK",
+      "buying and selling scam UK"
     ]
   },
   {
@@ -2176,7 +2303,9 @@
       "travel fraud UK",
       "holiday scams",
       "booking site safety",
-      "travel agent verification"
+      "travel agent verification",
+      "travel scam UK",
+      "holiday scam UK"
     ]
   },
   {
@@ -2230,7 +2359,13 @@
       "fake Amazon email",
       "account verification scam",
       "payment details fraud",
-      "UK shopping scams"
+      "UK shopping scams",
+      "Amazon scam UK",
+      "Amazon email scam",
+      "Amazon text scam",
+      "Amazon Prime scam",
+      "online shopping scam UK",
+      "fake online shop UK"
     ]
   },
   {
@@ -2283,7 +2418,13 @@
       "phone scam UK",
       "Amazon support scam",
       "impersonation fraud",
-      "account security"
+      "account security",
+      "Amazon scam UK",
+      "Amazon email scam",
+      "Amazon text scam",
+      "Amazon Prime scam",
+      "fake Amazon email",
+      "vishing UK"
     ]
   },
   {
@@ -2337,7 +2478,14 @@
       "phishing",
       "payment fraud",
       "UK scams",
-      "account security"
+      "account security",
+      "Amazon scam UK",
+      "Amazon email scam",
+      "Amazon text scam",
+      "Amazon Prime scam",
+      "fake Amazon email",
+      "bank transfer scam UK",
+      "payment scam UK"
     ]
   },
   {
@@ -2391,7 +2539,9 @@
       "identity theft",
       "two-factor authentication",
       "phone verification scam",
-      "account security"
+      "account security",
+      "tech support scam UK",
+      "remote access scam UK"
     ]
   },
   {
@@ -2444,7 +2594,13 @@
       "fake Apple emails",
       "phishing scams UK",
       "Apple account security",
-      "email fraud detection"
+      "email fraud detection",
+      "Apple scam UK",
+      "fake Apple email",
+      "Apple ID scam",
+      "Apple phishing",
+      "tech support scam UK",
+      "remote access scam UK"
     ]
   },
   {
@@ -2497,7 +2653,13 @@
       "family impersonation",
       "urgent money request",
       "UK fraud",
-      "cyber security"
+      "cyber security",
+      "WhatsApp scam UK",
+      "WhatsApp fraud",
+      "WhatsApp hi mum scam",
+      "WhatsApp new number scam",
+      "social media scam UK",
+      "social media fraud UK"
     ]
   },
   {
@@ -2552,7 +2714,12 @@
       "fake Instagram verification",
       "Instagram prize scam",
       "Instagram impersonation",
-      "UK social media scams"
+      "UK social media scams",
+      "Instagram scam UK",
+      "Instagram fraud",
+      "fake Instagram message",
+      "social media scam UK",
+      "social media fraud UK"
     ]
   },
   {
@@ -2606,7 +2773,16 @@
       "social media fraud",
       "UK scams",
       "account verification",
-      "online safety"
+      "online safety",
+      "romance scam UK",
+      "dating scam UK",
+      "online dating fraud",
+      "job scam UK",
+      "fake job offer",
+      "recruitment scam UK",
+      "work from home scam",
+      "social media scam UK",
+      "social media fraud UK"
     ]
   },
   {
@@ -2660,7 +2836,11 @@
       "SMS scam",
       "parking violation",
       "phishing text",
-      "UK scams"
+      "UK scams",
+      "fake parking ticket",
+      "parking scam UK",
+      "text scam UK",
+      "SMS scam UK"
     ]
   },
   {
@@ -2768,7 +2948,9 @@
       "credit repair fraud",
       "UK credit scams",
       "fake credit services",
-      "credit report manipulation"
+      "credit report manipulation",
+      "investment scam UK",
+      "financial fraud UK"
     ]
   },
   {
@@ -2823,7 +3005,11 @@
       "payment fraud protection",
       "fake listings",
       "item non-delivery",
-      "safe trading tips"
+      "safe trading tips",
+      "Facebook scam UK",
+      "Facebook fraud",
+      "online marketplace scam UK",
+      "buying and selling scam UK"
     ]
   },
   {
@@ -2876,7 +3062,9 @@
       "UK marketplace fraud",
       "classifieds scam",
       "online selling safety",
-      "buyer protection"
+      "buyer protection",
+      "online marketplace scam UK",
+      "buying and selling scam UK"
     ]
   },
   {
@@ -2930,7 +3118,15 @@
       "delivery scam",
       "SMS fraud",
       "phishing",
-      "UK scams"
+      "UK scams",
+      "Evri text scam",
+      "Evri parcel scam",
+      "fake Evri text",
+      "delivery scam UK",
+      "parcel scam",
+      "fake delivery text",
+      "text scam UK",
+      "SMS scam UK"
     ]
   },
   {
@@ -2991,7 +3187,11 @@
       "fake Amazon email",
       "Amazon phishing email",
       "Amazon email scam signs",
-      "is this Amazon email real"
+      "is this Amazon email real",
+      "Amazon scam UK",
+      "Amazon email scam",
+      "Amazon text scam",
+      "Amazon Prime scam"
     ]
   },
   {
@@ -3296,7 +3496,9 @@
       "fake QR code",
       "QR code phishing",
       "scam QR codes",
-      "how to spot QR code scams"
+      "how to spot QR code scams",
+      "tech support scam UK",
+      "remote access scam UK"
     ]
   },
   {
@@ -3357,7 +3559,11 @@
       "Evri phishing SMS UK",
       "fake Evri delivery message",
       "Evri text message scam",
-      "Evri parcel delivery scam"
+      "Evri parcel delivery scam",
+      "Evri scam",
+      "Evri text scam",
+      "Evri parcel scam",
+      "fake Evri text"
     ]
   },
   {
@@ -3418,7 +3624,10 @@
       "family impersonation scam UK",
       "WhatsApp fraud",
       "text message family scam",
-      "urgent money scam WhatsApp"
+      "urgent money scam WhatsApp",
+      "WhatsApp scam UK",
+      "WhatsApp hi mum scam",
+      "WhatsApp new number scam"
     ]
   },
   {
@@ -3479,7 +3688,9 @@
       "Vinted fake seller",
       "Vinted buyer scam",
       "how to avoid Vinted fraud",
-      "Vinted payment protection"
+      "Vinted payment protection",
+      "online marketplace scam UK",
+      "buying and selling scam UK"
     ]
   },
   {
@@ -3540,7 +3751,13 @@
       "bitcoin scam",
       "cryptocurrency fraud",
       "fake crypto exchange",
-      "crypto investment scam"
+      "crypto investment scam",
+      "crypto scam UK",
+      "cryptocurrency scam",
+      "bitcoin scam UK",
+      "investment scam UK",
+      "cryptocurrency scam UK",
+      "crypto fraud UK"
     ]
   },
   {
@@ -3601,7 +3818,9 @@
       "fake Temu offers",
       "Temu cashback scam",
       "is Temu safe",
-      "Temu phishing"
+      "Temu phishing",
+      "fake website UK",
+      "scam website UK"
     ]
   },
   {
@@ -3662,7 +3881,8 @@
       "how to spot fake bank transfer",
       "bank impersonation fraud",
       "UK transfer scam warning signs",
-      "protect against bank transfer fraud"
+      "protect against bank transfer fraud",
+      "payment scam UK"
     ]
   },
   {
@@ -3723,7 +3943,9 @@
       "fake Tinder profiles",
       "dating app fraud",
       "romance scam Tinder",
-      "Tinder catfish"
+      "Tinder catfish",
+      "romance scam UK",
+      "dating fraud UK"
     ]
   },
   {
@@ -3784,7 +4006,14 @@
       "fake debt adviser",
       "debt consolidation scam",
       "debt management fraud",
-      "upfront fee scam"
+      "upfront fee scam",
+      "BT scam",
+      "BT broadband scam",
+      "BT internet scam",
+      "BT engineer scam",
+      "BT phone scam",
+      "investment scam UK",
+      "financial fraud UK"
     ]
   },
   {
@@ -3845,7 +4074,9 @@
       "AliExpress fake sellers",
       "AliExpress scam UK",
       "AliExpress counterfeit",
-      "AliExpress non-delivery scam"
+      "AliExpress non-delivery scam",
+      "fake website UK",
+      "scam website UK"
     ]
   },
   {
@@ -3906,7 +4137,12 @@
       "crypto fraud warning signs",
       "Bitcoin investment scam",
       "how to avoid Bitcoin scams",
-      "UK crypto scam reporting"
+      "UK crypto scam reporting",
+      "crypto scam UK",
+      "cryptocurrency scam",
+      "investment scam UK",
+      "cryptocurrency scam UK",
+      "crypto fraud UK"
     ]
   },
   {
@@ -3967,7 +4203,11 @@
       "fake recruiter UK",
       "LinkedIn employment scam",
       "recruitment fraud UK",
-      "how to spot fake job offers"
+      "how to spot fake job offers",
+      "job scam UK",
+      "fake job offer",
+      "recruitment scam UK",
+      "work from home scam"
     ]
   },
   {
@@ -4028,7 +4268,12 @@
       "fake Microsoft support",
       "Microsoft tech support scam UK",
       "Windows virus pop-up scam",
-      "Microsoft remote access scam"
+      "Microsoft remote access scam",
+      "Microsoft scam UK",
+      "Microsoft tech support scam",
+      "fake Microsoft call",
+      "tech support scam UK",
+      "remote access scam UK"
     ]
   },
   {
@@ -4089,7 +4334,15 @@
       "fake Facebook Marketplace sellers",
       "how to avoid Marketplace scams",
       "Facebook Marketplace fraud warning signs",
-      "reporting Facebook scams"
+      "reporting Facebook scams",
+      "Facebook scam UK",
+      "Facebook Marketplace scam",
+      "Facebook fraud",
+      "delivery scam UK",
+      "parcel scam",
+      "fake delivery text",
+      "online marketplace scam UK",
+      "buying and selling scam UK"
     ]
   },
   {
@@ -4150,7 +4403,12 @@
       "fake job offer warning signs",
       "employment scam protection",
       "recruitment fraud detection",
-      "how to spot fake job offers"
+      "how to spot fake job offers",
+      "job scam UK",
+      "fake job offer",
+      "recruitment scam UK",
+      "work from home scam",
+      "recruitment fraud UK"
     ]
   },
   {
@@ -4211,7 +4469,12 @@
       "fake job offers UK",
       "employment scam warning signs",
       "remote job scam protection",
-      "how to spot job scams"
+      "how to spot job scams",
+      "job scam UK",
+      "fake job offer",
+      "recruitment scam UK",
+      "work from home scam",
+      "recruitment fraud UK"
     ]
   },
   {
@@ -4272,7 +4535,13 @@
       "WhatsApp child impersonation scam",
       "emergency money scam WhatsApp UK",
       "fake family message scam",
-      "WhatsApp account hacked scam"
+      "WhatsApp account hacked scam",
+      "WhatsApp scam UK",
+      "WhatsApp fraud",
+      "WhatsApp hi mum scam",
+      "WhatsApp new number scam",
+      "social media scam UK",
+      "social media fraud UK"
     ]
   },
   {
@@ -4333,7 +4602,9 @@
       "is Temu safe",
       "Temu app risks",
       "Temu security concerns",
-      "Temu legitimate or fake"
+      "Temu legitimate or fake",
+      "fake website UK",
+      "scam website UK"
     ]
   },
   {
@@ -4394,7 +4665,15 @@
       "Royal Mail SMS fraud UK",
       "fake Royal Mail messages",
       "Royal Mail phishing scam",
-      "delivery scam text messages"
+      "delivery scam text messages",
+      "Royal Mail scam",
+      "Royal Mail parcel scam",
+      "fake Royal Mail text",
+      "delivery scam UK",
+      "parcel scam",
+      "fake delivery text",
+      "text scam UK",
+      "SMS scam UK"
     ]
   },
   {
@@ -4455,7 +4734,14 @@
       "fake HMRC text",
       "tax refund SMS scam UK",
       "HMRC phishing text",
-      "how to spot HMRC scam"
+      "how to spot HMRC scam",
+      "HMRC scam",
+      "HMRC tax scam",
+      "HMRC email scam",
+      "HMRC text scam",
+      "fake HMRC letter",
+      "text scam UK",
+      "SMS scam UK"
     ]
   },
   {
@@ -4516,7 +4802,12 @@
       "Barclays SMS fraud UK",
       "fake Barclays text messages",
       "Barclays phishing scam",
-      "banking SMS scam prevention"
+      "banking SMS scam prevention",
+      "Barclays scam",
+      "Barclays fraud text",
+      "fake Barclays email",
+      "text scam UK",
+      "SMS scam UK"
     ]
   },
   {
@@ -4577,7 +4868,12 @@
       "Lloyds SMS phishing",
       "fake Lloyds Bank message",
       "Lloyds scam alert text",
-      "how to spot Lloyds Bank scam"
+      "how to spot Lloyds Bank scam",
+      "Lloyds Bank scam",
+      "Lloyds fraud text",
+      "fake Lloyds email",
+      "text scam UK",
+      "SMS scam UK"
     ]
   },
   {
@@ -4638,7 +4934,12 @@
       "fake NatWest SMS scam",
       "NatWest phishing text UK",
       "how to spot fake bank texts",
-      "NatWest security alert scam"
+      "NatWest security alert scam",
+      "NatWest scam",
+      "NatWest fraud text",
+      "fake NatWest email",
+      "text scam UK",
+      "SMS scam UK"
     ]
   },
   {
@@ -4699,7 +5000,12 @@
       "fake Halifax SMS",
       "Halifax phishing text messages",
       "Halifax bank scam UK",
-      "Halifax security alert scam"
+      "Halifax security alert scam",
+      "Halifax scam",
+      "Halifax fraud text",
+      "fake Halifax email",
+      "text scam UK",
+      "SMS scam UK"
     ]
   },
   {
@@ -4760,7 +5066,13 @@
       "vehicle tax text scam UK",
       "DVLA phishing SMS",
       "fake DVLA message",
-      "car tax scam alert"
+      "car tax scam alert",
+      "DVLA scam",
+      "DVLA email scam",
+      "DVLA text scam",
+      "fake DVLA email",
+      "text scam UK",
+      "SMS scam UK"
     ]
   },
   {
@@ -4821,7 +5133,9 @@
       "fake TV Licensing SMS",
       "TV Licence text message scam UK",
       "phishing text scam",
-      "how to spot fake TV Licensing messages"
+      "how to spot fake TV Licensing messages",
+      "text scam UK",
+      "SMS scam UK"
     ]
   },
   {
@@ -4882,7 +5196,9 @@
       "fake NHS appointment text",
       "NHS SMS scam UK",
       "appointment cancellation scam",
-      "NHS phishing text"
+      "NHS phishing text",
+      "text scam UK",
+      "SMS scam UK"
     ]
   },
   {
@@ -4943,7 +5259,13 @@
       "HMRC scam SMS UK",
       "fake tax text message",
       "council tax phishing text",
-      "HMRC text scam"
+      "HMRC text scam",
+      "HMRC scam",
+      "HMRC tax scam",
+      "HMRC email scam",
+      "fake HMRC letter",
+      "text scam UK",
+      "SMS scam UK"
     ]
   },
   {
@@ -5004,7 +5326,16 @@
       "fake DVLA text message",
       "parking ticket scam SMS",
       "DVLA impersonation scam",
-      "how to spot parking fine text scam"
+      "how to spot parking fine text scam",
+      "DVLA scam",
+      "DVLA email scam",
+      "DVLA text scam",
+      "fake DVLA email",
+      "parking fine scam",
+      "fake parking ticket",
+      "parking scam UK",
+      "text scam UK",
+      "SMS scam UK"
     ]
   },
   {
@@ -5065,7 +5396,12 @@
       "fake parcel text messages UK",
       "SMS delivery fraud",
       "Hermes phishing scam",
-      "parcel delivery scam alert"
+      "parcel delivery scam alert",
+      "delivery scam UK",
+      "parcel scam",
+      "fake delivery text",
+      "text scam UK",
+      "SMS scam UK"
     ]
   },
   {
@@ -5126,7 +5462,17 @@
       "fake Amazon SMS",
       "Amazon phishing text",
       "Amazon text scam warning signs",
-      "how to spot fake Amazon delivery texts"
+      "how to spot fake Amazon delivery texts",
+      "Amazon scam UK",
+      "Amazon email scam",
+      "Amazon text scam",
+      "Amazon Prime scam",
+      "fake Amazon email",
+      "delivery scam UK",
+      "parcel scam",
+      "fake delivery text",
+      "text scam UK",
+      "SMS scam UK"
     ]
   },
   {
@@ -5187,7 +5533,14 @@
       "fake HMRC email",
       "tax refund scam UK",
       "HMRC phishing email",
-      "how to spot fake HMRC"
+      "how to spot fake HMRC",
+      "HMRC scam",
+      "HMRC tax scam",
+      "HMRC email scam",
+      "HMRC text scam",
+      "fake HMRC letter",
+      "email scam UK",
+      "phishing email UK"
     ]
   },
   {
@@ -5248,7 +5601,12 @@
       "fake Microsoft email UK",
       "Microsoft phishing email",
       "account suspension scam",
-      "Microsoft email scam warning"
+      "Microsoft email scam warning",
+      "Microsoft scam UK",
+      "Microsoft tech support scam",
+      "fake Microsoft call",
+      "email scam UK",
+      "phishing email UK"
     ]
   },
   {
@@ -5309,7 +5667,12 @@
       "fake Netflix payment email",
       "Netflix phishing email warning",
       "how to spot Netflix scam email",
-      "Netflix billing update scam"
+      "Netflix billing update scam",
+      "Netflix scam UK",
+      "fake Netflix email",
+      "Netflix phishing",
+      "email scam UK",
+      "phishing email UK"
     ]
   },
   {
@@ -5370,7 +5733,10 @@
       "fake HSBC email",
       "HSBC scam",
       "phishing scam UK",
-      "bank phishing email"
+      "bank phishing email",
+      "HSBC fraud text",
+      "email scam UK",
+      "phishing email UK"
     ]
   },
   {
@@ -5431,7 +5797,11 @@
       "Santander phishing email",
       "fake Santander email",
       "Santander banking scam",
-      "how to spot fake Santander emails"
+      "how to spot fake Santander emails",
+      "Santander scam",
+      "Santander fraud text",
+      "email scam UK",
+      "phishing email UK"
     ]
   },
   {
@@ -5492,7 +5862,12 @@
       "fake PayPal email",
       "PayPal phishing email UK",
       "PayPal email scam warning signs",
-      "how to verify PayPal email"
+      "how to verify PayPal email",
+      "PayPal scam UK",
+      "PayPal email scam",
+      "PayPal phishing",
+      "email scam UK",
+      "phishing email UK"
     ]
   },
   {
@@ -5553,7 +5928,11 @@
       "fake DVLA email",
       "DVLA phishing scam UK",
       "DVLA fraud email",
-      "DVLA impersonation"
+      "DVLA impersonation",
+      "DVLA scam",
+      "DVLA text scam",
+      "email scam UK",
+      "phishing email UK"
     ]
   },
   {
@@ -5614,7 +5993,9 @@
       "fake Companies House email",
       "Companies House phishing UK",
       "Companies House impersonation scam",
-      "UK business email scam"
+      "UK business email scam",
+      "email scam UK",
+      "phishing email UK"
     ]
   },
   {
@@ -5675,7 +6056,13 @@
       "fake TV licensing emails",
       "TV licence scam warning signs",
       "TV licensing phishing",
-      "TVL scam emails"
+      "TVL scam emails",
+      "TV Licence scam",
+      "TV licence email scam",
+      "fake TV licence letter",
+      "BBC TV licence scam",
+      "email scam UK",
+      "phishing email UK"
     ]
   },
   {
@@ -5736,7 +6123,12 @@
       "fake NatWest email UK",
       "NatWest scam email",
       "phishing email bank",
-      "how to spot fake bank emails"
+      "how to spot fake bank emails",
+      "NatWest scam",
+      "NatWest fraud text",
+      "fake NatWest email",
+      "email scam UK",
+      "phishing email UK"
     ]
   },
   {
@@ -5797,7 +6189,14 @@
       "fake HMRC calls UK",
       "tax fraud scam",
       "HMRC impersonation",
-      "phone scam HMRC"
+      "phone scam HMRC",
+      "HMRC scam",
+      "HMRC tax scam",
+      "HMRC email scam",
+      "HMRC text scam",
+      "fake HMRC letter",
+      "phone scam UK",
+      "vishing UK"
     ]
   },
   {
@@ -5858,7 +6257,9 @@
       "fake bank call scam",
       "bank phone scam warning signs",
       "how to stop bank fraud calls",
-      "UK bank scam protection"
+      "UK bank scam protection",
+      "phone scam UK",
+      "vishing UK"
     ]
   },
   {
@@ -5919,7 +6320,14 @@
       "BT broadband phone scam",
       "fake BT customer service calls",
       "BT phishing calls",
-      "how to spot BT scam"
+      "how to spot BT scam",
+      "BT scam",
+      "BT broadband scam",
+      "BT internet scam",
+      "BT engineer scam",
+      "BT phone scam",
+      "phone scam UK",
+      "vishing UK"
     ]
   },
   {
@@ -5980,7 +6388,9 @@
       "fake police calls",
       "police phone scam",
       "Action Fraud scam call",
-      "NCA impersonation scam"
+      "NCA impersonation scam",
+      "phone scam UK",
+      "vishing UK"
     ]
   },
   {
@@ -6041,7 +6451,9 @@
       "pension scam UK",
       "early pension access scam",
       "pension fraud cold calls",
-      "pension liberation warning signs"
+      "pension liberation warning signs",
+      "phone scam UK",
+      "vishing UK"
     ]
   },
   {
@@ -6102,7 +6514,13 @@
       "fake DVLA calls",
       "DVLA impersonation scam",
       "driving licence scam",
-      "vehicle tax scam"
+      "vehicle tax scam",
+      "DVLA scam",
+      "DVLA email scam",
+      "DVLA text scam",
+      "fake DVLA email",
+      "phone scam UK",
+      "vishing UK"
     ]
   },
   {
@@ -6163,7 +6581,14 @@
       "HMRC impersonation scam",
       "fake HMRC phone call",
       "National Insurance fraud scam",
-      "HMRC scam prevention"
+      "HMRC scam prevention",
+      "HMRC scam",
+      "HMRC tax scam",
+      "HMRC email scam",
+      "HMRC text scam",
+      "fake HMRC letter",
+      "phone scam UK",
+      "vishing UK"
     ]
   },
   {
@@ -6224,7 +6649,13 @@
       "upfront payment fraud",
       "loan scam warning signs",
       "prize scam prevention",
-      "inheritance advance fee"
+      "inheritance advance fee",
+      "job scam UK",
+      "fake job offer",
+      "recruitment scam UK",
+      "work from home scam",
+      "bank transfer scam UK",
+      "payment scam UK"
     ]
   },
   {
@@ -6285,7 +6716,9 @@
       "bank impersonation scam",
       "unauthorised bank transfer",
       "how to prevent push payment fraud",
-      "UK scam prevention"
+      "UK scam prevention",
+      "bank transfer scam UK",
+      "payment scam UK"
     ]
   },
   {
@@ -6346,7 +6779,9 @@
       "fake invoice scam",
       "business invoice fraud",
       "supplier impersonation fraud",
-      "invoice payment scam"
+      "invoice payment scam",
+      "bank transfer scam UK",
+      "payment scam UK"
     ]
   },
   {
@@ -6407,7 +6842,9 @@
       "accidental overpayment fraud",
       "refund scam",
       "payment reversal scam",
-      "how to spot overpayment scams"
+      "how to spot overpayment scams",
+      "bank transfer scam UK",
+      "payment scam UK"
     ]
   },
   {
@@ -6468,7 +6905,13 @@
       "fake crypto exchange scam",
       "bitcoin payment scam",
       "crypto fraud warning signs",
-      "how to avoid crypto scams"
+      "how to avoid crypto scams",
+      "crypto scam UK",
+      "cryptocurrency scam",
+      "bitcoin scam UK",
+      "investment scam UK",
+      "cryptocurrency scam UK",
+      "crypto fraud UK"
     ]
   },
   {
@@ -6529,7 +6972,12 @@
       "Apple Pay fraud",
       "fake Apple alert",
       "phishing Apple Pay",
-      "payment scam UK"
+      "payment scam UK",
+      "Apple scam UK",
+      "fake Apple email",
+      "Apple ID scam",
+      "Apple phishing",
+      "bank transfer scam UK"
     ]
   },
   {
@@ -6590,7 +7038,13 @@
       "PayPal scam protection",
       "PayPal money transfer fraud",
       "how to spot PayPal scams",
-      "PayPal buyer protection"
+      "PayPal buyer protection",
+      "PayPal scam UK",
+      "PayPal email scam",
+      "fake PayPal email",
+      "PayPal phishing",
+      "bank transfer scam UK",
+      "payment scam UK"
     ]
   },
   {
@@ -6651,7 +7105,9 @@
       "Monzo fraud UK",
       "fake Monzo message",
       "Monzo account security",
-      "money transfer scam"
+      "money transfer scam",
+      "bank transfer scam UK",
+      "payment scam UK"
     ]
   },
   {
@@ -6712,7 +7168,9 @@
       "eBay payment fraud",
       "fake eBay seller",
       "eBay scam protection",
-      "eBay buyer protection UK"
+      "eBay buyer protection UK",
+      "online marketplace scam UK",
+      "buying and selling scam UK"
     ]
   },
   {
@@ -6773,7 +7231,12 @@
       "Facebook Marketplace scam UK",
       "fake buyer scam warning signs",
       "protect yourself selling online",
-      "spot fake payment confirmations"
+      "spot fake payment confirmations",
+      "Facebook scam UK",
+      "Facebook Marketplace scam",
+      "Facebook fraud",
+      "online marketplace scam UK",
+      "buying and selling scam UK"
     ]
   },
   {
@@ -6834,7 +7297,9 @@
       "Vinted buyer scam",
       "fake Vinted buyer",
       "Vinted payment scam",
-      "selling on Vinted safely"
+      "selling on Vinted safely",
+      "online marketplace scam UK",
+      "buying and selling scam UK"
     ]
   },
   {
@@ -6895,7 +7360,9 @@
       "fake Depop sellers",
       "Depop payment fraud",
       "Depop fake items",
-      "how to avoid Depop scams"
+      "how to avoid Depop scams",
+      "online marketplace scam UK",
+      "buying and selling scam UK"
     ]
   },
   {
@@ -6956,7 +7423,9 @@
       "fake car listings",
       "car buying fraud",
       "AutoTrader fake seller",
-      "how to avoid car scams"
+      "how to avoid car scams",
+      "online marketplace scam UK",
+      "buying and selling scam UK"
     ]
   },
   {
@@ -7017,7 +7486,9 @@
       "fake property listing UK",
       "rental deposit scam",
       "Rightmove fraud",
-      "how to spot fake rental listings"
+      "how to spot fake rental listings",
+      "online marketplace scam UK",
+      "buying and selling scam UK"
     ]
   },
   {
@@ -7078,7 +7549,9 @@
       "fake Airbnb listings",
       "Airbnb rental fraud",
       "how to spot Airbnb scams",
-      "Airbnb account takeover"
+      "Airbnb account takeover",
+      "online marketplace scam UK",
+      "buying and selling scam UK"
     ]
   },
   {
@@ -7139,7 +7612,9 @@
       "fake Preloved sellers",
       "Preloved marketplace fraud",
       "second-hand marketplace scam",
-      "Preloved payment scam"
+      "Preloved payment scam",
+      "online marketplace scam UK",
+      "buying and selling scam UK"
     ]
   },
   {
@@ -7200,7 +7675,16 @@
       "fake trader Instagram",
       "Instagram forex scam",
       "crypto investment scam Instagram",
-      "investment scam warning signs"
+      "investment scam warning signs",
+      "Instagram scam UK",
+      "Instagram fraud",
+      "fake Instagram message",
+      "crypto scam UK",
+      "cryptocurrency scam",
+      "bitcoin scam UK",
+      "investment scam UK",
+      "social media scam UK",
+      "social media fraud UK"
     ]
   },
   {
@@ -7261,7 +7745,17 @@
       "fake investment advisor WhatsApp",
       "crypto investment scam WhatsApp",
       "WhatsApp forex scam",
-      "investment fraud WhatsApp messages"
+      "investment fraud WhatsApp messages",
+      "WhatsApp scam UK",
+      "WhatsApp fraud",
+      "WhatsApp hi mum scam",
+      "WhatsApp new number scam",
+      "crypto scam UK",
+      "cryptocurrency scam",
+      "bitcoin scam UK",
+      "investment scam UK",
+      "social media scam UK",
+      "social media fraud UK"
     ]
   },
   {
@@ -7322,7 +7816,17 @@
       "fake TikTok sellers",
       "TikTok payment fraud",
       "TikTok seller verification",
-      "TikTok shopping safety"
+      "TikTok shopping safety",
+      "PayPal scam UK",
+      "PayPal email scam",
+      "fake PayPal email",
+      "PayPal phishing",
+      "crypto scam UK",
+      "cryptocurrency scam",
+      "bitcoin scam UK",
+      "investment scam UK",
+      "social media scam UK",
+      "social media fraud UK"
     ]
   },
   {
@@ -7383,7 +7887,12 @@
       "fake Facebook ads UK",
       "Facebook scam warning signs",
       "Facebook investment scam",
-      "spotting fake ads"
+      "spotting fake ads",
+      "Facebook scam UK",
+      "Facebook Marketplace scam",
+      "Facebook fraud",
+      "social media scam UK",
+      "social media fraud UK"
     ]
   },
   {
@@ -7444,7 +7953,13 @@
       "fake Twitter cryptocurrency",
       "social media crypto scam UK",
       "Bitcoin giveaway scam",
-      "Twitter impersonation fraud"
+      "Twitter impersonation fraud",
+      "crypto scam UK",
+      "cryptocurrency scam",
+      "bitcoin scam UK",
+      "investment scam UK",
+      "social media scam UK",
+      "social media fraud UK"
     ]
   },
   {
@@ -7505,7 +8020,12 @@
       "fake job offer",
       "LinkedIn scam UK",
       "job scam warning signs",
-      "credential theft"
+      "credential theft",
+      "job scam UK",
+      "recruitment scam UK",
+      "work from home scam",
+      "social media scam UK",
+      "social media fraud UK"
     ]
   },
   {
@@ -7566,7 +8086,9 @@
       "crypto ATM fraud",
       "Bitcoin scam warning signs",
       "Action Fraud Bitcoin",
-      "how to spot Bitcoin ATM scam"
+      "how to spot Bitcoin ATM scam",
+      "cryptocurrency scam UK",
+      "crypto fraud UK"
     ]
   },
   {
@@ -7627,7 +8149,13 @@
       "fake Binance email",
       "Binance phishing scam",
       "Binance cryptocurrency scam",
-      "how to verify Binance"
+      "how to verify Binance",
+      "crypto scam UK",
+      "cryptocurrency scam",
+      "bitcoin scam UK",
+      "investment scam UK",
+      "cryptocurrency scam UK",
+      "crypto fraud UK"
     ]
   },
   {
@@ -7688,7 +8216,13 @@
       "crypto exchange scam",
       "fake cryptocurrency platform",
       "Bitcoin exchange scam",
-      "crypto investment fraud UK"
+      "crypto investment fraud UK",
+      "crypto scam UK",
+      "cryptocurrency scam",
+      "bitcoin scam UK",
+      "investment scam UK",
+      "cryptocurrency scam UK",
+      "crypto fraud UK"
     ]
   },
   {
@@ -7749,7 +8283,13 @@
       "cryptocurrency recovery fraud",
       "fake crypto recovery service",
       "crypto scam recovery",
-      "how to avoid crypto recovery scam"
+      "how to avoid crypto recovery scam",
+      "crypto scam UK",
+      "cryptocurrency scam",
+      "bitcoin scam UK",
+      "investment scam UK",
+      "cryptocurrency scam UK",
+      "crypto fraud UK"
     ]
   },
   {
@@ -7810,7 +8350,9 @@
       "fake NFT platform",
       "NFT investment scam",
       "NFT marketplace fraud",
-      "crypto scam warning signs"
+      "crypto scam warning signs",
+      "cryptocurrency scam UK",
+      "crypto fraud UK"
     ]
   },
   {
@@ -7871,7 +8413,12 @@
       "fake car tax renewal email",
       "DVLA scam UK",
       "car tax phishing email",
-      "DVLA email fraud"
+      "DVLA email fraud",
+      "DVLA scam",
+      "DVLA text scam",
+      "fake DVLA email",
+      "government scam UK",
+      "official impersonation scam"
     ]
   },
   {
@@ -7932,7 +8479,9 @@
       "DWP scam UK",
       "benefits fraud",
       "Universal Credit phishing",
-      "government impersonation scam"
+      "government impersonation scam",
+      "government scam UK",
+      "official impersonation scam"
     ]
   },
   {
@@ -7993,7 +8542,13 @@
       "fake TV Licensing demand",
       "TV Licensing fraud",
       "how to spot fake TV Licensing letter",
-      "TV Licensing scam report"
+      "TV Licensing scam report",
+      "TV Licence scam",
+      "TV licence email scam",
+      "fake TV licence letter",
+      "BBC TV licence scam",
+      "government scam UK",
+      "official impersonation scam"
     ]
   },
   {
@@ -8054,7 +8609,9 @@
       "fake HMCTS email",
       "court fine scam",
       "HMCTS impersonation",
-      "government email scam UK"
+      "government email scam UK",
+      "government scam UK",
+      "official impersonation scam"
     ]
   },
   {
@@ -8115,7 +8672,9 @@
       "HMPO passport scam",
       "fake passport office email",
       "passport fraud UK",
-      "how to spot passport renewal scam"
+      "how to spot passport renewal scam",
+      "government scam UK",
+      "official impersonation scam"
     ]
   },
   {
@@ -8176,7 +8735,9 @@
       "UK visa email scam",
       "Home Office visa fraud",
       "fake immigration email",
-      "UKVI phishing"
+      "UKVI phishing",
+      "government scam UK",
+      "official impersonation scam"
     ]
   },
   {
@@ -8237,7 +8798,12 @@
       "fake Indeed job listings",
       "Indeed employment scam",
       "job application scam",
-      "Indeed phishing"
+      "Indeed phishing",
+      "job scam UK",
+      "fake job offer",
+      "recruitment scam UK",
+      "work from home scam",
+      "recruitment fraud UK"
     ]
   },
   {
@@ -8298,7 +8864,12 @@
       "fake job offer scam 2026",
       "work from home scam warning signs",
       "legitimate remote jobs UK",
-      "employment scam protection"
+      "employment scam protection",
+      "job scam UK",
+      "fake job offer",
+      "recruitment scam UK",
+      "work from home scam",
+      "recruitment fraud UK"
     ]
   },
   {
@@ -8359,7 +8930,12 @@
       "fake mystery shopper jobs",
       "mystery shopping employment scam",
       "how to spot mystery shopper scams",
-      "legitimate mystery shopper companies UK"
+      "legitimate mystery shopper companies UK",
+      "job scam UK",
+      "fake job offer",
+      "recruitment scam UK",
+      "work from home scam",
+      "recruitment fraud UK"
     ]
   },
   {
@@ -8420,7 +8996,12 @@
       "fake work from home jobs",
       "employment fraud UK",
       "job scam warning signs",
-      "remote job scam"
+      "remote job scam",
+      "job scam UK",
+      "fake job offer",
+      "recruitment scam UK",
+      "work from home scam",
+      "recruitment fraud UK"
     ]
   },
   {
@@ -8481,7 +9062,12 @@
       "fake job offer scam",
       "employment scam warning signs",
       "recruitment fraud protection",
-      "job scam reporting UK"
+      "job scam reporting UK",
+      "job scam UK",
+      "fake job offer",
+      "recruitment scam UK",
+      "work from home scam",
+      "recruitment fraud UK"
     ]
   },
   {
@@ -8542,7 +9128,15 @@
       "romance fraud cryptocurrency",
       "dating app scam warning signs",
       "Tinder fake profile investment",
-      "how to spot investment scam online"
+      "how to spot investment scam online",
+      "crypto scam UK",
+      "cryptocurrency scam",
+      "bitcoin scam UK",
+      "investment scam UK",
+      "romance scam UK",
+      "dating scam UK",
+      "online dating fraud",
+      "dating fraud UK"
     ]
   },
   {
@@ -8603,7 +9197,11 @@
       "fake Bumble profile",
       "dating app scam signs",
       "romance scam Bumble",
-      "catfish scam dating"
+      "catfish scam dating",
+      "romance scam UK",
+      "dating scam UK",
+      "online dating fraud",
+      "dating fraud UK"
     ]
   },
   {
@@ -8664,7 +9262,15 @@
       "dating app cryptocurrency fraud",
       "romance scam crypto investment",
       "fake relationship investment scam",
-      "online dating money fraud UK"
+      "online dating money fraud UK",
+      "crypto scam UK",
+      "cryptocurrency scam",
+      "bitcoin scam UK",
+      "investment scam UK",
+      "romance scam UK",
+      "dating scam UK",
+      "online dating fraud",
+      "dating fraud UK"
     ]
   },
   {
@@ -8725,7 +9331,11 @@
       "fake soldier dating scam",
       "romance scam warning signs",
       "online dating safety UK",
-      "how to report romance scam"
+      "how to report romance scam",
+      "romance scam UK",
+      "dating scam UK",
+      "online dating fraud",
+      "dating fraud UK"
     ]
   },
   {
@@ -8786,7 +9396,12 @@
       "Microsoft scam calls UK",
       "fake tech support",
       "Windows virus pop-up scam",
-      "Microsoft impersonation scam"
+      "Microsoft impersonation scam",
+      "Microsoft scam UK",
+      "Microsoft tech support scam",
+      "fake Microsoft call",
+      "tech support scam UK",
+      "remote access scam UK"
     ]
   },
   {
@@ -8847,7 +9462,12 @@
       "fake Apple support UK",
       "Apple phishing scam",
       "Apple ID scam",
-      "Apple support fraud"
+      "Apple support fraud",
+      "Apple scam UK",
+      "fake Apple email",
+      "Apple phishing",
+      "tech support scam UK",
+      "remote access scam UK"
     ]
   },
   {
@@ -8908,7 +9528,14 @@
       "BT broadband scam UK",
       "fake BT call",
       "tech support scam",
-      "BT phishing"
+      "BT phishing",
+      "BT scam",
+      "BT broadband scam",
+      "BT internet scam",
+      "BT engineer scam",
+      "BT phone scam",
+      "tech support scam UK",
+      "remote access scam UK"
     ]
   },
   {
@@ -8969,7 +9596,8 @@
       "fake tech support scam",
       "remote desktop scam",
       "computer control scam",
-      "TeamViewer scam UK"
+      "TeamViewer scam UK",
+      "tech support scam UK"
     ]
   },
   {
@@ -9030,7 +9658,9 @@
       "HP support scam UK",
       "fake printer support",
       "tech support scam",
-      "printer error scam"
+      "printer error scam",
+      "tech support scam UK",
+      "remote access scam UK"
     ]
   },
   {
@@ -9091,7 +9721,9 @@
       "Nike scam sites",
       "counterfeit Nike shopping",
       "how to spot fake Nike",
-      "Nike phishing scam"
+      "Nike phishing scam",
+      "fake website UK",
+      "scam website UK"
     ]
   },
   {
@@ -9152,7 +9784,9 @@
       "ASOS copycat scam",
       "fake ASOS UK",
       "ASOS phishing scam",
-      "ASOS scam website"
+      "ASOS scam website",
+      "fake website UK",
+      "scam website UK"
     ]
   },
   {
@@ -9213,7 +9847,9 @@
       "counterfeit UGG boots scam",
       "fake UGG online store",
       "UGG website scam warning signs",
-      "how to spot fake UGG boots online"
+      "how to spot fake UGG boots online",
+      "fake website UK",
+      "scam website UK"
     ]
   },
   {
@@ -9274,7 +9910,9 @@
       "DHgate fake reviews",
       "DHgate counterfeit goods",
       "DHgate non-delivery",
-      "is DHgate safe UK"
+      "is DHgate safe UK",
+      "fake website UK",
+      "scam website UK"
     ]
   },
   {
@@ -9335,7 +9973,9 @@
       "Wish fake reviews",
       "Wish counterfeit items",
       "Wish phishing email",
-      "Wish review scam"
+      "Wish review scam",
+      "fake website UK",
+      "scam website UK"
     ]
   },
   {
@@ -9396,7 +10036,9 @@
       "illegal pharmacy websites",
       "counterfeit medicines scam",
       "fake prescription scam",
-      "spotting fake pharmacies"
+      "spotting fake pharmacies",
+      "fake website UK",
+      "scam website UK"
     ]
   },
   {
@@ -9457,7 +10099,14 @@
       "Individual Voluntary Arrangement fraud",
       "debt adviser scam",
       "IVA fee scam",
-      "fake debt relief UK"
+      "fake debt relief UK",
+      "BT scam",
+      "BT broadband scam",
+      "BT internet scam",
+      "BT engineer scam",
+      "BT phone scam",
+      "investment scam UK",
+      "financial fraud UK"
     ]
   },
   {
@@ -9518,7 +10167,14 @@
       "fake debt relief companies",
       "debt adviser scam",
       "upfront fee debt scam",
-      "how to spot debt scams"
+      "how to spot debt scams",
+      "BT scam",
+      "BT broadband scam",
+      "BT internet scam",
+      "BT engineer scam",
+      "BT phone scam",
+      "investment scam UK",
+      "financial fraud UK"
     ]
   },
   {
@@ -9579,7 +10235,9 @@
       "fake FCA regulated company",
       "investment scam impersonation",
       "FCA clone fraud",
-      "how to verify investment company UK"
+      "how to verify investment company UK",
+      "investment scam UK",
+      "financial fraud UK"
     ]
   },
   {
@@ -9640,7 +10298,9 @@
       "fake investment bonds",
       "bond investment fraud",
       "high-yield bond scam",
-      "investment fraud UK"
+      "investment fraud UK",
+      "investment scam UK",
+      "financial fraud UK"
     ]
   },
   {
@@ -9701,7 +10361,9 @@
       "land investment fraud",
       "property investment scam",
       "fake land plots UK",
-      "land banking schemes"
+      "land banking schemes",
+      "investment scam UK",
+      "financial fraud UK"
     ]
   },
   {
@@ -9762,7 +10424,9 @@
       "fake forex broker",
       "forex scam signs",
       "FX trading fraud",
-      "regulated forex broker check"
+      "regulated forex broker check",
+      "investment scam UK",
+      "financial fraud UK"
     ]
   },
   {
@@ -9823,7 +10487,9 @@
       "fake holiday deals",
       "travel agent scam",
       "holiday booking fraud",
-      "fake travel websites UK"
+      "fake travel websites UK",
+      "travel scam UK",
+      "holiday scam UK"
     ]
   },
   {
@@ -9884,7 +10550,9 @@
       "fake flight booking scam",
       "airline ticket fraud UK",
       "holiday booking scam",
-      "cheap flights scam"
+      "cheap flights scam",
+      "travel scam UK",
+      "holiday scam UK"
     ]
   },
   {
@@ -9945,7 +10613,9 @@
       "fake UK visa websites",
       "immigration scam",
       "visa fraud prevention",
-      "UKVI scam"
+      "UKVI scam",
+      "travel scam UK",
+      "holiday scam UK"
     ]
   },
   {
@@ -10006,7 +10676,9 @@
       "fake holiday rental UK",
       "Airbnb scam UK",
       "holiday rental fraud",
-      "fake holiday lettings"
+      "fake holiday lettings",
+      "travel scam UK",
+      "holiday scam UK"
     ]
   },
   {
@@ -10067,7 +10739,9 @@
       "fake ticket seller",
       "Ticketmaster scam",
       "resale ticket fraud",
-      "how to spot fake tickets"
+      "how to spot fake tickets",
+      "online shopping scam UK",
+      "fake online shop UK"
     ]
   },
   {
@@ -10128,7 +10802,9 @@
       "fake Glastonbury tickets UK",
       "ticket resale scam",
       "festival ticket fraud",
-      "Glastonbury Tixel scam"
+      "Glastonbury Tixel scam",
+      "online shopping scam UK",
+      "fake online shop UK"
     ]
   },
   {
@@ -10189,7 +10865,9 @@
       "fake Viagogo tickets",
       "Viagogo ticket fraud",
       "Viagogo impersonation scam",
-      "buying tickets safely"
+      "buying tickets safely",
+      "online shopping scam UK",
+      "fake online shop UK"
     ]
   },
   {
@@ -10433,7 +11111,9 @@
       "illegal online pharmacy scam",
       "counterfeit medicine UK",
       "verify legitimate online pharmacy",
-      "NHS registered pharmacy check"
+      "NHS registered pharmacy check",
+      "fake website UK",
+      "scam website UK"
     ]
   },
   {
@@ -10494,7 +11174,9 @@
       "fake forex broker UK",
       "forex scam warning signs",
       "unregulated forex broker",
-      "forex trading fraud"
+      "forex trading fraud",
+      "investment scam UK",
+      "financial fraud UK"
     ]
   }
 ]

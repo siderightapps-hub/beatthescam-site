@@ -151,43 +151,56 @@ def get_trending_queries(service, days: int = 28) -> list:
     return queries
 
 # ── Gap detection ─────────────────────────────────────────────────────────────
+def normalise(text: str) -> str:
+    """Normalise text for matching — lowercase, stem plurals."""
+    text = text.lower()
+    # Simple plural stemming — strip trailing 's' from words
+    words = []
+    for w in re.findall(r'\b[a-z]{3,}\b', text):
+        w = re.sub(r'(?<=.{3})s$', '', w)  # strip trailing s if word > 3 chars
+        words.append(w)
+    return " ".join(words)
+
 def find_content_gaps(queries: list, posts: list) -> list:
     """Find queries not already well-covered by existing articles."""
 
-    # Build a searchable index of existing content
-    existing_text = " ".join([
+    # Build a searchable index of existing content — normalised
+    existing_text = normalise(" ".join([
         p.get("title", "") + " " +
         p.get("description", "") + " " +
+        p.get("hero", "") + " " +
         " ".join(p.get("keywords", []))
         for p in posts
-    ]).lower()
+    ]))
 
     gaps = []
     for q in queries:
-        query = q["query"].lower()
+        query_norm = normalise(q["query"])
 
         # Skip very short queries
-        if len(query) < 8:
+        if len(q["query"]) < 8:
             continue
 
         # Skip branded queries already ranking well
         if q["position"] < 5 and q["clicks"] > 0:
             continue
 
-        # Check if existing content covers this query
-        query_words = [w for w in query.split() if len(w) > 3]
-        matched_words = sum(1 for w in query_words if w in existing_text)
-        coverage = matched_words / len(query_words) if query_words else 1
+        # Check coverage using normalised words
+        query_words = [w for w in query_norm.split() if len(w) > 3]
+        if not query_words:
+            continue
 
-        # If less than 60% of query words are in our content, it's a gap
-        if coverage < 0.6:
+        matched_words = sum(1 for w in query_words if w in existing_text)
+        coverage = matched_words / len(query_words)
+
+        # If less than 70% of query words are in our content, it's a gap
+        if coverage < 0.7:
             gaps.append({
                 **q,
                 "coverage": round(coverage * 100),
-                "category": guess_category(query),
+                "category": guess_category(q["query"]),
             })
 
-    # Sort by impressions (highest opportunity first)
     gaps.sort(key=lambda x: x["impressions"], reverse=True)
     print(f"🎯 Found {len(gaps)} content gaps")
     return gaps
