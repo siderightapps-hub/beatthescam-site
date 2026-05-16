@@ -9,3 +9,6 @@ beatthescam_security_handoff.md
 client_secret*.json
 token.json
 google_token.json
+
+# Video production handoff (local only)
+beatthescam-video-handoff.md
