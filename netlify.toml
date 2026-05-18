@@ -2,6 +2,7 @@
 
 [build]
   publish = "dist"
+  ignore = "git diff --quiet $CACHED_COMMIT_REF $COMMIT_REF -- dist/ netlify/"
 
 [functions]
   directory = "netlify/functions"
