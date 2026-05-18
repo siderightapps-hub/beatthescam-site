@@ -53,6 +53,7 @@ jobs:
         run: |
           pip install \
             anthropic \
+            Pillow \
             tweepy \
             python-dotenv \
             google-auth-oauthlib \

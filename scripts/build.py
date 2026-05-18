@@ -169,11 +169,83 @@ def seo_title(post_title: str, site_name: str, max_len: int = 60) -> str:
     return truncated + suffix
 
 def seo_description(desc: str, max_len: int = 155) -> str:
-    """Truncate a meta description to max_len chars at a word boundary."""
+    """Trim a meta description for SERP display.
+
+    Strategy (in order):
+      1. If already <= max_len, return unchanged.
+      2. Prefer the longest sentence-bounded prefix that fits.
+      3. Else fall back to word-boundary trim, but keep the last full clause
+         (strip dangling prepositions/auxiliaries that would end the snippet
+         mid-thought like "...used by them to.").
+    """
+    desc = (desc or "").strip()
     if len(desc) <= max_len:
         return desc
+
+    # 1) Sentence boundary fit
+    sentence_end_re = re.compile(r"([.!?])\s")
+    best_end = 0
+    for m in sentence_end_re.finditer(desc):
+        end = m.end() - 1  # include the punctuation, not the space
+        if end <= max_len:
+            best_end = end
+        else:
+            break
+    if best_end >= 60:
+        return desc[:best_end].strip()
+
+    # 2) Word-boundary fallback, stripping dangling connector words
     truncated = desc[:max_len].rsplit(" ", 1)[0].rstrip(" .,;:")
-    return truncated + "."
+    DANGLERS = {
+        "to", "the", "a", "an", "of", "for", "with", "and", "or", "but",
+        "in", "on", "at", "by", "from", "as", "is", "are", "was", "were",
+        "be", "been", "this", "that", "these", "those", "their", "your", "our",
+    }
+    parts = truncated.split()
+    while parts and parts[-1].lower() in DANGLERS:
+        parts.pop()
+    truncated = " ".join(parts).rstrip(" .,;:")
+    if not truncated:
+        return desc[:max_len].rstrip()
+    return truncated + "…"
+
+
+def first_sentence(text: str) -> str:
+    """Return the first sentence of text, or the whole string if no terminator."""
+    m = re.search(r"[.!?](\s|$)", text or "")
+    if not m:
+        return (text or "").strip()
+    return text[: m.end() - 1].strip()
+
+
+def pick_description(post: dict, max_len: int = 155) -> str:
+    """Pick the best meta description for a post.
+
+    Preference order:
+      1. post['description'] verbatim if it already fits.
+      2. First sentence of post['description'] if that fits.
+      3. post['hero'] verbatim if it fits.
+      4. First sentence of section 1 body if it fits.
+      5. sentence-aware trim of post['description'].
+    """
+    desc = (post.get("description") or "").strip()
+    hero = (post.get("hero") or "").strip()
+
+    if desc and len(desc) <= max_len:
+        return desc
+    fs = first_sentence(desc)
+    if fs and len(fs) <= max_len and len(fs) >= 60:
+        return fs
+    if hero and len(hero) <= max_len and len(hero) >= 60:
+        return hero
+    sections = post.get("sections") or []
+    if sections:
+        body = sections[0][1] if isinstance(sections[0], (list, tuple)) and len(sections[0]) >= 2 else ""
+        body = _normalize_bullet_body(body)
+        fs_body = first_sentence(body)
+        if fs_body and 60 <= len(fs_body) <= max_len:
+            return fs_body
+    return seo_description(desc, max_len)
 
 
 def _normalize_bullet_body(para) -> str:
@@ -238,25 +310,51 @@ def json_ld(data) -> str:
     serialised = serialised.replace("</script>", r"<\/script>").replace("<!--", r"<\!--")
     return '<script type="application/ld+json">' + serialised + "</script>"
 
+def _verification_meta(site: dict) -> str:
+    lines = []
+    g = (site.get("google_site_verification") or "").strip()
+    b = (site.get("bing_site_verification") or "").strip()
+    if g:
+        lines.append(f'<meta name="google-site-verification" content="{html.escape(g)}">')
+    if b:
+        lines.append(f'<meta name="msvalidate.01" content="{html.escape(b)}">')
+    return "\n  ".join(lines)
+
+
+def _prev_next_meta(prev_url: str = None, next_url: str = None) -> str:
+    parts = []
+    if prev_url:
+        parts.append(f'<link rel="prev" href="{prev_url}">')
+    if next_url:
+        parts.append(f'<link rel="next" href="{next_url}">')
+    return "\n  ".join(parts)
+
+
 def make_base(content: str, *, title: str, description: str, canonical: str, schema: str, site: dict,
-              og_type: str = "website", robots: str = "index,follow", og_title: str = None):
+              og_type: str = "website", robots: str = "index,follow", og_title: str = None,
+              og_image: str = None, prev_url: str = None, next_url: str = None):
+    og_image_url = og_image or abs_url(site, "/assets/og-image-v2.png")
+    twitter_handle = site.get("twitter") or ""
     replacements = {
-        "{{title}}":          html.escape(title),
-        "{{description}}":    html.escape(description),
-        "{{canonical}}":      canonical,
-        "{{robots}}":         robots,
-        "{{og_type}}":        og_type,
-        "{{og_title}}":       html.escape(og_title or title),
-        "{{og_image}}":       abs_url(site, "/assets/og-image-v2.png"),
-        "{{site_name}}":      html.escape(site["site_name"]),
-        "{{tagline}}":        html.escape(site["tagline"]),
-        "{{content}}":        localize_content_paths(content, site),
-        "{{schema}}":         schema,
-        "{{asset_prefix}}":   site.get("site_path", ""),
-        "{{adsense_client}}": site["adsense_client"],
-        "{{ga4_id}}":         site["ga4_id"],
-        "{{year}}":           str(datetime.utcnow().year),
-        "{{footer_cats}}":    _FOOTER_CATS_HTML,
+        "{{title}}":             html.escape(title),
+        "{{description}}":       html.escape(description),
+        "{{canonical}}":         canonical,
+        "{{robots}}":            robots,
+        "{{og_type}}":           og_type,
+        "{{og_title}}":          html.escape(og_title or title),
+        "{{og_image}}":          og_image_url,
+        "{{site_name}}":         html.escape(site["site_name"]),
+        "{{tagline}}":           html.escape(site["tagline"]),
+        "{{twitter_handle}}":    html.escape(twitter_handle),
+        "{{content}}":           localize_content_paths(content, site),
+        "{{schema}}":            schema,
+        "{{asset_prefix}}":      site.get("site_path", ""),
+        "{{adsense_client}}":    site["adsense_client"],
+        "{{ga4_id}}":            site["ga4_id"],
+        "{{year}}":              str(datetime.utcnow().year),
+        "{{footer_cats}}":       _FOOTER_CATS_HTML,
+        "{{prev_next}}":         _prev_next_meta(prev_url, next_url),
+        "{{verification_meta}}": _verification_meta(site),
     }
     page = BASE
     for key, value in replacements.items():
@@ -328,25 +426,146 @@ def faq_schema(pairs):
         ]
     })
 
-def article_schema(site, post, url):
-    return json_ld({
+def article_schema(site, post, url, og_image_url=None):
+    # Author is the Organization that operates the site. We deliberately
+    # avoid inventing a Person — fabricated bylines hurt E-E-A-T on YMYL
+    # content. The trust signals come from publisher consistency, cited
+    # public-authority sources (Action Fraud / NCSC / FCA), and a clear
+    # methodology section on /about/.
+    author = {
+        "@type": "Organization",
+        "name": site["author"],
+        "url": site["domain"] + (site.get("editor_url") or "/about/"),
+    }
+    published = post["date"]
+    modified  = post.get("updated") or post.get("dateModified") or post["date"]
+    image_url = og_image_url or abs_url(site, "/assets/og-image-v2.png")
+    data = {
         "@context": "https://schema.org",
         "@type": "Article",
         "headline": post["title"],
         "description": post["description"],
-        "datePublished": post["date"],
-        "dateModified": post["date"],
-        "author": {"@type": "Organization", "name": site["author"]},
+        "datePublished": published,
+        "dateModified": modified,
+        "author": author,
         "publisher": {
             "@type": "Organization",
             "name": site["site_name"],
+            "url": site["domain"],
             "logo": {"@type": "ImageObject", "url": abs_url(site, "/assets/logo-mark.svg")}
         },
-        "mainEntityOfPage": url,
-        "image": [abs_url(site, "/assets/og-image-v2.png")],
+        "mainEntityOfPage": {"@type": "WebPage", "@id": url},
+        "image": [image_url],
         "articleSection": post["category"],
-        "keywords": ", ".join(post["keywords"])
+        "keywords": ", ".join(post["keywords"]),
+        "inLanguage": site.get("locale", "en_GB").replace("_", "-"),
+        "isAccessibleForFree": True,
+    }
+    if modified and modified != published:
+        data["reviewedBy"] = author
+    return json_ld(data)
+
+
+def breadcrumb_schema(items):
+    """items: list of (name, absolute_url) tuples representing the breadcrumb trail."""
+    if not items:
+        return ""
+    return json_ld({
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+            {"@type": "ListItem", "position": i + 1, "name": name, "item": url}
+            for i, (name, url) in enumerate(items)
+        ],
     })
+
+
+def itemlist_schema(items, list_name=None):
+    """items: list of (name, absolute_url) tuples."""
+    if not items:
+        return ""
+    data = {
+        "@context": "https://schema.org",
+        "@type": "ItemList",
+        "numberOfItems": len(items),
+        "itemListElement": [
+            {"@type": "ListItem", "position": i + 1, "name": name, "url": url}
+            for i, (name, url) in enumerate(items)
+        ],
+    }
+    if list_name:
+        data["name"] = list_name
+    return json_ld(data)
+
+
+_STEP_RE      = re.compile(r"\bStep\s+\d+\s*[:.\)\-–]\s*", re.IGNORECASE)
+_PAREN_NUM_RE = re.compile(r"\((\d+)\)\s+")
+
+
+def parse_numbered_steps(text: str):
+    """Extract a list of step strings from a paragraph that contains
+    explicit numbered markers like 'Step 1:' or '(1)'. Returns [] if
+    fewer than 3 distinct steps are detectable."""
+    text = (text or "").strip()
+    if not text:
+        return []
+    # "Step N:" pattern
+    if _STEP_RE.search(text):
+        parts = _STEP_RE.split(text)
+        steps = [p.strip().rstrip(".") for p in parts if p.strip()]
+        if len(steps) >= 3:
+            return steps
+    # "(N)" pattern
+    if _PAREN_NUM_RE.search(text):
+        parts = _PAREN_NUM_RE.split(text)
+        # split returns [pre, num, body, num, body, ...] -> take every other from index 2
+        steps = []
+        for i in range(2, len(parts), 2):
+            piece = parts[i].strip().rstrip(";.")
+            if piece:
+                steps.append(piece)
+        if len(steps) >= 3:
+            return steps
+    return []
+
+
+def howto_schema(site, post, url):
+    """Emit a HowTo schema when a section contains numbered user-action steps.
+
+    Skips the 'how this scam works' section — that describes the attacker's
+    procedure, not a how-to for the reader, and would mislead search engines.
+    """
+    SKIP_KEYWORDS = ("how this scam works", "how the scam works", "how scammers")
+    for entry in post.get("sections", []) or []:
+        if not (isinstance(entry, (list, tuple)) and len(entry) >= 2):
+            continue
+        title, body = entry[0], entry[1]
+        tlow = (title or "").lower()
+        if any(k in tlow for k in SKIP_KEYWORDS):
+            continue
+        body = _normalize_bullet_body(body)
+        if not isinstance(body, str):
+            continue
+        steps = parse_numbered_steps(body)
+        if not steps:
+            continue
+        return json_ld({
+            "@context": "https://schema.org",
+            "@type": "HowTo",
+            "name": title,
+            "description": f"{title} — guidance from the {post['title']} guide on {site['site_name']}.",
+            "totalTime": "PT5M",
+            "step": [
+                {
+                    "@type": "HowToStep",
+                    "position": i + 1,
+                    "name": f"Step {i + 1}",
+                    "text": s[:500],
+                }
+                for i, s in enumerate(steps[:8])
+            ],
+        })
+    return ""
 
 
 # ─── COMPONENTS ────────────────────────────────────────────────────────────
@@ -540,40 +759,115 @@ def render_home(site, posts, categories):
     )
 
 
-def render_guides_index(site, posts):
-    cards = ''.join(render_card(p) for p in posts)
+GUIDES_PER_PAGE = 30
+
+
+def _guides_page_url(site, page_num: int) -> str:
+    if page_num <= 1:
+        return site["domain"] + "/guides/"
+    return site["domain"] + f"/guides/page/{page_num}/"
+
+
+def render_guides_index_page(site, page_posts, page_num: int, total_pages: int, all_posts):
+    cards = ''.join(render_card(p) for p in page_posts)
+
+    page_label = "" if page_num == 1 else f" — page {page_num} of {total_pages}"
+    canonical = _guides_page_url(site, page_num)
+    prev_url  = _guides_page_url(site, page_num - 1) if page_num > 1 else None
+    next_url  = _guides_page_url(site, page_num + 1) if page_num < total_pages else None
+
+    pagination_links = []
+    if prev_url:
+        pagination_links.append(f'<a class="btn btn-secondary" rel="prev" href="{prev_url}">&larr; Previous</a>')
+    pagination_links.append(f'<span class="meta">Page {page_num} of {total_pages}</span>')
+    if next_url:
+        pagination_links.append(f'<a class="btn btn-secondary" rel="next" href="{next_url}">Next &rarr;</a>')
+    pagination_html = (
+        '<nav class="pagination" aria-label="Guides pagination" style="display:flex;gap:1rem;align-items:center;justify-content:center;margin:2rem 0">'
+        + " ".join(pagination_links)
+        + '</nav>'
+        if total_pages > 1 else ""
+    )
+
+    h1 = "Scam guides" if page_num == 1 else f"Scam guides — page {page_num}"
+    intro = ("Browse all published guides by scam type, payment method, platform, or impersonation pattern."
+             if page_num == 1 else
+             f"Page {page_num} of {total_pages} — older guides covering UK scam patterns, payment fraud, and impersonation tactics.")
+
+    search_box = (
+        '<div class="search-box" style="max-width:720px">'
+        '<input id="pageSearch" type="search" placeholder="Filter guides on this page" aria-label="Filter guides">'
+        '</div>'
+    ) if page_num == 1 else ""
+
     content = f'''
     <section class="hero">
       <div class="wrap">
-        <div class="breadcrumbs"><a href="/">Home</a> / Guides</div>
-        <h1>Scam guides</h1>
-        <p class="lead">Browse all published guides by scam type, payment method, platform, or impersonation pattern.</p>
-        <div class="search-box" style="max-width:720px">
-          <input id="pageSearch" type="search" placeholder="Filter guides on this page" aria-label="Filter guides">
-        </div>
+        <div class="breadcrumbs"><a href="/">Home</a> / Guides{page_label}</div>
+        <h1>{html.escape(h1)}</h1>
+        <p class="lead">{html.escape(intro)}</p>
+        {search_box}
       </div>
     </section>
     <section class="section">
       <div class="wrap">
         <div class="grid-3" id="guideGrid">{cards}</div>
+        {pagination_html}
       </div>
     </section>
+    '''
+
+    if page_num == 1:
+        content += '''
     <script>
-      const params = new URLSearchParams(window.location.search);
-      const input = document.getElementById('pageSearch');
-      const cards = Array.from(document.querySelectorAll('[data-searchable]'));
-      function applyFilter(value) {{
-        const q = (value || '').toLowerCase().trim();
-        cards.forEach(card => {{
-          card.style.display = card.dataset.searchable.includes(q) ? '' : 'none';
-        }});
-      }}
-      input.addEventListener('input', e => applyFilter(e.target.value));
-      if (params.get('q')) {{ input.value = params.get('q'); applyFilter(input.value); }}
+      (function() {{
+        var params = new URLSearchParams(window.location.search);
+        var input = document.getElementById('pageSearch');
+        if (!input) return;
+        var cards = Array.from(document.querySelectorAll('[data-searchable]'));
+        function applyFilter(value) {{
+          var q = (value || '').toLowerCase().trim();
+          cards.forEach(function(card) {{ card.style.display = card.dataset.searchable.includes(q) ? '' : 'none'; }});
+        }}
+        input.addEventListener('input', function(e) {{ applyFilter(e.target.value); }});
+        if (params.get('q')) {{ input.value = params.get('q'); applyFilter(input.value); }}
+      }})();
     </script>
     '''
-    schema = page_schema(site, 'Guides', 'Browse all scam guides published on Beat the Scam.', site['domain'] + '/guides/')
-    return make_base(content, title=f'Scam Guides | {site["site_name"]}', description='Browse all published UK scam guides by type — from phishing emails and fake texts to crypto fraud, job scams, and marketplace abuse. Free advice, no account needed.', canonical=site['domain'] + '/guides/', schema=schema, site=site)
+
+    # ItemList schema for this page only (so search engines can read the page's actual contents)
+    item_pairs = [(p["title"], site["domain"] + f"/guides/{p['slug']}/") for p in page_posts]
+    breadcrumbs = [("Home", site["domain"] + "/"), ("Guides", site["domain"] + "/guides/")]
+    if page_num > 1:
+        breadcrumbs.append((f"Page {page_num}", canonical))
+
+    schema = (
+        page_schema(site, h1, 'Browse all scam guides published on Beat the Scam.', canonical)
+        + itemlist_schema(item_pairs, list_name=h1)
+        + breadcrumb_schema(breadcrumbs)
+    )
+    description = (
+        'Browse all published UK scam guides by type — from phishing emails and fake texts to crypto fraud, job scams, and marketplace abuse. Free advice, no account needed.'
+        if page_num == 1 else
+        f'Older UK scam guides, page {page_num} of {total_pages}. Covers phishing, payment fraud, marketplace scams, and impersonation patterns.'
+    )
+    return make_base(
+        content,
+        title=seo_title(h1, site["site_name"]),
+        description=seo_description(description),
+        canonical=canonical,
+        schema=schema,
+        site=site,
+        prev_url=prev_url,
+        next_url=next_url,
+    )
+
+
+def render_guides_index(site, posts):
+    """Backwards-compat: render only the first page (used by callers that
+    expect a single HTML string). Full pagination is handled in build()."""
+    total_pages = max(1, (len(posts) + GUIDES_PER_PAGE - 1) // GUIDES_PER_PAGE)
+    return render_guides_index_page(site, posts[:GUIDES_PER_PAGE], 1, total_pages, posts)
 
 
 def render_categories_index(site, categories):
@@ -598,12 +892,22 @@ def render_categories_index(site, categories):
     </section>
     <section class="section"><div class="wrap"><div class="category-grid">{"".join(items)}</div></div></section>
     '''
+    cat_items = [
+        (category_label(cat), site["domain"] + f"/categories/{slugify(cat)}/")
+        for cat, _ in sorted(categories.items(), key=lambda x: len(x[1]), reverse=True)
+    ]
+    breadcrumbs = [("Home", site["domain"] + "/"), ("Categories", site["domain"] + "/categories/")]
+    schema = (
+        page_schema(site, 'Categories', 'Browse scam guide categories.', site['domain'] + '/categories/')
+        + itemlist_schema(cat_items, list_name='Scam categories')
+        + breadcrumb_schema(breadcrumbs)
+    )
     return make_base(
         content,
         title=f'Categories | {site["site_name"]}',
         description='Browse all scam categories and find guides relevant to the message or situation you are checking.',
         canonical=site['domain'] + '/categories/',
-        schema=page_schema(site, 'Categories', 'Browse scam guide categories.', site['domain'] + '/categories/'),
+        schema=schema,
         site=site
     )
 
@@ -638,37 +942,106 @@ def render_category_page(site, category, posts, all_categories=None):
     <section class="section"><div class="wrap"><div class="grid-3">{"".join(render_card(p) for p in posts)}</div></div></section>
     {related_cats_html}
     '''
+    canonical = site['domain'] + f'/categories/{slug}/'
+    item_pairs  = [(p["title"], site["domain"] + f"/guides/{p['slug']}/") for p in posts]
+    breadcrumbs = [
+        ("Home",          site["domain"] + "/"),
+        ("Categories",    site["domain"] + "/categories/"),
+        (label,           canonical),
+    ]
+    schema = (
+        page_schema(site, label, desc, canonical)
+        + itemlist_schema(item_pairs, list_name=label)
+        + breadcrumb_schema(breadcrumbs)
+    )
     return make_base(
         content,
         title=seo_title(label, site["site_name"]),
         description=seo_description(desc),
-        canonical=site['domain'] + f'/categories/{slug}/',
-        schema=page_schema(site, label, desc, site['domain'] + f'/categories/{slug}/'),
+        canonical=canonical,
+        schema=schema,
         site=site
     )
 
 
+def _keyword_set(post):
+    return {(k or "").lower().strip() for k in post.get("keywords", []) if k}
+
+
 def related_posts(posts, current, count=4):
-    current_sig = topic_signature(current)
+    """Score-based related-post picker.
+
+    Scoring:
+      +3  shared category
+      +2  per shared keyword token
+      +1  per shared significant word in the title (length >= 5, not common stop)
+    Topics that share more keywords with the current post bubble up — this
+    gives much better cross-category recommendations than same-category-only.
+    """
+    current_sig   = topic_signature(current)
+    current_kws   = _keyword_set(current)
+    title_tokens  = {
+        t for t in re.findall(r"[a-z]{5,}", current["title"].lower())
+        if t not in {"guide", "scams", "scam", "checklist", "messages", "message", "online"}
+    }
     seen = {current_sig}
-    ordered = []
-    same_cat = [p for p in posts if p['slug'] != current['slug'] and p['category'] == current['category']]
-    others   = [p for p in posts if p['slug'] != current['slug'] and p['category'] != current['category']]
-    for p in same_cat + others:
+
+    scored = []
+    for p in posts:
+        if p["slug"] == current["slug"]:
+            continue
         sig = topic_signature(p)
         if sig in seen:
             continue
-        seen.add(sig)
-        ordered.append(p)
-        if len(ordered) >= count:
-            break
-    return ordered
+        score = 0
+        if p["category"] == current["category"]:
+            score += 3
+        shared_kw = current_kws & _keyword_set(p)
+        score += 2 * len(shared_kw)
+        p_title_tokens = {t for t in re.findall(r"[a-z]{5,}", p["title"].lower())}
+        score += len(title_tokens & p_title_tokens)
+        if score > 0:
+            scored.append((score, p, sig))
+
+    scored.sort(key=lambda x: (-x[0], x[1]["date"]), reverse=False)
+    scored.sort(key=lambda x: -x[0])  # primary: score desc
+
+    out = []
+    used_sigs = set(seen)
+    for _, p, sig in scored:
+        if sig in used_sigs:
+            continue
+        used_sigs.add(sig)
+        out.append(p)
+        if len(out) >= count:
+            return out
+
+    # Fallback — if nothing scored, fill from same-category, then anywhere.
+    if len(out) < count:
+        for p in posts:
+            if len(out) >= count:
+                break
+            if p["slug"] == current["slug"]:
+                continue
+            sig = topic_signature(p)
+            if sig in used_sigs:
+                continue
+            used_sigs.add(sig)
+            out.append(p)
+    return out
 
 
 def render_post(site, post, all_posts, affiliates=None):
     url   = site['domain'] + f'/guides/{post["slug"]}/'
     label = category_label(post["category"])
     mins  = reading_time(post)
+    cat_slug = slugify(post["category"])
+
+    published = post["date"]
+    updated   = post.get("updated") or post.get("dateModified") or published
+    updated_html = ""
+    if updated and updated != published:
+        updated_html = f' &middot; <time datetime="{html.escape(updated)}">Updated {html.escape(updated)}</time>'
 
     section_ids   = []
     section_parts = []
@@ -691,18 +1064,27 @@ def render_post(site, post, all_posts, affiliates=None):
         for p in related_posts(all_posts, post)
     )
 
+    # Honest byline: the publisher (an organisation), not an invented persona.
+    author_url = site.get("editor_url") or "/about/"
+    byline = f'<a href="{html.escape(author_url)}" rel="author">{html.escape(site["author"])}</a>'
+
     content = f'''
     <section class="hero">
       <div class="wrap">
-        <div class="breadcrumbs"><a href="/">Home</a> / <a href="/guides/">Guides</a> / <a href="/categories/{post["category"]}/">{html.escape(label)}</a> / <span class="bc-title">{html.escape(post["title"])}</span></div>
+        <div class="breadcrumbs"><a href="/">Home</a> / <a href="/guides/">Guides</a> / <a href="/categories/{cat_slug}/">{html.escape(label)}</a> / <span class="bc-title">{html.escape(post["title"])}</span></div>
       </div>
     </section>
     <section class="wrap article-layout">
-      <article class="article">
+      <article class="article" itemscope itemtype="https://schema.org/Article">
+        <meta itemprop="inLanguage" content="en-GB">
         <div class="eyebrow">{html.escape(label)}</div>
-        <h1>{html.escape(post["title"])}</h1>
-        <p class="lead">{html.escape(post["hero"])}</p>
-        <p class="meta">Published {post["date"]} &middot; {html.escape(site["author"])} &middot; {mins} min read</p>
+        <h1 itemprop="headline">{html.escape(post["title"])}</h1>
+        <p class="lead" itemprop="description">{html.escape(post["hero"])}</p>
+        <p class="meta">
+          <span itemprop="author" itemscope itemtype="https://schema.org/Organization">By <span itemprop="name">{byline}</span></span>
+          &middot; <time itemprop="datePublished" datetime="{html.escape(published)}">Published {html.escape(published)}</time>{updated_html}
+          &middot; {mins} min read
+        </p>
         <div class="badge-row">{badges}</div>
         <div class="notice"><strong>Key rule:</strong> verify through an official route you opened yourself, not the link, number, app, or payment details supplied by the suspicious message.</div>
         <div class="toc"><strong>On this page</strong><ol>{toc}</ol></div>
@@ -714,6 +1096,7 @@ def render_post(site, post, all_posts, affiliates=None):
           Use the <a href="/check/">AI scam checker</a> for an instant analysis, or report it to
           <a href="https://www.reportfraud.police.uk" rel="noopener noreferrer" target="_blank">Action Fraud</a>.
         </div>
+        <p class="meta" style="margin-top:1.4rem">Reviewed against current UK reporting guidance from <a href="https://www.actionfraud.police.uk/" rel="noopener" target="_blank">Action Fraud</a>, the <a href="https://www.ncsc.gov.uk/" rel="noopener" target="_blank">National Cyber Security Centre</a>, and <a href="https://www.citizensadvice.org.uk/consumer/scams/" rel="noopener" target="_blank">Citizens Advice</a>. Last reviewed {html.escape(updated or published)}. Read about <a href="/about/">how Beat the Scam writes guides</a>.</p>
       </article>
       <aside class="sidebar">
         <section class="sidebar-card">
@@ -746,16 +1129,30 @@ def render_post(site, post, all_posts, affiliates=None):
       </aside>
     </section>
     '''
-    schema = article_schema(site, post, url) + faq_schema(post['faq'])
+
+    breadcrumbs = [
+        ("Home",         site["domain"] + "/"),
+        ("Guides",       site["domain"] + "/guides/"),
+        (label,          site["domain"] + f"/categories/{cat_slug}/"),
+        (post["title"], url),
+    ]
+    og_image_url = abs_url(site, f"/assets/og/{post['slug']}.png")
+    schema = (
+        article_schema(site, post, url, og_image_url=og_image_url)
+        + faq_schema(post['faq'])
+        + breadcrumb_schema(breadcrumbs)
+        + howto_schema(site, post, url)
+    )
     return make_base(
         content,
         title=seo_title(post["title"], site["site_name"]),
         og_title=post['title'],
-        description=seo_description(post['description']),
+        description=pick_description(post),
         canonical=url,
         schema=schema,
         site=site,
-        og_type='article'
+        og_type='article',
+        og_image=og_image_url,
     )
 
 
@@ -989,8 +1386,8 @@ def build_legal_bodies(site):
     <p><strong>{html.escape(site["site_name"])}</strong> is a consumer-protection content site focused on helping UK residents recognise scam patterns before they send money, share credentials, or install malicious software.</p>
 
     <div class="author-card" style="margin:1.5rem 0;padding:1.2rem;border:1px solid var(--line);border-radius:14px;background:#fafafa">
-      <p style="margin:0 0 .35rem 0"><strong>Edited by James Carter</strong> &middot; Editor, {html.escape(site["site_name"])}</p>
-      <p style="margin:0;font-size:.95rem;color:#555">Background in UK consumer affairs writing with a focus on fraud, online safety, and digital payment risk. Reviews scam patterns regularly and updates guides as new variants emerge.</p>
+      <p style="margin:0 0 .35rem 0"><strong>Who runs this site</strong></p>
+      <p style="margin:0;font-size:.95rem;color:#555">{html.escape(site["site_name"])} is operated independently by a UK-based technologist using AI tooling to surface scam patterns and translate official UK guidance into plain-English checks. We are not journalists, lawyers, regulators, bankers, or accredited consumer-affairs professionals. We are an educational publication — every recommendation on the site directs you to the official UK authority that owns that decision.</p>
     </div>
 
     <p>The editorial model is simple: fast checks, plain-English explanations, and practical actions. The site is not a law firm, bank, or regulator. It is a free educational publication designed to reduce avoidable losses.</p>
@@ -1089,14 +1486,53 @@ def build_legal_bodies(site):
 
 # ─── DEDUPLICATE ────────────────────────────────────────────────────────────
 
-def deduplicate_posts(posts: list) -> list:
-    """Keep only the most recent post per slug."""
-    seen: dict = {}
+def disambiguate_slugs(posts: list) -> list:
+    """Ensure every post keeps a unique slug, preserving all posts.
+
+    For colliding slugs, the newest post wins the canonical slug; older
+    posts get -2, -3 suffixes. This avoids the previous behaviour of
+    silently dropping duplicates and losing indexable content.
+
+    Posts that share a slug AND identical (title, description) — i.e.
+    obvious accidental re-imports of the same article — are still
+    deduplicated (newer kept) since they offer no SEO value as two pages.
+    """
+    by_slug: dict = {}
     for post in posts:
-        slug = post["slug"]
-        if slug not in seen or post["date"] > seen[slug]["date"]:
-            seen[slug] = post
-    return sorted(seen.values(), key=lambda p: p["date"], reverse=True)
+        by_slug.setdefault(post["slug"], []).append(post)
+
+    out = []
+    for slug, group in by_slug.items():
+        group.sort(key=lambda p: p["date"], reverse=True)
+
+        # Drop literal duplicates (same title+description) — keep newest only.
+        seen_key = set()
+        unique = []
+        for p in group:
+            key = (p.get("title", "").strip().lower(), p.get("description", "").strip().lower())
+            if key in seen_key:
+                continue
+            seen_key.add(key)
+            unique.append(p)
+
+        if len(unique) == 1:
+            out.append(unique[0])
+            continue
+
+        # First entry keeps the canonical slug; rest get -2, -3, ...
+        out.append(unique[0])
+        for idx, p in enumerate(unique[1:], start=2):
+            new_slug = f"{slug}-{idx}"
+            p = dict(p)
+            p["slug"] = new_slug
+            out.append(p)
+            print(f"  slug-collision: '{slug}' → kept newest, renamed older to '{new_slug}'")
+
+    return sorted(out, key=lambda p: p["date"], reverse=True)
+
+
+# Backwards-compat alias used by any external caller / test.
+deduplicate_posts = disambiguate_slugs
 
 
 # ─── INTERNAL LINKING ──────────────────────────────────────────────────────
@@ -1206,6 +1642,176 @@ def apply_internal_links(html_str: str, current_slug: str, link_map: dict, max_t
     return "".join(out)
 
 
+# ─── OG IMAGE GENERATION ───────────────────────────────────────────────────
+
+try:
+    from PIL import Image, ImageDraw, ImageFont
+    _PIL_OK = True
+except Exception:
+    _PIL_OK = False
+
+
+_OG_W, _OG_H = 1200, 630
+
+
+def _load_font(size: int):
+    """Best-effort font load — try common system fonts, fall back to default."""
+    candidates = [
+        "/System/Library/Fonts/Supplemental/Arial Bold.ttf",
+        "/System/Library/Fonts/Helvetica.ttc",
+        "/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf",
+        "/usr/share/fonts/truetype/liberation/LiberationSans-Bold.ttf",
+        "/Library/Fonts/Arial Bold.ttf",
+    ]
+    for path in candidates:
+        try:
+            return ImageFont.truetype(path, size)
+        except Exception:
+            continue
+    return ImageFont.load_default()
+
+
+def _wrap_text(draw, text: str, font, max_width: int):
+    words = text.split()
+    lines = []
+    current = []
+    for word in words:
+        trial = " ".join(current + [word])
+        bbox = draw.textbbox((0, 0), trial, font=font)
+        if (bbox[2] - bbox[0]) <= max_width:
+            current.append(word)
+        else:
+            if current:
+                lines.append(" ".join(current))
+            current = [word]
+    if current:
+        lines.append(" ".join(current))
+    return lines
+
+
+def generate_og_image(out_path: Path, title: str, category_label: str, site_name: str):
+    """Write a 1200x630 branded OG image for a single post. No-op if Pillow missing."""
+    if not _PIL_OK:
+        return False
+    img = Image.new("RGB", (_OG_W, _OG_H), color=(11, 18, 32))  # matches theme-color #0b1220
+    draw = ImageDraw.Draw(img)
+
+    # Subtle accent bar
+    draw.rectangle([(0, 0), (_OG_W, 12)], fill=(58, 134, 255))
+
+    # Bottom branding strip
+    draw.rectangle([(0, _OG_H - 90), (_OG_W, _OG_H)], fill=(15, 24, 42))
+
+    pad = 80
+    body_width = _OG_W - pad * 2
+
+    cat_font   = _load_font(34)
+    title_font = _load_font(64)
+    brand_font = _load_font(36)
+    tag_font   = _load_font(28)
+
+    # Eyebrow / category
+    draw.text((pad, 90), category_label.upper(), font=cat_font, fill=(140, 198, 255))
+
+    # Title — wrap and cap at 4 lines
+    lines = _wrap_text(draw, title, title_font, body_width)[:4]
+    y = 160
+    line_height = 78
+    for line in lines:
+        draw.text((pad, y), line, font=title_font, fill=(255, 255, 255))
+        y += line_height
+
+    # Brand
+    draw.text((pad, _OG_H - 72), site_name, font=brand_font, fill=(255, 255, 255))
+    draw.text((pad, _OG_H - 36), "Scam alerts, plain-English checks", font=tag_font, fill=(140, 198, 255))
+
+    out_path.parent.mkdir(parents=True, exist_ok=True)
+    img.save(out_path, "PNG", optimize=True)
+    return True
+
+
+# ─── BARE-PATH LINKIFY ─────────────────────────────────────────────────────
+
+_BARE_PATH_RE = re.compile(r"(?<![\"'>=/])(/guides/[a-z0-9][a-z0-9-]+/)(?![A-Za-z0-9-])")
+
+_BARE_PATH_EXCLUDED_RE = re.compile(
+    r'<head\b[^>]*>.*?</head>'
+    r'|<script\b[^>]*>.*?</script>'
+    r'|<style\b[^>]*>.*?</style>'
+    r'|<noscript\b[^>]*>.*?</noscript>'
+    r'|<a\s[^>]*>.*?</a>'
+    r'|<code[^>]*>.*?</code>'
+    r'|<pre[^>]*>.*?</pre>',
+    re.IGNORECASE | re.DOTALL,
+)
+
+
+def linkify_bare_paths(html_str: str, slug_titles: dict) -> str:
+    """Convert AI-generated bare '/guides/xyz/' text into proper anchor tags.
+
+    Skips inside <head>, <script>, <style>, existing <a>, <code>, <pre> — same
+    zones as apply_internal_links to avoid double-wrapping or touching
+    metadata/structured-data blocks.
+    """
+    if not html_str:
+        return html_str
+
+    zones = []
+    last_end = 0
+    for m in _BARE_PATH_EXCLUDED_RE.finditer(html_str):
+        if m.start() > last_end:
+            zones.append(("plain", html_str[last_end:m.start()]))
+        zones.append(("excluded", m.group()))
+        last_end = m.end()
+    if last_end < len(html_str):
+        zones.append(("plain", html_str[last_end:]))
+
+    def replace_match(m):
+        path = m.group(1)
+        slug = path.strip("/").split("/")[-1]
+        link_text = slug_titles.get(slug) or slug.replace("-", " ")
+        return f'<a href="{path}">{html.escape(link_text)}</a>'
+
+    out = []
+    for kind, text in zones:
+        if kind == "excluded":
+            out.append(text)
+        else:
+            out.append(_BARE_PATH_RE.sub(replace_match, text))
+    return "".join(out)
+
+
+# ─── PHONE LINKIFY ─────────────────────────────────────────────────────────
+
+# Match UK helpline patterns: 0300/0800/0808/0345 prefix, then space-separated digits.
+_PHONE_RE = re.compile(r"\b(0(?:300|800|808|345|371|370|345)\s\d{3}\s\d{3,4})\b")
+
+
+def linkify_phones(html_str: str) -> str:
+    """Wrap UK consumer-helpline numbers in tel: anchors so they're tappable on mobile."""
+    if not html_str:
+        return html_str
+    zones = []
+    last_end = 0
+    for m in _BARE_PATH_EXCLUDED_RE.finditer(html_str):
+        if m.start() > last_end:
+            zones.append(("plain", html_str[last_end:m.start()]))
+        zones.append(("excluded", m.group()))
+        last_end = m.end()
+    if last_end < len(html_str):
+        zones.append(("plain", html_str[last_end:]))
+
+    def replace(m):
+        number = m.group(1)
+        tel = "+44" + number.replace(" ", "")[1:]
+        return f'<a href="tel:{tel}">{number}</a>'
+
+    out = []
+    for kind, text in zones:
+        out.append(text if kind == "excluded" else _PHONE_RE.sub(replace, text))
+    return "".join(out)
+
+
 # ─── MAIN BUILD ────────────────────────────────────────────────────────────
 
 def build():
@@ -1218,12 +1824,15 @@ def build():
     for post in raw_posts:
         post["category"] = normalize_category(post["category"])
 
-    # Deduplicate — keep newest per slug
-    posts = deduplicate_posts(raw_posts)
+    # Disambiguate slug collisions — preserve all posts, never silently drop
+    posts = disambiguate_slugs(raw_posts)
 
     categories = defaultdict(list)
     for post in posts:
         categories[post['category']].append(post)
+
+    # Slug → title map for bare-path linkification (used per-guide below)
+    slug_titles = {p["slug"]: p["title"] for p in posts}
 
     if DIST.exists():
         shutil.rmtree(DIST)
@@ -1246,19 +1855,44 @@ def build():
                 shutil.copy2(src, DIST / src.name)
 
     write(DIST / 'index.html',       render_home(site, posts, categories))
-    write(DIST / 'guides/index.html', render_guides_index(site, posts))
     write(DIST / 'categories/index.html', render_categories_index(site, categories))
     for cat, items in categories.items():
         write(DIST / 'categories' / slugify(cat) / 'index.html', render_category_page(site, cat, items, categories))
+
+    # Paginated /guides/ index (30 per page, with rel=next/prev wired through make_base)
+    total_pages = max(1, (len(posts) + GUIDES_PER_PAGE - 1) // GUIDES_PER_PAGE)
+    for page_num in range(1, total_pages + 1):
+        start = (page_num - 1) * GUIDES_PER_PAGE
+        page_posts = posts[start:start + GUIDES_PER_PAGE]
+        html_page = render_guides_index_page(site, page_posts, page_num, total_pages, posts)
+        out_path = DIST / 'guides' / 'index.html' if page_num == 1 else DIST / 'guides' / 'page' / str(page_num) / 'index.html'
+        write(out_path, html_page)
 
     # Build phrase → URL map once for the whole site, then auto-link
     # contextual mentions inside each rendered guide before writing.
     link_map = build_internal_link_map(posts)
 
+    # Per-post OG image generation (no-op if Pillow missing)
+    og_dir = DIST / 'assets' / 'og'
+    og_dir.mkdir(parents=True, exist_ok=True)
+    og_gen_count = 0
+
     for post in posts:
+        # Generate the OG image first so the rendered HTML references a real file.
+        og_out = og_dir / f"{post['slug']}.png"
+        if generate_og_image(og_out, post["title"], category_label(post["category"]), site["site_name"]):
+            og_gen_count += 1
+
         html_out = render_post(site, post, posts, affiliates)
+        html_out = linkify_bare_paths(html_out, slug_titles)
         html_out = apply_internal_links(html_out, post['slug'], link_map)
+        html_out = linkify_phones(html_out)
         write(DIST / 'guides' / post['slug'] / 'index.html', html_out)
+
+    if not _PIL_OK:
+        print("  Pillow not installed — per-post OG images skipped (using site default).")
+    else:
+        print(f"  Generated {og_gen_count} per-post OG images in /assets/og/")
 
     write(DIST / 'check/index.html', render_check_page(site))
 
@@ -1308,18 +1942,71 @@ def build():
     rss = f'<?xml version="1.0" encoding="UTF-8" ?>\n<rss version="2.0"><channel><title>{html.escape(site["site_name"])}</title><link>{site["domain"]}</link><description>{html.escape(site["tagline"])}</description>{"".join(rss_items)}</channel></rss>'
     write(DIST / 'rss.xml', rss)
 
-    # Sitemap — includes lastmod dates so crawlers can prioritise fresh content
+    # Sitemap — lastmod reflects actual content dates, not the build timestamp
     today = datetime.utcnow().strftime("%Y-%m-%d")
-    static_urls = ['/', '/guides/', '/categories/', '/check/', '/about/', '/privacy/', '/cookies/', '/terms/', '/contact/']
+    newest_post_date = max((p["date"] for p in posts), default=today)
+
+    static_url_lastmods = {
+        '/':            newest_post_date,
+        '/guides/':     newest_post_date,
+        '/categories/': newest_post_date,
+        '/check/':      today,
+        '/about/':      today,
+        '/privacy/':    today,
+        '/cookies/':    today,
+        '/terms/':      today,
+        '/contact/':    today,
+    }
+
     sitemap_lines = ['<?xml version="1.0" encoding="UTF-8"?>', '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">']
-    for url in static_urls:
-        sitemap_lines.append(f'<url><loc>{site["domain"]}{url}</loc><lastmod>{today}</lastmod><changefreq>weekly</changefreq></url>')
+    for url, lastmod in static_url_lastmods.items():
+        freq = 'daily' if url == '/' else 'weekly'
+        sitemap_lines.append(f'<url><loc>{site["domain"]}{url}</loc><lastmod>{lastmod}</lastmod><changefreq>{freq}</changefreq></url>')
+
+    # Paginated /guides/ pages — each its own URL
+    for page_num in range(2, total_pages + 1):
+        sitemap_lines.append(
+            f'<url><loc>{site["domain"]}/guides/page/{page_num}/</loc>'
+            f'<lastmod>{newest_post_date}</lastmod><changefreq>weekly</changefreq></url>'
+        )
+
     for p in posts:
-        sitemap_lines.append(f'<url><loc>{site["domain"]}/guides/{p["slug"]}/</loc><lastmod>{p["date"]}</lastmod><changefreq>monthly</changefreq></url>')
-    for cat in categories:
-        sitemap_lines.append(f'<url><loc>{site["domain"]}/categories/{slugify(cat)}/</loc><lastmod>{today}</lastmod><changefreq>weekly</changefreq></url>')
+        post_lastmod = p.get("updated") or p.get("dateModified") or p["date"]
+        sitemap_lines.append(
+            f'<url><loc>{site["domain"]}/guides/{p["slug"]}/</loc>'
+            f'<lastmod>{post_lastmod}</lastmod><changefreq>monthly</changefreq></url>'
+        )
+
+    for cat, items in categories.items():
+        # Category lastmod = newest member's date (or build today if empty)
+        cat_lastmod = max((p.get("updated") or p.get("dateModified") or p["date"] for p in items), default=today)
+        sitemap_lines.append(
+            f'<url><loc>{site["domain"]}/categories/{slugify(cat)}/</loc>'
+            f'<lastmod>{cat_lastmod}</lastmod><changefreq>weekly</changefreq></url>'
+        )
     sitemap_lines.append('</urlset>')
     write(DIST / 'sitemap.xml', '\n'.join(sitemap_lines))
+
+    # humans.txt — small editorial transparency signal
+    humans_txt = (
+        f"/* SITE */\n"
+        f"Name: {site['site_name']}\n"
+        f"Site: {site['domain']}\n"
+        f"Contact: {site['contact_email']}\n"
+        f"Coverage: UK consumer protection — scam alerts, verification guides, AI scam checker\n\n"
+        f"/* PUBLISHER */\n"
+        f"Name: {site['author']}\n"
+        f"Notes: Independent educational publication. Not a law firm, bank, or regulator.\n"
+        f"Methodology: see {site['domain']}/about/\n\n"
+        f"/* SOURCES */\n"
+        f"Action Fraud — https://www.actionfraud.police.uk/\n"
+        f"NCSC — https://www.ncsc.gov.uk/\n"
+        f"Citizens Advice — https://www.citizensadvice.org.uk/consumer/scams/\n"
+        f"FCA ScamSmart — https://www.fca.org.uk/scamsmart\n\n"
+        f"/* LAST UPDATE */\n"
+        f"{today}\n"
+    )
+    write(DIST / 'humans.txt', humans_txt)
 
     # Robots
     robots_content = (

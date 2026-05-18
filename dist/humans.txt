@@ -1,0 +1,19 @@
+/* SITE */
+Name: Beat the Scam
+Site: https://beatthescam.com
+Contact: hello@beatthescam.com
+Coverage: UK consumer protection — scam alerts, verification guides, AI scam checker
+
+/* PUBLISHER */
+Name: Beat the Scam Editorial Team
+Notes: Independent educational publication. Not a law firm, bank, or regulator.
+Methodology: see https://beatthescam.com/about/
+
+/* SOURCES */
+Action Fraud — https://www.actionfraud.police.uk/
+NCSC — https://www.ncsc.gov.uk/
+Citizens Advice — https://www.citizensadvice.org.uk/consumer/scams/
+FCA ScamSmart — https://www.fca.org.uk/scamsmart
+
+/* LAST UPDATE */
+2026-05-18
