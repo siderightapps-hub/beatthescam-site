@@ -70,7 +70,7 @@ jobs:
           if [ "$DRY_RUN" = "true" ]; then
             python scripts/search_console_articles.py --dry-run --days "$SC_DAYS"
           else
-            OUTPUT=$(python scripts/search_console_articles.py --days "$SC_DAYS" --limit 1 2>&1)
+            OUTPUT=$(python scripts/search_console_articles.py --days "$SC_DAYS" --limit 1 2>&1) || true
             echo "$OUTPUT"
             # Extract new slugs from output for tweeting
             SLUGS=$(echo "$OUTPUT" | grep "^NEW_ARTICLE_SLUGS=" | cut -d= -f2)
