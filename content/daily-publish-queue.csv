@@ -117,11 +117,11 @@ concert ticket scam UK,Unknown,shopping,true,2026-05-17T08:34:15Z,concert-ticket
 Glastonbury ticket scam UK,Unknown,shopping,true,2026-05-17T08:34:15Z,glastonbury-ticket-scam-uk
 Viagogo scam UK,Viagogo,shopping,true,2026-05-17T08:34:15Z,viagogo-scam-uk
 British Gas scam call UK,British Gas,utility,true,2026-05-17T08:34:15Z,british-gas-scam-call-uk
-smart meter scam call UK,Unknown,utility,,,smart-meter-scam-call-uk
-solar panel scam UK,Unknown,utility,,,solar-panel-scam-uk
-Revolut scam UK,Revolut,payment,,,revolut-scam-uk
-Starling bank scam UK,Starling,payment,,,starling-bank-scam-uk
-Wise transfer scam UK,Wise,payment,,,wise-transfer-scam-uk
+smart meter scam call UK,Unknown,utility,true,2026-05-18T10:42:47Z,smart-meter-scam-call-uk
+solar panel scam UK,Unknown,utility,true,2026-05-18T10:42:47Z,solar-panel-scam-uk
+Revolut scam UK,Revolut,payment,true,2026-05-18T10:42:47Z,revolut-scam-uk
+Starling bank scam UK,Starling,payment,true,2026-05-18T10:42:47Z,starling-bank-scam-uk
+Wise transfer scam UK,Wise,payment,true,2026-05-18T10:42:47Z,wise-transfer-scam-uk
 TSB bank scam text,TSB,sms,,,tsb-bank-scam-text
 Nationwide scam text UK,Nationwide,sms,,,nationwide-scam-text-uk
 HSBC bank scam call UK,HSBC,phone,,,hsbc-bank-scam-call-uk

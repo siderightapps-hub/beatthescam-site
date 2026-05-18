@@ -1,6 +1,27 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <rss version="2.0"><channel><title>Beat the Scam</title><link>https://beatthescam.com</link><description>Scam alerts, plain-English checks, and practical guides to help people verify suspicious emails, texts, websites, calls, and offers.</description>
         <item>
+          <title>Revolut Scam UK: How to Spot Fake Revolut Messages and Protect Your Money</title>
+          <link>https://beatthescam.com/guides/revolut-scam-uk/</link>
+          <guid>https://beatthescam.com/guides/revolut-scam-uk/</guid>
+          <pubDate>Mon, 18 May 2026 00:00:00 +0000</pubDate>
+          <description>Revolut scams target UK users through fake SMS messages, emails, and cloned app interfaces claiming urgent action is needed. Fraudsters use these to harvest your login credentials, two-factor codes, and bank details, then drain your account or use it for money laundering.</description>
+        </item>
+        <item>
+          <title>Starling Bank Scam UK: How to Spot and Stop Fake Starling Fraud</title>
+          <link>https://beatthescam.com/guides/starling-bank-scam-uk/</link>
+          <guid>https://beatthescam.com/guides/starling-bank-scam-uk/</guid>
+          <pubDate>Mon, 18 May 2026 00:00:00 +0000</pubDate>
+          <description>Starling Bank scams typically arrive as fake text messages or emails claiming suspicious activity on your account, asking you to click a link or call a number. Fraudsters use authentic-looking branding to trick you into revealing security codes, card details, or granting remote access to your device.</description>
+        </item>
+        <item>
+          <title>Wise Transfer Scam UK: How to Spot and Avoid Impersonation Fraud</title>
+          <link>https://beatthescam.com/guides/wise-transfer-scam-uk/</link>
+          <guid>https://beatthescam.com/guides/wise-transfer-scam-uk/</guid>
+          <pubDate>Mon, 18 May 2026 00:00:00 +0000</pubDate>
+          <description>Wise impersonation scams target UK customers through fake emails, texts and website clones, tricking them into revealing login credentials or sending money to criminal accounts. This guide explains how these scams work and how to verify genuine Wise communications.</description>
+        </item>
+        <item>
           <title>Concert Ticket Scam UK: How to Spot and Avoid Fake Ticket Sites</title>
           <link>https://beatthescam.com/guides/concert-ticket-scam-uk/</link>
           <guid>https://beatthescam.com/guides/concert-ticket-scam-uk/</guid>
@@ -188,25 +209,4 @@
           <guid>https://beatthescam.com/guides/apple-tech-support-scam-uk/</guid>
           <pubDate>Sat, 09 May 2026 00:00:00 +0000</pubDate>
           <description>Apple tech support scams target UK residents through pop-up warnings, emails, and phone calls claiming your device is infected or locked. Scammers aim to steal your Apple ID credentials, payment details, or convince you to pay for fake technical support.</description>
-        </item>
-        <item>
-          <title>BT Broadband Tech Support Scam: How to Spot and Stop It in the UK</title>
-          <link>https://beatthescam.com/guides/bt-broadband-tech-support-scam-uk/</link>
-          <guid>https://beatthescam.com/guides/bt-broadband-tech-support-scam-uk/</guid>
-          <pubDate>Sat, 09 May 2026 00:00:00 +0000</pubDate>
-          <description>Criminals impersonate BT customer support staff, calling or texting to claim your broadband connection has serious security issues or faults. They&#x27;ll pressure you to install remote access software or pay for fake repairs—here&#x27;s what to watch for.</description>
-        </item>
-        <item>
-          <title>Remote Access Scam UK: How Scammers Trick You Into Giving Control of Your Computer</title>
-          <link>https://beatthescam.com/guides/remote-access-scam-uk/</link>
-          <guid>https://beatthescam.com/guides/remote-access-scam-uk/</guid>
-          <pubDate>Sat, 09 May 2026 00:00:00 +0000</pubDate>
-          <description>A remote access scam is when a fraudster convinces you to download software that lets them take control of your computer or phone remotely. They typically pose as technical support, your bank, or an antivirus company, then steal your banking details, passwords, and money while you watch helplessly.</description>
-        </item>
-        <item>
-          <title>Printer Support Scam UK: How to Spot Fake HP Support Calls</title>
-          <link>https://beatthescam.com/guides/printer-support-scam-uk/</link>
-          <guid>https://beatthescam.com/guides/printer-support-scam-uk/</guid>
-          <pubDate>Sat, 09 May 2026 00:00:00 +0000</pubDate>
-          <description>Printer support scams target UK residents with urgent calls or pop-ups claiming your HP printer has errors. Scammers use social engineering to convince you to pay for unnecessary repairs or download malware.</description>
         </item></channel></rss>
