@@ -119,14 +119,29 @@ jobs:
           fi
           git commit -m "Daily AI publish: $(date -u +%Y-%m-%d)"
 
-          # Pull-rebase + retry on push rejection (manual pushes during build)
           for attempt in 1 2 3; do
-            git pull --rebase origin main || true
-            if git push; then
-              echo "Push succeeded on attempt $attempt"
-              exit 0
+            git fetch origin main
+            if git rebase origin/main; then
+              if git push origin HEAD:main; then
+                echo "✅ Push succeeded on attempt $attempt"
+                exit 0
+              fi
+            else
+              echo "Rebase conflict — aborting and retrying with reset"
+              git rebase --abort
+              git fetch origin main
+              git reset --soft HEAD~1
+              git stash
+              git checkout main
+              git pull origin main
+              git stash pop
+              git add content/posts.json \
+                      content/topics-claude-template.csv \
+                      content/daily-publish-queue.csv \
+                      dist
+              git commit -m "Daily AI publish: $(date -u +%Y-%m-%d)"
             fi
-            echo "Push attempt $attempt rejected — retrying after rebase"
+            echo "Push attempt $attempt rejected — retrying"
             sleep 5
           done
           echo "Push failed after 3 attempts"
@@ -147,12 +162,27 @@ jobs:
           git commit -m "Daily AI publish (content only): $(date -u +%Y-%m-%d)"
 
           for attempt in 1 2 3; do
-            git pull --rebase origin main || true
-            if git push; then
-              echo "Push succeeded on attempt $attempt"
-              exit 0
+            git fetch origin main
+            if git rebase origin/main; then
+              if git push origin HEAD:main; then
+                echo "✅ Push succeeded on attempt $attempt"
+                exit 0
+              fi
+            else
+              echo "Rebase conflict — aborting and retrying with reset"
+              git rebase --abort
+              git fetch origin main
+              git reset --soft HEAD~1
+              git stash
+              git checkout main
+              git pull origin main
+              git stash pop
+              git add content/posts.json \
+                      content/topics-claude-template.csv \
+                      content/daily-publish-queue.csv
+              git commit -m "Daily AI publish (content only): $(date -u +%Y-%m-%d)"
             fi
-            echo "Push attempt $attempt rejected — retrying after rebase"
+            echo "Push attempt $attempt rejected — retrying"
             sleep 5
           done
           echo "Push failed after 3 attempts"
