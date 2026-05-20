@@ -127,11 +127,11 @@ TSB bank scam text,TSB,sms,true,2026-05-19T10:11:32Z,tsb-bank-scam-text
 Nationwide scam text UK,Nationwide,sms,true,2026-05-19T10:11:32Z,nationwide-scam-text-uk
 HSBC bank scam call UK,HSBC,phone,true,2026-05-19T10:11:32Z,hsbc-bank-scam-call-uk
 Santander phone scam UK,Santander,phone,true,2026-05-19T10:11:32Z,santander-phone-scam-uk
-AI voice cloning scam UK,Unknown,tech,,,ai-voice-cloning-scam-uk
-deepfake video scam UK,Unknown,tech,,,deepfake-video-scam-uk
-QR code scam UK,Unknown,tech,,,qr-code-scam-uk
-SIM swap fraud UK,Unknown,tech,,,sim-swap-fraud-uk
-number spoofing scam UK,Unknown,phone,,,number-spoofing-scam-uk
+AI voice cloning scam UK,Unknown,tech,true,2026-05-20T08:33:43Z,ai-voice-cloning-scam-uk
+deepfake video scam UK,Unknown,tech,true,2026-05-20T08:33:43Z,deepfake-video-scam-uk
+QR code scam UK,Unknown,tech,true,2026-05-20T08:33:43Z,qr-code-scam-uk
+SIM swap fraud UK,Unknown,tech,true,2026-05-20T08:33:43Z,sim-swap-fraud-uk
+number spoofing scam UK,Unknown,phone,true,2026-05-20T08:33:43Z,number-spoofing-scam-uk
 fake Wi-Fi hotspot scam UK,Unknown,tech,,,fake-wi-fi-hotspot-scam-uk
 Shein fake website UK,Shein,website,,,shein-fake-website-uk
 fake Ray-Ban website UK,Ray-Ban,website,,,fake-ray-ban-website-uk
