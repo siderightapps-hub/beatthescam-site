@@ -17,8 +17,18 @@ You can reuse an existing Google Cloud project if you have one (e.g. the project
 
 ```bash
 cd ~/Projects/websites/beatthescam-site
-pip install google-auth-oauthlib google-api-python-client python-dotenv
+python3 -m pip install google-auth-oauthlib google-api-python-client python-dotenv
 ```
+
+Use `python3 -m pip` (not bare `pip`) — on macOS, `pip` is often not aliased even when `python3` works fine, and using `python3 -m pip` guarantees the libs install into the same Python the upload script will use.
+
+If you get a *permission denied* error (system Python writing to a system path), add `--user`:
+
+```bash
+python3 -m pip install --user google-auth-oauthlib google-api-python-client python-dotenv
+```
+
+That installs into `~/Library/Python/3.x/lib/python/site-packages/` — your user site, no sudo needed.
 
 (You already have `python-dotenv` for the Twitter scripts; the other two are new.)
 
