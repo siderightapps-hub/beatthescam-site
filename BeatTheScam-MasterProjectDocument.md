@@ -526,6 +526,7 @@ multiplex_unit:       <add after creation>
 - **2026-05-19** — Video generation pipeline built (`scripts/generate_video.py`); HMRC Tax Rebate first publish hit 210 YouTube Shorts views.
 - **2026-05-21** — `daily-publish` + `daily-search-console` pipelines serialised via `concurrency: content-pipeline` group; rebase-conflict recovery rewritten; batch size dropped 5 → 1.
 - **2026-05-22** — Video pipeline extended with `HOOK_TEMPLATES` topic-family classification + per-family verify copy + `shorten_warning()` v2 (clause-aware trim). YouTube Shorts auto-upload (`scripts/upload_to_youtube.py`) shipped.
+- **2026-05-22 (later)** — Auto-generated brand-aligned thumbnails (1280×720 JPEG, per-family `thumbnail_text`, auto-uploaded via `yt.thumbnails().set()`). `shorten_warning()` hardened: ellipsis fallback removed entirely — function now NEVER cuts mid-phrase, returns full original sentence if no clean clause boundary exists. macOS Reminders integration in `upload_to_youtube.py` — auto-creates a "Upload <slug> to TikTok" reminder for 07:30 local time on every successful upload (syncs to iPhone via iCloud).
 
 ### Current state
 
@@ -625,7 +626,7 @@ The pipeline ([`scripts/generate_video.py`](scripts/generate_video.py)):
 - Outputs 1080×1920 H.264 MP4 at ~45s, ~28MB, to `out/videos/<slug>.mp4` (gitignored).
 - Renders per-card frames + audio for debug at `out/videos/<slug>-frames/` and `out/videos/<slug>-audio/`.
 
-YouTube auto-upload ([`scripts/upload_to_youtube.py`](scripts/upload_to_youtube.py)) reads the MP4 + the `.upload.md` sidecar, uploads via the YouTube Data API v3 (Unlisted by default for 24h review, `--public` to publish immediately). One-time OAuth setup at `docs/youtube-upload-setup.md` (~15 min).
+YouTube auto-upload ([`scripts/upload_to_youtube.py`](scripts/upload_to_youtube.py)) reads the MP4 + the `.upload.md` sidecar, uploads via the YouTube Data API v3 (Unlisted by default for 24h review, `--public` to publish immediately). After the video upload, it also auto-uploads the brand thumbnail (1280×720 JPEG) via `yt.thumbnails().set()` and creates a **macOS Reminder** ("Upload `<slug>` to TikTok" at 07:30 local time) so the remaining manual TikTok step doesn't get forgotten. Reminder syncs to iPhone via iCloud. One-time OAuth setup: `docs/youtube-upload-setup.md` (~15 min). First-run macOS permission grant: `python3 scripts/upload_to_youtube.py --test-reminder`.
 
 ### Hashtag template
 

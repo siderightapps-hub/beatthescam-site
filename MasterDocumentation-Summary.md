@@ -195,6 +195,10 @@ Copy `WebsiteProject-MasterTemplate.md` to the new project's repo as `PROJECT.md
 ## Document versioning
 
 - **v1.0 — 2026-05-20** — Initial consolidated master document + template + summary, produced from `Template.md` brief.
+- **v1.2 — 2026-05-22 (afternoon)** — Three further capability ships:
+  - **Auto-thumbnail generation + auto-upload.** `scripts/generate_video.py` now renders a brand-aligned 1280×720 JPEG sidecar; `scripts/upload_to_youtube.py` uploads it via `yt.thumbnails().set()` after the video upload (non-fatal on phone-verification failure). Per-family `thumbnail_text` in `HOOK_TEMPLATES` keeps copy topic-correct.
+  - **Never-cut-mid-sentence guarantee.** `shorten_warning()`'s ellipsis-fallback step was deleted entirely. If no clean clause boundary exists within 90 chars, the function returns the full original sentence. Eliminates the `"bank…"` / `"didn't expect…"` failure mode by construction, not by best-effort.
+  - **macOS Reminders integration.** `scripts/upload_to_youtube.py` creates a "Upload `<slug>` to TikTok" reminder for 07:30 local time after every successful upload — closes the only manual step remaining in the daily pipeline. Syncs to iPhone via iCloud. New `--test-reminder` flag to grant the first-time macOS permission prompt.
 - **v1.1 — 2026-05-22** — Folded in the contents of the prior session's `beatthescam-chat-handoff.md` (now deletable) plus today's pipeline work:
   - `VideoProductionHandoff.md` **rewritten** for the new `scripts/generate_video.py` text-card pipeline; the old Gemini-character / CapCut workflow is retired.
   - `scripts/upload_to_youtube.py` + `scripts/get_youtube_refresh_token.py` + `docs/youtube-upload-setup.md` added.

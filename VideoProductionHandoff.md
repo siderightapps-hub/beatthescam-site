@@ -60,12 +60,13 @@ cd ~/Projects/websites/beatthescam-site
 python3 scripts/generate_video.py <slug>
 ```
 
-That single command does **everything**: pulls the article from `content/posts.json`, generates 8 text cards (Pillow), synthesises 8 voice clips (ElevenLabs Daniel V3), assembles via MoviePy with Ken Burns + crossfades, encodes a 1080×1920 H.264 MP4 at ~45s runtime.
+That single command does **everything**: pulls the article from `content/posts.json`, generates 8 text cards (Pillow), synthesises 8 voice clips (ElevenLabs Daniel V3), assembles via MoviePy with Ken Burns + crossfades, encodes a 1080×1920 H.264 MP4 at ~45s runtime, **and renders a brand-aligned 1280×720 thumbnail JPEG**.
 
 Outputs:
 
 ```
 out/videos/<slug>.mp4              # 1080×1920, 30fps, ~25-30 MB (the deliverable)
+out/videos/<slug>.thumbnail.jpg    # 1280×720, JPEG ~65 KB (auto-uploaded by upload_to_youtube.py)
 out/videos/<slug>-frames/          # PNG per scene (visual debug)
 out/videos/<slug>-audio/           # MP3 per scene (audio debug)
 out/videos/<slug>.upload.md        # hand-written upload metadata (currently manual)
@@ -80,9 +81,10 @@ out/videos/<slug>.upload.md        # hand-written upload metadata (currently man
 python3 scripts/upload_to_youtube.py <slug>             # Unlisted (review in Studio)
 python3 scripts/upload_to_youtube.py <slug> --public    # Public immediately
 python3 scripts/upload_to_youtube.py <slug> --dry-run   # Validate metadata, don't upload
+python3 scripts/upload_to_youtube.py --test-reminder    # First-run: grant macOS Reminders permission
 ```
 
-Reads `out/videos/<slug>.upload.md` for title / description / tags. Auto-sets category=Education, language=en-GB, made-for-kids=NO.
+Reads `out/videos/<slug>.upload.md` for title / description / tags. Auto-sets category=Education, language=en-GB, made-for-kids=NO. After video upload succeeds, **also auto-uploads the brand thumbnail** via `yt.thumbnails().set()` (requires phone-verified YouTube account — fails non-fatally if not verified, video upload itself remains successful), and **creates a macOS Reminder** titled "Upload <slug> to TikTok" scheduled for 07:30 BST tomorrow (syncs to iPhone via iCloud).
 
 ### TikTok upload (still manual)
 
@@ -163,7 +165,7 @@ Article warning sentences are often too long for cards. The trim cascades throug
 3. **Drop `using/via/by/through X, Y, Z` lists** (2+ items) — fixed FB Marketplace sign 3's `"...using bank…"` bug
 4. **Drop quoted examples + their lead-in** — `"like 'X' or 'Y'"` strings
 5. **Cut at latest clause boundary** within 90 chars — accepts commas, semicolons, OR connector words (`but / and / or / so / within / during / after / before / throughout / around`) — fixed Hi Mum's `"didn't expect…"`, `"about the new…"`, `"to an urgent…"` bugs
-6. **Word-boundary fallback** — pops trailing `_TRIM_DANGLERS` connector words (`is/of/the/such/...`)
+6. **Never cut mid-phrase.** If no clean clause boundary exists, **return the full original sentence intact** rather than ellipsis-truncate. The pre-2026-05-22 word-boundary-plus-ellipsis fallback (`"bank…"` / `"didn't expect…"`) was deleted entirely — there is no longer any code path that produces a mid-phrase cut. Trade-off: slightly longer audio per scene in the rare case a warning has no clause boundaries within 90 chars. Acceptable because (a) all observed warnings cut cleanly at clause boundaries, and (b) viewer comprehension > millimetre runtime savings.
 
 Output is used for BOTH on-card display text AND voiceover speech.
 
