@@ -13,3 +13,7 @@ google_token.json
 # Video production handoff (local only)
 beatthescam-video-handoff.md
 .claude/
+
+# Local video render output — never shipped to Netlify or git
+/out/
+/dist/videos/
