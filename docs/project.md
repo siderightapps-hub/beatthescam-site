@@ -354,7 +354,7 @@ This is the **complete inventory of every external account** the site depends on
 
 - **Handle:** `@BeatTheScamUK`
 - **Account email:** `socialmedia@beatthescam.com`
-- **Posting:** Manual upload from CapCut → camera roll → TikTok app (per `VideoProductionHandoff.md`)
+- **Posting:** Manual upload from CapCut → camera roll → TikTok app (per `video-pipeline.md`)
 - **API:** Not currently used (no automated posting)
 
 ### YouTube
@@ -374,7 +374,7 @@ This is the **complete inventory of every external account** the site depends on
 
 ### Gemini (image generation)
 
-- **Used for:** Generating per-clip images for video production (UK-specific scene details — see `VideoProductionHandoff.md` Section 3 Step 3)
+- **Used for:** Generating per-clip images for video production (UK-specific scene details — see `video-pipeline.md` Section 3 Step 3)
 
 ### CapCut
 
@@ -606,7 +606,7 @@ When `content/daily-publish-queue.csv` drops below 20 topics, add new ones in ba
 | LinkedIn | Reserved | Not yet active |
 | Reddit | Personal account used carefully in r/Scams and r/UKPersonalFinance | See Section 14 |
 
-### Video production workflow (CANONICAL pipeline — full detail in `VideoProductionHandoff.md`)
+### Video production workflow (CANONICAL pipeline — full detail in `video-pipeline.md`)
 
 The old Gemini-character-image / CapCut workflow was retired on 2026-05-22 after HMRC made via the new pipeline hit 210 YouTube views vs <15 for the older character-image videos. **The canonical workflow is now one command per video:**
 
@@ -639,7 +639,7 @@ Standard tags: `#ScamAlert #UKScam #ScamAwareness #FraudAlert #BeatTheScam`
 
 ### Video calendar
 
-12-video plan running through ~Week 4. Current progress: 3 of 12 published (ISP Impersonation, WhatsApp "Hi Mum", Royal Mail Text). Next: HMRC Tax Refund Scam. Full calendar in `VideoProductionHandoff.md` Section 2.
+12-video plan running through ~Week 4. Current progress: 3 of 12 published (ISP Impersonation, WhatsApp "Hi Mum", Royal Mail Text). Next: HMRC Tax Refund Scam. Full calendar in `video-pipeline.md` Section 2.
 
 ---
 
@@ -1416,8 +1416,8 @@ Display labels in `CATEGORY_LABELS`; descriptions in `CATEGORY_DESCRIPTIONS`.
 - `SecurityAuditHandoff.md` — full security remediation record (2026-04-30)
 - `SessionHandoff-SEOHygieneAndBullet-ListBugFix.md` — 2026-05-01 session
 - `SessionHandoff-SEOHygieneBullet-ListBug-HouseKeeping.md` — 2026-05-02 session
-- `VideoProductionHandoff.md` — video production workflow & calendar
-- `WebsiteProject-MasterTemplate.md` — generic template extracted from this document
+- `video-pipeline.md` — video production workflow & calendar
+- `project-template.md` — generic template extracted from this document
 
 ---
 

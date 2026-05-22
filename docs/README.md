@@ -1,7 +1,7 @@
 # Master Documentation — Summary
 
 > Created: 2026-05-20
-> Companion summary to `BeatTheScam-MasterProjectDocument.md` and `WebsiteProject-MasterTemplate.md`.
+> Companion summary to `project.md` and `project-template.md`.
 
 ---
 
@@ -11,9 +11,9 @@ Three documents were created in this session, fulfilling the instructions in `Te
 
 | # | File | Purpose | Audience |
 |---|---|---|---|
-| 1 | `BeatTheScam-MasterProjectDocument.md` | Complete, project-specific source-of-truth for the Beat The Scam website | Owner · new Claude chats · potential buyers · contractors |
-| 2 | `WebsiteProject-MasterTemplate.md` | Generic, reusable template for any future website project — also doubles as a baseline `CLAUDE.md` for Claude Code | Future projects |
-| 3 | `MasterDocumentation-Summary.md` *(this file)* | Quick-reference index, summary of what the documents cover, and "where do I look for X?" map | All audiences |
+| 1 | `project.md` | Complete, project-specific source-of-truth for the Beat The Scam website | Owner · new Claude chats · potential buyers · contractors |
+| 2 | `project-template.md` | Generic, reusable template for any future website project — also doubles as a baseline `CLAUDE.md` for Claude Code | Future projects |
+| 3 | `README.md` *(this file)* | Quick-reference index, summary of what the documents cover, and "where do I look for X?" map | All audiences |
 
 All three live at the repo root and are designed to be copy-pasted into new Claude chats to initialise context.
 
@@ -23,7 +23,7 @@ All three live at the repo root and are designed to be copy-pasted into new Clau
 
 ```
 ┌────────────────────────────────────────────────────────────┐
-│  BeatTheScam-MasterProjectDocument.md                      │
+│  project.md                      │
 │  ────────────────────────────────────────                  │
 │  The single source-of-truth for Beat The Scam.             │
 │  Updated whenever anything material changes.               │
@@ -33,12 +33,12 @@ All three live at the repo root and are designed to be copy-pasted into new Clau
 │   ├─ SecurityAuditHandoff.md                               │
 │   ├─ SessionHandoff-SEOHygieneAndBullet-ListBugFix.md      │
 │   ├─ SessionHandoff-SEOHygieneBullet-…-HouseKeeping.md     │
-│   └─ VideoProductionHandoff.md  (referenced, not merged)   │
+│   └─ video-pipeline.md  (referenced, not merged)   │
 └──────────────────────────────┬─────────────────────────────┘
                                │ inspired
                                ▼
 ┌────────────────────────────────────────────────────────────┐
-│  WebsiteProject-MasterTemplate.md                          │
+│  project-template.md                          │
 │  ────────────────────────────────                          │
 │  Same structure, placeholders instead of facts.            │
 │  Copy → new project → fill in → live.                      │
@@ -46,7 +46,7 @@ All three live at the repo root and are designed to be copy-pasted into new Clau
 └────────────────────────────────────────────────────────────┘
 ```
 
-The five existing handoff documents (`ProjectHandoffDocument.md`, `SecurityAuditHandoff.md`, the two `SessionHandoff-…` files, and `VideoProductionHandoff.md`) remain useful as **historical records** of specific work sessions, but going forward the **master document is the canonical reference**. Update the master first, the session handoffs second.
+The five existing handoff documents (`ProjectHandoffDocument.md`, `SecurityAuditHandoff.md`, the two `SessionHandoff-…` files, and `video-pipeline.md`) remain useful as **historical records** of specific work sessions, but going forward the **master document is the canonical reference**. Update the master first, the session handoffs second.
 
 ---
 
@@ -138,7 +138,7 @@ The brief asked to "add any other information that I may have missed." Items add
 | How do I push from local? | Section 19 |
 | What's the valuation today? | Section 22 |
 | Which directories should I submit to? | Section 14 |
-| What's the next video topic? | `VideoProductionHandoff.md` Section 2 |
+| What's the next video topic? | `video-pipeline.md` Section 2 |
 | Which schema types are deployed? | Section 13 |
 | What's the cookie consent posture? | Section 16 |
 
@@ -146,7 +146,7 @@ The brief asked to "add any other information that I may have missed." Items add
 
 ## Recommended next actions
 
-Pulled forward from `BeatTheScam-MasterProjectDocument.md` Section 21:
+Pulled forward from `project.md` Section 21:
 
 ### This week
 - [ ] Activate `privacy@`, `security@`, `editorial@`, `legal@` mailbox aliases
@@ -174,21 +174,21 @@ Pulled forward from `BeatTheScam-MasterProjectDocument.md` Section 21:
 
 ### For the owner
 
-1. **Update `BeatTheScam-MasterProjectDocument.md` first** whenever anything material changes — keys rotated, affiliate approved, security re-scanned, new section in the build pipeline, etc.
+1. **Update `project.md` first** whenever anything material changes — keys rotated, affiliate approved, security re-scanned, new section in the build pipeline, etc.
 2. Then optionally write a thin `SessionHandoff-[topic].md` for the session-specific narrative.
 3. Update `Last updated:` at the top of the master document on every meaningful change.
 
 ### For Claude Code / new chat sessions
 
-Paste the relevant section(s) of `BeatTheScam-MasterProjectDocument.md` into the chat. If using Claude Code on this repo, point Claude at the file directly with `@BeatTheScam-MasterProjectDocument.md` or place a thin `CLAUDE.md` at the repo root that links to it.
+Paste the relevant section(s) of `project.md` into the chat. If using Claude Code on this repo, point Claude at the file directly with `@project.md` or place a thin `CLAUDE.md` at the repo root that links to it.
 
 ### For potential buyers
 
-Share `BeatTheScam-MasterProjectDocument.md` Sections 1, 2, 3, 7, 10, 13, 22, and 23 first. Hold Sections 6 (secrets) and 17 (security details) back until under NDA.
+Share `project.md` Sections 1, 2, 3, 7, 10, 13, 22, and 23 first. Hold Sections 6 (secrets) and 17 (security details) back until under NDA.
 
 ### For starting the next project
 
-Copy `WebsiteProject-MasterTemplate.md` to the new project's repo as `PROJECT.md` (or `CLAUDE.md`), then walk down section-by-section, filling in placeholders. The template is the fastest way to start a new project with the same operational maturity as Beat The Scam.
+Copy `project-template.md` to the new project's repo as `PROJECT.md` (or `CLAUDE.md`), then walk down section-by-section, filling in placeholders. The template is the fastest way to start a new project with the same operational maturity as Beat The Scam.
 
 ---
 
@@ -200,7 +200,7 @@ Copy `WebsiteProject-MasterTemplate.md` to the new project's repo as `PROJECT.md
   - **Never-cut-mid-sentence guarantee.** `shorten_warning()`'s ellipsis-fallback step was deleted entirely. If no clean clause boundary exists within 90 chars, the function returns the full original sentence. Eliminates the `"bank…"` / `"didn't expect…"` failure mode by construction, not by best-effort.
   - **macOS Reminders integration.** `scripts/upload_to_youtube.py` creates a "Upload `<slug>` to TikTok" reminder for 07:30 local time after every successful upload — closes the only manual step remaining in the daily pipeline. Syncs to iPhone via iCloud. New `--test-reminder` flag to grant the first-time macOS permission prompt.
 - **v1.1 — 2026-05-22** — Folded in the contents of the prior session's `beatthescam-chat-handoff.md` (now deletable) plus today's pipeline work:
-  - `VideoProductionHandoff.md` **rewritten** for the new `scripts/generate_video.py` text-card pipeline; the old Gemini-character / CapCut workflow is retired.
+  - `video-pipeline.md` **rewritten** for the new `scripts/generate_video.py` text-card pipeline; the old Gemini-character / CapCut workflow is retired.
   - `scripts/upload_to_youtube.py` + `scripts/get_youtube_refresh_token.py` + `docs/youtube-upload-setup.md` added.
   - Master doc Section 6: ElevenLabs key rotation history added (2026-05-18/19 leak event); local `.env` variables documented; worktree `.env` sync options.
   - Master doc Section 7: Bing Webmaster Tools entry added.
@@ -214,4 +214,4 @@ Future updates should bump the version and note what changed.
 
 ---
 
-*End of Summary. The three documents (`BeatTheScam-MasterProjectDocument.md`, `WebsiteProject-MasterTemplate.md`, `MasterDocumentation-Summary.md`) plus `VideoProductionHandoff.md` together replace the entire ad-hoc handoff document set as the canonical project documentation. The prior session handoffs (`beatthescam-chat-handoff.md`, the in-flight `SessionHandoff-*` markdown files at repo root, `ProjectHandoffDocument.md`, `SecurityAuditHandoff.md`, `Template.md`) can be deleted — every fact from them that's still load-bearing is now in this canonical set.*
+*End of Summary. The three documents (`project.md`, `project-template.md`, `README.md`) plus `video-pipeline.md` together replace the entire ad-hoc handoff document set as the canonical project documentation. The prior session handoffs (`beatthescam-chat-handoff.md`, the in-flight `SessionHandoff-*` markdown files at repo root, `ProjectHandoffDocument.md`, `SecurityAuditHandoff.md`, `Template.md`) can be deleted — every fact from them that's still load-bearing is now in this canonical set.*
