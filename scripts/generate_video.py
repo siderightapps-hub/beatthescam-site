@@ -226,6 +226,104 @@ def render_card(
     img.save(out_path, "PNG", optimize=True)
 
 
+# ─── Thumbnail rendering (YouTube custom thumbnails, 1280×720 landscape) ──
+
+THUMB_W, THUMB_H = 1280, 720
+
+
+def render_thumbnail(out_path: Path, *, topic: str, family: str) -> Path:
+    """Render a 1280×720 YouTube thumbnail. Brand-aligned (matches the video
+    cards) but landscape-oriented.
+
+    Layout (top to bottom):
+      - 24px red accent bar
+      - "SCAM ALERT" eyebrow (top-left, red, ~54px)
+      - Big topic text centered horizontally and vertically. Auto-sizes
+        font down from 200→80px to fit in 1-2 lines.
+      - "3 WARNING SIGNS" subtitle in accent blue
+      - Brand footer strip: "Beat the Scam" left, "beatthescam.com" right
+
+    Saves as JPEG (YouTube prefers JPEG; quality 90 keeps the file <500 KB,
+    well under YouTube's 2 MB hard cap).
+    """
+    tpl = HOOK_TEMPLATES.get(family, HOOK_TEMPLATES["message"])
+    thumb_text = tpl.get("thumbnail_text", "{topic} SCAM").format(topic=topic).upper()
+
+    img = Image.new("RGB", (THUMB_W, THUMB_H), BG)
+    draw = ImageDraw.Draw(img)
+
+    # Top accent bar
+    draw.rectangle([(0, 0), (THUMB_W, 24)], fill=ALERT_RED)
+
+    # SCAM ALERT eyebrow (top-left)
+    pad = 70
+    draw.text((pad, 60), "SCAM ALERT", font=load_font(54), fill=ALERT_RED)
+
+    # Centerpiece: big topic text, auto-sized to fit
+    max_text_w = THUMB_W - 2 * pad
+    # The centerpiece area is roughly y=160 to y=540 (380px tall)
+    centerpiece_top, centerpiece_bottom = 160, 540
+    centerpiece_h = centerpiece_bottom - centerpiece_top
+
+    chosen_size = 200
+    chosen_lines: List[str] = []
+    chosen_line_h = 0
+    for size in range(200, 79, -10):
+        f = load_font(size)
+        lines = wrap(draw, thumb_text, f, max_text_w)
+        line_h = int(size * 1.05)  # tight line height for big display type
+        total_h = len(lines) * line_h
+        # Vertical fit check + horizontal fit check (wrap() can't split a
+        # single long word, so a wide word like "MARKETPLACE" at 200pt
+        # would overflow horizontally — drop the size until it fits).
+        widest = max(
+            (draw.textbbox((0, 0), line, font=f)[2] for line in lines),
+            default=0,
+        )
+        if total_h <= centerpiece_h and widest <= max_text_w:
+            chosen_size = size
+            chosen_lines = lines
+            chosen_line_h = line_h
+            break
+    else:
+        # Even at 80px it overflowed — accept it and let it crowd
+        f = load_font(80)
+        chosen_size = 80
+        chosen_lines = wrap(draw, thumb_text, f, max_text_w)
+        chosen_line_h = int(80 * 1.05)
+
+    f = load_font(chosen_size)
+    block_h = len(chosen_lines) * chosen_line_h
+    block_top = centerpiece_top + (centerpiece_h - block_h) // 2
+    for i, line in enumerate(chosen_lines):
+        bbox = draw.textbbox((0, 0), line, font=f)
+        x = (THUMB_W - (bbox[2] - bbox[0])) // 2
+        draw.text((x, block_top + i * chosen_line_h), line, font=f, fill=WHITE)
+
+    # "3 WARNING SIGNS" subtitle
+    sub_text = "3 WARNING SIGNS"
+    sub_f = load_font(64)
+    sub_bbox = draw.textbbox((0, 0), sub_text, font=sub_f)
+    sub_x = (THUMB_W - (sub_bbox[2] - sub_bbox[0])) // 2
+    draw.text((sub_x, 580), sub_text, font=sub_f, fill=ACCENT)
+
+    # Brand footer strip
+    footer_h = 60
+    draw.rectangle([(0, THUMB_H - footer_h), (THUMB_W, THUMB_H)], fill=PANEL)
+    brand_f = load_font(28)
+    draw.text((pad, THUMB_H - footer_h + 15), "Beat the Scam", font=brand_f, fill=WHITE)
+    url_text = "beatthescam.com"
+    url_bbox = draw.textbbox((0, 0), url_text, font=brand_f)
+    draw.text(
+        (THUMB_W - pad - (url_bbox[2] - url_bbox[0]), THUMB_H - footer_h + 15),
+        url_text, font=brand_f, fill=SECONDARY,
+    )
+
+    out_path.parent.mkdir(parents=True, exist_ok=True)
+    img.save(out_path, "JPEG", quality=90, optimize=True)
+    return out_path
+
+
 # ─── Content extraction ────────────────────────────────────────────────────
 
 def _coerce_body(body) -> str:
@@ -297,6 +395,7 @@ HOOK_TEMPLATES = {
         "promise":         "{n} warning {sign_word} that the {topic} message is a scam.",
         "verify_headline": "Verify through the official site yourself — never via the link.",
         "verify_speech":   "Always verify through the official site yourself. Never via a link in the message.",
+        "thumbnail_text":  "{topic} SCAM",  # e.g. "HMRC SCAM", "DVLA SCAM", "ROYAL MAIL SCAM"
     },
     "marketplace": {
         "hook_headline":   "Spotted a {topic} bargain? Stop — it might be a scam.",
@@ -304,6 +403,7 @@ HOOK_TEMPLATES = {
         "promise":         "{n} warning {sign_word} that the listing is fake.",
         "verify_headline": "Pay through Marketplace. Never bank transfer to a stranger.",
         "verify_speech":   "Pay through Marketplace itself. Never bank transfer to a seller you haven't met in person.",
+        "thumbnail_text":  "MARKETPLACE SCAM",  # "Facebook Marketplace SCAM" is too long for thumbnail
     },
     "family_message": {
         "hook_headline":   "\"Hi Mum, I've lost my phone — can you send £200?\" Stop.",
@@ -311,6 +411,7 @@ HOOK_TEMPLATES = {
         "promise":         "{n} warning {sign_word} it's a scammer, not your family.",
         "verify_headline": "Call your family on their old number. Don't send a penny yet.",
         "verify_speech":   "Call your family member on their original number first. Don't send anything until you've heard their voice.",
+        "thumbnail_text":  "\"HI MUM\" SCAM",
     },
     "call": {
         "hook_headline":   "A {topic} call asking you to move money? Hang up.",
@@ -318,6 +419,7 @@ HOOK_TEMPLATES = {
         "promise":         "{n} warning {sign_word} that the {topic} call is a scam.",
         "verify_headline": "Hang up. Call your bank back on the number from your card.",
         "verify_speech":   "Hang up. Call your bank back using the number printed on the back of your card.",
+        "thumbnail_text":  "{topic} CALL SCAM",
     },
 }
 
@@ -809,6 +911,15 @@ def main():
     size_mb = out_path.stat().st_size / (1024 * 1024)
     print(f"\n✓ Done — {out_path} ({size_mb:.2f} MB)")
     print(f"  Inspect frames: {out_dir / (args.slug + '-frames')}")
+
+    # Render YouTube thumbnail alongside the MP4. upload_to_youtube.py picks
+    # this up automatically if it's present at {slug}.thumbnail.jpg.
+    thumb_path = out_dir / f"{args.slug}.thumbnail.jpg"
+    topic = short_topic(post)
+    family = _topic_family(post)
+    render_thumbnail(thumb_path, topic=topic, family=family)
+    thumb_kb = thumb_path.stat().st_size // 1024
+    print(f"  Thumbnail:      {thumb_path} ({thumb_kb} KB)")
 
 
 if __name__ == "__main__":

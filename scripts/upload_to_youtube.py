@@ -108,8 +108,9 @@ def authenticate() -> Credentials:
 
 
 def upload(slug: str, *, public: bool = False, dry_run: bool = False) -> None:
-    mp4 = OUT_VIDEOS / f"{slug}.mp4"
-    md  = OUT_VIDEOS / f"{slug}.upload.md"
+    mp4   = OUT_VIDEOS / f"{slug}.mp4"
+    md    = OUT_VIDEOS / f"{slug}.upload.md"
+    thumb = OUT_VIDEOS / f"{slug}.thumbnail.jpg"
 
     if not mp4.exists():
         sys.exit(
@@ -137,6 +138,10 @@ def upload(slug: str, *, public: bool = False, dry_run: bool = False) -> None:
     print(f"description: {meta['description'].splitlines()[0][:120]}...")
     print(f"tags:        {len(meta['tags'])} tag(s): {', '.join(meta['tags'][:5])}{'...' if len(meta['tags']) > 5 else ''}")
     print(f"privacy:     {'public' if public else 'unlisted'} (Education / Made for kids: NO)")
+    if thumb.exists():
+        print(f"thumbnail:   {thumb.name} ({thumb.stat().st_size // 1024} KB)")
+    else:
+        print(f"thumbnail:   (none — YouTube will auto-pick the hook frame)")
 
     if dry_run:
         print("\n(dry-run — metadata parsed OK, no upload performed)")
@@ -174,16 +179,35 @@ def upload(slug: str, *, public: bool = False, dry_run: bool = False) -> None:
 
     video_id = response["id"]
     print()
-    print("✅ Uploaded.")
+    print("✅ Video uploaded.")
     print(f"   Shorts URL: https://youtube.com/shorts/{video_id}")
     print(f"   Studio:     https://studio.youtube.com/video/{video_id}/edit")
+
+    # Custom thumbnail upload (non-fatal on failure — the video is up either way).
+    # Custom thumbnails require a verified YouTube account (phone confirmation).
+    # If your account isn't verified, this step fails with a 403; the video
+    # is still successfully uploaded and YouTube uses the auto-selected
+    # hook-frame thumbnail instead.
+    if thumb.exists():
+        print()
+        print("Uploading thumbnail...")
+        try:
+            yt.thumbnails().set(
+                videoId=video_id,
+                media_body=MediaFileUpload(str(thumb), mimetype="image/jpeg"),
+            ).execute()
+            print(f"✅ Thumbnail set ({thumb.name})")
+        except Exception as e:
+            print(f"⚠ Thumbnail upload failed (video upload itself was fine): {e}")
+            print(f"  If this is a 403, your YouTube account needs phone verification.")
+            print(f"  Set the thumbnail manually in Studio for now.")
+
     print()
     print("Next steps in Studio:")
     print("  1. Confirm 'Altered content: Yes' is set (AI voice — required disclosure)")
-    print("  2. Set thumbnail to the hook frame if auto-selection looks off")
-    print("  3. Add to your 'Scam Alerts' playlist (or create one)")
+    print("  2. Add to your 'Scam Alerts' playlist (or create one)")
     if not public:
-        print("  4. After 24h review, change visibility from Unlisted → Public")
+        print("  3. After 24h review, change visibility from Unlisted → Public")
 
 
 def main() -> None:
