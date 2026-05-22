@@ -12,11 +12,22 @@ on:
         required: false
         default: "28"
   schedule:
-    # 06:30 UTC = 07:30 UK BST — runs after daily-publish (06:15 UTC)
-    - cron: '30 6 * * *'
+    # 05:23 UTC (06:23 BST). Off popular minute and hour slots.
+    # The concurrency group below queues this behind daily-publish if both
+    # are still in flight, so the 16-minute offset is defensive, not load-
+    # bearing. See master doc Section 20.
+    - cron: '23 5 * * *'
 
 permissions:
   contents: write
+
+# Serialise with daily-publish.yml: the two pipelines both regenerate
+# dist/sitemap.xml from posts.json. If they run concurrently the second to
+# push will hit a merge conflict on dist/sitemap.xml during rebase. Same
+# group name in both workflow files queues them instead of failing.
+concurrency:
+  group: content-pipeline
+  cancel-in-progress: false
 
 jobs:
   search-console-articles:
@@ -117,6 +128,7 @@ jobs:
       - name: Commit and push new article + dist
         if: env.DRY_RUN != 'true' && steps.changed.outputs.changed == 'true'
         run: |
+          set -e
           git config user.name  "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add content/posts.json dist/
@@ -129,19 +141,29 @@ jobs:
                 echo "✅ Push succeeded on attempt $attempt"
                 exit 0
               fi
-            else
-              echo "Rebase conflict — aborting and retrying with reset"
-              git rebase --abort
-              git fetch origin main
-              git reset --soft HEAD~1
-              git stash
-              git checkout main
-              git pull origin main
-              git stash pop
-              git add content/posts.json dist/
-              git commit -m "Search Console article: $(date -u +%Y-%m-%d)"
+              echo "Push attempt $attempt rejected (non-fast-forward) — retrying"
+              sleep 5
+              continue
             fi
-            echo "Push attempt $attempt rejected — retrying"
+
+            # Rebase conflict. dist/ is derived from content/posts.json — never
+            # try to merge it. Snapshot our new article, hard-reset to fresh
+            # main, merge our additions into the canonical posts.json, then
+            # rebuild dist/ from scratch.
+            echo "Rebase conflict on attempt $attempt — recovering by snapshot + reset + rebuild"
+            git rebase --abort || true
+            cp content/posts.json /tmp/posts-ours.json
+            git reset --hard origin/main
+            python scripts/merge_new_posts.py /tmp/posts-ours.json content/posts.json
+
+            if git diff --quiet content/posts.json; then
+              echo "ℹ️  Our new article was already on main — nothing to push"
+              exit 0
+            fi
+
+            python scripts/build.py
+            git add content/posts.json dist/
+            git commit -m "Search Console article: $(date -u +%Y-%m-%d)"
             sleep 5
           done
           echo "Push failed after 3 attempts"
@@ -196,19 +218,25 @@ jobs:
                   echo "✅ tweeted_posts.json pushed on attempt $attempt"
                   exit 0
                 fi
-              else
-                echo "Rebase conflict — aborting and retrying with reset"
-                git rebase --abort
-                git fetch origin main
-                git reset --soft HEAD~1
-                git stash
-                git checkout main
-                git pull origin main
-                git stash pop
-                git add content/tweeted_posts.json
-                git commit -m "Update tweeted_posts.json after auto-tweet"
+                echo "Push attempt $attempt rejected (non-fast-forward) — retrying"
+                sleep 5
+                continue
               fi
-              echo "Push attempt $attempt rejected — retrying"
+
+              # tweeted_posts.json is just a slug→timestamp dict; conflict
+              # means another process added an entry. Snapshot ours, reset,
+              # python-merge the dicts, re-commit.
+              echo "Rebase conflict on attempt $attempt — recovering by snapshot + reset + merge"
+              git rebase --abort || true
+              cp content/tweeted_posts.json /tmp/tweeted-ours.json
+              git reset --hard origin/main
+              python -c "import json, pathlib; ours=json.loads(pathlib.Path('/tmp/tweeted-ours.json').read_text()); bp=pathlib.Path('content/tweeted_posts.json'); base=json.loads(bp.read_text()) if bp.exists() else {}; merged={**base, **ours}; bp.write_text(json.dumps(merged, indent=2, ensure_ascii=False)+chr(10)); print(f'Merged tweeted_posts.json: {len(merged)} entries')"
+              if git diff --quiet content/tweeted_posts.json; then
+                echo "ℹ️  Nothing new to record — exiting"
+                exit 0
+              fi
+              git add content/tweeted_posts.json
+              git commit -m "Update tweeted_posts.json after auto-tweet"
               sleep 5
             done
             echo "Push failed after 3 attempts"

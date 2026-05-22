@@ -6,7 +6,7 @@ on:
       batch_size:
         description: "Number of new topics to publish this run"
         required: false
-        default: "5"
+        default: "1"
       rewrite_thin:
         description: "Rewrite thin guides? (true/false)"
         required: false
@@ -16,11 +16,21 @@ on:
         required: false
         default: "10"
   schedule:
-    # Daily at 06:15 UTC
-    - cron: '15 6 * * *'
+    # Daily at 05:07 UTC (06:07 BST). Off the popular :00/:15/:30/:45 minute
+    # slots and off the 06:00-08:00 UTC peak window — GitHub-Actions scheduled
+    # cron is best-effort and gets delayed by hours when stacked against
+    # popular slots. See master doc Section 20.
+    - cron: '7 5 * * *'
 
 permissions:
   contents: write
+
+# Serialise with daily-search-console.yml: both pipelines regenerate
+# dist/sitemap.xml from posts.json. Same group name in both files queues
+# them instead of letting them race.
+concurrency:
+  group: content-pipeline
+  cancel-in-progress: false
 
 jobs:
   publish:
@@ -107,6 +117,7 @@ jobs:
       - name: Commit content + dist (only if dist changed)
         if: steps.dist_changed.outputs.changed == 'true'
         run: |
+          set -e
           git config user.name  "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add content/posts.json \
@@ -126,22 +137,35 @@ jobs:
                 echo "✅ Push succeeded on attempt $attempt"
                 exit 0
               fi
-            else
-              echo "Rebase conflict — aborting and retrying with reset"
-              git rebase --abort
-              git fetch origin main
-              git reset --soft HEAD~1
-              git stash
-              git checkout main
-              git pull origin main
-              git stash pop
-              git add content/posts.json \
-                      content/topics-claude-template.csv \
-                      content/daily-publish-queue.csv \
-                      dist
-              git commit -m "Daily AI publish: $(date -u +%Y-%m-%d)"
+              echo "Push attempt $attempt rejected (non-fast-forward) — retrying"
+              sleep 5
+              continue
             fi
-            echo "Push attempt $attempt rejected — retrying"
+
+            # Rebase conflict. dist/ is derived — never merge it. Snapshot our
+            # content/* changes, hard-reset to fresh main, merge new posts in
+            # by slug, take our CSVs as-is, rebuild dist/ from scratch.
+            echo "Rebase conflict on attempt $attempt — recovering by snapshot + reset + rebuild"
+            git rebase --abort || true
+            cp content/posts.json                  /tmp/posts-ours.json
+            cp content/topics-claude-template.csv  /tmp/topics-ours.csv
+            cp content/daily-publish-queue.csv     /tmp/queue-ours.csv
+            git reset --hard origin/main
+            python scripts/merge_new_posts.py /tmp/posts-ours.json content/posts.json
+            cp /tmp/topics-ours.csv  content/topics-claude-template.csv
+            cp /tmp/queue-ours.csv   content/daily-publish-queue.csv
+
+            git add content/posts.json \
+                    content/topics-claude-template.csv \
+                    content/daily-publish-queue.csv
+            if git diff --cached --quiet; then
+              echo "ℹ️  Our work was already on main — nothing to push"
+              exit 0
+            fi
+
+            python scripts/build.py
+            git add dist
+            git commit -m "Daily AI publish: $(date -u +%Y-%m-%d)"
             sleep 5
           done
           echo "Push failed after 3 attempts"
@@ -150,6 +174,7 @@ jobs:
       - name: Commit content only (no dist change)
         if: steps.dist_changed.outputs.changed == 'false'
         run: |
+          set -e
           git config user.name  "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add content/posts.json \
@@ -168,21 +193,31 @@ jobs:
                 echo "✅ Push succeeded on attempt $attempt"
                 exit 0
               fi
-            else
-              echo "Rebase conflict — aborting and retrying with reset"
-              git rebase --abort
-              git fetch origin main
-              git reset --soft HEAD~1
-              git stash
-              git checkout main
-              git pull origin main
-              git stash pop
-              git add content/posts.json \
-                      content/topics-claude-template.csv \
-                      content/daily-publish-queue.csv
-              git commit -m "Daily AI publish (content only): $(date -u +%Y-%m-%d)"
+              echo "Push attempt $attempt rejected (non-fast-forward) — retrying"
+              sleep 5
+              continue
             fi
-            echo "Push attempt $attempt rejected — retrying"
+
+            # Rebase conflict on content-only commit — same recovery pattern
+            # as the content+dist case, just no rebuild needed.
+            echo "Rebase conflict on attempt $attempt — recovering by snapshot + reset"
+            git rebase --abort || true
+            cp content/posts.json                  /tmp/posts-ours.json
+            cp content/topics-claude-template.csv  /tmp/topics-ours.csv
+            cp content/daily-publish-queue.csv     /tmp/queue-ours.csv
+            git reset --hard origin/main
+            python scripts/merge_new_posts.py /tmp/posts-ours.json content/posts.json
+            cp /tmp/topics-ours.csv  content/topics-claude-template.csv
+            cp /tmp/queue-ours.csv   content/daily-publish-queue.csv
+
+            git add content/posts.json \
+                    content/topics-claude-template.csv \
+                    content/daily-publish-queue.csv
+            if git diff --cached --quiet; then
+              echo "ℹ️  Our work was already on main — nothing to push"
+              exit 0
+            fi
+            git commit -m "Daily AI publish (content only): $(date -u +%Y-%m-%d)"
             sleep 5
           done
           echo "Push failed after 3 attempts"
