@@ -503,17 +503,6 @@ def short_topic(post) -> str:
     return "this"
 
 
-# Words that, when left dangling at the end of a sentence trim, sound
-# grammatically incomplete (e.g., "claiming a tax rebate is…"). Pop these
-# from the tail until the trim lands on a content word.
-_TRIM_DANGLERS = {
-    "to", "the", "a", "an", "of", "for", "with", "and", "or", "but",
-    "in", "on", "at", "by", "from", "as", "is", "are", "was", "were",
-    "be", "been", "this", "that", "these", "those", "their", "your", "our",
-    "such", "like", "including", "into", "onto", "upon", "than", "if", "so",
-}
-
-
 def shorten_warning(text: str, max_chars: int = 90) -> str:
     """Trim warning text for both card display AND speech.
 
@@ -593,16 +582,12 @@ def shorten_warning(text: str, max_chars: int = 90) -> str:
     if cut_at >= 25:
         return text[:cut_at].rstrip(",.;: ")
 
-    # 6. Word-boundary fallback, then pop trailing connector words so the
-    #    line doesn't end on "is", "of", "as", etc.
-    head = text[:max_chars].rsplit(" ", 1)[0].rstrip(",.;:")
-    parts = head.split()
-    while parts and parts[-1].lower() in _TRIM_DANGLERS:
-        parts.pop()
-    head = " ".join(parts)
-    if not head:
-        head = text[:max_chars].rsplit(" ", 1)[0].rstrip(",.;:")
-    return head + "…"
+    # 6. No clean clause boundary found within max_chars. Hard rule: never
+    #    cut mid-phrase with an ellipsis (the "bank…" / "didn't expect…"
+    #    failure mode that produced unreadable cards). Return the full
+    #    original sentence intact — card auto-sizing + audio length both
+    #    handle longer text fine. Never strands the viewer mid-thought.
+    return text
 
 
 # ─── Storyboard ────────────────────────────────────────────────────────────
