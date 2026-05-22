@@ -26,6 +26,7 @@ import os
 import re
 import sys
 from pathlib import Path
+from typing import Optional
 
 from dotenv import load_dotenv
 from google.oauth2.credentials import Credentials
@@ -67,7 +68,7 @@ def parse_upload_md(path: Path) -> dict:
     # blocks don't shadow the YouTube ones if labels happen to match.
     yt_section = re.split(r"^##\s+TikTok\s+upload", text, maxsplit=1, flags=re.M | re.I)[0]
 
-    def grab(label: str) -> str | None:
+    def grab(label: str) -> Optional[str]:
         pattern = rf"###\s+{re.escape(label)}[^\n]*\n+```\s*\n(.+?)\n```"
         m = re.search(pattern, yt_section, re.DOTALL | re.I)
         return m.group(1).strip() if m else None
