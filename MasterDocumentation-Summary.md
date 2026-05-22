@@ -194,10 +194,20 @@ Copy `WebsiteProject-MasterTemplate.md` to the new project's repo as `PROJECT.md
 
 ## Document versioning
 
-- v1.0 — 2026-05-20 — Initial consolidated master document + template + summary, produced from `Template.md` brief.
+- **v1.0 — 2026-05-20** — Initial consolidated master document + template + summary, produced from `Template.md` brief.
+- **v1.1 — 2026-05-22** — Folded in the contents of the prior session's `beatthescam-chat-handoff.md` (now deletable) plus today's pipeline work:
+  - `VideoProductionHandoff.md` **rewritten** for the new `scripts/generate_video.py` text-card pipeline; the old Gemini-character / CapCut workflow is retired.
+  - `scripts/upload_to_youtube.py` + `scripts/get_youtube_refresh_token.py` + `docs/youtube-upload-setup.md` added.
+  - Master doc Section 6: ElevenLabs key rotation history added (2026-05-18/19 leak event); local `.env` variables documented; worktree `.env` sync options.
+  - Master doc Section 7: Bing Webmaster Tools entry added.
+  - Master doc Section 11: 5-bullet "Major completed milestones" timeline added (security audit, SEO hygiene, 14-item SEO sweep, video pipeline build, daily-publish concurrency fix, video-pipeline extensions).
+  - Master doc Section 12: video workflow replaced — one-command render + one-command upload.
+  - Master doc Section 13: SEO structural foundations expanded (per-post OG images, ItemList/HowTo schema, pagination, RSS discovery, hreflang, sitemap lastmod, linkified guide paths).
+  - Master doc Section 20: **anti-patterns section added** — explicit guardrails so future sessions don't re-litigate the James Carter pseudonym, HMRC phonetics, video catchphrase, voice ID, dist-merge logic.
+  - Master doc Section 21: 8 pending GSC URLs follow-up + Etsy-style resurrection pattern + music-bed search added.
 
 Future updates should bump the version and note what changed.
 
 ---
 
-*End of Summary. The three documents (`BeatTheScam-MasterProjectDocument.md`, `WebsiteProject-MasterTemplate.md`, `MasterDocumentation-Summary.md`) together replace the original ad-hoc handoff document set as the canonical project documentation for Beat The Scam.*
+*End of Summary. The three documents (`BeatTheScam-MasterProjectDocument.md`, `WebsiteProject-MasterTemplate.md`, `MasterDocumentation-Summary.md`) plus `VideoProductionHandoff.md` together replace the entire ad-hoc handoff document set as the canonical project documentation. The prior session handoffs (`beatthescam-chat-handoff.md`, the in-flight `SessionHandoff-*` markdown files at repo root, `ProjectHandoffDocument.md`, `SecurityAuditHandoff.md`, `Template.md`) can be deleted — every fact from them that's still load-bearing is now in this canonical set.*

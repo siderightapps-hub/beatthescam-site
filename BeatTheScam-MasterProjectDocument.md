@@ -237,6 +237,28 @@ The daily pipeline is optimised to **only push to GitHub when content has actual
 | `TWITTER_API_SECRET` | Twitter OAuth | (confirm) |
 | `TWITTER_ACCESS_TOKEN` | Twitter OAuth | (confirm) |
 | `TWITTER_ACCESS_SECRET` | Twitter OAuth | (confirm) |
+| `GOOGLE_SEARCH_CONSOLE_TOKEN` + `GOOGLE_OAUTH_CREDENTIALS` | Search Console gap pipeline | (confirm) |
+
+### Local-only env vars (`.env` in repo root, gitignored)
+
+| Variable | Purpose | Notes |
+|---|---|---|
+| `ELEVENLABS_API_KEY` | Voiceover for `scripts/generate_video.py` | Restricted scope: TTS / Voices / Models / User only. Current key rotated **2026-05-18/19** after an earlier key was leaked in chat. |
+| `ELEVENLABS_VOICE_ID` | Optional voice override (default Daniel `3WqHLnw80rOZqJzW9YRB`) | British male newsreader |
+| `ELEVENLABS_MODEL_ID` | Optional model override (default `eleven_v3`) | |
+| `YOUTUBE_CLIENT_ID` + `YOUTUBE_CLIENT_SECRET` + `YOUTUBE_REFRESH_TOKEN` | YouTube Shorts auto-upload (`scripts/upload_to_youtube.py`) | One-time OAuth flow — `docs/youtube-upload-setup.md` |
+
+### Worktree `.env` sync
+
+Git worktrees each have their own `.env` (gitignored). Two clean options to keep them in sync — pick one once and stick with it:
+
+```bash
+# Option A: symlink (per new worktree)
+cd <worktree> && ln -s ../../../.env .env
+
+# Option B: shell helper in ~/.zshrc
+worktree-env() { cp ~/Projects/websites/beatthescam-site/.env .env; }
+```
 
 ### Netlify environment variables (Site settings → Environment variables)
 
@@ -249,6 +271,15 @@ The daily pipeline is optimised to **only push to GitHub when content has actual
 - All keys were rotated on **2026-04-28** after a suspected exposure incident.
 - Rotation playbook documented in `SecurityAuditHandoff.md`.
 - **Cadence going forward:** rotate every 90 days minimum; immediate rotation on any suspected exposure.
+
+### Key rotation history
+
+| Date | Key | Trigger | Action |
+|---|---|---|---|
+| 2026-04-28 | `ANTHROPIC_API_KEY` (both GitHub Secrets + Netlify env) | Suspected exposure | Rotated both copies; verified all dependent workflows |
+| 2026-05-18/19 | `ELEVENLABS_API_KEY` (local `.env`) | Earlier key `sk_be296…` leaked in chat output when a `sed` redaction failed against a malformed file. | User revoked the key in the ElevenLabs dashboard mid-session and created a replacement with restricted scope (TTS / Voices / Models / User only). |
+
+**Lesson logged:** when running redaction commands against `.env` files, verify the file content is well-formed first (no stray BOMs, no CRLF artifacts). A failed redact that prints the raw file to stdout has the same effect as no redact at all.
 
 ### What is NOT stored as a secret
 
@@ -277,6 +308,12 @@ This is the **complete inventory of every external account** the site depends on
 - **Property:** `https://beatthescam.com`
 - **Verification method:** DNS TXT record
 - **Used for:** Indexing reports, query performance, sitemap submission, content gap analysis (via `search_console_articles.py`).
+
+### Bing Webmaster Tools
+
+- **Status:** site DNS-verified.
+- **Recommended setup path:** "Import from Google Search Console" — one click in Bing Webmaster, re-uses the existing GSC verification + sitemap.
+- `bing_site_verification` field in `content/site.json` is currently empty (DNS verification means no meta tag is needed).
 
 ### Google — Analytics 4
 
@@ -481,10 +518,19 @@ multiplex_unit:       <add after creation>
 
 ## 11. Content Operations & AI Pipeline
 
+### Major completed milestones
+
+- **2026-04-30** — Security audit + remediation (Section 17).
+- **2026-05-01/02** — SEO hygiene + bullet-list bug fix + housekeeping sweep (category redirects, robots.txt, About-page E-E-A-T).
+- **2026-05-18/19** — 14-item structural SEO sweep landed on commit `b09a9d1`: sentence-aware meta descriptions; duplicate slug disambiguation (177→180 indexable guides); BreadcrumbList + HowTo + ItemList schema; per-post Open Graph images (Pillow-generated 1200×630 in `dist/assets/og/`); pagination of `/guides/` at 30/page with `rel=prev/next`; `hreflang=en-GB`; sitemap lastmod per category; RSS discovery in `<head>`; related-posts cross-category scoring. Plus editorial-integrity pass — removed the fabricated "James Carter" editor persona, switched article schema author to `Organization`, added Action Fraud / NCSC / Citizens Advice citations to every guide footer.
+- **2026-05-19** — Video generation pipeline built (`scripts/generate_video.py`); HMRC Tax Rebate first publish hit 210 YouTube Shorts views.
+- **2026-05-21** — `daily-publish` + `daily-search-console` pipelines serialised via `concurrency: content-pipeline` group; rebase-conflict recovery rewritten; batch size dropped 5 → 1.
+- **2026-05-22** — Video pipeline extended with `HOOK_TEMPLATES` topic-family classification + per-family verify copy + `shorten_warning()` v2 (clause-aware trim). YouTube Shorts auto-upload (`scripts/upload_to_youtube.py`) shipped.
+
 ### Current state
 
 - **Published guides:** 97+ across 17 normalised categories
-- **Queue:** ~77 remaining topics in `content/daily-publish-queue.csv` (~15 days at 5/day)
+- **Queue:** ~77 remaining topics in `content/daily-publish-queue.csv` (~77 days at 1/day)
 - **Avg article length:** 900–1,200 words (post-rewrite of 20 thin guides)
 - **Structure per article:** 6 sections × 120–180 words + 4 FAQs + sidebar (Fast checks, Related guides, Report this scam, Checker CTA, Affiliate card) + FAQ schema
 - **Reporting links:** All updated from `actionfraud.police.uk` → `reportfraud.police.uk`
@@ -559,13 +605,27 @@ When `content/daily-publish-queue.csv` drops below 20 topics, add new ones in ba
 | LinkedIn | Reserved | Not yet active |
 | Reddit | Personal account used carefully in r/Scams and r/UKPersonalFinance | See Section 14 |
 
-### Video production workflow (summary — full detail in `VideoProductionHandoff.md`)
+### Video production workflow (CANONICAL pipeline — full detail in `VideoProductionHandoff.md`)
 
-1. **Script** — Claude pulls article from `posts.json`, verifies stats, generates 30s or 60s timed script
-2. **Audio** — ElevenLabs (Daniel, British male), 43–58s target
-3. **Images** — Gemini with UK-specific scene prompts; **first frame must be a human face showing emotion** (critical retention rule)
-4. **Assembly** — CapCut: hard cuts, -20dB background music, auto-captions, Ken Burns on long clips, end card
-5. **Export & upload** — TikTok (AI content toggle ON), YouTube Shorts (Altered content YES), then `python3 scripts/tweet_new_articles.py --slug ...`
+The old Gemini-character-image / CapCut workflow was retired on 2026-05-22 after HMRC made via the new pipeline hit 210 YouTube views vs <15 for the older character-image videos. **The canonical workflow is now one command per video:**
+
+```bash
+python3 scripts/generate_video.py <slug>            # render MP4 from posts.json
+python3 scripts/upload_to_youtube.py <slug>         # auto-upload Unlisted
+# TikTok upload remains manual via tiktok.com web
+```
+
+The pipeline ([`scripts/generate_video.py`](scripts/generate_video.py)):
+
+- Reads any post from `content/posts.json` by slug.
+- Renders 8 Pillow text cards (Hook → Promise → 3 Signs → Verify → CTA → End card) on the brand palette (`#0b1220` navy, `#3a86ff` accent, `#ff5c5c` alert red).
+- Synthesises voiceover via **ElevenLabs Daniel V3** (British male newsreader, voice ID `3WqHLnw80rOZqJzW9YRB`).
+- Picks topic-correct hook + verify copy via `HOOK_TEMPLATES` + `SLUG_FAMILIES` (`message` / `marketplace` / `family_message` / `call` families).
+- Trims warning text via `shorten_warning()` (clause-aware, handles `using/via/by X, Y, Z` lists + `but/and/or/within` connectors).
+- Outputs 1080×1920 H.264 MP4 at ~45s, ~28MB, to `out/videos/<slug>.mp4` (gitignored).
+- Renders per-card frames + audio for debug at `out/videos/<slug>-frames/` and `out/videos/<slug>-audio/`.
+
+YouTube auto-upload ([`scripts/upload_to_youtube.py`](scripts/upload_to_youtube.py)) reads the MP4 + the `.upload.md` sidecar, uploads via the YouTube Data API v3 (Unlisted by default for 24h review, `--public` to publish immediately). One-time OAuth setup at `docs/youtube-upload-setup.md` (~15 min).
 
 ### Hashtag template
 
@@ -602,18 +662,22 @@ This site is engineered for three search modes simultaneously:
 ### Structural SEO foundations (✅ already in place)
 
 - Canonical URLs on every page
-- Schema.org markup: `WebSite`, `Organization`, `Article`, `FAQPage`, `BreadcrumbList`
-- OpenGraph + Twitter Card meta on every page
+- Schema.org markup: `WebSite`, `Organization`, `Article`, `FAQPage`, `BreadcrumbList`, **`ItemList`** (category + paginated guide indices), **`HowTo`** (on posts with clear numbered steps — ~2 of 180 qualify; conservative emission)
+- OpenGraph + Twitter Card meta on every page; **per-post 1200×630 OG image** generated by Pillow into `dist/assets/og/{slug}.png`
+- `hreflang="en-GB"` + `x-default`; `og:locale="en_GB"` on every page
 - Reading time on every article
 - Table of contents on every article
-- Related-guides sidebar (4 deduped by topic)
-- `sitemap.xml` auto-generated and submitted to Search Console
+- Related-guides sidebar (cross-category scoring — shared keywords count, not just same category)
+- **Pagination of `/guides/`** at 30/page (currently 6 pages) with `rel=prev/next` + per-page canonicals
+- `sitemap.xml` auto-generated, **per-category `lastmod` reflects newest member** (not build date); submitted to Search Console + Bing Webmaster Tools
 - `robots.txt` tightened (blocks `/search/`, `*.php`, `?l=` spam patterns)
 - Category 301s deployed via `dist/_redirects`
+- **RSS discovery** via `<link rel="alternate" type="application/rss+xml">` in `<head>`
 - HSTS preload + HTTPS everywhere
 - Mobile-responsive, fast (no JS frameworks, minimal assets)
 - HTTP/2 via Netlify
 - Image lazy-loading where applicable
+- **Linkified bare `/guides/...` paths** in article body — AI-generated raw paths become real `<a>` tags via the slug→title map
 
 ### Priority pages (deserve internal-link concentration)
 
@@ -1178,6 +1242,19 @@ Revoke PATs after use at github.com → Settings → Developer settings → Pers
 
 17. **No formal trademark filing.** Recommend UK IPO classes 41 + 42.
 
+### Anti-patterns — don't regress these
+
+Decisions reached in prior sessions that future Claude sessions should preserve, not re-litigate:
+
+- **Don't re-add a named editor pseudonym.** A fabricated "James Carter" persona was created earlier and explicitly retired on 2026-05-19. Article schema uses `Organization` author (`"Beat the Scam Editorial Team"`). Fabricated bylines are explicitly flagged against quality signals in Google's YMYL guidance. Only swap to a named editor if the owner provides a real person with verifiable consumer-affairs credentials.
+- **Don't add phonetic overrides for HMRC / DVLA / NCSC** in `generate_video.py`'s `PHONETIC_OVERRIDES`. We tried `H. M. R. C.` (V3 elided the R) and `aitch em are see` (too rushed) — settled on bare `HMRC` because V3 handles common UK acronyms natively. Only phonetic-override genuinely tricky brand names (`Revolut` → `Rev-uh-loot`, `Evri` → `Ev-ree`).
+- **Don't change the video catchphrase to an exclamation.** "Beat the Scam!" sounded too energetic. Declarative period — "Remember — Beat the Scam." — is what shipped.
+- **Don't change the video voice ID without asking.** Daniel (`3WqHLnw80rOZqJzW9YRB`) was chosen after A/B against Grace.
+- **Don't ship videos to `dist/`.** Video output lives at `out/videos/` (gitignored). Anything in `dist/` deploys to Netlify and would bloat the site.
+- **Don't push uncommitted changes.** Default is local-only — wait for explicit "commit and push" from the owner before pushing to `main`.
+- **Don't try to merge `dist/sitemap.xml` (or any derived file) during rebase recovery.** Pipeline rebase-conflict logic snapshots `content/*`, hard-resets to `origin/main`, merges via `scripts/merge_new_posts.py`, then rebuilds `dist/` from scratch via `build.py`. Don't revert to stash/checkout/pop logic.
+- **Don't replace the static end card** (`assets/video/end-card.png`) with a generated one. The owner-provided designed image is more on-brand than anything generatable from text alone.
+
 ---
 
 ## 21. Outstanding Roadmap
@@ -1192,6 +1269,9 @@ Revoke PATs after use at github.com → Settings → Developer settings → Pers
 - [ ] Verify `/terms/` page exists and is current
 - [ ] Confirm Twitter API keys are stored as GitHub Secrets
 - [ ] Build out the top 3 category hub pages (600–800 words each)
+- [ ] Complete YouTube OAuth one-time setup (`docs/youtube-upload-setup.md`) so `scripts/upload_to_youtube.py` works end-to-end.
+- [ ] **Get the 8 pending GSC URLs from the owner.** Search Console flagged them as failing page-indexing validation. Pattern from the Etsy URL we resurrected (`etsy-scam-sellers-uk-guide` — added to `content/daily-publish-queue.csv` for regeneration at the exact original slug): for dead-slug URLs Google has cached, queue a regen via the daily-publish workflow so the URL returns 200; for URLs with no sensible regen topic, add to a `manual_redirects` list in `scripts/build.py`.
+- [ ] Find a workable video music bed (`assets/audio/news-bed.mp3` currently empty — two candidates rejected). Search: YouTube Audio Library Mood=Dark + Genre=Electronic/Cinematic; or Pixabay terms "documentary tension", "investigation", "cybersecurity". Target tone: vigilant, deliberate, investigative — not alarmist.
 
 ### Near-term (4–8 weeks)
 

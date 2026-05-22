@@ -1,6 +1,10 @@
 # Beat The Scam — Video Production Handoff
-> Use this file to initialise a new Claude chat for video production.
-> Last updated: 2026-05-16 | Videos published: 3
+
+> Single source-of-truth for the video pipeline. Pipeline rewrite landed 2026-05-22 — drop the Gemini-character workflow entirely; the new text-card pipeline is now canonical.
+>
+> **Last updated:** 2026-05-22
+> **Videos published:** 5 (3 on the old Gemini workflow + HMRC + today's FB Marketplace + Hi Mum recreate)
+> **Canonical pipeline:** `scripts/generate_video.py` (text cards, ElevenLabs Daniel V3, Pillow + MoviePy)
 
 ---
 
@@ -8,16 +12,16 @@
 
 **Site:** https://beatthescam.com
 **Repo:** https://github.com/siderightapps-hub/beatthescam-site
-**Owner:** Alex (GitHub: siderightapps-hub)
+**Owner:** Alex (GitHub: `siderightapps-hub`)
 
 **Social accounts:**
-- Twitter/X: @BeatTheScamUK
-- TikTok: @BeatTheScamUK
-- YouTube: Beat The Scam (Brand Account under siderightapps@gmail.com)
+- Twitter/X: `@BeatTheScamUK`
+- TikTok: `@BeatTheScamUK`
+- YouTube: Beat The Scam (Brand Account under `siderightapps@gmail.com`)
 
 **Emails:**
-- Social/tools: socialmedia@beatthescam.com
-- Dev/infra: siderightapps@gmail.com
+- Social/tools: `socialmedia@beatthescam.com`
+- Dev/infra: `siderightapps@gmail.com`
 
 ---
 
@@ -25,244 +29,303 @@
 
 ### Current status (update this each session)
 
-| # | Video | TikTok | YouTube Shorts | Twitter |
-|---|---|---|---|---|
-| 1 | ISP Impersonation Scams (BT, Sky, Virgin Media) | ✅ | ✅ | ✅ |
-| 2 | WhatsApp "Hi Mum" Scam | ✅ | ✅ | ✅ |
-| 3 | Royal Mail Text Scam | ✅ | ✅ | ✅ |
-| 4 | HMRC Tax Refund Scam | ⬜ | ⬜ | ⬜ |
-| 5 | Facebook Marketplace Scam | ⬜ | ⬜ | ⬜ |
-| 6 | Police Impersonation Scam Call | ⬜ | ⬜ | ⬜ |
-| 7 | QR Code Parking Scam | ⬜ | ⬜ | ⬜ |
-| 8 | DVLA Vehicle Tax Text Scam | ⬜ | ⬜ | ⬜ |
-| 9 | PayPal Email Scam | ⬜ | ⬜ | ⬜ |
-| 10 | Puppy Scam UK | ⬜ | ⬜ | ⬜ |
-| 11 | Bank Impersonation Phone Scam | ⬜ | ⬜ | ⬜ |
-| 12 | Pig Butchering / Tinder Investment Scam | ⬜ | ⬜ | ⬜ |
+| # | Video | Slug | TikTok | YouTube Shorts | Twitter | Pipeline |
+|---|---|---|---|---|---|---|
+| 1 | ISP Impersonation Scams (BT, Sky, Virgin Media) | `isp-impersonation-scam-bt-sky-virgin-media` | ✅ | ✅ | ✅ | Old (Gemini) |
+| 2 | WhatsApp "Hi Mum" Scam | `whatsapp-family-emergency-scam` | ✅ | ✅ | ✅ | Old (Gemini) |
+| 3 | Royal Mail Text Scam | `royal-mail-text-scam-uk` | ✅ | ✅ | ✅ | Old (Gemini) |
+| 4 | HMRC Tax Rebate Email Scam | `hmrc-tax-rebate-email-scam` | ✅ | ✅ (210 views!) | ✅ | **New (text cards)** |
+| 5 | Facebook Marketplace Scam | `facebook-marketplace-scam-uk` | ⬜ | ⬜ | ⬜ | **New (text cards)** — rendered today |
+| 5b | WhatsApp "Hi Mum" recreate (TikTok only) | `whatsapp-family-emergency-scam` | ⬜ | (skip) | (existing) | **New (text cards)** — rendered today |
+| 6 | Police Impersonation Scam Call | `police-impersonation-scam-uk` | ⬜ | ⬜ | ⬜ | New |
+| 7 | QR Code Parking Scam | `qr-code-parking-scam-uk` | ⬜ | ⬜ | ⬜ | New |
+| 8 | DVLA Vehicle Tax Text Scam | `dvla-vehicle-tax-text-scam-uk` | ⬜ | ⬜ | ⬜ | New |
+| 9 | PayPal Email Scam | `paypal-email-scam-uk` | ⬜ | ⬜ | ⬜ | New |
+| 10 | Puppy Scam UK | `puppy-scam-uk` | ⬜ | ⬜ | ⬜ | New |
+| 11 | Bank Impersonation Phone Scam | `bank-impersonation-phone-scam-uk` | ⬜ | ⬜ | ⬜ | New (call family) |
+| 12 | Pig Butchering / Tinder Investment Scam | `tinder-investment-scam-uk` | ⬜ | ⬜ | ⬜ | New |
 
 **Posting schedule:** Daily (Mon–Sun, one video per day — changed from M/W/F on 2026-05-22)
-**Next video:** HMRC Tax Refund Scam
+**Best time:** 07:30–09:00 UK BST
+**Next video to publish:** FB Marketplace + Hi Mum recreate (TikTok); then move down the calendar
 
 ---
 
-## 3. Video Production Workflow
+## 3. The new pipeline (canonical from 2026-05-22)
 
-### Step 1 — Script
-Tell Claude which article to use. Claude will:
-- Pull the article content from posts.json
-- Verify all statistics against live sources
-- Generate a timed script (30s or 60s)
-- Confirm all stats are verified before proceeding
+### One-command render
 
-**Script format:**
-```
-[HOOK — 3 sec] Opens with shocking/relatable statement
-[PROBLEM — 8 sec] Context, verified UK statistics, named sources
-[RED FLAG 1 — 4 sec] Specific, visual red flag
-[RED FLAG 2 — 4 sec] Specific, visual red flag
-[RED FLAG 3 — 4 sec] Specific, visual red flag
-[CTA — 7 sec] Action + beatthescam.com + link in bio
-```
-
-### Step 2 — Audio (ElevenLabs)
-- Account: socialmedia@beatthescam.com
-- Plan: Starter ($6/month)
-- Voice: Daniel — British Male (changed from Grace, 2026-05)
-- Paste script → generate → download MP3
-- Two generations produced — pick the better one
-- Target: 43–58 seconds audio
-
-### Step 3 — Images (Gemini)
-Claude provides exact prompts for each clip.
-
-**⚠️ Critical rules for Gemini prompts:**
-- Always ask Gemini for UK-specific setting details
-- UK plug sockets, radiators, terraced houses through windows
-- Newspapers: Guardian, Daily Mail
-- Mugs: PG Tips, Union Jack
-- **FIRST CLIP MUST BE A HUMAN FACE showing emotion** — not an object
-- Keep character consistent across all clips (same person, same setting)
-- If Gemini blocks a prompt (scam text content), rephrase and add the text as a CapCut overlay instead
-
-### Step 4 — CapCut Assembly
-1. Import audio + images
-2. Add auto-captions
-3. Add background music at **-20dB**
-4. **Hard cuts between clips** (no fades between clips)
-5. Fade in at very start (0.3s), fade into end card only
-6. Add on-screen text overlays for key stats/red flags
-7. Add Ken Burns slow zoom on any clip held for 10+ seconds
-8. End card: `beatthescam-tiktok-endcard.png` (already generated)
-
-**Clip timing process:**
-- Listen to audio and note exact timestamps for each section
-- Give timestamps to Claude → Claude gives exact duration per clip
-
-### Step 5 — Export & Upload
-
-**TikTok:**
-- Export from CapCut to camera roll (never use CapCut's direct share)
-- Upload manually from camera roll
-- Add caption + hashtags (Claude provides these)
-- Toggle: AI-generated content ON
-- Pin first comment immediately after posting
-
-**YouTube Shorts:**
-- Upload same MP4 file
-- Claude provides: title, description, tags
-- Settings: Education category, Not made for kids, Altered content YES, Public
-- Add related video (link to most relevant previous Short)
-
-**Twitter/X:**
 ```bash
-python3 scripts/tweet_new_articles.py --slug [article-slug]
+cd ~/Projects/websites/beatthescam-site
+python3 scripts/generate_video.py <slug>
 ```
-Run from beatthescam-site folder on Mac.
+
+That single command does **everything**: pulls the article from `content/posts.json`, generates 8 text cards (Pillow), synthesises 8 voice clips (ElevenLabs Daniel V3), assembles via MoviePy with Ken Burns + crossfades, encodes a 1080×1920 H.264 MP4 at ~45s runtime.
+
+Outputs:
+
+```
+out/videos/<slug>.mp4              # 1080×1920, 30fps, ~25-30 MB (the deliverable)
+out/videos/<slug>-frames/          # PNG per scene (visual debug)
+out/videos/<slug>-audio/           # MP3 per scene (audio debug)
+out/videos/<slug>.upload.md        # hand-written upload metadata (currently manual)
+```
+
+`out/` is gitignored — videos never ship to Netlify or git.
+
+### One-command upload to YouTube Shorts
+
+```bash
+# After OAuth one-time setup (see docs/youtube-upload-setup.md):
+python3 scripts/upload_to_youtube.py <slug>             # Unlisted (review in Studio)
+python3 scripts/upload_to_youtube.py <slug> --public    # Public immediately
+python3 scripts/upload_to_youtube.py <slug> --dry-run   # Validate metadata, don't upload
+```
+
+Reads `out/videos/<slug>.upload.md` for title / description / tags. Auto-sets category=Education, language=en-GB, made-for-kids=NO.
+
+### TikTok upload (still manual)
+
+TikTok's Content Posting API requires app approval, which isn't worth it at current volume. Workflow per video:
+
+1. Open the MP4 in macOS Quick Look, end-to-end check
+2. AirDrop / iCloud the file to phone OR upload via tiktok.com web
+3. Paste caption + hashtags from `out/videos/<slug>.upload.md` "TikTok upload" section
+4. Cover: pick the hook frame (red bar) or a strong sign frame
+5. Music: add TikTok's "Breaking News" commercial sound (same as HMRC — adds production polish)
+6. Toggle: AI-generated content **ON**, Allow Duet/Stitch ON, Public
+7. Post → immediately pin the first comment from the upload.md template
 
 ---
 
-## 4. Key Lessons Learned
+## 4. Storyboard — 8 scenes per video
 
-### Hook rule (most important)
-**First frame = human face showing emotion.**
-Videos opening with objects (phone on table, router) get 1-3 second average watch time.
-Videos opening with a person's face get 10-20 second average watch time.
-Always start with the "concerned person" clip, not the "object" clip.
+Hardcoded in `scripts/generate_video.py` (`build_scripts()`). All cards use the brand palette: navy `#0b1220` background, accent blue `#3a86ff`, alert red `#ff5c5c`.
 
-### Script length
-- 30-second script generates ~43-58 seconds of audio at natural pace
-- Don't fight it — use it as a 60-second video
-- TikTok and YouTube Shorts both support up to 60 seconds
-
-### Statistics rule
-All stats must be verified before inclusion. Claude checks each one against:
-- Action Fraud / reportfraud.police.uk
-- FCA (fca.org.uk)
-- NCSC (ncsc.gov.uk)
-- UK Finance (ukfinance.org.uk)
-- Which? (which.co.uk)
-- Named surveys with methodology
-
-Never use unverified figures. If a stat can't be verified, describe the pattern without a number.
-
-### Audio levels
-- Voiceover: 0dB
-- Background music: -20dB
-- Sound effects: -15dB
-
-### Posting timing
-Best time to post: **07:30–09:00 UK BST**
-Post **daily** (Mon–Sun) for consistent algorithmic signals — daily cadence is generally rewarded more than every-other-day on both TikTok and YouTube Shorts.
-
----
-
-## 5. Analytics Benchmarks (as of 2026-05-16)
-
-| Video | Platform | Views | Avg Watch | Notes |
+| # | Scene | Eyebrow | Duration | Content |
 |---|---|---|---|---|
-| ISP Scam | YouTube Shorts | 6 | 0:49 (103%) | Excellent retention, low reach |
-| WhatsApp Hi Mum | YouTube Shorts | 171 | 0:09 (16.5%) | Good reach, weak hook |
-| Royal Mail | TikTok | 234 | 3.25s | Good reach, weak hook (object first frame) |
+| 1 | Hook | "SCAM ALERT" (red) | ~5s | Topic-family-specific hook (see Section 5) |
+| 2 | Promise | "IN THIS SHORT" | ~4s | Big "3" + "warning signs to spot" |
+| 3 | Sign 1 of 3 | "SIGN 1 OF 3" | ~6s | First warning from article section 2 |
+| 4 | Sign 2 of 3 | "SIGN 2 OF 3" | ~6s | Second warning |
+| 5 | Sign 3 of 3 | "SIGN 3 OF 3" | ~6s | Third warning |
+| 6 | Verify | "DO THIS INSTEAD" | ~6s | Topic-family-specific verify advice |
+| 7 | CTA | "FULL GUIDE AT" | ~3s | Full article title + beatthescam.com |
+| 8 | End card | (static) | 4.5s | `assets/video/end-card.png` + "Remember — Beat the Scam." |
 
-**Key insight:** Retention matters more than views at this stage. The ISP video's 103% retention (people replaying) is the strongest signal — YouTube will keep distributing it.
-
----
-
-## 6. File Locations
-
-| File | Location |
-|---|---|
-| End card (TikTok/Shorts) | `beatthescam-tiktok-endcard.png` — already in Claude outputs |
-| Twitter/X profile picture | `beatthescam-logo-twitter-profile-400px.png` |
-| YouTube banner | `beatthescam-youtube-banner.png` |
-| YouTube profile picture | `beatthescam-logo-youtube-profile-800px.png` |
-| OG image (site) | `/assets/og-image-v2.png` in repo |
+Each card has 4% Ken Burns zoom across its duration; 0.35s CrossFadeIn between cards.
 
 ---
 
-## 7. Automation Running
+## 5. Topic-family templates (`HOOK_TEMPLATES`)
 
-| Automation | Schedule | Status |
+`scripts/generate_video.py` classifies each slug into a topic family and picks topic-correct hook + verify copy. Slug → family map in `SLUG_FAMILIES`; copy in `HOOK_TEMPLATES`. Default family is `message` (the proven HMRC template — never change without evidence).
+
+| Family | Used for | Hook copy | Verify copy |
+|---|---|---|---|
+| `message` (default) | HMRC, DVLA, NCSC, Royal Mail, TV Licensing, banks, generic phishing | "Got a {topic} message? Don't tap that link." | "Verify through the official site yourself — never via the link." |
+| `marketplace` | Facebook Marketplace, eBay, Vinted, Gumtree, Shpock, Depop | "Spotted a {topic} bargain? Stop — it might be a scam." | "Pay through Marketplace. Never bank transfer to a stranger." |
+| `family_message` | WhatsApp Hi Mum / new-number / family-emergency | `'Hi Mum, I've lost my phone — can you send £200?' Stop.` | "Call your family on their old number. Don't send a penny yet." |
+| `call` | Bank impersonation calls, police impersonation, courier fraud | "A {topic} call asking you to move money? Hang up." | "Hang up. Call your bank back on the number from your card." |
+
+To add a new family: extend both `HOOK_TEMPLATES` and `SLUG_FAMILIES`. Each template can use `{topic}`, `{n}`, `{sign_word}` placeholders.
+
+---
+
+## 6. Pinned configuration (don't change without intention)
+
+| Setting | Value | Where |
 |---|---|---|
-| Daily article publish (5/day from queue) | 06:15 UTC daily | ✅ Running |
-| Search Console article generator | 06:30 UTC daily | ✅ Running |
-| Twitter auto-poster (on publish) | Triggered by SC pipeline | ✅ Running |
+| Voice | **Daniel** — `3WqHLnw80rOZqJzW9YRB` | `scripts/generate_video.py` constant |
+| Model | `eleven_v3` | constant |
+| Resolution | 1080 × 1920 | `W, H` constants |
+| Frame rate | 30 fps | `FPS` |
+| Background | `#0b1220` (matches site theme) | `BG` |
+| Accent | `#3a86ff` (brand blue) | `ACCENT` |
+| Alert | `#ff5c5c` (red for hook) | `ALERT_RED` |
+| Catchphrase | "Remember — Beat the Scam." (declarative period, NOT exclamation) | end-card scene |
+| End-card min duration | 4.5s | scene definition |
+| Warning trim max | 90 chars | `shorten_warning()` default |
+| Music level | -20 dB (factor 0.1) | `build_video()` |
 
-**Search Console pipeline:**
-- Pulls trending queries → finds content gaps → generates article via Claude API
-- Adds to posts.json → rebuilds site → commits → Netlify deploys → tweets
-- Fully automated — no manual intervention needed
+Changeable via env vars: `ELEVENLABS_API_KEY` (required), `ELEVENLABS_VOICE_ID` (override), `ELEVENLABS_MODEL_ID` (override).
+
+Changeable via CLI: `--no-music`, `--music PATH`, `--out-dir DIR`.
 
 ---
 
-## 8. Hashtag Templates
+## 7. The `shorten_warning()` trim function
 
-**Standard tags (all videos):**
-`#ScamAlert #UKScam #ScamAwareness #FraudAlert #BeatTheScam`
+Article warning sentences are often too long for cards. The trim cascades through these steps:
 
-**Category tags:**
+1. **Drop parentheticals** `(e.g., ...)`
+2. **Drop em-dash continuations** `main point — elaboration`
+3. **Drop `using/via/by/through X, Y, Z` lists** (2+ items) — fixed FB Marketplace sign 3's `"...using bank…"` bug
+4. **Drop quoted examples + their lead-in** — `"like 'X' or 'Y'"` strings
+5. **Cut at latest clause boundary** within 90 chars — accepts commas, semicolons, OR connector words (`but / and / or / so / within / during / after / before / throughout / around`) — fixed Hi Mum's `"didn't expect…"`, `"about the new…"`, `"to an urgent…"` bugs
+6. **Word-boundary fallback** — pops trailing `_TRIM_DANGLERS` connector words (`is/of/the/such/...`)
+
+Output is used for BOTH on-card display text AND voiceover speech.
+
+---
+
+## 8. Editorial guardrails (don't repeat these mistakes)
+
+Lessons from prior sessions — explicit so future Claude sessions don't regress:
+
+1. **Don't re-add a named editor pseudonym.** Earlier session invented "James Carter" as a fabricated UK consumer-affairs editor. We retired that and use Organization byline ("Beat the Scam Editorial Team"). Fabricated bylines are explicitly penalised under Google's YMYL E-E-A-T guidance. Only add a named editor if the user provides a real person with real credentials.
+2. **Don't add phonetic overrides for HMRC / DVLA / NCSC.** We tried `H. M. R. C.` (V3 elided the R), then `aitch em are see` (too rushed). Settled on bare `HMRC` — V3 handles common UK acronyms natively. Re-adding overrides regresses.
+3. **Don't switch the catchphrase to exclamation.** "Beat the Scam!" sounded too energetic. Declarative period preferred.
+4. **Don't change voice ID without asking.** Daniel was chosen after A/B against Grace.
+5. **Don't ship videos to `dist/`.** They'd auto-deploy to Netlify and bloat the site. Output lives at `out/videos/` (gitignored).
+6. **Don't push uncommitted changes.** User explicitly asked for "commit and one push" — default is local-only until the user asks for the push.
+
+---
+
+## 9. Music bed — current state
+
+- **Active slot:** `assets/audio/news-bed.mp3` — **empty** (no file)
+- **Behaviour when empty:** voice-only render, no music
+- **Two candidates rejected so far:** one too cinematic, one too sleepy. Both kept in `assets/audio/candidates/` for reference.
+- **TikTok workaround:** add TikTok's "Breaking News" commercial sound in the upload editor. Commercial-cleared for TikTok use only.
+- **YouTube workaround:** uploads silent (voice-only) until a track is dropped at `assets/audio/news-bed.mp3` and videos are re-rendered.
+
+**Active search strategy** for finding a workable track:
+- YouTube Audio Library: Mood = "Dark", Genre = "Electronic" or "Cinematic"
+- Pixabay search terms: `documentary tension`, `investigation`, `cybersecurity`
+- Target: "vigilant, deliberate, investigative — not alarmist"
+- Or: generate via Lyria / MusicFX with the same brief
+
+---
+
+## 10. Analytics — what's working so far
+
+As of 2026-05-22:
+
+| Video | Platform | Views | Notes |
+|---|---|---|---|
+| HMRC Tax Rebate (new pipeline) | YouTube Shorts | **210** | Best performer — proves the text-card format. |
+| WhatsApp Hi Mum (old Gemini) | YouTube Shorts | 175 | Content is good — TikTok hook killed it on TT (1 view). Today's recreate uses the new pipeline. |
+| WhatsApp Hi Mum (old Gemini) | TikTok | 1 | Object first-frame killed retention. Recreated today with text-card hook. |
+| ISP/BT/Sky/Virgin (old Gemini) | YouTube | 9 | Niche topic, decent retention, low reach. |
+| ISP/BT/Sky/Virgin (old Gemini) | TikTok | 14 | Same. |
+| Royal Mail (old Gemini) | TikTok | 234 | Original surprise hit. |
+
+**Key insight:** the new text-card pipeline (HMRC: 210 YT views) significantly outperforms the old Gemini-character pipeline (ISP: 9 YT views). Hypothesis being tested today with FB Marketplace + Hi Mum recreate: text-card format = better TikTok retention than character images.
+
+---
+
+## 11. Cost per video (current)
+
+- **ElevenLabs:** ~$0.055/video on Creator tier (~30 chars/card × 8 cards = ~240 chars/video; tier gives 100,000 chars/month = ~400 videos)
+- **Local CPU:** ~45s on M-series MacBook Air
+- **GPU:** none needed
+- **Storage:** ~30 MB per video, all in `out/videos/` (gitignored)
+- **YouTube API quota:** 1,600 units per upload, daily limit 10,000 units = ~6 uploads/day (more than enough for daily cadence)
+
+---
+
+## 12. Hashtag templates
+
+**Standard tags (every video):** `#ScamAlert #UKScam #ScamAwareness #FraudAlert #BeatTheScam`
+
+**Category-specific add-ons:**
+
 | Category | Tags |
 |---|---|
 | SMS/Text | `#TextScam #SMSScam #DeliveryScam` |
 | Phone | `#PhoneScam #VishingUK` |
 | Email | `#EmailScam #PhishingUK` |
 | Government | `#HMRCScam #DVLAScam #GovScam` |
-| WhatsApp | `#WhatsAppScam #HiMumScam` |
-| Marketplace | `#FacebookMarketplace #OnlineScam` |
+| WhatsApp | `#WhatsAppScam #HiMumScam #NewNumberScam` |
+| Marketplace | `#FacebookMarketplace #MarketplaceScam #OnlineShopping` |
 | Banking | `#BankScam #BankFraud` |
 | Tech | `#TechScam #RemoteAccess` |
 
-**First pinned comment template:**
-```
-💬 Share this with [target audience]. [Single protective action]. beatthescam.com — full guide in bio.
-```
+**TikTok hashtag strategy** (10 tags total):
+- 3 broad/discovery: `#fyp #scamalert #ukscam`
+- 3 topic-specific
+- 2 brand: `#beatthescam #scamawareness`
+- 2 audience: `#ukconsumer #fraudprevention` (or `#parentsoftiktok` for family-message videos)
 
 ---
 
-## 9. Quick Commands
+## 13. Open follow-ups
+
+- [ ] **Find a working music bed.** Two rejections; current state is voice-only. Acceptable but limits feel.
+- [ ] **Auto-generate `.upload.md` files via Claude API.** Currently hand-written. A small Claude Haiku call (~$0.001 each) could draft title/description/tags from the post + render duration.
+- [ ] **GitHub Actions workflow `daily-video.yml`** — render + upload the latest daily-publish slug automatically. Depends on YouTube OAuth secrets being added to the repo.
+- [ ] **TikTok automated upload.** Requires either the Content Posting API (app approval needed) or a third-party scheduler (Buffer / Publer / Postiz). Defer until content cadence justifies.
+- [ ] **Per-video music bed by category.** Calm for "info", urgent for "alert", investigative for "fraud" — once 3-5 trusted tracks exist.
+- [ ] **Burned-in subtitles.** TikTok auto-captions on upload work; on-card text already covers silent viewers. Worth doing if accessibility audit flags it.
+
+---
+
+## 14. Quick commands cheat-sheet
 
 ```bash
-# Navigate to repo
+# Navigate
 cd ~/Projects/websites/beatthescam-site
 
-# Pull latest
-git pull origin main
+# Render a video (any slug from posts.json)
+python3 scripts/generate_video.py facebook-marketplace-scam-uk
+python3 scripts/generate_video.py facebook-marketplace-scam-uk --no-music
 
-# Tweet a specific article
-python3 scripts/tweet_new_articles.py --slug [slug-here]
+# A/B test a different voice
+ELEVENLABS_VOICE_ID=oWAxZDx7w5VEj9dCyTzz python3 scripts/generate_video.py <slug>
 
-# Preview tweet without posting
-python3 scripts/tweet_new_articles.py --slug [slug-here] --dry-run
+# Upload to YouTube Shorts
+python3 scripts/upload_to_youtube.py <slug> --dry-run     # validate metadata
+python3 scripts/upload_to_youtube.py <slug>               # Unlisted
+python3 scripts/upload_to_youtube.py <slug> --public      # Public immediately
 
-# Check Search Console gaps (dry run)
-python3 scripts/search_console_articles.py --dry-run
+# One-time YouTube OAuth setup
+python3 scripts/get_youtube_refresh_token.py
 
-# Build site locally
+# Tweet an article (existing pipeline)
+python3 scripts/tweet_new_articles.py --slug <slug>
+python3 scripts/tweet_new_articles.py --slug <slug> --dry-run
+
+# Build the site (separate concern — not video)
 python3 scripts/build.py
-
-# Commit and push
-git add -A && git commit -m "Message" && git push origin main
 ```
 
 ---
 
-## 10. Next Session Checklist
+## 15. Worktree `.env` note
+
+Git worktrees each have their own local `.env` since the file is gitignored. Two clean options to keep them in sync:
+
+```bash
+# Option A: symlink in each new worktree
+cd <worktree>
+ln -s ../../../.env .env
+
+# Option B: shell helper in ~/.zshrc
+worktree-env() { cp ~/Projects/websites/beatthescam-site/.env .env; }
+```
+
+Either works. Not implemented automatically — pick one once and stick with it.
+
+---
+
+## 16. Next-session checklist
 
 When starting a new video session:
 
 - [ ] Review Section 2 (Content Calendar) — which video is next?
-- [ ] Ask Claude to generate the script for that video
-- [ ] Confirm all stats are verified before generating audio
-- [ ] Generate audio in ElevenLabs (Daniel voice)
-- [ ] Get Gemini prompts from Claude — remember first frame = human face
-- [ ] Assemble in CapCut — hard cuts, -20dB music, Ken Burns on long clips
-- [ ] Export to camera roll
-- [ ] Upload to TikTok (AI content label ON)
-- [ ] Upload to YouTube Shorts (Altered content YES)
-- [ ] Tweet: `python3 scripts/tweet_new_articles.py --slug [slug]`
-- [ ] Pin first comment on TikTok and YouTube
+- [ ] Run `python3 scripts/generate_video.py <slug>`
+- [ ] Open the MP4 (`out/videos/<slug>.mp4`) and watch end-to-end
+- [ ] Check the hook frame is on-brand (`out/videos/<slug>-frames/01-hook.png`)
+- [ ] Upload to YouTube: `python3 scripts/upload_to_youtube.py <slug>`
+- [ ] Upload to TikTok manually (`out/videos/<slug>.mp4` → tiktok.com web)
+- [ ] Use TikTok's "Breaking News" commercial sound
+- [ ] Toggle AI-generated content ON on both platforms
+- [ ] Paste the first pinned comment from `out/videos/<slug>.upload.md`
+- [ ] Tweet: `python3 scripts/tweet_new_articles.py --slug <slug>`
 - [ ] Update Section 2 calendar with ✅
+- [ ] Watch 1h / 24h / 48h analytics — compare retention curve to HMRC's
 
 ---
 
-*Last updated: 2026-05-16. Paste this file into a new Claude chat to continue video production from where you left off.*
+*Last updated: 2026-05-22. Replaces the previous Gemini-character-image workflow entirely. Paste this whole file into a new Claude chat to bootstrap video production work.*
