@@ -37,7 +37,10 @@ jobs:
     runs-on: ubuntu-latest
     env:
       ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
-      BATCH_SIZE: ${{ github.event.inputs.batch_size || '5' }}
+      # Scheduled runs have no inputs, so the fallback applies. Yesterday's
+      # decision: 1 article/day from queue. 5 was the historical default
+      # before that.
+      BATCH_SIZE: ${{ github.event.inputs.batch_size || '1' }}
       REWRITE_THIN: ${{ github.event.inputs.rewrite_thin || 'false' }}
       REWRITE_LIMIT: ${{ github.event.inputs.rewrite_limit || '10' }}
 
@@ -62,13 +65,20 @@ jobs:
         run: pip install -r requirements-claude.txt
 
       - name: Publish new topics
+        id: publish
         run: |
-          python scripts/run_daily_publish.py \
+          OUTPUT=$(python scripts/run_daily_publish.py \
             --queue  content/daily-publish-queue.csv \
             --topics content/topics-claude-template.csv \
             --posts  content/posts.json \
             --batch-size "$BATCH_SIZE" \
-            --model  claude-haiku-4-5-20251001
+            --model  claude-haiku-4-5-20251001 2>&1)
+          echo "$OUTPUT"
+          # Extract new slugs from the script's marker line (same convention as
+          # scripts/search_console_articles.py) so the tweet step below can fire.
+          SLUGS=$(echo "$OUTPUT" | grep "^NEW_ARTICLE_SLUGS=" | tail -1 | cut -d= -f2)
+          echo "new_slugs=$SLUGS" >> $GITHUB_OUTPUT
+          echo "Captured slugs for tweeting: $SLUGS"
 
       - name: Rewrite thin guides (optional)
         if: env.REWRITE_THIN == 'true'
@@ -218,6 +228,81 @@ jobs:
               exit 0
             fi
             git commit -m "Daily AI publish (content only): $(date -u +%Y-%m-%d)"
+            sleep 5
+          done
+          echo "Push failed after 3 attempts"
+          exit 1
+      - name: Tweet new articles
+        if: steps.publish.outputs.new_slugs != ''
+        env:
+          TWITTER_API_KEY:             ${{ secrets.TWITTER_API_KEY }}
+          TWITTER_API_KEY_SECRET:      ${{ secrets.TWITTER_API_KEY_SECRET }}
+          TWITTER_ACCESS_TOKEN:        ${{ secrets.TWITTER_ACCESS_TOKEN }}
+          TWITTER_ACCESS_TOKEN_SECRET: ${{ secrets.TWITTER_ACCESS_TOKEN_SECRET }}
+        run: |
+          # Write .env for tweet script
+          cat > .env << EOF
+          TWITTER_API_KEY=${{ secrets.TWITTER_API_KEY }}
+          TWITTER_API_KEY_SECRET=${{ secrets.TWITTER_API_KEY_SECRET }}
+          TWITTER_ACCESS_TOKEN=${{ secrets.TWITTER_ACCESS_TOKEN }}
+          TWITTER_ACCESS_TOKEN_SECRET=${{ secrets.TWITTER_ACCESS_TOKEN_SECRET }}
+          EOF
+
+          # Ensure tweeted_posts.json exists
+          if [ ! -f content/tweeted_posts.json ]; then
+            echo "{}" > content/tweeted_posts.json
+          fi
+
+          # Tweet each new slug. Individual failures (e.g. duplicate-detection
+          # suppression) don't kill the rest of the batch.
+          SLUGS="${{ steps.publish.outputs.new_slugs }}"
+          IFS=',' read -ra SLUG_ARRAY <<< "$SLUGS"
+          for SLUG in "${SLUG_ARRAY[@]}"; do
+            echo "🐦 Tweeting: $SLUG"
+            python scripts/tweet_new_articles.py --slug "$SLUG" || echo "Tweet failed for $SLUG"
+          done
+
+          rm -f .env
+
+      - name: Save updated tweeted_posts.json
+        if: steps.publish.outputs.new_slugs != ''
+        run: |
+          set -e
+          git config user.name  "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add content/tweeted_posts.json || true
+          if git diff --cached --quiet; then
+            echo "ℹ️  No changes to tweeted_posts.json"
+            exit 0
+          fi
+          git commit -m "Update tweeted_posts.json after daily-publish auto-tweet"
+
+          for attempt in 1 2 3; do
+            git fetch origin main
+            if git rebase origin/main; then
+              if git push origin HEAD:main; then
+                echo "✅ tweeted_posts.json pushed on attempt $attempt"
+                exit 0
+              fi
+              echo "Push attempt $attempt rejected (non-fast-forward) — retrying"
+              sleep 5
+              continue
+            fi
+
+            # tweeted_posts.json is just a slug→timestamp dict; conflict means
+            # another process added an entry. Snapshot ours, reset, python-merge
+            # the dicts, re-commit.
+            echo "Rebase conflict on attempt $attempt — recovering by snapshot + reset + merge"
+            git rebase --abort || true
+            cp content/tweeted_posts.json /tmp/tweeted-ours.json
+            git reset --hard origin/main
+            python -c "import json, pathlib; ours=json.loads(pathlib.Path('/tmp/tweeted-ours.json').read_text()); bp=pathlib.Path('content/tweeted_posts.json'); base=json.loads(bp.read_text()) if bp.exists() else {}; merged={**base, **ours}; bp.write_text(json.dumps(merged, indent=2, ensure_ascii=False)+chr(10)); print(f'Merged tweeted_posts.json: {len(merged)} entries')"
+            if git diff --quiet content/tweeted_posts.json; then
+              echo "ℹ️  Nothing new to record — exiting"
+              exit 0
+            fi
+            git add content/tweeted_posts.json
+            git commit -m "Update tweeted_posts.json after daily-publish auto-tweet"
             sleep 5
           done
           echo "Push failed after 3 attempts"

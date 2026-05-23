@@ -99,6 +99,15 @@ def main():
 
     save_queue(queue_path, rows, fieldnames)
     print(f"Published {len(batch)} topic(s)")
+
+    # Emit the new slugs in the convention the daily-publish.yml workflow
+    # greps for (`^NEW_ARTICLE_SLUGS=...`), so the tweet step can fire for
+    # each new article. Mirrors the contract that scripts/search_console_articles.py
+    # uses for the daily-search-console.yml workflow.
+    new_slugs = [slugify(row["keyword"]) for row in batch]
+    if new_slugs:
+        print(f"NEW_ARTICLE_SLUGS={','.join(new_slugs)}")
+
     return 0
 
 
