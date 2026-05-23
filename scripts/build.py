@@ -168,15 +168,24 @@ def seo_title(post_title: str, site_name: str, max_len: int = 60) -> str:
     truncated = post_title[:available].rsplit(" ", 1)[0].rstrip(" :,-–")
     return truncated + suffix
 
-def seo_description(desc: str, max_len: int = 155) -> str:
+def seo_description(desc: str, max_len: int = 160, min_acceptable: int = 130) -> str:
     """Trim a meta description for SERP display.
 
     Strategy (in order):
       1. If already <= max_len, return unchanged.
-      2. Prefer the longest sentence-bounded prefix that fits.
+      2. Prefer the longest sentence-bounded prefix that fits AND is at
+         least `min_acceptable` chars. The min stops us preferring a
+         short first sentence over fuller content — e.g. a 158-char string
+         where the first sentence is only 100 chars would previously cut
+         to 100, but with min_acceptable=130 we skip that short cut and
+         fall through to the word-boundary trim which keeps more text.
       3. Else fall back to word-boundary trim, but keep the last full clause
          (strip dangling prepositions/auxiliaries that would end the snippet
          mid-thought like "...used by them to.").
+
+    Defaults assume Google's effective SERP description display cap of
+    ~160 chars, which is comfortably under the 155 chars Ahrefs flags as
+    "too short" for sites still in the cold-start phase.
     """
     desc = (desc or "").strip()
     if len(desc) <= max_len:
@@ -191,7 +200,7 @@ def seo_description(desc: str, max_len: int = 155) -> str:
             best_end = end
         else:
             break
-    if best_end >= 60:
+    if best_end >= min_acceptable:
         return desc[:best_end].strip()
 
     # 2) Word-boundary fallback, stripping dangling connector words
@@ -218,34 +227,73 @@ def first_sentence(text: str) -> str:
     return text[: m.end() - 1].strip()
 
 
-def pick_description(post: dict, max_len: int = 155) -> str:
+def pick_description(post: dict, max_len: int = 160, min_len: int = 130) -> str:
     """Pick the best meta description for a post.
 
+    Targets the 130-160 char sweet spot that Google displays AND Ahrefs
+    accepts. Adds extension logic for descriptions that are present but
+    too short — they get padded with the hero line or section 1 first
+    sentence so we hit ~130+ chars instead of returning a 95-char string
+    that Ahrefs flags as "Meta description too short".
+
     Preference order:
-      1. post['description'] verbatim if it already fits.
-      2. First sentence of post['description'] if that fits.
-      3. post['hero'] verbatim if it fits.
-      4. First sentence of section 1 body if it fits.
-      5. sentence-aware trim of post['description'].
+      1. post['description'] verbatim if it's already in the sweet spot.
+      2. If description is too short, extend it with the hero line, then
+         with section 1's first sentence — whichever fits within max_len.
+      3. If description is too long, sentence-aware trim of it.
+      4. No description present — fall back to hero, then section 1 trim.
     """
     desc = (post.get("description") or "").strip()
     hero = (post.get("hero") or "").strip()
 
-    if desc and len(desc) <= max_len:
-        return desc
-    fs = first_sentence(desc)
-    if fs and len(fs) <= max_len and len(fs) >= 60:
-        return fs
-    if hero and len(hero) <= max_len and len(hero) >= 60:
-        return hero
-    sections = post.get("sections") or []
-    if sections:
+    # Helper: extract section 1 first sentence
+    def section1_first_sentence() -> str:
+        sections = post.get("sections") or []
+        if not sections:
+            return ""
         body = sections[0][1] if isinstance(sections[0], (list, tuple)) and len(sections[0]) >= 2 else ""
         body = _normalize_bullet_body(body)
-        fs_body = first_sentence(body)
-        if fs_body and 60 <= len(fs_body) <= max_len:
-            return fs_body
-    return seo_description(desc, max_len)
+        return first_sentence(body)
+
+    # 1) Description already in sweet spot
+    if desc and min_len <= len(desc) <= max_len:
+        return desc
+
+    # 2) Description too short — extend with hero, then section 1
+    if desc and len(desc) < min_len:
+        # Try hero first
+        if hero and hero.lower() not in desc.lower():
+            combined = f"{desc} {hero}"
+            if len(combined) <= max_len:
+                return combined
+            return seo_description(combined, max_len)
+        # Then section 1
+        sec1 = section1_first_sentence()
+        if sec1 and sec1.lower() not in desc.lower():
+            combined = f"{desc} {sec1}"
+            if len(combined) <= max_len:
+                return combined
+            return seo_description(combined, max_len)
+        # Nothing to extend with — return the short desc rather than nothing
+        return desc
+
+    # 3) Description too long — sentence-aware trim
+    if desc and len(desc) > max_len:
+        return seo_description(desc, max_len)
+
+    # 4) No description at all — hero, then section 1
+    if hero:
+        if len(hero) <= max_len:
+            return hero
+        return seo_description(hero, max_len)
+
+    sec1 = section1_first_sentence()
+    if sec1:
+        if len(sec1) <= max_len:
+            return sec1
+        return seo_description(sec1, max_len)
+
+    return ""
 
 
 def _normalize_bullet_body(para) -> str:
