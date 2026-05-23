@@ -116,16 +116,33 @@ def get_client():
     access_token        = os.getenv("TWITTER_ACCESS_TOKEN")
     access_token_secret = os.getenv("TWITTER_ACCESS_TOKEN_SECRET")
 
-    missing = [k for k, v in {
+    creds = {
         "TWITTER_API_KEY":             api_key,
         "TWITTER_API_KEY_SECRET":      api_secret,
         "TWITTER_ACCESS_TOKEN":        access_token,
         "TWITTER_ACCESS_TOKEN_SECRET": access_token_secret,
-    }.items() if not v]
-
+    }
+    missing = [k for k, v in creds.items() if not v]
     if missing:
         print(f"❌ Missing keys in .env: {', '.join(missing)}")
         print(f"   Copy .env.example → .env and fill in your credentials.")
+        sys.exit(1)
+
+    # Detect .env.example placeholder values so we fail with a clear message
+    # instead of getting a confusing 401 from Twitter. This trap exists because
+    # `cp .env.example .env` over an existing .env is an easy mistake to make
+    # when adding new sections to the template (it happened on 2026-05-22 when
+    # the ElevenLabs section was added — wiped the Twitter values).
+    placeholders = [k for k, v in creds.items() if v and (
+        v.endswith("_here") or v.startswith("your_") or v == "sk_your_key_here"
+    )]
+    if placeholders:
+        print(f"❌ Placeholder values detected in .env for: {', '.join(placeholders)}")
+        print(f"   Looks like .env was copied from .env.example without filling in")
+        print(f"   the real keys. Fix:")
+        print(f"   1. Get the real values from https://developer.twitter.com/en/portal/dashboard")
+        print(f"   2. Replace the 'your_*_here' lines in .env with the real keys.")
+        print(f"   3. Re-run: python3 scripts/check_twitter_auth.py to verify.")
         sys.exit(1)
 
     return tweepy.Client(
