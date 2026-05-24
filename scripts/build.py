@@ -33,6 +33,67 @@ CATEGORY_CANON = {
     "donation scams":                 "fraud",
 }
 
+# Article-level 301 redirects. Used when an article is deleted but its URL
+# may have inbound links from Google's index, Search Console history, or
+# external sites. The value is either:
+#   - another article slug (the canonical replacement), or
+#   - "__CAT__:<category-slug>" to redirect to a category landing page.
+#
+# Populated as part of the AdSense "Low value content" remediation on
+# 2026-05-24: 51 short / duplicate articles were removed (the bimodal
+# distribution of 49 articles <300 words alongside 155 articles >800 words
+# was flagged by an AdSense reviewer). _redirects entries are emitted by
+# build() so the deleted URLs still resolve via 301.
+ARTICLE_REDIRECTS = {
+    "paypal-email-scam-signs":                    "__CAT__:payment",
+    "facebook-marketplace-scam-uk-guide":         "facebook-marketplace-scam-uk",
+    "facebook-marketplace-scam-signs":            "facebook-marketplace-scam-uk",
+    "hmrc-tax-refund-scam-checklist":             "__CAT__:government",
+    "gumtree-scam-uk":                            "__CAT__:marketplace",
+    "parking-fine-scam-text-messages-uk":         "parking-fine-scam-text-uk",
+    "bank-transfer-scam-warning-signs":           "__CAT__:payment",
+    "crypto-investment-scam-checklist":           "__CAT__:crypto",
+    "phone-call-scam-red-flags":                  "__CAT__:phone",
+    "romance-scam-slow-burn-patterns":            "__CAT__:dating",
+    "job-scam-checklist-uk":                      "__CAT__:employment",
+    "google-voice-verification-scam":             "__CAT__:fraud",
+    "puppy-sale-scam-checklist":                  "__CAT__:shopping",
+    "travel-booking-scam-checklist":              "__CAT__:travel",
+    "ticket-resale-scam-checklist":               "__CAT__:shopping",
+    "shein-scam-or-legit-uk":                     "__CAT__:website",
+    "gumtree-scam-uk-guide":                      "__CAT__:marketplace",
+    "ebay-scam-buyer-protection-uk":              "__CAT__:marketplace",
+    "evri-text-scam-uk":                          "__CAT__:sms",
+    "dpd-delivery-scam-text":                     "__CAT__:sms",
+    "yodel-scam-text-messages":                   "__CAT__:sms",
+    "ups-delivery-scam-text-messages-uk":         "__CAT__:sms",
+    "paypal-email-scam-uk":                       "__CAT__:payment",
+    "invoice-scam-email-uk":                      "__CAT__:payment",
+    "refund-scam-uk":                             "__CAT__:payment",
+    "chargeback-scam-uk":                         "__CAT__:payment",
+    "direct-debit-scam-uk":                       "__CAT__:payment",
+    "hmrc-tax-refund-scam-awareness":             "__CAT__:government",
+    "dvla-scam-email-awareness":                  "__CAT__:government",
+    "nhs-covid-scam-message":                     "__CAT__:government",
+    "forex-trading-scams-uk-protection-guide":    "__CAT__:crypto",
+    "trading-signal-scam-uk":                     "__CAT__:crypto",
+    "work-from-home-scams-uk":                    "__CAT__:employment",
+    "romance-scam-signs-uk-dating":               "__CAT__:dating",
+    "puppy-scam-uk":                              "__CAT__:marketplace",
+    "ticket-scam-uk":                             "__CAT__:marketplace",
+    "holiday-booking-scam-uk":                    "__CAT__:travel",
+    "amazon-scam-email-uk":                       "__CAT__:shopping",
+    "amazon-phone-call-scam-uk":                  "__CAT__:phone",
+    "amazon-refund-scam-uk":                      "__CAT__:payment",
+    "google-voice-scam-uk":                       "__CAT__:tech",
+    "apple-id-scam-email-uk":                     "__CAT__:tech",
+    "whatsapp-family-scam-urgent-money-messages": "__CAT__:social",
+    "instagram-scam-message-uk":                  "__CAT__:social",
+    "snapchat-scam-account-awareness":            "__CAT__:social",
+    "energy-bill-scam-uk":                        "__CAT__:utility",
+    "credit-score-scam-uk":                       "__CAT__:finance",
+}
+
 CATEGORY_LABELS = {
     "marketplace": "Marketplace Scams",
     "sms":         "Text Message Scams",
@@ -2089,6 +2150,20 @@ def build():
         seen.add(old_slug)
         redirect_lines.append(f"/categories/{old_slug}    /categories/{new_slug}/    301!")
         redirect_lines.append(f"/categories/{old_slug}/*    /categories/{new_slug}/:splat    301!")
+
+    # Article-level 301s (auto-generated from ARTICLE_REDIRECTS).
+    # For each deleted slug, emit two rules (with + without trailing slash)
+    # so Netlify catches both forms cleanly.
+    redirect_lines.append("")
+    redirect_lines.append("# Article 301s (auto-generated from ARTICLE_REDIRECTS)")
+    for old_slug, target in ARTICLE_REDIRECTS.items():
+        if target.startswith("__CAT__:"):
+            destination = f"/categories/{target[len('__CAT__:'):]}/"
+        else:
+            destination = f"/guides/{target}/"
+        redirect_lines.append(f"/guides/{old_slug}    {destination}    301!")
+        redirect_lines.append(f"/guides/{old_slug}/    {destination}    301!")
+
     write(DIST / '_redirects', "\n".join(redirect_lines) + "\n")
 
     print(f"Built {len(posts)} posts across {len(categories)} categories -> {DIST}")
