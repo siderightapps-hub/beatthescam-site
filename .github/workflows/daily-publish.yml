@@ -232,8 +232,24 @@ jobs:
           done
           echo "Push failed after 3 attempts"
           exit 1
+      # Always-on debug — prints the captured slug value before the if:
+      # is evaluated, so we can see whether the slug-capture step is
+      # producing the value we think it is.
+      - name: Debug — what was captured?
+        if: always()
+        run: |
+          echo "steps.publish.outputs.new_slugs = '${{ steps.publish.outputs.new_slugs }}'"
+          echo "length: ${#NEW_SLUGS_DEBUG}"
+        env:
+          NEW_SLUGS_DEBUG: ${{ steps.publish.outputs.new_slugs }}
+
       - name: Tweet new articles
-        if: steps.publish.outputs.new_slugs != ''
+        # Explicit ${{ }} form + truthy check. The bare `!= ''` form
+        # silently skipped on 2026-05-24 and 2026-05-25 even though the
+        # publish step printed `Captured slugs for tweeting: <slug>`.
+        # Forcing the expression evaluator avoids any implicit-parsing
+        # ambiguity around how GitHub Actions reads step-output values.
+        if: ${{ steps.publish.outputs.new_slugs != '' && steps.publish.outputs.new_slugs }}
         env:
           TWITTER_API_KEY:             ${{ secrets.TWITTER_API_KEY }}
           TWITTER_API_KEY_SECRET:      ${{ secrets.TWITTER_API_KEY_SECRET }}
@@ -265,7 +281,7 @@ jobs:
           rm -f .env
 
       - name: Save updated tweeted_posts.json
-        if: steps.publish.outputs.new_slugs != ''
+        if: ${{ steps.publish.outputs.new_slugs != '' && steps.publish.outputs.new_slugs }}
         run: |
           set -e
           git config user.name  "github-actions[bot]"
