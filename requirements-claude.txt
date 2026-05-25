@@ -1,2 +1,10 @@
 anthropic>=0.34.0
 Pillow>=10.0.0
+
+# Needed by scripts/tweet_new_articles.py (called by daily-publish.yml
+# after a successful publish). Added 2026-05-25 — they were already
+# pip-installed inline in daily-search-console.yml but daily-publish.yml
+# installs from this file, so its tweet step was silently failing with
+# "tweepy not installed" on every run.
+tweepy>=4.14.0
+python-dotenv>=1.0.0
