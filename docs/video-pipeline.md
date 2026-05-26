@@ -27,27 +27,62 @@
 
 ## 2. ⚠️ Content Calendar — Start Every Session Here
 
-### Current status (update this each session)
+### Published — what's already shipped
 
-| # | Video | Slug | TikTok | YouTube Shorts | Twitter | Pipeline |
-|---|---|---|---|---|---|---|
-| 1 | ISP Impersonation Scams (BT, Sky, Virgin Media) | `isp-impersonation-scam-bt-sky-virgin-media` | ✅ | ✅ | ✅ | Old (Gemini) |
-| 2 | WhatsApp "Hi Mum" Scam | `whatsapp-family-emergency-scam` | ✅ | ✅ | ✅ | Old (Gemini) |
-| 3 | Royal Mail Text Scam | `royal-mail-text-scam-uk` | ✅ | ✅ | ✅ | Old (Gemini) |
-| 4 | HMRC Tax Rebate Email Scam | `hmrc-tax-rebate-email-scam` | ✅ | ✅ (210 views!) | ✅ | **New (text cards)** |
-| 5 | Facebook Marketplace Scam | `facebook-marketplace-scam-uk` | ⬜ | ⬜ | ⬜ | **New (text cards)** — rendered today |
-| 5b | WhatsApp "Hi Mum" recreate (TikTok only) | `whatsapp-family-emergency-scam` | ⬜ | (skip) | (existing) | **New (text cards)** — rendered today |
-| 6 | Police Impersonation Scam Call | `police-impersonation-scam-uk` | ⬜ | ⬜ | ⬜ | New |
-| 7 | QR Code Parking Scam | `qr-code-parking-scam-uk` | ⬜ | ⬜ | ⬜ | New |
-| 8 | DVLA Vehicle Tax Text Scam | `dvla-vehicle-tax-text-scam-uk` | ⬜ | ⬜ | ⬜ | New |
-| 9 | PayPal Email Scam | `paypal-email-scam-uk` | ⬜ | ⬜ | ⬜ | New |
-| 10 | Puppy Scam UK | `puppy-scam-uk` | ⬜ | ⬜ | ⬜ | New |
-| 11 | Bank Impersonation Phone Scam | `bank-impersonation-phone-scam-uk` | ⬜ | ⬜ | ⬜ | New (call family) |
-| 12 | Pig Butchering / Tinder Investment Scam | `tinder-investment-scam-uk` | ⬜ | ⬜ | ⬜ | New |
+View counts last refreshed **2026-05-26**.
+
+| # | Video | Slug | TikTok | YouTube Shorts | Twitter | Pipeline | Notes |
+|---|---|---|---|---|---|---|---|
+| 1 | ISP Impersonation Scams (BT, Sky, Virgin Media) | `isp-impersonation-scam-bt-sky-virgin-media` | ✅ (14) | ✅ (11) | ✅ | Old (Gemini) | Niche topic, low ceiling — leave as-is. |
+| 2 | WhatsApp "Hi Mum" Scam (original) | `whatsapp-family-emergency-scam` | ✅ (1) | ✅ (175) | ✅ | Old (Gemini) | Old TikTok hook killed it (1 view); YouTube doing fine. Superseded on TikTok by row 5b. |
+| 3 | Royal Mail Text Scam | `royal-mail-text-scam-uk` | ✅ (249) | ✅ (15) | ✅ | Old (Gemini) | Strong TikTok — leave as-is. |
+| 4 | HMRC Tax Rebate Email Scam | `hmrc-tax-rebate-email-scam` | ✅ (255) | ✅ (210) | ✅ | **New (text cards)** | First proof-of-concept for the no-image pipeline. Best YouTube performer. |
+| 5 | Facebook Marketplace Scam | `facebook-marketplace-scam-uk` | ✅ (268) | ✅ (1) | ✅ | **New (text cards)** | Validated text-card hook on TikTok (268 views). YouTube still finding its feet. |
+| 5b | WhatsApp "Hi Mum" recreate (TikTok-only) | `whatsapp-family-emergency-scam` | ✅ (281) | (skip — original on YT works) | (existing) | **New (text cards)** | **Hypothesis validated — text-card recreate jumped from 1 → 281 TikTok views.** Same script + audio, different format. |
+| 6 | Glastonbury Ticket Scam | `glastonbury-ticket-scam-uk` | (pending upload) | (pending upload) | (pending) | **New (ticket_resale family)** | First seasonal render. Glasto starts 24 June — 4 weeks out. Topical urgency. |
+
+### Next 14 days — summer schedule
+
+All videos pulled from articles **already published** on the site. Hook copy is auto-handled by the topic-family classifier in `scripts/generate_video.py`. Render one per day with:
+
+```bash
+python3 scripts/generate_video.py <slug>
+python3 scripts/upload_to_youtube.py <slug>
+# Then upload to TikTok manually using the .upload.md
+```
+
+| Day | Slug | Topical hook | Family |
+|---|---|---|---|
+| Mon 26 May (today) | `glastonbury-ticket-scam-uk` | Glasto −28 days | `ticket_resale` ✅ rendered |
+| Tue 27 May | `fake-festival-ticket-scam-uk` | Generic festival cover (Reading, Leeds, Wireless, Parklife, TRNSMT) | `ticket_resale` |
+| Wed 28 May | `airbnb-scam-uk-listings` | Staycation season builds | `marketplace` |
+| Thu 29 May | `viagogo-scam-uk` | Resale platform peak | `ticket_resale` |
+| Fri 30 May | `stubhub-ticket-scam-uk` | Same | `ticket_resale` |
+| Sat 31 May | `concert-ticket-scam-uk-2026` | Wider net — any UK arena gig | `ticket_resale` |
+| Sun 1 Jun | `fake-airline-ticket-scam-uk` | Travel season ramp | `ticket_resale` |
+| Mon 2 Jun | `rightmove-rental-scam-uk` | Summer rental fraud peak | `marketplace` |
+| Tue 3 Jun | `holiday-let-scam-uk` | Same | `marketplace` |
+| Wed 4 Jun | `package-holiday-scam-uk` | TUI/Jet2 wave | `message` |
+| Thu 5 Jun | `passport-renewal-scam-uk` | Pre-travel admin anxiety | `message` |
+| Fri 6 Jun | `ukvi-visa-scam-uk` | Same | `message` |
+| Sat 7 Jun | `visa-application-scam-uk` | Same | `message` |
+| Sun 8 Jun | (pick from new queue articles by then) | New seasonal content | varies |
+
+### Deferred — autumn/winter slots
+
+Original calendar items deprioritised until autumn 2026 (low summer search intent):
+
+- Police Impersonation Scam Call
+- QR Code Parking Scam
+- DVLA Vehicle Tax Text Scam
+- PayPal Email Scam (year-round, but plenty of other topical content first)
+- Puppy Scam UK
+- Bank Impersonation Phone Scam
+- Pig Butchering / Tinder Investment Scam
 
 **Posting schedule:** Daily (Mon–Sun, one video per day — changed from M/W/F on 2026-05-22)
 **Best time:** 07:30–09:00 UK BST
-**Next video to publish:** FB Marketplace + Hi Mum recreate (TikTok); then move down the calendar
+**Today's render:** see the "Today" row above. The 14-day plan is published-article-driven; the daily-publish queue is separately filling the catalogue with new seasonal articles (Glastonbury accommodation → festival camping → Reading tickets → Wimbledon → F1 → airport transfer → TUI → Jet2 → holiday compensation → solar panel → driveway cowboy → bank holiday parcel → wedding venue → wedding photographer) so by mid-June this calendar can extend with fresh content too.
 
 ---
 
