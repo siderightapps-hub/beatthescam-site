@@ -377,6 +377,18 @@ TOPIC_OVERRIDES = {
     "amazon-delivery": "Amazon delivery",
     "amazon-order":    "Amazon order",
     "fake-online-pharmacy": "fake pharmacy",
+    # Ticket-resale brands — keep topic names short so the ticket_resale
+    # hook copy reads cleanly ("Looking for Glastonbury tickets?" not
+    # "Looking for Glastonbury Ticket Scam UK tickets?").
+    "glastonbury":            "Glastonbury",
+    "wimbledon":              "Wimbledon",
+    "reading-festival":       "Reading Festival",
+    "f1-british-gp":          "British GP",
+    "viagogo":                "Viagogo",
+    "stubhub":                "StubHub",
+    "concert-ticket":         "concert",
+    "fake-festival-ticket":   "festival",
+    "fake-airline-ticket":    "airline",
 }
 
 
@@ -421,6 +433,14 @@ HOOK_TEMPLATES = {
         "verify_speech":   "Hang up. Call your bank back using the number printed on the back of your card.",
         "thumbnail_text":  "{topic} CALL SCAM",
     },
+    "ticket_resale": {
+        "hook_headline":   "Looking for {topic} tickets? That \"bargain\" is a scam.",
+        "hook_speech":     "Looking for {topic} tickets? Stop. That bargain is probably a scam.",
+        "promise":         "{n} warning {sign_word} the {topic} ticket seller is a scammer.",
+        "verify_headline": "Buy through official resellers only. Never bank transfer to a stranger.",
+        "verify_speech":   "Only buy through official resellers like Ticketmaster, See Tickets, or AXS. Never bank transfer to a face-value seller you haven't met.",
+        "thumbnail_text":  "{topic} TICKET SCAM",
+    },
 }
 
 # Map a slug substring to its hook-template family. Checked in order — more
@@ -446,6 +466,17 @@ SLUG_FAMILIES = [
     ("police-impersonation",    "call"),
     ("courier-fraud",           "call"),
     ("phone-call-scam",         "call"),
+    # ticket resale / event scams — peak summer (festivals, sport)
+    ("glastonbury",             "ticket_resale"),
+    ("wimbledon",               "ticket_resale"),
+    ("reading-festival",        "ticket_resale"),
+    ("f1-british-gp",           "ticket_resale"),
+    ("viagogo",                 "ticket_resale"),
+    ("stubhub",                 "ticket_resale"),
+    ("concert-ticket",          "ticket_resale"),
+    ("fake-festival-ticket",    "ticket_resale"),
+    ("fake-airline-ticket",     "ticket_resale"),
+    ("-ticket-scam",            "ticket_resale"),  # generic catch-all
 ]
 
 
