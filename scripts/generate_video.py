@@ -575,6 +575,21 @@ def shorten_warning(text: str, max_chars: int = 90) -> str:
         flags=re.I,
     )
 
+    # 3b. Strip ": A, B, C" colon-introduces-examples lists (2+ items). The
+    #     colon promises examples — if there are multiple comma-separated
+    #     examples, the trim downstream would otherwise cut after just the
+    #     first one and read like a mid-list truncation. e.g. on the
+    #     Glastonbury ticket-scam article:
+    #       "payment methods that can't be traced or reversed: cryptocurrency,
+    #        bank transfer to a personal account, or iTunes/Google Play gift
+    #        cards." -> "payment methods that can't be traced or reversed"
+    #     Single-example colons ("there's only one: A.") aren't matched.
+    text = re.sub(
+        r":\s+[^,.;:]+(?:\s*,\s*[^,.;:]+){1,}\s*\.?",
+        "",
+        text,
+    )
+
     # 4. Quoted-example lead-ins + their content (and any "or 'Y'" siblings)
     text = re.sub(
         r"\s+(\b(?:like|such as|including|e\.?g\.?)\s+)?"
