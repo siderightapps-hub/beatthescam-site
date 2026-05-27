@@ -562,31 +562,50 @@ def shorten_warning(text: str, max_chars: int = 90) -> str:
     # 2. Em-dash / en-dash (Unicode only, not the hyphen used in compound words)
     text = re.split(r"\s*[—–]\s*", text)[0]
 
-    # 3. Strip "using/via/by/through X, Y, Z" lists (2+ items, comma-separated,
-    #    optionally ending "or Z"). Catches "pay using bank transfer, Google
-    #    Play cards, iTunes vouchers, or cryptocurrency" but leaves "using
-    #    urgent language" (single thing, not a list) alone.
+    # Minimum length of "substantive content before the list connector"
+    # required for the example-list strippers (steps 3 + 3b) to fire.
+    # Without this guard, sentences where the WARNING IS the list itself
+    # (e.g. "The seller demands payment by bank transfer, cryptocurrency,
+    # or gift cards" — where "demands payment" is meaningless without the
+    # methods) would get stripped to a useless stub. Threshold tuned so
+    # that "Seller asks you to pay outside Facebook Marketplace" (51 chars,
+    # substantive) DOES strip, but "The seller demands payment" (26 chars,
+    # generic) does NOT.
+    _MIN_BEFORE_LIST = 35
+
+    def _strip_if_substantive(match):
+        before = match.string[:match.start()].strip()
+        if len(before) < _MIN_BEFORE_LIST:
+            return match.group(0)  # leave alone — list IS the warning
+        return ""
+
+    # 3. Strip "using/via/by/through/with X, Y, Z" lists (2+ items, comma-
+    #    separated, optionally ending "or Z"). Catches "pay outside
+    #    Marketplace using bank transfer, gift cards, or cryptocurrency"
+    #    but preserves "demands payment by bank transfer, gift cards, or
+    #    cryptocurrency" where dropping the list would leave just the
+    #    meaningless verb.
     text = re.sub(
         r"\s+(?:using|via|by|through|with)\s+"
         r"[^,.;]+(?:,\s*[^,.;]+){1,}"          # at least one comma-separated item
         r"(?:,?\s*(?:or|and)\s+[^,.;]+)?",     # optional trailing ", or Z"
-        "",
+        _strip_if_substantive,
         text,
         flags=re.I,
     )
 
-    # 3b. Strip ": A, B, C" colon-introduces-examples lists (2+ items). The
-    #     colon promises examples — if there are multiple comma-separated
-    #     examples, the trim downstream would otherwise cut after just the
-    #     first one and read like a mid-list truncation. e.g. on the
-    #     Glastonbury ticket-scam article:
+    # 3b. Strip ": A, B, C" colon-introduces-examples lists (2+ items).
+    #     Same threshold guard as step 3 — only fires when there's
+    #     substantive content before the colon. e.g. on the Glastonbury
+    #     ticket-scam article:
     #       "payment methods that can't be traced or reversed: cryptocurrency,
-    #        bank transfer to a personal account, or iTunes/Google Play gift
-    #        cards." -> "payment methods that can't be traced or reversed"
-    #     Single-example colons ("there's only one: A.") aren't matched.
+    #        bank transfer..., or gift cards." (66 chars before colon)
+    #        -> "payment methods that can't be traced or reversed"
+    #     But preserves things like "Three reasons: A, B, C" (13 chars
+    #     before colon, list is the meaning).
     text = re.sub(
         r":\s+[^,.;:]+(?:\s*,\s*[^,.;:]+){1,}\s*\.?",
-        "",
+        _strip_if_substantive,
         text,
     )
 
