@@ -39,7 +39,7 @@ View counts last refreshed **2026-05-26**.
 | 4 | HMRC Tax Rebate Email Scam | `hmrc-tax-rebate-email-scam` | ✅ (255) | ✅ (210) | ✅ | **New (text cards)** | First proof-of-concept for the no-image pipeline. Best YouTube performer. |
 | 5 | Facebook Marketplace Scam | `facebook-marketplace-scam-uk` | ✅ (268) | ✅ (1) | ✅ | **New (text cards)** | Validated text-card hook on TikTok (268 views). YouTube still finding its feet. |
 | 5b | WhatsApp "Hi Mum" recreate (TikTok-only) | `whatsapp-family-emergency-scam` | ✅ (281) | (skip — original on YT works) | (existing) | **New (text cards)** | **Hypothesis validated — text-card recreate jumped from 1 → 281 TikTok views.** Same script + audio, different format. |
-| 6 | Glastonbury Ticket Scam | `glastonbury-ticket-scam-uk` | (pending upload) | (pending upload) | (pending) | **New (ticket_resale family)** | First seasonal render. Glasto starts 24 June — 4 weeks out. Topical urgency. |
+| 6 | Glastonbury Ticket Scam | `glastonbury-ticket-scam-uk` | ✅ (posted 2026-05-27) | ✅ (posted 2026-05-27) | (pending) | **New (ticket_resale family)** | First seasonal/topical render. Glasto starts 24 June — 4 weeks out. View counts to be backfilled in 48h to validate the seasonal+topical hypothesis (TikTok 48h target: 300+; YT 7-day target: 100+). |
 
 ### Next 14 days — summer schedule
 
@@ -53,8 +53,8 @@ python3 scripts/upload_to_youtube.py <slug>
 
 | Day | Slug | Topical hook | Family |
 |---|---|---|---|
-| Mon 26 May (today) | `glastonbury-ticket-scam-uk` | Glasto −28 days | `ticket_resale` ✅ rendered |
-| Tue 27 May | `fake-festival-ticket-scam-uk` | Generic festival cover (Reading, Leeds, Wireless, Parklife, TRNSMT) | `ticket_resale` |
+| Mon 26 May | `glastonbury-ticket-scam-uk` | Glasto −28 days | `ticket_resale` ✅ shipped 27 May (TT + YT) |
+| Tue 27 May (today) | `fake-festival-ticket-scam-uk` | Generic festival cover (Reading, Leeds, Wireless, Parklife, TRNSMT) | `ticket_resale` |
 | Wed 28 May | `airbnb-scam-uk-listings` | Staycation season builds | `marketplace` |
 | Thu 29 May | `viagogo-scam-uk` | Resale platform peak | `ticket_resale` |
 | Fri 30 May | `stubhub-ticket-scam-uk` | Same | `ticket_resale` |
