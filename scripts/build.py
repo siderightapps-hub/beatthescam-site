@@ -45,6 +45,19 @@ CATEGORY_CANON = {
 # was flagged by an AdSense reviewer). _redirects entries are emitted by
 # build() so the deleted URLs still resolve via 301.
 ARTICLE_REDIRECTS = {
+    # ── Slug-collision artifacts (the "-2" duplicates) ──────────────────
+    # Older builds auto-generated these "-2" URLs when two posts.json
+    # entries shared a base slug. Deduplicating posts.json on 2026-05-24
+    # stopped them being generated, so they 404'd — and Google had
+    # discovered/indexed several (showed up as "Not found (404)" in Search
+    # Console on 2026-05-28). Redirect each to its surviving canonical.
+    "facebook-marketplace-scam-uk-guide-2":       "facebook-marketplace-scam-uk",
+    "fake-online-pharmacy-uk-scam-2":             "fake-online-pharmacy-uk-scam",
+    "is-temu-a-scam-uk-2":                        "is-temu-a-scam-uk",
+    "concert-ticket-scam-uk-2":                   "concert-ticket-scam-uk",
+    "forex-trading-scam-uk-2":                    "forex-trading-scam-uk",
+    "evri-text-scam-uk-2":                        "evri-delivery-scam-guide",
+    # ── Thin/duplicate articles removed in the AdSense remediation ──────
     "paypal-email-scam-signs":                    "__CAT__:payment",
     "facebook-marketplace-scam-uk-guide":         "facebook-marketplace-scam-uk",
     "facebook-marketplace-scam-signs":            "facebook-marketplace-scam-uk",
