@@ -16,4 +16,4 @@ Citizens Advice — https://www.citizensadvice.org.uk/consumer/scams/
 FCA ScamSmart — https://www.fca.org.uk/scamsmart
 
 /* LAST UPDATE */
-2026-05-27
+2026-05-28
