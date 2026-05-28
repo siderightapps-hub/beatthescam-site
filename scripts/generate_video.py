@@ -389,6 +389,12 @@ TOPIC_OVERRIDES = {
     "concert-ticket":         "concert",
     "fake-festival-ticket":   "festival",
     "fake-airline-ticket":    "airline",
+    # Marketplace product slugs — keep the topic short + seasonal so the
+    # "Spotted a {topic} bargain?" hook and "{topic} SCAM" thumbnail stay
+    # punchy. Without this the topic resolves to the full title prefix
+    # ("Festival Camping Equipment") which crowds the thumbnail.
+    "festival-camping-equipment": "festival gear",
+    "festival-camping":           "festival gear",
 }
 
 
@@ -413,9 +419,14 @@ HOOK_TEMPLATES = {
         "hook_headline":   "Spotted a {topic} bargain? Stop — it might be a scam.",
         "hook_speech":     "Spotted a {topic} bargain? Stop. It might be a scam.",
         "promise":         "{n} warning {sign_word} that the listing is fake.",
-        "verify_headline": "Pay through Marketplace. Never bank transfer to a stranger.",
-        "verify_speech":   "Pay through Marketplace itself. Never bank transfer to a seller you haven't met in person.",
-        "thumbnail_text":  "MARKETPLACE SCAM",  # "Facebook Marketplace SCAM" is too long for thumbnail
+        # Platform-agnostic — this family covers Facebook Marketplace,
+        # Vinted, Depop, eBay, Gumtree, Shpock. The old "Pay through
+        # Marketplace" copy was Facebook-Marketplace-specific and read
+        # wrong on a Vinted/Depop video. "The app's buyer protection"
+        # is correct for all of them.
+        "verify_headline": "Use the app's buyer protection. Never bank transfer to a stranger.",
+        "verify_speech":   "Pay through the app's own buyer protection. Never bank transfer or pay off-app to a seller you haven't met.",
+        "thumbnail_text":  "{topic} SCAM",
     },
     "family_message": {
         "hook_headline":   "\"Hi Mum, I've lost my phone — can you send £200?\" Stop.",
