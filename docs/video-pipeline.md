@@ -39,7 +39,9 @@ View counts last refreshed **2026-05-26**.
 | 4 | HMRC Tax Rebate Email Scam | `hmrc-tax-rebate-email-scam` | ✅ (255) | ✅ (210) | ✅ | **New (text cards)** | First proof-of-concept for the no-image pipeline. Best YouTube performer. |
 | 5 | Facebook Marketplace Scam | `facebook-marketplace-scam-uk` | ✅ (268) | ✅ (1) | ✅ | **New (text cards)** | Validated text-card hook on TikTok (268 views). YouTube still finding its feet. |
 | 5b | WhatsApp "Hi Mum" recreate (TikTok-only) | `whatsapp-family-emergency-scam` | ✅ (281) | (skip — original on YT works) | (existing) | **New (text cards)** | **Hypothesis validated — text-card recreate jumped from 1 → 281 TikTok views.** Same script + audio, different format. |
-| 6 | Glastonbury Ticket Scam | `glastonbury-ticket-scam-uk` | ✅ (posted 2026-05-27) | ✅ (posted 2026-05-27) | (pending) | **New (ticket_resale family)** | First seasonal/topical render. Glasto starts 24 June — 4 weeks out. View counts to be backfilled in 48h to validate the seasonal+topical hypothesis (TikTok 48h target: 300+; YT 7-day target: 100+). |
+| 6 | Glastonbury Ticket Scam | `glastonbury-ticket-scam-uk` | ✅ (posted 2026-05-27) | ✅ (posted 2026-05-27) | (pending) | **New (ticket_resale family)** | First seasonal/topical render. Glasto starts 24 June. Backfill view counts ~29 May to validate seasonal+topical hypothesis (TikTok 48h target: 300+; YT 7-day target: 100+). |
+| 7 | Fake Festival Ticket Scam (generic) | `fake-festival-ticket-scam-uk` | ✅ (posted 2026-05-28) | ✅ (posted 2026-05-28) | (pending) | **New (ticket_resale family)** | Wide-net companion to row 6 — Reading, Leeds, Wireless, Parklife, TRNSMT, Latitude, Boomtown. Tests whether second-tier festivals get more reach going wide vs per-festival. |
+| 8 | Festival camping equipment Vinted scam | `festival-camping-equipment-vinted-scam` | (article only — auto-published 28 May) | — | ✅ (auto) | n/a (article) | Auto-published from the seasonal queue. Candidate for a future `marketplace`-family video. |
 
 ### Next 14 days — summer schedule
 
@@ -54,8 +56,8 @@ python3 scripts/upload_to_youtube.py <slug>
 | Day | Slug | Topical hook | Family |
 |---|---|---|---|
 | Mon 26 May | `glastonbury-ticket-scam-uk` | Glasto −28 days | `ticket_resale` ✅ shipped 27 May (TT + YT) |
-| Tue 27 May (today) | `fake-festival-ticket-scam-uk` | Generic festival cover (Reading, Leeds, Wireless, Parklife, TRNSMT) | `ticket_resale` |
-| Wed 28 May | `airbnb-scam-uk-listings` | Staycation season builds | `marketplace` |
+| Tue 27 May | `fake-festival-ticket-scam-uk` | Generic festival cover (Reading, Leeds, Wireless, Parklife, TRNSMT) | `ticket_resale` ✅ shipped 28 May (TT + YT) |
+| Wed 28 May (today) | `airbnb-scam-uk-listings` | Staycation season builds | `marketplace` |
 | Thu 29 May | `viagogo-scam-uk` | Resale platform peak | `ticket_resale` |
 | Fri 30 May | `stubhub-ticket-scam-uk` | Same | `ticket_resale` |
 | Sat 31 May | `concert-ticket-scam-uk-2026` | Wider net — any UK arena gig | `ticket_resale` |
