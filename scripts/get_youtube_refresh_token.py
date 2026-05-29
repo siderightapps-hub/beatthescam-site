@@ -63,12 +63,37 @@ def main() -> None:
             "https://myaccount.google.com/permissions and re-running."
         )
 
+    token = creds.refresh_token
+
+    # Write the token straight into .env so there's no error-prone manual
+    # copy-paste. Replaces an existing YOUTUBE_REFRESH_TOKEN= line if present,
+    # otherwise appends one. (Manual paste is where this broke on 2026-05-29:
+    # the helper printed a token but .env never got updated.)
+    env_path = REPO_ROOT / ".env"
+    line = f"YOUTUBE_REFRESH_TOKEN={token}"
+    if env_path.exists():
+        lines = env_path.read_text().splitlines()
+        replaced = False
+        for i, ln in enumerate(lines):
+            if ln.strip().startswith("YOUTUBE_REFRESH_TOKEN="):
+                lines[i] = line
+                replaced = True
+                break
+        if not replaced:
+            lines.append(line)
+        env_path.write_text("\n".join(lines) + "\n")
+        action = "Updated" if replaced else "Appended to"
+    else:
+        env_path.write_text(line + "\n")
+        action = "Created"
+
     print()
     print("=" * 60)
-    print("Add this line to your .env file:")
+    print(f"✅ {action} {env_path} with the new refresh token.")
     print("=" * 60)
-    print(f"YOUTUBE_REFRESH_TOKEN={creds.refresh_token}")
-    print("=" * 60)
+    print()
+    print("Token (also saved above, in case you want to copy it to GitHub Secrets):")
+    print(f"  YOUTUBE_REFRESH_TOKEN={token}")
     print()
     print("Test it:")
     print("  python3 scripts/upload_to_youtube.py <slug> --dry-run")
