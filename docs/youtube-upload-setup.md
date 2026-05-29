@@ -53,7 +53,8 @@ That installs into `~/Library/Python/3.x/lib/python/site-packages/` — your use
    - Developer contact email: your email
 4. **Scopes** → Add or remove scopes → search `youtube.upload` → tick `.../auth/youtube.upload` → Update → Save and continue.
 5. **Test users** → Add your Google account (the one that owns the Beat The Scam YouTube brand account) → Save and continue.
-6. Summary → Back to dashboard. Publishing status will stay "Testing" — that's fine for a single-user tool. The token doesn't expire while the app is in Testing as long as you re-mint it before the 7-day refresh-token expiry window. (See step 6 if you ever need to refresh.)
+6. Summary → Back to dashboard.
+7. **Publish the app.** OAuth consent screen → **Publishing status** → **Publish app** → confirm. This moves the app from "Testing" to **"In production"**. For a single-user tool using only the narrow `youtube.upload` scope, Google does **not** require its formal verification review — you'll see an "unverified app" warning during the consent flow (click through it; see Step 5), but the app stays in production. **This is the important bit: refresh tokens minted while the app is in Production do not expire.** Testing-mode tokens silently die after 7 days, which is what bit us on 2026-05-29. The app is now in Production, so this is a one-time setup.
 
 ---
 
@@ -86,12 +87,12 @@ It will:
 - Ask you to sign in with the Google account that owns the Beat The Scam YouTube channel.
 - Warn that **"the app is not verified"** — click **Advanced** → **Go to Beat The Scam Video Upload (unsafe)**. This is fine; you're authorising your own app.
 - Ask for permission to **manage your YouTube account** (specifically: upload videos).
-- Print the refresh token to your terminal.
+- **Write the refresh token straight into your `.env`** — it replaces any existing `YOUTUBE_REFRESH_TOKEN=` line, or appends one if none exists. (It also prints the token so you can copy it to GitHub Secrets if needed.)
 
-Add the printed token to `.env`:
+You don't need to copy-paste anything into `.env` by hand — that manual step is exactly where this broke on 2026-05-29 (the helper printed a token but `.env` was never updated, so uploads kept using a stale, expired token). The script now does the write for you. Just confirm the line is there:
 
 ```bash
-YOUTUBE_REFRESH_TOKEN=<paste from terminal>
+grep YOUTUBE_REFRESH_TOKEN .env
 ```
 
 ---
@@ -154,7 +155,7 @@ Everything from `## TikTok upload` onwards in the .upload.md is ignored, so TikT
 
 ## Common gotchas
 
-- **`invalid_grant` after a few weeks** — Google rotates refresh tokens for "Testing" OAuth apps after 7 days of non-use. If your refresh token expires, just re-run `scripts/get_youtube_refresh_token.py` and update `.env`. Or move the OAuth app to "In production" (you'd need verification for that, not worth it for a single-user tool).
+- **`invalid_grant` / "Token has been expired or revoked"** — this is the 7-day Testing-mode expiry. **Fixed permanently by publishing the app to Production** (Step 3.7) — production tokens don't expire. If you somehow still hit it, just re-run `scripts/get_youtube_refresh_token.py`; it re-mints the token and writes it straight into `.env` (no manual paste). Note: the `.env` token's file mtime doesn't change unless the script rewrites it, so if a re-auth "didn't take", check that the helper actually finished and wrote the new line (`grep YOUTUBE_REFRESH_TOKEN .env`).
 - **Quota** — YouTube Data API gives you 10,000 units/day by default. An upload costs 1,600 units. So you can upload up to ~6 videos per day from this project before hitting the quota. More than enough for daily-cadence content.
 - **Wrong channel** — if you've signed into a different Google account than the one that owns the Beat The Scam channel, the upload lands on the wrong channel. Sign out of other Google accounts in your default browser, OR use a private window for `get_youtube_refresh_token.py`.
 - **The script worked locally but fails in CI later** — the `.env` file doesn't ship to GitHub Actions. When wiring this into a workflow, store `YOUTUBE_CLIENT_ID`, `YOUTUBE_CLIENT_SECRET`, and `YOUTUBE_REFRESH_TOKEN` as repository secrets and reference them via `env:` blocks.

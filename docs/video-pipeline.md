@@ -41,7 +41,7 @@ View counts last refreshed **2026-05-26**.
 | 5b | WhatsApp "Hi Mum" recreate (TikTok-only) | `whatsapp-family-emergency-scam` | ✅ (281) | (skip — original on YT works) | (existing) | **New (text cards)** | **Hypothesis validated — text-card recreate jumped from 1 → 281 TikTok views.** Same script + audio, different format. |
 | 6 | Glastonbury Ticket Scam | `glastonbury-ticket-scam-uk` | ✅ (posted 2026-05-27) | ✅ (posted 2026-05-27) | (pending) | **New (ticket_resale family)** | First seasonal/topical render. Glasto starts 24 June. Backfill view counts ~29 May to validate seasonal+topical hypothesis (TikTok 48h target: 300+; YT 7-day target: 100+). |
 | 7 | Fake Festival Ticket Scam (generic) | `fake-festival-ticket-scam-uk` | ✅ (posted 2026-05-28) | ✅ (posted 2026-05-28) | (pending) | **New (ticket_resale family)** | Wide-net companion to row 6 — Reading, Leeds, Wireless, Parklife, TRNSMT, Latitude, Boomtown. Tests whether second-tier festivals get more reach going wide vs per-festival. |
-| 8 | Festival camping equipment Vinted scam | `festival-camping-equipment-vinted-scam` | (article only — auto-published 28 May) | — | ✅ (auto) | n/a (article) | Auto-published from the seasonal queue. Candidate for a future `marketplace`-family video. |
+| 8 | Festival camping gear (Vinted) scam | `festival-camping-equipment-vinted-scam` | ✅ (posted 2026-05-29) | ✅ (posted 2026-05-29) | ✅ (auto, 28 May) | **New (marketplace family)** | Article auto-published 28 May, video shipped 29 May. First render after the marketplace verify copy was made platform-agnostic + topic shortened to "festival gear". YT: youtube.com/shorts/I_00psb_Ft0 |
 
 ### Next 14 days — summer schedule
 
@@ -57,18 +57,19 @@ python3 scripts/upload_to_youtube.py <slug>
 |---|---|---|---|
 | Mon 26 May | `glastonbury-ticket-scam-uk` | Glasto −28 days | `ticket_resale` ✅ shipped 27 May (TT + YT) |
 | Tue 27 May | `fake-festival-ticket-scam-uk` | Generic festival cover (Reading, Leeds, Wireless, Parklife, TRNSMT) | `ticket_resale` ✅ shipped 28 May (TT + YT) |
-| Wed 28 May (today) | `airbnb-scam-uk-listings` | Staycation season builds | `marketplace` |
-| Thu 29 May | `viagogo-scam-uk` | Resale platform peak | `ticket_resale` |
-| Fri 30 May | `stubhub-ticket-scam-uk` | Same | `ticket_resale` |
-| Sat 31 May | `concert-ticket-scam-uk-2026` | Wider net — any UK arena gig | `ticket_resale` |
-| Sun 1 Jun | `fake-airline-ticket-scam-uk` | Travel season ramp | `ticket_resale` |
-| Mon 2 Jun | `rightmove-rental-scam-uk` | Summer rental fraud peak | `marketplace` |
-| Tue 3 Jun | `holiday-let-scam-uk` | Same | `marketplace` |
-| Wed 4 Jun | `package-holiday-scam-uk` | TUI/Jet2 wave | `message` |
-| Thu 5 Jun | `passport-renewal-scam-uk` | Pre-travel admin anxiety | `message` |
-| Fri 6 Jun | `ukvi-visa-scam-uk` | Same | `message` |
-| Sat 7 Jun | `visa-application-scam-uk` | Same | `message` |
-| Sun 8 Jun | (pick from new queue articles by then) | New seasonal content | varies |
+| Wed 28 May | `festival-camping-equipment-vinted-scam` | Subbed in for airbnb — freshest seasonal article | `marketplace` ✅ shipped 29 May (TT + YT) |
+| Thu 29 May (today) | `airbnb-scam-uk-listings` | Staycation season builds (carried over) | `marketplace` |
+| Fri 30 May | `viagogo-scam-uk` | Resale platform peak | `ticket_resale` |
+| Sat 31 May | `stubhub-ticket-scam-uk` | Same | `ticket_resale` |
+| Sun 1 Jun | `concert-ticket-scam-uk-2026` | Wider net — any UK arena gig | `ticket_resale` |
+| Mon 2 Jun | `fake-airline-ticket-scam-uk` | Travel season ramp | `ticket_resale` |
+| Tue 3 Jun | `rightmove-rental-scam-uk` | Summer rental fraud peak | `marketplace` |
+| Wed 4 Jun | `holiday-let-scam-uk` | Same | `marketplace` |
+| Thu 5 Jun | `package-holiday-scam-uk` | TUI/Jet2 wave | `message` |
+| Fri 6 Jun | `passport-renewal-scam-uk` | Pre-travel admin anxiety | `message` |
+| Sat 7 Jun | `ukvi-visa-scam-uk` | Same | `message` |
+| Sun 8 Jun | `visa-application-scam-uk` | Same | `message` |
+| Mon 9 Jun | (pick from new queue articles by then) | New seasonal content | varies |
 
 ### Deferred — autumn/winter slots
 
@@ -286,6 +287,14 @@ As of 2026-05-22:
 - 3 topic-specific
 - 2 brand: `#beatthescam #scamawareness`
 - 2 audience: `#ukconsumer #fraudprevention` (or `#parentsoftiktok` for family-message videos)
+
+**TikTok pinned first comment — HARD 150-character limit.** TikTok truncates comments at 150 characters (YouTube has no such limit, so YT pinned comments can be longer). When drafting the `### Pinned first comment` block in a `.upload.md`, count the characters and keep it ≤150 including spaces, emoji and the `beatthescam.com` mention. This bit us on the Glastonbury and festival videos where the first drafts ran 160–165 chars and had to be re-cut. Quick check before handing the comment over:
+
+```bash
+python3 -c "print(len('''💬 Save this before festival season. Pay ONLY through buyer protection — never bank transfer. beatthescam.com — full guide in bio.'''))"
+```
+
+If it prints >150, trim. Drop the leading emoji first (saves ~2), then shorten the CTA ("full guide in bio" → "guide in bio").
 
 ---
 
