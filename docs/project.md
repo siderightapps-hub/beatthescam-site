@@ -87,7 +87,7 @@ A free, UK-focused consumer-protection publication that:
 | Address | Purpose | Status |
 |---|---|---|
 | `hello@beatthescam.com` | General public contact (footer + Contact page) | Active |
-| `socialmedia@beatthescam.com` | Social platform sign-ups, ElevenLabs, TikTok, YouTube brand account | Active |
+| `socialmedia@beatthescam.com` | Social platform sign-ups, ElevenLabs, TikTok, YouTube brand account, Instagram | Active |
 | `privacy@beatthescam.com` | GDPR / data protection / right-to-be-forgotten enquiries | Reserved — should be activated |
 | `welcome@beatthescam.com` | Newsletter onboarding (future — planned newsletter feature) | Reserved |
 | `editorial@beatthescam.com` | Editorial / correction enquiries | Reserved — should be activated |
@@ -101,7 +101,7 @@ A free, UK-focused consumer-protection publication that:
 
 - Contact page: `https://beatthescam.com/contact/`
 - Footer link on every page
-- Social: Twitter/X `@BeatTheScamUK`, TikTok `@BeatTheScamUK`, YouTube `Beat The Scam`
+- Social: Twitter/X `@BeatTheScamUK`, TikTok `@BeatTheScamUK`, Instagram `@beatthescamuk`, YouTube `Beat The Scam`
 
 ---
 
@@ -602,7 +602,7 @@ When `content/daily-publish-queue.csv` drops below 20 topics, add new ones in ba
 | TikTok | `@BeatTheScamUK` | Active — 3 videos published, M/W/F cadence |
 | YouTube | `Beat The Scam` (Brand Account) | Active — 3 Shorts published |
 | Facebook | Reserved | Not yet active |
-| Instagram | Reserved | Not yet active |
+| Instagram | `@beatthescamuk` | Active — Creator account; manual Reels (same MP4 as Shorts/TikTok) |
 | LinkedIn | Reserved | Not yet active |
 | Reddit | Personal account used carefully in r/Scams and r/UKPersonalFinance | See Section 14 |
 
@@ -772,8 +772,9 @@ Per Google's [AI optimization guide](https://developers.google.com/search/docs/f
 3. **Social mentions**
    - Twitter / X bio link ✅
    - TikTok bio link ✅
+   - Instagram bio link ✅ (`beatthescam.com`)
    - YouTube channel "About" link ✅
-   - Pinterest / Instagram (when those channels activate)
+   - Pinterest (when that channel activates)
 
 4. **Reddit participation** *(carefully, organically)*
    - **r/Scams** — answer questions with genuine help; link only when directly relevant
@@ -1321,7 +1322,7 @@ Decisions reached in prior sessions that future Claude sessions should preserve,
 - Netlify hosting setup (transferable)
 - Google Analytics 4 property
 - Google AdSense Publisher ID (in review — will need re-verification on transfer)
-- Social channels: Twitter `@BeatTheScamUK`, TikTok `@BeatTheScamUK`, YouTube "Beat The Scam"
+- Social channels: Twitter `@BeatTheScamUK`, TikTok `@BeatTheScamUK`, Instagram `@beatthescamuk`, YouTube "Beat The Scam"
 - 3 published Shorts/TikToks (and assets)
 - All branding assets (logo variants, OG image, banners, end card)
 - This document and all session handoff documents
