@@ -296,6 +296,20 @@ python3 -c "print(len('''💬 Save this before festival season. Pay ONLY through
 
 If it prints >150, trim. Drop the leading emoji first (saves ~2), then shorten the CTA ("full guide in bio" → "guide in bio").
 
+### Instagram Reels (third platform — paste-ready, manual for now)
+
+Every `.upload.md` should carry an `## Instagram Reels` section after the TikTok block. **The same MP4 works unchanged** — 1080×1920 / 9:16 / ~45s *is* the Reels spec, so there's no re-render. The YouTube uploader ignores everything that isn't its own `### Title`/`### Description`/`### Tags` blocks, so an Instagram section is parser-safe (don't reuse those three heading labels inside it — use `### Caption` / `### Settings` / `### Pinned first comment` like TikTok).
+
+Instagram-specific rules when drafting the Reels caption:
+- **Front-load the hook** — only the first ~125 chars show before the "… more" fold. Lead with the question/red-flag, not hashtags.
+- **Hashtags: 3–5, in the caption.** The "30 hashtags" era is over; Instagram itself now recommends 3–5 relevant tags. Use brand + topic (e.g. `#vintedscam #festivalscam #ukscams #scamawareness #fraudprevention`).
+- **No clickable links** in captions → CTA stays "link in bio" (same constraint as TikTok).
+- **Audio for reach:** Reels favours trending audio. Either add a trending track at low volume in-app (so the voiceover still reads) or keep original audio. Watch commercial-use limits as with TikTok's "Breaking News" sound.
+- **Cover:** reuse the hook frame or the 1280×720 thumbnail.
+- **Posting:** manual via the IG app, or schedule free in **Meta Business Suite** (needs the account linked to a Facebook Page). Full Graph API auto-publish is deferred — it needs Meta app review for `instagram_content_publish` and pulls the video from a public URL, so the MP4 would have to be hosted. Same defer-until-cadence-justifies call we made for TikTok.
+
+Status: the `@BeatTheScamUK` Instagram handle is **reserved but not yet active** — packages are Reels-ready so activation is just "convert to a Creator account and start pasting." Worked example: `out/videos/festival-camping-equipment-vinted-scam.upload.md`.
+
 ---
 
 ## 13. Open follow-ups
