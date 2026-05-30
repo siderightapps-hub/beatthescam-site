@@ -8,9 +8,9 @@
 > 3. Potential buyers / acquirers — full due-diligence briefing on the asset.
 > 4. Contractors, future editors, security reviewers — onboarding pack.
 >
-> **Last updated:** 2026-05-20
-> **Domain age:** ~3 months (registered February 2026)
-> **Site state:** 97+ guides published, 17 normalised categories, AI checker live, social channels active
+> **Last updated:** 2026-05-30
+> **Domain age:** ~4 months (registered February 2026)
+> **Site state:** 160 guides published, 17 normalised categories, AI checker live, three video channels active (YouTube Shorts + TikTok + Instagram Reels), llms.txt deployed. Semrush Site Health **98%**, AI Search Health **99%**, ~191 residual warnings all from Google's AdSense CDN (irreducible third-party floor).
 > **Maintainer:** Alex — SideRight Apps (GitHub: `siderightapps-hub`)
 
 ---
@@ -450,6 +450,23 @@ GA4 `gtag.js` loads inline via `templates/base.html`. This is one of the reasons
 - No advertising/remarketing features enabled in GA4 admin (keeps consent obligations lighter).
 - See Section 16 for cookie banner and consent treatment.
 
+### Semrush (SEO + backlink audit + site audit)
+
+- **Project:** `beatthescam.com` (single project, free tier).
+- **Position Tracking:** target country was initially set to **Spain (Spanish)** in error — this needs swapping to **United Kingdom (English)** in the Position Tracking settings (delete the existing target and re-add UK — the free tier's 1-target limit blocks adding a 2nd before deleting the 1st).
+- **Site Audit baseline (2026-05-30 after this session's remediation):**
+  - Site Health **98%** (was 96% before fix pass)
+  - AI Search Health **99%** (was 88% — biggest gain from llms.txt + cleaner heading hierarchy + sentence-split paragraphs)
+  - Errors **0** · Warnings **192**
+  - **191 of 192 warnings are unfixable** — Google's `pagead2.googlesyndication.com/.../adsbygoogle.js` flagged as "uncompressed" on every page. We don't control Google's CDN compression headers. Accept as inherent to running AdSense.
+  - The 1 remaining genuine warning is "low word count" on a page already rewritten in source — will clear on next re-crawl.
+- **Backlink Audit (Disavow Policy):** see Section 14 — Beatthescam.com has an active Google disavow file as of 2026-05-30.
+- **Cadence:** re-run the Site Audit + Backlink Audit weekly; check the dashboard before any push that materially changes templates or rendered HTML.
+
+### Looker Studio (optional)
+
+Semrush exposes a Looker Studio connector under the Site Audit "Export" menu. Not wired up. Worth doing if/when we want a single dashboard combining GSC + GA4 + Semrush.
+
 ---
 
 ## 10. Monetisation — AdSense, Affiliates, Sponsorships
@@ -850,6 +867,25 @@ DA isn't a Google metric but is a useful proxy. Realistic 12-month target: **DA 
 - Steady internal-link expansion via category hubs
 - Continued original content (>200 guides by month 12)
 
+### Disavow Policy ✅ Live since 2026-05-30
+
+The site has an active Google disavow file. Background and the rules for future maintenance:
+
+**Why we have one.** Young domains get passively pulled onto "aged-domain marketplace" scrape lists within months of registration. Semrush flagged 53 toxic backlinks (out of 112 analysed) on 2026-05-30, all from the same class of source: `all-aged-domains.com`, `mail.domainanalysis.org`, `mail.linksnatcher.com`, `wonvision.com`, `jobsapp.info` etc. — all "Where to buy aged domains and backlinks" scraper aggregators. We did not buy links; the site was scraped onto these lists automatically.
+
+**What we disavowed.** 66 domains at the **domain level** (so any future link from those same farms is also ignored). The active file is `disavow_beatthescam.com_20260530.txt` — keep a copy under `~/Downloads/` and re-export from Semrush whenever it changes.
+
+**Where it lives.** Disavow is uploaded at https://search.google.com/search-console/disavow-links — the tool is hidden, not in the main Search Console nav. Note: **the disavow tool only works on a URL-prefix property**, not on a Domain property. We added `https://beatthescam.com/` as a URL-prefix property in Search Console specifically to enable this (the Domain property `beatthescam.com` remains the primary).
+
+**THE RULE for future updates (this is the one to remember).** Every upload **REPLACES** the previous file — not appends. So:
+1. In Semrush → Backlink Audit → Disavow tab → click **Export to .txt** to get the *full* current list
+2. Upload that full file to the disavow tool (it overwrites the previous)
+3. **Never** edit by hand and never upload a partial list — you'd accidentally un-disavow everything missing
+
+**When to re-do.** Re-export + re-upload once a month, or any time a new Semrush audit flags 5+ new high-toxicity sources. The "Download list" button in Search Console always shows the currently-active file as a sanity check.
+
+**What this fixes vs. doesn't.** Disavow tells Google to ignore those links for ranking — links still exist on the spam sites, Semrush will keep showing them in "Backlinks" (Semrush ≠ Google). Authority Score does **not** lift from disavowing — aged-domain spam never passes authority anyway. Real lift comes from earning quality backlinks (the work above).
+
 ### Avoiding bad backlink habits
 
 - ❌ No paid PBNs
@@ -1084,38 +1120,15 @@ google.com, pub-1606633100797174, DIRECT, f08c47fec0942fa0
 - Served at `https://beatthescam.com/ads.txt`
 - AdSense dashboard shows as **Authorised**
 
-### `llms.txt` *(NEW — recommended)*
+### `llms.txt` ✅ Live since 2026-05-30
 
-[`llms.txt`](https://llmstxt.org/) is an emerging standard for telling LLMs what content on the site is canonical and citation-worthy. **Currently not deployed.** Recommended next step.
+[`llms.txt`](https://llmstxt.org/) is the emerging standard for telling LLM crawlers (ChatGPT, Claude, Perplexity, Gemini) what content on the site is canonical and citation-worthy. **Live at https://beatthescam.com/llms.txt** — generated by `scripts/build.py` from `content/posts.json` on every build.
 
-Suggested content for `https://beatthescam.com/llms.txt`:
+Structure: a brief site description, then categories listed (with guide counts), then every guide grouped by category with title + URL + description, then an "Optional" section for About/Contact/Privacy. Currently ~242 lines covering all 160 guides.
 
-```
-# Beat The Scam
+Impact: AI Search Health jumped from 88% → 99% in the Semrush audit on the next crawl after deployment.
 
-> UK consumer-protection publication providing plain-English scam awareness guides and a free AI-powered scam checker. All content is original, fact-checked against UK government sources, and edited by Beat The Scam Editorial Team.
-
-## Core pages
-
-- [About & methodology](https://beatthescam.com/about/): How we research, write, and verify our content; AI use disclosure.
-- [Privacy policy](https://beatthescam.com/privacy/)
-- [Free scam checker](https://beatthescam.com/check/): Paste a suspicious message; receive a verdict.
-
-## Topic hubs
-
-- [Payment scams](https://beatthescam.com/categories/payment/)
-- [SMS / text scams](https://beatthescam.com/categories/sms/)
-- [Email / phishing scams](https://beatthescam.com/categories/email/)
-- [Government impersonation scams](https://beatthescam.com/categories/government/)
-- [Marketplace scams](https://beatthescam.com/categories/marketplace/)
-- (… one line per category …)
-
-## Optional
-
-- [Sitemap (full URL list)](https://beatthescam.com/sitemap.xml)
-```
-
-Add generation of `llms.txt` to `build.py` from the category list.
+**Editing:** don't hand-edit `dist/llms.txt` — it's regenerated every build. Change the structure or copy in `scripts/build.py` (search for `llms.txt — markdown index`).
 
 ### `security.txt` *(NEW — recommended)*
 
@@ -1234,6 +1247,12 @@ Revoke PATs after use at github.com → Settings → Developer settings → Pers
 
 12. **Bullet-list rendering bug.** Fixed in both renderer (`build.py`) and generator (`generate_content_claude.py`). Layer 3 (cleaning the broken-shape data already in `posts.json`) is optional — not urgent.
 
+13. **Experian affiliate URL is unstable.** The `experian-identity` entry in `content/affiliates.json` deliberately points to the **main consumer landing** `https://www.experian.co.uk/consumer/` rather than a product-specific page. On 2026-05-30 we discovered Experian had retired their standalone product URLs (`/consumer/identity-plus.html`, `/identity-protection.html`, `/free-credit-score.html`, etc. all 404) and only the main consumer landing returns 200. HEAD-checked nine plausible candidates before settling on the landing. **If you ever update this URL, run a quick `curl -I` HEAD-check first** — Experian's URL scheme is JS-driven and they restructure regularly. A future swap to a more specific page is fine as long as you verify it's live first. The dead URL previously generated **84 broken-link warnings** (one entry, fanned out across every affiliate-matched guide page) in the Semrush audit.
+
+14. **Google Disavow tool requires URL-prefix property, not Domain property.** Search Console disavow tool flat-refuses Domain properties ("Domain properties are not supported at this time"). We added `https://beatthescam.com/` as a URL-prefix property specifically to enable disavow uploads — leave it verified. See Section 14 Disavow Policy.
+
+15. **Semrush "uncompressed JS/CSS" is unfixable AdSense.** ~191 pages flagged because Google serves `pagead2.googlesyndication.com/.../adsbygoogle.js` without the compression header Semrush expects. We don't control Google's CDN. Don't waste cycles trying to clear this warning — only path is removing AdSense (irrational) or lazy-loading the AdSense script (small revenue trade-off). Site Health is otherwise 98% — that 191 is the irreducible floor.
+
 13. **No `llms.txt` yet.** Recommended next addition. See Section 18.
 
 14. **No `security.txt` yet.** Recommended next addition. See Section 18.
@@ -1263,15 +1282,24 @@ Decisions reached in prior sessions that future Claude sessions should preserve,
 
 > Carried forward from `ProjectHandoffDocument.md` Section 7 and updated.
 
+### Recently completed (2026-05-30 session)
+
+- [x] **`llms.txt` generation added to `build.py`** — live at `/llms.txt`, regenerated every build (see Section 18). AI Search Health 88% → 99%.
+- [x] **YouTube OAuth setup complete** — `scripts/upload_to_youtube.py` works end-to-end; OAuth app moved to Production so refresh tokens no longer expire on the 7-day Testing cycle. Helper script auto-writes `YOUTUBE_REFRESH_TOKEN` straight into `.env`.
+- [x] **Instagram channel activated** — `@beatthescamuk` (Creator account, bio link to beatthescam.com). Every `.upload.md` now carries a paste-ready Reels block (same 1080×1920 MP4 as Shorts/TikTok — zero re-render).
+- [x] **Semrush remediation pass** — Site Health 96% → 98%, AI Search Health 88% → 99%. Cleared 84 broken-link warnings (single dead Experian affiliate URL), 157 "paragraphs too long" warnings (added sentence-aware paragraph splitter in `build.py`), 6 "poor heading hierarchy" on listing pages (added `<h2>` between H1 and card grid), 7 "no anchor text" warnings (nested-anchor guard in `apply_internal_links`). Minified `dist/assets/styles.css` + `app.js`. 191 residual "uncompressed" warnings are Google's AdSense CDN — irreducible.
+- [x] **Google disavow file uploaded** — 66 domains (Section 14 Disavow Policy). Added URL-prefix Search Console property `https://beatthescam.com/` to enable the tool.
+
 ### This week / next session
 
+- [ ] **Backlinks push** — start the structured outreach cadence in Section 14. Authority Score is **2** (irreducible without quality backlinks); this is the single biggest growth lever now that on-site audit health is at the ceiling. First wins: 5 directory submissions/week + HARO sign-up + 1–2 link-insertion emails/week.
+- [ ] **Cross-platform video + Twitter analytics review** — first proper post-publish review of the YouTube Shorts + TikTok + Instagram Reels + X data side-by-side. Goal: identify whether the first-second retention hypothesis (the swipe-away problem we parked) holds across all three platforms, and pull tweet-impression data from X's native dashboard (free X API tier doesn't expose analytics). See `docs/video-pipeline.md` Section 10 for the existing analytics baseline.
+- [ ] **Semrush Position Tracking — swap Spain → UK** (1-min dashboard action — delete the existing Spain (Spanish) target, add United Kingdom (English); the free tier's 1-target limit blocks adding a 2nd without first deleting).
 - [ ] Activate `privacy@`, `security@`, `editorial@`, `legal@` mailbox aliases
-- [ ] Add `llms.txt` generation to `build.py`
 - [ ] Add `/.well-known/security.txt`
 - [ ] Verify `/terms/` page exists and is current
 - [ ] Confirm Twitter API keys are stored as GitHub Secrets
 - [ ] Build out the top 3 category hub pages (600–800 words each)
-- [ ] Complete YouTube OAuth one-time setup (`docs/youtube-upload-setup.md`) so `scripts/upload_to_youtube.py` works end-to-end.
 - [ ] **Get the 8 pending GSC URLs from the owner.** Search Console flagged them as failing page-indexing validation. Pattern from the Etsy URL we resurrected (`etsy-scam-sellers-uk-guide` — added to `content/daily-publish-queue.csv` for regeneration at the exact original slug): for dead-slug URLs Google has cached, queue a regen via the daily-publish workflow so the URL returns 200; for URLs with no sensible regen topic, add to a `manual_redirects` list in `scripts/build.py`.
 - [ ] Find a workable video music bed (`assets/audio/news-bed.mp3` currently empty — two candidates rejected). Search: YouTube Audio Library Mood=Dark + Genre=Electronic/Cinematic; or Pixabay terms "documentary tension", "investigation", "cybersecurity". Target tone: vigilant, deliberate, investigative — not alarmist.
 

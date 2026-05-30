@@ -308,7 +308,26 @@ Instagram-specific rules when drafting the Reels caption:
 - **Cover:** reuse the hook frame or the 1280×720 thumbnail.
 - **Posting:** manual via the IG app, or schedule free in **Meta Business Suite** (needs the account linked to a Facebook Page). Full Graph API auto-publish is deferred — it needs Meta app review for `instagram_content_publish` and pulls the video from a public URL, so the MP4 would have to be hosted. Same defer-until-cadence-justifies call we made for TikTok.
 
-Status: the `@BeatTheScamUK` Instagram handle is **reserved but not yet active** — packages are Reels-ready so activation is just "convert to a Creator account and start pasting." Worked example: `out/videos/festival-camping-equipment-vinted-scam.upload.md`.
+Status: **`@beatthescamuk` Instagram is LIVE as of 2026-05-30** — Creator account, profile pic (favicon mark), bio link to beatthescam.com, 4 Reels seeded (Facebook Marketplace, Glastonbury tickets, festival tickets, festival gear). Worked example with the Reels block: `out/videos/festival-camping-equipment-vinted-scam.upload.md`.
+
+---
+
+## Cross-platform analytics review — queued for next session
+
+The site now publishes the **same 1080×1920 MP4** to three platforms off one render: **YouTube Shorts** (auto, via `upload_to_youtube.py`), **TikTok** (manual), **Instagram Reels** (manual). That makes the next analytics review the first like-for-like cross-platform comparison we've had — and it lines up with the open first-second-retention question we parked.
+
+What to pull when there's ~7 days of post-publish data:
+
+| Platform | Where | Key metrics |
+|---|---|---|
+| YouTube Shorts | YouTube Studio → Content → individual Short → Analytics | Views, average view duration, **% viewed**, watch time |
+| TikTok | TikTok app → Analytics (requires Creator/Pro account, free) → individual video | Views, average watch time, **completion rate**, full-video views |
+| Instagram Reels | Instagram app → Insights on each Reel (Creator-account-only) | Plays, **initial plays (= first-second retention proxy)**, accounts reached, watch time |
+| X / Twitter | analytics.twitter.com → per-post View analytics (manual — free API tier doesn't expose this) | Impressions, link clicks, engagement rate |
+
+Note on X specifically: free X API v2 (which `tweet_new_articles.py` uses) is **post-only** — no programmatic analytics access. Tweet metrics require Basic tier ($100/mo+). At our scale the right call is **manual pull from the native dashboard** alongside the video numbers, not paid API.
+
+The retention question to answer: *if all three platforms show heavy first-second drop-off, the hook is the problem (test alternative openers — kinetic text reveal, shocking-number open, curiosity-gap question); if Reels holds better than Shorts/TikTok, it's audience/platform fit and we double down on Reels-first creative.*
 
 ---
 

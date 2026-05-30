@@ -6,6 +6,7 @@
       "name": "Experian IdentityPlus",
       "tagline": "Monitor your credit file and get alerts if your details appear on the dark web.",
       "cta": "Check your Experian report",
+      "_href_note": "Points to the main consumer landing — Experian retired their standalone product URLs (identity-plus.html, identity-protection.html etc. all 404 as of 2026-05-30). HEAD-check any future swap with `curl -I` first. Background: docs/project.md Section 20 #13.",
       "href": "https://www.experian.co.uk/consumer/",
       "categories": ["payment", "fraud", "website", "email", "sms", "phone", "finance"],
       "keywords": ["identity", "personal details", "bank", "credit", "data breach"]
