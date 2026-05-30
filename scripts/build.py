@@ -922,6 +922,12 @@ def render_guides_index_page(site, page_posts, page_num: int, total_pages: int, 
         '</div>'
     ) if page_num == 1 else ""
 
+    # H2 between H1 and the card grid keeps heading hierarchy correct
+    # (Semrush flagged H1→H3 skips on guides/ + guides/page/N — 5 pages
+    # in the 2026-05-30 audit). Card titles are <h3>, so we need an <h2>
+    # ancestor before them.
+    grid_heading = ("Latest guides" if page_num == 1
+                    else f"Older guides — page {page_num}")
     content = f'''
     <section class="hero">
       <div class="wrap">
@@ -933,6 +939,7 @@ def render_guides_index_page(site, page_posts, page_num: int, total_pages: int, 
     </section>
     <section class="section">
       <div class="wrap">
+        <h2>{html.escape(grid_heading)}</h2>
         <div class="grid-3" id="guideGrid">{cards}</div>
         {pagination_html}
       </div>
@@ -1061,7 +1068,7 @@ def render_category_page(site, category, posts, all_categories=None):
         <p class="lead">{html.escape(desc)}</p>
       </div>
     </section>
-    <section class="section"><div class="wrap"><div class="grid-3">{"".join(render_card(p) for p in posts)}</div></div></section>
+    <section class="section"><div class="wrap"><h2>Latest {html.escape(label.lower())}</h2><div class="grid-3">{"".join(render_card(p) for p in posts)}</div></div></section>
     {related_cats_html}
     '''
     canonical = site['domain'] + f'/categories/{slug}/'
@@ -1176,7 +1183,12 @@ def render_post(site, post, all_posts, affiliates=None):
             inner = "".join(f"<li>{html.escape(l)}</li>" for l in lines)
             section_parts.append(f'<h2 id="{sid}">{html.escape(title)}</h2><ul>{inner}</ul>')
         else:
-            section_parts.append(f'<h2 id="{sid}">{html.escape(title)}</h2><p>{html.escape(para)}</p>')
+            # Split long blob paragraphs into ≤100-word chunks at sentence
+            # boundaries — clears Semrush "paragraphs too long" (157 pages
+            # in the 2026-05-30 audit) and reads better on mobile.
+            paragraphs = split_into_paragraphs(para)
+            paragraphs_html = "".join(f'<p>{html.escape(p)}</p>' for p in paragraphs)
+            section_parts.append(f'<h2 id="{sid}">{html.escape(title)}</h2>{paragraphs_html}')
 
     toc      = "".join(f'<li><a href="#{sid}">{html.escape(t)}</a></li>' for sid, t in section_ids)
     faq_html = "".join(f'<details><summary>{html.escape(q)}</summary><p>{html.escape(a)}</p></details>' for q, a in post['faq'])
@@ -1657,6 +1669,51 @@ def disambiguate_slugs(posts: list) -> list:
 deduplicate_posts = disambiguate_slugs
 
 
+# ─── PARAGRAPH SPLITTING ───────────────────────────────────────────────────
+
+def split_into_paragraphs(body: str, max_words: int = 100) -> list:
+    """Split a section body into HTML-paragraph-sized chunks.
+
+    The AI content generator emits each section as a single 130–215 word
+    blob with no `\\n\\n` breaks, which renders as one giant `<p>` and
+    triggers Semrush's "paragraphs are too long" warning on every guide
+    (~157 pages in the 2026-05-30 audit). Hand-written sections that do
+    use `\\n\\n` are respected verbatim.
+
+    Algorithm:
+      1. Respect any explicit `\\n\\n` author breaks first.
+      2. For each resulting paragraph still over max_words, split at
+         sentence boundaries (end-of-sentence punctuation followed by a
+         capital letter) and re-pack into chunks up to max_words.
+
+    Returns a list of paragraph strings (still plain text — caller is
+    responsible for html-escaping + wrapping in `<p>`).
+    """
+    body = (body or "").strip()
+    if not body:
+        return []
+    raw = [p.strip() for p in body.split("\n\n") if p.strip()]
+    out = []
+    for para in raw:
+        if len(para.split()) <= max_words:
+            out.append(para)
+            continue
+        sentences = re.split(r"(?<=[.!?])\s+(?=[A-Z])", para)
+        chunk: list = []
+        chunk_words = 0
+        for s in sentences:
+            sw = len(s.split())
+            if chunk and chunk_words + sw > max_words:
+                out.append(" ".join(chunk))
+                chunk = []
+                chunk_words = 0
+            chunk.append(s)
+            chunk_words += sw
+        if chunk:
+            out.append(" ".join(chunk))
+    return out
+
+
 # ─── INTERNAL LINKING ──────────────────────────────────────────────────────
 
 # Regions inside these tags are skipped for auto-linking. Avoids:
@@ -1713,6 +1770,24 @@ def build_internal_link_map(posts):
     return link_map
 
 
+_ANCHOR_SPAN_RE = re.compile(r"<a\b[^>]*>.*?</a>", re.IGNORECASE | re.DOTALL)
+
+
+def _pos_inside_anchor(text: str, pos: int) -> bool:
+    """True if `pos` in `text` falls inside any `<a>...</a>` span.
+
+    Used by apply_internal_links to skip matches that would create
+    nested anchor tags (illegal HTML, and Semrush flags the resulting
+    empty outer anchor as 'no anchor text').
+    """
+    for m in _ANCHOR_SPAN_RE.finditer(text):
+        if m.start() <= pos < m.end():
+            return True
+        if m.start() > pos:
+            return False
+    return False
+
+
 def apply_internal_links(html_str: str, current_slug: str, link_map: dict, max_total: int = 5) -> str:
     """Auto-link plain-text occurrences of mapped phrases inside post HTML.
 
@@ -1755,11 +1830,18 @@ def apply_internal_links(html_str: str, current_slug: str, link_map: dict, max_t
             if phrase in used or added >= max_total:
                 continue
             pat = re.compile(r"\b" + re.escape(phrase) + r"\b", re.IGNORECASE)
-            m = pat.search(text)
-            if m:
+            # Iterate matches so we can skip ones that fall inside an
+            # anchor we inserted on an earlier candidate. Without this
+            # guard we produce nested <a><a></a> — the outer one ends up
+            # with no anchor text (the Semrush "links with no anchor
+            # text" warning on 7 pages in the 2026-05-30 audit).
+            for m in pat.finditer(text):
+                if _pos_inside_anchor(text, m.start()):
+                    continue
                 text = text[:m.start()] + f'<a href="{url}">{m.group()}</a>' + text[m.end():]
                 used.add(phrase)
                 added += 1
+                break
         out.append(text)
     return "".join(out)
 
