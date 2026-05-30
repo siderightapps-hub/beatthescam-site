@@ -6,7 +6,7 @@
       "name": "Experian IdentityPlus",
       "tagline": "Monitor your credit file and get alerts if your details appear on the dark web.",
       "cta": "Check your Experian report",
-      "href": "https://www.experian.co.uk/consumer/identity-plus.html",
+      "href": "https://www.experian.co.uk/consumer/",
       "categories": ["payment", "fraud", "website", "email", "sms", "phone", "finance"],
       "keywords": ["identity", "personal details", "bank", "credit", "data breach"]
     },
