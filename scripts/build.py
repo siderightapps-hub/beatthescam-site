@@ -1961,6 +1961,28 @@ def build():
     DIST.mkdir(parents=True)
     shutil.copytree(ROOT / 'assets', DIST / 'assets')
 
+    # Minify styles.css + app.js in place — clears the Semrush
+    # "unminified JS/CSS" warnings (counted on every crawled page, so the
+    # cost of one minify wipes hundreds of warnings). Falls back silently
+    # if rcssmin/rjsmin aren't installed so a missing dep never breaks
+    # the build for a dev who hasn't pip-installed them yet.
+    try:
+        import rcssmin, rjsmin
+        for path, fn in [
+            (DIST / 'assets' / 'styles.css', rcssmin.cssmin),
+            (DIST / 'assets' / 'app.js',     rjsmin.jsmin),
+        ]:
+            if not path.exists():
+                continue
+            original = path.read_text(encoding='utf-8')
+            minified = fn(original)
+            path.write_text(minified, encoding='utf-8')
+            saved = len(original) - len(minified)
+            pct = (saved / len(original) * 100) if original else 0
+            print(f"  Minified {path.name}: {len(original)}B → {len(minified)}B (-{pct:.0f}%)")
+    except ImportError:
+        print("  (minify skipped — `pip install rcssmin rjsmin` to enable)")
+
     # Populate footer category links (used by make_base via {{footer_cats}})
     global _FOOTER_CATS_HTML
     _FOOTER_CATS_HTML = "\n".join(
@@ -2143,6 +2165,47 @@ def build():
         f'Sitemap: {site["domain"]}/sitemap.xml\n'
     )
     write(DIST / 'robots.txt', robots_content)
+
+    # llms.txt — markdown index for LLM crawlers (ChatGPT, Claude,
+    # Perplexity, Gemini etc.) per https://llmstxt.org/. Groups every
+    # guide by category so retrieval systems see the topic structure
+    # rather than a flat URL list. Clears the Semrush "Llms.txt not
+    # found" notice and is a direct GEO/AEO signal — currently 0
+    # AI Visibility / 2 cited pages, so there's real lift to be had.
+    domain = site["domain"].rstrip("/")
+    llms_lines = [
+        "# Beat The Scam",
+        "",
+        "> Plain-English UK consumer-protection guides covering scams, fraud, and how to spot them before paying. New guide published daily by an editorial team focused on UK consumers.",
+        "",
+        "## Categories",
+        "",
+    ]
+    sorted_cats = sorted(categories.keys(), key=lambda c: category_label(c).lower())
+    for cat in sorted_cats:
+        llms_lines.append(
+            f'- [{category_label(cat)}]({domain}/categories/{slugify(cat)}/): {len(categories[cat])} guide(s)'
+        )
+    llms_lines.extend(["", "## Guides", ""])
+    for cat in sorted_cats:
+        items = sorted(categories[cat], key=lambda p: p["title"].lower())
+        llms_lines.append(f"### {category_label(cat)}")
+        llms_lines.append("")
+        for p in items:
+            desc = (p.get("description") or "").strip().replace("\n", " ")
+            llms_lines.append(
+                f'- [{p["title"]}]({domain}/guides/{p["slug"]}/): {desc}'
+            )
+        llms_lines.append("")
+    llms_lines.extend([
+        "## Optional",
+        "",
+        f"- [About]({domain}/about/): site & methodology",
+        f"- [Contact]({domain}/contact/): how to reach the editorial team",
+        f"- [Privacy]({domain}/privacy/): data handling & cookies",
+        "",
+    ])
+    write(DIST / "llms.txt", "\n".join(llms_lines))
 
     # IndexNow key — tells Bing/Yandex about new/updated pages instantly.
     # Key must match the filename. Generate once and keep stable.

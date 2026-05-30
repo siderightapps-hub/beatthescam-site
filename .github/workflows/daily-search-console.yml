@@ -69,7 +69,9 @@ jobs:
             python-dotenv \
             google-auth-oauthlib \
             google-auth-httplib2 \
-            google-api-python-client
+            google-api-python-client \
+            rcssmin \
+            rjsmin
 
       - name: Write Google token from secret
         run: |

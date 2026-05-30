@@ -37,6 +37,10 @@ def main() -> int:
                         help="Rewrite guides with fewer words than this (default: 400)")
     parser.add_argument("--limit",     type=int, default=20,
                         help="Max guides to rewrite in one run (default: 20)")
+    parser.add_argument("--slug",      default=None,
+                        help="Rewrite only this specific slug (bypasses --threshold). "
+                             "Useful for one-off fixes (e.g. a single Semrush-flagged "
+                             "low-word-count page).")
     parser.add_argument("--model",     default=DEFAULT_MODEL)
     parser.add_argument("--dry-run",   action="store_true",
                         help="List guides that would be rewritten without doing it")
@@ -50,17 +54,25 @@ def main() -> int:
     posts     = load_posts(args.posts)
     all_slugs = [p["slug"] for p in posts]
 
-    # Find thin guides, sorted by word count ascending
-    thin = sorted(
-        [p for p in posts if section_word_count(p) < args.threshold],
-        key=section_word_count
-    )[:args.limit]
+    if args.slug:
+        # Targeted single-slug mode — bypasses the threshold gate.
+        thin = [p for p in posts if p["slug"] == args.slug]
+        if not thin:
+            print(f"ERROR: slug not found in {args.posts}: {args.slug}", file=sys.stderr)
+            return 1
+        print(f"Targeted rewrite: {args.slug} ({section_word_count(thin[0])}w)\n")
+    else:
+        # Find thin guides, sorted by word count ascending
+        thin = sorted(
+            [p for p in posts if section_word_count(p) < args.threshold],
+            key=section_word_count
+        )[:args.limit]
 
-    if not thin:
-        print(f"No guides under {args.threshold} words. Nothing to rewrite.")
-        return 0
+        if not thin:
+            print(f"No guides under {args.threshold} words. Nothing to rewrite.")
+            return 0
 
-    print(f"Found {len(thin)} guides under {args.threshold} words (limit: {args.limit}):\n")
+        print(f"Found {len(thin)} guides under {args.threshold} words (limit: {args.limit}):\n")
     for p in thin:
         wc = section_word_count(p)
         print(f"  {wc:4d}w  {p['slug']}")

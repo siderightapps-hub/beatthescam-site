@@ -8,3 +8,11 @@ Pillow>=10.0.0
 # "tweepy not installed" on every run.
 tweepy>=4.14.0
 python-dotenv>=1.0.0
+
+# Asset minifiers used by scripts/build.py to shrink dist/assets/styles.css
+# and dist/assets/app.js. Added 2026-05-30 to clear the "unminified JS/CSS"
+# Semrush warnings (1 source file each, but Semrush counts them on every
+# page = ~192 warnings cleared for two tiny pure-Python wheels). Build
+# falls back gracefully if either is missing (prints a skip message).
+rcssmin>=1.2.0
+rjsmin>=1.2.0

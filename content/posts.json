@@ -215,7 +215,7 @@
     "title": "Is This Website a Scam? A Practical Checklist Before You Buy",
     "description": "A plain-English checklist for judging whether a website is legitimate before you enter payment details.",
     "category": "Website Scams",
-    "date": "2026-04-10",
+    "date": "2026-05-30",
     "keywords": [
       "is this website a scam",
       "website scam checker",
@@ -225,41 +225,69 @@
     "sections": [
       [
         "Start with the basics",
-        "Check the domain name, spelling, and overall quality of the site. Scam shops often use lookalike domains, clumsy wording, and template pages copied from other businesses. One rough design choice is not enough to prove fraud, but several small defects in a row should slow you down."
+        "Open the address bar and read the domain slowly. Scam shops lean on lookalike domains — extra hyphens, swapped letters, an unusual top-level suffix like .shop or .top, or a brand name with numbers wedged in. None of those is proof on its own, but each one adds weight. Cross-check the spelling of the brand against the official site by typing the brand name into Google directly instead of clicking through any ad or message that brought you there.\n\nNext, look at the build of the site. Templated 'Shopify-clone' layouts are everywhere now, so a generic look alone is not damning. What you are watching for is sloppiness: copy-paste artefacts, mismatched fonts, broken images, footer text that mentions a different store name, language switchers that do nothing, or a cookie banner that links to a 'lorem ipsum' privacy page. One rough edge is a maintenance bug. Three rough edges in a row is a pattern.\n\nFinally, check the site's age. Free tools like whois.com or who.is reveal when a domain was registered. A 'British heritage' store with a domain registered three weeks ago and no historical record on the Internet Archive (web.archive.org) is almost certainly not what it claims to be."
       ],
       [
         "Check contact details and policies",
-        "A legitimate retailer usually shows a real business name, returns policy, delivery information, customer support details, and privacy terms. Scam stores often use vague contact forms, fake addresses, or policy text that does not match the products they claim to sell."
+        "A legitimate UK retailer publishes a real business name, a registered company number, a returns policy with a 14-day cooling-off period (your right under the Consumer Contracts Regulations 2013), delivery information with realistic timeframes, named customer support details, and a privacy notice that mentions UK GDPR by name. Vagueness in any of these is meaningful — not because every legitimate store is perfect, but because scam stores tend to be vague in multiple places at once.\n\nRead the contact page critically. A Gmail or Outlook address as the only contact for a self-described 'established UK retailer' is a warning sign. A 'business' address that resolves to a residential street on Google Street View is another. A phone number with a non-UK dialling code, or a UK number that rings out and never returns calls, tells you what the buying experience will look like if anything goes wrong.\n\nPay particular attention to the returns and refund text. Scam stores frequently copy a generic returns policy from a template and then quietly add a clause that effectively cancels it — 'returns accepted within 7 days at customer's expense, subject to a 50% restocking fee, refund issued as store credit'. By the time the parcel never arrives, those clauses are the contract you agreed to."
       ],
       [
         "Review payment methods",
-        "Credit cards normally offer better consumer protection than bank transfer, cryptocurrency, or direct payment apps. If the site nudges you towards irreversible payment methods, treat that as a material risk signal rather than a minor inconvenience."
+        "Credit cards carry the strongest UK consumer protection by a wide margin. **Section 75 of the Consumer Credit Act 1974** makes the card issuer jointly liable with the retailer for any purchase between £100 and £30,000, even if the retailer disappears tomorrow. Debit cards are not covered by Section 75 but qualify for **chargeback** via Visa, Mastercard or Amex schemes — weaker than Section 75 but still useful.\n\nPayPal is safe **only** when you pay via 'Goods and Services'. 'Friends and Family' transfers strip away PayPal's Buyer Protection and are functionally a bank transfer — irreversible the moment they land. Any seller asking you to send via Friends and Family is asking you to give up your protection. That is the entire reason they are asking.\n\nBank transfers, cryptocurrency, gift cards, and money-transfer services like Western Union and MoneyGram all share one property: once the money has moved, you cannot pull it back. Legitimate retailers know this and almost never insist on them. If a checkout that started with 'pay by card' suddenly reroutes you to a bank transfer page or asks you to email for 'alternative payment details', stop. That redirect is the scam."
       ],
       [
         "Inspect product pages",
-        "Scam stores often recycle identical descriptions across many items, use stolen images, or offer luxury-looking products at implausibly low prices. Reverse-image search and brand-name searches can expose copied listings quickly."
+        "Scam stores rarely write their own product descriptions. They paste a manufacturer's blurb, paraphrase a competitor's listing, or scrape Amazon. Copy a unique-looking sentence from a product description and search it in quotes on Google. If the same sentence appears across a dozen unrelated 'UK retailers', you are looking at the same wholesale fraud template wearing different branding.\n\nReverse-image-search the main product photo using Google Images, TinEye, or Bing Visual Search. Genuine retailers shoot their own photography. Scam stores reuse stock photos, manufacturer images, or images stolen from real shops. A photo that appears on AliExpress, on three random Shopify stores, and on the site you're considering is a strong signal that nothing real is being sold.\n\nSanity-check the price. A legitimate 70% discount on a current-season brand-name product is rare. A site listing dozens of brand-name items — across categories that do not normally share a supply chain — at 60–80% off retail is almost certainly running fake listings against goods it does not hold. The combination of unrelated brands, blanket discounts, and a countdown timer is a recognisable scam signature."
       ],
       [
         "Look for external reputation signals",
-        "Search the domain alongside terms such as review, scam, refund, delivery, and trustpilot. You are not looking for a perfect reputation. You are looking for patterns: missing parcels, impossible refunds, fake tracking, or zero evidence of real fulfilment."
+        "Search the domain followed by the words **review, scam, refund, delivery,** and **trustpilot**. You are not looking for a flawless reputation. You are looking for patterns: missing parcels, refunds that never arrive, fake tracking numbers, customer-service emails that bounce, or — most telling — zero independent evidence of fulfilment at all. A six-month-old shop with no Reddit threads, no YouTube unboxings, no forum posts and no Trustpilot reviews is statistically unusual for a real retailer.\n\nTrustpilot itself needs reading carefully. Scam stores buy positive reviews in batches, so look at the **distribution** of dates, not the headline star rating. Forty 5-star reviews all posted in the same week, written in similar broken English, with no detail about specific products, is the signature of paid review farms. Genuine retailers accrete reviews steadily over months, with a mix of stars, specific product mentions and occasional complaints answered by support.\n\nCross-reference with **ScamAdviser** (scamadviser.com) for a quick risk score, and check **Action Fraud's** alerts page (actionfraud.police.uk). Reddit's r/Scams and r/UKPersonalFinance are also useful — searching the brand name there often surfaces firsthand victim accounts months before Trustpilot catches up."
+      ],
+      [
+        "Verify the UK business itself",
+        "If a site claims to be a UK business, that claim is verifiable in about 90 seconds. Search the trading name on **Companies House** (find-and-update.company-information.service.gov.uk). A real UK retailer will appear with an active status, a registered office address, a list of directors, and filed accounts going back several years. A scam shop will either not appear at all, appear under a recently-incorporated shell company with one nominated director and no accounts filed, or use a company name that has nothing to do with the brand on the website.\n\nCross-check the **registered office** on Google Maps or Street View. Mass-incorporation scams cluster around well-known formation-agent addresses (you'll often see hundreds of companies sharing the same Birmingham, London or Manchester address). That alone is not proof of fraud — many legitimate small businesses use formation agents — but combined with a brand-new domain, missing accounts and absent reviews, it tightens the picture considerably.\n\nFor regulated categories (financial services, pharmacy, alcohol, supplements, electricals carrying CE/UKCA marks), check the relevant register: the **FCA Register** for financial firms, the **General Pharmaceutical Council** for online pharmacies, **Trading Standards** for product-safety concerns, and the **Advertising Standards Authority (ASA)** for previously-upheld complaints against the brand."
       ],
       [
         "If you are still unsure",
-        "Pause the purchase. Check whether the site claims to be a UK business and whether that claim matches Companies House or other public records. Send a simple pre-sales question. A non-response or evasive answer before purchase is usually more useful than any marketing copy on the site itself."
+        "Pause the purchase — losing a 'limited-time deal' costs nothing if the deal is fake to begin with. Open the site's homepage in archive.org's Wayback Machine and see how long it has actually existed. A 'long-established British family business' whose earliest snapshot is from last month is lying about one or the other.\n\nSend a simple pre-sales question through every contact channel the site offers — email, contact form, Live Chat, Facebook DM, phone. Ask something specific and trivial ('do you ship the size 10 to Edinburgh, and how long does it take?'). A genuine retailer responds within a working day from a real address. A scam shop either ignores you, replies in broken English from a personal Gmail, or sends a template that doesn't answer the question.\n\nFinally, ask yourself the basic question scammers depend on you not asking: **why is this priced 70% below everywhere else?** Sometimes the answer is genuine (clearance, grey import, end-of-line). More often, the answer is that the goods do not exist. If you cannot construct a plausible legitimate reason for the discount, treat the discount itself as the warning."
+      ],
+      [
+        "What to do if you've already paid",
+        "Act the same day, not the same week. If you paid by **credit card**, contact your card issuer and open a Section 75 dispute — they are jointly liable with the retailer and can refund you directly. If you paid by **debit card**, ask the bank to raise a **chargeback** through the Visa or Mastercard scheme; deadlines vary (often 120 days from transaction or expected delivery) so move quickly.\n\nIf you paid by **PayPal Goods and Services**, open a 'Resolution Centre' dispute within 180 days. If you paid by **bank transfer**, contact your bank's fraud team immediately — under the UK's **Authorised Push Payment (APP) reimbursement scheme** (live since October 2024), most banks are required to refund APP-fraud victims within five business days unless gross negligence applies.\n\nReport the scam itself to **Action Fraud** (actionfraud.police.uk, 0300 123 2040). Reports feed the National Fraud Intelligence Bureau and contribute to the takedown of repeat-offender domains, even when individual cases are not investigated. If a UK bank account received your money, also report it to the bank that holds that account — they have an obligation to investigate mule accounts.\n\nFinally, change passwords for any account you used to register with the scam site and monitor your card statements for follow-on fraud. Scam shops resell their order data, so the same details often surface again weeks later in unrelated attempted charges."
       ]
     ],
     "faq": [
       [
         "Does the padlock mean a site is safe?",
-        "No. HTTPS only secures the connection. It does not prove the business behind the site is legitimate."
+        "No. The padlock (HTTPS) only proves the connection between your browser and the server is encrypted. It tells you nothing about whether the business behind the site is legitimate. Scam stores all use HTTPS now — it's free via Let's Encrypt and takes five minutes to set up."
       ],
       [
-        "What is the strongest red flag?",
-        "Pressure to pay by bank transfer or crypto is one of the strongest danger signs."
+        "What is the strongest single red flag?",
+        "A seller pushing you towards an irreversible payment method — bank transfer, cryptocurrency, PayPal 'Friends and Family', gift cards, Western Union, MoneyGram — when card payment was originally on offer. That redirect is almost always the scam itself."
       ],
       [
-        "Should I trust social media ads?",
-        "Treat them as an introduction, not proof. Verify the store independently before buying."
+        "Should I trust social media ads for online shops?",
+        "Treat them as an introduction, not proof. Facebook, Instagram and TikTok ad approval doesn't verify the underlying business. Click through, then run the full checklist before paying. Scam shops are particularly active on Instagram Stories and TikTok Shop because the format makes price comparison harder."
+      ],
+      [
+        "Is a Trustpilot 4.8-star rating enough to trust a site?",
+        "Not on its own. Look at the distribution of reviews over time. Forty 5-star reviews posted in the same fortnight, all in similar broken English with no specific product mentions, signals paid reviews. Genuine ratings accumulate steadily over months, mix stars, and reference real orders."
+      ],
+      [
+        "What if the site has a UK address and phone number?",
+        "A UK address is easily faked. Check the address on Google Maps — a residential street, an empty lot, or a 'virtual office' is a warning sign. Check the company on Companies House: a real retailer is registered, active, has named directors, and has filed accounts. A UK phone number that rings out and never returns calls is functionally the same as no phone number."
+      ],
+      [
+        "How do I reverse-image-search a product photo?",
+        "On a computer, right-click the product image and choose 'Search image with Google'. On a phone, screenshot the product and use Google Lens or upload the screenshot to images.google.com. TinEye (tineye.com) is also free and often catches images Google misses. If the same photo appears on AliExpress and three random Shopify shops, the listing is not unique."
+      ],
+      [
+        "Can I trust tools like ScamAdviser or Web of Trust?",
+        "Use them as one signal among several, not as a verdict. ScamAdviser scores combine domain age, hosting country, link patterns and user reports — a low score (under 50) is meaningful, but a high score doesn't prove safety. Pair it with the checks above rather than treating it as the final word."
+      ],
+      [
+        "Where do I report a UK scam website?",
+        "Action Fraud is the central UK reporting service: actionfraud.police.uk or 0300 123 2040. For phishing emails, forward them to report@phishing.gov.uk. For scam texts, forward to 7726. If a card was charged, also report the merchant to your card issuer — repeat reports help payment networks block the merchant entirely."
       ]
     ]
   },

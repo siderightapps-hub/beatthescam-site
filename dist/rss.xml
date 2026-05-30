@@ -1,6 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <rss version="2.0"><channel><title>Beat the Scam</title><link>https://beatthescam.com</link><description>Scam alerts, plain-English checks, and practical guides to help people verify suspicious emails, texts, websites, calls, and offers.</description>
         <item>
+          <title>Is This Website a Scam? A Practical Checklist Before You Buy</title>
+          <link>https://beatthescam.com/guides/is-this-website-a-scam/</link>
+          <guid>https://beatthescam.com/guides/is-this-website-a-scam/</guid>
+          <pubDate>Sat, 30 May 2026 00:00:00 +0000</pubDate>
+          <description>A plain-English checklist for judging whether a website is legitimate before you enter payment details.</description>
+        </item>
+        <item>
           <title>Festival Lineup Email Scam UK: How to Spot Fake Ticket Offers</title>
           <link>https://beatthescam.com/guides/festival-lineup-email-scam-uk/</link>
           <guid>https://beatthescam.com/guides/festival-lineup-email-scam-uk/</guid>
@@ -202,11 +209,4 @@
           <guid>https://beatthescam.com/guides/nationwide-scam-text-uk/</guid>
           <pubDate>Tue, 19 May 2026 00:00:00 +0000</pubDate>
           <description>Scammers send fake Nationwide text messages claiming suspicious activity, urgent action needed, or account verification to trick you into clicking malicious links or sharing sensitive data. This guide explains the exact tactics used and how to protect yourself.</description>
-        </item>
-        <item>
-          <title>HSBC Bank Scam Call UK: How to Spot and Stop Phone Impersonators</title>
-          <link>https://beatthescam.com/guides/hsbc-bank-scam-call-uk/</link>
-          <guid>https://beatthescam.com/guides/hsbc-bank-scam-call-uk/</guid>
-          <pubDate>Tue, 19 May 2026 00:00:00 +0000</pubDate>
-          <description>Scammers call pretending to be HSBC fraud teams, claiming suspicious activity on your account and asking you to verify details or download apps. These calls look legitimate because fraudsters spoof HSBC&#x27;s real phone number, but they&#x27;re designed to steal your login credentials and money.</description>
         </item></channel></rss>
