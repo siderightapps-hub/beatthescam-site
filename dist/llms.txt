@@ -18,7 +18,7 @@
 - [Social Media Scams](https://beatthescam.com/categories/social/): 7 guide(s)
 - [Tech Support Scams](https://beatthescam.com/categories/tech/): 13 guide(s)
 - [Text Message Scams](https://beatthescam.com/categories/sms/): 20 guide(s)
-- [Travel Scams](https://beatthescam.com/categories/travel/): 5 guide(s)
+- [Travel Scams](https://beatthescam.com/categories/travel/): 6 guide(s)
 - [Utility Scams](https://beatthescam.com/categories/utility/): 3 guide(s)
 - [Website Scams](https://beatthescam.com/categories/website/): 12 guide(s)
 
@@ -209,6 +209,7 @@
 
 ### Travel Scams
 
+- [Airport Transfer Taxi Scam UK: How to Spot and Avoid Fake Minicabs](https://beatthescam.com/guides/airport-transfer-taxi-scam-uk/): Airport transfer taxi scams target UK travellers at their most vulnerable—arriving tired and wanting quick transport. Scammers create fake websites, send phishing emails posing as airport services, or approach you in arrivals offering inflated fares.
 - [Fake Airline Ticket Scam UK: How to Spot and Avoid Holiday Booking Fraud](https://beatthescam.com/guides/fake-airline-ticket-scam-uk/): Fake airline ticket scams target UK holiday makers with bargain flights that don't exist. Fraudsters impersonate real airlines or create convincing fake booking sites, then vanish once you've paid.
 - [Glastonbury Accommodation Scam UK: How to Spot Fake Bookings](https://beatthescam.com/guides/glastonbury-accommodation-scam-uk/): Scammers create fake Glastonbury accommodation listings on social media, messaging apps, and ad sites to steal deposits from festival-goers. This guide shows you exactly how to verify genuine bookings and protect yourself before sending any money.
 - [Holiday Let Scam UK: How to Spot Fake Rental Listings and Protect Your Money](https://beatthescam.com/guides/holiday-let-scam-uk/): Holiday let scams target UK holidaymakers by posting fake rental properties on legitimate platforms or fraudulent websites. Scammers typically request upfront deposits or full payment via untraceable methods, then disappear or use stolen photos.
