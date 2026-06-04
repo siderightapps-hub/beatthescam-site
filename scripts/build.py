@@ -1593,16 +1593,60 @@ def build_legal_bodies(site):
     <p>Questions: <a href="mailto:{site["contact_email"]}">{site["contact_email"]}</a>.</p>
     '''
 
-    terms = '''
-    <p>The content on this site is provided for general educational purposes only. It is not legal, financial, investment, cybersecurity, or regulatory advice.</p>
-    <h2>No guarantee of outcome</h2>
-    <p>Scam tactics change quickly. While the site aims to provide useful guidance, no article can guarantee that a specific interaction is safe or fraudulent.</p>
-    <h2>AI scam checker</h2>
-    <p>The AI scam checker is an educational tool. Its output is not a definitive fraud determination. Always verify through official channels and contact your bank immediately if you have already sent money or shared account details.</p>
-    <h2>User responsibility</h2>
-    <p>You remain responsible for verifying urgent or high-value matters through official channels or qualified professionals.</p>
+    # Bump TERMS_LAST_UPDATED when materially revising the Terms text below.
+    # The date is shown to users at the top of /terms/ as the legal effective date.
+    TERMS_LAST_UPDATED = "4 June 2026"
+    terms = f'''
+    <p class="note" style="color:#666;font-size:.95rem"><strong>Last updated:</strong> {TERMS_LAST_UPDATED}</p>
+
+    <p>These Terms set out the rules for using <strong>beatthescam.com</strong> ("the Site"). By using the Site you agree to them. If you do not agree, please do not use the Site.</p>
+
+    <h2>About this site</h2>
+    <p>Beat the Scam publishes plain-English guides about scams and fraud affecting UK consumers, and offers a free AI scam checker. The Site is operated by SideRight Apps. Editorial decisions are made by the Beat the Scam editorial team.</p>
+
+    <h2>Educational purpose &mdash; not professional advice</h2>
+    <p>Everything published here is general educational information. It is <strong>not</strong> legal, financial, investment, tax, medical, cybersecurity, or regulatory advice, and reading it does not create an advisor&ndash;client relationship.</p>
+    <p>Scam tactics change rapidly. No article can guarantee that a specific message, listing, website or interaction is safe or fraudulent. If anything you read here is material to your circumstances, verify it through official UK channels (Action Fraud, the FCA Register, Companies House, Citizens Advice, your bank&#8217;s published fraud line) or seek qualified professional advice.</p>
+
+    <h2>The AI scam checker</h2>
+    <p>The AI scam checker is an educational tool that returns an automated plain-English assessment. Its output is <strong>not</strong> a definitive fraud determination and we make no warranty that it will identify every scam or that flagged messages are necessarily fraudulent.</p>
+    <p>Do not rely on the checker alone for high-stakes decisions. If you have already sent money, shared bank details, or shared one-time codes, contact your bank immediately and report the incident to Action Fraud (<a href="https://www.actionfraud.police.uk/" rel="noopener noreferrer" target="_blank">actionfraud.police.uk</a> or 0300 123 2040).</p>
+
+    <h2>Your responsibilities</h2>
+    <p>You agree to use the Site lawfully and reasonably. You must not:</p>
+    <ul>
+      <li>Submit content to the AI scam checker that contains other people&#8217;s personal data (full names, account numbers, ID document numbers) &mdash; redact before pasting</li>
+      <li>Scrape, mirror, or republish substantial portions of the Site without prior written permission</li>
+      <li>Use automated tools to overload the Site or the AI scam checker</li>
+      <li>Use the Site to commit, promote, or facilitate fraud</li>
+      <li>Misrepresent any Site content as the official position of any third party the Site discusses</li>
+    </ul>
+
+    <h2>Intellectual property</h2>
+    <p>All original content on the Site &mdash; articles, guides, images, the brand, and the structure of the AI scam checker output &mdash; is copyright Beat the Scam / SideRight Apps unless stated otherwise. You may quote up to a short paragraph with attribution and a link back to the source article. For larger reproductions, please ask first via the contact address below.</p>
+
+    <h2>Advertising and affiliate disclosure</h2>
+    <p>The Site is funded by display advertising (currently Google AdSense) and by affiliate commissions on a small number of third-party products (such as credit-file monitoring and identity-protection services). When you click an affiliate link and complete a purchase, we may receive a small commission at no extra cost to you.</p>
+    <p>Affiliate placements never change the editorial position of any guide. We only recommend products we would suggest a friend use, and we mark affiliate links with <code>rel="sponsored"</code> as required by the UK Advertising Standards Authority CAP Code and by Google&#8217;s quality guidelines. If you would like us to remove a specific affiliate placement, write to us at the contact address below.</p>
+
     <h2>External links</h2>
-    <p>The site may link to third-party services or official resources. Those sites operate under their own terms and privacy policies.</p>
+    <p>The Site links to third-party services and official resources (government sites, regulators, banks, news outlets). Those sites operate under their own terms and privacy policies and we have no control over their content, accuracy, or availability.</p>
+
+    <h2>Privacy and cookies</h2>
+    <p>How we handle personal data and cookies is explained in our <a href="/privacy/">Privacy Policy</a> and <a href="/cookies/">Cookie Policy</a>. Use of the Site is subject to those documents as well as these Terms.</p>
+
+    <h2>Limitation of liability</h2>
+    <p>To the maximum extent permitted by law, Beat the Scam, SideRight Apps, and the editorial team are not liable for any loss, damage, or expense arising from your use of the Site or your reliance on its content &mdash; including the AI scam checker. We make no warranty that the Site will be uninterrupted, error-free, or secure.</p>
+    <p><strong>Nothing in these Terms limits or excludes our liability for:</strong> (a) death or personal injury caused by our negligence; (b) fraud or fraudulent misrepresentation; (c) any other liability that cannot lawfully be limited or excluded under English, Scots, or Northern Ireland law &mdash; including your statutory rights as a consumer.</p>
+
+    <h2>Changes to these Terms</h2>
+    <p>We may update these Terms from time to time to reflect changes to the Site, to the law, or to industry practice. The &#8220;Last updated&#8221; date at the top of this page shows when the current version took effect. Continuing to use the Site after a change means you accept the updated Terms.</p>
+
+    <h2>Governing law and jurisdiction</h2>
+    <p>These Terms are governed by the laws of <strong>England and Wales</strong>. If you are resident in <strong>Scotland</strong>, these Terms are governed by <strong>Scots law</strong> and the Scottish courts have non-exclusive jurisdiction over any dispute arising from them. If you are resident in <strong>Northern Ireland</strong>, the courts of Northern Ireland have non-exclusive jurisdiction. None of this affects your mandatory statutory consumer rights in your country of residence.</p>
+
+    <h2>Contact</h2>
+    <p>For questions about these Terms, email <a href="mailto:{site["contact_email"]}">{site["contact_email"]}</a>. For corrections, write to the same address with the page URL and the change requested. For privacy and data-protection requests, see the <a href="/privacy/">Privacy Policy</a>.</p>
     '''
 
     contact = f'''
