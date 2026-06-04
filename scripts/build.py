@@ -66,6 +66,10 @@ ARTICLE_REDIRECTS = {
     "parking-fine-scam-text-messages-uk":         "parking-fine-scam-text-uk",
     "bank-transfer-scam-warning-signs":           "__CAT__:payment",
     "crypto-investment-scam-checklist":           "__CAT__:crypto",
+    # GSC 2026-06-04: flagged as Not found (404). The canonical live guide
+    # on this exact topic is crypto-investment-scams-uk-protection — article
+    # → article redirect preserves more SEO juice than article → category.
+    "crypto-investment-scam-uk-guide":            "crypto-investment-scams-uk-protection",
     "phone-call-scam-red-flags":                  "__CAT__:phone",
     "romance-scam-slow-burn-patterns":            "__CAT__:dating",
     "job-scam-checklist-uk":                      "__CAT__:employment",
