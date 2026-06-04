@@ -24,10 +24,20 @@
   <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
   <link rel="manifest" href="/site.webmanifest">
 
-  <!-- Resource hints for third-party origins -->
+  <!-- Resource hints for third-party origins. preconnect = full TCP+TLS
+       handshake started immediately (good for resources we KNOW will load
+       on every page). dns-prefetch = DNS lookup only (cheap fallback for
+       older browsers that ignore preconnect). googletagmanager loads GA4,
+       pagead2 loads AdSense — both are async <script> tags in <body>, so
+       preconnect shaves 100-300ms off their first paint on mobile.
+       Also adds tpc.googlesyndication.com (where ad creatives serve from)
+       and the ahrefs analytics host. -->
   <link rel="preconnect" href="https://www.googletagmanager.com" crossorigin>
+  <link rel="preconnect" href="https://pagead2.googlesyndication.com" crossorigin>
+  <link rel="preconnect" href="https://tpc.googlesyndication.com" crossorigin>
   <link rel="dns-prefetch" href="https://www.googletagmanager.com">
   <link rel="dns-prefetch" href="https://pagead2.googlesyndication.com">
+  <link rel="dns-prefetch" href="https://tpc.googlesyndication.com">
   <link rel="dns-prefetch" href="https://analytics.ahrefs.com">
 
   <meta property="og:type" content="website">
