@@ -1605,9 +1605,14 @@ def render_author_page(site):
         ("Author", site["domain"] + "/author/"),
     ])
 
+    # object-fit:cover means any future drop-in image (square or not)
+    # crops to fill the circle instead of stretching. loading="lazy"
+    # because the headshot is below-the-fold on the author page.
     image_html = (
         f'<img src="{html.escape(image)}" alt="{html.escape(name)}" width="160" height="160" '
-        f'style="border-radius:50%;border:1px solid var(--line);background:#fafafa">'
+        f'loading="lazy" decoding="async" '
+        f'style="border-radius:50%;border:1px solid var(--line);background:#fafafa;'
+        f'object-fit:cover;display:block">'
     ) if image else ""
 
     content = f'''
