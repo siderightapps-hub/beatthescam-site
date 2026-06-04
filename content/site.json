@@ -4,11 +4,61 @@
   "tagline": "Scam alerts, plain-English checks, and practical guides to help people verify suspicious emails, texts, websites, calls, and offers.",
   "adsense_client": "ca-pub-1606633100797174",
   "contact_email": "hello@beatthescam.com",
-  "author": "Beat the Scam Editorial Team",
-  "editor_url": "/about/",
+  "author": "Alex Bacsa",
+  "publisher": "Beat the Scam",
+  "editor_url": "/author/",
   "locale": "en_GB",
   "twitter": "@beatthescam",
   "ga4_id": "G-JXNF856NBF",
   "google_site_verification": "",
-  "bing_site_verification": ""
+  "bing_site_verification": "",
+
+  "author_profile": {
+    "name": "Alex Bacsa",
+    "role": "Founder & Editor",
+    "image": "/assets/img/team/alex-bacsa.svg",
+    "url": "/author/",
+    "linkedin": "https://www.linkedin.com/in/alexbacsa/",
+    "email": "hello@beatthescam.com",
+    "based_in": "United Kingdom",
+    "bio": "Alex Bacsa is the founder and editor of Beat the Scam, an independent UK consumer-protection publication covering scams, fraud, and the plain-English verification checks readers need before they send money, share credentials, or install software they didn't ask for. He runs Beat the Scam from the UK as an outside operator — not a journalist, lawyer, regulator, or banker — paying close attention to the patterns that keep costing UK households tens of millions a year and translating them into checks anyone can run in under sixty seconds. Coverage relies on AI tooling for first drafts, with every recommendation verified against current public guidance from Action Fraud, the FCA, the NCSC, and Citizens Advice before it ships.",
+    "expertise": [
+      "UK consumer protection",
+      "Fraud prevention",
+      "Scam pattern analysis",
+      "AI-assisted editorial workflows",
+      "Fintech & banking technology",
+      "SaaS productivity tooling",
+      "B2B sales"
+    ],
+    "sameAs": [
+      "https://www.linkedin.com/in/alexbacsa/",
+      "https://cloudfintech.ai/author",
+      "https://tuningdigital.com/about",
+      "https://salestap.com/about"
+    ],
+    "publications": [
+      {
+        "name": "CloudFintech",
+        "url": "https://cloudfintech.ai",
+        "author_url": "https://cloudfintech.ai/author",
+        "role": "Founding Editor",
+        "topic": "Financial technology — AI in credit decisioning, stablecoin infrastructure, and the regulatory frameworks catching up with both"
+      },
+      {
+        "name": "Tuning Digital",
+        "url": "https://tuningdigital.com",
+        "author_url": "https://tuningdigital.com/about",
+        "role": "Founder & Editor",
+        "topic": "Hands-on reviews of AI and SaaS productivity tools — writing, project management, automation, design, analytics, CRM"
+      },
+      {
+        "name": "SalesTap",
+        "url": "https://salestap.com",
+        "author_url": "https://salestap.com/about",
+        "role": "Editor",
+        "topic": "B2B sales — cold email frameworks, pipeline management, sales methodologies (MEDDIC, SPIN, Challenger, ABM)"
+      }
+    ]
+  }
 }

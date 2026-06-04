@@ -5,7 +5,7 @@ Contact: hello@beatthescam.com
 Coverage: UK consumer protection — scam alerts, verification guides, AI scam checker
 
 /* PUBLISHER */
-Name: Beat the Scam Editorial Team
+Name: Alex Bacsa
 Notes: Independent educational publication. Not a law firm, bank, or regulator.
 Methodology: see https://beatthescam.com/about/
 

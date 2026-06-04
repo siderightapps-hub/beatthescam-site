@@ -553,16 +553,23 @@ def faq_schema(pairs):
     })
 
 def article_schema(site, post, url, og_image_url=None):
-    # Author is the Organization that operates the site. We deliberately
-    # avoid inventing a Person — fabricated bylines hurt E-E-A-T on YMYL
-    # content. The trust signals come from publisher consistency, cited
-    # public-authority sources (Action Fraud / NCSC / FCA), and a clear
-    # methodology section on /about/.
+    # Author is a real Person — backed by a verifiable LinkedIn profile and
+    # cross-publication co-citation across CloudFintech, TuningDigital, and
+    # SalesTap. Publisher is kept separate as the Organization that operates
+    # the site (Beat the Scam). The Person.sameAs array is what Google reads
+    # to confirm cross-publication identity for E-E-A-T.
+    ap = site.get("author_profile") or {}
     author = {
-        "@type": "Organization",
+        "@type": "Person",
         "name": site["author"],
         "url": site["domain"] + (site.get("editor_url") or "/about/"),
     }
+    if ap.get("role"):
+        author["jobTitle"] = ap["role"]
+    if ap.get("image"):
+        author["image"] = abs_url(site, ap["image"])
+    if ap.get("sameAs"):
+        author["sameAs"] = ap["sameAs"]
     published = post["date"]
     modified  = post.get("updated") or post.get("dateModified") or post["date"]
     image_url = og_image_url or abs_url(site, "/assets/og-image-v2.png")
@@ -1202,7 +1209,9 @@ def render_post(site, post, all_posts, affiliates=None):
         for p in related_posts(all_posts, post)
     )
 
-    # Honest byline: the publisher (an organisation), not an invented persona.
+    # Named byline backed by a real Person — Alex Bacsa, founder & editor.
+    # Cross-publication identity (CloudFintech, TuningDigital, SalesTap) is
+    # asserted via the Person.sameAs array in article_schema() above.
     author_url = site.get("editor_url") or "/about/"
     byline = f'<a href="{html.escape(author_url)}" rel="author">{html.escape(site["author"])}</a>'
 
@@ -1219,7 +1228,7 @@ def render_post(site, post, all_posts, affiliates=None):
         <h1 itemprop="headline">{html.escape(post["title"])}</h1>
         <p class="lead" itemprop="description">{html.escape(post["hero"])}</p>
         <p class="meta">
-          <span itemprop="author" itemscope itemtype="https://schema.org/Organization">By <span itemprop="name">{byline}</span></span>
+          <span itemprop="author" itemscope itemtype="https://schema.org/Person">By <span itemprop="name">{byline}</span></span>
           &middot; <time itemprop="datePublished" datetime="{html.escape(published)}">Published {html.escape(published)}</time>{updated_html}
           &middot; {mins} min read
         </p>
@@ -1519,13 +1528,128 @@ def render_simple_page(site, title, description, body, slug):
     return make_base(content, title=f'{title} | {site["site_name"]}', description=description, canonical=site['domain'] + f'/{slug}/', schema=page_schema(site, title, description, site['domain'] + f'/{slug}/'), site=site)
 
 
+def render_author_page(site):
+    """Render /author/ — the canonical author page for Alex Bacsa.
+
+    Mirrors the structure of cloudfintech.ai/author and tuningdigital.com/about
+    so cross-publication identity reads consistently to both human readers and
+    search engines. The Person.sameAs JSON-LD block is the machine-readable
+    equivalent of the visible "Also publishes on" section below.
+    """
+    ap = site.get("author_profile") or {}
+    if not ap:
+        return None
+    name      = ap.get("name", site.get("author", ""))
+    role      = ap.get("role", "Founder & Editor")
+    image     = ap.get("image", "")
+    linkedin  = ap.get("linkedin", "")
+    email     = ap.get("email", site.get("contact_email", ""))
+    based_in  = ap.get("based_in", "")
+    bio       = ap.get("bio", "")
+    expertise = ap.get("expertise") or []
+    same_as   = ap.get("sameAs") or []
+    pubs      = ap.get("publications") or []
+
+    expertise_html = ""
+    if expertise:
+        chips = " ".join(f'<span class="badge">{html.escape(e)}</span>' for e in expertise)
+        expertise_html = f'<div class="badges" style="display:flex;flex-wrap:wrap;gap:.4rem;margin:.6rem 0 1.2rem">{chips}</div>'
+
+    pubs_html = ""
+    if pubs:
+        cards = "".join(
+            f'''<article class="trust-card">
+                <h3><a href="{html.escape(p["url"])}" rel="noopener noreferrer" target="_blank">{html.escape(p["name"])}</a></h3>
+                <p class="note" style="margin:.25rem 0 .5rem;color:#666"><strong>{html.escape(p.get("role",""))}</strong></p>
+                <p style="margin:0">{html.escape(p.get("topic",""))}</p>
+                <p style="margin:.75rem 0 0;font-size:.9rem"><a href="{html.escape(p.get("author_url", p["url"]))}" rel="noopener noreferrer" target="_blank">Author profile &rarr;</a></p>
+            </article>''' for p in pubs
+        )
+        pubs_html = f'''
+        <h2>Also publishes on</h2>
+        <p>Independent UK-based publications I founded or edit. Same author identity, separate editorial focus per site.</p>
+        <div class="grid-3" style="margin-top:1rem">{cards}</div>
+        '''
+
+    bio_paragraphs = "".join(f"<p>{html.escape(para.strip())}</p>" for para in bio.split("\n\n") if para.strip())
+
+    social_links = []
+    if linkedin:
+        social_links.append(f'<a href="{html.escape(linkedin)}" rel="noopener noreferrer" target="_blank">LinkedIn</a>')
+    if email:
+        social_links.append(f'<a href="mailto:{html.escape(email)}">{html.escape(email)}</a>')
+    social_html = " &middot; ".join(social_links)
+
+    # JSON-LD Person block. Person.sameAs is the cross-publication signal Google
+    # reads to confirm identity across CloudFintech, TuningDigital, SalesTap and
+    # the LinkedIn profile.
+    person = {
+        "@context": "https://schema.org",
+        "@type": "Person",
+        "name": name,
+        "url": site["domain"] + ap.get("url", "/author/"),
+        "jobTitle": role,
+        "worksFor": {"@type": "Organization", "name": site["site_name"], "url": site["domain"]},
+        "description": bio,
+    }
+    if image:
+        person["image"] = abs_url(site, image)
+    if email:
+        person["email"] = email
+    if same_as:
+        person["sameAs"] = same_as
+    if based_in:
+        person["address"] = {"@type": "PostalAddress", "addressCountry": "GB"}
+    schema = json_ld(person) + breadcrumb_schema([
+        ("Home",   site["domain"] + "/"),
+        ("Author", site["domain"] + "/author/"),
+    ])
+
+    image_html = (
+        f'<img src="{html.escape(image)}" alt="{html.escape(name)}" width="160" height="160" '
+        f'style="border-radius:50%;border:1px solid var(--line);background:#fafafa">'
+    ) if image else ""
+
+    content = f'''
+    <section class="hero">
+      <div class="wrap">
+        <div class="breadcrumbs"><a href="/">Home</a> / Author</div>
+        <h1>{html.escape(name)}</h1>
+        <p class="lead">{html.escape(role)} &middot; {html.escape(site["site_name"])}{(" &middot; Based in " + html.escape(based_in)) if based_in else ""}</p>
+      </div>
+    </section>
+    <section class="section">
+      <div class="wrap" style="display:flex;gap:2rem;align-items:flex-start;flex-wrap:wrap">
+        <div style="flex:0 0 160px">{image_html}</div>
+        <article class="article" style="flex:1;min-width:280px">
+          {bio_paragraphs}
+          {expertise_html}
+          {pubs_html}
+          <h2>Connect</h2>
+          <p>{social_html}</p>
+          <p class="note" style="margin-top:1.5rem;color:#666;font-size:.9rem">For editorial enquiries about {html.escape(site["site_name"])} specifically, including corrections and partnership proposals, see the <a href="/contact/">contact page</a>.</p>
+        </article>
+      </div>
+    </section>
+    '''
+    return make_base(
+        content,
+        title=f'{name} — {role}, {site["site_name"]}',
+        description=f'{name} is the {role.lower()} of {site["site_name"]}. Also publishes on CloudFintech, Tuning Digital, and SalesTap. UK-based.',
+        canonical=site["domain"] + "/author/",
+        schema=schema,
+        site=site,
+    )
+
+
 def build_legal_bodies(site):
     about = f'''
     <p><strong>{html.escape(site["site_name"])}</strong> is a consumer-protection content site focused on helping UK residents recognise scam patterns before they send money, share credentials, or install malicious software.</p>
 
     <div class="author-card" style="margin:1.5rem 0;padding:1.2rem;border:1px solid var(--line);border-radius:14px;background:#fafafa">
       <p style="margin:0 0 .35rem 0"><strong>Who runs this site</strong></p>
-      <p style="margin:0;font-size:.95rem;color:#555">{html.escape(site["site_name"])} is operated independently by a UK-based technologist using AI tooling to surface scam patterns and translate official UK guidance into plain-English checks. We are not journalists, lawyers, regulators, bankers, or accredited consumer-affairs professionals. We are an educational publication — every recommendation on the site directs you to the official UK authority that owns that decision.</p>
+      <p style="margin:0 0 .5rem 0;font-size:.95rem;color:#555">{html.escape(site["site_name"])} is founded and edited by <a href="/author/"><strong>{html.escape(site["author"])}</strong></a>, an independent UK-based publisher who also runs <a href="https://cloudfintech.ai" rel="noopener noreferrer" target="_blank">CloudFintech</a> (fintech &amp; banking technology), <a href="https://tuningdigital.com" rel="noopener noreferrer" target="_blank">Tuning Digital</a> (AI &amp; SaaS productivity tools), and <a href="https://salestap.com" rel="noopener noreferrer" target="_blank">SalesTap</a> (B2B sales). He uses AI tooling to surface scam patterns and translate official UK guidance into plain-English checks.</p>
+      <p style="margin:0;font-size:.95rem;color:#555">He is not a journalist, lawyer, regulator, banker, or accredited consumer-affairs professional. This is an educational publication &mdash; every recommendation on the site directs you to the official UK authority that owns that decision.</p>
     </div>
 
     <p>The editorial model is simple: fast checks, plain-English explanations, and practical actions. The site is not a law firm, bank, or regulator. It is a free educational publication designed to reduce avoidable losses.</p>
@@ -2177,6 +2301,12 @@ def build():
     write(DIST / 'terms/index.html',   render_simple_page(site, 'Terms',          'Terms of use for Beat the Scam. Educational scam guidance only — not legal or financial advice. Read before relying on any content for important decisions.',                                 terms,   'terms'))
     write(DIST / 'contact/index.html', render_simple_page(site, 'Contact',        'Contact Beat the Scam for editorial corrections, privacy questions, or partnership enquiries. We aim to respond to all editorial requests promptly.',     contact, 'contact'))
 
+    # Named author page — Alex Bacsa, cross-linked with CloudFintech /
+    # TuningDigital / SalesTap via the Person.sameAs block in the page schema.
+    author_html = render_author_page(site)
+    if author_html:
+        write(DIST / 'author/index.html', author_html)
+
     not_found_html = make_base(
         '<section class="hero"><div class="wrap"><h1>Page not found</h1><p class="lead">The page may have moved or the address may be incorrect.</p><div class="hero-actions"><a class="btn btn-primary" href="/">Home</a><a class="btn btn-secondary" href="/guides/">Guides</a></div></div></section>',
         title=f'404 | {site["site_name"]}',
@@ -2226,6 +2356,7 @@ def build():
         '/categories/': newest_post_date,
         '/check/':      today,
         '/about/':      today,
+        '/author/':     today,
         '/privacy/':    today,
         '/cookies/':    today,
         '/terms/':      today,
