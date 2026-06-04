@@ -7,15 +7,17 @@
 
 ## What was produced
 
-Three documents were created in this session, fulfilling the instructions in `Template.md`:
-
 | # | File | Purpose | Audience |
 |---|---|---|---|
-| 1 | `project.md` | Complete, project-specific source-of-truth for the Beat The Scam website | Owner · new Claude chats · potential buyers · contractors |
-| 2 | `project-template.md` | Generic, reusable template for any future website project — also doubles as a baseline `CLAUDE.md` for Claude Code | Future projects |
-| 3 | `README.md` *(this file)* | Quick-reference index, summary of what the documents cover, and "where do I look for X?" map | All audiences |
+| 0 | [`next-session.md`](next-session.md) | **Fast-start punch list — read this first when opening a new chat.** Covers where things stand, what to do next, and what data to bring. ~3-minute read. | Owner · new Claude chats |
+| 1 | [`project.md`](project.md) | Complete, project-specific source-of-truth for the Beat The Scam website | Owner · new Claude chats · potential buyers · contractors |
+| 2 | [`project-template.md`](project-template.md) | Generic, reusable template for any future website project — also doubles as a baseline `CLAUDE.md` for Claude Code | Future projects |
+| 3 | [`video-pipeline.md`](video-pipeline.md) | The canonical video production pipeline (Pillow text cards + ElevenLabs + MoviePy) including cross-platform analytics methodology | Video production work |
+| 4 | [`youtube-upload-setup.md`](youtube-upload-setup.md) | One-time OAuth setup for `scripts/upload_to_youtube.py` | Setup only |
+| 5 | [`daily-publish.md`](daily-publish.md) | Daily-publish operational runbook | Pipeline debugging |
+| 6 | `README.md` *(this file)* | Quick-reference index, summary of what the documents cover, and "where do I look for X?" map | All audiences |
 
-All three live at the repo root and are designed to be copy-pasted into new Claude chats to initialise context.
+**The fastest way to start a new session** is to open `docs/next-session.md`. It has been written specifically to be the front door for resuming work and links into the other docs on demand.
 
 ---
 
@@ -146,15 +148,32 @@ The brief asked to "add any other information that I may have missed." Items add
 
 ## Recommended next actions
 
+> **For the next-session focus**, see [`next-session.md`](next-session.md) — it has the punch list, the data you need to gather, and the order to tackle it in.
+
 Pulled forward from `project.md` Section 21:
 
-### This week
-- [ ] Activate `privacy@`, `security@`, `editorial@`, `legal@` mailbox aliases
-- [ ] Add `llms.txt` generation to `build.py`
-- [ ] Add `/.well-known/security.txt`
-- [ ] Verify `/terms/` page exists and is current
+### Next session — primary focus
+
+- [ ] **Cross-platform video + Twitter analytics review** — first proper post-publish review of YouTube Shorts + TikTok + Instagram Reels + X data side-by-side. See `docs/video-pipeline.md` Section 11 for the methodology.
+- [ ] **Backlinks push** — start the structured outreach cadence in `project.md` Section 14. Authority Score 2 → 10+ is the single biggest remaining growth lever.
+
+### Secondary (slot in as bandwidth allows)
+- [ ] Semrush Position Tracking — swap Spain → UK (1-min dashboard task)
+- [ ] Activate `privacy@`, `security@`, `editorial@`, `legal@` mailbox aliases (DNS task)
 - [ ] Confirm Twitter API keys are stored as GitHub Secrets
 - [ ] Build out the top 3 category hub pages (600–800 words each)
+- [ ] Find a workable video music bed (`assets/audio/news-bed.mp3` empty)
+- [ ] Awin reapply (window opens 2026-06-12) + CJ follow-up + direct affiliate outreach
+- [ ] AdSense approval chase
+
+### Recently completed (2026-06-04) — fully captured in `project.md` Section 21
+- ✅ `/terms/` full UK rewrite (E&W + Scotland + NI)
+- ✅ Named author + cross-publication E-E-A-T (Alex Bacsa, real headshot, `sameAs` to 3 sister pubs)
+- ✅ `/author/` page generated
+- ✅ `/.well-known/security.txt` (RFC 9116) live
+- ✅ GSC failing-validation URL triage (1 fix, 9 already resolved)
+- ✅ Mobile LCP optimisation (AdSense preconnect)
+- ✅ PageSpeed baseline captured (mobile 92–97 Performance across pages)
 
 ### Near-term (4–8 weeks)
 - Near-miss query optimisation pass
@@ -194,7 +213,9 @@ Copy `project-template.md` to the new project's repo as `PROJECT.md` (or `CLAUDE
 
 ## Document versioning
 
-- **v1.0 — 2026-05-20** — Initial consolidated master document + template + summary, produced from `Template.md` brief.
+- **v1.4 — 2026-06-04** — Technical-build closeout. Added [`next-session.md`](next-session.md) as the fast-start front door for resuming work. `project.md` updates: top header + new "Recently completed (2026-06-04 session)" block (Terms rewrite, named author E-E-A-T, security.txt, GSC URL triage, AdSense preconnect, Lighthouse baseline), Section 9 gains PageSpeed Insights subsection with baseline numbers + API rate-limit gotcha, Section 18 `security.txt` flipped Live, Section 21 "This week / next session" refocused on the two primary growth items (cross-platform analytics review + backlinks push). README's "What was produced" table now includes all 6 docs with relative links + flags next-session.md as the front door.
+- **v1.3 — 2026-05-30** — Three-front session: Instagram channel activated (`@beatthescamuk`), full Semrush remediation pass (Site Health 96% → 98%, AI Search 88% → 99%, 454 issue-instances cleared), Google disavow file uploaded for 66 toxic domains. project.md gains Section 14 Disavow Policy subsection + Section 9 Semrush subsection.
+- **v1.2 — 2026-05-22 (afternoon)** — Three further capability ships:
 - **v1.2 — 2026-05-22 (afternoon)** — Three further capability ships:
   - **Auto-thumbnail generation + auto-upload.** `scripts/generate_video.py` now renders a brand-aligned 1280×720 JPEG sidecar; `scripts/upload_to_youtube.py` uploads it via `yt.thumbnails().set()` after the video upload (non-fatal on phone-verification failure). Per-family `thumbnail_text` in `HOOK_TEMPLATES` keeps copy topic-correct.
   - **Never-cut-mid-sentence guarantee.** `shorten_warning()`'s ellipsis-fallback step was deleted entirely. If no clean clause boundary exists within 90 chars, the function returns the full original sentence. Eliminates the `"bank…"` / `"didn't expect…"` failure mode by construction, not by best-effort.

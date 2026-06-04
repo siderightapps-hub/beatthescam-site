@@ -1,0 +1,135 @@
+# Start here next session
+
+> **Last touched:** 2026-06-04 (technical-build closeout)
+> **Next focus:** social analytics review + backlinks/outreach push
+> **What you need from yourself:** ~7 days of post-publish video data + 30 min for the analytics pull + an hour blocked off for the outreach kickoff
+
+This doc is the **fast-start punch list** for the next session — read it before re-opening anything else and you'll be productive in 2 minutes instead of 20.
+
+The exhaustive context lives in `docs/project.md`. This file is the index.
+
+---
+
+## Where things stand (as of last close)
+
+- **Site Health 98%**, **AI Search Health 99%**, Lighthouse mobile **92–97** Performance / **95–98** Accessibility / **100** SEO across homepage, guide, author pages
+- **Technical build = 100% complete.** No remaining engineering blockers. ~191 residual Semrush warnings are all Google's AdSense CDN — irreducible.
+- **164 guides** published, 17 categories, daily publish + 3 video channels (YT Shorts + TikTok + IG Reels) operational
+- **Disavow file** uploaded for 66 toxic domains; `/.well-known/security.txt` + `llms.txt` + full UK Terms all live
+- **Named author E-E-A-T** complete: Alex Bacsa across all guides, real headshot, `sameAs` to LinkedIn + CloudFintech + Tuning Digital + SalesTap
+
+If anything in the above feels stale on re-read, the canonical source is `docs/project.md` Section 21 "Recently completed".
+
+---
+
+## 1. Social analytics review (do this FIRST)
+
+> **Why first:** the data is time-sensitive — the longer videos sit, the less actionable the post-publish retention signals become.
+
+### What to bring to the session
+
+Open these four dashboards in browser tabs **before** opening Claude:
+
+| Platform | Where | What to grab |
+|---|---|---|
+| **YouTube Shorts** | YouTube Studio → Content → individual Short → Analytics tab | Views, average view duration, % viewed, watch time |
+| **TikTok** | TikTok app → profile → Analytics (Pro/Creator account, free) → individual video | Views, average watch time, **completion rate**, full-video views |
+| **Instagram Reels** | IG app (mobile) → Reels → Insights on each Reel (Creator account needed — already done) | Plays, **initial plays**, accounts reached, watch time |
+| **Twitter / X** | analytics.twitter.com → per-post View analytics (manual — free API tier doesn't expose this) | Impressions, link clicks, engagement rate |
+
+Best videos to pull data on (last ~30 days, sorted oldest first so retention has matured):
+- HMRC Tax Rebate (oldest, most data)
+- WhatsApp Hi Mum recreate
+- Facebook Marketplace
+- Festival camping
+- The 4 Instagram Reels seeded on 2026-05-30
+
+### The question we're answering
+
+**Does the first-second drop-off problem hold across all three video platforms, or is it platform-specific?**
+
+- If **all three** show heavy < 3s drop-off → it's the hook. We test the alternative openers we parked: kinetic-text reveal, shocking-number open, curiosity-gap question.
+- If **Reels holds better than Shorts/TikTok** → it's audience/platform fit. We double down on Reels-first creative.
+- If **Twitter is flat (low impressions)** → tweet format is the bottleneck. Test natively attaching the Short to the tweet for reach instead of a bare link.
+
+### Reference docs
+
+- `docs/video-pipeline.md` Section 11 "Cross-platform analytics review" — has the where-to-look + what-to-measure table verbatim
+- `docs/video-pipeline.md` Section 10 "Analytics — what's working so far" — the prior baseline (HMRC 210 YT views, FB Marketplace 268 TT, etc.) for comparison
+
+### What to expect from this session's Claude work
+
+After you share the data: a side-by-side comparison table, the retention verdict, and a concrete A/B testing plan for the next 2-3 videos. Not analytics dashboards — diagnosis and next-step planning.
+
+---
+
+## 2. Backlinks & outreach push
+
+> **Why this matters:** Authority Score is **2**. The technical SEO ceiling has been hit. The single biggest growth lever remaining is **earning quality backlinks**, which is pure outreach work that cannot be automated.
+
+### Reference doc
+
+Full playbook is `docs/project.md` Section 14 "Backlinks, Authority & Domain Authority Plan". Read it once before the session.
+
+### What to bring to the session
+
+| Item | Where to get it |
+|---|---|
+| **Target list** (5-10 UK consumer-finance / fraud-prevention sites) | We'll build this together in the session — bring any sites you already read or admire |
+| **HARO / Featured.com account** | Sign up at <https://featured.com/> (free) — takes 2 minutes |
+| **Spreadsheet for outreach tracking** | Either your existing Project Tracker (.xlsx) or a fresh sheet — columns: domain, contact name, email, date contacted, response, link earned (Y/N) |
+| **Personal email** to send outreach from | The `hello@beatthescam.com` mailbox or a personal address that doesn't go to spam filters |
+
+### Per-week cadence target (Section 14)
+
+| Tactic | Frequency | Target wins/month |
+|---|---|---|
+| Directory submissions | 5/week × 6 weeks then maintenance | 5–10 links |
+| Reddit r/Scams + r/UKPersonalFinance contributions | 3–5/week | 2–4 links (natural mentions) |
+| Quora answers | 2/week | 2–4 links |
+| Link-insertion outreach (email pitches) | 5–10/week | 1–3 placements |
+| Guest post pitches | 3/week | 1 placement/month |
+| HARO responses | 5/week | 1–2 quotes/month |
+
+### What to expect from this session's Claude work
+
+We'll:
+1. Triage a starter list of **20-30 UK target sites** by relevance and reach-difficulty
+2. Draft **3 email templates** (cold outreach, link-insertion, guest-post pitch) you can paste and personalise
+3. Pick the first 5 directories to submit to + walk through the submission process
+4. Set up the Reddit/Quora cadence with the topical angles you'll lead with
+5. Optionally extend `docs/project.md` with an outreach-log section so wins are tracked over time
+
+---
+
+## 3. Smaller items if time allows
+
+Pulled forward from `docs/project.md` Section 21 in priority order. None are blocking.
+
+- [ ] **Semrush Position Tracking** — swap Spain (Spanish) → United Kingdom (English). Dashboard task, 1 minute. The free tier's 1-target limit means delete-then-add (not add-then-delete).
+- [ ] **Activate mailbox aliases** — `privacy@`, `security@`, `editorial@`, `legal@`. DNS / email-hosting task on your side. Once `security@` is active, swap the primary Contact line in `scripts/build.py`'s security.txt block.
+- [ ] **Confirm Twitter API keys** are stored in GitHub Secrets (not just `.env`) — currently risk-zone if a daily-publish ever fails on a Twitter-keys-missing path.
+- [ ] **Video music bed** — `assets/audio/news-bed.mp3` is empty (two candidates rejected). Search YouTube Audio Library Mood=Dark + Genre=Electronic/Cinematic; or Pixabay terms "documentary tension", "investigation", "cybersecurity". Target tone: vigilant, deliberate, investigative — not alarmist.
+- [ ] **Top 3 category hub pages** (600–800 words each) — editorial work. Pick the three highest-traffic categories from GSC and expand the existing landing page bodies.
+- [ ] **PageSpeed re-check** — confirm the homepage's pre-deploy amber FCP/LCP cleared after the 2026-06-04 preconnect commit landed. URL: <https://pagespeed.web.dev/analysis?url=https%3A%2F%2Fbeatthescam.com%2F>.
+
+---
+
+## How to start the next session in 30 seconds
+
+**Open Claude and paste:**
+
+> Picking up from last session — see `docs/next-session.md`. Today I want to do [analytics review / backlinks kickoff / both]. I have [data ready / questions about X / dashboard tabs open]. Let's go.
+
+That's it. Claude reads this doc first, knows the state, and dives straight into productive work.
+
+---
+
+## What this doc is NOT
+
+- **Not** the canonical reference for site state — that's `docs/project.md` (1400+ lines, full history)
+- **Not** the runbook — that's `docs/daily-publish.md` (operational details for the daily pipeline)
+- **Not** the video pipeline docs — that's `docs/video-pipeline.md` (full pipeline + analytics methodology)
+- **Not** the YouTube setup guide — that's `docs/youtube-upload-setup.md` (one-time OAuth setup)
+
+This doc is **the front door**. Read it, then the others on demand.
