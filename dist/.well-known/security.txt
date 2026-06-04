@@ -1,0 +1,11 @@
+# Security policy for beatthescam.com
+# In scope: beatthescam.com and its subdomains.
+# If you've found a security vulnerability, please report it via the
+# channels below. We aim to respond to all credible reports within 5
+# working days. Thank you for helping keep readers safe.
+
+Contact: mailto:hello@beatthescam.com
+Contact: https://beatthescam.com/contact/
+Expires: 2027-05-05T00:00:00.000Z
+Preferred-Languages: en
+Canonical: https://beatthescam.com/.well-known/security.txt

@@ -3,7 +3,7 @@ import json
 import re
 import shutil
 from collections import defaultdict
-from datetime import datetime
+from datetime import datetime, timedelta
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -2477,6 +2477,26 @@ def build():
     # Key must match the filename. Generate once and keep stable.
     indexnow_key = "b3c8e1f2a94d7056"
     write(DIST / f'{indexnow_key}.txt', indexnow_key)
+
+    # security.txt (RFC 9116) — tells security researchers how to disclose
+    # vulnerabilities. Auto-regenerated every build so the Expires field
+    # always stays under the 1-year RFC ceiling without manual upkeep.
+    # Lives at /.well-known/security.txt per the spec.
+    expires_iso = (datetime.utcnow() + timedelta(days=335)).strftime("%Y-%m-%dT00:00:00.000Z")
+    security_txt = (
+        f"# Security policy for {site['domain'].replace('https://','').replace('http://','')}\n"
+        f"# In scope: beatthescam.com and its subdomains.\n"
+        f"# If you've found a security vulnerability, please report it via the\n"
+        f"# channels below. We aim to respond to all credible reports within 5\n"
+        f"# working days. Thank you for helping keep readers safe.\n"
+        f"\n"
+        f"Contact: mailto:{site['contact_email']}\n"
+        f"Contact: {site['domain']}/contact/\n"
+        f"Expires: {expires_iso}\n"
+        f"Preferred-Languages: en\n"
+        f"Canonical: {site['domain']}/.well-known/security.txt\n"
+    )
+    write(DIST / '.well-known' / 'security.txt', security_txt)
 
     # _redirects (Netlify)
     # Category slug 301s — auto-derived from CATEGORY_CANON.
