@@ -893,18 +893,17 @@ def _drift_zoom(t, d):
     return 1.0 + 0.04 * (t / d)
 
 
-def _punch_in_zoom(t, d):
-    """Snappy push-in with a slight overshoot "pop" over the first ~0.5s, then a
-    gentle drift. Opening card only, for the TikTok/Reels motion-hook test —
-    much stronger than the baseline drift so the first second reads as real
-    movement. Frame 1 stays at 1.0 (fully legible) before the pop."""
-    snap = 0.5
-    if t < snap:
-        p = t / snap
-        c1, c3 = 1.70158, 2.70158
-        back = 1 + c3 * (p - 1) ** 3 + c1 * (p - 1) ** 2   # easeOutBack (overshoots)
-        return 1.0 + 0.10 * back                            # 1.0 -> ~1.11 pop -> 1.10
-    return 1.10 + 0.03 * ((t - snap) / max(d - snap, 0.01))
+def _hook_reveal_zoom(t, d):
+    """Hook-card motion for the TikTok/Reels test: a push-in (1.0 -> 1.07) over
+    the first ~0.5s, then a gentle drift. Combined with a quick fade-in from
+    black (applied in build_video), the hook 'materialises' rather than sitting
+    static. Kept at scale >= 1.0 so the headline never clips (a centre scale-up
+    fights MoviePy's resize+position interaction)."""
+    rev = 0.5
+    if t < rev:
+        ease = 1 - (1 - t / rev) ** 3         # ease-out cubic
+        return 1.0 + 0.07 * ease              # 1.0 -> 1.07 push-in
+    return 1.07 + 0.03 * ((t - rev) / max(d - rev, 0.01))   # gentle drift after
 
 
 def build_video(post, slug: str, out_dir: Path, music_path: Optional[Path], motion_hook: bool = False) -> Path:
@@ -951,22 +950,26 @@ def build_video(post, slug: str, out_dir: Path, music_path: Optional[Path], moti
         dur = s["scene_dur"]
 
         # Image clip motion. Baseline = gentle drift. With --motion-hook, the
-        # FIRST card gets a fast punch-in (a swipe-stopper for the TikTok/Reels
-        # test); every other card and the whole YouTube path keep the drift.
-        zoom_fn = _punch_in_zoom if (motion_hook and i == 0) else _drift_zoom
+        # FIRST card gets a "reveal": scale-up from centre + quick fade-in from
+        # black (a swipe-stopper for the TikTok/Reels test). Every other card and
+        # the whole YouTube path keep the gentle drift.
+        is_hook = motion_hook and i == 0
+        zoom_fn = _hook_reveal_zoom if is_hook else _drift_zoom
         clip = (
             ImageClip(str(frames_dir / s["filename"]))
             .with_duration(dur)
             .resized(lambda t, d=dur, z=zoom_fn: z(t, d))
         )
-
         # Per-card voice
         voice = AudioFileClip(str(s["audio_path"])).with_start(0)
         clip  = clip.with_audio(voice)
 
-        # Crossfade in for all but the first card
+        # Crossfade in for all but the first card; the hook card fades in from
+        # black instead (the "reveal").
         if i > 0:
             clip = clip.with_effects([CrossFadeIn(overlap)])
+        elif is_hook:
+            clip = clip.with_effects([CrossFadeIn(0.32)])
 
         clip = clip.with_start(cursor)
         timeline.append(clip)
