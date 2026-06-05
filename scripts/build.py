@@ -2221,7 +2221,11 @@ def build():
     if DIST.exists():
         shutil.rmtree(DIST)
     DIST.mkdir(parents=True)
-    shutil.copytree(ROOT / 'assets', DIST / 'assets')
+    # Copy assets → dist, but never the audio/ bed: it's a local video-render
+    # asset (licensed stock music). Serving the raw file publicly would breach
+    # most free-music licenses (no standalone redistribution) and bloat the deploy.
+    shutil.copytree(ROOT / 'assets', DIST / 'assets',
+                    ignore=shutil.ignore_patterns('audio', '*.mp3', '*.wav', '*.aac'))
 
     # Minify styles.css + app.js in place — clears the Semrush
     # "unminified JS/CSS" warnings (counted on every crawled page, so the

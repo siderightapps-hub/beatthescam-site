@@ -17,3 +17,6 @@ beatthescam-video-handoff.md
 # Local video render output — never shipped to Netlify or git
 /out/
 /dist/videos/
+
+# Video music bed — local render asset only (licensed; never commit or deploy)
+assets/audio/
