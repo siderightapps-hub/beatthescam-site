@@ -81,9 +81,12 @@ ARTICLE_REDIRECTS = {
     "gumtree-scam-uk-guide":                      "__CAT__:marketplace",
     "ebay-scam-buyer-protection-uk":              "__CAT__:marketplace",
     "evri-text-scam-uk":                          "__CAT__:sms",
-    "dpd-delivery-scam-text":                     "__CAT__:sms",
-    "yodel-scam-text-messages":                   "__CAT__:sms",
-    "ups-delivery-scam-text-messages-uk":         "__CAT__:sms",
+    # dpd-delivery-scam-text, yodel-scam-text-messages and
+    # ups-delivery-scam-text-messages-uk were resurrected as full ~1,000-word
+    # guides on 2026-06-05 — they were the site's highest-demand URLs (DPD alone
+    # had 1,905 GSC impressions at pos 10.2) but the 2026-05-24 purge 301'd them
+    # to a thin category page. Redirects removed so build() serves the real
+    # guide pages again. See scripts/recover_courier_guides.py.
     "paypal-email-scam-uk":                       "__CAT__:payment",
     "invoice-scam-email-uk":                      "__CAT__:payment",
     "refund-scam-uk":                             "__CAT__:payment",

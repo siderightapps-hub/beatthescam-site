@@ -1,6 +1,27 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <rss version="2.0"><channel><title>Beat the Scam</title><link>https://beatthescam.com</link><description>Scam alerts, plain-English checks, and practical guides to help people verify suspicious emails, texts, websites, calls, and offers.</description>
         <item>
+          <title>DPD Scam Text Messages: How to Spot a Fake DPD Delivery Text</title>
+          <link>https://beatthescam.com/guides/dpd-delivery-scam-text/</link>
+          <guid>https://beatthescam.com/guides/dpd-delivery-scam-text/</guid>
+          <pubDate>Fri, 05 Jun 2026 00:00:00 +0000</pubDate>
+          <description>Fake DPD &#x27;missed delivery&#x27; or &#x27;redelivery fee&#x27; texts are smishing scams. Here&#x27;s how to spot a fake DPD text, verify a genuine one, and report it in the UK.</description>
+        </item>
+        <item>
+          <title>Yodel Scam Text Messages: How to Spot a Fake Yodel Text (UK)</title>
+          <link>https://beatthescam.com/guides/yodel-scam-text-messages/</link>
+          <guid>https://beatthescam.com/guides/yodel-scam-text-messages/</guid>
+          <pubDate>Fri, 05 Jun 2026 00:00:00 +0000</pubDate>
+          <description>Fake Yodel texts about a missed parcel or small &#x27;redelivery&#x27; fee are smishing scams. Here&#x27;s how to spot a fake Yodel text, check a real one, and report it in the UK.</description>
+        </item>
+        <item>
+          <title>UPS Scam Text Messages: Spot a Fake UPS Delivery Text (UK)</title>
+          <link>https://beatthescam.com/guides/ups-delivery-scam-text-messages-uk/</link>
+          <guid>https://beatthescam.com/guides/ups-delivery-scam-text-messages-uk/</guid>
+          <pubDate>Fri, 05 Jun 2026 00:00:00 +0000</pubDate>
+          <description>Fake UPS texts about a missed delivery or &#x27;customs fee&#x27; are smishing scams. Here&#x27;s how to spot a fake UPS text, verify a genuine one, and report it in the UK.</description>
+        </item>
+        <item>
           <title>Holiday Compensation Scam UK: How to Spot Fake Claims Handlers</title>
           <link>https://beatthescam.com/guides/holiday-compensation-scam-uk/</link>
           <guid>https://beatthescam.com/guides/holiday-compensation-scam-uk/</guid>
@@ -188,25 +209,4 @@
           <guid>https://beatthescam.com/guides/number-spoofing-scam-uk/</guid>
           <pubDate>Wed, 20 May 2026 00:00:00 +0000</pubDate>
           <description>Number spoofing is when criminals use technology to make their phone number appear as something trusted — like your bank or the HMRC — so you answer and engage with them. UK residents lose millions yearly to spoofed calls because the fake caller ID makes the scam seem legitimate.</description>
-        </item>
-        <item>
-          <title>Fake Wi-Fi Hotspot Scam UK: How to Spot and Avoid Fake Public Networks</title>
-          <link>https://beatthescam.com/guides/fake-wifi-hotspot-scam-uk/</link>
-          <guid>https://beatthescam.com/guides/fake-wifi-hotspot-scam-uk/</guid>
-          <pubDate>Wed, 20 May 2026 00:00:00 +0000</pubDate>
-          <description>Fake Wi-Fi hotspot scams trick you into connecting to bogus networks that look legitimate but are controlled by criminals. Once connected, scammers can intercept your passwords, banking credentials, emails and sensitive information without you realising.</description>
-        </item>
-        <item>
-          <title>Shein Fake Website Scam UK: How to Spot and Avoid It</title>
-          <link>https://beatthescam.com/guides/shein-fake-website-scam-uk/</link>
-          <guid>https://beatthescam.com/guides/shein-fake-website-scam-uk/</guid>
-          <pubDate>Wed, 20 May 2026 00:00:00 +0000</pubDate>
-          <description>Scammers build convincing counterfeit Shein shopping sites that look almost identical to the real thing, stealing credit card details and addresses from unsuspecting UK customers. This guide shows you exactly what to look for and how to stay safe.</description>
-        </item>
-        <item>
-          <title>Fake Ray-Ban Website Scam UK: How to Spot &amp; Avoid It</title>
-          <link>https://beatthescam.com/guides/fake-ray-ban-website-scam-uk/</link>
-          <guid>https://beatthescam.com/guides/fake-ray-ban-website-scam-uk/</guid>
-          <pubDate>Wed, 20 May 2026 00:00:00 +0000</pubDate>
-          <description>Fake Ray-Ban websites look almost identical to the real thing but steal your money and identity details instead. We show you exactly what to check before you buy sunglasses online.</description>
         </item></channel></rss>

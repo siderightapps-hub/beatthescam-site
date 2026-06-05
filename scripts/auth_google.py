@@ -22,14 +22,27 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 
 # Look for client_secret*.json in the repo root
-cred_files = list(ROOT.glob("client_secret*.json"))
+cred_files = sorted(ROOT.glob("client_secret*.json"))
 if not cred_files:
     print("❌ No client_secret*.json file found in the repo root.")
     print("   Make sure your Google OAuth credentials JSON is in:")
     print(f"   {ROOT}/")
     exit(1)
 
-CREDENTIALS_FILE = str(cred_files[0])
+
+def _is_desktop(path):
+    """A Desktop-app client has an 'installed' key (redirect http://localhost).
+    A 'web' client (e.g. one wired to the OAuth Playground) will fail
+    run_local_server() with redirect_uri_mismatch, so we must skip it."""
+    try:
+        return "installed" in json.loads(Path(path).read_text())
+    except Exception:
+        return False
+
+
+# Prefer a Desktop-app client — the only type run_local_server() can use.
+desktop = [f for f in cred_files if _is_desktop(f)]
+CREDENTIALS_FILE = str((desktop or cred_files)[0])
 TOKEN_FILE = str(ROOT / "token.json")
 
 print(f"✅ Found credentials: {Path(CREDENTIALS_FILE).name}")
@@ -39,6 +52,7 @@ try:
     from google_auth_oauthlib.flow import InstalledAppFlow
     from google.auth.transport.requests import Request
     from google.oauth2.credentials import Credentials
+    from google.auth.exceptions import RefreshError
 except ImportError:
     print("❌ Missing libraries. Run:")
     print("   pip3 install google-auth-oauthlib google-auth-httplib2 google-api-python-client")
@@ -50,21 +64,31 @@ creds = None
 
 # Check if token already exists
 if os.path.exists(TOKEN_FILE):
-    creds = Credentials.from_authorized_user_file(TOKEN_FILE, SCOPES)
+    try:
+        creds = Credentials.from_authorized_user_file(TOKEN_FILE, SCOPES)
+    except Exception:
+        creds = None
 
-# If no valid credentials, run the browser auth flow
-if not creds or not creds.valid:
-    if creds and creds.expired and creds.refresh_token:
-        print("🔄 Refreshing expired token...")
+# Try a silent refresh first, but fall back to the browser flow if the refresh
+# token has been revoked/expired (invalid_grant). Without this, a dead refresh
+# token crashes the script instead of letting you simply re-authorise.
+if creds and not creds.valid and creds.expired and creds.refresh_token:
+    print("🔄 Refreshing expired token...")
+    try:
         creds.refresh(Request())
-    else:
-        print()
-        print("🌐 Opening browser for Google login...")
-        print("   Log in with: siderightapps@gmail.com")
-        print("   Then grant access to Search Console")
-        print()
-        flow = InstalledAppFlow.from_client_secrets_file(CREDENTIALS_FILE, SCOPES)
-        creds = flow.run_local_server(port=0)
+    except RefreshError as e:
+        print(f"⚠️  Refresh failed ({e}). Falling back to browser login.")
+        creds = None
+
+# If still no valid credentials, run the browser auth flow
+if not creds or not creds.valid:
+    print()
+    print(f"🌐 Opening browser for Google login (client: {Path(CREDENTIALS_FILE).name})...")
+    print("   Log in with: siderightapps@gmail.com")
+    print("   Then grant access to Search Console")
+    print()
+    flow = InstalledAppFlow.from_client_secrets_file(CREDENTIALS_FILE, SCOPES)
+    creds = flow.run_local_server(port=0)
 
 # Save the token
 with open(TOKEN_FILE, "w") as f:
