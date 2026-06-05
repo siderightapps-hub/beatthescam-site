@@ -545,6 +545,27 @@ def short_topic(post) -> str:
     return "this"
 
 
+_DANGLERS = {
+    "to", "the", "a", "an", "of", "for", "with", "and", "or", "but", "in", "on",
+    "at", "by", "from", "as", "is", "are", "was", "were", "that", "which", "who",
+    "your", "their", "this", "these", "those", "into", "about", "like", "such",
+    "including",
+    # trailing participles that signal an elaboration was stripped mid-clause
+    "described", "claiming", "called", "marked", "labelled", "labeled", "known",
+    "referred",
+}
+
+
+def _strip_dangler(s: str) -> str:
+    """Strip trailing connectors/prepositions/articles (and leftover punctuation)
+    so a shortened warning never ends mid-thought ('...click a link to')."""
+    s = (s or "").strip().rstrip(",.;:- ")
+    parts = s.split()
+    while parts and parts[-1].lower().strip(",.;:-'\"") in _DANGLERS:
+        parts.pop()
+    return " ".join(parts).rstrip(",.;:- ")
+
+
 def shorten_warning(text: str, max_chars: int = 90) -> str:
     """Trim warning text for both card display AND speech.
 
@@ -569,6 +590,14 @@ def shorten_warning(text: str, max_chars: int = 90) -> str:
 
     # 1. Parentheticals
     text = re.sub(r"\s*\([^)]*\)", "", text)
+
+    # 1b. Multi-sentence warnings: if the FIRST sentence is a substantive,
+    #     card-fittable complete thought, use it and drop the rest (almost
+    #     always elaboration). Fixes "...Real Evri links start with" danglers
+    #     where the real red flag is the opening sentence.
+    _sents = re.split(r"(?<=[.!?])\s+", text, maxsplit=1)
+    if len(_sents) > 1 and 40 <= len(_sents[0]) <= max_chars + 20 and not _sents[0].rstrip().endswith(":"):
+        text = _sents[0]
 
     # 2. Em-dash / en-dash (Unicode only, not the hyphen used in compound words)
     text = re.split(r"\s*[—–]\s*", text)[0]
@@ -624,17 +653,27 @@ def shorten_warning(text: str, max_chars: int = 90) -> str:
     text = re.sub(
         r"\s+(\b(?:like|such as|including|e\.?g\.?)\s+)?"
         r"['\"][^'\"]+['\"]"
-        r"(\s+(?:or|and)\s+['\"][^'\"]+['\"])*",
+        r"((?:\s*,\s*|\s+(?:or|and)\s+)['\"][^'\"]+['\"])*",
         "",
         text,
         flags=re.I,
     )
+
+    # 4b. Drop a trailing "rather than / instead of / as opposed to / over X"
+    #     contrast. In a warning the lead clause is the red flag; the contrast
+    #     bloats the card AND is what made the payment-method list get cut
+    #     mid-way ("...bank transfer, gift cards" dropping "or cryptocurrency").
+    #     Guarded so we never strip to a stub.
+    _contrast = re.search(r"\s+(?:rather than|instead of|as opposed to|over)\s+\S", text, flags=re.I)
+    if _contrast and _contrast.start() >= 30:
+        text = text[:_contrast.start()].rstrip()
 
     # Clean up residue from stripping: double punctuation, stranded separators
     text = re.sub(r"\s*,\s*,\s*", ", ", text)
     text = re.sub(r"\s*[,;]\s*(or|and)\b", r" \1", text, flags=re.I)
     text = re.sub(r"\b(or|and)\s+[,;]", r"\1", text, flags=re.I)
     text = re.sub(r"\s+", " ", text).strip().rstrip(".,;:")
+    text = _strip_dangler(text)
     if not text:
         return ""
 
@@ -656,14 +695,19 @@ def shorten_warning(text: str, max_chars: int = 90) -> str:
     ):
         cut_at = m.start()
     if cut_at >= 25:
-        return text[:cut_at].rstrip(",.;: ")
+        # Don't strand a coordinated list: if the text after the cut begins with
+        # a closing "or/and <item>", cutting here leaves "X, Y" missing "or Z".
+        # In that case fall through and keep the full sentence (step 6).
+        tail = text[cut_at:].lstrip(",.;: ")
+        if not re.match(r"(?:or|and)\b", tail, flags=re.I):
+            return _strip_dangler(text[:cut_at])
 
     # 6. No clean clause boundary found within max_chars. Hard rule: never
     #    cut mid-phrase with an ellipsis (the "bank…" / "didn't expect…"
     #    failure mode that produced unreadable cards). Return the full
     #    original sentence intact — card auto-sizing + audio length both
     #    handle longer text fine. Never strands the viewer mid-thought.
-    return text
+    return _strip_dangler(text)
 
 
 # ─── Storyboard ────────────────────────────────────────────────────────────
@@ -844,7 +888,26 @@ def audio_duration(path: Path) -> float:
 
 # ─── Assembly ──────────────────────────────────────────────────────────────
 
-def build_video(post, slug: str, out_dir: Path, music_path: Optional[Path]) -> Path:
+def _drift_zoom(t, d):
+    """Baseline gentle 4% Ken Burns drift across a card (the YouTube path)."""
+    return 1.0 + 0.04 * (t / d)
+
+
+def _punch_in_zoom(t, d):
+    """Snappy push-in with a slight overshoot "pop" over the first ~0.5s, then a
+    gentle drift. Opening card only, for the TikTok/Reels motion-hook test —
+    much stronger than the baseline drift so the first second reads as real
+    movement. Frame 1 stays at 1.0 (fully legible) before the pop."""
+    snap = 0.5
+    if t < snap:
+        p = t / snap
+        c1, c3 = 1.70158, 2.70158
+        back = 1 + c3 * (p - 1) ** 3 + c1 * (p - 1) ** 2   # easeOutBack (overshoots)
+        return 1.0 + 0.10 * back                            # 1.0 -> ~1.11 pop -> 1.10
+    return 1.10 + 0.03 * ((t - snap) / max(d - snap, 0.01))
+
+
+def build_video(post, slug: str, out_dir: Path, music_path: Optional[Path], motion_hook: bool = False) -> Path:
     frames_dir = out_dir / f"{slug}-frames"
     audio_dir  = out_dir / f"{slug}-audio"
     for d in (frames_dir, audio_dir):
@@ -887,12 +950,14 @@ def build_video(post, slug: str, out_dir: Path, music_path: Optional[Path]) -> P
     for i, s in enumerate(scenes):
         dur = s["scene_dur"]
 
-        # Image clip; the slow zoom is the "motion" — keeps the eye engaged
-        # without the cards feeling like a static slideshow.
+        # Image clip motion. Baseline = gentle drift. With --motion-hook, the
+        # FIRST card gets a fast punch-in (a swipe-stopper for the TikTok/Reels
+        # test); every other card and the whole YouTube path keep the drift.
+        zoom_fn = _punch_in_zoom if (motion_hook and i == 0) else _drift_zoom
         clip = (
             ImageClip(str(frames_dir / s["filename"]))
             .with_duration(dur)
-            .resized(lambda t, d=dur: 1.0 + 0.04 * (t / d))  # 4% zoom across the card
+            .resized(lambda t, d=dur, z=zoom_fn: z(t, d))
         )
 
         # Per-card voice
@@ -958,6 +1023,8 @@ def main():
                         help=f"background music path (default: {DEFAULT_MUSIC})")
     parser.add_argument("--no-music", action="store_true",
                         help="skip background music even if file exists")
+    parser.add_argument("--motion-hook", action="store_true",
+                        help="fast punch-in on the opening card (TikTok/Reels swipe-stopper test)")
     args = parser.parse_args()
 
     posts = json.loads(Path(args.posts).read_text(encoding="utf-8"))
@@ -968,7 +1035,7 @@ def main():
     out_dir = Path(args.out_dir)
     music_path = None if args.no_music else Path(args.music)
 
-    out_path = build_video(post, args.slug, out_dir, music_path)
+    out_path = build_video(post, args.slug, out_dir, music_path, motion_hook=args.motion_hook)
     size_mb = out_path.stat().st_size / (1024 * 1024)
     print(f"\n✓ Done — {out_path} ({size_mb:.2f} MB)")
     print(f"  Inspect frames: {out_dir / (args.slug + '-frames')}")
