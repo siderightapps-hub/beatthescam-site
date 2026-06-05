@@ -24,11 +24,13 @@ Brand facts for any profile/citation (keep these identical everywhere — NAP co
 
 | Target | Type | Where | Status | Date | Link? | Notes |
 |---|---|---|---|---|---|---|
-| LinkedIn Company Page | self-serve | linkedin.com/company/setup/new/ | ☐ | | | nofollow; brand/trust |
-| Crunchbase | self-serve | crunchbase.com → Add company | ☐ | | | indexed citation |
-| About.me (Alex Bacsa) | self-serve | about.me | ☐ | | | reinforces author sameAs |
-| Trustpilot | self-serve | business.trustpilot.com | ☐ | | | claim/defensive; reviews |
-| F6S | self-serve | f6s.com | ☐ | | | dofollow founder/startup dir |
+| LinkedIn — personal profile | self-serve | linkedin.com/in/alexbacsa | ☐ | | | NOW: add "Beat the Scam" to Experience + beatthescam.com in Featured/Contact (not rate-limited) |
+| LinkedIn Company Page | self-serve | linkedin.com/company/setup/new/ | ⏳ weekend | | | BLOCKED: 7-day page-creation cooldown hit via sister pubs; retry when window resets |
+| Owler | self-serve | owler.com | ✅ | 2026-06-05 | ✅ | Media/Publishing, Private, 2026; HQ = city/country (no home address) |
+| Google Business Profile | self-serve | business.google.com | ☐ | | | optional; service-area + HIDE address; higher-value citation |
+| About.me (Alex Bacsa) | self-serve | about.me/alexbacsa | ✅ | 2026-06-05 | ✅ | bio + beatthescam.com button + 3 sister-pub links + LinkedIn/X/YT/IG |
+| Trustpilot | self-serve | trustpilot.com/review/beatthescam.com | ✅ | 2026-06-05 | ✅ | claimed; "Information Service" category; desc in; brand citation + reviews |
+| F6S | self-serve | f6s.com/alex-bacsa | ✅ | 2026-06-05 | ✅ | profile + Beat the Scam experience; search-visibility kept ON |
 | Citizens Advice | resource email | citizensadvice.org.uk/contact | ☐ | | | long shot, low effort |
 | Get Safe Online | resource email | getsafeonline.org | ☐ | | | |
 | Stop Scams UK / Take Five | resource email | stopscamsuk.org.uk · takefive-stopfraud.org.uk | ☐ | | | |
