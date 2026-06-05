@@ -18,7 +18,7 @@
 - [Social Media Scams](https://beatthescam.com/categories/social/): 7 guide(s)
 - [Tech Support Scams](https://beatthescam.com/categories/tech/): 13 guide(s)
 - [Text Message Scams](https://beatthescam.com/categories/sms/): 20 guide(s)
-- [Travel Scams](https://beatthescam.com/categories/travel/): 8 guide(s)
+- [Travel Scams](https://beatthescam.com/categories/travel/): 9 guide(s)
 - [Utility Scams](https://beatthescam.com/categories/utility/): 3 guide(s)
 - [Website Scams](https://beatthescam.com/categories/website/): 12 guide(s)
 
@@ -212,6 +212,7 @@
 - [Airport Transfer Taxi Scam UK: How to Spot and Avoid Fake Minicabs](https://beatthescam.com/guides/airport-transfer-taxi-scam-uk/): Airport transfer taxi scams target UK travellers at their most vulnerable—arriving tired and wanting quick transport. Scammers create fake websites, send phishing emails posing as airport services, or approach you in arrivals offering inflated fares.
 - [Fake Airline Ticket Scam UK: How to Spot and Avoid Holiday Booking Fraud](https://beatthescam.com/guides/fake-airline-ticket-scam-uk/): Fake airline ticket scams target UK holiday makers with bargain flights that don't exist. Fraudsters impersonate real airlines or create convincing fake booking sites, then vanish once you've paid.
 - [Glastonbury Accommodation Scam UK: How to Spot Fake Bookings](https://beatthescam.com/guides/glastonbury-accommodation-scam-uk/): Scammers create fake Glastonbury accommodation listings on social media, messaging apps, and ad sites to steal deposits from festival-goers. This guide shows you exactly how to verify genuine bookings and protect yourself before sending any money.
+- [Holiday Compensation Scam UK: How to Spot Fake Claims Handlers](https://beatthescam.com/guides/holiday-compensation-scam-uk/): Holiday compensation scams target UK travellers who are legitimately owed money for cancelled trips, delays, or poor service. Fraudsters impersonate established claims management companies or create fake ones, demanding upfront fees before pursuing compensation.
 - [Holiday Let Scam UK: How to Spot Fake Rental Listings and Protect Your Money](https://beatthescam.com/guides/holiday-let-scam-uk/): Holiday let scams target UK holidaymakers by posting fake rental properties on legitimate platforms or fraudulent websites. Scammers typically request upfront deposits or full payment via untraceable methods, then disappear or use stolen photos.
 - [Jet2 Holiday Scam UK: How to Spot and Avoid Fake Booking Websites](https://beatthescam.com/guides/jet2-holiday-scam-uk/): Jet2 holiday scams target UK travellers through convincing fake websites, text messages, and emails offering unusually cheap flights and package deals. Scammers collect payment and passport details, then disappear—leaving victims without flights or refunds.
 - [Package Holiday Scam UK: How to Spot Fake Travel Deals and Protect Yourself](https://beatthescam.com/guides/package-holiday-scam-uk/): Package holiday scams target UK travellers with too-good-to-be-true deals on flights, hotels, and complete holiday packages. Fraudsters impersonate legitimate travel agents, create fake websites, and use social media to lure victims into paying upfront for holidays that never exist.
