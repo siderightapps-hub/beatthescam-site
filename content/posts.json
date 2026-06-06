@@ -1,5 +1,64 @@
 [
   {
+    "slug": "impersonation-scams-when-criminals-pretend-to-be-your-bank-or-the-police",
+    "title": "Impersonation Scams: When Criminals Pretend to Be Your Bank or the Police",
+    "description": "Learn how impersonation scams work in the UK, recognise the warning signs, and protect yourself from criminals posing as trusted organisations. This guide helps consumers avoid losing money to fake calls and messages.",
+    "hero": "Scammers are calling and texting UK residents impersonating banks, the police, and government agencies to steal personal information and money.",
+    "date": "2026-06-06",
+    "category": "fraud",
+    "keywords": [
+      "impersonation scam",
+      "fake bank calls",
+      "police impersonation",
+      "phishing",
+      "social engineering"
+    ],
+    "sections": [
+      [
+        "What is this scam?",
+        "Impersonation scams occur when criminals contact you pretending to be from your bank, the police, HMRC, or other trusted organisations. The scammer's goal is to extract personal information (passwords, PINs, card details) or convince you to transfer money urgently. These scams exploit trust in established institutions and create artificial pressure through false claims of fraud, unpaid taxes, or criminal investigations. In the UK, impersonation scams are increasingly sophisticated, using spoofed phone numbers that match your bank's real number or cloned official websites that look identical to genuine ones. Victims may be asked to visit an ATM, transfer funds to a 'secure account', or provide sensitive details that criminals then use for identity theft or direct theft."
+      ],
+      [
+        "How it works — step by step",
+        "- Step 1: You receive a call, text, or email claiming to be from your bank, police, or government agency\n- Step 2: The scammer creates urgency by claiming fraud on your account, a warrant for your arrest, or unpaid taxes needing immediate payment\n- Step 3: They request personal information (passwords, card numbers, CVV, memorable information) or ask you to confirm details\n- Step 4: You may be directed to a fake website, told to visit an ATM, or asked to transfer money to a 'secure account'\n- Step 5: Once they have your information or money, contact ceases and the fraud is discovered when you check your account or receive a statement"
+      ],
+      [
+        "Warning signs to look for",
+        "- Unexpected contact claiming urgent action is needed on your account\n- Requests for passwords, PINs, CVV numbers, or one-time codes — legitimate banks never ask for these\n- Pressure to act immediately or threats of account closure, arrest, or legal action\n- Spelling or grammar errors in official-looking emails or texts\n- Requests to transfer money to another account or visit an ATM to withdraw cash\n- Phone numbers that look similar to your bank's but differ by one or two digits\n- Generic greetings like 'Dear Customer' instead of your actual name\n- Links in messages that go to lookalike websites with slightly different URLs"
+      ],
+      [
+        "What to do if you receive one",
+        "- Stop contact immediately and do not provide any personal information\n- Never click links or download attachments from suspicious messages\n- If claiming to be your bank, hang up and call your bank directly using the number on the back of your card\n- Do not confirm any details, even if they already 'know' some information about you\n- Report the scam to Action Fraud on 0300 123 2040 or via actionfraud.police.uk\n- Forward suspicious text messages to 7726 (free) and delete the message"
+      ],
+      [
+        "How to protect yourself",
+        "Establish strong security habits to reduce impersonation scam risk. Never give personal information unsolicited, even if the caller claims to be from your bank. Always initiate contact yourself using official numbers from your bank's website or card. Enable two-factor authentication on your online banking and email accounts. Be sceptical of urgency and threats — legitimate organisations give you time to verify claims. Register with the Telephone Preference Service (TPS) to reduce unwanted calls. Keep your phone number, email, and personal details private. Use strong, unique passwords for all accounts. Verify suspicious emails by contacting organisations directly using official contact information, never using details from the message itself."
+      ],
+      [
+        "How to report it",
+        "Report impersonation scams to Action Fraud, the UK's official fraud reporting service. Call 0300 123 2040 (available Monday to Friday, 8am–8pm) or report online at actionfraud.police.uk — you'll receive a crime reference number. If you've received a suspicious text pretending to be from your bank or government, forward it to 7726 (free) and delete it. Contact your bank immediately if money was transferred or card details were compromised — they can freeze accounts and investigate fraudulent transactions. If you've provided passwords or login details, change them at once. Consider placing a fraud alert with Experian or Equifax if your personal data was exposed. Report the scam to the organisation being impersonated (your actual bank, local police force) to alert them to the fraud."
+      ]
+    ],
+    "faq": [
+      [
+        "Can scammers really spoof my bank's phone number?",
+        "Yes. Scammers use technology to make calls appear to come from your bank's genuine number, making it almost impossible to spot via caller ID alone. This is why you should always hang up and call your bank back using the number on your card or their official website, rather than the number shown on your phone. Your bank's customer service team can confirm whether the original call was legitimate."
+      ],
+      [
+        "What should I do if I've already given my card details to a scammer?",
+        "Contact your bank immediately on the number on the back of your card or their official website. They can cancel your card, monitor your account for fraudulent transactions, and reissue a new one. Report the scam to Action Fraud on 0300 123 2040 or actionfraud.police.uk. Check your credit file with Experian or Equifax for suspicious activity and consider placing a fraud alert. The faster you act, the more your bank can do to protect you."
+      ],
+      [
+        "Why do scammers create urgency and panic?",
+        "Urgency and panic bypass your critical thinking. When you're worried about account closure, arrest, or account fraud, you're less likely to pause and verify the claim independently. Legitimate organisations understand that you'll need time to verify their contact, so they never pressure you into immediate action. If you feel panicked by a caller's claims, this is a major red flag — hang up and independently contact the organisation."
+      ],
+      [
+        "Is it safe to verify a scammer's claim by calling the number they provided?",
+        "No. Scammers may provide a fake number that connects to another scammer or an automated message that sounds official. Always use contact information from your own records — your bank's card, official website, or a directory service like 118 118 — never from the caller or message. This ensures you're speaking to the genuine organisation, not another part of the scam."
+      ]
+    ]
+  },
+  {
     "slug": "dpd-delivery-scam-text",
     "title": "DPD Scam Text Messages: How to Spot a Fake DPD Delivery Text",
     "description": "Fake DPD 'missed delivery' or 'redelivery fee' texts are smishing scams. Here's how to spot a fake DPD text, verify a genuine one, and report it in the UK.",
