@@ -12,7 +12,7 @@
 - [Investment & Finance Scams](https://beatthescam.com/categories/finance/): 11 guide(s)
 - [Marketplace Scams](https://beatthescam.com/categories/marketplace/): 14 guide(s)
 - [Payment Scams](https://beatthescam.com/categories/payment/): 12 guide(s)
-- [Phone Scams](https://beatthescam.com/categories/phone/): 13 guide(s)
+- [Phone Scams](https://beatthescam.com/categories/phone/): 14 guide(s)
 - [Romance & Dating Scams](https://beatthescam.com/categories/dating/): 5 guide(s)
 - [Shopping Scams](https://beatthescam.com/categories/shopping/): 8 guide(s)
 - [Social Media Scams](https://beatthescam.com/categories/social/): 7 guide(s)
@@ -136,6 +136,7 @@
 - [Police Impersonation Scam Calls UK: How to Spot & Stop Them](https://beatthescam.com/guides/police-impersonation-scam-call-uk/): Police impersonation scams involve criminals calling you claiming to be from the police, Action Fraud, or the National Crime Agency to create urgency around fake criminal investigations. Victims are pressured to transfer money, buy gift cards, or reveal sensitive information like passwords and bank details.
 - [Santander Phone Scam UK: How to Spot and Stop It](https://beatthescam.com/guides/santander-phone-scam-uk/): Santander phone scams involve criminals calling you pretending to be the bank, claiming suspicious activity or a security breach. They pressure you to verify personal details, transfer money, or give access to your account—sometimes within minutes.
 - [Sky Broadband Scam Calls UK: How to Spot and Stop Them](https://beatthescam.com/guides/sky-broadband-scam-call-uk/): Sky broadband scam calls are one of the most common phone fraud attempts in the UK, with fraudsters pretending to be Sky customer service representatives. They use high-pressure tactics to convince you that your account is at risk, your broadband is being cut off, or you're owed a refund—but their real goal is to steal your login details, banking information, or money.
+- [Solar Panel Cold Caller Scam UK: How to Spot & Avoid It](https://beatthescam.com/guides/solar-panel-cold-caller-scam-uk/): Solar panel cold caller scams target UK homeowners with promises of free surveys, government grants, and renewable energy savings. Scammers gather personal details, arrange visits, or trick victims into paying upfront deposits that disappear.
 - [TalkTalk Scam Call UK: How to Spot and Stop Phone Fraud](https://beatthescam.com/guides/talktalk-scam-call-uk/): TalkTalk scam calls claim your account has a fault, security breach, or bill problem—then pressure you to reveal passwords or allow remote access to your computer. We explain exactly how to verify if a call is genuine and what to do if you've already engaged.
 - [Virgin Media Scam Call UK: How to Spot & Stop Phone Fraudsters](https://beatthescam.com/guides/virgin-media-scam-call-uk/): Fraudsters pose as Virgin Media support staff to trick you into revealing passwords, payment details, or granting remote access to your device. This guide explains exactly how the scam works and what to do if you've been contacted.
 
