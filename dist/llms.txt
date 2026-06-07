@@ -7,7 +7,7 @@
 - [Crypto Scams](https://beatthescam.com/categories/crypto/): 8 guide(s)
 - [Email Scams](https://beatthescam.com/categories/email/): 13 guide(s)
 - [Employment Scams](https://beatthescam.com/categories/employment/): 8 guide(s)
-- [Fraud & Impersonation](https://beatthescam.com/categories/fraud/): 5 guide(s)
+- [Fraud & Impersonation](https://beatthescam.com/categories/fraud/): 6 guide(s)
 - [Government Impersonation](https://beatthescam.com/categories/government/): 6 guide(s)
 - [Investment & Finance Scams](https://beatthescam.com/categories/finance/): 11 guide(s)
 - [Marketplace Scams](https://beatthescam.com/categories/marketplace/): 14 guide(s)
@@ -64,6 +64,7 @@
 
 ### Fraud & Impersonation
 
+- [beatthescam.com Guide: Spotting and Avoiding UK Consumer Scams](https://beatthescam.com/guides/beatthescamcom-guide-spotting-and-avoiding-uk-consumer-scams/): Complete guide to identifying common UK scams and protecting yourself. Learn warning signs, reporting procedures, and defence strategies from verified consumer threats.
 - [Charity Scams UK: How to Spot Fake Charities and Protect Your Donation](https://beatthescam.com/guides/charity-donation-scam-checklist/): Charity scams impersonate real charities or create fake ones to trick donors into sending money that never reaches those in need. Scammers use emotional appeals, fake websites, and convincing emails to steal donations—sometimes thousands of pounds.
 - [Driveway Cowboy Scam UK: How to Spot Fake Contractors](https://beatthescam.com/guides/driveway-cowboy-scam-uk/): Driveway cowboy scams target UK homeowners with unsolicited offers to repair or resurface driveways at suspiciously low prices. These fraudsters collect upfront deposits and vanish without completing work, or use fake company names and identities to avoid being traced.
 - [Impersonation Scams: When Criminals Pretend to Be Your Bank or the Police](https://beatthescam.com/guides/impersonation-scams-when-criminals-pretend-to-be-your-bank-or-the-police/): Learn how impersonation scams work in the UK, recognise the warning signs, and protect yourself from criminals posing as trusted organisations. This guide helps consumers avoid losing money to fake calls and messages.

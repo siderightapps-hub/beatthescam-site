@@ -1,5 +1,65 @@
 [
   {
+    "slug": "beatthescamcom-guide-spotting-and-avoiding-uk-consumer-scams",
+    "title": "beatthescam.com Guide: Spotting and Avoiding UK Consumer Scams",
+    "description": "Complete guide to identifying common UK scams and protecting yourself. Learn warning signs, reporting procedures, and defence strategies from verified consumer threats.",
+    "hero": "Scammers cost UK consumers millions annually — learn how to spot and stop them before they target you.",
+    "date": "2026-06-07",
+    "category": "fraud",
+    "keywords": [
+      "UK scams",
+      "consumer fraud",
+      "scam prevention",
+      "Action Fraud reporting",
+      "online safety",
+      "identity theft"
+    ],
+    "sections": [
+      [
+        "What is this guide about?",
+        "This guide covers verified UK scams that target consumers through phone calls, text messages, emails, and online platforms. Scammers impersonate trusted organisations like banks, the HMRC, courier services, and retailers to steal money or personal information. UK Finance reports significant losses from fraud annually, affecting people across all age groups and backgrounds. This guide helps you recognise common scam patterns, understand how fraudsters operate, and know exactly what to do if you're targeted. By learning these warning signs and protective measures, you can significantly reduce your risk of falling victim to organised fraud."
+      ],
+      [
+        "How scams work — step by step",
+        "- Step 1: Initial Contact — Scammers contact you via phone call, text, email, or social media, often impersonating a legitimate UK organisation\n- Step 2: Creating Urgency — They create pressure by claiming suspicious activity, a parcel delivery problem, or an account security issue requiring immediate action\n- Step 3: Building Trust — They may provide fake reference numbers, website links, or company details that appear authentic\n- Step 4: Requesting Information — They ask for passwords, PIN codes, card details, or personal information they claim to 'verify'\n- Step 5: Taking Money or Data — Once information is obtained, they either steal funds directly or use identity details for fraud"
+      ],
+      [
+        "Warning signs to look for",
+        "- Unsolicited contact asking you to verify personal or financial information\n- Requests to move money urgently or unusual payment methods (gift cards, crypto, bank transfers)\n- Pressure and threats about account closure, legal action, or package non-delivery\n- Links or phone numbers that don't match official websites (check independently)\n- Poor spelling, grammar, or unusual phrasing in official-looking messages\n- Requests to keep the contact secret or not tell your bank\n- Caller IDs spoofed to show familiar organisation numbers\n- Offers that seem too good to be true or unexpected prizes you didn't enter"
+      ],
+      [
+        "What to do if you receive one",
+        "- Stop and do not respond immediately — scammers rely on rushed decisions\n- Hang up or delete the message without clicking links or calling numbers provided\n- Independently verify contact by phoning the organisation's official number from their website\n- Never share passwords, PINs, codes, or card details with anyone contacting you\n- If money was lost, contact your bank immediately and report the fraud\n- Report the scam to Action Fraud on 0300 123 2040 or actionfraud.police.uk\n- Forward suspicious texts to 7726 (free, confidential SMS reporting)\n- Keep records of all communications for evidence"
+      ],
+      [
+        "How to protect yourself",
+        "Effective scam prevention requires awareness and good security habits. Never trust caller IDs or email addresses at face value — scammers spoof these regularly. Always independently verify contact by phoning organisations using numbers from their official websites, never numbers provided in the suspicious message. Enable two-factor authentication on all important accounts, use strong unique passwords, and keep devices updated with the latest security patches. Register with the Telephone Preference Service (TPS) to reduce unsolicited calls, though scammers ignore this. Be particularly cautious during major shopping periods and around tax deadlines when fraud increases. Teach family members, especially older relatives, to question unexpected contact and never rush into decisions involving money or personal data."
+      ],
+      [
+        "How to report it",
+        "Report all scams to Action Fraud, the UK's official fraud reporting centre. Call 0300 123 2040 (Mon-Fri 8am-8pm, Sat 9am-5pm) or visit actionfraud.police.uk online — provide as much detail as possible including dates, content, and any numbers or links involved. Forward suspicious text messages to 7726 (free, works with all networks) — include the sender's number if possible. If you've lost money, contact your bank or payment provider immediately on the number from their official website to freeze accounts and attempt recovery. Report phishing emails to the organisation being impersonated. Report social media scams directly to the platform. Keep all evidence including screenshots, messages, and call records."
+      ]
+    ],
+    "faq": [
+      [
+        "What should I do if I've already given a scammer my bank details?",
+        "Contact your bank immediately using the number on your bank card or statement — never use numbers from the original contact. Your bank can freeze accounts, cancel cards, and monitor for fraud. Report the incident to Action Fraud on 0300 123 2040. Check your credit file with Experian, Equifax, or CallCredit to spot identity theft early. Keep detailed records of what information was compromised for future reference and fraud prevention."
+      ],
+      [
+        "Can I get my money back if I've been scammed?",
+        "Recovery depends on how quickly you act. Contact your bank or payment provider immediately — they may recall transfers within hours. If the money reached another account, recovery becomes much harder. Your bank should investigate under their fraud procedures. Report to Action Fraud for official records. Some scams may be partially recoverable through Chargeback or Section 75 protection, depending on circumstances. Never send additional money trying to recover losses, as this is a common follow-up scam tactic."
+      ],
+      [
+        "How do scammers make spoofed phone numbers look real?",
+        "Scammers use technology to manipulate caller ID systems, making calls appear from legitimate organisations like banks or HMRC. These 'spoofed' numbers can look completely authentic but are fake. Never trust caller ID alone. Always hang up and independently call the organisation using a number from their official website, government records, or your existing statements. This is the only reliable way to verify if contact was genuine."
+      ],
+      [
+        "What's the difference between a scam and a legitimate company trying to contact me?",
+        "Legitimate organisations never ask you to confirm passwords, full card numbers, or PINs by phone, email, or text. They won't demand payment via unusual methods (gift cards, crypto, bank transfer to unknown accounts). They won't create artificial urgency or threaten legal action. Always independently verify by contacting the organisation directly using official contact information. If in doubt, hang up and call them back — legitimate companies expect this and won't be offended."
+      ]
+    ]
+  },
+  {
     "slug": "impersonation-scams-when-criminals-pretend-to-be-your-bank-or-the-police",
     "title": "Impersonation Scams: When Criminals Pretend to Be Your Bank or the Police",
     "description": "Learn how impersonation scams work in the UK, recognise the warning signs, and protect yourself from criminals posing as trusted organisations. This guide helps consumers avoid losing money to fake calls and messages.",
