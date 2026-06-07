@@ -1,8 +1,8 @@
 # Start here next session
 
-> **Last touched:** 2026-06-04 (technical-build closeout)
-> **Next focus:** social analytics review + backlinks/outreach push
-> **What you need from yourself:** ~7 days of post-publish video data + 30 min for the analytics pull + an hour blocked off for the outreach kickoff
+> **Last touched:** 2026-06-07 (analytics review + Tier 1 outreach + video-pipeline fixes)
+> **Next focus:** Tier 2 backlinks (link insertions) + read the F1 video retention number (~2026-06-14)
+> **What you need from yourself:** ~1 hour for the Tier 2 outreach kickoff; the F1 retention numbers once they mature
 
 This doc is the **fast-start punch list** for the next session — read it before re-opening anything else and you'll be productive in 2 minutes instead of 20.
 
@@ -12,17 +12,18 @@ The exhaustive context lives in `docs/project.md`. This file is the index.
 
 ## Where things stand (as of last close)
 
-- **Site Health 98%**, **AI Search Health 99%**, Lighthouse mobile **92–97** Performance / **95–98** Accessibility / **100** SEO across homepage, guide, author pages
-- **Technical build = 100% complete.** No remaining engineering blockers. ~191 residual Semrush warnings are all Google's AdSense CDN — irreducible.
-- **164 guides** published, 17 categories, daily publish + 3 video channels (YT Shorts + TikTok + IG Reels) operational
-- **Disavow file** uploaded for 66 toxic domains; `/.well-known/security.txt` + `llms.txt` + full UK Terms all live
-- **Named author E-E-A-T** complete: Alex Bacsa across all guides, real headshot, `sameAs` to LinkedIn + CloudFintech + Tuning Digital + SalesTap
+- **Done 2026-06-05→07** (full detail in `project.md` §21): reclaimed the DPD/Yodel/UPS courier guides the 2026-05-24 AdSense purge had 301'd away (live again); fixed GSC auth + added read-only `scripts/gsc_report.py`; reached the cross-platform video verdict (**YouTube Shorts + the site win**); fixed the `shorten_warning` truncation bug (0 breaks / 168 posts); built the **Tier 1 citation/E-E-A-T foundation** — see `docs/outreach-log.md`.
+- **Site Health 98%**, **AI Search Health 99%**, Lighthouse mobile 92–97 / SEO 100. Technical build 100% complete; ~191 residual Semrush warnings are Google's AdSense CDN (irreducible).
+- **168 guides**, 17 categories, daily publish + video pipeline (YT Shorts primary; TikTok one creative A/B then keep-or-drop; IG/X free cross-posts).
+- **E-E-A-T:** Alex Bacsa named author across all guides + `/author/` page, role standardised to "Founder & Editor" everywhere, `sameAs` to LinkedIn + 3 sister pubs. Disavow file (66 domains), security.txt, llms.txt, full UK Terms all live.
 
 If anything in the above feels stale on re-read, the canonical source is `docs/project.md` Section 21 "Recently completed".
 
 ---
 
-## 1. Social analytics review (do this FIRST)
+## 1. Social analytics review — ✅ DONE (2026-06-07)
+
+> **Verdict reached:** it's platform fit, not a universal hook. YouTube Shorts holds **35%+ retention** (the format works); TikTok ~4s / ~1% (swipe-away); IG/X negligible reach. **YouTube Shorts + the site are the two real channels.** One TikTok creative A/B (`--motion-hook` fade-in reveal) is running on the F1 video — read the retention number ~2026-06-14 to confirm keep-or-drop. Original methodology kept below for reference.
 
 > **Why first:** the data is time-sensitive — the longer videos sit, the less actionable the post-publish retention signals become.
 
@@ -63,7 +64,9 @@ After you share the data: a side-by-side comparison table, the retention verdict
 
 ---
 
-## 2. Backlinks & outreach push
+## 2. Backlinks & outreach push — Tier 1 ✅ DONE, Tier 2 next
+
+> **Tier 1 (citations/foundation) complete** — see `docs/outreach-log.md`: About.me, Trustpilot, Owler, F6S, LinkedIn personal + company pages all live; Take Five / FAS / Get Safe Online affiliations sent. **Next = Tier 2 link insertions** (the real dofollow lever): pitch the courier/bank-text guides to UK money blogs that already cover these scams. Shortlist + 3 templates ready in `docs/outreach-templates.md`. Original playbook kept below.
 
 > **Why this matters:** Authority Score is **2**. The technical SEO ceiling has been hit. The single biggest growth lever remaining is **earning quality backlinks**, which is pure outreach work that cannot be automated.
 

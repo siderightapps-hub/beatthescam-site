@@ -1278,6 +1278,14 @@ Revoke PATs after use at github.com → Settings → Developer settings → Pers
 
 17. **No formal trademark filing.** Recommend UK IPO classes 41 + 42.
 
+18. **GSC OAuth token expires ~weekly (Testing-mode app).** Google expires refresh tokens after ~7 days when the OAuth consent screen is in "Testing", rotting BOTH the local `token.json` AND the `GOOGLE_SEARCH_CONSOLE_TOKEN` CI secret on the same clock. Symptom: `invalid_grant: Token has been expired or revoked`. `daily-search-console.yml` wraps generation in `|| true`, so an expired CI token silently produces nothing **without failing the run** — the gap pipeline can be dead for weeks unnoticed. **Re-auth:** `python3 scripts/auth_google.py` (browser), then copy the new `token.json` into the CI secret. **Permanent fix:** publish the OAuth consent screen to "In production". (3 `client_secret*.json` files exist in the repo root — only the `758467619755…` ones are Desktop clients; `auth_google.py` now prefers a Desktop client and falls back to browser login on a dead refresh token.)
+
+19. **Check GSC demand before deleting pages for AdSense.** The 2026-05-24 "low value content" purge 301'd the site's HIGHEST-demand URLs (`dpd-delivery-scam-text` = 1,905 impr / pos 10.2, plus yodel/ups) to a thin category page, collapsing the courier cluster within ~2 weeks (resurrected 2026-06-05 via `scripts/recover_courier_guides.py`). The sin was *thinness* (<300-word stubs), not the topic — pull `scripts/gsc_report.py` before purging anything.
+
+20. **The video music bed must never deploy.** `assets/audio/news-bed.mp3` is a licensed local render asset; most free-stock-music licenses forbid redistributing the raw file. `build.py`'s assets→dist copytree excludes `assets/audio/` (+ `*.mp3/wav/aac`), and `.gitignore` excludes `assets/audio/`. Don't remove either guard. Off-site brand assets live in `brand/` (also not copied to `dist/`).
+
+21. **LinkedIn caps Company-Page creation (~7-day rolling window).** Creating several pages in a week (e.g. for sister publications) trips a "wait 7 days to create more pages" limit. Personal-profile edits are not limited.
+
 ### Anti-patterns — don't regress these
 
 Decisions reached in prior sessions that future Claude sessions should preserve, not re-litigate:
@@ -1297,7 +1305,16 @@ Decisions reached in prior sessions that future Claude sessions should preserve,
 
 > Carried forward from `ProjectHandoffDocument.md` Section 7 and updated.
 
-### Recently completed (2026-06-04 session)
+### Recently completed (2026-06-05 → 06-07 session)
+
+- [x] **Reclaimed the courier guides killed by the AdSense purge.** A live GSC review (new read-only `scripts/gsc_report.py`) found the site's highest-demand URLs had been 301'd to a thin category page by the 2026-05-24 purge — `dpd-delivery-scam-text` alone had **1,905 impressions at pos 10.2**. Resurrected **DPD / Yodel / UPS** as full ~1,000-word guides at their original URLs (`scripts/recover_courier_guides.py`), removed from `ARTICLE_REDIRECTS`, live. Lesson logged in Section 20.
+- [x] **Search Console auth + tooling fixed.** Re-authed the GSC OAuth token (was `invalid_grant`), refreshed the `GOOGLE_SEARCH_CONSOLE_TOKEN` CI secret, and fixed `scripts/auth_google.py` (deterministic Desktop-client selection + browser-fallback on a dead refresh token). New `scripts/gsc_report.py` for read-only query/page/near-miss pulls.
+- [x] **Cross-platform video analytics verdict.** TikTok ~4s avg watch / ~1% completion (high reach, instant swipe-away); YouTube Shorts 14–49s / 35%+ (the format works); Instagram + X negligible reach. **Verdict: platform fit, not a broken hook — YouTube Shorts + the site are the two real channels.** Running one TikTok creative A/B (`generate_video.py --motion-hook`, a fade-in-from-black hook reveal) on the F1 video to confirm before deprioritising TikTok; result ~2026-06-14.
+- [x] **Video-pipeline bugs fixed for good.** `shorten_warning()` was truncating warnings mid-list ("…bank transfer, gift cards" dropping "or cryptocurrency"); rewrote it with a universal dangling-word stripper + first-sentence preference + list-strand guard — audited to **0 breaks across all 168 posts** (was 20). Added the music bed (`assets/audio/news-bed.mp3`, −20 dB) **and** a deploy guard so the licensed file never ships (`build.py` excludes `assets/audio/`, gitignored).
+- [x] **Tier 1 backlink / citation foundation built.** Self-serve citations live — About.me, Trustpilot, Owler, F6S — plus a refreshed LinkedIn personal profile (banner, headline, About, Experience) **and** a new Company Page. Three trusted-body affiliations sent (Take Five, Friends Against Scams, Get Safe Online). Author role standardised to **"Founder & Editor"** everywhere (`content/site.json`). Tracked in new `docs/outreach-log.md` + `docs/outreach-templates.md`.
+- [x] **`CLAUDE.md`** added for Claude Code onboarding; **`brand/`** folder added for off-site marketing assets (logos, LinkedIn banners).
+
+### Previously completed (2026-06-04 session)
 
 - [x] **`/terms/` full UK best-practice rewrite** (commit `4ccff539`) — 130 → 891 words, 12 H2 sections. Adds the legally meaningful gaps: visible "Last updated" date (tracked via `TERMS_LAST_UPDATED` in build.py), affiliate disclosure (UK ASA CAP Code), AdSense disclosure (Google publisher T&Cs), acceptable use, IP/copyright, limitation of liability with statutory carve-outs, changes-to-Terms clause, and a tri-jurisdictional governing-law clause (**England & Wales** primary, **Scots law** for Scottish residents with Scottish courts non-exclusive, **Northern Ireland courts** non-exclusive for NI residents). AI scam checker carve-out + Action Fraud reporting route included.
 - [x] **GSC failing-validation URL triage** (commit `2d57d2e0`) — of the 10 "Not found (404)" URLs flagged on 2026-06-04, only 1 needed an on-site fix: dead `/guides/crypto-investment-scam-uk-guide/` → article-redirect to live `crypto-investment-scams-uk-protection` in `ARTICLE_REDIRECTS`. The other 9 were already resolved by earlier work (etsy resurrection, 6 old-category-slug redirects, 2 spam `/search/portal.php` URLs blocked by robots.txt) — they were just waiting on GSC to re-crawl. Server-error (5xx) `refund-scam-uk` was transient Netlify hiccup; now returns 200 via existing redirect.
@@ -1320,8 +1337,8 @@ Decisions reached in prior sessions that future Claude sessions should preserve,
 
 **Primary focus (this is what to do first):**
 
-- [ ] **Cross-platform video + Twitter analytics review** — first proper post-publish review of the YouTube Shorts + TikTok + Instagram Reels + X data side-by-side. Goal: identify whether the first-second retention hypothesis (the swipe-away problem) holds across all three platforms. Pull tweet-impression data from X's native dashboard manually (free X API tier doesn't expose analytics). See `docs/video-pipeline.md` Section 11 for the where-to-look + what-to-measure table.
-- [ ] **Backlinks push** — start the structured outreach cadence in Section 14. Authority Score is **2** (irreducible without quality backlinks); this is the single biggest growth lever. First wins per Section 14: 5 directory submissions/week + HARO/Featured.com sign-up + 1–2 link-insertion emails/week.
+- [x] **Cross-platform video analytics review — DONE (2026-06-07).** Verdict: platform fit, not a universal hook. **YouTube Shorts (35%+ retention) + the site are the two productive channels.** TikTok (swipe-away) gets one creative A/B (`--motion-hook` on the F1 video) then keep-or-drop; IG/X stay free cross-posts. Read the F1 retention number ~2026-06-14.
+- [ ] **Tier 2 backlinks — link insertions.** The Tier 1 citation/E-E-A-T foundation is complete (`docs/outreach-log.md`). Next is the real dofollow lever: pitch the courier/bank-text guides to UK money/consumer blogs that already cover these scams. Target shortlist + 3 email templates ready in `docs/outreach-templates.md`.
 
 **Secondary (slot in as bandwidth allows):**
 
@@ -1329,7 +1346,7 @@ Decisions reached in prior sessions that future Claude sessions should preserve,
 - [ ] Activate `privacy@`, `security@`, `editorial@`, `legal@` mailbox aliases (DNS task)
 - [ ] Confirm Twitter API keys are stored as GitHub Secrets
 - [ ] Build out the top 3 category hub pages (600–800 words each)
-- [ ] Find a workable video music bed (`assets/audio/news-bed.mp3` currently empty — two candidates rejected). Search: YouTube Audio Library Mood=Dark + Genre=Electronic/Cinematic; or Pixabay terms "documentary tension", "investigation", "cybersecurity". Target tone: vigilant, deliberate, investigative — not alarmist.
+- [x] **Video music bed — DONE.** `assets/audio/news-bed.mp3` added and mixed at −20 dB; kept local-only (licensed — excluded from `dist/` + gitignored; see Section 20 #20).
 - [ ] Awin reapply (window opens 2026-06-12) + CJ follow-up + direct affiliate outreach (Experian, Norton, Which? Legal, Cifas)
 - [ ] AdSense approval — chase if still pending
 
