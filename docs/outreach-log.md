@@ -25,7 +25,7 @@ Brand facts for any profile/citation (keep these identical everywhere — NAP co
 | Target | Type | Where | Status | Date | Link? | Notes |
 |---|---|---|---|---|---|---|
 | LinkedIn — personal profile | self-serve | linkedin.com/in/alexbacsa | ☐ | | | NOW: add "Beat the Scam" to Experience + beatthescam.com in Featured/Contact (not rate-limited) |
-| LinkedIn Company Page | self-serve | linkedin.com/company/setup/new/ | ⏳ weekend | | | BLOCKED: 7-day page-creation cooldown hit via sister pubs; retry when window resets |
+| LinkedIn Company Page | self-serve | linkedin.com/company/beat-the-scam | ✅ | 2026-06-07 | ✅ | created; navy logo + Information Services; re-link personal Experience entry for the logo |
 | Owler | self-serve | owler.com | ✅ | 2026-06-05 | ✅ | Media/Publishing, Private, 2026; HQ = city/country (no home address) |
 | Google Business Profile | self-serve | business.google.com | ☐ | | | optional; service-area + HIDE address; higher-value citation |
 | About.me (Alex Bacsa) | self-serve | about.me/alexbacsa | ✅ | 2026-06-05 | ✅ | bio + beatthescam.com button + 3 sister-pub links + LinkedIn/X/YT/IG |
