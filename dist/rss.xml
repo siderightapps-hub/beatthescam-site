@@ -1,6 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <rss version="2.0"><channel><title>Beat the Scam</title><link>https://beatthescam.com</link><description>Scam alerts, plain-English checks, and practical guides to help people verify suspicious emails, texts, websites, calls, and offers.</description>
         <item>
+          <title>Bank Holiday Parcel Scam Wave UK: How to Spot and Avoid Fake Delivery Texts</title>
+          <link>https://beatthescam.com/guides/bank-holiday-parcel-scam-wave-uk/</link>
+          <guid>https://beatthescam.com/guides/bank-holiday-parcel-scam-wave-uk/</guid>
+          <pubDate>Mon, 08 Jun 2026 00:00:00 +0000</pubDate>
+          <description>During UK bank holidays, scammers send SMS messages pretending to be parcel delivery services, claiming you need to pay a fee or confirm delivery. These texts contain malicious links designed to steal your banking details, passwords, and money.</description>
+        </item>
+        <item>
           <title>beatthescam.com Guide: Spotting and Avoiding UK Consumer Scams</title>
           <link>https://beatthescam.com/guides/beatthescamcom-guide-spotting-and-avoiding-uk-consumer-scams/</link>
           <guid>https://beatthescam.com/guides/beatthescamcom-guide-spotting-and-avoiding-uk-consumer-scams/</guid>
@@ -202,11 +209,4 @@
           <guid>https://beatthescam.com/guides/sky-broadband-scam-call-uk/</guid>
           <pubDate>Thu, 21 May 2026 00:00:00 +0000</pubDate>
           <description>Sky broadband scam calls are one of the most common phone fraud attempts in the UK, with fraudsters pretending to be Sky customer service representatives. They use high-pressure tactics to convince you that your account is at risk, your broadband is being cut off, or you&#x27;re owed a refund—but their real goal is to steal your login details, banking information, or money.</description>
-        </item>
-        <item>
-          <title>AI Voice Cloning Scam UK: How Criminals Fake Your Voice to Steal Money</title>
-          <link>https://beatthescam.com/guides/ai-voice-cloning-scam-uk/</link>
-          <guid>https://beatthescam.com/guides/ai-voice-cloning-scam-uk/</guid>
-          <pubDate>Wed, 20 May 2026 00:00:00 +0000</pubDate>
-          <description>AI voice cloning scams involve criminals using artificial intelligence to replicate someone&#x27;s voice—usually a family member or business contact—to request urgent money transfers. These scams are increasingly common in the UK and exploit trust and emotional pressure during fake emergencies.</description>
         </item></channel></rss>

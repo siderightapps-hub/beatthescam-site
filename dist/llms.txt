@@ -17,7 +17,7 @@
 - [Shopping Scams](https://beatthescam.com/categories/shopping/): 8 guide(s)
 - [Social Media Scams](https://beatthescam.com/categories/social/): 7 guide(s)
 - [Tech Support Scams](https://beatthescam.com/categories/tech/): 13 guide(s)
-- [Text Message Scams](https://beatthescam.com/categories/sms/): 23 guide(s)
+- [Text Message Scams](https://beatthescam.com/categories/sms/): 24 guide(s)
 - [Travel Scams](https://beatthescam.com/categories/travel/): 9 guide(s)
 - [Utility Scams](https://beatthescam.com/categories/utility/): 3 guide(s)
 - [Website Scams](https://beatthescam.com/categories/website/): 12 guide(s)
@@ -191,6 +191,7 @@
 ### Text Message Scams
 
 - [Amazon delivery scam text UK: how to spot and avoid fake SMS alerts](https://beatthescam.com/guides/amazon-delivery-scam-text-uk/): Amazon delivery scam texts impersonate Amazon to create fake urgency about failed deliveries or suspicious activity on your account. Scammers use these messages to steal login credentials, payment details, or install malware on your phone.
+- [Bank Holiday Parcel Scam Wave UK: How to Spot and Avoid Fake Delivery Texts](https://beatthescam.com/guides/bank-holiday-parcel-scam-wave-uk/): During UK bank holidays, scammers send SMS messages pretending to be parcel delivery services, claiming you need to pay a fee or confirm delivery. These texts contain malicious links designed to steal your banking details, passwords, and money.
 - [Bank Text Messages Not Arriving? How to Fix It and Spot Scams](https://beatthescam.com/guides/bank-text-codes-not-arriving/): Bank texts not arriving? Most causes are routine — the quick fixes, the UK sender IDs that prove a text is genuine, and the SIM-swap scam signs to watch for.
 - [Barclays Bank Text Scam: How to Spot and Avoid Fake SMS in the UK](https://beatthescam.com/guides/barclays-bank-text-scam-uk/): Barclays text scams trick customers into clicking malicious links or revealing sensitive information by posing as urgent account alerts. We explain how to identify these fraudulent messages and what steps to take immediately if you've been targeted.
 - [Council Tax Scam Text UK: How to Spot and Stop HMRC Impersonation SMS](https://beatthescam.com/guides/council-tax-scam-text-uk/): Scammers send fake SMS messages claiming you owe council tax or have HMRC tax issues, pressuring you to click links or call numbers. We show you exactly how to identify these texts and what to do if you've already responded.
