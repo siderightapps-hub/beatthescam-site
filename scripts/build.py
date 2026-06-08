@@ -73,14 +73,15 @@ ARTICLE_REDIRECTS = {
     "phone-call-scam-red-flags":                  "__CAT__:phone",
     "romance-scam-slow-burn-patterns":            "__CAT__:dating",
     "job-scam-checklist-uk":                      "__CAT__:employment",
-    "google-voice-verification-scam":             "__CAT__:fraud",
     "puppy-sale-scam-checklist":                  "__CAT__:shopping",
     "travel-booking-scam-checklist":              "__CAT__:travel",
     "ticket-resale-scam-checklist":               "__CAT__:shopping",
     "shein-scam-or-legit-uk":                     "__CAT__:website",
-    "gumtree-scam-uk-guide":                      "__CAT__:marketplace",
     "ebay-scam-buyer-protection-uk":              "__CAT__:marketplace",
     "evri-text-scam-uk":                          "__CAT__:sms",
+    # royal-mail-text-scam-guide 404'd (no post at that slug); redirect to the live
+    # royal-mail-text-scam-uk so the "royal mail parcel scams" demand lands somewhere real.
+    "royal-mail-text-scam-guide":                 "royal-mail-text-scam-uk",
     # dpd-delivery-scam-text, yodel-scam-text-messages and
     # ups-delivery-scam-text-messages-uk were resurrected as full ~1,000-word
     # guides on 2026-06-05 — they were the site's highest-demand URLs (DPD alone
@@ -90,7 +91,6 @@ ARTICLE_REDIRECTS = {
     "paypal-email-scam-uk":                       "__CAT__:payment",
     "invoice-scam-email-uk":                      "__CAT__:payment",
     "refund-scam-uk":                             "__CAT__:payment",
-    "chargeback-scam-uk":                         "__CAT__:payment",
     "direct-debit-scam-uk":                       "__CAT__:payment",
     "hmrc-tax-refund-scam-awareness":             "__CAT__:government",
     "dvla-scam-email-awareness":                  "__CAT__:government",
@@ -102,8 +102,10 @@ ARTICLE_REDIRECTS = {
     "puppy-scam-uk":                              "__CAT__:marketplace",
     "ticket-scam-uk":                             "__CAT__:marketplace",
     "holiday-booking-scam-uk":                    "__CAT__:travel",
-    "amazon-scam-email-uk":                       "__CAT__:shopping",
-    "amazon-phone-call-scam-uk":                  "__CAT__:phone",
+    # 2nd purge-recovery batch (2026-06-07, see recover_purged_pages_2.py):
+    # amazon-scam-email-uk → redirected to its live twin (consolidates the demand);
+    # amazon-phone-call-scam-uk / chargeback / gumtree / google-voice resurrected as full guides.
+    "amazon-scam-email-uk":                       "amazon-order-scam-email-checklist",
     "amazon-refund-scam-uk":                      "__CAT__:payment",
     "google-voice-scam-uk":                       "__CAT__:tech",
     "apple-id-scam-email-uk":                     "__CAT__:tech",
