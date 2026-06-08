@@ -181,6 +181,19 @@ def load_affiliates(root: Path) -> list:
         return []
 
 
+def load_category_hubs(root: Path) -> dict:
+    """Optional per-category pillar content (title/description/intro/sections/faq)
+    keyed by canonical category slug. Turns a category page into a rankable hub
+    that links down to its guides. Missing file/category → plain category page."""
+    path = root / "content" / "category-hubs.json"
+    if not path.exists():
+        return {}
+    try:
+        return json.loads(path.read_text(encoding="utf-8"))
+    except Exception:
+        return {}
+
+
 def affiliate_block(post: dict, affiliates: list) -> str:
     """Return an HTML affiliate card relevant to this post, or empty string."""
     if not affiliates:
@@ -1057,7 +1070,7 @@ def render_categories_index(site, categories):
     )
 
 
-def render_category_page(site, category, posts, all_categories=None):
+def render_category_page(site, category, posts, all_categories=None, hub=None):
     label = category_label(category)
     desc  = category_description(category)
     slug  = slugify(category)
@@ -1076,6 +1089,27 @@ def render_category_page(site, category, posts, all_categories=None):
             )
             related_cats_html = f'<section class="section"><div class="wrap"><h2>Browse other scam categories</h2><ul class="list-clean">{links}</ul></div></section>'
 
+    # Optional pillar hub content (intro + sections above the guide grid; FAQ
+    # below it). Bodies are trusted HTML with hand-picked internal links to the
+    # cluster's guides, so they're rendered raw (not escaped).
+    hub_body_html = hub_faq_html = ""
+    hub_faq_pairs = []
+    if hub:
+        intro = hub.get("intro", "")
+        secs = "".join(
+            f'<section class="section"><div class="wrap"><h2>{html.escape(h)}</h2>{b}</div></section>'
+            for h, b in hub.get("sections", [])
+        )
+        hub_body_html = (f'<section class="section"><div class="wrap">{intro}</div></section>' if intro else "") + secs
+        hub_faq_pairs = [(q, a) for q, a in hub.get("faq", []) if q and a]
+        if hub_faq_pairs:
+            items = "".join(
+                f'<details><summary>{html.escape(q)}</summary><p>{html.escape(a)}</p></details>'
+                for q, a in hub_faq_pairs
+            )
+            hub_faq_html = f'<section class="section"><div class="wrap"><h2>Common questions</h2><div class="faq-panel">{items}</div></div></section>'
+
+    grid_heading = f"All {html.escape(label.lower())} guides" if hub else f"Latest {html.escape(label.lower())}"
     content = f'''
     <section class="hero">
       <div class="wrap">
@@ -1084,7 +1118,9 @@ def render_category_page(site, category, posts, all_categories=None):
         <p class="lead">{html.escape(desc)}</p>
       </div>
     </section>
-    <section class="section"><div class="wrap"><h2>Latest {html.escape(label.lower())}</h2><div class="grid-3">{"".join(render_card(p) for p in posts)}</div></div></section>
+    {hub_body_html}
+    <section class="section"><div class="wrap"><h2>{grid_heading}</h2><div class="grid-3">{"".join(render_card(p) for p in posts)}</div></div></section>
+    {hub_faq_html}
     {related_cats_html}
     '''
     canonical = site['domain'] + f'/categories/{slug}/'
@@ -1094,15 +1130,18 @@ def render_category_page(site, category, posts, all_categories=None):
         ("Categories",    site["domain"] + "/categories/"),
         (label,           canonical),
     ]
+    page_title = hub.get("title") if hub and hub.get("title") else label
+    page_desc  = hub.get("description") if hub and hub.get("description") else desc
     schema = (
-        page_schema(site, label, desc, canonical)
+        page_schema(site, label, page_desc, canonical)
         + itemlist_schema(item_pairs, list_name=label)
         + breadcrumb_schema(breadcrumbs)
+        + (faq_schema(hub_faq_pairs) if hub_faq_pairs else "")
     )
     return make_base(
         content,
-        title=seo_title(label, site["site_name"]),
-        description=seo_description(desc),
+        title=seo_title(page_title, site["site_name"]),
+        description=seo_description(page_desc),
         canonical=canonical,
         schema=schema,
         site=site
@@ -2205,6 +2244,7 @@ def build():
     raw_posts = read_json(ROOT / 'content/posts.json')
 
     affiliates = load_affiliates(ROOT)
+    category_hubs = load_category_hubs(ROOT)
 
     # Normalise category names
     for post in raw_posts:
@@ -2269,7 +2309,7 @@ def build():
     write(DIST / 'index.html',       render_home(site, posts, categories))
     write(DIST / 'categories/index.html', render_categories_index(site, categories))
     for cat, items in categories.items():
-        write(DIST / 'categories' / slugify(cat) / 'index.html', render_category_page(site, cat, items, categories))
+        write(DIST / 'categories' / slugify(cat) / 'index.html', render_category_page(site, cat, items, categories, hub=category_hubs.get(cat)))
 
     # Paginated /guides/ index (30 per page, with rel=next/prev wired through make_base)
     total_pages = max(1, (len(posts) + GUIDES_PER_PAGE - 1) // GUIDES_PER_PAGE)

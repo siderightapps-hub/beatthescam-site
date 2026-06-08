@@ -1,0 +1,47 @@
+{
+  "sms": {
+    "title": "Scam Text Messages UK: Spot, Check & Report",
+    "description": "A scam text? Learn the UK smishing patterns — fake delivery, bank, HMRC and DVLA texts — how to check a suspicious message safely, and how to report it to 7726.",
+    "intro": "<p>Scam texts — known as <strong>smishing</strong> (SMS phishing) — are one of the most common frauds in the UK. A message pretends to be a courier, your bank, HMRC, the DVLA or the NHS, and pushes you to tap a link, pay a small fee, or hand over a code. The golden rule never changes: <strong>never act on the link, phone number or payment details inside the message itself</strong> — open the official app or website yourself and check. This hub explains the texts doing the rounds in the UK, how to tell a fake from the real thing, and how to report one in under a minute.</p><p>Not sure about a message right now? Paste it into our free <a href='/check/'>AI scam checker</a> for an instant verdict.</p>",
+    "sections": [
+      [
+        "The most common UK scam texts",
+        "<p><strong>Fake delivery texts</strong> are the biggest category — a 'missed parcel', 'redelivery fee' or 'address problem' from a courier you may not even be expecting. See the guides for <a href='/guides/dpd-delivery-scam-text/'>DPD</a>, <a href='/guides/evri-delivery-scam-guide/'>Evri</a>, <a href='/guides/yodel-scam-text-messages/'>Yodel</a>, <a href='/guides/ups-delivery-scam-text-messages-uk/'>UPS</a>, <a href='/guides/royal-mail-text-scam-uk/'>Royal Mail</a> and <a href='/guides/hermes-parcel-scam-text-uk/'>Hermes</a>.</p><p><strong>Bank texts</strong> claim there's 'suspicious activity' or a 'new payee', or ask you to 'verify' your account — and a related worry is when your genuine <a href='/guides/bank-text-codes-not-arriving/'>bank verification codes stop arriving</a>. Bank-specific guides cover <a href='/guides/halifax-bank-scam-text-uk/'>Halifax</a>, <a href='/guides/lloyds-bank-scam-text/'>Lloyds</a>, <a href='/guides/natwest-fraud-text-message-scam-uk/'>NatWest</a> and <a href='/guides/barclays-bank-text-scam-uk/'>Barclays</a>.</p><p><strong>Government and council texts</strong> impersonate <a href='/guides/hmrc-tax-refund-text-scam-uk/'>HMRC</a> ('you're owed a tax refund'), the <a href='/guides/dvla-vehicle-tax-text-scam/'>DVLA</a> ('your vehicle tax failed'), the <a href='/guides/nhs-appointment-scam-text-uk/'>NHS</a> and <a href='/guides/council-tax-scam-text-uk/'>council tax</a> departments — all leaning on a believable official name plus a link or a threat.</p>"
+      ],
+      [
+        "How to tell if a text is a scam",
+        "<p>Genuine organisations don't behave the way scam texts do. Treat a message as a scam if any of these apply:</p><ul><li>It contains a <strong>link asking you to pay, log in or 'verify'</strong> — banks, couriers and government bodies don't do this by text.</li><li>It demands a <strong>small fee</strong> ('redelivery', 'release', 'customs') to free a parcel or fix an account.</li><li>It creates <strong>urgency</strong> — act within hours, your account will be closed, your parcel returned.</li><li>It comes from an <strong>ordinary mobile or international number</strong>, not a recognised sender ID.</li><li>The web address isn't the official one — watch for extra words, hyphens or odd endings (e.g. 'royalmail-redelivery' rather than royalmail.com).</li><li>It asks for a <strong>card number, PIN, password or one-time code</strong> — no genuine body needs these by text.</li></ul>"
+      ],
+      [
+        "How to check a suspicious text safely",
+        "<p>Never tap the link. Verify the claim through a clean route you trust instead:</p><ul><li><strong>Go direct.</strong> Open the official app, or type the company's address into your browser yourself — never follow the link in the message.</li><li><strong>Use the number you already have.</strong> Call the number on the back of your bank card, or the contact details on the official website — not a number from the text.</li><li><strong>Check the order.</strong> For delivery texts, log into the retailer you actually bought from; if there's no matching parcel, it's a scam.</li><li><strong>Ask the checker.</strong> Paste the message into our free <a href='/check/'>AI scam checker</a> for an instant second opinion.</li></ul>"
+      ],
+      [
+        "What to do if you've already tapped a link or paid",
+        "<ul><li>If you entered card or bank details, <strong>contact your bank immediately</strong> on the number on your card — block the card and report fraud.</li><li>Change the password for any account whose details you entered, and turn on two-step verification.</li><li>Be ready for a <strong>follow-up phone call</strong> pretending to be your bank's fraud team — that's often stage two. Hang up and call your bank back on the official number.</li><li>Keep the message as evidence, then report it (below).</li></ul>"
+      ],
+      [
+        "How to report a scam text in the UK",
+        "<p>Reporting takes under a minute and genuinely helps shut these campaigns down.</p><ul><li><strong>Forward the text free to 7726</strong> — the spam-reporting shortcode run by mobile networks (it spells 'SPAM' on a keypad) — then delete it.</li><li><strong>Report to Action Fraud</strong> at <a href='https://www.reportfraud.police.uk' rel='nofollow'>reportfraud.police.uk</a> or 0300 123 2040 if you've lost money or shared details (in Scotland, contact Police Scotland on 101).</li><li>Report phishing websites to the National Cyber Security Centre (NCSC).</li></ul>"
+      ]
+    ],
+    "faq": [
+      [
+        "Will my bank, Royal Mail or HMRC ever text me a link?",
+        "Genuine organisations may send texts, but they won't ask you to pay, log in, or 'verify' your account through a link in the message, and they'll never ask for your full card number, PIN, password or a one-time code by text. If a text does any of that, treat it as a scam and check directly via the official app or website."
+      ],
+      [
+        "What is 7726 and how do I use it?",
+        "7726 is a free shortcode run by UK mobile networks for reporting scam texts (the digits spell 'SPAM'). Forward the suspicious message to 7726 so your network can investigate and help block the sender, then delete it. It costs nothing and works on all the major UK networks."
+      ],
+      [
+        "I clicked a link in a scam text — what should I do?",
+        "If you only opened the link but entered nothing, close it and delete the message. If you entered any card, bank or login details, contact your bank immediately on the number on your card, change the affected passwords, and turn on two-step verification. Watch for a follow-up call claiming to be your bank — that's part of the scam. Report it to Action Fraud at reportfraud.police.uk or 0300 123 2040."
+      ],
+      [
+        "How do I know if a text is really from my bank?",
+        "Real bank texts come from a named sender ID (e.g. 'Halifax', 'Barclays') rather than a phone number, often include part of your name or account details, and never contain a link asking you to log in or 'verify'. If you're unsure, don't tap anything — open your banking app or call the number on the back of your card to check."
+      ]
+    ]
+  }
+}
