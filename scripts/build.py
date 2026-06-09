@@ -2552,7 +2552,16 @@ def build():
     # Lives in dist/_redirects rather than netlify.toml because [[redirects]]
     # in toml weren't being applied at edge despite headers and the API
     # redirect from the same toml working correctly.
-    redirect_lines = ["# Category slug normalisation (auto-generated from CATEGORY_CANON)"]
+    # API function rewrites live here, NOT netlify.toml: new toml [[redirects]]
+    # beyond the original /api/check-scam rule are not applied at the edge on
+    # this site (same quirk as the category 301s). _redirects is the reliable
+    # mechanism, and a 200 rewrite must precede any catch-all to win.
+    redirect_lines = [
+        "# API function rewrites (auto-generated)",
+        "/api/subscribe    /.netlify/functions/subscribe    200",
+        "",
+        "# Category slug normalisation (auto-generated from CATEGORY_CANON)",
+    ]
     seen = set()
     for old_label, new_slug in CATEGORY_CANON.items():
         old_slug = old_label.replace(" ", "-")

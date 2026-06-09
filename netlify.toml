@@ -57,10 +57,9 @@
   to     = "/.netlify/functions/check-scam"
   status = 200
 
-[[redirects]]
-  from   = "/api/subscribe"
-  to     = "/.netlify/functions/subscribe"
-  status = 200
+# /api/subscribe lives in dist/_redirects, not here — new toml [[redirects]]
+# beyond the check-scam rule above are NOT applied at the edge on this site
+# (same quirk as the category 301s). See the _redirects block in scripts/build.py.
 
 # Category slug 301 redirects live in dist/_redirects, not here.
 # (The toml-based [[redirects]] blocks weren't being applied at edge
