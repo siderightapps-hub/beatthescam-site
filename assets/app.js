@@ -97,4 +97,69 @@
       });
     }
   });
+
+  // ─── NEWSLETTER SIGNUP ────────────────────────────────────────────────────
+  const nlForm = document.getElementById('nl-form');
+  if(nlForm){
+    const nlEmail   = document.getElementById('nl-email');
+    const nlConsent = document.getElementById('nl-consent');
+    const nlWebsite = document.getElementById('nl-website');
+    const nlSubmit  = document.getElementById('nl-submit');
+    const nlMsg     = document.getElementById('nl-msg');
+    const EMAIL_RE  = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+    function nlShow(text, kind){
+      if(!nlMsg) return;
+      nlMsg.textContent = text;
+      nlMsg.classList.remove('is-error','is-success');
+      if(kind){ nlMsg.classList.add(kind === 'error' ? 'is-error' : 'is-success'); }
+    }
+
+    nlForm.addEventListener('submit', function(e){
+      e.preventDefault();
+      const email = ((nlEmail && nlEmail.value) || '').trim();
+      const consent = !!(nlConsent && nlConsent.checked);
+
+      if(!EMAIL_RE.test(email)){
+        nlShow('Please enter a valid email address.', 'error');
+        if(nlEmail) nlEmail.focus();
+        return;
+      }
+      if(!consent){
+        nlShow('Please tick the box to confirm you agree.', 'error');
+        return;
+      }
+
+      if(nlSubmit){ nlSubmit.disabled = true; nlSubmit.textContent = 'Subscribing…'; }
+      nlShow('', null);
+
+      fetch('/api/subscribe', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          email: email,
+          consent: consent,
+          website: (nlWebsite && nlWebsite.value) || ''
+        })
+      }).then(function(res){
+        return res.json().catch(function(){ return {}; }).then(function(data){
+          return { ok: res.ok, data: data };
+        });
+      }).then(function(r){
+        if(r.ok){
+          nlForm.reset();
+          nlShow("You're in. Check your inbox for a welcome email.", 'success');
+          if(typeof gtag === 'function'){
+            gtag('event', 'newsletter_signup', { event_category: 'engagement' });
+          }
+        } else {
+          nlShow((r.data && r.data.error) || 'Something went wrong. Please try again.', 'error');
+        }
+      }).catch(function(){
+        nlShow('Network error. Please try again in a moment.', 'error');
+      }).finally(function(){
+        if(nlSubmit){ nlSubmit.disabled = false; nlSubmit.textContent = 'Subscribe'; }
+      });
+    });
+  }
 })();

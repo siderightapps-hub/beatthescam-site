@@ -199,6 +199,29 @@
     <section class="section"><div class="wrap"><h2>Browse other scam categories</h2><ul class="list-clean"><li><a href="/categories/sms/">Text Message Scams</a> <span class="meta">(24 guides)</span></li><li><a href="/categories/phone/">Phone Scams</a> <span class="meta">(15 guides)</span></li><li><a href="/categories/marketplace/">Marketplace Scams</a> <span class="meta">(15 guides)</span></li><li><a href="/categories/payment/">Payment Scams</a> <span class="meta">(14 guides)</span></li><li><a href="/categories/tech/">Tech Support Scams</a> <span class="meta">(13 guides)</span></li><li><a href="/categories/website/">Website Scams</a> <span class="meta">(12 guides)</span></li></ul></div></section>
     
   </main>
+  <section class="newsletter-band" aria-labelledby="nl-heading">
+    <div class="wrap newsletter-inner">
+      <div class="newsletter-copy">
+        <h2 id="nl-heading">Get scam alerts before they reach you</h2>
+        <p>Plain-English warnings and new guides on the latest UK scams — the checks to run before you click, pay, or share. Free, and you can unsubscribe anytime.</p>
+      </div>
+      <form class="newsletter-form" id="nl-form" novalidate>
+        <label class="sr-only" for="nl-email">Email address</label>
+        <input class="newsletter-input" type="email" id="nl-email" name="email" placeholder="you@example.com" autocomplete="email" required>
+        <button class="btn btn-primary newsletter-btn" type="submit" id="nl-submit">Subscribe</button>
+        <!-- Honeypot: hidden from humans, bots fill it. Submissions with this set are silently dropped. -->
+        <div class="hp-field" aria-hidden="true">
+          <label for="nl-website">Leave this field empty</label>
+          <input type="text" id="nl-website" name="website" tabindex="-1" autocomplete="off">
+        </div>
+        <label class="newsletter-consent">
+          <input type="checkbox" id="nl-consent" name="consent" required>
+          <span>I agree to receive emails from Beat the Scam and accept the <a href="/privacy/">Privacy Policy</a>.</span>
+        </label>
+        <p class="newsletter-msg" id="nl-msg" role="status" aria-live="polite"></p>
+      </form>
+    </div>
+  </section>
   <footer class="site-footer">
     <div class="wrap footer-grid">
       <div>

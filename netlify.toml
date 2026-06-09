@@ -57,6 +57,11 @@
   to     = "/.netlify/functions/check-scam"
   status = 200
 
+[[redirects]]
+  from   = "/api/subscribe"
+  to     = "/.netlify/functions/subscribe"
+  status = 200
+
 # Category slug 301 redirects live in dist/_redirects, not here.
 # (The toml-based [[redirects]] blocks weren't being applied at edge
 # even though API redirect and headers from this file work correctly.
