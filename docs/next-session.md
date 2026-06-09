@@ -1,8 +1,8 @@
 # Start here next session
 
-> **Last touched:** 2026-06-07 (analytics review + Tier 1 outreach + video-pipeline fixes)
-> **Next focus:** Tier 2 backlinks (link insertions) + read the F1 video retention number (~2026-06-14)
-> **What you need from yourself:** ~1 hour for the Tier 2 outreach kickoff; the F1 retention numbers once they mature
+> **Last touched:** 2026-06-09 (2nd purge recovery + top-3 category hubs; GSC indexing requested)
+> **Next focus:** sign up to Resend → wire the newsletter capture form + Netlify function → send the Tier 2 outreach emails. Then chase AdSense + affiliate hrefs, and read the F1 retention number.
+> **What you need from yourself:** a Resend account with the beatthescam.com domain verified; ~1 hour to send the Tier 2 outreach emails (`docs/outreach-templates.md`).
 
 This doc is the **fast-start punch list** for the next session — read it before re-opening anything else and you'll be productive in 2 minutes instead of 20.
 
@@ -12,9 +12,9 @@ The exhaustive context lives in `docs/project.md`. This file is the index.
 
 ## Where things stand (as of last close)
 
-- **Done 2026-06-05→07** (full detail in `project.md` §21): reclaimed the DPD/Yodel/UPS courier guides the 2026-05-24 AdSense purge had 301'd away (live again); fixed GSC auth + added read-only `scripts/gsc_report.py`; reached the cross-platform video verdict (**YouTube Shorts + the site win**); fixed the `shorten_warning` truncation bug (0 breaks / 168 posts); built the **Tier 1 citation/E-E-A-T foundation** — see `docs/outreach-log.md`.
+- **Done 2026-06-05→09** (full detail in `project.md` §21): reclaimed the DPD/Yodel/UPS courier guides **plus a 2nd purged batch** (Amazon-call / chargeback / Gumtree / Google-Voice) the AdSense purge had 301'd away; built the **top-3 category hubs** (SMS, Payment, Government pillar pages — `content/category-hubs.json`); fixed GSC auth + added `scripts/gsc_report.py`; reached the cross-platform video verdict (**YouTube Shorts + the site win**); fixed the `shorten_warning` truncation bug; built the **Tier 1 citation/E-E-A-T foundation** (`docs/outreach-log.md`).
 - **Site Health 98%**, **AI Search Health 99%**, Lighthouse mobile 92–97 / SEO 100. Technical build 100% complete; ~191 residual Semrush warnings are Google's AdSense CDN (irreducible).
-- **168 guides**, 17 categories, daily publish + video pipeline (YT Shorts primary; TikTok one creative A/B then keep-or-drop; IG/X free cross-posts).
+- **178 guides**, 17 categories, daily publish + video pipeline (YT Shorts primary; TikTok one creative A/B then keep-or-drop; IG/X free cross-posts).
 - **E-E-A-T:** Alex Bacsa named author across all guides + `/author/` page, role standardised to "Founder & Editor" everywhere, `sameAs` to LinkedIn + 3 sister pubs. Disavow file (66 domains), security.txt, llms.txt, full UK Terms all live.
 
 If anything in the above feels stale on re-read, the canonical source is `docs/project.md` Section 21 "Recently completed".
