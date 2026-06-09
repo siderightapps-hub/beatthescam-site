@@ -34,8 +34,8 @@
     "sameAs": [
       "https://www.linkedin.com/in/alexbacsa/",
       "https://cloudfintech.ai/author",
-      "https://tuningdigital.com/about",
-      "https://salestap.com/about"
+      "https://tuningdigital.com/about.html#editor",
+      "https://salestap.com/about#editor"
     ],
     "publications": [
       {
@@ -48,14 +48,14 @@
       {
         "name": "Tuning Digital",
         "url": "https://tuningdigital.com",
-        "author_url": "https://tuningdigital.com/about",
+        "author_url": "https://tuningdigital.com/about.html#editor",
         "role": "Founder & Editor",
         "topic": "Hands-on reviews of AI and SaaS productivity tools — writing, project management, automation, design, analytics, CRM"
       },
       {
         "name": "SalesTap",
         "url": "https://salestap.com",
-        "author_url": "https://salestap.com/about",
+        "author_url": "https://salestap.com/about#editor",
         "role": "Founder & Editor",
         "topic": "B2B sales — cold email frameworks, pipeline management, sales methodologies (MEDDIC, SPIN, Challenger, ABM)"
       }
