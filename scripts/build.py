@@ -1,3 +1,4 @@
+import hashlib
 import html
 import json
 import re
@@ -493,6 +494,8 @@ def make_base(content: str, *, title: str, description: str, canonical: str, sch
         "{{content}}":           localize_content_paths(content, site),
         "{{schema}}":            schema,
         "{{asset_prefix}}":      site.get("site_path", ""),
+        "{{css_ver}}":           site.get("_asset_ver_css", ""),
+        "{{js_ver}}":            site.get("_asset_ver_js", ""),
         "{{adsense_client}}":    site["adsense_client"],
         "{{ga4_id}}":            site["ga4_id"],
         "{{year}}":              str(datetime.utcnow().year),
@@ -2290,6 +2293,20 @@ def build():
             print(f"  Minified {path.name}: {len(original)}B → {len(minified)}B (-{pct:.0f}%)")
     except ImportError:
         print("  (minify skipped — `pip install rcssmin rjsmin` to enable)")
+
+    # Cache-busting asset versions. styles.css/app.js are served with a 1-year
+    # `immutable` cache and non-versioned filenames, so returning visitors keep
+    # stale CSS/JS after a deploy unless the URL changes. Append ?v=<hash> of the
+    # FINAL (post-minify) dist file: stable when content is unchanged (cache hit
+    # preserved), new when it changes (forces a fresh fetch). Computed here,
+    # after minify and before any page render, so every page embeds it.
+    def _asset_ver(path):
+        try:
+            return hashlib.md5(path.read_bytes()).hexdigest()[:10]
+        except OSError:
+            return ""
+    site['_asset_ver_css'] = _asset_ver(DIST / 'assets' / 'styles.css')
+    site['_asset_ver_js']  = _asset_ver(DIST / 'assets' / 'app.js')
 
     # Populate footer category links (used by make_base via {{footer_cats}})
     global _FOOTER_CATS_HTML
