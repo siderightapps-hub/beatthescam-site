@@ -112,7 +112,7 @@ We'll:
 Pulled forward from `docs/project.md` Section 21 in priority order. None are blocking.
 
 - [ ] **Semrush Position Tracking** — swap Spain (Spanish) → United Kingdom (English). Dashboard task, 1 minute. The free tier's 1-target limit means delete-then-add (not add-then-delete).
-- [ ] **Activate mailbox aliases** — `privacy@`, `security@`, `editorial@`, `legal@`. DNS / email-hosting task on your side. Once `security@` is active, swap the primary Contact line in `scripts/build.py`'s security.txt block.
+- [x] **Activate mailbox aliases — DONE 2026-06-09.** `abuse@`, `hello@`, `legal@`, `privacy@`, `security@`, `socialmedia@` are all live. Site copy now routes to dedicated inboxes (driven by new `site.json` keys `security_email`/`privacy_email`/`legal_email`): `security.txt` + contact page → `security@`; Privacy Policy + Cookie Policy → `privacy@`; Terms-legal + copyright → `legal@`; general/editorial/corrections stay on `hello@`. About/Terms now names **Alex Bacsa, Founder & Editor** as the editorial decision-maker (was "editorial team").
 - [ ] **Confirm Twitter API keys** are stored in GitHub Secrets (not just `.env`) — currently risk-zone if a daily-publish ever fails on a Twitter-keys-missing path.
 - [ ] **Video music bed** — `assets/audio/news-bed.mp3` is empty (two candidates rejected). Search YouTube Audio Library Mood=Dark + Genre=Electronic/Cinematic; or Pixabay terms "documentary tension", "investigation", "cybersecurity". Target tone: vigilant, deliberate, investigative — not alarmist.
 - [ ] **Top 3 category hub pages** (600–800 words each) — editorial work. Pick the three highest-traffic categories from GSC and expand the existing landing page bodies.

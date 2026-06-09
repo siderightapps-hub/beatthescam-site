@@ -1756,7 +1756,7 @@ def build_legal_bodies(site):
     <h2>Cookie choices</h2>
     <p>A cookie banner allows you to accept or reject non-essential cookies. Your preference is stored locally in your browser.</p>
     <h2>Your rights</h2>
-    <p>If you are in the UK or EEA you may have rights relating to your personal data. Contact us at <a href="mailto:{site["contact_email"]}">{site["contact_email"]}</a>.</p>
+    <p>If you are in the UK or EEA you may have rights relating to your personal data. Contact us at <a href="mailto:{site["privacy_email"]}">{site["privacy_email"]}</a>.</p>
     '''
 
     cookies = f'''
@@ -1770,7 +1770,7 @@ def build_legal_bodies(site):
     <h2>How to manage cookies</h2>
     <p>Change browser cookie settings at any time, or use the Cookie settings link in the footer to reopen the consent banner.</p>
     <h2>Contact</h2>
-    <p>Questions: <a href="mailto:{site["contact_email"]}">{site["contact_email"]}</a>.</p>
+    <p>Cookie and privacy questions: <a href="mailto:{site["privacy_email"]}">{site["privacy_email"]}</a>.</p>
     '''
 
     # Bump TERMS_LAST_UPDATED when materially revising the Terms text below.
@@ -1782,7 +1782,7 @@ def build_legal_bodies(site):
     <p>These Terms set out the rules for using <strong>beatthescam.com</strong> ("the Site"). By using the Site you agree to them. If you do not agree, please do not use the Site.</p>
 
     <h2>About this site</h2>
-    <p>Beat the Scam publishes plain-English guides about scams and fraud affecting UK consumers, and offers a free AI scam checker. The Site is operated by SideRight Apps. Editorial decisions are made by the Beat the Scam editorial team.</p>
+    <p>Beat the Scam publishes plain-English guides about scams and fraud affecting UK consumers, and offers a free AI scam checker. The Site is operated by SideRight Apps. Editorial decisions are made by Alex Bacsa, Founder &amp; Editor.</p>
 
     <h2>Educational purpose &mdash; not professional advice</h2>
     <p>Everything published here is general educational information. It is <strong>not</strong> legal, financial, investment, tax, medical, cybersecurity, or regulatory advice, and reading it does not create an advisor&ndash;client relationship.</p>
@@ -1803,7 +1803,7 @@ def build_legal_bodies(site):
     </ul>
 
     <h2>Intellectual property</h2>
-    <p>All original content on the Site &mdash; articles, guides, images, the brand, and the structure of the AI scam checker output &mdash; is copyright Beat the Scam / SideRight Apps unless stated otherwise. You may quote up to a short paragraph with attribution and a link back to the source article. For larger reproductions, please ask first via the contact address below.</p>
+    <p>All original content on the Site &mdash; articles, guides, images, the brand, and the structure of the AI scam checker output &mdash; is copyright Beat the Scam / SideRight Apps unless stated otherwise. You may quote up to a short paragraph with attribution and a link back to the source article. For larger reproductions, please ask first at <a href="mailto:{site["legal_email"]}">{site["legal_email"]}</a>.</p>
 
     <h2>Advertising and affiliate disclosure</h2>
     <p>The Site is funded by display advertising (currently Google AdSense) and by affiliate commissions on a small number of third-party products (such as credit-file monitoring and identity-protection services). When you click an affiliate link and complete a purchase, we may receive a small commission at no extra cost to you.</p>
@@ -1826,15 +1826,17 @@ def build_legal_bodies(site):
     <p>These Terms are governed by the laws of <strong>England and Wales</strong>. If you are resident in <strong>Scotland</strong>, these Terms are governed by <strong>Scots law</strong> and the Scottish courts have non-exclusive jurisdiction over any dispute arising from them. If you are resident in <strong>Northern Ireland</strong>, the courts of Northern Ireland have non-exclusive jurisdiction. None of this affects your mandatory statutory consumer rights in your country of residence.</p>
 
     <h2>Contact</h2>
-    <p>For questions about these Terms, email <a href="mailto:{site["contact_email"]}">{site["contact_email"]}</a>. For corrections, write to the same address with the page URL and the change requested. For privacy and data-protection requests, see the <a href="/privacy/">Privacy Policy</a>.</p>
+    <p>For questions about these Terms, copyright, or other legal matters, email <a href="mailto:{site["legal_email"]}">{site["legal_email"]}</a>. For corrections to a guide, email <a href="mailto:{site["contact_email"]}">{site["contact_email"]}</a> with the page URL and the change requested. For privacy and data-protection requests, see the <a href="/privacy/">Privacy Policy</a>.</p>
     '''
 
     contact = f'''
-    <p>For editorial contact, corrections, or partnership enquiries, email <a href="mailto:{site["contact_email"]}">{site["contact_email"]}</a>.</p>
+    <p>For editorial contact, corrections, or partnership enquiries, email <a href="mailto:{site["contact_email"]}">{site["contact_email"]}</a>. For privacy, legal, or security matters, please use the dedicated addresses below.</p>
     <div class="tablelike">
-      <div class="table-row"><strong>Editorial corrections</strong><span>Send the page URL and the correction you want reviewed.</span></div>
-      <div class="table-row"><strong>Advertising or partnerships</strong><span>Include the business name, proposal, and relevant website.</span></div>
-      <div class="table-row"><strong>Privacy queries</strong><span>Reference &#8220;Privacy request&#8221; in the subject line.</span></div>
+      <div class="table-row"><strong>Editorial &amp; corrections</strong><span><a href="mailto:{site["contact_email"]}">{site["contact_email"]}</a> &mdash; send the page URL and the correction you want reviewed.</span></div>
+      <div class="table-row"><strong>Advertising or partnerships</strong><span><a href="mailto:{site["contact_email"]}">{site["contact_email"]}</a> &mdash; include the business name, proposal, and relevant website.</span></div>
+      <div class="table-row"><strong>Privacy &amp; data protection</strong><span><a href="mailto:{site["privacy_email"]}">{site["privacy_email"]}</a> &mdash; reference &#8220;Privacy request&#8221; in the subject line.</span></div>
+      <div class="table-row"><strong>Legal &amp; copyright</strong><span><a href="mailto:{site["legal_email"]}">{site["legal_email"]}</a> &mdash; Terms, intellectual property, and reproduction requests.</span></div>
+      <div class="table-row"><strong>Security disclosure</strong><span><a href="mailto:{site["security_email"]}">{site["security_email"]}</a> &mdash; see also our <a href="/.well-known/security.txt">security.txt</a>.</span></div>
     </div>
     <p class="note" style="margin-top:1.5rem">To report a scam to UK authorities directly, use <a href="https://www.reportfraud.police.uk/" rel="noopener noreferrer" target="_blank">Action Fraud</a> or forward suspicious texts to <strong>7726</strong> (free on all UK networks).</p>
     '''
@@ -2556,7 +2558,7 @@ def build():
         f"# channels below. We aim to respond to all credible reports within 5\n"
         f"# working days. Thank you for helping keep readers safe.\n"
         f"\n"
-        f"Contact: mailto:{site['contact_email']}\n"
+        f"Contact: mailto:{site['security_email']}\n"
         f"Contact: {site['domain']}/contact/\n"
         f"Expires: {expires_iso}\n"
         f"Preferred-Languages: en\n"
