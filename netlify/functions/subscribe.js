@@ -57,6 +57,22 @@ function isValidEmail(email) {
 // ─── SENDER CONFIG ───────────────────────────────────────────────────────────
 const FROM_ADDRESS = "Beat the Scam <alerts@updates.beatthescam.com>";
 const REPLY_TO     = "hello@beatthescam.com";
+const SITE         = "https://beatthescam.com";
+
+// ─── UNSUBSCRIBE TOKEN ────────────────────────────────────────────────────────
+// Opaque, non-forgeable token so a recipient can only unsubscribe THEIR OWN
+// address: base64url(email) + "." + base64url(HMAC-SHA256(secret, email)).
+// Fails CLOSED — with no UNSUBSCRIBE_SECRET set, no token (and therefore no
+// unsubscribe link/header) is produced, rather than minting a forgeable
+// empty-key HMAC. Verified the same way in netlify/functions/unsubscribe.js.
+const crypto = require("crypto");
+function unsubToken(email) {
+  const secret = process.env.UNSUBSCRIBE_SECRET || "";
+  if (!secret) return "";
+  const e   = Buffer.from(email, "utf8").toString("base64url");
+  const sig = crypto.createHmac("sha256", secret).update(email).digest("base64url");
+  return `${e}.${sig}`;
+}
 
 const WELCOME_HTML = `<!doctype html>
 <html lang="en-GB">
@@ -77,8 +93,9 @@ const WELCOME_HTML = `<!doctype html>
         <a href="https://beatthescam.com/check/" style="display:inline-block;background:#1d4ed8;color:#ffffff;text-decoration:none;font-weight:700;font-size:16px;padding:13px 22px;border-radius:999px;">Check a message &rarr;</a>
       </p>
       <p style="margin:0;font-size:14px;line-height:1.6;color:#5b6878;">
-        Reply to this email any time &mdash; it reaches a real person. You can unsubscribe from any newsletter with one click.
+        Reply to this email any time &mdash; it reaches a real person.
       </p>
+      __UNSUB_HTML__
     </div>
     <p style="margin:18px 0 0;font-size:12px;line-height:1.6;color:#8a97a6;text-align:center;">
       Beat the Scam &middot; Independent UK consumer-protection guides<br>
@@ -95,8 +112,8 @@ Thanks for subscribing to Beat the Scam. You'll get plain-English scam alerts an
 Got a suspicious text, email, or call? Run it through our free AI scam checker:
 https://beatthescam.com/check/
 
-Reply to this email any time — it reaches a real person. You can unsubscribe from any newsletter with one click.
-
+Reply to this email any time — it reaches a real person.
+__UNSUB_TEXT__
 Beat the Scam · Independent UK consumer-protection guides
 Educational content only — not legal or financial advice.`;
 
@@ -230,6 +247,17 @@ exports.handler = async function(event) {
 
   // ─── Send the welcome email (best-effort — never fail the signup on this) ───
   try {
+    // Per-recipient unsubscribe (RFC 8058 one-click via the List-Unsubscribe
+    // header, plus a visible body link). Built only when UNSUBSCRIBE_SECRET is
+    // set; otherwise no link/header is added (fail closed — never ship a
+    // forgeable token).
+    const token    = unsubToken(email);
+    const unsubUrl = token ? `${SITE}/api/unsubscribe?t=${encodeURIComponent(token)}` : "";
+    const unsubHtml = unsubUrl
+      ? `<p style="margin:14px 0 0;font-size:12px;line-height:1.6;color:#8a97a6;">Don't want these emails? <a href="${unsubUrl}" style="color:#1d4ed8;">Unsubscribe</a>.</p>`
+      : "";
+    const unsubText = unsubUrl ? `Unsubscribe: ${unsubUrl}` : "";
+
     const mailRes = await fetch("https://api.resend.com/emails", {
       method: "POST",
       headers: {
@@ -241,8 +269,12 @@ exports.handler = async function(event) {
         to: [email],
         reply_to: REPLY_TO,
         subject: "You're on the list — Beat the Scam alerts",
-        html: WELCOME_HTML,
-        text: WELCOME_TEXT,
+        html: WELCOME_HTML.replace("__UNSUB_HTML__", unsubHtml),
+        text: WELCOME_TEXT.replace("__UNSUB_TEXT__", unsubText),
+        ...(unsubUrl ? { headers: {
+          "List-Unsubscribe": `<${unsubUrl}>`,
+          "List-Unsubscribe-Post": "List-Unsubscribe=One-Click",
+        } } : {}),
       }),
     });
     if (!mailRes.ok) {

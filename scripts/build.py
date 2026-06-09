@@ -2575,7 +2575,8 @@ def build():
     # mechanism, and a 200 rewrite must precede any catch-all to win.
     redirect_lines = [
         "# API function rewrites (auto-generated)",
-        "/api/subscribe    /.netlify/functions/subscribe    200",
+        "/api/subscribe      /.netlify/functions/subscribe      200",
+        "/api/unsubscribe    /.netlify/functions/unsubscribe    200",
         "",
         "# Category slug normalisation (auto-generated from CATEGORY_CANON)",
     ]

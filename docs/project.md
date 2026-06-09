@@ -267,6 +267,7 @@ worktree-env() { cp ~/Projects/websites/beatthescam-site/.env .env; }
 | `ANTHROPIC_API_KEY` | Used by `check-scam.js` serverless function | 2026-04-28 |
 | `RESEND_API_KEY` | Used by `subscribe.js` (newsletter) — Resend Audiences + welcome email | 2026-06-09 (added) |
 | `RESEND_AUDIENCE_ID` | Target Resend Audience for `subscribe.js`. **Both Resend vars required** — missing either returns `500 "Service not configured"`. Get the ID from Resend → Audiences → the `</>` snippet (NOT the domain ID). | 2026-06-09 (added) |
+| `UNSUBSCRIBE_SECRET` | HMAC key signing the one-click unsubscribe links in the welcome email (`subscribe.js` mints, `unsubscribe.js` verifies). Any long random string — generate with `openssl rand -hex 32`. **Fails closed:** if unset, the welcome email ships with no unsubscribe link/header. Does NOT rotate on the Resend 90-day cadence (rotating it invalidates links in already-sent emails). | 2026-06-09 (added) |
 
 ### Key rotation policy
 

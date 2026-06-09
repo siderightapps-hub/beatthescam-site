@@ -1,9 +1,9 @@
 # Start here next session
 
-> **Last touched:** 2026-06-09 (newsletter capture + /api/subscribe function built, deployed & verified live; 2nd purge recovery + top-3 category hubs done)
-> **⚠️ One action to finish the newsletter:** add **`RESEND_AUDIENCE_ID`** to Netlify env (Site config → Environment variables), then trigger a redeploy. The function is live but returns `500 "Service not configured"` until it's set (verified 2026-06-09). `RESEND_API_KEY` is already set. Get the Audience ID from the Resend dashboard → Audiences → your audience → the `</>` API snippet (it's the `audienceId`, NOT the domain ID).
-> **Next focus:** finish the env var above → then send the Tier 2 outreach emails. Then chase AdSense + affiliate hrefs, and read the F1 retention number.
-> **What you need from yourself:** the Resend Audience ID (above); ~1 hour to send the Tier 2 outreach emails (`docs/outreach-templates.md`).
+> **Last touched:** 2026-06-09 (newsletter LIVE end-to-end — capture + welcome email confirmed; one-click unsubscribe added; cache-busting asset URLs; 2nd purge recovery + top-3 category hubs done)
+> **⚠️ One action to finish unsubscribe:** add **`UNSUBSCRIBE_SECRET`** to Netlify env (any long random string — `openssl rand -hex 32`), then redeploy. Until it's set, the welcome email ships with **no** unsubscribe link (fails closed by design). `RESEND_API_KEY` (full-access) + `RESEND_AUDIENCE_ID` are already set and the subscribe flow is verified live.
+> **Next focus:** finish the env var above → send the Tier 2 outreach emails. Then chase AdSense + affiliate hrefs, and read the F1 retention number. **For future newsletters:** send as Resend **Broadcasts** and drop in the `{{{RESEND_UNSUBSCRIBE_URL}}}` footer token — Resend handles unsubscribe + List-Unsubscribe headers automatically there (the welcome email self-hosts it because that token does NOT work on the `/emails` API).
+> **What you need from yourself:** set `UNSUBSCRIBE_SECRET` (above); ~1 hour to send the Tier 2 outreach emails (`docs/outreach-templates.md`).
 
 This doc is the **fast-start punch list** for the next session — read it before re-opening anything else and you'll be productive in 2 minutes instead of 20.
 
