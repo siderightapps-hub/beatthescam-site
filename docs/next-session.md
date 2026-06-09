@@ -1,8 +1,9 @@
 # Start here next session
 
-> **Last touched:** 2026-06-09 (2nd purge recovery + top-3 category hubs; GSC indexing requested)
-> **Next focus:** sign up to Resend → wire the newsletter capture form + Netlify function → send the Tier 2 outreach emails. Then chase AdSense + affiliate hrefs, and read the F1 retention number.
-> **What you need from yourself:** a Resend account with the beatthescam.com domain verified; ~1 hour to send the Tier 2 outreach emails (`docs/outreach-templates.md`).
+> **Last touched:** 2026-06-09 (newsletter capture + /api/subscribe function built, deployed & verified live; 2nd purge recovery + top-3 category hubs done)
+> **⚠️ One action to finish the newsletter:** add **`RESEND_AUDIENCE_ID`** to Netlify env (Site config → Environment variables), then trigger a redeploy. The function is live but returns `500 "Service not configured"` until it's set (verified 2026-06-09). `RESEND_API_KEY` is already set. Get the Audience ID from the Resend dashboard → Audiences → your audience → the `</>` API snippet (it's the `audienceId`, NOT the domain ID).
+> **Next focus:** finish the env var above → then send the Tier 2 outreach emails. Then chase AdSense + affiliate hrefs, and read the F1 retention number.
+> **What you need from yourself:** the Resend Audience ID (above); ~1 hour to send the Tier 2 outreach emails (`docs/outreach-templates.md`).
 
 This doc is the **fast-start punch list** for the next session — read it before re-opening anything else and you'll be productive in 2 minutes instead of 20.
 
@@ -13,6 +14,7 @@ The exhaustive context lives in `docs/project.md`. This file is the index.
 ## Where things stand (as of last close)
 
 - **Done 2026-06-05→09** (full detail in `project.md` §21): reclaimed the DPD/Yodel/UPS courier guides **plus a 2nd purged batch** (Amazon-call / chargeback / Gumtree / Google-Voice) the AdSense purge had 301'd away; built the **top-3 category hubs** (SMS, Payment, Government pillar pages — `content/category-hubs.json`); fixed GSC auth + added `scripts/gsc_report.py`; reached the cross-platform video verdict (**YouTube Shorts + the site win**); fixed the `shorten_warning` truncation bug; built the **Tier 1 citation/E-E-A-T foundation** (`docs/outreach-log.md`).
+- **Newsletter (2026-06-09):** sitewide email-capture band (above the footer on every page) + hardened `netlify/functions/subscribe.js` (Resend Audience add + branded welcome email; per-IP rate limit, origin allow-list, consent + honeypot, duplicate-safe). Live and verified. **Routing gotcha:** the `/api/subscribe` rewrite had to go in `dist/_redirects` (emitted by `build()`), NOT `netlify.toml` — new toml `[[redirects]]` beyond the grandfathered `/api/check-scam` rule are silently ignored at the edge here. Only blocker to going fully live: the `RESEND_AUDIENCE_ID` env var (see banner above).
 - **Site Health 98%**, **AI Search Health 99%**, Lighthouse mobile 92–97 / SEO 100. Technical build 100% complete; ~191 residual Semrush warnings are Google's AdSense CDN (irreducible).
 - **178 guides**, 17 categories, daily publish + video pipeline (YT Shorts primary; TikTok one creative A/B then keep-or-drop; IG/X free cross-posts).
 - **E-E-A-T:** Alex Bacsa named author across all guides + `/author/` page, role standardised to "Founder & Editor" everywhere, `sameAs` to LinkedIn + 3 sister pubs. Disavow file (66 domains), security.txt, llms.txt, full UK Terms all live.
