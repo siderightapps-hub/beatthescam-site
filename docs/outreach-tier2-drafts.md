@@ -95,7 +95,7 @@ beatthescam.com · hello@beatthescam.com
 ## 3. Graham Cluley — tip / reader resource (not a guest post)
 
 - **Route:** <https://grahamcluley.com/contact/> — he welcomes email (the address is on the page but JS-obfuscated; the contact form works too). He explicitly does **not** accept external articles ("Sorry, I'm not accepting articles from external contributors") so never pitch a guest post — frame purely as a reader resource.
-- **Hook:** the Cifas Fraudscape SIM-swap surge. **`[verify the exact figure — ~1,055% rise in unauthorised SIM-swaps in 2024 — and make sure our own guide cites it before you send]`**.
+- **Hook:** the Cifas SIM-swap surge — **verified & now cited in our guide**. Cifas *Fraudscape 2025* recorded a **1,055% surge in unauthorised SIM-swap cases in 2024** (nearly 3,000, on its National Fraud Database). Source: <https://www.cifas.org.uk/newsroom/huge-surge-see-sim-swaps-hit-telco-and-mobile>.
 - **Our guide:** `https://beatthescam.com/guides/sim-swap-fraud-uk/`. **Anchor:** *a step-by-step UK SIM-swap walkthrough*.
 
 **Subject:** UK SIM-swap surge — a reader resource for your audience
@@ -106,8 +106,8 @@ Hi Graham,
 Long-time reader — the Smashing Security episodes on SIM-swap and smishing are
 required listening.
 
-Flagging a UK angle in case it's useful: Cifas's latest Fraudscape logged a
-roughly 1,055% jump in unauthorised SIM-swap cases in 2024. [verify figure] On
+Flagging a UK angle in case it's useful: Cifas's Fraudscape 2025 logged a 1,055%
+surge in unauthorised SIM-swap cases in 2024 — nearly 3,000 in a single year. On
 the back of that I've published a plain-English UK walkthrough — provider PIN
 setup, the "no signal" warning sign, and what to do (and in what order) when your
 number's been ported:
