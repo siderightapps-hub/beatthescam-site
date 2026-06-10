@@ -1,9 +1,9 @@
 # Start here next session
 
-> **Last touched:** 2026-06-09 (newsletter LIVE end-to-end — capture + welcome email confirmed; one-click unsubscribe added; cache-busting asset URLs; 2nd purge recovery + top-3 category hubs done)
-> **⚠️ One action to finish unsubscribe:** add **`UNSUBSCRIBE_SECRET`** to Netlify env (any long random string — `openssl rand -hex 32`), then redeploy. Until it's set, the welcome email ships with **no** unsubscribe link (fails closed by design). `RESEND_API_KEY` (full-access) + `RESEND_AUDIENCE_ID` are already set and the subscribe flow is verified live.
-> **Next focus:** finish the env var above → send the Tier 2 outreach emails. Then chase AdSense + affiliate hrefs, and read the F1 retention number. **For future newsletters:** send as Resend **Broadcasts** and drop in the `{{{RESEND_UNSUBSCRIBE_URL}}}` footer token — Resend handles unsubscribe + List-Unsubscribe headers automatically there (the welcome email self-hosts it because that token does NOT work on the `/emails` API).
-> **What you need from yourself:** set `UNSUBSCRIBE_SECRET` (above); ~1 hour to send the Tier 2 outreach emails (`docs/outreach-templates.md`).
+> **Last touched:** 2026-06-10 (newsletter + one-click unsubscribe LIVE & verified end-to-end — all 4 checks green; contact routing → dedicated inboxes; Tier 2 outreach drafts written)
+> **✅ Newsletter fully shipped:** capture → welcome email → one-click unsubscribe all confirmed working. `RESEND_API_KEY` + `RESEND_AUDIENCE_ID` + `UNSUBSCRIBE_SECRET` all set in Netlify.
+> **Next focus:** **send the Tier 2 outreach emails — drafts are ready in [`outreach-tier2-drafts.md`](outreach-tier2-drafts.md)** (send order: Lovemoney → Money to the Masses → Graham Cluley → This Is Money → MoneyMagpie; Be Clever With Your Cash = do NOT cold-pitch). Then chase AdSense + affiliate hrefs, read the F1 retention number. **For future newsletters:** send as Resend **Broadcasts** + `{{{RESEND_UNSUBSCRIBE_URL}}}` footer token (Resend handles unsubscribe automatically there; the welcome email self-hosts it because that token does NOT work on `/emails`).
+> **What you need from yourself:** ~1 hour to send the Tier 2 emails; verify each contact route + any `[verify…]` figure before sending.
 
 This doc is the **fast-start punch list** for the next session — read it before re-opening anything else and you'll be productive in 2 minutes instead of 20.
 
