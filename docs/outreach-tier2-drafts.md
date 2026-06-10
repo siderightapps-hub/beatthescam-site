@@ -11,7 +11,7 @@
 | # | Target | Type | Why this order |
 |---|---|---|---|
 | 1 | **Lovemoney** | Link insertion | Recent on-topic article, **follow** links, real editorial inbox. Best odds. |
-| 2 | **Money to the Masses** | Link insertion + podcast | Reachable founder, perfect HMRC-text match, podcast is a bonus angle. |
+| 2 | **Money to the Masses** | Link insertion | Reachable founder, perfect HMRC-text match. |
 | 3 | **Graham Cluley** | Tip / reader resource | Lead with the Cifas SIM-swap stat; no link-begging. |
 | 4 | **This Is Money** | Expert source (not a link) | Big publisher nofollows; pitch as a quotable source instead. |
 | 5 | **MoneyMagpie** | Link insertion (low priority) | Links are **nofollow** + looser fit; send only if you've spare slots. |
@@ -61,7 +61,7 @@ beatthescam.com · hello@beatthescam.com
 
 ## 2. Money to the Masses — link insertion + podcast angle ⭐
 
-- **Route:** `damien@moneytothemasses.com` (his direct address, framed for editorial/podcast ideas) — or the contact form at <https://moneytothemasses.com/contact>.
+- **Route:** the contact form at <https://moneytothemasses.com/contact> (cleanest for an editorial "further reading" suggestion), or `damien@moneytothemasses.com` (his direct address).
 - **Their article:** "HMRC to contact 1.3m pensioners about Winter Fuel Payment — How to tell a genuine message from a scam" — <https://moneytothemasses.com/news/hmrc-to-contact-1-3m-pensioners-about-winter-fuel-payment-how-to-tell-a-genuine-message-from-a-scam> (live; verify headline on open).
 - **Our guide:** `https://beatthescam.com/guides/hmrc-tax-refund-text-scam-uk/`. **Anchor:** *how to spot a fake HMRC tax-refund text*.
 
@@ -82,9 +82,7 @@ wording fraudsters use, how the fake refund page works, and the reporting steps
 https://beatthescam.com/guides/hmrc-tax-refund-text-scam-uk/
 
 If it'd help your readers, it might fit as a further-reading link in that piece.
-And separately — I know the Money to the Masses podcast covers scams regularly;
-if a smishing/impersonation segment is ever useful, I'd happily come on as a UK
-source. Either way, thanks for the consistently clear coverage.
+Either way, thanks for the consistently clear coverage.
 
 Best,
 Alex Bacsa

@@ -44,7 +44,7 @@ Brand facts for any profile/citation (keep these identical everywhere — NAP co
 | # | Target | Angle | Route | Status | Date | Link? | Notes |
 |---|---|---|---|---|---|---|---|
 | 1 | Lovemoney | "fake parcel deliveries 2024" piece → SMS hub | uknews@lovemoney.com | ☐ | | | **Best target**: recent article, links *follow*. Guide: /categories/sms/ |
-| 2 | Money to the Masses | HMRC Winter Fuel scam piece → HMRC text guide | damien@moneytothemasses.com / contact form | ☐ | | | + podcast guest angle. Guide: hmrc-tax-refund-text-scam-uk |
+| 2 | Money to the Masses | HMRC Winter Fuel scam piece → HMRC text guide | contact form / damien@moneytothemasses.com | ☐ | | | Guide: hmrc-tax-refund-text-scam-uk |
 | 3 | Graham Cluley | SIM-swap tip/resource (NOT guest post) | grahamcluley.com/contact form | ☐ | | | Lead w/ Cifas stat [verify]. Guide: sim-swap-fraud-uk |
 | 4 | This Is Money | **expert source**, not link (nofollow) | Helen Crane (helen.crane@…, *pattern*) / Qwoted | ☐ | | | Crane on the Case. Grab a real recent column title first |
 | 5 | MoneyMagpie | bank-text guide (low priority — nofollow) | editorial@moneymagpie.com | ☐ | | | Looser fit; phone-call focus. Guide: bank-text-codes-not-arriving |
