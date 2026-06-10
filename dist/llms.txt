@@ -11,7 +11,7 @@
 - [Government Impersonation](https://beatthescam.com/categories/government/): 6 guide(s)
 - [Investment & Finance Scams](https://beatthescam.com/categories/finance/): 11 guide(s)
 - [Marketplace Scams](https://beatthescam.com/categories/marketplace/): 15 guide(s)
-- [Payment Scams](https://beatthescam.com/categories/payment/): 14 guide(s)
+- [Payment Scams](https://beatthescam.com/categories/payment/): 15 guide(s)
 - [Phone Scams](https://beatthescam.com/categories/phone/): 15 guide(s)
 - [Romance & Dating Scams](https://beatthescam.com/categories/dating/): 5 guide(s)
 - [Shopping Scams](https://beatthescam.com/categories/shopping/): 8 guide(s)
@@ -127,6 +127,7 @@
 - [QR Code Scams UK: How to Spot and Avoid Fake Payment Links](https://beatthescam.com/guides/qr-code-payment-scam-guide/): QR code scams are growing in the UK, with criminals replacing legitimate codes or sending fake ones via text, email, or in person. Scanning a malicious QR code can lead to fake payment pages, identity theft, or direct account access.
 - [Revolut Scam UK: How to Spot Fake Revolut Messages and Protect Your Money](https://beatthescam.com/guides/revolut-scam-uk/): Revolut scams target UK users through fake SMS messages, emails, and cloned app interfaces claiming urgent action is needed. Fraudsters use these to harvest your login credentials, two-factor codes, and bank details, then drain your account or use it for money laundering.
 - [Starling Bank Scam UK: How to Spot and Stop Fake Starling Fraud](https://beatthescam.com/guides/starling-bank-scam-uk/): Starling Bank scams typically arrive as fake text messages or emails claiming suspicious activity on your account, asking you to click a link or call a number. Fraudsters use authentic-looking branding to trick you into revealing security codes, card details, or granting remote access to your device.
+- [Wedding Photographer Scam UK: How to Spot Fake Bookings & Protect Your Money](https://beatthescam.com/guides/wedding-photographer-scam-uk/): Wedding photographer scams involve fraudsters impersonating real professionals or creating fake portfolios to collect deposits for non-existent services. They typically target engaged couples under time pressure, requesting large upfront payments via bank transfer or digital wallet.
 - [Wedding Venue Deposit Scam UK: How to Spot Fake Booking Confirmations](https://beatthescam.com/guides/wedding-venue-deposit-scam-uk/): Wedding venue deposit scams target engaged couples by creating fake booking confirmations and invoices that look legitimate. Scammers use stolen venue details and pressure tactics to extract deposits before the couple discovers the deception.
 - [Wise Transfer Scam UK: How to Spot and Avoid Impersonation Fraud](https://beatthescam.com/guides/wise-transfer-scam-uk/): Wise impersonation scams target UK customers through fake emails, texts and website clones, tricking them into revealing login credentials or sending money to criminal accounts. This guide explains how these scams work and how to verify genuine Wise communications.
 
