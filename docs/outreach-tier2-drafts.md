@@ -94,7 +94,7 @@ beatthescam.com · hello@beatthescam.com
 
 ## 3. Graham Cluley — tip / reader resource (not a guest post)
 
-- **Route:** contact form only — <https://grahamcluley.com/contact/> (no scrapeable email; he explicitly does **not** accept external articles, so never pitch a guest post).
+- **Route:** <https://grahamcluley.com/contact/> — he welcomes email (the address is on the page but JS-obfuscated; the contact form works too). He explicitly does **not** accept external articles ("Sorry, I'm not accepting articles from external contributors") so never pitch a guest post — frame purely as a reader resource.
 - **Hook:** the Cifas Fraudscape SIM-swap surge. **`[verify the exact figure — ~1,055% rise in unauthorised SIM-swaps in 2024 — and make sure our own guide cites it before you send]`**.
 - **Our guide:** `https://beatthescam.com/guides/sim-swap-fraud-uk/`. **Anchor:** *a step-by-step UK SIM-swap walkthrough*.
 
@@ -127,20 +127,21 @@ Beat the Scam · beatthescam.com
 ## 4. This Is Money — expert source, **not** a link insertion
 
 This Is Money (MailOnline) nofollows external links and won't retro-edit articles
-from a cold email — so don't ask for a link. Pitch yourself as a **quotable UK
-source** for Helen Crane's "Crane on the Case" consumer column instead; a credited
-quote earns a mention naturally and builds a repeat relationship.
+from a cold email — so don't ask for a link, and don't worry that there's no easy
+delivery/bank-text article to hook onto. Pitch yourself as a **quotable UK
+source** for Helen Crane's consumer beat instead; a credited quote earns a
+mention naturally and builds a repeat relationship.
 
-- **Route (pick one):** `helen.crane@thisismoney.co.uk` *(pattern-guessed — not confirmed)* · the safe fallback `editor@thisismoney.co.uk` / TIM "Contact us" form · or **Qwoted** (app.qwoted.com — she's listed; built for exactly this).
-- **Before sending:** open her author archive (muckrack.com/helen-crane or the TIM "Beat the Scammers" hub) and drop one **real recent column title** into the `[…]` slot — the desk bins anything that reads like you didn't read her work.
+- **Route:** `helen.crane@thisismoney.co.uk` — **confirmed** (listed on her Muck Rack profile: "Get in touch: helen.crane@thisismoney.co.uk"). She's Deputy Editor & consumer champion at This Is Money — scams are her beat. Alternative: **Qwoted** (app.qwoted.com). Skip X — her account is dormant (last post Nov 2025).
+- This pitch references her column's *format*, not a specific article, so there's no `[…]` to fill in.
 
-**Subject:** A UK scam-trends source for Crane on the Case?
+**Subject:** A UK scam-trends source for your consumer stories?
 
 ```
 Hi Helen,
 
-I'm a regular reader of Crane on the Case — your column on [recent reader case]
-was a good example of how often these recoveries hinge on one missed red flag.
+I'm a regular reader of your Crane on the Case column — the reader-recovery cases
+are a great reminder of how often these come down to one missed red flag.
 
 I run Beat the Scam, a free, independent UK consumer-protection site with a free
 AI scam checker. Because readers paste live suspicious messages into the checker,
