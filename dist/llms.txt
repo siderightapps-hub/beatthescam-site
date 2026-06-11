@@ -9,7 +9,7 @@
 - [Employment Scams](https://beatthescam.com/categories/employment/): 8 guide(s)
 - [Fraud & Impersonation](https://beatthescam.com/categories/fraud/): 7 guide(s)
 - [Government Impersonation](https://beatthescam.com/categories/government/): 6 guide(s)
-- [Investment & Finance Scams](https://beatthescam.com/categories/finance/): 11 guide(s)
+- [Investment & Finance Scams](https://beatthescam.com/categories/finance/): 12 guide(s)
 - [Marketplace Scams](https://beatthescam.com/categories/marketplace/): 15 guide(s)
 - [Payment Scams](https://beatthescam.com/categories/payment/): 15 guide(s)
 - [Phone Scams](https://beatthescam.com/categories/phone/): 15 guide(s)
@@ -94,6 +94,7 @@
 - [Land Banking Scam UK: How to Spot and Avoid Property Investment Fraud](https://beatthescam.com/guides/land-banking-scam-uk/): Land banking scams target property investors by selling worthless or non-existent UK land plots at inflated prices, promising rapid appreciation. Scammers use high-pressure sales tactics, fake documentation, and promises of guaranteed returns to persuade victims to part with tens of thousands of pounds.
 - [Money Mule Scam UK: How to Spot and Avoid Being Recruited](https://beatthescam.com/guides/money-mule-scam-uk/): Money mule scams lure UK residents into moving stolen money through their bank accounts in exchange for a cut of the proceeds. If you fall for this, you could face criminal charges even if you didn't know the money was stolen.
 - [Pension Cold Call Scam UK: How to Spot and Stop This Scam](https://beatthescam.com/guides/pension-cold-call-scam-uk/): Pension cold call scams target people by pretending to be legitimate financial advisers offering pension reviews or early access schemes. The scammers convince you to transfer your pension pot into fraudulent accounts, leaving your retirement savings gone forever.
+- [Recovery Room Scam UK: How to Spot and Avoid Fake Debt Recovery Schemes](https://beatthescam.com/guides/recovery-room-scam-uk/): Recovery room scams promise to retrieve money lost to previous fraud, but are themselves sophisticated fraud schemes. Scammers pose as debt recovery firms, lawyers, or financial investigators to extract upfront fees and personal data from desperate victims.
 
 ### Marketplace Scams
 
