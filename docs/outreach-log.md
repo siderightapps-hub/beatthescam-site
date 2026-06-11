@@ -47,7 +47,7 @@ Brand facts for any profile/citation (keep these identical everywhere — NAP co
 | 2 | Money to the Masses | HMRC Winter Fuel scam piece → HMRC text guide | contact form / damien@moneytothemasses.com | ⏳ sent | 2026-06-10 | | Sent. Guide: hmrc-tax-refund-text-scam-uk |
 | 3 | Graham Cluley | SIM-swap tip/resource (NOT guest post) | grahamcluley.com/contact form | ⏳ sent | 2026-06-10 | | Sent. Cifas 1,055% stat verified + cited in guide. Guide: sim-swap-fraud-uk |
 | 4 | This Is Money | **expert source**, not link (nofollow) | helen.crane@thisismoney.co.uk (✅ confirmed) / Qwoted | ⏳ sent | 2026-06-10 | | Sent. Pitched as a source, not a link |
-| 5 | MoneyMagpie | bank-text guide (low priority — nofollow) | editorial@moneymagpie.com | ⏳ sent | 2026-06-10 | | Sent. Looser fit; phone-call focus. Guide: bank-text-codes-not-arriving |
+| 5 | MoneyMagpie | bank-text guide (low priority — nofollow) | Marc Crosby, Publishing Editor | ✖ paid-only | 2026-06-10 | | Replied 2026-06-10: charges for guest content/links (and they're nofollow anyway = no SEO value). Declined — off white-hat strategy. Door left open for free editorial source. |
 | — | Be Clever With Your Cash | ⚠️ DO NOT cold-pitch | — | ✖ skip (cold) | | | Contact page auto-spams link requests; relationship/long-game only |
 | + | Malwarebytes / BleepingComputer / Which? | SIM-swap guide via tip forms | tip forms | ☐ | | | Bonus homes for sim-swap-fraud-uk |
 
