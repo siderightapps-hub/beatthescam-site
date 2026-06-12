@@ -1,6 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <rss version="2.0"><channel><title>Beat the Scam</title><link>https://beatthescam.com</link><description>Scam alerts, plain-English checks, and practical guides to help people verify suspicious emails, texts, websites, calls, and offers.</description>
         <item>
+          <title>Share Fraud UK: How to Spot and Avoid Investment Scams</title>
+          <link>https://beatthescam.com/guides/share-fraud-uk/</link>
+          <guid>https://beatthescam.com/guides/share-fraud-uk/</guid>
+          <pubDate>Fri, 12 Jun 2026 00:00:00 +0000</pubDate>
+          <description>Share fraud is a growing threat where scammers pose as legitimate investment brokers or advisors to convince you to buy fake shares or invest in non-existent companies. This guide explains how the scam works, what to watch for, and what steps to take if you&#x27;ve been contacted.</description>
+        </item>
+        <item>
           <title>Recovery Room Scam UK: How to Spot and Avoid Fake Debt Recovery Schemes</title>
           <link>https://beatthescam.com/guides/recovery-room-scam-uk/</link>
           <guid>https://beatthescam.com/guides/recovery-room-scam-uk/</guid>
@@ -202,11 +209,4 @@
           <guid>https://beatthescam.com/guides/o2-scam-text-uk/</guid>
           <pubDate>Sat, 23 May 2026 00:00:00 +0000</pubDate>
           <description>O2 scam texts are fake SMS messages that impersonate the major UK mobile network operator to steal login credentials, payment details, or personal information. These messages typically claim your account needs urgent attention, payment is overdue, or you&#x27;ve won a prize, with a link directing you to a fake website.</description>
-        </item>
-        <item>
-          <title>Vodafone scam text UK: how to spot and report fake SMS messages</title>
-          <link>https://beatthescam.com/guides/vodafone-scam-text-uk/</link>
-          <guid>https://beatthescam.com/guides/vodafone-scam-text-uk/</guid>
-          <pubDate>Sat, 23 May 2026 00:00:00 +0000</pubDate>
-          <description>Vodafone impersonation scams use convincing text messages to trick you into clicking malicious links or sharing personal information. We explain the warning signs, how to verify genuine messages, and what to do if you&#x27;ve already clicked.</description>
         </item></channel></rss>
