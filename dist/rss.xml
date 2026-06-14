@@ -1,6 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <rss version="2.0"><channel><title>Beat the Scam</title><link>https://beatthescam.com</link><description>Scam alerts, plain-English checks, and practical guides to help people verify suspicious emails, texts, websites, calls, and offers.</description>
         <item>
+          <title>Identity Theft UK: How to Spot and Stop It Before Your Details Are Used</title>
+          <link>https://beatthescam.com/guides/identity-theft-uk/</link>
+          <guid>https://beatthescam.com/guides/identity-theft-uk/</guid>
+          <pubDate>Sun, 14 Jun 2026 00:00:00 +0000</pubDate>
+          <description>Identity theft in the UK involves criminals stealing your personal information—name, address, National Insurance number, or bank details—to commit fraud in your name. We explain the warning signs, how the scam works, and exactly what to do if you think you&#x27;re a victim.</description>
+        </item>
+        <item>
           <title>Ponzi Scheme UK Warning: How to Spot Investment Scams</title>
           <link>https://beatthescam.com/guides/ponzi-scheme-uk-warning/</link>
           <guid>https://beatthescam.com/guides/ponzi-scheme-uk-warning/</guid>
@@ -202,11 +209,4 @@
           <guid>https://beatthescam.com/guides/money-mule-scam-uk/</guid>
           <pubDate>Sun, 24 May 2026 00:00:00 +0000</pubDate>
           <description>Money mule scams lure UK residents into moving stolen money through their bank accounts in exchange for a cut of the proceeds. If you fall for this, you could face criminal charges even if you didn&#x27;t know the money was stolen.</description>
-        </item>
-        <item>
-          <title>Virgin Media Scam Call UK: How to Spot &amp; Stop Phone Fraudsters</title>
-          <link>https://beatthescam.com/guides/virgin-media-scam-call-uk/</link>
-          <guid>https://beatthescam.com/guides/virgin-media-scam-call-uk/</guid>
-          <pubDate>Sat, 23 May 2026 00:00:00 +0000</pubDate>
-          <description>Fraudsters pose as Virgin Media support staff to trick you into revealing passwords, payment details, or granting remote access to your device. This guide explains exactly how the scam works and what to do if you&#x27;ve been contacted.</description>
         </item></channel></rss>

@@ -7,7 +7,7 @@
 - [Crypto Scams](https://beatthescam.com/categories/crypto/): 8 guide(s)
 - [Email Scams](https://beatthescam.com/categories/email/): 13 guide(s)
 - [Employment Scams](https://beatthescam.com/categories/employment/): 8 guide(s)
-- [Fraud & Impersonation](https://beatthescam.com/categories/fraud/): 7 guide(s)
+- [Fraud & Impersonation](https://beatthescam.com/categories/fraud/): 8 guide(s)
 - [Government Impersonation](https://beatthescam.com/categories/government/): 6 guide(s)
 - [Investment & Finance Scams](https://beatthescam.com/categories/finance/): 14 guide(s)
 - [Marketplace Scams](https://beatthescam.com/categories/marketplace/): 15 guide(s)
@@ -68,6 +68,7 @@
 - [Charity Scams UK: How to Spot Fake Charities and Protect Your Donation](https://beatthescam.com/guides/charity-donation-scam-checklist/): Charity scams impersonate real charities or create fake ones to trick donors into sending money that never reaches those in need. Scammers use emotional appeals, fake websites, and convincing emails to steal donations—sometimes thousands of pounds.
 - [Driveway Cowboy Scam UK: How to Spot Fake Contractors](https://beatthescam.com/guides/driveway-cowboy-scam-uk/): Driveway cowboy scams target UK homeowners with unsolicited offers to repair or resurface driveways at suspiciously low prices. These fraudsters collect upfront deposits and vanish without completing work, or use fake company names and identities to avoid being traced.
 - [Google Voice Verification Code Scam UK: Don't Share That Code](https://beatthescam.com/guides/google-voice-verification-scam/): Someone asks you to read back a Google verification code to 'prove you're real'? It's a scam to hijack your number. Here's how it works and what to do.
+- [Identity Theft UK: How to Spot and Stop It Before Your Details Are Used](https://beatthescam.com/guides/identity-theft-uk/): Identity theft in the UK involves criminals stealing your personal information—name, address, National Insurance number, or bank details—to commit fraud in your name. We explain the warning signs, how the scam works, and exactly what to do if you think you're a victim.
 - [Impersonation Scams: When Criminals Pretend to Be Your Bank or the Police](https://beatthescam.com/guides/impersonation-scams-when-criminals-pretend-to-be-your-bank-or-the-police/): Learn how impersonation scams work in the UK, recognise the warning signs, and protect yourself from criminals posing as trusted organisations. This guide helps consumers avoid losing money to fake calls and messages.
 - [Recovery Scam UK: How Scammers Pose as Refund Services](https://beatthescam.com/guides/refund-recovery-scam-warning-signs/): Recovery scams target people who have already lost money to fraud, promising to retrieve their funds for an upfront fee. Scammers impersonate legitimate refund companies, lawyers, or financial investigators to gain trust and extract payment.
 - [WhatsApp 'New Number' Scam UK: How to Spot Family Impersonation Tricks](https://beatthescam.com/guides/whatsapp-family-emergency-scam/): Scammers access or create WhatsApp accounts and message your contacts pretending to be a family member with a new phone number. They quickly build trust before asking for urgent financial help, often citing emergencies like hospital bills or legal problems.
