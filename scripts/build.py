@@ -115,6 +115,19 @@ ARTICLE_REDIRECTS = {
     "snapchat-scam-account-awareness":            "__CAT__:social",
     "energy-bill-scam-uk":                        "__CAT__:utility",
     "credit-score-scam-uk":                       "__CAT__:finance",
+    # ── Cannibalisation cleanup (2026-06-15, external audit) ────────────────
+    # Near-duplicate guides competing for the same intent were consolidated to
+    # one canonical each. Survivors chosen by quality (freshness, clean slug,
+    # no data defects); unique advice from each loser was grafted into its
+    # survivor first, so these are article→article 301s (no content lost).
+    # NB: solar-panel-scam-uk and solar-panel-cold-caller-scam-uk were KEPT as
+    # separate guides — they target genuinely different vectors (general vs
+    # cold-call) and are now reciprocally cross-linked, not merged.
+    "concert-ticket-scam-uk-2026":                "concert-ticket-scam-uk",
+    "forex-trading-scam-uk-2026":                 "forex-trading-scam-uk",
+    "qr-code-payment-scam-guide":                 "qr-code-scam-uk",
+    "qr-code-scam-payment-uk":                    "qr-code-scam-uk",
+    "whatsapp-scam-family-message-uk":            "whatsapp-family-emergency-scam",
 }
 
 CATEGORY_LABELS = {
@@ -1281,6 +1294,14 @@ def render_post(site, post, all_posts, affiliates=None):
         </p>
         <div class="badge-row">{badges}</div>
         <div class="notice"><strong>Key rule:</strong> verify through an official route you opened yourself, not the link, number, app, or payment details supplied by the suspicious message.</div>
+        <aside class="do-now" aria-label="What to do if you are being targeted right now">
+          <p class="do-now-title">Being targeted right now? Do this</p>
+          <ol>
+            <li><strong>Stop.</strong> Don&#8217;t pay, transfer money, or share passwords, PINs, or one-time codes.</li>
+            <li><strong>Contact your bank</strong> on the number on the back of your card if your money or details may be at risk.</li>
+            <li><strong>Report it</strong> &#8212; call Action Fraud on 0300 123 2040 (Police Scotland: 101), and forward scam texts to 7726.</li>
+          </ol>
+        </aside>
         <div class="toc"><strong>On this page</strong><ol>{toc}</ol></div>
         {"".join(section_parts)}
         <h2>Frequently asked questions</h2>
@@ -1378,6 +1399,7 @@ def render_check_page(site):
               </select>
             </div>
             <label for="scamInput" class="checker-label">Paste the message, URL, or describe the call</label>
+            <p class="checker-safety" role="note"><strong>Keep yourself safe:</strong> never paste passwords, PINs, full card numbers, or one-time security codes &mdash; a scam check never needs them.</p>
             <textarea
               id="scamInput"
               class="checker-textarea"
@@ -1389,7 +1411,7 @@ def render_check_page(site):
               <span class="checker-char-count" id="charCount">0 / 3000</span>
               <button id="checkBtn" class="btn btn-primary checker-submit">Analyse message</button>
             </div>
-            <p class="note" style="margin-top:.75rem">Your message is sent to Claude AI for analysis and is not stored by Beat the Scam. Do not include passwords or full bank account numbers.</p>
+            <p class="note" style="margin-top:.75rem">Your message is sent to Claude AI for analysis and is not stored by Beat the Scam.</p>
           </div>
         </div>
 
@@ -1535,7 +1557,7 @@ def render_check_page(site):
 
       function renderError() {
         var p = el("p", {"class": "notice"}, "Sorry, the checker could not be reached right now. Please try again, or ");
-        var a = el("a", {"href": "https://www.reportfraud.police.uk", "rel": "noopener noreferrer", "target": "_blank"}, "report directly to the Police");
+        var a = el("a", {"href": "https://www.reportfraud.police.uk", "rel": "noopener noreferrer", "target": "_blank"}, "report it to Action Fraud");
         p.appendChild(a);
         resultContent.textContent = "";
         resultContent.appendChild(p);
@@ -2405,18 +2427,33 @@ def build():
         })
     write(DIST / 'search.json', json.dumps(search_items, indent=2))
 
-    # RSS
+    # RSS — newest first so feed readers detect updates from the top item.
+    # lastBuildDate + atom:link self-ref + isPermaLink GUIDs added 2026-06-15
+    # (external audit P3): stronger update detection and stable item identity.
+    rss_posts = sorted(posts, key=lambda p: p["date"], reverse=True)[:30]
     rss_items = []
-    for post in posts[:30]:
+    for post in rss_posts:
         rss_items.append(f'''
         <item>
           <title>{html.escape(post["title"])}</title>
           <link>{site["domain"]}/guides/{post["slug"]}/</link>
-          <guid>{site["domain"]}/guides/{post["slug"]}/</guid>
+          <guid isPermaLink="true">{site["domain"]}/guides/{post["slug"]}/</guid>
           <pubDate>{datetime.strptime(post["date"], "%Y-%m-%d").strftime("%a, %d %b %Y 00:00:00 +0000")}</pubDate>
           <description>{html.escape(post["description"])}</description>
         </item>''')
-    rss = f'<?xml version="1.0" encoding="UTF-8" ?>\n<rss version="2.0"><channel><title>{html.escape(site["site_name"])}</title><link>{site["domain"]}</link><description>{html.escape(site["tagline"])}</description>{"".join(rss_items)}</channel></rss>'
+    # lastBuildDate = newest item's date (content-derived, not the build clock,
+    # so a no-op rebuild doesn't churn the feed's freshness signal).
+    last_build = datetime.strptime(rss_posts[0]["date"], "%Y-%m-%d").strftime("%a, %d %b %Y 00:00:00 +0000") if rss_posts else ""
+    rss = (
+        '<?xml version="1.0" encoding="UTF-8" ?>\n'
+        '<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel>'
+        f'<title>{html.escape(site["site_name"])}</title>'
+        f'<link>{site["domain"]}</link>'
+        f'<description>{html.escape(site["tagline"])}</description>'
+        f'<lastBuildDate>{last_build}</lastBuildDate>'
+        f'<atom:link href="{site["domain"]}/rss.xml" rel="self" type="application/rss+xml" />'
+        f'{"".join(rss_items)}</channel></rss>'
+    )
     write(DIST / 'rss.xml', rss)
 
     # Sitemap — lastmod reflects actual content dates, not the build timestamp

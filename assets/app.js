@@ -35,15 +35,43 @@
     }
   }
 
+  function consentAccepted(){ return safeGet(storageKey) === 'accepted'; }
+
+  // AdSense + Ahrefs don't participate in Consent Mode, so they're injected
+  // here only once the visitor has accepted — never before. Guarded so a
+  // re-accept (or accepted-on-load + later click) can't double-inject.
+  let deferredLoaded = false;
+  function loadDeferredScripts(){
+    if(deferredLoaded) return;
+    deferredLoaded = true;
+    const cfg = window.BTS_DEFERRED_SCRIPTS || {};
+    if(cfg.adsense && cfg.adsense.src){
+      const a = document.createElement('script');
+      a.async = true;
+      a.src = cfg.adsense.src;
+      if(cfg.adsense.crossorigin){ a.crossOrigin = cfg.adsense.crossorigin; }
+      document.head.appendChild(a);
+    }
+    if(cfg.ahrefs && cfg.ahrefs.src){
+      const h = document.createElement('script');
+      h.async = true;
+      h.src = cfg.ahrefs.src;
+      if(cfg.ahrefs.key){ h.setAttribute('data-key', cfg.ahrefs.key); }
+      document.head.appendChild(h);
+    }
+  }
+
   function applyConsent(mode){
-    if(typeof gtag !== 'function') return;
     const granted = mode === 'accepted';
-    gtag('consent', 'update', {
-      ad_storage: granted ? 'granted' : 'denied',
-      analytics_storage: granted ? 'granted' : 'denied',
-      ad_user_data: granted ? 'granted' : 'denied',
-      ad_personalization: granted ? 'granted' : 'denied'
-    });
+    if(typeof gtag === 'function'){
+      gtag('consent', 'update', {
+        ad_storage: granted ? 'granted' : 'denied',
+        analytics_storage: granted ? 'granted' : 'denied',
+        ad_user_data: granted ? 'granted' : 'denied',
+        ad_personalization: granted ? 'granted' : 'denied'
+      });
+    }
+    if(granted){ loadDeferredScripts(); }
   }
 
   function hideBanner(){ if(banner){ banner.hidden = true; banner.setAttribute('aria-hidden','true'); } }
@@ -88,7 +116,7 @@
 
   document.addEventListener('click', function(e){
     const link = e.target.closest('a');
-    if(!link || typeof gtag !== 'function') return;
+    if(!link || typeof gtag !== 'function' || !consentAccepted()) return;
     if(link.hostname && link.hostname !== window.location.hostname){
       gtag('event', 'outbound_click', {
         event_category: 'engagement',
@@ -149,7 +177,7 @@
         if(r.ok){
           nlForm.reset();
           nlShow("You're in. Check your inbox for a welcome email.", 'success');
-          if(typeof gtag === 'function'){
+          if(typeof gtag === 'function' && consentAccepted()){
             gtag('event', 'newsletter_signup', { event_category: 'engagement' });
           }
         } else {

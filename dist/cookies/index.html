@@ -55,7 +55,7 @@
   <meta name="twitter:image" content="https://beatthescam.com/assets/og-image-v2.png">
   <meta name="twitter:site" content="@beatthescam">
   <meta name='impact-site-verification' value='e0dda02c-a1b6-4056-9f92-16f7c916bd4b'>
-  <link rel="stylesheet" href="/assets/styles.css?v=782b3ba557">
+  <link rel="stylesheet" href="/assets/styles.css?v=2aec57b620">
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-JXNF856NBF"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
@@ -70,9 +70,19 @@
     });
     gtag('config', 'G-JXNF856NBF', { anonymize_ip: true });
   </script>
-  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1606633100797174" crossorigin="anonymous"></script>
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebPage","name":"Cookie Policy","description":"How Beat the Scam uses cookies for analytics, advertising, and consent preferences. Learn what is stored and how to manage your cookie settings.","url":"https://beatthescam.com/cookies/","isPartOf":{"@type":"WebSite","name":"Beat the Scam","url":"https://beatthescam.com"}}</script>
-  <script src="https://analytics.ahrefs.com/analytics.js" data-key="l1GHKUGfAKlhtjbYgIySAg" async></script>
+  <!--
+    AdSense + Ahrefs do NOT participate in Google Consent Mode, so they are not
+    loaded here. assets/app.js injects them only after the visitor accepts
+    cookies (or immediately on load if a prior "accepted" choice is stored).
+    This block is config only — no third-party request fires before consent.
+  -->
+  <script>
+    window.BTS_DEFERRED_SCRIPTS = {
+      adsense: { src: "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1606633100797174", crossorigin: "anonymous" },
+      ahrefs:  { src: "https://analytics.ahrefs.com/analytics.js", key: "l1GHKUGfAKlhtjbYgIySAg" }
+    };
+  </script>
 </head>
 <body>
   <a class="skip-link" href="#main">Skip to content</a>
@@ -152,20 +162,20 @@
         <ul>
           <li><a href="/guides/">All guides</a></li>
           <li><a href="/categories/sms/">Text Message Scams</a></li>
-<li><a href="/categories/payment/">Payment Scams</a></li>
 <li><a href="/categories/phone/">Phone Scams</a></li>
 <li><a href="/categories/marketplace/">Marketplace Scams</a></li>
+<li><a href="/categories/payment/">Payment Scams</a></li>
 <li><a href="/categories/finance/">Investment &amp; Finance Scams</a></li>
 <li><a href="/categories/email/">Email Scams</a></li>
-<li><a href="/categories/tech/">Tech Support Scams</a></li>
 <li><a href="/categories/website/">Website Scams</a></li>
+<li><a href="/categories/tech/">Tech Support Scams</a></li>
 <li><a href="/categories/fraud/">Fraud &amp; Impersonation</a></li>
 <li><a href="/categories/travel/">Travel Scams</a></li>
-<li><a href="/categories/shopping/">Shopping Scams</a></li>
 <li><a href="/categories/employment/">Employment Scams</a></li>
 <li><a href="/categories/crypto/">Crypto Scams</a></li>
-<li><a href="/categories/social/">Social Media Scams</a></li>
+<li><a href="/categories/shopping/">Shopping Scams</a></li>
 <li><a href="/categories/government/">Government Impersonation</a></li>
+<li><a href="/categories/social/">Social Media Scams</a></li>
 <li><a href="/categories/dating/">Romance &amp; Dating Scams</a></li>
 <li><a href="/categories/utility/">Utility Scams</a></li>
         </ul>
@@ -197,6 +207,6 @@
       <button class="btn btn-primary" id="cookieAccept" type="button">Accept</button>
     </div>
   </div>
-  <script src="/assets/app.js?v=c20ef7d26b" defer></script>
+  <script src="/assets/app.js?v=b57ab43531" defer></script>
 </body>
 </html>

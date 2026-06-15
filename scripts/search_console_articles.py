@@ -226,13 +226,12 @@ def generate_article(query: dict, api_key: str):
 
 Write a complete guide about: "{q}"
 
-CRITICAL RULES — violations will cause the article to be rejected:
-- Write ONLY about verified, documented UK scams
-- Do NOT invent statistics, victim numbers, or financial losses
-- If you cite a figure, it must be from Action Fraud, FCA, Which?, NCSC, or UK Finance
-- If you cannot verify a stat, describe the scam pattern without figures
-- All content must be UK-specific (use £ not $, UK reporting numbers, UK organisations)
-- Action Fraud number: 0300 123 2040 | Spam texts: 7726
+ACCURACY — THIS OVERRIDES EVERY STYLE AND SEO RULE BELOW. A plausible-sounding but invented fact about a real company, person, or product is the single worst failure this publication can make: it is libel-adjacent and gets the site rejected from ad networks.
+- Write ONLY about verified, documented UK scams. All content must be UK-specific (use £ not $, UK reporting numbers, UK organisations). Action Fraud: 0300 123 2040 | Spam texts: 7726.
+- Use directional language ("growing rapidly", "a meaningful share", "early data suggests") for figures unless they are well-established public facts. Never invent specific percentages, dollar figures, or entity-attributed statistics. If you cite a figure, it must be from Action Fraud, FCA, Which?, NCSC, or UK Finance; if you cannot verify a stat, describe the scam pattern without figures.
+- NEVER invent or assert a specific dated event, deal, acquisition, merger, partnership, funding round, valuation, product launch, regulatory action, or piece of legislation involving a real named company, person, product, or regulator unless you are certain it is a true, well-established public fact. This explicitly includes who-acquired-whom, who-partnered-with-whom, launch/approval dates, what a law or feature actually covers, pricing/plan limits, and which tool or vendor a named company actually uses.
+- If you are not certain of the exact relationship, date, figure, or attribution, describe it in general terms WITHOUT naming a specific deal/number — or omit it. Inventing a product or vendor name, or pairing a real company with the wrong partner, tool, or capability, is forbidden.
+- Before finalising, re-read every sentence that names a real company, person, or product alongside a date, number, deal, price, or feature. If you are not confident it is a true public fact, rewrite it as a general statement or delete it.
 
 OUTPUT FORMAT — respond with a single valid JSON object only, no other text:
 {{

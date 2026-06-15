@@ -70,9 +70,19 @@
     });
     gtag('config', '{{ga4_id}}', { anonymize_ip: true });
   </script>
-  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client={{adsense_client}}" crossorigin="anonymous"></script>
   {{schema}}
-  <script src="https://analytics.ahrefs.com/analytics.js" data-key="l1GHKUGfAKlhtjbYgIySAg" async></script>
+  <!--
+    AdSense + Ahrefs do NOT participate in Google Consent Mode, so they are not
+    loaded here. assets/app.js injects them only after the visitor accepts
+    cookies (or immediately on load if a prior "accepted" choice is stored).
+    This block is config only — no third-party request fires before consent.
+  -->
+  <script>
+    window.BTS_DEFERRED_SCRIPTS = {
+      adsense: { src: "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client={{adsense_client}}", crossorigin: "anonymous" },
+      ahrefs:  { src: "https://analytics.ahrefs.com/analytics.js", key: "l1GHKUGfAKlhtjbYgIySAg" }
+    };
+  </script>
 </head>
 <body>
   <a class="skip-link" href="#main">Skip to content</a>
