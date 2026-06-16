@@ -1,5 +1,12 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Beat the Scam</title><link>https://beatthescam.com</link><description>Scam alerts, plain-English checks, and practical guides to help people verify suspicious emails, texts, websites, calls, and offers.</description><lastBuildDate>Mon, 15 Jun 2026 00:00:00 +0000</lastBuildDate><atom:link href="https://beatthescam.com/rss.xml" rel="self" type="application/rss+xml" />
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Beat the Scam</title><link>https://beatthescam.com</link><description>Scam alerts, plain-English checks, and practical guides to help people verify suspicious emails, texts, websites, calls, and offers.</description><lastBuildDate>Tue, 16 Jun 2026 00:00:00 +0000</lastBuildDate><atom:link href="https://beatthescam.com/rss.xml" rel="self" type="application/rss+xml" />
+        <item>
+          <title>Conveyancing Fraud UK: How to Spot and Stop Property Purchase Scams</title>
+          <link>https://beatthescam.com/guides/conveyancing-fraud-uk/</link>
+          <guid isPermaLink="true">https://beatthescam.com/guides/conveyancing-fraud-uk/</guid>
+          <pubDate>Tue, 16 Jun 2026 00:00:00 +0000</pubDate>
+          <description>Conveyancing fraud is a sophisticated crime where criminals impersonate your solicitor or conveyancer to intercept property funds. This guide explains how the scam works, what warning signs to watch for, and how to protect yourself during a property transaction.</description>
+        </item>
         <item>
           <title>Deed Fraud UK Property Scam: How to Protect Your Home</title>
           <link>https://beatthescam.com/guides/deed-fraud-uk-property-scam/</link>
@@ -202,11 +209,4 @@
           <guid isPermaLink="true">https://beatthescam.com/guides/fake-trading-platform-uk/</guid>
           <pubDate>Tue, 26 May 2026 00:00:00 +0000</pubDate>
           <description>Fake trading platforms are websites designed to look like real investment brokers, where scammers trick you into depositing money or handing over sensitive financial information. These sites often target UK investors with promises of high returns on forex, cryptocurrency, or stocks.</description>
-        </item>
-        <item>
-          <title>Pension Cold Call Scam UK: How to Spot and Stop This Scam</title>
-          <link>https://beatthescam.com/guides/pension-cold-call-scam-uk/</link>
-          <guid isPermaLink="true">https://beatthescam.com/guides/pension-cold-call-scam-uk/</guid>
-          <pubDate>Mon, 25 May 2026 00:00:00 +0000</pubDate>
-          <description>Pension cold call scams target people by pretending to be legitimate financial advisers offering pension reviews or early access schemes. The scammers convince you to transfer your pension pot into fraudulent accounts, leaving your retirement savings gone forever.</description>
         </item></channel></rss>
