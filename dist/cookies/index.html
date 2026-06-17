@@ -72,17 +72,13 @@
   </script>
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebPage","name":"Cookie Policy","description":"How Beat the Scam uses cookies for analytics, advertising, and consent preferences. Learn what is stored and how to manage your cookie settings.","url":"https://beatthescam.com/cookies/","isPartOf":{"@type":"WebSite","name":"Beat the Scam","url":"https://beatthescam.com"}}</script>
   <!--
-    AdSense + Ahrefs do NOT participate in Google Consent Mode, so they are not
-    loaded here. assets/app.js injects them only after the visitor accepts
-    cookies (or immediately on load if a prior "accepted" choice is stored).
-    This block is config only — no third-party request fires before consent.
+    AdSense loads on every page and respects Google Consent Mode: the GA4
+    consent defaults above start denied, so visitors who haven't accepted get
+    non-personalised ads and no ad-personalisation cookies until they do.
+    Ahrefs Web Analytics is cookieless. Custom GA4 events stay gated in app.js.
   -->
-  <script>
-    window.BTS_DEFERRED_SCRIPTS = {
-      adsense: { src: "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1606633100797174", crossorigin: "anonymous" },
-      ahrefs:  { src: "https://analytics.ahrefs.com/analytics.js", key: "l1GHKUGfAKlhtjbYgIySAg" }
-    };
-  </script>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1606633100797174" crossorigin="anonymous"></script>
+  <script src="https://analytics.ahrefs.com/analytics.js" data-key="l1GHKUGfAKlhtjbYgIySAg" async></script>
 </head>
 <body>
   <a class="skip-link" href="#main">Skip to content</a>
@@ -207,6 +203,6 @@
       <button class="btn btn-primary" id="cookieAccept" type="button">Accept</button>
     </div>
   </div>
-  <script src="/assets/app.js?v=b57ab43531" defer></script>
+  <script src="/assets/app.js?v=85c1ca3474" defer></script>
 </body>
 </html>

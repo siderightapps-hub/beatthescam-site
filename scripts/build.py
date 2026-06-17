@@ -1774,7 +1774,20 @@ def build_legal_bodies(site):
     <h2>Google Analytics</h2>
     <p>The site uses Google Analytics 4. Analytics cookies are only enabled after consent where required.</p>
     <h2>Advertising</h2>
-    <p>The site uses Google AdSense. If advertising is active, Google and its partners may use cookies subject to your consent choices.</p>
+    <p>The site uses Google AdSense. Until you accept cookies, ads are non-personalised and no advertising-personalisation cookies are set; if you accept, Google and its partners may use cookies to personalise and measure ads. You can change your choice any time via the Cookie settings link in the footer.</p>
+    <h2>Newsletter</h2>
+    <p>If you subscribe to email updates, your email address and your consent are stored by, and the emails delivered through, <strong>Resend</strong> (our email provider). We use your address only to send Beat the Scam updates, never sell or share it, and every email carries a one-click unsubscribe link.</p>
+    <h2>Who processes your data</h2>
+    <p>We deliberately keep the list of third parties ("sub-processors") that may handle your data short. Each links to its own privacy policy:</p>
+    <ul class="list-clean">
+      <li><strong>Google</strong> &mdash; Analytics (GA4) and AdSense. Usage data, and &mdash; only after you accept &mdash; advertising and analytics cookies. <a href="https://policies.google.com/privacy" rel="noopener noreferrer" target="_blank">Policy</a>.</li>
+      <li><strong>Anthropic</strong> &mdash; processes the text you submit to the AI checker to produce a verdict. We do not store it. <a href="https://www.anthropic.com/legal/privacy" rel="noopener noreferrer" target="_blank">Policy</a>.</li>
+      <li><strong>Resend</strong> &mdash; stores newsletter subscribers and delivers our emails. <a href="https://resend.com/legal/privacy-policy" rel="noopener noreferrer" target="_blank">Policy</a>.</li>
+      <li><strong>Netlify</strong> &mdash; hosts the site; its server logs may briefly record your IP address and request details for security and reliability. <a href="https://www.netlify.com/privacy/" rel="noopener noreferrer" target="_blank">Policy</a>.</li>
+      <li><strong>Ahrefs</strong> &mdash; cookieless visitor analytics, with no personal profiles or cross-site tracking. <a href="https://ahrefs.com/privacy-policy" rel="noopener noreferrer" target="_blank">Policy</a>.</li>
+    </ul>
+    <h2>Data retention</h2>
+    <p>Checker submissions are processed in real time and not stored by Beat the Scam. Newsletter data is kept until you unsubscribe. Analytics and server-log data are retained according to each provider's standard periods.</p>
     <h2>Cookie choices</h2>
     <p>A cookie banner allows you to accept or reject non-essential cookies. Your preference is stored locally in your browser.</p>
     <h2>Your rights</h2>

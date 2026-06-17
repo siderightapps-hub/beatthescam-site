@@ -3,12 +3,7 @@ const storageKey='bts_cookie_pref_v1';const banner=document.getElementById('cook
 function safeSet(key,value){try{window.localStorage.setItem(key,value);return true;}catch(err){return false;}}
 function updateStatus(mode){if(!status)return;if(mode==='accepted'){status.textContent='Non-essential cookies are enabled.';}else if(mode==='rejected'){status.textContent='Non-essential cookies are disabled.';}else{status.textContent='No choice saved yet.';}}
 function consentAccepted(){return safeGet(storageKey)==='accepted';}
-let deferredLoaded=false;function loadDeferredScripts(){if(deferredLoaded)return;deferredLoaded=true;const cfg=window.BTS_DEFERRED_SCRIPTS||{};if(cfg.adsense&&cfg.adsense.src){const a=document.createElement('script');a.async=true;a.src=cfg.adsense.src;if(cfg.adsense.crossorigin){a.crossOrigin=cfg.adsense.crossorigin;}
-document.head.appendChild(a);}
-if(cfg.ahrefs&&cfg.ahrefs.src){const h=document.createElement('script');h.async=true;h.src=cfg.ahrefs.src;if(cfg.ahrefs.key){h.setAttribute('data-key',cfg.ahrefs.key);}
-document.head.appendChild(h);}}
-function applyConsent(mode){const granted=mode==='accepted';if(typeof gtag==='function'){gtag('consent','update',{ad_storage:granted?'granted':'denied',analytics_storage:granted?'granted':'denied',ad_user_data:granted?'granted':'denied',ad_personalization:granted?'granted':'denied'});}
-if(granted){loadDeferredScripts();}}
+function applyConsent(mode){const granted=mode==='accepted';if(typeof gtag==='function'){gtag('consent','update',{ad_storage:granted?'granted':'denied',analytics_storage:granted?'granted':'denied',ad_user_data:granted?'granted':'denied',ad_personalization:granted?'granted':'denied'});}}
 function hideBanner(){if(banner){banner.hidden=true;banner.setAttribute('aria-hidden','true');}}
 function showBanner(){if(banner){banner.hidden=false;banner.setAttribute('aria-hidden','false');}}
 function setPreference(mode){safeSet(storageKey,mode);applyConsent(mode);updateStatus(mode);hideBanner();}
