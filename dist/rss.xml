@@ -1,5 +1,12 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Beat the Scam</title><link>https://beatthescam.com</link><description>Scam alerts, plain-English checks, and practical guides to help people verify suspicious emails, texts, websites, calls, and offers.</description><lastBuildDate>Wed, 17 Jun 2026 00:00:00 +0000</lastBuildDate><atom:link href="https://beatthescam.com/rss.xml" rel="self" type="application/rss+xml" />
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Beat the Scam</title><link>https://beatthescam.com</link><description>Scam alerts, plain-English checks, and practical guides to help people verify suspicious emails, texts, websites, calls, and offers.</description><lastBuildDate>Thu, 18 Jun 2026 00:00:00 +0000</lastBuildDate><atom:link href="https://beatthescam.com/rss.xml" rel="self" type="application/rss+xml" />
+        <item>
+          <title>CEO Fraud Email Scam UK: How to Spot and Stop Impersonation Attacks</title>
+          <link>https://beatthescam.com/guides/ceo-fraud-email-scam-uk/</link>
+          <guid isPermaLink="true">https://beatthescam.com/guides/ceo-fraud-email-scam-uk/</guid>
+          <pubDate>Thu, 18 Jun 2026 00:00:00 +0000</pubDate>
+          <description>CEO fraud, also called business email compromise (BEC), is a targeted scam where criminals impersonate company executives to trick employees into transferring funds or revealing sensitive information. This guide shows you the exact warning signs and verification steps UK businesses and employees need to know.</description>
+        </item>
         <item>
           <title>Mandate Fraud UK: How Scammers Steal Direct Debit Access</title>
           <link>https://beatthescam.com/guides/mandate-fraud-uk-businesses/</link>
@@ -202,11 +209,4 @@
           <guid isPermaLink="true">https://beatthescam.com/guides/festival-camping-equipment-vinted-scam/</guid>
           <pubDate>Thu, 28 May 2026 00:00:00 +0000</pubDate>
           <description>Festival season brings a surge of fake camping equipment listings on Vinted, where scammers use stolen photos and pressure tactics to trick buyers into paying outside the app. This guide explains how the scam works and exactly what to check before buying.</description>
-        </item>
-        <item>
-          <title>Glastonbury Accommodation Scam UK: How to Spot Fake Bookings</title>
-          <link>https://beatthescam.com/guides/glastonbury-accommodation-scam-uk/</link>
-          <guid isPermaLink="true">https://beatthescam.com/guides/glastonbury-accommodation-scam-uk/</guid>
-          <pubDate>Wed, 27 May 2026 00:00:00 +0000</pubDate>
-          <description>Scammers create fake Glastonbury accommodation listings on social media, messaging apps, and ad sites to steal deposits from festival-goers. This guide shows you exactly how to verify genuine bookings and protect yourself before sending any money.</description>
         </item></channel></rss>
