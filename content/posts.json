@@ -641,7 +641,7 @@
       ],
       [
         "Documented victim case",
-        "In a case documented by Which? magazine, a retired woman received a call from someone claiming to be a BT engineer. She was told malicious activity had been detected from her router. Guided to download TeamViewer and log into her banking accounts to 'verify the firewall was working', she handed over security codes she believed were setting up new protection. Attackers transferred funds through First Direct to external accounts using her existing payees, bypassing new-payee security checks. The transfers were labelled 'flights' to avoid automated fraud detection. She lost £155,000. This case illustrates the core mechanism of all ISP impersonation scams: the victim is made to feel in control while the criminals observe and act in the background."
+        "In a case documented by Which? magazine, a retired woman received a call from someone claiming to be a BT engineer. She was told malicious activity had been detected from her router. Guided to download TeamViewer and log into her banking accounts to 'verify the firewall was working', she handed over security codes she believed were setting up new protection. Attackers transferred funds through First Direct to external accounts using her existing payees, bypassing new-payee security checks. The transfers were labelled 'flights' to avoid automated fraud detection. She lost tens of thousands of pounds. This case illustrates the core mechanism of all ISP impersonation scams: the victim is made to feel in control while the criminals observe and act in the background."
       ],
       [
         "Red flags to watch for",
@@ -2380,7 +2380,7 @@
       ],
       [
         "What to do if you have already interacted",
-        "Act immediately if you clicked a link or entered any details. First, if you haven't already, do not enter any further information. If you entered your login details on a fake website, log into your genuine NatWest account right now and change your password to something completely new. If you also provided your card details, PIN, or CVV, contact NatWest immediately on 0370 300 0000 (the number on the back of your card) and tell them your card may be compromised—they can block it immediately. Check your recent transactions for any unauthorised payments and report them to NatWest. If money has been transferred out of your account, contact your bank straight away as they may be able to recover it, especially if the transaction is recent. Report the scam to Action Fraud on 0300 123 2040 or online at actionfraud.police.uk. Also report the text message to the NCSC by forwarding it to 7726 (spells 'SPAM'). Consider placing a fraud alert on your credit file with Experian, Equifax, or CallCredit to prevent scammers from opening new accounts in your name."
+        "Act immediately if you clicked a link or entered any details. First, if you haven't already, do not enter any further information. If you entered your login details on a fake website, log into your genuine NatWest account right now and change your password to something completely new. If you also provided your card details, PIN, or CVV, contact NatWest immediately on 03457 888 444 (the number on the back of your card) and tell them your card may be compromised—they can block it immediately. Check your recent transactions for any unauthorised payments and report them to NatWest. If money has been transferred out of your account, contact your bank straight away as they may be able to recover it, especially if the transaction is recent. Report the scam to Action Fraud on 0300 123 2040 or online at actionfraud.police.uk. Also report the text message to the NCSC by forwarding it to 7726 (spells 'SPAM'). Consider placing a fraud alert on your credit file with Experian, Equifax, or CallCredit to prevent scammers from opening new accounts in your name."
       ],
       [
         "Reporting this scam in the UK",
@@ -2402,7 +2402,7 @@
       ],
       [
         "How do I report a NatWest fraud text message?",
-        "Forward the text message to 7726 (the NCSC free reporting shortcode). This helps block the sender and warn others. Report the scam to Action Fraud by calling 0300 123 2040 or visiting actionfraud.police.uk. Also notify NatWest directly by calling 0370 300 0000 (the number on your card) so they can update their fraud systems and warn other customers. Keep a screenshot of the text message with the date and time for your records."
+        "Forward the text message to 7726 (the NCSC free reporting shortcode). This helps block the sender and warn others. Report the scam to Action Fraud by calling 0300 123 2040 or visiting actionfraud.police.uk. Also notify NatWest directly by calling 03457 888 444 (the number on your card) so they can update their fraud systems and warn other customers. Keep a screenshot of the text message with the date and time for your records."
       ]
     ],
     "keywords": [
@@ -5646,7 +5646,7 @@
     "sections": [
       [
         "What is this scam?",
-        "A fake crypto exchange is a fraudulent website or app designed to look almost identical to a real, legitimate cryptocurrency platform. Scammers copy the branding, logos, layout, and even customer service pages of established exchanges like Coinbase, Kraken, Binance, or FTX. The goal is to trick you into creating an account, depositing money, or entering your login credentials. Once you do, the criminals either steal your funds directly or use your details to access your real crypto exchange accounts. These scams are particularly effective because they exploit people's trust in well-known brands. Some fake exchanges even let you deposit money initially, making a few small withdrawals possible — this builds confidence before asking you to invest larger sums. At that point, your funds vanish and the platform becomes unresponsive."
+        "A fake crypto exchange is a fraudulent website or app designed to look almost identical to a real, legitimate cryptocurrency platform. Scammers copy the branding, logos, layout, and even customer service pages of established exchanges like Coinbase, Kraken, or Binance. The goal is to trick you into creating an account, depositing money, or entering your login credentials. Once you do, the criminals either steal your funds directly or use your details to access your real crypto exchange accounts. These scams are particularly effective because they exploit people's trust in well-known brands. Some fake exchanges even let you deposit money initially, making a few small withdrawals possible — this builds confidence before asking you to invest larger sums. At that point, your funds vanish and the platform becomes unresponsive."
       ],
       [
         "Warning signs to look for",
@@ -5747,7 +5747,7 @@
       ],
       [
         "What happens if I give a crypto recovery scammer my private wallet key or seed phrase?",
-        "If you have given a scammer your private key or seed phrase, they can immediately access and steal all cryptocurrency in that wallet. You must transfer any remaining funds to a completely new wallet with a new seed phrase from a legitimate exchange (Coinbase, Kraken, or FTX UK). Change the password on any linked email accounts immediately. Consider the compromised wallet as permanently unsafe for future use. Report this to Action Fraud as it constitutes theft, not just fraud."
+        "If you have given a scammer your private key or seed phrase, they can immediately access and steal all cryptocurrency in that wallet. You must transfer any remaining funds to a completely new wallet with a new seed phrase from a legitimate exchange (Coinbase or Kraken). Change the password on any linked email accounts immediately. Consider the compromised wallet as permanently unsafe for future use. Report this to Action Fraud as it constitutes theft, not just fraud."
       ],
       [
         "How do I report a crypto recovery scam in the UK?",
@@ -7622,7 +7622,7 @@
       ],
       [
         "Reporting this scam in the UK",
-        "Report clone firm investment scams to Action Fraud, the UK's official fraud-reporting service. Call 0300 123 2040 (Monday–Friday, 8am–8pm) or report online at actionfraud.police.uk. You'll receive a crime reference number, which you should share with your bank. Notify the FCA Consumer Helpline at 0800 111 6000 to alert the regulator that scammers are impersonating a genuine firm under its supervision—this helps the FCA warn the real company and other consumers. If the scammers contacted you by email, report the fake email address to the NCSC at report@phishing.gov.uk. If you received a malicious text or link, forward it to 7726 (a free, secure reporting service run by mobile networks). Contact Citizens Advice consumer helpline on 0808 223 1133 if you need support understanding your rights or how to recover funds. Report the fake website to the real company being impersonated—they may be able to request takedown or warn customers. Keep detailed records of all communications with the scammers and your bank, as these will support any fraud investigation or refund claim."
+        "Report clone firm investment scams to Action Fraud, the UK's official fraud-reporting service. Call 0300 123 2040 (Monday–Friday, 8am–8pm) or report online at actionfraud.police.uk. You'll receive a crime reference number, which you should share with your bank. Notify the FCA Consumer Helpline at 0800 111 6768 to alert the regulator that scammers are impersonating a genuine firm under its supervision—this helps the FCA warn the real company and other consumers. If the scammers contacted you by email, report the fake email address to the NCSC at report@phishing.gov.uk. If you received a malicious text or link, forward it to 7726 (a free, secure reporting service run by mobile networks). Contact Citizens Advice consumer helpline on 0808 223 1133 if you need support understanding your rights or how to recover funds. Report the fake website to the real company being impersonated—they may be able to request takedown or warn customers. Keep detailed records of all communications with the scammers and your bank, as these will support any fraud investigation or refund claim."
       ]
     ],
     "faq": [
@@ -7640,7 +7640,7 @@
       ],
       [
         "Who should I report a clone firm investment scam to?",
-        "Report to Action Fraud (0300 123 2040 or actionfraud.police.uk) to file a crime report. Notify the FCA Consumer Helpline (0800 111 6000) to alert the regulator that a genuine firm is being impersonated. Report the fake website to the NCSC (report@phishing.gov.uk) so they can request removal. If you received contact by email, SMS or social media, report those messages through those platforms' abuse systems. Contact your bank immediately and provide them with your Action Fraud crime reference number. The more places you report it, the faster action can be taken to shut down the fake operation and protect other people."
+        "Report to Action Fraud (0300 123 2040 or actionfraud.police.uk) to file a crime report. Notify the FCA Consumer Helpline (0800 111 6768) to alert the regulator that a genuine firm is being impersonated. Report the fake website to the NCSC (report@phishing.gov.uk) so they can request removal. If you received contact by email, SMS or social media, report those messages through those platforms' abuse systems. Contact your bank immediately and provide them with your Action Fraud crime reference number. The more places you report it, the faster action can be taken to shut down the fake operation and protect other people."
       ]
     ],
     "keywords": [
@@ -8203,7 +8203,7 @@
       ],
       [
         "The scammer told me there was a gas safety issue and I'm worried it might be real. What should I do?",
-        "Call British Gas directly on 0333 207 9299 (their official number) and ask if they have any safety concerns registered for your property. They will confirm whether they were trying to reach you or whether a call genuinely needs to be made. If you smell gas or suspect a real leak, call the National Gas Emergency Service on 0800 111 999—they respond to genuine emergencies regardless of your supplier."
+        "Call British Gas using the number on your latest bill or from britishgas.co.uk and ask if they have any safety concerns registered for your property. They will confirm whether they were trying to reach you or whether a call genuinely needs to be made. If you smell gas or suspect a real leak, call the National Gas Emergency Service on 0800 111 999—they respond to genuine emergencies regardless of your supplier."
       ],
       [
         "How do I report a British Gas scam call?",

@@ -11,12 +11,10 @@ on:
         description: "Days of Search Console data to analyse"
         required: false
         default: "28"
-  schedule:
-    # 05:23 UTC (06:23 BST). Off popular minute and hour slots.
-    # The concurrency group below queues this behind daily-publish if both
-    # are still in flight, so the 16-minute offset is defensive, not load-
-    # bearing. See master doc Section 20.
-    - cron: '23 5 * * *'
+  # SCHEDULE PAUSED 2026-06-18 (P0 safety hold) — see daily-publish.yml. Re-enable
+  # once the P1 accuracy gate is in place. Manual workflow_dispatch runs still work.
+  # schedule:
+  #   - cron: '23 5 * * *'   # 05:23 UTC (06:23 BST)
 
 permissions:
   contents: write
@@ -172,10 +170,10 @@ jobs:
           exit 1
 
       - name: Tweet new article
-        if: >
-          env.DRY_RUN != 'true' &&
-          steps.changed.outputs.changed == 'true' &&
-          steps.generate.outputs.new_slugs != ''
+        # P0 SAFETY HOLD 2026-06-18: auto-tweet disabled (see daily-publish.yml).
+        # Re-enable after the accuracy gate. Original condition:
+        #   env.DRY_RUN != 'true' && steps.changed.outputs.changed == 'true' && steps.generate.outputs.new_slugs != ''
+        if: false
         run: |
           # Write .env for tweet script
           cat > .env << EOF

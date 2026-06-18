@@ -15,12 +15,12 @@ on:
         description: "Max thin guides to rewrite per run"
         required: false
         default: "10"
-  schedule:
-    # Daily at 05:07 UTC (06:07 BST). Off the popular :00/:15/:30/:45 minute
-    # slots and off the 06:00-08:00 UTC peak window — GitHub-Actions scheduled
-    # cron is best-effort and gets delayed by hours when stacked against
-    # popular slots. See master doc Section 20.
-    - cron: '7 5 * * *'
+  # SCHEDULE PAUSED 2026-06-18 (P0 safety hold) — the autonomous publish -> deploy
+  # -> tweet path ran with no pre-publication accuracy gate or human review.
+  # Re-enable the cron below once the P1 accuracy gate is in place. Manual
+  # workflow_dispatch runs still work. See the project audit for context.
+  # schedule:
+  #   - cron: '7 5 * * *'   # Daily 05:07 UTC (06:07 BST)
 
 permissions:
   contents: write
@@ -249,7 +249,10 @@ jobs:
         # publish step printed `Captured slugs for tweeting: <slug>`.
         # Forcing the expression evaluator avoids any implicit-parsing
         # ambiguity around how GitHub Actions reads step-output values.
-        if: ${{ steps.publish.outputs.new_slugs != '' && steps.publish.outputs.new_slugs }}
+        # P0 SAFETY HOLD 2026-06-18: auto-tweet disabled — guides were broadcast to
+        # @BeatTheScamUK with no human review. Re-enable after the accuracy gate (P1).
+        # Original condition: ${{ steps.publish.outputs.new_slugs != '' && steps.publish.outputs.new_slugs }}
+        if: false
         env:
           TWITTER_API_KEY:             ${{ secrets.TWITTER_API_KEY }}
           TWITTER_API_KEY_SECRET:      ${{ secrets.TWITTER_API_KEY_SECRET }}
