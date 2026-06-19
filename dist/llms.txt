@@ -5,7 +5,7 @@
 ## Categories
 
 - [Crypto Scams](https://beatthescam.com/categories/crypto/): 8 guide(s)
-- [Email Scams](https://beatthescam.com/categories/email/): 15 guide(s)
+- [Email Scams](https://beatthescam.com/categories/email/): 16 guide(s)
 - [Employment Scams](https://beatthescam.com/categories/employment/): 8 guide(s)
 - [Fraud & Impersonation](https://beatthescam.com/categories/fraud/): 11 guide(s)
 - [Government Impersonation](https://beatthescam.com/categories/government/): 6 guide(s)
@@ -41,6 +41,7 @@
 - [CEO Fraud Email Scam UK: How to Spot and Stop Impersonation Attacks](https://beatthescam.com/guides/ceo-fraud-email-scam-uk/): CEO fraud, also called business email compromise (BEC), is a targeted scam where criminals impersonate company executives to trick employees into transferring funds or revealing sensitive information. This guide shows you the exact warning signs and verification steps UK businesses and employees need to know.
 - [Companies House Email Scam UK: How to Spot and Avoid Fake Official Emails](https://beatthescam.com/guides/companies-house-email-scam-uk/): Fraudsters send emails pretending to be from Companies House, the UK government agency that registers companies. They demand urgent payment for filing fees, renewals, or threaten to strike your company off the register unless you act immediately.
 - [DVLA Email Scam UK: How to Spot and Avoid Fake DVLA Emails](https://beatthescam.com/guides/dvla-email-scam-uk/): Fraudsters send fake DVLA emails claiming you owe vehicle tax, need to update your license, or have a traffic violation. These emails trick you into clicking malicious links or revealing sensitive information like your driving license number and bank details.
+- [Email Account Takeover Scam UK: How to Spot and Stop It](https://beatthescam.com/guides/email-account-takeover-scam-uk/): Email account takeover is when criminals break into your email account to steal money, personal data, or impersonate you to others. This guide explains how the scam works, what warning signs to watch for, and exactly what to do if you think your account has been compromised.
 - [Festival Lineup Email Scam UK: How to Spot Fake Ticket Offers](https://beatthescam.com/guides/festival-lineup-email-scam-uk/): Festival lineup email scams trick UK music fans into clicking malicious links or paying for fake presale tickets. Scammers impersonate real festivals like Glastonbury, Reading, Leeds, and Latitude to harvest payment details and personal information.
 - [HMRC Tax Rebate Email Scam: How to Spot and Avoid It in the UK](https://beatthescam.com/guides/hmrc-tax-rebate-email-scam/): HMRC tax rebate scams use convincing fake emails claiming you're owed a refund to steal your personal and financial data. This guide shows you exactly how to spot these emails and what to do if you've already clicked a link.
 - [HSBC Phishing Email Scam UK: How to Spot and Stop It](https://beatthescam.com/guides/hsbc-phishing-email-scam-uk/): HSBC phishing emails trick customers into revealing login details, card numbers, or personal information by impersonating the bank. Scammers use urgent language, fake security alerts, and fraudulent links to steal credentials and access accounts.
