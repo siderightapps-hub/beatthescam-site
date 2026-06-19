@@ -8,9 +8,9 @@
 > 3. Potential buyers / acquirers — full due-diligence briefing on the asset.
 > 4. Contractors, future editors, security reviewers — onboarding pack.
 >
-> **Last updated:** 2026-06-04
+> **Last updated:** 2026-06-19
 > **Domain age:** ~4 months (registered February 2026)
-> **Site state:** 164 guides published, 17 normalised categories, AI checker live, three video channels active (YouTube Shorts + TikTok + Instagram Reels), llms.txt + security.txt deployed, full UK Terms (E&W + Scotland + NI), named author E-E-A-T (Alex Bacsa) with cross-publication identity (CloudFintech + Tuning Digital + SalesTap + LinkedIn). Semrush Site Health **98%**, AI Search Health **99%**, Lighthouse mobile Performance **92–97** / Accessibility **95–98** / Best Practices **92** / SEO **100** across homepage, guide, author pages. ~191 residual Semrush warnings all from Google's AdSense CDN (irreducible third-party floor). **Technical build = 100% complete; all remaining work is growth, ops, or editorial.**
+> **Site state:** 184 guides published, 17 normalised categories, AI checker live, newsletter live (Resend capture + welcome email + signed one-click unsubscribe), llms.txt + security.txt deployed, full UK Terms (E&W + Scotland + NI), named author E-E-A-T (Alex Bacsa) with cross-publication identity (CloudFintech + Tuning Digital + SalesTap + LinkedIn). **Video production (YouTube Shorts + TikTok + Instagram Reels) was discontinued 2026-06-15** — it built neither domain authority nor backlinks; see `MD Files/BeatTheScam/VideoProductionHandoff.md`. Semrush Site Health **98%**, AI Search Health **99%**, Lighthouse mobile Performance **92–97** / Accessibility **95–98** / Best Practices **92** / SEO **100** across homepage, guide, author pages. ~191 residual Semrush warnings all from Google's AdSense CDN (irreducible third-party floor). **Technical build is mature and stable; the open risk surface is editorial accuracy (autonomous AI publishing is gated but not source-checked — see the content-accuracy section), not infrastructure.**
 > **Maintainer:** Alex — SideRight Apps (GitHub: `siderightapps-hub`)
 
 ---

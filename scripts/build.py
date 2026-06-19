@@ -276,6 +276,14 @@ def seo_title(post_title: str, site_name: str, max_len: int = 60) -> str:
     if len(post_title) <= available:
         return post_title + suffix
     truncated = post_title[:available].rsplit(" ", 1)[0].rstrip(" :,-–")
+    # Drop any trailing connective/stop-word left by truncation, so titles
+    # don't read "...How to Spot and | Beat the Scam".
+    stop = {"and", "or", "to", "the", "a", "an", "of", "for", "with",
+            "in", "on", "your", "how", "is", "vs"}
+    words = truncated.split()
+    while len(words) > 1 and words[-1].lower().strip(":,-–&") in stop:
+        words.pop()
+    truncated = " ".join(words).rstrip(" :,-–")
     return truncated + suffix
 
 def seo_description(desc: str, max_len: int = 160, min_acceptable: int = 130) -> str:
@@ -1755,7 +1763,7 @@ def build_legal_bodies(site):
     <p>If a guide contains an error, email <a href="mailto:{site["contact_email"]}">{site["contact_email"]}</a> with the page URL and the issue. Corrections are made promptly.</p>
 
     <h2>About the AI scam checker</h2>
-    <p>The free scam checker on this site sends the suspicious message text you paste to Anthropic&#8217;s Claude API for analysis. The text is processed in real time to produce a verdict, list of red flags, and recommended actions &mdash; then discarded. Beat the Scam does not store the text, your IP address, or any identifying data linked to your submission.</p>
+    <p>The free scam checker on this site sends the suspicious message text you paste to Anthropic&#8217;s Claude API for analysis. The text is processed in real time to produce a verdict, list of red flags, and recommended actions &mdash; then discarded. Beat the Scam does not store the text, your IP address, or any identifying data linked to your submission. As the processor, Anthropic may retain the text you submit and the model&#8217;s response for up to 30 days under its standard API data policy (and longer only where required for legal or safety reasons); it does not use API inputs or outputs to train its models.</p>
     <p>For your own safety, do not paste full passwords, full bank account numbers, or other sensitive credentials into the checker. The tool is designed to analyse the suspicious content itself (the message, link, or scam pattern), not your private credentials.</p>
     <p>The checker&#8217;s output is educational. It is not a definitive fraud determination. If you are unsure about a real-world payment or account access decision, contact your bank&#8217;s fraud team using the number on the back of your card.</p>
 
@@ -1781,13 +1789,13 @@ def build_legal_bodies(site):
     <p>We deliberately keep the list of third parties ("sub-processors") that may handle your data short. Each links to its own privacy policy:</p>
     <ul class="list-clean">
       <li><strong>Google</strong> &mdash; Analytics (GA4) and AdSense. Usage data, and &mdash; only after you accept &mdash; advertising and analytics cookies. <a href="https://policies.google.com/privacy" rel="noopener noreferrer" target="_blank">Policy</a>.</li>
-      <li><strong>Anthropic</strong> &mdash; processes the text you submit to the AI checker to produce a verdict. We do not store it. <a href="https://www.anthropic.com/legal/privacy" rel="noopener noreferrer" target="_blank">Policy</a>.</li>
+      <li><strong>Anthropic</strong> &mdash; processes the text you submit to the AI checker to produce a verdict. We do not store it; Anthropic may retain it for up to 30 days under its standard API policy and does not train on it. <a href="https://www.anthropic.com/legal/privacy" rel="noopener noreferrer" target="_blank">Policy</a>.</li>
       <li><strong>Resend</strong> &mdash; stores newsletter subscribers and delivers our emails. <a href="https://resend.com/legal/privacy-policy" rel="noopener noreferrer" target="_blank">Policy</a>.</li>
       <li><strong>Netlify</strong> &mdash; hosts the site; its server logs may briefly record your IP address and request details for security and reliability. <a href="https://www.netlify.com/privacy/" rel="noopener noreferrer" target="_blank">Policy</a>.</li>
       <li><strong>Ahrefs</strong> &mdash; cookieless visitor analytics, with no personal profiles or cross-site tracking. <a href="https://ahrefs.com/privacy-policy" rel="noopener noreferrer" target="_blank">Policy</a>.</li>
     </ul>
     <h2>Data retention</h2>
-    <p>Checker submissions are processed in real time and not stored by Beat the Scam. Newsletter data is kept until you unsubscribe. Analytics and server-log data are retained according to each provider's standard periods.</p>
+    <p>Checker submissions are processed in real time and not stored by Beat the Scam, though Anthropic &mdash; the API provider that analyses the text &mdash; may retain it for up to 30 days under its standard policy. Newsletter data is kept until you unsubscribe. Analytics and server-log data are retained according to each provider's standard periods.</p>
     <h2>Cookie choices</h2>
     <p>A cookie banner allows you to accept or reject non-essential cookies. Your preference is stored locally in your browser.</p>
     <h2>Your rights</h2>
