@@ -2629,6 +2629,7 @@ def build():
         "# API function rewrites (auto-generated)",
         "/api/subscribe      /.netlify/functions/subscribe      200",
         "/api/unsubscribe    /.netlify/functions/unsubscribe    200",
+        "/api/csp-report     /.netlify/functions/csp-report     200",
         "",
         "# Category slug normalisation (auto-generated from CATEGORY_CANON)",
     ]

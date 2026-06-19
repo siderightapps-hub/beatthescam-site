@@ -26,10 +26,16 @@
     Cross-Origin-Opener-Policy = "same-origin-allow-popups"
     # Legacy XSS filter for older browsers (harmless on modern browsers)
     X-XSS-Protection = "1; mode=block"
+    # CSP violation reporting endpoint (modern Reporting API). The CSP below
+    # references this name via `report-to csp-endpoint`. Self-hosted collector:
+    # netlify/functions/csp-report.js, routed via dist/_redirects (see gotcha
+    # in scripts/build.py — new toml [[redirects]] are ignored at the edge here).
+    Reporting-Endpoints = "csp-endpoint=\"https://beatthescam.com/api/csp-report\""
     # Content Security Policy
     # unsafe-inline needed for inline scripts (GA4, checker page, AdSense)
     # unsafe-eval NOT present
-    Content-Security-Policy = "default-src 'self'; script-src 'self' 'unsafe-inline' https://pagead2.googlesyndication.com https://www.googletagmanager.com https://www.google-analytics.com https://partner.googleadservices.com https://tpc.googlesyndication.com https://adservice.google.com https://adservice.google.co.uk https://analytics.ahrefs.com; style-src 'self' 'unsafe-inline'; img-src 'self' data: https://pagead2.googlesyndication.com https://www.google-analytics.com https://www.googletagmanager.com https://tpc.googlesyndication.com; connect-src 'self' https://www.google-analytics.com https://analytics.google.com https://stats.g.doubleclick.net https://analytics.ahrefs.com; frame-src https://googleads.g.doubleclick.net https://tpc.googlesyndication.com; font-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; upgrade-insecure-requests"
+    # report-uri (legacy) + report-to (modern) send violations to /api/csp-report
+    Content-Security-Policy = "default-src 'self'; script-src 'self' 'unsafe-inline' https://pagead2.googlesyndication.com https://www.googletagmanager.com https://www.google-analytics.com https://partner.googleadservices.com https://tpc.googlesyndication.com https://adservice.google.com https://adservice.google.co.uk https://analytics.ahrefs.com; style-src 'self' 'unsafe-inline'; img-src 'self' data: https://pagead2.googlesyndication.com https://www.google-analytics.com https://www.googletagmanager.com https://tpc.googlesyndication.com; connect-src 'self' https://www.google-analytics.com https://analytics.google.com https://stats.g.doubleclick.net https://analytics.ahrefs.com; frame-src https://googleads.g.doubleclick.net https://tpc.googlesyndication.com; font-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; upgrade-insecure-requests; report-uri https://beatthescam.com/api/csp-report; report-to csp-endpoint"
 
 # ─── STATIC ASSETS — long cache, immutable ───────────────────────────────────
 [[headers]]
