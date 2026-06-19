@@ -5,7 +5,7 @@
 ## Categories
 
 - [Crypto Scams](https://beatthescam.com/categories/crypto/): 8 guide(s)
-- [Email Scams](https://beatthescam.com/categories/email/): 14 guide(s)
+- [Email Scams](https://beatthescam.com/categories/email/): 15 guide(s)
 - [Employment Scams](https://beatthescam.com/categories/employment/): 8 guide(s)
 - [Fraud & Impersonation](https://beatthescam.com/categories/fraud/): 11 guide(s)
 - [Government Impersonation](https://beatthescam.com/categories/government/): 6 guide(s)
@@ -50,6 +50,7 @@
 - [Netflix Billing Email Scam UK: How to Spot Fake Payment Notices](https://beatthescam.com/guides/netflix-billing-email-scam-uk/): Netflix billing email scams target UK subscribers by sending urgent messages claiming payment has failed or your account needs updating. Victims are directed to fake login pages where their email, password, and payment information are stolen.
 - [PayPal Account Limited Email Scam UK: How to Spot and Avoid It](https://beatthescam.com/guides/paypal-account-limited-email-scam-uk/): Scammers send fake PayPal emails claiming your account is limited, asking you to verify your identity or payment details. We show you how to spot the fake emails and stay safe.
 - [Santander Email Scam UK: How to Spot & Report Fake Banking Emails](https://beatthescam.com/guides/santander-email-scam-uk/): Santander email scams trick UK customers into clicking malicious links or handing over login details by pretending to be the bank. These phishing emails often claim your account is locked, compromised, or needs urgent verification—all lies designed to steal your passwords and access your money.
+- [Sextortion Email Scam UK: How to Spot and Stop It](https://beatthescam.com/guides/sextortion-email-scam-uk/): Sextortion is a blackmail scam delivered by email, where criminals claim to have intimate footage or screenshots and demand payment to keep quiet. These emails are almost always false, but they exploit fear and shame to pressure victims into paying.
 - [TV Licence Email Scam UK: How to Spot Fake TV Licensing Demands](https://beatthescam.com/guides/tv-licence-email-scam-uk/): TV licence email scams use official-looking messages claiming you owe a fine or renewal payment to steal money or identity information. Scammers create fake websites and demand urgent payment before your account is suspended or enforcement action is taken.
 
 ### Employment Scams
