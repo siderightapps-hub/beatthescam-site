@@ -51,6 +51,16 @@ def slugify(text: str) -> str:
     return text.strip("-")
 
 
+def parse_marker(text: str, key: str) -> list:
+    """Read the `KEY=a,b,c` line the generator prints (last one wins)."""
+    vals: list = []
+    for line in text.splitlines():
+        if line.startswith(key + "="):
+            payload = line[len(key) + 1:].strip()
+            vals = [s for s in payload.split(",") if s]
+    return vals
+
+
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("--queue", required=True)
@@ -65,7 +75,7 @@ def main():
     posts_path = Path(args.posts)
 
     rows, fieldnames = load_queue(queue_path)
-    pending = [r for r in rows if str(r.get("published", "")).strip().lower() not in {"true", "yes", "1"}]
+    pending = [r for r in rows if str(r.get("published", "")).strip().lower() not in {"true", "yes", "1", "quarantined"}]
     batch = pending[: max(args.batch_size, 0)]
 
     if not batch:
@@ -87,26 +97,41 @@ def main():
         "--date",
         dt.date.today().isoformat(),
     ]
-    subprocess.run(cmd, check=True)
+    # Capture the generator's stdout so we can see which posts actually passed
+    # the accuracy gate. Only gate-PASSED posts are marked published + tweeted;
+    # quarantined posts are set aside for review (not retried, not broadcast).
+    proc = subprocess.run(cmd, check=True, capture_output=True, text=True)
+    sys.stdout.write(proc.stdout)
+    if proc.stderr:
+        sys.stderr.write(proc.stderr)
+
+    published_slugs = parse_marker(proc.stdout, "GATE_PUBLISHED")
+    quarantined_slugs = parse_marker(proc.stdout, "GATE_QUARANTINED")
+    published_set, quarantined_set = set(published_slugs), set(quarantined_slugs)
 
     published_at = dt.datetime.utcnow().replace(microsecond=0).isoformat() + "Z"
     batch_keywords = {row["keyword"] for row in batch}
     for row in rows:
-        if row["keyword"] in batch_keywords and str(row.get("published", "")).strip().lower() not in {"true", "yes", "1"}:
-            row["published"] = "true"
-            row["published_at"] = published_at
-            row["slug"] = slugify(row["keyword"])
+        if row["keyword"] not in batch_keywords:
+            continue
+        if str(row.get("published", "")).strip().lower() in {"true", "yes", "1", "quarantined"}:
+            continue
+        rslug = slugify(row["keyword"])
+        if rslug in published_set:
+            row["published"], row["published_at"], row["slug"] = "true", published_at, rslug
+        elif rslug in quarantined_set:
+            # Gate-failed: set aside for manual review. Excluded from pending so
+            # it is not auto-retried, and it is never tweeted.
+            row["published"], row["published_at"], row["slug"] = "quarantined", published_at, rslug
+        # else: generation errored (produced no post) — leave pending to retry.
 
     save_queue(queue_path, rows, fieldnames)
-    print(f"Published {len(batch)} topic(s)")
+    print(f"Published {len(published_slugs)} topic(s); quarantined {len(quarantined_slugs)} for review")
 
-    # Emit the new slugs in the convention the daily-publish.yml workflow
-    # greps for (`^NEW_ARTICLE_SLUGS=...`), so the tweet step can fire for
-    # each new article. Mirrors the contract that scripts/search_console_articles.py
-    # uses for the daily-search-console.yml workflow.
-    new_slugs = [slugify(row["keyword"]) for row in batch]
-    if new_slugs:
-        print(f"NEW_ARTICLE_SLUGS={','.join(new_slugs)}")
+    # Only gate-PASSED slugs are emitted for tweeting (daily-publish.yml greps
+    # `^NEW_ARTICLE_SLUGS=`). Quarantined content is never broadcast.
+    if published_slugs:
+        print(f"NEW_ARTICLE_SLUGS={','.join(published_slugs)}")
 
     return 0
 

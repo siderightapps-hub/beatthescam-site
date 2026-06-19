@@ -20,3 +20,6 @@ beatthescam-video-handoff.md
 
 # Video music bed — local render asset only (licensed; never commit or deploy)
 assets/audio/
+
+# Gate-quarantined drafts — failed the accuracy gate; local review only, never published
+content/quarantine/

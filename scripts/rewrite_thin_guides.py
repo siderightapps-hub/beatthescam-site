@@ -22,6 +22,7 @@ sys.path.insert(0, str(Path(__file__).parent))
 from generate_content_claude import (
     Topic, claude_post, load_posts, save_posts, slugify
 )
+from content_gate import run_gate, quarantine_post
 
 DEFAULT_MODEL = "claude-haiku-4-5-20251001"
 
@@ -44,6 +45,10 @@ def main() -> int:
     parser.add_argument("--model",     default=DEFAULT_MODEL)
     parser.add_argument("--dry-run",   action="store_true",
                         help="List guides that would be rewritten without doing it")
+    parser.add_argument("--no-gate", action="store_true",
+                        help="Skip the accuracy gate (manual override — unsafe for autonomous runs)")
+    parser.add_argument("--gate-no-llm", action="store_true",
+                        help="Run only the deterministic gate checks (skip the LLM judge)")
     args = parser.parse_args()
 
     api_key = os.getenv("ANTHROPIC_API_KEY")
@@ -100,6 +105,16 @@ def main() -> int:
             new_post = claude_post(topic, today, args.model, client, all_slugs)
             # Preserve the original slug so URLs don't change
             new_post["slug"] = slug
+
+            # Accuracy gate — only replace the live guide if the rewrite PASSES.
+            # On failure, the original guide is kept untouched (never degraded).
+            if not args.no_gate:
+                result = run_gate(new_post, client=client, model=args.model,
+                                  use_llm=not args.gate_no_llm)
+                if not result.passed:
+                    quarantine_post(new_post, result, today)
+                    print(f"QUARANTINED rewrite (kept original) — {result.summary()}", file=sys.stderr)
+                    continue
 
             # Replace in posts list
             posts = [p for p in posts if p["slug"] != slug]

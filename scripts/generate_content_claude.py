@@ -17,6 +17,8 @@ from typing import Dict, List, Sequence
 
 from anthropic import Anthropic
 
+from content_gate import run_gate, ACCURACY_BLOCK, quarantine_post
+
 DEFAULT_MODEL   = "claude-haiku-4-5-20251001"
 REQUIRED_FIELDS = ["title", "slug", "category", "excerpt", "description",
                    "hero", "date", "content", "sections", "faq", "keywords"]
@@ -92,7 +94,7 @@ def extract_json(text: str) -> Dict:
 
 # ─── CLAUDE PROMPT ───────────────────────────────────────────────────────────
 
-SYSTEM_PROMPT = """You are a UK consumer protection writer for the website Beat the Scam (beatthescam.com).
+SYSTEM_PROMPT = f"""You are a UK consumer protection writer for the website Beat the Scam (beatthescam.com).
 You write practical, detailed scam-awareness guides for ordinary UK residents.
 
 Your writing style:
@@ -102,11 +104,7 @@ Your writing style:
 - Calm tone — not alarmist
 - Reference named companies, products, and organisations only when you are confident they are real and publicly verifiable
 
-ACCURACY — THIS OVERRIDES EVERY STYLE AND SEO RULE BELOW. A plausible-sounding but invented fact about a real company, person, or product is the single worst failure this publication can make: it is libel-adjacent and gets the site rejected from ad networks.
-- Use directional language ("growing rapidly", "a meaningful share", "early data suggests") for figures unless they are well-established public facts. Never invent specific percentages, dollar figures, or entity-attributed statistics.
-- NEVER invent or assert a specific dated event, deal, acquisition, merger, partnership, funding round, valuation, product launch, regulatory action, or piece of legislation involving a real named company, person, product, or regulator unless you are certain it is a true, well-established public fact. This explicitly includes who-acquired-whom, who-partnered-with-whom, launch/approval dates, what a law or feature actually covers, pricing/plan limits, and which tool or vendor a named company actually uses.
-- If you are not certain of the exact relationship, date, figure, or attribution, describe it in general terms WITHOUT naming a specific deal/number — or omit it. Inventing a product or vendor name, or pairing a real company with the wrong partner, tool, or capability, is forbidden.
-- Before finalising, re-read every sentence that names a real company, person, or product alongside a date, number, deal, price, or feature. If you are not confident it is a true public fact, rewrite it as a general statement or delete it.
+{ACCURACY_BLOCK}
 
 You ALWAYS respond with valid JSON only. No markdown fences, no preamble, no trailing text."""
 
@@ -171,6 +169,7 @@ def claude_post(topic: Topic, today: str, model: str, client: Anthropic,
     response = client.messages.create(
         model=model,
         max_tokens=3000,
+        temperature=0,   # factual reference content — minimise creative drift
         system=SYSTEM_PROMPT,
         messages=[{"role": "user", "content": build_prompt(topic, all_slugs)}],
     )
@@ -324,6 +323,10 @@ def main() -> int:
     parser.add_argument("--model",  default=DEFAULT_MODEL)
     parser.add_argument("--date",   default=date.today().isoformat())
     parser.add_argument("--force",  action="store_true", help="Overwrite existing slugs")
+    parser.add_argument("--no-gate", action="store_true",
+                        help="Skip the accuracy gate entirely (manual override — unsafe for autonomous runs)")
+    parser.add_argument("--gate-no-llm", action="store_true",
+                        help="Run only the deterministic gate checks (skip the LLM judge)")
     args = parser.parse_args()
 
     posts  = load_posts(args.posts)
@@ -340,6 +343,8 @@ def main() -> int:
         client = Anthropic(api_key=api_key)
 
     added = 0
+    published_slugs: List[str] = []
+    quarantined_slugs: List[str] = []
     for topic in topics:
         slug = slugify(topic.keyword)
 
@@ -353,20 +358,38 @@ def main() -> int:
                 post = claude_post(topic, args.date, args.model, client, all_slugs)
             else:
                 post = fallback_post(topic, args.date)
-
-            if args.force:
-                posts = [p for p in posts if p.get("slug") != post["slug"]]
-
-            posts.append(post)
-            all_slugs.append(post["slug"])
-            added += 1
-            wc = sum(len((t + " " + b).split()) for t, b in post["sections"])
-            print(f"ok ({wc}w)")
         except Exception as e:
             print(f"ERROR: {e}", file=sys.stderr)
+            continue
+
+        # ── Accuracy gate: PASS → publish, FAIL → quarantine (never published).
+        if args.mode == "claude" and not args.no_gate:
+            result = run_gate(post, client=client, model=args.model,
+                              use_llm=not args.gate_no_llm)
+            if not result.passed:
+                quarantine_post(post, result, args.date)
+                quarantined_slugs.append(post["slug"])
+                print(f"QUARANTINED — {result.summary()}", file=sys.stderr)
+                continue
+
+        if args.force:
+            posts = [p for p in posts if p.get("slug") != post["slug"]]
+
+        posts.append(post)
+        all_slugs.append(post["slug"])
+        published_slugs.append(post["slug"])
+        added += 1
+        wc = sum(len((t + " " + b).split()) for t, b in post["sections"])
+        print(f"ok ({wc}w)")
 
     save_posts(args.posts, posts)
     print(f"\nDone: added {added} post(s) to {args.posts}")
+    if quarantined_slugs:
+        print(f"Quarantined {len(quarantined_slugs)} post(s) for review: {', '.join(quarantined_slugs)}")
+    # Machine-readable lines the orchestrator (run_daily_publish.py) parses so it
+    # only marks-published / tweets posts that actually passed the gate.
+    print(f"GATE_PUBLISHED={','.join(published_slugs)}")
+    print(f"GATE_QUARANTINED={','.join(quarantined_slugs)}")
     return 0
 
 

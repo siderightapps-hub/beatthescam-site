@@ -21,6 +21,8 @@ import sys
 from datetime import datetime, date, timedelta
 from pathlib import Path
 
+from content_gate import run_gate, ACCURACY_BLOCK, quarantine_post
+
 ROOT       = Path(__file__).resolve().parents[1]
 POSTS_FILE = ROOT / "content" / "posts.json"
 SITE_FILE  = ROOT / "content" / "site.json"
@@ -226,12 +228,8 @@ def generate_article(query: dict, api_key: str):
 
 Write a complete guide about: "{q}"
 
-ACCURACY — THIS OVERRIDES EVERY STYLE AND SEO RULE BELOW. A plausible-sounding but invented fact about a real company, person, or product is the single worst failure this publication can make: it is libel-adjacent and gets the site rejected from ad networks.
-- Write ONLY about verified, documented UK scams. All content must be UK-specific (use £ not $, UK reporting numbers, UK organisations). Action Fraud: 0300 123 2040 | Spam texts: 7726.
-- Use directional language ("growing rapidly", "a meaningful share", "early data suggests") for figures unless they are well-established public facts. Never invent specific percentages, dollar figures, or entity-attributed statistics. If you cite a figure, it must be from Action Fraud, FCA, Which?, NCSC, or UK Finance; if you cannot verify a stat, describe the scam pattern without figures.
-- NEVER invent or assert a specific dated event, deal, acquisition, merger, partnership, funding round, valuation, product launch, regulatory action, or piece of legislation involving a real named company, person, product, or regulator unless you are certain it is a true, well-established public fact. This explicitly includes who-acquired-whom, who-partnered-with-whom, launch/approval dates, what a law or feature actually covers, pricing/plan limits, and which tool or vendor a named company actually uses.
-- If you are not certain of the exact relationship, date, figure, or attribution, describe it in general terms WITHOUT naming a specific deal/number — or omit it. Inventing a product or vendor name, or pairing a real company with the wrong partner, tool, or capability, is forbidden.
-- Before finalising, re-read every sentence that names a real company, person, or product alongside a date, number, deal, price, or feature. If you are not confident it is a true public fact, rewrite it as a general statement or delete it.
+{ACCURACY_BLOCK}
+- Write ONLY about verified, documented UK scams. All content must be UK-specific (use £ not $, UK reporting routes, UK organisations).
 
 OUTPUT FORMAT — respond with a single valid JSON object only, no other text:
 {{
@@ -259,6 +257,7 @@ OUTPUT FORMAT — respond with a single valid JSON object only, no other text:
         response = client.messages.create(
             model="claude-haiku-4-5-20251001",
             max_tokens=3000,
+            temperature=0,   # factual reference content — minimise creative drift
             messages=[{"role": "user", "content": prompt}],
         )
         raw = response.content[0].text.strip()
@@ -351,6 +350,10 @@ def main():
         return
 
     # Generate articles for top gaps
+    from anthropic import Anthropic
+    gate_client = Anthropic(api_key=api_key)
+    GATE_MODEL = "claude-haiku-4-5-20251001"
+
     generated = 0
     for gap in gaps:
         if generated >= args.limit:
@@ -365,6 +368,13 @@ def main():
         post = generate_article(gap, api_key)
         if not post:
             print(f"⚠️  Skipping '{gap['query']}' — generation failed")
+            continue
+
+        # Accuracy gate — PASS → publish, FAIL → quarantine (never published or tweeted).
+        result = run_gate(post, client=gate_client, model=GATE_MODEL, use_llm=True)
+        if not result.passed:
+            quarantine_post(post, result, date.today().isoformat())
+            print(f"🚫 QUARANTINED '{gap['query']}' — {result.summary()}")
             continue
 
         # Double-check slug uniqueness
