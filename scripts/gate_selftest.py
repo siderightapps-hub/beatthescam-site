@@ -92,11 +92,35 @@ CLEAN = {
              "your order directly via the courier's official website rather than the link."]],
 }
 
+# (4) ABSOLUTE — the class that leaked into the 2026-06-19 sextortion guide:
+#     an unconditional "no footage exists" guarantee plus an invented
+#     illustrative figure. The deterministic absolute check MUST block the
+#     guarantee (no API needed); the tightened judge should also object to the
+#     made-up rate. The hedged sentence must NOT trip the absolute check.
+ABSOLUTE = {
+    "slug": "selftest-absolute", "title": "Sextortion Email Scam UK",
+    "hero": "x", "description": "y",
+    "sections": [
+        ["What is this scam?",
+         "Sextortion emails claim a hacker filmed you via your webcam. In reality no footage "
+         "exists — the scammer is bluffing. They send the same email to 100,000 people, and "
+         "even if only 0.1% pay, they profit. If your webcam is intact, you are completely safe."],
+        ["What to do",
+         "Do not pay. It is extremely unlikely that any footage exists. Report the email to "
+         "Action Fraud on 0300 123 2040 and forward scam texts to 7726."],
+    ],
+    "faq": [["Do they have a video of me?",
+             "Almost certainly not — these are mass-mailed bluffs."]],
+}
+
 EXPECT = [
     ("fabricated (multi-vector) is BLOCKED",            "FABRICATED", lambda r: not r.passed),
     ("subtle fabrication is BLOCKED",                   "SUBTLE",     lambda r: not r.passed),
     ("...and the LLM JUDGE is what caught the subtle one",
      "SUBTLE", lambda r: any(i["check"] == "judge" and i["severity"] == "block" for i in r.issues)),
+    ("absolute guarantee is BLOCKED",                   "ABSOLUTE",   lambda r: not r.passed),
+    ("...and the DETERMINISTIC absolute check caught it (no API needed)",
+     "ABSOLUTE", lambda r: any(i["check"] == "absolute" and i["severity"] == "block" for i in r.issues)),
     ("clean guide PASSES (no over-blocking)",           "CLEAN",      lambda r: r.passed),
 ]
 
@@ -117,10 +141,11 @@ def main() -> int:
 
     print(f"Running gate self-test with model: {args.model}\n")
     results = {}
-    for name, post in [("FABRICATED", FABRICATED), ("SUBTLE", SUBTLE), ("CLEAN", CLEAN)]:
+    for name, post in [("FABRICATED", FABRICATED), ("SUBTLE", SUBTLE),
+                       ("ABSOLUTE", ABSOLUTE), ("CLEAN", CLEAN)]:
         results[name] = run_gate(post, client=client, model=args.model, use_llm=True)
 
-    for name in ("FABRICATED", "SUBTLE", "CLEAN"):
+    for name in ("FABRICATED", "SUBTLE", "ABSOLUTE", "CLEAN"):
         r = results[name]
         print(f"── {name}: {r.summary()}")
         for i in r.issues:

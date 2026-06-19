@@ -31,7 +31,8 @@ from typing import Dict, List, Optional
 # their prompts cannot drift apart again (audit GAP 4). The gate's allowlist
 # (ALLOWED_PHONE_DIGITS) and this prompt rule are kept deliberately in sync.
 ACCURACY_BLOCK = """ACCURACY — THIS OVERRIDES EVERY STYLE AND SEO RULE BELOW. A plausible-sounding but invented fact about a real company, person, or product is the single worst failure this publication can make: it is libel-adjacent and gets the site rejected from ad networks.
-- Use directional language ("growing rapidly", "a meaningful share", "early data suggests") for figures unless they are well-established public facts. Never invent specific percentages, dollar figures, or entity-attributed statistics. Do not attribute a statistic to a named body (Action Fraud, the FCA, Which?, UK Finance, NCSC) unless you are certain of the exact figure — if unsure, describe the pattern without a number.
+- Use directional language ("growing rapidly", "a meaningful share", "early data suggests") for figures unless they are well-established public facts. Never invent specific percentages, dollar figures, or entity-attributed statistics. Do not attribute a statistic to a named body (Action Fraud, the FCA, Which?, UK Finance, NCSC) unless you are certain of the exact figure — if unsure, describe the pattern without a number. This includes ILLUSTRATIVE or hypothetical numbers: do not invent a count or rate to make a point (e.g. "they email 100,000 people and even if 0.1% pay") — describe the mechanism qualitatively instead ("sent to very large numbers of people, so even a tiny response rate is profitable").
+- Never give the reader an unconditional guarantee or absolute about their own situation or safety: do not write that something is impossible, that no footage/recording/evidence exists, that they are "100% safe", or that an outcome is guaranteed. Real threats vary, so an absolute can be both wrong and harmful — use hedged, accurate language ("almost always a bluff", "it is extremely unlikely that any footage exists", "in the vast majority of cases"). Accurately describing a scammer's OWN false promise is fine.
 - NEVER invent or assert a specific dated event, deal, acquisition, merger, partnership, funding round, valuation, product launch, regulatory action, or piece of legislation involving a real named company, person, product, or regulator unless you are certain it is a true, well-established public fact. This explicitly includes who-acquired-whom, who-partnered-with-whom, launch/approval dates, what a law or feature actually covers, pricing/plan limits, and which tool or vendor a named company actually uses.
 - Never present a named company as "legitimate", "genuine", or "trusted" unless it is a well-known real brand; do not invent example company names.
 - If you are not certain of the exact relationship, date, figure, or attribution, describe it in general terms WITHOUT naming a specific deal/number — or omit it. Inventing a product or vendor name, or pairing a real company with the wrong partner, tool, or capability, is forbidden.
@@ -149,11 +150,50 @@ def check_banned_entities(post: Dict) -> List[Dict]:
     return issues
 
 
+# Unconditional certainty that is dangerous on a safety-advice site. These are
+# claims only the SITE makes to the reader — a scammer asserts the OPPOSITE (that
+# footage/evidence DOES exist), so collision with described scammer-speech is ~nil.
+# Hedged advice ("it is extremely unlikely that any footage exists", "there is
+# almost certainly no footage") does NOT match these bare-absolute patterns by
+# construction, because an adverb sits between the verb and the negation/noun.
+# This is the exact class that leaked into the 2026-06-19 sextortion guide.
+_ABSOLUTE_RES = [
+    re.compile(r"\bno\s+(?:such\s+)?(?:footage|video|recording|images?|photos?|"
+               r"pictures?)\s+(?:exists?|was\s+(?:ever\s+)?(?:taken|made|recorded|captured))\b", re.I),
+    re.compile(r"\bthere\s+(?:is|are)\s+no\s+(?:footage|video|recording|images?|photos?|pictures?)\b", re.I),
+    re.compile(r"\b(?:footage|video|recording|images?|photos?|pictures?)\s+(?:does|do)\s+not\s+exist\b", re.I),
+    re.compile(r"\byou\s+are\s+(?:completely|totally|perfectly|fully|entirely|100%)\s+safe\b", re.I),
+    re.compile(r"\byou\s+have\s+nothing\s+to\s+(?:worry\s+about|fear)\b", re.I),
+]
+
+
+def check_absolutes(post: Dict) -> List[Dict]:
+    text = _post_text(post)
+    issues: List[Dict] = []
+    seen = set()
+    for rx in _ABSOLUTE_RES:
+        m = rx.search(text)
+        if m:
+            phrase = m.group(0).strip().lower()
+            if phrase in seen:
+                continue
+            seen.add(phrase)
+            issues.append({
+                "check": "absolute",
+                "severity": SEVERITY_BLOCK,
+                "detail": (f"makes an unconditional guarantee/absolute to the reader "
+                           f"('{m.group(0).strip()}'). Real threats vary — use hedged, "
+                           f"accurate language ('almost always a bluff', 'extremely "
+                           f"unlikely that any footage exists')."),
+            })
+    return issues
+
+
 def check_deterministic(post: Dict) -> List[Dict]:
     # Note: no deterministic domain/URL check — these guides intentionally
     # contain example scam/lookalike domains, so a domain allowlist is pure
     # noise here. Domain plausibility is left to the LLM judge.
-    return check_phones(post) + check_banned_entities(post)
+    return check_phones(post) + check_banned_entities(post) + check_absolutes(post)
 
 
 # ─── LLM JUDGE ───────────────────────────────────────────────────────────────
@@ -166,6 +206,12 @@ access and may hallucinate confidently.
 Flag a claim when it is a specific assertion the reader could act on or be misled by and that \
 cannot be safely assumed true:
 - invented or unattributed statistics / figures / percentages / £ amounts presented as fact
+- numbers used illustratively or hypothetically (e.g. "they send this to 100,000 people and even \
+if only 0.1% pay") — a made-up count or rate is still fabrication when framed as an example
+- absolute guarantees or certainty stated to the READER about their own situation: that no \
+footage / recording / evidence exists, that they are completely safe, that an outcome is impossible \
+or guaranteed. Hedged language ("almost certainly", "extremely unlikely", "in the vast majority of \
+cases") is fine; an unconditional absolute is not
 - quotes attributed to a named person or organisation
 - specific claims about a named company's deal, partnership, acquisition, product, pricing, or feature
 - naming a specific company as "legitimate"/"genuine"/"trusted" (could be invented or defunct)
@@ -174,7 +220,8 @@ cannot be safely assumed true:
 
 Do NOT flag: general scam-pattern description, the standard UK reporting routes (Action Fraud \
 0300 123 2040, Citizens Advice 0808 223 1133, forward texts to 7726, report@phishing.gov.uk), \
-or clearly directional language ("growing rapidly", "many victims").
+clearly directional language ("growing rapidly", "many victims"), or the site accurately \
+describing a SCAMMER's own false promise (e.g. "the scammer claims your funds are 100% safe").
 
 Respond with ONLY this JSON, no other text:
 {"verdict":"pass"|"fail","risk":"low"|"medium"|"high","issues":[{"claim":"<quote>","problem":"<short>","severity":"low"|"medium"|"high"}]}
