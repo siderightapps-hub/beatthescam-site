@@ -11,10 +11,11 @@ on:
         description: "Days of Search Console data to analyse"
         required: false
         default: "28"
-  # SCHEDULE PAUSED 2026-06-18 (P0 safety hold) — see daily-publish.yml. Re-enable
-  # once the P1 accuracy gate is in place. Manual workflow_dispatch runs still work.
-  # schedule:
-  #   - cron: '23 5 * * *'   # 05:23 UTC (06:23 BST)
+  schedule:
+    # 05:23 UTC (06:23 BST). Re-enabled 2026-06-19 after the P1 accuracy gate — the
+    # generator runs every draft through scripts/content_gate.py before publishing.
+    # Queued behind daily-publish via the concurrency group below.
+    - cron: '23 5 * * *'
 
 permissions:
   contents: write
@@ -170,10 +171,12 @@ jobs:
           exit 1
 
       - name: Tweet new article
-        # P0 SAFETY HOLD 2026-06-18: auto-tweet disabled (see daily-publish.yml).
-        # Re-enable after the accuracy gate. Original condition:
-        #   env.DRY_RUN != 'true' && steps.changed.outputs.changed == 'true' && steps.generate.outputs.new_slugs != ''
-        if: false
+        # Re-enabled 2026-06-19: only gate-passed articles are inserted, so
+        # new_slugs only ever references content that cleared the accuracy gate.
+        if: >
+          env.DRY_RUN != 'true' &&
+          steps.changed.outputs.changed == 'true' &&
+          steps.generate.outputs.new_slugs != ''
         run: |
           # Write .env for tweet script
           cat > .env << EOF
