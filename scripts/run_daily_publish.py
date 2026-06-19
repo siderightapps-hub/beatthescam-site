@@ -105,9 +105,11 @@ def main():
     if proc.stderr:
         sys.stderr.write(proc.stderr)
 
+    # post slugs (real URLs) → tweeting; topic slugs → marking the right queue rows
+    # (the model's chosen slug can differ from slugify(keyword)).
     published_slugs = parse_marker(proc.stdout, "GATE_PUBLISHED")
-    quarantined_slugs = parse_marker(proc.stdout, "GATE_QUARANTINED")
-    published_set, quarantined_set = set(published_slugs), set(quarantined_slugs)
+    published_topics = set(parse_marker(proc.stdout, "GATE_PUBLISHED_TOPICS"))
+    quarantined_topics = set(parse_marker(proc.stdout, "GATE_QUARANTINED_TOPICS"))
 
     published_at = dt.datetime.utcnow().replace(microsecond=0).isoformat() + "Z"
     batch_keywords = {row["keyword"] for row in batch}
@@ -117,16 +119,16 @@ def main():
         if str(row.get("published", "")).strip().lower() in {"true", "yes", "1", "quarantined"}:
             continue
         rslug = slugify(row["keyword"])
-        if rslug in published_set:
+        if rslug in published_topics:
             row["published"], row["published_at"], row["slug"] = "true", published_at, rslug
-        elif rslug in quarantined_set:
+        elif rslug in quarantined_topics:
             # Gate-failed: set aside for manual review. Excluded from pending so
             # it is not auto-retried, and it is never tweeted.
             row["published"], row["published_at"], row["slug"] = "quarantined", published_at, rslug
         # else: generation errored (produced no post) — leave pending to retry.
 
     save_queue(queue_path, rows, fieldnames)
-    print(f"Published {len(published_slugs)} topic(s); quarantined {len(quarantined_slugs)} for review")
+    print(f"Published {len(published_topics)} topic(s); quarantined {len(quarantined_topics)} for review")
 
     # Only gate-PASSED slugs are emitted for tweeting (daily-publish.yml greps
     # `^NEW_ARTICLE_SLUGS=`). Quarantined content is never broadcast.

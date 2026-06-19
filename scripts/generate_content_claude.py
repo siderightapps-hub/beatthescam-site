@@ -343,8 +343,9 @@ def main() -> int:
         client = Anthropic(api_key=api_key)
 
     added = 0
-    published_slugs: List[str] = []
-    quarantined_slugs: List[str] = []
+    published_slugs: List[str] = []     # real post slugs (URLs) — used for tweeting
+    published_topics: List[str] = []    # topic slugs (slugify(keyword)) — used to mark queue rows
+    quarantined_topics: List[str] = []  # topic slugs — used to mark queue rows
     for topic in topics:
         slug = slugify(topic.keyword)
 
@@ -368,7 +369,7 @@ def main() -> int:
                               use_llm=not args.gate_no_llm)
             if not result.passed:
                 quarantine_post(post, result, args.date)
-                quarantined_slugs.append(post["slug"])
+                quarantined_topics.append(slug)
                 print(f"QUARANTINED — {result.summary()}", file=sys.stderr)
                 continue
 
@@ -378,18 +379,22 @@ def main() -> int:
         posts.append(post)
         all_slugs.append(post["slug"])
         published_slugs.append(post["slug"])
+        published_topics.append(slug)
         added += 1
         wc = sum(len((t + " " + b).split()) for t, b in post["sections"])
         print(f"ok ({wc}w)")
 
     save_posts(args.posts, posts)
     print(f"\nDone: added {added} post(s) to {args.posts}")
-    if quarantined_slugs:
-        print(f"Quarantined {len(quarantined_slugs)} post(s) for review: {', '.join(quarantined_slugs)}")
-    # Machine-readable lines the orchestrator (run_daily_publish.py) parses so it
-    # only marks-published / tweets posts that actually passed the gate.
+    if quarantined_topics:
+        print(f"Quarantined {len(quarantined_topics)} topic(s) for review: {', '.join(quarantined_topics)}")
+    # Machine-readable lines the orchestrator (run_daily_publish.py) parses.
+    # GATE_PUBLISHED   = real post slugs (for tweeting / NEW_ARTICLE_SLUGS).
+    # *_TOPICS         = topic slugs (slugify(keyword)) used to mark the right queue
+    #                    rows; the post slug can differ when the model picks its own.
     print(f"GATE_PUBLISHED={','.join(published_slugs)}")
-    print(f"GATE_QUARANTINED={','.join(quarantined_slugs)}")
+    print(f"GATE_PUBLISHED_TOPICS={','.join(published_topics)}")
+    print(f"GATE_QUARANTINED_TOPICS={','.join(quarantined_topics)}")
     return 0
 
 
