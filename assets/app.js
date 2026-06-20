@@ -73,9 +73,8 @@
            (window.googlefc && typeof window.googlefc === 'object');
   }
 
-  if(googleCmpActive()){
-    hideBanner(); // Google's CMP is the consent surface here.
-  } else {
+  // Custom-banner fallback — only for regions where Google's CMP isn't shown.
+  function showFallbackBanner(){
     const current = safeGet(storageKey);
     if(current === 'accepted' || current === 'rejected'){
       applyConsent(current);
@@ -85,6 +84,21 @@
       updateStatus(null);
       showBanner();
     }
+  }
+
+  if(googleCmpActive()){
+    hideBanner(); // Google's CMP is the consent surface here.
+  } else {
+    // The CMP loads async and may not have injected __tcfapi yet. Keep the
+    // banner hidden and poll briefly before falling back, so it doesn't flash
+    // in regulated regions where Google's message is about to appear.
+    hideBanner();
+    var waited = 0;
+    var cmpPoll = setInterval(function(){
+      waited += 200;
+      if(googleCmpActive()){ clearInterval(cmpPoll); hideBanner(); }
+      else if(waited >= 2500){ clearInterval(cmpPoll); showFallbackBanner(); }
+    }, 200);
   }
 
   if(accept){

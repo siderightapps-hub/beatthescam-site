@@ -8,7 +8,9 @@ function hideBanner(){if(banner){banner.hidden=true;banner.setAttribute('aria-hi
 function showBanner(){if(banner){banner.hidden=false;banner.setAttribute('aria-hidden','false');}}
 function setPreference(mode){safeSet(storageKey,mode);applyConsent(mode);updateStatus(mode);hideBanner();}
 function googleCmpActive(){return typeof window.__tcfapi==='function'||(window.googlefc&&typeof window.googlefc==='object');}
-if(googleCmpActive()){hideBanner();}else{const current=safeGet(storageKey);if(current==='accepted'||current==='rejected'){applyConsent(current);updateStatus(current);hideBanner();}else{updateStatus(null);showBanner();}}
+function showFallbackBanner(){const current=safeGet(storageKey);if(current==='accepted'||current==='rejected'){applyConsent(current);updateStatus(current);hideBanner();}else{updateStatus(null);showBanner();}}
+if(googleCmpActive()){hideBanner();}else{hideBanner();var waited=0;var cmpPoll=setInterval(function(){waited+=200;if(googleCmpActive()){clearInterval(cmpPoll);hideBanner();}
+else if(waited>=2500){clearInterval(cmpPoll);showFallbackBanner();}},200);}
 if(accept){accept.addEventListener('click',function(e){e.preventDefault();setPreference('accepted');});}
 if(reject){reject.addEventListener('click',function(e){e.preventDefault();setPreference('rejected');});}
 if(openSettings){openSettings.addEventListener('click',function(e){e.preventDefault();if(window.googlefc&&typeof window.googlefc.showRevocationMessage==='function'){window.googlefc.showRevocationMessage();}else{showBanner();banner&&banner.scrollIntoView({behavior:'smooth',block:'nearest'});}});}

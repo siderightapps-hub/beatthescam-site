@@ -35,7 +35,13 @@
     # unsafe-inline needed for inline scripts (GA4, checker page, AdSense)
     # unsafe-eval NOT present
     # report-uri (legacy) + report-to (modern) send violations to /api/csp-report
-    Content-Security-Policy = "default-src 'self'; script-src 'self' 'unsafe-inline' https://pagead2.googlesyndication.com https://www.googletagmanager.com https://www.google-analytics.com https://partner.googleadservices.com https://tpc.googlesyndication.com https://adservice.google.com https://adservice.google.co.uk https://analytics.ahrefs.com; style-src 'self' 'unsafe-inline'; img-src 'self' data: https://pagead2.googlesyndication.com https://www.google-analytics.com https://www.googletagmanager.com https://tpc.googlesyndication.com; connect-src 'self' https://www.google-analytics.com https://analytics.google.com https://stats.g.doubleclick.net https://analytics.ahrefs.com; frame-src https://googleads.g.doubleclick.net https://tpc.googlesyndication.com; font-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; upgrade-insecure-requests; report-uri https://beatthescam.com/api/csp-report; report-to csp-endpoint"
+    # NOTE: Google's certified CMP (Funding Choices / "Privacy & messaging")
+    # loads from fundingchoicesmessages.google.com — it must be allow-listed in
+    # script-src, frame-src, img-src AND connect-src or the consent message is
+    # CSP-blocked and the site falls back to the custom banner (regression seen
+    # 2026-06-21). Edits here only reach the edge after a Netlify "Clear cache
+    # and deploy" (Section 20 gotcha — netlify.toml headers don't hot-apply here).
+    Content-Security-Policy = "default-src 'self'; script-src 'self' 'unsafe-inline' https://pagead2.googlesyndication.com https://www.googletagmanager.com https://www.google-analytics.com https://partner.googleadservices.com https://tpc.googlesyndication.com https://adservice.google.com https://adservice.google.co.uk https://analytics.ahrefs.com https://fundingchoicesmessages.google.com; style-src 'self' 'unsafe-inline'; img-src 'self' data: https://pagead2.googlesyndication.com https://www.google-analytics.com https://www.googletagmanager.com https://tpc.googlesyndication.com https://fundingchoicesmessages.google.com; connect-src 'self' https://www.google-analytics.com https://analytics.google.com https://stats.g.doubleclick.net https://analytics.ahrefs.com https://fundingchoicesmessages.google.com; frame-src https://googleads.g.doubleclick.net https://tpc.googlesyndication.com https://fundingchoicesmessages.google.com; font-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; upgrade-insecure-requests; report-uri https://beatthescam.com/api/csp-report; report-to csp-endpoint"
 
 # ─── STATIC ASSETS — long cache, immutable ───────────────────────────────────
 [[headers]]
