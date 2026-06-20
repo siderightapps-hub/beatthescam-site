@@ -83,8 +83,19 @@ jobs:
           if [ "$DRY_RUN" = "true" ]; then
             python scripts/search_console_articles.py --dry-run --days "$SC_DAYS"
           else
-            OUTPUT=$(python scripts/search_console_articles.py --days "$SC_DAYS" --limit 1 2>&1) || true
+            # Capture output but surface a real failure instead of swallowing it
+            # with `|| true` — a non-zero exit here is usually an expired Search
+            # Console OAuth token (rotates ~weekly) and means the gap pipeline is
+            # silently doing nothing. Fail loudly so it gets re-authed.
+            set +e
+            OUTPUT=$(python scripts/search_console_articles.py --days "$SC_DAYS" --limit 1 2>&1)
+            CODE=$?
+            set -e
             echo "$OUTPUT"
+            if [ "$CODE" -ne 0 ]; then
+              echo "::error::Search Console article generator failed (exit $CODE) — check the Google OAuth token (token.json) hasn't expired."
+              exit "$CODE"
+            fi
             # Extract new slugs from output for tweeting
             SLUGS=$(echo "$OUTPUT" | grep "^NEW_ARTICLE_SLUGS=" | cut -d= -f2)
             echo "new_slugs=$SLUGS" >> $GITHUB_OUTPUT

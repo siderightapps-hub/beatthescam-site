@@ -106,7 +106,7 @@
         <div class="breadcrumbs"><a href="/">Home</a> / Guides</div>
         <h1>Scam guides</h1>
         <p class="lead">Browse all published guides by scam type, payment method, platform, or impersonation pattern.</p>
-        <div class="search-box" style="max-width:720px"><input id="pageSearch" type="search" placeholder="Filter guides on this page" aria-label="Filter guides"></div>
+        <div class="search-box" style="max-width:720px"><input id="pageSearch" type="search" placeholder="Search all guides" aria-label="Search all guides"></div>
       </div>
     </section>
     <section class="section">
@@ -323,23 +323,66 @@
       <p class="meta">Updated 2026-05-30</p>
     </article>
     </div>
+        <div class="grid-3" id="searchResults" hidden></div>
+        <p id="searchEmpty" class="lead" hidden>No guides match your search. Try a different keyword.</p>
         <nav class="pagination" aria-label="Guides pagination" style="display:flex;gap:1rem;align-items:center;justify-content:center;margin:2rem 0"><span class="meta">Page 1 of 7</span> <a class="btn btn-secondary" rel="next" href="https://beatthescam.com/guides/page/2/">Next &rarr;</a></nav>
       </div>
     </section>
     
     <script>
-      (function() {{
-        var params = new URLSearchParams(window.location.search);
+      (function() {
         var input = document.getElementById('pageSearch');
         if (!input) return;
-        var cards = Array.from(document.querySelectorAll('[data-searchable]'));
-        function applyFilter(value) {{
+        var grid = document.getElementById('guideGrid');
+        var results = document.getElementById('searchResults');
+        var empty = document.getElementById('searchEmpty');
+        var pager = document.querySelector('.pagination');
+        var indexPromise = null;
+        function loadIndex() {
+          if (!indexPromise) {
+            indexPromise = fetch('/search.json')
+              .then(function(r) { return r.ok ? r.json() : []; })
+              .catch(function() { return []; });
+          }
+          return indexPromise;
+        }
+        function esc(s) {
+          return String(s == null ? '' : s).replace(/[&<>"]/g, function(c) {
+            return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c];
+          });
+        }
+        function render(items) {
+          results.innerHTML = items.map(function(it) {
+            return '<article class="card guide-card">' +
+              '<div class="eyebrow">' + esc(it.category) + '</div>' +
+              '<h3><a href="' + esc(it.url) + '">' + esc(it.title) + '</a></h3>' +
+              '<p>' + esc(it.description) + '</p>' +
+            '</article>';
+          }).join('');
+        }
+        function showSearch(on) {
+          results.hidden = !on;
+          grid.hidden = on;
+          if (pager) pager.style.display = on ? 'none' : '';
+        }
+        function run(value) {
           var q = (value || '').toLowerCase().trim();
-          cards.forEach(function(card) {{ card.style.display = card.dataset.searchable.includes(q) ? '' : 'none'; }});
-        }}
-        input.addEventListener('input', function(e) {{ applyFilter(e.target.value); }});
-        if (params.get('q')) {{ input.value = params.get('q'); applyFilter(input.value); }}
-      }})();
+          if (!q) { showSearch(false); empty.hidden = true; return; }
+          loadIndex().then(function(items) {
+            var hits = items.filter(function(it) {
+              var hay = (it.title + ' ' + it.description + ' ' + it.category + ' ' +
+                         (it.keywords || []).join(' ')).toLowerCase();
+              return hay.indexOf(q) !== -1;
+            });
+            render(hits);
+            showSearch(true);
+            empty.hidden = hits.length > 0;
+          });
+        }
+        input.addEventListener('input', function(e) { run(e.target.value); });
+        var params = new URLSearchParams(window.location.search);
+        if (params.get('q')) { input.value = params.get('q'); run(input.value); }
+      })();
     </script>
     
   </main>

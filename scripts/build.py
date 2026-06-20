@@ -237,12 +237,18 @@ def affiliate_block(post: dict, affiliates: list) -> str:
         return ""
 
     p = best_product
+    # These are honest editorial recommendations, NOT paid placements: the hrefs
+    # are plain destination links, not affiliate tracking URLs (see the _note in
+    # content/affiliates.json). Labelling them "Sponsored" / rel="sponsored"
+    # would misrepresent unpaid links as paid — an ASA and trust problem on a
+    # scam-awareness site. When real affiliate deals + tracking URLs are signed,
+    # flip the label back to "Sponsored" and rel to "sponsored noopener...".
     return f'''
     <section class="sidebar-card affiliate-card">
-      <p class="note" style="margin:0 0 .4rem;font-size:.8rem;text-transform:uppercase;letter-spacing:.06em;font-weight:800;color:var(--muted)">Sponsored</p>
+      <p class="note" style="margin:0 0 .4rem;font-size:.8rem;text-transform:uppercase;letter-spacing:.06em;font-weight:800;color:var(--muted)">Recommended</p>
       <h3 style="margin:.15rem 0 .4rem">{html.escape(p["name"])}</h3>
       <p class="note">{html.escape(p["tagline"])}</p>
-      <a class="btn btn-secondary" href="{html.escape(p["href"])}" rel="sponsored noopener noreferrer" target="_blank" style="width:100%;margin-top:.6rem;text-align:center">{html.escape(p["cta"])}</a>
+      <a class="btn btn-secondary" href="{html.escape(p["href"])}" rel="nofollow noopener noreferrer" target="_blank" style="width:100%;margin-top:.6rem;text-align:center">{html.escape(p["cta"])}</a>
     </section>
     '''
 
@@ -971,7 +977,7 @@ def render_guides_index_page(site, page_posts, page_num: int, total_pages: int, 
 
     search_box = (
         '<div class="search-box" style="max-width:720px">'
-        '<input id="pageSearch" type="search" placeholder="Filter guides on this page" aria-label="Filter guides">'
+        '<input id="pageSearch" type="search" placeholder="Search all guides" aria-label="Search all guides">'
         '</div>'
     ) if page_num == 1 else ""
 
@@ -994,26 +1000,72 @@ def render_guides_index_page(site, page_posts, page_num: int, total_pages: int, 
       <div class="wrap">
         <h2>{html.escape(grid_heading)}</h2>
         <div class="grid-3" id="guideGrid">{cards}</div>
+        <div class="grid-3" id="searchResults" hidden></div>
+        <p id="searchEmpty" class="lead" hidden>No guides match your search. Try a different keyword.</p>
         {pagination_html}
       </div>
     </section>
     '''
 
     if page_num == 1:
+        # Site-wide guide search: filters the full /search.json index (every
+        # guide), not just the cards rendered on this page. Empty query restores
+        # the normal latest-guides grid + pagination.
         content += '''
     <script>
-      (function() {{
-        var params = new URLSearchParams(window.location.search);
+      (function() {
         var input = document.getElementById('pageSearch');
         if (!input) return;
-        var cards = Array.from(document.querySelectorAll('[data-searchable]'));
-        function applyFilter(value) {{
+        var grid = document.getElementById('guideGrid');
+        var results = document.getElementById('searchResults');
+        var empty = document.getElementById('searchEmpty');
+        var pager = document.querySelector('.pagination');
+        var indexPromise = null;
+        function loadIndex() {
+          if (!indexPromise) {
+            indexPromise = fetch('/search.json')
+              .then(function(r) { return r.ok ? r.json() : []; })
+              .catch(function() { return []; });
+          }
+          return indexPromise;
+        }
+        function esc(s) {
+          return String(s == null ? '' : s).replace(/[&<>"]/g, function(c) {
+            return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c];
+          });
+        }
+        function render(items) {
+          results.innerHTML = items.map(function(it) {
+            return '<article class="card guide-card">' +
+              '<div class="eyebrow">' + esc(it.category) + '</div>' +
+              '<h3><a href="' + esc(it.url) + '">' + esc(it.title) + '</a></h3>' +
+              '<p>' + esc(it.description) + '</p>' +
+            '</article>';
+          }).join('');
+        }
+        function showSearch(on) {
+          results.hidden = !on;
+          grid.hidden = on;
+          if (pager) pager.style.display = on ? 'none' : '';
+        }
+        function run(value) {
           var q = (value || '').toLowerCase().trim();
-          cards.forEach(function(card) {{ card.style.display = card.dataset.searchable.includes(q) ? '' : 'none'; }});
-        }}
-        input.addEventListener('input', function(e) {{ applyFilter(e.target.value); }});
-        if (params.get('q')) {{ input.value = params.get('q'); applyFilter(input.value); }}
-      }})();
+          if (!q) { showSearch(false); empty.hidden = true; return; }
+          loadIndex().then(function(items) {
+            var hits = items.filter(function(it) {
+              var hay = (it.title + ' ' + it.description + ' ' + it.category + ' ' +
+                         (it.keywords || []).join(' ')).toLowerCase();
+              return hay.indexOf(q) !== -1;
+            });
+            render(hits);
+            showSearch(true);
+            empty.hidden = hits.length > 0;
+          });
+        }
+        input.addEventListener('input', function(e) { run(e.target.value); });
+        var params = new URLSearchParams(window.location.search);
+        if (params.get('q')) { input.value = params.get('q'); run(input.value); }
+      })();
     </script>
     '''
 
@@ -2436,17 +2488,17 @@ def build():
     write(DIST / 'CNAME', 'beatthescam.com')
     write(DIST / 'ads.txt', f'google.com, {site["adsense_client"].replace("ca-", "")}, DIRECT, f08c47fec0942fa0')
 
-    # Search index
+    # Search index powering the site-wide guide search on /guides/. Lean fields
+    # only (title/description/category/keywords — no full body) so the browser
+    # can fetch it cheaply for filter-as-you-type across every guide.
     search_items = []
     for post in posts:
-        blob = ' '.join([post['title'], post['description'], post['category'],
-                         *post['keywords'], *[s[0] + ' ' + s[1] for s in post['sections']]])
         search_items.append({
             'title': post['title'], 'url': f'/guides/{post["slug"]}/',
             'description': post['description'], 'category': category_label(post['category']),
-            'content': blob
+            'keywords': post.get('keywords', []),
         })
-    write(DIST / 'search.json', json.dumps(search_items, indent=2))
+    write(DIST / 'search.json', json.dumps(search_items, ensure_ascii=False))
 
     # RSS — newest first so feed readers detect updates from the top item.
     # lastBuildDate + atom:link self-ref + isPermaLink GUIDs added 2026-06-15

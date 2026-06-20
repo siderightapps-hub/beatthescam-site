@@ -58,6 +58,45 @@ function getAllowedOrigin(requestOrigin) {
   return ALLOWED_ORIGINS[0]; // Default to primary domain
 }
 
+// ─── ALLOWED REPORTING DOMAINS ───────────────────────────────────────────────
+// The checker renders model-produced reporting links as trusted guidance, so a
+// prompt-injected message could otherwise smuggle an attacker-controlled URL
+// into the UI. We only forward links whose host is (or is a subdomain of) an
+// official UK reporting/consumer-protection domain. Base domains cover their
+// subdomains: e.g. "police.uk" allows actionfraud./reportfraud./met.police.uk,
+// and "gov.uk" allows ncsc./nationalcrimeagency.gov.uk.
+const ALLOWED_REPORT_DOMAINS = [
+  "gov.uk",
+  "police.uk",
+  "fca.org.uk",
+  "citizensadvice.org.uk",
+  "which.co.uk",
+  "ofcom.org.uk",
+  "ico.org.uk",
+  "takefive-stopfraud.org.uk",
+  "moneyhelper.org.uk",
+  "victimsupport.org.uk",
+  "cifas.org.uk",
+  "financial-ombudsman.org.uk",
+  "pensions-ombudsman.org.uk",
+  "stepchange.org",
+  "nationaldebtline.org",
+];
+
+function isAllowedReportUrl(raw) {
+  let u;
+  try {
+    u = new URL(raw);
+  } catch {
+    return false;
+  }
+  if (u.protocol !== "https:") return false;
+  const host = u.hostname.toLowerCase();
+  return ALLOWED_REPORT_DOMAINS.some(
+    d => host === d || host.endsWith("." + d)
+  );
+}
+
 // ─── HANDLER ─────────────────────────────────────────────────────────────────
 exports.handler = async function(event) {
   const requestOrigin = event.headers["origin"] || event.headers["Origin"] || "";
@@ -215,10 +254,12 @@ Rules:
     // Never claim high confidence that something is safe — scam tactics evolve
     const finalConfidence = verdict === "probably_legitimate" ? "low" : confidence;
 
-    // Sanitise reporting_links — only forward https:// URLs to prevent open redirect
+    // Sanitise reporting_links — forward only links to official UK reporting
+    // domains (allowlisted), so a prompt-injected message cannot surface an
+    // attacker-controlled URL as trusted reporting guidance.
     const safeLinks = Array.isArray(parsed.reporting_links)
       ? parsed.reporting_links.filter(
-          l => l && typeof l.url === "string" && l.url.startsWith("https://")
+          l => l && typeof l.url === "string" && isAllowedReportUrl(l.url)
         )
       : [];
 
