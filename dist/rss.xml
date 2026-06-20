@@ -1,5 +1,12 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Beat the Scam</title><link>https://beatthescam.com</link><description>Scam alerts, plain-English checks, and practical guides to help people verify suspicious emails, texts, websites, calls, and offers.</description><lastBuildDate>Fri, 19 Jun 2026 00:00:00 +0000</lastBuildDate><atom:link href="https://beatthescam.com/rss.xml" rel="self" type="application/rss+xml" />
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Beat the Scam</title><link>https://beatthescam.com</link><description>Scam alerts, plain-English checks, and practical guides to help people verify suspicious emails, texts, websites, calls, and offers.</description><lastBuildDate>Sat, 20 Jun 2026 00:00:00 +0000</lastBuildDate><atom:link href="https://beatthescam.com/rss.xml" rel="self" type="application/rss+xml" />
+        <item>
+          <title>Student Finance Scam UK: How to Spot and Avoid Fake Loan Offers</title>
+          <link>https://beatthescam.com/guides/student-finance-scam-uk/</link>
+          <guid isPermaLink="true">https://beatthescam.com/guides/student-finance-scam-uk/</guid>
+          <pubDate>Sat, 20 Jun 2026 00:00:00 +0000</pubDate>
+          <description>Student Finance scams target UK students with fake loan offers, fake repayment demands, and phishing emails that look like official government communications. Scammers use urgency and authority to trick you into sharing bank details, passwords, or paying upfront fees.</description>
+        </item>
         <item>
           <title>Sextortion Email Scam UK: How to Spot and Stop It</title>
           <link>https://beatthescam.com/guides/sextortion-email-scam-uk/</link>
@@ -202,11 +209,4 @@
           <guid isPermaLink="true">https://beatthescam.com/guides/f1-british-gp-ticket-scam-uk/</guid>
           <pubDate>Mon, 01 Jun 2026 00:00:00 +0000</pubDate>
           <description>Each year, criminals pose as official F1 or Silverstone sellers to con UK fans out of money for counterfeit British Grand Prix tickets. This guide explains how the scam works, what warning signs to watch for, and exactly what to do if you&#x27;ve already paid.</description>
-        </item>
-        <item>
-          <title>Is This Website a Scam? A Practical Checklist Before You Buy</title>
-          <link>https://beatthescam.com/guides/is-this-website-a-scam/</link>
-          <guid isPermaLink="true">https://beatthescam.com/guides/is-this-website-a-scam/</guid>
-          <pubDate>Sat, 30 May 2026 00:00:00 +0000</pubDate>
-          <description>A plain-English checklist for judging whether a website is legitimate before you enter payment details.</description>
         </item></channel></rss>
