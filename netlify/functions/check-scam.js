@@ -35,6 +35,61 @@ function isRateLimited(ip) {
   return entry.count > RATE_LIMIT_MAX;
 }
 
+// ─── DURABLE RATE LIMIT + DAILY SPEND CAP (Netlify Blobs) ─────────────────────
+// The in-memory limiter above only protects a single warm instance and resets
+// on cold start. Netlify Blobs gives a store shared across instances + restarts,
+// so the per-IP limit and a global daily spend ceiling actually hold. Every
+// Blobs call is guarded: if the store is unavailable the checker still works
+// (per-IP falls back to the in-memory limiter; the spend cap fails open).
+let getStore = null;
+try { ({ getStore } = require("@netlify/blobs")); } catch { /* dep/runtime absent — degrade gracefully */ }
+
+const DAILY_CALL_CAP = 2000; // max Anthropic checker calls per UTC day (abuse / cost guard; tune freely)
+
+function blobStore(name) {
+  if (!getStore) return null;
+  try { return getStore({ name, consistency: "strong" }); }
+  catch { return null; }
+}
+
+// Durable per-IP limiter. Returns true (limited) / false (ok), or null when the
+// store is unavailable so the caller can fall back to the in-memory limiter.
+async function durableRateLimited(ip) {
+  const store = blobStore("checker-ratelimit");
+  if (!store || !ip) return null;
+  try {
+    const now = Date.now();
+    const key = `ip:${ip}`;
+    const cur = (await store.get(key, { type: "json" })) || { count: 0, windowStart: now };
+    if (now - cur.windowStart > RATE_LIMIT_WINDOW_MS) { cur.count = 0; cur.windowStart = now; }
+    cur.count++;
+    await store.setJSON(key, cur);
+    return cur.count > RATE_LIMIT_MAX;
+  } catch (err) {
+    console.error("Blobs rate-limit error (falling back to in-memory):", err);
+    return null;
+  }
+}
+
+// Global daily spend cap. Checks-and-increments today's call counter; returns
+// true once the cap is reached (caller should refuse). Fails OPEN on store
+// errors — the per-IP limit still applies, so availability wins over a perfect cap.
+async function overDailyCap() {
+  const store = blobStore("checker-spend");
+  if (!store) return false;
+  try {
+    const key = `calls:${new Date().toISOString().slice(0, 10)}`; // calls:YYYY-MM-DD (UTC)
+    const cur = (await store.get(key, { type: "json" })) || { count: 0 };
+    if (cur.count >= DAILY_CALL_CAP) return true;
+    cur.count++;
+    await store.setJSON(key, cur);
+    return false;
+  } catch (err) {
+    console.error("Blobs spend-cap error (failing open):", err);
+    return false;
+  }
+}
+
 // ─── ALLOWED MESSAGE TYPES ───────────────────────────────────────────────────
 const ALLOWED_TYPES = new Set([
   "SMS or text message",
@@ -128,7 +183,11 @@ exports.handler = async function(event) {
     event.requestContext?.identity?.sourceIp ||
     "";
 
-  if (isRateLimited(clientIp)) {
+  // Durable per-IP limit when Netlify Blobs is available; otherwise the
+  // in-memory limiter. durableRateLimited() returns null when the store is down.
+  const durable = await durableRateLimited(clientIp);
+  const limited = durable === null ? isRateLimited(clientIp) : durable;
+  if (limited) {
     return {
       statusCode: 429,
       headers: { ...corsHeaders, "Retry-After": "60" },
@@ -167,6 +226,16 @@ exports.handler = async function(event) {
       statusCode: 400,
       headers: corsHeaders,
       body: JSON.stringify({ error: "Message too short" }),
+    };
+  }
+
+  // Global daily spend ceiling — refuse politely once the cap is reached, so a
+  // burst of traffic from many IPs can't run up an unbounded Anthropic bill.
+  if (await overDailyCap()) {
+    return {
+      statusCode: 503,
+      headers: { ...corsHeaders, "Retry-After": "3600", "Content-Type": "application/json" },
+      body: JSON.stringify({ error: "The free checker is very busy right now. Please try again later." }),
     };
   }
 

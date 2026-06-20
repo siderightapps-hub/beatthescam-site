@@ -1,6 +1,11 @@
 // netlify/functions/subscribe.js
-// Adds a newsletter subscriber to a Resend Audience and sends a welcome email.
-// Reads RESEND_API_KEY and RESEND_AUDIENCE_ID from the Netlify environment.
+// Step 1 of double opt-in: validate the request and email the visitor a signed
+// confirmation link. The address is NOT added to the Resend Audience here — that
+// only happens after they click confirm (netlify/functions/confirm-subscribe.js),
+// which proves the address belongs to the person who submitted it (stops a third
+// party from subscribing someone else's email).
+// Reads RESEND_API_KEY, RESEND_AUDIENCE_ID and UNSUBSCRIBE_SECRET (the HMAC key,
+// reused to sign confirm links) from the Netlify environment.
 
 // ─── RATE LIMITING ───────────────────────────────────────────────────────────
 // In-memory store — resets on cold start. Keyed by IP. Signups are far rarer
@@ -59,22 +64,24 @@ const FROM_ADDRESS = "Beat the Scam <alerts@updates.beatthescam.com>";
 const REPLY_TO     = "hello@beatthescam.com";
 const SITE         = "https://beatthescam.com";
 
-// ─── UNSUBSCRIBE TOKEN ────────────────────────────────────────────────────────
-// Opaque, non-forgeable token so a recipient can only unsubscribe THEIR OWN
-// address: base64url(email) + "." + base64url(HMAC-SHA256(secret, email)).
-// Fails CLOSED — with no UNSUBSCRIBE_SECRET set, no token (and therefore no
-// unsubscribe link/header) is produced, rather than minting a forgeable
-// empty-key HMAC. Verified the same way in netlify/functions/unsubscribe.js.
+// ─── CONFIRM TOKEN ────────────────────────────────────────────────────────────
+// Opaque, non-forgeable token tying a confirm link to ONE address:
+//   base64url(email) + "." + base64url(HMAC-SHA256(secret, "confirm:" + email)).
+// The "confirm:" prefix means a confirm token is NOT interchangeable with an
+// unsubscribe token (which signs the bare email in unsubscribe.js), even though
+// both reuse UNSUBSCRIBE_SECRET. Fails CLOSED — with no secret, no token is
+// minted and double opt-in cannot proceed (we never ship a forgeable token).
 const crypto = require("crypto");
-function unsubToken(email) {
+function confirmToken(email) {
   const secret = process.env.UNSUBSCRIBE_SECRET || "";
   if (!secret) return "";
   const e   = Buffer.from(email, "utf8").toString("base64url");
-  const sig = crypto.createHmac("sha256", secret).update(email).digest("base64url");
+  const sig = crypto.createHmac("sha256", secret).update("confirm:" + email).digest("base64url");
   return `${e}.${sig}`;
 }
 
-const WELCOME_HTML = `<!doctype html>
+// ─── CONFIRMATION EMAIL ────────────────────────────────────────────────────────
+const CONFIRM_HTML = `<!doctype html>
 <html lang="en-GB">
 <body style="margin:0;padding:0;background:#f3f6fb;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;color:#102033;">
   <div style="max-width:560px;margin:0 auto;padding:32px 20px;">
@@ -82,20 +89,16 @@ const WELCOME_HTML = `<!doctype html>
       <span style="color:#ffffff;font-size:20px;font-weight:800;letter-spacing:-.02em;">Beat the Scam</span>
     </div>
     <div style="background:#ffffff;border:1px solid #dbe5ef;border-top:0;border-radius:0 0 16px 16px;padding:28px;">
-      <h1 style="margin:0 0 14px;font-size:22px;line-height:1.3;">You're on the list &#9989;</h1>
+      <h1 style="margin:0 0 14px;font-size:22px;line-height:1.3;">Confirm your subscription</h1>
       <p style="margin:0 0 16px;font-size:16px;line-height:1.6;color:#5b6878;">
-        Thanks for subscribing. You'll get plain-English scam alerts and new guides as the latest tactics appear &mdash; the checks you can run in under a minute before you click, pay, or share anything.
-      </p>
-      <p style="margin:0 0 24px;font-size:16px;line-height:1.6;color:#5b6878;">
-        Got a suspicious text, email, or call right now? Run it through our free AI scam checker:
+        Someone (hopefully you) asked to subscribe this address to Beat the Scam scam alerts. Tap the button to confirm and start receiving them.
       </p>
       <p style="margin:0 0 28px;">
-        <a href="https://beatthescam.com/check/" style="display:inline-block;background:#1d4ed8;color:#ffffff;text-decoration:none;font-weight:700;font-size:16px;padding:13px 22px;border-radius:999px;">Check a message &rarr;</a>
+        <a href="__CONFIRM_URL__" style="display:inline-block;background:#1d4ed8;color:#ffffff;text-decoration:none;font-weight:700;font-size:16px;padding:13px 22px;border-radius:999px;">Confirm subscription &rarr;</a>
       </p>
       <p style="margin:0;font-size:14px;line-height:1.6;color:#5b6878;">
-        Reply to this email any time &mdash; it reaches a real person.
+        Didn't request this? Just ignore this email — nothing happens unless you confirm, and you won't be added to any list.
       </p>
-      __UNSUB_HTML__
     </div>
     <p style="margin:18px 0 0;font-size:12px;line-height:1.6;color:#8a97a6;text-align:center;">
       Beat the Scam &middot; Independent UK consumer-protection guides<br>
@@ -105,15 +108,14 @@ const WELCOME_HTML = `<!doctype html>
 </body>
 </html>`;
 
-const WELCOME_TEXT = `You're on the list.
+const CONFIRM_TEXT = `Confirm your subscription
 
-Thanks for subscribing to Beat the Scam. You'll get plain-English scam alerts and new guides as the latest tactics appear — the checks you can run in under a minute before you click, pay, or share anything.
+Someone (hopefully you) asked to subscribe this address to Beat the Scam scam alerts. Open the link below to confirm and start receiving them:
 
-Got a suspicious text, email, or call? Run it through our free AI scam checker:
-https://beatthescam.com/check/
+__CONFIRM_URL__
 
-Reply to this email any time — it reaches a real person.
-__UNSUB_TEXT__
+Didn't request this? Just ignore this email — nothing happens unless you confirm, and you won't be added to any list.
+
 Beat the Scam · Independent UK consumer-protection guides
 Educational content only — not legal or financial advice.`;
 
@@ -154,11 +156,13 @@ exports.handler = async function(event) {
     };
   }
 
-  // Auth / config
+  // Auth / config. UNSUBSCRIBE_SECRET is required: it signs the confirm link, so
+  // without it double opt-in cannot run (fail closed rather than add unconfirmed).
   const apiKey     = process.env.RESEND_API_KEY;
   const audienceId = process.env.RESEND_AUDIENCE_ID;
-  if (!apiKey || !audienceId) {
-    console.error("RESEND_API_KEY or RESEND_AUDIENCE_ID not set");
+  const secret     = process.env.UNSUBSCRIBE_SECRET;
+  if (!apiKey || !audienceId || !secret) {
+    console.error("RESEND_API_KEY / RESEND_AUDIENCE_ID / UNSUBSCRIBE_SECRET not all set");
     return {
       statusCode: 500,
       headers: corsHeaders,
@@ -186,7 +190,7 @@ exports.handler = async function(event) {
     return {
       statusCode: 200,
       headers: { ...corsHeaders, "Content-Type": "application/json", "Cache-Control": "no-store" },
-      body: JSON.stringify({ ok: true }),
+      body: JSON.stringify({ ok: true, pending: true }),
     };
   }
 
@@ -206,58 +210,12 @@ exports.handler = async function(event) {
     };
   }
 
-  // ─── Add the contact to the Resend audience ────────────────────────────────
+  // ─── Send the double opt-in confirmation email ─────────────────────────────
+  // We do NOT touch the Resend audience here — confirm-subscribe.js adds the
+  // contact only after the link is clicked.
+  const token      = confirmToken(email);
+  const confirmUrl = `${SITE}/api/confirm-subscribe?t=${encodeURIComponent(token)}`;
   try {
-    const addRes = await fetch(`https://api.resend.com/audiences/${audienceId}/contacts`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        "Authorization": `Bearer ${apiKey}`,
-      },
-      body: JSON.stringify({ email, unsubscribed: false }),
-    });
-
-    if (!addRes.ok) {
-      const errText = await addRes.text();
-      // A duplicate contact is not a user-facing error — they're already in.
-      const isDuplicate = addRes.status === 409 || /already\s*exists|duplicate/i.test(errText);
-      if (!isDuplicate) {
-        console.error("Resend add-contact error:", addRes.status, errText);
-        return {
-          statusCode: 502,
-          headers: corsHeaders,
-          body: JSON.stringify({ error: "Could not complete signup. Please try again shortly." }),
-        };
-      }
-      // Already subscribed — succeed silently without re-sending the welcome.
-      return {
-        statusCode: 200,
-        headers: { ...corsHeaders, "Content-Type": "application/json", "Cache-Control": "no-store" },
-        body: JSON.stringify({ ok: true, already: true }),
-      };
-    }
-  } catch (err) {
-    console.error("Resend add-contact threw:", err);
-    return {
-      statusCode: 502,
-      headers: corsHeaders,
-      body: JSON.stringify({ error: "Could not complete signup. Please try again shortly." }),
-    };
-  }
-
-  // ─── Send the welcome email (best-effort — never fail the signup on this) ───
-  try {
-    // Per-recipient unsubscribe (RFC 8058 one-click via the List-Unsubscribe
-    // header, plus a visible body link). Built only when UNSUBSCRIBE_SECRET is
-    // set; otherwise no link/header is added (fail closed — never ship a
-    // forgeable token).
-    const token    = unsubToken(email);
-    const unsubUrl = token ? `${SITE}/api/unsubscribe?t=${encodeURIComponent(token)}` : "";
-    const unsubHtml = unsubUrl
-      ? `<p style="margin:14px 0 0;font-size:12px;line-height:1.6;color:#8a97a6;">Don't want these emails? <a href="${unsubUrl}" style="color:#1d4ed8;">Unsubscribe</a>.</p>`
-      : "";
-    const unsubText = unsubUrl ? `Unsubscribe: ${unsubUrl}` : "";
-
     const mailRes = await fetch("https://api.resend.com/emails", {
       method: "POST",
       headers: {
@@ -268,26 +226,31 @@ exports.handler = async function(event) {
         from: FROM_ADDRESS,
         to: [email],
         reply_to: REPLY_TO,
-        subject: "You're on the list — Beat the Scam alerts",
-        html: WELCOME_HTML.replace("__UNSUB_HTML__", unsubHtml),
-        text: WELCOME_TEXT.replace("__UNSUB_TEXT__", unsubText),
-        ...(unsubUrl ? { headers: {
-          "List-Unsubscribe": `<${unsubUrl}>`,
-          "List-Unsubscribe-Post": "List-Unsubscribe=One-Click",
-        } } : {}),
+        subject: "Confirm your Beat the Scam subscription",
+        html: CONFIRM_HTML.replace(/__CONFIRM_URL__/g, confirmUrl),
+        text: CONFIRM_TEXT.replace(/__CONFIRM_URL__/g, confirmUrl),
       }),
     });
     if (!mailRes.ok) {
-      console.error("Welcome email non-OK:", mailRes.status, await mailRes.text());
+      console.error("Confirmation email non-OK:", mailRes.status, await mailRes.text());
+      return {
+        statusCode: 502,
+        headers: corsHeaders,
+        body: JSON.stringify({ error: "Could not send the confirmation email. Please try again shortly." }),
+      };
     }
   } catch (err) {
-    // Log but still report success — the contact is saved either way.
-    console.error("Welcome email failed (non-fatal):", err);
+    console.error("Confirmation email threw:", err);
+    return {
+      statusCode: 502,
+      headers: corsHeaders,
+      body: JSON.stringify({ error: "Could not send the confirmation email. Please try again shortly." }),
+    };
   }
 
   return {
     statusCode: 200,
     headers: { ...corsHeaders, "Content-Type": "application/json", "Cache-Control": "no-store" },
-    body: JSON.stringify({ ok: true }),
+    body: JSON.stringify({ ok: true, pending: true }),
   };
 };

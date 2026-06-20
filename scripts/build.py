@@ -1836,7 +1836,7 @@ def build_legal_bodies(site):
     <h2>Advertising</h2>
     <p>The site uses Google AdSense. Until you accept cookies, ads are non-personalised and no advertising-personalisation cookies are set; if you accept, Google and its partners may use cookies to personalise and measure ads. You can change your choice any time via the Cookie settings link in the footer.</p>
     <h2>Newsletter</h2>
-    <p>If you subscribe to email updates, your email address and your consent are stored by, and the emails delivered through, <strong>Resend</strong> (our email provider). We use your address only to send Beat the Scam updates, never sell or share it, and every email carries a one-click unsubscribe link.</p>
+    <p>If you subscribe to email updates we use double opt-in: we email you a confirmation link, and your address is only added to our list once you click it (so no one can sign up an address that isn't theirs). Your email address and consent are then stored by, and the emails delivered through, <strong>Resend</strong> (our email provider). We use your address only to send Beat the Scam updates, never sell or share it, and every email carries a one-click unsubscribe link.</p>
     <h2>Who processes your data</h2>
     <p>We deliberately keep the list of third parties ("sub-processors") that may handle your data short. Each links to its own privacy policy:</p>
     <ul class="list-clean">
@@ -2687,9 +2687,10 @@ def build():
     # mechanism, and a 200 rewrite must precede any catch-all to win.
     redirect_lines = [
         "# API function rewrites (auto-generated)",
-        "/api/subscribe      /.netlify/functions/subscribe      200",
-        "/api/unsubscribe    /.netlify/functions/unsubscribe    200",
-        "/api/csp-report     /.netlify/functions/csp-report     200",
+        "/api/subscribe          /.netlify/functions/subscribe          200",
+        "/api/confirm-subscribe  /.netlify/functions/confirm-subscribe  200",
+        "/api/unsubscribe        /.netlify/functions/unsubscribe        200",
+        "/api/csp-report         /.netlify/functions/csp-report         200",
         "",
         "# Category slug normalisation (auto-generated from CATEGORY_CANON)",
     ]

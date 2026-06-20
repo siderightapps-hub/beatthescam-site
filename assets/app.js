@@ -154,7 +154,7 @@
       }).then(function(r){
         if(r.ok){
           nlForm.reset();
-          nlShow("You're in. Check your inbox for a welcome email.", 'success');
+          nlShow("Almost there — check your inbox and click the link to confirm your subscription.", 'success');
           if(typeof gtag === 'function' && consentAccepted()){
             gtag('event', 'newsletter_signup', { event_category: 'engagement' });
           }

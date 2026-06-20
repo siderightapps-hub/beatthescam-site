@@ -1,7 +1,8 @@
 # API function rewrites (auto-generated)
-/api/subscribe      /.netlify/functions/subscribe      200
-/api/unsubscribe    /.netlify/functions/unsubscribe    200
-/api/csp-report     /.netlify/functions/csp-report     200
+/api/subscribe          /.netlify/functions/subscribe          200
+/api/confirm-subscribe  /.netlify/functions/confirm-subscribe  200
+/api/unsubscribe        /.netlify/functions/unsubscribe        200
+/api/csp-report         /.netlify/functions/csp-report         200
 
 # Category slug normalisation (auto-generated from CATEGORY_CANON)
 /categories/website-scams    /categories/website/    301!
