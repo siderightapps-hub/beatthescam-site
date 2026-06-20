@@ -1834,7 +1834,7 @@ def build_legal_bodies(site):
     <h2>Google Analytics</h2>
     <p>The site uses Google Analytics 4. Analytics cookies are only enabled after consent where required.</p>
     <h2>Advertising</h2>
-    <p>The site uses Google AdSense. Until you accept cookies, ads are non-personalised and no advertising-personalisation cookies are set; if you accept, Google and its partners may use cookies to personalise and measure ads. You can change your choice any time via the Cookie settings link in the footer.</p>
+    <p>The site uses Google AdSense. In the UK and EEA, your consent for advertising and analytics cookies is collected through Google&#8217;s certified Consent Management Platform (the consent message you see on your first visit), which records your choice under the IAB Transparency &amp; Consent Framework. Until you consent, ads are non-personalised and no advertising-personalisation cookies are set; if you consent, Google and its partners may use cookies to personalise and measure ads. You can change your choice any time via the Cookie settings link in the footer.</p>
     <h2>Newsletter</h2>
     <p>If you subscribe to email updates we use double opt-in: we email you a confirmation link, and your address is only added to our list once you click it (so no one can sign up an address that isn't theirs). Your email address and consent are then stored by, and the emails delivered through, <strong>Resend</strong> (our email provider). We use your address only to send Beat the Scam updates, never sell or share it, and every email carries a one-click unsubscribe link.</p>
     <h2>Who processes your data</h2>
@@ -1849,7 +1849,7 @@ def build_legal_bodies(site):
     <h2>Data retention</h2>
     <p>Checker submissions are processed in real time and not stored by Beat the Scam, though Anthropic &mdash; the API provider that analyses the text &mdash; may retain it for up to 30 days under its standard policy. Newsletter data is kept until you unsubscribe. Analytics and server-log data are retained according to each provider's standard periods.</p>
     <h2>Cookie choices</h2>
-    <p>A cookie banner allows you to accept or reject non-essential cookies. Your preference is stored locally in your browser.</p>
+    <p>In the UK and EEA, a Google-certified consent message lets you accept or reject non-essential (advertising and analytics) cookies, and change your choice at any time via the Cookie settings link in the footer. Elsewhere, a simple cookie banner offers the same accept/reject choice, stored locally in your browser.</p>
     <h2>Your rights</h2>
     <p>If you are in the UK or EEA you may have rights relating to your personal data. Contact us at <a href="mailto:{site["privacy_email"]}">{site["privacy_email"]}</a>.</p>
     '''
@@ -1861,9 +1861,9 @@ def build_legal_bodies(site):
     <h2>Analytics cookies</h2>
     <p>If you accept analytics cookies, Google Analytics 4 may collect information about page views, device type, and interaction patterns.</p>
     <h2>Advertising cookies</h2>
-    <p>If advertising is active and you consent, Google AdSense may use cookies to support ad delivery and measurement.</p>
+    <p>If advertising is active and you consent, Google AdSense may use cookies to support ad delivery and measurement. In the UK and EEA your advertising and analytics consent is collected through Google&#8217;s certified Consent Management Platform under the IAB Transparency &amp; Consent Framework; until you consent, ads are non-personalised.</p>
     <h2>How to manage cookies</h2>
-    <p>Change browser cookie settings at any time, or use the Cookie settings link in the footer to reopen the consent banner.</p>
+    <p>Change browser cookie settings at any time, or use the Cookie settings link in the footer to reopen the consent message and change your choice.</p>
     <h2>Contact</h2>
     <p>Cookie and privacy questions: <a href="mailto:{site["privacy_email"]}">{site["privacy_email"]}</a>.</p>
     '''

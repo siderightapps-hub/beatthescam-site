@@ -62,14 +62,29 @@
     hideBanner();
   }
 
-  const current = safeGet(storageKey);
-  if(current === 'accepted' || current === 'rejected'){
-    applyConsent(current);
-    updateStatus(current);
-    hideBanner();
+  // Google's certified CMP (AdSense "Privacy & messaging") owns ad + analytics
+  // consent via IAB TCF wherever it applies — it injects window.__tcfapi /
+  // window.googlefc. When present, defer to it: keep our custom banner hidden
+  // (no double prompt) and let the CMP drive Consent Mode. The custom banner is
+  // the fallback only for visitors outside the CMP's regulated regions, where
+  // Google's message isn't shown. Verify per-region behaviour in a preview.
+  function googleCmpActive(){
+    return typeof window.__tcfapi === 'function' ||
+           (window.googlefc && typeof window.googlefc === 'object');
+  }
+
+  if(googleCmpActive()){
+    hideBanner(); // Google's CMP is the consent surface here.
   } else {
-    updateStatus(null);
-    showBanner();
+    const current = safeGet(storageKey);
+    if(current === 'accepted' || current === 'rejected'){
+      applyConsent(current);
+      updateStatus(current);
+      hideBanner();
+    } else {
+      updateStatus(null);
+      showBanner();
+    }
   }
 
   if(accept){
@@ -87,8 +102,13 @@
   if(openSettings){
     openSettings.addEventListener('click', function(e){
       e.preventDefault();
-      showBanner();
-      banner && banner.scrollIntoView({behavior:'smooth', block:'nearest'});
+      // Re-open Google's CMP where it manages consent; else our fallback banner.
+      if(window.googlefc && typeof window.googlefc.showRevocationMessage === 'function'){
+        window.googlefc.showRevocationMessage();
+      } else {
+        showBanner();
+        banner && banner.scrollIntoView({behavior:'smooth', block:'nearest'});
+      }
     });
   }
 
