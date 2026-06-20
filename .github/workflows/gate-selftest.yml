@@ -1,0 +1,34 @@
+name: Gate self-test
+
+# Manual-only validation of the content accuracy gate (scripts/content_gate.py)
+# against scripts/gate_selftest.py's fixtures, using the existing
+# ANTHROPIC_API_KEY GitHub secret — so it can be run without anyone holding the
+# key locally. Side-effect-free: the self-test never writes posts.json or the
+# quarantine, and this job never commits. A red run = the gate regressed; do not
+# ship gate changes until it's green. Click "Run workflow" in the Actions tab.
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  selftest:
+    runs-on: ubuntu-latest
+    env:
+      ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install dependencies
+        run: pip install -r requirements-claude.txt
+
+      - name: Run gate self-test
+        run: python scripts/gate_selftest.py
