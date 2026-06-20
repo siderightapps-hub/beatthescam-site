@@ -10,7 +10,7 @@
 >
 > **Last updated:** 2026-06-19
 > **Domain age:** ~4 months (registered February 2026)
-> **Site state:** 184 guides published, 17 normalised categories, AI checker live, newsletter live (Resend capture + welcome email + signed one-click unsubscribe), llms.txt + security.txt deployed, full UK Terms (E&W + Scotland + NI), named author E-E-A-T (Alex Bacsa) with cross-publication identity (CloudFintech + Tuning Digital + SalesTap + LinkedIn). **Video production (YouTube Shorts + TikTok + Instagram Reels) was discontinued 2026-06-15** — it built neither domain authority nor backlinks; see `MD Files/BeatTheScam/VideoProductionHandoff.md`. Semrush Site Health **98%**, AI Search Health **99%**, Lighthouse mobile Performance **92–97** / Accessibility **95–98** / Best Practices **92** / SEO **100** across homepage, guide, author pages. ~191 residual Semrush warnings all from Google's AdSense CDN (irreducible third-party floor). **Technical build is mature and stable; the open risk surface is editorial accuracy (autonomous AI publishing is gated but not source-checked — see the content-accuracy section), not infrastructure.**
+> **Site state:** ~185 guides published (grows ~1/day via the gated cron), 17 normalised categories, AI checker live (durable rate limit + daily spend cap), newsletter live (Resend, **double opt-in** + signed one-click unsubscribe), UK/EEA ad+analytics consent via Google's certified CMP, llms.txt + security.txt deployed, full UK Terms (E&W + Scotland + NI), named author E-E-A-T (Alex Bacsa) with cross-publication identity (CloudFintech + Tuning Digital + SalesTap + LinkedIn). **Video production (YouTube Shorts + TikTok + Instagram Reels) was discontinued 2026-06-15** — it built neither domain authority nor backlinks; see `MD Files/BeatTheScam/VideoProductionHandoff.md`. Semrush Site Health **98%**, AI Search Health **99%**, Lighthouse mobile Performance **92–97** / Accessibility **95–98** / Best Practices **92** / SEO **100** across homepage, guide, author pages. ~191 residual Semrush warnings all from Google's AdSense CDN (irreducible third-party floor). **Technical build is mature and stable; the open risk surface is editorial accuracy (autonomous AI publishing is gated but not source-checked — see the content-accuracy section), not infrastructure.**
 > **Maintainer:** Alex — SideRight Apps (GitHub: `siderightapps-hub`)
 
 ---
@@ -111,15 +111,15 @@ A free, UK-focused consumer-protection publication that:
 |---|---|---|
 | Site generation | **Custom Python static site generator** (`scripts/build.py`) | NOT Next.js, NOT Hugo, NOT Jekyll. Bespoke Python that reads `content/posts.json` + `content/site.json` and renders into `dist/` using `templates/base.html`. |
 | Templating | Single `templates/base.html` shell with `{{placeholder}}` substitution | Simple, fast, no framework dependency. |
-| Source of truth (content) | `content/posts.json` | All 97+ guides as JSON records. |
+| Source of truth (content) | `content/posts.json` | All ~185 guides as JSON records (grows ~1/day via the gated daily cron). |
 | Hosting / CDN | **Netlify** (Personal plan — $9/month, 1000 build credits) | Auto-deploys on push to `main`. |
-| Serverless functions | **Netlify Functions** (`netlify/functions/check-scam.js`) | Proxies the AI scam checker to the Anthropic API. |
-| AI for scam checker | **Anthropic Claude — `claude-haiku-4-5-20251001`** | Returns structured JSON verdict. |
-| AI for content generation | **Anthropic Claude — `claude-haiku-4-5-20251001`** | Generates 6 sections × 120–180 words + 4 FAQs per guide. |
-| Content automation | **GitHub Actions** (`.github/workflows/daily-publish.yml`) | Daily at 06:15 UTC, batch of 5 guides. |
-| Analytics | **Google Analytics 4** | ID `G-JXNF856NBF`. |
-| Ads | **Google AdSense** | Publisher ID `ca-pub-1606633100797174` — *in review.* |
-| Email distribution | Not yet implemented | Planned: ConvertKit / Buttondown / MailerLite for the planned newsletter. |
+| Serverless functions | **Netlify Functions** (5: `check-scam`, `subscribe`, `confirm-subscribe`, `unsubscribe`, `csp-report`) | AI checker proxy + double opt-in newsletter (subscribe/confirm/unsubscribe) + CSP violation collector. Functions now carry a `package.json` (`@netlify/blobs`). |
+| AI for scam checker | **Anthropic Claude — `claude-haiku-4-5-20251001`** | Returns structured JSON verdict. Durable per-IP rate limit + daily spend cap (`DAILY_CALL_CAP=2000`/UTC-day) via Netlify Blobs. |
+| AI for content generation | **Anthropic Claude — `claude-haiku-4-5-20251001`** | Generates 6 sections × 120–180 words + 4 FAQs per guide, gated by `scripts/content_gate.py` before publish. |
+| Content automation | **GitHub Actions** (`.github/workflows/daily-publish.yml`) | Daily at 05:07 UTC, batch of 1, gated by the accuracy gate. |
+| Analytics | **Google Analytics 4** | ID `G-JXNF856NBF`. Consent via Google Consent Mode driven by the certified CMP. |
+| Ads | **Google AdSense** | Publisher ID `ca-pub-1606633100797174`. UK/EEA consent via Google's certified CMP (Privacy & messaging). |
+| Email distribution | **Resend** (live, double opt-in) | Audiences + transactional confirm/welcome/unsubscribe emails via `subscribe.js`/`confirm-subscribe.js`/`unsubscribe.js`. |
 | Search / SEO | Google Search Console, Bing Webmaster Tools | Site verified. |
 | Repository | GitHub (`siderightapps-hub/beatthescam-site`) | Private/public TBD — confirm before sale. |
 
@@ -128,7 +128,7 @@ A free, UK-focused consumer-protection publication that:
 - **Zero ongoing server cost** beyond Netlify's flat fee.
 - **Instant rollback** via Git history.
 - **A+ security** is easier to maintain — no app server attack surface.
-- **AI checker is the only dynamic surface** and is isolated as a single serverless function with rate limiting, CORS pinning, and input sanitisation.
+- **Dynamic surfaces are five small, isolated serverless functions** (AI checker, newsletter subscribe/confirm/unsubscribe, CSP report collector) — each with rate limiting, CORS/origin pinning, and input sanitisation; no app server.
 
 ---
 
@@ -153,7 +153,7 @@ beatthescam-site/
 │   └── base.html                      # HTML shell with {{placeholders}}
 ├── assets/
 │   ├── styles.css                     # All site CSS
-│   ├── app.js                         # Cookie consent + nav toggle + outbound click tracking
+│   ├── app.js                         # Cookie consent (defers to Google CMP; custom banner fallback) + nav toggle + outbound click tracking
 │   └── og-image-v2.png                # OpenGraph default image
 ├── netlify/
 │   └── functions/
@@ -209,9 +209,9 @@ Developer pushes to main  →  GitHub webhook  →  Netlify pulls repo  →  Ser
 ### Daily pipeline flow
 
 ```
-06:15 UTC  →  GitHub Actions starts daily-publish.yml
+05:07 UTC  →  GitHub Actions starts daily-publish.yml
             →  git pull --rebase origin main   (catches manual pushes)
-            →  Calls Claude API → generates 5 guides → updates posts.json
+            →  Calls Claude API → generates 1 guide → content_gate.py (deterministic + LLM judge); FAIL → quarantine → updates posts.json
             →  Runs python scripts/build.py → rebuilds dist/
             →  Verifies dist/index.html, dist/robots.txt, dist/_redirects, 50+ guide directories exist
             →  git add -A && commit
@@ -264,10 +264,10 @@ worktree-env() { cp ~/Projects/websites/beatthescam-site/.env .env; }
 
 | Variable | Purpose | Last rotated |
 |---|---|---|
-| `ANTHROPIC_API_KEY` | Used by `check-scam.js` serverless function | 2026-04-28 |
-| `RESEND_API_KEY` | Used by `subscribe.js` (newsletter) — Resend Audiences + welcome email | 2026-06-09 (added) |
-| `RESEND_AUDIENCE_ID` | Target Resend Audience for `subscribe.js`. **Both Resend vars required** — missing either returns `500 "Service not configured"`. Get the ID from Resend → Audiences → the `</>` snippet (NOT the domain ID). | 2026-06-09 (added) |
-| `UNSUBSCRIBE_SECRET` | HMAC key signing the one-click unsubscribe links in the welcome email (`subscribe.js` mints, `unsubscribe.js` verifies). Any long random string — generate with `openssl rand -hex 32`. **Fails closed:** if unset, the welcome email ships with no unsubscribe link/header. Does NOT rotate on the Resend 90-day cadence (rotating it invalidates links in already-sent emails). | 2026-06-09 (added) |
+| `ANTHROPIC_API_KEY` | Used by `check-scam.js` (checker) and the content-generation scripts. The checker also enforces a durable per-IP rate limit + daily spend cap (`DAILY_CALL_CAP=2000`/UTC-day) via **Netlify Blobs** (auto-provisioned — no extra secret). | 2026-04-28 |
+| `RESEND_API_KEY` | Newsletter (now **double opt-in**): `subscribe.js` sends the confirmation email; `confirm-subscribe.js` adds the Resend Audience contact + sends the welcome email after the link is clicked. | 2026-06-09 (added) |
+| `RESEND_AUDIENCE_ID` | Target Resend Audience (used by `confirm-subscribe.js` to add the contact, `unsubscribe.js` to suppress it). All three of `RESEND_API_KEY`/`RESEND_AUDIENCE_ID`/`UNSUBSCRIBE_SECRET` are now required for signup — missing any returns `500 "Service not configured"`. Get the ID from Resend → Audiences → the `</>` snippet (NOT the domain ID). | 2026-06-09 (added) |
+| `UNSUBSCRIBE_SECRET` | HMAC key for BOTH the unsubscribe token (signs the bare email — `unsubscribe.js` verifies) AND the subscribe-confirm token (signs `"confirm:<email>"` — `confirm-subscribe.js` verifies; the two are deliberately not interchangeable). Any long random string — `openssl rand -hex 32`. **Now REQUIRED for signup (fails closed):** with it unset, `subscribe.js` returns `500` rather than minting a forgeable confirm token. Do NOT rotate casually — it invalidates confirm/unsubscribe links in already-sent emails. | 2026-06-09 (added) |
 
 ### Key rotation policy
 
@@ -509,7 +509,7 @@ Semrush exposes a Looker Studio connector under the Site Audit "Export" menu. No
 - [x] Cookie Policy page live (`/cookies/`)
 - [x] `ads.txt` served and Authorised at `/ads.txt`
 - [x] `robots.txt` does not block `Mediapartners-Google` or `AdsBot-Google`
-- [x] Original, regularly-published content (97+ guides, daily publishing pipeline)
+- [x] Original, regularly-published content (~185 guides, gated daily publishing pipeline)
 - [x] Working HTTPS with valid certificate
 - [x] Site has clear navigation and footer
 
@@ -958,12 +958,12 @@ The site has an active Google disavow file. Background and the rules for future 
 - **Data controller contact:** `privacy@beatthescam.com` (activate this alias)
 - **Lawful bases used:**
   - **Legitimate interest** for GA4 analytics (with IP anonymisation)
-  - **Consent** for AdSense personalised ads (via the cookie banner)
+  - **Consent** for AdSense personalised ads + analytics in the UK/EEA, collected via **Google's certified CMP** (AdSense → Privacy & messaging, IAB TCF) driving Google Consent Mode
   - **Contract / legitimate interest** for the scam checker (user-initiated submission)
 - **Data retention:**
   - Scam checker submissions: **not stored** (stateless function — Anthropic processes, returns, discarded)
   - Analytics: GA4 default retention (14 months)
-  - Newsletter: TBD when launched — recommend 24 months inactive purge
+  - Newsletter: **live (double opt-in via Resend)** — address + consent kept until the subscriber unsubscribes; recommend a periodic inactive purge
 - **Data processors:**
   - Google (GA4, AdSense)
   - Anthropic (scam checker AI inference — see Anthropic's UK/EU data residency posture)
@@ -975,10 +975,9 @@ The site has an active Google disavow file. Background and the rules for future 
 
 ### PECR (UK cookie law)
 
-- Cookie banner required for **non-essential** cookies (GA4, AdSense)
-- Consent UI lives in `assets/app.js`
-- Banner blocks non-essential tags until consent given (verify implementation)
-- "Reject all" must be as easy as "Accept all"
+- Consent for **non-essential** cookies (GA4, AdSense) in the UK/EEA is collected by **Google's certified CMP** (AdSense → Privacy & messaging), which drives Google Consent Mode (both "advertising" and "analytics" consent-mode toggles enabled). Reject-all ("Do not consent") is enabled for all EEA+UK+CH countries.
+- `assets/app.js` **defers** to the CMP when a TCF API is present (`window.__tcfapi`/`window.googlefc`): the custom banner stays hidden and the footer "Cookie settings" reopens the CMP. The custom banner in `app.js` is now only the **fallback** for regions where Google's message isn't shown.
+- Consent Mode defaults are denied; tags load but stay cookieless until consent (Advanced consent mode pattern).
 
 ### CCPA / CPRA (US California)
 
@@ -1059,11 +1058,12 @@ Full CSP string in `SecurityAuditHandoff.md` Section 1.
 ### Application-level security (scam checker function)
 
 - ✅ CORS locked to `https://beatthescam.com`
-- ✅ IP-based rate limiting: 10/min/IP, 429 on breach
+- ✅ Rate limiting: 10/min/IP, 429 on breach — now **durable via Netlify Blobs** (shared across instances/cold starts), falling back to in-memory if Blobs is unavailable
+- ✅ **Daily spend cap:** `DAILY_CALL_CAP=2000` Anthropic calls/UTC-day (Blobs counter, fails open) — bounds cost from a multi-IP burst
 - ✅ Input sanitisation: `type` stripped of non-alphanumerics
 - ✅ Output validation: verdict shape verified before returning
 - ✅ Error handling: generic 500s only, no stack-trace leakage
-- ✅ Safe DOM rendering: `createElement` + `textContent`; `https://` prefix validation on links
+- ✅ Safe DOM rendering: `createElement` + `textContent`; reporting links restricted to an **allow-list of official UK reporting domains** (not just any `https://`)
 
 ### Repository hygiene
 
@@ -1174,8 +1174,8 @@ A short credits file at `/humans.txt`. Useful for buyers / future contractors. O
 
 ### Daily (automated)
 
-- ✅ 06:15 UTC — Daily AI publish workflow
-- ✅ 06:30 UTC — Search Console article generator
+- ✅ 05:07 UTC — Daily AI publish workflow (gated by content_gate.py)
+- ✅ 05:23 UTC — Search Console article generator (gated; fails loudly on a dead GSC token)
 - ✅ Tweet on every publish
 
 ### Weekly (manual)
@@ -1240,7 +1240,7 @@ Revoke PATs after use at github.com → Settings → Developer settings → Pers
 
 2. **`netlify.toml` redirects only work for the two grandfathered rules.** `[[redirects]]` works for the original `/api/check-scam` rewrite and the catch-all 404, but **any newly added toml rule is silently ignored at the edge** — not just category 301s. Confirmed 2026-06-09: the freshly added `/api/subscribe` → function rewrite 404'd from toml while `/.netlify/functions/subscribe` resolved fine. **Workaround (always):** put every new redirect/rewrite in `dist/_redirects` (auto-generated by `build.py`). API `200` rewrites are emitted at the **top** of that file because first-match-wins and a rewrite must precede any catch-all. Do **not** add new `[[redirects]]` to `netlify.toml` expecting them to work.
 
-3. **Daily pipeline git-conflict risk — RESOLVED 2026-05-21.** Both `daily-publish` (06:15 UTC) and `daily-search-console` (06:30 UTC) regenerate `dist/sitemap.xml` from `posts.json`. When daily-publish overran the 15-minute window the two ran concurrently, the second push hit a rebase conflict on `dist/sitemap.xml`, and the previous "stash + checkout + stash-pop" recovery branch failed because `dist/` is derived (not authored) content and can't be merged. **Fix:**
+3. **Daily pipeline git-conflict risk — RESOLVED 2026-05-21.** Both `daily-publish` (now 05:07 UTC) and `daily-search-console` (now 05:23 UTC) regenerate `dist/sitemap.xml` from `posts.json`. When daily-publish overran the 15-minute window the two ran concurrently, the second push hit a rebase conflict on `dist/sitemap.xml`, and the previous "stash + checkout + stash-pop" recovery branch failed because `dist/` is derived (not authored) content and can't be merged. **Fix:**
    - Both workflows now share a `concurrency: group: content-pipeline, cancel-in-progress: false` block — GitHub Actions queues them instead of letting them race.
    - The rebase-conflict recovery path was rewritten to: snapshot our `content/*` changes to `/tmp/`, `git reset --hard origin/main`, merge new posts back in via `scripts/merge_new_posts.py` (matches by slug), rebuild `dist/` from scratch via `scripts/build.py`, then commit + push. `dist/` is never merged.
    - **Canonical detection:** if a workflow run fails with "CONFLICT (content): Merge conflict in dist/sitemap.xml" the concurrency group is misconfigured. Both workflows must reference the same group name.
@@ -1281,13 +1281,19 @@ Revoke PATs after use at github.com → Settings → Developer settings → Pers
 
 17. **No formal trademark filing.** Recommend UK IPO classes 41 + 42.
 
-18. **GSC OAuth token expires ~weekly (Testing-mode app).** Google expires refresh tokens after ~7 days when the OAuth consent screen is in "Testing", rotting BOTH the local `token.json` AND the `GOOGLE_SEARCH_CONSOLE_TOKEN` CI secret on the same clock. Symptom: `invalid_grant: Token has been expired or revoked`. `daily-search-console.yml` wraps generation in `|| true`, so an expired CI token silently produces nothing **without failing the run** — the gap pipeline can be dead for weeks unnoticed. **Re-auth:** `python3 scripts/auth_google.py` (browser), then copy the new `token.json` into the CI secret. **Permanent fix:** publish the OAuth consent screen to "In production". (3 `client_secret*.json` files exist in the repo root — only the `758467619755…` ones are Desktop clients; `auth_google.py` now prefers a Desktop client and falls back to browser login on a dead refresh token.)
+18. **GSC OAuth token expires ~weekly (Testing-mode app).** Google expires refresh tokens after ~7 days when the OAuth consent screen is in "Testing", rotting BOTH the local `token.json` AND the `GOOGLE_SEARCH_CONSOLE_TOKEN` CI secret on the same clock. Symptom: `invalid_grant: Token has been expired or revoked`. **(Fixed 2026-06-20)** `daily-search-console.yml` previously wrapped generation in `|| true`, so an expired CI token silently produced nothing without failing the run; it now captures the exit code and **fails the step loudly** with a GitHub error annotation, so a dead gap pipeline is visible. **Re-auth:** `python3 scripts/auth_google.py` (browser), then copy the new `token.json` into the CI secret. **Permanent fix:** publish the OAuth consent screen to "In production". (3 `client_secret*.json` files exist in the repo root — only the `758467619755…` ones are Desktop clients; `auth_google.py` now prefers a Desktop client and falls back to browser login on a dead refresh token.)
 
 19. **Check GSC demand before deleting pages for AdSense.** The 2026-05-24 "low value content" purge 301'd the site's HIGHEST-demand URLs (`dpd-delivery-scam-text` = 1,905 impr / pos 10.2, plus yodel/ups) to a thin category page, collapsing the courier cluster within ~2 weeks (resurrected 2026-06-05 via `scripts/recover_courier_guides.py`). The sin was *thinness* (<300-word stubs), not the topic — pull `scripts/gsc_report.py` before purging anything.
 
 20. **The video music bed must never deploy.** `assets/audio/news-bed.mp3` is a licensed local render asset; most free-stock-music licenses forbid redistributing the raw file. `build.py`'s assets→dist copytree excludes `assets/audio/` (+ `*.mp3/wav/aac`), and `.gitignore` excludes `assets/audio/`. Don't remove either guard. Off-site brand assets live in `brand/` (also not copied to `dist/`).
 
 21. **LinkedIn caps Company-Page creation (~7-day rolling window).** Creating several pages in a week (e.g. for sister publications) trips a "wait 7 days to create more pages" limit. Personal-profile edits are not limited.
+
+22. **Newsletter is double opt-in (2026-06-20) — `UNSUBSCRIBE_SECRET` is now required for signup.** `subscribe.js` no longer adds the contact; it emails an HMAC-signed confirm link and `confirm-subscribe.js` adds the contact + sends the welcome only after the link is clicked (GET = confirm page, POST = mutate, like `unsubscribe.js`). The confirm token signs `"confirm:<email>"` (NOT interchangeable with the bare-email unsubscribe token). Consequence: if `UNSUBSCRIBE_SECRET` is unset, signups now **500** (previously they only shipped without an unsubscribe link). The front-end success copy says "check your inbox to confirm", not "you're in".
+
+23. **The repo now has a `package.json` (functions only) — the first JS dependency.** `@netlify/blobs` backs the checker's durable rate limit + `DAILY_CALL_CAP=2000`/day spend cap. Netlify installs function deps when bundling; this does NOT add a static-site build step (`dist/` is still published as-is). Blobs is auto-provisioned (no secret); every Blobs call is guarded so the checker degrades to in-memory limiting if Blobs is down. Don't delete `package.json` thinking the repo is "pure Python" — the functions need it.
+
+24. **UK/EEA consent is Google's certified CMP, not the custom banner.** AdSense → Privacy & messaging serves the certified CMP (driving Consent Mode; both advertising + analytics consent-mode toggles ON; "Do not consent" ON for all EEA+UK+CH). `assets/app.js` defers to it (`window.__tcfapi`/`window.googlefc`) and hides the custom banner in-region — the custom banner is only a fallback elsewhere. Don't "fix" the custom banner to manage ad consent again. If the CMP doesn't render, check CSP for `fundingchoicesmessages.google.com` (and remember netlify.toml header edits may need a "Clear cache and deploy").
 
 ### Anti-patterns — don't regress these
 

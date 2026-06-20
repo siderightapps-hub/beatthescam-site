@@ -1,5 +1,7 @@
 # Beat The Scam — Video Production Handoff
 
+> **⚠️ DISCONTINUED 2026-06-15.** Video production (YouTube Shorts + TikTok + Instagram Reels) was stopped — it built neither domain authority nor backlinks for a search/reference asset, and the manual time went to the operator's main bet. Nothing in the repo was disabled (production was fully manual); just stopped producing. The BTS ElevenLabs voiceover key was deleted. This doc is retained as a historical/reference handoff only. Full rationale: `MD Files/BeatTheScam/VideoProductionHandoff.md`.
+>
 > Single source-of-truth for the video pipeline. Pipeline rewrite landed 2026-05-22 — drop the Gemini-character workflow entirely; the new text-card pipeline is now canonical.
 >
 > **Last updated:** 2026-05-22

@@ -71,7 +71,7 @@ The five existing handoff documents (`ProjectHandoffDocument.md`, `SecurityAudit
 | 13 | SEO, GEO & AEO Strategy | All three search-mode strategies; near-miss query work |
 | 14 | Backlinks, Authority & DA Plan | Outreach cadence, directory submissions, niche edits, Reddit/Quora |
 | 15 | Target Audience & Brand Voice | Editorial decisions, voice-check |
-| 16 | Legal, Compliance, GDPR & Privacy | Data requests, cookie banner config, affiliate disclosure |
+| 16 | Legal, Compliance, GDPR & Privacy | Data requests, consent (Google certified CMP), affiliate disclosure |
 | 17 | Security Posture (OWASP) | Re-scan checklist, OWASP coverage matrix, recurring checks |
 | 18 | Site Files (sitemap, robots, ads, llms, security.txt) | Each canonical site file, including emerging standards |
 | 19 | Operational Runbook | Daily / weekly / monthly / quarterly / annual cadence |
@@ -183,7 +183,7 @@ Pulled forward from `project.md` Section 21:
 
 ### Medium-term (8–24 weeks)
 - URL Checker feature (VirusTotal + Google Safe Browsing)
-- Email newsletter launch
+- ~~Email newsletter launch~~ — ✅ **LIVE** (Resend, double opt-in)
 - First guest-post placement on DA 40+ UK publication
 - Trademark filing
 
