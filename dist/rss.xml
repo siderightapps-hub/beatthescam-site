@@ -1,5 +1,12 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Beat the Scam</title><link>https://beatthescam.com</link><description>Scam alerts, plain-English checks, and practical guides to help people verify suspicious emails, texts, websites, calls, and offers.</description><lastBuildDate>Sat, 20 Jun 2026 00:00:00 +0000</lastBuildDate><atom:link href="https://beatthescam.com/rss.xml" rel="self" type="application/rss+xml" />
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Beat the Scam</title><link>https://beatthescam.com</link><description>Scam alerts, plain-English checks, and practical guides to help people verify suspicious emails, texts, websites, calls, and offers.</description><lastBuildDate>Sun, 21 Jun 2026 00:00:00 +0000</lastBuildDate><atom:link href="https://beatthescam.com/rss.xml" rel="self" type="application/rss+xml" />
+        <item>
+          <title>Council Housing Scam UK: How to Spot and Avoid Fake Housing Offers</title>
+          <link>https://beatthescam.com/guides/council-housing-scam-uk/</link>
+          <guid isPermaLink="true">https://beatthescam.com/guides/council-housing-scam-uk/</guid>
+          <pubDate>Sun, 21 Jun 2026 00:00:00 +0000</pubDate>
+          <description>Council housing scams target people desperate for affordable accommodation by posing as local authority housing departments. Scammers demand upfront fees, deposits, or personal information, then disappear or use stolen data for identity fraud.</description>
+        </item>
         <item>
           <title>Student Finance Scam UK: How to Spot and Avoid Fake Loan Offers</title>
           <link>https://beatthescam.com/guides/student-finance-scam-uk/</link>
@@ -202,11 +209,4 @@
           <guid isPermaLink="true">https://beatthescam.com/guides/airport-transfer-taxi-scam-uk/</guid>
           <pubDate>Tue, 02 Jun 2026 00:00:00 +0000</pubDate>
           <description>Airport transfer taxi scams target UK travellers at their most vulnerable—arriving tired and wanting quick transport. Scammers create fake websites, send phishing emails posing as airport services, or approach you in arrivals offering inflated fares.</description>
-        </item>
-        <item>
-          <title>F1 British GP Ticket Scam UK: How to Avoid Fake Silverstone Sellers</title>
-          <link>https://beatthescam.com/guides/f1-british-gp-ticket-scam-uk/</link>
-          <guid isPermaLink="true">https://beatthescam.com/guides/f1-british-gp-ticket-scam-uk/</guid>
-          <pubDate>Mon, 01 Jun 2026 00:00:00 +0000</pubDate>
-          <description>Each year, criminals pose as official F1 or Silverstone sellers to con UK fans out of money for counterfeit British Grand Prix tickets. This guide explains how the scam works, what warning signs to watch for, and exactly what to do if you&#x27;ve already paid.</description>
         </item></channel></rss>

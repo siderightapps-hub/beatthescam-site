@@ -8,7 +8,7 @@
 - [Email Scams](https://beatthescam.com/categories/email/): 16 guide(s)
 - [Employment Scams](https://beatthescam.com/categories/employment/): 8 guide(s)
 - [Fraud & Impersonation](https://beatthescam.com/categories/fraud/): 11 guide(s)
-- [Government Impersonation](https://beatthescam.com/categories/government/): 7 guide(s)
+- [Government Impersonation](https://beatthescam.com/categories/government/): 8 guide(s)
 - [Investment & Finance Scams](https://beatthescam.com/categories/finance/): 13 guide(s)
 - [Marketplace Scams](https://beatthescam.com/categories/marketplace/): 15 guide(s)
 - [Payment Scams](https://beatthescam.com/categories/payment/): 14 guide(s)
@@ -81,6 +81,7 @@
 
 ### Government Impersonation
 
+- [Council Housing Scam UK: How to Spot and Avoid Fake Housing Offers](https://beatthescam.com/guides/council-housing-scam-uk/): Council housing scams target people desperate for affordable accommodation by posing as local authority housing departments. Scammers demand upfront fees, deposits, or personal information, then disappear or use stolen data for identity fraud.
 - [Court Summons Scam Email UK: How to Spot Fake HMCTS Messages](https://beatthescam.com/guides/court-summons-scam-email-uk/): Fraudsters send official-looking emails claiming you have an unpaid fine or court appearance, pressuring you to click links or pay immediately. This guide shows you how to verify genuine HMCTS contact and what to do if you've already responded.
 - [DVLA Email Scam Car Tax: How to Spot Fake Renewal Emails in the UK](https://beatthescam.com/guides/dvla-email-scam-car-tax/): Scammers send convincing fake DVLA emails claiming your car tax is expiring or needs urgent renewal, complete with official-looking logos and buttons. They trick you into paying for non-existent tax or stealing your personal data and bank details.
 - [Passport Renewal Scam UK: How to Spot Fake HMPO Requests](https://beatthescam.com/guides/passport-renewal-scam-uk/): Scammers impersonate the UK Passport Office (HMPO) to trick people into paying fake fees or handing over personal data. This guide shows you how to spot these scams, verify genuine requests, and what to do if you've already been contacted.
