@@ -62,20 +62,25 @@
     hideBanner();
   }
 
-  // Google's certified CMP (AdSense "Privacy & messaging") owns ad + analytics
-  // consent via IAB TCF wherever it applies — it injects window.__tcfapi /
-  // window.googlefc. When present, defer to it: keep our custom banner hidden
-  // (no double prompt) and let the CMP drive Consent Mode. The custom banner is
-  // the fallback only for visitors outside the CMP's regulated regions, where
-  // Google's message isn't shown. Verify per-region behaviour in a preview.
-  function googleCmpActive(){
-    return typeof window.__tcfapi === 'function' ||
-           (window.googlefc && typeof window.googlefc === 'object');
+  // Defer to Google's certified CMP (AdSense "Privacy & messaging") ONLY when it
+  // genuinely runs — i.e. it shows its message or yields a real TC decision —
+  // NOT merely when the __tcfapi/googlefc stub is present. The stub can load
+  // while AdSense / the message isn't serving yet (e.g. before AdSense is
+  // approved), and trusting its mere presence would leave the page with NO
+  // consent UI at all. So: default to our own banner, and hide it only once a
+  // TCF CMP actually takes over. This self-corrects when AdSense goes live.
+  var cmpTookOver = false;
+  function deferToCmp(){
+    if(cmpTookOver) return;
+    cmpTookOver = true;
+    hideBanner();
   }
 
-  // Custom-banner fallback — only for regions where Google's CMP isn't shown.
+  // Custom-banner fallback — the consent surface wherever Google's CMP isn't
+  // actively shown (non-regulated regions, or before the CMP is live).
   function showFallbackBanner(){
-    const current = safeGet(storageKey);
+    if(cmpTookOver) return;
+    var current = safeGet(storageKey);
     if(current === 'accepted' || current === 'rejected'){
       applyConsent(current);
       updateStatus(current);
@@ -86,20 +91,21 @@
     }
   }
 
-  if(googleCmpActive()){
-    hideBanner(); // Google's CMP is the consent surface here.
-  } else {
-    // The CMP loads async and may not have injected __tcfapi yet. Keep the
-    // banner hidden and poll briefly before falling back, so it doesn't flash
-    // in regulated regions where Google's message is about to appear.
-    hideBanner();
-    var waited = 0;
-    var cmpPoll = setInterval(function(){
-      waited += 200;
-      if(googleCmpActive()){ clearInterval(cmpPoll); hideBanner(); }
-      else if(waited >= 2500){ clearInterval(cmpPoll); showFallbackBanner(); }
-    }, 200);
+  if(typeof window.__tcfapi === 'function'){
+    try {
+      window.__tcfapi('addEventListener', 2, function(tcData, success){
+        if(success && tcData && (
+            tcData.eventStatus === 'cmpuishown' ||
+            tcData.eventStatus === 'useractioncomplete' ||
+            (tcData.gdprApplies === true && tcData.tcString))){
+          deferToCmp();
+        }
+      });
+    } catch(e){ /* malformed stub — fall through to our own banner */ }
   }
+
+  // If a real CMP hasn't taken over shortly, show our own banner as the consent UI.
+  setTimeout(function(){ if(!cmpTookOver){ showFallbackBanner(); } }, 2000);
 
   if(accept){
     accept.addEventListener('click', function(e){
@@ -116,8 +122,9 @@
   if(openSettings){
     openSettings.addEventListener('click', function(e){
       e.preventDefault();
-      // Re-open Google's CMP where it manages consent; else our fallback banner.
-      if(window.googlefc && typeof window.googlefc.showRevocationMessage === 'function'){
+      // Re-open Google's CMP only when it actually manages consent here; else
+      // show our own banner (the active consent surface in this region/state).
+      if(cmpTookOver && window.googlefc && typeof window.googlefc.showRevocationMessage === 'function'){
         window.googlefc.showRevocationMessage();
       } else {
         showBanner();
