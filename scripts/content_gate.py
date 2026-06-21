@@ -159,6 +159,7 @@ def check_phones(post: Dict) -> List[Dict]:
             issues.append({
                 "check": "phone",
                 "severity": SEVERITY_BLOCK,
+                "span": raw,
                 "detail": (f"states a non-allowlisted phone number '{raw}'. "
                            f"Do not hardcode organisation numbers — tell readers to use "
                            f"the number on their card, bill, or the official website."),
@@ -174,6 +175,7 @@ def check_banned_entities(post: Dict) -> List[Dict]:
             issues.append({
                 "check": "entity",
                 "severity": SEVERITY_BLOCK,
+                "span": ent,
                 "detail": f"references '{ent}', which is defunct/unsafe to present as legitimate.",
             })
     return issues
@@ -210,6 +212,7 @@ def check_absolutes(post: Dict) -> List[Dict]:
             issues.append({
                 "check": "absolute",
                 "severity": SEVERITY_BLOCK,
+                "span": m.group(0).strip(),
                 "detail": (f"makes an unconditional guarantee/absolute to the reader "
                            f"('{m.group(0).strip()}'). Real threats vary — use hedged, "
                            f"accurate language ('almost always a bluff', 'extremely "
@@ -241,10 +244,78 @@ def check_sources(post: Dict) -> List[Dict]:
             issues.append({
                 "check": "source",
                 "severity": SEVERITY_FLAG,
+                "span": email,
                 "detail": (f"cites a non-canon official reporting email '{email}'. "
                            f"Verify it and add it to content/sources.json, or use a "
                            f"canon route (e.g. report@phishing.gov.uk)."),
             })
+    return issues
+
+
+# Legislation / legal-entitlement assertions. We can't verify the LAW
+# deterministically, so these are FLAG-tier (recorded in the manifest + surfaced
+# in the weekly digest for a human to confirm), never a block — many are correct
+# (e.g. "the Fraud Act 2006"). The judge still independently blocks fabrications.
+_LEGISLATION_RES = [
+    re.compile(r"\bthe\s+(?:[A-Z][\w’']+\s+){1,5}Act(?:\s+\d{4})?", ),     # "the Fraud Act 2006"
+    re.compile(r"\b(?:illegal|unlawful|a\s+criminal\s+offence)\s+under\b", re.I),
+    re.compile(r"\b(?:you\s+are|you’re|you're)\s+legally\s+(?:entitled|required|obliged|protected)\b", re.I),
+    re.compile(r"\blegally\s+(?:entitled|required|obliged)\s+to\b", re.I),
+]
+
+
+def check_legislation(post: Dict) -> List[Dict]:
+    text = _post_text(post)
+    issues: List[Dict] = []
+    seen = set()
+    for rx in _LEGISLATION_RES:
+        for m in rx.finditer(text):
+            span = m.group(0).strip()
+            key = span.lower()
+            if key in seen:
+                continue
+            seen.add(key)
+            issues.append({
+                "check": "legislation",
+                "severity": SEVERITY_FLAG,
+                "span": span,
+                "detail": f"makes a legal/legislation claim ('{span}') — verify it is accurate.",
+            })
+    return issues
+
+
+# A regulator/authority named alongside a specific year and an event verb — the
+# "invented dated regulatory event" failure class the audit flagged. High-stakes
+# but unverifiable deterministically → FLAG (manifest + digest), not a block.
+_AUTHORITIES = (r"FCA|Ofcom|ICO|HMRC|NCSC|Action\s+Fraud|Companies\s+House|DVLA|"
+                r"Ofgem|PSR|FOS|Financial\s+Ombudsman|Trading\s+Standards|Which\?|UK\s+Finance")
+_EVENT_VERB = (r"banned|fined|launched|introduced|ruled|announced|acquired|merged|"
+               r"ordered|warned|seized|charged|prosecuted|shut\s+down")
+# Year: a plausible recent year (2000–2029), NOT one embedded in a phone number
+# (e.g. the "2040" in Action Fraud's 0300 123 2040, or "…111 2024").
+_YEAR = r"(?<!\d\s)(?<!\d)(20[0-2]\d)\b"
+_DATED_RE = re.compile(
+    rf"\b(?:{_AUTHORITIES})\b[^.]{{0,60}}?\b(?:{_EVENT_VERB})\b[^.]{{0,40}}?{_YEAR}"
+    rf"|\b(?:{_EVENT_VERB})\b[^.]{{0,40}}?\b(?:{_AUTHORITIES})\b[^.]{{0,40}}?{_YEAR}",
+    re.I)
+
+
+def check_dated_events(post: Dict) -> List[Dict]:
+    text = _post_text(post)
+    issues: List[Dict] = []
+    seen = set()
+    for m in _DATED_RE.finditer(text):
+        span = re.sub(r"\s+", " ", m.group(0).strip())[:160]
+        key = span.lower()
+        if key in seen:
+            continue
+        seen.add(key)
+        issues.append({
+            "check": "dated_event",
+            "severity": SEVERITY_FLAG,
+            "span": span,
+            "detail": f"asserts a dated event involving an authority ('{span}') — verify it is true.",
+        })
     return issues
 
 
@@ -253,7 +324,8 @@ def check_deterministic(post: Dict) -> List[Dict]:
     # contain example scam/lookalike domains, so a domain allowlist is pure
     # noise here. Domain plausibility is left to the LLM judge.
     return (check_phones(post) + check_banned_entities(post)
-            + check_absolutes(post) + check_sources(post))
+            + check_absolutes(post) + check_sources(post)
+            + check_legislation(post) + check_dated_events(post))
 
 
 # ─── LLM JUDGE ───────────────────────────────────────────────────────────────
@@ -350,4 +422,45 @@ def quarantine_post(post: Dict, result: GateResult, today: str,
     path = d / f"{today}-{post.get('slug', 'unknown')}.json"
     with open(path, "w", encoding="utf-8") as f:
         json.dump(rec, f, indent=2, ensure_ascii=False)
+    return str(path)
+
+
+# ─── CLAIM MANIFEST ───────────────────────────────────────────────────────────
+
+def build_manifest(post: Dict, result: GateResult, model: Optional[str] = None,
+                   today: Optional[str] = None) -> Dict:
+    """An AUDIT record of the high-stakes claims the gate detected in a post —
+    NOT a bibliography. These are detector outputs (phones, absolutes, banned
+    entities, non-canon reporting emails, legislation, dated events) plus any LLM
+    judge findings, each tagged block/flag. One is written per PUBLISHED guide so
+    the weekly digest can surface flag-tier claims for a human to verify. The
+    drafting model has no internet, so we never ask it to cite — the manifest is
+    derived entirely from deterministic + judge detection."""
+    claims = []
+    for i in result.issues:
+        claims.append({
+            "type":     i.get("check"),
+            "severity": i.get("severity"),
+            "text":     i.get("span") or (i.get("detail", "")[:160]),
+            "detail":   i.get("detail", ""),
+        })
+    return {
+        "slug":        post.get("slug"),
+        "title":       post.get("title"),
+        "date":        today or post.get("date"),
+        "model":       model,
+        "gate_passed": result.passed,
+        "claims":      claims,
+    }
+
+
+def write_manifest(post: Dict, result: GateResult, model: Optional[str] = None,
+                   today: Optional[str] = None, mdir: str = "content/manifests") -> str:
+    """Write the per-guide claim manifest to content/manifests/<slug>.json.
+    Best-effort: callers should not fail a publish if this raises."""
+    d = Path(mdir)
+    d.mkdir(parents=True, exist_ok=True)
+    path = d / f"{post.get('slug', 'unknown')}.json"
+    with open(path, "w", encoding="utf-8") as f:
+        json.dump(build_manifest(post, result, model, today), f, indent=2, ensure_ascii=False)
     return str(path)
