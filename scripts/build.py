@@ -195,6 +195,39 @@ def load_affiliates(root: Path) -> list:
         return []
 
 
+def load_sources(root: Path) -> list:
+    """Verified canon of official UK reporting routes (content/sources.json) —
+    the single source of truth shared with scripts/content_gate.py. Returns the
+    list of official_routes (empty list if the file is missing/malformed, in
+    which case render_post falls back to its built-in routes)."""
+    path = root / "content" / "sources.json"
+    if not path.exists():
+        return []
+    try:
+        return json.loads(path.read_text(encoding="utf-8")).get("official_routes", [])
+    except Exception:
+        return []
+
+
+def report_block(sources: list) -> str:
+    """Render the 'Report this scam' sidebar list from the verified canon
+    (on_page routes only). Falls back to the canonical three if the canon is
+    unavailable, so a guide never ships without reporting routes."""
+    routes = [r for r in (sources or []) if r.get("on_page") and r.get("report_url")]
+    if not routes:
+        routes = [
+            {"report_url": "https://www.reportfraud.police.uk", "report_label": "Action Fraud (UK)"},
+            {"report_url": "https://www.ncsc.gov.uk/collection/phishing-scams", "report_label": "NCSC — report phishing"},
+            {"report_url": "https://www.citizensadvice.org.uk/consumer/scams/reporting-a-scam/", "report_label": "Citizens Advice"},
+        ]
+    items = "".join(
+        f'<li><a href="{html.escape(r["report_url"])}" rel="noopener noreferrer" target="_blank">'
+        f'{html.escape(r.get("report_label") or r.get("name", "Report"))}</a></li>'
+        for r in routes
+    )
+    return f'<ul class="list-clean">{items}</ul>'
+
+
 def load_category_hubs(root: Path) -> dict:
     """Optional per-category pillar content (title/description/intro/sections/faq)
     keyed by canonical category slug. Turns a category page into a rankable hub
@@ -1291,7 +1324,7 @@ def related_posts(posts, current, count=4):
     return out
 
 
-def render_post(site, post, all_posts, affiliates=None):
+def render_post(site, post, all_posts, affiliates=None, sources=None):
     url   = site['domain'] + f'/guides/{post["slug"]}/'
     label = category_label(post["category"])
     mins  = reading_time(post)
@@ -1389,11 +1422,7 @@ def render_post(site, post, all_posts, affiliates=None):
         </section>
         <section class="sidebar-card">
           <h3>Report this scam</h3>
-          <ul class="list-clean">
-            <li><a href="https://www.reportfraud.police.uk" rel="noopener noreferrer" target="_blank">Action Fraud (UK)</a></li>
-            <li><a href="https://www.ncsc.gov.uk/collection/phishing-scams" rel="noopener noreferrer" target="_blank">NCSC &#8212; report phishing</a></li>
-            <li><a href="https://www.citizensadvice.org.uk/consumer/scams/reporting-a-scam/" rel="noopener noreferrer" target="_blank">Citizens Advice</a></li>
-          </ul>
+          {report_block(sources)}
         </section>
         <section class="sidebar-card">
           <h3>Not sure?</h3>
@@ -2344,6 +2373,7 @@ def build():
     raw_posts = read_json(ROOT / 'content/posts.json')
 
     affiliates = load_affiliates(ROOT)
+    sources    = load_sources(ROOT)
     category_hubs = load_category_hubs(ROOT)
 
     # Normalise category names
@@ -2449,7 +2479,7 @@ def build():
         if generate_og_image(og_out, post["title"], category_label(post["category"]), site["site_name"]):
             og_gen_count += 1
 
-        html_out = render_post(site, post, posts, affiliates)
+        html_out = render_post(site, post, posts, affiliates, sources)
         html_out = linkify_bare_paths(html_out, slug_titles)
         html_out = apply_internal_links(html_out, post['slug'], link_map)
         html_out = linkify_phones(html_out)

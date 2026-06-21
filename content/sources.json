@@ -1,0 +1,85 @@
+{
+  "_note": "VERIFIED CANON of official UK reporting / consumer-protection routes. Single source of truth for: (1) the accuracy gate's allowed phone numbers (content_gate.py derives ALLOWED_PHONE_DIGITS from the phone/sms fields here), (2) the gate's reporting-email validation (check_sources), and (3) build.py's on-page 'Report this scam' block. NEVER hardcode an org number or reporting route anywhere else. Verify any change against the official source before committing. Phones are normalised to digits-only by the gate.",
+  "report_emails": [
+    "report@phishing.gov.uk",
+    "phishing@hmrc.gov.uk"
+  ],
+  "official_routes": [
+    {
+      "key": "action-fraud",
+      "name": "Action Fraud",
+      "report_url": "https://www.reportfraud.police.uk",
+      "info_url": "https://www.actionfraud.police.uk/",
+      "phone": "0300 123 2040",
+      "report_label": "Action Fraud (UK)",
+      "on_page": true
+    },
+    {
+      "key": "ncsc-sers",
+      "name": "National Cyber Security Centre",
+      "report_url": "https://www.ncsc.gov.uk/collection/phishing-scams",
+      "info_url": "https://www.ncsc.gov.uk/",
+      "email": "report@phishing.gov.uk",
+      "report_label": "NCSC — report phishing",
+      "on_page": true
+    },
+    {
+      "key": "citizens-advice",
+      "name": "Citizens Advice consumer helpline",
+      "report_url": "https://www.citizensadvice.org.uk/consumer/scams/reporting-a-scam/",
+      "info_url": "https://www.citizensadvice.org.uk/consumer/scams/",
+      "phone": "0808 223 1133",
+      "report_label": "Citizens Advice",
+      "on_page": true
+    },
+    {
+      "key": "fca-scamsmart",
+      "name": "FCA ScamSmart / consumer helpline",
+      "info_url": "https://www.fca.org.uk/scamsmart",
+      "phone": "0800 111 6768",
+      "on_page": false
+    },
+    {
+      "key": "report-spam-sms",
+      "name": "Forward spam texts to 7726",
+      "sms": "7726",
+      "on_page": false
+    },
+    {
+      "key": "stop-scams-159",
+      "name": "Stop Scams UK — call your bank",
+      "phone": "159",
+      "on_page": false
+    },
+    {
+      "key": "gas-emergency",
+      "name": "National Gas Emergency Service",
+      "phone": "0800 111 999",
+      "on_page": false
+    },
+    {
+      "key": "power-cut-105",
+      "name": "Power cut / electricity emergency",
+      "phone": "105",
+      "on_page": false
+    },
+    {
+      "key": "police-101",
+      "name": "Police non-emergency",
+      "phone": "101",
+      "on_page": false
+    },
+    {
+      "key": "emergency-999",
+      "name": "Emergency services",
+      "phone": "999",
+      "on_page": false
+    },
+    {
+      "key": "emergency-112",
+      "name": "Emergency services",
+      "phone": "112",
+      "on_page": false
+    }
+  ]
+}

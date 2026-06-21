@@ -41,23 +41,52 @@ ACCURACY_BLOCK = """ACCURACY — THIS OVERRIDES EVERY STYLE AND SEO RULE BELOW. 
 
 # ─── ALLOWLISTS / BLOCKLISTS ─────────────────────────────────────────────────
 
-# The ONLY phone numbers a guide may state (normalised to digits-only). These
-# are national, stable, cross-scam numbers verified against official sources.
-# Everything else — bank fraud lines, courier numbers, utility numbers — is
-# blocked, because hardcoding an organisation's number is the highest-
-# consequence error on a scam-advice site (the audit found several wrong ones).
-# New guides must instead tell readers to use the number on their card, bill,
-# or the organisation's official website.
-ALLOWED_PHONE_DIGITS = {
-    "03001232040",   # Action Fraud
-    "08082231133",   # Citizens Advice consumer helpline
-    "08001116768",   # FCA consumer helpline (verified 2026-06-18)
-    "7726",          # forward spam SMS (free, all UK networks)
-    "159",           # Stop Scams UK — call your bank
-    "0800111999",    # National Gas Emergency Service
-    "105",           # power-cut / electricity emergency
-    "999", "112", "101",  # police / emergency
+# The ONLY phone numbers a guide may state (normalised to digits-only) and the
+# only official reporting emails — both DERIVED from the verified canon in
+# content/sources.json (single source of truth, shared with build.py's on-page
+# reporting block). Everything else — bank fraud lines, courier numbers, utility
+# numbers — is blocked, because hardcoding an organisation's number is the
+# highest-consequence error on a scam-advice site. Loaded defensively: if the
+# canon is missing/malformed the gate falls back to the hardcoded set below so
+# it never breaks.
+_FALLBACK_PHONE_DIGITS = {
+    "03001232040", "08082231133", "08001116768", "7726", "159",
+    "0800111999", "105", "999", "112", "101",
 }
+_FALLBACK_REPORT_EMAILS = {"report@phishing.gov.uk"}
+
+
+def _load_canon() -> Dict:
+    path = Path(__file__).resolve().parents[1] / "content" / "sources.json"
+    try:
+        return json.loads(path.read_text(encoding="utf-8"))
+    except Exception:
+        return {}
+
+
+def _canon_phone_digits(canon: Dict) -> set:
+    digits = set()
+    for r in canon.get("official_routes", []):
+        for field in ("phone", "sms"):
+            v = r.get(field)
+            if v:
+                d = re.sub(r"\D", "", str(v))
+                if d:
+                    digits.add(d)
+    return digits or set(_FALLBACK_PHONE_DIGITS)
+
+
+def _canon_report_emails(canon: Dict) -> set:
+    emails = {e.strip().lower() for e in canon.get("report_emails", []) if e}
+    for r in canon.get("official_routes", []):
+        if r.get("email"):
+            emails.add(str(r["email"]).strip().lower())
+    return emails or set(_FALLBACK_REPORT_EMAILS)
+
+
+_CANON = _load_canon()
+ALLOWED_PHONE_DIGITS = _canon_phone_digits(_CANON)
+ALLOWED_REPORT_EMAILS = _canon_report_emails(_CANON)
 
 # Substrings (matched case-insensitively, on word boundaries where sensible)
 # that must never be presented as legitimate/current. Defunct or unsafe to
@@ -189,11 +218,42 @@ def check_absolutes(post: Dict) -> List[Dict]:
     return issues
 
 
+# Email addresses on a UK government / police domain are almost always presented
+# as an official reporting route. One that is NOT in the canon is likely
+# hallucinated (a victim could send evidence into the void), but real gov
+# reporting addresses exist beyond ours (e.g. phishing@hmrc.gov.uk), so this is
+# a FLAG (review via the weekly digest), not a hard block — add confirmed ones
+# to content/sources.json.
+_REPORT_EMAIL_RE = re.compile(r"\b[\w.+-]+@(?:[\w-]+\.)*(?:gov\.uk|police\.uk)\b", re.I)
+
+
+def check_sources(post: Dict) -> List[Dict]:
+    text = _post_text(post)
+    issues: List[Dict] = []
+    seen = set()
+    for m in _REPORT_EMAIL_RE.finditer(text):
+        email = m.group(0).strip()
+        low = email.lower()
+        if low in seen:
+            continue
+        seen.add(low)
+        if low not in ALLOWED_REPORT_EMAILS:
+            issues.append({
+                "check": "source",
+                "severity": SEVERITY_FLAG,
+                "detail": (f"cites a non-canon official reporting email '{email}'. "
+                           f"Verify it and add it to content/sources.json, or use a "
+                           f"canon route (e.g. report@phishing.gov.uk)."),
+            })
+    return issues
+
+
 def check_deterministic(post: Dict) -> List[Dict]:
     # Note: no deterministic domain/URL check — these guides intentionally
     # contain example scam/lookalike domains, so a domain allowlist is pure
     # noise here. Domain plausibility is left to the LLM judge.
-    return check_phones(post) + check_banned_entities(post) + check_absolutes(post)
+    return (check_phones(post) + check_banned_entities(post)
+            + check_absolutes(post) + check_sources(post))
 
 
 # ─── LLM JUDGE ───────────────────────────────────────────────────────────────
