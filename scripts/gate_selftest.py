@@ -113,6 +113,24 @@ ABSOLUTE = {
              "Almost certainly not — these are mass-mailed bluffs."]],
 }
 
+# (5) FLAGS — review-tier (NOT block) classes that feed the claim manifest +
+#     weekly digest: a legislation claim, a dated regulatory event, and a
+#     non-canon official reporting email. These must be RECORDED (so a human can
+#     verify them) but must NOT block publication.
+FLAGS = {
+    "slug": "selftest-flags", "title": "Consumer Rights Refund Scam UK",
+    "hero": "x", "description": "y",
+    "sections": [
+        ["What is this scam?",
+         "Under the Consumer Rights Act 2015 you are legally entitled to a refund. "
+         "The FCA banned this firm from trading in 2024 after an investigation."],
+        ["How to report",
+         "Report it by emailing abuse@madeup-reports.gov.uk, or to Action Fraud "
+         "on 0300 123 2040."],
+    ],
+    "faq": [],
+}
+
 EXPECT = [
     ("fabricated (multi-vector) is BLOCKED",            "FABRICATED", lambda r: not r.passed),
     ("subtle fabrication is BLOCKED",                   "SUBTLE",     lambda r: not r.passed),
@@ -122,6 +140,12 @@ EXPECT = [
     ("...and the DETERMINISTIC absolute check caught it (no API needed)",
      "ABSOLUTE", lambda r: any(i["check"] == "absolute" and i["severity"] == "block" for i in r.issues)),
     ("clean guide PASSES (no over-blocking)",           "CLEAN",      lambda r: r.passed),
+    ("legislation claim is RECORDED as a flag",         "FLAGS",
+     lambda r: any(i["check"] == "legislation" for i in r.issues)),
+    ("dated regulatory event is RECORDED as a flag",    "FLAGS",
+     lambda r: any(i["check"] == "dated_event" for i in r.issues)),
+    ("non-canon reporting email is RECORDED as a flag", "FLAGS",
+     lambda r: any(i["check"] == "source" for i in r.issues)),
 ]
 
 
@@ -142,10 +166,10 @@ def main() -> int:
     print(f"Running gate self-test with model: {args.model}\n")
     results = {}
     for name, post in [("FABRICATED", FABRICATED), ("SUBTLE", SUBTLE),
-                       ("ABSOLUTE", ABSOLUTE), ("CLEAN", CLEAN)]:
+                       ("ABSOLUTE", ABSOLUTE), ("CLEAN", CLEAN), ("FLAGS", FLAGS)]:
         results[name] = run_gate(post, client=client, model=args.model, use_llm=True)
 
-    for name in ("FABRICATED", "SUBTLE", "ABSOLUTE", "CLEAN"):
+    for name in ("FABRICATED", "SUBTLE", "ABSOLUTE", "CLEAN", "FLAGS"):
         r = results[name]
         print(f"── {name}: {r.summary()}")
         for i in r.issues:
