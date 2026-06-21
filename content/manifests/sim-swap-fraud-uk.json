@@ -1,0 +1,15 @@
+{
+  "slug": "sim-swap-fraud-uk",
+  "title": "SIM Swap Fraud UK: How Scammers Hijack Your Phone Number",
+  "date": "2026-05-20",
+  "model": null,
+  "gate_passed": true,
+  "claims": [
+    {
+      "type": "legislation",
+      "severity": "flag",
+      "text": "legally required to",
+      "detail": "makes a legal/legislation claim ('legally required to') — verify it is accurate."
+    }
+  ]
+}

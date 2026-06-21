@@ -1,0 +1,15 @@
+{
+  "slug": "is-this-website-a-scam",
+  "title": "Is This Website a Scam? A Practical Checklist Before You Buy",
+  "date": "2026-05-30",
+  "model": null,
+  "gate_passed": true,
+  "claims": [
+    {
+      "type": "legislation",
+      "severity": "flag",
+      "text": "the Consumer Credit Act 1974",
+      "detail": "makes a legal/legislation claim ('the Consumer Credit Act 1974') — verify it is accurate."
+    }
+  ]
+}

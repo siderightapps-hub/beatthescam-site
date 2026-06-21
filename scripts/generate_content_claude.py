@@ -17,7 +17,7 @@ from typing import Dict, List, Sequence
 
 from anthropic import Anthropic
 
-from content_gate import run_gate, ACCURACY_BLOCK, quarantine_post
+from content_gate import run_gate, ACCURACY_BLOCK, quarantine_post, write_manifest
 
 DEFAULT_MODEL   = "claude-haiku-4-5-20251001"
 REQUIRED_FIELDS = ["title", "slug", "category", "excerpt", "description",
@@ -372,6 +372,11 @@ def main() -> int:
                 quarantined_topics.append(slug)
                 print(f"QUARANTINED — {result.summary()}", file=sys.stderr)
                 continue
+            # PASS → write the claim manifest (audit trail; never fail a publish on this)
+            try:
+                write_manifest(post, result, model=args.model, today=args.date)
+            except Exception as e:
+                print(f"  [warn] manifest write failed for {slug}: {e}", file=sys.stderr)
 
         if args.force:
             posts = [p for p in posts if p.get("slug") != post["slug"]]

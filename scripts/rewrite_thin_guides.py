@@ -22,7 +22,7 @@ sys.path.insert(0, str(Path(__file__).parent))
 from generate_content_claude import (
     Topic, claude_post, load_posts, save_posts, slugify
 )
-from content_gate import run_gate, quarantine_post
+from content_gate import run_gate, quarantine_post, write_manifest
 
 DEFAULT_MODEL = "claude-haiku-4-5-20251001"
 
@@ -115,6 +115,11 @@ def main() -> int:
                     quarantine_post(new_post, result, today)
                     print(f"QUARANTINED rewrite (kept original) — {result.summary()}", file=sys.stderr)
                     continue
+                # PASS → refresh the claim manifest for this slug (best-effort)
+                try:
+                    write_manifest(new_post, result, model=args.model, today=today)
+                except Exception as e:
+                    print(f"  [warn] manifest write failed for {slug}: {e}", file=sys.stderr)
 
             # Replace in posts list
             posts = [p for p in posts if p["slug"] != slug]

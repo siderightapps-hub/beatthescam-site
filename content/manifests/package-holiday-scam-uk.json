@@ -1,0 +1,15 @@
+{
+  "slug": "package-holiday-scam-uk",
+  "title": "Package Holiday Scam UK: How to Spot Fake Travel Deals and Protect Yourself",
+  "date": "2026-05-12",
+  "model": null,
+  "gate_passed": true,
+  "claims": [
+    {
+      "type": "legislation",
+      "severity": "flag",
+      "text": "the Consumer Rights Act",
+      "detail": "makes a legal/legislation claim ('the Consumer Rights Act') — verify it is accurate."
+    }
+  ]
+}

@@ -1,0 +1,15 @@
+{
+  "slug": "visa-application-scam-uk",
+  "title": "Visa Application Scam UK: How to Spot Fake Immigration Services",
+  "date": "2026-05-12",
+  "model": null,
+  "gate_passed": true,
+  "claims": [
+    {
+      "type": "source",
+      "severity": "flag",
+      "text": "complaints@oisc.homeoffice.gov.uk",
+      "detail": "cites a non-canon official reporting email 'complaints@oisc.homeoffice.gov.uk'. Verify it and add it to content/sources.json, or use a canon route (e.g. report@phishing.gov.uk)."
+    }
+  ]
+}

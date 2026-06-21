@@ -21,7 +21,7 @@ import sys
 from datetime import datetime, date, timedelta
 from pathlib import Path
 
-from content_gate import run_gate, ACCURACY_BLOCK, quarantine_post
+from content_gate import run_gate, ACCURACY_BLOCK, quarantine_post, write_manifest
 
 ROOT       = Path(__file__).resolve().parents[1]
 POSTS_FILE = ROOT / "content" / "posts.json"
@@ -386,6 +386,11 @@ def main():
         posts.insert(0, post)
         existing_slugs.add(post["slug"])
         generated += 1
+        # PASS → write the claim manifest (audit trail; best-effort)
+        try:
+            write_manifest(post, result, model=GATE_MODEL, today=date.today().isoformat())
+        except Exception as e:
+            print(f"  [warn] manifest write failed for {post['slug']}: {e}")
 
         print(f"✅ Added article #{generated}: {post['title']}")
 

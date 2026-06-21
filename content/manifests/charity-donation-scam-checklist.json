@@ -1,0 +1,15 @@
+{
+  "slug": "charity-donation-scam-checklist",
+  "title": "Charity Scams UK: How to Spot Fake Charities and Protect Your Donation",
+  "date": "2026-04-21",
+  "model": null,
+  "gate_passed": true,
+  "claims": [
+    {
+      "type": "source",
+      "severity": "flag",
+      "text": "charity.commission@charitycommission.gsi.gov.uk",
+      "detail": "cites a non-canon official reporting email 'charity.commission@charitycommission.gsi.gov.uk'. Verify it and add it to content/sources.json, or use a canon route (e.g. report@phishing.gov.uk)."
+    }
+  ]
+}
