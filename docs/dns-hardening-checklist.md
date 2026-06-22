@@ -44,22 +44,24 @@ Two senders must stay aligned before enforcing: **Microsoft 365** (apex) and
 
 ## 2. DKIM → 2048-bit
 
-- **Resend (newsletter) — currently 1024-bit.** There is **no key-size toggle in
-  the Resend dashboard.** To move to 2048-bit you must re-provision: remove the
-  `updates.beatthescam.com` domain in Resend and re-add it (Resend issues a fresh
-  DKIM key on new domains), then update the regenerated `resend._domainkey.updates`
-  record in Dynadot — or ask Resend support to rotate the key. Confirm the new
-  public key starts `MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8A…` (2048) instead of
-  `MIGfMA0…` (1024). **Priority: low** — a 1024-bit key still passes DMARC; this
-  is "preferable," not a vulnerability. Re-adding the domain re-verifies all
-  Resend DNS records, so do it during a quiet window.
-- **Microsoft 365:** Defender portal → Email & collaboration → Policies & rules →
-  Threat policies → DKIM → `beatthescam.com` → ensure enabled; rotate to 2048-bit
-  if it is still 1024.
+- **Microsoft 365 — ✅ rotated 2026-06-22.** "Rotate DKIM keys" in the Defender
+  portal regenerates a 2048-bit key; CNAMEs unchanged. New key publishes within a
+  few hours. Authoritative check is the portal ("Signing DKIM signatures") or a
+  DKIM pass on a real sent email — the Microsoft-hosted key TXT does not always
+  resolve via a plain `dig` of the CNAME target.
+- **Resend (newsletter) — was 1024-bit; ⏳ support ticket open 2026-06-22** to
+  confirm/rotate the key bit length. There is **no key-size toggle in the Resend
+  dashboard**; if support can't rotate it, the fallback is to remove and re-add
+  the `updates.beatthescam.com` domain in Resend (issues a fresh key), then update
+  the regenerated `resend._domainkey.updates` record in Dynadot. Target key starts
+  `MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8A…` (2048) vs `MIGfMA0…` (1024). **Priority:
+  low** — 1024 still passes DMARC. Re-adding re-verifies all Resend records, so do
+  it in a quiet window if needed.
 
-## 3. CAA records — none today
+## 3. CAA records — ✅ DONE (live 2026-06-22)
 
-Restrict which CA can issue certs (Netlify uses Let's Encrypt). **Dynadot format:**
+All three records live (`dig +short CAA beatthescam.com` returns issue, issuewild,
+iodef for letsencrypt.org). Restrict which CA can issue certs. **Dynadot format:**
 choose Record Type **CAA**, leave **Subdomain blank** (= apex), and type the whole
 record — `Flag Tag Value`, single spaces — into the one destination field. There
 are no separate issue/issuewild/iodef dropdowns. Add three records:
@@ -99,11 +101,13 @@ without TLS — leave Opportunistic unless you have a specific compliance reason
 
 ---
 
-## Suggested order
+## Status snapshot (2026-06-22)
 
-1. DMARC Step 1 (reporting on, still `p=none`) — zero risk, start collecting data.
-2. CAA records — zero delivery risk.
-3. HSTS preload submission (after confirming the header is live).
-4. M365 DKIM → 2048 (low risk).
-5. DMARC Step 2 → 3 once reports are clean.
-6. Resend DKIM → 2048 and DNSSEC — optional, lower priority.
+- ✅ DMARC Step 1 (reporting on, `p=none`) — live.
+- ✅ CAA records — live.
+- ✅ HSTS preload — submitted, pending inclusion.
+- ✅ M365 DKIM — rotated to 2048-bit (propagating).
+- ⏳ Resend DKIM → 2048 — support ticket open (low priority; 1024 passes DMARC).
+- ⬜ DMARC Step 2 → 3 (quarantine → reject) — wait ~1–2 weeks, confirm `dmarc@`
+  reports show BOTH M365 and Resend passing, then ramp.
+- ⬜ DNSSEC — blocked on Dynadot (needs third-party NS); optional, deferred.
