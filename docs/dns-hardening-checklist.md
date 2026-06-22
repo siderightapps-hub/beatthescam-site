@@ -25,7 +25,7 @@ Current: `_dmarc.beatthescam.com TXT "v=DMARC1; p=none;"` (monitor only, no repo
 Two senders must stay aligned before enforcing: **Microsoft 365** (apex) and
 **Resend** (newsletter from `updates.`).
 
-- **Step 1 — now (add reporting, keep monitoring):**
+- **Step 1 — ✅ DONE (live 2026-06-22), reporting on, still `p=none`:**
   ```
   _dmarc.beatthescam.com  TXT  "v=DMARC1; p=none; rua=mailto:dmarc@beatthescam.com; fo=1"
   ```
@@ -59,14 +59,18 @@ Two senders must stay aligned before enforcing: **Microsoft 365** (apex) and
 
 ## 3. CAA records — none today
 
-Restrict which CA can issue certs (Netlify uses Let's Encrypt). Add in Dynadot:
+Restrict which CA can issue certs (Netlify uses Let's Encrypt). **Dynadot format:**
+choose Record Type **CAA**, leave **Subdomain blank** (= apex), and type the whole
+record — `Flag Tag Value`, single spaces — into the one destination field. There
+are no separate issue/issuewild/iodef dropdowns. Add three records:
 ```
-beatthescam.com.  CAA  0 issue     "letsencrypt.org"
-beatthescam.com.  CAA  0 issuewild "letsencrypt.org"
-beatthescam.com.  CAA  0 iodef     "mailto:dmarc@beatthescam.com"
+0 issue "letsencrypt.org"
+0 issuewild "letsencrypt.org"
+0 iodef "mailto:dmarc@beatthescam.com"
 ```
-⚠️ If any subdomain ever gets a cert from a different CA, add that CA too or its
-renewal will fail.
+⚠️ If any subdomain ever gets a cert from a different CA — e.g. if Resend's
+custom **tracking subdomain** is later enabled — add that CA too, or its cert
+issuance will fail. Verify after saving: `dig +short CAA beatthescam.com`.
 
 ## 4. DNSSEC — blocked on Dynadot DNS
 
@@ -78,15 +82,14 @@ provider (e.g. Cloudflare) and re-creating every record there. **Priority: low /
 optional** — weigh the migration effort against the benefit; defer unless DNS is
 being moved for another reason.
 
-## 5. HSTS preload — header already correct
+## 5. HSTS preload — ✅ SUBMITTED 2026-06-22 (pending inclusion)
 
-`netlify.toml` already serves `Strict-Transport-Security: max-age=63072000;
-includeSubDomains; preload`. After the current deploy:
-```
-curl -sI https://beatthescam.com | grep -i strict-transport
-```
-If present, submit at https://hstspreload.org. ⚠️ Preload + `includeSubDomains` is
-hard to undo — confirm every current/future subdomain can serve HTTPS first.
+`netlify.toml` serves `Strict-Transport-Security: max-age=63072000;
+includeSubDomains; preload` (confirmed live). Submitted at https://hstspreload.org
+— status "pending inclusion". ⚠️ Preload + `includeSubDomains` covers ALL
+subdomains, so every current/future subdomain (incl. any Resend tracking
+subdomain) MUST serve valid HTTPS or it becomes unreachable. Re-check status over
+the next few weeks.
 
 ## 6. (Optional) Resend TLS
 
