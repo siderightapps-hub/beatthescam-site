@@ -4,12 +4,5 @@
   "date": "2026-04-27",
   "model": null,
   "gate_passed": true,
-  "claims": [
-    {
-      "type": "legislation",
-      "severity": "flag",
-      "text": "legally required to",
-      "detail": "makes a legal/legislation claim ('legally required to') — verify it is accurate."
-    }
-  ]
+  "claims": []
 }

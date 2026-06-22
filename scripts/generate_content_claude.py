@@ -179,8 +179,11 @@ def claude_post(topic: Topic, today: str, model: str, client: Anthropic,
     try:
         data = extract_json(raw)
     except Exception as e:
-        print(f"  [warn] JSON parse failed for '{topic.keyword}': {e}. Using fallback.")
-        data = {}
+        # Malformed model output → do NOT silently publish a generic fallback
+        # guide (Executive Verdict, Critical #3 — the fallback is ~490 templated
+        # words, thin and low-value but not fabricated, so the gate wouldn't
+        # catch it). Raise so the caller skips this topic; it retries next run.
+        raise ValueError(f"malformed model output for '{topic.keyword}': {e}")
 
     return normalise(data, topic, today)
 
