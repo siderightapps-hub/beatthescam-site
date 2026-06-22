@@ -102,6 +102,21 @@ function page(title, bodyHtml) {
     + `</body></html>`;
 }
 
+// Security headers for the function-rendered HTML pages. netlify.toml [[headers]]
+// do not reliably reach function responses here (Section 20 gotcha), so they are
+// set explicitly. These pages use only inline-style attributes and a same-origin
+// form — no scripts, no external resources — so the CSP can be strict.
+const SECURITY_HEADERS = {
+  "Content-Security-Policy":
+    "default-src 'none'; style-src 'unsafe-inline'; img-src 'self' data:; " +
+    "form-action 'self'; base-uri 'none'; frame-ancestors 'none'",
+  "X-Frame-Options": "DENY",
+  "X-Content-Type-Options": "nosniff",
+  "Referrer-Policy": "no-referrer",
+  "Permissions-Policy": "camera=(), microphone=(), geolocation=()",
+  "Strict-Transport-Security": "max-age=63072000; includeSubDomains; preload",
+};
+
 function htmlResponse(statusCode, body) {
   return {
     statusCode,
@@ -109,6 +124,7 @@ function htmlResponse(statusCode, body) {
       "Content-Type": "text/html; charset=utf-8",
       "Cache-Control": "no-store",
       "X-Robots-Tag": "noindex",
+      ...SECURITY_HEADERS,
     },
     body,
   };

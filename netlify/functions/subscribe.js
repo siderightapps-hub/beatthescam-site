@@ -65,19 +65,24 @@ const REPLY_TO     = "hello@beatthescam.com";
 const SITE         = "https://beatthescam.com";
 
 // ─── CONFIRM TOKEN ────────────────────────────────────────────────────────────
-// Opaque, non-forgeable token tying a confirm link to ONE address:
-//   base64url(email) + "." + base64url(HMAC-SHA256(secret, "confirm:" + email)).
-// The "confirm:" prefix means a confirm token is NOT interchangeable with an
-// unsubscribe token (which signs the bare email in unsubscribe.js), even though
-// both reuse UNSUBSCRIBE_SECRET. Fails CLOSED — with no secret, no token is
-// minted and double opt-in cannot proceed (we never ship a forgeable token).
+// Opaque, non-forgeable, EXPIRING token tying a confirm link to ONE address:
+//   base64url(email) + "." + base36(expiry_unix_s)
+//                     + "." + base64url(HMAC-SHA256(secret, "confirm:"+email+":"+exp)).
+// The expiry is inside the signed payload, so it can't be tampered with, and a
+// captured link stops working after CONFIRM_TTL_SECONDS. The "confirm:" prefix
+// means a confirm token is NOT interchangeable with an unsubscribe token (which
+// signs the bare email in unsubscribe.js), even though both reuse
+// UNSUBSCRIBE_SECRET. Fails CLOSED — with no secret, no token is minted and
+// double opt-in cannot proceed (we never ship a forgeable token).
 const crypto = require("crypto");
+const CONFIRM_TTL_SECONDS = 7 * 24 * 3600;   // confirm links expire after 7 days
 function confirmToken(email) {
   const secret = process.env.UNSUBSCRIBE_SECRET || "";
   if (!secret) return "";
+  const exp = (Math.floor(Date.now() / 1000) + CONFIRM_TTL_SECONDS).toString(36);
   const e   = Buffer.from(email, "utf8").toString("base64url");
-  const sig = crypto.createHmac("sha256", secret).update("confirm:" + email).digest("base64url");
-  return `${e}.${sig}`;
+  const sig = crypto.createHmac("sha256", secret).update("confirm:" + email + ":" + exp).digest("base64url");
+  return `${e}.${exp}.${sig}`;
 }
 
 // ─── CONFIRMATION EMAIL ────────────────────────────────────────────────────────
@@ -129,6 +134,10 @@ exports.handler = async function(event) {
     "Access-Control-Allow-Headers": "Content-Type",
     "Access-Control-Allow-Methods": "POST, OPTIONS",
     "Vary": "Origin",
+    // Set here too — netlify.toml [[headers]] do not reliably reach function
+    // responses on this site (Section 20 gotcha).
+    "X-Content-Type-Options": "nosniff",
+    "Referrer-Policy": "no-referrer",
   };
 
   // Handle preflight

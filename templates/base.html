@@ -72,12 +72,15 @@
   </script>
   {{schema}}
   <!--
-    AdSense loads on every page and respects Google Consent Mode: the GA4
-    consent defaults above start denied, so visitors who haven't accepted get
-    non-personalised ads and no ad-personalisation cookies until they do.
+    AdSense respects Google Consent Mode: the GA4 consent defaults above start
+    denied, so visitors who haven't accepted get non-personalised ads and no
+    ad-personalisation cookies until they do. The ad tag below is emitted per
+    page by make_base()/_ads_head(): omitted entirely on the /check/ tool, and
+    preceded by a requestNonPersonalizedAds flag on sensitive financial / victim
+    pages (Google restricts personalisation based on negative financial status).
     Ahrefs Web Analytics is cookieless. Custom GA4 events stay gated in app.js.
   -->
-  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client={{adsense_client}}" crossorigin="anonymous"></script>
+  {{ads_head}}
   <script src="https://analytics.ahrefs.com/analytics.js" data-key="l1GHKUGfAKlhtjbYgIySAg" async></script>
 </head>
 <body>

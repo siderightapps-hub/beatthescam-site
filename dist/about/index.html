@@ -72,9 +72,12 @@
   </script>
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebPage","name":"About","description":"Beat the Scam is a free UK consumer protection site. Learn how guides are researched, who writes them, and how the AI scam checker works.","url":"https://beatthescam.com/about/","isPartOf":{"@type":"WebSite","name":"Beat the Scam","url":"https://beatthescam.com"}}</script>
   <!--
-    AdSense loads on every page and respects Google Consent Mode: the GA4
-    consent defaults above start denied, so visitors who haven't accepted get
-    non-personalised ads and no ad-personalisation cookies until they do.
+    AdSense respects Google Consent Mode: the GA4 consent defaults above start
+    denied, so visitors who haven't accepted get non-personalised ads and no
+    ad-personalisation cookies until they do. The ad tag below is emitted per
+    page by make_base()/_ads_head(): omitted entirely on the /check/ tool, and
+    preceded by a requestNonPersonalizedAds flag on sensitive financial / victim
+    pages (Google restricts personalisation based on negative financial status).
     Ahrefs Web Analytics is cookieless. Custom GA4 events stay gated in app.js.
   -->
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1606633100797174" crossorigin="anonymous"></script>

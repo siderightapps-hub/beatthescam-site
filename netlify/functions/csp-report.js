@@ -109,15 +109,15 @@ exports.handler = async function(event) {
   // Reports are delivered same-origin by the user agent, so no CORS headers are
   // needed; answer a stray preflight cheaply just in case.
   if (event.httpMethod === "OPTIONS") {
-    return { statusCode: 204, headers: { "Cache-Control": "no-store" }, body: "" };
+    return { statusCode: 204, headers: { "Cache-Control": "no-store", "X-Content-Type-Options": "nosniff" }, body: "" };
   }
   if (event.httpMethod !== "POST") {
-    return { statusCode: 405, headers: { "Cache-Control": "no-store" }, body: "Method not allowed" };
+    return { statusCode: 405, headers: { "Cache-Control": "no-store", "X-Content-Type-Options": "nosniff" }, body: "Method not allowed" };
   }
 
   // From here on always answer 204 — the browser ignores the response body, and
   // a collector should never surface an error. Problems are logged, not returned.
-  const ok = { statusCode: 204, headers: { "Cache-Control": "no-store" }, body: "" };
+  const ok = { statusCode: 204, headers: { "Cache-Control": "no-store", "X-Content-Type-Options": "nosniff" }, body: "" };
 
   // Rate limit on the unspoofable Netlify edge IP; the IP itself is never logged.
   const clientIp =

@@ -535,9 +535,65 @@ def _prev_next_meta(prev_url: str = None, next_url: str = None) -> str:
     return "\n  ".join(parts)
 
 
+def _ads_head(site: dict, ads_mode: str) -> str:
+    """Build the per-page AdSense <head> snippet.
+
+      "none"    → no ads at all (the /check/ tool — excluded from Auto Ads).
+      "npa"     → request NON-personalised ads regardless of consent, for pages
+                  about debt, insolvency, money lost to scams, or victim support.
+                  Google restricts ad personalisation based on negative financial
+                  status, so these must not serve personalised ads even after
+                  consent.
+      "default" → the standard Auto Ads tag (personalisation still gated by the
+                  CMP / Consent Mode).
+    """
+    client = site["adsense_client"]
+    tag = (f'<script async src="https://pagead2.googlesyndication.com/pagead/js/'
+           f'adsbygoogle.js?client={client}" crossorigin="anonymous"></script>')
+    if ads_mode == "none":
+        return "<!-- Ads intentionally disabled on this page (excluded from Auto Ads) -->"
+    if ads_mode == "npa":
+        return ('<script>(adsbygoogle=window.adsbygoogle||[]).requestNonPersonalizedAds=1;</script>\n  '
+                + tag)
+    return tag
+
+
+# Pages whose subject implies "negative financial status" — debt/insolvency, or
+# recovery scams that target people who have already lost money. Google restricts
+# ad personalisation on these, so they get requestNonPersonalizedAds regardless
+# of consent. Matched against slug + title + category + keywords (NOT the body),
+# so the trigger is the page's TOPIC, not an incidental mention. The list is kept
+# deliberately tight: broad words like "victim", "refund", "compensation" or
+# "lost money" recur across almost every scam guide and would needlessly switch
+# the whole corpus to non-personalised ads.
+_SENSITIVE_FINANCE_TERMS = (
+    # Debt / insolvency / negative financial status (stems — leading \b only, so
+    # "debt" also catches "debts", "insolven" catches "insolvency/insolvent").
+    "debt", "iva", "individual voluntary arrangement", "bankrupt", "insolven",
+    "bailiff", "arrears", "ccj", "county court judgment", "loan default",
+    "struggling to pay", "repossess",
+    # Recovery scams (prey on people who already lost money)
+    "recovery scam", "recover your money", "recover stolen", "money recovery",
+    "fund recovery", "get your money back",
+)
+# Leading word boundary only — avoids "iva" matching inside "festival", while
+# still matching word-initial stems like "debt"/"debts".
+_SENSITIVE_FINANCE_RE = re.compile(
+    r"\b(?:" + "|".join(re.escape(t) for t in _SENSITIVE_FINANCE_TERMS) + r")", re.I)
+
+def post_ads_mode(post: dict) -> str:
+    """Return "npa" for debt/insolvency or money-recovery pages, else "default"."""
+    hay = " ".join([
+        post.get("slug", ""), post.get("title", ""), post.get("category", ""),
+        " ".join(post.get("keywords", []) or []),
+    ])
+    return "npa" if _SENSITIVE_FINANCE_RE.search(hay) else "default"
+
+
 def make_base(content: str, *, title: str, description: str, canonical: str, schema: str, site: dict,
               og_type: str = "website", robots: str = "index,follow", og_title: str = None,
-              og_image: str = None, prev_url: str = None, next_url: str = None):
+              og_image: str = None, prev_url: str = None, next_url: str = None,
+              ads_mode: str = "default"):
     og_image_url = og_image or abs_url(site, "/assets/og-image-v2.png")
     twitter_handle = site.get("twitter") or ""
     replacements = {
@@ -556,7 +612,7 @@ def make_base(content: str, *, title: str, description: str, canonical: str, sch
         "{{asset_prefix}}":      site.get("site_path", ""),
         "{{css_ver}}":           site.get("_asset_ver_css", ""),
         "{{js_ver}}":            site.get("_asset_ver_js", ""),
-        "{{adsense_client}}":    site["adsense_client"],
+        "{{ads_head}}":          _ads_head(site, ads_mode),
         "{{ga4_id}}":            site["ga4_id"],
         "{{year}}":              str(datetime.utcnow().year),
         "{{footer_cats}}":       _FOOTER_CATS_HTML,
@@ -1404,7 +1460,7 @@ def render_post(site, post, all_posts, affiliates=None, sources=None):
           Use the <a href="/check/">AI scam checker</a> for an instant analysis, or report it to
           <a href="https://www.reportfraud.police.uk" rel="noopener noreferrer" target="_blank">Action Fraud</a>.
         </div>
-        <p class="meta" style="margin-top:1.4rem">Reviewed against current UK reporting guidance from <a href="https://www.actionfraud.police.uk/" rel="noopener" target="_blank">Action Fraud</a>, the <a href="https://www.ncsc.gov.uk/" rel="noopener" target="_blank">National Cyber Security Centre</a>, and <a href="https://www.citizensadvice.org.uk/consumer/scams/" rel="noopener" target="_blank">Citizens Advice</a>. Last reviewed {html.escape(updated or published)}. Read about <a href="/about/">how Beat the Scam writes guides</a>.</p>
+        <p class="meta" style="margin-top:1.4rem">Reporting routes in this guide are checked against our verified canon of official UK sources &#8212; <a href="https://www.actionfraud.police.uk/" rel="noopener" target="_blank">Action Fraud</a>, the <a href="https://www.ncsc.gov.uk/" rel="noopener" target="_blank">National Cyber Security Centre</a>, and <a href="https://www.citizensadvice.org.uk/consumer/scams/" rel="noopener" target="_blank">Citizens Advice</a> &#8212; by an automated accuracy gate before publication. {"Updated" if updated else "Published"} {html.escape(updated or published)}. Read about <a href="/about/">how Beat the Scam writes guides</a>.</p>
       </article>
       <aside class="sidebar">
         <section class="sidebar-card">
@@ -1457,6 +1513,7 @@ def render_post(site, post, all_posts, affiliates=None, sources=None):
         site=site,
         og_type='article',
         og_image=og_image_url,
+        ads_mode=post_ads_mode(post),
     )
 
 
@@ -1669,6 +1726,7 @@ def render_check_page(site):
         canonical=site['domain'] + '/check/',
         schema=schema,
         site=site,
+        ads_mode="none",
     )
 
 
@@ -1863,7 +1921,7 @@ def build_legal_bodies(site):
     <h2>Google Analytics</h2>
     <p>The site uses Google Analytics 4. Analytics cookies are only enabled after consent where required.</p>
     <h2>Advertising</h2>
-    <p>The site uses Google AdSense. In the UK and EEA, your consent for advertising and analytics cookies is collected through Google&#8217;s certified Consent Management Platform (the consent message you see on your first visit), which records your choice under the IAB Transparency &amp; Consent Framework. Until you consent, ads are non-personalised and no advertising-personalisation cookies are set; if you consent, Google and its partners may use cookies to personalise and measure ads. You can change your choice any time via the Cookie settings link in the footer.</p>
+    <p>The site uses Google AdSense. To serve, measure, and (with your consent) personalise ads, Google and its partners may use <strong>cookies, web beacons (pixel tags), your IP address, and device or online identifiers</strong>. In the UK and EEA, your consent for advertising and analytics cookies is collected through Google&#8217;s certified Consent Management Platform (the consent message you see on your first visit), which records your choice under the IAB Transparency &amp; Consent Framework. Until you consent, ads are non-personalised and no advertising-personalisation cookies are set; if you consent, Google and its partners may use the technologies above to personalise and measure ads. On pages dealing with debt, insolvency, or money lost to scams, ads are served non-personalised regardless of consent. You can change your choice any time via the Cookie settings link in the footer. For more on how Google uses this data, see <a href="https://policies.google.com/technologies/partner-sites" rel="noopener noreferrer" target="_blank">How Google uses information from sites that use its services</a>.</p>
     <h2>Newsletter</h2>
     <p>If you subscribe to email updates we use double opt-in: we email you a confirmation link, and your address is only added to our list once you click it (so no one can sign up an address that isn't theirs). Your email address and consent are then stored by, and the emails delivered through, <strong>Resend</strong> (our email provider). We use your address only to send Beat the Scam updates, never sell or share it, and every email carries a one-click unsubscribe link.</p>
     <h2>Who processes your data</h2>

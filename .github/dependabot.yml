@@ -1,0 +1,37 @@
+# Dependabot — automated dependency update PRs for every ecosystem in the repo.
+# Added 2026-06-22 (supply-chain audit fix). Weekly cadence keeps the noise low
+# for a small project; security updates are raised immediately regardless.
+version: 2
+updates:
+  # Netlify Functions JS deps (@netlify/blobs) — package.json + package-lock.json
+  - package-ecosystem: "npm"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+    open-pull-requests-limit: 5
+    labels:
+      - "dependencies"
+    commit-message:
+      prefix: "deps"
+
+  # Python content/build pipeline deps — requirements-claude.txt
+  - package-ecosystem: "pip"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+    open-pull-requests-limit: 5
+    labels:
+      - "dependencies"
+    commit-message:
+      prefix: "deps"
+
+  # GitHub Actions used by the workflows (checkout, setup-python, CodeQL, …)
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+    open-pull-requests-limit: 5
+    labels:
+      - "ci"
+    commit-message:
+      prefix: "ci"

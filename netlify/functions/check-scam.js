@@ -162,6 +162,10 @@ exports.handler = async function(event) {
     "Access-Control-Allow-Headers": "Content-Type",
     "Access-Control-Allow-Methods": "POST, OPTIONS",
     "Vary": "Origin",
+    // Set here too — netlify.toml [[headers]] do not reliably reach function
+    // responses on this site (Section 20 gotcha).
+    "X-Content-Type-Options": "nosniff",
+    "Referrer-Policy": "no-referrer",
   };
 
   // Handle preflight
@@ -305,7 +309,9 @@ Rules:
     try {
       parsed = JSON.parse(clean);
     } catch {
-      console.error("Claude returned non-JSON:", text);
+      // Do NOT log `text` — model output can echo user-submitted content, which
+      // would contradict the "not stored" promise. Log only a non-sensitive shape.
+      console.error("Claude returned non-JSON (len=%d)", text.length);
       return {
         statusCode: 502,
         headers: corsHeaders,

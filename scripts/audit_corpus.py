@@ -27,20 +27,35 @@ from content_gate import run_gate, build_manifest, write_manifest, SEVERITY_BLOC
 def main() -> int:
     ap = argparse.ArgumentParser(description="One-time deterministic corpus accuracy audit")
     ap.add_argument("--posts", default="content/posts.json")
+    ap.add_argument("--manifests", default="content/manifests",
+                    help="manifest directory (read existing model provenance from here)")
     ap.add_argument("--no-write", action="store_true", help="report only; don't write manifests")
     args = ap.parse_args()
 
     posts = json.loads(Path(args.posts).read_text(encoding="utf-8"))
+    mdir = Path(args.manifests)
     by_type = Counter()
     blocks = []                    # (slug, claim)
     flags = defaultdict(list)      # type -> [(slug, text)]
     written = 0
 
+    def existing_model(slug: str):
+        """Preserve the drafting model recorded by the generation path — a
+        deterministic re-audit must not wipe provenance to null."""
+        mp = mdir / f"{slug}.json"
+        if mp.exists():
+            try:
+                return json.loads(mp.read_text(encoding="utf-8")).get("model")
+            except (ValueError, OSError):
+                return None
+        return None
+
     for p in posts:
         result = run_gate(p, use_llm=False)   # deterministic only
-        man = build_manifest(p, result, today=p.get("date"))
+        model = existing_model(p.get("slug", ""))
+        man = build_manifest(p, result, model=model, today=p.get("date"))
         if not args.no_write:
-            write_manifest(p, result, today=p.get("date"))
+            write_manifest(p, result, model=model, today=p.get("date"))
             written += 1
         for c in man["claims"]:
             by_type[c["type"]] += 1

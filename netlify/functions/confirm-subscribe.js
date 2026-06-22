@@ -48,17 +48,21 @@ function isRateLimited(ip) {
 
 // ─── TOKEN ────────────────────────────────────────────────────────────────────
 // Returns the verified email, or null if the token is missing / malformed / has
-// a bad signature / the secret is unset (fail closed). Signs "confirm:<email>".
+// a bad signature / has EXPIRED / the secret is unset (fail closed). Token format
+// is base64url(email).base36(exp).sig where sig = HMAC("confirm:"+email+":"+exp);
+// the expiry is signed, so a captured link stops working after it lapses.
 function verifyConfirmToken(t) {
   const secret = process.env.UNSUBSCRIBE_SECRET || "";
   if (!t || !secret) return null;
   const parts = String(t).split(".");
-  if (parts.length !== 2) return null;
-  const [e, sig] = parts;
+  if (parts.length !== 3) return null;
+  const [e, exp, sig] = parts;
   let email;
   try { email = Buffer.from(e, "base64url").toString("utf8"); } catch { return null; }
   if (!email || email.length > 254 || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) return null;
-  const expected = crypto.createHmac("sha256", secret).update("confirm:" + email).digest("base64url");
+  const expSec = parseInt(exp, 36);
+  if (!Number.isFinite(expSec) || expSec * 1000 < Date.now()) return null;   // expired / malformed
+  const expected = crypto.createHmac("sha256", secret).update("confirm:" + email + ":" + exp).digest("base64url");
   const a = Buffer.from(sig);
   const b = Buffer.from(expected);
   if (a.length !== b.length || !crypto.timingSafeEqual(a, b)) return null;
@@ -82,15 +86,32 @@ async function addContact(email) {
   const apiKey     = process.env.RESEND_API_KEY;
   const audienceId = process.env.RESEND_AUDIENCE_ID;
   if (!apiKey || !audienceId || !email) return false;
+  const auth = { "Content-Type": "application/json", "Authorization": `Bearer ${apiKey}` };
   try {
     const res = await fetch(`${RESEND_BASE}/audiences/${audienceId}/contacts`, {
       method: "POST",
-      headers: { "Content-Type": "application/json", "Authorization": `Bearer ${apiKey}` },
+      headers: auth,
       body: JSON.stringify({ email, unsubscribed: false }),
     });
     if (res.ok) return true;
     const txt = await res.text();
-    if (res.status === 409 || /already\s*exists|duplicate/i.test(txt)) return true;
+    if (res.status === 409 || /already\s*exists|duplicate/i.test(txt)) {
+      // Existing contact — POST won't re-activate a previously unsubscribed
+      // address, so PATCH it back to subscribed. This makes re-confirming a
+      // reliable resubscribe instead of a silent no-op.
+      try {
+        const patch = await fetch(
+          `${RESEND_BASE}/audiences/${audienceId}/contacts/${encodeURIComponent(email)}`,
+          { method: "PATCH", headers: auth, body: JSON.stringify({ unsubscribed: false }) }
+        );
+        if (patch.ok) return true;
+        console.error("confirm reactivate non-ok:", patch.status, (await patch.text()).slice(0, 300));
+        return false;
+      } catch (e) {
+        console.error("confirm reactivate threw:", e);
+        return false;
+      }
+    }
     console.error("confirm add-contact non-ok:", res.status, txt.slice(0, 300));
     return false;
   } catch (err) {
@@ -185,6 +206,21 @@ function page(title, bodyHtml) {
     + `</body></html>`;
 }
 
+// Security headers for the function-rendered HTML pages. netlify.toml [[headers]]
+// do not reliably reach function responses here (Section 20 gotcha), so they are
+// set explicitly. These pages use only inline-style attributes and a same-origin
+// form — no scripts, no external resources — so the CSP can be strict.
+const SECURITY_HEADERS = {
+  "Content-Security-Policy":
+    "default-src 'none'; style-src 'unsafe-inline'; img-src 'self' data:; " +
+    "form-action 'self'; base-uri 'none'; frame-ancestors 'none'",
+  "X-Frame-Options": "DENY",
+  "X-Content-Type-Options": "nosniff",
+  "Referrer-Policy": "no-referrer",
+  "Permissions-Policy": "camera=(), microphone=(), geolocation=()",
+  "Strict-Transport-Security": "max-age=63072000; includeSubDomains; preload",
+};
+
 function htmlResponse(statusCode, body) {
   return {
     statusCode,
@@ -192,6 +228,7 @@ function htmlResponse(statusCode, body) {
       "Content-Type": "text/html; charset=utf-8",
       "Cache-Control": "no-store",
       "X-Robots-Tag": "noindex",
+      ...SECURITY_HEADERS,
     },
     body,
   };
