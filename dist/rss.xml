@@ -1,5 +1,12 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Beat the Scam</title><link>https://beatthescam.com</link><description>Scam alerts, plain-English checks, and practical guides to help people verify suspicious emails, texts, websites, calls, and offers.</description><lastBuildDate>Sun, 21 Jun 2026 00:00:00 +0000</lastBuildDate><atom:link href="https://beatthescam.com/rss.xml" rel="self" type="application/rss+xml" />
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Beat the Scam</title><link>https://beatthescam.com</link><description>Scam alerts, plain-English checks, and practical guides to help people verify suspicious emails, texts, websites, calls, and offers.</description><lastBuildDate>Mon, 22 Jun 2026 00:00:00 +0000</lastBuildDate><atom:link href="https://beatthescam.com/rss.xml" rel="self" type="application/rss+xml" />
+        <item>
+          <title>Benefits Fraud Text Scam UK: How to Spot and Avoid DWP Impersonation</title>
+          <link>https://beatthescam.com/guides/benefits-fraud-text-scam-uk/</link>
+          <guid isPermaLink="true">https://beatthescam.com/guides/benefits-fraud-text-scam-uk/</guid>
+          <pubDate>Mon, 22 Jun 2026 00:00:00 +0000</pubDate>
+          <description>Criminals send fake text messages claiming to be from the Department for Work and Pensions (DWP), asking you to verify your identity, confirm bank details, or click a link. These messages are designed to harvest your personal information or trick you into paying fake fines or fees.</description>
+        </item>
         <item>
           <title>Council Housing Scam UK: How to Spot and Avoid Fake Housing Offers</title>
           <link>https://beatthescam.com/guides/council-housing-scam-uk/</link>
@@ -202,11 +209,4 @@
           <guid isPermaLink="true">https://beatthescam.com/guides/tui-booking-scam-uk/</guid>
           <pubDate>Wed, 03 Jun 2026 00:00:00 +0000</pubDate>
           <description>TUI booking scams target UK holidaymakers with fake confirmation emails, texts, and websites that look identical to the real TUI platform. Scammers create urgency around payment, cancellation fees, or security issues to trick you into sending money or revealing personal details.</description>
-        </item>
-        <item>
-          <title>Airport Transfer Taxi Scam UK: How to Spot and Avoid Fake Minicabs</title>
-          <link>https://beatthescam.com/guides/airport-transfer-taxi-scam-uk/</link>
-          <guid isPermaLink="true">https://beatthescam.com/guides/airport-transfer-taxi-scam-uk/</guid>
-          <pubDate>Tue, 02 Jun 2026 00:00:00 +0000</pubDate>
-          <description>Airport transfer taxi scams target UK travellers at their most vulnerable—arriving tired and wanting quick transport. Scammers create fake websites, send phishing emails posing as airport services, or approach you in arrivals offering inflated fares.</description>
         </item></channel></rss>
