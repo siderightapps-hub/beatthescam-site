@@ -17,4 +17,4 @@ python-dotenv>=1.0.0,<2.0.0
 # page = ~192 warnings cleared for two tiny pure-Python wheels). Build
 # falls back gracefully if either is missing (prints a skip message).
 rcssmin>=1.2.0,<2.0.0
-rjsmin>=1.2.0,<2.0.0
+rjsmin>=1.2.5,<2.0.0
