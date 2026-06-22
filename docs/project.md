@@ -412,17 +412,32 @@ This is the **complete inventory of every external account** the site depends on
 | Item | Value |
 |---|---|
 | Domain | `beatthescam.com` |
-| Registrar | (confirm — likely Namecheap / GoDaddy / Cloudflare Registrar) |
+| Registrar | **Dynadot** |
 | Registration date | February 2026 |
-| DNS provider | Netlify DNS (or registrar default — confirm) |
-| Nameservers | Netlify (`dns1.p01.nsone.net` etc., confirm in registrar) |
+| DNS provider | **Dynadot DNS** (nameservers `ns1.dyna-ns.net` / `ns2.dyna-ns.net`); apex A record → Netlify `75.2.60.5`. NOT Netlify DNS. |
 | SSL | Let's Encrypt via Netlify managed HTTPS |
-| HSTS | `max-age=31536000; includeSubDomains; preload` — **submitted to HSTS preload list** |
+| HSTS | `max-age=63072000; includeSubDomains; preload` — **submitted to HSTS preload list 2026-06-22 (pending inclusion)** |
 | TLS rating | **SSL Labs A+** (TLS 1.3, modern cipher suites) |
+
+### Email authentication & DNS hardening (status 2026-06-22)
+
+Full operator runbook: [`docs/dns-hardening-checklist.md`](dns-hardening-checklist.md). All records are edited in the **Dynadot** control panel.
+
+| Control | Status | Notes |
+|---|---|---|
+| SPF | ✅ strong | `v=spf1 include:spf.protection.outlook.com -all` (apex on Microsoft 365) |
+| DKIM (M365, apex mail) | ✅ 2048-bit | `selector1/2._domainkey` CNAMEs; rotated to 2048 via Defender 2026-06-22 |
+| DKIM (Resend, newsletter) | ⏳ 1024-bit | `resend._domainkey.updates`; support ticket open to rotate to 2048 (1024 still passes DMARC — low priority) |
+| DMARC | ⚠️ `p=none` + reporting | `rua=mailto:dmarc@beatthescam.com` (alias of `privacy@`). Ramp to quarantine→reject is the next step, after ~1–2 wks of clean reports showing BOTH M365 and Resend pass |
+| CAA | ✅ live | `0 issue/issuewild "letsencrypt.org"` + `0 iodef "mailto:dmarc@beatthescam.com"` |
+| DNSSEC | ❌ not enabled | Blocked: Dynadot only offers DNSSEC with third-party nameservers. Deferred unless DNS is moved. |
+
+Email: apex on **Microsoft 365** (MX `beatthescam-com.mail.protection.outlook.com`); newsletter sends via **Resend** from `updates.beatthescam.com`.
 
 ### Subdomains in use
 
 - `www.beatthescam.com` → 301 redirect to apex `beatthescam.com`
+- `updates.beatthescam.com` → Resend newsletter sending domain (SPF/DKIM)
 
 ### Subdomains reserved for future
 
@@ -512,6 +527,16 @@ Semrush exposes a Looker Studio connector under the Site Audit "Export" menu. No
 - [x] Original, regularly-published content (~185 guides, gated daily publishing pipeline)
 - [x] Working HTTPS with valid certificate
 - [x] Site has clear navigation and footer
+
+### Ad serving policy (per-page — added 2026-06-22)
+
+The AdSense tag is **no longer hardcoded on every page**. `templates/base.html` carries an `{{ads_head}}` placeholder filled per-page by `_ads_head()` in `build.py`, driven by an `ads_mode`:
+
+- **`none`** — the `/check/` tool is **excluded from Auto Ads entirely** (`render_check_page` passes `ads_mode="none"`).
+- **`npa`** — pages about debt / insolvency / money-recovery serve **non-personalised ads** regardless of consent (`requestNonPersonalizedAds=1`), because Google restricts ad personalisation based on negative financial status. Matched by `post_ads_mode()` against slug/title/category/keywords (leading word-boundary regex; ~6 guides: debt-management, debt-relief, iva-scam, crypto-recovery, recovery-room, refund-recovery).
+- **`default`** — standard Auto Ads tag (personalisation still gated by the CMP / Consent Mode).
+
+To widen/narrow the NPA set, edit `_SENSITIVE_FINANCE_TERMS` in `build.py`.
 
 ### Ad unit IDs
 
@@ -629,21 +654,23 @@ When `content/daily-publish-queue.csv` drops below 20 topics, add new ones in ba
 
 ## 12. Social Media & Video Production
 
+> ⛔ **Video production DISCONTINUED 2026-06-15.** YouTube Shorts + TikTok video was stopped — it built neither domain authority nor backlinks for a search/reference asset, and the manual time went to the operator's main bet (the "31 Years" YouTube channel). Production was fully manual (no cron automated it), so nothing was disabled in the repo — the scripts below (`generate_video.py`, `upload_to_youtube.py`) remain for reference but are **no longer in active use**. The BTS ElevenLabs voiceover key was deleted. Rationale: `MD Files/BeatTheScam/VideoProductionHandoff.md`. The **only active social channel is X/Twitter** (auto-posts on publish). The daily written-guide pipeline is unaffected and remains the authority engine.
+
 ### Channels
 
 | Platform | Handle | Status |
 |---|---|---|
-| Twitter / X | `@BeatTheScamUK` | Active — auto-posts on article publish |
-| TikTok | `@BeatTheScamUK` | Active — 3 videos published, M/W/F cadence |
-| YouTube | `Beat The Scam` (Brand Account) | Active — 3 Shorts published |
-| Facebook | Reserved | Not yet active |
-| Instagram | `@beatthescamuk` | Active — Creator account; manual Reels (same MP4 as Shorts/TikTok) |
-| LinkedIn | Reserved | Not yet active |
+| Twitter / X | `@BeatTheScamUK` | ✅ Active — auto-posts on article publish |
+| TikTok | `@BeatTheScamUK` | ⛔ Video discontinued 2026-06-15 (3 videos published before stop) |
+| YouTube | `Beat The Scam` (Brand Account) | ⛔ Video discontinued 2026-06-15 (3 Shorts published before stop) |
+| Facebook | Reserved | Not active |
+| Instagram | `@beatthescamuk` | ⛔ Video discontinued 2026-06-15 |
+| LinkedIn | Reserved | Not active |
 | Reddit | Personal account used carefully in r/Scams and r/UKPersonalFinance | See Section 14 |
 
-### Video production workflow (CANONICAL pipeline — full detail in `video-pipeline.md`)
+### Video production workflow (HISTORICAL — discontinued 2026-06-15; full detail in `video-pipeline.md`)
 
-The old Gemini-character-image / CapCut workflow was retired on 2026-05-22 after HMRC made via the new pipeline hit 210 YouTube views vs <15 for the older character-image videos. **The canonical workflow is now one command per video:**
+> Retained for reference only. The pipeline was never automated by a cron, so it is simply no longer run. The old Gemini-character-image / CapCut workflow had earlier been retired on 2026-05-22. When it was active, the workflow was one command per video:
 
 ```bash
 python3 scripts/generate_video.py <slug>            # render MP4 from posts.json
@@ -667,14 +694,13 @@ YouTube auto-upload ([`scripts/upload_to_youtube.py`](scripts/upload_to_youtube.
 
 Standard tags: `#ScamAlert #UKScam #ScamAwareness #FraudAlert #BeatTheScam`
 
-### Posting schedule
+### Posting schedule (historical — video discontinued)
 
-- **Daily (Mon–Sun)** — best window **07:30–09:00 UK BST**. Changed from M/W/F to daily on 2026-05-22 — daily cadence is generally rewarded more on both TikTok and YouTube Shorts.
-- Pin first comment immediately after posting on TikTok and YouTube
+When video was active: daily (Mon–Sun), best window 07:30–09:00 UK BST. No longer run.
 
-### Video calendar
+### Video calendar (historical — video discontinued)
 
-12-video plan running through ~Week 4. Current progress: 3 of 12 published (ISP Impersonation, WhatsApp "Hi Mum", Royal Mail Text). Next: HMRC Tax Refund Scam. Full calendar in `video-pipeline.md` Section 2.
+The 12-video plan was abandoned at 3 published (ISP Impersonation, WhatsApp "Hi Mum", Royal Mail Text) when video was discontinued 2026-06-15.
 
 ---
 
@@ -1016,8 +1042,9 @@ The site has an active Google disavow file. Background and the rules for future 
 
 ### Audit status
 
-- **Original audit:** 2026-04-29
-- **Remediation completed:** 2026-04-30
+- **Original audit:** 2026-04-29 → remediation completed 2026-04-30
+- **Executive Verdict (external) round 1:** 2026-06-19 → 06-21 (gate hardening, editorial-accuracy layer, E-tier checker/newsletter/consent)
+- **Executive Verdict (external) round 2:** 2026-06-22 — content accuracy (charity/DWP), editorial-honesty wording, function-response security headers, expiring confirm tokens, checker-logging privacy fix, supply-chain (lockfile + Dependabot + CodeQL), AdSense per-page ad policy, privacy-policy precision, DNS/email hardening (DMARC reporting, CAA, HSTS preload, M365 DKIM 2048). All A–E remediated & live; DNS ramp items tracked in `dns-hardening-checklist.md`.
 - **Status:** ✅ All actionable items remediated or verified
 
 ### Live scan results
@@ -1031,14 +1058,14 @@ The site has an active Google disavow file. Background and the rules for future 
 
 ```
 content-security-policy: default-src 'self'; script-src 'self' 'unsafe-inline' [Google AdSense + GA4 hosts]; …
-strict-transport-security: max-age=31536000; includeSubDomains; preload
+strict-transport-security: max-age=63072000; includeSubDomains; preload
 permissions-policy: camera=(), microphone=(), geolocation=(), payment=(), usb=(), interest-cohort=()
 referrer-policy: strict-origin-when-cross-origin
 x-content-type-options: nosniff
 x-frame-options: DENY
 ```
 
-Full CSP string in `SecurityAuditHandoff.md` Section 1.
+Full CSP string in `SecurityAuditHandoff.md` Section 1. **Netlify Function responses** (these come from the function bundle, NOT netlify.toml — which doesn't reliably reach function responses): the HTML pages `confirm-subscribe.js` / `unsubscribe.js` set their own strict per-page headers (`default-src 'none'; style-src 'unsafe-inline'; form-action 'self'; frame-ancestors 'none'` CSP + X-Frame-Options DENY + nosniff + `no-referrer` + Permissions-Policy + 2yr HSTS, added 2026-06-22); the JSON functions (`check-scam`, `subscribe`, `csp-report`) add `nosniff` + `no-referrer`.
 
 ### OWASP Top 10 (2021) coverage
 
@@ -1049,10 +1076,10 @@ Full CSP string in `SecurityAuditHandoff.md` Section 1.
 | A03 — Injection | Scam checker sanitises `type` field; no SQL; no shell calls | ✅ |
 | A04 — Insecure Design | Stateless function, no user accounts | ✅ |
 | A05 — Security Misconfiguration | netlify.toml headers verified; Server header noted (Netlify-managed) | ✅ |
-| A06 — Vulnerable Components | Static site + 1 minimal Node function; dependencies minimal | ✅ |
+| A06 — Vulnerable Components | Static site + minimal Node functions; **`package-lock.json` pins deps, `requirements-claude.txt` upper-bounded, Dependabot (npm+pip+actions) + CodeQL (JS+Python) added 2026-06-22** | ✅ |
 | A07 — ID & Auth Failures | No auth in scope | N/A |
-| A08 — Software & Data Integrity Failures | No CDN scripts beyond Google's; SRI not viable on AdSense | Partial (documented) |
-| A09 — Logging & Monitoring Failures | No user accounts; Netlify provides function logs | Acceptable |
+| A08 — Software & Data Integrity Failures | No CDN scripts beyond Google's; SRI not viable on AdSense; lockfile + Dependabot + CodeQL now cover dependency integrity | Partial (documented) |
+| A09 — Logging & Monitoring Failures | No user accounts; Netlify function logs; **checker no longer logs raw model output (could echo user-submitted text — fixed 2026-06-22)** | Acceptable |
 | A10 — SSRF | Function only calls Anthropic API; user input never used as URL | ✅ |
 
 ### Application-level security (scam checker function)
@@ -1065,12 +1092,20 @@ Full CSP string in `SecurityAuditHandoff.md` Section 1.
 - ✅ Error handling: generic 500s only, no stack-trace leakage
 - ✅ Safe DOM rendering: `createElement` + `textContent`; reporting links restricted to an **allow-list of official UK reporting domains** (not just any `https://`)
 
+### Newsletter functions (subscribe / confirm-subscribe / unsubscribe)
+
+- ✅ Double opt-in; per-IP rate limit; origin allow-list; honeypot
+- ✅ **Confirm tokens now carry a signed 7-day expiry** (3-part `email.exp.sig`, HMAC over `"confirm:"+email+":"+exp`) — a captured link stops working after it lapses (2026-06-22)
+- ✅ Re-confirming a previously-unsubscribed address now **reactivates** it (PATCH on duplicate) instead of silently no-op'ing
+- ✅ GET renders a confirm page only (scanner/prefetch-safe); POST mutates
+
 ### Repository hygiene
 
 - ✅ No `.env` files in git history
 - ✅ No exposed keys in `dist/` or source
 - ✅ No source maps in production
 - ✅ API keys rotated 2026-04-28 after suspected exposure
+- ✅ **`package-lock.json` + upper-bounded `requirements-claude.txt`; Dependabot (npm + pip + github-actions) + CodeQL SAST (JS + Python) — added 2026-06-22**
 
 ### Watch points (do NOT regress)
 
@@ -1097,7 +1132,7 @@ Full CSP string in `SecurityAuditHandoff.md` Section 1.
 - Recovery codes printed and stored offline
 - Backup of `posts.json`, `affiliates.json`, `site.json`, `templates/`, `scripts/`, `assets/` — git is primary; secondary cold backup recommended (S3 + offline drive quarterly)
 - Domain registrar lock enabled
-- DNSSEC enabled (confirm)
+- DNSSEC **not enabled** — blocked on Dynadot (requires third-party nameservers); deferred unless DNS is moved (see Section 8 + `dns-hardening-checklist.md`)
 - Domain transfer auth code stored in password manager, not email
 
 ---
@@ -1297,6 +1332,14 @@ Revoke PATs after use at github.com → Settings → Developer settings → Pers
 
 25. **Editorial accuracy layer = canon + manifests + weekly digest (2026-06-21).** `content/sources.json` is the VERIFIED canon of official UK reporting routes — the single source of truth for the gate's allowed phone numbers/reporting emails AND `build.py`'s on-page "Report this scam" block. Don't hard-code an org number or reporting route anywhere else; add verified ones to the canon (the gate `check_sources` FLAGS non-canon gov/police reporting emails for review — it already found a stale `*.gsi.gov.uk` address). On a gate PASS, each generator writes `content/manifests/<slug>.json` (an audit record of detected high-stakes claims — NOT a bibliography; the model has no internet so it never cites). `scripts/audit_corpus.py` re-audits all guides; the **Weekly editorial audit** Action (`scripts/audit_digest.py`) emails flag-tier claims for review. Legislation / dated-event / non-canon-source detectors are FLAG-tier (recorded, never blocking) — don't make them block (most legislation refs are correct). After any `content_gate.py` change, run the **Gate self-test** Action.
 
+26. **AdSense is per-page now — don't re-hardcode the tag (2026-06-22).** `base.html` uses an `{{ads_head}}` placeholder; `_ads_head()`/`post_ads_mode()` in `build.py` emit no ads on `/check/` and non-personalised ads on debt/insolvency/recovery pages. If you "restore" a hardcoded `adsbygoogle.js` in the template you'll re-enable personalised ads on negative-financial-status pages (a Google policy issue) and put ads back on `/check/`. Tune the NPA set via `_SENSITIVE_FINANCE_TERMS`. Note: the comment block in `base.html` must NOT contain the literal `{{ads_head}}` token — it gets substituted and can break the HTML comment (caught + fixed during the 2026-06-22 work).
+
+27. **Function security headers + confirm-token expiry live in the function code, not netlify.toml (2026-06-22).** `confirm-subscribe.js`/`unsubscribe.js` set their own `SECURITY_HEADERS` const on HTML responses (netlify.toml headers don't reliably reach function responses — see gotcha #2). Confirm tokens are now 3-part with a signed 7-day expiry; `subscribe.js` (mint) and `confirm-subscribe.js` (verify) must stay in sync on the format `base64url(email).base36(exp).sig` signed over `"confirm:"+email+":"+exp`. Don't revert either to the old 2-part permanent token.
+
+28. **Supply-chain files exist now — keep them (2026-06-22).** `package-lock.json` (commit it), `requirements-claude.txt` upper bounds, `.github/dependabot.yml`, `.github/workflows/codeql.yml`. Actions are still tag-pinned (`@v4` etc.); Dependabot's `github-actions` updater manages them — SHA-pinning was deliberately deferred to it.
+
+29. **`audit_corpus.py` preserves manifest `model` provenance (2026-06-22).** A bare re-audit used to rewrite every `content/manifests/*.json` with `model: null`, wiping the model the generator recorded. It now reads the existing manifest's `model` and passes it through. The 187 legacy manifests remain `null` ON PURPOSE (the original model was never recorded — don't backfill a guessed value).
+
 ### Anti-patterns — don't regress these
 
 Decisions reached in prior sessions that future Claude sessions should preserve, not re-litigate:
@@ -1316,13 +1359,24 @@ Decisions reached in prior sessions that future Claude sessions should preserve,
 
 > Carried forward from `ProjectHandoffDocument.md` Section 7 and updated.
 
-### Recently completed (2026-06-19 → 06-21 — Executive Verdict remediation, now FULLY CLOSED)
+### Recently completed (2026-06-22 — second Executive Verdict remediation, A–E live)
+
+A fresh external "Executive Verdict" audit surfaced further items; all code/content tranches (A–E) are remediated, deployed, and verified live. DNS (tranche F) is in progress — see `dns-hardening-checklist.md`.
+
+- [x] **Content accuracy.** Fixed the charity guide (false "all UK charities must be registered / not legitimate if unlisted" → £5,000-income + CIO rule; dead `.gsi.gov.uk` email) and the DWP benefits-text guide ("DWP number on bank card", single "DWP account" vagueness, SMS reporting route). Web-verified vs GOV.UK / Charity Commission / DWP. Corpus swept — errors were isolated.
+- [x] **Editorial honesty.** Softened author bio off "every recommendation verified… before it ships"; per-post footer now describes the automated gate + Published/Updated date (not an implied human review); `audit_corpus.py` preserves manifest `model` provenance instead of nulling it.
+- [x] **Function/security hardening.** Checker no longer logs raw model output; confirm/unsubscribe HTML pages get full security headers; confirm tokens now expire (signed 7-day) + reactivate-on-duplicate.
+- [x] **Supply chain.** `package-lock.json`, upper-bounded `requirements-claude.txt`, Dependabot (npm+pip+actions) + CodeQL (JS+Python).
+- [x] **AdSense + privacy.** `/check/` excluded from Auto Ads; non-personalised ads on debt/insolvency/recovery pages; privacy policy discloses cookies/web beacons/IP/identifiers + the NPA treatment.
+- [~] **DNS/email (tranche F, in progress).** Done: DMARC reporting (`p=none`+rua), CAA, HSTS preload submitted, M365 DKIM→2048. Pending: DMARC quarantine→reject ramp (after ~1–2 wks of clean reports), Resend DKIM→2048 (support ticket; low priority), DNSSEC (blocked on Dynadot). Full status: `dns-hardening-checklist.md`.
+
+### Recently completed (2026-06-19 → 06-21 — Executive Verdict remediation round 1, closed)
 
 - [x] **Accuracy gate hardened + corpus cleaned.** Added a deterministic absolute-claim check (the LLM judge alone had leaked invented stats + "no footage exists" into a gated sextortion guide); cleaned 46 guides of hardcoded org phone numbers; new legislation / dated-event / non-canon-reporting-email detectors (FLAG-tier). Corpus passes the gate with 0 block-tier claims.
 - [x] **Editorial-accuracy system built.** Verified source canon `content/sources.json` (single source of truth for the gate's allow-lists AND `build.py`'s on-page reporting block); per-guide **claim manifests** (`content/manifests/`, written on every gated publish); `scripts/audit_corpus.py` (re-audit all) + **weekly audit digest** (`scripts/audit_digest.py`, `.github/workflows/weekly-audit.yml` — emails flag-tier claims via Resend). Human review is the digest (tiered), not per-article blocking — preserves the autonomous model. The verdict's deeper "claim manifests + human approval for high-stakes claims" recommendation, done without LLM-authored (hallucinated) citations.
 - [x] **Checker, newsletter, consent hardened (E-tier).** Reporting-link domain allow-list in `check-scam.js`; durable per-IP rate limit + `DAILY_CALL_CAP=2000`/day spend cap via Netlify Blobs (first `package.json`); newsletter **double opt-in** (`subscribe` → `confirm-subscribe`); UK/EEA consent via **Google's certified CMP** (CSP allow-listed, app.js defers to it).
 - [x] **Quality + hygiene.** Site-wide search (lean `search.json`); 53 de-dangled SEO titles; affiliate cards "Sponsored"→"Recommended" (`rel=nofollow`, unpaid); Search Console workflow fails loudly (no more `|| true`); Anthropic 30-day retention disclosed; full docs reconciliation.
-- [x] **Last residuals closed.** Malformed model output no longer publishes a thin fallback guide (quarantines instead — `generate_content_claude.py`); **privacy notice completed to the ICO "right to be informed" checklist** (controller, lawful bases, consent withdrawal, all rights, right to complain to the ICO, automated-decisions + transfers); fixed 4 real content errors the audit surfaced — 3 stale/wrong reporting routes (decommissioned `*.gsi.gov.uk`, non-existent `abuse@justice.gov.uk`, OISC→IAA) and a mis-cited Act (Section 75 is the **Consumer Credit Act 1974**, not the Consumer Rights Act). **No open defects from the verdict remain — only growth items below.**
+- [x] **Last residuals closed.** Malformed model output no longer publishes a thin fallback guide (quarantines instead — `generate_content_claude.py`); **privacy notice completed to the ICO "right to be informed" checklist** (controller, lawful bases, consent withdrawal, all rights, right to complain to the ICO, automated-decisions + transfers); fixed 4 real content errors the audit surfaced — 3 stale/wrong reporting routes (decommissioned `*.gsi.gov.uk`, non-existent `abuse@justice.gov.uk`, OISC→IAA) and a mis-cited Act (Section 75 is the **Consumer Credit Act 1974**, not the Consumer Rights Act). **No open defects from round 1 remained** (a second external verdict on 2026-06-22 surfaced the further items in the block above, now also remediated).
 
 ### Recently completed (2026-06-05 → 06-07 session)
 
@@ -1511,7 +1565,8 @@ Display labels in `CATEGORY_LABELS`; descriptions in `CATEGORY_DESCRIPTIONS`.
 - `SecurityAuditHandoff.md` — full security remediation record (2026-04-30)
 - `SessionHandoff-SEOHygieneAndBullet-ListBugFix.md` — 2026-05-01 session
 - `SessionHandoff-SEOHygieneBullet-ListBug-HouseKeeping.md` — 2026-05-02 session
-- `video-pipeline.md` — video production workflow & calendar
+- `video-pipeline.md` — video production workflow & calendar (HISTORICAL — video discontinued 2026-06-15)
+- `dns-hardening-checklist.md` — DNS / email-auth / TLS operator runbook (DMARC, DKIM, CAA, DNSSEC, HSTS) — tranche F of the 2026-06-22 Executive Verdict
 - `project-template.md` — generic template extracted from this document
 
 ---

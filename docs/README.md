@@ -12,7 +12,8 @@
 | 0 | [`next-session.md`](next-session.md) | **Fast-start punch list — read this first when opening a new chat.** Covers where things stand, what to do next, and what data to bring. ~3-minute read. | Owner · new Claude chats |
 | 1 | [`project.md`](project.md) | Complete, project-specific source-of-truth for the Beat The Scam website | Owner · new Claude chats · potential buyers · contractors |
 | 2 | [`project-template.md`](project-template.md) | Generic, reusable template for any future website project — also doubles as a baseline `CLAUDE.md` for Claude Code | Future projects |
-| 3 | [`video-pipeline.md`](video-pipeline.md) | The canonical video production pipeline (Pillow text cards + ElevenLabs + MoviePy) including cross-platform analytics methodology | Video production work |
+| 3 | [`video-pipeline.md`](video-pipeline.md) | **HISTORICAL** — video production pipeline (Pillow text cards + ElevenLabs + MoviePy). Video was **discontinued 2026-06-15**; kept for reference only | Historical reference |
+| 3b | [`dns-hardening-checklist.md`](dns-hardening-checklist.md) | DNS / email-auth / TLS operator runbook (DMARC, DKIM, CAA, DNSSEC, HSTS) — tranche F of the 2026-06-22 Executive Verdict | Owner · DNS work |
 | 4 | [`youtube-upload-setup.md`](youtube-upload-setup.md) | One-time OAuth setup for `scripts/upload_to_youtube.py` | Setup only |
 | 5 | [`daily-publish.md`](daily-publish.md) | Daily-publish operational runbook | Pipeline debugging |
 | 6 | `README.md` *(this file)* | Quick-reference index, summary of what the documents cover, and "where do I look for X?" map | All audiences |
