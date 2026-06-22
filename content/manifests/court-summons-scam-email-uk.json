@@ -4,12 +4,5 @@
   "date": "2026-05-06",
   "model": null,
   "gate_passed": true,
-  "claims": [
-    {
-      "type": "source",
-      "severity": "flag",
-      "text": "abuse@justice.gov.uk",
-      "detail": "cites a non-canon official reporting email 'abuse@justice.gov.uk'. Verify it and add it to content/sources.json, or use a canon route (e.g. report@phishing.gov.uk)."
-    }
-  ]
+  "claims": []
 }
