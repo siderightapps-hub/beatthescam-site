@@ -128,14 +128,14 @@ jobs:
         if: env.DRY_RUN != 'true'
         id: changed
         run: |
-          git add content/posts.json dist/
+          git add content/manifests/ content/posts.json dist/
           if git diff --cached --quiet; then
             echo "changed=false" >> $GITHUB_OUTPUT
             echo "ℹ️  No new articles generated this run"
           else
             echo "changed=true" >> $GITHUB_OUTPUT
           fi
-          git reset HEAD content/posts.json dist/
+          git reset HEAD content/manifests/ content/posts.json dist/
 
       - name: Commit and push new article + dist
         if: env.DRY_RUN != 'true' && steps.changed.outputs.changed == 'true'
@@ -143,7 +143,7 @@ jobs:
           set -e
           git config user.name  "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add content/posts.json dist/
+          git add content/manifests/ content/posts.json dist/
           git commit -m "Search Console article: $(date -u +%Y-%m-%d)"
 
           for attempt in 1 2 3; do
@@ -174,7 +174,7 @@ jobs:
             fi
 
             python scripts/build.py
-            git add content/posts.json dist/
+            git add content/manifests/ content/posts.json dist/
             git commit -m "Search Console article: $(date -u +%Y-%m-%d)"
             sleep 5
           done
