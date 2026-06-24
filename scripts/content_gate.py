@@ -319,13 +319,98 @@ def check_dated_events(post: Dict) -> List[Dict]:
     return issues
 
 
+# ─── UK CONSUMER-PROTECTION ACCURACY (added after the 2026-06 editorial audit) ─
+# Catches the exact recurring factual errors that audit found in the corpus.
+
+# ClearScore is a free credit-checking APP (it resells Equifax data); "CallCredit"
+# was renamed TransUnion in 2018. Neither is a UK credit reference agency — the
+# three CRAs are Experian, Equifax, TransUnion. Presenting ClearScore/CallCredit
+# AS an agency (enumerated alongside BOTH Experian and Equifax, or right next to
+# "credit reference agenc[y]") is the misclassification to BLOCK. A correct,
+# standalone mention of ClearScore as a free app sits apart from the trio, so
+# requiring both other agencies (or the explicit CRA phrase) keeps this tight.
+_CRA_APP_RE = re.compile(r"\b(?:clear\s?score|call\s?credit)\b", re.I)
+def check_cra_misclassification(post: Dict) -> List[Dict]:
+    issues: List[Dict] = []
+    seen = set()
+    for seg in re.split(r"(?<=[.!?])\s+", _post_text(post)):
+        low = seg.lower()
+        if not _CRA_APP_RE.search(low):
+            continue
+        if ("credit reference agenc" in low) or ("experian" in low and "equifax" in low):
+            key = low[:60]
+            if key in seen:
+                continue
+            seen.add(key)
+            name = "ClearScore" if re.search(r"clear\s?score", low) else "CallCredit"
+            issues.append({
+                "check": "cra_misclassification",
+                "severity": SEVERITY_BLOCK,
+                "span": seg.strip()[:160],
+                "detail": (f"presents '{name}' as a UK credit reference agency. The three CRAs are "
+                           f"Experian, Equifax, and TransUnion — ClearScore is a free credit-checking "
+                           f"app and CallCredit was renamed TransUnion in 2018. Use TransUnion."),
+            })
+    return issues
+
+
+# The National Fraud Database is a Cifas service; consumers join via a Cifas
+# Protective Registration (cifas.org.uk), NOT "through Citizens Advice" or "via
+# Action Fraud". Routing it through those bodies is the wrong-routing error. BLOCK.
+_NFD_ROUTING_RE = re.compile(
+    r"national\s+fraud\s+database[^.]{0,60}\b(?:citizens\s+advice|action\s+fraud)\b"
+    r"|\b(?:through|via|with)\s+(?:citizens\s+advice|action\s+fraud)\b[^.]{0,40}national\s+fraud\s+database",
+    re.I)
+def check_nfd_routing(post: Dict) -> List[Dict]:
+    text = _post_text(post)
+    if _NFD_ROUTING_RE.search(text):
+        m = _NFD_ROUTING_RE.search(text)
+        return [{
+            "check": "nfd_routing",
+            "severity": SEVERITY_BLOCK,
+            "span": re.sub(r"\s+", " ", m.group(0))[:160],
+            "detail": ("routes the National Fraud Database through Citizens Advice / Action Fraud. "
+                       "It is a Cifas service — direct readers to a Cifas Protective Registration "
+                       "(cifas.org.uk)."),
+        }]
+    return []
+
+
+# US-style "fraud alert on your credit file" is not a UK mechanism (that is a
+# Cifas Protective Registration). Imprecise rather than dangerous → FLAG (review).
+_FRAUD_ALERT_RE = re.compile(
+    r"fraud\s+alert[^.]{0,40}credit\s+(?:file|report|record)"
+    r"|credit\s+(?:file|report|record)[^.]{0,40}fraud\s+alert", re.I)
+# HMRC runs genuine SMS/email campaigns and genuine texts can carry gov.uk links,
+# so blanket "HMRC never texts/emails/links you" is inaccurate → FLAG (review).
+_HMRC_CHANNEL_RE = re.compile(
+    r"HMRC[^.]{0,40}\bnever\b[^.]{0,40}\b(?:text|texts|sms|e-?mails?|links?)\b", re.I)
+def check_uk_advice_flags(post: Dict) -> List[Dict]:
+    text = _post_text(post)
+    issues: List[Dict] = []
+    if _FRAUD_ALERT_RE.search(text):
+        issues.append({"check": "fraud_alert", "severity": SEVERITY_FLAG,
+                       "span": re.sub(r"\s+", " ", _FRAUD_ALERT_RE.search(text).group(0))[:140],
+                       "detail": ("uses US-style 'fraud alert on your credit file'. The UK mechanism is a "
+                                  "Cifas Protective Registration (cifas.org.uk); free CRA monitoring is separate.")})
+    if _HMRC_CHANNEL_RE.search(text):
+        issues.append({"check": "hmrc_channel", "severity": SEVERITY_FLAG,
+                       "span": re.sub(r"\s+", " ", _HMRC_CHANNEL_RE.search(text).group(0))[:140],
+                       "detail": ("blanket 'HMRC never texts/emails/links you' — HMRC runs genuine SMS/email "
+                                  "campaigns and genuine texts can carry gov.uk links. Say HMRC won't ask you "
+                                  "to confirm details or 'claim' a refund via a link.")})
+    return issues
+
+
 def check_deterministic(post: Dict) -> List[Dict]:
     # Note: no deterministic domain/URL check — these guides intentionally
     # contain example scam/lookalike domains, so a domain allowlist is pure
     # noise here. Domain plausibility is left to the LLM judge.
     return (check_phones(post) + check_banned_entities(post)
             + check_absolutes(post) + check_sources(post)
-            + check_legislation(post) + check_dated_events(post))
+            + check_legislation(post) + check_dated_events(post)
+            + check_cra_misclassification(post) + check_nfd_routing(post)
+            + check_uk_advice_flags(post))
 
 
 # ─── LLM JUDGE ───────────────────────────────────────────────────────────────

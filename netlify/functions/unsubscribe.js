@@ -130,6 +130,22 @@ function htmlResponse(statusCode, body) {
   };
 }
 
+// Plain-text edge responses (429/405) get the same security header set + no-store
+// as the HTML pages — netlify.toml headers don't reliably reach functions here.
+function textResponse(statusCode, body, extraHeaders) {
+  return {
+    statusCode,
+    headers: {
+      "Content-Type": "text/plain; charset=utf-8",
+      "Cache-Control": "no-store",
+      "X-Robots-Tag": "noindex",
+      ...SECURITY_HEADERS,
+      ...(extraHeaders || {}),
+    },
+    body,
+  };
+}
+
 // ─── HANDLER ──────────────────────────────────────────────────────────────────
 exports.handler = async function(event) {
   const clientIp =
@@ -137,7 +153,7 @@ exports.handler = async function(event) {
     event.headers["x-forwarded-for"]?.split(",")[0].trim() ||
     "";
   if (isRateLimited(clientIp)) {
-    return { statusCode: 429, headers: { "Retry-After": "60", "Cache-Control": "no-store" }, body: "Too many requests" };
+    return textResponse(429, "Too many requests", { "Retry-After": "60" });
   }
 
   const token = (event.queryStringParameters && event.queryStringParameters.t) || "";
@@ -161,7 +177,7 @@ exports.handler = async function(event) {
   }
 
   if (event.httpMethod !== "GET") {
-    return { statusCode: 405, headers: { "Cache-Control": "no-store" }, body: "Method not allowed" };
+    return textResponse(405, "Method not allowed");
   }
 
   // ─── GET: render a confirm page only. NEVER mutates (prefetch/scanner-safe).

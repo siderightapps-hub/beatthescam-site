@@ -44,12 +44,48 @@ function isRateLimited(ip) {
 let getStore = null;
 try { ({ getStore } = require("@netlify/blobs")); } catch { /* dep/runtime absent — degrade gracefully */ }
 
+const crypto = require("crypto");
+
 const DAILY_CALL_CAP = 2000; // max Anthropic checker calls per UTC day (abuse / cost guard; tune freely)
+
+// Rate-limit keys are a salted HASH of the IP, never the raw address — so the
+// limiter never persists a plaintext IP (the privacy policy promises as much).
+// Set RATE_LIMIT_SALT in Netlify env for a stronger per-deploy secret; the
+// fallback still removes the raw IP. The hash is stable per IP within a deploy.
+const RL_SALT = process.env.RATE_LIMIT_SALT || "bts-checker-rl-v1";
+function rlKey(ip) {
+  return "ip:" + crypto.createHash("sha256").update(RL_SALT + "|" + ip).digest("hex").slice(0, 32);
+}
 
 function blobStore(name) {
   if (!getStore) return null;
   try { return getStore({ name, consistency: "strong" }); }
   catch { return null; }
+}
+
+// Atomic read-modify-write on a Blobs key via compare-and-set (etag), so
+// concurrent invocations can't clobber each other's increments and slip past a
+// limit. Retries a few times under contention; on the final attempt falls back
+// to an unconditional write so progress is still recorded. `mutate(cur)` returns
+// the next value. Returns the stored value, or null if the store is unusable.
+async function atomicUpdate(store, key, init, mutate) {
+  for (let attempt = 0; attempt < 5; attempt++) {
+    let cur = null, etag = null;
+    try {
+      const meta = await store.getWithMetadata(key, { type: "json" });
+      if (meta) { cur = meta.data; etag = meta.etag; }
+    } catch { /* treat as absent and try to create */ }
+    const next = mutate(cur || init());
+    const opts = etag ? { onlyIfMatch: etag } : { onlyIfNew: true };
+    try {
+      const res = await store.setJSON(key, next, opts);
+      if (!res || res.modified !== false) return next;   // wrote successfully
+      // res.modified === false → a racer wrote first; loop and retry with fresh etag
+    } catch (e) {
+      if (attempt === 4) { try { await store.setJSON(key, next); return next; } catch { return null; } }
+    }
+  }
+  return null;
 }
 
 // Durable per-IP limiter. Returns true (limited) / false (ok), or null when the
@@ -59,12 +95,15 @@ async function durableRateLimited(ip) {
   if (!store || !ip) return null;
   try {
     const now = Date.now();
-    const key = `ip:${ip}`;
-    const cur = (await store.get(key, { type: "json" })) || { count: 0, windowStart: now };
-    if (now - cur.windowStart > RATE_LIMIT_WINDOW_MS) { cur.count = 0; cur.windowStart = now; }
-    cur.count++;
-    await store.setJSON(key, cur);
-    return cur.count > RATE_LIMIT_MAX;
+    const next = await atomicUpdate(store, rlKey(ip),
+      () => ({ count: 0, windowStart: now }),
+      (cur) => {
+        if (now - cur.windowStart > RATE_LIMIT_WINDOW_MS) { cur.count = 0; cur.windowStart = now; }
+        cur.count++;
+        return cur;
+      });
+    if (next === null) return null;   // store failed — caller falls back to in-memory
+    return next.count > RATE_LIMIT_MAX;
   } catch (err) {
     console.error("Blobs rate-limit error (falling back to in-memory):", err);
     return null;
@@ -79,11 +118,9 @@ async function overDailyCap() {
   if (!store) return false;
   try {
     const key = `calls:${new Date().toISOString().slice(0, 10)}`; // calls:YYYY-MM-DD (UTC)
-    const cur = (await store.get(key, { type: "json" })) || { count: 0 };
-    if (cur.count >= DAILY_CALL_CAP) return true;
-    cur.count++;
-    await store.setJSON(key, cur);
-    return false;
+    const next = await atomicUpdate(store, key, () => ({ count: 0 }), (c) => { c.count++; return c; });
+    if (next === null) return false;            // store failed — fail open (availability > perfect cap)
+    return next.count > DAILY_CALL_CAP;
   } catch (err) {
     console.error("Blobs spend-cap error (failing open):", err);
     return false;
@@ -163,9 +200,11 @@ exports.handler = async function(event) {
     "Access-Control-Allow-Methods": "POST, OPTIONS",
     "Vary": "Origin",
     // Set here too — netlify.toml [[headers]] do not reliably reach function
-    // responses on this site (Section 20 gotcha).
+    // responses on this site (Section 20 gotcha). no-store on EVERY response
+    // (incl. errors/limits), so nothing here is ever cached.
     "X-Content-Type-Options": "nosniff",
     "Referrer-Policy": "no-referrer",
+    "Cache-Control": "no-store",
   };
 
   // Handle preflight
@@ -175,6 +214,15 @@ exports.handler = async function(event) {
 
   if (event.httpMethod !== "POST") {
     return { statusCode: 405, headers: corsHeaders, body: "Method not allowed" };
+  }
+
+  // Enforce origin server-side: CORS headers only stop a *browser* from reading
+  // the response — a non-browser client (curl, script, server) ignores them and
+  // would still run up the Anthropic bill. Reject a present-but-unlisted Origin
+  // outright. A missing Origin (same-origin posts, non-browser clients) is
+  // allowed through; the per-IP limit and daily cap still bound it.
+  if (requestOrigin && !ALLOWED_ORIGINS.includes(requestOrigin)) {
+    return { statusCode: 403, headers: corsHeaders, body: JSON.stringify({ error: "Forbidden" }) };
   }
 
   // Rate limiting — check client IP
@@ -208,6 +256,12 @@ exports.handler = async function(event) {
       headers: corsHeaders,
       body: JSON.stringify({ error: "Service not configured" }),
     };
+  }
+
+  // Cap total body size BEFORE parsing — never allocate/parse a multi-MB payload
+  // (field-length caps below only apply post-parse). 16KB >> the 3000-char cap.
+  if ((event.body || "").length > 16 * 1024) {
+    return { statusCode: 413, headers: corsHeaders, body: JSON.stringify({ error: "Request too large" }) };
   }
 
   // Parse and validate input
@@ -268,9 +322,14 @@ Rules:
 - Always include at least one recommended_action even for legitimate messages.
 - Do not output anything outside the JSON object.`;
 
+  // Bound the upstream call so a hung Anthropic connection can't pin the function
+  // open until the platform's hard timeout. AbortController → 504 below.
+  const ac = new AbortController();
+  const upstreamTimeout = setTimeout(() => ac.abort(), 20000);
   try {
     const response = await fetch("https://api.anthropic.com/v1/messages", {
       method: "POST",
+      signal: ac.signal,
       headers: {
         "Content-Type": "application/json",
         "x-api-key": apiKey,
@@ -362,11 +421,21 @@ Rules:
       body: JSON.stringify(result),
     };
   } catch (err) {
+    if (err && err.name === "AbortError") {
+      console.error("Anthropic API timeout (aborted after 20s)");
+      return {
+        statusCode: 504,
+        headers: corsHeaders,
+        body: JSON.stringify({ error: "The checker timed out. Please try again in a moment." }),
+      };
+    }
     console.error("Function error:", err);
     return {
       statusCode: 500,
       headers: corsHeaders,
       body: JSON.stringify({ error: "Internal error" }),
     };
+  } finally {
+    clearTimeout(upstreamTimeout);
   }
 };

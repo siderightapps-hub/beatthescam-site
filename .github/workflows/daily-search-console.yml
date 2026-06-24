@@ -44,7 +44,7 @@ jobs:
 
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
         with:
           fetch-depth: 0
 
@@ -55,22 +55,20 @@ jobs:
           git pull --rebase origin main
 
       - name: Setup Python
-        uses: actions/setup-python@v5
+        uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065 # v5
         with:
           python-version: '3.12'
 
       - name: Install dependencies
         run: |
+          # Shared build/publish deps come from the upper-bounded requirements
+          # file (same as daily-publish.yml — no longer installed unpinned here);
+          # the Google API client trio is specific to this pipeline, pinned below.
+          pip install -r requirements-claude.txt
           pip install \
-            anthropic \
-            Pillow \
-            tweepy \
-            python-dotenv \
-            google-auth-oauthlib \
-            google-auth-httplib2 \
-            google-api-python-client \
-            rcssmin \
-            rjsmin
+            'google-auth-oauthlib>=1.0.0,<2.0.0' \
+            'google-auth-httplib2>=0.2.0,<0.3.0' \
+            'google-api-python-client>=2.0.0,<3.0.0'
 
       - name: Write Google token from secret
         run: |
@@ -165,8 +163,13 @@ jobs:
             echo "Rebase conflict on attempt $attempt — recovering by snapshot + reset + rebuild"
             git rebase --abort || true
             cp content/posts.json /tmp/posts-ours.json
+            # Preserve the freshly-written manifest for the new article — it is
+            # not yet committed, so the hard reset would destroy it and the
+            # article would publish with no audit manifest.
+            rm -rf /tmp/manifests-ours && cp -r content/manifests /tmp/manifests-ours
             git reset --hard origin/main
             python scripts/merge_new_posts.py /tmp/posts-ours.json content/posts.json
+            cp -rn /tmp/manifests-ours/. content/manifests/ 2>/dev/null || true
 
             if git diff --quiet content/posts.json; then
               echo "ℹ️  Our new article was already on main — nothing to push"

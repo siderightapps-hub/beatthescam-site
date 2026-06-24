@@ -38,6 +38,88 @@ function isRateLimited(ip) {
   return entry.count > RATE_LIMIT_MAX;
 }
 
+// ─── DURABLE ABUSE CONTROLS (Netlify Blobs) ──────────────────────────────────
+// The in-memory per-IP limiter above resets on cold start and is per-instance,
+// so on its own it can't stop newsletter-bombing a victim's inbox from rotating
+// IPs. Two durable, shared controls back it up: a per-ADDRESS daily limit (cap
+// the confirmation emails any one address can receive per day) and a GLOBAL
+// daily send cap. Keys are salted hashes, never the plaintext address. Every
+// Blobs call degrades gracefully — if the store is unavailable, the in-memory
+// per-IP limiter still applies.
+const crypto = require("crypto");
+let getStore = null;
+try { ({ getStore } = require("@netlify/blobs")); } catch { /* dep/runtime absent — degrade gracefully */ }
+
+const ADDRESS_DAILY_MAX = 5;     // max confirmation emails to one address / rolling 24h
+const DAILY_SEND_CAP    = 500;   // max confirmation emails sent across all addresses / UTC day
+const RL_SALT           = process.env.RATE_LIMIT_SALT || "bts-subscribe-rl-v1";
+
+function blobStore(name) {
+  if (!getStore) return null;
+  try { return getStore({ name, consistency: "strong" }); }
+  catch { return null; }
+}
+
+function emailKey(email) {
+  return "em:" + crypto.createHash("sha256").update(RL_SALT + "|" + email).digest("hex").slice(0, 32);
+}
+
+// Atomic read-modify-write on a Blobs key via compare-and-set (etag), so
+// concurrent invocations can't clobber each other's counters. Retries under
+// contention; on the last attempt writes unconditionally. Returns the stored
+// value, or null if the store is unusable.
+async function atomicUpdate(store, key, init, mutate) {
+  for (let attempt = 0; attempt < 5; attempt++) {
+    let cur = null, etag = null;
+    try {
+      const meta = await store.getWithMetadata(key, { type: "json" });
+      if (meta) { cur = meta.data; etag = meta.etag; }
+    } catch { /* treat as absent */ }
+    const next = mutate(cur || init());
+    const opts = etag ? { onlyIfMatch: etag } : { onlyIfNew: true };
+    try {
+      const res = await store.setJSON(key, next, opts);
+      if (!res || res.modified !== false) return next;
+    } catch (e) {
+      if (attempt === 4) { try { await store.setJSON(key, next); return next; } catch { return null; } }
+    }
+  }
+  return null;
+}
+
+// True once this address has already received its daily quota of confirmation
+// emails. Increments the per-address counter as part of the check. Fails OPEN
+// (returns false) if Blobs is down — the per-IP limiter still applies.
+async function addressOverDailyLimit(email) {
+  const store = blobStore("subscribe-cooldown");
+  if (!store) return false;
+  try {
+    const now  = Date.now();
+    const next = await atomicUpdate(store, emailKey(email),
+      () => ({ count: 0, windowStart: now }),
+      (cur) => {
+        if (now - cur.windowStart > 24 * 3600 * 1000) { cur.count = 0; cur.windowStart = now; }
+        cur.count++;
+        return cur;
+      });
+    if (next === null) return false;
+    return next.count > ADDRESS_DAILY_MAX;
+  } catch { return false; }
+}
+
+// True once today's global confirmation-send cap is reached. Increments the
+// counter. Fails OPEN if Blobs is down.
+async function overDailySendCap() {
+  const store = blobStore("subscribe-spend");
+  if (!store) return false;
+  try {
+    const key  = `sends:${new Date().toISOString().slice(0, 10)}`;
+    const next = await atomicUpdate(store, key, () => ({ count: 0 }), (c) => { c.count++; return c; });
+    if (next === null) return false;
+    return next.count > DAILY_SEND_CAP;
+  } catch { return false; }
+}
+
 // ─── ALLOWED ORIGINS ─────────────────────────────────────────────────────────
 const ALLOWED_ORIGINS = [
   "https://beatthescam.com",
@@ -74,7 +156,7 @@ const SITE         = "https://beatthescam.com";
 // signs the bare email in unsubscribe.js), even though both reuse
 // UNSUBSCRIBE_SECRET. Fails CLOSED — with no secret, no token is minted and
 // double opt-in cannot proceed (we never ship a forgeable token).
-const crypto = require("crypto");
+// (crypto is required once at the top of the file.)
 const CONFIRM_TTL_SECONDS = 7 * 24 * 3600;   // confirm links expire after 7 days
 function confirmToken(email) {
   const secret = process.env.UNSUBSCRIBE_SECRET || "";
@@ -135,9 +217,10 @@ exports.handler = async function(event) {
     "Access-Control-Allow-Methods": "POST, OPTIONS",
     "Vary": "Origin",
     // Set here too — netlify.toml [[headers]] do not reliably reach function
-    // responses on this site (Section 20 gotcha).
+    // responses on this site (Section 20 gotcha). no-store on EVERY response.
     "X-Content-Type-Options": "nosniff",
     "Referrer-Policy": "no-referrer",
+    "Cache-Control": "no-store",
   };
 
   // Handle preflight
@@ -147,6 +230,13 @@ exports.handler = async function(event) {
 
   if (event.httpMethod !== "POST") {
     return { statusCode: 405, headers: corsHeaders, body: "Method not allowed" };
+  }
+
+  // Enforce origin server-side: CORS headers only stop a browser from reading the
+  // response; a non-browser client ignores them and could still trigger sends.
+  // Reject a present-but-unlisted Origin. A missing Origin is allowed through.
+  if (requestOrigin && !ALLOWED_ORIGINS.includes(requestOrigin)) {
+    return { statusCode: 403, headers: corsHeaders, body: JSON.stringify({ error: "Forbidden" }) };
   }
 
   // Rate limiting — x-nf-client-connection-ip is set by Netlify's edge and
@@ -177,6 +267,11 @@ exports.handler = async function(event) {
       headers: corsHeaders,
       body: JSON.stringify({ error: "Service not configured" }),
     };
+  }
+
+  // Cap total body size BEFORE parsing — never allocate/parse a multi-MB payload.
+  if ((event.body || "").length > 16 * 1024) {
+    return { statusCode: 413, headers: corsHeaders, body: JSON.stringify({ error: "Request too large" }) };
   }
 
   // Parse and validate input
@@ -216,6 +311,26 @@ exports.handler = async function(event) {
       statusCode: 400,
       headers: corsHeaders,
       body: JSON.stringify({ error: "Please tick the consent box to subscribe." }),
+    };
+  }
+
+  // Durable anti-abuse, layered on the per-IP limiter: silently absorb once an
+  // address has had its daily quota of confirmations (pretend success, send
+  // nothing — same as the honeypot path, so a bomber can't tell), and refuse new
+  // sends once the global daily cap is hit. Together these bound inbox-bombing
+  // that rotating IPs would otherwise slip past the per-IP limiter.
+  if (await addressOverDailyLimit(email)) {
+    return {
+      statusCode: 200,
+      headers: { ...corsHeaders, "Content-Type": "application/json" },
+      body: JSON.stringify({ ok: true, pending: true }),
+    };
+  }
+  if (await overDailySendCap()) {
+    return {
+      statusCode: 503,
+      headers: { ...corsHeaders, "Retry-After": "3600", "Content-Type": "application/json" },
+      body: JSON.stringify({ error: "We're sending a lot of confirmations right now. Please try again later." }),
     };
   }
 

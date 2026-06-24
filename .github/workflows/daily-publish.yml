@@ -46,7 +46,7 @@ jobs:
 
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
         with:
           fetch-depth: 0
 
@@ -57,7 +57,7 @@ jobs:
           git pull --rebase origin main
 
       - name: Setup Python
-        uses: actions/setup-python@v5
+        uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065 # v5
         with:
           python-version: '3.12'
 
@@ -160,10 +160,17 @@ jobs:
             cp content/posts.json                  /tmp/posts-ours.json
             cp content/topics-claude-template.csv  /tmp/topics-ours.csv
             cp content/daily-publish-queue.csv     /tmp/queue-ours.csv
+            # Preserve freshly-written manifests: they are created during
+            # generation but not yet committed, so the hard reset below would
+            # otherwise destroy them — the new guide would then publish with no
+            # audit manifest, silently defeating the weekly editorial digest.
+            rm -rf /tmp/manifests-ours && cp -r content/manifests /tmp/manifests-ours
             git reset --hard origin/main
             python scripts/merge_new_posts.py /tmp/posts-ours.json content/posts.json
             cp /tmp/topics-ours.csv  content/topics-claude-template.csv
             cp /tmp/queue-ours.csv   content/daily-publish-queue.csv
+            # Restore our new manifests without clobbering canon already on main.
+            cp -rn /tmp/manifests-ours/. content/manifests/ 2>/dev/null || true
 
             git add content/manifests/ content/posts.json \
                     content/topics-claude-template.csv \
@@ -215,10 +222,17 @@ jobs:
             cp content/posts.json                  /tmp/posts-ours.json
             cp content/topics-claude-template.csv  /tmp/topics-ours.csv
             cp content/daily-publish-queue.csv     /tmp/queue-ours.csv
+            # Preserve freshly-written manifests: they are created during
+            # generation but not yet committed, so the hard reset below would
+            # otherwise destroy them — the new guide would then publish with no
+            # audit manifest, silently defeating the weekly editorial digest.
+            rm -rf /tmp/manifests-ours && cp -r content/manifests /tmp/manifests-ours
             git reset --hard origin/main
             python scripts/merge_new_posts.py /tmp/posts-ours.json content/posts.json
             cp /tmp/topics-ours.csv  content/topics-claude-template.csv
             cp /tmp/queue-ours.csv   content/daily-publish-queue.csv
+            # Restore our new manifests without clobbering canon already on main.
+            cp -rn /tmp/manifests-ours/. content/manifests/ 2>/dev/null || true
 
             git add content/manifests/ content/posts.json \
                     content/topics-claude-template.csv \

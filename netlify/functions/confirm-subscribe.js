@@ -23,6 +23,55 @@ const FROM_ADDRESS  = "Beat the Scam <alerts@updates.beatthescam.com>";
 const REPLY_TO      = "hello@beatthescam.com";
 const SITE          = "https://beatthescam.com";
 
+// ─── SINGLE-USE TOKEN GUARD (Netlify Blobs) ───────────────────────────────────
+// Confirm tokens stay valid for 7 days, but must work only ONCE. We record a
+// consumed token's hash in a durable, shared store; a replay — e.g. an old link
+// re-clicked after the user has since unsubscribed — is then refused, so it
+// can't silently resurrect a cancelled subscription. Fails OPEN if Blobs is
+// down (availability) — the token's signature + expiry still gate it.
+let getStore = null;
+try { ({ getStore } = require("@netlify/blobs")); } catch { /* dep/runtime absent — degrade gracefully */ }
+
+function blobStore(name) {
+  if (!getStore) return null;
+  try { return getStore({ name, consistency: "strong" }); }
+  catch { return null; }
+}
+
+function consumedKey(token) {
+  return "ct:" + crypto.createHash("sha256").update(String(token)).digest("hex").slice(0, 32);
+}
+
+// Atomically claim a token. Returns true if this caller claimed it (proceed),
+// false if it was already consumed (reject the replay). onlyIfNew makes the
+// claim race-safe; fails open if the store is unavailable.
+async function consumeConfirmToken(token) {
+  const store = blobStore("confirm-consumed");
+  if (!store) return true;
+  const key = consumedKey(token);
+  try {
+    const res = await store.setJSON(key, { t: Date.now() }, { onlyIfNew: true });
+    if (res && res.modified === false) return false;   // already existed → replay
+    return true;
+  } catch {
+    // Conditional write unsupported/errored — fall back to get-then-set (small
+    // race window, acceptable for this control).
+    try {
+      if (await store.get(key)) return false;
+      await store.setJSON(key, { t: Date.now() });
+      return true;
+    } catch { return true; }   // store unusable → fail open
+  }
+}
+
+// Release a claimed token so a transient add failure doesn't burn a still-valid
+// link (the user can click it again).
+async function releaseConfirmToken(token) {
+  const store = blobStore("confirm-consumed");
+  if (!store) return;
+  try { await store.delete(consumedKey(token)); } catch { /* best effort */ }
+}
+
 // ─── RATE LIMITING (per IP) ───────────────────────────────────────────────────
 const rateLimitStore = new Map();
 const RATE_LIMIT_WINDOW_MS = 60 * 1000;
@@ -234,6 +283,22 @@ function htmlResponse(statusCode, body) {
   };
 }
 
+// Plain-text edge responses (429/405) get the same security header set + no-store
+// as the HTML pages — netlify.toml headers don't reliably reach functions here.
+function textResponse(statusCode, body, extraHeaders) {
+  return {
+    statusCode,
+    headers: {
+      "Content-Type": "text/plain; charset=utf-8",
+      "Cache-Control": "no-store",
+      "X-Robots-Tag": "noindex",
+      ...SECURITY_HEADERS,
+      ...(extraHeaders || {}),
+    },
+    body,
+  };
+}
+
 // ─── HANDLER ──────────────────────────────────────────────────────────────────
 exports.handler = async function(event) {
   const clientIp =
@@ -241,7 +306,7 @@ exports.handler = async function(event) {
     event.headers["x-forwarded-for"]?.split(",")[0].trim() ||
     "";
   if (isRateLimited(clientIp)) {
-    return { statusCode: 429, headers: { "Retry-After": "60", "Cache-Control": "no-store" }, body: "Too many requests" };
+    return textResponse(429, "Too many requests", { "Retry-After": "60" });
   }
 
   const token = (event.queryStringParameters && event.queryStringParameters.t) || "";
@@ -254,17 +319,28 @@ exports.handler = async function(event) {
       return htmlResponse(200, page("Confirm subscription",
         `<p style="font-size:16px;">This confirmation link is invalid or has expired. Please subscribe again from <a href="https://beatthescam.com/" style="color:#1d4ed8;">beatthescam.com</a>.</p>`));
     }
+    // Enforce single-use BEFORE mutating: a replayed link (e.g. re-clicked after
+    // the user later unsubscribed) is refused here, so it can't silently
+    // reactivate a cancelled subscription. Released again if the add fails, so a
+    // transient error doesn't burn a still-valid link.
+    const fresh = await consumeConfirmToken(token);
+    if (!fresh) {
+      return htmlResponse(200, page("Already confirmed",
+        `<p style="font-size:16px;">This confirmation link has already been used &#9989; If you previously unsubscribed and want Beat the Scam alerts again, please <a href="https://beatthescam.com/" style="color:#1d4ed8;">subscribe again</a>.</p>`));
+    }
     const added = await addContact(email);
-    if (added) await sendWelcome(email);
-    return htmlResponse(200,
-      added
-        ? page("Subscribed", `<p style="font-size:16px;">You're confirmed and on the list &#9989; Check your inbox for a welcome email.</p>`)
-        : page("Confirm subscription", `<p style="font-size:16px;">We couldn't finish that just now. Please try again, or email <a href="mailto:${CONTACT_EMAIL}" style="color:#1d4ed8;">${CONTACT_EMAIL}</a>.</p>`)
-    );
+    if (added) {
+      await sendWelcome(email);
+      return htmlResponse(200, page("Subscribed",
+        `<p style="font-size:16px;">You're confirmed and on the list &#9989; Check your inbox for a welcome email.</p>`));
+    }
+    await releaseConfirmToken(token);   // add failed — let them retry the same link
+    return htmlResponse(200, page("Confirm subscription",
+      `<p style="font-size:16px;">We couldn't finish that just now. Please try again, or email <a href="mailto:${CONTACT_EMAIL}" style="color:#1d4ed8;">${CONTACT_EMAIL}</a>.</p>`));
   }
 
   if (event.httpMethod !== "GET") {
-    return { statusCode: 405, headers: { "Cache-Control": "no-store" }, body: "Method not allowed" };
+    return textResponse(405, "Method not allowed");
   }
 
   // ─── GET: render a confirm page only. NEVER mutates (prefetch/scanner-safe).
