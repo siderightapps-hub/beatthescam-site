@@ -1,5 +1,12 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Beat the Scam</title><link>https://beatthescam.com</link><description>Scam alerts, plain-English checks, and practical guides to help people verify suspicious emails, texts, websites, calls, and offers.</description><lastBuildDate>Tue, 23 Jun 2026 00:00:00 +0000</lastBuildDate><atom:link href="https://beatthescam.com/rss.xml" rel="self" type="application/rss+xml" />
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Beat the Scam</title><link>https://beatthescam.com</link><description>Scam alerts, plain-English checks, and practical guides to help people verify suspicious emails, texts, websites, calls, and offers.</description><lastBuildDate>Wed, 24 Jun 2026 00:00:00 +0000</lastBuildDate><atom:link href="https://beatthescam.com/rss.xml" rel="self" type="application/rss+xml" />
+        <item>
+          <title>Companies House Scam Letter UK: How to Spot and Report It</title>
+          <link>https://beatthescam.com/guides/companies-house-scam-letter-uk/</link>
+          <guid isPermaLink="true">https://beatthescam.com/guides/companies-house-scam-letter-uk/</guid>
+          <pubDate>Wed, 24 Jun 2026 00:00:00 +0000</pubDate>
+          <description>Scammers send official-looking letters claiming to be from Companies House, often demanding urgent payment for company registration or compliance fees. This guide explains how to spot these letters, verify genuine communications, and report them to the authorities.</description>
+        </item>
         <item>
           <title>HMRC Self Assessment Scam UK: How to Spot and Avoid It</title>
           <link>https://beatthescam.com/guides/hmrc-self-assessment-scam-uk/</link>
@@ -202,11 +209,4 @@
           <guid isPermaLink="true">https://beatthescam.com/guides/holiday-compensation-scam-uk/</guid>
           <pubDate>Fri, 05 Jun 2026 00:00:00 +0000</pubDate>
           <description>Holiday compensation scams target UK travellers who are legitimately owed money for cancelled trips, delays, or poor service. Fraudsters impersonate established claims management companies or create fake ones, demanding upfront fees before pursuing compensation.</description>
-        </item>
-        <item>
-          <title>Jet2 Holiday Scam UK: How to Spot and Avoid Fake Booking Websites</title>
-          <link>https://beatthescam.com/guides/jet2-holiday-scam-uk/</link>
-          <guid isPermaLink="true">https://beatthescam.com/guides/jet2-holiday-scam-uk/</guid>
-          <pubDate>Thu, 04 Jun 2026 00:00:00 +0000</pubDate>
-          <description>Jet2 holiday scams target UK travellers through convincing fake websites, text messages, and emails offering unusually cheap flights and package deals. Scammers collect payment and passport details, then disappear—leaving victims without flights or refunds.</description>
         </item></channel></rss>
