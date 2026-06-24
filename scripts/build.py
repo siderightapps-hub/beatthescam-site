@@ -842,13 +842,17 @@ def howto_schema(site, post, url):
 
 def render_card(post):
     label = category_label(post["category"])
+    updated = post.get("updated") or post.get("dateModified")
+    date_label = (f'Updated {html.escape(updated)}'
+                  if updated and updated != post["date"]
+                  else f'Published {html.escape(post["date"])}')
     searchable = (post["title"] + " " + post["description"] + " " + post["category"] + " " + " ".join(post["keywords"])).lower()
     return f'''
     <article class="card guide-card" data-searchable="{html.escape(searchable)}">
       <div class="eyebrow">{html.escape(label)}</div>
       <h3><a href="/guides/{post["slug"]}/">{html.escape(post["title"])}</a></h3>
       <p>{html.escape(post["description"])}</p>
-      <p class="meta">Updated {post["date"]}</p>
+      <p class="meta">{date_label}</p>
     </article>
     '''
 
@@ -1460,7 +1464,7 @@ def render_post(site, post, all_posts, affiliates=None, sources=None):
           Use the <a href="/check/">AI scam checker</a> for an instant analysis, or report it to
           <a href="https://www.reportfraud.police.uk" rel="noopener noreferrer" target="_blank">Action Fraud</a>.
         </div>
-        <p class="meta" style="margin-top:1.4rem">Reporting routes in this guide are checked against our verified canon of official UK sources &#8212; <a href="https://www.actionfraud.police.uk/" rel="noopener" target="_blank">Action Fraud</a>, the <a href="https://www.ncsc.gov.uk/" rel="noopener" target="_blank">National Cyber Security Centre</a>, and <a href="https://www.citizensadvice.org.uk/consumer/scams/" rel="noopener" target="_blank">Citizens Advice</a> &#8212; by an automated accuracy gate before publication. {"Updated" if updated else "Published"} {html.escape(updated or published)}. Read about <a href="/about/">how Beat the Scam writes guides</a>.</p>
+        <p class="meta" style="margin-top:1.4rem">Reporting routes in this guide are checked against our verified canon of official UK sources &#8212; <a href="https://www.actionfraud.police.uk/" rel="noopener" target="_blank">Action Fraud</a>, the <a href="https://www.ncsc.gov.uk/" rel="noopener" target="_blank">National Cyber Security Centre</a>, and <a href="https://www.citizensadvice.org.uk/consumer/scams/" rel="noopener" target="_blank">Citizens Advice</a> &#8212; by an automated accuracy gate before publication. {("Updated " + html.escape(updated)) if updated != published else ("Published " + html.escape(published))}. Read about <a href="/about/">how Beat the Scam writes guides</a>.</p>
       </article>
       <aside class="sidebar">
         <section class="sidebar-card">
@@ -1578,6 +1582,44 @@ def render_check_page(site):
           It is not a definitive fraud verdict. If you have already sent money or shared personal details,
           contact your bank immediately and report to
           <a href="https://www.reportfraud.police.uk" rel="noopener noreferrer" target="_blank">Action Fraud</a>.
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="wrap" style="max-width:780px">
+        <h2>How the scam checker works</h2>
+        <p>Paste the suspicious content above and the checker sends it to an AI model (Anthropic&#8217;s Claude) prompted to recognise the patterns behind common UK scams. In a few seconds it returns a plain-English verdict, the specific red flags it spotted, any reassuring signs, the practical steps to take next, and the official UK routes to report it. Nothing you paste is stored by Beat the Scam, and the reporting links in your result are restricted to an allow-list of official UK bodies &mdash; so a manipulated message can&#8217;t slip a fake &#8220;report here&#8221; link into the answer.</p>
+
+        <h2>What you can check</h2>
+        <ul>
+          <li><strong>Text messages (SMS):</strong> &#8220;missed delivery&#8221; parcel texts, fake bank fraud-alert texts, DVLA or HMRC refund texts.</li>
+          <li><strong>Emails:</strong> phishing that imitates your bank, a retailer, a delivery firm, or a government department.</li>
+          <li><strong>Websites and links:</strong> lookalike shop, login, or &#8220;verification&#8221; pages built to capture your details.</li>
+          <li><strong>Phone calls:</strong> describe what the caller said &mdash; bank or police impersonation, &#8220;your account is at risk&#8221;, or tech-support claims.</li>
+          <li><strong>Job offers:</strong> work-from-home, mystery-shopping, or recruitment messages that ask for money or documents up front.</li>
+          <li><strong>Investment and crypto:</strong> &#8220;guaranteed returns&#8221;, celebrity-endorsed trading platforms, or recovery offers after a previous loss.</li>
+        </ul>
+
+        <h2>How to read your result</h2>
+        <p>The checker gives one of four verdicts, each with a confidence level:</p>
+        <ul>
+          <li><strong>Likely a scam</strong> &mdash; several strong fraud signals are present. Don&#8217;t click, reply, pay, or call back.</li>
+          <li><strong>Possibly a scam</strong> &mdash; some warning signs; treat it with caution and verify independently.</li>
+          <li><strong>Probably legitimate</strong> &mdash; nothing obvious stands out, but this is never a guarantee &mdash; still verify before acting on anything important.</li>
+          <li><strong>Unclear</strong> &mdash; not enough to judge; check directly with the organisation via its official website or app.</li>
+        </ul>
+        <p>Because scam tactics change constantly, treat the result as a guide, not a final verdict. The single safest habit is to verify through a channel you open yourself &mdash; the number on the back of your card, or an address you type into your browser &mdash; rather than any link, number, or detail supplied in the message itself.</p>
+
+        <h2>If you have already responded</h2>
+        <p>If you have paid, shared bank or card details, or shared a one-time passcode, act straight away. Contact your bank on the number on the back of your card, report it to Action Fraud on <strong>0300 123 2040</strong> or at <a href="https://www.actionfraud.police.uk/" rel="noopener noreferrer" target="_blank">actionfraud.police.uk</a> (Police Scotland: <strong>101</strong>), and forward scam texts to <strong>7726</strong> and suspicious emails to <strong>report@phishing.gov.uk</strong>. For step-by-step help by scam type, browse our <a href="/guides/">scam guides</a>.</p>
+
+        <h2>Common questions</h2>
+        <div class="faq">
+          <details><summary>Is the scam checker free?</summary><p>Yes &mdash; it&#8217;s completely free and needs no account. It exists to help you make a quick, safer judgement before you click, pay, or share anything.</p></details>
+          <details><summary>Do you store the message I paste?</summary><p>No. Your text is sent to the AI for analysis and is not stored by Beat the Scam. Please don&#8217;t paste passwords, PINs, full card numbers, or one-time codes &mdash; a scam check never needs them.</p></details>
+          <details><summary>Can the checker be wrong?</summary><p>Yes. It&#8217;s an educational tool and can both flag genuine messages and miss real scams. Use it as one input alongside independent verification, not as the final word.</p></details>
+          <details><summary>It says &#8220;probably legitimate&#8221; &mdash; am I safe to proceed?</summary><p>Not necessarily. A reassuring result is not a green light. If money, credentials, or personal data are involved, confirm through the organisation&#8217;s official website, app, or published phone number first.</p></details>
         </div>
       </div>
     </section>
@@ -1902,7 +1944,7 @@ def build_legal_bodies(site):
     <p>If a guide contains an error, email <a href="mailto:{site["contact_email"]}">{site["contact_email"]}</a> with the page URL and the issue. Corrections are made promptly.</p>
 
     <h2>About the AI scam checker</h2>
-    <p>The free scam checker on this site sends the suspicious message text you paste to Anthropic&#8217;s Claude API for analysis. The text is processed in real time to produce a verdict, list of red flags, and recommended actions &mdash; then discarded. Beat the Scam does not store the text, your IP address, or any identifying data linked to your submission. As the processor, Anthropic may retain the text you submit and the model&#8217;s response for up to 30 days under its standard API data policy (and longer only where required for legal or safety reasons); it does not use API inputs or outputs to train its models.</p>
+    <p>The free scam checker on this site sends the suspicious message text you paste to Anthropic&#8217;s Claude API for analysis. The text is processed in real time to produce a verdict, list of red flags, and recommended actions &mdash; then discarded. Beat the Scam does not store the suspicious text you submit, and does not link it to your identity. To keep the free tool available and block abuse, the checker keeps a rate-limit counter keyed to a hashed form of your IP address &mdash; used only to enforce per-minute and daily usage limits, and never linked to your submission. As the processor, Anthropic may retain the text you submit and the model&#8217;s response for up to 30 days under its standard API data policy (and longer only where required for legal or safety reasons); it does not use API inputs or outputs to train its models.</p>
     <p>For your own safety, do not paste full passwords, full bank account numbers, or other sensitive credentials into the checker. The tool is designed to analyse the suspicious content itself (the message, link, or scam pattern), not your private credentials.</p>
     <p>The checker&#8217;s output is educational. It is not a definitive fraud determination. If you are unsure about a real-world payment or account access decision, contact your bank&#8217;s fraud team using the number on the back of your card.</p>
 
@@ -1917,7 +1959,7 @@ def build_legal_bodies(site):
     <h2>What information we collect</h2>
     <p>The site does not offer user accounts, comments, or direct purchases. Standard server logs may record technical data such as browser type, device type, and approximate location.</p>
     <h2>AI scam checker</h2>
-    <p>When you use the AI scam checker, the text you submit is sent to Anthropic&#8217;s Claude API for analysis. This text is not stored by Beat the Scam. Do not include full passwords or bank account numbers in checker submissions.</p>
+    <p>When you use the AI scam checker, the text you submit is sent to Anthropic&#8217;s Claude API for analysis. This text is not stored by Beat the Scam. To prevent abuse of the free tool, the checker keeps a rate-limit counter keyed to a hashed form of your IP address; it is used only to enforce per-minute and daily limits, is never linked to your submission, and is not used to identify you. Do not include full passwords or bank account numbers in checker submissions.</p>
     <h2>Google Analytics</h2>
     <p>The site uses Google Analytics 4. Analytics cookies are only enabled after consent where required.</p>
     <h2>Advertising</h2>
@@ -1961,7 +2003,7 @@ def build_legal_bodies(site):
 
     # Bump TERMS_LAST_UPDATED when materially revising the Terms text below.
     # The date is shown to users at the top of /terms/ as the legal effective date.
-    TERMS_LAST_UPDATED = "4 June 2026"
+    TERMS_LAST_UPDATED = "23 June 2026"
     terms = f'''
     <p class="note" style="color:#666;font-size:.95rem"><strong>Last updated:</strong> {TERMS_LAST_UPDATED}</p>
 
@@ -1971,7 +2013,7 @@ def build_legal_bodies(site):
     <p>Beat the Scam publishes plain-English guides about scams and fraud affecting UK consumers, and offers a free AI scam checker. The Site is operated by SideRight Apps. Editorial decisions are made by Alex Bacsa, Founder &amp; Editor.</p>
 
     <h2>Educational purpose &mdash; not professional advice</h2>
-    <p>Everything published here is general educational information. It is <strong>not</strong> legal, financial, investment, tax, medical, cybersecurity, or regulatory advice, and reading it does not create an advisor&ndash;client relationship.</p>
+    <p>Everything published here is general educational information. It is <strong>not</strong> legal, financial, investment, tax, medical, cybersecurity, or regulatory advice, and reading it does not create an advisor&ndash;client relationship. See our full <a href="/disclaimer/">Disclaimer</a> for the detail.</p>
     <p>Scam tactics change rapidly. No article can guarantee that a specific message, listing, website or interaction is safe or fraudulent. If anything you read here is material to your circumstances, verify it through official UK channels (Action Fraud, the FCA Register, Companies House, Citizens Advice, your bank&#8217;s published fraud line) or seek qualified professional advice.</p>
 
     <h2>The AI scam checker</h2>
@@ -1991,9 +2033,9 @@ def build_legal_bodies(site):
     <h2>Intellectual property</h2>
     <p>All original content on the Site &mdash; articles, guides, images, the brand, and the structure of the AI scam checker output &mdash; is copyright Beat the Scam / SideRight Apps unless stated otherwise. You may quote up to a short paragraph with attribution and a link back to the source article. For larger reproductions, please ask first at <a href="mailto:{site["legal_email"]}">{site["legal_email"]}</a>.</p>
 
-    <h2>Advertising and affiliate disclosure</h2>
-    <p>The Site is funded by display advertising (currently Google AdSense) and by affiliate commissions on a small number of third-party products (such as credit-file monitoring and identity-protection services). When you click an affiliate link and complete a purchase, we may receive a small commission at no extra cost to you.</p>
-    <p>Affiliate placements never change the editorial position of any guide. We only recommend products we would suggest a friend use, and we mark affiliate links with <code>rel="sponsored"</code> as required by the UK Advertising Standards Authority CAP Code and by Google&#8217;s quality guidelines. If you would like us to remove a specific affiliate placement, write to us at the contact address below.</p>
+    <h2>Advertising and product recommendations</h2>
+    <p>The Site is funded by display advertising (currently Google AdSense). Some guides also link to third-party products and services we consider genuinely useful (such as credit-file monitoring, identity-protection, and consumer-legal services). At present these are <strong>independent, unpaid editorial recommendations</strong>: we earn no commission on them, they carry a <code>rel="nofollow"</code> attribute, and they never change the editorial position of any guide.</p>
+    <p>If we enter a paid affiliate arrangement in future, we will disclose it clearly beside the recommendation and mark those links <code>rel="sponsored"</code>, as required by the UK Advertising Standards Authority CAP Code and by Google&#8217;s quality guidelines. We only recommend products we would suggest a friend use. If you would like us to remove a specific recommendation, write to us at the contact address below.</p>
 
     <h2>External links</h2>
     <p>The Site links to third-party services and official resources (government sites, regulators, banks, news outlets). Those sites operate under their own terms and privacy policies and we have no control over their content, accuracy, or availability.</p>
@@ -2027,7 +2069,34 @@ def build_legal_bodies(site):
     <p class="note" style="margin-top:1.5rem">To report a scam to UK authorities directly, use <a href="https://www.reportfraud.police.uk/" rel="noopener noreferrer" target="_blank">Action Fraud</a> or forward suspicious texts to <strong>7726</strong> (free on all UK networks).</p>
     '''
 
-    return about, privacy, cookies, terms, contact
+    disclaimer = f'''
+    <p class="note" style="color:#666;font-size:.95rem"><strong>Last updated:</strong> 24 June 2026</p>
+
+    <p>Everything published on <strong>{html.escape(site["site_name"])}</strong> &mdash; the guides, the AI scam checker, and any other material &mdash; is provided for <strong>general education and consumer awareness only</strong>. This page sets out the limits of that information. By using the Site you accept this disclaimer alongside our <a href="/terms/">Terms</a>.</p>
+
+    <h2>Not professional advice</h2>
+    <p>The content here is <strong>not</strong> legal, financial, investment, tax, accounting, cybersecurity, or regulatory advice, and reading it does <strong>not</strong> create an advisor&ndash;client or other professional relationship. It cannot account for your individual circumstances. Before acting on anything that materially affects your money, identity, or legal position, seek advice from a suitably qualified professional or an official UK body &mdash; for example the <a href="https://www.fca.org.uk/" rel="noopener noreferrer" target="_blank">FCA</a>, <a href="https://www.citizensadvice.org.uk/" rel="noopener noreferrer" target="_blank">Citizens Advice</a>, or your bank&#8217;s published fraud line.</p>
+
+    <h2>No guarantees about specific messages or websites</h2>
+    <p>Scam tactics change constantly. No guide, and no result from the AI scam checker, can guarantee that a particular message, email, website, listing, phone call, or investment is either safe or fraudulent. A &#8220;probably legitimate&#8221; result is not a green light, and the absence of a warning is not a guarantee of safety. Always verify independently through an official channel you find yourself &mdash; never through a link, phone number, or payment detail supplied in the suspicious message.</p>
+
+    <h2>About the AI scam checker</h2>
+    <p>The scam checker returns an <strong>automated, educational</strong> assessment generated by an AI model. It can be wrong in both directions &mdash; flagging genuine messages and missing real scams &mdash; and it does <strong>not</strong> make any decision that produces a legal or similarly significant effect on you. Do not rely on it alone for a high-stakes decision. The text you submit is processed to produce a verdict and is not stored by Beat the Scam; see the <a href="/privacy/">Privacy Policy</a> for how it handles data.</p>
+
+    <h2>Accuracy and corrections</h2>
+    <p>We take accuracy seriously: every guide passes an automated accuracy gate before publication and is reviewed on a recurring schedule. Even so, the Site may contain errors, omissions, or information that has gone out of date. If you spot something wrong, please email <a href="mailto:{site["contact_email"]}">{site["contact_email"]}</a> with the page URL and we will correct it promptly.</p>
+
+    <h2>External links</h2>
+    <p>The Site links to third-party resources such as government sites, regulators, banks, and news outlets. Those sites operate under their own terms and privacy policies, and we have no control over and accept no responsibility for their content, accuracy, or availability.</p>
+
+    <h2>If you think you have been scammed</h2>
+    <p>If you have already sent money, shared bank or card details, or shared one-time passcodes, act immediately: contact your bank using the number on the back of your card, and report it to <strong>Action Fraud</strong> on 0300 123 2040 or at <a href="https://www.actionfraud.police.uk/" rel="noopener noreferrer" target="_blank">actionfraud.police.uk</a> (in Scotland, contact <strong>Police Scotland on 101</strong>). You can forward scam texts to <strong>7726</strong> and suspicious emails to <strong>report@phishing.gov.uk</strong>.</p>
+
+    <h2>Liability</h2>
+    <p>To the maximum extent permitted by law, Beat the Scam and SideRight Apps accept no liability for any loss or damage arising from your use of, or reliance on, the Site or the AI scam checker. Nothing here limits any liability that cannot lawfully be excluded &mdash; including for death or personal injury caused by negligence, or for fraud. The full limitation of liability is set out in our <a href="/terms/">Terms</a>.</p>
+    '''
+
+    return about, privacy, cookies, terms, contact, disclaimer
 
 
 # ─── DEDUPLICATE ────────────────────────────────────────────────────────────
@@ -2554,12 +2623,13 @@ def build():
 
     write(DIST / 'check/index.html', render_check_page(site))
 
-    about, privacy, cookies, terms, contact = build_legal_bodies(site)
+    about, privacy, cookies, terms, contact, disclaimer = build_legal_bodies(site)
     write(DIST / 'about/index.html',   render_simple_page(site, 'About',          'Beat the Scam is a free UK consumer protection site. Learn how guides are researched, who writes them, and how the AI scam checker works.',        about,   'about'))
     write(DIST / 'privacy/index.html', render_simple_page(site, 'Privacy Policy', 'How Beat the Scam uses Google Analytics, Google AdSense, and the Anthropic Claude API. Understand your data choices and cookie consent options.',          privacy, 'privacy'))
     write(DIST / 'cookies/index.html', render_simple_page(site, 'Cookie Policy',  'How Beat the Scam uses cookies for analytics, advertising, and consent preferences. Learn what is stored and how to manage your cookie settings.',                   cookies, 'cookies'))
     write(DIST / 'terms/index.html',   render_simple_page(site, 'Terms',          'Terms of use for Beat the Scam. Educational scam guidance only — not legal or financial advice. Read before relying on any content for important decisions.',                                 terms,   'terms'))
     write(DIST / 'contact/index.html', render_simple_page(site, 'Contact',        'Contact Beat the Scam for editorial corrections, privacy questions, or partnership enquiries. We aim to respond to all editorial requests promptly.',     contact, 'contact'))
+    write(DIST / 'disclaimer/index.html', render_simple_page(site, 'Disclaimer',  'Important disclaimer for Beat the Scam: the guides and AI scam checker are general consumer-awareness information only — not legal, financial, or other professional advice.', disclaimer, 'disclaimer'))
 
     # Named author page — Alex Bacsa, cross-linked with CloudFintech /
     # TuningDigital / SalesTap via the Person.sameAs block in the page schema.
@@ -2625,17 +2695,23 @@ def build():
     today = datetime.utcnow().strftime("%Y-%m-%d")
     newest_post_date = max((p["date"] for p in posts), default=today)
 
+    # Static pages change rarely — pin their sitemap lastmod to the date their
+    # content last materially changed (bump STATIC_LASTMOD when you edit them),
+    # NOT the build timestamp, so unchanged pages don't advertise false freshness
+    # on every rebuild.
+    STATIC_LASTMOD = "2026-06-23"
     static_url_lastmods = {
         '/':            newest_post_date,
         '/guides/':     newest_post_date,
         '/categories/': newest_post_date,
-        '/check/':      today,
-        '/about/':      today,
-        '/author/':     today,
-        '/privacy/':    today,
-        '/cookies/':    today,
-        '/terms/':      today,
-        '/contact/':    today,
+        '/check/':      STATIC_LASTMOD,
+        '/about/':      STATIC_LASTMOD,
+        '/author/':     STATIC_LASTMOD,
+        '/privacy/':    STATIC_LASTMOD,
+        '/cookies/':    STATIC_LASTMOD,
+        '/terms/':      STATIC_LASTMOD,
+        '/disclaimer/': STATIC_LASTMOD,
+        '/contact/':    STATIC_LASTMOD,
     }
 
     sitemap_lines = ['<?xml version="1.0" encoding="UTF-8"?>', '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">']

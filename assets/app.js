@@ -37,17 +37,31 @@
 
   function consentAccepted(){ return safeGet(storageKey) === 'accepted'; }
 
+  // Best-effort signal: does UK/EEA data-protection law (and thus the IAB TCF)
+  // apply to this visitor? null = unknown. Populated from the TCF stub below.
+  // The custom fallback banner must NEVER grant TCF-scope advertising consent
+  // on its own — that consent is only valid from Google's certified CMP. So we
+  // upgrade advertising signals via the fallback ONLY when we can positively
+  // confirm GDPR does not apply; otherwise ads stay non-personalised until the
+  // certified CMP supplies a valid TC string (which drives Consent Mode itself).
+  var gdprApplies = null;
+
   // AdSense loads on every page (in the document head) and honours Consent Mode
-  // via the gtag consent signal below — non-personalised ads until the visitor
-  // accepts, personalised after. Only our own GA4 events wait for consent.
+  // via the gtag consent signal below. Analytics consent comes from this banner
+  // (or the CMP); advertising consent only upgrades when GDPR provably does not
+  // apply here, or when the certified CMP grants it.
   function applyConsent(mode){
     const granted = mode === 'accepted';
+    // Only grant advertising consent through this fallback for confirmed non-GDPR
+    // visitors. In the UK/EEA (gdprApplies === true) or when the region is unknown
+    // (null), advertising stays denied → non-personalised ads, no ad cookies.
+    const adGranted = granted && gdprApplies === false;
     if(typeof gtag === 'function'){
       gtag('consent', 'update', {
-        ad_storage: granted ? 'granted' : 'denied',
-        analytics_storage: granted ? 'granted' : 'denied',
-        ad_user_data: granted ? 'granted' : 'denied',
-        ad_personalization: granted ? 'granted' : 'denied'
+        ad_storage: adGranted ? 'granted' : 'denied',
+        ad_user_data: adGranted ? 'granted' : 'denied',
+        ad_personalization: adGranted ? 'granted' : 'denied',
+        analytics_storage: granted ? 'granted' : 'denied'
       });
     }
   }
@@ -94,10 +108,13 @@
   if(typeof window.__tcfapi === 'function'){
     try {
       window.__tcfapi('addEventListener', 2, function(tcData, success){
-        if(success && tcData && (
-            tcData.eventStatus === 'cmpuishown' ||
-            tcData.eventStatus === 'useractioncomplete' ||
-            (tcData.gdprApplies === true && tcData.tcString))){
+        if(!success || !tcData) return;
+        // Record whether GDPR/TCF applies so the fallback banner knows whether it
+        // may grant advertising consent (only when this is strictly false).
+        if(typeof tcData.gdprApplies === 'boolean'){ gdprApplies = tcData.gdprApplies; }
+        if(tcData.eventStatus === 'cmpuishown' ||
+           tcData.eventStatus === 'useractioncomplete' ||
+           (tcData.gdprApplies === true && tcData.tcString)){
           deferToCmp();
         }
       });
