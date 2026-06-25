@@ -1,0 +1,136 @@
+name: Tweet on publish
+
+# Fires AFTER a daily-publish (or search-console) review PR is merged to main —
+# i.e. once a human has approved the content. This is where auto-tweeting lives
+# now that the content crons open PRs instead of committing to main, so nothing
+# is promoted before editorial review.
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'content/posts.json'
+
+permissions:
+  contents: write
+
+# Share the content-pipeline lock so a tweet run can't race a generation run.
+concurrency:
+  group: content-pipeline
+  cancel-in-progress: false
+
+jobs:
+  tweet:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup Python
+        uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065 # v5
+        with:
+          python-version: '3.12'
+
+      - name: Determine newly published slugs (added in this push only)
+        id: slugs
+        env:
+          BEFORE: ${{ github.event.before }}
+        run: |
+          # If the before-ref is the zero SHA or unreachable (force-push, first
+          # commit), we cannot compute a diff — skip rather than guess.
+          if [ -z "$BEFORE" ] || [ "$BEFORE" = "0000000000000000000000000000000000000000" ] || ! git cat-file -e "${BEFORE}^{commit}" 2>/dev/null; then
+            echo "No usable before-ref; skipping."
+            echo "new_slugs=" >> $GITHUB_OUTPUT
+            exit 0
+          fi
+          ADDED=$(python - <<'PY'
+          import json, os, subprocess
+          before = os.environ["BEFORE"]
+          r = subprocess.run(["git", "show", f"{before}:content/posts.json"],
+                             capture_output=True, text=True)
+          old = set()
+          if r.returncode == 0:
+              try:
+                  old = {p.get("slug") for p in json.loads(r.stdout)}
+              except Exception:
+                  old = set()
+          with open("content/posts.json", encoding="utf-8") as f:
+              new = json.load(f)
+          added = [p.get("slug") for p in new if p.get("slug") and p.get("slug") not in old]
+          print(",".join(added))
+          PY
+          )
+          echo "Newly added slugs: '$ADDED'"
+          # Safety cap: a normal merge adds 1 guide. More than 3 means a bulk
+          # change (e.g. a corpus-wide edit) — never auto-tweet those.
+          COUNT=$(awk -F, '{print ($0=="")?0:NF}' <<< "$ADDED")
+          if [ "$COUNT" -gt 3 ]; then
+            echo "::warning::$COUNT new slugs detected (> cap of 3) — skipping auto-tweet to avoid a burst. Tweet manually if intended."
+            echo "new_slugs=" >> $GITHUB_OUTPUT
+            exit 0
+          fi
+          echo "new_slugs=$ADDED" >> $GITHUB_OUTPUT
+
+      - name: Install dependencies
+        if: ${{ steps.slugs.outputs.new_slugs != '' }}
+        run: pip install -r requirements-claude.txt
+
+      - name: Tweet new articles
+        if: ${{ steps.slugs.outputs.new_slugs != '' }}
+        env:
+          TWITTER_API_KEY:             ${{ secrets.TWITTER_API_KEY }}
+          TWITTER_API_KEY_SECRET:      ${{ secrets.TWITTER_API_KEY_SECRET }}
+          TWITTER_ACCESS_TOKEN:        ${{ secrets.TWITTER_ACCESS_TOKEN }}
+          TWITTER_ACCESS_TOKEN_SECRET: ${{ secrets.TWITTER_ACCESS_TOKEN_SECRET }}
+        run: |
+          cat > .env << EOF
+          TWITTER_API_KEY=${{ secrets.TWITTER_API_KEY }}
+          TWITTER_API_KEY_SECRET=${{ secrets.TWITTER_API_KEY_SECRET }}
+          TWITTER_ACCESS_TOKEN=${{ secrets.TWITTER_ACCESS_TOKEN }}
+          TWITTER_ACCESS_TOKEN_SECRET=${{ secrets.TWITTER_ACCESS_TOKEN_SECRET }}
+          EOF
+
+          if [ ! -f content/tweeted_posts.json ]; then
+            echo "{}" > content/tweeted_posts.json
+          fi
+
+          # tweet_new_articles.py dedupes against tweeted_posts.json, so even a
+          # re-run cannot double-tweet. Individual failures don't kill the batch.
+          IFS=',' read -ra SLUG_ARRAY <<< "${{ steps.slugs.outputs.new_slugs }}"
+          for SLUG in "${SLUG_ARRAY[@]}"; do
+            [ -z "$SLUG" ] && continue
+            echo "🐦 Tweeting: $SLUG"
+            python scripts/tweet_new_articles.py --slug "$SLUG" || echo "Tweet failed for $SLUG"
+          done
+
+          rm -f .env
+
+      - name: Save updated tweeted_posts.json
+        if: ${{ steps.slugs.outputs.new_slugs != '' }}
+        run: |
+          set -e
+          git config user.name  "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add content/tweeted_posts.json || true
+          if git diff --cached --quiet; then
+            echo "ℹ️  No changes to tweeted_posts.json"
+            exit 0
+          fi
+          git commit -m "Record auto-tweet after publish"
+          for attempt in 1 2 3; do
+            git fetch origin main
+            if git rebase origin/main && git push origin HEAD:main; then
+              echo "✅ tweeted_posts.json pushed on attempt $attempt"
+              exit 0
+            fi
+            git rebase --abort 2>/dev/null || true
+            cp content/tweeted_posts.json /tmp/tweeted-ours.json
+            git reset --hard origin/main
+            python -c "import json,pathlib; ours=json.loads(pathlib.Path('/tmp/tweeted-ours.json').read_text()); bp=pathlib.Path('content/tweeted_posts.json'); base=json.loads(bp.read_text()) if bp.exists() else {}; bp.write_text(json.dumps({**base,**ours}, indent=2, ensure_ascii=False)+chr(10))"
+            git add content/tweeted_posts.json
+            git diff --cached --quiet && { echo "Nothing new to record"; exit 0; }
+            git commit -m "Record auto-tweet after publish"
+            sleep 5
+          done
+          echo "Push failed after 3 attempts"; exit 1

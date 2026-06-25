@@ -16,18 +16,27 @@ on:
         required: false
         default: "10"
   schedule:
-    # Daily at 05:07 UTC (06:07 BST). Re-enabled 2026-06-19 after the P1 accuracy
-    # gate landed — generation now runs through scripts/content_gate.py (deterministic
-    # checks + LLM judge) before anything is published or tweeted; failures are
-    # quarantined. GitHub cron is best-effort and can be delayed by hours.
+    # Daily at 05:07 UTC (06:07 BST). GitHub cron is best-effort and can be
+    # delayed by hours. Generation runs through scripts/content_gate.py
+    # (deterministic checks + LLM judge) before anything is written; gate
+    # failures are quarantined.
+    #
+    # HUMAN-REVIEW GATE (2026-06-25): this workflow NO LONGER commits to main.
+    # It opens a pull request for editorial review instead. Nothing goes live,
+    # gets ads, or is tweeted until a human merges the PR. This satisfies
+    # Google's requirement that automatically-generated content be reviewed or
+    # curated before it carries advertising. Auto-tweet now lives in
+    # tweet-on-publish.yml, which fires only after the PR is merged to main.
     - cron: '7 5 * * *'
 
 permissions:
   contents: write
+  pull-requests: write
+  issues: write          # gh label create manages labels via the issues API
 
-# Serialise with daily-search-console.yml: both pipelines regenerate
-# dist/sitemap.xml from posts.json. Same group name in both files queues
-# them instead of letting them race.
+# Serialise with daily-search-console.yml: both pipelines branch off main and
+# regenerate dist/sitemap.xml from posts.json. Same group name in both files
+# queues them instead of letting them race off the same base.
 concurrency:
   group: content-pipeline
   cancel-in-progress: false
@@ -37,9 +46,7 @@ jobs:
     runs-on: ubuntu-latest
     env:
       ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
-      # Scheduled runs have no inputs, so the fallback applies. Yesterday's
-      # decision: 1 article/day from queue. 5 was the historical default
-      # before that.
+      # Scheduled runs have no inputs, so the fallback applies: 1 article/day.
       BATCH_SIZE: ${{ github.event.inputs.batch_size || '1' }}
       REWRITE_THIN: ${{ github.event.inputs.rewrite_thin || 'false' }}
       REWRITE_LIMIT: ${{ github.event.inputs.rewrite_limit || '10' }}
@@ -50,7 +57,7 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: Sync with latest main (catch any manual pushes)
+      - name: Sync with latest main
         run: |
           git config user.name  "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
@@ -74,11 +81,11 @@ jobs:
             --batch-size "$BATCH_SIZE" \
             --model  claude-haiku-4-5-20251001 2>&1)
           echo "$OUTPUT"
-          # Extract new slugs from the script's marker line (same convention as
-          # scripts/search_console_articles.py) so the tweet step below can fire.
+          # Extract new slugs from the script's marker line so the PR body can
+          # list them (only gate-PASSED slugs are emitted).
           SLUGS=$(echo "$OUTPUT" | grep "^NEW_ARTICLE_SLUGS=" | tail -1 | cut -d= -f2)
           echo "new_slugs=$SLUGS" >> $GITHUB_OUTPUT
-          echo "Captured slugs for tweeting: $SLUGS"
+          echo "Captured new slugs: $SLUGS"
 
       - name: Rewrite thin guides (optional)
         if: env.REWRITE_THIN == 'true'
@@ -113,230 +120,61 @@ jobs:
           fi
           echo "Build verified: $POST_COUNT post directories, all required files present"
 
-      - name: Check if dist changed
-        id: dist_changed
-        run: |
-          git add dist/
-          if git diff --cached --quiet; then
-            echo "changed=false" >> $GITHUB_OUTPUT
-          else
-            echo "changed=true" >> $GITHUB_OUTPUT
-          fi
-          git reset HEAD dist/
-
-      - name: Commit content + dist (only if dist changed)
-        if: steps.dist_changed.outputs.changed == 'true'
+      - name: Open review pull request
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           set -e
           git config user.name  "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+          # Stage everything the pipeline produces. dist/ is derived but committed
+          # so Netlify serves it as-is on merge.
           git add content/manifests/ content/posts.json \
                   content/topics-claude-template.csv \
                   content/daily-publish-queue.csv \
-                  dist
+                  dist/
+
           if git diff --cached --quiet; then
-            echo "No changes to commit"
+            echo "ℹ️  Nothing generated this run (queue empty / no changes) — no PR to open."
             exit 0
           fi
-          git commit -m "Daily AI publish: $(date -u +%Y-%m-%d)"
 
-          for attempt in 1 2 3; do
-            git fetch origin main
-            if git rebase origin/main; then
-              if git push origin HEAD:main; then
-                echo "✅ Push succeeded on attempt $attempt"
-                exit 0
-              fi
-              echo "Push attempt $attempt rejected (non-fast-forward) — retrying"
-              sleep 5
-              continue
-            fi
-
-            # Rebase conflict. dist/ is derived — never merge it. Snapshot our
-            # content/* changes, hard-reset to fresh main, merge new posts in
-            # by slug, take our CSVs as-is, rebuild dist/ from scratch.
-            echo "Rebase conflict on attempt $attempt — recovering by snapshot + reset + rebuild"
-            git rebase --abort || true
-            cp content/posts.json                  /tmp/posts-ours.json
-            cp content/topics-claude-template.csv  /tmp/topics-ours.csv
-            cp content/daily-publish-queue.csv     /tmp/queue-ours.csv
-            # Preserve freshly-written manifests: they are created during
-            # generation but not yet committed, so the hard reset below would
-            # otherwise destroy them — the new guide would then publish with no
-            # audit manifest, silently defeating the weekly editorial digest.
-            rm -rf /tmp/manifests-ours && cp -r content/manifests /tmp/manifests-ours
-            git reset --hard origin/main
-            python scripts/merge_new_posts.py /tmp/posts-ours.json content/posts.json
-            cp /tmp/topics-ours.csv  content/topics-claude-template.csv
-            cp /tmp/queue-ours.csv   content/daily-publish-queue.csv
-            # Restore our new manifests without clobbering canon already on main.
-            cp -rn /tmp/manifests-ours/. content/manifests/ 2>/dev/null || true
-
-            git add content/manifests/ content/posts.json \
-                    content/topics-claude-template.csv \
-                    content/daily-publish-queue.csv
-            if git diff --cached --quiet; then
-              echo "ℹ️  Our work was already on main — nothing to push"
-              exit 0
-            fi
-
-            python scripts/build.py
-            git add dist
-            git commit -m "Daily AI publish: $(date -u +%Y-%m-%d)"
-            sleep 5
-          done
-          echo "Push failed after 3 attempts"
-          exit 1
-
-      - name: Commit content only (no dist change)
-        if: steps.dist_changed.outputs.changed == 'false'
-        run: |
-          set -e
-          git config user.name  "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add content/manifests/ content/posts.json \
-                  content/topics-claude-template.csv \
-                  content/daily-publish-queue.csv
-          if git diff --cached --quiet; then
-            echo "No changes to commit"
-            exit 0
-          fi
-          git commit -m "Daily AI publish (content only): $(date -u +%Y-%m-%d)"
-
-          for attempt in 1 2 3; do
-            git fetch origin main
-            if git rebase origin/main; then
-              if git push origin HEAD:main; then
-                echo "✅ Push succeeded on attempt $attempt"
-                exit 0
-              fi
-              echo "Push attempt $attempt rejected (non-fast-forward) — retrying"
-              sleep 5
-              continue
-            fi
-
-            # Rebase conflict on content-only commit — same recovery pattern
-            # as the content+dist case, just no rebuild needed.
-            echo "Rebase conflict on attempt $attempt — recovering by snapshot + reset"
-            git rebase --abort || true
-            cp content/posts.json                  /tmp/posts-ours.json
-            cp content/topics-claude-template.csv  /tmp/topics-ours.csv
-            cp content/daily-publish-queue.csv     /tmp/queue-ours.csv
-            # Preserve freshly-written manifests: they are created during
-            # generation but not yet committed, so the hard reset below would
-            # otherwise destroy them — the new guide would then publish with no
-            # audit manifest, silently defeating the weekly editorial digest.
-            rm -rf /tmp/manifests-ours && cp -r content/manifests /tmp/manifests-ours
-            git reset --hard origin/main
-            python scripts/merge_new_posts.py /tmp/posts-ours.json content/posts.json
-            cp /tmp/topics-ours.csv  content/topics-claude-template.csv
-            cp /tmp/queue-ours.csv   content/daily-publish-queue.csv
-            # Restore our new manifests without clobbering canon already on main.
-            cp -rn /tmp/manifests-ours/. content/manifests/ 2>/dev/null || true
-
-            git add content/manifests/ content/posts.json \
-                    content/topics-claude-template.csv \
-                    content/daily-publish-queue.csv
-            if git diff --cached --quiet; then
-              echo "ℹ️  Our work was already on main — nothing to push"
-              exit 0
-            fi
-            git commit -m "Daily AI publish (content only): $(date -u +%Y-%m-%d)"
-            sleep 5
-          done
-          echo "Push failed after 3 attempts"
-          exit 1
-      # Always-on debug — prints the captured slug value before the if:
-      # is evaluated, so we can see whether the slug-capture step is
-      # producing the value we think it is.
-      - name: Debug — what was captured?
-        if: always()
-        run: |
-          echo "steps.publish.outputs.new_slugs = '${{ steps.publish.outputs.new_slugs }}'"
-          echo "length: ${#NEW_SLUGS_DEBUG}"
-        env:
-          NEW_SLUGS_DEBUG: ${{ steps.publish.outputs.new_slugs }}
-
-      - name: Tweet new articles
-        # Explicit ${{ }} form + truthy check. The bare `!= ''` form
-        # silently skipped on 2026-05-24 and 2026-05-25 even though the
-        # publish step printed `Captured slugs for tweeting: <slug>`.
-        # Forcing the expression evaluator avoids any implicit-parsing
-        # ambiguity around how GitHub Actions reads step-output values.
-        # Re-enabled 2026-06-19: new_slugs only ever contains gate-PASSED post slugs
-        # (run_daily_publish emits NEW_ARTICLE_SLUGS from GATE_PUBLISHED), so this
-        # only tweets content that cleared the fabrication checks.
-        if: ${{ steps.publish.outputs.new_slugs != '' && steps.publish.outputs.new_slugs }}
-        env:
-          TWITTER_API_KEY:             ${{ secrets.TWITTER_API_KEY }}
-          TWITTER_API_KEY_SECRET:      ${{ secrets.TWITTER_API_KEY_SECRET }}
-          TWITTER_ACCESS_TOKEN:        ${{ secrets.TWITTER_ACCESS_TOKEN }}
-          TWITTER_ACCESS_TOKEN_SECRET: ${{ secrets.TWITTER_ACCESS_TOKEN_SECRET }}
-        run: |
-          # Write .env for tweet script
-          cat > .env << EOF
-          TWITTER_API_KEY=${{ secrets.TWITTER_API_KEY }}
-          TWITTER_API_KEY_SECRET=${{ secrets.TWITTER_API_KEY_SECRET }}
-          TWITTER_ACCESS_TOKEN=${{ secrets.TWITTER_ACCESS_TOKEN }}
-          TWITTER_ACCESS_TOKEN_SECRET=${{ secrets.TWITTER_ACCESS_TOKEN_SECRET }}
-          EOF
-
-          # Ensure tweeted_posts.json exists
-          if [ ! -f content/tweeted_posts.json ]; then
-            echo "{}" > content/tweeted_posts.json
-          fi
-
-          # Tweet each new slug. Individual failures (e.g. duplicate-detection
-          # suppression) don't kill the rest of the batch.
+          DATE=$(date -u +%Y-%m-%d)
+          BRANCH="auto/daily-publish-$(date -u +%Y%m%d)-${{ github.run_id }}"
           SLUGS="${{ steps.publish.outputs.new_slugs }}"
-          IFS=',' read -ra SLUG_ARRAY <<< "$SLUGS"
-          for SLUG in "${SLUG_ARRAY[@]}"; do
-            echo "🐦 Tweeting: $SLUG"
-            python scripts/tweet_new_articles.py --slug "$SLUG" || echo "Tweet failed for $SLUG"
-          done
 
-          rm -f .env
+          git checkout -b "$BRANCH"
+          git commit -m "Daily AI publish (review): $DATE"
+          git push origin "$BRANCH"
 
-      - name: Save updated tweeted_posts.json
-        if: ${{ steps.publish.outputs.new_slugs != '' && steps.publish.outputs.new_slugs }}
-        run: |
-          set -e
-          git config user.name  "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add content/tweeted_posts.json || true
-          if git diff --cached --quiet; then
-            echo "ℹ️  No changes to tweeted_posts.json"
-            exit 0
-          fi
-          git commit -m "Update tweeted_posts.json after daily-publish auto-tweet"
+          # Idempotent label; ignore "already exists".
+          gh label create auto-content --color 1f6feb --description "Auto-generated content awaiting editorial review" 2>/dev/null || true
 
-          for attempt in 1 2 3; do
-            git fetch origin main
-            if git rebase origin/main; then
-              if git push origin HEAD:main; then
-                echo "✅ tweeted_posts.json pushed on attempt $attempt"
-                exit 0
-              fi
-              echo "Push attempt $attempt rejected (non-fast-forward) — retrying"
-              sleep 5
-              continue
-            fi
+          BODY=$(cat <<EOF
+          Automated daily-publish output for **editorial review**. Generated by Claude and passed the automated accuracy gate (\`scripts/content_gate.py\`). **Merging this PR publishes the guide(s) and enables advertising on them** — review before merging.
 
-            # tweeted_posts.json is just a slug→timestamp dict; conflict means
-            # another process added an entry. Snapshot ours, reset, python-merge
-            # the dicts, re-commit.
-            echo "Rebase conflict on attempt $attempt — recovering by snapshot + reset + merge"
-            git rebase --abort || true
-            cp content/tweeted_posts.json /tmp/tweeted-ours.json
-            git reset --hard origin/main
-            python -c "import json, pathlib; ours=json.loads(pathlib.Path('/tmp/tweeted-ours.json').read_text()); bp=pathlib.Path('content/tweeted_posts.json'); base=json.loads(bp.read_text()) if bp.exists() else {}; merged={**base, **ours}; bp.write_text(json.dumps(merged, indent=2, ensure_ascii=False)+chr(10)); print(f'Merged tweeted_posts.json: {len(merged)} entries')"
-            if git diff --quiet content/tweeted_posts.json; then
-              echo "ℹ️  Nothing new to record — exiting"
-              exit 0
-            fi
-            git add content/tweeted_posts.json
-            git commit -m "Update tweeted_posts.json after daily-publish auto-tweet"
-            sleep 5
-          done
-          echo "Push failed after 3 attempts"
-          exit 1
+          **New guide slug(s):** \`${SLUGS:-none captured}\`
+
+          ### Reviewer checklist
+          - [ ] Reporting routes / phone numbers correct and from the verified canon
+          - [ ] Reimbursement framing uses the mandatory APP rules (not the old CRM code)
+          - [ ] No US-style "fraud alert / credit freeze" (UK = Cifas Protective Registration)
+          - [ ] 7726 attributed to the mobile networks, not the NCSC
+          - [ ] No unsafe threat-dismissal advice (esp. sextortion/deepfake guides)
+          - [ ] Brand/domain claims are not false absolutes ("always/never")
+          - [ ] Flag-tier notes in \`content/manifests/\` reviewed
+
+          On merge, \`tweet-on-publish.yml\` will tweet the new guide(s).
+          EOF
+          )
+
+          gh pr create --base main --head "$BRANCH" \
+            --title "Daily AI publish for review: $DATE" \
+            --body "$BODY" \
+            --label auto-content \
+          || gh pr create --base main --head "$BRANCH" \
+            --title "Daily AI publish for review: $DATE" \
+            --body "$BODY"
+
+          echo "✅ Opened review PR from $BRANCH"

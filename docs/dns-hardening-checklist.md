@@ -42,21 +42,20 @@ Two senders must stay aligned before enforcing: **Microsoft 365** (apex) and
   (via DKIM alignment on `updates.`) would quarantine/reject your own subscriber
   emails.
 
-## 2. DKIM → 2048-bit
+## 2. DKIM — M365 ✅ COMPLETE; Resend ✅ CLOSED (1024 is Resend's max)
 
-- **Microsoft 365 — ✅ rotated 2026-06-22.** "Rotate DKIM keys" in the Defender
-  portal regenerates a 2048-bit key; CNAMEs unchanged. New key publishes within a
-  few hours. Authoritative check is the portal ("Signing DKIM signatures") or a
-  DKIM pass on a real sent email — the Microsoft-hosted key TXT does not always
-  resolve via a plain `dig` of the CNAME target.
-- **Resend (newsletter) — was 1024-bit; ⏳ support ticket open 2026-06-22** to
-  confirm/rotate the key bit length. There is **no key-size toggle in the Resend
-  dashboard**; if support can't rotate it, the fallback is to remove and re-add
-  the `updates.beatthescam.com` domain in Resend (issues a fresh key), then update
-  the regenerated `resend._domainkey.updates` record in Dynadot. Target key starts
-  `MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8A…` (2048) vs `MIGfMA0…` (1024). **Priority:
-  low** — 1024 still passes DMARC. Re-adding re-verifies all Resend records, so do
-  it in a quiet window if needed.
+- **Microsoft 365 — ✅ COMPLETE.** Rotated to 2048-bit 2026-06-22. The 3rd audit
+  (2026-06-25) flagged **`selector1` pointing at a malformed CNAME target** (only
+  `selector2` was resolving); the operator **corrected selector 1 (2026-06-25)**,
+  so **both selectors now resolve and sign**. Authoritative check is the Defender
+  portal ("Signing DKIM signatures") or a DKIM pass on a real sent email — the
+  Microsoft-hosted key TXT does not always resolve via a plain `dig` of the CNAME.
+- **Resend (newsletter) — ✅ CLOSED, stays 1024-bit.** Operator confirmed with
+  Resend (2026-06-25) that **2048-bit is not offered — 1024 is the maximum Resend
+  provides.** This is a **vendor limitation, not an open action**: 1024-bit DKIM
+  still passes DMARC, so no further work. (A re-audit may still flag "Resend DKIM
+  1024-bit" — the answer is that Resend has no 2048 option; the key is theirs to
+  size, not ours.)
 
 ## 3. CAA records — ✅ DONE (live 2026-06-22)
 
@@ -101,13 +100,18 @@ without TLS — leave Opportunistic unless you have a specific compliance reason
 
 ---
 
-## Status snapshot (2026-06-22)
+## Status snapshot (updated 2026-06-25)
 
-- ✅ DMARC Step 1 (reporting on, `p=none`) — live.
+- ✅ M365 DKIM — **COMPLETE.** 2048-bit; selector 1 malformed CNAME corrected
+  2026-06-25 (3rd-audit finding) — both selectors now sign.
+- ✅ Resend DKIM — **CLOSED.** Stays 1024-bit; Resend offers no 2048 option
+  (vendor limit); 1024 passes DMARC — no further action.
 - ✅ CAA records — live.
-- ✅ HSTS preload — submitted, pending inclusion.
-- ✅ M365 DKIM — rotated to 2048-bit (propagating).
-- ⏳ Resend DKIM → 2048 — support ticket open (low priority; 1024 passes DMARC).
-- ⬜ DMARC Step 2 → 3 (quarantine → reject) — wait ~1–2 weeks, confirm `dmarc@`
-  reports show BOTH M365 and Resend passing, then ramp.
+- ✅ HSTS preload — submitted, pending inclusion (re-check status).
+- 🧪 DMARC — **in testing** at `p=none` with reporting on. Step 2→3
+  (quarantine → reject) still pending: confirm `dmarc@` reports show BOTH M365 and
+  Resend passing, then ramp `pct` 25→50→100, then `p=reject`.
 - ⬜ DNSSEC — blocked on Dynadot (needs third-party NS); optional, deferred.
+
+**Remaining DNS actions:** only the **DMARC enforcement ramp** (after the testing
+window) and **optional DNSSEC**. DKIM (both senders) and CAA/HSTS are done.

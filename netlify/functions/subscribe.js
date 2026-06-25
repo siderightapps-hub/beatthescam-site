@@ -52,7 +52,10 @@ try { ({ getStore } = require("@netlify/blobs")); } catch { /* dep/runtime absen
 
 const ADDRESS_DAILY_MAX = 5;     // max confirmation emails to one address / rolling 24h
 const DAILY_SEND_CAP    = 500;   // max confirmation emails sent across all addresses / UTC day
-const RL_SALT           = process.env.RATE_LIMIT_SALT || "bts-subscribe-rl-v1";
+// Prefer a dedicated RATE_LIMIT_SALT; else reuse UNSUBSCRIBE_SECRET (already
+// required by this function) so the per-address hash salt is never the public
+// literal. Hashes the address so the abuse-cap store never persists raw emails.
+const RL_SALT           = process.env.RATE_LIMIT_SALT || process.env.UNSUBSCRIBE_SECRET || "bts-subscribe-rl-v1";
 
 function blobStore(name) {
   if (!getStore) return null;

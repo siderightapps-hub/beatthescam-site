@@ -50,9 +50,10 @@ const DAILY_CALL_CAP = 2000; // max Anthropic checker calls per UTC day (abuse /
 
 // Rate-limit keys are a salted HASH of the IP, never the raw address — so the
 // limiter never persists a plaintext IP (the privacy policy promises as much).
-// Set RATE_LIMIT_SALT in Netlify env for a stronger per-deploy secret; the
-// fallback still removes the raw IP. The hash is stable per IP within a deploy.
-const RL_SALT = process.env.RATE_LIMIT_SALT || "bts-checker-rl-v1";
+// Prefer a dedicated RATE_LIMIT_SALT; otherwise reuse UNSUBSCRIBE_SECRET (already
+// required site-wide), so the salt is always a real secret and never the public
+// literal — without failing closed and taking the checker offline if it's unset.
+const RL_SALT = process.env.RATE_LIMIT_SALT || process.env.UNSUBSCRIBE_SECRET || "bts-checker-rl-v1";
 function rlKey(ip) {
   return "ip:" + crypto.createHash("sha256").update(RL_SALT + "|" + ip).digest("hex").slice(0, 32);
 }
@@ -187,6 +188,34 @@ function isAllowedReportUrl(raw) {
   return ALLOWED_REPORT_DOMAINS.some(
     d => host === d || host.endsWith("." + d)
   );
+}
+
+// ─── SCRUB MODEL-AUTHORED FREE TEXT ──────────────────────────────────────────
+// The model's narrative fields (summary, flags, recommended_actions) are shown
+// to the user as guidance. A prompt-injected message could try to plant an
+// attacker-controlled phone number, link, or email there (reporting_links are
+// separately host-allowlisted, but the free text is not). We redact contact
+// details a victim might act on, while preserving the genuine UK reporting
+// shortcodes (999/101/159/7726…) and official gov.uk reporting addresses.
+const SAFE_SHORTCODES = new Set(["999", "112", "101", "105", "111", "159", "7726"]);
+
+function scrubContact(s) {
+  if (typeof s !== "string") return "";
+  return s
+    // Emails: keep official *.gov.uk reporting addresses, redact everything else.
+    .replace(/\b[\w.+-]+@[\w.-]+\.[a-z]{2,}\b/gi,
+      m => /@([\w-]+\.)*gov\.uk$/i.test(m) ? m : "[contact removed — verify via an official source]")
+    // Clickable-looking links (scheme / www. / host-with-path). Bare brand
+    // mentions like "gov.uk" with no path stay as plain text.
+    .replace(/\b(?:https?:\/\/|www\.)\S+/gi, "[link removed — verify via an official source]")
+    .replace(/\b[\w-]+(?:\.[\w-]+)+\/\S+/gi, "[link removed — verify via an official source]")
+    // Dialable phone numbers (UK 0…, or international +…). Short safety codes are
+    // ≤4 digits and never start 0/+, so they survive; full numbers are redacted.
+    .replace(/\+\d[\d\s().-]{6,}\d|\b0\d[\d\s().-]{5,12}\d/g, (m) => {
+      const digits = m.replace(/\D/g, "");
+      return (digits.length < 7 || SAFE_SHORTCODES.has(digits))
+        ? m : "[number removed — use the number on your card or the official website]";
+    });
 }
 
 // ─── HANDLER ─────────────────────────────────────────────────────────────────
@@ -401,13 +430,13 @@ Rules:
       verdict:             verdict,
       confidence:          finalConfidence,
       summary:             typeof parsed.summary === "string"
-                             ? parsed.summary.slice(0, 500) : "",
+                             ? scrubContact(parsed.summary.slice(0, 500)) : "",
       red_flags:           Array.isArray(parsed.red_flags)
-                             ? parsed.red_flags.slice(0, 6).map(String) : [],
+                             ? parsed.red_flags.slice(0, 6).map(x => scrubContact(String(x))) : [],
       green_flags:         Array.isArray(parsed.green_flags)
-                             ? parsed.green_flags.slice(0, 6).map(String) : [],
+                             ? parsed.green_flags.slice(0, 6).map(x => scrubContact(String(x))) : [],
       recommended_actions: Array.isArray(parsed.recommended_actions)
-                             ? parsed.recommended_actions.slice(0, 5).map(String) : [],
+                             ? parsed.recommended_actions.slice(0, 5).map(x => scrubContact(String(x))) : [],
       reporting_links:     safeLinks.slice(0, 5),
     };
 

@@ -12,18 +12,21 @@ on:
         required: false
         default: "28"
   schedule:
-    # 05:23 UTC (06:23 BST). Re-enabled 2026-06-19 after the P1 accuracy gate — the
-    # generator runs every draft through scripts/content_gate.py before publishing.
-    # Queued behind daily-publish via the concurrency group below.
+    # 05:23 UTC (06:23 BST). Queued behind daily-publish via the concurrency
+    # group. The generator runs every draft through scripts/content_gate.py.
+    #
+    # HUMAN-REVIEW GATE (2026-06-25): like daily-publish.yml, this no longer
+    # commits to main — it opens a review PR. Nothing is published, monetised, or
+    # tweeted until a human merges. Auto-tweet lives in tweet-on-publish.yml.
     - cron: '23 5 * * *'
 
 permissions:
   contents: write
+  pull-requests: write
+  issues: write          # gh label create manages labels via the issues API
 
-# Serialise with daily-publish.yml: the two pipelines both regenerate
-# dist/sitemap.xml from posts.json. If they run concurrently the second to
-# push will hit a merge conflict on dist/sitemap.xml during rebase. Same
-# group name in both workflow files queues them instead of failing.
+# Serialise with daily-publish.yml: both pipelines branch off main and
+# regenerate dist/sitemap.xml from posts.json. Same group name queues them.
 concurrency:
   group: content-pipeline
   cancel-in-progress: false
@@ -35,10 +38,6 @@ jobs:
       ANTHROPIC_API_KEY:              ${{ secrets.ANTHROPIC_API_KEY }}
       GOOGLE_SEARCH_CONSOLE_TOKEN:    ${{ secrets.GOOGLE_SEARCH_CONSOLE_TOKEN }}
       GOOGLE_OAUTH_CREDENTIALS:       ${{ secrets.GOOGLE_OAUTH_CREDENTIALS }}
-      TWITTER_API_KEY:                ${{ secrets.TWITTER_API_KEY }}
-      TWITTER_API_KEY_SECRET:         ${{ secrets.TWITTER_API_KEY_SECRET }}
-      TWITTER_ACCESS_TOKEN:           ${{ secrets.TWITTER_ACCESS_TOKEN }}
-      TWITTER_ACCESS_TOKEN_SECRET:    ${{ secrets.TWITTER_ACCESS_TOKEN_SECRET }}
       DRY_RUN:  ${{ github.event.inputs.dry_run || 'false' }}
       SC_DAYS:  ${{ github.event.inputs.days    || '28'    }}
 
@@ -61,8 +60,7 @@ jobs:
 
       - name: Install dependencies
         run: |
-          # Shared build/publish deps come from the upper-bounded requirements
-          # file (same as daily-publish.yml — no longer installed unpinned here);
+          # Shared build/publish deps from the upper-bounded requirements file;
           # the Google API client trio is specific to this pipeline, pinned below.
           pip install -r requirements-claude.txt
           pip install \
@@ -81,10 +79,9 @@ jobs:
           if [ "$DRY_RUN" = "true" ]; then
             python scripts/search_console_articles.py --dry-run --days "$SC_DAYS"
           else
-            # Capture output but surface a real failure instead of swallowing it
-            # with `|| true` — a non-zero exit here is usually an expired Search
-            # Console OAuth token (rotates ~weekly) and means the gap pipeline is
-            # silently doing nothing. Fail loudly so it gets re-authed.
+            # Surface a real failure instead of swallowing it — a non-zero exit
+            # here is usually an expired Search Console OAuth token (rotates
+            # ~weekly), which means the gap pipeline is silently doing nothing.
             set +e
             OUTPUT=$(python scripts/search_console_articles.py --days "$SC_DAYS" --limit 1 2>&1)
             CODE=$?
@@ -94,7 +91,6 @@ jobs:
               echo "::error::Search Console article generator failed (exit $CODE) — check the Google OAuth token (token.json) hasn't expired."
               exit "$CODE"
             fi
-            # Extract new slugs from output for tweeting
             SLUGS=$(echo "$OUTPUT" | grep "^NEW_ARTICLE_SLUGS=" | cut -d= -f2)
             echo "new_slugs=$SLUGS" >> $GITHUB_OUTPUT
             echo "Generated slugs: $SLUGS"
@@ -115,6 +111,10 @@ jobs:
             echo "ERROR: dist/robots.txt not found"
             exit 1
           fi
+          if [ ! -f dist/_redirects ]; then
+            echo "ERROR: dist/_redirects not found"
+            exit 1
+          fi
           POST_COUNT=$(find dist/guides -mindepth 1 -maxdepth 1 -type d | wc -l)
           if [ "$POST_COUNT" -lt 50 ]; then
             echo "ERROR: only $POST_COUNT post directories found"
@@ -122,142 +122,56 @@ jobs:
           fi
           echo "✅ Build verified: $POST_COUNT post directories"
 
-      - name: Check if content changed
+      - name: Open review pull request
         if: env.DRY_RUN != 'true'
-        id: changed
-        run: |
-          git add content/manifests/ content/posts.json dist/
-          if git diff --cached --quiet; then
-            echo "changed=false" >> $GITHUB_OUTPUT
-            echo "ℹ️  No new articles generated this run"
-          else
-            echo "changed=true" >> $GITHUB_OUTPUT
-          fi
-          git reset HEAD content/manifests/ content/posts.json dist/
-
-      - name: Commit and push new article + dist
-        if: env.DRY_RUN != 'true' && steps.changed.outputs.changed == 'true'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           set -e
           git config user.name  "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
           git add content/manifests/ content/posts.json dist/
-          git commit -m "Search Console article: $(date -u +%Y-%m-%d)"
 
-          for attempt in 1 2 3; do
-            git fetch origin main
-            if git rebase origin/main; then
-              if git push origin HEAD:main; then
-                echo "✅ Push succeeded on attempt $attempt"
-                exit 0
-              fi
-              echo "Push attempt $attempt rejected (non-fast-forward) — retrying"
-              sleep 5
-              continue
-            fi
-
-            # Rebase conflict. dist/ is derived from content/posts.json — never
-            # try to merge it. Snapshot our new article, hard-reset to fresh
-            # main, merge our additions into the canonical posts.json, then
-            # rebuild dist/ from scratch.
-            echo "Rebase conflict on attempt $attempt — recovering by snapshot + reset + rebuild"
-            git rebase --abort || true
-            cp content/posts.json /tmp/posts-ours.json
-            # Preserve the freshly-written manifest for the new article — it is
-            # not yet committed, so the hard reset would destroy it and the
-            # article would publish with no audit manifest.
-            rm -rf /tmp/manifests-ours && cp -r content/manifests /tmp/manifests-ours
-            git reset --hard origin/main
-            python scripts/merge_new_posts.py /tmp/posts-ours.json content/posts.json
-            cp -rn /tmp/manifests-ours/. content/manifests/ 2>/dev/null || true
-
-            if git diff --quiet content/posts.json; then
-              echo "ℹ️  Our new article was already on main — nothing to push"
-              exit 0
-            fi
-
-            python scripts/build.py
-            git add content/manifests/ content/posts.json dist/
-            git commit -m "Search Console article: $(date -u +%Y-%m-%d)"
-            sleep 5
-          done
-          echo "Push failed after 3 attempts"
-          exit 1
-
-      - name: Tweet new article
-        # Re-enabled 2026-06-19: only gate-passed articles are inserted, so
-        # new_slugs only ever references content that cleared the accuracy gate.
-        if: >
-          env.DRY_RUN != 'true' &&
-          steps.changed.outputs.changed == 'true' &&
-          steps.generate.outputs.new_slugs != ''
-        run: |
-          # Write .env for tweet script
-          cat > .env << EOF
-          TWITTER_API_KEY=${{ secrets.TWITTER_API_KEY }}
-          TWITTER_API_KEY_SECRET=${{ secrets.TWITTER_API_KEY_SECRET }}
-          TWITTER_ACCESS_TOKEN=${{ secrets.TWITTER_ACCESS_TOKEN }}
-          TWITTER_ACCESS_TOKEN_SECRET=${{ secrets.TWITTER_ACCESS_TOKEN_SECRET }}
-          EOF
-
-          # Write tweeted_posts.json if it doesn't exist
-          if [ ! -f content/tweeted_posts.json ]; then
-            echo "{}" > content/tweeted_posts.json
+          if git diff --cached --quiet; then
+            echo "ℹ️  No new articles generated this run — no PR to open."
+            exit 0
           fi
 
-          # Tweet each new slug
+          DATE=$(date -u +%Y-%m-%d)
+          BRANCH="auto/search-console-$(date -u +%Y%m%d)-${{ github.run_id }}"
           SLUGS="${{ steps.generate.outputs.new_slugs }}"
-          IFS=',' read -ra SLUG_ARRAY <<< "$SLUGS"
-          for SLUG in "${SLUG_ARRAY[@]}"; do
-            echo "🐦 Tweeting: $SLUG"
-            python scripts/tweet_new_articles.py --slug "$SLUG" || echo "Tweet failed for $SLUG"
-          done
 
-          # Clean up .env
-          rm -f .env
+          git checkout -b "$BRANCH"
+          git commit -m "Search Console article (review): $DATE"
+          git push origin "$BRANCH"
 
-      - name: Save updated tweeted_posts.json
-        if: >
-          env.DRY_RUN != 'true' &&
-          steps.changed.outputs.changed == 'true' &&
-          steps.generate.outputs.new_slugs != ''
-        run: |
-          git config user.name  "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add content/tweeted_posts.json || true
-          if ! git diff --cached --quiet; then
-            git commit -m "Update tweeted_posts.json after auto-tweet"
+          gh label create auto-content --color 1f6feb --description "Auto-generated content awaiting editorial review" 2>/dev/null || true
 
-            for attempt in 1 2 3; do
-              git fetch origin main
-              if git rebase origin/main; then
-                if git push origin HEAD:main; then
-                  echo "✅ tweeted_posts.json pushed on attempt $attempt"
-                  exit 0
-                fi
-                echo "Push attempt $attempt rejected (non-fast-forward) — retrying"
-                sleep 5
-                continue
-              fi
+          BODY=$(cat <<EOF
+          Automated Search-Console gap-fill output for **editorial review**. Generated by Claude and passed the automated accuracy gate (\`scripts/content_gate.py\`). **Merging this PR publishes the guide(s) and enables advertising on them** — review before merging.
 
-              # tweeted_posts.json is just a slug→timestamp dict; conflict
-              # means another process added an entry. Snapshot ours, reset,
-              # python-merge the dicts, re-commit.
-              echo "Rebase conflict on attempt $attempt — recovering by snapshot + reset + merge"
-              git rebase --abort || true
-              cp content/tweeted_posts.json /tmp/tweeted-ours.json
-              git reset --hard origin/main
-              python -c "import json, pathlib; ours=json.loads(pathlib.Path('/tmp/tweeted-ours.json').read_text()); bp=pathlib.Path('content/tweeted_posts.json'); base=json.loads(bp.read_text()) if bp.exists() else {}; merged={**base, **ours}; bp.write_text(json.dumps(merged, indent=2, ensure_ascii=False)+chr(10)); print(f'Merged tweeted_posts.json: {len(merged)} entries')"
-              if git diff --quiet content/tweeted_posts.json; then
-                echo "ℹ️  Nothing new to record — exiting"
-                exit 0
-              fi
-              git add content/tweeted_posts.json
-              git commit -m "Update tweeted_posts.json after auto-tweet"
-              sleep 5
-            done
-            echo "Push failed after 3 attempts"
-            exit 1
-          else
-            echo "ℹ️  No changes to tweeted_posts.json"
-          fi
+          **New guide slug(s):** \`${SLUGS:-none captured}\`
+
+          ### Reviewer checklist
+          - [ ] Reporting routes / phone numbers correct and from the verified canon
+          - [ ] Reimbursement framing uses the mandatory APP rules (not the old CRM code)
+          - [ ] No US-style "fraud alert / credit freeze" (UK = Cifas Protective Registration)
+          - [ ] 7726 attributed to the mobile networks, not the NCSC
+          - [ ] No unsafe threat-dismissal advice (esp. sextortion/deepfake guides)
+          - [ ] Brand/domain claims are not false absolutes ("always/never")
+          - [ ] Flag-tier notes in \`content/manifests/\` reviewed
+
+          On merge, \`tweet-on-publish.yml\` will tweet the new guide(s).
+          EOF
+          )
+
+          gh pr create --base main --head "$BRANCH" \
+            --title "Search Console article for review: $DATE" \
+            --body "$BODY" \
+            --label auto-content \
+          || gh pr create --base main --head "$BRANCH" \
+            --title "Search Console article for review: $DATE" \
+            --body "$BODY"
+
+          echo "✅ Opened review PR from $BRANCH"

@@ -122,17 +122,24 @@ class GateResult:
 # ─── TEXT EXTRACTION ─────────────────────────────────────────────────────────
 
 def _post_text(post: Dict) -> str:
-    """All human-readable body text from a post (sections + faq)."""
-    parts: List[str] = []
+    """All reader-visible text from a post — title, section HEADINGS and bodies,
+    faq, hero, description, and keywords. Headings/title/keywords are included so
+    a high-stakes claim placed there (a hardcoded number, banned entity, false
+    absolute) is checked too, not only the section bodies."""
+    parts: List[str] = [str(post.get("title", ""))]
     for item in post.get("sections", []):
         if isinstance(item, (list, tuple)) and len(item) >= 2:
-            parts.append(str(item[1]))
+            parts.append(str(item[0]))   # section heading
+            parts.append(str(item[1]))   # section body
     for item in post.get("faq", []):
         if isinstance(item, (list, tuple)) and len(item) >= 2:
             parts.append(str(item[0]))
             parts.append(str(item[1]))
     parts.append(str(post.get("hero", "")))
     parts.append(str(post.get("description", "")))
+    kws = post.get("keywords") or []
+    if isinstance(kws, (list, tuple)):
+        parts.append(" ".join(str(k) for k in kws))
     return "\n".join(parts)
 
 
@@ -402,6 +409,57 @@ def check_uk_advice_flags(post: Dict) -> List[Dict]:
     return issues
 
 
+# ── Recurring factual-accuracy guards (from the 2026-06 editorial audit) ──────
+# Outdated reimbursement framework: the VOLUNTARY Contingent Reimbursement Model
+# (CRM code) was superseded on 7 Oct 2024 by MANDATORY APP-fraud reimbursement
+# under PSR rules. Presenting the CRM code as current recourse is wrong. FLAG.
+_CRM_CODE_RE = re.compile(r"contingent\s+reimbursement\s+model|\bCRM\s+code\b", re.I)
+# 7726 is the spam-reporting shortcode run by the MOBILE NETWORKS, not the NCSC
+# (the NCSC runs report@phishing.gov.uk for emails). Misattribution. FLAG.
+_SHORTCODE_NCSC_RE = re.compile(
+    r"7726[^.]{0,60}\b(?:ncsc|national\s+cyber\s+security)\b"
+    r"|\b(?:ncsc|national\s+cyber\s+security)\b[^.]{0,60}7726", re.I)
+# "credit freeze" is a US mechanism with no UK equivalent (use a Cifas Protective
+# Registration). Imprecise rather than dangerous → FLAG.
+_CREDIT_FREEZE_RE = re.compile(r"credit\s+freeze|freez(?:e|ing)\s+your\s+credit", re.I)
+# Dangerous threat-dismissal heuristic: teaching a victim that the ABSENCE of
+# proof means a threat is fake can make them ignore a real one. The LLM judge
+# BLOCKs the worst "no footage exists" absolutes; this is a deterministic
+# backstop for the directive forms. FLAG.
+_THREAT_DISMISS_RE = re.compile(
+    r"assume[^.]{0,30}\b(?:fake|bluff)\b[^.]{0,30}unless"
+    r"|(?:genuine|real|legitimate)\s+threat\s+would[^.]{0,80}\b(?:proof|evidence|screenshot|verifiable)\b", re.I)
+
+
+def check_recurring_accuracy(post: Dict) -> List[Dict]:
+    """Forward guards for the recurring errors the editorial audit found, so new
+    (incl. future-locale) drafts can't silently reproduce them. All FLAG-tier:
+    recorded in the manifest + surfaced in the weekly digest and PR review."""
+    text = _post_text(post)
+    issues: List[Dict] = []
+
+    def flag(rx, check, detail):
+        m = rx.search(text)
+        if m:
+            issues.append({"check": check, "severity": SEVERITY_FLAG,
+                           "span": re.sub(r"\s+", " ", m.group(0))[:140], "detail": detail})
+
+    flag(_CRM_CODE_RE, "reimbursement_framework",
+         "cites the voluntary Contingent Reimbursement Model / CRM code. Since 7 Oct 2024, "
+         "APP-fraud reimbursement is MANDATORY under PSR rules for most banks — frame recovery "
+         "around the mandatory scheme, not the superseded voluntary one.")
+    flag(_SHORTCODE_NCSC_RE, "shortcode_attribution",
+         "attributes 7726 to the NCSC. 7726 is the free spam-reporting shortcode run by the mobile "
+         "networks; the NCSC runs report@phishing.gov.uk for suspicious EMAILS.")
+    flag(_CREDIT_FREEZE_RE, "credit_freeze",
+         "uses the US 'credit freeze' — there is no UK credit freeze. The UK mechanism is a Cifas "
+         "Protective Registration (cifas.org.uk).")
+    flag(_THREAT_DISMISS_RE, "threat_dismissal",
+         "teaches that the absence of proof means a threat is fake/a bluff. Reassure that most are "
+         "bulk bluffs WITHOUT guaranteeing safety; never imply a victim's real threat is fake.")
+    return issues
+
+
 def check_deterministic(post: Dict) -> List[Dict]:
     # Note: no deterministic domain/URL check — these guides intentionally
     # contain example scam/lookalike domains, so a domain allowlist is pure
@@ -410,7 +468,7 @@ def check_deterministic(post: Dict) -> List[Dict]:
             + check_absolutes(post) + check_sources(post)
             + check_legislation(post) + check_dated_events(post)
             + check_cra_misclassification(post) + check_nfd_routing(post)
-            + check_uk_advice_flags(post))
+            + check_uk_advice_flags(post) + check_recurring_accuracy(post))
 
 
 # ─── LLM JUDGE ───────────────────────────────────────────────────────────────

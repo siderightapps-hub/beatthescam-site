@@ -575,6 +575,16 @@ _SENSITIVE_FINANCE_TERMS = (
     # Recovery scams (prey on people who already lost money)
     "recovery scam", "recover your money", "recover stolen", "money recovery",
     "fund recovery", "get your money back",
+    # Sexual / sextortion / intimate-image abuse — personalised ads are
+    # inappropriate alongside this content (Google also restricts personalisation).
+    "sextortion", "intimate image", "intimate-image", "revenge porn",
+    "webcam blackmail", "blackmail", "explicit image", "explicit photo",
+    "nude photo", "nude image", "deepfake",
+    # Romance / relationship fraud
+    "romance scam", "romance fraud", "catfish", "pig butchering", "pig-butchering",
+    "military romance", "dating scam",
+    # Identity theft (the victim's own identity stolen — not org impersonation)
+    "identity theft", "identity fraud", "stolen identity",
 )
 # Leading word boundary only — avoids "iva" matching inside "festival", while
 # still matching word-initial stems like "debt"/"debts".
@@ -582,11 +592,15 @@ _SENSITIVE_FINANCE_RE = re.compile(
     r"\b(?:" + "|".join(re.escape(t) for t in _SENSITIVE_FINANCE_TERMS) + r")", re.I)
 
 def post_ads_mode(post: dict) -> str:
-    """Return "npa" for debt/insolvency or money-recovery pages, else "default"."""
+    """Return "npa" for debt/insolvency, money-recovery, sexual/sextortion,
+    romance, or identity-theft pages, else "default"."""
     hay = " ".join([
         post.get("slug", ""), post.get("title", ""), post.get("category", ""),
         " ".join(post.get("keywords", []) or []),
     ])
+    # Normalise hyphens/underscores to spaces so a hyphenated slug
+    # ("military-romance-scam-uk") matches the spaced terms ("military romance").
+    hay = hay.replace("-", " ").replace("_", " ")
     return "npa" if _SENSITIVE_FINANCE_RE.search(hay) else "default"
 
 
@@ -1394,7 +1408,8 @@ def render_post(site, post, all_posts, affiliates=None, sources=None):
     updated   = post.get("updated") or post.get("dateModified") or published
     updated_html = ""
     if updated and updated != published:
-        updated_html = f' &middot; <time datetime="{html.escape(updated)}">Updated {html.escape(updated)}</time>'
+        updated_html = (f' &middot; <time itemprop="dateModified" datetime="{html.escape(updated)}">'
+                        f'Updated {html.escape(updated)}</time>')
 
     section_ids   = []
     section_parts = []
@@ -1427,6 +1442,17 @@ def render_post(site, post, all_posts, affiliates=None, sources=None):
     # asserted via the Person.sameAs array in article_schema() above.
     author_url = site.get("editor_url") or "/about/"
     byline = f'<a href="{html.escape(author_url)}" rel="author">{html.escape(site["author"])}</a>'
+
+    # Honest review attestation: only guides carrying a real `updated` date have
+    # been through human editorial review (the rest show the automated gate +
+    # publish date only). Going forward the human-review publishing gate stamps
+    # `updated` when the editor approves a guide.
+    role = (site.get("author_profile") or {}).get("role") or "Editor"
+    if updated != published:
+        review_note = (f'Fact-checked and updated by {byline}, {html.escape(role)}, '
+                       f'on {html.escape(updated)}.')
+    else:
+        review_note = f'Published {html.escape(published)}.'
 
     content = f'''
     <section class="hero">
@@ -1464,7 +1490,7 @@ def render_post(site, post, all_posts, affiliates=None, sources=None):
           Use the <a href="/check/">AI scam checker</a> for an instant analysis, or report it to
           <a href="https://www.reportfraud.police.uk" rel="noopener noreferrer" target="_blank">Action Fraud</a>.
         </div>
-        <p class="meta" style="margin-top:1.4rem">Reporting routes in this guide are checked against our verified canon of official UK sources &#8212; <a href="https://www.actionfraud.police.uk/" rel="noopener" target="_blank">Action Fraud</a>, the <a href="https://www.ncsc.gov.uk/" rel="noopener" target="_blank">National Cyber Security Centre</a>, and <a href="https://www.citizensadvice.org.uk/consumer/scams/" rel="noopener" target="_blank">Citizens Advice</a> &#8212; by an automated accuracy gate before publication. {("Updated " + html.escape(updated)) if updated != published else ("Published " + html.escape(published))}. Read about <a href="/about/">how Beat the Scam writes guides</a>.</p>
+        <p class="meta" style="margin-top:1.4rem">Reporting routes in this guide are checked against our verified canon of official UK sources &#8212; <a href="https://www.actionfraud.police.uk/" rel="noopener" target="_blank">Action Fraud</a>, the <a href="https://www.ncsc.gov.uk/" rel="noopener" target="_blank">National Cyber Security Centre</a>, and <a href="https://www.citizensadvice.org.uk/consumer/scams/" rel="noopener" target="_blank">Citizens Advice</a> &#8212; by an automated accuracy gate before publication. {review_note} Read about <a href="/about/">how Beat the Scam writes guides</a>.</p>
       </article>
       <aside class="sidebar">
         <section class="sidebar-card">
@@ -1783,7 +1809,10 @@ def render_simple_page(site, title, description, body, slug):
     </section>
     <section class="section"><div class="wrap"><article class="article">{body}</article></div></section>
     '''
-    return make_base(content, title=f'{title} | {site["site_name"]}', description=description, canonical=site['domain'] + f'/{slug}/', schema=page_schema(site, title, description, site['domain'] + f'/{slug}/'), site=site)
+    # Legal / trust pages (about, privacy, cookies, terms, contact, disclaimer)
+    # carry no ads — they are not content surfaces and AdSense guidance is to keep
+    # ads off legal/utility pages.
+    return make_base(content, title=f'{title} | {site["site_name"]}', description=description, canonical=site['domain'] + f'/{slug}/', schema=page_schema(site, title, description, site['domain'] + f'/{slug}/'), site=site, ads_mode="none")
 
 
 def render_author_page(site):
