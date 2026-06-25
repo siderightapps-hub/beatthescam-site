@@ -4,10 +4,13 @@
 // added to the Resend Audience and the welcome email sent.
 //
 // Security / safety model (mirrors unsubscribe.js):
-//  - The link carries an HMAC-signed token, so only the address that was
-//    submitted can be confirmed — it can't be swapped without invalidating the
-//    signature. The token signs "confirm:<email>", so it is NOT usable as an
-//    unsubscribe token (which signs the bare email). Verified with timingSafeEqual.
+//  - The link carries an OPAQUE, ENCRYPTED token (AES-256-GCM): the email +
+//    expiry are sealed under a key derived from UNSUBSCRIBE_SECRET, so the
+//    address can't be read from a captured URL AND can't be swapped without
+//    breaking the auth tag. The key is domain-separated by purpose, so a confirm
+//    token is NOT usable as an unsubscribe token. We DUAL-PARSE: the legacy
+//    base64url(email).base36(exp).sig (HMAC) format is still accepted so confirm
+//    links already in inboxes keep working during the transition.
 //  - GET NEVER mutates state — it only renders a confirm page. Only POST adds
 //    the contact, so email link-prefetchers / security scanners (which GET every
 //    link) cannot auto-confirm a subscription — which is the whole point of
@@ -95,20 +98,83 @@ function isRateLimited(ip) {
   return entry.count > RATE_LIMIT_MAX;
 }
 
-// ─── TOKEN ────────────────────────────────────────────────────────────────────
+// ─── OPAQUE TOKEN CRYPTO (AES-256-GCM) ────────────────────────────────────────
+// New tokens encrypt their payload under a key derived from UNSUBSCRIBE_SECRET
+// (rationale in subscribe.js: the legacy base64url(email)… format leaked the
+// address from any captured URL). Confirm tokens are OPENED here; the welcome
+// email's unsubscribe token is SEALED here. Keys are domain-separated by purpose
+// ("confirm" vs "unsub"), so the two are not interchangeable.
+const TOKEN_VERSION = 0x02;
+const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+// HKDF-SHA256(UNSUBSCRIBE_SECRET) → 32-byte AES-256 key, domain-separated by purpose.
+function tokenKey(purpose) {
+  const secret = process.env.UNSUBSCRIBE_SECRET || "";
+  if (!secret) return null;
+  return Buffer.from(crypto.hkdfSync("sha256", secret, "bts-token-kdf-v2", "aes256gcm:" + purpose, 32));
+}
+
+// Seal a payload object → opaque dotless base64url token. "" with no secret.
+function sealToken(purpose, payload) {
+  const key = tokenKey(purpose);
+  if (!key) return "";
+  const iv     = crypto.randomBytes(12);
+  const cipher = crypto.createCipheriv("aes-256-gcm", key, iv);
+  cipher.setAAD(Buffer.from("bts-token-v2:" + purpose, "utf8"));
+  const pt  = Buffer.from(JSON.stringify(payload), "utf8");
+  const ct  = Buffer.concat([cipher.update(pt), cipher.final()]);
+  const tag = cipher.getAuthTag();
+  return Buffer.concat([Buffer.from([TOKEN_VERSION]), iv, ct, tag]).toString("base64url");
+}
+
+// Open an opaque token → payload object, or null if malformed / tampered /
+// sealed for a different purpose / minted under a different secret.
+function openToken(purpose, token) {
+  const key = tokenKey(purpose);
+  if (!key) return null;
+  const buf = Buffer.from(String(token), "base64url");
+  if (buf.length < 1 + 12 + 16 + 2) return null;          // version + iv + tag + ≥2 ct bytes
+  if (buf[0] !== TOKEN_VERSION) return null;
+  const iv  = buf.subarray(1, 13);
+  const ct  = buf.subarray(13, buf.length - 16);
+  const tag = buf.subarray(buf.length - 16);
+  try {
+    const decipher = crypto.createDecipheriv("aes-256-gcm", key, iv);
+    decipher.setAAD(Buffer.from("bts-token-v2:" + purpose, "utf8"));
+    decipher.setAuthTag(tag);
+    const dt = Buffer.concat([decipher.update(ct), decipher.final()]);
+    return JSON.parse(dt.toString("utf8"));
+  } catch { return null; }
+}
+
+// ─── CONFIRM TOKEN — DUAL-PARSE (new opaque + legacy dotted) ───────────────────
 // Returns the verified email, or null if the token is missing / malformed / has
-// a bad signature / has EXPIRED / the secret is unset (fail closed). Token format
-// is base64url(email).base36(exp).sig where sig = HMAC("confirm:"+email+":"+exp);
-// the expiry is signed, so a captured link stops working after it lapses.
+// a bad signature / has EXPIRED / the secret is unset (fail closed). A token
+// containing "." is the LEGACY base64url(email).base36(exp).sig (HMAC) format,
+// still in inboxes during the transition; a dotless token is the new AES-256-GCM
+// format. BOTH enforce the signed 7-day expiry (it can't be tampered in either).
 function verifyConfirmToken(t) {
   const secret = process.env.UNSUBSCRIBE_SECRET || "";
   if (!t || !secret) return null;
+  return String(t).includes(".") ? verifyConfirmTokenLegacy(t) : verifyConfirmTokenV2(t);
+}
+
+function verifyConfirmTokenV2(t) {
+  const p = openToken("confirm", t);
+  if (!p || typeof p.e !== "string") return null;
+  if (p.e.length > 254 || !EMAIL_RE.test(p.e)) return null;
+  if (!Number.isFinite(p.x) || p.x * 1000 < Date.now()) return null;   // expired / malformed
+  return p.e;
+}
+
+function verifyConfirmTokenLegacy(t) {
+  const secret = process.env.UNSUBSCRIBE_SECRET || "";
   const parts = String(t).split(".");
   if (parts.length !== 3) return null;
   const [e, exp, sig] = parts;
   let email;
   try { email = Buffer.from(e, "base64url").toString("utf8"); } catch { return null; }
-  if (!email || email.length > 254 || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) return null;
+  if (!email || email.length > 254 || !EMAIL_RE.test(email)) return null;
   const expSec = parseInt(exp, 36);
   if (!Number.isFinite(expSec) || expSec * 1000 < Date.now()) return null;   // expired / malformed
   const expected = crypto.createHmac("sha256", secret).update("confirm:" + email + ":" + exp).digest("base64url");
@@ -118,14 +184,12 @@ function verifyConfirmToken(t) {
   return email;
 }
 
-// Unsubscribe token for the welcome email's one-click link — signs the BARE
-// email, matching what unsubscribe.js verifies.
+// Unsubscribe token for the welcome email's one-click link — now OPAQUE
+// (AES-256-GCM), so a freshly-sent welcome email never embeds a recoverable
+// address. unsubscribe.js dual-parses, so the bare-email legacy links previously
+// minted keep working too.
 function unsubToken(email) {
-  const secret = process.env.UNSUBSCRIBE_SECRET || "";
-  if (!secret) return "";
-  const e   = Buffer.from(email, "utf8").toString("base64url");
-  const sig = crypto.createHmac("sha256", secret).update(email).digest("base64url");
-  return `${e}.${sig}`;
+  return sealToken("unsub", { e: email });
 }
 
 // ─── RESEND ───────────────────────────────────────────────────────────────────

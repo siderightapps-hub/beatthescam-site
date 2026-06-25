@@ -4,9 +4,12 @@
 // suppression list future Broadcasts honour). RFC 8058 one-click compatible.
 //
 // Security / safety model:
-//  - The link carries an HMAC-signed token (base64url(email).base64url(sig)),
-//    so a recipient can only unsubscribe THEIR OWN address — the email can't be
-//    swapped without invalidating the signature. Verified with timingSafeEqual.
+//  - The link carries an OPAQUE, ENCRYPTED token (AES-256-GCM): the email is
+//    sealed under a key derived from UNSUBSCRIBE_SECRET, so a recipient can only
+//    unsubscribe THEIR OWN address — the email can't be read from a captured URL
+//    and can't be swapped without breaking the auth tag. We DUAL-PARSE: the
+//    legacy base64url(email).sig (HMAC) format is still accepted so unsubscribe
+//    links already delivered keep working (compliance) during the transition.
 //  - GET NEVER mutates state — it only renders a confirm page. Only POST
 //    performs the unsubscribe, so email link-prefetchers / security scanners
 //    (which issue GET on every link) cannot auto-unsubscribe a recipient.
@@ -42,18 +45,68 @@ function isRateLimited(ip) {
   return entry.count > RATE_LIMIT_MAX;
 }
 
-// ─── TOKEN ────────────────────────────────────────────────────────────────────
-// Returns the verified email, or null if the token is missing / malformed /
-// has a bad signature / the secret is unset (fail closed).
+// ─── OPAQUE TOKEN CRYPTO (AES-256-GCM) ────────────────────────────────────────
+// Unsubscribe tokens are now opaque: the email is encrypted under a key derived
+// from UNSUBSCRIBE_SECRET, so the address can't be recovered from a captured URL
+// (browser history, logs, Referer) — the legacy base64url(email).sig format
+// leaked it. The key is domain-separated by purpose, so a confirm token can't be
+// used to unsubscribe. (crypto is required once at the top of the file.)
+const TOKEN_VERSION = 0x02;
+const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+// HKDF-SHA256(UNSUBSCRIBE_SECRET) → 32-byte AES-256 key, domain-separated by purpose.
+function tokenKey(purpose) {
+  const secret = process.env.UNSUBSCRIBE_SECRET || "";
+  if (!secret) return null;
+  return Buffer.from(crypto.hkdfSync("sha256", secret, "bts-token-kdf-v2", "aes256gcm:" + purpose, 32));
+}
+
+// Open an opaque token → payload object, or null if malformed / tampered /
+// sealed for a different purpose / minted under a different secret.
+function openToken(purpose, token) {
+  const key = tokenKey(purpose);
+  if (!key) return null;
+  const buf = Buffer.from(String(token), "base64url");
+  if (buf.length < 1 + 12 + 16 + 2) return null;          // version + iv + tag + ≥2 ct bytes
+  if (buf[0] !== TOKEN_VERSION) return null;
+  const iv  = buf.subarray(1, 13);
+  const ct  = buf.subarray(13, buf.length - 16);
+  const tag = buf.subarray(buf.length - 16);
+  try {
+    const decipher = crypto.createDecipheriv("aes-256-gcm", key, iv);
+    decipher.setAAD(Buffer.from("bts-token-v2:" + purpose, "utf8"));
+    decipher.setAuthTag(tag);
+    const dt = Buffer.concat([decipher.update(ct), decipher.final()]);
+    return JSON.parse(dt.toString("utf8"));
+  } catch { return null; }
+}
+
+// ─── TOKEN — DUAL-PARSE (new opaque + legacy dotted) ───────────────────────────
+// Returns the verified email, or null if missing / malformed / bad signature /
+// secret unset (fail closed). A token containing "." is the LEGACY
+// base64url(email).sig (HMAC) format — still in welcome emails already delivered
+// — and is HMAC-verified; a dotless token is the new AES-256-GCM format.
 function verifyToken(t) {
   const secret = process.env.UNSUBSCRIBE_SECRET || "";
   if (!t || !secret) return null;
+  return String(t).includes(".") ? verifyTokenLegacy(t) : verifyTokenV2(t);
+}
+
+function verifyTokenV2(t) {
+  const p = openToken("unsub", t);
+  if (!p || typeof p.e !== "string") return null;
+  if (p.e.length > 254 || !EMAIL_RE.test(p.e)) return null;
+  return p.e;
+}
+
+function verifyTokenLegacy(t) {
+  const secret = process.env.UNSUBSCRIBE_SECRET || "";
   const parts = String(t).split(".");
   if (parts.length !== 2) return null;
   const [e, sig] = parts;
   let email;
   try { email = Buffer.from(e, "base64url").toString("utf8"); } catch { return null; }
-  if (!email || email.length > 254 || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) return null;
+  if (!email || email.length > 254 || !EMAIL_RE.test(email)) return null;
   const expected = crypto.createHmac("sha256", secret).update(email).digest("base64url");
   const a = Buffer.from(sig);
   const b = Buffer.from(expected);

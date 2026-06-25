@@ -149,25 +149,47 @@ const FROM_ADDRESS = "Beat the Scam <alerts@updates.beatthescam.com>";
 const REPLY_TO     = "hello@beatthescam.com";
 const SITE         = "https://beatthescam.com";
 
-// ─── CONFIRM TOKEN ────────────────────────────────────────────────────────────
-// Opaque, non-forgeable, EXPIRING token tying a confirm link to ONE address:
-//   base64url(email) + "." + base36(expiry_unix_s)
-//                     + "." + base64url(HMAC-SHA256(secret, "confirm:"+email+":"+exp)).
-// The expiry is inside the signed payload, so it can't be tampered with, and a
-// captured link stops working after CONFIRM_TTL_SECONDS. The "confirm:" prefix
-// means a confirm token is NOT interchangeable with an unsubscribe token (which
-// signs the bare email in unsubscribe.js), even though both reuse
-// UNSUBSCRIBE_SECRET. Fails CLOSED — with no secret, no token is minted and
-// double opt-in cannot proceed (we never ship a forgeable token).
-// (crypto is required once at the top of the file.)
+// ─── CONFIRM TOKEN — OPAQUE / ENCRYPTED (AES-256-GCM) ──────────────────────────
+// The confirm link ties ONE address to ONE click WITHOUT revealing that address.
+// The older base64url(email).base36(exp).sig format was non-forgeable (HMAC) but
+// the plaintext email was trivially recoverable from any captured URL — browser
+// history, function/CDN logs, the Referer header. So we now mint an OPAQUE token:
+// the email + expiry are sealed with AES-256-GCM under a key derived from
+// UNSUBSCRIBE_SECRET, yielding a dotless base64url blob that leaks nothing and is
+// still tamper-proof (GCM auth tag covers the payload AND the expiry).
+// confirm-subscribe.js DUAL-PARSES — it accepts both this new format and the
+// legacy dotted format — so confirmation emails already sitting in inboxes keep
+// working through the transition. The key is domain-separated by purpose
+// ("confirm" vs "unsub"), so a confirm token can't be replayed as an unsubscribe
+// token. Fails CLOSED — with no secret, no token is minted and double opt-in
+// cannot proceed (we never ship a forgeable token). (crypto required at top.)
 const CONFIRM_TTL_SECONDS = 7 * 24 * 3600;   // confirm links expire after 7 days
-function confirmToken(email) {
+const TOKEN_VERSION = 0x02;
+
+// HKDF-SHA256(UNSUBSCRIBE_SECRET) → 32-byte AES-256 key, domain-separated by purpose.
+function tokenKey(purpose) {
   const secret = process.env.UNSUBSCRIBE_SECRET || "";
-  if (!secret) return "";
-  const exp = (Math.floor(Date.now() / 1000) + CONFIRM_TTL_SECONDS).toString(36);
-  const e   = Buffer.from(email, "utf8").toString("base64url");
-  const sig = crypto.createHmac("sha256", secret).update("confirm:" + email + ":" + exp).digest("base64url");
-  return `${e}.${exp}.${sig}`;
+  if (!secret) return null;
+  return Buffer.from(crypto.hkdfSync("sha256", secret, "bts-token-kdf-v2", "aes256gcm:" + purpose, 32));
+}
+
+// Seal a small payload object into an opaque, dotless base64url token:
+// base64url( version(1) || iv(12) || ciphertext || tag(16) ). Returns "" with no
+// secret (fail closed). The version byte + purpose are bound as GCM AAD.
+function sealToken(purpose, payload) {
+  const key = tokenKey(purpose);
+  if (!key) return "";
+  const iv     = crypto.randomBytes(12);
+  const cipher = crypto.createCipheriv("aes-256-gcm", key, iv);
+  cipher.setAAD(Buffer.from("bts-token-v2:" + purpose, "utf8"));
+  const pt  = Buffer.from(JSON.stringify(payload), "utf8");
+  const ct  = Buffer.concat([cipher.update(pt), cipher.final()]);
+  const tag = cipher.getAuthTag();
+  return Buffer.concat([Buffer.from([TOKEN_VERSION]), iv, ct, tag]).toString("base64url");
+}
+
+function confirmToken(email) {
+  return sealToken("confirm", { e: email, x: Math.floor(Date.now() / 1000) + CONFIRM_TTL_SECONDS });
 }
 
 // ─── CONFIRMATION EMAIL ────────────────────────────────────────────────────────
