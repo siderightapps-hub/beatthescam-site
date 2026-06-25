@@ -231,6 +231,8 @@ Write a complete guide about: "{q}"
 {ACCURACY_BLOCK}
 - Write ONLY about verified, documented UK scams. All content must be UK-specific (use £ not $, UK reporting routes, UK organisations).
 
+STRUCTURE — do NOT reuse a fixed template across guides. Give each section a NATURAL, SCAM-SPECIFIC heading (not generic ones like "What is this scam?" or "How it works — step by step"), and order the sections the way someone searching for THIS specific scam would actually read them — lead with whatever matters most for the query. Vary the number and order of sections from guide to guide (5 to 8). Across the guide, cover ALL of these essentials under whatever natural headings fit best: what the scam is; how it works step by step (bullet list, "- " prefix); the warning signs (6+ bullets, "- " prefix); what to do if you have received or already interacted with it (bullet list); how to verify it is genuine or protect yourself; and how to report it in the UK. Write the FAQ as 3 to 5 REAL questions someone would Google about THIS specific scam — vary them between guides, phrase them naturally, and never write "Is [X] a legitimate company?" when [X] is a scam type rather than an actual company.
+
 OUTPUT FORMAT — respond with a single valid JSON object only, no other text:
 {{
   "title": "Specific UK-focused title including the scam type (max 80 chars)",
@@ -238,18 +240,12 @@ OUTPUT FORMAT — respond with a single valid JSON object only, no other text:
   "hero": "1-sentence hook describing the scam threat (max 120 chars)",
   "keywords": ["keyword1", "keyword2", "keyword3", "keyword4", "keyword5", "keyword6"],
   "sections": [
-    ["What is this scam?", "130-180 word explanation of the scam and how it works in the UK"],
-    ["How it works — step by step", "- Step 1: ...\n- Step 2: ...\n- Step 3: ...\n- Step 4: ...\n- Step 5: ..."],
-    ["Warning signs to look for", "- Warning sign one\n- Warning sign two\n- Warning sign three\n- Warning sign four\n- Warning sign five\n- Warning sign six"],
-    ["What to do if you receive one", "- Action one\n- Action two\n- Action three\n- Action four\n- Action five"],
-    ["How to protect yourself", "130-180 word paragraph with practical prevention advice"],
-    ["How to report it", "Explain how to report to Action Fraud (0300 123 2040 or actionfraud.police.uk), forward suspicious texts to 7726, and contact your bank immediately if money was lost."]
+    ["<your natural, scam-specific heading>", "<120-180 words, OR a bullet list with each item starting with '- '>"],
+    ["<next heading — vary order and count (5 to 8 sections) per the STRUCTURE rules above>", "..."]
   ],
   "faq": [
-    ["Question 1 someone would Google about this scam?", "Clear, specific answer (60-100 words)"],
-    ["Question 2?", "Clear, specific answer (60-100 words)"],
-    ["Question 3?", "Clear, specific answer (60-100 words)"],
-    ["Question 4?", "Clear, specific answer (60-100 words)"]
+    ["<a real, naturally-phrased question someone would Google about THIS scam>", "Clear, specific answer (60-100 words)"],
+    ["<another real, varied question — 3 to 5 total>", "Clear, specific answer (60-100 words)"]
   ]
 }}"""
 

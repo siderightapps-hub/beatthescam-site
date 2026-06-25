@@ -139,24 +139,23 @@ Return a single JSON object with exactly these fields:
   ]
 }}
 
-Section requirements — write EXACTLY these 6 sections in this order:
-1. "What is this scam?" — explain the specific scam pattern clearly, 120-180 words
-2. "Warning signs to look for" — 6-8 specific red flags as a bullet list (use - prefix), each 1-2 sentences
-3. "How this scam works step by step" — walk through the scam from first contact to money/data loss, 150-200 words
-4. "How to verify if it is genuine" — specific verification steps for this exact scam type, 120-160 words. Where relevant, link to a related guide using one of these internal URLs: {related_str}
-5. "What to do if you have already interacted" — specific recovery actions in order of urgency, 120-160 words
-6. "Reporting this scam in the UK" — specific reporting routes with org names: Action Fraud (0300 123 2040), NCSC Suspicious Email Reporting Service (report@phishing.gov.uk), forward SMS to 7726, Citizens Advice consumer helpline (0808 223 1133), 120-150 words
+Section requirements — COVER ALL SIX essentials below, but DO NOT reuse a fixed template. Give each section a NATURAL, SCAM-SPECIFIC heading (e.g. "How the fake [brand] text reaches you" rather than the generic "How this scam works step by step"), and ORDER the sections the way someone searching for THIS specific scam would actually want to read them — lead with whatever matters most for the query (a "is [brand] legit?" review intent should open with the verdict; an "I've already been scammed" intent should open with what to do right now). Deliberately vary the structure from one guide to the next; you may split, merge, reorder, or add one extra section (5 to 8 sections total) where this scam genuinely warrants it. Do not pad — every section must earn its place.
 
-FAQ requirements — write EXACTLY 4 FAQs:
-1. A question about whether {topic.entity} is legitimate or always a scam
-2. A question about what to do if money was already sent
-3. A question specific to this scam type (not generic)
-4. A question about how to report it
+The six essentials to cover (in whatever order, under whatever natural headings fit best):
+- What the scam is — the specific pattern, explained clearly (120-180 words)
+- The warning signs — 6-8 specific red flags as a bullet list (every item starts with "- "), 1-2 sentences each
+- How it works — from first contact through to the money or data loss (150-200 words)
+- How to verify whether it is genuine — verification steps specific to THIS exact scam. Where relevant, link to a related guide using one of these internal URLs: {related_str}
+- What to do if you have already interacted — recovery actions in order of urgency (120-160 words)
+- How to report it in the UK — specific routes with org names: Action Fraud (0300 123 2040), NCSC Suspicious Email Reporting Service (report@phishing.gov.uk), forward SMS to 7726, Citizens Advice consumer helpline (0808 223 1133) (120-150 words)
+
+FAQ requirements — write 3 to 5 FAQs that are the REAL questions someone would type about THIS specific scam, varied from guide to guide (do not force a fixed set). Phrase each the natural way a worried person would ask it; do NOT write "Is [X] a legitimate company?" when [X] is a scam type rather than an actual company. Good candidates: whether a specific message / website / caller is genuine, what to do if money or details were already shared, a detail unique to this scam, and how to report it.
 
 Rules:
 - Every section body must be 120+ words. Short sections will be rejected.
-- bullet list items in "Warning signs" must start with "- "
+- The warning-signs bullet list items must start with "- "
 - All content must be specific to {topic.keyword}, not generic scam advice
+- Keep the official reporting routes above (Action Fraud, NCSC, 7726, Citizens Advice) accurate and unchanged
 - slug must be lowercase with hyphens only
 - Return ONLY the JSON object, nothing else"""
 
