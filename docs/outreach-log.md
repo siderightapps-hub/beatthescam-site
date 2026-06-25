@@ -31,7 +31,7 @@ Brand facts for any profile/citation (keep these identical everywhere — NAP co
 | About.me (Alex Bacsa) | self-serve | about.me/alexbacsa | ✅ | 2026-06-05 | ✅ | bio + beatthescam.com button + 3 sister-pub links + LinkedIn/X/YT/IG |
 | Trustpilot | self-serve | trustpilot.com/review/beatthescam.com | ✅ | 2026-06-05 | ✅ | claimed; "Information Service" category; desc in; brand citation + reviews |
 | F6S | self-serve | f6s.com/alex-bacsa | ✅ | 2026-06-05 | ✅ | profile + Beat the Scam experience; search-visibility kept ON |
-| Take Five (UK Finance) | supporter program | takefive@ukfinance.org.uk | ⏳ sent | 2026-06-05 | | become a supporter → listed on supporters page (high-authority .org.uk) |
+| Take Five (UK Finance) | supporter program | takefive@ukfinance.org.uk | ✖ declined | 2026-06-10 | | Replied 2026-06-10: charter is banks/FS firms + UK Finance members only — not eligible. Pointed to their public resources. Cordial, no link; relationship kept warm. |
 | Friends Against Scams | organisation program | friendsagainstscams.org.uk/contact | ⏳ sent | 2026-06-05 | | registered as FAS organisation (query: Organisation); credibility + possible listing |
 | Get Safe Online | partner/ambassador | getsafeonline.org/contact-us | ⏳ sent | 2026-06-05 | | partner scheme leans commercial; low priority |
 | Citizens Advice | — | — | ✖ skip | | | no outreach/partner route (helplines only) |
