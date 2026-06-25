@@ -135,7 +135,7 @@ mention naturally and builds a repeat relationship.
 - **Route:** `helen.crane@thisismoney.co.uk` — **confirmed** (listed on her Muck Rack profile: "Get in touch: helen.crane@thisismoney.co.uk"). She's Deputy Editor & consumer champion at This Is Money — scams are her beat. Alternative: **Qwoted** (app.qwoted.com). Skip X — her account is dormant (last post Nov 2025).
 - This pitch references her column's *format*, not a specific article, so there's no `[…]` to fill in.
 
-**Subject:** A UK scam-trends source for your consumer stories?
+**Subject:** A UK scam expert source for your consumer stories?
 
 ```
 Hi Helen,
@@ -143,13 +143,13 @@ Hi Helen,
 I'm a regular reader of your Crane on the Case column — the reader-recovery cases
 are a great reminder of how often these come down to one missed red flag.
 
-I run Beat the Scam, a free, independent UK consumer-protection site with a free
-AI scam checker. Because readers paste live suspicious messages into the checker,
-we get an early read on which scams are spiking — e.g. which courier brands are
-being impersonated most this month, and the shift from delivery texts to the
-"safe account" follow-up call.
+I run Beat the Scam, a free, independent UK consumer-protection site with ~190
+plain-English scam guides and a free AI scam checker. I cover UK scams full-time,
+so I can give a quick, current read on the patterns I'm seeing reported — e.g. the
+shift from courier delivery texts to the "safe account" follow-up call, and which
+brands are being impersonated right now.
 
-If that kind of current, UK-specific data point is ever useful for a piece — or
+If a current, UK-specific read on scam patterns is ever useful for a piece — or
 you want a quick expert comment on a reader's case — I'm very happy to be a
 source. No ask attached; just flagging it's here.
 

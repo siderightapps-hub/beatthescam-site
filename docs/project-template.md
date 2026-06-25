@@ -722,7 +722,7 @@ x-content-type-options: nosniff
 x-frame-options: DENY
 ```
 
-### OWASP Top 10 (2021) coverage
+### OWASP Top 10 (2025) coverage
 
 | ID | Risk | Mitigation |
 |---|---|---|

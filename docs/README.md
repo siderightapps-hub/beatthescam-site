@@ -68,7 +68,7 @@ The five existing handoff documents (`ProjectHandoffDocument.md`, `SecurityAudit
 | 9 | Analytics & Tracking | Reading GA4, setting up new events |
 | 10 | Monetisation | AdSense status, affiliate onboarding, ad unit IDs |
 | 11 | Content Operations & AI Pipeline | Running manual pipelines, debugging the daily workflow |
-| 12 | Social Media & Video Production | Posting cadence, hashtag templates |
+| 12 | Social Media & Video Production (video discontinued 2026-06-15) | Posting cadence, hashtag templates |
 | 13 | SEO, GEO & AEO Strategy | All three search-mode strategies; near-miss query work |
 | 14 | Backlinks, Authority & DA Plan | Outreach cadence, directory submissions, niche edits, Reddit/Quora |
 | 15 | Target Audience & Brand Voice | Editorial decisions, voice-check |
@@ -141,7 +141,6 @@ The brief asked to "add any other information that I may have missed." Items add
 | How do I push from local? | Section 19 |
 | What's the valuation today? | Section 22 |
 | Which directories should I submit to? | Section 14 |
-| What's the next video topic? | `video-pipeline.md` Section 2 |
 | Which schema types are deployed? | Section 13 |
 | What's the cookie consent posture? | Section 16 |
 
@@ -155,7 +154,6 @@ Pulled forward from `project.md` Section 21:
 
 ### Next session — primary focus
 
-- [ ] **Cross-platform video + Twitter analytics review** — first proper post-publish review of YouTube Shorts + TikTok + Instagram Reels + X data side-by-side. See `docs/video-pipeline.md` Section 11 for the methodology.
 - [ ] **Backlinks push** — start the structured outreach cadence in `project.md` Section 14. Authority Score 2 → 10+ is the single biggest remaining growth lever.
 
 ### Secondary (slot in as bandwidth allows)
@@ -163,7 +161,6 @@ Pulled forward from `project.md` Section 21:
 - [ ] Activate `privacy@`, `security@`, `editorial@`, `legal@` mailbox aliases (DNS task)
 - [ ] Confirm Twitter API keys are stored as GitHub Secrets
 - [ ] Build out the top 3 category hub pages (600–800 words each)
-- [ ] Find a workable video music bed (`assets/audio/news-bed.mp3` empty)
 - [ ] Awin reapply (window opens 2026-06-12) + CJ follow-up + direct affiliate outreach
 - [ ] AdSense approval chase
 

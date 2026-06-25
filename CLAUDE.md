@@ -8,7 +8,7 @@ Beat The Scam (https://beatthescam.com) is a UK consumer-protection site: plain-
 
 ## Editorial scope (2026-06-15): video discontinued
 
-YouTube Shorts + TikTok video production has been **discontinued** for Beat the Scam — it built neither domain authority nor backlinks for a search/reference asset, and the manual time goes to the operator's main bet (the "31 Years" YouTube channel). Production was fully manual (no workflow automated it), so nothing in this repo was disabled — just stop producing. The BTS ElevenLabs voiceover key was deleted (downgrade/cancel that plan). The daily written-guide cron — the authority engine (~191 guides) — is unchanged. Full rationale: `MD Files/BeatTheScam/VideoProductionHandoff.md`.
+YouTube Shorts + TikTok video production has been **discontinued** for Beat the Scam — it built neither domain authority nor backlinks for a search/reference asset, and the manual time goes to the operator's main bet (the "31 Years" YouTube channel). Production was fully manual (no workflow automated it), so nothing in this repo was disabled — just stop producing. The BTS ElevenLabs voiceover key was deleted (downgrade/cancel that plan). The daily written-guide cron — the authority engine (~191 guides) — is unchanged. Full rationale: `docs/video-pipeline.md`.
 
 ## Commands
 

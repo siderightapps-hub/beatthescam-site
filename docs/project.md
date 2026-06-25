@@ -10,7 +10,7 @@
 >
 > **Last updated:** 2026-06-19
 > **Domain age:** ~4 months (registered February 2026)
-> **Site state:** ~185 guides published (grows ~1/day via the gated cron), 17 normalised categories, AI checker live (durable rate limit + daily spend cap), newsletter live (Resend, **double opt-in** + signed one-click unsubscribe), UK/EEA ad+analytics consent via Google's certified CMP, llms.txt + security.txt deployed, full UK Terms (E&W + Scotland + NI), named author E-E-A-T (Alex Bacsa) with cross-publication identity (CloudFintech + Tuning Digital + SalesTap + LinkedIn). **Video production (YouTube Shorts + TikTok + Instagram Reels) was discontinued 2026-06-15** — it built neither domain authority nor backlinks; see `MD Files/BeatTheScam/VideoProductionHandoff.md`. Semrush Site Health **98%**, AI Search Health **99%**, Lighthouse mobile Performance **92–97** / Accessibility **95–98** / Best Practices **92** / SEO **100** across homepage, guide, author pages. ~191 residual Semrush warnings all from Google's AdSense CDN (irreducible third-party floor). **Technical build is mature and stable.** Editorial accuracy is now defence-in-depth: autonomous publishing is gated (deterministic + LLM judge), reporting routes are validated against a verified source canon (`content/sources.json`), every guide carries a claim manifest (`content/manifests/`), and a weekly audit digest surfaces flag-tier claims for human review — see the content-accuracy section.
+> **Site state:** ~190 guides published (grows ~1/day via the gated cron), 17 normalised categories, AI checker live (durable rate limit + daily spend cap), newsletter live (Resend, **double opt-in** + signed one-click unsubscribe), UK/EEA ad+analytics consent via Google's certified CMP, llms.txt + security.txt deployed, full UK Terms (E&W + Scotland + NI), named author E-E-A-T (Alex Bacsa) with cross-publication identity (CloudFintech + Tuning Digital + SalesTap + LinkedIn). **Video production (YouTube Shorts + TikTok + Instagram Reels) was discontinued 2026-06-15** — it built neither domain authority nor backlinks; see `docs/video-pipeline.md`. Semrush Site Health **98%**, AI Search Health **99%**, Lighthouse mobile Performance **92–97** / Accessibility **95–98** / Best Practices **92** / SEO **100** across homepage, guide, author pages. ~191 residual Semrush warnings all from Google's AdSense CDN (irreducible third-party floor). **Technical build is mature and stable.** Editorial accuracy is now defence-in-depth: autonomous publishing is gated (deterministic + LLM judge), reporting routes are validated against a verified source canon (`content/sources.json`), every guide carries a claim manifest (`content/manifests/`), and a weekly audit digest surfaces flag-tier claims for human review — see the content-accuracy section.
 > **Maintainer:** Alex — SideRight Apps (GitHub: `siderightapps-hub`)
 
 ---
@@ -111,7 +111,7 @@ A free, UK-focused consumer-protection publication that:
 |---|---|---|
 | Site generation | **Custom Python static site generator** (`scripts/build.py`) | NOT Next.js, NOT Hugo, NOT Jekyll. Bespoke Python that reads `content/posts.json` + `content/site.json` and renders into `dist/` using `templates/base.html`. |
 | Templating | Single `templates/base.html` shell with `{{placeholder}}` substitution | Simple, fast, no framework dependency. |
-| Source of truth (content) | `content/posts.json` | All ~185 guides as JSON records (grows ~1/day via the gated daily cron). |
+| Source of truth (content) | `content/posts.json` | All ~190 guides as JSON records (grows ~1/day via the gated daily cron). |
 | Hosting / CDN | **Netlify** (Personal plan — $9/month, 1000 build credits) | Auto-deploys on push to `main`. |
 | Serverless functions | **Netlify Functions** (5: `check-scam`, `subscribe`, `confirm-subscribe`, `unsubscribe`, `csp-report`) | AI checker proxy + double opt-in newsletter (subscribe/confirm/unsubscribe) + CSP violation collector. Functions now carry a `package.json` (`@netlify/blobs`). |
 | AI for scam checker | **Anthropic Claude — `claude-haiku-4-5-20251001`** | Returns structured JSON verdict. Durable per-IP rate limit + daily spend cap (`DAILY_CALL_CAP=2000`/UTC-day) via Netlify Blobs. |
@@ -335,7 +335,7 @@ This is the **complete inventory of every external account** the site depends on
   - In-article unit (mid-article, after section 2)
   - Sidebar unit (article pages, below "Related guides")
   - Anchor / sticky-footer mobile unit
-- **Essential pages confirmed for AdSense:** Privacy Policy ✅ · About ✅ (with E-E-A-T signals) · Contact ✅ · Cookie Policy ✅
+- **Essential pages confirmed for AdSense:** Privacy Policy ✅ · About ✅ (with E-E-A-T signals) · Contact ✅ · Cookie Policy ✅ · Terms ✅ · Disclaimer ✅
 - **Crawler access:** `robots.txt` does **not** block `Mediapartners-Google` or `AdsBot-Google`. Confirmed.
 
 ### Google — Cloud Console
@@ -524,7 +524,7 @@ Semrush exposes a Looker Studio connector under the Site Audit "Export" menu. No
 - [x] Cookie Policy page live (`/cookies/`)
 - [x] `ads.txt` served and Authorised at `/ads.txt`
 - [x] `robots.txt` does not block `Mediapartners-Google` or `AdsBot-Google`
-- [x] Original, regularly-published content (~185 guides, gated daily publishing pipeline)
+- [x] Original, regularly-published content (~190 guides, gated daily publishing pipeline)
 - [x] Working HTTPS with valid certificate
 - [x] Site has clear navigation and footer
 
@@ -654,7 +654,7 @@ When `content/daily-publish-queue.csv` drops below 20 topics, add new ones in ba
 
 ## 12. Social Media & Video Production
 
-> ⛔ **Video production DISCONTINUED 2026-06-15.** YouTube Shorts + TikTok video was stopped — it built neither domain authority nor backlinks for a search/reference asset, and the manual time went to the operator's main bet (the "31 Years" YouTube channel). Production was fully manual (no cron automated it), so nothing was disabled in the repo — the scripts below (`generate_video.py`, `upload_to_youtube.py`) remain for reference but are **no longer in active use**. The BTS ElevenLabs voiceover key was deleted. Rationale: `MD Files/BeatTheScam/VideoProductionHandoff.md`. The **only active social channel is X/Twitter** (auto-posts on publish). The daily written-guide pipeline is unaffected and remains the authority engine.
+> ⛔ **Video production DISCONTINUED 2026-06-15.** YouTube Shorts + TikTok video was stopped — it built neither domain authority nor backlinks for a search/reference asset, and the manual time went to the operator's main bet (the "31 Years" YouTube channel). Production was fully manual (no cron automated it), so nothing was disabled in the repo — the scripts below (`generate_video.py`, `upload_to_youtube.py`) remain for reference but are **no longer in active use**. The BTS ElevenLabs voiceover key was deleted. Rationale: `docs/video-pipeline.md`. The **only active social channel is X/Twitter** (auto-posts on publish). The daily written-guide pipeline is unaffected and remains the authority engine.
 
 ### Channels
 
@@ -975,8 +975,9 @@ The site has an active Google disavow file. Background and the rules for future 
 | Cookie Policy | `/cookies/` | Live |
 | About | `/about/` | Live — with E-E-A-T signals (editor byline, methodology, AI disclosure, sources, last reviewed date) |
 | Contact | `/contact/` | Live |
-| Terms of Use | `/terms/` | (confirm — if missing, add) |
-| Affiliate Disclosure | Currently inside Privacy/About | Recommend a dedicated `/disclosure/` page once affiliates go live |
+| Terms of Use | `/terms/` | Live |
+| Disclaimer | `/disclaimer/` | Live — not professional advice, AI-checker limits, liability (added 2026-06-24) |
+| Affiliate Disclosure | Inside Terms (§ Advertising and product recommendations) + Disclaimer | Currently unpaid editorial picks (`rel="nofollow"`); add a dedicated page only if paid affiliates go live |
 
 ### GDPR / UK GDPR / Data Protection Act 2018
 
@@ -1045,7 +1046,8 @@ The site has an active Google disavow file. Background and the rules for future 
 - **Original audit:** 2026-04-29 → remediation completed 2026-04-30
 - **Executive Verdict (external) round 1:** 2026-06-19 → 06-21 (gate hardening, editorial-accuracy layer, E-tier checker/newsletter/consent)
 - **Executive Verdict (external) round 2:** 2026-06-22 — content accuracy (charity/DWP), editorial-honesty wording, function-response security headers, expiring confirm tokens, checker-logging privacy fix, supply-chain (lockfile + Dependabot + CodeQL), AdSense per-page ad policy, privacy-policy precision, DNS/email hardening (DMARC reporting, CAA, HSTS preload, M365 DKIM 2048). All A–E remediated & live; DNS ramp items tracked in `dns-hardening-checklist.md`.
-- **Status:** ✅ All actionable items remediated or verified
+- **Executive Verdict (external) round 3:** 2026-06-24 → 06-25 — function hardening (non-allow-listed `Origin` → 403; salted-hash per-IP keys + atomic compare-and-set Blobs counters; single-use confirm tokens; durable per-address + global newsletter abuse caps; 16KB body cap before parse; 20s `AbortController` upstream timeout → 504; `no-store` on every response); CSP `frame-ancestors 'none'` + `X-XSS-Protection: 0`; all GitHub Actions SHA-pinned; content gate now BLOCKs ClearScore/CallCredit-as-CRA + National-Fraud-Database→Cifas and FLAGs US-style fraud-alert/HMRC-channel absolutes; corpus content sweep (ClearScore→TransUnion, US-style "fraud alert"→Cifas Protective Registration, ~67 guides); new `/disclaimer/` page; `/check/` de-thinned (~900 words, still ad-free); 16 dead internal links repointed; honesty/consent/affiliate/freshness fixes. Live on origin/main 2026-06-25.
+- **Status:** All code/content audit items remediated or verified; DNS/email-auth hardening in progress (DMARC enforcement ramp, Resend DKIM→2048, DNSSEC) — see `dns-hardening-checklist.md`
 
 ### Live scan results
 
@@ -1057,17 +1059,18 @@ The site has an active Google disavow file. Background and the rules for future 
 ### Security headers in production
 
 ```
-content-security-policy: default-src 'self'; script-src 'self' 'unsafe-inline' [Google AdSense + GA4 hosts]; …
+content-security-policy: default-src 'self'; script-src 'self' 'unsafe-inline' [Google AdSense + GA4 hosts]; … object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'none'; upgrade-insecure-requests; …
 strict-transport-security: max-age=63072000; includeSubDomains; preload
 permissions-policy: camera=(), microphone=(), geolocation=(), payment=(), usb=(), interest-cohort=()
 referrer-policy: strict-origin-when-cross-origin
 x-content-type-options: nosniff
 x-frame-options: DENY
+x-xss-protection: 0   # legacy header intentionally OFF (obsolete; "1; mode=block" can introduce XS-Leaks)
 ```
 
 Full CSP string in `SecurityAuditHandoff.md` Section 1. **Netlify Function responses** (these come from the function bundle, NOT netlify.toml — which doesn't reliably reach function responses): the HTML pages `confirm-subscribe.js` / `unsubscribe.js` set their own strict per-page headers (`default-src 'none'; style-src 'unsafe-inline'; form-action 'self'; frame-ancestors 'none'` CSP + X-Frame-Options DENY + nosniff + `no-referrer` + Permissions-Policy + 2yr HSTS, added 2026-06-22); the JSON functions (`check-scam`, `subscribe`, `csp-report`) add `nosniff` + `no-referrer`.
 
-### OWASP Top 10 (2021) coverage
+### OWASP Top 10 (2025) coverage
 
 | ID | Risk | Mitigation in this site |
 |---|---|---|
@@ -1084,9 +1087,10 @@ Full CSP string in `SecurityAuditHandoff.md` Section 1. **Netlify Function respo
 
 ### Application-level security (scam checker function)
 
-- ✅ CORS locked to `https://beatthescam.com`
-- ✅ Rate limiting: 10/min/IP, 429 on breach — now **durable via Netlify Blobs** (shared across instances/cold starts), falling back to in-memory if Blobs is unavailable
-- ✅ **Daily spend cap:** `DAILY_CALL_CAP=2000` Anthropic calls/UTC-day (Blobs counter, fails open) — bounds cost from a multi-IP burst
+- ✅ **Origin enforced server-side:** a non-allow-listed `Origin` is rejected with **403** — CORS headers alone only hide the response from a browser; a non-browser client (curl, script) ignores them
+- ✅ Rate limiting: 10/min/IP, 429 on breach — **durable via Netlify Blobs** (shared across instances/cold starts); the per-IP key is a **salted SHA-256 hash** (raw IPs are never stored) and the counter is **atomic** (compare-and-set via etag, so concurrent requests can't bypass it); falls back to in-memory if Blobs is unavailable
+- ✅ **Daily spend cap:** `DAILY_CALL_CAP=2000` Anthropic calls/UTC-day (atomic Blobs counter, fails open) — bounds cost from a multi-IP burst
+- ✅ **Request hardening:** 16KB body-size cap **before** `JSON.parse`; 20s `AbortController` timeout on the Anthropic call (→504); `Cache-Control: no-store` on **every** response (incl. errors/limits)
 - ✅ Input sanitisation: `type` stripped of non-alphanumerics
 - ✅ Output validation: verdict shape verified before returning
 - ✅ Error handling: generic 500s only, no stack-trace leakage
@@ -1096,7 +1100,8 @@ Full CSP string in `SecurityAuditHandoff.md` Section 1. **Netlify Function respo
 
 - ✅ Double opt-in; per-IP rate limit; origin allow-list; honeypot
 - ✅ **Confirm tokens now carry a signed 7-day expiry** (3-part `email.exp.sig`, HMAC over `"confirm:"+email+":"+exp`) — a captured link stops working after it lapses (2026-06-22)
-- ✅ Re-confirming a previously-unsubscribed address now **reactivates** it (PATCH on duplicate) instead of silently no-op'ing
+- ✅ **Confirm tokens are single-use** — consumed in Netlify Blobs on first confirm (released on add-failure so a transient error doesn't burn a valid link); a replayed 7-day link can no longer silently resurrect an unsubscribed contact (reactivation via PATCH-on-duplicate now needs a **fresh** token)
+- ✅ **Durable abuse caps** (subscribe): per-address daily limit + global daily send cap (Blobs, hashed key) bound newsletter-bombing that rotating IPs would slip past the per-IP limit; non-allow-listed `Origin` → **403**; 16KB body cap; `no-store` on all responses
 - ✅ GET renders a confirm page only (scanner/prefetch-safe); POST mutates
 
 ### Repository hygiene
@@ -1177,7 +1182,7 @@ google.com, pub-1606633100797174, DIRECT, f08c47fec0942fa0
 
 [`llms.txt`](https://llmstxt.org/) is the emerging standard for telling LLM crawlers (ChatGPT, Claude, Perplexity, Gemini) what content on the site is canonical and citation-worthy. **Live at https://beatthescam.com/llms.txt** — generated by `scripts/build.py` from `content/posts.json` on every build.
 
-Structure: a brief site description, then categories listed (with guide counts), then every guide grouped by category with title + URL + description, then an "Optional" section for About/Contact/Privacy. Currently ~242 lines covering all 160 guides.
+Structure: a brief site description, then categories listed (with guide counts), then every guide grouped by category with title + URL + description, then an "Optional" section for About/Contact/Privacy. Currently ~242 lines covering all 190 guides.
 
 Impact: AI Search Health jumped from 88% → 99% in the Semrush audit on the next crawl after deployment.
 
@@ -1215,7 +1220,6 @@ A short credits file at `/humans.txt`. Useful for buyers / future contractors. O
 
 ### Weekly (manual)
 
-- Mon / Wed / Fri — publish a new TikTok + YouTube Short (per video calendar)
 - Reply to any contact-form / `hello@` emails
 - Reddit / Quora — 3–5 contributions per week
 - Outreach — 5–10 link-insertion / guest-post emails per week
@@ -1227,7 +1231,6 @@ A short credits file at `/humans.txt`. Useful for buyers / future contractors. O
 - Review AdSense earnings (once approved)
 - Review affiliate dashboards (Awin, Impact, CJ)
 - Add 30+ new topics to `content/daily-publish-queue.csv` if running low
-- Update video calendar
 - Quarterly: re-run security scans (see Section 17)
 
 ### Quarterly
