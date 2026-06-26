@@ -133,8 +133,11 @@ jobs:
 
           git add content/manifests/ content/posts.json dist/
 
-          if git diff --cached --quiet; then
-            echo "ℹ️  No new articles generated this run — no PR to open."
+          # Gate the PR on the REAL signal (posts.json / manifests), not dist/ or
+          # queue churn — those change every run and would open an empty PR daily.
+          # See daily-publish.yml for the full rationale.
+          if git diff --cached --quiet -- content/posts.json content/manifests/; then
+            echo "ℹ️  No new articles in posts.json this run — no PR to open."
             exit 0
           fi
 

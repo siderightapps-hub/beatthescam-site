@@ -135,8 +135,13 @@ jobs:
                   content/daily-publish-queue.csv \
                   dist/
 
-          if git diff --cached --quiet; then
-            echo "ℹ️  Nothing generated this run (queue empty / no changes) — no PR to open."
+          # Gate the PR on the REAL signal — a new/changed guide in posts.json or
+          # a new manifest — not on dist/ or queue churn. dist changes every run
+          # (humans.txt/security.txt date bumps + nondeterministic OG renders) and
+          # the queue CSV rotates, so the old blanket check opened an empty PR on
+          # every no-content day once Actions could create PRs again.
+          if git diff --cached --quiet -- content/posts.json content/manifests/; then
+            echo "ℹ️  No new guide in posts.json this run — no PR to open."
             exit 0
           fi
 
