@@ -45,11 +45,14 @@ The first amount may look small, but the details can be used for further card fr
 
 ## 5. How to check a Royal Mail text safely
 
-Do not use a payment link from an unexpected text. Type `royalmail.com/pay-a-fee` or `royalmail.com/track-your-item` into your browser yourself, use the official Royal Mail app, or follow the grey `Fee to Pay` card left at your address.
+Do not use a payment link from an unexpected text.
 
-For customs charges, check that the SMS or email matches a real Royal Mail item and the official `Fee to Pay` route. For underpaid postage, rely on the grey `Fee to Pay` card and Royal Mail's site. If the message cannot be matched to a real item, treat it as a scam.
+- Type `royalmail.com/pay-a-fee` or `royalmail.com/track-your-item` into your browser yourself.
+- Use the official Royal Mail app, or follow the grey `Fee to Pay` card left at your address.
+- For customs charges, check that the SMS or email matches a real Royal Mail item and the official `Fee to Pay` route.
+- For underpaid postage, rely on the grey `Fee to Pay` card and Royal Mail's site.
 
-When you are unsure whether a linked site is a copycat, our guide on /guides/is-this-website-a-scam/ walks through the checks, and our /guides/dpd-delivery-scam-text/ guide covers the same trick from other couriers.
+If the message cannot be matched to a real item, treat it as a scam. When you are unsure whether a linked site is a copycat, our guide on /guides/is-this-website-a-scam/ walks through the checks, and our /guides/dpd-delivery-scam-text/ guide covers the same trick from other couriers.
 
 
 ## 6. If you paid or shared card details

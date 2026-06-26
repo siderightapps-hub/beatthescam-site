@@ -45,11 +45,14 @@ Those details can then be used for card fraud, bank fraud, identity misuse, or f
 
 ## 5. How to check with HMRC safely
 
-Do not tap the link or call a number from the text. Type `gov.uk` into your browser yourself and search for `Personal Tax Account`, use the official HMRC app, or follow the instructions on a tax calculation letter you received by post.
+Do not tap the link or call a number from the text.
 
-If you recently requested a Self Assessment refund, a genuine HMRC text may confirm that it is being processed and when to expect it, but it should not ask for personal or financial information or include links. If you are not sure, check GOV.UK's list of genuine HMRC contacts and contact HMRC only through numbers or services published on GOV.UK.
+- Type `gov.uk` into your browser yourself and search for `Personal Tax Account`.
+- Use the official HMRC app if you already use it.
+- Follow the instructions on a tax calculation letter you received by post.
+- If you recently requested a Self Assessment refund, check whether the text only confirms processing and timing, without links or requests for details.
 
-When you are unsure whether a linked site is a copycat of GOV.UK, our guide on /guides/is-this-website-a-scam/ walks through the checks.
+A genuine HMRC text should not ask for personal or financial information or include a refund-claim link. If you are not sure, check GOV.UK's list of genuine HMRC contacts and contact HMRC only through numbers or services published on GOV.UK. When you are unsure whether a linked site is a copycat of GOV.UK, our guide on /guides/is-this-website-a-scam/ walks through the checks.
 
 
 ## 6. If you clicked or shared details
