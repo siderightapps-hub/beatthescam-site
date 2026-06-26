@@ -2238,7 +2238,7 @@
     "sections": [
       [
         "What a fake Barclays text looks like",
-        "A Barclays scam text is a smishing message designed to look like a bank security alert so you tap a link and give away online-banking details, card details, or a one-time passcode. An example of the style is: `Barclays: A new payee was set up on your account today. Not you? Cancel here: barclays-id-check.com`. The trigger varies - a new payee, a Direct Debit, a blocked card, or a payment you do not recognise - but the goal is to panic you into tapping.\n\nThe link usually leads to a copycat banking page or to a form controlled by criminals. This guide shows how to spot the warning signs, verify safely, and act if you have already tapped a link or shared details."
+        "A Barclays scam text is a smishing message designed to look like a bank security alert so you tap a link and give away online-banking details, card details, or a one-time passcode. An example of the style is: `Barclays: A new payee was set up on your account today. Not you? Cancel here: barclays-id-check.example`. The trigger varies - a new payee, a Direct Debit, a blocked card, or a payment you do not recognise - but the goal is to panic you into tapping.\n\nThe link usually leads to a copycat banking page or to a form controlled by criminals. This guide shows how to spot the warning signs, verify safely, and act if you have already tapped a link or shared details."
       ],
       [
         "Why the fake is so convincing",
