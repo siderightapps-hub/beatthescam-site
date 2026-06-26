@@ -78,7 +78,7 @@ ARTICLE_REDIRECTS = {
     "travel-booking-scam-checklist":              "__CAT__:travel",
     "ticket-resale-scam-checklist":               "__CAT__:shopping",
     "shein-scam-or-legit-uk":                     "__CAT__:website",
-    "ebay-scam-buyer-protection-uk":              "__CAT__:marketplace",
+    "ebay-scam-buyer-protection-uk":              "ebay-buyer-scam-uk",
     "evri-text-scam-uk":                          "__CAT__:sms",
     # royal-mail-text-scam-guide 404'd (no post at that slug); redirect to the live
     # royal-mail-text-scam-uk so the "royal mail parcel scams" demand lands somewhere real.
