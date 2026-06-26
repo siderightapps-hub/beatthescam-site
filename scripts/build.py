@@ -690,7 +690,7 @@ def faq_schema(pairs):
         return ""
     # Skip any malformed entries — must be 2-element sequences with non-empty strings
     valid = [
-        (str(q).strip(), str(a).strip())
+        (str(q).strip().replace("`", ""), str(a).strip().replace("`", ""))
         for item in pairs
         if isinstance(item, (list, tuple)) and len(item) == 2
         for q, a in [item]
@@ -848,7 +848,7 @@ def howto_schema(site, post, url):
                     "@type": "HowToStep",
                     "position": i + 1,
                     "name": f"Step {i + 1}",
-                    "text": s[:500],
+                    "text": str(s).replace("`", "")[:500],
                 }
                 for i, s in enumerate(steps[:8])
             ],
