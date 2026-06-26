@@ -45,9 +45,13 @@ The first payment may be small, but the card and personal details can be used fo
 
 ## 5. How to check an Evri text safely
 
-Do not tap the link or call a number from the text. Open the official Evri app, type `evri.com` into your browser yourself, or use a tracking link from the retailer you ordered from. Evri says its texts only send tracking links to its website, and it attempts deliveries up to three times.
+Do not tap the link or call a number from the text.
 
-If the text asks for payment to reschedule a delivery, asks you to install an app, or asks for card or bank details, treat it as a scam. When you are unsure whether a linked site is a copycat, our guide on /guides/is-this-website-a-scam/ walks through the checks.
+- Open the official Evri app or type `evri.com` into your browser yourself.
+- Use a tracking link from the retailer you ordered from if you have one.
+- Check for a tracking-only Evri update rather than a payment, app install, or personal-details request.
+
+Evri says its texts only send tracking links to its website, and it attempts deliveries up to three times. If the text asks for payment to reschedule a delivery, asks you to install an app, or asks for card or bank details, treat it as a scam. When you are unsure whether a linked site is a copycat, our guide on /guides/is-this-website-a-scam/ walks through the checks.
 
 
 ## 6. If you paid or shared card details

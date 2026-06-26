@@ -887,7 +887,7 @@
       ],
       [
         "How to check if an Amazon email is genuine",
-        "Do not click links or open attachments in the email. Open the Amazon app or type `amazon.co.uk` into your browser yourself, then check your order history, account alerts, payment settings, and in-account messages.\n\nIf the email mentions an order, payment problem, refund, or account lock that you cannot verify after signing in directly, treat the email as suspicious. Hovering over links can provide clues, but links and sender names can be disguised, so do not rely on that alone. If you are unsure whether a linked site is a copycat, our guide on /guides/is-this-website-a-scam/ walks through the checks."
+        "Do not click links or open attachments in the email.\n\n- Open the Amazon app or type `amazon.co.uk` into your browser yourself.\n- Check `Your Orders`, account alerts, payment settings, and in-account messages.\n- If the email mentions an order, payment problem, refund, or account lock, confirm it only after signing in directly.\n\nIf you cannot verify the message after signing in directly, treat it as suspicious. Hovering over links can provide clues, but links and sender names can be disguised, so do not rely on that alone. If you are unsure whether a linked site is a copycat, our guide on /guides/is-this-website-a-scam/ walks through the checks."
       ],
       [
         "If you clicked or shared details",
@@ -1143,7 +1143,7 @@
       ],
       [
         "How to check an Evri text safely",
-        "Do not tap the link or call a number from the text. Open the official Evri app, type `evri.com` into your browser yourself, or use a tracking link from the retailer you ordered from. Evri says its texts only send tracking links to its website, and it attempts deliveries up to three times.\n\nIf the text asks for payment to reschedule a delivery, asks you to install an app, or asks for card or bank details, treat it as a scam. When you are unsure whether a linked site is a copycat, our guide on /guides/is-this-website-a-scam/ walks through the checks."
+        "Do not tap the link or call a number from the text.\n\n- Open the official Evri app or type `evri.com` into your browser yourself.\n- Use a tracking link from the retailer you ordered from if you have one.\n- Check for a tracking-only Evri update rather than a payment, app install, or personal-details request.\n\nEvri says its texts only send tracking links to its website, and it attempts deliveries up to three times. If the text asks for payment to reschedule a delivery, asks you to install an app, or asks for card or bank details, treat it as a scam. When you are unsure whether a linked site is a copycat, our guide on /guides/is-this-website-a-scam/ walks through the checks."
       ],
       [
         "If you paid or shared card details",
@@ -2131,7 +2131,7 @@
       ],
       [
         "How to check a Royal Mail text safely",
-        "Do not use a payment link from an unexpected text. Type `royalmail.com/pay-a-fee` or `royalmail.com/track-your-item` into your browser yourself, use the official Royal Mail app, or follow the grey `Fee to Pay` card left at your address.\n\nFor customs charges, check that the SMS or email matches a real Royal Mail item and the official `Fee to Pay` route. For underpaid postage, rely on the grey `Fee to Pay` card and Royal Mail's site. If the message cannot be matched to a real item, treat it as a scam.\n\nWhen you are unsure whether a linked site is a copycat, our guide on /guides/is-this-website-a-scam/ walks through the checks, and our /guides/dpd-delivery-scam-text/ guide covers the same trick from other couriers."
+        "Do not use a payment link from an unexpected text.\n\n- Type `royalmail.com/pay-a-fee` or `royalmail.com/track-your-item` into your browser yourself.\n- Use the official Royal Mail app, or follow the grey `Fee to Pay` card left at your address.\n- For customs charges, check that the SMS or email matches a real Royal Mail item and the official `Fee to Pay` route.\n- For underpaid postage, rely on the grey `Fee to Pay` card and Royal Mail's site.\n\nIf the message cannot be matched to a real item, treat it as a scam. When you are unsure whether a linked site is a copycat, our guide on /guides/is-this-website-a-scam/ walks through the checks, and our /guides/dpd-delivery-scam-text/ guide covers the same trick from other couriers."
       ],
       [
         "If you paid or shared card details",
@@ -2204,7 +2204,7 @@
       ],
       [
         "How to check with HMRC safely",
-        "Do not tap the link or call a number from the text. Type `gov.uk` into your browser yourself and search for `Personal Tax Account`, use the official HMRC app, or follow the instructions on a tax calculation letter you received by post.\n\nIf you recently requested a Self Assessment refund, a genuine HMRC text may confirm that it is being processed and when to expect it, but it should not ask for personal or financial information or include links. If you are not sure, check GOV.UK's list of genuine HMRC contacts and contact HMRC only through numbers or services published on GOV.UK.\n\nWhen you are unsure whether a linked site is a copycat of GOV.UK, our guide on /guides/is-this-website-a-scam/ walks through the checks."
+        "Do not tap the link or call a number from the text.\n\n- Type `gov.uk` into your browser yourself and search for `Personal Tax Account`.\n- Use the official HMRC app if you already use it.\n- Follow the instructions on a tax calculation letter you received by post.\n- If you recently requested a Self Assessment refund, check whether the text only confirms processing and timing, without links or requests for details.\n\nA genuine HMRC text should not ask for personal or financial information or include a refund-claim link. If you are not sure, check GOV.UK's list of genuine HMRC contacts and contact HMRC only through numbers or services published on GOV.UK. When you are unsure whether a linked site is a copycat of GOV.UK, our guide on /guides/is-this-website-a-scam/ walks through the checks."
       ],
       [
         "If you clicked or shared details",
@@ -2907,7 +2907,7 @@
       ],
       [
         "How to check a parcel text safely",
-        "Do not tap the link or call a number from the text. Open the official Evri app, type `evri.com` into your browser yourself, or use a tracking link from the retailer you ordered from. Hermes deliveries are now handled under the Evri brand.\n\nIf the text asks for payment to reschedule a delivery, asks you to install an app, or asks for card or bank details, treat it as a scam. When you are unsure whether a linked site is a copycat, our guide on /guides/is-this-website-a-scam/ walks through the checks."
+        "Do not tap the link or call a number from the text.\n\n- Open the official Evri app or type `evri.com` into your browser yourself.\n- Use a tracking link from the retailer you ordered from if you have one.\n- Remember that Hermes deliveries are now handled under the Evri brand.\n\nIf the text asks for payment to reschedule a delivery, asks you to install an app, or asks for card or bank details, treat it as a scam. When you are unsure whether a linked site is a copycat, our guide on /guides/is-this-website-a-scam/ walks through the checks."
       ],
       [
         "If you paid or shared card details",

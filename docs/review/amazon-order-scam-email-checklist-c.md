@@ -44,9 +44,13 @@ Those details can be used to take over the account, place orders, attempt card f
 
 ## 5. How to check if an Amazon email is genuine
 
-Do not click links or open attachments in the email. Open the Amazon app or type `amazon.co.uk` into your browser yourself, then check your order history, account alerts, payment settings, and in-account messages.
+Do not click links or open attachments in the email.
 
-If the email mentions an order, payment problem, refund, or account lock that you cannot verify after signing in directly, treat the email as suspicious. Hovering over links can provide clues, but links and sender names can be disguised, so do not rely on that alone. If you are unsure whether a linked site is a copycat, our guide on /guides/is-this-website-a-scam/ walks through the checks.
+- Open the Amazon app or type `amazon.co.uk` into your browser yourself.
+- Check `Your Orders`, account alerts, payment settings, and in-account messages.
+- If the email mentions an order, payment problem, refund, or account lock, confirm it only after signing in directly.
+
+If you cannot verify the message after signing in directly, treat it as suspicious. Hovering over links can provide clues, but links and sender names can be disguised, so do not rely on that alone. If you are unsure whether a linked site is a copycat, our guide on /guides/is-this-website-a-scam/ walks through the checks.
 
 
 ## 6. If you clicked or shared details
