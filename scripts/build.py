@@ -304,13 +304,17 @@ def slugify(value: str) -> str:
 # the full category list into the footer without changing function signatures.
 _FOOTER_CATS_HTML = ""
 
-def seo_title(post_title: str, site_name: str, max_len: int = 60) -> str:
+def seo_title(post_title: str, site_name: str, max_len: int = 60, brand: bool = True) -> str:
     """Return a <title>-safe string truncated to max_len chars.
 
-    Appends ' | SiteName' suffix, then truncates the post_title portion at
-    the nearest word boundary so the full string fits within max_len.
+    Appends ' | SiteName' suffix (unless brand=False), then truncates the
+    post_title portion at the nearest word boundary so the full string fits
+    within max_len. Guides pass brand=False: the ' | Beat the Scam' suffix
+    costs 16 chars of <title> space, which on a long-tail query site is worth
+    more spent on the title itself — and it stops long guide titles being
+    guillotined mid-phrase into a dangling "…How to Spot" (2026-06 audit).
     """
-    suffix = f" | {site_name}"
+    suffix = f" | {site_name}" if brand else ""
     available = max_len - len(suffix)
     if len(post_title) <= available:
         return post_title + suffix
@@ -409,7 +413,7 @@ def pick_description(post: dict, max_len: int = 160, min_len: int = 130) -> str:
         if not sections:
             return ""
         body = sections[0][1] if isinstance(sections[0], (list, tuple)) and len(sections[0]) >= 2 else ""
-        body = _normalize_bullet_body(body)
+        body = _normalize_bullet_body(body).replace("`", "")
         return first_sentence(body)
 
     # 1) Description already in sweet spot
@@ -1398,6 +1402,47 @@ def related_posts(posts, current, count=4):
     return out
 
 
+_INLINE_CODE_RE = re.compile(r"`([^`]+)`")
+
+
+def _inline(text: str) -> str:
+    """html-escape, then render `…` markdown code-spans as <code>…</code>.
+    Used for example scam domains / messages and technical tokens (URLs, emails)
+    so they read as literal, non-clickable strings. Phones are left un-backticked
+    in content so linkify_phones can still wrap them in tel: anchors."""
+    return _INLINE_CODE_RE.sub(lambda m: f"<code>{m.group(1)}</code>", html.escape(text))
+
+
+def _render_section_body(para) -> str:
+    """Render a section body that may freely interleave prose paragraphs and
+    '- ' bullet lines: consecutive bullets collapse into one <ul>, runs of
+    prose are paragraph-split (Semrush "too-long paragraph" fix) into <p>.
+    Backward compatible with pure-prose and pure-bullet bodies, which render
+    exactly as the old if/else did."""
+    para = _normalize_bullet_body(para)
+    parts, prose, bullets = [], [], []
+    def flush_prose():
+        if prose:
+            text = "\n".join(prose).strip("\n")
+            if text.strip():
+                parts.extend(f"<p>{_inline(p)}</p>" for p in split_into_paragraphs(text))
+            prose.clear()
+    def flush_bullets():
+        if bullets:
+            inner = "".join(f"<li>{_inline(b)}</li>" for b in bullets if b)
+            if inner:
+                parts.append(f"<ul>{inner}</ul>")
+            bullets.clear()
+    for line in para.split("\n"):
+        st = line.strip()
+        if st.startswith("- ") or st == "-":
+            flush_prose(); bullets.append(st.lstrip("-").strip())
+        else:
+            flush_bullets(); prose.append(line)
+    flush_prose(); flush_bullets()
+    return "".join(parts)
+
+
 def render_post(site, post, all_posts, affiliates=None, sources=None):
     url   = site['domain'] + f'/guides/{post["slug"]}/'
     label = category_label(post["category"])
@@ -1416,21 +1461,10 @@ def render_post(site, post, all_posts, affiliates=None, sources=None):
     for title, para in post['sections']:
         sid = slugify(title)
         section_ids.append((sid, title))
-        para = _normalize_bullet_body(para)
-        if para.strip().startswith("-"):
-            lines = [l.strip().lstrip("- ") for l in para.strip().splitlines() if l.strip().lstrip("- ")]
-            inner = "".join(f"<li>{html.escape(l)}</li>" for l in lines)
-            section_parts.append(f'<h2 id="{sid}">{html.escape(title)}</h2><ul>{inner}</ul>')
-        else:
-            # Split long blob paragraphs into ≤100-word chunks at sentence
-            # boundaries — clears Semrush "paragraphs too long" (157 pages
-            # in the 2026-05-30 audit) and reads better on mobile.
-            paragraphs = split_into_paragraphs(para)
-            paragraphs_html = "".join(f'<p>{html.escape(p)}</p>' for p in paragraphs)
-            section_parts.append(f'<h2 id="{sid}">{html.escape(title)}</h2>{paragraphs_html}')
+        section_parts.append(f'<h2 id="{sid}">{html.escape(title)}</h2>{_render_section_body(para)}')
 
     toc      = "".join(f'<li><a href="#{sid}">{html.escape(t)}</a></li>' for sid, t in section_ids)
-    faq_html = "".join(f'<details><summary>{html.escape(q)}</summary><p>{html.escape(a)}</p></details>' for q, a in post['faq'])
+    faq_html = "".join(f'<details><summary>{_inline(q)}</summary><p>{_inline(a)}</p></details>' for q, a in post['faq'])
     badges   = "".join(f'<span class="badge">{html.escape(k)}</span>' for k in post['keywords'])
     related  = "".join(
         f'<a href="/guides/{p["slug"]}/">{html.escape(p["title"])}<span class="meta">{html.escape(category_label(p["category"]))} &middot; {p["date"]}</span></a>'
@@ -1535,7 +1569,7 @@ def render_post(site, post, all_posts, affiliates=None, sources=None):
     )
     return make_base(
         content,
-        title=seo_title(post["title"], site["site_name"]),
+        title=seo_title(post["title"], site["site_name"], brand=False),
         og_title=post['title'],
         description=pick_description(post),
         canonical=url,
