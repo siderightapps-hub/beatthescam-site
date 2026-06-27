@@ -1,5 +1,12 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Beat the Scam</title><link>https://beatthescam.com</link><description>Scam alerts, plain-English checks, and practical guides to help people verify suspicious emails, texts, websites, calls, and offers.</description><lastBuildDate>Thu, 25 Jun 2026 00:00:00 +0000</lastBuildDate><atom:link href="https://beatthescam.com/rss.xml" rel="self" type="application/rss+xml" />
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Beat the Scam</title><link>https://beatthescam.com</link><description>Scam alerts, plain-English checks, and practical guides to help people verify suspicious emails, texts, websites, calls, and offers.</description><lastBuildDate>Sat, 27 Jun 2026 00:00:00 +0000</lastBuildDate><atom:link href="https://beatthescam.com/rss.xml" rel="self" type="application/rss+xml" />
+        <item>
+          <title>Fake Travel Agent Scam UK: How to Spot and Avoid Holiday Booking Fraud</title>
+          <link>https://beatthescam.com/guides/fake-travel-agent-scam-uk/</link>
+          <guid isPermaLink="true">https://beatthescam.com/guides/fake-travel-agent-scam-uk/</guid>
+          <pubDate>Sat, 27 Jun 2026 00:00:00 +0000</pubDate>
+          <description>Fake travel agent scams target UK holidaymakers through fake websites, social media, and email. Scammers collect payment and passport details, then disappear or use your information for identity theft.</description>
+        </item>
         <item>
           <title>Booking.com Scam UK: How to Spot Fake Booking Emails and Protect Your Holiday</title>
           <link>https://beatthescam.com/guides/booking-com-scam-uk/</link>
@@ -202,11 +209,4 @@
           <guid isPermaLink="true">https://beatthescam.com/guides/yodel-scam-text-messages/</guid>
           <pubDate>Fri, 05 Jun 2026 00:00:00 +0000</pubDate>
           <description>Fake Yodel texts about a missed parcel or small &#x27;redelivery&#x27; fee are smishing scams. Here&#x27;s how to spot a fake Yodel text, check a real one, and report it in the UK.</description>
-        </item>
-        <item>
-          <title>UPS Scam Text Messages: Spot a Fake UPS Delivery Text (UK)</title>
-          <link>https://beatthescam.com/guides/ups-delivery-scam-text-messages-uk/</link>
-          <guid isPermaLink="true">https://beatthescam.com/guides/ups-delivery-scam-text-messages-uk/</guid>
-          <pubDate>Fri, 05 Jun 2026 00:00:00 +0000</pubDate>
-          <description>Fake UPS texts about a missed delivery or &#x27;customs fee&#x27; are smishing scams. Here&#x27;s how to spot a fake UPS text, verify a genuine one, and report it in the UK.</description>
         </item></channel></rss>
