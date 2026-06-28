@@ -9,7 +9,7 @@ Pillow>=12.2.0,<13.0.0
 # installs from this file, so its tweet step was silently failing with
 # "tweepy not installed" on every run.
 tweepy>=4.14.0,<5.0.0
-python-dotenv>=1.0.0,<2.0.0
+python-dotenv>=1.2.2,<2.0.0
 
 # Asset minifiers used by scripts/build.py to shrink dist/assets/styles.css
 # and dist/assets/app.js. Added 2026-05-30 to clear the "unminified JS/CSS"
