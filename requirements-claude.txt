@@ -8,7 +8,7 @@ Pillow>=12.2.0,<13.0.0
 # pip-installed inline in daily-search-console.yml but daily-publish.yml
 # installs from this file, so its tweet step was silently failing with
 # "tweepy not installed" on every run.
-tweepy>=4.14.0,<5.0.0
+tweepy>=4.16.0,<5.0.0
 python-dotenv>=1.2.2,<2.0.0
 
 # Asset minifiers used by scripts/build.py to shrink dist/assets/styles.css
