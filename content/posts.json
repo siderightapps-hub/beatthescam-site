@@ -1395,53 +1395,53 @@
     "sections": [
       [
         "What a bank-transfer scam looks like",
-        "A bank-transfer scam tricks you into sending money from your own account by Faster Payment, so the cash leaves instantly and is hard to recover. This is authorised push-payment (APP) fraud — you make the transfer yourself, believing a lie. The classic version is the `safe account` con: a caller posing as your bank, the police, or a fraud team says your money is at risk and you must `move it to a safe account` right now. Other versions are paying for goods, a deposit, an invoice, or an investment by transfer to an account that turns out to be the criminal's. This guide shows how to spot it, how to check before you send, and what to do if you already have."
+        "A bank-transfer scam tricks you into sending money from your own account, usually by Faster Payment. This is authorised push-payment (APP) fraud: you authorise the transfer because you believe a lie.\n\nThe classic version is the \"safe account\" con. A caller claims to be from your bank, the police, or a fraud team and says your money is at risk. They tell you to move it to a new account for protection. Other versions involve fake sellers, rental deposits, changed invoice details, investment offers, romance scams, or urgent requests from someone impersonating your boss."
       ],
       [
         "Why these scams work",
-        "Bank transfers feel normal, and scammers manufacture the two things that override caution: fear and urgency. An impersonator may know some of your details, spoof a real bank or police number on your phone, and stay on the line while you `secure` your money. The single most important fact protects you from the worst version: your bank and the police will never ask you to move money to a `safe account`, withdraw cash for safekeeping, or transfer funds to `protect` them — that request is always a scam. A genuine purchase or invoice is also safer paid by card than by transfer, because a transfer has far less built-in protection."
+        "Bank transfers feel normal, and scammers manufacture fear or urgency. A caller may know some of your details, spoof a real-looking number, and keep you on the line while you make the payment. An email scam may arrive inside a real invoice chain after an account has been compromised.\n\nThe safe rule is simple: do not move money to a \"safe\", \"holding\", or \"protected\" account because someone on a call, message, or email tells you to. Hang up, pause, and contact your bank yourself. A genuine bank or police force will not need you to transfer money away to protect it."
       ],
       [
         "Signs a bank transfer is a scam",
-        "- Someone tells you to move money to a new, `safe`, or `holding` account — banks and police never do this.\n- You're pressured to act immediately, kept on the phone, or told to keep it secret.\n- A seller, `landlord`, or `agent` wants a deposit or full payment by transfer before you can verify them.\n- The account name doesn't match the person or company you expect (a Confirmation of Payee mismatch).\n- An `invoice` arrives with changed bank details, or a `boss` emails asking for an urgent transfer.\n- The deal or return is too good, or a romantic or online contact you've never met asks for a transfer.\n- You're told to ignore your bank's on-screen scam warnings."
+        "- Someone tells you to move money to a new, safe, holding, or protected account.\n- You are pressured to act immediately, kept on the phone, or told to keep it secret.\n- A seller, landlord, agent, or trader wants a deposit or full payment by transfer before you can verify them.\n- The account name does not match the person or company you expect.\n- An invoice arrives with changed bank details.\n- A boss, colleague, romantic contact, or online friend asks for an urgent transfer.\n- You are told to ignore your bank's scam warnings or Confirmation of Payee warning."
       ],
       [
         "How the scam works, step by step",
-        "First, contact comes by call, text, email, or an online listing, creating a reason to pay or to `protect` your money. Second, pressure builds — a deadline, a threat, or a caller who won't let you hang up. Third, you're given account details and talked through making the transfer yourself, sometimes told to dismiss the bank's warnings. Fourth, the money lands in a `mule` account and is moved on within minutes. Finally, contact stops, or more transfers are requested. Because you authorised it, recovery depends on speed and your bank's reimbursement assessment — so pausing before you send is the strongest protection."
+        "First, contact comes by call, text, email, social media, or an online listing. Second, the scammer creates a reason to pay or to \"protect\" your money. Third, pressure builds: a deadline, threat, secret instruction, or caller who will not let you hang up. Fourth, you are given account details and guided through the transfer. Fifth, the money lands in a mule account and may be moved on quickly.\n\nBecause you authorised the payment, recovery depends on speed, scope, and your bank's reimbursement assessment. Pausing before you send is the strongest protection."
       ],
       [
         "How to check before you transfer",
-        "If anything feels rushed, stop — a genuine request survives a pause.\n- Hang up and call your bank yourself on 159, a secure service that connects you straight to your bank, or use the number on your card. Wait a moment so the line clears.\n- Never move money to a `safe account` — no bank or police force will ever ask you to.\n- Check the payee name matches exactly; treat a Confirmation of Payee mismatch as a red flag.\n- For a purchase, deposit, or invoice, verify the person or company independently and prefer paying by card.\n- For a changed-bank-details invoice, call the supplier on a known number to confirm.\nIf you're unsure whether a website or `bank` message is genuine, our guide on /guides/is-this-website-a-scam/ helps, and our /guides/impersonation-scams-when-criminals-pretend-to-be-your-bank-or-the-police/ guide covers the safe-account con in detail."
+        "If anything feels rushed, stop. A genuine request can survive a pause.\n\n- Hang up and call your bank yourself on 159, or use the number on your card.\n- Never move money to a safe, holding, or protected account because of a call or message.\n- Check the payee name carefully. Treat a Confirmation of Payee \"no match\" or unexpected \"close match\" warning as a serious red flag.\n- For a purchase, rental deposit, or invoice, verify the person or company independently and prefer paying by card where possible.\n- For changed invoice details, call the supplier on a known number before paying.\n- Do not ignore scam warnings shown by your bank.\n\nIf you are unsure whether a website or bank message is genuine, our guide on /guides/is-this-website-a-scam/ helps, and our /guides/impersonation-scams-when-criminals-pretend-to-be-your-bank-or-the-police/ guide covers the safe-account con in detail."
       ],
       [
-        "If you've already transferred money",
-        "Act immediately — speed matters most with transfers. Contact your bank straight away using 159 or the number on your card, tell them it was a scam, and ask them to try to recover the payment and to stop any further transfers. Since 7 October 2024, most APP (authorised push-payment) fraud victims can claim reimbursement for UK transfers made over Faster Payments or CHAPS, subject to limits and exclusions — the PSR rules include a 13-month claim window, a maximum claim of £85,000, possible exclusions, and a possible excess of up to £100. Report it as fraud and keep every message, account name, and reference. If you shared card or login details too, ask the bank to secure those. To protect your identity, consider a Cifas Protective Registration at cifas.org.uk and check your credit report with Experian, Equifax or TransUnion. Watch for a follow-up call offering to `recover` your money for a fee — that is a second scam targeting victims."
+        "If you have already transferred money",
+        "Act immediately. Contact your bank using 159, the number on your card, or the in-app number you know is genuine. Tell them it was a scam, ask them to try to recover the payment, and ask them to stop any further transfers.\n\nIf you sent money by UK bank transfer on or after 7 October 2024, mandatory APP fraud reimbursement rules may apply to Faster Payments and CHAPS transfers. The PSR rules include a 13-month claim window, reimbursement within 5 business days in many cases, a maximum claim amount of £85,000, possible exclusions, and a possible excess of up to £100. The rules do not cover every payment type or every situation, so report it to your bank as soon as possible and answer bank questions promptly after checking the request is genuine.\n\nIf you shared card, login, or identity details too, ask the bank to secure those. Consider Cifas Protective Registration at `cifas.org.uk` and monitor your credit reports with Experian, Equifax, and TransUnion. Watch for follow-up \"recovery\" offers that ask for a fee; that is a second scam targeting victims."
       ],
       [
         "How to report a bank-transfer scam (UK)",
-        "Tell your bank first, as above — they can attempt recovery and assess reimbursement. Report the scam to Report Fraud at reportfraud.police.uk or on 0300 123 2040 if you are in England, Wales or Northern Ireland; in Scotland, report to Police Scotland on 101. If the scam reached you by text, forward it to 7726. If by email, forward it to the National Cyber Security Centre at report@phishing.gov.uk. Keep the account name and number you paid, the amount, dates, and all messages — your bank and the police will ask for them."
+        "Tell your bank first, because they can try to recover the payment and assess reimbursement. If the scam reached you by text, forward it to 7726. If it came by email, forward it to the NCSC at `report@phishing.gov.uk`.\n\nReport the scam to Report Fraud at `reportfraud.police.uk` or on 0300 123 2040 if you are in England, Wales, or Northern Ireland. In Scotland, report to Police Scotland on 101. Keep the account name and number you paid, the amount, dates, payment references, and all messages."
       ]
     ],
     "faq": [
       [
-        "Someone says my money is at risk and I must move it to a safe account — is that real?",
-        "No. Your bank and the police will never ask you to move money to a `safe account`, withdraw cash for safekeeping, or transfer funds to protect them. That request is always a scam, however convincing the caller or the number on your screen. Hang up and call your bank on 159 or the number on your card."
+        "Someone says my money is at risk and I must move it to a safe account - is that real?",
+        "No. Do not move money to a safe, holding, or protected account because of a call or message. Hang up and call your bank yourself on 159 or the number on your card."
       ],
       [
         "Can I get money back after a bank transfer scam?",
-        "Often, yes, if you act fast. Tell your bank immediately so they can try to recover it. Since 7 October 2024, most APP (authorised push-payment) fraud victims can claim reimbursement for UK transfers made over Faster Payments or CHAPS, subject to limits and exclusions — the PSR rules include a 13-month claim window, a maximum claim of £85,000, possible exclusions, and a possible excess of up to £100. Recovery is harder once the money has moved on, so report it the moment you realise."
+        "Often, but not always. If you sent an eligible UK Faster Payments or CHAPS transfer on or after 7 October 2024, APP reimbursement rules may apply, subject to limits and exclusions. Tell your bank immediately."
       ],
       [
         "What is Confirmation of Payee, and does it stop scams?",
-        "Confirmation of Payee checks whether the account name you enter matches the real account holder when you set up a payment. A `no match` or `close match` warning is a strong sign something is wrong — don't ignore it. It helps, but it won't catch every scam, so still verify who you're paying independently."
+        "Confirmation of Payee checks whether the account name you enter matches the account you are sending money to. A no-match or unexpected close-match warning is a serious red flag. It helps reduce errors and fraud, but it does not catch every scam."
       ],
       [
-        "A seller or landlord wants payment by bank transfer — should I?",
-        "Be cautious. A transfer has far less protection than a card payment, and 'pay a deposit by transfer before you can view or verify' is a common scam. Verify the person or company independently first, and prefer paying by card where you can."
+        "A seller or landlord wants payment by bank transfer - should I?",
+        "Be cautious. A transfer has less built-in protection than a card payment, and \"pay a deposit by transfer before you can view or verify\" is a common scam pattern. Verify the person or company independently first and prefer paying by card where you can."
       ],
       [
         "How do I report a bank-transfer scam?",
-        "Tell your bank first (call 159 or the number on your card) so they can attempt recovery, then report it to Report Fraud at reportfraud.police.uk or on 0300 123 2040 (England, Wales or Northern Ireland; in Scotland, Police Scotland on 101)."
+        "Tell your bank first so they can try to recover the payment and assess reimbursement. Then report it to Report Fraud in England, Wales, or Northern Ireland, or to Police Scotland on 101 in Scotland."
       ]
     ],
     "keywords": [
@@ -3070,53 +3070,53 @@
     "sections": [
       [
         "What a fake HMRC rebate email looks like",
-        "An HMRC tax-rebate scam email pretends to come from HM Revenue & Customs so you click a link and hand over bank, card, or personal details. A typical one has a subject like `You are eligible for a tax rebate of £284.50` and a button such as `Claim your refund`, often on a page styled like GOV.UK. HMRC does send some genuine emails, which is what makes the fakes effective — but a real tax rebate is never claimed by clicking a link in an email and entering your bank or card details. This guide shows how to tell a genuine HMRC email from phishing, how to check safely, and how to report it."
+        "An HMRC tax-rebate scam email pretends to come from HM Revenue & Customs so you click a link and hand over bank, card, or personal details. An example of the style is: `You are eligible for a tax rebate of £284.50`, with a button such as `Claim your refund`.\n\nThe link often opens a fake GOV.UK-style page. HMRC does send some genuine emails, which is why fake messages can feel convincing. The red flag is an unexpected rebate email that asks you to claim through a link and enter payment or personal details."
       ],
       [
         "Why these HMRC emails fool people",
-        "Phishing emails copy HMRC and GOV.UK branding, and the visible sender name can be set to anything. The promise of money you're owed lowers your guard, and a specific amount makes it look official. Two facts cut through it: HMRC does send genuine emails, so 'it came by email' isn't proof either way; but HMRC won't ask you to claim a rebate, or to give your bank, card, or full personal details, through a link in an email. Genuine refunds are handled through your Personal Tax Account or HMRC online account, or repaid automatically — not via an emailed `claim` form."
+        "Phishing emails copy HMRC and GOV.UK branding, and the visible sender name can be set to almost anything. A specific refund amount makes the message look official, and the promise of money lowers caution.\n\nThe useful distinction is this: HMRC can send genuine emails, but a rebate email asking you to click a link and enter bank details, card details, or full personal information should be treated as phishing. GOV.UK refund guidance points people to official routes such as a P800 tax calculation letter, Personal Tax Account, HMRC app, HMRC online account, contacting HMRC, or cheque where the letter says that applies."
       ],
       [
         "Signs an HMRC email is phishing",
-        "- A generic greeting such as `Dear Customer` instead of your name, with an offer of a rebate.\n- It asks you to `claim` a refund by clicking a link or button.\n- The sender's address isn't a genuine HMRC/GOV.UK address, or a link (hover without clicking) points to a lookalike.\n- It asks for your bank details, card number, or personal information to `process` the refund.\n- It pressures you with a deadline to claim before you `lose` the money.\n- An unexpected attachment, or spelling and layout that's slightly off — though polished emails can still be phishing."
+        "- It offers a tax refund or rebate that you can claim by clicking a link or button.\n- It asks for bank details, card details, your National Insurance number, or other personal information.\n- It uses a generic greeting such as `Dear Customer`.\n- The sender address is not a genuine HMRC or GOV.UK domain, or the link points to a lookalike site.\n- It pressures you with a deadline before you \"lose\" the refund.\n- It includes an unexpected attachment, QR code, or shortened link.\n- It looks official but asks you to use a route outside GOV.UK, the HMRC app, or your HMRC online account."
       ],
       [
         "How the HMRC rebate scam works",
-        "First, an email claims you're owed a tax rebate. Second, it pushes you to click `claim` and pushes urgency. Third, the link opens a fake GOV.UK-style page asking for your bank or card details and personal information to `verify` and `release` the refund. Fourth, the criminals capture everything you enter. Fifth, they take money, commit identity fraud, or target you again. Because being owed money feels welcome, people enter details quickly — so checking only through your HMRC online account breaks the chain."
+        "First, an email claims you are owed a tax rebate. Second, it pushes urgency and asks you to click a claim link. Third, the link opens a fake GOV.UK-style page asking for bank, card, or personal details. Fourth, criminals capture everything you enter. Fifth, they use those details for card fraud, bank fraud, identity misuse, or follow-up impersonation scams.\n\nChecking only through GOV.UK, the HMRC app, your HMRC online account, or a genuine P800 letter breaks the scam chain."
       ],
       [
         "How to check if an HMRC email is genuine",
-        "Don't click links or open attachments in the email.\n- Sign in to your Personal Tax Account or HMRC online account by typing gov.uk into your browser yourself, and check there for any genuine refund.\n- Use the official HMRC app if you have it.\n- Remember HMRC won't ask you to claim a rebate or give bank or card details through an email link.\n- To contact HMRC, use only the details published on GOV.UK.\nIf you're unsure whether a linked page is a copycat of GOV.UK, our guide on /guides/is-this-website-a-scam/ walks through the checks, and our /guides/hmrc-tax-refund-text-scam-uk/ guide covers the same scam by text."
+        "Do not click links or open attachments in an unexpected rebate email.\n\n- Type `gov.uk` into your browser and search for `Personal Tax Account` or HMRC refund guidance.\n- Use the official HMRC app if you already use it.\n- Follow the instructions on a P800 tax calculation letter you received by post.\n- Contact HMRC only through details published on GOV.UK.\n- Hover over links without clicking, but do not rely on that alone; fake emails can be polished.\n\nIf you are unsure whether a linked page is a copycat of GOV.UK, our guide on /guides/is-this-website-a-scam/ walks through the checks, and our /guides/hmrc-tax-refund-text-scam-uk/ guide covers the same scam by text."
       ],
       [
         "If you clicked or shared details",
-        "Act quickly. If you gave bank or card details, contact your bank or card issuer using the number on your card, tell them it was a scam, and ask them to stop the card and watch the account; a card payment may be recoverable through chargeback, and if you made a transfer, report it as fraud — since 7 October 2024, most APP (authorised push-payment) fraud victims can claim reimbursement for UK transfers made over Faster Payments or CHAPS, subject to limits and exclusions — the PSR rules include a 13-month claim window, a maximum claim of £85,000, possible exclusions, and a possible excess of up to £100. If you shared personal information such as your National Insurance number, consider a Cifas Protective Registration at cifas.org.uk and check your credit report with Experian, Equifax or TransUnion. Keep the email as evidence."
+        "If you gave bank or card details, contact your bank or card issuer immediately using the number on your card. Tell them it was a scam, ask them to secure the account or card, and ask about disputing any payment. A card payment may be recoverable through chargeback, depending on the circumstances and card scheme rules.\n\nIf you sent money by UK bank transfer on or after 7 October 2024, mandatory APP fraud reimbursement rules may apply to Faster Payments and CHAPS transfers. The PSR rules include a 13-month claim window, a maximum claim amount of £85,000, possible exclusions, and a possible excess of up to £100. Report it to your bank as soon as possible.\n\nIf you shared personal information such as your National Insurance number, consider Cifas Protective Registration at `cifas.org.uk` and monitor your credit reports with Experian, Equifax, and TransUnion. Keep the email as evidence."
       ],
       [
         "How to report a fake HMRC email (UK)",
-        "Forward the email to HMRC at phishing@hmrc.gov.uk, then delete it. You can also report phishing to the National Cyber Security Centre at report@phishing.gov.uk. If you lost money or shared sensitive details, report it to Report Fraud at reportfraud.police.uk or on 0300 123 2040 if you are in England, Wales or Northern Ireland; in Scotland, report to Police Scotland on 101. If the same scam reached you by text, forward it to 7726."
+        "Forward suspicious HMRC emails to `phishing@hmrc.gov.uk`, then delete them. You can also report phishing emails to the National Cyber Security Centre at `report@phishing.gov.uk`.\n\nIf you lost money, shared sensitive information, or were hacked, report it to Report Fraud at `reportfraud.police.uk` or on 0300 123 2040 if you are in England, Wales, or Northern Ireland. In Scotland, report to Police Scotland on 101. If the same scam reached you by text, forward the text to 60599 for HMRC or to 7726 for your mobile provider."
       ]
     ],
     "faq": [
       [
         "Does HMRC email people about tax rebates?",
-        "HMRC does send some genuine emails, but it won't tell you to claim a tax rebate, or ask for your bank or card details, through a link in an email. Genuine refunds are handled through your Personal Tax Account or repaid automatically. Treat any `claim your rebate here` email as a scam and check your HMRC account directly."
+        "HMRC does send genuine emails, so the fact that a message arrived by email is not enough to judge it. Treat an unexpected email that asks you to claim a rebate through a link and enter bank, card, or full personal details as phishing. Check refunds through GOV.UK, the HMRC app, your HMRC online account, or a genuine P800 letter."
       ],
       [
         "How can I tell who really sent an HMRC email?",
-        "The visible sender name can be faked, so check the full email address and hover over links (without clicking) to see where they lead. The most reliable test is your HMRC online account: sign in directly via gov.uk and see whether any refund is genuinely shown there."
+        "The visible sender name can be faked. Check the full address and any link destination, but the safest test is to sign in directly through GOV.UK or use official HMRC contact details."
       ],
       [
-        "I clicked the link and entered my details — what now?",
-        "If you gave bank or card details, call your bank using the number on your card and ask them to stop the card and watch the account. If you shared personal information, consider a Cifas Protective Registration at cifas.org.uk. Then forward the email to phishing@hmrc.gov.uk and report it to Report Fraud."
+        "I clicked the link and entered my details - what now?",
+        "If you gave bank or card details, call your bank using the number on your card and ask them to secure the account. If you shared personal information, consider Cifas Protective Registration and monitor your credit reports. Then forward the email to `phishing@hmrc.gov.uk`."
       ],
       [
         "Can I get my money back after an HMRC email scam?",
-        "Possibly. If you paid by card, ask your bank about a chargeback. If you sent a bank transfer, report it as fraud at once: since 7 October 2024, most APP (authorised push-payment) fraud victims can claim reimbursement for UK transfers made over Faster Payments or CHAPS, subject to limits and exclusions — the PSR rules include a 13-month claim window, a maximum claim of £85,000, possible exclusions, and a possible excess of up to £100. Keep the email and act quickly."
+        "Possibly. If you paid by card, ask your bank about disputing the payment. If you sent an eligible UK bank transfer on or after 7 October 2024, APP reimbursement rules may apply to Faster Payments and CHAPS transfers, subject to limits and exclusions."
       ],
       [
         "How do I report a fake HMRC rebate email?",
-        "Forward it to HMRC at phishing@hmrc.gov.uk and to the NCSC at report@phishing.gov.uk. If you lost money, also report it to Report Fraud at reportfraud.police.uk or on 0300 123 2040 (England, Wales or Northern Ireland; in Scotland, Police Scotland on 101)."
+        "Forward it to `phishing@hmrc.gov.uk` and to the NCSC at `report@phishing.gov.uk`. If you lost money or shared sensitive details, report it to Report Fraud in England, Wales, or Northern Ireland, or to Police Scotland on 101 in Scotland."
       ]
     ],
     "keywords": [
@@ -6062,53 +6062,53 @@
     "sections": [
       [
         "What a Universal Credit scam looks like",
-        "A Universal Credit scam impersonates the DWP, Jobcentre, or a `benefits adviser` to steal money or details, or to misuse your claim. A common text reads: `DWP: you are entitled to a £680 cost-of-living grant. Apply here: uc-grant.example`. The most damaging version is the advance-loan scam: a fake `agent` offers to help you `claim a government grant`, but actually applies for a Universal Credit advance in your name — a real loan that DWP later reclaims from your benefits — then takes the money, leaving you in debt. Others phish for bank or login details, or charge a `fee` to make a claim. This guide shows the warning signs, how to check, and what to do if you're caught."
+        "A Universal Credit scam impersonates the DWP, Jobcentre, GOV.UK, or a \"benefits adviser\" to steal money, login details, bank details, or control of your claim. An example of the style is: `DWP: You are entitled to a £680 support grant. Apply here: uc-grant.example`.\n\nOne damaging version is an advance-loan scam. A fake adviser or \"agent\" offers to help you claim a grant, but may try to use your details to apply for a Universal Credit advance. GOV.UK confirms an advance is not free money: it must usually be paid back, normally out of future Universal Credit payments. Other versions phish for your Universal Credit login, ask for bank details, or charge a fee to make a claim."
       ],
       [
         "Why these scams are convincing",
-        "Scammers target the worry and need around benefits, and offer something that sounds generous — a grant, a bonus, an advance, or help to claim. They spoof `DWP` or `GOV.UK` sender names and use Facebook posts, texts, or word-of-mouth `agents`. The facts that protect you: applying for and managing Universal Credit is free, through GOV.UK and your own online account — you never pay a fee or a middleman to claim; the DWP won't ask for bank or card details, or a payment, through a link in a text; and an `advance` is a loan repaid from your future benefits, not free money, so never let anyone apply for one on your behalf."
+        "Scammers target stress around benefits, rent, bills, and waiting for payments. They use sender names such as `DWP` or `GOV.UK`, social-media posts, WhatsApp messages, and word-of-mouth \"agents\". They may describe the money as a grant, bonus, cost-of-living payment, or advance.\n\nThe facts that protect you are specific. You can apply for Universal Credit online through GOV.UK, or by phone through the Universal Credit helpline if you cannot claim online. GOV.UK lists free Help to Claim support from Citizens Advice. An advance must usually be repaid. GOV.UK also says you will not be asked to share personal information such as bank details in your Universal Credit journal, by phone, text, or email."
       ],
       [
         "Signs a Universal Credit message is a scam",
-        "- It offers a grant, bonus, or `cost-of-living` payment you must claim through a link.\n- A `benefits adviser` or social-media `agent` offers to claim a grant or advance for you, sometimes for a cut.\n- It asks for your bank details, card number, or your Universal Credit login.\n- It asks you to pay a `fee` to make or speed up a claim.\n- The link isn't gov.uk — it's a lookalike or shortened address.\n- It pressures you to act before a `deadline`.\n- Someone asks for your ID and bank details to `set up` your claim for you."
+        "- It offers a grant, bonus, or support payment that you must claim through a link.\n- A social-media \"agent\" offers to claim a grant or advance for you, especially for a cut.\n- It asks for your Universal Credit login, National Insurance number, bank details, or card details.\n- It asks you to pay a fee to make, speed up, or release a claim.\n- The link is not `gov.uk` or the official Universal Credit service reached from GOV.UK.\n- It pressures you to act before a deadline or says the offer is secret.\n- Someone asks for your ID and bank details to \"set up\" a claim for you."
       ],
       [
         "How the Universal Credit scam works",
-        "First, an offer of a grant, bonus, or `help to claim` arrives by text, social media, or an `agent`. Second, you're asked for personal and bank details, a login, or permission to `apply` for you. Third, in the advance-loan version, the scammer uses your details to claim a Universal Credit advance — a loan — and diverts the money. Fourth, they take the cash or your details. Finally, you're left owing the advance back to DWP from future payments, or your claim and identity are misused. Dealing with your claim only through GOV.UK and your own account avoids it."
+        "First, a message or post offers a grant, bonus, advance, or help to claim. Second, you are pushed to share personal information, bank details, login details, or permission for someone to act for you. Third, the scammer uses those details to steal from you, misuse your claim, or try to apply for money in your name. Fourth, they disappear, ask for more money, or keep control of your details.\n\nThe advance variant is especially risky because the money may be treated as a real Universal Credit advance. If an advance has been taken in your name, DWP may seek repayment through your benefit payments while the fraud is investigated. Keeping the claim inside GOV.UK, your own account, and official DWP contact routes removes the fake middleman."
       ],
       [
         "How to check with the DWP safely",
-        "Don't tap links or trust an `agent` who contacts you.\n- Manage your claim only by signing in to your Universal Credit account through gov.uk, typed in yourself.\n- Remember claiming is free — never pay a fee or let a middleman claim or take an advance for you.\n- The DWP won't ask for bank or card details, or a payment, through a link in a text.\n- Check any `grant` or `cost-of-living` payment via the official GOV.UK pages, not a message.\n- Use your journal or the helpline details on GOV.UK to query anything about your claim.\nIf you're unsure whether a linked page is a copycat of GOV.UK, our guide on /guides/is-this-website-a-scam/ helps, and our /guides/council-tax-scam-text-uk/ guide covers similar government-impersonation messages."
+        "Do not tap links or trust an agent who contacts you first.\n\n- Type `gov.uk` into your browser and use the Universal Credit pages to claim or sign in.\n- Use your Universal Credit account, journal, official helpline, or work coach for claim questions.\n- Remember that Help to Claim support is free through Citizens Advice.\n- Do not pay a fee or let a stranger apply for an advance or claim on your behalf.\n- Treat any text, email, or message asking for personal or bank details as unsafe.\n- Check any claimed grant or payment through official GOV.UK pages, not through a message.\n\nIf you are unsure whether a linked page is a copycat of GOV.UK, our guide on /guides/is-this-website-a-scam/ helps, and our /guides/council-tax-scam-text-uk/ guide covers similar government-impersonation messages."
       ],
       [
         "If you shared details or lost money",
-        "Act quickly. If a scammer has your Universal Credit login or has applied for an advance in your name, sign in to your account if you can, and contact the DWP through the official details on GOV.UK to report it and protect your claim. If you gave bank or card details, contact your bank using the number on your card; if you sent a payment, report it as fraud — since 7 October 2024, most APP (authorised push-payment) fraud victims can claim reimbursement for UK transfers made over Faster Payments or CHAPS, subject to limits and exclusions — the PSR rules include a 13-month claim window, a maximum claim of £85,000, possible exclusions, and a possible excess of up to £100. If you shared ID or personal details, consider a Cifas Protective Registration at cifas.org.uk and check your credit report with Experian, Equifax or TransUnion. Keep the message, screenshots, and any names or numbers used."
+        "If a scammer has your Universal Credit login or has applied for an advance in your name, sign in to your account if you can and contact Universal Credit through the official GOV.UK routes. Use your journal, the Universal Credit helpline, or your work coach to report what happened and protect your claim.\n\nIf you gave bank or card details, contact your bank using the number on your card. If you paid by card, ask about disputing the payment or chargeback. If you sent money by UK bank transfer on or after 7 October 2024, mandatory APP fraud reimbursement rules may apply to Faster Payments and CHAPS transfers. The PSR rules include a 13-month claim window, a maximum claim amount of £85,000, possible exclusions, and a possible excess of up to £100.\n\nIf you shared ID or personal details, consider Cifas Protective Registration at `cifas.org.uk` and monitor your credit reports with Experian, Equifax, and TransUnion. Keep the message, screenshots, account names, numbers, payment references, and any names used by the scammer."
       ],
       [
         "How to report a Universal Credit scam (UK)",
-        "Report it to the DWP using the official reporting routes on GOV.UK, especially if your claim or an advance is involved. Report the scam to Report Fraud at reportfraud.police.uk or on 0300 123 2040 if you are in England, Wales or Northern Ireland; in Scotland, report to Police Scotland on 101. If it came by text, forward it to 7726. If by email, forward it to the National Cyber Security Centre at report@phishing.gov.uk. Keep everything as evidence."
+        "Report claim or advance misuse to Universal Credit through your official account, the Universal Credit helpline, or your work coach. If the scam came by text, forward it to 7726. If it came by email, forward it to the NCSC at `report@phishing.gov.uk`.\n\nIf you lost money, shared sensitive information, or were asked to move money, report it to Report Fraud at `reportfraud.police.uk` or on 0300 123 2040 if you are in England, Wales, or Northern Ireland. In Scotland, report to Police Scotland on 101. Keep everything as evidence."
       ]
     ],
     "faq": [
       [
-        "Does the DWP text or message people about Universal Credit?",
-        "The DWP and Jobcentre do contact claimants, but they won't ask you to claim a grant, or hand over bank or card details, through a link in a text, and they never charge a fee to claim. Manage your claim only through your Universal Credit account on gov.uk, and treat `claim your grant here` links as scams."
+        "Does the DWP text or email people about Universal Credit?",
+        "DWP and Jobcentre Plus can contact claimants, and GOV.UK says you may get a text or email when there is a new Universal Credit journal message. You should sign in to your account directly through GOV.UK to read it. GOV.UK says you will not be asked to share personal information such as bank details in your journal, by phone, text, or email."
       ],
       [
-        "Someone offered to help me claim a government grant or advance — is that safe?",
-        "Be very careful. A common scam is a fake `agent` who applies for a Universal Credit advance — a loan repaid from your future benefits — in your name, then takes the money, leaving you in debt to DWP. Never give anyone your details or login to claim for you; claiming is free through GOV.UK."
+        "Someone offered to help me claim a government grant or advance - is that safe?",
+        "Be careful. Free Help to Claim support is available through Citizens Advice, and Universal Credit should be handled through GOV.UK, your account, the helpline, or your work coach. Do not give a social-media agent your login, ID, or bank details, and do not let them apply for an advance for you."
       ],
       [
         "Is a Universal Credit advance free money?",
-        "No. An advance is a loan that DWP recovers from your future Universal Credit payments. If someone offers to get you an `advance` or `grant` and takes a cut, or applies without you understanding it's a loan, that's a scam — and you'll owe the money back."
+        "No. GOV.UK says you must usually pay back a Universal Credit advance, normally out of your future payments. If someone describes an advance as a grant or free money, treat that as a red flag."
       ],
       [
-        "I gave a scammer my Universal Credit login or details — what now?",
-        "Sign in to your account if you can and contact the DWP through the official GOV.UK details to report it and protect your claim. If you shared bank details, call your bank using the number on your card. Consider a Cifas Protective Registration at cifas.org.uk to protect your identity."
+        "I gave a scammer my Universal Credit login or details - what now?",
+        "Sign in to your account if you can and contact Universal Credit through the official GOV.UK routes. If you shared bank details, call your bank using the number on your card. If you shared ID, consider Cifas Protective Registration and monitor your credit reports."
       ],
       [
         "How do I report a Universal Credit scam?",
-        "Report it to the DWP via the official routes on GOV.UK, then report the scam to Report Fraud at reportfraud.police.uk or on 0300 123 2040 (England, Wales or Northern Ireland; in Scotland, Police Scotland on 101). Forward scam texts to 7726 and scam emails to report@phishing.gov.uk."
+        "Report claim misuse to Universal Credit through official GOV.UK routes. Forward scam texts to 7726 and scam emails to `report@phishing.gov.uk`. If you lost money or shared sensitive details, report it to Report Fraud in England, Wales, or Northern Ireland, or to Police Scotland on 101 in Scotland."
       ]
     ],
     "keywords": [
@@ -6597,53 +6597,53 @@
     "sections": [
       [
         "What a data-entry job scam looks like",
-        "A data-entry job scam dangles easy, well-paid work from home — typing, copy-pasting, form-filling, or `online tasks` — to take an upfront fee, your details, or the use of your bank account. A typical message reads: `Earn £25/hour doing simple data entry from home. Pay a refundable £49 starter fee to receive your software and first batch.` Some versions are `task` scams where you must top up money to `unlock` higher commission that never arrives, or money-mule schemes dressed up as `payment processing`. This guide shows the warning signs, how to find genuine work, and what to do if you've already paid."
+        "A data-entry job scam offers easy, well-paid work from home - typing, copy-pasting, form-filling, reviewing apps, or completing online tasks - to take your money, identity details, or bank access. An example of the style is: `Earn £25/hour doing simple data entry from home. Pay a refundable £49 starter fee to receive your software and first batch.`\n\nSome versions are task scams. You are shown small early earnings, then told to deposit money to unlock higher commission, complete \"combination tasks\", or release withdrawals. Other versions are money-mule schemes dressed up as payment processing. This guide shows the warning signs, how to look for genuine work, and what to do if you have already paid."
       ],
       [
         "Why these scams are convincing",
-        "The promise is exactly what many people want — flexible, simple work from home — and the early steps can feel legitimate, sometimes even paying a small `commission` to build trust before the bigger ask. Scammers use real-sounding company names and move you to WhatsApp or Telegram. The clearest rule: genuine paid work does not require you to pay to start, to `unlock` tasks or withdrawals, or to receive and forward money. If you have to put money in to get money out, it's a scam."
+        "The offer matches what many people want: flexible work, simple tasks, no commute, and quick income. The first steps can feel legitimate. Scammers may use real-sounding company names, fake dashboards, small early payouts, and recruiter messages on WhatsApp or Telegram.\n\nThe safest rule is practical: genuine paid employment should not require you to pay to secure the role, unlock work, unlock withdrawals, or receive wages. If a supposed job says you must put money in before you can get money out, treat it as a scam."
       ],
       [
         "Signs a data-entry job is a scam",
-        "- It asks for an upfront fee for `software`, `training`, a `starter kit`, or `registration`.\n- It's a `task` or `app-optimising` job where you must deposit money to unlock commission or withdrawals.\n- It involves receiving money and sending it on — that's money-mule recruitment.\n- Pay is very high for very simple work, with no real interview.\n- It moves you to WhatsApp or Telegram and pressures you to start fast.\n- It asks for bank details or ID before any genuine offer.\n- The company has no verifiable website, address, or Companies House record."
+        "- It asks for an upfront fee for software, training, a starter kit, registration, or onboarding.\n- It is a task, app-optimising, product-review, or \"data boosting\" job where you must deposit money to unlock commission or withdrawals.\n- It involves receiving money and sending it on, buying crypto, or moving funds through your account.\n- The pay is unusually high for very simple work and there is no real interview.\n- The recruiter moves you to WhatsApp, Telegram, or a personal email almost immediately.\n- It asks for bank details, passport images, National Insurance details, or other ID before a genuine offer.\n- The employer has no verifiable official website, careers page, address, or matching company record."
       ],
       [
         "How the scam works",
-        "First, an advert or message offers easy, well-paid data entry from home. Second, you're moved off-platform and asked for a small `starter` fee, or set `tasks` that need a deposit to continue. Third, you pay — or you receive money and forward it on. Fourth, the `commission` is blocked behind ever-larger deposits, the fee is gone, or your account is used to launder money. Genuine work never asks you to pay in first, so refusing the upfront ask ends the scam."
+        "First, an advert or message offers easy, well-paid data entry from home. Second, you are moved off-platform and asked for a small starter fee, or you are placed in a fake task platform. Third, the platform shows supposed earnings. Fourth, you are told to deposit more money to continue, unlock commission, or withdraw. Fifth, the withdrawals never arrive or the account is locked behind more demands.\n\nIn the money-mule variant, the \"job\" asks you to receive money and send it on. Stop immediately if that happens. Moving money for someone else can lead to frozen accounts and may be investigated as money laundering, even if you believed the work was genuine."
       ],
       [
         "How to find data-entry work safely",
-        "Treat any pay-to-start offer as a scam.\n- Never pay a fee to begin a job, buy `software`, or `unlock` tasks or withdrawals.\n- Be very wary of `tasks` that require topping up money to earn commission — that's a common task-scam pattern.\n- Verify the employer independently: official website, Companies House, a phone number you find yourself.\n- Apply through reputable job boards and keep messages on-platform; be cautious of WhatsApp-only `recruiters`.\n- Never agree to receive and forward money as `part of the job`.\nIf you're unsure whether a site is genuine, our guide on /guides/is-this-website-a-scam/ helps, and our /guides/work-from-home-scam-uk/ guide covers home-working scams more broadly."
+        "Treat any pay-to-start offer as a red flag.\n\n- Do not pay a fee to begin a job, buy software, unlock tasks, or unlock withdrawals.\n- Be very wary of task platforms that require top-ups to earn commission.\n- Verify the employer independently through its official website, careers page, and a phone number you find yourself.\n- If it claims to be a UK limited company, compare the name, company number, address, and directors on Companies House. A Companies House record is a useful check, not proof that a recruiter is genuine.\n- Apply through reputable job boards and keep messages on-platform where possible.\n- Do not agree to receive, forward, or process money as part of a job.\n\nIf you are unsure whether a site is genuine, our guide on /guides/is-this-website-a-scam/ helps, and our /guides/work-from-home-scam-uk/ guide covers home-working scams more broadly."
       ],
       [
-        "If you've paid or shared details",
-        "Act quickly. If you paid by card, contact your bank or card issuer using the number on your card and ask about a chargeback; if you sent a transfer, report it as fraud — since 7 October 2024, most APP (authorised push-payment) fraud victims can claim reimbursement for UK transfers made over Faster Payments or CHAPS, subject to limits and exclusions — the PSR rules include a 13-month claim window, a maximum claim of £85,000, possible exclusions, and a possible excess of up to £100. If you shared ID, consider a Cifas Protective Registration at cifas.org.uk and check your credit report with Experian, Equifax or TransUnion. If you received and forwarded money, stop and tell your bank — you may have been used as a money mule, with serious consequences. Keep the advert, messages, and any receipts."
+        "If you paid or shared details",
+        "If you paid by card, contact your bank or card issuer using the number on your card. Tell them it was a scam and ask about disputing the payment or chargeback.\n\nIf you sent money by UK bank transfer on or after 7 October 2024, mandatory APP fraud reimbursement rules may apply to Faster Payments and CHAPS transfers. The PSR rules include a 13-month claim window, a maximum claim amount of £85,000, possible exclusions, and a possible excess of up to £100. Report it to your bank as soon as possible.\n\nIf you shared ID, consider Cifas Protective Registration at `cifas.org.uk` and monitor your credit reports with Experian, Equifax, and TransUnion. If you received and forwarded money, stop and tell your bank immediately. Keep the advert, messages, platform screenshots, payment receipts, account details, and recruiter names."
       ],
       [
         "How to report a data-entry job scam (UK)",
-        "Report the listing or recruiter to the job board or platform you found it on. Report the scam to Report Fraud at reportfraud.police.uk or on 0300 123 2040 if you are in England, Wales or Northern Ireland; in Scotland, report to Police Scotland on 101. If it reached you by text, forward it to 7726. If by email, forward it to the National Cyber Security Centre at report@phishing.gov.uk. Keep screenshots and any payment details."
+        "Report the listing or recruiter to the job board, social platform, or messaging platform you found it on. If it reached you by text, forward it to 7726. If it came by email, forward it to the NCSC at `report@phishing.gov.uk`.\n\nIf you lost money, shared sensitive information, or were asked to move money, report it to Report Fraud at `reportfraud.police.uk` or on 0300 123 2040 if you are in England, Wales, or Northern Ireland. In Scotland, report to Police Scotland on 101. Tell your bank immediately if money moved through your account."
       ]
     ],
     "faq": [
       [
         "Is data-entry work from home ever genuine?",
-        "Yes, genuine data-entry and admin roles exist — but they never ask you to pay to start, buy `software` to begin, or `unlock` your earnings, and they don't ask you to receive and forward money. If an offer needs money from you first, it's a scam, however real the company name sounds."
+        "Yes, genuine data-entry and admin roles exist. The red flags are payment to start, unusually high pay for simple work, no real interview, task platforms that require deposits, and requests to receive and forward money."
       ],
       [
-        "I was asked to pay a 'starter' or 'software' fee — is that normal?",
-        "No. A genuine employer doesn't charge you to begin work or provide tools. Any upfront `starter`, `software`, `training`, or `registration` fee — especially to a personal account or by gift card — is a scam. Don't pay it."
+        "I was asked to pay a starter or software fee - is that normal?",
+        "Do not pay a recruiter or private account to secure a job. In a genuine paid employment role, you should not need to pay to unlock work, onboarding, or wages. Verify any claimed requirement independently before sharing money or details."
       ],
       [
-        "The 'job' asks me to deposit money to unlock higher pay — what is that?",
-        "That's a task scam. You're shown small early `earnings` to build trust, then told to deposit more to `unlock` bigger commission or to withdraw — which never happens. Stop depositing, and report it; the money you put in is the scam."
+        "The job asks me to deposit money to unlock higher pay - what is that?",
+        "That is the task-scam pattern. You may see small early earnings, then be told to pay more to unlock commission or withdraw. Stop depositing and keep evidence."
       ],
       [
-        "I've already paid — can I get my money back?",
-        "Possibly. If you paid by card, ask your bank about a chargeback. If you sent a bank transfer, report it as fraud at once: since 7 October 2024, most APP (authorised push-payment) fraud victims can claim reimbursement for UK transfers made over Faster Payments or CHAPS, subject to limits and exclusions — the PSR rules include a 13-month claim window, a maximum claim of £85,000, possible exclusions, and a possible excess of up to £100. Keep the messages and report the listing to the platform."
+        "I have already paid - can I get my money back?",
+        "Possibly. If you paid by card, ask your bank about disputing the payment. If you sent an eligible UK bank transfer on or after 7 October 2024, APP reimbursement rules may apply to Faster Payments and CHAPS transfers, subject to limits and exclusions."
       ],
       [
         "How do I report a data-entry job scam?",
-        "Report the listing or recruiter to the platform, then report the scam to Report Fraud at reportfraud.police.uk or on 0300 123 2040 (England, Wales or Northern Ireland; in Scotland, Police Scotland on 101). Tell your bank immediately if money moved through your account."
+        "Report the listing or recruiter to the platform. If you lost money, shared sensitive details, or were asked to move money, report it to Report Fraud in England, Wales, or Northern Ireland, or to Police Scotland on 101 in Scotland. Tell your bank immediately if money moved through your account."
       ]
     ],
     "keywords": [
@@ -6670,53 +6670,53 @@
     "sections": [
       [
         "What a recruitment-agency scam looks like",
-        "A recruitment-agency scam uses a fake or impersonated agency to take your money, your identity, or the use of your bank account. A recruiter contacts you about a great role, then asks for an upfront `fee`, your bank and ID details, or to move money for `training` or `equipment`. A typical message reads: `We'd like to offer you the role. To secure it, pay a refundable £95 registration and onboarding fee.` The job may not exist, or the `work` may be receiving and forwarding money for criminals. This guide shows the warning signs, how to verify an agency, and what to do if you've already paid or shared details."
+        "A recruitment-agency scam uses a fake or impersonated agency to take your money, identity documents, bank details, or access to your account. A recruiter contacts you about a strong role, then asks for an upfront fee, early ID, bank details, or help moving money. An example of the style is: `We would like to offer you the role. To secure onboarding, pay a refundable £95 registration and background-check fee.`\n\nThe job may not exist. In other cases, the \"work\" may be receiving and forwarding money for criminals. This guide shows the warning signs, how to verify an agency, and what to do if you have already paid or shared details."
       ],
       [
         "Why these scams are convincing",
-        "Scammers copy real agency names, logos, and recruiter language, post on genuine job boards, and move you onto WhatsApp or a personal email to apply pressure. The most useful rule is precise: a recruitment agency cannot charge you a fee to find you work. Some genuine, separate costs exist — an official check such as a basic DBS has a published fee — but those are verifiable through official channels and should never be paid to a recruiter, a personal account, by gift card, or to a `private` account to `secure` or `unlock` a job. You also never need to receive money and pass it on as part of a real job."
+        "Scammers copy real agency names, logos, job-board posts, recruiter language, and email signatures. They may impersonate a real recruiter or use a lookalike domain that is only one character away from the real agency's domain.\n\nThe useful legal rule is precise. GOV.UK says employment agencies and employment businesses cannot charge a fee to a work-seeker for work-finding services. Some genuine, separate checks can have published fees - for example, GOV.UK lists a fee for a basic DBS check - but those should be verified through official channels. Do not pay a recruiter, private account, gift-card request, crypto wallet, or rushed link to secure or unlock a job."
       ],
       [
         "Signs a recruitment agency is a scam",
-        "- It asks you to pay up front to secure the role, register, or cover `training`, `equipment`, or a check, especially to a personal or mismatched account.\n- It moves you off the job board to WhatsApp, Telegram, or a personal email almost immediately.\n- It asks for your bank details, passport, or ID before a genuine interview and written offer.\n- The pay is high for little work, or you're `hired` with no real interview.\n- The `job` involves receiving and forwarding money — that's money-mule recruitment.\n- The agency's name, domain, email, Companies House record, and website don't line up.\n- You're pressured to act before you can verify the agency independently."
+        "- It asks you to pay upfront to secure the role, register, unlock onboarding, or release a job offer.\n- It says a check, certificate, equipment fee, or training fee must be paid to a personal or mismatched account.\n- It moves you off the job board to WhatsApp, Telegram, or a personal email almost immediately.\n- It asks for bank details, passport images, or ID documents before a genuine interview and written offer.\n- The pay is high for little work, or you are hired with no real interview.\n- The job involves receiving and forwarding money, buying crypto, or processing payments.\n- The agency's name, domain, email, Companies House record, and website do not line up."
       ],
       [
         "How the scam works",
-        "First, a recruiter contacts you or replies to an application with a strong offer. Second, they move you off-platform and offer the role quickly. Third, they ask for an upfront fee, your ID and bank details, or to process a payment. Fourth, you pay a `fee`, hand over identity documents, or let money pass through your account. Finally, the job never materialises, the fee is gone, your identity is misused, or your account is frozen because it was used to move criminal money. Verifying the agency before paying or sharing anything stops it."
+        "First, a recruiter contacts you or replies to an application with a strong offer. Second, they move you off-platform and offer the role quickly. Third, they ask for a fee, identity documents, bank details, or a payment-processing task. Fourth, you pay, hand over documents, or let money pass through your account. Finally, the job disappears, the fee is gone, your identity is misused, or your account is frozen because it was used to move criminal money.\n\nThe most effective protection is to verify the agency before paying or sharing anything sensitive."
       ],
       [
         "How to check an agency is genuine",
-        "Slow down and verify before you pay or share anything.\n- Never pay a recruiter or a private account to secure, register for, or `unlock` a job.\n- If a check or certificate is genuinely needed, verify the official route yourself rather than paying through a recruiter link.\n- Find the agency independently: its official website, a Companies House search, and a phone number you find yourself.\n- Check the recruiter's email is on the real agency domain, not a free or lookalike address.\n- Don't share bank details, passport, or ID before a real interview and a written offer.\n- Walk away from any role that asks you to receive or forward money.\nIf you're unsure whether a recruiter's site is genuine, our guide on /guides/is-this-website-a-scam/ helps, and our /guides/indeed-job-scam-uk/ guide covers the same trick on job boards."
+        "Slow down and verify before you pay or share anything.\n\n- Do not pay a recruiter or private account to secure, register for, or unlock a job.\n- If a check or certificate is mentioned, verify the official route yourself rather than using a rushed recruiter link.\n- Find the agency independently through its official website and a phone number you find yourself.\n- If it claims to be a UK limited company, compare the name, company number, address, and directors on Companies House. A Companies House record is a useful check, not proof that the recruiter is genuine.\n- Check that the recruiter's email is on the real agency domain, not a free or lookalike address.\n- Do not share bank details, passport images, or ID documents before a real interview, written offer, and proper onboarding.\n- Walk away from any role that asks you to receive or forward money.\n\nIf you are unsure whether a recruiter's site is genuine, our guide on /guides/is-this-website-a-scam/ helps, and our /guides/indeed-job-scam-uk/ guide covers the same trick on job boards."
       ],
       [
-        "If you've paid or shared details",
-        "Act quickly. If you paid by card, contact your bank or card issuer using the number on your card and ask about a chargeback; if you sent a transfer, report it as fraud — since 7 October 2024, most APP (authorised push-payment) fraud victims can claim reimbursement for UK transfers made over Faster Payments or CHAPS, subject to limits and exclusions — the PSR rules include a 13-month claim window, a maximum claim of £85,000, possible exclusions, and a possible excess of up to £100. If you shared ID documents, consider a Cifas Protective Registration at cifas.org.uk and watch your credit report with Experian, Equifax or TransUnion for accounts opened in your name. If you received and forwarded money, stop immediately and tell your bank — you may have been used as a money mule, which can freeze your accounts and carries serious consequences. Keep the messages, the agency name, and any receipts."
+        "If you paid or shared details",
+        "If you paid by card, contact your bank or card issuer using the number on your card. Tell them it was a scam and ask about disputing the payment or chargeback.\n\nIf you sent money by UK bank transfer on or after 7 October 2024, mandatory APP fraud reimbursement rules may apply to Faster Payments and CHAPS transfers. The PSR rules include a 13-month claim window, a maximum claim amount of £85,000, possible exclusions, and a possible excess of up to £100. Report it to your bank as soon as possible.\n\nIf you shared ID documents, consider Cifas Protective Registration at `cifas.org.uk` and monitor your credit reports with Experian, Equifax, and TransUnion. If you received and forwarded money, stop immediately and tell your bank. Keep the messages, agency name, domain, payment details, phone numbers, and receipts."
       ],
       [
         "How to report a recruitment-agency scam (UK)",
-        "Report the recruiter or listing to the job board you found it on. Report the scam to Report Fraud at reportfraud.police.uk or on 0300 123 2040 if you are in England, Wales or Northern Ireland; in Scotland, report to Police Scotland on 101. If the scam came by text, forward it to 7726. If by email, forward it to the National Cyber Security Centre at report@phishing.gov.uk. For free advice you can also contact the Citizens Advice consumer helpline on 0808 223 1133. Keep screenshots of everything."
+        "Report the recruiter or listing to the job board you found it on. If the scam came by text, forward it to 7726. If it came by email, forward it to the NCSC at `report@phishing.gov.uk`.\n\nIf you lost money, shared sensitive information, or were asked to move money, report it to Report Fraud at `reportfraud.police.uk` or on 0300 123 2040 if you are in England, Wales, or Northern Ireland. In Scotland, report to Police Scotland on 101."
       ]
     ],
     "faq": [
       [
         "Can a UK recruitment agency charge me a fee to find work?",
-        "No. A recruitment agency cannot charge you a fee for finding you work. Some genuine, separate costs exist — for example an official basic DBS check has a published fee — but those are verified through official channels and never paid to a recruiter or a private account to `secure` a job. Any upfront 'registration' or 'onboarding' fee is a scam."
+        "GOV.UK says employment agencies and employment businesses cannot charge a work-seeker a fee for work-finding services. There are different rules for entertainment and modelling agencies. Some official checks can have published fees, so verify any genuine check independently rather than paying a recruiter or private account to secure a job."
       ],
       [
-        "A recruiter wants my bank details and passport before an interview — red flag?",
-        "Yes. You don't need to share bank details or ID just to apply or interview. Genuine agencies collect those after a real offer, through proper onboarding. Sharing them early risks identity theft, so verify the agency independently first."
+        "A recruiter wants my bank details and passport before an interview - red flag?",
+        "Yes. You should not need to share bank details or identity documents just to apply or interview. Genuine onboarding happens after a real offer, through a controlled process."
       ],
       [
-        "The agency asked me to receive and forward money — is that a job?",
-        "No — that's money-mule recruitment, and it's money laundering even if you thought it was real work. Stop immediately, don't move any more money, and tell your bank. It can lead to frozen accounts and serious consequences."
+        "The agency asked me to receive and forward money - is that a job?",
+        "No. That is a money-mule red flag. Stop immediately, do not move any more money, and tell your bank."
       ],
       [
-        "I've already paid a recruiter — can I get my money back?",
-        "Possibly. If you paid by card, ask your bank about a chargeback. If you sent a bank transfer, report it as fraud at once: since 7 October 2024, most APP (authorised push-payment) fraud victims can claim reimbursement for UK transfers made over Faster Payments or CHAPS, subject to limits and exclusions — the PSR rules include a 13-month claim window, a maximum claim of £85,000, possible exclusions, and a possible excess of up to £100. Report the recruiter to the job board and keep all the messages."
+        "I have already paid a recruiter - can I get my money back?",
+        "Possibly. If you paid by card, ask your bank about disputing the payment. If you sent an eligible UK bank transfer on or after 7 October 2024, APP reimbursement rules may apply to Faster Payments and CHAPS transfers, subject to limits and exclusions."
       ],
       [
         "How do I report a recruitment-agency scam?",
-        "Report the recruiter or listing to the job board, then report the scam to Report Fraud at reportfraud.police.uk or on 0300 123 2040 (England, Wales or Northern Ireland; in Scotland, Police Scotland on 101). Tell your bank immediately if money moved through your account."
+        "Report the recruiter or listing to the job board. If you lost money, shared sensitive details, or were asked to move money, report it to Report Fraud in England, Wales, or Northern Ireland, or to Police Scotland on 101 in Scotland. Tell your bank immediately if money moved through your account."
       ]
     ],
     "keywords": [
