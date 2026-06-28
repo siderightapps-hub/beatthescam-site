@@ -23,3 +23,8 @@ assets/audio/
 
 # Gate-quarantined drafts — failed the accuracy gate; local review only, never published
 content/quarantine/
+
+# Editorial review working-docs — local-only QA artifacts (readable draft + operator
+# -c.md fact-checks for the diversification batches). Regenerable from posts.json; never
+# site content, so kept out of the repo. Removed from tracking 2026-06-28.
+docs/review/
