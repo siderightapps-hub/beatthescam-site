@@ -95,6 +95,7 @@ ARTICLE_REDIRECTS = {
     "direct-debit-scam-uk":                       "__CAT__:payment",
     "hmrc-tax-refund-scam-awareness":             "__CAT__:government",
     "dvla-scam-email-awareness":                  "__CAT__:government",
+    "dvla-email-scam-car-tax":                     "dvla-email-scam-uk",
     "nhs-covid-scam-message":                     "__CAT__:government",
     "forex-trading-scams-uk-protection-guide":    "__CAT__:crypto",
     "trading-signal-scam-uk":                     "__CAT__:crypto",
