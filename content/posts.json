@@ -1813,15 +1813,15 @@
     "sections": [
       [
         "What a Microsoft support scam looks like",
-        "A Microsoft support scam uses an unsolicited phone call, or a full-screen browser pop-up, claiming your computer is infected and that \"Microsoft\" needs to fix it. They pressure you to install remote-access software, then charge a \"fix\" fee or steal from your bank. An example of the pop-up style is: `Windows Defender Alert: your PC is infected and your data is at risk. Do not restart — call Microsoft support immediately to remove the threat.`\n\nThe call or pop-up is the bait; granting remote access is the real danger. This guide shows the warning signs, how to stay safe, and what to do if you have already let them in."
+        "A Microsoft support scam uses an unsolicited phone call, or a full-screen browser pop-up, claiming your computer is infected and that \"Microsoft\" needs to fix it. They pressure you to install remote-access software, then charge a \"fix\" fee or steal from your bank. An example of the pop-up style is: `Windows Defender Alert: your PC is infected and your data is at risk. Do not restart - call Microsoft support immediately to remove the threat.`\n\nThe call or pop-up is the bait; granting remote access is the real danger. This guide shows the warning signs, how to stay safe, and what to do if you have already let them in."
       ],
       [
         "Why these scams are convincing",
-        "An alarming pop-up that fills the screen, a confident caller using technical language, and the Microsoft name together create panic. Once someone is worried about losing their files, they stop questioning and start following instructions.\n\nThe fact that protects you: Microsoft does not cold-call people about PC problems, and a genuine error or security message never gives you a phone number to call. Any unsolicited \"your computer is infected, call this number\" message is a scam."
+        "An alarming pop-up that fills the screen, a confident caller using technical language, and the Microsoft name together create panic. Once someone is worried about losing their files, they stop questioning and start following instructions.\n\nThe fact that protects you: Microsoft does not make unsolicited calls about computer problems, and Microsoft error or warning messages do not include phone numbers to call. Any unexpected \"your computer is infected, call this number\" message should be treated as a scam."
       ],
       [
         "Signs a Microsoft support contact is a scam",
-        "- You get an unsolicited call claiming to be Microsoft, Windows, or a \"certified technician\".\n- A pop-up says your PC is infected and gives a phone number to call.\n- You are told not to restart or close the screen.\n- You are asked to install remote-access software (such as AnyDesk or TeamViewer).\n- You are asked to pay a \"fix\" fee, buy gift cards, or log in to your bank while they watch.\n- The caller already \"knows\" your computer has a problem.\n- They create urgency and discourage you from hanging up."
+        "- You get an unsolicited call claiming to be Microsoft, Windows, or a \"certified technician\".\n- A pop-up says your PC is infected and gives a phone number to call.\n- You are told not to restart or close the screen.\n- You are asked to install remote-access software, such as AnyDesk or TeamViewer.\n- You are asked to pay a \"fix\" fee, buy gift cards, or log in to your bank while they watch.\n- The caller already \"knows\" your computer has a problem.\n- They create urgency and discourage you from hanging up."
       ],
       [
         "How the scam works",
@@ -1829,37 +1829,37 @@
       ],
       [
         "How to stay safe from support scams",
-        "Treat any unsolicited \"your computer has a problem\" contact as a scam.\n\n- Hang up on unsolicited \"Microsoft\" or \"Windows\" calls — Microsoft does not cold-call about PC problems.\n- Never call a number shown in a pop-up, and never grant remote access to an unexpected caller.\n- Close a scary pop-up by shutting the browser (or restarting the PC); a genuine warning never gives a phone number.\n- Never buy gift cards or log in to your bank because a \"technician\" tells you to.\n- If you need help, contact Microsoft or a technician you found yourself.\n\nIf you are unsure whether a linked page is genuine, our guide on /guides/is-this-website-a-scam/ helps, and our /guides/windows-tech-support-scam-uk/ and /guides/amazon-phone-call-scam-uk/ guides cover related phone and pop-up cons."
+        "Treat any unsolicited \"your computer has a problem\" contact as a scam.\n\n- Hang up on unsolicited \"Microsoft\" or \"Windows\" calls - Microsoft does not cold-call about PC problems.\n- Never call a number shown in a pop-up, and never grant remote access to an unexpected caller.\n- Close a scary pop-up by shutting the browser or restarting the PC; a genuine Microsoft warning does not tell you to phone a support number.\n- Never buy gift cards or log in to your bank because a \"technician\" tells you to.\n- If you need help, contact Microsoft or a technician you found yourself.\n\nIf you are unsure whether a linked page is genuine, our guide on /guides/is-this-website-a-scam/ helps, and our /guides/windows-tech-support-scam-uk/ and /guides/amazon-phone-call-scam-uk/ guides cover related phone and pop-up cons."
       ],
       [
         "If you let them in or paid",
-        "If you granted remote access, disconnect the computer from the internet, then run a full security scan or have it checked by a technician you trust. Change your important passwords — email and banking first — from a different, clean device. If you logged in to your bank or shared card details, contact your bank immediately on 159 or the number on your card.\n\nIf you paid by card, ask about a chargeback. If you sent money by UK bank transfer on or after 7 October 2024, mandatory APP fraud reimbursement rules may apply to Faster Payments and CHAPS transfers. The PSR rules include a 13-month claim window, a maximum claim amount of £85,000, possible exclusions, and a possible excess of up to £100. Report it to your bank as soon as possible. If you shared personal details, consider Cifas Protective Registration at `cifas.org.uk` and monitor your credit reports with Experian, Equifax, and TransUnion. Keep the caller's number, any payment details, and the software you were asked to install as evidence."
+        "If you granted remote access, disconnect the computer from the internet, then run a full security scan or have it checked by a technician you trust. Change your important passwords - email and banking first - from a different, clean device. If you logged in to your bank or shared card details, contact your bank immediately on 159 or the number on your card.\n\nIf you paid by card, ask about a chargeback. If you sent money by UK bank transfer on or after 7 October 2024, mandatory APP fraud reimbursement rules may apply to Faster Payments and CHAPS transfers. The PSR rules include a 13-month claim window, reimbursement within 5 business days in many cases, a maximum claim amount of £85,000, possible exclusions, and a possible excess of up to £100. The rules do not cover every payment type or every situation, so report it to your bank as soon as possible.\n\nIf you shared personal details, consider Cifas Protective Registration at `cifas.org.uk` and monitor your credit reports with Experian, Equifax, and TransUnion. Keep the caller's number, any payment details, and the software you were asked to install as evidence."
       ],
       [
         "How to report a Microsoft support scam (UK)",
-        "You can report a scam that impersonates Microsoft to Microsoft through their official \"report a scam\" page. If a phishing message reached you by email, forward it to the NCSC at `report@phishing.gov.uk`; if by text, forward it to 7726.\n\nIf you lost money or shared sensitive information, report it to Report Fraud at `reportfraud.police.uk` or on 0300 123 2040 if you are in England, Wales, or Northern Ireland. In Scotland, report to Police Scotland on 101. Tell your bank as soon as possible if money moved, and keep the evidence."
+        "Report a support scam that impersonates Microsoft through Microsoft's official support-scam page at `microsoft.com/en-us/concern/scam` or `reportfraud.microsoft.com`. If a phishing message reached you by email, forward it to the NCSC at `report@phishing.gov.uk`; if by text, forward it to 7726.\n\nIf you lost money or shared sensitive information, report it to Report Fraud at `reportfraud.police.uk` or on 0300 123 2040 if you are in England, Wales, or Northern Ireland. In Scotland, report to Police Scotland on 101. Tell your bank as soon as possible if money moved, and keep the evidence."
       ]
     ],
     "faq": [
       [
         "Does Microsoft ever call about a problem with my PC?",
-        "No. Microsoft does not make unsolicited calls about computer problems, and genuine error or security messages never give you a phone number to call. Any such call or pop-up is a scam."
+        "No. Microsoft does not make unsolicited calls about computer problems, and Microsoft error or warning messages do not include phone numbers to call. Any such call or pop-up is a scam."
       ],
       [
-        "A pop-up says my PC is infected and to call a number — is it real?",
-        "No. That is a scam pop-up. Do not call the number. Close the browser, or restart the PC if the pop-up won't close, and do not let anyone take remote control."
+        "A pop-up says my PC is infected and to call a number - is it real?",
+        "No. That is a scam pop-up. Do not call the number. Close the browser, or restart the PC if the pop-up will not close, and do not let anyone take remote control."
       ],
       [
-        "I granted remote access to my computer — what could they have done?",
+        "I granted remote access to my computer - what could they have done?",
         "They may have installed malware, viewed or copied files, or tried to reach your online banking. Disconnect from the internet, run a security scan or get the PC checked, and change your key passwords from a clean device."
       ],
       [
-        "I've already paid the scammers — can I get it back?",
+        "I've already paid the scammers - can I get it back?",
         "Possibly. If you paid by card, ask your bank about a chargeback. Eligible UK transfers since 7 October 2024 may fall under APP reimbursement rules, subject to limits and exclusions. Tell your bank immediately."
       ],
       [
         "How do I report a Microsoft support scam?",
-        "Report it to Microsoft through their official report-a-scam page, then report it to Report Fraud in England, Wales, or Northern Ireland, or to Police Scotland on 101 in Scotland. Tell your bank if money moved."
+        "Report it to Microsoft through `microsoft.com/en-us/concern/scam` or `reportfraud.microsoft.com`, then report it to Report Fraud in England, Wales, or Northern Ireland, or to Police Scotland on 101 in Scotland. Tell your bank if money moved."
       ]
     ],
     "keywords": [
@@ -2662,53 +2662,53 @@
     "sections": [
       [
         "What a fake TV Licensing text looks like",
-        "A TV Licensing scam text is a smishing message that pretends to come from TV Licensing so you tap a link and hand over card, bank, or personal details. The usual hooks are a direct debit that \"failed\", a licence that has \"expired\", or a refund you are \"owed\". An example of the style is: `TV Licensing: Your direct debit failed and your licence is no longer valid. Update your payment to avoid a £1,000 fine: tvlicence-renew.example`.\n\nThe link opens a convincing TV Licensing-style page that captures whatever you enter. TV Licensing does send some genuine texts and emails, so the red flag is not the channel — it is an unexpected message that asks you to pay or confirm details through a link."
+        "A TV Licensing scam text is a smishing message that pretends to come from TV Licensing so you tap a link and hand over card, bank, or personal details. The usual hooks are a direct debit that \"failed\", a licence that has \"expired\", or a refund you are \"owed\". An example of the style is: `TV Licensing: Your direct debit failed and your licence is no longer valid. Update your payment to avoid a £1,000 fine: tvlicence-renew.example`.\n\nThe link opens a convincing TV Licensing-style page that captures whatever you enter. TV Licensing does send some genuine texts and emails, so the red flag is not the channel - it is an unexpected message that asks you to pay or confirm details through a link."
       ],
       [
         "Why these texts fool people",
-        "Most UK households deal with TV Licensing, so a payment problem feels plausible, and the threat of a fine adds pressure. A refund offer works the other way, by lowering caution. The sender ID and the link can both be faked to look official.\n\nThe reliable test is to go to the source yourself: type tvlicensing.co.uk into your browser, or use a bill or letter you already have, rather than trusting a link in a text. Genuine TV Licensing emails usually include your name and part of your postcode, but a text alone is never proof."
+        "Most UK households deal with TV Licensing, so a payment problem feels plausible, and the threat of a fine adds pressure. A refund offer works the other way, by lowering caution. The sender ID and the link can both be faked to look official.\n\nThe reliable test is to go to the source yourself: type `tvlicensing.co.uk` into your browser, or use a bill or letter you already have, rather than trusting a link in a text. Genuine TV Licensing emails usually include your name and part of your postcode, but a text alone is never proof."
       ],
       [
         "Signs a TV Licensing text is a scam",
-        "- It says your direct debit or payment failed and your licence is now invalid.\n- It offers a refund you were not expecting.\n- It asks you to pay or \"confirm\" card, bank, or personal details through a link.\n- The link is not tvlicensing.co.uk (a lookalike such as `tvlicence-renew.example`).\n- It threatens a fine, court, or an \"enforcement officer\" unless you act today.\n- It uses a generic greeting and a short deadline.\n- It arrives from an odd number or as an unexpected message."
+        "- It says your direct debit or payment failed and your licence is now invalid.\n- It offers a refund you were not expecting.\n- It asks you to pay or \"confirm\" card, bank, or personal details through a link.\n- The link is not `tvlicensing.co.uk`, for example a lookalike such as `tvlicence-renew.example`.\n- It threatens a fine, court, or an \"enforcement officer\" unless you act today.\n- It uses a generic greeting and a short deadline.\n- It arrives from an odd number or as an unexpected message."
       ],
       [
         "How the scam works, step by step",
-        "First, a text claims a licence or payment problem, or a refund. Second, urgency — a fine or a deadline — pushes you to tap the link. Third, a fake TV Licensing page asks for card and personal details. Fourth, criminals capture them for card fraud, bank fraud, or identity theft. Fifth, they may follow up by phone pretending to be TV Licensing or your bank.\n\nGoing to tvlicensing.co.uk yourself, rather than tapping the link, breaks the chain."
+        "First, a text claims a licence or payment problem, or a refund. Second, urgency - a fine or a deadline - pushes you to tap the link. Third, a fake TV Licensing page asks for card and personal details. Fourth, criminals capture them for card fraud, bank fraud, or identity theft. Fifth, they may follow up by phone pretending to be TV Licensing or your bank.\n\nGoing to `tvlicensing.co.uk` yourself, rather than tapping the link, breaks the chain."
       ],
       [
         "How to check a TV Licensing text safely",
-        "Do not tap the link or call a number from the text.\n\n- Type tvlicensing.co.uk into your browser yourself, or sign in from a bill or letter you already have.\n- Check your licence status and any payment there, not through the link.\n- Remember a real fine is never settled by entering card details on a page you reached from a text.\n- Do not enter card, bank, or personal details on a page you opened from the message.\n- If you are unsure, contact TV Licensing through details on tvlicensing.co.uk.\n\nIf you are unsure whether a linked page is genuine, our guide on /guides/is-this-website-a-scam/ helps, and our /guides/tv-licence-email-scam-uk/ guide covers the same scam by email."
+        "Do not tap the link or call a number from the text.\n\n- Type `tvlicensing.co.uk` into your browser yourself, or sign in from a bill or letter you already have.\n- Check your licence status and any payment there, not through the link.\n- Remember a real no-licence fine can be up to £1,000, but it is not settled by entering card details on a page you reached from a text.\n- Do not enter card, bank, or personal details on a page you opened from the message.\n- If you are unsure, contact TV Licensing through details on `tvlicensing.co.uk`.\n\nIf you are unsure whether a linked page is genuine, our guide on /guides/is-this-website-a-scam/ helps, and our /guides/tv-licence-email-scam-uk/ guide covers the same scam by email."
       ],
       [
         "If you tapped the link or shared details",
-        "If you entered card or bank details, contact your bank or card issuer immediately using the number on your card, tell them it was a scam, and ask them to secure the account and about disputing any payment — a card payment may be recoverable through chargeback, depending on the circumstances and card scheme rules. If you sent money by UK bank transfer on or after 7 October 2024, mandatory APP fraud reimbursement rules may apply to Faster Payments and CHAPS transfers. The PSR rules include a 13-month claim window, a maximum claim amount of £85,000, possible exclusions, and a possible excess of up to £100. Report it to your bank as soon as possible.\n\nIf you shared personal information, consider Cifas Protective Registration at `cifas.org.uk` and monitor your credit reports with Experian, Equifax, and TransUnion. Keep the text as evidence."
+        "If you entered card or bank details, contact your bank or card issuer immediately using the number on your card, tell them it was a scam, and ask them to secure the account and about disputing any payment - a card payment may be recoverable through chargeback, depending on the circumstances and card scheme rules. If you sent money by UK bank transfer on or after 7 October 2024, mandatory APP fraud reimbursement rules may apply to Faster Payments and CHAPS transfers. The PSR rules include a 13-month claim window, reimbursement within 5 business days in many cases, a maximum claim amount of £85,000, possible exclusions, and a possible excess of up to £100. The rules do not cover every payment type or every situation, so report it to your bank as soon as possible.\n\nIf you shared personal information, consider Cifas Protective Registration at `cifas.org.uk` and monitor your credit reports with Experian, Equifax, and TransUnion. Keep the text as evidence."
       ],
       [
         "How to report a TV Licensing scam text (UK)",
-        "Forward the scam text to 7726 so your mobile provider can investigate. If the same scam reached you by email, forward it to the NCSC at `report@phishing.gov.uk`. You can also tell TV Licensing through tvlicensing.co.uk.\n\nIf you lost money or shared sensitive information, report it to Report Fraud at `reportfraud.police.uk` or on 0300 123 2040 if you are in England, Wales, or Northern Ireland. In Scotland, report to Police Scotland on 101. Keep the original message and any screenshots."
+        "Forward the scam text to 7726 so your mobile provider can investigate. TV Licensing also publishes a text-scam reporting mailbox on its current scam advice page at `tvlicensing.co.uk/faqs/FAQ288`; check that page for the current address before sending screenshots. If the same scam reached you by email, forward it to the NCSC at `report@phishing.gov.uk`.\n\nIf you lost money or shared sensitive information, report it to Report Fraud at `reportfraud.police.uk` or on 0300 123 2040 if you are in England, Wales, or Northern Ireland. In Scotland, report to Police Scotland on 101. Keep the original message and any screenshots."
       ]
     ],
     "faq": [
       [
         "Does TV Licensing send texts, or is every TV Licensing text a scam?",
-        "TV Licensing does send some genuine texts and emails, so the channel alone is not proof. Treat any message that asks you to pay or confirm details through a link as a scam, and check your licence by typing tvlicensing.co.uk yourself."
+        "TV Licensing does send some genuine texts and emails, so the channel alone is not proof. Treat any message that asks you to pay or confirm details through a link as unsafe, and check your licence by typing `tvlicensing.co.uk` yourself."
       ],
       [
-        "A text says my TV Licence direct debit failed and I'll be fined — is it real?",
-        "Check it yourself at tvlicensing.co.uk rather than tapping the link. A genuine fine is never settled by entering your card details on a page you reached from a text with a deadline."
+        "A text says my TV Licence direct debit failed and I'll be fined - is it real?",
+        "Check it yourself at `tvlicensing.co.uk` rather than tapping the link. A genuine no-licence fine can be up to £1,000, but a scam text link is not how a fine is settled."
       ],
       [
-        "The text offers a TV Licensing refund — should I claim it?",
-        "Be wary. A refund link that asks for your card or bank details is a classic smishing hook. Check any genuine refund through your TV Licensing account at tvlicensing.co.uk."
+        "The text offers a TV Licensing refund - should I claim it?",
+        "Be wary. A refund link that asks for your card or bank details is a classic smishing hook. Check any genuine refund through your TV Licensing account at `tvlicensing.co.uk`."
       ],
       [
-        "I entered my card details on a TV Licensing-looking site — what now?",
+        "I entered my card details on a TV Licensing-looking site - what now?",
         "Contact your bank using the number on your card, ask them to secure the account, and ask about a chargeback. If you shared personal details, consider Cifas Protective Registration and monitor your credit reports."
       ],
       [
         "How do I report a TV Licensing scam text?",
-        "Forward it to 7726, and if you lost money or shared details, report it to Report Fraud in England, Wales, or Northern Ireland, or to Police Scotland on 101 in Scotland."
+        "Forward it to 7726, and check TV Licensing's current scam advice page for its own text-scam reporting mailbox. If you lost money or shared details, report it to Report Fraud in England, Wales, or Northern Ireland, or to Police Scotland on 101 in Scotland."
       ]
     ],
     "keywords": [
@@ -4576,27 +4576,27 @@
     "sections": [
       [
         "What an Apple Pay scam looks like",
-        "An Apple Pay scam uses a call, text, or email that pretends to be from Apple or your bank, claiming there is \"suspicious activity\" on your Apple Pay or that it has been \"locked\", so you click a link or hand over details. An example of the style is: `Apple Pay: a payment of £79.99 was authorised on your account. If this wasn't you, verify now: apple-pay-secure.example`.\n\nThe goal is to capture your Apple ID, card details, or bank login — or, in the worst version, to talk you into \"moving money to a safe account\". This guide shows the warning signs, how to check, and what to do if you have already responded."
+        "An Apple Pay scam uses a call, text, or email that pretends to be from Apple or your bank, claiming there is \"suspicious activity\" on your Apple Pay or that it has been \"locked\", so you click a link or hand over details. An example of the style is: `Apple Pay: a payment of £79.99 was authorised on your account. If this wasn't you, verify now: apple-pay-secure.example`.\n\nThe goal is to capture your Apple ID, card details, or bank login - or, in the worst version, to talk you into \"moving money to a safe account\". This guide shows the warning signs, how to check, and what to do if you have already responded."
       ],
       [
         "Why these scams are convincing",
-        "Apple and Apple Pay are trusted, and a specific amount or a \"locked account\" warning creates instant alarm. The sender ID, caller number, and links can all be faked, and a follow-up call may pose as your bank's fraud team to seem helpful.\n\nThe distinction that protects you: genuine Apple Pay activity shows in the Wallet app, and neither Apple nor your bank will ask you to \"verify\" through a link or to move your money to another account to keep it safe."
+        "Apple and Apple Pay are trusted, and a specific amount or a \"locked account\" warning creates instant alarm. The sender ID, caller number, and links can all be faked, and a follow-up call may pose as your bank's fraud team to seem helpful.\n\nThe distinction that protects you: do not verify Apple Pay, Apple ID, or bank details through an unexpected link. Check directly in Wallet and your bank/card account, and contact your bank yourself if you think a card is affected. Neither Apple nor your bank will ask you to move money to a new \"safe\" account to keep it protected."
       ],
       [
         "Signs an Apple Pay message is a scam",
-        "- It claims suspicious activity, a locked account, or an unrecognised payment, and wants you to act now.\n- It asks you to \"verify\" through a link, or to confirm your Apple ID, card, or bank details.\n- It tells you to move money to a new, \"safe\", or \"holding\" account.\n- The link is not apple.com or your bank's site (a lookalike such as `apple-pay-secure.example`).\n- A caller claims to be Apple or your bank and pressures you to act or stay on the line.\n- You are asked to read out a one-time passcode."
+        "- It claims suspicious activity, a locked account, or an unrecognised payment, and wants you to act now.\n- It asks you to \"verify\" through a link, or to confirm your Apple ID, card, or bank details.\n- It tells you to move money to a new, \"safe\", or \"holding\" account.\n- The link is not `apple.com` or your bank's site, for example a lookalike such as `apple-pay-secure.example`.\n- A caller claims to be Apple or your bank and pressures you to act or stay on the line.\n- You are asked to read out a one-time passcode."
       ],
       [
         "How the scam works",
-        "First, a message or call warns of a problem with your Apple Pay. Second, urgency pushes you to click a link or keep talking. Third, a fake Apple or bank page captures your Apple ID, card, or login — or the caller talks you through \"securing\" your money. Fourth, criminals use the details for fraud, or the \"safe account\" transfer sends your money straight to them. Fifth, they may call again posing as your bank.\n\nChecking the Wallet app and contacting your bank yourself breaks the chain."
+        "First, a message or call warns of a problem with your Apple Pay. Second, urgency pushes you to click a link or keep talking. Third, a fake Apple or bank page captures your Apple ID, card, or login - or the caller talks you through \"securing\" your money. Fourth, criminals use the details for fraud, or the \"safe account\" transfer sends your money straight to them. Fifth, they may call again posing as your bank.\n\nChecking Wallet, checking your bank/card account directly, and contacting your bank yourself breaks the chain."
       ],
       [
         "How to check an Apple Pay alert safely",
-        "If anything feels rushed, stop. A genuine alert survives a pause.\n\n- Open the Wallet app and check your cards and recent transactions there.\n- If you think a card is affected, call your bank on 159 or the number on your card.\n- Never move money to a \"safe\", \"holding\", or \"protected\" account — no bank or Apple will ever ask you to.\n- Do not click links or read out a one-time passcode from a message or call.\n- Manage your Apple ID by typing apple.com yourself, not through a link.\n\nIf you are unsure whether a linked page is genuine, our guide on /guides/is-this-website-a-scam/ helps, and our /guides/impersonation-scams-when-criminals-pretend-to-be-your-bank-or-the-police/ guide covers the bank-impersonation and safe-account con."
+        "If anything feels rushed, stop. A genuine alert survives a pause.\n\n- Open the Wallet app and your bank/card app directly to check cards and recent activity.\n- If you think a card is affected, call your bank on 159 or the number on your card.\n- Never move money to a \"safe\", \"holding\", or \"protected\" account - no bank or Apple will ask you to do that.\n- Do not click links or read out a one-time passcode from a message or call.\n- Manage your Apple ID by typing `apple.com` yourself, not through a link.\n\nIf you are unsure whether a linked page is genuine, our guide on /guides/is-this-website-a-scam/ helps, and our /guides/impersonation-scams-when-criminals-pretend-to-be-your-bank-or-the-police/ guide covers the bank-impersonation and safe-account con."
       ],
       [
         "If you responded or shared details",
-        "If you shared card or bank details, or moved money, contact your bank immediately on 159 or the number on your card, tell them it was a scam, and ask them to secure the account and try to recover any payment. If you sent money by UK bank transfer on or after 7 October 2024, mandatory APP fraud reimbursement rules may apply to Faster Payments and CHAPS transfers. The PSR rules include a 13-month claim window, a maximum claim amount of £85,000, possible exclusions, and a possible excess of up to £100. Report it to your bank as soon as possible.\n\nIf you gave away your Apple ID password, change it by typing apple.com yourself and turn on two-factor authentication. If you shared personal details, consider Cifas Protective Registration at `cifas.org.uk` and monitor your credit reports with Experian, Equifax, and TransUnion. Keep the message or caller number as evidence."
+        "If you shared card or bank details, or moved money, contact your bank immediately on 159 or the number on your card, tell them it was a scam, and ask them to secure the account and try to recover any payment. If you sent money by UK bank transfer on or after 7 October 2024, mandatory APP fraud reimbursement rules may apply to Faster Payments and CHAPS transfers. The PSR rules include a 13-month claim window, reimbursement within 5 business days in many cases, a maximum claim amount of £85,000, possible exclusions, and a possible excess of up to £100. The rules do not cover every payment type or every situation, so report it to your bank as soon as possible.\n\nIf you gave away your Apple ID password, change it by typing `apple.com` yourself and turn on two-factor authentication. If you shared personal details, consider Cifas Protective Registration at `cifas.org.uk` and monitor your credit reports with Experian, Equifax, and TransUnion. Keep the message or caller number as evidence."
       ],
       [
         "How to report an Apple Pay scam (UK)",
@@ -4606,23 +4606,23 @@
     "faq": [
       [
         "Is Apple Pay safe, or are these alerts real?",
-        "Apple Pay itself is secure. The scam is the impersonation around it. Genuine activity shows in the Wallet app, and neither Apple nor your bank will ask you to verify through a link or move money to a \"safe account\"."
+        "Apple Pay itself is secure. The scam is the impersonation around it. Do not verify through an unexpected link. Check Wallet and your bank/card account directly, and contact your bank yourself if you think a card is affected."
       ],
       [
-        "Apple Pay 'locked my account' and wants me to verify — is that genuine?",
-        "No. An unexpected message asking you to verify your Apple Pay through a link is phishing. Check the Wallet app, and contact your bank on 159 if you think a card is affected."
+        "Apple Pay 'locked my account' and wants me to verify - is that genuine?",
+        "No. An unexpected message asking you to verify Apple Pay through a link is phishing. Check Wallet and your bank/card account directly, and contact your bank on 159 if you think a card is affected."
       ],
       [
-        "Someone says my money is at risk and I must move it to a safe account — real?",
-        "No. That is always a scam, however convincing the caller. No bank or Apple will ever ask you to move money to a safe, holding, or protected account. Hang up and call your bank on 159."
+        "Someone says my money is at risk and I must move it to a safe account - real?",
+        "No. That is a scam, however convincing the caller. No bank or Apple will ask you to move money to a safe, holding, or protected account. Hang up and call your bank on 159."
       ],
       [
-        "I shared my details or moved money — can I get it back?",
+        "I shared my details or moved money - can I get it back?",
         "Maybe. Tell your bank immediately on 159 or the number on your card. A card payment may be recoverable through chargeback, and eligible UK transfers since 7 October 2024 may fall under APP reimbursement rules, subject to limits and exclusions."
       ],
       [
         "How do I report an Apple Pay scam text or email?",
-        "Forward scam texts to 7726 and scam emails to `report@phishing.gov.uk` (you can also report Apple-impersonation phishing to `reportphishing@apple.com`). If you lost money, report it to Report Fraud in England, Wales, or Northern Ireland, or to Police Scotland on 101 in Scotland."
+        "Forward scam texts to 7726 and scam emails to `report@phishing.gov.uk`. You can also report Apple-impersonation phishing to `reportphishing@apple.com`. If you lost money, report it to Report Fraud in England, Wales, or Northern Ireland, or to Police Scotland on 101 in Scotland."
       ]
     ],
     "keywords": [
@@ -4982,15 +4982,15 @@
     "sections": [
       [
         "What a Depop scam looks like",
-        "Depop is a genuine UK resale app, but criminals exploit it. The most common con is a seller (often on a hacked or throwaway account) who pushes you to pay outside Depop — by bank transfer or PayPal \"friends and family\" — then disappears with your money. An example of the style is: `Hi! I can do £45 for the trainers if you pay by bank transfer or PayPal friends & family — Depop takes a fee so it's cheaper to go off-app x`.\n\nOther versions include fake high-value listings, \"I've sent it, here's a tracking link\" phishing, and overpayment tricks aimed at sellers. This guide shows the warning signs, how to buy and sell safely, and what to do if you have already paid."
+        "Depop is a genuine resale app, but criminals exploit it. The most common con is a seller, often on a hacked or throwaway account, who pushes you to pay outside Depop - by bank transfer or PayPal \"friends and family\" - then disappears with your money. An example of the style is: `Hi! I can do £45 for the trainers if you pay by bank transfer or PayPal friends & family - Depop takes a fee so it's cheaper to go off-app x`.\n\nOther versions include fake high-value listings, \"I've sent it, here's a tracking link\" phishing, and overpayment tricks aimed at sellers. This guide shows the warning signs, how to buy and sell safely, and what to do if you have already paid."
       ],
       [
         "Why these scams work",
-        "A small discount for paying off-app sounds reasonable, and a hacked account can carry genuine reviews and followers, so it looks trustworthy. Scammers add urgency — \"another buyer is interested\" — to rush you.\n\nThe rule that protects you: pay through Depop's own checkout, which carries buyer protection, and never pay by bank transfer or PayPal \"friends and family\". The moment a payment leaves the app, your protection goes with it."
+        "A small discount for paying off-app sounds reasonable, and a hacked account can carry genuine reviews and followers, so it looks trustworthy. Scammers add urgency - \"another buyer is interested\" - to rush you.\n\nThe rule that protects you: keep messages and payment inside Depop. Depop tells users not to pay or share private information outside the app because keeping transactions in app is what lets Depop help protect them. PayPal \"friends and family\" is a personal-payment route and is not the same as paying for an eligible purchase with Purchase Protection."
       ],
       [
         "Signs a Depop deal is a scam",
-        "- The seller asks you to pay by bank transfer or PayPal \"friends and family\".\n- They want to move the chat or payment off Depop, to WhatsApp, Instagram, or email.\n- A discount is offered specifically for paying off-app.\n- The price is far below the going rate, or the deal is rushed.\n- A \"seller\" sends a tracking or payment link asking you to log in or enter card details.\n- The account is new, or its style and posts changed recently (a sign it was hacked).\n- A buyer \"overpays\" and asks you to refund the difference."
+        "- The seller asks you to pay by bank transfer or PayPal \"friends and family\".\n- They want to move the chat or payment off Depop, to WhatsApp, Instagram, or email.\n- A discount is offered specifically for paying off-app.\n- The price is far below the going rate, or the deal is rushed.\n- A \"seller\" sends a tracking or payment link asking you to log in or enter card details.\n- The account is new, or its style and posts changed recently, which can be a sign it was hacked.\n- A buyer \"overpays\" and asks you to refund the difference."
       ],
       [
         "How the scam works",
@@ -4998,37 +4998,37 @@
       ],
       [
         "How to buy and sell safely on Depop",
-        "Keep everything inside the app.\n\n- Pay through Depop's checkout so your purchase is covered by buyer protection.\n- Never pay by bank transfer or PayPal \"friends and family\", however small the discount.\n- Keep all messages and payment on Depop, and ignore requests to move off-app.\n- As a seller, only post an item once the payment shows in your Depop balance — ignore emailed \"payment confirmations\".\n- Be wary of new accounts, prices that are too good, and pressure to rush.\n\nIf you are unsure whether a linked page is genuine, our guide on /guides/is-this-website-a-scam/ helps, and our /guides/vinted-buyer-scam-uk/ and /guides/paypal-friends-family-scam-uk/ guides cover related resale and payment cons."
+        "Keep everything inside the app.\n\n- Pay through Depop checkout and keep the transaction in app.\n- Never pay by bank transfer or PayPal \"friends and family\", however small the discount.\n- Keep all messages and payment on Depop, and ignore requests to move off-app.\n- As a seller, only post an item once the payment is visible through Depop's legitimate in-app payment flow - ignore emailed \"payment confirmations\".\n- Be wary of new accounts, prices that are too good, and pressure to rush.\n\nIf you are unsure whether a linked page is genuine, our guide on /guides/is-this-website-a-scam/ helps, and our /guides/vinted-buyer-scam-uk/ and /guides/paypal-friends-family-scam-uk/ guides cover related resale and payment cons."
       ],
       [
         "If you have already paid or shared details",
-        "If you paid by card, contact your bank or card issuer using the number on your card and ask about disputing the payment or a chargeback. If you sent money by UK bank transfer on or after 7 October 2024, mandatory APP fraud reimbursement rules may apply to Faster Payments and CHAPS transfers. The PSR rules include a 13-month claim window, a maximum claim amount of £85,000, possible exclusions, and a possible excess of up to £100. Report it to your bank as soon as possible. If you paid by PayPal \"friends and family\", contact PayPal, though that payment type has little buyer protection.\n\nIf you entered your login or card on a fake page, change your Depop password (and anywhere you reused it) and tell your bank. If you shared identity details, consider Cifas Protective Registration at `cifas.org.uk` and monitor your credit reports with Experian, Equifax, and TransUnion. Report the account to Depop and keep the listing, profile, and chat as evidence."
+        "If you paid by card, contact your bank or card issuer using the number on your card and ask about disputing the payment or a chargeback. If you sent money by UK bank transfer on or after 7 October 2024, mandatory APP fraud reimbursement rules may apply to Faster Payments and CHAPS transfers. The PSR rules include a 13-month claim window, reimbursement within 5 business days in many cases, a maximum claim amount of £85,000, possible exclusions, and a possible excess of up to £100. The rules do not cover every payment type or every situation, so report it to your bank as soon as possible. If you paid by PayPal \"friends and family\", contact PayPal, but do not assume Purchase Protection applies to that payment type.\n\nIf you entered your login or card on a fake page, change your Depop password and anywhere you reused it, then tell your bank. If you shared identity details, consider Cifas Protective Registration at `cifas.org.uk` and monitor your credit reports with Experian, Equifax, and TransUnion. Report the account to Depop and keep the listing, profile, and chat as evidence."
       ],
       [
         "How to report a Depop scam (UK)",
-        "Report the seller or buyer in the app using Report, and contact Depop support with screenshots of the listing, profile, and messages. If a scam link reached you by email, forward it to the NCSC at `report@phishing.gov.uk`; if by text, forward it to 7726.\n\nIf you lost money or shared sensitive information, report it to Report Fraud at `reportfraud.police.uk` or on 0300 123 2040 if you are in England, Wales, or Northern Ireland. In Scotland, report to Police Scotland on 101. Tell your bank as soon as possible if money moved."
+        "Report the seller or buyer in the app using Report, and contact Depop through the Help Centre with screenshots of the listing, profile, and messages. Depop's current help page lists `support@depophelp.zendesk.com` as a support channel, not `support@depop.com`. If you receive a suspicious email, SMS, social-media message, or website claiming to be Depop, Depop says to report it to `reportphishing@depop.com`.\n\nIf a scam link reached you by email, forward it to the NCSC at `report@phishing.gov.uk`; if by text, forward it to 7726.\n\nIf you lost money or shared sensitive information, report it to Report Fraud at `reportfraud.police.uk` or on 0300 123 2040 if you are in England, Wales, or Northern Ireland. In Scotland, report to Police Scotland on 101. Tell your bank as soon as possible if money moved."
       ]
     ],
     "faq": [
       [
         "Is Depop safe to use, or should I avoid it?",
-        "Depop is a genuine marketplace; the risk is off-platform payments. If you pay through Depop's checkout you have buyer protection. The danger sign is a seller who wants a bank transfer or PayPal \"friends and family\" payment."
+        "Depop is a genuine marketplace; the risk is off-platform payments. Keep payment and messages inside Depop. The danger sign is a seller who wants a bank transfer or PayPal \"friends and family\" payment."
       ],
       [
-        "A seller offers a discount to pay by bank transfer or 'friends and family' — is that ok?",
-        "No. That is the most common Depop scam. Paying off-app removes your buyer protection, and the item often never arrives. Pay through Depop's checkout only."
+        "A seller offers a discount to pay by bank transfer or 'friends and family' - is that ok?",
+        "No. That is the most common Depop scam pattern. Paying off-app removes Depop's ability to help protect the transaction, and the item often never arrives. Pay through Depop checkout only."
       ],
       [
         "How can I tell if a seller's account was hacked rather than a deliberate scam?",
         "You often cannot, and it does not change what you should do. A sudden change in what an account posts, or a long-standing account suddenly pushing off-app payment, can both signal a takeover. Keep the deal on Depop either way."
       ],
       [
-        "I've already paid a Depop scammer — can I get my money back?",
-        "Possibly. If you paid by card, ask your bank about a chargeback. Eligible UK transfers since 7 October 2024 may fall under APP reimbursement rules, subject to limits and exclusions. PayPal \"friends and family\" payments have little protection. Report it quickly."
+        "I've already paid a Depop scammer - can I get my money back?",
+        "Possibly. If you paid by card, ask your bank about a chargeback. Eligible UK transfers since 7 October 2024 may fall under APP reimbursement rules, subject to limits and exclusions. PayPal \"friends and family\" payments should not be assumed to have Purchase Protection. Report it quickly."
       ],
       [
         "How do I report a Depop scam?",
-        "Report the user in the app and contact Depop support with screenshots. If you lost money or shared details, report it to Report Fraud in England, Wales, or Northern Ireland, or to Police Scotland on 101 in Scotland."
+        "Report the user in the app and contact Depop through the Help Centre with screenshots. Report suspicious Depop-impersonation messages to `reportphishing@depop.com`. If you lost money or shared details, report it to Report Fraud in England, Wales, or Northern Ireland, or to Police Scotland on 101 in Scotland."
       ]
     ],
     "keywords": [
@@ -5132,7 +5132,7 @@
       ],
       [
         "Why these scams are convincing",
-        "A competitive rental market makes a cheap, well-photographed listing feel like a lucky find, and pressure — \"other applicants are waiting\" — pushes you to pay fast. The photos are often genuine, lifted from a real advert, which is why they look right.\n\nThe rule that protects you: never pay a deposit, holding fee, or first month's rent for a property you have not viewed in person, and never transfer money to \"hold\" a place. Rightmove is an advertising portal — it does not take rent or deposits, so any in-listing \"payment\" instruction is a scam."
+        "A competitive rental market makes a cheap, well-photographed listing feel like a lucky find, and pressure - \"other applicants are waiting\" - pushes you to pay fast. The photos are often genuine, lifted from a real advert, which is why they look right.\n\nThe rule that protects you: do not pay a deposit, holding deposit, or first month's rent for a property you have not viewed in person and verified through a legitimate landlord or agent. Rightmove is a property advertising portal, not the landlord or payment collector for your tenancy, so any in-listing instruction to send money directly to \"secure\" the property should be treated as a serious red flag."
       ],
       [
         "Signs a rental listing or landlord is a scam",
@@ -5140,41 +5140,41 @@
       ],
       [
         "How the scam works",
-        "First, a tempting listing appears at a low rent. Second, the landlord explains they cannot show it and offers keys after payment. Third, they ask for a deposit or holding fee by bank transfer. Fourth, you pay and the keys never come, or more \"fees\" are demanded. Finally, contact stops.\n\nBecause a bank transfer has little built-in protection, viewing the property and verifying the landlord or agent before any money moves is the only reliable defence."
+        "First, a tempting listing appears at a low rent. Second, the landlord explains they cannot show it and offers keys after payment. Third, they ask for a deposit or holding fee by bank transfer. Fourth, you pay and the keys never come, or more \"fees\" are demanded. Finally, contact stops.\n\nBecause a bank transfer has little built-in protection compared with card payments, viewing the property and verifying the landlord or agent before any money moves is the safest defence."
       ],
       [
         "How to rent safely",
-        "Slow the process down and verify before paying anything.\n\n- View the property in person (or via a live video walkthrough you control) before paying a penny.\n- Never transfer a deposit or holding fee to \"hold\" a property you have not seen.\n- Verify a letting agent independently — find their details yourself and check they are a real, registered agent.\n- Remember a genuine tenancy deposit must be protected in a government-approved deposit scheme; ask which one.\n- Be wary of a landlord who is \"abroad\", cannot meet, or rushes you.\n\nIf you are unsure whether a listing or site is genuine, our guide on /guides/is-this-website-a-scam/ helps, and our /guides/airbnb-scam-uk-listings/ and /guides/council-housing-scam-uk/ guides cover related property cons."
+        "Slow the process down and verify before paying anything.\n\n- View the property in person before paying a deposit, holding deposit, or first month's rent.\n- Never transfer money to \"hold\" a property you have not seen and verified.\n- Verify a letting agent independently - find their details yourself and check they are a real, registered agent.\n- Ask which tenancy deposit scheme will protect your deposit. In England and Wales, most assured shorthold tenancy deposits must be protected in a government-backed scheme.\n- Be wary of a landlord who is \"abroad\", cannot meet, or rushes you.\n\nIf you are unsure whether a listing or site is genuine, our guide on /guides/is-this-website-a-scam/ helps, and our /guides/airbnb-scam-uk-listings/ and /guides/council-housing-scam-uk/ guides cover related property cons."
       ],
       [
         "If you have already paid",
-        "If you paid by card, contact your bank or card issuer using the number on your card and ask about disputing the payment or a chargeback. If you sent money by UK bank transfer on or after 7 October 2024, mandatory APP fraud reimbursement rules may apply to Faster Payments and CHAPS transfers. The PSR rules include a 13-month claim window, a maximum claim amount of £85,000, possible exclusions, and a possible excess of up to £100. Report it to your bank as soon as possible.\n\nIf you shared identity documents or proof-of-income paperwork, consider Cifas Protective Registration at `cifas.org.uk` and monitor your credit reports with Experian, Equifax, and TransUnion. Report the listing to Rightmove, and keep the advert, messages, and payment details as evidence."
+        "If you paid by card, contact your bank or card issuer using the number on your card and ask about disputing the payment or a chargeback. If you sent money by UK bank transfer on or after 7 October 2024, mandatory APP fraud reimbursement rules may apply to Faster Payments and CHAPS transfers. The PSR rules include a 13-month claim window, reimbursement within 5 business days in many cases, a maximum claim amount of £85,000, possible exclusions, and a possible excess of up to £100. The rules do not cover every payment type or every situation, so report it to your bank as soon as possible.\n\nIf you shared identity documents or proof-of-income paperwork, consider Cifas Protective Registration at `cifas.org.uk` and monitor your credit reports with Experian, Equifax, and TransUnion. Report the listing to Rightmove through the listing/report or Contact Us route, and keep the advert, messages, and payment details as evidence."
       ],
       [
         "How to report a fake Rightmove rental (UK)",
-        "Report the listing to Rightmove using the report option on the property page. If the scammer contacted you by email, forward it to the NCSC at `report@phishing.gov.uk`; if by text, forward it to 7726.\n\nIf you lost money or shared sensitive information, report it to Report Fraud at `reportfraud.police.uk` or on 0300 123 2040 if you are in England, Wales, or Northern Ireland. In Scotland, report to Police Scotland on 101. Tell your bank as soon as possible if money moved, and keep all the evidence."
+        "Report the listing to Rightmove using the report option on the property page where available, or through Rightmove's Contact Us route for suspicious adverts and communications. I could not confirm `fraud@rightmove.co.uk` from Rightmove's current public safety page, so use Rightmove's current in-site route rather than relying on that email address.\n\nIf the scammer contacted you by email, forward it to the NCSC at `report@phishing.gov.uk`; if by text, forward it to 7726.\n\nIf you lost money or shared sensitive information, report it to Report Fraud at `reportfraud.police.uk` or on 0300 123 2040 if you are in England, Wales, or Northern Ireland. In Scotland, report to Police Scotland on 101. Tell your bank as soon as possible if money moved, and keep all the evidence."
       ]
     ],
     "faq": [
       [
         "Is Rightmove a scam, or just used by scammers?",
-        "Rightmove is a genuine property portal; criminals abuse it with fake or cloned listings. The danger sign is not the site — it is a landlord who cannot let you view the property and wants money transferred to hold it."
+        "Rightmove is a genuine property portal; criminals can abuse property portals with fake or cloned listings. The danger sign is not the site - it is a landlord who cannot let you view the property and wants money transferred to hold it."
       ],
       [
-        "A landlord is abroad and will post the keys after I pay a deposit — is that real?",
-        "No. That is the classic rental scam. Never transfer a deposit or holding fee for a property you have not viewed, and be very wary of any landlord who cannot meet or show you the home."
+        "A landlord is abroad and will post the keys after I pay a deposit - is that real?",
+        "No. That is the classic rental scam pattern. Do not transfer a deposit or holding fee for a property you have not viewed and verified, and be very wary of any landlord who cannot meet or show you the home."
       ],
       [
-        "The 'landlord' keeps asking for more admin or final-payment fees — what now?",
+        "The 'landlord' keeps asking for more admin or final-payment fees - what now?",
         "Stop paying. Escalating fees are a clear scam sign. Do not send any more money, and report it. Keep every message and payment reference as evidence."
       ],
       [
-        "I've sent a deposit to a fake landlord — can I get it back?",
+        "I've sent a deposit to a fake landlord - can I get it back?",
         "Possibly. Tell your bank immediately. A card payment may be recoverable through chargeback, and eligible UK transfers since 7 October 2024 may fall under APP reimbursement rules, subject to limits and exclusions."
       ],
       [
         "How do I report a fake Rightmove listing?",
-        "Report it to Rightmove using the report option on the listing, then report it to Report Fraud in England, Wales, or Northern Ireland, or to Police Scotland on 101 in Scotland. Tell your bank if money moved."
+        "Report it through the listing/report option where available or through Rightmove's Contact Us route, then report it to Report Fraud in England, Wales, or Northern Ireland, or to Police Scotland on 101 in Scotland. Tell your bank if money moved."
       ]
     ],
     "keywords": [
