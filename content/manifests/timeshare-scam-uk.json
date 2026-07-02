@@ -1,0 +1,21 @@
+{
+  "slug": "timeshare-scam-uk",
+  "title": "Timeshare Scam UK: How to Spot and Avoid Holiday Property Traps",
+  "date": "2026-07-02",
+  "model": "claude-haiku-4-5-20251001",
+  "gate_passed": true,
+  "claims": [
+    {
+      "type": "legislation",
+      "severity": "flag",
+      "text": "the Consumer Credit Act",
+      "detail": "makes a legal/legislation claim ('the Consumer Credit Act') — verify it is accurate."
+    },
+    {
+      "type": "shortcode_attribution",
+      "severity": "flag",
+      "text": "7726 (this alerts your mobile provider and the NCSC",
+      "detail": "attributes 7726 to the NCSC. 7726 is the free spam-reporting shortcode run by the mobile networks; the NCSC runs report@phishing.gov.uk for suspicious EMAILS."
+    }
+  ]
+}
