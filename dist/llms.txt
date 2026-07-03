@@ -18,7 +18,7 @@
 - [Social Media Scams](https://beatthescam.com/categories/social/): 6 guide(s)
 - [Tech Support Scams](https://beatthescam.com/categories/tech/): 12 guide(s)
 - [Text Message Scams](https://beatthescam.com/categories/sms/): 24 guide(s)
-- [Travel Scams](https://beatthescam.com/categories/travel/): 11 guide(s)
+- [Travel Scams](https://beatthescam.com/categories/travel/): 12 guide(s)
 - [Utility Scams](https://beatthescam.com/categories/utility/): 3 guide(s)
 - [Website Scams](https://beatthescam.com/categories/website/): 12 guide(s)
 
@@ -241,6 +241,7 @@
 - [Holiday Let Scam UK: How to Spot Fake Rental Listings and Protect Your Money](https://beatthescam.com/guides/holiday-let-scam-uk/): Holiday let scams target UK holidaymakers by posting fake rental properties on legitimate platforms or fraudulent websites. Scammers typically request upfront deposits or full payment via untraceable methods, then disappear or use stolen photos.
 - [Jet2 Holiday Scam UK: How to Spot and Avoid Fake Booking Websites](https://beatthescam.com/guides/jet2-holiday-scam-uk/): Jet2 holiday scams target UK travellers through convincing fake websites, text messages, and emails offering unusually cheap flights and package deals. Scammers collect payment and passport details, then disappear—leaving victims without flights or refunds.
 - [Package Holiday Scam UK: How to Spot Fake Travel Deals and Protect Yourself](https://beatthescam.com/guides/package-holiday-scam-uk/): Package holiday scams target UK travellers with too-good-to-be-true deals on flights, hotels, and complete holiday packages. Fraudsters impersonate legitimate travel agents, create fake websites, and use social media to lure victims into paying upfront for holidays that never exist.
+- [Timeshare Scam UK: How to Spot and Avoid Holiday Property Traps](https://beatthescam.com/guides/timeshare-scam-uk/): Timeshare scams lure UK consumers with promises of cheap holidays, luxury properties, and investment returns, then trap them in expensive contracts they cannot escape. This guide explains how the scam works, what warning signs to watch for, and what to do if you have already been caught.
 - [TUI Booking Scam UK: How to Spot Fake Holiday Offers and Protect Yourself](https://beatthescam.com/guides/tui-booking-scam-uk/): TUI booking scams target UK holidaymakers with fake confirmation emails, texts, and websites that look identical to the real TUI platform. Scammers create urgency around payment, cancellation fees, or security issues to trick you into sending money or revealing personal details.
 - [Visa Application Scam UK: How to Spot Fake Immigration Services](https://beatthescam.com/guides/visa-application-scam-uk/): Visa application scams target people applying for UK visas by impersonating official government services or legitimate visa consultants. Fraudsters create convincing websites and emails to collect application fees and steal identity documents, leaving victims without a visa and thousands of pounds out of pocket.
 
