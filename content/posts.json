@@ -948,7 +948,7 @@
       ],
       [
         "Why these scams are convincing",
-        "Emotional appeals around disasters, illness, or vulnerable people override the caution people would normally apply, and a scammer can copy a real charity's name, logo, and branding closely. Urgency — \"donate before midnight\" — pushes people to give without checking.\n\nThe fact that protects you: every genuine UK charity above a certain size is registered with the Charity Commission (or its Scottish or Northern Irish equivalent), and you can check any charity's registration number independently before giving."
+        "Emotional appeals around disasters, illness, or vulnerable people override the caution people would normally apply, and a scammer can copy a real charity's name, logo, and branding closely. Urgency — \"donate before midnight\" — pushes people to give without checking.\n\nThe fact that protects you: registered charities can be checked independently, but the correct register depends on where the charity is registered. England and Wales use the Charity Commission register, Scotland uses OSCR, and Northern Ireland uses CCNI. If an appeal gives a registration number, verify that the name, number, and cause match before giving."
       ],
       [
         "Signs a charity appeal is a scam",
@@ -960,7 +960,7 @@
       ],
       [
         "How to donate safely",
-        "Take a moment to check before you give.\n\n- Check the charity's registration number on the Charity Commission register (or the Scottish or Northern Irish equivalent) before donating.\n- Ask a street or doorstep collector for their ID badge and a genuine, sealed collection tin.\n- Donate directly through the charity's own website, which you reach by typing the address yourself, rather than a link in a message.\n- Be wary of any request to donate by bank transfer, gift card, or cryptocurrency.\n- Give directly to well-known, established charities if you are ever unsure about a lesser-known appeal.\n\nIf you are unsure whether a linked site is genuine, our guide on /guides/is-this-website-a-scam/ helps, and our /guides/advance-fee-scam-uk/ guide covers other pressure-based scam patterns."
+        "Take a moment to check before you give.\n\n- Check the charity's registration number on the Charity Commission register, OSCR, or CCNI, depending on where it claims to be registered.\n- Ask a street or doorstep collector for their ID badge and a genuine, sealed collection tin.\n- Donate directly through the charity's own website, which you reach by typing the address yourself, rather than a link in a message.\n- Be wary of any request to donate by bank transfer, gift card, or cryptocurrency.\n- Give directly to well-known, established charities if you are ever unsure about a lesser-known appeal.\n\nIf you are unsure whether a linked site is genuine, our guide on /guides/is-this-website-a-scam/ helps, and our /guides/advance-fee-scam-uk/ guide covers other pressure-based scam patterns."
       ],
       [
         "If you have already donated to a fake charity",
@@ -968,13 +968,13 @@
       ],
       [
         "How to report a charity scam (UK)",
-        "Report a suspected fake or fraudulent charity to the Charity Commission (or the Scottish or Northern Irish equivalent). If the scam reached you by email, forward it to the NCSC at `report@phishing.gov.uk`; if by text, forward it to 7726.\n\nIf you lost money, report it to Report Fraud at `reportfraud.police.uk` or on 0300 123 2040 if you are in England, Wales, or Northern Ireland. In Scotland, report to Police Scotland on 101. Keep all your evidence, including the charity name and any collector or contact details."
+        "Report a suspected fake or fraudulent charity to the Charity Commission for England and Wales, OSCR in Scotland, or CCNI in Northern Ireland, depending on the charity or appeal. If the scam reached you by email, forward it to the NCSC at `report@phishing.gov.uk`; if by text, forward it to 7726.\n\nIf you lost money, report it to Report Fraud at `reportfraud.police.uk` or on 0300 123 2040 if you are in England, Wales, or Northern Ireland. In Scotland, report to Police Scotland on 101. Keep all your evidence, including the charity name and any collector or contact details."
       ]
     ],
     "faq": [
       [
         "How can I check if a charity collector is genuine?",
-        "Ask to see their ID badge and check the charity's registration number on the Charity Commission register (or the Scottish or Northern Irish equivalent) independently, rather than trusting a badge or tin alone."
+        "Ask to see their ID badge and check the charity's registration number on the appropriate official register independently, rather than trusting a badge or tin alone."
       ],
       [
         "A text or email asks me to donate to a disaster appeal urgently — is that safe?",
@@ -990,7 +990,7 @@
       ],
       [
         "How do I report a fake charity?",
-        "Report it to the Charity Commission (or the Scottish or Northern Irish equivalent). Forward scam emails to `report@phishing.gov.uk` and scam texts to 7726. If you lost money, report it to Report Fraud in England, Wales, or Northern Ireland, or to Police Scotland on 101 in Scotland."
+        "Report it to the relevant charity regulator: the Charity Commission for England and Wales, OSCR in Scotland, or CCNI in Northern Ireland. Forward scam emails to `report@phishing.gov.uk` and scam texts to 7726. If you lost money, report it to Report Fraud in England, Wales, or Northern Ireland, or to Police Scotland on 101 in Scotland."
       ]
     ],
     "keywords": [
@@ -1364,7 +1364,7 @@
       ],
       [
         "Why these scams are convincing",
-        "Fake celebrity endorsements, often created with manipulated images, video, or deepfakes, borrow a well-known face's credibility. Slick apps and dashboards showing steady, rising profits look like a genuine trading platform, and contact through social media or a dating app can build weeks of trust before money is mentioned.\n\nThe fact that protects you: no genuine investment can guarantee returns, and the FCA warns that crypto is high risk — you should be prepared to lose all the money you put in, even with a regulated firm."
+        "Fake celebrity endorsements, sometimes using manipulated images, video, or deepfakes, borrow a well-known face's credibility. Slick apps and dashboards showing steady, rising profits look like a genuine trading platform, and contact through social media or a dating app can build weeks of trust before money is mentioned.\n\nThe fact that protects you: no genuine investment can guarantee returns, and the FCA warns that crypto is high risk — you should be prepared to lose all the money you put in, even with a regulated firm."
       ],
       [
         "Signs a crypto investment is a scam",
@@ -1380,7 +1380,7 @@
       ],
       [
         "If you have already invested",
-        "Contact the exchange or platform you sent funds from as soon as possible, though recovery is often very limited once crypto has moved on. If you paid by card to buy the crypto in the first place, contact your bank or card issuer and ask about disputing that initial payment. If you sent money by UK bank transfer on or after 7 October 2024, mandatory APP fraud reimbursement rules may apply to Faster Payments and CHAPS transfers. The PSR rules include a 13-month claim window, a maximum claim amount of £85,000, possible exclusions, and a possible excess of up to £100. Report it to your bank as soon as possible. for any bank transfer used to fund the purchase.\n\nDo not pay anyone who contacts you offering to \"recover\" your lost money for a fee — that is a second scam. If you shared identity details, consider Cifas Protective Registration at `cifas.org.uk` and monitor your credit reports with Experian, Equifax, and TransUnion. Keep screenshots, wallet addresses, and all messages as evidence."
+        "Contact the exchange or platform you sent funds from as soon as possible, though recovery is often very limited once crypto has moved on. If you paid by card to buy the crypto in the first place, contact your bank or card issuer and ask about disputing that initial payment. If you sent money by UK bank transfer on or after 7 October 2024, mandatory APP fraud reimbursement rules may apply to Faster Payments and CHAPS transfers. The PSR rules include a 13-month claim window, a maximum claim amount of £85,000, possible exclusions, and a possible excess of up to £100. Report any bank transfer used to fund the purchase to your bank as soon as possible.\n\nDo not pay anyone who contacts you offering to \"recover\" your lost money for a fee — that is a second scam. If you shared identity details, consider Cifas Protective Registration at `cifas.org.uk` and monitor your credit reports with Experian, Equifax, and TransUnion. Keep screenshots, wallet addresses, and all messages as evidence."
       ],
       [
         "How to report a crypto investment scam (UK)",
@@ -2138,7 +2138,7 @@
     "sections": [
       [
         "What a Temu impersonation scam looks like",
-        "Temu is a genuine, if controversial, low-cost shopping platform — the scam is criminals impersonating Temu through fake cashback offers, \"free gift\" texts, or lookalike websites to harvest your card and personal details. An example of the style is: `Temu: You've been selected for a £750 shopping spree! Claim your reward now: temu-rewards-uk.example`.\n\nThe genuine Temu app never needs a separate \"claim\" link outside it to receive an order, refund, or reward. This guide shows the warning signs, how to check safely, and what to do if you have already responded."
+        "Temu is a real low-cost shopping marketplace - this page is about criminals impersonating Temu through fake cashback offers, \"free gift\" texts, or lookalike websites to harvest your card and personal details. An example of the style is: `Temu: You've been selected for a £750 shopping spree! Claim your reward now: temu-rewards-uk.example`.\n\nDo not use a link in an unsolicited message to claim a reward, refund, or order issue. Check inside the official Temu app or by typing `temu.com` yourself instead. This guide shows the warning signs, how to check safely, and what to do if you have already responded."
       ],
       [
         "Why these scams are convincing",
@@ -2154,7 +2154,7 @@
       ],
       [
         "How to check a Temu offer safely",
-        "Do not tap the link or enter details on a page you reached from a message.\n\n- Open the official Temu app and check your orders, coins, and rewards there directly.\n- Never enter card or bank details to \"claim\" a free reward or process a refund.\n- Treat any unsolicited \"you've won\" message as a scam, whatever platform it claims to be from.\n- Be suspicious of pressure to share the offer with friends and family to unlock it.\n\nIf you are unsure whether a linked page is genuine, our guide on /guides/is-this-website-a-scam/ helps, and our /guides/fake-nike-website-uk/ and /guides/asos-copycat-scam-uk/ guides cover similar retail impersonation scams."
+        "Do not tap the link or enter details on a page you reached from a message.\n\n- Open the official Temu app and check your orders, coins, and rewards there directly.\n- Never enter card or bank details on a page reached from an unsolicited message to \"claim\" a free reward or process a refund.\n- Treat any unsolicited \"you've won\" message as a scam, whatever platform it claims to be from.\n- Be suspicious of pressure to share the offer with friends and family to unlock it.\n\nIf you are unsure whether a linked page is genuine, our guide on /guides/is-this-website-a-scam/ helps, and our /guides/fake-nike-website-uk/ and /guides/asos-copycat-scam-uk/ guides cover similar retail impersonation scams."
       ],
       [
         "If you tapped the link or shared details",
@@ -2176,7 +2176,7 @@
       ],
       [
         "Temu is asking for my card details to release a free gift — should I enter them?",
-        "No. A genuine reward or refund does not require you to enter card details on a linked page to \"process\" it. This is a classic phishing hook."
+        "Do not enter them on a page reached from an unsolicited message. Check the official Temu app or type `temu.com` yourself to verify whether any reward, refund, or order issue is real."
       ],
       [
         "I entered my card details on a Temu-looking site — what now?",
@@ -7208,11 +7208,11 @@
     "sections": [
       [
         "What an Apple tech support scam looks like",
-        "An Apple tech support scam uses a pop-up, browser alert, or unsolicited call claiming your iPhone, iPad, or Mac is infected, locked, or compromised, and that \"Apple support\" needs remote access or payment to fix it. An example of the pop-up style is: `Apple Security Alert: your device has been locked due to suspicious activity. Call Apple Support immediately to unlock it.`\n\nApple does not display this kind of pop-up, and a genuine Apple warning never includes a phone number to call. This guide shows the warning signs, how to stay safe, and what to do if you have already responded."
+        "An Apple tech support scam uses a pop-up, browser alert, or unsolicited call claiming your iPhone, iPad, or Mac is infected, locked, or compromised, and that \"Apple support\" needs remote access or payment to fix it. An example of the pop-up style is: `Apple Security Alert: your device has been locked due to suspicious activity. Call Apple Support immediately to unlock it.`\n\nApple says browser pop-ups or alerts that warn about security problems or viruses and tell you to call a number should be treated as fraudulent. This guide shows the warning signs, how to stay safe, and what to do if you have already responded."
       ],
       [
         "Why these scams are convincing",
-        "A pop-up that fills the screen and mimics Apple's design language, combined with alarming language about being \"locked\" or \"infected\", creates panic that stops people questioning it. A caller using confident, technical-sounding language and the Apple name adds to the pressure.\n\nThe fact that protects you: Apple does not make unsolicited calls about device problems, and its genuine security messages appear within Settings on your own device, never as a browser pop-up with a phone number."
+        "A pop-up that fills the screen and mimics Apple's design language, combined with alarming language about being \"locked\" or \"infected\", creates panic that stops people questioning it. A caller using confident, technical-sounding language and the Apple name adds to the pressure.\n\nThe fact that protects you: do not trust a browser pop-up or unexpected call just because it uses Apple's name. Apple says not to answer suspicious calls claiming to be Apple Support; contact Apple yourself through official support channels if you need help."
       ],
       [
         "Signs an Apple support contact is a scam",
@@ -7232,13 +7232,13 @@
       ],
       [
         "How to report an Apple tech support scam (UK)",
-        "You can report phishing or scam contact impersonating Apple to Apple at `reportphishing@apple.com`. If the scam reached you by email, also forward it to the NCSC at `report@phishing.gov.uk`; if by text, forward it to 7726.\n\nIf you lost money or shared sensitive information, report it to Report Fraud at `reportfraud.police.uk` or on 0300 123 2040 if you are in England, Wales, or Northern Ireland. In Scotland, report to Police Scotland on 101. Keep all your evidence."
+        "You can report phishing or scam contact impersonating Apple to Apple at `reportphishing@apple.com`. For a suspicious Apple-looking text, Apple asks you to email a screenshot to that address. If the scam reached you by email, also forward it to the NCSC at `report@phishing.gov.uk`; if by text, forward it to 7726.\n\nIf you lost money or shared sensitive information, report it to Report Fraud at `reportfraud.police.uk` or on 0300 123 2040 if you are in England, Wales, or Northern Ireland. In Scotland, report to Police Scotland on 101. Keep all your evidence."
       ]
     ],
     "faq": [
       [
         "Does Apple ever call about a problem with my device?",
-        "No. Apple does not make unsolicited calls about device problems, and genuine Apple security messages appear within your device's Settings, not as a browser pop-up with a phone number to call."
+        "Treat any unexpected Apple support call as suspicious. Apple says to hang up on unsolicited or suspicious calls claiming to be Apple or Apple Support, then contact Apple yourself through official support channels if you need to check."
       ],
       [
         "A pop-up says my iPhone is locked and gives a number to call — is it real?",
@@ -7828,7 +7828,7 @@
       ],
       [
         "Signs an IVA offer is a scam or bad advice",
-        "- You are contacted or find a firm shortly after searching for debt help online.\n- It pushes you towards an IVA specifically, without discussing other debt options first.\n- It charges a large upfront fee before you have received proper advice.\n- It plays down the serious consequences of an IVA, such as its effect on your credit file.\n- It pressures you to sign quickly or discourages independent advice.\n- The firm is not authorised by the FCA for debt counselling or debt adjusting."
+        "- You are contacted or find a firm shortly after searching for debt help online.\n- It pushes you towards an IVA specifically, without discussing other debt options first.\n- It charges a large upfront fee before you have received proper advice.\n- It plays down the serious consequences of an IVA, such as its effect on your credit file.\n- It pressures you to sign quickly or discourages independent advice.\n- The firm is not authorised by the FCA, or does not have permission for the debt service it is offering."
       ],
       [
         "How the scam works",
@@ -7836,7 +7836,7 @@
       ],
       [
         "How to find genuine debt advice",
-        "Free, regulated debt advice is available before you commit to an IVA or any other solution.\n\n- Contact a free debt-advice organisation such as StepChange, National Debtline, or Citizens Advice before agreeing to anything.\n- Use MoneyHelper's debt advice locator to find free, impartial help.\n- Ask about all your debt options, not just an IVA, and understand the pros and cons of each.\n- Check that any firm is authorised by the FCA for the service it is offering.\n- Never pay a large upfront fee before receiving genuine advice.\n\nIf you are unsure whether a linked site is genuine, our guide on /guides/is-this-website-a-scam/ helps, and our /guides/debt-relief-scam-uk/ guide covers the wider upfront-fee debt-help pattern."
+        "Free, regulated debt advice is available before you commit to an IVA or any other solution.\n\n- Contact a free debt-advice organisation such as StepChange, National Debtline, or Citizens Advice before agreeing to anything.\n- Use MoneyHelper's debt advice locator to find free, impartial help.\n- Ask about all your debt options, not just an IVA, and understand the pros and cons of each.\n- Check that any firm is authorised by the FCA and has permission for the service it is offering.\n- Never pay a large upfront fee before receiving genuine advice.\n\nIf you are unsure whether a linked site is genuine, our guide on /guides/is-this-website-a-scam/ helps, and our /guides/debt-relief-scam-uk/ guide covers the wider upfront-fee debt-help pattern."
       ],
       [
         "If you have already paid a fee or signed up",
@@ -7858,7 +7858,7 @@
       ],
       [
         "How do I know if an IVA firm is legitimate?",
-        "Check whether it is authorised by the FCA for debt counselling or debt adjusting, and be very wary of any firm demanding a large fee before explaining your full range of options."
+        "Check whether it is authorised by the FCA and has permission for the debt service it is offering, and be very wary of any firm demanding a large fee before explaining your full range of options."
       ],
       [
         "I've already paid an upfront fee — can I get it back?",
@@ -9073,11 +9073,11 @@
       ],
       [
         "If you clicked the link or shared details",
-        "If you entered card details, contact your bank or card issuer immediately using the number on your card, tell them it was a scam, and ask about disputing the payment or a chargeback. If you sent money by UK bank transfer on or after 7 October 2024, mandatory APP fraud reimbursement rules may apply to Faster Payments and CHAPS transfers. The PSR rules include a 13-month claim window, a maximum claim amount of £85,000, possible exclusions, and a possible excess of up to £100. Report it to your bank as soon as possible.\n\nIf you entered your Wise login, change your password by typing wise.com yourself and check for any unrecognised transfers. If you shared personal details, consider Cifas Protective Registration at `cifas.org.uk` and monitor your credit reports with Experian, Equifax, and TransUnion. Keep the message as evidence."
+        "If you entered card details, contact your bank or card issuer immediately using the number on your card, tell them it was a scam, and ask about disputing the payment or a chargeback. If you sent money by UK bank transfer on or after 7 October 2024, mandatory APP fraud reimbursement rules may apply to Faster Payments and CHAPS transfers. The PSR rules include a 13-month claim window, a maximum claim amount of £85,000, possible exclusions, and a possible excess of up to £100. Report it to your bank as soon as possible.\n\nIf you entered your Wise login, change your password by typing wise.com yourself and check for any unrecognised transfers. If you sent a transfer through Wise to someone you now believe is a scammer, report it to Wise immediately through the logged-in web form or in-app report flow. If you shared personal details, consider Cifas Protective Registration at `cifas.org.uk` and monitor your credit reports with Experian, Equifax, and TransUnion. Keep the message as evidence."
       ],
       [
         "How to report a Wise scam (UK)",
-        "If the scam reached you by email, forward it to the NCSC at `report@phishing.gov.uk`; if by text, forward it to 7726.\n\nIf you lost money or shared sensitive information, report it to Report Fraud at `reportfraud.police.uk` or on 0300 123 2040 if you are in England, Wales, or Northern Ireland. In Scotland, report to Police Scotland on 101. Keep the original message and any screenshots."
+        "If the scam reached you by email, forward it to the NCSC at `report@phishing.gov.uk`; if by text, forward it to 7726.\n\nIf you sent money through Wise, report it to Wise through the app or logged-in web form as soon as possible. If you lost money or shared sensitive information, report it to Report Fraud at `reportfraud.police.uk` or on 0300 123 2040 if you are in England, Wales, or Northern Ireland. In Scotland, report to Police Scotland on 101. Keep the original message and any screenshots."
       ]
     ],
     "faq": [
@@ -9099,7 +9099,7 @@
       ],
       [
         "How do I report a fake Wise message?",
-        "Forward scam emails to `report@phishing.gov.uk` and scam texts to 7726. If you lost money or shared details, report it to Report Fraud in England, Wales, or Northern Ireland, or to Police Scotland on 101 in Scotland."
+        "Forward scam emails to `report@phishing.gov.uk` and scam texts to 7726. If you sent a transfer through Wise, report it to Wise through the app or logged-in web form. If you lost money or shared details, report it to Report Fraud in England, Wales, or Northern Ireland, or to Police Scotland on 101 in Scotland."
       ]
     ],
     "keywords": [
@@ -9195,7 +9195,7 @@
       ],
       [
         "Signs a TSB text is a scam",
-        "- It claims a payment needs to be confirmed or cancelled through a link.\n- It says your account is blocked, limited, or under review.\n- It asks you to log in or \"verify\" your details through a link.\n- The link is not tsb.co.uk (a lookalike such as `tsb-secure-login.example`).\n- It gives a short deadline to act.\n- It arrives from an unfamiliar number rather than TSB's usual sender.\n- It pressures you to act before checking your real account."
+        "- It claims a payment needs to be confirmed or cancelled through a link.\n- It says your account is blocked, limited, or under review.\n- It asks you to log in or \"verify\" your details through a link.\n- The link is not tsb.co.uk (a lookalike such as `tsb-secure-login.example`).\n- It gives a short deadline to act.\n- It arrives from an unfamiliar number, or the sender looks plausible but the link or request is unusual.\n- It pressures you to act before checking your real account."
       ],
       [
         "How the scam works",
@@ -9211,7 +9211,7 @@
       ],
       [
         "How to report a TSB scam text (UK)",
-        "Forward the scam text to 7726 so your mobile provider can investigate. If the same scam reached you by email, forward it to the NCSC at `report@phishing.gov.uk`.\n\nIf you lost money or shared sensitive information, report it to Report Fraud at `reportfraud.police.uk` or on 0300 123 2040 if you are in England, Wales, or Northern Ireland. In Scotland, report to Police Scotland on 101. Keep the original message and any screenshots."
+        "Forward the scam text to 7726 so your mobile provider can investigate. TSB also asks customers to forward suspicious email or text details to `emailscams@tsb.co.uk`. If the same scam reached you by email, forward it to the NCSC at `report@phishing.gov.uk`.\n\nIf you lost money or shared sensitive information, report it to Report Fraud at `reportfraud.police.uk` or on 0300 123 2040 if you are in England, Wales, or Northern Ireland. In Scotland, report to Police Scotland on 101. Keep the original message and any screenshots."
       ]
     ],
     "faq": [
@@ -9233,7 +9233,7 @@
       ],
       [
         "How do I report a TSB scam text?",
-        "Forward it to 7726, and if you lost money or shared details, report it to Report Fraud in England, Wales, or Northern Ireland, or to Police Scotland on 101 in Scotland."
+        "Forward it to 7726 and send the details to TSB at `emailscams@tsb.co.uk`. If you lost money or shared details, report it to Report Fraud in England, Wales, or Northern Ireland, or to Police Scotland on 101 in Scotland."
       ]
     ],
     "keywords": [
@@ -9702,7 +9702,7 @@
     "sections": [
       [
         "What number spoofing is",
-        "Number spoofing is when a caller deliberately makes your phone display a different number, so a scam call appears to come from your bank, HMRC, the police, or another trusted organisation. An example of the effect: your screen shows your bank's genuine customer service number, but the person calling is a fraudster. \n\nSpoofing technology is not hard for criminals to access, and a matching number proves nothing about who is really calling. This guide explains how it works, how to stay safe, and what to do if you have already been caught out."
+        "Number spoofing is when a caller deliberately makes your phone display a different number, so a scam call appears to come from your bank, HMRC, the police, or another trusted organisation. An example of the effect: your screen shows your bank's genuine customer service number, but the person calling is a fraudster. \n\nCaller ID can be changed or spoofed, and a matching number proves nothing about who is really calling. This guide explains how it works, how to stay safe, and what to do if you have already been caught out."
       ],
       [
         "Why spoofed calls are so convincing",
@@ -9714,11 +9714,11 @@
       ],
       [
         "How spoofing is used in scams",
-        "First, a scammer sets the caller ID your phone displays to a trusted number, often using cheap and widely available technology. Second, they call and use the trusted-looking number to lower your guard. Third, they combine this with urgency, fear, or a plausible story to get you to move money, share codes, or grant access to your device. Fourth, once the scam is complete, contact stops.\n\nHanging up and calling the organisation back on a number you find yourself, not the number that called you, breaks the chain."
+        "First, a scammer changes the caller ID your phone displays to a trusted-looking number. Second, they call and use the trusted-looking number to lower your guard. Third, they combine this with urgency, fear, or a plausible story to get you to move money, share codes, or grant access to your device. Fourth, once the scam is complete, contact stops.\n\nHanging up and calling the organisation back on a number you find yourself, not the number that called you, breaks the chain."
       ],
       [
         "How to protect yourself from spoofed calls",
-        "Treat the number on your screen as unreliable evidence on its own.\n\n- If a call asks you to move money, share a code, or grant remote access, hang up regardless of what number it showed.\n- Call the organisation back using a number from their official website, a genuine letter, or the back of your card — never a number given during the call.\n- Wait a few minutes before calling back, or use a different phone, so you are not accidentally reconnected to the scammer.\n- Remember that banks and government bodies will not ask you to move money to a \"safe account\" or share a one-time code.\n\nOur /guides/impersonation-scams-when-criminals-pretend-to-be-your-bank-or-the-police/ and /guides/police-impersonation-scam-call-uk/ guides cover the scams that most often use spoofing in detail."
+        "Treat the number on your screen as unreliable evidence on its own.\n\n- If a call asks you to move money, share a code, or grant remote access, hang up regardless of what number it showed.\n- Call the organisation back using a number from their official website, a genuine letter, or the back of your card — never a number given during the call.\n- Wait at least five minutes before calling back, or use a different phone, so you are not accidentally reconnected to the scammer.\n- Remember that banks and government bodies will not ask you to move money to a \"safe account\" or share a one-time code.\n\nOur /guides/impersonation-scams-when-criminals-pretend-to-be-your-bank-or-the-police/ and /guides/police-impersonation-scam-call-uk/ guides cover the scams that most often use spoofing in detail."
       ],
       [
         "If you have already responded to a spoofed call",
@@ -9736,7 +9736,7 @@
       ],
       [
         "How do scammers spoof a phone number?",
-        "They use readily available technology to set the caller ID your phone displays, without needing to actually control that number. It requires no special access to the real organisation's systems."
+        "They use calling systems that can change the caller ID your phone displays, without needing to actually control that number. It requires no special access to the real organisation's systems."
       ],
       [
         "A spoofed caller told me to move money to a safe account — should I?",
@@ -10022,11 +10022,11 @@
     "sections": [
       [
         "What a StubHub ticket scam looks like",
-        "StubHub is a genuine ticket resale platform, but criminals exploit it with fake listings, cloned websites, or messages that try to move you off-platform where its protections do not apply. An example of the style is: `I have 2x tickets on StubHub but I'll do a better price if you pay me directly by bank transfer instead of through the site.`\n\nOnce payment happens outside StubHub, there is no guarantee the tickets exist or will arrive. This guide shows the warning signs, how to buy safely, and what to do if you have already been caught out."
+        "StubHub is a genuine ticket resale platform, but criminals exploit it with fake listings, cloned websites, or messages that try to move you off-platform where its protections do not apply. An example of the style is: `I have 2x tickets on StubHub but I'll do a better price if you pay me directly by bank transfer instead of through the site.`\n\nOnce payment happens outside StubHub, StubHub's FanProtect protection is unlikely to help because the private payment is not a StubHub order. This guide shows the warning signs, how to buy safely, and what to do if you have already been caught out."
       ],
       [
         "Why these scams are convincing",
-        "A slightly better price for paying \"directly\" sounds like a reasonable saving, and a cloned website that copies StubHub's branding closely can look identical to the real thing. Pressure around sold-out or high-demand events pushes buyers to skip proper checks.\n\nThe rule that protects you: complete any StubHub purchase entirely within the platform. Its protections, including guarantees around valid tickets, only apply to purchases made and paid for through StubHub itself."
+        "A slightly better price for paying \"directly\" sounds like a reasonable saving, and a cloned website that copies StubHub's branding closely can look identical to the real thing. Pressure around sold-out or high-demand events pushes buyers to skip proper checks.\n\nThe rule that protects you: complete any StubHub purchase entirely within the platform. Its protections, including guarantees around valid tickets, apply to qualified orders made and paid for through StubHub itself."
       ],
       [
         "Signs a StubHub deal is a scam",
@@ -10038,7 +10038,7 @@
       ],
       [
         "How to buy StubHub tickets safely",
-        "Keep the whole purchase on the platform.\n\n- Type stubhub.co.uk yourself rather than following a link from an email, text, or ad.\n- Pay and communicate entirely through StubHub — never move to a bank transfer or private payment.\n- Be suspicious of any discount offered specifically for paying off-platform.\n- Check the exact web address before entering any payment details.\n- Prefer paying by card within the platform, which combines with StubHub's own guarantees.\n\nIf you are unsure, our /guides/concert-ticket-scam-uk/ and /guides/f1-british-gp-ticket-scam-uk/ guides cover the same resale-ticket pattern at other events."
+        "Keep the whole purchase on the platform.\n\n- Type stubhub.co.uk yourself rather than following a link from an email, text, or ad.\n- Keep the purchase and payment entirely on StubHub - never move to a bank transfer or private payment.\n- Be suspicious of any discount offered specifically for paying off-platform.\n- Check the exact web address before entering any payment details.\n- Prefer paying by card within the platform, which combines with StubHub's own guarantees.\n\nIf you are unsure, our /guides/concert-ticket-scam-uk/ and /guides/f1-british-gp-ticket-scam-uk/ guides cover the same resale-ticket pattern at other events."
       ],
       [
         "If you have already paid off-platform",
@@ -10730,11 +10730,11 @@
     "sections": [
       [
         "What a money mule scam looks like",
-        "A money mule scam recruits people, often through a fake job offer, social media, or a message from someone posing as a friend, to receive money into their bank account and pass it on, keeping a cut. An example of the style is: `Earn £200 a week from home — just receive payments into your account and transfer 90% on to us, keep the rest.`\n\nThe money being moved is stolen or fraud proceeds, and being a money mule is a criminal offence in the UK, even if you did not know the money was illegitimate. This guide shows the warning signs, what can happen to you, and what to do if you are already involved."
+        "A money mule scam recruits people, often through a fake job offer, social media, or a message from someone posing as a friend, to receive money into their bank account and pass it on, keeping a cut. An example of the style is: `Earn £200 a week from home — just receive payments into your account and transfer 90% on to us, keep the rest.`\n\nThe money being moved is usually stolen money or fraud proceeds. If you know or suspect that, or the circumstances show you were ignoring obvious red flags, you can face serious criminal investigation or prosecution for money laundering. This guide shows the warning signs, what can happen to you, and what to do if you are already involved."
       ],
       [
         "Why this recruitment is convincing",
-        "The offer of easy money for what sounds like simple admin work is appealing, especially to people short of cash or new to the UK. It can be dressed up as a legitimate \"payment processing\" or \"agent\" job, and the recruiter may seem friendly or even claim to be a fellow student or acquaintance.\n\nThe fact that protects you: no genuine job asks you to receive money into your personal bank account and forward it elsewhere. This pattern is always a sign of money laundering, whatever it is called."
+        "The offer of easy money for what sounds like simple admin work is appealing, especially to people short of cash or new to the UK. It can be dressed up as a legitimate \"payment processing\" or \"agent\" job, and the recruiter may seem friendly or even claim to be a fellow student or acquaintance.\n\nThe fact that protects you: no genuine job asks you to receive money into your personal bank account and forward it elsewhere. This pattern is a serious money-laundering warning sign, whatever it is called."
       ],
       [
         "Signs you are being recruited as a money mule",
@@ -10742,7 +10742,7 @@
       ],
       [
         "What happens if you get involved",
-        "Banks use fraud-detection systems to spot mule activity, and an account used this way can be frozen — sometimes with your own genuine money trapped inside — often without warning. Being a money mule is a criminal offence in the UK; you can be prosecuted for money laundering even if you did not know the money was stolen, and a conviction can make it very hard to open bank accounts or get credit in future.\n\nStopping immediately and reporting it protects you far more than continuing, even if you have already moved some money."
+        "Banks use fraud-detection systems to spot mule activity, and an account used this way can be frozen - sometimes with your own genuine money trapped inside - often without warning. Money laundering offences are serious in the UK. Prosecutors look at whether you knew or suspected the money was criminal property, and obvious red flags, payments for use of your account, false documents, or repeated transfers can be used as evidence. A conviction or fraud marker can make it very hard to open bank accounts or get credit in future.\n\nStopping immediately and reporting it protects you far more than continuing, even if you have already moved some money."
       ],
       [
         "How to protect yourself",
@@ -10750,7 +10750,7 @@
       ],
       [
         "If you are already involved",
-        "Stop immediately — do not move any more money or accept further payments. Contact your bank as soon as possible, explain what has happened, and follow their guidance; acting quickly and honestly is taken into account.\n\nIf you shared identity or bank details as part of this, consider Cifas Protective Registration at `cifas.org.uk` and monitor your credit reports with Experian, Equifax, and TransUnion. Keep all messages, names, and payment details, as this evidence may help if the matter is investigated."
+        "Stop immediately - do not move any more money or accept further payments. Contact your bank as soon as possible, explain what has happened, and follow their guidance; acting quickly and honestly can help limit harm and creates a record of what happened.\n\nIf you shared identity or bank details as part of this, consider Cifas Protective Registration at `cifas.org.uk` and monitor your credit reports with Experian, Equifax, and TransUnion. Keep all messages, names, and payment details, as this evidence may help if the matter is investigated."
       ],
       [
         "How to report money mule recruitment (UK)",
@@ -10760,7 +10760,7 @@
     "faq": [
       [
         "Is being a money mule actually illegal if I didn't know the money was stolen?",
-        "Yes, it can still be prosecuted as money laundering even if you claim you did not know. Banks and the law treat this pattern seriously regardless of intent, which is why stopping immediately and reporting it matters."
+        "It can be investigated very seriously. For the main money-laundering offences, prosecutors usually need evidence that you knew or suspected the money was criminal property. Do not assume \"I didn't ask questions\" protects you: ignoring obvious red flags can still put you at serious risk, which is why stopping immediately and reporting it matters."
       ],
       [
         "A 'job' wants me to receive payments and forward most of them on — is that legitimate?",
