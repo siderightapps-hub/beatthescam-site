@@ -5298,11 +5298,11 @@
     "sections": [
       [
         "What an Airbnb scam listing looks like",
-        "An Airbnb scam uses a fake or hijacked listing, or a host who pushes you to pay outside the Airbnb app, to take money for a property that does not exist, is not really available, or is very different from what was advertised. An example of the style is: `Great news, I can offer a better rate if you pay directly by bank transfer instead of through Airbnb — I'll send you the booking details once you pay.`\n\nOnce payment happens outside Airbnb, its protections do not apply. This guide shows the warning signs, how to book safely, and what to do if you have already been caught out."
+        "An Airbnb scam uses a fake or hijacked listing, or a host who pushes you to pay outside the Airbnb app, to take money for a property that does not exist, is not really available, or is very different from what was advertised. An example of the style is: `Great news, I can offer a better rate if you pay directly by bank transfer instead of through Airbnb — I'll send you the booking details once you pay.`\n\nOnce the booking or main payment is moved outside Airbnb, Airbnb's protections may not apply. This guide shows the warning signs, how to book safely, and what to do if you have already been caught out."
       ],
       [
         "Why these scams are convincing",
-        "A genuine-looking listing with real photos, reviews, and a plausible host profile builds trust, and a slightly better price for paying \"directly\" sounds like a reasonable saving. Some scams use a hijacked, previously genuine host account, which carries real historical reviews that make the listing look established.\n\nThe rule that protects you: always pay and communicate entirely within the Airbnb app. Its guarantees and support only apply to bookings made and paid for through the platform itself."
+        "A genuine-looking listing with real photos, reviews, and a plausible host profile builds trust, and a slightly better price for paying \"directly\" sounds like a reasonable saving. Some scams use a hijacked, previously genuine host account, which carries real historical reviews that make the listing look established.\n\nThe rule that protects you: keep the reservation, main payment, and booking messages inside Airbnb. Treat any unexpected request to pay a host directly by bank transfer, PDF invoice, money order, or similar method as a major red flag."
       ],
       [
         "Signs an Airbnb listing is a scam",
@@ -5310,15 +5310,15 @@
       ],
       [
         "How the scam works",
-        "First, an attractive listing appears, sometimes on a genuine or hijacked host account. Second, the host offers a discount or urgency to pay directly, off the platform. Third, you pay by bank transfer or another unprotected method. Fourth, the property does not exist, is unavailable, or is very different from advertised, and Airbnb's protections do not apply because the payment happened outside the platform. Finally, the host becomes unreachable.\n\nKeeping every part of the booking and payment inside the Airbnb app breaks the chain."
+        "First, an attractive listing appears, sometimes on a genuine or hijacked host account. Second, the host offers a discount or urgency to pay directly, off the platform. Third, you pay by bank transfer or another unprotected method. Fourth, the property does not exist, is unavailable, or is very different from advertised, and Airbnb's protections may not apply because the booking or main payment moved outside the platform. Finally, the host becomes unreachable.\n\nKeeping the reservation and main payment inside Airbnb breaks the chain."
       ],
       [
         "How to book on Airbnb safely",
-        "Never move the booking or payment off the platform.\n\n- Always pay and communicate entirely through the Airbnb app or website, never by bank transfer to a host directly.\n- Be suspicious of any discount offered specifically for paying off-platform.\n- Check the host's review history and how long the listing has existed.\n- Compare the listing's price and description with similar properties in the same area.\n- Contact Airbnb support through the app if anything about a listing or host feels off before you pay.\n\nIf you are unsure whether a listing is genuine, our guide on /guides/is-this-website-a-scam/ helps, and our /guides/rightmove-rental-scam-uk/ guide covers the same off-platform-payment pattern in long-term rentals."
+        "Never move the booking or payment off the platform.\n\n- Keep the reservation and main payment through the Airbnb app or website, never by bank transfer to a host directly.\n- Use Airbnb's Resolution Centre or official Airbnb checkout for Airbnb-related payments; question any private invoice or transfer request.\n- Be suspicious of any discount offered specifically for paying off-platform.\n- Check the host's review history and how long the listing has existed.\n- Compare the listing's price and description with similar properties in the same area.\n- Contact Airbnb support through the app if anything about a listing or host feels off before you pay.\n\nIf you are unsure whether a listing is genuine, our guide on /guides/is-this-website-a-scam/ helps, and our /guides/rightmove-rental-scam-uk/ guide covers the same off-platform-payment pattern in long-term rentals."
       ],
       [
         "If you have already paid off-platform",
-        "If you paid by card, contact your bank or card issuer using the number on your card and ask about disputing the payment or a chargeback. If you sent money by UK bank transfer on or after 7 October 2024, mandatory APP fraud reimbursement rules may apply to Faster Payments and CHAPS transfers. The PSR rules include a 13-month claim window, a maximum claim amount of £85,000, possible exclusions, and a possible excess of up to £100. Report it to your bank as soon as possible.\n\nReport the host and listing to Airbnb immediately, though its guarantees are unlikely to apply to a payment made outside the platform. If you shared identity details, consider Cifas Protective Registration at `cifas.org.uk` and monitor your credit reports with Experian, Equifax, and TransUnion. Keep the listing, messages, and payment details as evidence."
+        "If you paid by card, contact your bank or card issuer using the number on your card and ask about disputing the payment or a chargeback. If you sent money by UK bank transfer on or after 7 October 2024, mandatory APP fraud reimbursement rules may apply to Faster Payments and CHAPS transfers. The PSR rules include a 13-month claim window, a maximum claim amount of £85,000, possible exclusions, and a possible excess of up to £100. Report it to your bank as soon as possible.\n\nReport the host and listing to Airbnb immediately, though Airbnb's protections may not apply to a booking or main payment moved outside the platform. If you shared identity details, consider Cifas Protective Registration at `cifas.org.uk` and monitor your credit reports with Experian, Equifax, and TransUnion. Keep the listing, messages, and payment details as evidence."
       ],
       [
         "How to report an Airbnb scam (UK)",
@@ -5332,7 +5332,7 @@
       ],
       [
         "A host offers a discount if I pay them directly instead of through Airbnb — should I?",
-        "No. Always pay and communicate entirely through the Airbnb app. Its guarantees and support only apply to bookings made and paid for on the platform, not to private payments arranged outside it."
+        "No. Keep the reservation and main payment through Airbnb. A private bank transfer for the booking removes important platform protections and is a major red flag."
       ],
       [
         "How can I tell if an Airbnb listing has been hijacked?",
@@ -5340,7 +5340,7 @@
       ],
       [
         "I paid a host directly and the property didn't exist — can I get my money back?",
-        "Possibly, but Airbnb's own guarantees are unlikely to apply to an off-platform payment. If you paid by card, ask your bank about a chargeback."
+        "Possibly, but Airbnb's own protections may not apply to a booking or main payment moved off-platform. If you paid by card, ask your bank about a chargeback."
       ],
       [
         "How do I report an Airbnb scam?",
@@ -6258,7 +6258,7 @@
     "sections": [
       [
         "What a fake TV Licence letter looks like",
-        "A TV Licence scam letter imitates official TV Licensing correspondence, demanding payment or personal details, often with a threat of a fine or prosecution for not having a licence. An example of the style is: `FINAL NOTICE: Our records show no valid TV Licence at this address. Pay the £169.50 fee within 7 days or face prosecution and a fine of up to £1,000.`\n\nGenuine TV Licensing correspondence follows a specific, verifiable process, and you can always check your licence status directly rather than relying on a letter's claims. This guide shows the warning signs, how to check safely, and what to do if you are unsure."
+        "A TV Licence scam letter imitates official TV Licensing correspondence, demanding payment or personal details, often with a threat of a fine or prosecution for not having a licence. An example of the style is: `FINAL NOTICE: Our records show no valid TV Licence at this address. Pay the £180 fee within 7 days or face prosecution and a fine of up to £1,000.`\n\nGenuine TV Licensing correspondence follows a specific, verifiable process, and you can always check your licence status directly rather than relying on a letter's claims. This guide shows the warning signs, how to check safely, and what to do if you are unsure."
       ],
       [
         "Why these letters are convincing",
@@ -6462,23 +6462,23 @@
       ],
       [
         "Why these scams are convincing",
-        "For anyone with an application in progress, the threat of losing a visa or having an application cancelled creates intense anxiety, especially given real visa fees and processes that can feel confusing. A message that references application-style language and a short deadline pushes people to pay before checking.\n\nThe fact that protects you: genuine visa and immigration fees are paid only through the official GOV.UK service you access yourself, and you can check the status of a genuine application through your own UKVI account rather than trusting an unsolicited message."
+        "For anyone with an application in progress, the threat of losing a visa or having an application cancelled creates intense anxiety, especially given real visa fees and processes that can feel confusing. A message that references application-style language and a short deadline pushes people to pay before checking.\n\nThe fact that protects you: genuine visa and immigration payments start from the official GOV.UK service you access yourself. If the official process sends you to a commercial partner payment step, reach it only through GOV.UK, not through an unsolicited email, text, or call."
       ],
       [
         "Signs a UKVI message is a scam",
-        "- It demands an urgent payment through a link or over the phone to avoid your application being cancelled.\n- The web address is not gov.uk (a lookalike such as `ukvi-payment-portal.example`).\n- It asks for passport, bank, or personal details through an unexpected email or call.\n- It gives an unusually short deadline to pay or respond.\n- It threatens immediate deportation or refusal without the normal formal process.\n- The sender address or phone number does not match official gov.uk contact details."
+        "- It demands an urgent payment through a link or over the phone to avoid your application being cancelled.\n- The web address is not a `.gov.uk` address (a lookalike such as `ukvi-payment-portal.example`).\n- It asks for passport, bank, or personal details through an unexpected email or call.\n- It gives an unusually short deadline to pay or respond.\n- It threatens immediate deportation or refusal without the normal formal process.\n- The sender address or phone number does not match official gov.uk contact details."
       ],
       [
         "How the scam works",
-        "First, an email, call, or text claims a problem with your visa or immigration application. Second, urgency and fear about your immigration status push you to act quickly. Third, you are asked to pay through a link or over the phone, or to share passport and personal details. Fourth, criminals use the payment and details for fraud or identity theft, while your genuine application is unaffected either way.\n\nChecking your application status directly through your own UKVI account on gov.uk breaks the chain."
+        "First, an email, call, or text claims a problem with your visa or immigration application. Second, urgency and fear about your immigration status push you to act quickly. Third, you are asked to pay through a link or over the phone, or to share passport and personal details. Fourth, criminals use the payment and details for fraud or identity theft, while your genuine application is unaffected either way.\n\nChecking your application status or payment route directly through GOV.UK breaks the chain."
       ],
       [
         "How to check a UKVI message safely",
-        "Do not click links, call numbers, or pay based on the message alone.\n\n- Sign in to your own UKVI account through gov.uk to check your application and any genuine fees due.\n- Remember the only genuine visa and immigration payment route is through gov.uk, which you reach by typing the address yourself.\n- Never pay by bank transfer, gift cards, or over an unsolicited phone call for a visa fee.\n- Contact UKVI only through the contact details published on gov.uk.\n\nIf you are unsure whether a linked page is genuine, our guide on /guides/is-this-website-a-scam/ helps, and our /guides/dvla-email-scam-uk/ guide covers a similar government-impersonation pattern."
+        "Do not click links, call numbers, or pay based on the message alone.\n\n- If you have a UKVI account, sign in through GOV.UK to check your application and any genuine fees due.\n- Start from GOV.UK by typing the address yourself; do not use a link from an unexpected message.\n- Never pay by bank transfer to a personal account, gift cards, email payment demand, or unsolicited phone call for a visa fee.\n- Contact UKVI only through the contact details published on gov.uk.\n\nIf you are unsure whether a linked page is genuine, our guide on /guides/is-this-website-a-scam/ helps, and our /guides/dvla-email-scam-uk/ guide covers a similar government-impersonation pattern."
       ],
       [
         "If you have already paid or shared details",
-        "If you paid by card, contact your bank or card issuer using the number on your card and ask about disputing the payment or a chargeback. If you sent money by UK bank transfer on or after 7 October 2024, mandatory APP fraud reimbursement rules may apply to Faster Payments and CHAPS transfers. The PSR rules include a 13-month claim window, a maximum claim amount of £85,000, possible exclusions, and a possible excess of up to £100. Report it to your bank as soon as possible.\n\nCheck your genuine application status through your UKVI account on gov.uk. If you shared passport or personal details, consider Cifas Protective Registration at `cifas.org.uk` and monitor your credit reports with Experian, Equifax, and TransUnion. Keep the message as evidence."
+        "If you paid by card, contact your bank or card issuer using the number on your card and ask about disputing the payment or a chargeback. If you sent money by UK bank transfer on or after 7 October 2024, mandatory APP fraud reimbursement rules may apply to Faster Payments and CHAPS transfers. The PSR rules include a 13-month claim window, a maximum claim amount of £85,000, possible exclusions, and a possible excess of up to £100. Report it to your bank as soon as possible.\n\nCheck your genuine application status through GOV.UK or your UKVI account reached from GOV.UK. If you shared passport or personal details, consider Cifas Protective Registration at `cifas.org.uk` and monitor your credit reports with Experian, Equifax, and TransUnion. Keep the message as evidence."
       ],
       [
         "How to report a UKVI visa scam (UK)",
@@ -6488,19 +6488,19 @@
     "faq": [
       [
         "Does UKVI ever email about visa applications?",
-        "Genuine visa and immigration correspondence is managed through your own UKVI account on gov.uk. Treat any email or call demanding urgent payment through a link or over the phone as a scam, and check your application status directly on gov.uk instead."
+        "Genuine visa and immigration correspondence should be checked through GOV.UK or your UKVI account reached from GOV.UK. Treat any email or call demanding urgent payment through a link or over the phone as a scam, and check directly on GOV.UK instead."
       ],
       [
         "The message threatens my application will be cancelled unless I pay today — is that real?",
-        "Check your application status yourself through your UKVI account on gov.uk. A genuine fee or issue is handled there, not through an urgent, unsolicited payment demand with a short deadline."
+        "Check your application status yourself through GOV.UK or your UKVI account reached from GOV.UK. A genuine fee or issue is handled through the official process, not through an urgent, unsolicited payment demand with a short deadline."
       ],
       [
         "How do I pay a genuine UKVI or visa fee safely?",
-        "Only pay through the official service on gov.uk, which you reach by typing the address yourself. Never pay through a link in an email, a phone call, or by bank transfer to a personal account."
+        "Start from the official service on GOV.UK, which you reach by typing the address yourself. If GOV.UK sends you to an official commercial partner payment step, only use the route reached through that process. Never pay through a link in an email, a phone call, or by bank transfer to a personal account."
       ],
       [
         "I've shared my passport or personal details with a scam UKVI contact — what now?",
-        "Consider Cifas Protective Registration and monitor your credit reports. Check your genuine application status through gov.uk, and keep the scam message as evidence."
+        "Consider Cifas Protective Registration and monitor your credit reports. Check your genuine application status through GOV.UK, and keep the scam message as evidence."
       ],
       [
         "How do I report a UKVI visa scam?",
@@ -8189,23 +8189,23 @@
       ],
       [
         "Why these scams are convincing",
-        "An unusually low all-inclusive price is tempting, especially near school holidays, and a fake confirmation email or PDF itinerary can look identical to a genuine one. A seller who claims to have bulk operator rates or a special allocation sounds like they have access to a deal you cannot get elsewhere.\n\nThe fact that protects you: a genuine package holiday that includes a flight should be ATOL protected, and you can check a company's ATOL status independently before booking or paying anything."
+        "An unusually low all-inclusive price is tempting, especially near school holidays, and a fake confirmation email or PDF itinerary can look identical to a genuine one. A seller who claims to have bulk operator rates or a special allocation sounds like they have access to a deal you cannot get elsewhere.\n\nThe fact that protects you: a qualifying package holiday that includes a flight and is sold by or through an ATOL holder should be ATOL protected, and you should receive an ATOL Certificate. You can check a company's ATOL status independently before booking or paying anything."
       ],
       [
         "Signs a package holiday deal is a scam",
-        "- The price is far below any genuine travel company for the same holiday.\n- You are asked to pay by bank transfer to a personal account rather than through a recognised travel company.\n- The seller cannot confirm ATOL protection for a flight-inclusive package.\n- You are pressured to book quickly because the deal is \"about to expire\".\n- The booking confirmation cannot be verified with the airline, hotel, or tour operator directly.\n- The company has no verifiable address, landline, or Companies House record."
+        "- The price is far below any genuine travel company for the same holiday.\n- You are asked to pay by bank transfer to a personal account rather than through a recognised travel company.\n- The seller cannot confirm ATOL protection or provide clear ATOL holder details for a flight-inclusive package.\n- You are pressured to book quickly because the deal is \"about to expire\".\n- The booking confirmation cannot be verified with the airline, hotel, or tour operator directly.\n- The company has no verifiable address, landline, or Companies House record."
       ],
       [
         "How the scam works",
-        "First, an advert or message offers a bargain package holiday. Second, you pay, usually by bank transfer, to secure the deal. Third, you may receive a fake booking confirmation or itinerary. Fourth, when you try to check with the airline, hotel, or operator directly, no booking exists. Finally, the seller stops responding, sometimes just before the travel date.\n\nVerifying ATOL protection and the booking directly with the airline or hotel before you rely on it breaks the chain."
+        "First, an advert or message offers a bargain package holiday. Second, you pay, usually by bank transfer, to secure the deal. Third, you may receive a fake booking confirmation or itinerary. Fourth, when you try to check with the airline, hotel, or operator directly, no booking exists. Finally, the seller stops responding, sometimes just before the travel date.\n\nChecking ATOL protection, the ATOL holder details, and the booking directly with the airline, hotel, or tour operator before you rely on it breaks the chain."
       ],
       [
         "How to book a package holiday safely",
-        "Book through a recognised, ATOL-protected travel company.\n\n- Check whether the company and the specific package are ATOL protected before you pay, using the official ATOL check.\n- Book through a well-known travel agent or tour operator's own website, not a personal seller found on social media or a classified ad.\n- Verify any booking confirmation directly with the airline, hotel, or operator named in it.\n- Be suspicious of an all-inclusive price dramatically below every other source for the same trip.\n- Prefer paying by card, which offers more practical dispute options than a bank transfer.\n\nIf you are unsure, our /guides/fake-airline-ticket-scam-uk/ and /guides/fake-travel-agent-scam-uk/ guides cover related travel-booking cons."
+        "Book through a recognised, ATOL-protected travel company.\n\n- Check whether the company and the specific flight-inclusive package are ATOL protected before you pay, using the official ATOL check.\n- Check that the exact company or trading name and ATOL number match, and make sure you receive an ATOL Certificate for an ATOL-protected booking.\n- Book through a well-known travel agent or tour operator's own website, not a personal seller found on social media or a classified ad.\n- Verify any booking confirmation directly with the airline, hotel, or operator named in it.\n- Be suspicious of an all-inclusive price dramatically below every other source for the same trip.\n- Prefer paying by card, which offers more practical dispute options than a bank transfer.\n\nIf you are unsure, our /guides/fake-airline-ticket-scam-uk/ and /guides/fake-travel-agent-scam-uk/ guides cover related travel-booking cons."
       ],
       [
         "If you have already paid",
-        "If you paid by card, contact your bank or card issuer using the number on your card and ask about disputing the payment or a chargeback. If you sent money by UK bank transfer on or after 7 October 2024, mandatory APP fraud reimbursement rules may apply to Faster Payments and CHAPS transfers. The PSR rules include a 13-month claim window, a maximum claim amount of £85,000, possible exclusions, and a possible excess of up to £100. Report it to your bank as soon as possible.\n\nCheck the ATOL register to see whether the company was ever ATOL protected, and if you shared identity details, consider Cifas Protective Registration at `cifas.org.uk` and monitor your credit reports with Experian, Equifax, and TransUnion. Keep the advert, messages, any booking confirmation, and payment details as evidence."
+        "If you paid by card, contact your bank or card issuer using the number on your card and ask about disputing the payment or a chargeback. If you sent money by UK bank transfer on or after 7 October 2024, mandatory APP fraud reimbursement rules may apply to Faster Payments and CHAPS transfers. The PSR rules include a 13-month claim window, a maximum claim amount of £85,000, possible exclusions, and a possible excess of up to £100. Report it to your bank as soon as possible.\n\nCheck the ATOL register to see whether the company was ATOL protected and whether the details match the seller you used. If you shared identity details, consider Cifas Protective Registration at `cifas.org.uk` and monitor your credit reports with Experian, Equifax, and TransUnion. Keep the advert, messages, any booking confirmation, ATOL Certificate, and payment details as evidence."
       ],
       [
         "How to report a package holiday scam (UK)",
@@ -8219,7 +8219,7 @@
       ],
       [
         "Does ATOL protect every package holiday?",
-        "Genuine flight-inclusive packages sold by an ATOL holder should be protected. Check the specific company's ATOL status yourself using the official register before paying, rather than trusting a seller's claim."
+        "No. ATOL is for qualifying flight-inclusive package trips sold by or through an ATOL holder, and you should receive an ATOL Certificate. Non-flight packages, many flight-only bookings, and ordinary travel disputes are different, so check the specific company's ATOL status and the exact booking before paying."
       ],
       [
         "I have a booking confirmation — does that prove the holiday is real?",
@@ -9030,7 +9030,7 @@
       ],
       [
         "Why these scams are convincing",
-        "Because Starling has no branches, people are used to managing everything by app, call, or message, which makes a fake \"security\" contact feel plausible. A caller who already knows your name or partial account details, and a spoofed number, add to the pressure.\n\nThe fact that protects you: Starling will never ask you to move money to a \"safe account\", and any request to do so — from anyone, however convincing — is always a scam."
+        "Because Starling has no branches, people are used to managing everything by app, call, or message, which makes a fake \"security\" contact feel plausible. A caller who already knows your name or partial account details, and a spoofed number, add to the pressure.\n\nThe fact that protects you: Starling says it will never ask you to make or approve payments to keep your account safe, and any request to move money to a \"safe account\" is a scam."
       ],
       [
         "Signs a Starling message is a scam",
@@ -9042,15 +9042,15 @@
       ],
       [
         "How to check a Starling alert safely",
-        "If anything feels rushed, stop.\n\n- Open the Starling app directly and check your transactions and account status there.\n- Use in-app chat to contact Starling support if you are unsure — never a number given to you by a caller.\n- Never move money to a \"safe\", \"holding\", or \"protected\" account; Starling will not ask you to.\n- Never share a one-time code, your PIN, or your full password to anyone.\n- Do not install remote-access or screen-sharing software during an unexpected call.\n\nIf you are unsure whether a linked page is genuine, our guide on /guides/is-this-website-a-scam/ helps, and our /guides/monzo-scam-transfer-uk/ guide covers the same pattern with another app-based bank."
+        "If anything feels rushed, stop.\n\n- Open the Starling app directly and check your transactions and account status there.\n- Use the Starling app's Call Status feature to check whether Starling is calling you. If it does not show Starling is calling, hang up.\n- Use in-app chat, or Starling's official fraud number published on starlingbank.com, if you need help, and call 159 if a payment request feels suspicious.\n- Never move money to a \"safe\", \"holding\", or \"protected\" account; Starling will not ask you to.\n- Never share a one-time code, your PIN, or your full password to anyone.\n- Do not install remote-access or screen-sharing software during an unexpected call.\n\nIf you are unsure whether a linked page is genuine, our guide on /guides/is-this-website-a-scam/ helps, and our /guides/monzo-scam-transfer-uk/ guide covers the same pattern with another app-based bank."
       ],
       [
         "If you responded or shared details",
-        "If you shared your login, PIN, or moved money, open the Starling app immediately and use in-app chat to report it and freeze your card if needed. If you sent money by UK bank transfer on or after 7 October 2024, mandatory APP fraud reimbursement rules may apply to Faster Payments and CHAPS transfers. The PSR rules include a 13-month claim window, a maximum claim amount of £85,000, possible exclusions, and a possible excess of up to £100. Report it to your bank as soon as possible.\n\nChange your Starling password and any reused passwords from a device you trust. If you shared identity details, consider Cifas Protective Registration at `cifas.org.uk` and monitor your credit reports with Experian, Equifax, and TransUnion. Keep the caller's number, messages, and times as evidence."
+        "If you shared your login, PIN, or moved money, open the Starling app immediately and use in-app chat to report it and freeze your card if needed, or call Starling's official fraud number published on starlingbank.com. If you sent money by UK bank transfer on or after 7 October 2024, mandatory APP fraud reimbursement rules may apply to Faster Payments and CHAPS transfers. The PSR rules include a 13-month claim window, a maximum claim amount of £85,000, possible exclusions, and a possible excess of up to £100. Report it to your bank as soon as possible.\n\nChange your Starling password and any reused passwords from a device you trust. If you shared identity details, consider Cifas Protective Registration at `cifas.org.uk` and monitor your credit reports with Experian, Equifax, and TransUnion. Keep the caller's number, messages, and times as evidence."
       ],
       [
         "How to report a Starling scam (UK)",
-        "Report it to Starling directly through the in-app chat, which is the fastest route to freeze your account or card. If the scam reached you by email, forward it to the NCSC at `report@phishing.gov.uk`; if by text, forward it to 7726.\n\nIf you lost money or shared sensitive information, report it to Report Fraud at `reportfraud.police.uk` or on 0300 123 2040 if you are in England, Wales, or Northern Ireland. In Scotland, report to Police Scotland on 101. Keep the evidence and report it as soon as possible."
+        "Report it to Starling directly through in-app chat or by calling its official fraud number published on starlingbank.com. If a payment request feels suspicious during a call, hang up and call 159. If the scam reached you by email, forward it to the NCSC at `report@phishing.gov.uk`; if by text, forward it to 7726.\n\nIf you lost money or shared sensitive information, report it to Report Fraud at `reportfraud.police.uk` or on 0300 123 2040 if you are in England, Wales, or Northern Ireland. In Scotland, report to Police Scotland on 101. Keep the evidence and report it as soon as possible."
       ]
     ],
     "faq": [
@@ -9064,15 +9064,15 @@
       ],
       [
         "A caller claims to be from Starling's fraud team — how do I check?",
-        "Hang up and contact Starling only through the official app's in-app chat. Never call a number given to you during the suspicious call, and never share a one-time code, PIN, or password."
+        "Check the Starling app's Call Status feature. If it does not show Starling is calling, hang up and contact Starling through in-app chat, its official fraud number on starlingbank.com, or 159. Never call a number given to you during the suspicious call, and never share a one-time code, PIN, or password."
       ],
       [
         "I shared my login or moved money — can I get it back?",
-        "Maybe. Report it in the Starling app immediately to freeze your account. Eligible UK transfers since 7 October 2024 may fall under APP reimbursement rules, subject to limits and exclusions."
+        "Maybe. Report it in the Starling app immediately, or call Starling's official fraud number on starlingbank.com, to secure your account. Eligible UK transfers since 7 October 2024 may fall under APP reimbursement rules, subject to limits and exclusions."
       ],
       [
         "How do I report a Starling scam?",
-        "Report it through the Starling app's in-app chat first, then if you lost money or shared details, report it to Report Fraud in England, Wales, or Northern Ireland, or to Police Scotland on 101 in Scotland."
+        "Report it through the Starling app's in-app chat or by calling its official fraud number on starlingbank.com, then if you lost money or shared details, report it to Report Fraud in England, Wales, or Northern Ireland, or to Police Scotland on 101 in Scotland."
       ]
     ],
     "keywords": [
@@ -9322,15 +9322,15 @@
       ],
       [
         "How to check a Nationwide text safely",
-        "Do not tap the link or call a number from the text.\n\n- Open the Nationwide app or type nationwide.co.uk yourself and check your account and recent transactions there.\n- Never enter your login, card, or personal details on a page you reached from a text.\n- If you think a payment or your card is affected, call Nationwide using the number on your card or 159.\n- Treat any unexpected \"account restricted\" or \"verify now\" message with suspicion.\n\nIf you are unsure whether a linked page is genuine, our guide on /guides/is-this-website-a-scam/ helps, and our /guides/tsb-bank-scam-text-messages-uk/ and /guides/starling-bank-scam-uk/ guides cover the same pattern with other providers."
+        "Do not tap the link or call a number from the text.\n\n- Open the Nationwide app or type nationwide.co.uk yourself and check your account and recent transactions there.\n- Never enter your login, card, or personal details on a page you reached from a text.\n- If you think a payment or your card is affected, call Nationwide using the number on your card, its dedicated fraud helpline published on nationwide.co.uk, or 159.\n- If someone calls claiming to be Nationwide, use Call Checker in the Nationwide app where available; if you cannot use the app, hang up and call 159.\n- Treat any unexpected \"account restricted\" or \"verify now\" message with suspicion.\n\nIf you are unsure whether a linked page is genuine, our guide on /guides/is-this-website-a-scam/ helps, and our /guides/tsb-bank-scam-text-messages-uk/ and /guides/starling-bank-scam-uk/ guides cover the same pattern with other providers."
       ],
       [
         "If you tapped the link or shared details",
-        "If you entered your login or card details, contact Nationwide immediately using the number on your card or 159, tell them it was a scam, and ask them to secure your account. If you sent money by UK bank transfer on or after 7 October 2024, mandatory APP fraud reimbursement rules may apply to Faster Payments and CHAPS transfers. The PSR rules include a 13-month claim window, a maximum claim amount of £85,000, possible exclusions, and a possible excess of up to £100. Report it to your bank as soon as possible.\n\nChange your Nationwide password through the app or nationwide.co.uk directly. If you shared personal information, consider Cifas Protective Registration at `cifas.org.uk` and monitor your credit reports with Experian, Equifax, and TransUnion. Keep the text as evidence."
+        "If you entered your login or card details, contact Nationwide immediately using the number on your card, its dedicated fraud helpline published on nationwide.co.uk, or 159, tell them it was a scam, and ask them to secure your account. If you sent money by UK bank transfer on or after 7 October 2024, mandatory APP fraud reimbursement rules may apply to Faster Payments and CHAPS transfers. The PSR rules include a 13-month claim window, a maximum claim amount of £85,000, possible exclusions, and a possible excess of up to £100. Report it to your bank as soon as possible.\n\nChange your Nationwide password through the app or nationwide.co.uk directly. If you shared personal information, consider Cifas Protective Registration at `cifas.org.uk` and monitor your credit reports with Experian, Equifax, and TransUnion. Keep the text as evidence."
       ],
       [
         "How to report a Nationwide scam text (UK)",
-        "Forward the scam text to 7726 so your mobile provider can investigate. If the same scam reached you by email, forward it to the NCSC at `report@phishing.gov.uk`.\n\nIf you lost money or shared sensitive information, report it to Report Fraud at `reportfraud.police.uk` or on 0300 123 2040 if you are in England, Wales, or Northern Ireland. In Scotland, report to Police Scotland on 101. Keep the original message and any screenshots."
+        "Forward suspicious Nationwide emails, texts, or messages to `phishing@nationwide.co.uk`. You can also forward scam texts to 7726 so your mobile provider can investigate. If the same scam reached you by email, forward it to the NCSC at `report@phishing.gov.uk`.\n\nIf you lost money or shared sensitive information, report it to Report Fraud at `reportfraud.police.uk` or on 0300 123 2040 if you are in England, Wales, or Northern Ireland. In Scotland, report to Police Scotland on 101. Keep the original message and any screenshots."
       ]
     ],
     "faq": [
@@ -9348,11 +9348,11 @@
       ],
       [
         "I entered my login on a Nationwide-looking site — what now?",
-        "Contact Nationwide immediately using the number on your card or 159 to secure your account, and change your password through the official app or website. If you shared personal details, consider Cifas Protective Registration and monitor your credit reports."
+        "Contact Nationwide immediately using the number on your card, its dedicated fraud helpline published on nationwide.co.uk, or 159 to secure your account, and change your password through the official app or website. If you shared personal details, consider Cifas Protective Registration and monitor your credit reports."
       ],
       [
         "How do I report a Nationwide scam text?",
-        "Forward it to 7726, and if you lost money or shared details, report it to Report Fraud in England, Wales, or Northern Ireland, or to Police Scotland on 101 in Scotland."
+        "Forward it to `phishing@nationwide.co.uk` and to 7726. If you lost money or shared details, report it to Report Fraud in England, Wales, or Northern Ireland, or to Police Scotland on 101 in Scotland."
       ]
     ],
     "keywords": [
@@ -9979,7 +9979,7 @@
       ],
       [
         "How to report a fake Ray-Ban website (UK)",
-        "If the scam reached you by email, forward the email to `report@phishing.gov.uk`. You can also report suspicious websites and links to the NCSC so they can be investigated for takedown. If the link reached you by text, forward it to 7726, and report the advert to the social-media platform you saw it on.\n\nIf you lost money or shared card details, report it to Report Fraud at `reportfraud.police.uk` or on 0300 123 2040 if you are in England, Wales, or Northern Ireland. In Scotland, report to Police Scotland on 101. Keep all the evidence."
+        "Report the site to Ray-Ban through its official \"Report Fake\" page at `ray-ban.com/uk/getsupport/report-fakes`. If the scam reached you by email, forward the email to `report@phishing.gov.uk`. You can also report suspicious websites and links to the NCSC so they can be investigated for takedown. If the link reached you by text, forward it to 7726, and report the advert to the social-media platform you saw it on.\n\nIf you lost money or shared card details, report it to Report Fraud at `reportfraud.police.uk` or on 0300 123 2040 if you are in England, Wales, or Northern Ireland. In Scotland, report to Police Scotland on 101. Keep all the evidence."
       ]
     ],
     "faq": [
@@ -10001,7 +10001,7 @@
       ],
       [
         "How do I report a fake Ray-Ban website?",
-        "Forward scam emails to `report@phishing.gov.uk`, forward scam texts to 7726, and report the advert to the platform. If you lost money, report it to Report Fraud in England, Wales, or Northern Ireland, or to Police Scotland on 101 in Scotland."
+        "Report the site through Ray-Ban's official \"Report Fake\" page, forward scam emails to `report@phishing.gov.uk`, forward scam texts to 7726, and report the advert to the platform. If you lost money, report it to Report Fraud in England, Wales, or Northern Ireland, or to Police Scotland on 101 in Scotland."
       ]
     ],
     "keywords": [
@@ -11131,7 +11131,7 @@
       ],
       [
         "How to buy festival tickets safely",
-        "Go straight to the source rather than following a link.\n\n- Visit the festival's official website directly to find its named, authorised ticket sellers.\n- Do not click a presale link in an unsolicited email; type the festival's address yourself instead.\n- Be suspicious of \"guaranteed\" presale access from a source you cannot verify as official.\n- Prefer paying by card through a recognised, authorised ticket seller.\n- Check the exact web address before entering any payment details.\n\nIf you are unsure, our /guides/concert-ticket-scam-uk/, /guides/f1-british-gp-ticket-scam-uk/, and /guides/stubhub-ticket-scam-uk/ guides cover related ticket-buying scams."
+        "Go straight to the source rather than following a link.\n\n- Visit the festival's official website directly to find its named, authorised ticket sellers, such as the venue box office, official promoter or agent, or a well-known ticketing website listed by the festival.\n- Do not click a presale link in an unsolicited email; type the festival's address yourself instead.\n- Be suspicious of \"guaranteed\" presale access from a source you cannot verify as official.\n- Prefer paying by card through a recognised, authorised ticket seller.\n- Check the exact web address before entering any payment details.\n\nIf you are unsure, our /guides/concert-ticket-scam-uk/, /guides/f1-british-gp-ticket-scam-uk/, and /guides/stubhub-ticket-scam-uk/ guides cover related ticket-buying scams."
       ],
       [
         "If you clicked the link or shared details",
@@ -11522,15 +11522,15 @@
       ],
       [
         "How to check a solar panel offer safely",
-        "Never agree to anything during an unsolicited call or visit.\n\n- Check any government solar or energy-efficiency scheme independently through official government sources, not through what the caller tells you.\n- Get multiple written quotes from installers you find yourself, and compare them without time pressure.\n- Check the company's accreditation, reviews, and Companies House record independently.\n- Never sign a contract or finance agreement on the spot; take it away to read and get independent advice.\n- Be very wary of \"free\" panels tied to a scheme you cannot verify yourself.\n\nOur /guides/solar-panel-scam-uk/ and /guides/driveway-cowboy-scam-uk/ guides cover related home-improvement scam patterns."
+        "Never agree to anything during an unsolicited call or visit.\n\n- Check any government solar or energy-efficiency scheme independently through official government sources, not through what the caller tells you.\n- Get multiple written quotes from installers you find yourself, and compare them without time pressure.\n- Check the company's accreditation with the issuing body, and check reviews and Companies House records independently.\n- Never sign a contract or finance agreement on the spot; take it away to read and get independent advice.\n- Be very wary of \"free\" panels tied to a scheme you cannot verify yourself.\n\nOur /guides/solar-panel-scam-uk/ and /guides/driveway-cowboy-scam-uk/ guides cover related home-improvement scam patterns."
       ],
       [
         "If you have already signed up or paid",
-        "If you paid by card, contact your bank or card issuer using the number on your card and ask about disputing the payment or a chargeback. If you sent money by UK bank transfer on or after 7 October 2024, mandatory APP fraud reimbursement rules may apply to Faster Payments and CHAPS transfers. The PSR rules include a 13-month claim window, a maximum claim amount of £85,000, possible exclusions, and a possible excess of up to £100. Report it to your bank as soon as possible.\n\nIf you signed a finance agreement, you may have a statutory cooling-off period — check your paperwork and act quickly if you want to cancel. If you shared identity or bank details, consider Cifas Protective Registration at `cifas.org.uk` and monitor your credit reports with Experian, Equifax, and TransUnion. Keep any contract, correspondence, and payment records as evidence."
+        "If you paid by card, contact your bank or card issuer using the number on your card and ask about disputing the payment or a chargeback. If you sent money by UK bank transfer on or after 7 October 2024, mandatory APP fraud reimbursement rules may apply to Faster Payments and CHAPS transfers. The PSR rules include a 13-month claim window, a maximum claim amount of £85,000, possible exclusions, and a possible excess of up to £100. Report it to your bank as soon as possible.\n\nIf you agreed during a doorstep visit, phone call, or other arrangement away from the trader's business premises, you may have a 14-day cancellation right for the installation contract, but exceptions can apply and you may have to pay for work already started with your agreement. If you signed a regulated finance agreement, there may also be a separate 14-day right to withdraw from the credit. Check your paperwork and contact a consumer advice service quickly before the deadline passes. If you shared identity or bank details, consider Cifas Protective Registration at `cifas.org.uk` and monitor your credit reports with Experian, Equifax, and TransUnion. Keep any contract, correspondence, and payment records as evidence."
       ],
       [
         "How to report a solar panel cold-calling scam (UK)",
-        "Report a rogue trader or high-pressure sales approach to your local council's Trading Standards service.\n\nIf you lost money, report it to Report Fraud at `reportfraud.police.uk` or on 0300 123 2040 if you are in England, Wales, or Northern Ireland. In Scotland, report to Police Scotland on 101. Keep all your evidence, including any contract, correspondence, and payment records."
+        "Report a rogue trader or high-pressure sales approach through the relevant consumer advice service so it can be passed to Trading Standards. In England and Wales, Citizens Advice consumer service is the public route for reporting to Trading Standards; use the equivalent national consumer advice route in Scotland or Northern Ireland.\n\nIf you lost money, report it to Report Fraud at `reportfraud.police.uk` or on 0300 123 2040 if you are in England, Wales, or Northern Ireland. In Scotland, report to Police Scotland on 101. Keep all your evidence, including any contract, correspondence, and payment records."
       ]
     ],
     "faq": [
@@ -11548,11 +11548,11 @@
       ],
       [
         "I've signed up and now regret it — can I cancel?",
-        "If you signed a finance agreement, check your paperwork for a statutory cooling-off period and act quickly. If you paid by card, ask your bank about a chargeback."
+        "If you agreed during a doorstep visit or phone sale, you may have a 14-day cancellation right, but exceptions can apply. If you signed a regulated finance agreement, you may also have a separate 14-day right to withdraw from the credit. Check the paperwork and get consumer advice quickly. If you paid by card, ask your bank about a chargeback."
       ],
       [
         "How do I report a solar panel cold-calling scam?",
-        "Report it to your local council's Trading Standards service. If you lost money, report it to Report Fraud in England, Wales, or Northern Ireland, or to Police Scotland on 101 in Scotland."
+        "Report it through the relevant consumer advice service so it can be passed to Trading Standards. If you lost money, report it to Report Fraud in England, Wales, or Northern Ireland, or to Police Scotland on 101 in Scotland."
       ]
     ],
     "keywords": [
@@ -11599,11 +11599,11 @@
       ],
       [
         "If you have already paid or agreed to work",
-        "If you paid by card, contact your bank or card issuer using the number on your card and ask about disputing the payment or a chargeback. If you sent money by UK bank transfer on or after 7 October 2024, mandatory APP fraud reimbursement rules may apply to Faster Payments and CHAPS transfers. The PSR rules include a 13-month claim window, a maximum claim amount of £85,000, possible exclusions, and a possible excess of up to £100. Report it to your bank as soon as possible.\n\nDo not pay any further amount to \"fix\" poor work without an independent assessment first. If you shared identity or bank details, consider Cifas Protective Registration at `cifas.org.uk` and monitor your credit reports with Experian, Equifax, and TransUnion. Keep any contract, receipts, photos of the work, and the trader's details as evidence."
+        "If you paid by card, contact your bank or card issuer using the number on your card and ask about disputing the payment or a chargeback. If you sent money by UK bank transfer on or after 7 October 2024, mandatory APP fraud reimbursement rules may apply to Faster Payments and CHAPS transfers. The PSR rules include a 13-month claim window, a maximum claim amount of £85,000, possible exclusions, and a possible excess of up to £100. Report it to your bank as soon as possible.\n\nDo not pay any further amount to \"fix\" poor work without an independent assessment first. If you agreed during a doorstep visit, phone call, or other arrangement away from the trader's business premises, you may have a 14-day cancellation right, but exceptions can apply and you may have to pay for work already started with your agreement. Check the paperwork and contact a consumer advice service quickly before the deadline passes. If you shared identity or bank details, consider Cifas Protective Registration at `cifas.org.uk` and monitor your credit reports with Experian, Equifax, and TransUnion. Keep any contract, receipts, photos of the work, and the trader's details as evidence."
       ],
       [
         "How to report a driveway cowboy scam (UK)",
-        "Report a rogue trader to your local council's Trading Standards service, which handles doorstep and rogue-trading complaints.\n\nIf you lost money, report it to Report Fraud at `reportfraud.police.uk` or on 0300 123 2040 if you are in England, Wales, or Northern Ireland. In Scotland, report to Police Scotland on 101. Keep all your evidence, including any contract, receipts, and photographs of the work."
+        "Report a rogue trader through the relevant consumer advice service so it can be passed to Trading Standards. In England and Wales, Citizens Advice consumer service is the public route for reporting to Trading Standards; use the equivalent national consumer advice route in Scotland or Northern Ireland.\n\nIf you lost money, report it to Report Fraud at `reportfraud.police.uk` or on 0300 123 2040 if you are in England, Wales, or Northern Ireland. In Scotland, report to Police Scotland on 101. Keep all your evidence, including any contract, receipts, and photographs of the work."
       ]
     ],
     "faq": [
@@ -11621,11 +11621,11 @@
       ],
       [
         "I've already paid a cowboy trader for poor or unfinished work — what can I do?",
-        "If you paid by card, ask your bank about a chargeback. Report the trader to your local council's Trading Standards service, and keep photos, receipts, and any contract as evidence."
+        "If you paid by card, ask your bank about a chargeback. If you agreed during a doorstep visit or phone sale, you may have a 14-day cancellation right, but exceptions can apply. Report the trader through the relevant consumer advice service so it can be passed to Trading Standards, and keep photos, receipts, and any contract as evidence."
       ],
       [
         "How do I report a driveway cowboy scam?",
-        "Report it to your local council's Trading Standards service. If you lost money, report it to Report Fraud in England, Wales, or Northern Ireland, or to Police Scotland on 101 in Scotland."
+        "Report it through the relevant consumer advice service so it can be passed to Trading Standards. If you lost money, report it to Report Fraud in England, Wales, or Northern Ireland, or to Police Scotland on 101 in Scotland."
       ]
     ],
     "keywords": [
