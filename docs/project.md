@@ -8,9 +8,9 @@
 > 3. Potential buyers / acquirers — full due-diligence briefing on the asset.
 > 4. Contractors, future editors, security reviewers — onboarding pack.
 >
-> **Last updated:** 2026-06-19
-> **Domain age:** ~4 months (registered February 2026)
-> **Site state:** ~190 guides published (grows ~1/day via the gated cron), 17 normalised categories, AI checker live (durable rate limit + daily spend cap), newsletter live (Resend, **double opt-in** + signed one-click unsubscribe), UK/EEA ad+analytics consent via Google's certified CMP, llms.txt + security.txt deployed, full UK Terms (E&W + Scotland + NI), named author E-E-A-T (Alex Bacsa) with cross-publication identity (CloudFintech + Tuning Digital + SalesTap + LinkedIn). **Video production (YouTube Shorts + TikTok + Instagram Reels) was discontinued 2026-06-15** — it built neither domain authority nor backlinks; see `docs/video-pipeline.md`. Semrush Site Health **98%**, AI Search Health **99%**, Lighthouse mobile Performance **92–97** / Accessibility **95–98** / Best Practices **92** / SEO **100** across homepage, guide, author pages. ~191 residual Semrush warnings all from Google's AdSense CDN (irreducible third-party floor). **Technical build is mature and stable.** Editorial accuracy is now defence-in-depth: autonomous publishing is gated (deterministic + LLM judge), reporting routes are validated against a verified source canon (`content/sources.json`), every guide carries a claim manifest (`content/manifests/`), and a weekly audit digest surfaces flag-tier claims for human review — see the content-accuracy section.
+> **Last updated:** 2026-07-04
+> **Domain age:** ~5 months (registered February 2026)
+> **Site state:** 189 guides published (grows ~1/day via the gated cron, net of occasional diversification-batch consolidations — see `docs/content-diversification-plan.md` for the current count), 17 normalised categories, AI checker live (durable rate limit + daily spend cap), newsletter live (Resend, **double opt-in** + signed one-click unsubscribe), UK/EEA ad+analytics consent via Google's certified CMP, llms.txt + security.txt deployed, full UK Terms (E&W + Scotland + NI), named author E-E-A-T (Alex Bacsa) with cross-publication identity (CloudFintech + Tuning Digital + SalesTap + LinkedIn). **Video production (YouTube Shorts + TikTok + Instagram Reels) was discontinued 2026-06-15** — it built neither domain authority nor backlinks; see `docs/video-pipeline.md`. Semrush Site Health **98%**, AI Search Health **99%**, Lighthouse mobile Performance **92–97** / Accessibility **95–98** / Best Practices **92** / SEO **100** across homepage, guide, author pages. ~191 residual Semrush warnings all from Google's AdSense CDN (irreducible third-party floor). **Technical build is mature and stable.** Editorial accuracy is now defence-in-depth: autonomous publishing is gated (deterministic + LLM judge), reporting routes are validated against a verified source canon (`content/sources.json`), every guide carries a claim manifest (`content/manifests/`), and a weekly audit digest surfaces flag-tier claims for human review — see the content-accuracy section.
 > **Maintainer:** Alex — SideRight Apps (GitHub: `siderightapps-hub`)
 
 ---
@@ -58,7 +58,7 @@
 
 A free, UK-focused consumer-protection publication that:
 
-1. Publishes plain-English **scam awareness guides** (now 97+ published, with a queue of additional topics being released ~5/day).
+1. Publishes plain-English **scam awareness guides** (now 189 published, with a queue of additional topics being released ~5/day).
 2. Offers a **free AI-powered Scam Checker** at `/check/` where users paste suspicious messages and receive a verdict, confidence score, red flags, green flags, recommended actions, and reporting links.
 3. Routes users to legitimate UK reporting bodies (Action Fraud / `reportfraud.police.uk`, NCSC, FCA ScamSmart, Take Five, Citizens Advice).
 4. Generates revenue via Google AdSense (in review), affiliate partnerships (Experian, Norton, Cifas, Which? Legal), and future newsletter / sponsorship channels.
@@ -68,7 +68,7 @@ A free, UK-focused consumer-protection publication that:
 
 - The exact-match keyword domain `beatthescam.com` is short, memorable, and category-defining.
 - Consumer fraud is a **YMYL** (your-money-or-your-life) niche with high RPMs once authority is established.
-- The site already has 97+ original articles, technical SEO foundation, security A+, schema markup, and an AI utility (scam checker) that competitors don't offer.
+- The site already has 189 original articles, technical SEO foundation, security A+, schema markup, and an AI utility (scam checker) that competitors don't offer.
 - The brand is portable: it could be acquired by a consumer-finance publisher, a cybersecurity SaaS vendor, an insurance / identity-protection brand, or a UK media group.
 
 ---
@@ -111,7 +111,7 @@ A free, UK-focused consumer-protection publication that:
 |---|---|---|
 | Site generation | **Custom Python static site generator** (`scripts/build.py`) | NOT Next.js, NOT Hugo, NOT Jekyll. Bespoke Python that reads `content/posts.json` + `content/site.json` and renders into `dist/` using `templates/base.html`. |
 | Templating | Single `templates/base.html` shell with `{{placeholder}}` substitution | Simple, fast, no framework dependency. |
-| Source of truth (content) | `content/posts.json` | All ~190 guides as JSON records (grows ~1/day via the gated daily cron). |
+| Source of truth (content) | `content/posts.json` | All 189 guides as JSON records (grows ~1/day via the gated daily cron). |
 | Hosting / CDN | **Netlify** (Personal plan — $9/month, 1000 build credits) | Auto-deploys on push to `main`. |
 | Serverless functions | **Netlify Functions** (5: `check-scam`, `subscribe`, `confirm-subscribe`, `unsubscribe`, `csp-report`) | AI checker proxy + double opt-in newsletter (subscribe/confirm/unsubscribe) + CSP violation collector. Functions now carry a `package.json` (`@netlify/blobs`). |
 | AI for scam checker | **Anthropic Claude — `claude-haiku-4-5-20251001`** | Returns structured JSON verdict. Durable per-IP rate limit + daily spend cap (`DAILY_CALL_CAP=2000`/UTC-day) via Netlify Blobs. |
@@ -121,7 +121,7 @@ A free, UK-focused consumer-protection publication that:
 | Ads | **Google AdSense** | Publisher ID `ca-pub-1606633100797174`. UK/EEA consent via Google's certified CMP (Privacy & messaging). |
 | Email distribution | **Resend** (live, double opt-in) | Audiences + transactional confirm/welcome/unsubscribe emails via `subscribe.js`/`confirm-subscribe.js`/`unsubscribe.js`. |
 | Search / SEO | Google Search Console, Bing Webmaster Tools | Site verified. |
-| Repository | GitHub (`siderightapps-hub/beatthescam-site`) | Private/public TBD — confirm before sale. |
+| Repository | GitHub (`siderightapps-hub/beatthescam-site`) | Public — confirmed 2026-07-04 via `gh repo view`. |
 
 ### Why static + serverless?
 
@@ -142,13 +142,22 @@ beatthescam-site/
 │   ├── rewrite_thin_guides.py         # One-shot script to rewrite short guides
 │   ├── run_daily_publish.py           # Daily pipeline orchestrator
 │   ├── search_console_articles.py     # Pulls SC queries → finds content gaps → generates articles
-│   └── tweet_new_articles.py          # Auto-tweet on publish
+│   ├── tweet_new_articles.py          # Auto-tweet on publish
+│   ├── content_gate.py                # Content accuracy gate (deterministic + LLM judge)
+│   ├── audit_corpus.py                # Re-audits the whole corpus on demand
+│   ├── audit_digest.py                # Weekly audit digest emailer
+│   ├── gate_selftest.py               # Live self-test for the accuracy gate
+│   └── ...                            # + 13 more: auth_google.py, check_twitter_auth.py, generate_trending_topics.py, generate_video.py, get_youtube_refresh_token.py, gsc_report.py, merge_new_posts.py, add_bank_codes_post.py, recover_courier_guides.py, recover_purged_pages_2.py, upload_to_youtube.py (see `ls scripts/` for the full current list)
 ├── content/
-│   ├── posts.json                     # All 97+ published guides (source of truth)
+│   ├── posts.json                     # All 189 published guides (source of truth)
 │   ├── site.json                      # Site config (domain, AdSense ID, GA4 ID, etc.)
 │   ├── affiliates.json                # Affiliate products config
 │   ├── daily-publish-queue.csv        # Pending topics
-│   └── topics-claude-template.csv     # Topic template reference
+│   ├── topics-claude-template.csv     # Topic template reference
+│   ├── sources.json                   # Verified source canon (reporting phones/emails) — gate + on-page "Report this scam" block derive from this
+│   ├── manifests/                     # Per-guide claim manifests (content/manifests/<slug>.json) — audit record of high-stakes claims detected by the gate
+│   ├── category-hubs.json             # Category hub page config
+│   └── tweeted_posts.json             # Dedupe ledger for auto-tweet
 ├── templates/
 │   └── base.html                      # HTML shell with {{placeholders}}
 ├── assets/
@@ -157,10 +166,21 @@ beatthescam-site/
 │   └── og-image-v2.png                # OpenGraph default image
 ├── netlify/
 │   └── functions/
-│       └── check-scam.js              # Serverless Claude API proxy (rate-limited)
+│       ├── check-scam.js              # Serverless Claude API proxy (rate-limited)
+│       ├── subscribe.js               # Newsletter signup (step 1, double opt-in)
+│       ├── confirm-subscribe.js       # Newsletter confirm (step 2) + welcome email
+│       ├── unsubscribe.js             # One-click + form unsubscribe
+│       └── csp-report.js              # CSP violation report collector
 ├── .github/
 │   └── workflows/
-│       └── daily-publish.yml          # GitHub Actions daily content pipeline
+│       ├── daily-publish.yml          # Daily content pipeline (05:07 UTC) — opens a review PR
+│       ├── daily-search-console.yml   # Search Console content-gap pipeline (05:23 UTC) — opens a review PR
+│       ├── tweet-on-publish.yml       # Fires on merge-to-main touching posts.json — tweets added slugs
+│       ├── weekly-audit.yml           # Digests recent claim manifests' flag-tier claims for human review
+│       ├── gate-selftest.yml          # Manual workflow_dispatch — runs the content gate's live self-test
+│       └── codeql.yml                 # CodeQL SAST for JS + Python
+├── package.json                       # JS deps for Netlify Functions only (@netlify/blobs)
+├── package-lock.json                  # JS deps for Netlify Functions only (@netlify/blobs)
 ├── netlify.toml                       # Netlify config — security headers, redirects
 ├── dist/                              # Built site (committed, served by Netlify)
 │   ├── _redirects                     # Auto-generated 301s for category slug normalisation
@@ -208,17 +228,22 @@ Developer pushes to main  →  GitHub webhook  →  Netlify pulls repo  →  Ser
 
 ### Daily pipeline flow
 
+**Human-review gate (2026-06-25):** the cron no longer pushes straight to `main`. It opens a pull request instead — nothing publishes, gets ads, or is tweeted until the operator merges it.
+
 ```
 05:07 UTC  →  GitHub Actions starts daily-publish.yml
-            →  git pull --rebase origin main   (catches manual pushes)
             →  Calls Claude API → generates 1 guide → content_gate.py (deterministic + LLM judge); FAIL → quarantine; PASS → write content/manifests/<slug>.json → updates posts.json
             →  Runs python scripts/build.py → rebuilds dist/
             →  Verifies dist/index.html, dist/robots.txt, dist/_redirects, 50+ guide directories exist
-            →  git add -A && commit
-            →  Pull-rebase + retry loop on push (up to 3 attempts)
-            →  Push to main
-            →  Netlify auto-deploys
+            →  git checkout -b auto/daily-publish-<date>-<run_id>
+            →  git commit && git push origin <branch>
+            →  gh pr create --base main --label auto-content
+            →  Operator reviews and merges the PR
+            →  Netlify auto-deploys from the merge
+            →  (separately) tweet-on-publish.yml fires on that merge push and tweets the added slug(s) — diff-based, ≤3-slug cap, deduped via tweeted_posts.json
 ```
+
+There is no rebase-retry loop anymore: each cron run branches fresh off `main` and pushes a brand-new branch, so there is nothing to conflict with on push.
 
 ### Credit usage discipline
 
@@ -234,10 +259,12 @@ The daily pipeline is optimised to **only push to GitHub when content has actual
 |---|---|---|
 | `ANTHROPIC_API_KEY` | Used by `daily-publish.yml` for Claude content generation | 2026-04-28 |
 | `TWITTER_API_KEY` | Auto-tweet new articles via `tweet_new_articles.py` | (confirm) |
-| `TWITTER_API_SECRET` | Twitter OAuth | (confirm) |
+| `TWITTER_API_KEY_SECRET` | Twitter OAuth | (confirm) |
 | `TWITTER_ACCESS_TOKEN` | Twitter OAuth | (confirm) |
-| `TWITTER_ACCESS_SECRET` | Twitter OAuth | (confirm) |
+| `TWITTER_ACCESS_TOKEN_SECRET` | Twitter OAuth | (confirm) |
 | `GOOGLE_SEARCH_CONSOLE_TOKEN` + `GOOGLE_OAUTH_CREDENTIALS` | Search Console gap pipeline | (confirm) |
+
+> The four `TWITTER_*` secrets are consumed by **`tweet-on-publish.yml`** (fires on merge-to-`main`, not by either daily content cron directly). `GOOGLE_SEARCH_CONSOLE_TOKEN`/`GOOGLE_OAUTH_CREDENTIALS` are consumed by the separate **`daily-search-console.yml`** cron.
 
 ### Local-only env vars (`.env` in repo root, gitignored)
 
@@ -272,7 +299,6 @@ worktree-env() { cp ~/Projects/websites/beatthescam-site/.env .env; }
 ### Key rotation policy
 
 - All keys were rotated on **2026-04-28** after a suspected exposure incident.
-- Rotation playbook documented in `SecurityAuditHandoff.md`.
 - **Cadence going forward:** rotate every 90 days minimum; immediate rotation on any suspected exposure.
 
 ### Key rotation history
@@ -351,37 +377,49 @@ This is the **complete inventory of every external account** the site depends on
 - **Handle:** `@BeatTheScamUK`
 - **API access tier:** Free or Basic (confirm)
 - **OAuth credentials:** stored as GitHub Secrets for `tweet_new_articles.py`
-- **Posting frequency:** On every new article publish + manual video posts
+- **Posting frequency:** On every new article publish (via `tweet-on-publish.yml`, fires on merge to `main`)
 
 ### TikTok
 
+**[DISCONTINUED 2026-06-15]** — video production stopped; this account is dormant, not actively posting. Left below for historical reference.
+
 - **Handle:** `@BeatTheScamUK`
 - **Account email:** `socialmedia@beatthescam.com`
-- **Posting:** Manual upload from CapCut → camera roll → TikTok app (per `video-pipeline.md`)
-- **API:** Not currently used (no automated posting)
+- **Posting (historical):** Manual upload from CapCut → camera roll → TikTok app (per `video-pipeline.md`)
+- **API:** Not used (no automated posting)
 
 ### YouTube
+
+**[DISCONTINUED 2026-06-15]** — Shorts production stopped; this channel is dormant, not actively posting. Left below for historical reference.
 
 - **Channel:** Beat The Scam (Brand Account)
 - **Owner Google account:** `siderightapps@gmail.com`
 - **Channel handle:** TBC
-- **Posting:** Manual upload of Shorts via the YouTube Studio interface
-- **API:** Not currently used
+- **Posting (historical):** Manual upload of Shorts via the YouTube Studio interface
+- **API:** Not used
 
 ### ElevenLabs (voice generation)
 
+**[DISCONTINUED 2026-06-15 — key deleted, plan should be downgraded/cancelled]**
+
 - **Account email:** `socialmedia@beatthescam.com`
-- **Plan:** Starter ($6/month)
-- **Voice in use:** Daniel (British male) — changed from Grace
-- **Used for:** Voiceovers in Shorts/TikTok videos
+- **Plan:** Starter ($6/month) — should be downgraded/cancelled now that the key is deleted
+- **Voice used:** Daniel (British male) — changed from Grace
+- **Used for (historical):** Voiceovers in Shorts/TikTok videos
 
 ### Gemini (image generation)
 
-- **Used for:** Generating per-clip images for video production (UK-specific scene details — see `video-pipeline.md` Section 3 Step 3)
+[DISCONTINUED — stated use case (video image generation) no longer applies since video production stopped 2026-06-15; confirm with operator whether the account itself needs downgrading]
+
+- **Used for (historical):** Generating per-clip images for video production (UK-specific scene details — see `video-pipeline.md` Section 3 Step 3)
 
 ### CapCut
 
-- **Used for:** Video assembly, auto-captions, background music, end card insertion
+**[DISCONTINUED 2026-06-15]** — video production stopped; this tool is no longer in active use.
+
+- **Used for (historical):** Video assembly, auto-captions, background music, end card insertion
+
+> **Note (applies to Impact.com, Awin, and CJ Affiliate below):** `content/affiliates.json`'s actual live product links (Experian, Cifas, Which? Legal, Norton) are currently direct/untracked URLs, NOT routed through any of these three affiliate networks — regardless of each account's individual application status below. No affiliate commission is currently being captured through them yet.
 
 ### Impact.com (affiliate network)
 
@@ -506,14 +544,16 @@ Semrush exposes a Looker Studio connector under the Site Audit "Export" menu. No
 
 ### Channel status table
 
+⚠️ Table dated 2026-05-20 — re-verify each row's status, especially Awin (reapply window has since opened).
+
 | Channel | Status (2026-05-20) | Estimated revenue at scale |
 |---|---|---|
 | **Google AdSense** | In review since ~2026-04-21 | £30–£900/mo depending on traffic |
-| **Experian IdentityPlus (via Awin)** | Awin rejected, reapply 2026-06-12+ | £50–£300/mo if approved |
+| **Experian IdentityPlus (via Awin)** | Awin rejected, reapply 2026-06-12+ (reapply window opened 2026-06-12 — confirm with operator whether this happened) | £50–£300/mo if approved |
 | **Norton 360 (via Impact/CJ)** | Impact verified, CJ application in progress | £50–£250/mo if approved |
 | **Which? Legal (direct outreach)** | Email outreach drafted | £30–£150/mo if approved |
 | **Cifas Protective Registration** | Direct outreach planned | £20–£100/mo (lower commission tier) |
-| **Newsletter sponsorships** | Newsletter not built yet | £100–£500/mo per sponsored issue once list >2,000 |
+| **Newsletter sponsorships** | Newsletter live (Resend, double opt-in) — list size TBC | £100–£500/mo per sponsored issue once list >2,000 |
 | **Direct sponsorships** | None yet | Untapped — security SaaS brands relevant |
 
 ### AdSense — readiness checklist
@@ -524,7 +564,7 @@ Semrush exposes a Looker Studio connector under the Site Audit "Export" menu. No
 - [x] Cookie Policy page live (`/cookies/`)
 - [x] `ads.txt` served and Authorised at `/ads.txt`
 - [x] `robots.txt` does not block `Mediapartners-Google` or `AdsBot-Google`
-- [x] Original, regularly-published content (~190 guides, gated daily publishing pipeline)
+- [x] Original, regularly-published content (189 guides, gated daily publishing pipeline)
 - [x] Working HTTPS with valid certificate
 - [x] Site has clear navigation and footer
 
@@ -572,7 +612,7 @@ multiplex_unit:       <add after creation>
 
 - Sponsored "Editor's Pick" sections within category hub pages
 - Co-branded annual "UK Scam Trends Report" with an identity-protection brand
-- Sponsored email blast inside the future newsletter
+- Sponsored email blast inside the newsletter (once list size supports it)
 
 ---
 
@@ -590,8 +630,8 @@ multiplex_unit:       <add after creation>
 
 ### Current state
 
-- **Published guides:** 97+ across 17 normalised categories
-- **Queue:** ~77 remaining topics in `content/daily-publish-queue.csv` (~77 days at 1/day)
+- **Published guides:** 189 across 17 normalised categories
+- **Queue:** ~30 remaining topics in `content/daily-publish-queue.csv` (~30 days at 1/day)
 - **Avg article length:** 900–1,200 words (post-rewrite of 20 thin guides)
 - **Structure per article:** 6 sections × 120–180 words + 4 FAQs + sidebar (Fast checks, Related guides, Report this scam, Checker CTA, Affiliate card) + FAQ schema
 - **Reporting links:** All updated from `actionfraud.police.uk` → `reportfraud.police.uk`
@@ -606,16 +646,18 @@ multiplex_unit:       <add after creation>
 | Queue file | `content/daily-publish-queue.csv` |
 | Model | `claude-haiku-4-5-20251001` |
 | Build verification | Fails workflow if `dist/index.html`, `dist/robots.txt`, `dist/_redirects` missing OR <50 guide dirs |
-| Push retry | `git pull --rebase` + 3 attempts with 5s sleep on rejection |
+| Publish flow (since 2026-06-25) | Generate → gate → build → **opens a review PR** (branch `auto/daily-publish-<date>-<run_id>`, label `auto-content`). Does **not** push/commit to `main` directly — a human must merge. No rebase-retry loop: each cron branches fresh off `main`, so there's nothing to conflict with. |
 
 ### Search Console article generator (parallel pipeline)
 
 - Runs at **05:23 UTC** daily (was 06:30 UTC until 2026-05-22). Off popular slots to reduce delay; queued behind `daily-publish` via shared `concurrency: content-pipeline` group.
 - Pulls trending queries from Search Console
 - Identifies content gaps (queries with impressions but no matching guide)
-- Generates new article via Claude API
-- Adds to `posts.json`, rebuilds, commits, pushes
-- Tweets new article via `tweet_new_articles.py`
+- Generates new article via Claude API, runs it through the accuracy gate, and rebuilds
+- **Opens a review PR** (branch `auto/search-console-<date>-<run_id>`, label `auto-content`) — does not commit/push to `main` directly, same as `daily-publish`
+- Nothing publishes, gets ads, or is tweeted until the operator merges the PR
+
+On merge, a **separate** workflow, `tweet-on-publish.yml`, tweets the slug(s) added by that push (diff-based against `content/posts.json`, ≤3-slug cap, deduped via `content/tweeted_posts.json`) — tweeting is no longer a step either generator runs itself.
 
 ### Manual content commands
 
@@ -714,6 +756,8 @@ This site is engineered for three search modes simultaneously:
 
 ### Current SEO state (Search Console snapshot 2026-04-30)
 
+⚠️ This snapshot is from 2026-04-30 and is now stale. A more recent 90-day pull (token refreshed 2026-06-26, via `scripts/gsc_report.py`) is recorded in `docs/content-diversification-plan.md` §1: 9,731 impressions / 49 clicks / 0.50% CTR / average position 15.5 — a substantially better picture than the figures below. See that doc for the current numbers; re-pull via `gsc_report.py` for anything more recent than 2026-06-26.
+
 - Impressions: 1,850 / 3 months
 - Clicks: 3 (CTR 0.2%)
 - Average position: 24.1
@@ -752,7 +796,7 @@ This site is engineered for three search modes simultaneously:
 
 ### Near-miss query strategy (highest immediate leverage)
 
-Per the SEO ranking section in `SessionHandoff-SEOHygieneBullet-ListBug-HouseKeeping.md`:
+Near-miss query strategy:
 
 1. In Search Console → Performance → Queries, filter to **Position < 20**
 2. Sort by Impressions descending
@@ -1039,8 +1083,6 @@ The site has an active Google disavow file. Background and the rules for future 
 
 ## 17. Security Posture (OWASP & Internet Security)
 
-> Full detail in `SecurityAuditHandoff.md`. This section is the executive summary.
-
 ### Audit status
 
 - **Original audit:** 2026-04-29 → remediation completed 2026-04-30
@@ -1066,9 +1108,11 @@ referrer-policy: strict-origin-when-cross-origin
 x-content-type-options: nosniff
 x-frame-options: DENY
 x-xss-protection: 0   # legacy header intentionally OFF (obsolete; "1; mode=block" can introduce XS-Leaks)
+cross-origin-opener-policy: same-origin-allow-popups
+reporting-endpoints: csp-endpoint="https://beatthescam.com/api/csp-report"
 ```
 
-Full CSP string in `SecurityAuditHandoff.md` Section 1. **Netlify Function responses** (these come from the function bundle, NOT netlify.toml — which doesn't reliably reach function responses): the HTML pages `confirm-subscribe.js` / `unsubscribe.js` set their own strict per-page headers (`default-src 'none'; style-src 'unsafe-inline'; form-action 'self'; frame-ancestors 'none'` CSP + X-Frame-Options DENY + nosniff + `no-referrer` + Permissions-Policy + 2yr HSTS, added 2026-06-22); the JSON functions (`check-scam`, `subscribe`, `csp-report`) add `nosniff` + `no-referrer`.
+**Netlify Function responses** (these come from the function bundle, NOT netlify.toml — which doesn't reliably reach function responses): the HTML pages `confirm-subscribe.js` / `unsubscribe.js` set their own strict per-page headers (`default-src 'none'; style-src 'unsafe-inline'; form-action 'self'; frame-ancestors 'none'` CSP + X-Frame-Options DENY + nosniff + `no-referrer` + Permissions-Policy + 2yr HSTS, added 2026-06-22); the JSON functions (`check-scam`, `subscribe`, `csp-report`) add `nosniff` + `no-referrer`.
 
 ### OWASP Top 10 (2025) coverage
 
@@ -1182,7 +1226,7 @@ google.com, pub-1606633100797174, DIRECT, f08c47fec0942fa0
 
 [`llms.txt`](https://llmstxt.org/) is the emerging standard for telling LLM crawlers (ChatGPT, Claude, Perplexity, Gemini) what content on the site is canonical and citation-worthy. **Live at https://beatthescam.com/llms.txt** — generated by `scripts/build.py` from `content/posts.json` on every build.
 
-Structure: a brief site description, then categories listed (with guide counts), then every guide grouped by category with title + URL + description, then an "Optional" section for About/Contact/Privacy. Currently ~242 lines covering all 190 guides.
+Structure: a brief site description, then categories listed (with guide counts), then every guide grouped by category with title + URL + description, then an "Optional" section for About/Contact/Privacy. Currently ~242 lines covering all 189 guides (line count will drift slightly with corpus size — check `dist/search.json` for the exact current figure).
 
 Impact: AI Search Health jumped from 88% → 99% in the Semrush audit on the next crawl after deployment.
 
@@ -1195,14 +1239,14 @@ Impact: AI Search Health jumped from 88% → 99% in the Semrush audit on the nex
 Current contents:
 
 ```
-Contact: mailto:hello@beatthescam.com
+Contact: mailto:security@beatthescam.com
 Contact: https://beatthescam.com/contact/
 Expires: <today+335 days, ISO 8601>
 Preferred-Languages: en
 Canonical: https://beatthescam.com/.well-known/security.txt
 ```
 
-**To change:** edit the `security_txt = ...` block in `scripts/build.py` (search for "security.txt (RFC 9116)"). When the `security@beatthescam.com` mailbox alias is activated, swap the primary Contact line. PGP signing not implemented — major publishers (Google, GitHub, Cloudflare) don't sign theirs either; defer unless a real vuln-disclosure programme starts.
+**To change:** edit the `security_txt = ...` block in `scripts/build.py` (search for "security.txt (RFC 9116)"). Already using the dedicated `security@` alias, activated 2026-06-09 (`content/site.json`'s `security_email` key, rendered here by `build.py`). PGP signing not implemented — major publishers (Google, GitHub, Cloudflare) don't sign theirs either; defer unless a real vuln-disclosure programme starts.
 
 ### `humans.txt` *(optional — nice-to-have)*
 
@@ -1214,9 +1258,13 @@ A short credits file at `/humans.txt`. Useful for buyers / future contractors. O
 
 ### Daily (automated)
 
-- ✅ 05:07 UTC — Daily AI publish workflow (gated by content_gate.py)
-- ✅ 05:23 UTC — Search Console article generator (gated; fails loudly on a dead GSC token)
-- ✅ Tweet on every publish
+- ✅ 05:07 UTC — Daily AI publish workflow: generates from the queue, runs `content_gate.py`, builds, then **opens a review PR** (label `auto-content`) instead of publishing directly — nothing goes live until the operator merges it.
+- ✅ 05:23 UTC — Search Console article generator: same gate → build → **review PR** flow (fails loudly on a dead GSC token, doesn't silently no-op).
+- ✅ Tweet on publish — handled by a separate workflow, `tweet-on-publish.yml`, triggered by the post-merge push to `main` (not by either daily cron itself); tweets only the slug(s) added in that push.
+
+### Weekly (automated)
+
+- ✅ Monday 06:00 UTC — Weekly editorial audit digest (`.github/workflows/weekly-audit.yml`) emails flag-tier claims from recent guides for human review.
 
 ### Weekly (manual)
 
@@ -1272,8 +1320,6 @@ Revoke PATs after use at github.com → Settings → Developer settings → Pers
 
 ## 20. Known Issues & Watch Points
 
-> Carried forward and consolidated from `ProjectHandoffDocument.md`, `SecurityAuditHandoff.md`, `SessionHandoff-SEOHygieneAndBullet-ListBugFix.md`, `SessionHandoff-SEOHygieneBullet-ListBug-HouseKeeping.md`.
-
 1. **Netlify publish directory dependency.** The dashboard's *Publish directory* must be set to `dist`. If "Not set", `netlify.toml` `[[headers]]` blocks silently stop applying. **Canonical check:** `curl -sI https://beatthescam.com/assets/styles.css | grep -i cache-control` must return `public, max-age=31536000, immutable`.
 
 2. **`netlify.toml` redirects only work for the two grandfathered rules.** `[[redirects]]` works for the original `/api/check-scam` rewrite and the catch-all 404, but **any newly added toml rule is silently ignored at the edge** — not just category 301s. Confirmed 2026-06-09: the freshly added `/api/subscribe` → function rewrite 404'd from toml while `/.netlify/functions/subscribe` resolved fine. **Workaround (always):** put every new redirect/rewrite in `dist/_redirects` (auto-generated by `build.py`). API `200` rewrites are emitted at the **top** of that file because first-match-wins and a rewrite must precede any catch-all. Do **not** add new `[[redirects]]` to `netlify.toml` expecting them to work.
@@ -1289,11 +1335,11 @@ Revoke PATs after use at github.com → Settings → Developer settings → Pers
 
 5. **Netlify credit usage cap.** 1,000 credits/month. Pipeline only deploys when `dist/` changes. Monitor monthly.
 
-6. **AdSense approval delay.** Site has been in review since ~2026-04-21 (re-started after `ads.txt` fix). Chase mid-week if still pending after 14 days.
+6. **AdSense approval delay.** Site has been in review since ~2026-04-21 (re-started after `ads.txt` fix) — well past the original "chase after 14 days" trigger as of 2026-07-04. Chase now if still pending; current status can't be verified from the repo.
 
-7. **Awin rejected.** Reapply 2026-06-12 onwards with Search Console traffic data.
+7. **Awin rejected.** Reapply window opened 2026-06-12 with Search Console traffic data — that date has passed (today is 2026-07-04); confirm with the operator whether the reapply happened.
 
-8. **Content queue depletion.** ~77 topics remaining at 5/day = ~15 days. Add new topics before queue empties.
+8. **Content queue depletion.** ~30 topics remaining in `content/daily-publish-queue.csv` at 1/day (the daily-publish cron's actual rate — verified against the CSV: 214 rows, 30 not yet published) = ~30 days. Add new topics before queue empties.
 
 9. **Local Mac keyboard interference.** Some pasted commands containing `build.py` were silently converted to markdown link format on the local laptop. Workaround: tab-completion or rename file when running locally. CI is unaffected.
 
@@ -1309,48 +1355,44 @@ Revoke PATs after use at github.com → Settings → Developer settings → Pers
 
 15. **Semrush "uncompressed JS/CSS" is unfixable AdSense.** ~191 pages flagged because Google serves `pagead2.googlesyndication.com/.../adsbygoogle.js` without the compression header Semrush expects. We don't control Google's CDN. Don't waste cycles trying to clear this warning — only path is removing AdSense (irrational) or lazy-loading the AdSense script (small revenue trade-off). Site Health is otherwise 98% — that 191 is the irreducible floor.
 
-13. **No `llms.txt` yet.** Recommended next addition. See Section 18.
+16. **Mailbox aliases — DONE 2026-06-09.** `abuse@`, `hello@`, `legal@`, `privacy@`, `security@`, `socialmedia@` are all live and routed to dedicated inboxes, driven by `content/site.json` keys `security_email`/`privacy_email`/`legal_email` (`security.txt` + contact page → `security@`; Privacy/Cookie policies → `privacy@`; Terms/copyright → `legal@`; general/editorial stays on `hello@`). No open item here — see `docs/next-session.md` for anything DNS-level still tracked.
 
-14. **No `security.txt` yet.** Recommended next addition. See Section 18.
+17. **No `/terms/` page audit confirmed.** Verify it exists and is current.
 
-15. **`privacy@`, `security@`, `editorial@`, `legal@` mailboxes not active.** Recommend activating as catch-alls or forwarders.
+18. **No formal trademark filing.** Recommend UK IPO classes 41 + 42.
 
-16. **No `/terms/` page audit confirmed.** Verify it exists and is current.
+19. **GSC OAuth token expires ~weekly (Testing-mode app).** Google expires refresh tokens after ~7 days when the OAuth consent screen is in "Testing", rotting BOTH the local `token.json` AND the `GOOGLE_SEARCH_CONSOLE_TOKEN` CI secret on the same clock. Symptom: `invalid_grant: Token has been expired or revoked`. **(Fixed 2026-06-20)** `daily-search-console.yml` previously wrapped generation in `|| true`, so an expired CI token silently produced nothing without failing the run; it now captures the exit code and **fails the step loudly** with a GitHub error annotation, so a dead gap pipeline is visible. **Re-auth:** `python3 scripts/auth_google.py` (browser), then copy the new `token.json` into the CI secret. **Permanent fix:** publish the OAuth consent screen to "In production". (3 `client_secret*.json` files exist in the repo root — only the `758467619755…` ones are Desktop clients; `auth_google.py` now prefers a Desktop client and falls back to browser login on a dead refresh token.)
 
-17. **No formal trademark filing.** Recommend UK IPO classes 41 + 42.
+20. **Check GSC demand before deleting pages for AdSense.** The 2026-05-24 "low value content" purge 301'd the site's HIGHEST-demand URLs (`dpd-delivery-scam-text` = 1,905 impr / pos 10.2, plus yodel/ups) to a thin category page, collapsing the courier cluster within ~2 weeks (resurrected 2026-06-05 via `scripts/recover_courier_guides.py`). The sin was *thinness* (<300-word stubs), not the topic — pull `scripts/gsc_report.py` before purging anything.
 
-18. **GSC OAuth token expires ~weekly (Testing-mode app).** Google expires refresh tokens after ~7 days when the OAuth consent screen is in "Testing", rotting BOTH the local `token.json` AND the `GOOGLE_SEARCH_CONSOLE_TOKEN` CI secret on the same clock. Symptom: `invalid_grant: Token has been expired or revoked`. **(Fixed 2026-06-20)** `daily-search-console.yml` previously wrapped generation in `|| true`, so an expired CI token silently produced nothing without failing the run; it now captures the exit code and **fails the step loudly** with a GitHub error annotation, so a dead gap pipeline is visible. **Re-auth:** `python3 scripts/auth_google.py` (browser), then copy the new `token.json` into the CI secret. **Permanent fix:** publish the OAuth consent screen to "In production". (3 `client_secret*.json` files exist in the repo root — only the `758467619755…` ones are Desktop clients; `auth_google.py` now prefers a Desktop client and falls back to browser login on a dead refresh token.)
+21. **The video music bed must never deploy.** `assets/audio/news-bed.mp3` is a licensed local render asset; most free-stock-music licenses forbid redistributing the raw file. `build.py`'s assets→dist copytree excludes `assets/audio/` (+ `*.mp3/wav/aac`), and `.gitignore` excludes `assets/audio/`. Don't remove either guard. Off-site brand assets live in `brand/` (also not copied to `dist/`).
 
-19. **Check GSC demand before deleting pages for AdSense.** The 2026-05-24 "low value content" purge 301'd the site's HIGHEST-demand URLs (`dpd-delivery-scam-text` = 1,905 impr / pos 10.2, plus yodel/ups) to a thin category page, collapsing the courier cluster within ~2 weeks (resurrected 2026-06-05 via `scripts/recover_courier_guides.py`). The sin was *thinness* (<300-word stubs), not the topic — pull `scripts/gsc_report.py` before purging anything.
+22. **LinkedIn caps Company-Page creation (~7-day rolling window).** Creating several pages in a week (e.g. for sister publications) trips a "wait 7 days to create more pages" limit. Personal-profile edits are not limited.
 
-20. **The video music bed must never deploy.** `assets/audio/news-bed.mp3` is a licensed local render asset; most free-stock-music licenses forbid redistributing the raw file. `build.py`'s assets→dist copytree excludes `assets/audio/` (+ `*.mp3/wav/aac`), and `.gitignore` excludes `assets/audio/`. Don't remove either guard. Off-site brand assets live in `brand/` (also not copied to `dist/`).
+23. **Newsletter is double opt-in (2026-06-20) — `UNSUBSCRIBE_SECRET` is now required for signup.** `subscribe.js` no longer adds the contact; it emails an opaque (encrypted) confirm link and `confirm-subscribe.js` adds the contact + sends the welcome only after the link is clicked (GET = confirm page, POST = mutate, like `unsubscribe.js`). The confirm token is purpose-bound (NOT interchangeable with the unsubscribe token; opaque AES-256-GCM format as of 2026-06-25 — see #28). Consequence: if `UNSUBSCRIBE_SECRET` is unset, signups now **500** (previously they only shipped without an unsubscribe link). The front-end success copy says "check your inbox to confirm", not "you're in".
 
-21. **LinkedIn caps Company-Page creation (~7-day rolling window).** Creating several pages in a week (e.g. for sister publications) trips a "wait 7 days to create more pages" limit. Personal-profile edits are not limited.
+24. **The repo now has a `package.json` (functions only) — the first JS dependency.** `@netlify/blobs` backs the checker's durable rate limit + `DAILY_CALL_CAP=2000`/day spend cap. Netlify installs function deps when bundling; this does NOT add a static-site build step (`dist/` is still published as-is). Blobs is auto-provisioned (no secret); every Blobs call is guarded so the checker degrades to in-memory limiting if Blobs is down. Don't delete `package.json` thinking the repo is "pure Python" — the functions need it.
 
-22. **Newsletter is double opt-in (2026-06-20) — `UNSUBSCRIBE_SECRET` is now required for signup.** `subscribe.js` no longer adds the contact; it emails an opaque (encrypted) confirm link and `confirm-subscribe.js` adds the contact + sends the welcome only after the link is clicked (GET = confirm page, POST = mutate, like `unsubscribe.js`). The confirm token is purpose-bound (NOT interchangeable with the unsubscribe token; opaque AES-256-GCM format as of 2026-06-25 — see #27). Consequence: if `UNSUBSCRIBE_SECRET` is unset, signups now **500** (previously they only shipped without an unsubscribe link). The front-end success copy says "check your inbox to confirm", not "you're in".
+25. **UK/EEA consent is Google's certified CMP, not the custom banner.** AdSense → Privacy & messaging serves the certified CMP (driving Consent Mode; both advertising + analytics consent-mode toggles ON; "Do not consent" ON for all EEA+UK+CH). `assets/app.js` defers to it (`window.__tcfapi`/`window.googlefc`) and hides the custom banner in-region — the custom banner is only a fallback elsewhere (app.js polls ~2.5s for the CMP before falling back, so it doesn't flash). Don't "fix" the custom banner to manage ad consent again. **CSP gotcha (hit 2026-06-21):** the CMP loads from `fundingchoicesmessages.google.com` and was CSP-blocked, so the custom banner showed instead of Google's message. Fix = allow-list that domain in `script-src`, `frame-src`, `img-src` AND `connect-src` (now done in `netlify.toml`). netlify.toml header edits only reach the edge after a Netlify **"Clear cache and deploy"**.
 
-23. **The repo now has a `package.json` (functions only) — the first JS dependency.** `@netlify/blobs` backs the checker's durable rate limit + `DAILY_CALL_CAP=2000`/day spend cap. Netlify installs function deps when bundling; this does NOT add a static-site build step (`dist/` is still published as-is). Blobs is auto-provisioned (no secret); every Blobs call is guarded so the checker degrades to in-memory limiting if Blobs is down. Don't delete `package.json` thinking the repo is "pure Python" — the functions need it.
+26. **Editorial accuracy layer = canon + manifests + weekly digest (2026-06-21).** `content/sources.json` is the VERIFIED canon of official UK reporting routes — the single source of truth for the gate's allowed phone numbers/reporting emails AND `build.py`'s on-page "Report this scam" block. Don't hard-code an org number or reporting route anywhere else; add verified ones to the canon (the gate `check_sources` FLAGS non-canon gov/police reporting emails for review — it already found a stale `*.gsi.gov.uk` address). On a gate PASS, each generator writes `content/manifests/<slug>.json` (an audit record of detected high-stakes claims — NOT a bibliography; the model has no internet so it never cites). `scripts/audit_corpus.py` re-audits all guides; the **Weekly editorial audit** Action (`scripts/audit_digest.py`) emails flag-tier claims for review. Legislation / dated-event / non-canon-source detectors are FLAG-tier (recorded, never blocking) — don't make them block (most legislation refs are correct). After any `content_gate.py` change, run the **Gate self-test** Action.
 
-24. **UK/EEA consent is Google's certified CMP, not the custom banner.** AdSense → Privacy & messaging serves the certified CMP (driving Consent Mode; both advertising + analytics consent-mode toggles ON; "Do not consent" ON for all EEA+UK+CH). `assets/app.js` defers to it (`window.__tcfapi`/`window.googlefc`) and hides the custom banner in-region — the custom banner is only a fallback elsewhere (app.js polls ~2.5s for the CMP before falling back, so it doesn't flash). Don't "fix" the custom banner to manage ad consent again. **CSP gotcha (hit 2026-06-21):** the CMP loads from `fundingchoicesmessages.google.com` and was CSP-blocked, so the custom banner showed instead of Google's message. Fix = allow-list that domain in `script-src`, `frame-src`, `img-src` AND `connect-src` (now done in `netlify.toml`). netlify.toml header edits only reach the edge after a Netlify **"Clear cache and deploy"**.
+27. **AdSense is per-page now — don't re-hardcode the tag (2026-06-22).** `base.html` uses an `{{ads_head}}` placeholder; `_ads_head()`/`post_ads_mode()` in `build.py` emit no ads on `/check/` and non-personalised ads on debt/insolvency/recovery pages. If you "restore" a hardcoded `adsbygoogle.js` in the template you'll re-enable personalised ads on negative-financial-status pages (a Google policy issue) and put ads back on `/check/`. Tune the NPA set via `_SENSITIVE_FINANCE_TERMS`. Note: the comment block in `base.html` must NOT contain the literal `{{ads_head}}` token — it gets substituted and can break the HTML comment (caught + fixed during the 2026-06-22 work).
 
-25. **Editorial accuracy layer = canon + manifests + weekly digest (2026-06-21).** `content/sources.json` is the VERIFIED canon of official UK reporting routes — the single source of truth for the gate's allowed phone numbers/reporting emails AND `build.py`'s on-page "Report this scam" block. Don't hard-code an org number or reporting route anywhere else; add verified ones to the canon (the gate `check_sources` FLAGS non-canon gov/police reporting emails for review — it already found a stale `*.gsi.gov.uk` address). On a gate PASS, each generator writes `content/manifests/<slug>.json` (an audit record of detected high-stakes claims — NOT a bibliography; the model has no internet so it never cites). `scripts/audit_corpus.py` re-audits all guides; the **Weekly editorial audit** Action (`scripts/audit_digest.py`) emails flag-tier claims for review. Legislation / dated-event / non-canon-source detectors are FLAG-tier (recorded, never blocking) — don't make them block (most legislation refs are correct). After any `content_gate.py` change, run the **Gate self-test** Action.
-
-26. **AdSense is per-page now — don't re-hardcode the tag (2026-06-22).** `base.html` uses an `{{ads_head}}` placeholder; `_ads_head()`/`post_ads_mode()` in `build.py` emit no ads on `/check/` and non-personalised ads on debt/insolvency/recovery pages. If you "restore" a hardcoded `adsbygoogle.js` in the template you'll re-enable personalised ads on negative-financial-status pages (a Google policy issue) and put ads back on `/check/`. Tune the NPA set via `_SENSITIVE_FINANCE_TERMS`. Note: the comment block in `base.html` must NOT contain the literal `{{ads_head}}` token — it gets substituted and can break the HTML comment (caught + fixed during the 2026-06-22 work).
-
-27. **Function security headers live in the function code, not netlify.toml (2026-06-22).** `confirm-subscribe.js`/`unsubscribe.js` set their own `SECURITY_HEADERS` const on HTML responses (netlify.toml headers don't reliably reach function responses — see gotcha #2).
+28. **Function security headers live in the function code, not netlify.toml (2026-06-22).** `confirm-subscribe.js`/`unsubscribe.js` set their own `SECURITY_HEADERS` const on HTML responses (netlify.toml headers don't reliably reach function responses — see gotcha #2).
     - **Newsletter tokens are OPAQUE (AES-256-GCM) as of 2026-06-25** — email (+ 7-day expiry for confirm) sealed under an HKDF key from `UNSUBSCRIBE_SECRET`, domain-separated per purpose. Replaced the leaky `base64url(email).base36(exp).sig` HMAC format (non-forgeable but the plaintext email was recoverable from a captured URL — 3rd-audit finding). The mint/verify halves must stay in sync on the inlined `sealToken`/`openToken` helpers: `subscribe.js`↔`confirm-subscribe.js` (confirm) and `confirm-subscribe.js`↔`unsubscribe.js` (unsub).
     - **Dual-parse** keeps the legacy dotted HMAC formats working (discriminator: opaque tokens are **dotless**, legacy contain `.`) — don't break it while legacy links are live.
     - **Cleanup asymmetry (important):** the legacy *confirm* branch (`verifyConfirmTokenLegacy`) can be deleted 7 days after deploy (confirm TTL expires all legacy confirm links); the legacy *unsubscribe* branch (`verifyTokenLegacy`) must stay **indefinitely** — those links never expire and must keep working for compliance unless `UNSUBSCRIBE_SECRET` is rotated (which itself breaks all live links — a deliberate choice only).
 
-28. **Supply-chain files exist now — keep them (2026-06-22).** `package-lock.json` (commit it), `requirements-claude.txt` upper bounds, `.github/dependabot.yml`, `.github/workflows/codeql.yml`. Actions are **SHA-pinned** (full commit SHA + `# vN` comment, since 2026-06-24) so Dependabot's `github-actions` updater still tracks them; keep new workflow steps SHA-pinned the same way (the 2026-06-25 PR-gate + `tweet-on-publish.yml` steps follow this).
+29. **Supply-chain files exist now — keep them (2026-06-22).** `package-lock.json` (commit it), `requirements-claude.txt` upper bounds, `.github/dependabot.yml`, `.github/workflows/codeql.yml`. Actions are **SHA-pinned** (full commit SHA + `# vN` comment, since 2026-06-24) so Dependabot's `github-actions` updater still tracks them; keep new workflow steps SHA-pinned the same way (the 2026-06-25 PR-gate + `tweet-on-publish.yml` steps follow this).
 
-29. **`audit_corpus.py` preserves manifest `model` provenance (2026-06-22).** A bare re-audit used to rewrite every `content/manifests/*.json` with `model: null`, wiping the model the generator recorded. It now reads the existing manifest's `model` and passes it through. The 187 legacy manifests remain `null` ON PURPOSE (the original model was never recorded — don't backfill a guessed value).
+30. **`audit_corpus.py` preserves manifest `model` provenance (2026-06-22).** A bare re-audit used to rewrite every `content/manifests/*.json` with `model: null`, wiping the model the generator recorded. It now reads the existing manifest's `model` and passes it through. The 187 legacy manifests remain `null` ON PURPOSE (the original model was never recorded — don't backfill a guessed value).
 
-30. **`@netlify/blobs` is pinned `~10.1.0` ON PURPOSE — don't bump to 10.2.0+ (2026-06-25).** The functions' atomic counters/tokens use the conditional-write API (`onlyIfMatch`/`onlyIfNew`/`setJSON`→`{modified}`), which **only exists in v10+** — under the old `^8.1.0` pin (resolving to 8.2.0, where `setJSON`→`void` and `SetOptions={metadata?}`) every CAS was a **silent no-op** (rate limits, spend cap, send caps, single-use confirm tokens all degraded to last-write-wins). `~10.1.0` is the newest version with the CAS API but BEFORE `@netlify/otel` enters (at 10.2.0), which pulls an OpenTelemetry chain with **6 moderate `npm audit` vulns**. So `~10.1.0` = CAS API + `npm audit` clean (34 pkgs). If Dependabot proposes ≥10.2.0, **decline** until Netlify fixes the upstream OTel vulns. 10.1.0 ships CJS + Node≥16, so no function-code change was needed.
+31. **`@netlify/blobs` is pinned `~10.1.0` ON PURPOSE — don't bump to 10.2.0+ (2026-06-25).** The functions' atomic counters/tokens use the conditional-write API (`onlyIfMatch`/`onlyIfNew`/`setJSON`→`{modified}`), which **only exists in v10+** — under the old `^8.1.0` pin (resolving to 8.2.0, where `setJSON`→`void` and `SetOptions={metadata?}`) every CAS was a **silent no-op** (rate limits, spend cap, send caps, single-use confirm tokens all degraded to last-write-wins). `~10.1.0` is the newest version with the CAS API but BEFORE `@netlify/otel` enters (at 10.2.0), which pulls an OpenTelemetry chain with **6 moderate `npm audit` vulns**. So `~10.1.0` = CAS API + `npm audit` clean (34 pkgs). If Dependabot proposes ≥10.2.0, **decline** until Netlify fixes the upstream OTel vulns. 10.1.0 ships CJS + Node≥16, so no function-code change was needed.
 
-31. **The content crons open a review PR — they do NOT commit to `main` (2026-06-25).** `daily-publish.yml`/`daily-search-console.yml` now `checkout -b auto/… → push → gh pr create` (label `auto-content`); nothing publishes, gets ads, or is tweeted until the operator merges (Google policy: auto-generated content must be reviewed before monetisation). **Prereq ✅ ENABLED 2026-06-25:** repo setting *Settings→Actions→General→"Allow GitHub Actions to create and approve pull requests"* is on, and the workflows set `permissions: pull-requests:write` + `issues:write`. Auto-tweet moved to **`tweet-on-publish.yml`** (trigger: push→main touching `content/posts.json` = post-merge; tweets only slugs ADDED in that push; **≤3-slug cap + `tweeted_posts.json` dedupe** so a bulk merge can't mass-tweet). The old rebase-conflict recovery in the crons is GONE (each branches off fresh `main` and pushes a new branch — no main-push to conflict).
+32. **The content crons open a review PR — they do NOT commit to `main` (2026-06-25).** `daily-publish.yml`/`daily-search-console.yml` now `checkout -b auto/… → push → gh pr create` (label `auto-content`); nothing publishes, gets ads, or is tweeted until the operator merges (Google policy: auto-generated content must be reviewed before monetisation). **Prereq ✅ ENABLED 2026-06-25:** repo setting *Settings→Actions→General→"Allow GitHub Actions to create and approve pull requests"* is on, and the workflows set `permissions: pull-requests:write` + `issues:write`. Auto-tweet moved to **`tweet-on-publish.yml`** (trigger: push→main touching `content/posts.json` = post-merge; tweets only slugs ADDED in that push; **≤3-slug cap + `tweeted_posts.json` dedupe** so a bulk merge can't mass-tweet). The old rebase-conflict recovery in the crons is GONE (each branches off fresh `main` and pushes a new branch — no main-push to conflict).
 
-32. **Gate forward-guards + checker scrubber added by the 3rd audit (2026-06-25).** `content_gate.py` `_post_text` now also covers section **headings, title, keywords** (claims there are now checked). New `check_recurring_accuracy()` adds 4 **FLAG**-tier guards — CRM-code (outdated; APP reimbursement is mandatory since 7 Oct 2024), 7726-attributed-to-NCSC (it's the mobile networks; NCSC = report@phishing.gov.uk for email), US "credit freeze", and the sextortion/deepfake "no-proof = fake" threat-dismissal heuristic — so new/locale drafts can't reproduce the audit's content errors (all FLAG → corpus stays 0 block-tier; run the **Gate self-test** Action after this lands). `check-scam.js` `scrubContact()` redacts prompt-injected phone/URL/email from the model's free-text fields (reporting_links stay host-allowlisted); preserves UK shortcodes + `*.gov.uk` emails. Salt now `RATE_LIMIT_SALT || UNSUBSCRIBE_SECRET || literal` (no public-known salt, no fail-closed).
+33. **Gate forward-guards + checker scrubber added by the 3rd audit (2026-06-25).** `content_gate.py` `_post_text` now also covers section **headings, title, keywords** (claims there are now checked). New `check_recurring_accuracy()` adds 4 **FLAG**-tier guards — CRM-code (outdated; APP reimbursement is mandatory since 7 Oct 2024), 7726-attributed-to-NCSC (it's the mobile networks; NCSC = report@phishing.gov.uk for email), US "credit freeze", and the sextortion/deepfake "no-proof = fake" threat-dismissal heuristic — so new/locale drafts can't reproduce the audit's content errors (all FLAG → corpus stays 0 block-tier; run the **Gate self-test** Action after this lands). `check-scam.js` `scrubContact()` redacts prompt-injected phone/URL/email from the model's free-text fields (reporting_links stay host-allowlisted); preserves UK shortcodes + `*.gov.uk` emails. Salt now `RATE_LIMIT_SALT || UNSUBSCRIBE_SECRET || literal` (no public-known salt, no fail-closed).
 
 ### Anti-patterns — don't regress these
 
@@ -1369,7 +1411,13 @@ Decisions reached in prior sessions that future Claude sessions should preserve,
 
 ## 21. Outstanding Roadmap
 
-> Carried forward from `ProjectHandoffDocument.md` Section 7 and updated.
+### Recently completed (2026-06-24 → 2026-07-04 — third audit remediation, opaque tokens, human-review PR gate, content diversification, canon fix)
+
+- **Round 3 remediation (2026-06-24/25):** fixed a critical Netlify Blobs SDK version mismatch (code used the v10 CAS API but `package.json` pinned v8, making every "atomic" rate-limit control a silent no-op) — repinned `~10.1.0`; Node 20→22; checker `scrubContact()` redacts prompt-injected contact details from model free-text; gate gained 4 new FLAG guards (CRM-code, 7726→NCSC, credit-freeze, threat-dismissal) and now reads headings/title/keywords too; legal pages excluded from ads, non-personalised-ads scope broadened to sextortion/romance/identity; 50 guides content-fixed (CRM→mandatory APP reimbursement, US-style fraud-alert/credit-freeze→Cifas, 7726→mobile networks, Companies House domain/absolutes, safety-critical sextortion/deepfake "no-proof≠fake" reframe).
+- **Newsletter tokens hardened (2026-06-25):** confirm/unsubscribe tokens replaced with opaque AES-256-GCM (HKDF-derived, per-purpose keys) instead of a leaky base64url(email) format; dual-parse keeps legacy links working (unsubscribe indefinitely, for compliance; confirm for its 7-day TTL only); confirm tokens are now single-use (Netlify Blobs).
+- **Content pipelines moved to human review (2026-06-25):** `daily-publish.yml`/`daily-search-console.yml` no longer commit to `main` — each opens a review PR (`auto-content` label) that the operator merges; auto-tweet moved to a separate `tweet-on-publish.yml` firing on merge (diff-based, ≤3-slug cap, deduped).
+- **Content diversification (2026-06-26 → 2026-07-04):** 14 batches (89 pages) de-templated from the generic 6-section outline flagged by the 4th external audit as an AdSense scaled-content risk; full history and methodology in `docs/content-diversification-plan.md`.
+- **Gate/canon fix (2026-07-04, PR #37):** added the Revenge Porn Helpline to `content/sources.json`'s canon, closing 2 BLOCK-tier findings that had crept in on two intimate-image-abuse guides ahead of the canon entry existing.
 
 ### Recently completed (2026-06-22 — second Executive Verdict remediation, A–E live)
 
@@ -1418,22 +1466,7 @@ A fresh external "Executive Verdict" audit surfaced further items; all code/cont
 
 ### This week / next session
 
-> **The technical build is genuinely 100% done.** All items below are growth, ops, or editorial — no remaining engineering blockers. See [`docs/next-session.md`](next-session.md) for the focused punch list to start the next session with.
-
-**Primary focus (this is what to do first):**
-
-- [x] **Cross-platform video analytics review — DONE (2026-06-07).** Verdict: platform fit, not a universal hook. **YouTube Shorts (35%+ retention) + the site are the two productive channels.** TikTok (swipe-away) gets one creative A/B (`--motion-hook` on the F1 video) then keep-or-drop; IG/X stay free cross-posts. Read the F1 retention number ~2026-06-14.
-- [ ] **Tier 2 backlinks — link insertions.** The Tier 1 citation/E-E-A-T foundation is complete (`docs/outreach-log.md`). Next is the real dofollow lever: pitch the courier/bank-text guides to UK money/consumer blogs that already cover these scams. Target shortlist + 3 email templates ready in `docs/outreach-templates.md`.
-
-**Secondary (slot in as bandwidth allows):**
-
-- [ ] **Semrush Position Tracking — swap Spain → UK** (1-min dashboard action — delete the existing Spain (Spanish) target, add United Kingdom (English); the free tier's 1-target limit blocks adding a 2nd without first deleting).
-- [ ] Activate `privacy@`, `security@`, `editorial@`, `legal@` mailbox aliases (DNS task)
-- [ ] Confirm Twitter API keys are stored as GitHub Secrets
-- [ ] Build out the top 3 category hub pages (600–800 words each)
-- [x] **Video music bed — DONE.** `assets/audio/news-bed.mp3` added and mixed at −20 dB; kept local-only (licensed — excluded from `dist/` + gitignored; see Section 20 #20).
-- [ ] Awin reapply (window opens 2026-06-12) + CJ follow-up + direct affiliate outreach (Experian, Norton, Which? Legal, Cifas)
-- [ ] AdSense approval — chase if still pending
+Superseded by [`docs/next-session.md`](next-session.md), which is updated far more frequently — maintaining the same status in two places is what let this subsection go stale. Check that file for the current punch list.
 
 ### Near-term (4–8 weeks)
 
@@ -1476,7 +1509,7 @@ A fresh external "Executive Verdict" audit surfaced further items; all code/cont
 
 - Domain: `beatthescam.com` (exact-match keyword, ~3 months old, no penalties, clean WHOIS)
 - GitHub repository (`siderightapps-hub/beatthescam-site`) — full transfer
-- 97+ original UK-focused guides in `content/posts.json`
+- 189 original UK-focused guides in `content/posts.json`
 - AI scam checker (live, rate-limited, secured)
 - Daily content generation pipeline (GitHub Actions + Anthropic Claude)
 - Netlify hosting setup (transferable)
@@ -1573,10 +1606,6 @@ Display labels in `CATEGORY_LABELS`; descriptions in `CATEGORY_DESCRIPTIONS`.
 
 ### Related internal documents
 
-- `ProjectHandoffDocument.md` — original project handoff (2026-04-30)
-- `SecurityAuditHandoff.md` — full security remediation record (2026-04-30)
-- `SessionHandoff-SEOHygieneAndBullet-ListBugFix.md` — 2026-05-01 session
-- `SessionHandoff-SEOHygieneBullet-ListBug-HouseKeeping.md` — 2026-05-02 session
 - `video-pipeline.md` — video production workflow & calendar (HISTORICAL — video discontinued 2026-06-15)
 - `dns-hardening-checklist.md` — DNS / email-auth / TLS operator runbook (DMARC, DKIM, CAA, DNSSEC, HSTS) — tranche F of the 2026-06-22 Executive Verdict
 - `project-template.md` — generic template extracted from this document

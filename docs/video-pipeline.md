@@ -190,7 +190,7 @@ To add a new family: extend both `HOOK_TEMPLATES` and `SLUG_FAMILIES`. Each temp
 | Warning trim max | 90 chars | `shorten_warning()` default |
 | Music level | -20 dB (factor 0.1) | `build_video()` |
 
-Changeable via env vars: `ELEVENLABS_API_KEY` (required), `ELEVENLABS_VOICE_ID` (override), `ELEVENLABS_MODEL_ID` (override).
+Changeable via env vars (historical — the BTS `ELEVENLABS_API_KEY` was deleted when video was discontinued 2026-06-15; would need reprovisioning to resume): `ELEVENLABS_API_KEY`, `ELEVENLABS_VOICE_ID` (override), `ELEVENLABS_MODEL_ID` (override).
 
 Changeable via CLI: `--no-music`, `--music PATH`, `--out-dir DIR`.
 
