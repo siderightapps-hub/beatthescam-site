@@ -1,8 +1,15 @@
 {
   "slug": "fake-pandora-website-uk-scam",
-  "title": "Fake Pandora Website UK: How to Spot & Avoid This Scam",
+  "title": "Fake Pandora Website UK: Spot a Counterfeit Jewellery Site",
   "date": "2026-05-20",
   "model": null,
   "gate_passed": true,
-  "claims": []
+  "claims": [
+    {
+      "type": "legislation",
+      "severity": "flag",
+      "text": "the Consumer Credit Act",
+      "detail": "makes a legal/legislation claim ('the Consumer Credit Act') — verify it is accurate."
+    }
+  ]
 }

@@ -96,6 +96,11 @@ ARTICLE_REDIRECTS = {
     "hmrc-tax-refund-scam-awareness":             "__CAT__:government",
     "dvla-scam-email-awareness":                  "__CAT__:government",
     "dvla-email-scam-car-tax":                     "dvla-email-scam-uk",
+    # ── Batch 14 consolidations (2026-07-03): near-duplicate topics merged
+    # into the stronger surviving page rather than shipping two near-
+    # identical guides. See docs/content-diversification-plan.md.
+    "bt-broadband-tech-support-scam-uk":          "bt-broadband-scam-calls-uk",
+    "linkedin-recruitment-scam-uk":               "linkedin-job-scam-guide-uk",
     "nhs-covid-scam-message":                     "__CAT__:government",
     "forex-trading-scams-uk-protection-guide":    "__CAT__:crypto",
     "trading-signal-scam-uk":                     "__CAT__:crypto",
