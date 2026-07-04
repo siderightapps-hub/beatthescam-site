@@ -4,5 +4,12 @@
   "date": "2026-05-20",
   "model": null,
   "gate_passed": true,
-  "claims": []
+  "claims": [
+    {
+      "type": "shortcode_attribution",
+      "severity": "flag",
+      "text": "7726 (spoof) and report phishing emails to the NCSC",
+      "detail": "attributes 7726 to the NCSC. 7726 is the free spam-reporting shortcode run by the mobile networks; the NCSC runs report@phishing.gov.uk for suspicious EMAILS."
+    }
+  ]
 }

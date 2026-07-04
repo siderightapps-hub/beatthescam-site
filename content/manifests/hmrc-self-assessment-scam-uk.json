@@ -4,5 +4,12 @@
   "date": "2026-06-23",
   "model": "claude-haiku-4-5-20251001",
   "gate_passed": true,
-  "claims": []
+  "claims": [
+    {
+      "type": "hmrc_channel",
+      "severity": "flag",
+      "text": "HMRC website—never via unsolicited emails or texts",
+      "detail": "blanket 'HMRC never texts/emails/links you' — HMRC runs genuine SMS/email campaigns and genuine texts can carry gov.uk links. Say HMRC won't ask you to confirm details or 'claim' a refund via a link."
+    }
+  ]
 }

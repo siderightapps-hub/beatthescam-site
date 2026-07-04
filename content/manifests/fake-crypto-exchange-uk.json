@@ -1,8 +1,15 @@
 {
   "slug": "fake-crypto-exchange-uk",
-  "title": "Fake Crypto Exchange UK: How to Spot and Avoid Scams in 2024",
+  "title": "Fake Crypto Exchange UK: How to Spot and Avoid Scams",
   "date": "2026-05-05",
   "model": null,
   "gate_passed": true,
-  "claims": []
+  "claims": [
+    {
+      "type": "credit_freeze",
+      "severity": "flag",
+      "text": "freezing your credit",
+      "detail": "uses the US 'credit freeze' — there is no UK credit freeze. The UK mechanism is a Cifas Protective Registration (cifas.org.uk)."
+    }
+  ]
 }
