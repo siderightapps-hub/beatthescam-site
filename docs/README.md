@@ -154,17 +154,9 @@ Pulled forward from `project.md` Section 21:
 
 ### Next session — primary focus
 
-- [ ] **Backlinks push** — start the structured outreach cadence in `project.md` Section 14. Authority Score 2 → 10+ is the single biggest remaining growth lever.
+**This checklist was retired 2026-07-04** — it had drifted a full month out of date (207 commits landed since its last update on 2026-06-04, including three remediation rounds, the editorial-accuracy gate + source canon, the human-review PR gate, and 14 content-diversification batches), because keeping two independently-updated "what's next" lists is exactly how documentation goes stale. **For current priorities, see [`next-session.md`](next-session.md)** (actively maintained, updated most sessions) and [`content-diversification-plan.md`](content-diversification-plan.md) (the content workstream's own resume line, now the dominant day-to-day work). Mailbox aliases and the Awin reapply window, both listed as open below as of 2026-06-04, are done/elapsed — check `next-session.md` for current status rather than this list.
 
-### Secondary (slot in as bandwidth allows)
-- [ ] Semrush Position Tracking — swap Spain → UK (1-min dashboard task)
-- [ ] Activate `privacy@`, `security@`, `editorial@`, `legal@` mailbox aliases (DNS task)
-- [ ] Confirm Twitter API keys are stored as GitHub Secrets
-- [ ] Build out the top 3 category hub pages (600–800 words each)
-- [ ] Awin reapply (window opens 2026-06-12) + CJ follow-up + direct affiliate outreach
-- [ ] AdSense approval chase
-
-### Recently completed (2026-06-04) — fully captured in `project.md` Section 21
+### Recently completed (2026-06-04) — historical snapshot only, not current status; see `project.md` Section 21 for the full dated history
 - ✅ `/terms/` full UK rewrite (E&W + Scotland + NI)
 - ✅ Named author + cross-publication E-E-A-T (Alex Bacsa, real headshot, `sameAs` to 3 sister pubs)
 - ✅ `/author/` page generated
