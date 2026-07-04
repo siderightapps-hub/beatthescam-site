@@ -80,6 +80,14 @@
       "name": "Emergency services",
       "phone": "112",
       "on_page": false
+    },
+    {
+      "key": "revenge-porn-helpline",
+      "name": "Revenge Porn Helpline",
+      "info_url": "https://revengepornhelpline.org.uk/",
+      "phone": "0345 6000 459",
+      "report_label": "Revenge Porn Helpline",
+      "on_page": false
     }
   ]
 }

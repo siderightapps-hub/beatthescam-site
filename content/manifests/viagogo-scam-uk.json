@@ -1,8 +1,15 @@
 {
   "slug": "viagogo-scam-uk",
-  "title": "Viagogo Scam UK: How to Spot Fake Ticket Sellers and Protect Your Money",
+  "title": "Is Viagogo Safe to Buy Tickets in the UK? What You Need to Know",
   "date": "2026-05-13",
   "model": null,
   "gate_passed": true,
-  "claims": []
+  "claims": [
+    {
+      "type": "legislation",
+      "severity": "flag",
+      "text": "the Consumer Credit Act",
+      "detail": "makes a legal/legislation claim ('the Consumer Credit Act') — verify it is accurate."
+    }
+  ]
 }
