@@ -60,7 +60,7 @@ A free, UK-focused consumer-protection publication that:
 
 1. Publishes plain-English **scam awareness guides** (now 189 published, with a queue of additional topics being released ~5/day).
 2. Offers a **free AI-powered Scam Checker** at `/check/` where users paste suspicious messages and receive a verdict, confidence score, red flags, green flags, recommended actions, and reporting links.
-3. Routes users to legitimate UK reporting bodies (Action Fraud / `reportfraud.police.uk`, NCSC, FCA ScamSmart, Take Five, Citizens Advice).
+3. Routes users to legitimate UK reporting bodies (Action Fraud / `reportfraud.police.uk`, NCSC, FCA Firm Checker, Take Five, Citizens Advice).
 4. Generates revenue via Google AdSense (in review), affiliate partnerships (Experian, Norton, Cifas, Which? Legal), and future newsletter / sponsorship channels.
 5. Builds topical authority over the medium-term to rank for UK fraud and scam queries.
 
