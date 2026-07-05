@@ -1,0 +1,27 @@
+{
+  "slug": "holiday-club-scam-uk",
+  "title": "Holiday Club Scam UK: How to Spot and Avoid Timeshare Fraud",
+  "date": "2026-07-05",
+  "model": "claude-haiku-4-5-20251001",
+  "gate_passed": true,
+  "claims": [
+    {
+      "type": "legislation",
+      "severity": "flag",
+      "text": "the Consumer Rights Act 2015",
+      "detail": "makes a legal/legislation claim ('the Consumer Rights Act 2015') — verify it is accurate."
+    },
+    {
+      "type": "reimbursement_framework",
+      "severity": "flag",
+      "text": "Contingent Reimbursement Model",
+      "detail": "cites the voluntary Contingent Reimbursement Model / CRM code. Since 7 Oct 2024, APP-fraud reimbursement is MANDATORY under PSR rules for most banks — frame recovery around the mandatory scheme, not the superseded voluntary one."
+    },
+    {
+      "type": "shortcode_attribution",
+      "severity": "flag",
+      "text": "7726 (this is free and helps the NCSC",
+      "detail": "attributes 7726 to the NCSC. 7726 is the free spam-reporting shortcode run by the mobile networks; the NCSC runs report@phishing.gov.uk for suspicious EMAILS."
+    }
+  ]
+}

@@ -1,5 +1,12 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Beat the Scam</title><link>https://beatthescam.com</link><description>Scam alerts, plain-English checks, and practical guides to help people verify suspicious emails, texts, websites, calls, and offers.</description><lastBuildDate>Sat, 04 Jul 2026 00:00:00 +0000</lastBuildDate><atom:link href="https://beatthescam.com/rss.xml" rel="self" type="application/rss+xml" />
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Beat the Scam</title><link>https://beatthescam.com</link><description>Scam alerts, plain-English checks, and practical guides to help people verify suspicious emails, texts, websites, calls, and offers.</description><lastBuildDate>Sun, 05 Jul 2026 00:00:00 +0000</lastBuildDate><atom:link href="https://beatthescam.com/rss.xml" rel="self" type="application/rss+xml" />
+        <item>
+          <title>Holiday Club Scam UK: How to Spot and Avoid Timeshare Fraud</title>
+          <link>https://beatthescam.com/guides/holiday-club-scam-uk/</link>
+          <guid isPermaLink="true">https://beatthescam.com/guides/holiday-club-scam-uk/</guid>
+          <pubDate>Sun, 05 Jul 2026 00:00:00 +0000</pubDate>
+          <description>Holiday club scams lure UK residents with promises of discounted holidays and exclusive travel deals, then pressure them into signing long-term contracts with hidden fees and poor value. This guide explains how the scam works, what to watch for, and what to do if you&#x27;ve already been caught.</description>
+        </item>
         <item>
           <title>Timeshare Scam UK: How to Spot and Avoid Holiday Property Traps</title>
           <link>https://beatthescam.com/guides/timeshare-scam-uk/</link>
@@ -202,11 +209,4 @@
           <guid isPermaLink="true">https://beatthescam.com/guides/solar-panel-cold-caller-scam-uk/</guid>
           <pubDate>Sat, 06 Jun 2026 00:00:00 +0000</pubDate>
           <description>Got an unsolicited call or doorstep visit offering free solar panels or a &#x27;government grant&#x27;? How to spot a solar panel cold-calling scam in the UK.</description>
-        </item>
-        <item>
-          <title>DPD Scam Text Messages: How to Spot a Fake DPD Delivery Text</title>
-          <link>https://beatthescam.com/guides/dpd-delivery-scam-text/</link>
-          <guid isPermaLink="true">https://beatthescam.com/guides/dpd-delivery-scam-text/</guid>
-          <pubDate>Fri, 05 Jun 2026 00:00:00 +0000</pubDate>
-          <description>Fake DPD &#x27;missed delivery&#x27; or &#x27;redelivery fee&#x27; texts are smishing scams. Here&#x27;s how to spot a fake DPD text, verify a genuine one, and report it in the UK.</description>
         </item></channel></rss>
