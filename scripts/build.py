@@ -2002,7 +2002,7 @@ def build_legal_bodies(site):
       <li><a href="https://www.actionfraud.police.uk/" rel="noopener noreferrer" target="_blank">Action Fraud</a> &mdash; the UK&#8217;s national reporting centre for fraud and cybercrime</li>
       <li><a href="https://www.ncsc.gov.uk/" rel="noopener noreferrer" target="_blank">National Cyber Security Centre (NCSC)</a> &mdash; for phishing reporting routes and current threat patterns</li>
       <li><a href="https://www.citizensadvice.org.uk/" rel="noopener noreferrer" target="_blank">Citizens Advice</a> &mdash; consumer protection guidance and helpline routes</li>
-      <li><a href="https://www.fca.org.uk/scamsmart" rel="noopener noreferrer" target="_blank">FCA ScamSmart</a> &mdash; for investment and financial services scams</li>
+      <li><a href="https://www.fca.org.uk/consumers/fca-firm-checker" rel="noopener noreferrer" target="_blank">FCA Firm Checker</a> &mdash; for investment and financial services scams</li>
       <li><a href="https://takefive-stopfraud.org.uk/" rel="noopener noreferrer" target="_blank">Take Five</a> &mdash; UK banking sector consumer fraud campaign</li>
       <li>Government UK pages for HMRC, DVLA, TV Licensing, and other public bodies commonly impersonated</li>
     </ul>
@@ -2827,7 +2827,7 @@ def build():
         f"Action Fraud — https://www.actionfraud.police.uk/\n"
         f"NCSC — https://www.ncsc.gov.uk/\n"
         f"Citizens Advice — https://www.citizensadvice.org.uk/consumer/scams/\n"
-        f"FCA ScamSmart — https://www.fca.org.uk/scamsmart\n\n"
+        f"FCA Firm Checker — https://www.fca.org.uk/consumers/fca-firm-checker\n\n"
         f"/* LAST UPDATE */\n"
         f"{today}\n"
     )

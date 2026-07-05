@@ -13,7 +13,7 @@ Methodology: see https://beatthescam.com/about/
 Action Fraud — https://www.actionfraud.police.uk/
 NCSC — https://www.ncsc.gov.uk/
 Citizens Advice — https://www.citizensadvice.org.uk/consumer/scams/
-FCA ScamSmart — https://www.fca.org.uk/scamsmart
+FCA Firm Checker — https://www.fca.org.uk/consumers/fca-firm-checker
 
 /* LAST UPDATE */
-2026-07-04
+2026-07-05

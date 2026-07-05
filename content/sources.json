@@ -33,9 +33,9 @@
       "on_page": true
     },
     {
-      "key": "fca-scamsmart",
-      "name": "FCA ScamSmart / consumer helpline",
-      "info_url": "https://www.fca.org.uk/scamsmart",
+      "key": "fca-firm-checker",
+      "name": "FCA Firm Checker / consumer helpline",
+      "info_url": "https://www.fca.org.uk/consumers/fca-firm-checker",
       "phone": "0800 111 6768",
       "on_page": false
     },
