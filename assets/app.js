@@ -105,7 +105,15 @@
     }
   }
 
-  if(typeof window.__tcfapi === 'function'){
+  // AdSense installs window.__tcfapi via an async <script> tag (see base.html),
+  // which can finish loading AFTER this deferred script runs — a single
+  // "typeof === 'function'" check here would then never register the listener
+  // below, so a CMP that shows up a moment later displays its own message on
+  // top of our fallback banner (the double-prompt this design exists to
+  // avoid). Poll briefly instead of checking once. This is safe to keep trying
+  // even after the fallback timeout below has fired: deferToCmp() hides an
+  // already-shown fallback banner the moment the CMP actually takes over.
+  function registerTcfListener(){
     try {
       window.__tcfapi('addEventListener', 2, function(tcData, success){
         if(!success || !tcData) return;
@@ -120,6 +128,15 @@
       });
     } catch(e){ /* malformed stub — fall through to our own banner */ }
   }
+  (function pollForTcf(attemptsLeft){
+    if(typeof window.__tcfapi === 'function'){
+      registerTcfListener();
+      return;
+    }
+    if(attemptsLeft > 0){
+      setTimeout(function(){ pollForTcf(attemptsLeft - 1); }, 500);
+    }
+  })(16); // ~8s of retries — generous enough for a slow-loading AdSense script
 
   // If a real CMP hasn't taken over shortly, show our own banner as the consent UI.
   setTimeout(function(){ if(!cmpTookOver){ showFallbackBanner(); } }, 2000);
