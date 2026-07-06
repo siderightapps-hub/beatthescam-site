@@ -419,11 +419,16 @@ Rules:
 
     // Sanitise reporting_links — forward only links to official UK reporting
     // domains (allowlisted), so a prompt-injected message cannot surface an
-    // attacker-controlled URL as trusted reporting guidance.
+    // attacker-controlled URL as trusted reporting guidance. The link TEXT is
+    // free-form model output too, so scrub it the same as summary/red_flags/etc:
+    // otherwise a prompt-injected response could plant a fake phone number or
+    // "act now" instruction as the trusted anchor text of a legitimate gov.uk
+    // link. scrubContact runs before the length cap so a redaction match can't
+    // be truncated away by the slice.
     const safeLinks = Array.isArray(parsed.reporting_links)
-      ? parsed.reporting_links.filter(
-          l => l && typeof l.url === "string" && isAllowedReportUrl(l.url)
-        )
+      ? parsed.reporting_links
+          .filter(l => l && typeof l.url === "string" && isAllowedReportUrl(l.url))
+          .map(l => ({ url: l.url, name: scrubContact(String(l.name || "")).slice(0, 120) }))
       : [];
 
     const result = {
