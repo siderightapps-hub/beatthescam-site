@@ -518,11 +518,19 @@ def localize_content_paths(content: str, site: dict) -> str:
             .replace("src='/", f"src='{prefix}/"))
 
 def json_ld(data) -> str:
-    # json.dumps handles all special chars correctly, but if any string value
-    # contains "</script>" it would prematurely close the <script> block and
-    # break the JSON. Replace with the safe unicode escape <\/script>.
+    # json.dumps handles all special chars correctly, but a literal "<" in a
+    # string value could form "</script>" (prematurely closing the block) or
+    # "<!--" (an HTML comment opener). Escape every "<" as the JSON-legal
+    # backslash-u-0-0-3-c unicode escape rather than pattern-matching
+    # "</script>"/"<!--" as literal text: a previous version replaced "<!--"
+    # with a literal backslash-bang, which is NOT a valid JSON escape, so any
+    # post containing "<!--" (e.g. quoting a phishing email's raw HTML) made
+    # the whole JSON-LD block unparseable. The unicode escape is valid JSON
+    # and round-trips to the same "<" character on parse, so no content
+    # changes — it also neutralises "<!--"/"</script>" regardless of case,
+    # which the literal-string replace did not.
     serialised = json.dumps(data, ensure_ascii=False, separators=(",", ":"))
-    serialised = serialised.replace("</script>", r"<\/script>").replace("<!--", r"<\!--")
+    serialised = serialised.replace("<", "\\u003c")
     return '<script type="application/ld+json">' + serialised + "</script>"
 
 def _verification_meta(site: dict) -> str:
@@ -1449,7 +1457,7 @@ def _render_section_body(para) -> str:
     return "".join(parts)
 
 
-def render_post(site, post, all_posts, affiliates=None, sources=None):
+def render_post(site, post, all_posts, affiliates=None, sources=None, link_map=None, slug_titles=None):
     url   = site['domain'] + f'/guides/{post["slug"]}/'
     label = category_label(post["category"])
     mins  = reading_time(post)
@@ -1573,6 +1581,16 @@ def render_post(site, post, all_posts, affiliates=None, sources=None):
         + breadcrumb_schema(breadcrumbs)
         + howto_schema(site, post, url)
     )
+
+    # Linkify passes run on the article body ONLY, before make_base() wraps it
+    # in the shared header/newsletter-band/footer chrome. Running them on the
+    # full page (as before) let a keyword match inside that boilerplate copy —
+    # not just the article — so every guide picked up an identical, unrelated
+    # auto-link (e.g. the newsletter band's "the latest UK scams" text).
+    content = linkify_bare_paths(content, slug_titles or {})
+    content = apply_internal_links(content, post['slug'], link_map or {})
+    content = linkify_phones(content)
+
     return make_base(
         content,
         title=seo_title(post["title"], site["site_name"], brand=False),
@@ -2684,10 +2702,8 @@ def build():
         if generate_og_image(og_out, post["title"], category_label(post["category"]), site["site_name"]):
             og_gen_count += 1
 
-        html_out = render_post(site, post, posts, affiliates, sources)
-        html_out = linkify_bare_paths(html_out, slug_titles)
-        html_out = apply_internal_links(html_out, post['slug'], link_map)
-        html_out = linkify_phones(html_out)
+        html_out = render_post(site, post, posts, affiliates, sources,
+                                link_map=link_map, slug_titles=slug_titles)
         write(DIST / 'guides' / post['slug'] / 'index.html', html_out)
 
     if not _PIL_OK:
