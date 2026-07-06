@@ -2023,7 +2023,11 @@ def build_legal_bodies(site):
     <p class="note" style="margin-top:2rem;color:#666;font-size:.9rem">Last reviewed: May 2026. The site is reviewed periodically and updated as scam patterns and reporting routes change.</p>
     '''
 
+    # Bump PRIVACY_LAST_UPDATED when materially revising the Privacy Policy below.
+    PRIVACY_LAST_UPDATED = "6 July 2026"
     privacy = f'''
+    <p class="note" style="color:#666;font-size:.95rem"><strong>Last updated:</strong> {PRIVACY_LAST_UPDATED}</p>
+
     <p>This Privacy Policy explains how {html.escape(site["site_name"])} uses analytics, advertising, and website technologies when you browse the site. {html.escape(site["site_name"])} is an independent UK publication; for data-protection purposes the <strong>data controller</strong> is its publisher, who you can contact at <a href="mailto:{site["privacy_email"]}">{site["privacy_email"]}</a>.</p>
     <h2>What information we collect</h2>
     <p>The site does not offer user accounts, comments, or direct purchases. Standard server logs may record technical data such as browser type, device type, and approximate location.</p>
@@ -2033,6 +2037,7 @@ def build_legal_bodies(site):
     <p>The site uses Google Analytics 4. Analytics cookies are only enabled after consent where required.</p>
     <h2>Advertising</h2>
     <p>The site uses Google AdSense. To serve, measure, and (with your consent) personalise ads, Google and its partners may use <strong>cookies, web beacons (pixel tags), your IP address, and device or online identifiers</strong>. In the UK and EEA, your consent for advertising and analytics cookies is collected through Google&#8217;s certified Consent Management Platform (the consent message you see on your first visit), which records your choice under the IAB Transparency &amp; Consent Framework. Until you consent, ads are non-personalised and no advertising-personalisation cookies are set; if you consent, Google and its partners may use the technologies above to personalise and measure ads. On pages dealing with debt, insolvency, or money lost to scams, ads are served non-personalised regardless of consent. You can change your choice any time via the Cookie settings link in the footer. For more on how Google uses this data, see <a href="https://policies.google.com/technologies/partner-sites" rel="noopener noreferrer" target="_blank">How Google uses information from sites that use its services</a>.</p>
+    <p>Third-party vendors, including Google, use cookies to serve ads based on your prior visits to this website or other websites. Google&#8217;s use of advertising cookies enables it and its partners to serve ads to you based on your visits to this site and/or other sites on the internet. You can opt out of personalised advertising from Google at any time in <a href="https://adssettings.google.com/" rel="noopener noreferrer" target="_blank">Google Ads Settings</a>, and opt out of many other third-party vendors&#8217; personalised-ad cookies at <a href="https://www.aboutads.info/choices" rel="noopener noreferrer" target="_blank">aboutads.info/choices</a> or, in the UK and Europe, <a href="https://www.youronlinechoices.com/" rel="noopener noreferrer" target="_blank">youronlinechoices.com</a>.</p>
     <h2>Newsletter</h2>
     <p>If you subscribe to email updates we use double opt-in: we email you a confirmation link, and your address is only added to our list once you click it (so no one can sign up an address that isn't theirs). Your email address and consent are then stored by, and the emails delivered through, <strong>Resend</strong> (our email provider). We use your address only to send Beat the Scam updates, never sell or share it, and every email carries a one-click unsubscribe link.</p>
     <h2>Who processes your data</h2>
@@ -2063,7 +2068,7 @@ def build_legal_bodies(site):
     <h2>Analytics cookies</h2>
     <p>If you accept analytics cookies, Google Analytics 4 may collect information about page views, device type, and interaction patterns.</p>
     <h2>Advertising cookies</h2>
-    <p>If advertising is active and you consent, Google AdSense may use cookies to support ad delivery and measurement. In the UK and EEA your advertising and analytics consent is collected through Google&#8217;s certified Consent Management Platform under the IAB Transparency &amp; Consent Framework; until you consent, ads are non-personalised.</p>
+    <p>If advertising is active and you consent, Google AdSense may use cookies to support ad delivery and measurement. In the UK and EEA your advertising and analytics consent is collected through Google&#8217;s certified Consent Management Platform under the IAB Transparency &amp; Consent Framework; until you consent, ads are non-personalised. Third-party vendors, including Google, use cookies to serve ads based on your prior visits to this website or other websites; you can opt out of personalised advertising in <a href="https://adssettings.google.com/" rel="noopener noreferrer" target="_blank">Google Ads Settings</a> or at <a href="https://www.aboutads.info/choices" rel="noopener noreferrer" target="_blank">aboutads.info/choices</a>.</p>
     <h2>How to manage cookies</h2>
     <p>Change browser cookie settings at any time, or use the Cookie settings link in the footer to reopen the consent message and change your choice.</p>
     <h2>Contact</h2>
