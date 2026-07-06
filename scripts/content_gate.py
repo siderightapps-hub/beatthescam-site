@@ -143,13 +143,32 @@ def _post_text(post: Dict) -> str:
     return "\n".join(parts)
 
 
-# Phone-like tokens: UK landline/mobile/freephone starting 0, plus the short
-# codes we explicitly allow/deny. Avoids matching money (£2,868) and years.
-_PHONE_RE = re.compile(r"(?<!\d)(?:0\d[\d\s]{5,12}\d|\b(?:7726|159|105|101|999|112)\b)")
+# Phone-like tokens: UK landline/mobile/freephone starting 0, the +44/0044
+# international prefix, plus the short codes we explicitly allow/deny.
+# Digit groups may be separated by spaces, hyphens, dots, or parens (e.g.
+# "0345-300-0000", "0345.300.0000", "(0345) 300 0000", "+44 345 300 0000",
+# "+443453000000") — a bare "0\d[\d\s]{5,12}\d" pattern misses all of these.
+# Still avoids matching money (£2,868) and years (a leading 0/+44/0044 is
+# required, which prose dates and prices don't start with).
+_PHONE_SEP = r"[\s.\-()]"
+_PHONE_RE = re.compile(
+    r"(?<!\d)(?:"
+    r"(?:\+44|0044)" + _PHONE_SEP + r"*0?" + _PHONE_SEP + r"*\d(?:" + _PHONE_SEP + r"*\d){6,12}"
+    r"|0" + _PHONE_SEP + r"*\d(?:" + _PHONE_SEP + r"*\d){5,12}"
+    r"|\b(?:7726|159|105|101|999|112)\b"
+    r")"
+)
 
 
 def _norm_digits(s: str) -> str:
-    return re.sub(r"\D", "", s)
+    digits = re.sub(r"\D", "", s)
+    # Normalise the +44/0044 international prefix to the domestic leading 0
+    # so "+44 345 300 0000" compares equal to the allowlisted "0345 300 0000".
+    if digits.startswith("0044"):
+        digits = "0" + digits[4:]
+    elif digits.startswith("44") and len(digits) >= 11:
+        digits = "0" + digits[2:]
+    return digits
 
 
 def check_phones(post: Dict) -> List[Dict]:
