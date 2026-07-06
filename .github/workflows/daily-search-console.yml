@@ -91,10 +91,23 @@ jobs:
               echo "::error::Search Console article generator failed (exit $CODE) — check the Google OAuth token (token.json) hasn't expired."
               exit "$CODE"
             fi
-            SLUGS=$(echo "$OUTPUT" | grep "^NEW_ARTICLE_SLUGS=" | cut -d= -f2)
+            SLUGS=$(echo "$OUTPUT" | grep "^NEW_ARTICLE_SLUGS=" | tail -1 | cut -d= -f2)
             echo "new_slugs=$SLUGS" >> $GITHUB_OUTPUT
             echo "Generated slugs: $SLUGS"
           fi
+
+      # content/quarantine/ is gitignored by design (a gate-failed draft must
+      # never risk landing in a commit/PR), so without this the human-review
+      # record of what the gate blocked, and why, evaporates with the runner.
+      # An artifact preserves it for review without touching the git tree.
+      - name: Upload quarantined drafts (if any) for review
+        if: always()
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
+        with:
+          name: quarantined-drafts-${{ github.run_id }}
+          path: content/quarantine/
+          if-no-files-found: ignore
+          retention-days: 30
 
       - name: Build site
         if: env.DRY_RUN != 'true'
@@ -166,6 +179,8 @@ jobs:
           - [ ] Flag-tier notes in \`content/manifests/\` reviewed
 
           On merge, \`tweet-on-publish.yml\` will tweet the new guide(s).
+
+          Any gate-quarantined draft(s) from this run are attached to the workflow run as a \`quarantined-drafts-${{ github.run_id }}\` artifact (never committed) — check the [run summary](${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}) if a topic seems to be missing.
           EOF
           )
 
