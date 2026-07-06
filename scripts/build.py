@@ -101,6 +101,14 @@ ARTICLE_REDIRECTS = {
     # identical guides. See docs/content-diversification-plan.md.
     "bt-broadband-tech-support-scam-uk":          "bt-broadband-scam-calls-uk",
     "linkedin-recruitment-scam-uk":               "linkedin-job-scam-guide-uk",
+    # ── Batch 16 consolidations (2026-07-05): near-duplicate topics merged
+    # into the stronger surviving page. See docs/content-diversification-plan.md.
+    # NB: solar-panel-scam-uk was deliberately NOT consolidated here — the
+    # 2026-06-15 audit already decided it and solar-panel-cold-caller-scam-uk
+    # target genuinely different vectors (online/advertised vs cold-call) and
+    # should stay separate, cross-linked pages.
+    "sky-broadband-scam-call-uk":                 "isp-impersonation-scam-bt-sky-virgin-media",
+    "tinder-investment-scam-uk":                  "pig-butchering-scam-uk",
     "nhs-covid-scam-message":                     "__CAT__:government",
     "forex-trading-scams-uk-protection-guide":    "__CAT__:crypto",
     "trading-signal-scam-uk":                     "__CAT__:crypto",
