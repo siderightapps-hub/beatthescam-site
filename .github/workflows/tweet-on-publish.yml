@@ -13,9 +13,16 @@ on:
 permissions:
   contents: write
 
-# Share the content-pipeline lock so a tweet run can't race a generation run.
+# Own lock, NOT the shared "content-pipeline" group: GitHub cancels a group's
+# previously-QUEUED run whenever a new one is queued (even with
+# cancel-in-progress: false), so sharing a group with the daily-publish /
+# daily-search-console crons let a busy merge day silently drop a queued tweet
+# run (or a queued cron run). This workflow doesn't need that lock anyway — it
+# doesn't touch the generation crons' state, and its own push step below
+# already retries + JSON-merges content/tweeted_posts.json against a moved
+# origin/main, so concurrent pushes from back-to-back merges are handled.
 concurrency:
-  group: content-pipeline
+  group: tweet-on-publish
   cancel-in-progress: false
 
 jobs:
