@@ -75,7 +75,7 @@ def main():
     posts_path = Path(args.posts)
 
     rows, fieldnames = load_queue(queue_path)
-    pending = [r for r in rows if str(r.get("published", "")).strip().lower() not in {"true", "yes", "1", "quarantined"}]
+    pending = [r for r in rows if str(r.get("published", "")).strip().lower() not in {"true", "yes", "1", "quarantined", "skipped"}]
     batch = pending[: max(args.batch_size, 0)]
 
     if not batch:
@@ -110,13 +110,14 @@ def main():
     published_slugs = parse_marker(proc.stdout, "GATE_PUBLISHED")
     published_topics = set(parse_marker(proc.stdout, "GATE_PUBLISHED_TOPICS"))
     quarantined_topics = set(parse_marker(proc.stdout, "GATE_QUARANTINED_TOPICS"))
+    skipped_topics = set(parse_marker(proc.stdout, "GATE_SKIPPED_TOPICS"))
 
     published_at = dt.datetime.utcnow().replace(microsecond=0).isoformat() + "Z"
     batch_keywords = {row["keyword"] for row in batch}
     for row in rows:
         if row["keyword"] not in batch_keywords:
             continue
-        if str(row.get("published", "")).strip().lower() in {"true", "yes", "1", "quarantined"}:
+        if str(row.get("published", "")).strip().lower() in {"true", "yes", "1", "quarantined", "skipped"}:
             continue
         rslug = slugify(row["keyword"])
         if rslug in published_topics:
@@ -125,10 +126,16 @@ def main():
             # Gate-failed: set aside for manual review. Excluded from pending so
             # it is not auto-retried, and it is never tweeted.
             row["published"], row["published_at"], row["slug"] = "quarantined", published_at, rslug
+        elif rslug in skipped_topics:
+            # A guide with this slug already exists (e.g. a duplicate queue entry,
+            # or it predates the queue system). Resolved — not retried, not tweeted —
+            # but distinct from "quarantined" since nothing was gate-failed.
+            row["published"], row["published_at"], row["slug"] = "skipped", published_at, rslug
         # else: generation errored (produced no post) — leave pending to retry.
 
     save_queue(queue_path, rows, fieldnames)
-    print(f"Published {len(published_topics)} topic(s); quarantined {len(quarantined_topics)} for review")
+    print(f"Published {len(published_topics)} topic(s); quarantined {len(quarantined_topics)} for review; "
+          f"skipped {len(skipped_topics)} (already exists)")
 
     # Only gate-PASSED slugs are emitted for tweeting (daily-publish.yml greps
     # `^NEW_ARTICLE_SLUGS=`). Quarantined content is never broadcast.

@@ -348,11 +348,13 @@ def main() -> int:
     published_slugs: List[str] = []     # real post slugs (URLs) — used for tweeting
     published_topics: List[str] = []    # topic slugs (slugify(keyword)) — used to mark queue rows
     quarantined_topics: List[str] = []  # topic slugs — used to mark queue rows
+    skipped_topics: List[str] = []      # topic slugs already published under this slug — used to mark queue rows
     for topic in topics:
         slug = slugify(topic.keyword)
 
         if topic_exists(posts, slug) and not args.force:
             print(f"  skip  {slug} (already exists)")
+            skipped_topics.append(slug)
             continue
 
         print(f"  gen   {slug} …", end=" ", flush=True)
@@ -366,6 +368,7 @@ def main() -> int:
             continue
 
         # ── Accuracy gate: PASS → publish, FAIL → quarantine (never published).
+        result = None
         if args.mode == "claude" and not args.no_gate:
             result = run_gate(post, client=client, model=args.model,
                               use_llm=not args.gate_no_llm)
@@ -374,6 +377,18 @@ def main() -> int:
                 quarantined_topics.append(slug)
                 print(f"QUARANTINED — {result.summary()}", file=sys.stderr)
                 continue
+
+        # The model (or the template) chooses its own post["slug"], which can
+        # differ from slugify(topic.keyword) (already checked above) and collide
+        # with an existing post. Re-check here, before the manifest write, so a
+        # duplicate slug can neither overwrite another guide's manifest nor
+        # silently replace its live page when build.py renders posts.json.
+        if post["slug"] in all_slugs and not args.force:
+            print(f"SKIPPED — generated slug '{post['slug']}' already exists", file=sys.stderr)
+            skipped_topics.append(slug)
+            continue
+
+        if result is not None:
             # PASS → write the claim manifest (audit trail; never fail a publish on this)
             try:
                 write_manifest(post, result, model=args.model, today=args.date)
@@ -399,9 +414,12 @@ def main() -> int:
     # GATE_PUBLISHED   = real post slugs (for tweeting / NEW_ARTICLE_SLUGS).
     # *_TOPICS         = topic slugs (slugify(keyword)) used to mark the right queue
     #                    rows; the post slug can differ when the model picks its own.
+    # GATE_SKIPPED_TOPICS = topic slugs that already exist under this slug — resolved,
+    #                       not retried, but not a fresh publish either (no tweet).
     print(f"GATE_PUBLISHED={','.join(published_slugs)}")
     print(f"GATE_PUBLISHED_TOPICS={','.join(published_topics)}")
     print(f"GATE_QUARANTINED_TOPICS={','.join(quarantined_topics)}")
+    print(f"GATE_SKIPPED_TOPICS={','.join(skipped_topics)}")
     return 0
 
 
