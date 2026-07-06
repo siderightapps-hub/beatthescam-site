@@ -41,8 +41,20 @@ function blobStore(name) {
   catch { return null; }
 }
 
+// Canonicalise before hashing: Node's base64url decoder silently drops any
+// character outside the base64url alphabet, so a dotless (opaque v2) token
+// with junk appended (e.g. "token=", "token~", a trailing space) decodes to
+// the IDENTICAL bytes — same email, still verifies — but hashing the raw
+// string would give each variant a different key, letting the string be
+// replayed indefinitely. By the time this runs, verifyConfirmToken has
+// already decoded + authenticated the token, so hashing those decoded bytes
+// is safe and collapses every such variant onto one key. Legacy dotted
+// tokens are exact-match (HMAC timingSafeEqual on the literal string), so
+// they have no equivalent malleability and are hashed as-is.
 function consumedKey(token) {
-  return "ct:" + crypto.createHash("sha256").update(String(token)).digest("hex").slice(0, 32);
+  const t = String(token);
+  const basis = t.includes(".") ? t : Buffer.from(t, "base64url");
+  return "ct:" + crypto.createHash("sha256").update(basis).digest("hex").slice(0, 32);
 }
 
 // Atomically claim a token. Returns true if this caller claimed it (proceed),
