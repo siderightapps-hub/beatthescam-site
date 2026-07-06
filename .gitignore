@@ -5,6 +5,13 @@ beatthescam_security_handoff.md
 .DS_Store
 .env
 
+# Python bytecode cache
+__pycache__/
+*.pyc
+
+# Node deps for the Netlify Functions' package.json (never committed)
+node_modules/
+
 # Google OAuth credentials - NEVER commit these
 client_secret*.json
 token.json
