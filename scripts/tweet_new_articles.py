@@ -164,6 +164,8 @@ def main():
                         help="Max new tweets to send per run (default: 5)")
     parser.add_argument("--slug", type=str,
                         help="Tweet a specific article by slug only")
+    parser.add_argument("--force", action="store_true",
+                        help="With --slug, tweet even if already recorded in tweeted_posts.json")
     args = parser.parse_args()
 
     # Load posts — deduplicate by slug
@@ -201,6 +203,13 @@ def main():
         if not to_tweet:
             print(f"❌ Slug '{args.slug}' not found in posts.json")
             sys.exit(1)
+        # --slug bypasses the "all unposted" filter below, so without this
+        # check it never consults tweeted_posts.json — re-running the CI
+        # workflow (e.g. after its own push step failed) would re-tweet the
+        # same slug every time.
+        if args.slug in tweeted and not args.force:
+            print(f"✅ '{args.slug}' is already recorded as tweeted — skipping (use --force to re-tweet).")
+            return
     else:
         # All unposted, newest first (posts.json is newest-first)
         to_tweet = [p for p in posts if p["slug"] not in tweeted][:args.limit]
