@@ -109,6 +109,15 @@ ARTICLE_REDIRECTS = {
     # should stay separate, cross-linked pages.
     "sky-broadband-scam-call-uk":                 "isp-impersonation-scam-bt-sky-virgin-media",
     "tinder-investment-scam-uk":                  "pig-butchering-scam-uk",
+    # ── Batch 17 consolidations (2026-07-06): near-duplicate topics merged
+    # into the stronger surviving page. See docs/content-diversification-plan.md.
+    # Resolves the 3-way bank/police impersonation overlap flagged since batch 15
+    # (both redundant pages covered the same fake-authority-figure-phone-call
+    # pattern already covered in depth by the survivor).
+    "bank-impersonation-phone-scam-uk":                                        "police-impersonation-scam-call-uk",
+    "impersonation-scams-when-criminals-pretend-to-be-your-bank-or-the-police": "police-impersonation-scam-call-uk",
+    "fake-trading-platform-uk":                   "forex-trading-scam-uk",
+    "debt-management-scam-uk":                    "debt-relief-scam-uk",
     "nhs-covid-scam-message":                     "__CAT__:government",
     "forex-trading-scams-uk-protection-guide":    "__CAT__:crypto",
     "trading-signal-scam-uk":                     "__CAT__:crypto",
