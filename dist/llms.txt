@@ -18,7 +18,7 @@
 - [Social Media Scams](https://beatthescam.com/categories/social/): 5 guide(s)
 - [Tech Support Scams](https://beatthescam.com/categories/tech/): 11 guide(s)
 - [Text Message Scams](https://beatthescam.com/categories/sms/): 24 guide(s)
-- [Travel Scams](https://beatthescam.com/categories/travel/): 12 guide(s)
+- [Travel Scams](https://beatthescam.com/categories/travel/): 13 guide(s)
 - [Utility Scams](https://beatthescam.com/categories/utility/): 3 guide(s)
 - [Website Scams](https://beatthescam.com/categories/website/): 12 guide(s)
 
@@ -229,6 +229,7 @@
 - [Fake Airline Ticket Scam UK: Spot a Bargain Flight Con](https://beatthescam.com/guides/fake-airline-ticket-scam-uk/): Found flights far cheaper than anywhere else, advertised on social media or by a 'travel agent'? How to spot a fake airline ticket scam and report it.
 - [Fake Travel Agent Scams UK: How to Spot Booking Fraud](https://beatthescam.com/guides/fake-travel-agent-scam-uk/): Booking a cheap holiday, flight or villa from an agent you don't know? How to spot a fake travel agent, verify ABTA/ATOL, and protect your money.
 - [Glastonbury Accommodation Scam UK: How to Spot Fake Bookings](https://beatthescam.com/guides/glastonbury-accommodation-scam-uk/): Scammers create fake Glastonbury accommodation listings on social media, messaging apps, and ad sites to steal deposits from festival-goers. This guide shows you exactly how to verify genuine bookings and protect yourself before sending any money.
+- [Holiday Club Scam UK: How to Spot and Avoid Timeshare Fraud](https://beatthescam.com/guides/holiday-club-scam-uk/): Holiday club scams lure UK residents with promises of discounted holidays and exclusive membership benefits, then pressure them into signing long-term contracts with hidden fees and poor value. This guide explains how the scam works, what to watch for, and what to do if you've already been caught.
 - [Holiday Compensation Scam UK: Fake Claims Handlers](https://beatthescam.com/guides/holiday-compensation-scam-uk/): Cold-called about compensation you're owed for a delayed or cancelled trip? Check the firm is FCA-authorised before sharing any details.
 - [Holiday Let Scam UK: Fake Independent Rentals](https://beatthescam.com/guides/holiday-let-scam-uk/): An independent holiday cottage 'owner' insists on a bank transfer before you can view it? That single request is the biggest red flag going.
 - [Jet2 Holiday Scam UK: Spot a Fake Deal or Contact](https://beatthescam.com/guides/jet2-holiday-scam-uk/): A huge Jet2 discount appeared on WhatsApp or social media? Verify any deal or booking directly on jet2holidays.com before you pay anything.
