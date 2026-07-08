@@ -1,0 +1,15 @@
+{
+  "slug": "holiday-club-scam-uk",
+  "title": "Holiday Club Scam UK: How to Spot and Avoid Timeshare Fraud",
+  "date": "2026-07-08",
+  "model": "claude-haiku-4-5-20251001",
+  "gate_passed": true,
+  "claims": [
+    {
+      "type": "legislation",
+      "severity": "flag",
+      "text": "the Consumer Rights Act 2015",
+      "detail": "makes a legal/legislation claim ('the Consumer Rights Act 2015') — verify it is accurate."
+    }
+  ]
+}
