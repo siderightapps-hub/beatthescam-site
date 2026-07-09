@@ -146,6 +146,12 @@ EXPECT = [
      lambda r: any(i["check"] == "dated_event" for i in r.issues)),
     ("non-canon reporting email is RECORDED as a flag", "FLAGS",
      lambda r: any(i["check"] == "source" for i in r.issues)),
+    # Regression guard: no DETERMINISTIC flag-tier class may ever emit a block —
+    # a refactor promoting legislation/dated_event/source to block-tier would
+    # otherwise still show a green self-test. The judge is excluded because it
+    # may legitimately block this fixture's invented dated event.
+    ("no deterministic flag class BLOCKS publication",  "FLAGS",
+     lambda r: not any(i["severity"] == "block" and i["check"] != "judge" for i in r.issues)),
 ]
 
 

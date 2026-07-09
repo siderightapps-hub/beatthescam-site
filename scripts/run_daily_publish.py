@@ -100,7 +100,17 @@ def main():
     # Capture the generator's stdout so we can see which posts actually passed
     # the accuracy gate. Only gate-PASSED posts are marked published + tweeted;
     # quarantined posts are set aside for review (not retried, not broadcast).
-    proc = subprocess.run(cmd, check=True, capture_output=True, text=True)
+    try:
+        proc = subprocess.run(cmd, check=True, capture_output=True, text=True)
+    except subprocess.CalledProcessError as e:
+        # Echo the captured output before re-raising — otherwise a generator
+        # crash leaves the CI log with a bare traceback and no gate/quarantine
+        # context to diagnose from.
+        if e.stdout:
+            sys.stdout.write(e.stdout)
+        if e.stderr:
+            sys.stderr.write(e.stderr)
+        raise
     sys.stdout.write(proc.stdout)
     if proc.stderr:
         sys.stderr.write(proc.stderr)
@@ -112,7 +122,7 @@ def main():
     quarantined_topics = set(parse_marker(proc.stdout, "GATE_QUARANTINED_TOPICS"))
     skipped_topics = set(parse_marker(proc.stdout, "GATE_SKIPPED_TOPICS"))
 
-    published_at = dt.datetime.utcnow().replace(microsecond=0).isoformat() + "Z"
+    published_at = dt.datetime.now(dt.timezone.utc).replace(microsecond=0).isoformat().replace("+00:00", "Z")
     batch_keywords = {row["keyword"] for row in batch}
     for row in rows:
         if row["keyword"] not in batch_keywords:

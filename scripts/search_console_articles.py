@@ -85,7 +85,6 @@ def get_search_console_service():
 
     # CI: load from environment variables
     sc_token = os.getenv("GOOGLE_SEARCH_CONSOLE_TOKEN")
-    sc_creds = os.getenv("GOOGLE_OAUTH_CREDENTIALS")
 
     if sc_token:
         print("🔑 Loading credentials from environment variables (CI mode)")
@@ -258,9 +257,9 @@ OUTPUT FORMAT — respond with a single valid JSON object only, no other text:
         )
         raw = response.content[0].text.strip()
 
-        # Strip markdown fences if present
-        raw = re.sub(r"^```json\s*", "", raw)
-        raw = re.sub(r"\s*```$", "", raw)
+        # Strip markdown fences if present (bare ``` and any case, matching
+        # generate_content_claude.extract_json)
+        raw = re.sub(r"^```(?:json)?\s*|\s*```$", "", raw, flags=re.IGNORECASE).strip()
 
         data = json.loads(raw)
 
@@ -271,9 +270,16 @@ OUTPUT FORMAT — respond with a single valid JSON object only, no other text:
                 print(f"❌ Missing field in response: {field}")
                 return None
 
-        if len(data["sections"]) < 4:
-            print(f"❌ Too few sections: {len(data['sections'])}")
+        # Shape-check as well as count: build.py hard-unpacks each section as a
+        # [heading, body] string pair, so a dict-shaped or 3-element section
+        # would crash the rebuild step later in the cron.
+        sections = [s for s in data["sections"]
+                    if isinstance(s, (list, tuple)) and len(s) == 2
+                    and all(isinstance(x, str) and x.strip() for x in s)]
+        if len(sections) < 4:
+            print(f"❌ Too few usable sections: {len(sections)}")
             return None
+        data["sections"] = [list(s) for s in sections]
 
         # Build the full post object
         post = {
@@ -288,13 +294,16 @@ OUTPUT FORMAT — respond with a single valid JSON object only, no other text:
             "faq":         data["faq"],
         }
 
-        print(f"   ✅ Generated: {post['title'][:60]}")
+        # Model-derived text is collapsed to one line before logging: the
+        # workflow scrapes this stdout for a column-0 "NEW_ARTICLE_SLUGS="
+        # marker, so a newline inside model output must never start a log line.
+        print(f"   ✅ Generated: {' '.join(post['title'].split())[:60]}")
         print(f"   Slug: {post['slug']}")
         return post
 
     except json.JSONDecodeError as e:
         print(f"❌ JSON parse error: {e}")
-        print(f"   Raw response: {raw[:200]}")
+        print(f"   Raw response: {' '.join(raw.split())[:200]}")
         return None
     except Exception as e:
         print(f"❌ Generation error: {e}")

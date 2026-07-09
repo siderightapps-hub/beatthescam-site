@@ -49,8 +49,12 @@ ACCURACY_BLOCK = """ACCURACY — THIS OVERRIDES EVERY STYLE AND SEO RULE BELOW. 
 # highest-consequence error on a scam-advice site. Loaded defensively: if the
 # canon is missing/malformed the gate falls back to the hardcoded set below so
 # it never breaks.
+# Keep in sync with content/sources.json — this set is used ONLY when the canon
+# fails to load, and any number in the canon but missing here would then be
+# false-BLOCKed (e.g. the Revenge Porn Helpline was added to the canon after
+# this fallback was first written and had drifted).
 _FALLBACK_PHONE_DIGITS = {
-    "03001232040", "08082231133", "08001116768", "7726", "159",
+    "03001232040", "08082231133", "08001116768", "03456000459", "7726", "159",
     "0800111999", "105", "999", "112", "101",
 }
 _FALLBACK_REPORT_EMAILS = {"report@phishing.gov.uk"}
@@ -148,9 +152,13 @@ def _post_text(post: Dict) -> str:
 # Digit groups may be separated by spaces, hyphens, dots, or parens (e.g.
 # "0345-300-0000", "0345.300.0000", "(0345) 300 0000", "+44 345 300 0000",
 # "+443453000000") — a bare "0\d[\d\s]{5,12}\d" pattern misses all of these.
+# The separator class includes the Unicode hyphen/dash family (‐-―,
+# −): models routinely emit en/em dashes, and "0345–300–0000" must not
+# slip past the allow-list. "/" is deliberately excluded — it would make
+# numeric dates like "01/02/2026" match as phone-like and false-BLOCK.
 # Still avoids matching money (£2,868) and years (a leading 0/+44/0044 is
 # required, which prose dates and prices don't start with).
-_PHONE_SEP = r"[\s.\-()]"
+_PHONE_SEP = r"[\s.\-()‐-―−]"
 _PHONE_RE = re.compile(
     r"(?<!\d)(?:"
     r"(?:\+44|0044)" + _PHONE_SEP + r"*0?" + _PHONE_SEP + r"*\d(?:" + _PHONE_SEP + r"*\d){6,12}"
@@ -219,8 +227,10 @@ _ABSOLUTE_RES = [
                r"pictures?)\s+(?:exists?|was\s+(?:ever\s+)?(?:taken|made|recorded|captured))\b", re.I),
     re.compile(r"\bthere\s+(?:is|are)\s+no\s+(?:footage|video|recording|images?|photos?|pictures?)\b", re.I),
     re.compile(r"\b(?:footage|video|recording|images?|photos?|pictures?)\s+(?:does|do)\s+not\s+exist\b", re.I),
-    re.compile(r"\byou\s+are\s+(?:completely|totally|perfectly|fully|entirely|100%)\s+safe\b", re.I),
-    re.compile(r"\byou\s+have\s+nothing\s+to\s+(?:worry\s+about|fear)\b", re.I),
+    # Accept contractions ("you're", "you've", curly or straight apostrophe) —
+    # "You're completely safe." must block exactly like "You are completely safe."
+    re.compile(r"\byou(?:\s+are|['’]re)\s+(?:completely|totally|perfectly|fully|entirely|100%)\s+safe\b", re.I),
+    re.compile(r"\byou(?:\s+have|['’]ve)\s+nothing\s+to\s+(?:worry\s+about|fear)\b", re.I),
 ]
 
 
@@ -283,7 +293,9 @@ def check_sources(post: Dict) -> List[Dict]:
 # in the weekly digest for a human to confirm), never a block — many are correct
 # (e.g. "the Fraud Act 2006"). The judge still independently blocks fabrications.
 _LEGISLATION_RES = [
-    re.compile(r"\bthe\s+(?:[A-Z][\w’']+\s+){1,5}Act(?:\s+\d{4})?", ),     # "the Fraud Act 2006"
+    # Case-sensitive on purpose ([A-Z] identifies the proper-noun Act name), but
+    # "[Tt]he" so a sentence-initial "The Fraud Act 2006…" is also caught.
+    re.compile(r"\b[Tt]he\s+(?:[A-Z][\w’']+\s+){1,5}Act(?:\s+\d{4})?", ),  # "the Fraud Act 2006"
     re.compile(r"\b(?:illegal|unlawful|a\s+criminal\s+offence)\s+under\b", re.I),
     re.compile(r"\b(?:you\s+are|you’re|you're)\s+legally\s+(?:entitled|required|obliged|protected)\b", re.I),
     re.compile(r"\blegally\s+(?:entitled|required|obliged)\s+to\b", re.I),
@@ -356,12 +368,24 @@ def check_dated_events(post: Dict) -> List[Dict]:
 # standalone mention of ClearScore as a free app sits apart from the trio, so
 # requiring both other agencies (or the explicit CRA phrase) keeps this tight.
 _CRA_APP_RE = re.compile(r"\b(?:clear\s?score|call\s?credit)\b", re.I)
+# A guide *correcting* the error ("ClearScore is a free app, not a credit
+# reference agency") is accurate and must not be quarantined — a false BLOCK
+# silently burns the topic (quarantined drafts are never retried).
+_CRA_NEGATED_RE = re.compile(
+    r"\b(?:not?|isn['’]t|aren['’]t|rather\s+than|instead\s+of|unlike)\b[^.!?\n]{0,40}"
+    r"credit\s+reference\s+agenc", re.I)
 def check_cra_misclassification(post: Dict) -> List[Dict]:
     issues: List[Dict] = []
     seen = set()
-    for seg in re.split(r"(?<=[.!?])\s+", _post_text(post)):
+    # Split on newlines as well as sentence punctuation: _post_text joins
+    # title/headings/bodies with \n and headings carry no terminal punctuation,
+    # so without the newline split a heading naming Experian+Equifax would
+    # bleed into the next line and false-positive a correct ClearScore mention.
+    for seg in re.split(r"(?<=[.!?])\s+|\n+", _post_text(post)):
         low = seg.lower()
         if not _CRA_APP_RE.search(low):
+            continue
+        if _CRA_NEGATED_RE.search(seg):
             continue
         if ("credit reference agenc" in low) or ("experian" in low and "equifax" in low):
             key = low[:60]
@@ -383,9 +407,14 @@ def check_cra_misclassification(post: Dict) -> List[Dict]:
 # The National Fraud Database is a Cifas service; consumers join via a Cifas
 # Protective Registration (cifas.org.uk), NOT "through Citizens Advice" or "via
 # Action Fraud". Routing it through those bodies is the wrong-routing error. BLOCK.
+# The gap pattern may cross ONE sentence boundary ("…the National Fraud
+# Database. You do this through Citizens Advice.") — two short sentences is
+# exactly how a model phrases the wrong routing, and "[^.]{0,60}" alone stops
+# at the full stop and misses it.
+_NFD_GAP = r"[^.]{0,60}(?:\.\s+[^.]{0,60})?"
 _NFD_ROUTING_RE = re.compile(
-    r"national\s+fraud\s+database[^.]{0,60}\b(?:citizens\s+advice|action\s+fraud)\b"
-    r"|\b(?:through|via|with)\s+(?:citizens\s+advice|action\s+fraud)\b[^.]{0,40}national\s+fraud\s+database",
+    r"national\s+fraud\s+database" + _NFD_GAP + r"\b(?:citizens\s+advice|action\s+fraud)\b"
+    r"|\b(?:through|via|with)\s+(?:citizens\s+advice|action\s+fraud)\b" + _NFD_GAP + r"national\s+fraud\s+database",
     re.I)
 def check_nfd_routing(post: Dict) -> List[Dict]:
     text = _post_text(post)
@@ -448,6 +477,10 @@ _CREDIT_FREEZE_RE = re.compile(r"credit\s+freeze|freez(?:e|ing)\s+your\s+credit"
 _THREAT_DISMISS_RE = re.compile(
     r"assume[^.]{0,30}\b(?:fake|bluff)\b[^.]{0,30}unless"
     r"|(?:genuine|real|legitimate)\s+threat\s+would[^.]{0,80}\b(?:proof|evidence|screenshot|verifiable)\b", re.I)
+# The FCA retired the "ScamSmart" branding — the canon (sources.json, 2026-07-05)
+# is the "FCA Firm Checker". Models with an older knowledge cutoff still write
+# "check ScamSmart", so guard the retired name. FLAG (review), not block.
+_SCAMSMART_RE = re.compile(r"\bscam\s?smart\b", re.I)
 
 
 def check_recurring_accuracy(post: Dict) -> List[Dict]:
@@ -476,6 +509,9 @@ def check_recurring_accuracy(post: Dict) -> List[Dict]:
     flag(_THREAT_DISMISS_RE, "threat_dismissal",
          "teaches that the absence of proof means a threat is fake/a bluff. Reassure that most are "
          "bulk bluffs WITHOUT guaranteeing safety; never imply a victim's real threat is fake.")
+    flag(_SCAMSMART_RE, "retired_branding",
+         "references the FCA's retired 'ScamSmart' branding. The current canon route is the FCA "
+         "Firm Checker (register.fca.org.uk) — see content/sources.json.")
     return issues
 
 

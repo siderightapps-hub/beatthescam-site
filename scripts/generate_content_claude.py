@@ -184,17 +184,22 @@ def claude_post(topic: Topic, today: str, model: str, client: Anthropic,
         # catch it). Raise so the caller skips this topic; it retries next run.
         raise ValueError(f"malformed model output for '{topic.keyword}': {e}")
 
-    return normalise(data, topic, today)
+    # strict=True: valid JSON that yields <4 usable sections (dict-shaped
+    # sections, refusals, truncation) must raise too — otherwise it would fall
+    # through normalise()'s templated sections and publish a thin generic guide,
+    # the same class Executive Verdict Critical #3 closed for malformed JSON.
+    return normalise(data, topic, today, strict=True)
 
 
 def fallback_post(topic: Topic, today: str) -> Dict:
-    kw  = topic.keyword
-    ent = topic.entity
     return normalise({}, topic, today)
 
 
-def normalise(data: Dict, topic: Topic, today: str) -> Dict:
-    """Validate and fill any missing fields with safe defaults."""
+def normalise(data: Dict, topic: Topic, today: str, strict: bool = False) -> Dict:
+    """Validate and fill any missing fields with safe defaults.
+
+    strict=True (claude mode) raises instead of substituting the templated
+    sections, reserving the template purely for --mode template."""
     kw  = topic.keyword
     ent = topic.entity
     cat = topic.category
@@ -227,6 +232,10 @@ def normalise(data: Dict, topic: Topic, today: str) -> Dict:
 
     # Fallback sections if Claude didn't deliver
     if len(sections) < 4:
+        if strict:
+            raise ValueError(
+                f"model returned only {len(sections)} usable sections for "
+                f"'{kw}' — refusing to publish the templated fallback")
         sections = [
             ["What is this scam?",
              f"{ent} impersonation scams target UK residents through fake messages, calls, or websites. "

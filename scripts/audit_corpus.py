@@ -21,7 +21,7 @@ from collections import Counter, defaultdict
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
-from content_gate import run_gate, build_manifest, write_manifest, SEVERITY_BLOCK
+from content_gate import run_gate, build_manifest, SEVERITY_BLOCK
 
 
 def main() -> int:
@@ -39,23 +39,29 @@ def main() -> int:
     flags = defaultdict(list)      # type -> [(slug, text)]
     written = 0
 
-    def existing_model(slug: str):
-        """Preserve the drafting model recorded by the generation path — a
-        deterministic re-audit must not wipe provenance to null."""
+    def existing_manifest(slug: str):
+        """Load the manifest written at generation time. A deterministic
+        re-audit must preserve two things from it that it cannot reproduce:
+        the drafting-model provenance, and the LLM judge's claims (this run
+        is use_llm=False, so rebuilding from scratch would silently erase the
+        judge findings the weekly digest reviews)."""
         mp = mdir / f"{slug}.json"
         if mp.exists():
             try:
-                return json.loads(mp.read_text(encoding="utf-8")).get("model")
+                return json.loads(mp.read_text(encoding="utf-8"))
             except (ValueError, OSError):
                 return None
         return None
 
     for p in posts:
         result = run_gate(p, use_llm=False)   # deterministic only
-        model = existing_model(p.get("slug", ""))
-        man = build_manifest(p, result, model=model, today=p.get("date"))
+        prior = existing_manifest(p.get("slug", "")) or {}
+        man = build_manifest(p, result, model=prior.get("model"), today=p.get("date"))
+        man["claims"] += [c for c in prior.get("claims", []) if c.get("type") == "judge"]
         if not args.no_write:
-            write_manifest(p, result, model=model, today=p.get("date"))
+            mdir.mkdir(parents=True, exist_ok=True)
+            mp = mdir / f"{p.get('slug', 'unknown')}.json"
+            mp.write_text(json.dumps(man, indent=2, ensure_ascii=False), encoding="utf-8")
             written += 1
         for c in man["claims"]:
             by_type[c["type"]] += 1

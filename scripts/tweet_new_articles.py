@@ -20,7 +20,7 @@ import sys
 import time
 import argparse
 from pathlib import Path
-from datetime import datetime
+from datetime import datetime, timezone
 
 # ── Dependency check ──────────────────────────────────────────────────────────
 try:
@@ -60,7 +60,6 @@ CATEGORY_TAGS = {
     "finance":     "#InvestmentScam",
     "fraud":       "#FraudAlert",
     "utility":     "#EnergyScam",
-    "crypto":      "#CryptoScam",
 }
 
 # ── Tweet composer ────────────────────────────────────────────────────────────
@@ -211,8 +210,12 @@ def main():
             print(f"✅ '{args.slug}' is already recorded as tweeted — skipping (use --force to re-tweet).")
             return
     else:
-        # All unposted, newest first (posts.json is newest-first)
-        to_tweet = [p for p in posts if p["slug"] not in tweeted][:args.limit]
+        # All unposted, newest first. posts.json ordering is MIXED — the
+        # search-console generator inserts at index 0 but the daily-publish
+        # generator appends — so sort by date instead of trusting file order.
+        # (CI always passes --slug; this batch path is manual-only.)
+        to_tweet = sorted((p for p in posts if p["slug"] not in tweeted),
+                          key=lambda p: p.get("date", ""), reverse=True)[:args.limit]
 
     if not to_tweet:
         print("✅ No new articles to tweet. All up to date.")
@@ -251,7 +254,7 @@ def main():
             response = client.create_tweet(text=tweet_text)
             tweet_id = response.data["id"]
             tweeted[slug] = {
-                "tweeted_at": datetime.utcnow().isoformat(),
+                "tweeted_at": datetime.now(timezone.utc).isoformat(),
                 "tweet_id":   tweet_id,
                 "title":      post["title"],
             }

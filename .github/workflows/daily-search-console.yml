@@ -37,7 +37,6 @@ jobs:
     env:
       ANTHROPIC_API_KEY:              ${{ secrets.ANTHROPIC_API_KEY }}
       GOOGLE_SEARCH_CONSOLE_TOKEN:    ${{ secrets.GOOGLE_SEARCH_CONSOLE_TOKEN }}
-      GOOGLE_OAUTH_CREDENTIALS:       ${{ secrets.GOOGLE_OAUTH_CREDENTIALS }}
       DRY_RUN:  ${{ github.event.inputs.dry_run || 'false' }}
       SC_DAYS:  ${{ github.event.inputs.days    || '28'    }}
 
@@ -68,12 +67,24 @@ jobs:
             'google-auth-httplib2>=0.2.0,<0.3.0' \
             'google-api-python-client>=2.0.0,<3.0.0'
 
-      - name: Write Google token from secret
+      # The queue-state equivalent for this pipeline: while auto-content PRs are
+      # open, generated guides haven't reached main's posts.json, so the same
+      # search gap gets re-generated daily. Skip until the backlog is merged.
+      - name: Skip if unmerged auto-content PRs exist
+        id: backlog
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          echo '${{ secrets.GOOGLE_SEARCH_CONSOLE_TOKEN }}' > token.json
-          echo "✅ token.json written"
+          OPEN=$(gh pr list --label auto-content --state open --json number --jq 'length')
+          if [ "$OPEN" -gt 0 ]; then
+            echo "ℹ️  $OPEN auto-content PR(s) awaiting review — skipping generation to avoid duplicate topics."
+            echo "skip=true" >> $GITHUB_OUTPUT
+          else
+            echo "skip=false" >> $GITHUB_OUTPUT
+          fi
 
       - name: Run Search Console article generator
+        if: steps.backlog.outputs.skip != 'true'
         id: generate
         run: |
           if [ "$DRY_RUN" = "true" ]; then
@@ -88,10 +99,17 @@ jobs:
             set -e
             echo "$OUTPUT"
             if [ "$CODE" -ne 0 ]; then
-              echo "::error::Search Console article generator failed (exit $CODE) — check the Google OAuth token (token.json) hasn't expired."
+              echo "::error::Search Console article generator failed (exit $CODE) — check the GOOGLE_SEARCH_CONSOLE_TOKEN secret hasn't expired (rotates ~weekly)."
               exit "$CODE"
             fi
+            # The scraped output includes model-influenced text (titles, raw
+            # responses on parse errors), so validate the charset before the
+            # value becomes a step output — anything but slug chars is dropped.
             SLUGS=$(echo "$OUTPUT" | grep "^NEW_ARTICLE_SLUGS=" | tail -1 | cut -d= -f2)
+            if ! echo "$SLUGS" | grep -Eq '^[a-z0-9,-]*$'; then
+              echo "WARNING: scraped slug list failed charset validation; discarding: $(echo "$SLUGS" | head -c 200)"
+              SLUGS=""
+            fi
             echo "new_slugs=$SLUGS" >> $GITHUB_OUTPUT
             echo "Generated slugs: $SLUGS"
           fi
@@ -110,11 +128,11 @@ jobs:
           retention-days: 30
 
       - name: Build site
-        if: env.DRY_RUN != 'true'
+        if: env.DRY_RUN != 'true' && steps.backlog.outputs.skip != 'true'
         run: python scripts/build.py
 
       - name: Verify build output
-        if: env.DRY_RUN != 'true'
+        if: env.DRY_RUN != 'true' && steps.backlog.outputs.skip != 'true'
         run: |
           if [ ! -f dist/index.html ]; then
             echo "ERROR: dist/index.html not found"
@@ -136,9 +154,13 @@ jobs:
           echo "✅ Build verified: $POST_COUNT post directories"
 
       - name: Open review pull request
-        if: env.DRY_RUN != 'true'
+        if: env.DRY_RUN != 'true' && steps.backlog.outputs.skip != 'true'
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          # Step outputs must reach the script via env, never inline ${{ }} in
+          # the run: body — inline interpolation happens before the shell runs,
+          # so a spoofed marker line in the scraped output would become code.
+          SLUGS: ${{ steps.generate.outputs.new_slugs }}
         run: |
           set -e
           git config user.name  "github-actions[bot]"
@@ -156,7 +178,6 @@ jobs:
 
           DATE=$(date -u +%Y-%m-%d)
           BRANCH="auto/search-console-$(date -u +%Y%m%d)-${{ github.run_id }}"
-          SLUGS="${{ steps.generate.outputs.new_slugs }}"
 
           git checkout -b "$BRANCH"
           git commit -m "Search Console article (review): $DATE"

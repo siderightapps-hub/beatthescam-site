@@ -17,10 +17,13 @@ permissions:
 # previously-QUEUED run whenever a new one is queued (even with
 # cancel-in-progress: false), so sharing a group with the daily-publish /
 # daily-search-console crons let a busy merge day silently drop a queued tweet
-# run (or a queued cron run). This workflow doesn't need that lock anyway — it
-# doesn't touch the generation crons' state, and its own push step below
-# already retries + JSON-merges content/tweeted_posts.json against a moved
-# origin/main, so concurrent pushes from back-to-back merges are handled.
+# run (or a queued cron run). The same queued-cancellation rule applies WITHIN
+# this group too: three merges in quick succession can cancel the middle run,
+# and since each run diffs only its own push window (before..after), the
+# cancelled window's slugs are never tweeted (and never recorded in
+# tweeted_posts.json). Accepted at the current 1–3 merges/day; the push step
+# below retries + JSON-merges content/tweeted_posts.json against a moved
+# origin/main, so the records that ARE written survive concurrent pushes.
 concurrency:
   group: tweet-on-publish
   cancel-in-progress: false
@@ -86,32 +89,26 @@ jobs:
       - name: Tweet new articles
         if: ${{ steps.slugs.outputs.new_slugs != '' }}
         env:
+          # get_client() reads these via os.getenv — dotenv only seeds defaults,
+          # so no .env file is needed (or written) on the runner.
           TWITTER_API_KEY:             ${{ secrets.TWITTER_API_KEY }}
           TWITTER_API_KEY_SECRET:      ${{ secrets.TWITTER_API_KEY_SECRET }}
           TWITTER_ACCESS_TOKEN:        ${{ secrets.TWITTER_ACCESS_TOKEN }}
           TWITTER_ACCESS_TOKEN_SECRET: ${{ secrets.TWITTER_ACCESS_TOKEN_SECRET }}
+          SLUGS: ${{ steps.slugs.outputs.new_slugs }}
         run: |
-          cat > .env << EOF
-          TWITTER_API_KEY=${{ secrets.TWITTER_API_KEY }}
-          TWITTER_API_KEY_SECRET=${{ secrets.TWITTER_API_KEY_SECRET }}
-          TWITTER_ACCESS_TOKEN=${{ secrets.TWITTER_ACCESS_TOKEN }}
-          TWITTER_ACCESS_TOKEN_SECRET=${{ secrets.TWITTER_ACCESS_TOKEN_SECRET }}
-          EOF
-
           if [ ! -f content/tweeted_posts.json ]; then
             echo "{}" > content/tweeted_posts.json
           fi
 
           # tweet_new_articles.py dedupes against tweeted_posts.json, so even a
           # re-run cannot double-tweet. Individual failures don't kill the batch.
-          IFS=',' read -ra SLUG_ARRAY <<< "${{ steps.slugs.outputs.new_slugs }}"
+          IFS=',' read -ra SLUG_ARRAY <<< "$SLUGS"
           for SLUG in "${SLUG_ARRAY[@]}"; do
             [ -z "$SLUG" ] && continue
             echo "🐦 Tweeting: $SLUG"
             python scripts/tweet_new_articles.py --slug "$SLUG" || echo "Tweet failed for $SLUG"
           done
-
-          rm -f .env
 
       - name: Save updated tweeted_posts.json
         if: ${{ steps.slugs.outputs.new_slugs != '' }}

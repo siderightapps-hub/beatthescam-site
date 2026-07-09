@@ -71,7 +71,25 @@ jobs:
       - name: Install dependencies
         run: pip install -r requirements-claude.txt
 
+      # The queue's "published" marks only reach main when a review PR merges,
+      # so generating while auto-content PRs are still open re-picks the same
+      # topics (2026-07: 3× duplicate holiday-club-scam-uk across #39/#49/#50).
+      # Skip the run instead — the topic publishes when the backlog is merged.
+      - name: Skip if unmerged auto-content PRs exist
+        id: backlog
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          OPEN=$(gh pr list --label auto-content --state open --json number --jq 'length')
+          if [ "$OPEN" -gt 0 ]; then
+            echo "ℹ️  $OPEN auto-content PR(s) awaiting review — skipping generation to avoid duplicate topics."
+            echo "skip=true" >> $GITHUB_OUTPUT
+          else
+            echo "skip=false" >> $GITHUB_OUTPUT
+          fi
+
       - name: Publish new topics
+        if: steps.backlog.outputs.skip != 'true'
         id: publish
         run: |
           OUTPUT=$(python scripts/run_daily_publish.py \
@@ -82,8 +100,15 @@ jobs:
             --model  claude-haiku-4-5-20251001 2>&1)
           echo "$OUTPUT"
           # Extract new slugs from the script's marker line so the PR body can
-          # list them (only gate-PASSED slugs are emitted).
+          # list them (only gate-PASSED slugs are emitted). The value is scraped
+          # from combined stdout+stderr, which includes model-influenced text,
+          # so validate the charset before it becomes a step output: anything
+          # but slug characters is dropped (never trusted downstream as code).
           SLUGS=$(echo "$OUTPUT" | grep "^NEW_ARTICLE_SLUGS=" | tail -1 | cut -d= -f2)
+          if ! echo "$SLUGS" | grep -Eq '^[a-z0-9,-]*$'; then
+            echo "WARNING: scraped slug list failed charset validation; discarding: $(echo "$SLUGS" | head -c 200)"
+            SLUGS=""
+          fi
           echo "new_slugs=$SLUGS" >> $GITHUB_OUTPUT
           echo "Captured new slugs: $SLUGS"
 
@@ -101,7 +126,7 @@ jobs:
           retention-days: 30
 
       - name: Rewrite thin guides (optional)
-        if: env.REWRITE_THIN == 'true'
+        if: env.REWRITE_THIN == 'true' && steps.backlog.outputs.skip != 'true'
         run: |
           python scripts/rewrite_thin_guides.py \
             --posts     content/posts.json \
@@ -110,9 +135,11 @@ jobs:
             --model     claude-haiku-4-5-20251001
 
       - name: Build site
+        if: steps.backlog.outputs.skip != 'true'
         run: python scripts/build.py
 
       - name: Verify build produced output (fail loudly on silent build failures)
+        if: steps.backlog.outputs.skip != 'true'
         run: |
           if [ ! -f dist/index.html ]; then
             echo "ERROR: dist/index.html not found — build.py exited silently without producing output"
@@ -134,8 +161,13 @@ jobs:
           echo "Build verified: $POST_COUNT post directories, all required files present"
 
       - name: Open review pull request
+        if: steps.backlog.outputs.skip != 'true'
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          # Step outputs must reach the script via env, never inline ${{ }} in
+          # the run: body — inline interpolation happens before the shell runs,
+          # so a spoofed marker line in the scraped output would become code.
+          SLUGS: ${{ steps.publish.outputs.new_slugs }}
         run: |
           set -e
           git config user.name  "github-actions[bot]"
@@ -160,7 +192,6 @@ jobs:
 
           DATE=$(date -u +%Y-%m-%d)
           BRANCH="auto/daily-publish-$(date -u +%Y%m%d)-${{ github.run_id }}"
-          SLUGS="${{ steps.publish.outputs.new_slugs }}"
 
           git checkout -b "$BRANCH"
           git commit -m "Daily AI publish (review): $DATE"
