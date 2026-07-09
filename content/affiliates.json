@@ -1,5 +1,5 @@
 {
-  "_note": "Replace href values with your actual affiliate tracking URLs before going live.",
+  "_note": "These are UNPAID, non-tracked editorial links (rel=nofollow, no 'Sponsored' label) — the live /terms/ page and affiliate_block() in build.py assert exactly that. If any href is ever swapped for a paid tracking URL, the Terms wording and the block's labelling/rel must change in the same commit or the Terms become false.",
   "products": [
     {
       "id": "experian-identity",

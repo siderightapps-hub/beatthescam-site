@@ -9,7 +9,7 @@ function showBanner(){if(banner){banner.hidden=false;banner.setAttribute('aria-h
 function setPreference(mode){safeSet(storageKey,mode);applyConsent(mode);updateStatus(mode);hideBanner();}
 var cmpTookOver=false;function deferToCmp(){if(cmpTookOver)return;cmpTookOver=true;hideBanner();}
 function showFallbackBanner(){if(cmpTookOver)return;var current=safeGet(storageKey);if(current==='accepted'||current==='rejected'){applyConsent(current);updateStatus(current);hideBanner();}else{updateStatus(null);showBanner();}}
-function registerTcfListener(){try{window.__tcfapi('addEventListener',2,function(tcData,success){if(!success||!tcData)return;if(typeof tcData.gdprApplies==='boolean'){gdprApplies=tcData.gdprApplies;}
+function registerTcfListener(){try{window.__tcfapi('addEventListener',2,function(tcData,success){if(!success||!tcData)return;if(typeof tcData.gdprApplies==='boolean'){var wasUnknown=(gdprApplies===null);gdprApplies=tcData.gdprApplies;if(wasUnknown&&gdprApplies===false&&!cmpTookOver){var stored=safeGet(storageKey);if(stored==='accepted'){applyConsent(stored);}}}
 if(tcData.eventStatus==='cmpuishown'||tcData.eventStatus==='useractioncomplete'||(tcData.gdprApplies===true&&tcData.tcString)){deferToCmp();}});}catch(e){}}
 (function pollForTcf(attemptsLeft){if(typeof window.__tcfapi==='function'){registerTcfListener();return;}
 if(attemptsLeft>0){setTimeout(function(){pollForTcf(attemptsLeft-1);},500);}})(16);setTimeout(function(){if(!cmpTookOver){showFallbackBanner();}},2000);if(accept){accept.addEventListener('click',function(e){e.preventDefault();setPreference('accepted');});}

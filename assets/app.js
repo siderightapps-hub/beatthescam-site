@@ -119,7 +119,20 @@
         if(!success || !tcData) return;
         // Record whether GDPR/TCF applies so the fallback banner knows whether it
         // may grant advertising consent (only when this is strictly false).
-        if(typeof tcData.gdprApplies === 'boolean'){ gdprApplies = tcData.gdprApplies; }
+        if(typeof tcData.gdprApplies === 'boolean'){
+          var wasUnknown = (gdprApplies === null);
+          gdprApplies = tcData.gdprApplies;
+          // gdprApplies resolves asynchronously and can land AFTER the 2s
+          // fallback timer has already applied a stored "accepted" preference
+          // (with advertising denied, because the region was still unknown).
+          // For a confirmed NON-GDPR visitor with no CMP takeover, re-apply the
+          // stored preference so advertising consent upgrades for this
+          // pageview instead of staying denied until the next visit.
+          if(wasUnknown && gdprApplies === false && !cmpTookOver){
+            var stored = safeGet(storageKey);
+            if(stored === 'accepted'){ applyConsent(stored); }
+          }
+        }
         if(tcData.eventStatus === 'cmpuishown' ||
            tcData.eventStatus === 'useractioncomplete' ||
            (tcData.gdprApplies === true && tcData.tcString)){

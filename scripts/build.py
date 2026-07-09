@@ -4,7 +4,7 @@ import json
 import re
 import shutil
 from collections import defaultdict
-from datetime import datetime, timedelta
+from datetime import datetime, timedelta, timezone
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -174,8 +174,8 @@ CATEGORY_LABELS = {
 }
 
 CATEGORY_DESCRIPTIONS = {
-    "marketplace": "Guides covering Facebook Marketplace, Gumtree, Vinted, and eBay scams targeting UK buyers and sellers. Spot fake payment fraud, advance fees, and collection scams.",
-    "sms":         "Guides covering fake delivery texts, bank impersonation SMS, HMRC alerts, and smishing attacks. Learn to identify and report suspicious texts targeting UK phones.",
+    "marketplace": "Guides covering Facebook Marketplace, Gumtree, Vinted, and eBay scams targeting UK buyers and sellers. Spot payment fraud, advance fees, and collection scams.",
+    "sms":         "Guides covering fake delivery texts, bank impersonation SMS, HMRC alerts, and smishing attacks. Learn to spot and report suspicious texts targeting UK phones.",
     "payment":     "Guides covering bank transfer fraud, advance fee scams, fake invoices, and APP fraud in the UK. Learn how to verify payment requests and protect your money.",
     "crypto":      "Guides covering fake crypto investment platforms, withdrawal fee traps, and romance fraud. Learn to identify cryptocurrency scams before sending money.",
     "tech":        "Guides covering fake tech support calls, remote access scams, and malicious software targeting UK users. Learn to spot and shut down tech support fraud.",
@@ -186,10 +186,10 @@ CATEGORY_DESCRIPTIONS = {
     "dating":      "Guides covering romance scams, fake profiles, and relationship fraud on dating apps. Learn to identify and avoid romance fraud before money or data is lost.",
     "email":       "Guides covering phishing emails, business email compromise, fake invoices, and email impersonation. Learn to identify and report suspicious emails in the UK.",
     "phone":       "Guides covering vishing calls, fake bank calls, HMRC phone scams, and voice fraud targeting UK residents. Learn to verify callers and avoid phone-based scams.",
-    "travel":      "Guides covering fake holiday listings, advance-fee travel fraud, and ticket scams targeting UK travellers. Learn to verify travel offers before paying a deposit.",
+    "travel":      "Guides covering fake holiday listings, advance-fee travel fraud, and ticket scams targeting UK travellers. Verify travel offers before paying a deposit.",
     "shopping":    "Guides covering fake online retailers, counterfeit goods, pet scams, and marketplace fraud. Learn to shop safely and spot fraudulent sellers in the UK.",
-    "finance":     "Guides covering fake investment opportunities, pension fraud, clone firm scams, and financial impersonation targeting UK consumers. Learn to protect your savings.",
-    "fraud":       "Guides covering recovery scams, impersonation fraud, and advance-fee tactics targeting UK consumers. Learn to recognise fraud patterns and report them correctly.",
+    "finance":     "Guides covering fake investment opportunities, pension fraud, clone firm scams, and financial impersonation targeting UK consumers. Protect your savings.",
+    "fraud":       "Guides covering recovery scams, impersonation fraud, and advance-fee tactics targeting UK consumers. Recognise fraud patterns and report them correctly.",
     "utility":     "Guides covering fake energy supplier calls, smart meter scams, and utility impersonation. Learn to verify energy contacts and avoid utility fraud in the UK.",
 }
 
@@ -387,8 +387,11 @@ def seo_description(desc: str, max_len: int = 160, min_acceptable: int = 130) ->
     if best_end >= min_acceptable:
         return desc[:best_end].strip()
 
-    # 2) Word-boundary fallback, stripping dangling connector words
-    truncated = desc[:max_len].rsplit(" ", 1)[0].rstrip(" .,;:")
+    # 2) Word-boundary fallback, stripping dangling connector words.
+    # Reserve one char for the appended ellipsis so the result stays <= max_len
+    # even for a no-space input, and strip any existing trailing "…" so a
+    # source description already ending in one can't produce "……".
+    truncated = desc[:max_len - 1].rsplit(" ", 1)[0].rstrip(" .,;:…")
     DANGLERS = {
         "to", "the", "a", "an", "of", "for", "with", "and", "or", "but",
         "in", "on", "at", "by", "from", "as", "is", "are", "was", "were",
@@ -397,9 +400,9 @@ def seo_description(desc: str, max_len: int = 160, min_acceptable: int = 130) ->
     parts = truncated.split()
     while parts and parts[-1].lower() in DANGLERS:
         parts.pop()
-    truncated = " ".join(parts).rstrip(" .,;:")
+    truncated = " ".join(parts).rstrip(" .,;:…")
     if not truncated:
-        return desc[:max_len].rstrip()
+        return desc[:max_len - 1].rstrip() + "…"
     return truncated + "…"
 
 
@@ -663,15 +666,20 @@ def make_base(content: str, *, title: str, description: str, canonical: str, sch
         "{{js_ver}}":            site.get("_asset_ver_js", ""),
         "{{ads_head}}":          _ads_head(site, ads_mode),
         "{{ga4_id}}":            site["ga4_id"],
-        "{{year}}":              str(datetime.utcnow().year),
+        "{{year}}":              str(datetime.now(timezone.utc).year),
         "{{footer_cats}}":       _FOOTER_CATS_HTML,
         "{{prev_next}}":         _prev_next_meta(prev_url, next_url),
         "{{verification_meta}}": _verification_meta(site),
     }
-    page = BASE
-    for key, value in replacements.items():
-        page = page.replace(key, value)
-    return page
+    # Single pass over the TEMPLATE only: chained str.replace would re-scan
+    # already-substituted values, so a literal "{{year}}" etc. inside article
+    # content (plausible on a site that quotes phishing-template text) would
+    # get substituted too. re.sub visits each template token exactly once.
+    return re.sub(
+        r"\{\{(?:%s)\}\}" % "|".join(re.escape(k[2:-2]) for k in replacements),
+        lambda m: replacements[m.group(0)],
+        BASE,
+    )
 
 
 # ─── SCHEMA ────────────────────────────────────────────────────────────────
@@ -873,7 +881,8 @@ def howto_schema(site, post, url):
             "@type": "HowTo",
             "name": title,
             "description": f"{title} — guidance from the {post['title']} guide on {site['site_name']}.",
-            "totalTime": "PT5M",
+            # no totalTime: a fabricated fixed duration on every HowTo is
+            # worse structured data than omitting the optional field.
             "step": [
                 {
                     "@type": "HowToStep",
@@ -1239,13 +1248,6 @@ def render_guides_index_page(site, page_posts, page_num: int, total_pages: int, 
     )
 
 
-def render_guides_index(site, posts):
-    """Backwards-compat: render only the first page (used by callers that
-    expect a single HTML string). Full pagination is handled in build()."""
-    total_pages = max(1, (len(posts) + GUIDES_PER_PAGE - 1) // GUIDES_PER_PAGE)
-    return render_guides_index_page(site, posts[:GUIDES_PER_PAGE], 1, total_pages, posts)
-
-
 def render_categories_index(site, categories):
     items = []
     for cat, posts in sorted(categories.items(), key=lambda x: len(x[1]), reverse=True):
@@ -1405,8 +1407,10 @@ def related_posts(posts, current, count=4):
         if score > 0:
             scored.append((score, p, sig))
 
-    scored.sort(key=lambda x: (-x[0], x[1]["date"]), reverse=False)
-    scored.sort(key=lambda x: -x[0])  # primary: score desc
+    # Score desc, then date desc — equal-score ties go to the NEWEST post,
+    # matching the newest-first convention used everywhere else.
+    scored.sort(key=lambda x: x[1]["date"], reverse=True)
+    scored.sort(key=lambda x: -x[0])  # stable: preserves date order within a score
 
     out = []
     used_sigs = set(seen)
@@ -2244,6 +2248,9 @@ def disambiguate_slugs(posts: list) -> list:
             continue
 
         # First entry keeps the canonical slug; rest get -2, -3, ...
+        # CAUTION: some "-2" slugs are ARTICLE_REDIRECTS keys (dead pages that
+        # now 301). A new collision minting one of those slugs would resurrect
+        # a URL the forced 301 then shadows — build() asserts against this.
         out.append(unique[0])
         for idx, p in enumerate(unique[1:], start=2):
             new_slug = f"{slug}-{idx}"
@@ -2253,10 +2260,6 @@ def disambiguate_slugs(posts: list) -> list:
             print(f"  slug-collision: '{slug}' → kept newest, renamed older to '{new_slug}'")
 
     return sorted(out, key=lambda p: p["date"], reverse=True)
-
-
-# Backwards-compat alias used by any external caller / test.
-deduplicate_posts = disambiguate_slugs
 
 
 # ─── PARAGRAPH SPLITTING ───────────────────────────────────────────────────
@@ -2378,6 +2381,22 @@ def _pos_inside_anchor(text: str, pos: int) -> bool:
     return False
 
 
+def _pos_inside_tag(text: str, pos: int) -> bool:
+    """True if `pos` falls inside an HTML tag (between '<' and '>'), i.e. in
+    attribute space rather than a text node.
+
+    The excluded-zone regexes protect whole ELEMENTS (<a>…</a>, headings,
+    <head>…), but a "plain" zone still contains other elements' opening tags —
+    e.g. <img alt="royal mail text example">. Substituting there would inject
+    an <a> INTO the attribute value and silently corrupt the page, so every
+    linkifier must skip matches at these positions.
+    """
+    lt = text.rfind("<", 0, pos)
+    if lt == -1:
+        return False
+    return text.rfind(">", 0, pos) < lt
+
+
 def apply_internal_links(html_str: str, current_slug: str, link_map: dict, max_total: int = 5) -> str:
     """Auto-link plain-text occurrences of mapped phrases inside post HTML.
 
@@ -2426,7 +2445,7 @@ def apply_internal_links(html_str: str, current_slug: str, link_map: dict, max_t
             # with no anchor text (the Semrush "links with no anchor
             # text" warning on 7 pages in the 2026-05-30 audit).
             for m in pat.finditer(text):
-                if _pos_inside_anchor(text, m.start()):
+                if _pos_inside_anchor(text, m.start()) or _pos_inside_tag(text, m.start()):
                     continue
                 text = text[:m.start()] + f'<a href="{url}">{m.group()}</a>' + text[m.end():]
                 used.add(phrase)
@@ -2560,17 +2579,18 @@ def linkify_bare_paths(html_str: str, slug_titles: dict) -> str:
     if last_end < len(html_str):
         zones.append(("plain", html_str[last_end:]))
 
-    def replace_match(m):
-        path = m.group(1)
-        slug = path.strip("/").split("/")[-1]
-        link_text = slug_titles.get(slug) or slug.replace("-", " ")
-        return f'<a href="{path}">{html.escape(link_text)}</a>'
-
     out = []
     for kind, text in zones:
         if kind == "excluded":
             out.append(text)
         else:
+            def replace_match(m, _text=text):
+                if _pos_inside_tag(_text, m.start()):   # e.g. an href/content attribute
+                    return m.group(0)
+                path = m.group(1)
+                slug = path.strip("/").split("/")[-1]
+                link_text = slug_titles.get(slug) or slug.replace("-", " ")
+                return f'<a href="{path}">{html.escape(link_text)}</a>'
             out.append(_BARE_PATH_RE.sub(replace_match, text))
     return "".join(out)
 
@@ -2578,7 +2598,7 @@ def linkify_bare_paths(html_str: str, slug_titles: dict) -> str:
 # ─── PHONE LINKIFY ─────────────────────────────────────────────────────────
 
 # Match UK helpline patterns: 0300/0800/0808/0345 prefix, then space-separated digits.
-_PHONE_RE = re.compile(r"\b(0(?:300|800|808|345|371|370|345)\s\d{3}\s\d{3,4})\b")
+_PHONE_RE = re.compile(r"\b(0(?:300|800|808|345|371|370)\s\d{3}\s\d{3,4})\b")
 
 
 def linkify_phones(html_str: str) -> str:
@@ -2595,14 +2615,18 @@ def linkify_phones(html_str: str) -> str:
     if last_end < len(html_str):
         zones.append(("plain", html_str[last_end:]))
 
-    def replace(m):
-        number = m.group(1)
-        tel = "+44" + number.replace(" ", "")[1:]
-        return f'<a href="tel:{tel}">{number}</a>'
-
     out = []
     for kind, text in zones:
-        out.append(text if kind == "excluded" else _PHONE_RE.sub(replace, text))
+        if kind == "excluded":
+            out.append(text)
+        else:
+            def replace(m, _text=text):
+                if _pos_inside_tag(_text, m.start()):   # e.g. an aria-label/alt value
+                    return m.group(0)
+                number = m.group(1)
+                tel = "+44" + number.replace(" ", "")[1:]
+                return f'<a href="tel:{tel}">{number}</a>'
+            out.append(_PHONE_RE.sub(replace, text))
     return "".join(out)
 
 
@@ -2622,6 +2646,16 @@ def build():
 
     # Disambiguate slug collisions — preserve all posts, never silently drop
     posts = disambiguate_slugs(raw_posts)
+
+    # A live guide must never share a slug with an ARTICLE_REDIRECTS key: the
+    # 301 is emitted with "301!" (forced), which overrides the static file at
+    # the edge, so the page would build fine yet be unreachable with no error
+    # anywhere. Fail the build loudly instead.
+    shadowed = set(ARTICLE_REDIRECTS) & {p["slug"] for p in posts}
+    if shadowed:
+        raise SystemExit(
+            f"ERROR: live guide slug(s) shadowed by a forced ARTICLE_REDIRECTS 301: "
+            f"{sorted(shadowed)} — rename the guide slug or drop the redirect.")
 
     categories = defaultdict(list)
     for post in posts:
@@ -2741,6 +2775,7 @@ def build():
     # Named author page — Alex Bacsa, cross-linked with CloudFintech /
     # TuningDigital / SalesTap via the Person.sameAs block in the page schema.
     author_html = render_author_page(site)
+    author_rendered = bool(author_html)
     if author_html:
         write(DIST / 'author/index.html', author_html)
 
@@ -2799,7 +2834,7 @@ def build():
     write(DIST / 'rss.xml', rss)
 
     # Sitemap — lastmod reflects actual content dates, not the build timestamp
-    today = datetime.utcnow().strftime("%Y-%m-%d")
+    today = datetime.now(timezone.utc).strftime("%Y-%m-%d")
     newest_post_date = max((p["date"] for p in posts), default=today)
 
     # Static pages change rarely — pin their sitemap lastmod to the date their
@@ -2813,7 +2848,9 @@ def build():
         '/categories/': newest_post_date,
         '/check/':      STATIC_LASTMOD,
         '/about/':      STATIC_LASTMOD,
-        '/author/':     STATIC_LASTMOD,
+        # /author/ only renders when site.json has an author_profile — keep the
+        # sitemap consistent with what was actually written to dist/.
+        **({'/author/': STATIC_LASTMOD} if author_rendered else {}),
         '/privacy/':    STATIC_LASTMOD,
         '/cookies/':    STATIC_LASTMOD,
         '/terms/':      STATIC_LASTMOD,
@@ -2935,7 +2972,7 @@ def build():
     # vulnerabilities. Auto-regenerated every build so the Expires field
     # always stays under the 1-year RFC ceiling without manual upkeep.
     # Lives at /.well-known/security.txt per the spec.
-    expires_iso = (datetime.utcnow() + timedelta(days=335)).strftime("%Y-%m-%dT00:00:00.000Z")
+    expires_iso = (datetime.now(timezone.utc) + timedelta(days=335)).strftime("%Y-%m-%dT00:00:00.000Z")
     security_txt = (
         f"# Security policy for {site['domain'].replace('https://','').replace('http://','')}\n"
         f"# In scope: beatthescam.com and its subdomains.\n"
