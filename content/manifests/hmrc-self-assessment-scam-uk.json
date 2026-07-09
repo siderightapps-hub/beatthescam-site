@@ -1,14 +1,20 @@
 {
   "slug": "hmrc-self-assessment-scam-uk",
-  "title": "HMRC Self Assessment Scam UK: How to Spot and Avoid It",
-  "date": "2026-06-23",
-  "model": "claude-haiku-4-5-20251001",
+  "title": "HMRC Self Assessment Scam UK: Fake Refund & Tax Bill Texts",
+  "date": "2026-07-09",
+  "model": "claude-sonnet-5 (manual diversification batch 18, post-factcheck)",
   "gate_passed": true,
   "claims": [
     {
+      "type": "source",
+      "severity": "flag",
+      "text": "branddefence@hmrc.gov.uk",
+      "detail": "cites a non-canon official reporting email 'branddefence@hmrc.gov.uk'. Verify it and add it to content/sources.json, or use a canon route (e.g. report@phishing.gov.uk)."
+    },
+    {
       "type": "hmrc_channel",
       "severity": "flag",
-      "text": "HMRC website—never via unsolicited emails or texts",
+      "text": "HMRC never asks you to 'confirm' bank details by text",
       "detail": "blanket 'HMRC never texts/emails/links you' — HMRC runs genuine SMS/email campaigns and genuine texts can carry gov.uk links. Say HMRC won't ask you to confirm details or 'claim' a refund via a link."
     }
   ]

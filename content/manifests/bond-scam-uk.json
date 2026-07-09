@@ -1,8 +1,8 @@
 {
   "slug": "bond-scam-uk",
-  "title": "Bond Scam UK: How Fraudsters Steal via Fake Investments",
-  "date": "2026-05-11",
-  "model": null,
+  "title": "Bond Scam UK: How Fake High-Return Bonds Work",
+  "date": "2026-07-09",
+  "model": "claude-sonnet-5 (manual diversification batch 18, post-factcheck)",
   "gate_passed": true,
   "claims": []
 }

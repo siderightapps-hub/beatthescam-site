@@ -1,15 +1,8 @@
 {
   "slug": "national-insurance-scam-call-uk",
-  "title": "National Insurance Scam Call UK: HMRC Impersonation Guide",
-  "date": "2026-04-29",
-  "model": null,
+  "title": "National Insurance Scam Call UK: The 'Suspended' Lie",
+  "date": "2026-07-09",
+  "model": "claude-sonnet-5 (manual diversification batch 18, post-factcheck)",
   "gate_passed": true,
-  "claims": [
-    {
-      "type": "shortcode_attribution",
-      "severity": "flag",
-      "text": "7726 (SPAM), report emails to the NCSC",
-      "detail": "attributes 7726 to the NCSC. 7726 is the free spam-reporting shortcode run by the mobile networks; the NCSC runs report@phishing.gov.uk for suspicious EMAILS."
-    }
-  ]
+  "claims": []
 }

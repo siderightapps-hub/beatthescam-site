@@ -1,8 +1,15 @@
 {
   "slug": "pension-liberation-scam-uk",
-  "title": "Pension Liberation Scam UK: How to Spot and Stop Cold Calls",
-  "date": "2026-04-29",
-  "model": null,
+  "title": "Pension Liberation Scam UK: The 55% Tax Trap",
+  "date": "2026-07-09",
+  "model": "claude-sonnet-5 (manual diversification batch 18, post-factcheck)",
   "gate_passed": true,
-  "claims": []
+  "claims": [
+    {
+      "type": "legislation",
+      "severity": "flag",
+      "text": "legally required to",
+      "detail": "makes a legal/legislation claim ('legally required to') — verify it is accurate."
+    }
+  ]
 }
