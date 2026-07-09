@@ -118,7 +118,9 @@ async function overDailyCap() {
   const store = blobStore("checker-spend");
   if (!store) return false;
   try {
-    const key = `calls:${new Date().toISOString().slice(0, 10)}`; // calls:YYYY-MM-DD (UTC)
+    // calls:YYYY-MM-DD keyed on the UTC date: the cap resets at midnight UTC
+    // (01:00/02:00 UK time), so a UK "day" deliberately spans two counters.
+    const key = `calls:${new Date().toISOString().slice(0, 10)}`;
     const next = await atomicUpdate(store, key, () => ({ count: 0 }), (c) => { c.count++; return c; });
     if (next === null) return false;            // store failed — fail open (availability > perfect cap)
     return next.count > DAILY_CALL_CAP;
@@ -209,9 +211,11 @@ function scrubContact(s) {
     // mentions like "gov.uk" with no path stay as plain text.
     .replace(/\b(?:https?:\/\/|www\.)\S+/gi, "[link removed — verify via an official source]")
     .replace(/\b[\w-]+(?:\.[\w-]+)+\/\S+/gi, "[link removed — verify via an official source]")
-    // Dialable phone numbers (UK 0…, or international +…). Short safety codes are
-    // ≤4 digits and never start 0/+, so they survive; full numbers are redacted.
-    .replace(/\+\d[\d\s().-]{6,}\d|\b0\d[\d\s().-]{5,12}\d/g, (m) => {
+    // Dialable phone numbers (UK 0…, international +…, or "44…" written
+    // without the + — an injection can drop the prefix to dodge the scrub).
+    // Short safety codes are ≤4 digits and never start 0/+/44, so they
+    // survive; full numbers are redacted.
+    .replace(/\+\d[\d\s().-]{6,}\d|\b0\d[\d\s().-]{5,12}\d|\b44[\d\s().-]{8,}\d/g, (m) => {
       const digits = m.replace(/\D/g, "");
       return (digits.length < 7 || SAFE_SHORTCODES.has(digits))
         ? m : "[number removed — use the number on your card or the official website]";
@@ -434,14 +438,17 @@ Rules:
     const result = {
       verdict:             verdict,
       confidence:          finalConfidence,
+      // scrub BEFORE slicing (same rule as link names above): slicing first can
+      // cut a phone number at the cap boundary to under the 7-digit redaction
+      // floor, letting the partial number through.
       summary:             typeof parsed.summary === "string"
-                             ? scrubContact(parsed.summary.slice(0, 500)) : "",
+                             ? scrubContact(parsed.summary).slice(0, 500) : "",
       red_flags:           Array.isArray(parsed.red_flags)
-                             ? parsed.red_flags.slice(0, 6).map(x => scrubContact(String(x))) : [],
+                             ? parsed.red_flags.slice(0, 6).map(x => scrubContact(String(x)).slice(0, 300)) : [],
       green_flags:         Array.isArray(parsed.green_flags)
-                             ? parsed.green_flags.slice(0, 6).map(x => scrubContact(String(x))) : [],
+                             ? parsed.green_flags.slice(0, 6).map(x => scrubContact(String(x)).slice(0, 300)) : [],
       recommended_actions: Array.isArray(parsed.recommended_actions)
-                             ? parsed.recommended_actions.slice(0, 5).map(x => scrubContact(String(x))) : [],
+                             ? parsed.recommended_actions.slice(0, 5).map(x => scrubContact(String(x)).slice(0, 300)) : [],
       reporting_links:     safeLinks.slice(0, 5),
     };
 

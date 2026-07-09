@@ -115,10 +115,24 @@ function verifyTokenLegacy(t) {
 }
 
 // ─── RESEND ───────────────────────────────────────────────────────────────────
+// Cap how long a Resend call can hang — Netlify kills a sync function at ~10s,
+// which would skip our own error handling entirely.
+const RESEND_TIMEOUT_MS = 8000;
+function fetchWithTimeout(url, opts) {
+  const ctrl = new AbortController();
+  const timer = setTimeout(() => ctrl.abort(), RESEND_TIMEOUT_MS);
+  return fetch(url, { ...opts, signal: ctrl.signal }).finally(() => clearTimeout(timer));
+}
+
 // Mark the contact unsubscribed. Tries the audience-scoped path first
 // (documented, and we hold the audience id), then the non-scoped contact path
-// as a fallback. A 404 (contact already gone) is treated as success — the end
-// state is what we want, and the op is idempotent.
+// as a fallback for contacts outside the configured audience. A 404 is treated
+// as success ONLY on the audience-scoped URL, where the route is known to
+// exist so 404 can only mean "contact already gone" (the end state we want).
+// On the fallback URL a 404 is ambiguous — it can equally mean "no such API
+// route" (e.g. RESEND_AUDIENCE_ID unset after an auth failure), and reporting
+// that as "You've been unsubscribed" would be a compliance-grade false
+// positive — so there it counts as failure and gets logged.
 async function markUnsubscribed(email) {
   const apiKey     = process.env.RESEND_API_KEY;
   const audienceId = process.env.RESEND_AUDIENCE_ID;
@@ -129,13 +143,13 @@ async function markUnsubscribed(email) {
   const headers = { "Content-Type": "application/json", "Authorization": `Bearer ${apiKey}` };
 
   const urls = [];
-  if (audienceId) urls.push(`${RESEND_BASE}/audiences/${audienceId}/contacts/${enc}`);
-  urls.push(`${RESEND_BASE}/contacts/${enc}`);
+  if (audienceId) urls.push({ url: `${RESEND_BASE}/audiences/${audienceId}/contacts/${enc}`, trust404: true });
+  urls.push({ url: `${RESEND_BASE}/contacts/${enc}`, trust404: false });
 
-  for (const url of urls) {
+  for (const { url, trust404 } of urls) {
     try {
-      const res = await fetch(url, { method: "PATCH", headers, body });
-      if (res.ok || res.status === 404) return true;
+      const res = await fetchWithTimeout(url, { method: "PATCH", headers, body });
+      if (res.ok || (res.status === 404 && trust404)) return true;
       console.error("unsubscribe PATCH non-ok:", res.status, url, (await res.text()).slice(0, 300));
     } catch (err) {
       console.error("unsubscribe PATCH threw:", url, err);
@@ -205,12 +219,19 @@ exports.handler = async function(event) {
     event.headers["x-nf-client-connection-ip"] ||
     event.headers["x-forwarded-for"]?.split(",")[0].trim() ||
     "";
-  if (isRateLimited(clientIp)) {
-    return textResponse(429, "Too many requests", { "Retry-After": "60" });
-  }
 
   const token = (event.queryStringParameters && event.queryStringParameters.t) || "";
   const email = verifyToken(token);
+
+  // Rate-limit invalid-token traffic only. RFC 8058 one-click POSTs arrive
+  // from Gmail/Yahoo provider egress IPs — after a large broadcast, one shared
+  // IP can legitimately carry many unsubscribes per minute, and a 429 there
+  // makes the provider record the unsubscribe as failed while the user
+  // believes they're off the list. Token verification is cheap (one AES-GCM
+  // open) and the op is idempotent, so valid-token requests are safe to serve.
+  if (!email && isRateLimited(clientIp)) {
+    return textResponse(429, "Too many requests", { "Retry-After": "60" });
+  }
 
   // ─── One-click (RFC 8058): the mail client POSTs to the List-Unsubscribe URL,
   //     or our own confirm form POSTs here. This is where state actually changes.

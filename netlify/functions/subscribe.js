@@ -50,7 +50,8 @@ const crypto = require("crypto");
 let getStore = null;
 try { ({ getStore } = require("@netlify/blobs")); } catch { /* dep/runtime absent — degrade gracefully */ }
 
-const ADDRESS_DAILY_MAX = 5;     // max confirmation emails to one address / rolling 24h
+const ADDRESS_DAILY_MAX = 5;     // max confirmation emails to one address per 24h window
+                                 // (fixed window anchored at the first send, not rolling)
 const DAILY_SEND_CAP    = 500;   // max confirmation emails sent across all addresses / UTC day
 // Prefer a dedicated RATE_LIMIT_SALT; else reuse UNSUBSCRIBE_SECRET (already
 // required by this function) so the per-address hash salt is never the public
@@ -108,6 +109,21 @@ async function addressOverDailyLimit(email) {
     if (next === null) return false;
     return next.count > ADDRESS_DAILY_MAX;
   } catch { return false; }
+}
+
+// Give back one unit of the per-address quota. Called when the confirmation
+// send FAILS after the quota was already claimed — the counter deliberately
+// increments before the send (so concurrent requests can't race past the
+// cap), but counting failed sends would let a burst of Resend 5xxs burn a
+// legitimate subscriber's whole daily quota with zero emails delivered.
+async function releaseAddressQuota(email) {
+  const store = blobStore("subscribe-cooldown");
+  if (!store) return;
+  try {
+    await atomicUpdate(store, emailKey(email),
+      () => ({ count: 0, windowStart: Date.now() }),
+      (cur) => { cur.count = Math.max(0, cur.count - 1); return cur; });
+  } catch { /* best effort */ }
 }
 
 // True once today's global confirmation-send cap is reached. Increments the
@@ -362,26 +378,42 @@ exports.handler = async function(event) {
   // ─── Send the double opt-in confirmation email ─────────────────────────────
   // We do NOT touch the Resend audience here — confirm-subscribe.js adds the
   // contact only after the link is clicked.
+  // confirmToken() can only return "" when UNSUBSCRIBE_SECRET is unset, which
+  // the config check above already 500s on — if that check ever moves below
+  // this point, an empty `t=` link would be emailed silently.
   const token      = confirmToken(email);
   const confirmUrl = `${SITE}/api/confirm-subscribe?t=${encodeURIComponent(token)}`;
   try {
-    const mailRes = await fetch("https://api.resend.com/emails", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        "Authorization": `Bearer ${apiKey}`,
-      },
-      body: JSON.stringify({
-        from: FROM_ADDRESS,
-        to: [email],
-        reply_to: REPLY_TO,
-        subject: "Confirm your Beat the Scam subscription",
-        html: CONFIRM_HTML.replace(/__CONFIRM_URL__/g, confirmUrl),
-        text: CONFIRM_TEXT.replace(/__CONFIRM_URL__/g, confirmUrl),
-      }),
-    });
+    // 8s timeout, well inside Netlify's ~10s function kill, so the failure
+    // path (incl. the quota release) always gets to run.
+    const ctrl  = new AbortController();
+    const timer = setTimeout(() => ctrl.abort(), 8000);
+    let mailRes;
+    try {
+      mailRes = await fetch("https://api.resend.com/emails", {
+        method: "POST",
+        signal: ctrl.signal,
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": `Bearer ${apiKey}`,
+        },
+        body: JSON.stringify({
+          from: FROM_ADDRESS,
+          to: [email],
+          reply_to: REPLY_TO,
+          subject: "Confirm your Beat the Scam subscription",
+          html: CONFIRM_HTML.replace(/__CONFIRM_URL__/g, confirmUrl),
+          text: CONFIRM_TEXT.replace(/__CONFIRM_URL__/g, confirmUrl),
+        }),
+      });
+    } finally {
+      clearTimeout(timer);
+    }
     if (!mailRes.ok) {
-      console.error("Confirmation email non-OK:", mailRes.status, await mailRes.text());
+      // Slice the error body — Resend validation errors can echo the recipient
+      // address, and function logs should never hold more of it than needed.
+      console.error("Confirmation email non-OK:", mailRes.status, (await mailRes.text()).slice(0, 300));
+      await releaseAddressQuota(email);
       return {
         statusCode: 502,
         headers: corsHeaders,
@@ -390,6 +422,7 @@ exports.handler = async function(event) {
     }
   } catch (err) {
     console.error("Confirmation email threw:", err);
+    await releaseAddressQuota(email);
     return {
       statusCode: 502,
       headers: corsHeaders,

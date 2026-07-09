@@ -8,9 +8,12 @@
 //    expiry are sealed under a key derived from UNSUBSCRIBE_SECRET, so the
 //    address can't be read from a captured URL AND can't be swapped without
 //    breaking the auth tag. The key is domain-separated by purpose, so a confirm
-//    token is NOT usable as an unsubscribe token. We DUAL-PARSE: the legacy
-//    base64url(email).base36(exp).sig (HMAC) format is still accepted so confirm
-//    links already in inboxes keep working during the transition.
+//    token is NOT usable as an unsubscribe token. The legacy dotted
+//    base64url(email).base36(exp).sig (HMAC) format was dual-parsed during the
+//    transition and RETIRED 2026-07-09: minting stopped 2026-06-25 and every
+//    legacy confirm token carries a signed 7-day expiry, so none can still
+//    verify. (unsubscribe.js keeps ITS legacy branch forever — those links
+//    have no expiry and must keep working for compliance.)
 //  - GET NEVER mutates state — it only renders a confirm page. Only POST adds
 //    the contact, so email link-prefetchers / security scanners (which GET every
 //    link) cannot auto-confirm a subscription — which is the whole point of
@@ -42,18 +45,15 @@ function blobStore(name) {
 }
 
 // Canonicalise before hashing: Node's base64url decoder silently drops any
-// character outside the base64url alphabet, so a dotless (opaque v2) token
-// with junk appended (e.g. "token=", "token~", a trailing space) decodes to
-// the IDENTICAL bytes — same email, still verifies — but hashing the raw
-// string would give each variant a different key, letting the string be
-// replayed indefinitely. By the time this runs, verifyConfirmToken has
-// already decoded + authenticated the token, so hashing those decoded bytes
-// is safe and collapses every such variant onto one key. Legacy dotted
-// tokens are exact-match (HMAC timingSafeEqual on the literal string), so
-// they have no equivalent malleability and are hashed as-is.
+// character outside the base64url alphabet, so a token with junk appended
+// (e.g. "token=", "token~", a trailing space) decodes to the IDENTICAL
+// bytes — same email, still verifies — but hashing the raw string would give
+// each variant a different key, letting the string be replayed indefinitely.
+// By the time this runs, verifyConfirmToken has already decoded +
+// authenticated the token, so hashing the decoded bytes is safe and collapses
+// every such variant onto one key.
 function consumedKey(token) {
-  const t = String(token);
-  const basis = t.includes(".") ? t : Buffer.from(t, "base64url");
+  const basis = Buffer.from(String(token), "base64url");
   return "ct:" + crypto.createHash("sha256").update(basis).digest("hex").slice(0, 32);
 }
 
@@ -159,41 +159,22 @@ function openToken(purpose, token) {
   } catch { return null; }
 }
 
-// ─── CONFIRM TOKEN — DUAL-PARSE (new opaque + legacy dotted) ───────────────────
+// ─── CONFIRM TOKEN ────────────────────────────────────────────────────────────
 // Returns the verified email, or null if the token is missing / malformed / has
-// a bad signature / has EXPIRED / the secret is unset (fail closed). A token
-// containing "." is the LEGACY base64url(email).base36(exp).sig (HMAC) format,
-// still in inboxes during the transition; a dotless token is the new AES-256-GCM
-// format. BOTH enforce the signed 7-day expiry (it can't be tampered in either).
+// a bad auth tag / has EXPIRED / the secret is unset (fail closed).
+// The legacy dotted HMAC format is no longer accepted (retired 2026-07-09):
+// minting stopped 2026-06-25 and its signed 7-day expiry means every legacy
+// confirm link had lapsed by 2026-07-02, so the branch was pure dead weight
+// (and its HMAC-over-decoded-email construction was malleable in ways the
+// single-use guard couldn't key on).
 function verifyConfirmToken(t) {
   const secret = process.env.UNSUBSCRIBE_SECRET || "";
   if (!t || !secret) return null;
-  return String(t).includes(".") ? verifyConfirmTokenLegacy(t) : verifyConfirmTokenV2(t);
-}
-
-function verifyConfirmTokenV2(t) {
   const p = openToken("confirm", t);
   if (!p || typeof p.e !== "string") return null;
   if (p.e.length > 254 || !EMAIL_RE.test(p.e)) return null;
   if (!Number.isFinite(p.x) || p.x * 1000 < Date.now()) return null;   // expired / malformed
   return p.e;
-}
-
-function verifyConfirmTokenLegacy(t) {
-  const secret = process.env.UNSUBSCRIBE_SECRET || "";
-  const parts = String(t).split(".");
-  if (parts.length !== 3) return null;
-  const [e, exp, sig] = parts;
-  let email;
-  try { email = Buffer.from(e, "base64url").toString("utf8"); } catch { return null; }
-  if (!email || email.length > 254 || !EMAIL_RE.test(email)) return null;
-  const expSec = parseInt(exp, 36);
-  if (!Number.isFinite(expSec) || expSec * 1000 < Date.now()) return null;   // expired / malformed
-  const expected = crypto.createHmac("sha256", secret).update("confirm:" + email + ":" + exp).digest("base64url");
-  const a = Buffer.from(sig);
-  const b = Buffer.from(expected);
-  if (a.length !== b.length || !crypto.timingSafeEqual(a, b)) return null;
-  return email;
 }
 
 // Unsubscribe token for the welcome email's one-click link — now OPAQUE
@@ -205,6 +186,17 @@ function unsubToken(email) {
 }
 
 // ─── RESEND ───────────────────────────────────────────────────────────────────
+// Every Resend call gets an 8s timeout — well inside Netlify's ~10s function
+// kill. Without it, a hung addContact after consumeConfirmToken means the
+// platform kills the function before releaseConfirmToken runs, permanently
+// burning a single-use link that was never actually used.
+const RESEND_TIMEOUT_MS = 8000;
+function fetchWithTimeout(url, opts) {
+  const ctrl = new AbortController();
+  const timer = setTimeout(() => ctrl.abort(), RESEND_TIMEOUT_MS);
+  return fetch(url, { ...opts, signal: ctrl.signal }).finally(() => clearTimeout(timer));
+}
+
 // Add (or re-activate) the contact in the audience. A duplicate is success —
 // the end state we want is "subscribed". Returns true on success.
 async function addContact(email) {
@@ -213,7 +205,7 @@ async function addContact(email) {
   if (!apiKey || !audienceId || !email) return false;
   const auth = { "Content-Type": "application/json", "Authorization": `Bearer ${apiKey}` };
   try {
-    const res = await fetch(`${RESEND_BASE}/audiences/${audienceId}/contacts`, {
+    const res = await fetchWithTimeout(`${RESEND_BASE}/audiences/${audienceId}/contacts`, {
       method: "POST",
       headers: auth,
       body: JSON.stringify({ email, unsubscribed: false }),
@@ -225,7 +217,7 @@ async function addContact(email) {
       // address, so PATCH it back to subscribed. This makes re-confirming a
       // reliable resubscribe instead of a silent no-op.
       try {
-        const patch = await fetch(
+        const patch = await fetchWithTimeout(
           `${RESEND_BASE}/audiences/${audienceId}/contacts/${encodeURIComponent(email)}`,
           { method: "PATCH", headers: auth, body: JSON.stringify({ unsubscribed: false }) }
         );
@@ -298,7 +290,7 @@ async function sendWelcome(email) {
     : "";
   const unsubText = unsubUrl ? `Unsubscribe: ${unsubUrl}` : "";
   try {
-    const res = await fetch(`${RESEND_BASE}/emails`, {
+    const res = await fetchWithTimeout(`${RESEND_BASE}/emails`, {
       method: "POST",
       headers: { "Content-Type": "application/json", "Authorization": `Bearer ${apiKey}` },
       body: JSON.stringify({
