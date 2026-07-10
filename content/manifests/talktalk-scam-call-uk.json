@@ -1,8 +1,8 @@
 {
   "slug": "talktalk-scam-call-uk",
-  "title": "TalkTalk Scam Call UK: How to Spot and Stop Phone Fraud",
-  "date": "2026-05-23",
-  "model": null,
+  "title": "TalkTalk Scam Call UK: Spot a Fake Support Call",
+  "date": "2026-07-10",
+  "model": "claude-sonnet-5 (manual diversification batch 19, post-factcheck, bold-strip fix)",
   "gate_passed": true,
   "claims": []
 }

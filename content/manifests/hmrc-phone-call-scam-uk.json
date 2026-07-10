@@ -1,8 +1,8 @@
 {
   "slug": "hmrc-phone-call-scam-uk",
-  "title": "HMRC Phone Call Scam UK: How to Spot and Stop Tax Fraud Calls",
-  "date": "2026-04-28",
-  "model": null,
+  "title": "HMRC Phone Call Scam UK: Spot a Fake Tax Call",
+  "date": "2026-07-10",
+  "model": "claude-sonnet-5 (manual diversification batch 19, post-factcheck, bold-strip fix)",
   "gate_passed": true,
   "claims": []
 }

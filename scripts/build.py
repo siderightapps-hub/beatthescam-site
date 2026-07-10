@@ -151,6 +151,15 @@ ARTICLE_REDIRECTS = {
     "qr-code-payment-scam-guide":                 "qr-code-scam-uk",
     "qr-code-scam-payment-uk":                    "qr-code-scam-uk",
     "whatsapp-scam-family-message-uk":            "whatsapp-family-emergency-scam",
+    # 2026-07-10 (batch 19): Action Fraud's own taxonomy doesn't separate
+    # "mandate fraud" from "invoice fraud" by recurring-vs-one-off — it's the
+    # formal reporting name for the whole redirected-payment pattern (UK
+    # Finance/NCSC track "invoice and mandate" as one combined category too).
+    # invoice-fraud-uk-businesses already said as much in its own FAQ. The one
+    # genuinely new fact from the loser page (Direct Debit Guarantee vs the
+    # business-size-gated APP reimbursement rules) was grafted into the
+    # survivor first — this is an article -> article 301, no content lost.
+    "mandate-fraud-uk-businesses":                "invoice-fraud-uk-businesses",
 }
 
 CATEGORY_LABELS = {

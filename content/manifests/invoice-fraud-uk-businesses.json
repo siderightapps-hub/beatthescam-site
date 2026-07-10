@@ -1,8 +1,8 @@
 {
   "slug": "invoice-fraud-uk-businesses",
-  "title": "Invoice Fraud UK: How Businesses Fall Victim and How to Stop It",
-  "date": "2026-04-30",
-  "model": null,
+  "title": "Invoice Fraud UK: How to Verify a Payment Safely",
+  "date": "2026-07-10",
+  "model": "claude-sonnet-5 (manual diversification batch 19, post-factcheck, bold-strip fix)",
   "gate_passed": true,
   "claims": []
 }
