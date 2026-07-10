@@ -8,9 +8,9 @@
 > 3. Potential buyers / acquirers — full due-diligence briefing on the asset.
 > 4. Contractors, future editors, security reviewers — onboarding pack.
 >
-> **Last updated:** 2026-07-04
+> **Last updated:** 2026-07-10
 > **Domain age:** ~5 months (registered February 2026)
-> **Site state:** 189 guides published (grows ~1/day via the gated cron, net of occasional diversification-batch consolidations — see `docs/content-diversification-plan.md` for the current count), 17 normalised categories, AI checker live (durable rate limit + daily spend cap), newsletter live (Resend, **double opt-in** + signed one-click unsubscribe), UK/EEA ad+analytics consent via Google's certified CMP, llms.txt + security.txt deployed, full UK Terms (E&W + Scotland + NI), named author E-E-A-T (Alex Bacsa) with cross-publication identity (CloudFintech + Tuning Digital + SalesTap + LinkedIn). **Video production (YouTube Shorts + TikTok + Instagram Reels) was discontinued 2026-06-15** — it built neither domain authority nor backlinks; see `docs/video-pipeline.md`. Semrush Site Health **98%**, AI Search Health **99%**, Lighthouse mobile Performance **92–97** / Accessibility **95–98** / Best Practices **92** / SEO **100** across homepage, guide, author pages. ~191 residual Semrush warnings all from Google's AdSense CDN (irreducible third-party floor). **Technical build is mature and stable.** Editorial accuracy is now defence-in-depth: autonomous publishing is gated (deterministic + LLM judge), reporting routes are validated against a verified source canon (`content/sources.json`), every guide carries a claim manifest (`content/manifests/`), and a weekly audit digest surfaces flag-tier claims for human review — see the content-accuracy section.
+> **Site state:** 181 guides published (grows ~1/day via the gated cron, net of occasional consolidations — see `docs/content-diversification-plan.md` for the current count), 17 normalised categories, AI checker live (durable rate limit + daily spend cap), newsletter live (Resend, **double opt-in** + signed one-click unsubscribe), UK/EEA ad+analytics consent via Google's certified CMP, llms.txt + security.txt deployed, full UK Terms (E&W + Scotland + NI), named author E-E-A-T (Alex Bacsa) with cross-publication identity (CloudFintech + Tuning Digital + SalesTap + LinkedIn). **Video production (YouTube Shorts + TikTok + Instagram Reels) was discontinued 2026-06-15** — it built neither domain authority nor backlinks; see `docs/video-pipeline.md`. Semrush Site Health **98%**, AI Search Health **99%**, Lighthouse mobile Performance **92–97** / Accessibility **95–98** / Best Practices **92** / SEO **100** across homepage, guide, author pages. ~191 residual Semrush warnings all from Google's AdSense CDN (irreducible third-party floor). **Technical build is mature and stable.** Editorial accuracy is now defence-in-depth: autonomous publishing is gated (deterministic + LLM judge), reporting routes are validated against a verified source canon (`content/sources.json`), every guide carries a claim manifest (`content/manifests/`), and a weekly audit digest surfaces flag-tier claims for human review — see the content-accuracy section.
 > **Maintainer:** Alex — SideRight Apps (GitHub: `siderightapps-hub`)
 
 ---
@@ -111,7 +111,7 @@ A free, UK-focused consumer-protection publication that:
 |---|---|---|
 | Site generation | **Custom Python static site generator** (`scripts/build.py`) | NOT Next.js, NOT Hugo, NOT Jekyll. Bespoke Python that reads `content/posts.json` + `content/site.json` and renders into `dist/` using `templates/base.html`. |
 | Templating | Single `templates/base.html` shell with `{{placeholder}}` substitution | Simple, fast, no framework dependency. |
-| Source of truth (content) | `content/posts.json` | All 189 guides as JSON records (grows ~1/day via the gated daily cron). |
+| Source of truth (content) | `content/posts.json` | All 181 guides as JSON records (grows ~1/day via the gated daily cron). |
 | Hosting / CDN | **Netlify** (Personal plan — $9/month, 1000 build credits) | Auto-deploys on push to `main`. |
 | Serverless functions | **Netlify Functions** (5: `check-scam`, `subscribe`, `confirm-subscribe`, `unsubscribe`, `csp-report`) | AI checker proxy + double opt-in newsletter (subscribe/confirm/unsubscribe) + CSP violation collector. Functions now carry a `package.json` (`@netlify/blobs`). |
 | AI for scam checker | **Anthropic Claude — `claude-haiku-4-5-20251001`** | Returns structured JSON verdict. Durable per-IP rate limit + daily spend cap (`DAILY_CALL_CAP=2000`/UTC-day) via Netlify Blobs. |
@@ -564,7 +564,7 @@ Semrush exposes a Looker Studio connector under the Site Audit "Export" menu. No
 - [x] Cookie Policy page live (`/cookies/`)
 - [x] `ads.txt` served and Authorised at `/ads.txt`
 - [x] `robots.txt` does not block `Mediapartners-Google` or `AdsBot-Google`
-- [x] Original, regularly-published content (189 guides, gated daily publishing pipeline)
+- [x] Original, regularly-published content (181 guides, gated daily publishing pipeline)
 - [x] Working HTTPS with valid certificate
 - [x] Site has clear navigation and footer
 
@@ -1226,7 +1226,7 @@ google.com, pub-1606633100797174, DIRECT, f08c47fec0942fa0
 
 [`llms.txt`](https://llmstxt.org/) is the emerging standard for telling LLM crawlers (ChatGPT, Claude, Perplexity, Gemini) what content on the site is canonical and citation-worthy. **Live at https://beatthescam.com/llms.txt** — generated by `scripts/build.py` from `content/posts.json` on every build.
 
-Structure: a brief site description, then categories listed (with guide counts), then every guide grouped by category with title + URL + description, then an "Optional" section for About/Contact/Privacy. Currently ~242 lines covering all 189 guides (line count will drift slightly with corpus size — check `dist/search.json` for the exact current figure).
+Structure: a brief site description, then categories listed (with guide counts), then every guide grouped by category with title + URL + description, then an "Optional" section for About/Contact/Privacy. Line count will drift with corpus size — check `dist/search.json` for the exact current figure (181 entries as of 2026-07-10).
 
 Impact: AI Search Health jumped from 88% → 99% in the Semrush audit on the next crawl after deployment.
 
@@ -1394,6 +1394,10 @@ Revoke PATs after use at github.com → Settings → Developer settings → Pers
 
 33. **Gate forward-guards + checker scrubber added by the 3rd audit (2026-06-25).** `content_gate.py` `_post_text` now also covers section **headings, title, keywords** (claims there are now checked). New `check_recurring_accuracy()` adds 4 **FLAG**-tier guards — CRM-code (outdated; APP reimbursement is mandatory since 7 Oct 2024), 7726-attributed-to-NCSC (it's the mobile networks; NCSC = report@phishing.gov.uk for email), US "credit freeze", and the sextortion/deepfake "no-proof = fake" threat-dismissal heuristic — so new/locale drafts can't reproduce the audit's content errors (all FLAG → corpus stays 0 block-tier; run the **Gate self-test** Action after this lands). `check-scam.js` `scrubContact()` redacts prompt-injected phone/URL/email from the model's free-text fields (reporting_links stay host-allowlisted); preserves UK shortcodes + `*.gov.uk` emails. Salt now `RATE_LIMIT_SALT || UNSUBSCRIBE_SECRET || literal` (no public-known salt, no fail-closed).
 
+34. **`build.py` has no Markdown renderer beyond backtick-code + bare-path auto-link (found 2026-07-10, during the content diversification project's final batches).** Confirmed by reading the code: article prose only supports backtick `` `code` `` spans and `linkify_bare_paths()`, which converts a literal bare `/guides/slug/` path into `<a href="...">{target page's own title}</a>` — it always substitutes the target's own title as link text, never custom text. Two real bugs this caused, both already live on published pages before being caught: (a) `[text](/guides/slug/)` bracket-link syntax isn't interpreted at all — the brackets are left as literal text while the bare path inside still gets auto-linkified, producing broken output like `[label](<a href="...">Real Title</a>)`; found on 6 already-published pages across 2 batches, fixed by rewriting to bare-path prose. (b) `**bold**` markdown has zero render support and shows as literal asterisks; found on 41 spots across 7 pages, including the core `is-this-website-a-scam` reference page. **Never use bracket-link syntax or bold markdown in article prose** — write bare `/guides/slug/` paths directly and phrase the sentence so the target's own (often long) title reads naturally as the visible link text; use plain, emphasis-free prose instead of bold. **Standard checks now, run against all of `dist/` after any content edit** (not caught by `content_gate.py`, which checks facts, not rendering): grep rendered HTML for literal `**` and for the regex `\[[a-zA-Z][^\]]*\]\(/guides/`, alongside the existing "…" truncation grep. Full detail: `docs/content-diversification-plan.md` §8's batch-20 entry.
+
+35. **`content_gate.py`'s legislation-citation regex lacked a word boundary after "Act" (fixed 2026-07-10, PR #53).** `_LEGISLATION_RES` matched `[A-Z]\w+ Act` with nothing requiring a boundary after "Act", so it flagged ordinary words like "Actually"/"Action"/"Active" whenever preceded by 1–5 capitalised words after "The"/"the" — hit on a draft title "...What the Software Actually Does", which the gate flagged as if it cited "the Software Act". Fixed with a trailing `\b`; genuine citations ("the Fraud Act 2006", "the Consumer Credit Act 1974") already had a natural word boundary after "Act" so detection is unaffected.
+
 ### Anti-patterns — don't regress these
 
 Decisions reached in prior sessions that future Claude sessions should preserve, not re-litigate:
@@ -1410,6 +1414,13 @@ Decisions reached in prior sessions that future Claude sessions should preserve,
 ---
 
 ## 21. Outstanding Roadmap
+
+### Recently completed (2026-07-04 → 2026-07-10 — content diversification project FINISHED, AdSense approval audit, full audit, rendering-bug fixes)
+
+- **Content diversification project COMPLETE (batches 15–20, 2026-07-04 → 2026-07-10):** 167 pages total de-templated from the generic 6-section outline (up from 89 across batches 1–14) — **a fresh full-corpus scan confirms zero guides remain on the generic template.** Several near-duplicate consolidations resolved along the way (`mandate-fraud-uk-businesses`→`invoice-fraud-uk-businesses`, `windows-tech-support-scam-uk`→`microsoft-support-scam-uk-guide`, `push-payment-fraud-uk`→`bank-transfer-scam-uk`, others). Every batch's draft went through an independent operator fact-check before commit, which caught genuine factual errors (not just imprecision) in nearly every batch — see `docs/content-diversification-plan.md` §8 for the full per-batch detail. **Two corpus-wide rendering bugs found and fixed** while drafting the final batches: `build.py` has no renderer at all for `[text](/guides/slug/)` markdown-link syntax (only bare `/guides/slug/` paths auto-linkify, always substituting the target page's own title as link text) or `**bold**` markdown — both had been silently shipping broken/literal markup on several already-published pages across multiple batches; both are now standard checks in the build-verification routine, alongside the existing meta-description-truncation grep.
+- **AdSense approval audit (2026-07-06):** site confirmed to pass all AdSense hard gates; privacy opt-out disclosures fixed and pushed live.
+- **Full audit remediation (2026-07-09):** ~30 fixes pushed live (self-test passed, cache cleared); daily-publish review-PR backlog cleared.
+- **Build/gate hardening (2026-07-09/10):** `build.py`'s linkifiers no longer substitute inside HTML attribute values; the build now fails outright if a live guide slug is shadowed by a forced `ARTICLE_REDIRECTS` 301 (was a silent footgun); `make_base()` does single-pass token substitution so literal `{{tokens}}` quoted in article text can't be expanded; `seo_description()` no longer produces a double-ellipsis or over-length output; 54 stale meta descriptions rewritten into the 130–160 char window; `content_gate.py`'s legislation-citation regex gained a word boundary after "Act" so it no longer flags ordinary words like "Actually" as a legislation citation.
 
 ### Recently completed (2026-06-24 → 2026-07-04 — third audit remediation, opaque tokens, human-review PR gate, content diversification, canon fix)
 
