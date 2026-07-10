@@ -295,7 +295,7 @@ def check_sources(post: Dict) -> List[Dict]:
 _LEGISLATION_RES = [
     # Case-sensitive on purpose ([A-Z] identifies the proper-noun Act name), but
     # "[Tt]he" so a sentence-initial "The Fraud Act 2006…" is also caught.
-    re.compile(r"\b[Tt]he\s+(?:[A-Z][\w’']+\s+){1,5}Act(?:\s+\d{4})?", ),  # "the Fraud Act 2006"
+    re.compile(r"\b[Tt]he\s+(?:[A-Z][\w’']+\s+){1,5}Act\b(?:\s+\d{4})?", ),  # "the Fraud Act 2006"
     re.compile(r"\b(?:illegal|unlawful|a\s+criminal\s+offence)\s+under\b", re.I),
     re.compile(r"\b(?:you\s+are|you’re|you're)\s+legally\s+(?:entitled|required|obliged|protected)\b", re.I),
     re.compile(r"\blegally\s+(?:entitled|required|obliged)\s+to\b", re.I),
