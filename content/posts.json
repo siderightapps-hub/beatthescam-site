@@ -734,7 +734,7 @@
     "slug": "is-this-website-a-scam",
     "title": "Is This Website a Scam? A Practical Checklist Before You Buy",
     "description": "A plain-English checklist for judging whether a website is legitimate before you enter payment details, starting with the domain itself.",
-    "category": "Website Scams",
+    "category": "website",
     "date": "2026-05-30",
     "keywords": [
       "is this website a scam",
@@ -1178,7 +1178,7 @@
   {
     "title": "WhatsApp 'Hi Mum' Scam UK: Spot a Fake Family Text",
     "slug": "whatsapp-family-emergency-scam",
-    "category": "Impersonation Scams",
+    "category": "fraud",
     "excerpt": "Learn how scammers impersonate family members on WhatsApp claiming to have a new number, then ask for urgent money.",
     "description": "Got a WhatsApp from 'your child' on a new number needing urgent money? Spot the 'Hi Mum' family impersonation scam, check safely, and get money back.",
     "hero": "A message from your son, daughter, or parent saying they've got a new number — but it's actually a criminal trying to manipulate you into sending money.",
