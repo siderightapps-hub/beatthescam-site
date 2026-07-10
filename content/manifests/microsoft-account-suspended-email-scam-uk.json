@@ -2,7 +2,7 @@
   "slug": "microsoft-account-suspended-email-scam-uk",
   "title": "Microsoft Account Suspended Scam Email: How to Spot It",
   "date": "2026-07-10",
-  "model": "claude-sonnet-5 (manual diversification batch 19, post-factcheck, bold-strip fix)",
+  "model": "claude-sonnet-5 (mechanical fix: broken internal-link markdown syntax, no content change)",
   "gate_passed": true,
   "claims": []
 }

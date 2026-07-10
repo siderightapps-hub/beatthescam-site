@@ -1,8 +1,15 @@
 {
   "slug": "deepfake-video-scam-uk",
-  "title": "Deepfake Video Scam UK: How to Spot and Stop Fake Video Blackmail",
-  "date": "2026-05-20",
-  "model": null,
+  "title": "Deepfake Sextortion UK: Fake Images or Video as Leverage",
+  "date": "2026-07-10",
+  "model": "claude-sonnet-5 (final diversification batch, post-factcheck)",
   "gate_passed": true,
-  "claims": []
+  "claims": [
+    {
+      "type": "legislation",
+      "severity": "flag",
+      "text": "the Online Safety Act 2023",
+      "detail": "makes a legal/legislation claim ('the Online Safety Act 2023') — verify it is accurate."
+    }
+  ]
 }

@@ -1,15 +1,8 @@
 {
   "slug": "remote-access-scam-uk",
-  "title": "Remote Access Scam UK: How Scammers Trick You Into Giving Control of Your Computer",
-  "date": "2026-05-09",
-  "model": null,
+  "title": "Remote Access Scam UK: What the Software Can Expose",
+  "date": "2026-07-10",
+  "model": "claude-sonnet-5 (final diversification batch, post-factcheck)",
   "gate_passed": true,
-  "claims": [
-    {
-      "type": "shortcode_attribution",
-      "severity": "flag",
-      "text": "NCSC) or 7726",
-      "detail": "attributes 7726 to the NCSC. 7726 is the free spam-reporting shortcode run by the mobile networks; the NCSC runs report@phishing.gov.uk for suspicious EMAILS."
-    }
-  ]
+  "claims": []
 }
