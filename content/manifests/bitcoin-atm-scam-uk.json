@@ -1,8 +1,8 @@
 {
   "slug": "bitcoin-atm-scam-uk",
   "title": "Bitcoin ATM Scam UK: Why a Caller Sending You to One Is a Scam",
-  "date": "2026-07-09",
-  "model": "claude-sonnet-5 (manual diversification batch 18, post-factcheck)",
+  "date": "2026-07-10",
+  "model": "claude-sonnet-5 (mechanical fix: broken internal-link markdown syntax, no content change)",
   "gate_passed": true,
   "claims": []
 }
