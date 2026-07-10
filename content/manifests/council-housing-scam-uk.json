@@ -1,8 +1,8 @@
 {
   "slug": "council-housing-scam-uk",
-  "title": "Council Housing Scam UK: How to Spot and Avoid Fake Housing Offers",
-  "date": "2026-06-21",
-  "model": null,
+  "title": "Council Housing Scam UK: Spot a Fake Housing Offer",
+  "date": "2026-07-10",
+  "model": "claude-sonnet-5 (manual diversification batch 19, post-factcheck, bold-strip fix)",
   "gate_passed": true,
   "claims": []
 }

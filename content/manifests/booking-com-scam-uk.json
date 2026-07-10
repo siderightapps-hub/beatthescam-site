@@ -1,8 +1,8 @@
 {
   "slug": "booking-com-scam-uk",
-  "title": "Booking.com Scam UK: How to Spot Fake Booking Emails and Protect Your Holiday",
-  "date": "2026-06-25",
-  "model": "claude-haiku-4-5-20251001",
+  "title": "Booking.com Scam UK: Spot a Fake Payment Message",
+  "date": "2026-07-10",
+  "model": "claude-sonnet-5 (manual diversification batch 19, post-factcheck, bold-strip fix)",
   "gate_passed": true,
   "claims": []
 }

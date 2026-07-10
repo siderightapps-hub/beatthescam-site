@@ -1,8 +1,8 @@
 {
   "slug": "conveyancing-fraud-uk",
-  "title": "Conveyancing Fraud UK: How to Spot and Stop Property Purchase Scams",
-  "date": "2026-06-16",
-  "model": null,
+  "title": "Conveyancing Fraud UK: Stop “Friday Afternoon Fraud”",
+  "date": "2026-07-10",
+  "model": "claude-sonnet-5 (manual diversification batch 19, post-factcheck, bold-strip fix)",
   "gate_passed": true,
   "claims": []
 }

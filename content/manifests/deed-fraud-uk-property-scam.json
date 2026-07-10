@@ -1,8 +1,15 @@
 {
   "slug": "deed-fraud-uk-property-scam",
-  "title": "Deed Fraud UK Property Scam: How to Protect Your Home",
-  "date": "2026-06-15",
-  "model": null,
+  "title": "Deed Fraud: Protect Property in England and Wales",
+  "date": "2026-07-10",
+  "model": "claude-sonnet-5 (manual diversification batch 19, post-factcheck, bold-strip fix)",
   "gate_passed": true,
-  "claims": []
+  "claims": [
+    {
+      "type": "source",
+      "severity": "flag",
+      "text": "reportafraud@landregistry.gov.uk",
+      "detail": "cites a non-canon official reporting email 'reportafraud@landregistry.gov.uk'. Verify it and add it to content/sources.json, or use a canon route (e.g. report@phishing.gov.uk)."
+    }
+  ]
 }

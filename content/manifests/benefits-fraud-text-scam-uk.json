@@ -1,8 +1,8 @@
 {
   "slug": "benefits-fraud-text-scam-uk",
-  "title": "Benefits Fraud Text Scam UK: How to Spot and Avoid DWP Impersonation",
-  "date": "2026-06-22",
-  "model": null,
+  "title": "Benefits Fraud Text Scam UK: Spot a Fake DWP Text",
+  "date": "2026-07-10",
+  "model": "claude-sonnet-5 (manual diversification batch 19, post-factcheck, bold-strip fix)",
   "gate_passed": true,
   "claims": []
 }

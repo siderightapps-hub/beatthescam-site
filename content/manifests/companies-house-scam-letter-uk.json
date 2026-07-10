@@ -1,8 +1,15 @@
 {
   "slug": "companies-house-scam-letter-uk",
-  "title": "Companies House Scam Letter UK: How to Spot and Report It",
-  "date": "2026-06-24",
-  "model": "claude-haiku-4-5-20251001",
+  "title": "Companies House Scam Letter UK: Spot a Fake Fee Demand",
+  "date": "2026-07-10",
+  "model": "claude-sonnet-5 (manual diversification batch 19, post-factcheck, bold-strip fix)",
   "gate_passed": true,
-  "claims": []
+  "claims": [
+    {
+      "type": "source",
+      "severity": "flag",
+      "text": "phishing@companieshouse.gov.uk",
+      "detail": "cites a non-canon official reporting email 'phishing@companieshouse.gov.uk'. Verify it and add it to content/sources.json, or use a canon route (e.g. report@phishing.gov.uk)."
+    }
+  ]
 }
