@@ -42,7 +42,7 @@ I run Beat the Scam, a free, independent UK consumer-protection site. We've
 published plain-English walkthroughs of the specific courier versions your
 article groups together — what a genuine Evri, Royal Mail or DPD text actually
 looks like, the red flags, and the bit the piece doesn't go into: how to report
-one (forward free to 7726, then Action Fraud).
+one (forward free to 7726, then Report Fraud).
 
 If it'd be useful for readers, our delivery-text guides might fit as a
 further-reading link where you cover the fake-parcel scam:
@@ -78,7 +78,7 @@ pressure.
 I run Beat the Scam, a free, independent UK consumer-protection site. We've got a
 detailed walkthrough of the HMRC tax-refund text scam specifically — the exact
 wording fraudsters use, how the fake refund page works, and the reporting steps
-(forward to 60599, then Action Fraud):
+(forward to 60599, then Report Fraud):
 https://beatthescam.com/guides/hmrc-tax-refund-text-scam-uk/
 
 If it'd help your readers, it might fit as a further-reading link in that piece.
@@ -143,7 +143,7 @@ Hi Helen,
 I'm a regular reader of your Crane on the Case column — the reader-recovery cases
 are a great reminder of how often these come down to one missed red flag.
 
-I run Beat the Scam, a free, independent UK consumer-protection site with ~190
+I run Beat the Scam, a free, independent UK consumer-protection site with 180+
 plain-English scam guides and a free AI scam checker. I cover UK scams full-time,
 so I can give a quick, current read on the patterns I'm seeing reported — e.g. the
 shift from courier delivery texts to the "safe account" follow-up call, and which

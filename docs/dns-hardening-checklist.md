@@ -21,7 +21,7 @@ lives in the repo. Status reflects the live state confirmed by `dig` on
 
 ## 1. DMARC — staged `p=none` → `quarantine` → `reject`
 
-Current: `_dmarc.beatthescam.com TXT "v=DMARC1; p=none;"` (monitor only, no reporting).
+Current: `_dmarc.beatthescam.com TXT "v=DMARC1; p=none; rua=mailto:dmarc@beatthescam.com; fo=1"` (monitor only, reporting ON since 2026-06-22 — see Step 1).
 Two senders must stay aligned before enforcing: **Microsoft 365** (apex) and
 **Resend** (newsletter from `updates.`).
 

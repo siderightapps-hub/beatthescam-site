@@ -24,12 +24,12 @@ I run Beat the Scam (beatthescam.com), a free, independent UK consumer-protectio
 site. We publish plain-English guides on the scams hitting UK consumers — fake
 delivery texts, bank and HMRC impersonation, payment fraud — plus a free AI scam
 checker that gives an instant verdict on a suspicious message and points people to
-the right reporting routes (Action Fraud, the NCSC, Citizens Advice).
+the right reporting routes (Report Fraud, the NCSC, Citizens Advice).
 
 It's genuinely free, no sign-up and no scare tactics. If you keep a list of
 scam-awareness resources for the public, I'd be grateful for it to be considered —
 and I'm very happy to link to [org]'s guidance from our guides in return; we
-already cite Action Fraud, the NCSC and Citizens Advice throughout.
+already cite Report Fraud, the NCSC and Citizens Advice throughout.
 
 Either way, thank you for the work you do on this.
 
@@ -147,7 +147,7 @@ parcel" trick was spot on.
 
 I run Beat the Scam, a free UK consumer-protection site, and we've just published a
 detailed walkthrough specifically on the DPD version — what a genuine DPD text looks
-like, the exact red flags, and the UK reporting steps (7726 + Action Fraud):
+like, the exact red flags, and the UK reporting steps (7726 + Report Fraud):
 https://beatthescam.com/guides/dpd-delivery-scam-text/
 
 If it'd be useful for your readers, it might fit as a further-reading link where you
