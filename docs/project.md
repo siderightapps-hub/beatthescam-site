@@ -634,7 +634,7 @@ multiplex_unit:       <add after creation>
 - **Queue:** ~30 remaining topics in `content/daily-publish-queue.csv` (~30 days at 1/day)
 - **Avg article length:** 900–1,200 words (post-rewrite of 20 thin guides)
 - **Structure per article:** 6 sections × 120–180 words + 4 FAQs + sidebar (Fast checks, Related guides, Report this scam, Checker CTA, Affiliate card) + FAQ schema
-- **Reporting links:** All updated from `actionfraud.police.uk` → `reportfraud.police.uk`
+- **Reporting links & brand:** `reportfraud.police.uk`, branded **"Report Fraud"** throughout the canon (`content/sources.json`) and every template surface (guide footer, `/check/`, `/about/`, `/terms/`, `/contact/`, `/disclaimer/`, `humans.txt`) — fixed 2026-07-10; the link had been migrated earlier but ~15 hardcoded spots in `build.py` plus the canon `name`/`info_url` fields still said "Action Fraud" / `actionfraud.police.uk` until then. **Still open:** the pre-existing guide body/FAQ copy in `content/posts.json` (all 183 published guides mention "Action Fraud" by name somewhere) has not been swept — that needs the normal per-guide fact-check flow, not a blind find-replace. See `docs/content-diversification-plan.md` §8.
 
 ### Daily publish pipeline
 
@@ -682,7 +682,7 @@ python3 scripts/build.py
 
 ### Editorial principles
 
-- **No fabricated statistics.** All stats verified against Action Fraud, NCSC, FCA, UK Finance, Which?, named surveys.
+- **No fabricated statistics.** All stats verified against Report Fraud, NCSC, FCA, UK Finance, Which?, named surveys.
 - **UK-first language.** Pounds sterling, UK reporting routes, UK phone scam patterns (HMRC, DVLA, Royal Mail, BT).
 - **Plain English.** No legal jargon. Read-aloud test for every section.
 - **Always include reporting routes.** Every article links to `reportfraud.police.uk`.
@@ -690,7 +690,7 @@ python3 scripts/build.py
 
 ### Topic queue management
 
-When `content/daily-publish-queue.csv` drops below 20 topics, add new ones in batch — use Search Console gap analysis and current scam news (NCSC alerts, Action Fraud bulletins, Which? scam tracker) as the source.
+When `content/daily-publish-queue.csv` drops below 20 topics, add new ones in batch — use Search Console gap analysis and current scam news (NCSC alerts, Report Fraud bulletins, Which? scam tracker) as the source.
 
 ---
 

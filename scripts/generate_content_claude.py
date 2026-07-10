@@ -100,7 +100,7 @@ You write practical, detailed scam-awareness guides for ordinary UK residents.
 Your writing style:
 - Plain English, no jargon
 - Specific and practical — not generic advice
-- UK-focused (Action Fraud, NCSC, Citizens Advice, UK banks, UK platforms)
+- UK-focused (Report Fraud, NCSC, Citizens Advice, UK banks, UK platforms)
 - Calm tone — not alarmist
 - Reference named companies, products, and organisations only when you are confident they are real and publicly verifiable
 
@@ -147,7 +147,7 @@ The six essentials to cover (in whatever order, under whatever natural headings 
 - How it works — from first contact through to the money or data loss (150-200 words)
 - How to verify whether it is genuine — verification steps specific to THIS exact scam. Where relevant, link to a related guide using one of these internal URLs: {related_str}
 - What to do if you have already interacted — recovery actions in order of urgency (120-160 words)
-- How to report it in the UK — specific routes with org names: Action Fraud (0300 123 2040), NCSC Suspicious Email Reporting Service (report@phishing.gov.uk), forward SMS to 7726, Citizens Advice consumer helpline (0808 223 1133) (120-150 words)
+- How to report it in the UK — specific routes with org names: Report Fraud (0300 123 2040), NCSC Suspicious Email Reporting Service (report@phishing.gov.uk), forward SMS to 7726, Citizens Advice consumer helpline (0808 223 1133) (120-150 words)
 
 FAQ requirements — write 3 to 5 FAQs that are the REAL questions someone would type about THIS specific scam, varied from guide to guide (do not force a fixed set). Phrase each the natural way a worried person would ask it; do NOT write "Is [X] a legitimate company?" when [X] is a scam type rather than an actual company. Good candidates: whether a specific message / website / caller is genuine, what to do if money or details were already shared, a detail unique to this scam, and how to report it.
 
@@ -155,7 +155,7 @@ Rules:
 - Every section body must be 120+ words. Short sections will be rejected.
 - The warning-signs bullet list items must start with "- "
 - All content must be specific to {topic.keyword}, not generic scam advice
-- Keep the official reporting routes above (Action Fraud, NCSC, 7726, Citizens Advice) accurate and unchanged
+- Keep the official reporting routes above (Report Fraud, NCSC, 7726, Citizens Advice) accurate and unchanged
 - slug must be lowercase with hyphens only
 - Return ONLY the JSON object, nothing else"""
 
@@ -268,7 +268,7 @@ def normalise(data: Dict, topic: Topic, today: str, strict: bool = False) -> Dic
              f"Change passwords for any affected accounts. Enable two-factor authentication. "
              f"Document everything — screenshots, message text, dates — before reporting."],
             ["Reporting this scam in the UK",
-             f"Report to Action Fraud online at reportfraud.police.uk or by phone on 0300 123 2040. "
+             f"Report to Report Fraud online at reportfraud.police.uk or by phone on 0300 123 2040. "
              f"If you received a suspicious email, forward it to report@phishing.gov.uk (the NCSC's Suspicious Email Reporting Service). "
              f"If you received a suspicious text, forward it to 7726 — this is free on all UK networks and goes to your mobile operator. "
              f"You can also report to Citizens Advice on 0808 223 1133. "
@@ -291,12 +291,12 @@ def normalise(data: Dict, topic: Topic, today: str, strict: bool = False) -> Dic
             ["What should I do if I already sent money?",
              f"Contact your bank immediately using the number on the back of your card. "
              f"Banks can sometimes recall bank transfers if reported quickly. "
-             f"Also report to Action Fraud at reportfraud.police.uk."],
+             f"Also report to Report Fraud at reportfraud.police.uk."],
             [f"How do I tell a fake {ent} website from the real one?",
              f"Check the domain name carefully — scammers use lookalike domains with extra words or different endings. "
              f"Always access the site by typing the address directly, not via a link in a message."],
             ["Who do I report this to in the UK?",
-             f"Report to Action Fraud (0300 123 2040 or reportfraud.police.uk). "
+             f"Report to Report Fraud (0300 123 2040 or reportfraud.police.uk). "
              f"Forward suspicious texts to 7726 and emails to report@phishing.gov.uk."],
         ]
 

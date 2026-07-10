@@ -248,7 +248,7 @@ def report_block(sources: list) -> str:
     routes = [r for r in (sources or []) if r.get("on_page") and r.get("report_url")]
     if not routes:
         routes = [
-            {"report_url": "https://www.reportfraud.police.uk", "report_label": "Action Fraud (UK)"},
+            {"report_url": "https://www.reportfraud.police.uk", "report_label": "Report Fraud (Action Fraud)"},
             {"report_url": "https://www.ncsc.gov.uk/collection/phishing-scams", "report_label": "NCSC — report phishing"},
             {"report_url": "https://www.citizensadvice.org.uk/consumer/scams/reporting-a-scam/", "report_label": "Citizens Advice"},
         ]
@@ -1556,7 +1556,7 @@ def render_post(site, post, all_posts, affiliates=None, sources=None, link_map=N
           <ol>
             <li><strong>Stop.</strong> Don&#8217;t pay, transfer money, or share passwords, PINs, or one-time codes.</li>
             <li><strong>Contact your bank</strong> on the number on the back of your card if your money or details may be at risk.</li>
-            <li><strong>Report it</strong> &#8212; call Action Fraud on 0300 123 2040 (Police Scotland: 101), and forward scam texts to 7726.</li>
+            <li><strong>Report it</strong> &#8212; call Report Fraud on 0300 123 2040 (Police Scotland: 101), and forward scam texts to 7726.</li>
           </ol>
         </aside>
         <div class="toc"><strong>On this page</strong><ol>{toc}</ol></div>
@@ -1566,9 +1566,9 @@ def render_post(site, post, all_posts, affiliates=None, sources=None, link_map=N
         <div class="notice" style="margin-top:2rem">
           <strong>Think you&#8217;ve spotted a scam?</strong>
           Use the <a href="/check/">AI scam checker</a> for an instant analysis, or report it to
-          <a href="https://www.reportfraud.police.uk" rel="noopener noreferrer" target="_blank">Action Fraud</a>.
+          <a href="https://www.reportfraud.police.uk" rel="noopener noreferrer" target="_blank">Report Fraud</a>.
         </div>
-        <p class="meta" style="margin-top:1.4rem">Reporting routes in this guide are checked against our verified canon of official UK sources &#8212; <a href="https://www.actionfraud.police.uk/" rel="noopener" target="_blank">Action Fraud</a>, the <a href="https://www.ncsc.gov.uk/" rel="noopener" target="_blank">National Cyber Security Centre</a>, and <a href="https://www.citizensadvice.org.uk/consumer/scams/" rel="noopener" target="_blank">Citizens Advice</a> &#8212; by an automated accuracy gate before publication. {review_note} Read about <a href="/about/">how Beat the Scam writes guides</a>.</p>
+        <p class="meta" style="margin-top:1.4rem">Reporting routes in this guide are checked against our verified canon of official UK sources &#8212; <a href="https://www.reportfraud.police.uk/" rel="noopener" target="_blank">Report Fraud</a>, the <a href="https://www.ncsc.gov.uk/" rel="noopener" target="_blank">National Cyber Security Centre</a>, and <a href="https://www.citizensadvice.org.uk/consumer/scams/" rel="noopener" target="_blank">Citizens Advice</a> &#8212; by an automated accuracy gate before publication. {review_note} Read about <a href="/about/">how Beat the Scam writes guides</a>.</p>
       </article>
       <aside class="sidebar">
         <section class="sidebar-card">
@@ -1695,7 +1695,7 @@ def render_check_page(site):
           <strong>This tool provides educational guidance only.</strong>
           It is not a definitive fraud verdict. If you have already sent money or shared personal details,
           contact your bank immediately and report to
-          <a href="https://www.reportfraud.police.uk" rel="noopener noreferrer" target="_blank">Action Fraud</a>.
+          <a href="https://www.reportfraud.police.uk" rel="noopener noreferrer" target="_blank">Report Fraud</a>.
         </div>
       </div>
     </section>
@@ -1726,7 +1726,7 @@ def render_check_page(site):
         <p>Because scam tactics change constantly, treat the result as a guide, not a final verdict. The single safest habit is to verify through a channel you open yourself &mdash; the number on the back of your card, or an address you type into your browser &mdash; rather than any link, number, or detail supplied in the message itself.</p>
 
         <h2>If you have already responded</h2>
-        <p>If you have paid, shared bank or card details, or shared a one-time passcode, act straight away. Contact your bank on the number on the back of your card, report it to Action Fraud on <strong>0300 123 2040</strong> or at <a href="https://www.actionfraud.police.uk/" rel="noopener noreferrer" target="_blank">actionfraud.police.uk</a> (Police Scotland: <strong>101</strong>), and forward scam texts to <strong>7726</strong> and suspicious emails to <strong>report@phishing.gov.uk</strong>. For step-by-step help by scam type, browse our <a href="/guides/">scam guides</a>.</p>
+        <p>If you have paid, shared bank or card details, or shared a one-time passcode, act straight away. Contact your bank on the number on the back of your card, report it to Report Fraud on <strong>0300 123 2040</strong> or at <a href="https://www.reportfraud.police.uk/" rel="noopener noreferrer" target="_blank">reportfraud.police.uk</a> (Police Scotland: <strong>101</strong>), and forward scam texts to <strong>7726</strong> and suspicious emails to <strong>report@phishing.gov.uk</strong>. For step-by-step help by scam type, browse our <a href="/guides/">scam guides</a>.</p>
 
         <h2>Common questions</h2>
         <div class="faq">
@@ -1859,7 +1859,7 @@ def render_check_page(site):
 
       function renderError() {
         var p = el("p", {"class": "notice"}, "Sorry, the checker could not be reached right now. Please try again, or ");
-        var a = el("a", {"href": "https://www.reportfraud.police.uk", "rel": "noopener noreferrer", "target": "_blank"}, "report it to Action Fraud");
+        var a = el("a", {"href": "https://www.reportfraud.police.uk", "rel": "noopener noreferrer", "target": "_blank"}, "report it to Report Fraud");
         p.appendChild(a);
         resultContent.textContent = "";
         resultContent.appendChild(p);
@@ -2043,11 +2043,11 @@ def build_legal_bodies(site):
     </div>
 
     <h2>How content is researched and produced</h2>
-    <p>Each guide on this site is drafted using AI assistance against a strict editorial template that forbids inventing statistics, quotes, or specific unverifiable claims, and that standardises the official UK reporting routes (Action Fraud, the NCSC, and Citizens Advice).</p>
+    <p>Each guide on this site is drafted using AI assistance against a strict editorial template that forbids inventing statistics, quotes, or specific unverifiable claims, and that standardises the official UK reporting routes (Report Fraud, the NCSC, and Citizens Advice).</p>
     <p>The drafting step uses Anthropic&#8217;s Claude API. The model is given a structured prompt covering the scam type, target audience, and required sections (what the scam looks like, warning signs, step-by-step pattern, verification, recovery actions, reporting routes). It is explicitly instructed not to invent statistics, predict outcomes, generate fake quotes, or assert specific claims about named companies or people. Before publication, every draft passes an automated accuracy gate: deterministic checks (no hard-coded organisation phone numbers, no defunct or unsafe entities, no unconditional safety guarantees, and reporting routes validated against a verified canon of official UK sources) plus a low-temperature AI fact-checking pass that fails closed on possible fabrication &mdash; drafts that fail are held back, never published. The high-stakes claims in each guide are recorded and reviewed on a recurring schedule. If you still spot an error, please report it (see below) and we will correct it promptly.</p>
     <p>Verification draws on UK-specific public sources, including:</p>
     <ul>
-      <li><a href="https://www.actionfraud.police.uk/" rel="noopener noreferrer" target="_blank">Action Fraud</a> &mdash; the UK&#8217;s national reporting centre for fraud and cybercrime</li>
+      <li><a href="https://www.reportfraud.police.uk/" rel="noopener noreferrer" target="_blank">Report Fraud</a> (formerly Action Fraud) &mdash; the UK&#8217;s national reporting centre for fraud and cybercrime</li>
       <li><a href="https://www.ncsc.gov.uk/" rel="noopener noreferrer" target="_blank">National Cyber Security Centre (NCSC)</a> &mdash; for phishing reporting routes and current threat patterns</li>
       <li><a href="https://www.citizensadvice.org.uk/" rel="noopener noreferrer" target="_blank">Citizens Advice</a> &mdash; consumer protection guidance and helpline routes</li>
       <li><a href="https://www.fca.org.uk/consumers/fca-firm-checker" rel="noopener noreferrer" target="_blank">FCA Firm Checker</a> &mdash; for investment and financial services scams</li>
@@ -2057,7 +2057,7 @@ def build_legal_bodies(site):
 
     <h2>Editorial standards</h2>
     <p>Content is written to be understandable under pressure. That means short sections, clear headings, and advice that directs readers towards independent verification through official channels &mdash; never through links, numbers, or payment details supplied by a suspicious message.</p>
-    <p>Where the site recommends a national reporting route &mdash; such as Action Fraud, the NCSC, or Citizens Advice &mdash; it uses the official published channel. For organisation-specific contact details, always confirm the number or web address against the official website, or the details on your card, bill, or statement, rather than relying solely on any number reproduced in a guide.</p>
+    <p>Where the site recommends a national reporting route &mdash; such as Report Fraud, the NCSC, or Citizens Advice &mdash; it uses the official published channel. For organisation-specific contact details, always confirm the number or web address against the official website, or the details on your card, bill, or statement, rather than relying solely on any number reproduced in a guide.</p>
     <p>If a guide contains an error, email <a href="mailto:{site["contact_email"]}">{site["contact_email"]}</a> with the page URL and the issue. Corrections are made promptly.</p>
 
     <h2>About the AI scam checker</h2>
@@ -2136,11 +2136,11 @@ def build_legal_bodies(site):
 
     <h2>Educational purpose &mdash; not professional advice</h2>
     <p>Everything published here is general educational information. It is <strong>not</strong> legal, financial, investment, tax, medical, cybersecurity, or regulatory advice, and reading it does not create an advisor&ndash;client relationship. See our full <a href="/disclaimer/">Disclaimer</a> for the detail.</p>
-    <p>Scam tactics change rapidly. No article can guarantee that a specific message, listing, website or interaction is safe or fraudulent. If anything you read here is material to your circumstances, verify it through official UK channels (Action Fraud, the FCA Register, Companies House, Citizens Advice, your bank&#8217;s published fraud line) or seek qualified professional advice.</p>
+    <p>Scam tactics change rapidly. No article can guarantee that a specific message, listing, website or interaction is safe or fraudulent. If anything you read here is material to your circumstances, verify it through official UK channels (Report Fraud, the FCA Register, Companies House, Citizens Advice, your bank&#8217;s published fraud line) or seek qualified professional advice.</p>
 
     <h2>The AI scam checker</h2>
     <p>The AI scam checker is an educational tool that returns an automated plain-English assessment. Its output is <strong>not</strong> a definitive fraud determination and we make no warranty that it will identify every scam or that flagged messages are necessarily fraudulent.</p>
-    <p>Do not rely on the checker alone for high-stakes decisions. If you have already sent money, shared bank details, or shared one-time codes, contact your bank immediately and report the incident to Action Fraud (<a href="https://www.actionfraud.police.uk/" rel="noopener noreferrer" target="_blank">actionfraud.police.uk</a> or 0300 123 2040).</p>
+    <p>Do not rely on the checker alone for high-stakes decisions. If you have already sent money, shared bank details, or shared one-time codes, contact your bank immediately and report the incident to Report Fraud (<a href="https://www.reportfraud.police.uk/" rel="noopener noreferrer" target="_blank">reportfraud.police.uk</a> or 0300 123 2040).</p>
 
     <h2>Your responsibilities</h2>
     <p>You agree to use the Site lawfully and reasonably. You must not:</p>
@@ -2188,7 +2188,7 @@ def build_legal_bodies(site):
       <div class="table-row"><strong>Legal &amp; copyright</strong><span><a href="mailto:{site["legal_email"]}">{site["legal_email"]}</a> &mdash; Terms, intellectual property, and reproduction requests.</span></div>
       <div class="table-row"><strong>Security disclosure</strong><span><a href="mailto:{site["security_email"]}">{site["security_email"]}</a> &mdash; see also our <a href="/.well-known/security.txt">security.txt</a>.</span></div>
     </div>
-    <p class="note" style="margin-top:1.5rem">To report a scam to UK authorities directly, use <a href="https://www.reportfraud.police.uk/" rel="noopener noreferrer" target="_blank">Action Fraud</a> or forward suspicious texts to <strong>7726</strong> (free on all UK networks).</p>
+    <p class="note" style="margin-top:1.5rem">To report a scam to UK authorities directly, use <a href="https://www.reportfraud.police.uk/" rel="noopener noreferrer" target="_blank">Report Fraud</a> or forward suspicious texts to <strong>7726</strong> (free on all UK networks).</p>
     '''
 
     disclaimer = f'''
@@ -2212,7 +2212,7 @@ def build_legal_bodies(site):
     <p>The Site links to third-party resources such as government sites, regulators, banks, and news outlets. Those sites operate under their own terms and privacy policies, and we have no control over and accept no responsibility for their content, accuracy, or availability.</p>
 
     <h2>If you think you have been scammed</h2>
-    <p>If you have already sent money, shared bank or card details, or shared one-time passcodes, act immediately: contact your bank using the number on the back of your card, and report it to <strong>Action Fraud</strong> on 0300 123 2040 or at <a href="https://www.actionfraud.police.uk/" rel="noopener noreferrer" target="_blank">actionfraud.police.uk</a> (in Scotland, contact <strong>Police Scotland on 101</strong>). You can forward scam texts to <strong>7726</strong> and suspicious emails to <strong>report@phishing.gov.uk</strong>.</p>
+    <p>If you have already sent money, shared bank or card details, or shared one-time passcodes, act immediately: contact your bank using the number on the back of your card, and report it to <strong>Report Fraud</strong> on 0300 123 2040 or at <a href="https://www.reportfraud.police.uk/" rel="noopener noreferrer" target="_blank">reportfraud.police.uk</a> (in Scotland, contact <strong>Police Scotland on 101</strong>). You can forward scam texts to <strong>7726</strong> and suspicious emails to <strong>report@phishing.gov.uk</strong>.</p>
 
     <h2>Liability</h2>
     <p>To the maximum extent permitted by law, Beat the Scam and SideRight Apps accept no liability for any loss or damage arising from your use of, or reliance on, the Site or the AI scam checker. Nothing here limits any liability that cannot lawfully be excluded &mdash; including for death or personal injury caused by negligence, or for fraud. The full limitation of liability is set out in our <a href="/terms/">Terms</a>.</p>
@@ -2908,7 +2908,7 @@ def build():
         f"Notes: Independent educational publication. Not a law firm, bank, or regulator.\n"
         f"Methodology: see {site['domain']}/about/\n\n"
         f"/* SOURCES */\n"
-        f"Action Fraud — https://www.actionfraud.police.uk/\n"
+        f"Report Fraud — https://www.reportfraud.police.uk/\n"
         f"NCSC — https://www.ncsc.gov.uk/\n"
         f"Citizens Advice — https://www.citizensadvice.org.uk/consumer/scams/\n"
         f"FCA Firm Checker — https://www.fca.org.uk/consumers/fca-firm-checker\n\n"

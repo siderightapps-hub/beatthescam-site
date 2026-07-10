@@ -7,9 +7,9 @@
   "official_routes": [
     {
       "key": "action-fraud",
-      "name": "Action Fraud",
+      "name": "Report Fraud (formerly Action Fraud)",
       "report_url": "https://www.reportfraud.police.uk",
-      "info_url": "https://www.actionfraud.police.uk/",
+      "info_url": "https://www.reportfraud.police.uk/",
       "phone": "0300 123 2040",
       "report_label": "Report Fraud (Action Fraud)",
       "on_page": true

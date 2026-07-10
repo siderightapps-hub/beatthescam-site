@@ -31,13 +31,13 @@ from typing import Dict, List, Optional
 # their prompts cannot drift apart again (audit GAP 4). The gate's allowlist
 # (ALLOWED_PHONE_DIGITS) and this prompt rule are kept deliberately in sync.
 ACCURACY_BLOCK = """ACCURACY — THIS OVERRIDES EVERY STYLE AND SEO RULE BELOW. A plausible-sounding but invented fact about a real company, person, or product is the single worst failure this publication can make: it is libel-adjacent and gets the site rejected from ad networks.
-- Use directional language ("growing rapidly", "a meaningful share", "early data suggests") for figures unless they are well-established public facts. Never invent specific percentages, dollar figures, or entity-attributed statistics. Do not attribute a statistic to a named body (Action Fraud, the FCA, Which?, UK Finance, NCSC) unless you are certain of the exact figure — if unsure, describe the pattern without a number. This includes ILLUSTRATIVE or hypothetical numbers: do not invent a count or rate to make a point (e.g. "they email 100,000 people and even if 0.1% pay") — describe the mechanism qualitatively instead ("sent to very large numbers of people, so even a tiny response rate is profitable").
+- Use directional language ("growing rapidly", "a meaningful share", "early data suggests") for figures unless they are well-established public facts. Never invent specific percentages, dollar figures, or entity-attributed statistics. Do not attribute a statistic to a named body (Report Fraud, the FCA, Which?, UK Finance, NCSC) unless you are certain of the exact figure — if unsure, describe the pattern without a number. This includes ILLUSTRATIVE or hypothetical numbers: do not invent a count or rate to make a point (e.g. "they email 100,000 people and even if 0.1% pay") — describe the mechanism qualitatively instead ("sent to very large numbers of people, so even a tiny response rate is profitable").
 - Never give the reader an unconditional guarantee or absolute about their own situation or safety: do not write that something is impossible, that no footage/recording/evidence exists, that they are "100% safe", or that an outcome is guaranteed. Real threats vary, so an absolute can be both wrong and harmful — use hedged, accurate language ("almost always a bluff", "it is extremely unlikely that any footage exists", "in the vast majority of cases"). Accurately describing a scammer's OWN false promise is fine.
 - NEVER invent or assert a specific dated event, deal, acquisition, merger, partnership, funding round, valuation, product launch, regulatory action, or piece of legislation involving a real named company, person, product, or regulator unless you are certain it is a true, well-established public fact. This explicitly includes who-acquired-whom, who-partnered-with-whom, launch/approval dates, what a law or feature actually covers, pricing/plan limits, and which tool or vendor a named company actually uses.
 - Never present a named company as "legitimate", "genuine", or "trusted" unless it is a well-known real brand; do not invent example company names.
 - If you are not certain of the exact relationship, date, figure, or attribution, describe it in general terms WITHOUT naming a specific deal/number — or omit it. Inventing a product or vendor name, or pairing a real company with the wrong partner, tool, or capability, is forbidden.
 - Before finalising, re-read every sentence that names a real company, person, or product alongside a date, number, deal, price, or feature. If you are not confident it is a true public fact, rewrite it as a general statement or delete it.
-- Do NOT state a phone number for any specific company (bank, courier, retailer, utility, etc.). The ONLY phone numbers permitted anywhere are: Action Fraud 0300 123 2040, Citizens Advice 0808 223 1133, the FCA consumer helpline 0800 111 6768, 159 (to reach your bank), and 7726 (forward spam texts). For any organisation, tell readers to use the number on their card, bill, or the organisation's official website — never state or invent a company's own number."""
+- Do NOT state a phone number for any specific company (bank, courier, retailer, utility, etc.). The ONLY phone numbers permitted anywhere are: Report Fraud 0300 123 2040, Citizens Advice 0808 223 1133, the FCA consumer helpline 0800 111 6768, 159 (to reach your bank), and 7726 (forward spam texts). For any organisation, tell readers to use the number on their card, bill, or the organisation's official website — never state or invent a company's own number."""
 
 # ─── ALLOWLISTS / BLOCKLISTS ─────────────────────────────────────────────────
 
@@ -325,7 +325,7 @@ def check_legislation(post: Dict) -> List[Dict]:
 # A regulator/authority named alongside a specific year and an event verb — the
 # "invented dated regulatory event" failure class the audit flagged. High-stakes
 # but unverifiable deterministically → FLAG (manifest + digest), not a block.
-_AUTHORITIES = (r"FCA|Ofcom|ICO|HMRC|NCSC|Action\s+Fraud|Companies\s+House|DVLA|"
+_AUTHORITIES = (r"FCA|Ofcom|ICO|HMRC|NCSC|Action\s+Fraud|Report\s+Fraud|Companies\s+House|DVLA|"
                 r"Ofgem|PSR|FOS|Financial\s+Ombudsman|Trading\s+Standards|Which\?|UK\s+Finance")
 _EVENT_VERB = (r"banned|fined|launched|introduced|ruled|announced|acquired|merged|"
                r"ordered|warned|seized|charged|prosecuted|shut\s+down")
@@ -406,15 +406,15 @@ def check_cra_misclassification(post: Dict) -> List[Dict]:
 
 # The National Fraud Database is a Cifas service; consumers join via a Cifas
 # Protective Registration (cifas.org.uk), NOT "through Citizens Advice" or "via
-# Action Fraud". Routing it through those bodies is the wrong-routing error. BLOCK.
+# Action Fraud" / "via Report Fraud". Routing it through those bodies is the wrong-routing error. BLOCK.
 # The gap pattern may cross ONE sentence boundary ("…the National Fraud
 # Database. You do this through Citizens Advice.") — two short sentences is
 # exactly how a model phrases the wrong routing, and "[^.]{0,60}" alone stops
 # at the full stop and misses it.
 _NFD_GAP = r"[^.]{0,60}(?:\.\s+[^.]{0,60})?"
 _NFD_ROUTING_RE = re.compile(
-    r"national\s+fraud\s+database" + _NFD_GAP + r"\b(?:citizens\s+advice|action\s+fraud)\b"
-    r"|\b(?:through|via|with)\s+(?:citizens\s+advice|action\s+fraud)\b" + _NFD_GAP + r"national\s+fraud\s+database",
+    r"national\s+fraud\s+database" + _NFD_GAP + r"\b(?:citizens\s+advice|action\s+fraud|report\s+fraud)\b"
+    r"|\b(?:through|via|with)\s+(?:citizens\s+advice|action\s+fraud|report\s+fraud)\b" + _NFD_GAP + r"national\s+fraud\s+database",
     re.I)
 def check_nfd_routing(post: Dict) -> List[Dict]:
     text = _post_text(post)
@@ -424,7 +424,7 @@ def check_nfd_routing(post: Dict) -> List[Dict]:
             "check": "nfd_routing",
             "severity": SEVERITY_BLOCK,
             "span": re.sub(r"\s+", " ", m.group(0))[:160],
-            "detail": ("routes the National Fraud Database through Citizens Advice / Action Fraud. "
+            "detail": ("routes the National Fraud Database through Citizens Advice / Report Fraud / Action Fraud. "
                        "It is a Cifas service — direct readers to a Cifas Protective Registration "
                        "(cifas.org.uk)."),
         }]
@@ -548,7 +548,7 @@ cases") is fine; an unconditional absolute is not
 - a specific dated event, law, or regulatory action stated as fact
 - any organisation-specific phone number (banks, couriers, utilities) — these should not be hardcoded
 
-Do NOT flag: general scam-pattern description, the standard UK reporting routes (Action Fraud \
+Do NOT flag: general scam-pattern description, the standard UK reporting routes (Report Fraud \
 0300 123 2040, Citizens Advice 0808 223 1133, forward texts to 7726, report@phishing.gov.uk), \
 clearly directional language ("growing rapidly", "many victims"), or the site accurately \
 describing a SCAMMER's own false promise (e.g. "the scammer claims your funds are 100% safe").
