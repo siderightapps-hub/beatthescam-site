@@ -158,10 +158,10 @@ Model on the existing bespoke exemplars (`amazon-phone-call-scam-uk`, `gumtree-s
 
 ## 7. Open questions (decide before execution)
 
-1. **Specimens** — can you supply/approve real paraphrased text examples for the bank/courier pages, or should they stay generic-illustrative? (Strongest "added value" signal vs. fastest to ship.)
-2. **Sequence** — CTR-sprint-first (recommended) vs. full-diversify in impression order?
-3. **Batch size & review** — how many pages per PR, and who reviews before merge?
-4. **Cannibalisation call** — `bank-text-codes-not-arriving` (troubleshooting intent) vs `halifax-bank-scam-text-uk` (scam-text intent) target overlapping "Halifax text" queries. Keep distinct (recommended) or consolidate?
+1. **Specimens** — ✅ RESOLVED by practice across all 20 batches: illustrative-only, clearly paraphrased, no live links or invented numbers — the standing rule from the 2026-06-26 decisions log held for the whole project.
+2. **Sequence** — ✅ RESOLVED: full-diversify won out. Batches 1-9 went in GSC-impression order (Mode A/B tiers from §3); once that pool thinned, batches 10-20 switched to vertical-diversity selection (fresh GSC/heading-scan each time, prioritising uncovered categories) rather than a title-only CTR sprint.
+3. **Batch size & review** — ✅ RESOLVED: ramped 5→10 (batch 11)→15 (batch 16)→17 (batch 20, one-off to finish the backlog in a single batch) — see [[feedback-diversification-batch-size-10]]. Review process settled as: draft → `docs/review/<slug>.md` → operator's independent fact-check → `docs/review/<slug>-c.md` → corrections applied → gate → build → commit → PR → operator merge. Never skip the fact-check step, even after doing independent web verification — see [[feedback-content-review-folder-before-commit]].
+4. **Cannibalisation call** — `bank-text-codes-not-arriving` (troubleshooting intent) vs `halifax-bank-scam-text-uk` (scam-text intent) target overlapping "Halifax text" queries. **Still genuinely open** — both were already-diversified Tier-1 pages from the start of the project and were never revisited by any of the 20 batches. Keep distinct (recommended) or consolidate, if this is ever picked back up.
 5. **Title truncation (corpus-wide)** — ✅ RESOLVED 2026-06-26: chose the global fix — `seo_title(brand=False)` for guides drops the brand suffix, fixing the audit's awkward-title finding across all 190 pages (e.g. Microsoft page `<title>` "…How to Spot Fake | Beat the Scam" → "Microsoft Support Scam UK: How to Spot Fake Support Calls").
 
 ---
