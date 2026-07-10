@@ -1,8 +1,8 @@
 {
   "slug": "bank-transfer-scam-uk",
   "title": "Bank Transfer Scams UK: How to Spot a 'Safe Account' Con",
-  "date": "2026-04-21",
-  "model": null,
+  "date": "2026-07-10",
+  "model": "claude-sonnet-5 (mechanical fix: editorial correction to payment-rail claim + cross-link, no other content change)",
   "gate_passed": true,
   "claims": []
 }

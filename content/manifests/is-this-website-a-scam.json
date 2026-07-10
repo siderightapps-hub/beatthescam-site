@@ -1,8 +1,8 @@
 {
   "slug": "is-this-website-a-scam",
   "title": "Is This Website a Scam? A Practical Checklist Before You Buy",
-  "date": "2026-05-30",
-  "model": null,
+  "date": "2026-07-10",
+  "model": "claude-sonnet-5 (mechanical fix: stray bold-markdown never rendered, no content change)",
   "gate_passed": true,
   "claims": [
     {

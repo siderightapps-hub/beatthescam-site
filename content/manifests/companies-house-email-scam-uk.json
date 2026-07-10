@@ -1,8 +1,15 @@
 {
   "slug": "companies-house-email-scam-uk",
-  "title": "Companies House Email Scam UK: How to Spot and Avoid Fake Official Emails",
-  "date": "2026-04-27",
-  "model": null,
+  "title": "Companies House Email Scam UK: Spot a Fake Notice",
+  "date": "2026-07-10",
+  "model": "claude-sonnet-5 (final diversification batch, post-factcheck)",
   "gate_passed": true,
-  "claims": []
+  "claims": [
+    {
+      "type": "source",
+      "severity": "flag",
+      "text": "phishing@companieshouse.gov.uk",
+      "detail": "cites a non-canon official reporting email 'phishing@companieshouse.gov.uk'. Verify it and add it to content/sources.json, or use a canon route (e.g. report@phishing.gov.uk)."
+    }
+  ]
 }

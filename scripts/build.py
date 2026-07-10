@@ -160,6 +160,23 @@ ARTICLE_REDIRECTS = {
     # business-size-gated APP reimbursement rules) was grafted into the
     # survivor first — this is an article -> article 301, no content lost.
     "mandate-fraud-uk-businesses":                "invoice-fraud-uk-businesses",
+    # 2026-07-10 (final diversification batch): both near-duplicates found
+    # while scoping the last generic-template pages, confirmed independently
+    # against primary sources before merging.
+    # windows-tech-support-scam-uk described the identical scam as
+    # microsoft-support-scam-uk-guide (unsolicited call/pop-up -> fake virus
+    # alert -> AnyDesk/TeamViewer remote access -> fake fix fee), and cited
+    # "reportfraud.org.uk" as a reporting route — confirmed by direct DNS/HTTP
+    # check to be a parked domain (names.co.uk registrar parking page), not a
+    # real fraud-reporting service. No unique content to graft.
+    "windows-tech-support-scam-uk":                "microsoft-support-scam-uk-guide",
+    # push-payment-fraud-uk is "authorised push-payment (APP) fraud" — the
+    # exact term bank-transfer-scam-uk already opens by defining itself as,
+    # covering the same "safe account" con with 159 + PSR reimbursement-rule
+    # detail. The loser's solicitor/conveyancing-payment FAQ entry is already
+    # covered in depth by the dedicated conveyancing-fraud-uk page (now
+    # cross-linked from the survivor) — no unique content lost.
+    "push-payment-fraud-uk":                       "bank-transfer-scam-uk",
 }
 
 CATEGORY_LABELS = {

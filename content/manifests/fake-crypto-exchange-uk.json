@@ -1,8 +1,8 @@
 {
   "slug": "fake-crypto-exchange-uk",
   "title": "Fake Crypto Exchange UK: Spot a Cloned Trading Platform",
-  "date": "2026-07-09",
-  "model": "claude-sonnet-5 (manual diversification batch 18, post-factcheck)",
+  "date": "2026-07-10",
+  "model": "claude-sonnet-5 (mechanical fix: broken internal-link markdown syntax, no content change)",
   "gate_passed": true,
   "claims": []
 }

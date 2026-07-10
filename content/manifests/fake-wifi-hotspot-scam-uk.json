@@ -1,15 +1,8 @@
 {
   "slug": "fake-wifi-hotspot-scam-uk",
-  "title": "Fake Wi-Fi Hotspot Scam UK: How to Spot and Avoid Fake Public Networks",
-  "date": "2026-05-20",
-  "model": null,
+  "title": "Fake Wi-Fi Hotspot Scam UK: Verify the Network",
+  "date": "2026-07-10",
+  "model": "claude-sonnet-5 (final diversification batch, post-factcheck)",
   "gate_passed": true,
-  "claims": [
-    {
-      "type": "shortcode_attribution",
-      "severity": "flag",
-      "text": "7726 (spoof) and report phishing emails to the NCSC",
-      "detail": "attributes 7726 to the NCSC. 7726 is the free spam-reporting shortcode run by the mobile networks; the NCSC runs report@phishing.gov.uk for suspicious EMAILS."
-    }
-  ]
+  "claims": []
 }
