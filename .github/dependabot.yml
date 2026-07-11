@@ -26,11 +26,21 @@ updates:
       prefix: "deps"
 
   # GitHub Actions used by the workflows (checkout, setup-python, CodeQL, …)
+  # codeql-action's init/analyze actions are versioned together as one release
+  # and MUST land in a single commit — bumping just one leaves them on
+  # mismatched versions and CodeQL analysis fails at runtime ("Loaded a
+  # configuration file for version X, but running version Y"). This group
+  # keeps Dependabot from ever splitting that pair across two PRs again
+  # (root-caused 2026-07-11 when PRs #42/#43 did exactly that and both failed CI).
   - package-ecosystem: "github-actions"
     directory: "/"
     schedule:
       interval: "weekly"
     open-pull-requests-limit: 5
+    groups:
+      codeql-action:
+        patterns:
+          - "github/codeql-action/*"
     labels:
       - "ci"
     commit-message:
