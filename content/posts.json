@@ -521,9 +521,9 @@
   },
   {
     "slug": "isp-impersonation-scam-bt-sky-virgin-media",
-    "title": "ISP Impersonation Scams UK: BT, Sky, Virgin Media and Openreach Fraud Calls",
-    "description": "Scammers cold-call UK households pretending to be BT, Sky, Virgin Media or Openreach, then ask for remote access. How to spot and report the scam.",
-    "hero": "A deep investigation into ISP impersonation calls targeting UK broadband customers — how scammers gain remote access to your computer, which providers are being faked, and exactly what to do if it happens to you.",
+    "title": "ISP Impersonation Scams UK: BT, Sky, Virgin Media and Openreach Calls",
+    "description": "Scammers impersonate UK broadband providers or Openreach, then ask for remote access, payment or security details. How to check safely.",
+    "hero": "An unexpected broadband-support call is not a reason to install remote-access software or disclose banking information.",
     "date": "2026-05-11",
     "category": "tech",
     "keywords": [
@@ -568,73 +568,41 @@
     ],
     "sections": [
       [
-        "What is the ISP impersonation scam?",
-        "You receive an unsolicited call. The caller knows your name, your postcode, and sometimes even your provider. They claim to be from BT, Sky, Virgin Media, Openreach, or a 'technical partner' and say there is an urgent fault on your line, malicious traffic from your router, or an equipment issue that must be fixed today. They sound calm, professional, and credible. This is a scam. Criminals impersonating UK internet service providers are cold-calling households across the country in one of the most damaging phone fraud campaigns currently active. According to Report Fraud, over 20,144 people in the UK became victims of remote access scams, losing an average of £2,868 each. The goal is always the same: to get remote access to your computer so they can steal banking credentials, drain accounts, and install backdoors for future access."
+        "What the scam looks like",
+        "An unsolicited caller claims to be from BT, Sky, Virgin Media, Openreach or a technical partner. They may mention a fault, slow broadband, suspicious activity, a router problem or the Digital Voice transition, then ask you to install software, visit a link, share a password or make a payment.\n\nThe caller may know your name, address or provider. That information does not authenticate the call, and caller ID can be spoofed. The genuine software named by the caller may be a legitimate remote-support product; the danger is granting access because an unexpected caller tells you to."
       ],
       [
-        "Which ISPs are being impersonated?",
-        "- BT — the most commonly impersonated provider. Scammers pose as BT engineers or 'BT Technical Support', exploiting the Digital Voice switchover. Victims are told to pay for line migration or grant remote access for urgent repairs.\n- Sky — callers claim your Sky box or broadband has a fault, or that your account shows suspicious activity. They request login credentials or remote access to 'secure' your account.\n- Virgin Media — fake Virgin engineers claim there are cable faults or speed issues. VMO2 now flags over 70 million suspected scam calls per month through AI-powered detection technology.\n- Openreach — because over 650 UK service providers use the Openreach network, claiming to be 'from Openreach' gives scammers near-universal cover. Openreach never calls customers directly.\n- TalkTalk — TalkTalk was targeted so heavily it once banned TeamViewer and AnyDesk from its network entirely. Impersonation scams continue exploiting previous TalkTalk data breaches.\n- Plusnet — as a BT Group subsidiary, Plusnet customers are regularly caught in scams targeting BT infrastructure. Callers threaten disconnection unless immediate action is taken.\n- EE, Three and other providers — mobile network impersonation includes fake 5G SIM upgrade emails and calls about suspicious device activity."
+        "Warning signs",
+        "- An unexpected call creates an urgent fault or disconnection story.\n- The caller asks for remote access to a computer, router or phone.\n- You are asked for a banking password, PIN, one-time code or card details.\n- You are told to pay an unexpected fee or to move money to protect an account.\n- The caller discourages you from hanging up or checking with the provider.\n- A link or phone number is supplied instead of asking you to use the provider’s official contact route.\n\nThe UK’s landline migration is real, but a real programme does not make an unexpected caller genuine. Check any Digital Voice information directly with your provider using a number or account you already trust."
       ],
       [
-        "How the scam works — step by step",
-        "- Step 1 — The cold call: You receive an unsolicited call from someone claiming to be from your ISP or Openreach. They may already know your name, address, and provider, sourced from previous data breaches. This familiarity is engineered to lower your defences.\n- Step 2 — The manufactured crisis: A fabricated urgent problem is presented: a line fault, malicious traffic from your router, a disconnection deadline, or impending equipment failure. The emotional pressure is deliberate.\n- Step 3 — Installing the remote tool: You are directed to a website and told to download AnyDesk, TeamViewer, UltraViewer, LogMeIn, or GoToAssist. The caller guides you through granting full access, framing it as 'letting the engineer take a look'.\n- Step 4 — Total control: With remote access established, the attacker can see your screen, control your mouse, read your files, intercept one-time passcodes, and access banking apps — often behind a fake 'working' screen overlay.\n- Step 5 — The drain: While claiming to run diagnostics, they open your online banking, move funds, add new payees, and transfer money to accounts under their control. Victims often aren't aware until hours later.\n- Step 6 — The cover-up: Before disconnecting, some scammers install persistent backdoor software. Others call back the next day posing as 'fraud investigators' to extract more."
-      ],
-      [
-        "The PSTN switchover scam",
-        "In a particularly widespread variant, criminals exploited the UK's nationwide migration from copper (PSTN) landlines to broadband-based Digital Voice services. Fraudsters impersonating BT engineers called victims and warned of an imminent 'January 2025 deadline', using real industry terminology and demanding payment or remote access to complete the migration before disconnection. What made this scam unusually effective was its use of genuine, accurate information — the switchover was real, the deadline had been publicised, and scammers sourced personal data from previous breaches so they knew your name, address, and provider before dialling. Key fact: the UK PSTN switchover is entirely free of charge. No ISP will ever call you and ask for payment to migrate your landline. The original January 2025 deadline was subsequently postponed — the new UK-wide deadline is now 31 January 2027. Anyone citing the original deadline to create urgency is running a scam."
-      ],
-      [
-        "Remote access tools used in these scams",
-        "These are legitimate software products used every day by genuine IT professionals. Criminals exploit them precisely because they are trusted and widely available. In 2017, TalkTalk banned TeamViewer and similar software from its network entirely after sustained scam campaigns targeting its customers."
-      ],
-      [
-        "Most commonly reported tools",
-        "- TeamViewer — the most commonly reported tool in UK remote access scams, according to Which? magazine\n- AnyDesk — used in large-scale campaigns; over 1,300 fake AnyDesk websites have been identified, some bundling Vidar infostealer malware, with infrastructure traced to Russia\n- UltraViewer — frequently used as an alternative when victims are familiar with the better-known tools\n- LogMeIn — reported in multiple UK cases documented by Which?\n- GoToAssist — used in customer support impersonation scams"
-      ],
-      [
-        "Documented victim case",
-        "In a case documented by Which? magazine, a retired woman received a call from someone claiming to be a BT engineer. She was told malicious activity had been detected from her router. Guided to download TeamViewer and log into her banking accounts to 'verify the firewall was working', she handed over security codes she believed were setting up new protection. Attackers transferred funds through First Direct to external accounts using her existing payees, bypassing new-payee security checks. The transfers were labelled 'flights' to avoid automated fraud detection. She lost tens of thousands of pounds. This case illustrates the core mechanism of all ISP impersonation scams: the victim is made to feel in control while the criminals observe and act in the background."
-      ],
-      [
-        "Red flags to watch for",
-        "- An unsolicited call claiming to be from your ISP, Openreach, BT, Sky, or Virgin Media\n- Claims of urgent faults, malicious activity, or disconnection threats you were not previously aware of\n- Requests to install any remote access software including AnyDesk, TeamViewer, or UltraViewer\n- Requests for payment to migrate your landline to Digital Voice — this is always free\n- Being asked for banking passwords, PINs, or one-time passcodes over the phone\n- Pressure to act immediately before an imminent deadline\n- Being told not to contact your bank or hang up\n- Caller already knows your name, address, or provider — this does not prove they are legitimate\n- Being directed to a website that looks like your ISP's site — check the URL carefully\n- Calls from spoofed numbers that appear to match your ISP's official contact numbers\n- Being transferred to a 'senior engineer' or 'fraud team' to add credibility\n- Being called back by a 'bank fraud team' shortly after — this is often the same criminals"
-      ],
-      [
-        "What to do if you receive one of these calls",
-        "- Hang up immediately — no legitimate ISP will object to you ending the call\n- Call your ISP back using the number on their official website or the back of your bill — not a number the caller gave you\n- Never install remote access software at an unsolicited caller's request\n- Never share one-time passcodes, PINs, or banking passwords over the phone\n- If you have already installed remote software: disconnect your internet connection immediately and run a full antivirus scan\n- If you have shared any financial information: contact your bank immediately on the number on the back of your card\n- Report the call to Report Fraud on 0300 123 2040 or at reportfraud.police.uk\n- Forward suspicious texts to 7726 — free on all UK networks\n- Report spoofed numbers to your mobile provider and to Ofcom"
-      ],
-      [
-        "What the networks are doing",
-        "VMO2 deployed Hiya's AI-powered Call Defence system, which now flags over 70 million suspected scam and spam calls every month, up from 50 million a year earlier. Over one billion suspicious calls have been flagged in total. According to Hiya's Q4 2024 Global Call Threat Report, 32% of all unknown calls to UK phones are now classified as spam or fraud, up from 28% the previous quarter. All major UK networks — BT, EE, Sky, Virgin Media, O2, Three, and Vodafone — support scam reporting via the number 7726. Ofcom is also tightening rules on number spoofing and requiring networks to implement STIR/SHAKEN authentication, a technical standard that validates caller ID to prevent spoofing. Despite these improvements, staying alert remains essential — network filtering does not catch every call."
+        "How to respond",
+        "Hang up and contact your provider through its official website, app, bill or the number on your contract. Do not use a number supplied by the caller. Never install remote-access software or share security credentials because of an unsolicited call.\n\nIf you installed software, disconnect the affected device from the internet and seek help removing it. Contact your bank immediately if the caller saw banking information, codes or a payment was made. Keep the caller’s number, messages, websites and payment details as evidence.\n\nForward suspicious texts to 7726. Report fraud at `reportfraud.police.uk` or on 0300 123 2040 in England, Wales or Northern Ireland; in Scotland, call Police Scotland on 101. Report an unlicensed or misleading communications service to the relevant provider or regulator where appropriate."
       ]
     ],
     "faq": [
       [
-        "Will BT, Sky, or Virgin Media ever call me out of the blue about a fault?",
-        "No. Legitimate UK internet service providers do not call customers unsolicited to report line faults, broadband issues, or equipment problems and then ask for remote access to fix them. If you receive such a call, it is a scam. Hang up and call your provider back on the number shown on their official website or your bill."
+        "Will a genuine provider ever contact me about a fault?",
+        "Providers can contact customers, so the subject of a call is not enough to authenticate it. If the caller asks for remote access, passwords, banking details, codes or an unexpected payment, hang up and verify through the provider’s official route."
       ],
       [
-        "Do I need to pay anything for the Digital Voice / PSTN landline switchover?",
-        "No. The UK's migration from copper PSTN lines to broadband-based Digital Voice is entirely free of charge for all customers. No ISP — BT, Sky, Plusnet, TalkTalk, or any other — will ever call you and request payment to complete this migration. The new UK-wide deadline for the switchover is 31 January 2027. Anyone demanding payment or urgency around this is running a scam."
+        "Is TeamViewer or AnyDesk itself a scam?",
+        "No. These are legitimate tools, but an unexpected caller who asks you to install or open them is a serious warning sign."
       ],
       [
-        "Is it safe to use TeamViewer or AnyDesk with someone who called me?",
-        "No. You should never install or open remote access software such as TeamViewer, AnyDesk, or UltraViewer at the request of someone who called you unsolicited. These are legitimate tools, but in the hands of scammers they give full control of your computer, including access to banking apps, passwords, and one-time security codes. Legitimate ISPs and engineers do not ask for remote access via a cold call."
+        "Do I need to pay for the Digital Voice transition?",
+        "Do not pay an unexpected caller. The transition and any equipment or plan changes should be confirmed through your provider’s official account or support channel, because arrangements differ between providers and customers."
       ],
       [
-        "What should I do if I already gave them access to my computer?",
-        "Act immediately. Disconnect your computer from the internet — unplug the ethernet cable or turn off Wi-Fi. Do not wait. Then contact your bank on the number on the back of your debit or credit card and tell them you may have been the victim of a remote access scam. Ask them to freeze your account while you investigate. Then run a full antivirus scan or take your device to a professional before reconnecting it to the internet. Report the incident to Report Fraud on 0300 123 2040."
-      ],
-      [
-        "How do scammers already know my name and address?",
-        "Personal data including names, addresses, phone numbers, and ISP details is widely available from previous large-scale data breaches. Scammers purchase or access these databases and use them to make calls sound credible. Knowing your name or address does not mean the caller is from your provider — it is a deliberate tactic to lower your guard. Always verify by hanging up and calling your ISP back on their official number."
+        "I gave a caller remote access. What should I do?",
+        "Disconnect the device, contact your bank if financial information may have been exposed, change passwords from a clean device, and get trusted technical help before reconnecting it. Report the incident and preserve evidence."
       ]
     ]
   },
   {
     "slug": "bank-text-codes-not-arriving",
     "title": "Bank Text Messages Not Arriving? How to Fix It and Spot Scams",
-    "description": "Bank texts not arriving? Most causes are routine — the quick fixes, the UK sender IDs that prove a text is genuine, and the SIM-swap scam signs to watch for.",
+    "description": "Bank texts not arriving? Most causes are routine — the quick fixes, common UK bank sender IDs, and the SIM-swap scam signs to watch for.",
     "hero": "Why your UK bank verification codes or 2FA texts aren't arriving — and what to do about it.",
     "date": "2026-05-07",
     "category": "sms",
@@ -680,23 +648,23 @@
     "sections": [
       [
         "Why your bank verification text might not be arriving",
-        "If your bank verification code or 2FA text has stopped arriving, you're far from alone — it's one of the most common UK customer service queries every week, and the cause is almost always routine. Mobile signal, a phone setting, the bank's SMS gateway hitting a delay, or your network operator filtering messages account for the vast majority of cases. Genuine fraud — where a criminal has taken over your number to intercept codes — exists, but it's rare and produces a distinctive cluster of symptoms (we'll cover what to watch for later). This guide starts with universal quick fixes, lists how to identify a genuine message from every major UK bank, walks through getting your code another way, and only escalates to fraud concerns when the symptoms genuinely warrant it. Most people reading this will resolve the problem in the next five minutes."
+        "If your bank verification code or 2FA text has stopped arriving, possible causes include weak signal, phone settings, a blocked message, or a delay at the bank or mobile network. A SIM-swap or number-porting fraud is another possibility, but missing bank texts on their own do not prove that has happened. This guide starts with low-risk checks, then explains when to contact the bank and mobile network."
       ],
       [
         "Quick fixes that work for any UK bank or service",
-        "Try this checklist first, in order. Reboot your phone — it clears stuck network connections and resolves more cases than anything else. Confirm Aeroplane Mode is off, Do Not Disturb is off, and no Focus profile is filtering banking or login notifications. Open your Messages app and check the blocked-numbers list — banking shortcodes can get blocked accidentally if you've ever tagged a scam text as spam. Check that your phone storage isn't critically full; some devices stop accepting new messages when storage runs out. Move location to confirm signal isn't the issue. Open the Messages app's filter or junk folder, since bank texts sometimes get misclassified as promotional. Then request a fresh code to test. This sequence resolves the issue more than nine times out of ten and works identically for every bank and every 2FA service."
+        "Try restarting the phone, checking signal and Airplane Mode, looking in blocked or filtered messages, and requesting a new code once. Settings and menu names vary by phone. If other texts and calls work but the bank code does not, contact the bank through its app or the number on your card; ask whether it can offer an alternative verification method."
       ],
       [
         "UK bank reference: sender IDs and how to verify a real bank message",
-        "Every major UK bank uses a consistent sender ID for security texts and includes specific signals you can use to verify a message is genuine. If a text claiming to be from your bank doesn't match these patterns, treat it as a scam. Real texts from UK banks never contain a clickable link asking you to log in or 'verify' your account. To check a message, open your bank's app yourself or type the bank's address into your browser. Find your bank's customer service number on the back of your debit card."
+        "Banks may use named sender IDs, but a sender name can be spoofed or hijacked and may appear in the same message thread as genuine texts. A mismatch is a warning sign, but a match is not proof. Treat any unexpected link asking you to log in, “verify” or enter security information as suspicious. Open the bank’s app yourself or type its address directly into the browser, and use the number on your card if you need to check a message."
       ],
       [
-        "UK bank sender IDs",
-        "- Halifax — sender ID 'Halifax' (not 'HalifaxUK' or 'Halifax-UK'); messages include part of your name, account number, or postcode; app-based authentication available.\n- Lloyds Bank — sender ID 'Lloyds'; messages include partial account or postcode details; app codes via Lloyds Mobile Banking.\n- Bank of Scotland — sender ID 'BankScot' or 'BOS'; app codes via Bank of Scotland Mobile Banking.\n- NatWest — sender ID 'NatWest' or 'NatWestAlert'; app codes via the NatWest mobile banking app.\n- Royal Bank of Scotland — sender ID 'RBS' or 'RBSAlert'; app codes via the RBS mobile banking app.\n- Barclays — sender ID 'Barclays'; app codes via Barclays Mobile Banking or PINsentry.\n- HSBC UK — sender ID 'HSBC'; codes via HSBC Mobile Banking and the HSBC Authenticator app.\n- First Direct — sender ID 'firstdirect'; app codes via the First Direct app.\n- Santander UK — sender ID 'Santander'; OneTouch authentication via the Santander app.\n- Nationwide — sender ID 'Nationwide' (or 'NationwideBS'); app codes via the Nationwide app.\n- TSB — sender ID 'TSB'; codes via the TSB Mobile Banking app.\n- Monzo, Starling, Revolut, Chase UK — primarily app-based; SMS used only as fallback."
+        "Do not use a sender-ID list as proof",
+        "There is no safe universal list of bank sender IDs: banks can use more than one sender and may change their messaging arrangements. Do not treat a named sender, a message thread or a partial personal detail as authentication. Verify in the official app or through a trusted contact route instead."
       ],
       [
         "Skip SMS: use app-based codes for banks and 2FA services",
-        "If SMS keeps failing, the fastest fix is often to bypass it entirely. Every major UK bank app generates secure login and payment codes inside the app — no SMS required. Set up app-based authentication once and you'll rarely need texts again. The same is true for non-banking services: Google's two-step verification works via the Google app or Authenticator without SMS; Apple ID 2FA delivers codes to your other Apple devices; Microsoft Authenticator handles Microsoft, Outlook, and Office 365 accounts independently of SMS; and most workplace systems support either Google or Microsoft Authenticator. For UK government services like Government Gateway, HMRC, and NHS login, you can also choose to receive codes by automated voice call instead of text. Switching to app-based or voice methods sidesteps SMS-delivery issues completely and is generally more secure than relying on SMS."
+        "Some banks and online services offer in-app approval, an authenticator app, or another recovery method, but the options differ. Check the provider's official help page or app rather than assuming a particular method is available. Never install an authenticator app or approve a login because an unexpected caller tells you to."
       ],
       [
         "When the bank or service network is at fault",
@@ -704,25 +672,25 @@
       ],
       [
         "When missing codes could indicate something more serious",
-        "Missing bank or 2FA texts on their own usually mean signal, settings, or a network-side issue. But if you also notice your phone showing 'no service' or 'SOS only' without explanation, calls suddenly failing, mobile data not working, or texts from other people also failing to arrive — that cluster of symptoms together can occasionally indicate a SIM-swap or port-out attack. This is rare, but it does happen. In a SIM-swap, a fraudster persuades your mobile network to transfer your number to a SIM card they control, so every text — including bank codes — goes to them instead of you. The warning sign is the combination of 'phone not working at all' plus 'missing codes', not missing codes alone. If only your bank texts are missing while everything else on your phone works fine, this almost certainly isn't what's happening."
+        "Missing bank or 2FA texts on their own can have routine causes. If you also see unexplained “no service” or “SOS only”, calls fail, mobile data stops or texts from other people do not arrive, contact your mobile network and bank promptly because a SIM swap or number port is one possible explanation. Missing codes alone do not establish that a SIM swap has happened."
       ],
       [
         "What to do if you see those warning signs",
-        "If your phone has stopped working entirely and bank codes have stopped arriving, treat it as serious. Use a different phone — a friend's, a family member's, or a landline — to call your bank on a verified number (back of your card, or their official website) and request that online and mobile banking access be frozen while you investigate. Then call your mobile network provider on a published number and ask whether any SIM swap or port-out request has been processed on your account in the last 30 days. If yes and you didn't authorise it, ask for an immediate reversal and request a port-out PIN to prevent it happening again. Report the case to Report Fraud at reportfraud.police.uk or 0300 123 2040. Don't wait or assume it's just a network outage — these attacks usually drain accounts within an hour."
+        "If the phone suddenly shows no service or SOS only, calls fail, or messages from other people also stop, use another phone to contact the bank and mobile network on verified numbers. Ask whether a SIM replacement or number port has been requested and secure the affected accounts. Report suspected fraud to Report Fraud. Do not assume that a bank-code delay alone means a SIM swap."
       ]
     ],
     "faq": [
       [
         "Why aren't my UK bank verification codes arriving?",
-        "The most common reasons are weak mobile signal, a blocked sender, Do Not Disturb mode, full phone storage, or a temporary delivery delay on the bank's or your mobile network's side. Try the technical fixes in this guide first. If they don't help, call your bank on the number on the back of your debit card — they can verify whether there's a known issue and arrange a code via the app or by phone instead."
+        "Possible causes include weak signal, phone settings, filtered messages, or a delay at the bank or mobile network. Try the basic checks, then contact the bank through the app or the number on your card if the problem continues."
       ],
       [
         "How do I know if a 'bank' text is real or a scam?",
-        "Genuine UK bank texts come from a named sender ID (e.g. 'Halifax', 'Lloyds', 'Barclays', 'HSBC') rather than a phone number, include part of your name or account details, and never contain a clickable link asking you to log in or 'verify' your account. The bank reference section above lists the standard sender IDs for each major UK bank. If a text fails any of these checks, treat it as a scam and forward it free to 7726."
+        "A mismatched sender is a warning sign, but a matching name is not proof because sender IDs can be spoofed or hijacked. Do not tap an unexpected link asking you to log in or verify. Check the account in the official app or contact the bank yourself, and forward a suspicious text to 7726."
       ],
       [
         "Can I get my verification codes without SMS at all?",
-        "Yes, every major UK bank's mobile app generates secure codes directly inside the app — no SMS needed. The same goes for Google, Microsoft, and Apple 2FA. For UK government services like HMRC, Government Gateway, and NHS login, you can choose voice call delivery instead of SMS. Switching to app-based or voice authentication is generally faster and more secure than relying on SMS, and it sidesteps delivery issues entirely."
+        "Some banks and services provide app-based approval or authenticator options, but availability depends on the provider and account. Check the official app or help centre for the account concerned."
       ],
       [
         "My HMRC, Microsoft, or Google code isn't arriving — does the same advice apply?",
@@ -1630,7 +1598,7 @@
       ],
       [
         "Buyer Protection and Free Return are not one universal promise",
-        "The original draft said Buyer Protection universally covered a buyer for 15 days “from confirming receipt” for non-delivery, damage or misdescription. The official terms reviewed do not support that simplified statement for every UK order.\n\nAliExpress does publish a 15-calendar-day Free Return term for participating products carrying the `Free Return` label. That is a particular programme with eligibility and return-condition rules, not proof that every dispute has the same deadline.\n\nFor a problem, open the order in the AliExpress account and use the dispute or return control before the deadline displayed there. Save screenshots of the listing, seller messages, tracking and the condition of the item.\n\nThe original “refunds typically take 1–10 working days” claim was also removed because no current universal UK term supporting it was found."
+        "AliExpress's 15-calendar-day Free Return window applies only to products carrying the `Free Return` label. It is a particular programme with its own eligibility and return-condition rules — not a universal 15-day guarantee for every order. Check the specific deadline shown on your own order rather than assuming the same window applies to non-delivery, damage or misdescription claims generally.\n\nFor a problem, open the order in the AliExpress account and use the dispute or return control before the deadline displayed there. Save screenshots of the listing, seller messages, tracking and the condition of the item.\n\nRefund processing times vary by payment method and dispute type, so check the timeframe given for your specific case rather than assuming a fixed number of working days."
       ],
       [
         "UK card protection",
@@ -1648,7 +1616,7 @@
       ],
       [
         "Does every AliExpress order have the same 15-day protection window?",
-        "No universal rule was verified. Fifteen days is expressly used for eligible `Free Return` products, while other dispute rights and deadlines should be checked on the specific order."
+        "No. Fifteen days applies specifically to eligible `Free Return` products; other dispute rights and deadlines depend on the specific order."
       ],
       [
         "Is section 75 automatic on AliExpress?",
@@ -2004,7 +1972,7 @@
       ],
       [
         "A recruiter wants a fee for training, equipment, or onboarding - is that normal?",
-        "Treat it as a red flag, especially if the request came from an unsolicited contact. UK employment agencies cannot charge work-seekers a fee for work-finding services, and a scammer may invent \"training\", \"equipment\", or \"onboarding\" charges to steal money."
+        "Treat it as a red flag, especially if the request came from an unsolicited contact. UK employment agencies generally cannot charge work-seekers a fee for work-finding services — there are narrow exceptions for a few occupations, such as some entertainment and modelling work — so for an ordinary job, a scammer may invent \"training\", \"equipment\", or \"onboarding\" charges to steal money."
       ],
       [
         "The 'job' asks me to receive money and send it on - what is that?",
@@ -3210,7 +3178,7 @@
     "sections": [
       [
         "What the scam looks like",
-        "The email claims unusual sign-in activity, a security hold or an imminent suspension affecting a Microsoft, Outlook or Xbox account. It creates urgency and links to a page made to resemble a Microsoft sign-in. A fraudulent page may steal the credentials entered into it. A phone call or pop-up claiming to be Microsoft technical support is a different pattern, covered separately at /guides/microsoft-support-scam-uk-guide/."
+        "The email claims unusual sign-in activity, a security hold or an imminent suspension affecting a Microsoft, Outlook or Xbox account. It creates urgency and links to a page made to resemble a Microsoft sign-in. A fraudulent page may steal the credentials entered into it. A phone call or pop-up claiming to be Microsoft technical support is a different pattern; see the /guides/microsoft-support-scam-uk-guide/."
       ],
       [
         "Microsoft's published warning signs",
@@ -3230,7 +3198,7 @@
       ],
       [
         "Report the phishing email",
-        "In Microsoft 365 Outlook or Outlook.com, select the message and choose Report > Report phishing. If using another email client, Microsoft asks you to attach the original message to a new email to `phish@office365.microsoft.com` rather than forwarding it normally. Also send it to the NCSC at `report@phishing.gov.uk`.\n\nIf money was lost or an account was hacked, report the crime to Report Fraud at `reportfraud.police.uk` or 0300 123 2040 in England, Wales or Northern Ireland; in Scotland, call Police Scotland on 101."
+        "In Microsoft 365 Outlook or Outlook.com, select the message and choose Report > Report phishing. Microsoft no longer publishes a general mailbox for forwarding phishing emails from other email clients; a work or school account holder can instead use the Submissions page in the Microsoft Defender portal, and anyone else should forward the email to the NCSC at `report@phishing.gov.uk`.\n\nIf money was lost or an account was hacked, report the crime to Report Fraud at `reportfraud.police.uk` or 0300 123 2040 in England, Wales or Northern Ireland; in Scotland, call Police Scotland on 101."
       ]
     ],
     "faq": [
@@ -3841,11 +3809,11 @@
       ],
       [
         "HMRC does make genuine calls",
-        "Do not use the claim that HMRC will always write first before any debt call. HMRC's current guidance lists genuine phone campaigns and says Debt Management sends some customers inbound voice prompts about overdue payments. Those prompts may give payment details or a helpline number, but HMRC says they will not ask for personal or financial information.\n\nHMRC also publishes time-limited campaigns in which it phones particular customer groups. Some genuine contacts may involve identity checks. The safest approach is to compare the contact with HMRC's current list and, if uncertain, end the call and contact HMRC through GOV.UK."
+        "HMRC does not always write first before making a debt-related call. HMRC's current guidance lists genuine phone campaigns and says Debt Management sends some customers automated voice prompts about overdue payments. Those prompts may give payment details or a helpline number, but HMRC says they will not ask for personal or financial information.\n\nHMRC also publishes time-limited campaigns in which it phones particular customer groups. Some genuine contacts may involve identity checks. The safest approach is to compare the contact with HMRC's current list and, if uncertain, end the call and contact HMRC through GOV.UK."
       ],
       [
         "Reliable warning signs",
-        "HMRC says it will never threaten arrest or leave a voicemail threatening legal action. Its general scam checklist says a contact could be fraudulent if it is threatening, unexpected, rushes you, asks for bank details, tells you to transfer money or offers a rebate.\n\nThe original claim that every genuine automated message must include a taxpayer reference number could not be supported by current HMRC guidance and has been removed."
+        "HMRC says it will never threaten arrest or leave a voicemail threatening legal action. Its general scam checklist says a contact could be fraudulent if it is threatening, unexpected, rushes you, asks for bank details, tells you to transfer money or offers a rebate.\n\nThere is no confirmed rule that every genuine automated HMRC message includes a taxpayer reference number, so that detail should not be used as a verification test on its own. Instead, compare the contact against HMRC's current list of genuine contacts, or check directly through GOV.UK or the official HMRC app."
       ],
       [
         "Check the call safely",
@@ -4257,7 +4225,7 @@
       ],
       [
         "Loan-fee fraud",
-        "The FCA says it receives hundreds of loan-fee fraud reports each year. Fraudsters often ask for £25 to £450, and the current FCA page reports an average victim loss of £255. They frequently target people who have applied for loans online.\n\nThe original draft’s statement that “no genuine loan ever requires a fee first” was false. The FCA expressly says some genuine authorised firms charge an upfront fee. Before doing so, they must send a notice stating the firm’s legal name, whether it is acting as a credit broker, the fee or calculation method, and when and how payment will be taken. The customer must acknowledge that notice."
+        "The FCA says it receives hundreds of loan-fee fraud reports each year. Fraudsters often ask for £25 to £450, and the current FCA page reports an average victim loss of £255. They frequently target people who have applied for loans online.\n\nSome FCA-authorised firms do charge a disclosed upfront fee, so “no genuine loan ever charges a fee first” is not a safe test on its own. Before taking payment, an authorised firm must send a written notice stating the firm’s legal name, whether it is acting as a credit broker, the fee or calculation method, and when and how payment will be taken — and the customer must acknowledge that notice. Verify the firm through the FCA Firm Checker and confirm you have received the required fee notice before paying anything."
       ],
       [
         "Warning signs",
@@ -4359,7 +4327,7 @@
       ],
       [
         "Is this called invoice fraud, mandate fraud, or CEO fraud?",
-        "All three terms are used for overlapping versions of the same scheme. Report Fraud's formal category for a redirected payment is 'mandate fraud'; 'invoice fraud' and 'CEO fraud' are common public-facing labels for the same pattern."
+        "Mandate fraud is a broad payment-diversion category that can include fake invoices or changed supplier bank details. CEO fraud is a related impersonation scam in which a criminal pretends to be a senior person inside the business. Both can use Business Email Compromise, but the labels are not exact synonyms."
       ],
       [
         "Am I guaranteed a refund if this happens to my business?",
@@ -4400,8 +4368,8 @@
         "Check the account directly through the bank or provider’s official app or site. A payment email, screenshot or balance shown inside a buyer-controlled page is not evidence that money arrived.\n\nEven where funds appear, do not send a new transfer to a different account or method. Contact the provider and ask it to reverse or return the original payment through the original route. Do not release goods until the provider confirms the payment status and advises it is safe."
       ],
       [
-        "The old cheque timeline was wrong",
-        "The source draft relied on the historical “2-4-6” cheque-clearing rule. UK sterling cheques now use the Image Clearing System. Pay.UK says a cheque paid in before the institution’s cut-off is normally available by 23:59 on the next working day. Bank terms can still include post-payment fraud measures, and foreign cheques or other deposit routes can follow different rules.\n\nTherefore, do not use “day 4” and “day 6” as current general UK advice. Ask the bank about the specific cheque and explain that an overpayment refund has been requested."
+        "How fast cheques actually clear",
+        "UK sterling cheques clear under the Image Clearing System. Pay.UK says a cheque paid in before the institution's cut-off is normally available by 23:59 on the next working day — much faster than the older multi-day \"2-4-6\" cheque-clearing timeline that scammers may still rely on to create a false sense of security while a cheque is still liable to be returned unpaid. Bank terms can still include post-payment fraud measures, and foreign cheques or other deposit routes can follow different rules.\n\nDo not treat a cheque as safe to refund against just because a few days have passed. Ask the bank about the specific cheque and explain that an overpayment refund has been requested."
       ],
       [
         "Warning signs",
@@ -4590,7 +4558,7 @@
       ],
       [
         "What PayPal currently says",
-        "PayPal UK says eligible Goods and Services payments can receive Buyer Protection. Its help pages list Friends and Family payments among transactions that are not eligible and describe a seller insisting on that method as a scam red flag.\n\nPayPal’s current scam-reporting page specifically describes item-not-received and low-value-item scams in which a fraudster persuades the buyer to use Friends and Family.\n\nThe original draft’s long quotations and fixed list of scam categories were not needed. The central claim is directly supported by current PayPal UK help content."
+        "PayPal UK says eligible Goods and Services payments can receive Buyer Protection. Its help pages list Friends and Family payments among transactions that are not eligible and describe a seller insisting on that method as a scam red flag.\n\nPayPal’s current scam-reporting page specifically describes item-not-received and low-value-item scams in which a fraudster persuades the buyer to use Friends and Family."
       ],
       [
         "When Friends and Family is appropriate",
@@ -4646,7 +4614,7 @@
       ],
       [
         "Why these scams are convincing",
-        "People are used to managing Monzo by app, call, or message, which makes a fake \"security\" contact feel plausible. A caller who already knows your name or partial account details, and a spoofed number, add to the pressure.\n\nThe fact that protects you: Monzo says it will never call you out of the blue or ask you to move your money. Any request to move money to a \"safe\", \"holding\", or \"protected\" account is a scam."
+        "People are used to managing Monzo by app, call, or message, which makes a fake \"security\" contact feel plausible. A caller who already knows your name or partial account details, and a spoofed number, add to the pressure.\n\nThe fact that protects you: Monzo does sometimes call customers, and will always ask security questions before discussing your account — but it will never ask you to move your money to a \"safe\", \"holding\", or \"protected\" account. If someone calling claims to be from Monzo, you can check whether the call is genuine using Monzo's Call Status feature in the app before you say or do anything."
       ],
       [
         "Signs a Monzo message is a scam",
@@ -4676,7 +4644,7 @@
       ],
       [
         "Someone says my Monzo account is compromised and I must move money to a safe account - real?",
-        "No. That is a scam. Monzo says it will not ask you to move money. Open the app yourself and use in-app chat, Call Status, or Monzo's own fraud page if you are unsure."
+        "No. That is a scam. Monzo will always ask security questions before discussing your account, but it will never ask you to move money to a safe account. Open the app yourself and use in-app chat, Call Status, or Monzo's own fraud page if you are unsure."
       ],
       [
         "A caller claims to be from Monzo's fraud team - how do I check?",
@@ -4958,7 +4926,7 @@
       ],
       [
         "How to report a Depop scam (UK)",
-        "Report the seller or buyer in the app using Report, and contact Depop through the Help Centre with screenshots of the listing, profile, and messages. Depop's current help page lists `support@depophelp.zendesk.com` as a support channel, not `support@depop.com`. If you receive a suspicious email, SMS, social-media message, or website claiming to be Depop, Depop says to report it to `reportphishing@depop.com`.\n\nIf a scam link reached you by email, forward it to the NCSC at `report@phishing.gov.uk`; if by text, forward it to 7726.\n\nIf you lost money or shared sensitive information, report it to Report Fraud at `reportfraud.police.uk` or on 0300 123 2040 if you are in England, Wales, or Northern Ireland. In Scotland, report to Police Scotland on 101. Tell your bank as soon as possible if money moved."
+        "Report the seller or buyer in the app using the in-app Report option, and contact Depop through the Help Centre's Submit a request form at `depophelp.zendesk.com/hc/en-gb/requests/new` with screenshots of the listing, profile, and messages. If you receive a suspicious email, SMS, social-media message, or website claiming to be Depop, report it to `reportphishing@depop.com`.\n\nIf a scam link reached you by email, forward it to the NCSC at `report@phishing.gov.uk`; if by text, forward it to 7726.\n\nIf you lost money or shared sensitive information, report it to Report Fraud at `reportfraud.police.uk` or on 0300 123 2040 if you are in England, Wales, or Northern Ireland. In Scotland, report to Police Scotland on 101. Tell your bank as soon as possible if money moved."
       ]
     ],
     "faq": [
@@ -4980,7 +4948,7 @@
       ],
       [
         "How do I report a Depop scam?",
-        "Report the user in the app and contact Depop through the Help Centre with screenshots. Report suspicious Depop-impersonation messages to `reportphishing@depop.com`. If you lost money or shared details, report it to Report Fraud in England, Wales, or Northern Ireland, or to Police Scotland on 101 in Scotland."
+        "Report the user in the app and contact Depop through the Help Centre's Submit a request form. Report suspicious Depop-impersonation messages to `reportphishing@depop.com`. If you lost money or shared details, report it to Report Fraud in England, Wales, or Northern Ireland, or to Police Scotland on 101 in Scotland."
       ]
     ],
     "keywords": [
@@ -5104,7 +5072,7 @@
       ],
       [
         "How to report a fake Rightmove rental (UK)",
-        "Report the listing to Rightmove using the report option on the property page where available, or through Rightmove's Contact Us route for suspicious adverts and communications. I could not confirm `fraud@rightmove.co.uk` from Rightmove's current public safety page, so use Rightmove's current in-site route rather than relying on that email address.\n\nIf the scammer contacted you by email, forward it to the NCSC at `report@phishing.gov.uk`; if by text, forward it to 7726.\n\nIf you lost money or shared sensitive information, report it to Report Fraud at `reportfraud.police.uk` or on 0300 123 2040 if you are in England, Wales, or Northern Ireland. In Scotland, report to Police Scotland on 101. Tell your bank as soon as possible if money moved, and keep all the evidence."
+        "Report the listing to Rightmove using the report option on the property page where available, or through Rightmove's current Contact Us route. Do not rely on an email address found in an old article or supplied by the suspected scammer.\n\nIf the scammer contacted you by email, forward it to the NCSC at `report@phishing.gov.uk`; if by text, forward it to 7726.\n\nIf you lost money or shared sensitive information, report it to Report Fraud at `reportfraud.police.uk` or on 0300 123 2040 if you are in England, Wales, or Northern Ireland. In Scotland, report to Police Scotland on 101. Tell your bank as soon as possible if money moved, and keep all the evidence."
       ]
     ],
     "faq": [
@@ -5126,7 +5094,7 @@
       ],
       [
         "How do I report a fake Rightmove listing?",
-        "Report it through the listing/report option where available or through Rightmove's Contact Us route, then report it to Report Fraud in England, Wales, or Northern Ireland, or to Police Scotland on 101 in Scotland. Tell your bank if money moved."
+        "Report it through the listing/report option where available or Rightmove's current Contact Us route, then report it to Report Fraud in England, Wales, or Northern Ireland, or to Police Scotland on 101 in Scotland. Tell your bank if money moved."
       ]
     ],
     "keywords": [
@@ -5949,7 +5917,7 @@
     "category": "government",
     "excerpt": "Scammers impersonate the DWP to steal Universal Credit claimants' personal data and money. Learn how to verify genuine contact and protect yourself.",
     "description": "A text, call, or 'agent' offering help to claim Universal Credit, a grant, or an advance? How to spot a Universal Credit scam and protect your claim and money.",
-    "hero": "The DWP will never ask for your password, PIN, or bank details by text, email, or unsolicited phone call—but scammers posing as the DWP do exactly that.",
+    "hero": "GOV.UK says Universal Credit will not ask for personal information such as bank details by text or email; verify unexpected calls through your own account or official helpline.",
     "date": "2026-05-06",
     "content": "## What is this scam?\n\nUniversal Credit scams exploit the fact that millions of UK residents depend on DWP payments and are naturally anxious about their claims. Scammers contact you claiming to be from the DWP, saying your Universal Credit account has been frozen, suspended, or flagged for review. They create panic by mentioning overpayments, identity theft, or missed appointments. The goal is to trick you into revealing sensitive information—your National Insurance number, username, password, date of birth, or bank details—or to convince you to transfer money immediately as a 'verification fee' or to 'release' your payment. Some scams pretend to offer you a backdated claim or emergency payment. Legitimate DWP contact never works this way. The real DWP uses only official channels (your online account, post, or a genuine phone number you initiate) and never demands immediate action through unsecured methods.\n\n## Warning signs to look for\n\n- A text or email with a shortened URL asking you to 'verify your account' or 'confirm your details'—legitimate DWP messages direct you to your existing online account.\n- Pressure to act immediately ('Your account will be closed in 24 hours')—the DWP sends formal written notice for serious issues, not urgent texts.\n- A request for your password, PIN, security questions, or date of birth—the DWP never asks for these over phone, text, or email.\n- A phone number that doesn't match the official DWP number (0800 328 5644 for Universal Credit customer service) or a spoofed number made to look like a DWP line.\n- An offer to process a refund, back-payment, or bonus that requires you to pay a fee first—this is a classic advance-fee scam.\n- Grammar or spelling errors in official-looking emails, or logos that look slightly off—the real DWP communications are professional.\n- A link in a text to a website that looks like but isn't quite the real gov.uk (e.g. 'gov-uk.com' instead of 'gov.uk').\n- Threats about benefit cancellation without any prior written notice or explanation—genuine sanctions are issued through your account with full details.\n\n## How this scam works step by step\n\nThe scam typically starts with a text message or email appearing to come from the DWP. It says something like 'Your Universal Credit claim requires urgent verification—click here' or 'Your account has been flagged. Confirm details within 24 hours.' The link leads to a fake gov.uk-lookalike website or a phishing page that mirrors the real Universal Credit login screen. When you enter your username and password, the scammers capture them and can access your real account. Alternatively, they may claim you've been overpaid and demand a 'refund' or 'correction fee' to keep your benefits active. Some scammers call, using social engineering to establish trust before asking for bank details 'to process a payment.' Once they have your information, they either drain your bank account via unauthorised transfers, commit identity fraud in your name, or log into your actual Universal Credit account to change address, bank details, or contact information, rerouting payments to themselves. Victims often don't notice until their regular payment fails to arrive.\n\n## How to verify if it is genuine\n\nIf you receive a message claiming to be from the DWP, do not click any links or call any numbers in the message. Instead, log directly into your Universal Credit account on the official gov.uk website (type 'www.gov.uk' into your browser, not via a link). Your real account will show any genuine alerts, suspensions, or required actions. If you're unsure whether something is legitimate, call the Universal Credit customer service number yourself: 0800 328 5644 (if you're already a claimant) or contact your work coach directly if you have one. The real DWP will confirm whether they sent that message. You can also report the message as a phishing attempt using the official NCSC Suspicious Email Reporting Service (report@phishing.gov.uk) or by forwarding SMS scams to 7726. For extra verification, visit Citizens Advice's scam-checking page or check Beat the Scam guides on spotting fake websites—see /guides/is-this-website-a-scam/ for detailed steps.\n\n## What to do if you have already interacted\n\nAct immediately. If you clicked a link and entered your Universal Credit username and password, change your password now on the real gov.uk website and enable any two-factor authentication available. If you disclosed your National Insurance number, date of birth, or bank details, contact your bank straight away to warn them and ask them to flag your account for fraud. If you transferred money to the scammers, contact your bank immediately and request an urgent recall or reversal; depending on how long ago it was, your bank may be able to recover the funds through a chargeback or Faster Payment reversal. Report the scam to Action Fraud on 0300 123 2040 or online at reportfraud.action.gov.uk—you'll need case reference number which helps with future claims. Check your Universal Credit account daily for the next few weeks to ensure no unauthorised changes have been made (address, bank details, contact info). Register for Cifas Protective Registration (cifas.org.uk) to flag your credit file against fraudulent applications. If your benefits have been redirected or stopped, contact your work coach or call Universal Credit customer service urgently.\n\n## Reporting this scam in the UK\n\nReport Universal Credit scams through multiple channels to help protect others. Contact Action Fraud on 0300 123 2040 (Mon–Fri, 8am–8pm) or report online at reportfraud.action.gov.uk—this is the UK's national fraud reporting centre and your case data feeds into police investigations. If you received a phishing email or text, report it to the NCSC Suspicious Email Reporting Service by forwarding the email to report@phishing.gov.uk or by texting the SMS to 7726 (the service is free and helps the NCSC take down fake sites). Contact Citizens Advice consumer helpline on 0808 223 1133 if you need support understanding your rights or next steps. You can also report the fake website directly to the Intellectual Property Crime Team. Tell your work coach or local jobcentre about the scam—they can flag it internally and alert other claimants. Do not publicly shame or name the scammers on social media, as this can interfere with police investigations; instead, keep all evidence (screenshots, message headers, URLs) and provide it to Action Fraud.",
     "sections": [
@@ -5959,7 +5927,7 @@
       ],
       [
         "Why these scams are convincing",
-        "Scammers target stress around benefits, rent, bills, and waiting for payments. They use sender names such as `DWP` or `GOV.UK`, social-media posts, WhatsApp messages, and word-of-mouth \"agents\". They may describe the money as a grant, bonus, cost-of-living payment, or advance.\n\nThe facts that protect you are specific. You can apply for Universal Credit online through GOV.UK, or by phone through the Universal Credit helpline if you cannot claim online. GOV.UK lists free Help to Claim support from Citizens Advice. An advance must usually be repaid. GOV.UK also says you will not be asked to share personal information such as bank details in your Universal Credit journal, by phone, text, or email."
+        "Scammers target stress around benefits, rent, bills, and waiting for payments. They use sender names such as `DWP` or `GOV.UK`, social-media posts, WhatsApp messages, and word-of-mouth \"agents\". They may describe the money as a grant, bonus, cost-of-living payment, or advance.\n\nThe facts that protect you are specific. You can apply for Universal Credit online through GOV.UK, or by phone through the Universal Credit helpline if you cannot claim online. GOV.UK lists free Help to Claim support from Citizens Advice. An advance must usually be repaid. GOV.UK also says you will not be asked to share personal information such as bank details in your Universal Credit journal, by text, or by email — DWP does genuinely contact claimants by phone, including to help with a claim, so use the Universal Credit helpline number yourself if you are ever unsure about a call."
       ],
       [
         "Signs a Universal Credit message is a scam",
@@ -5985,7 +5953,7 @@
     "faq": [
       [
         "Does the DWP text or email people about Universal Credit?",
-        "DWP and Jobcentre Plus can contact claimants, and GOV.UK says you may get a text or email when there is a new Universal Credit journal message. You should sign in to your account directly through GOV.UK to read it. GOV.UK says you will not be asked to share personal information such as bank details in your journal, by phone, text, or email."
+        "DWP and Jobcentre Plus can contact claimants, and GOV.UK says you may get a text or email when there is a new Universal Credit journal message. You should sign in to your account directly through GOV.UK to read it. GOV.UK says you will not be asked to share personal information such as bank details in your journal, by text, or by email."
       ],
       [
         "Someone offered to help me claim a government grant or advance - is that safe?",
@@ -7241,7 +7209,7 @@
       ],
       [
         "Product checks have limits",
-        "UGG’s official product-education material describes brand and packaging details, including logos and security labels on some products. Those details can vary by style and market and can also be copied by counterfeiters. The original draft’s universal statement that genuine current products never have a hang tag was not substantiated by the current UK material and has been removed.\n\nThe stronger check is the seller: buy through `ugg.com/uk/`, a known retailer you reach independently, or a retailer UGG confirms. Compare the exact style with UGG’s own current product page."
+        "UGG’s official product-education material describes brand and packaging details, including logos and security labels on some products. Those details can vary by style and market and can also be copied by counterfeiters, so a hang tag or packaging feature is not a reliable authenticity test on its own.\n\nThe stronger check is the seller: buy through `ugg.com/uk/`, a known retailer you reach independently, or a retailer UGG confirms. Compare the exact style with UGG’s own current product page."
       ],
       [
         "If you already paid",
@@ -7285,7 +7253,7 @@
     "sections": [
       [
         "DHgate is a marketplace, not one retailer",
-        "DHgate’s current help centre describes third-party sellers as the buyer’s supplier and provides on-platform ordering, messaging, tracking and dispute tools. That establishes that the platform is operating; it does not guarantee that every listing, review or product is genuine.\n\nCounterfeit risk is not hypothetical. The US Trade Representative’s 2025 Notorious Markets review continued to identify DHgate in connection with counterfeit goods, while DHgate’s own help pages explain how to dispute an item held by customs as fake or an item not as described.\n\nThe original draft specifically claimed fake five-star reviews were a known DHgate problem without citing DHgate-specific evidence. Fake reviews are a real e-commerce risk, but that platform-specific assertion has been removed rather than repeated as fact."
+        "DHgate’s current help centre describes third-party sellers as the buyer’s supplier and provides on-platform ordering, messaging, tracking and dispute tools. That establishes that the platform is operating; it does not guarantee that every listing, review or product is genuine.\n\nCounterfeit risk is not hypothetical. The US Trade Representative’s 2025 Notorious Markets review continued to identify DHgate in connection with counterfeit goods, while DHgate’s own help pages explain how to dispute an item held by customs as fake or an item not as described."
       ],
       [
         "Warning signs",
@@ -7293,11 +7261,11 @@
       ],
       [
         "Disputes and deadlines",
-        "Use the `Return & Refund` or dispute control shown in the order details and upload clear evidence. DHgate’s help centre says the seller normally has five days to respond after a dispute is opened, after which the buyer can escalate to DHgate.\n\nDo not rely on the original draft’s universal “8 days to 30 days, or 60 days for VIP” formula. Current DHgate help material uses different order states, delivery estimates, product categories and after-sale rules. Follow the deadline displayed on the specific order and act before confirming receipt."
+        "Use the `Return & Refund` or dispute control shown in the order details and upload clear evidence. Sellers on DHgate normally have five days to respond after a dispute is opened, after which the buyer can escalate to DHgate — this is DHgate’s own help centre position. Order states, delivery estimates, product categories and after-sale rules vary, so use the deadline shown on your own order rather than a fixed universal window, and act before confirming receipt."
       ],
       [
-        "Green Shipping Protection",
-        "The original draft described an insurance-backed Green Shipping Protection Service as a general extra layer for UK buyers. I could find that claim on coupon and affiliate pages, but not in the current official DHgate help material reviewed. It has therefore been removed as unverified. If an individual checkout offers optional shipping protection, read and save its actual terms before paying."
+        "Shipping protection",
+        "If an individual checkout offers optional shipping protection, read and save its actual terms before paying — treat it as an order-specific optional product rather than a guaranteed feature of every DHgate purchase."
       ],
       [
         "UK card protection",
@@ -7315,11 +7283,11 @@
       ],
       [
         "How long do I have to dispute an order?",
-        "Use the deadline shown on the order and current help flow. The universal window stated in the original draft could not be verified."
+        "Check the specific deadline shown on your own order rather than relying on a fixed universal window."
       ],
       [
-        "Is Green Shipping Protection automatically included for UK buyers?",
-        "That general claim was not confirmed in the official material checked. Treat any checkout protection as an order-specific optional product and read its terms."
+        "Is shipping protection automatically included for UK buyers?",
+        "No. Treat any checkout shipping protection as an order-specific optional product and read its terms before paying."
       ]
     ],
     "keywords": [
@@ -8066,19 +8034,19 @@
       ],
       [
         "The fees: what you actually pay versus the listed price",
-        "The price shown on a Viagogo listing is not the price you pay. Buyers typically pay a booking fee (a percentage of the ticket price), an order processing charge, and sometimes a delivery fee on top. These can add a significant amount to the listed price — check the total carefully before committing.\n\nSince the CMA intervention, Viagogo is required to show the total price earlier in the buying journey. In practice, the additional charges appear at the confirmation stage rather than the listing stage. Always check the total before entering payment details, and compare the final figure against face value or official resale platforms before committing."
+        "The advertised price and the final payable total can differ because compulsory fees and delivery charges may apply. Check the total, currency and delivery terms before entering payment details.\n\nThe CMA’s enforcement action required clearer pricing and seller information. That does not make every listing good value or every ticket valid, so compare the final total with the face value and any official resale option."
       ],
       [
         "Are Viagogo tickets valid? What can go wrong",
-        "Many buyers receive valid tickets and attend their event without issue. However, several things can go wrong:\n\n- Duplicate or cancelled tickets. A seller may list the same ticket to multiple buyers, or the original ticket may be cancelled by the promoter. Viagogo should replace these under its buyer guarantee, but the process takes time and can be difficult if the event has already passed.\n\n- Nominative tickets. Some events link tickets to the original buyer's name and require photo ID at the door. These cannot legitimately be resold. Buyers who purchase nominative tickets from any resale platform, including Viagogo, are at risk of being refused entry regardless of how genuine the ticket looks.\n\n- Late or non-delivery. Viagogo often releases tickets close to the event date, though timing varies by event. If tickets have not arrived, contact Viagogo support through the platform before assuming fraud."
+        "Many buyers receive valid tickets and attend their event without issue. However, several things can go wrong:\n\n- Duplicate or cancelled tickets. A seller may list the same ticket to multiple buyers, or the original ticket may be cancelled by the promoter. Viagogo should replace these under its buyer guarantee, but the process takes time and can be difficult if the event has already passed.\n\n- Nominative or restricted tickets. Some events link tickets to the original buyer or restrict resale. The promoter’s terms may allow cancellation or refusal of entry, even where the ticket itself is genuine.\n\n- Late or non-delivery. Viagogo often releases tickets close to the event date, though timing varies by event. If tickets have not arrived, contact Viagogo support through the platform before assuming fraud."
       ],
       [
         "Your rights if something goes wrong",
-        "Viagogo offers a buyer guarantee: if your tickets turn out to be invalid, the company should provide replacement tickets of equal or greater value, or a full refund. Exercising this in practice can be slow, and disputes are harder once the event has passed.\n\nFor stronger protection:\n\n- Pay by credit card. Purchases over £100 are protected under Section 75 of the Consumer Credit Act, meaning your card provider is jointly liable if the goods are not delivered as described. This is the most reliable protection available to UK buyers.\n\n- Chargeback. If you paid by debit card and the seller does not deliver, contact your bank and request a chargeback. Most card providers allow up to 120 days from the transaction date.\n\n- If a seller contacts you and asks for payment outside the Viagogo platform — by bank transfer, PayPal Friends and Family, or gift cards — stop immediately. This is a scam separate from Viagogo's own practices, and no buyer protection applies. Report it to Viagogo and to Report Fraud."
+        "Viagogo publishes a buyer guarantee that may provide replacement tickets or a refund when a ticket is invalid, subject to its current terms and deadlines. Contact the platform promptly; disputes are harder after an event has passed.\n\nFor stronger protection:\n\n- Pay by credit card where practical. Section 75 may apply to a qualifying credit-card purchase over £100 and not more than £30,000, but the required credit and supplier relationship must be present; ask the card issuer to assess the facts.\n\n- Chargeback. If you paid by card and the seller does not deliver, contact the card issuer promptly and ask whether the card-scheme rules allow a chargeback. Time limits vary.\n\n- If a seller contacts you and asks for payment outside the Viagogo platform — by bank transfer, PayPal Friends and Family, or gift cards — stop immediately. This is a scam separate from Viagogo's own practices, and no buyer protection applies. Report it to Viagogo and to Report Fraud."
       ],
       [
         "When it is definitely a scam — not just Viagogo being Viagogo",
-        "Separate from Viagogo's own controversial practices, fraudsters exploit Viagogo's reputation in specific ways:\n\n- Fake Viagogo websites. Scammers build replica sites with near-identical URLs (viag0go.com, viagogo-tickets.co.uk, or similar) to harvest payment details. Always confirm the URL is viagogo.com exactly before entering any information. Type the address directly into your browser rather than clicking a link from an email or social media.\n\n- Off-platform sellers. Someone contacts you on social media, by email, or via a classified ad claiming to have Viagogo tickets and asking for direct payment. Viagogo does not operate this way. Any seller asking you to pay outside the platform is conducting a fraud.\n\n- Fake order confirmation emails. Phishing emails mimicking Viagogo ask you to confirm or verify your booking by clicking a link. These are credential harvesting attempts. Viagogo does not send confirmation links requiring you to log in again after purchase."
+        "Separate from Viagogo's own controversial practices, fraudsters exploit Viagogo's reputation in specific ways:\n\n- Fake Viagogo websites. Scammers build replica sites with near-identical URLs (viag0go.com, viagogo-tickets.co.uk, or similar) to harvest payment details. Always confirm the URL is viagogo.com exactly before entering any information. Type the address directly into your browser rather than clicking a link from an email or social media.\n\n- Off-platform sellers. Someone contacts you on social media, by email, or via a classified ad claiming to have Viagogo tickets and asking for direct payment. Viagogo does not operate this way. Any seller asking you to pay outside the platform is conducting a fraud.\n\n- Fake order confirmation emails. Phishing emails can imitate booking confirmations and direct you to a lookalike sign-in or payment page. Check the order by opening Viagogo yourself rather than using the email link."
       ]
     ],
     "faq": [
@@ -8092,11 +8060,11 @@
       ],
       [
         "Can I get a refund from Viagogo if the event is cancelled?",
-        "Viagogo's stated policy covers cancellations with a refund or replacement, but outcomes vary and disputes are more difficult once an event has passed. For stronger protection, pay by credit card: under Section 75 of the Consumer Credit Act, your card provider is jointly liable for non-delivery of goods or services over £100, giving you an independent route to a refund."
+        "Check Viagogo’s current terms and contact it promptly. A qualifying credit-card purchase may also give you a Section 75 route, but eligibility depends on the payment and supplier arrangements."
       ],
       [
         "What did the CMA do about Viagogo?",
-        "In 2019, the UK Competition and Markets Authority secured a court order against Viagogo after the company refused to offer undertakings voluntarily — unlike StubHub, GetMeIn, and Seatwave, which offered undertakings at an earlier stage. The court order required Viagogo to show full prices upfront and provide clearer seller information. The CMA then monitored compliance before suspending further proceedings. The CMA case is publicly documented on gov.uk."
+        "In 2018, the UK Competition and Markets Authority secured a court order against Viagogo after the company refused to offer undertakings voluntarily — unlike StubHub, GetMeIn, and Seatwave, which offered undertakings at an earlier stage. The court order required Viagogo to show full prices upfront and provide clearer seller information. The CMA then monitored compliance before suspending further proceedings. The CMA case is publicly documented on gov.uk."
       ],
       [
         "Is there a safer alternative to Viagogo for resale tickets?",
@@ -8167,7 +8135,7 @@
       ],
       [
         "Does British Gas have an email address for reporting phishing?",
-        "I didn't verify a current British Gas phishing-reporting address on the live British Gas site during this review. Use British Gas's official website, app, or bill contact details for account-specific contact, and forward suspicious emails to `report@phishing.gov.uk`."
+        "Yes. Forward any suspicious email claiming to be from British Gas to `phishing@britishgas.co.uk`, without clicking any links in it first. Use British Gas's official website, app, or bill contact details for account-specific contact, and forward suspicious emails claiming to be from other senders to `report@phishing.gov.uk`."
       ],
       [
         "How do I report a fake British Gas call in the UK?",
@@ -8288,7 +8256,7 @@
     "faq": [
       [
         "Is there a genuine government scheme that pays for free solar panels?",
-        "I didn't verify any current scheme that hands out free solar panels through a simple online application. ECO, the Boiler Upgrade Scheme, and the Smart Export Guarantee are real, but they don't work in that simplified advert-style way."
+        "I found no current UK scheme that promises free solar panels to anyone who completes a simple online postcode form. ECO4 can include solar PV in specific eligible projects and households; it is not a universal free-panel offer. The Boiler Upgrade Scheme supports eligible heat-pump or biomass-boiler installations, while the Smart Export Guarantee pays eligible generators for exported electricity rather than paying for every installation. Check the current rules on GOV.UK or Ofgem and verify the installer independently."
       ],
       [
         "How do I check a solar panel installer is genuinely certified?",
@@ -9179,7 +9147,7 @@
     "sections": [
       [
         "What the scam is",
-        "Sextortion is a threat to share sexual images, video or information unless the target pays or does something else. Police guidance confirms that the material can be genuine, hacked, edited or created with AI. A target can therefore be a victim even if they never made or shared an intimate image.\n\nThe source draft relied heavily on one reported UK anecdote about a short, unconvincing AI clip. That example is not needed to establish the risk and has been removed. Current police guidance directly confirms the broader pattern."
+        "Sextortion is a threat to share sexual images, video or information unless the target pays or does something else. Police guidance confirms that the material can be genuine, hacked, edited or created with AI. A target can therefore be a victim even if they never made or shared an intimate image.\n\nCurrent police guidance directly confirms this broader pattern, so anyone targeted should take a threat seriously regardless of how convincing the material looks."
       ],
       [
         "What to do",
@@ -9187,7 +9155,7 @@
       ],
       [
         "The law is not uniform across the UK",
-        "The original draft incorrectly described one UK-wide legal position.\n\nIn England and Wales, the Online Safety Act 2023 introduced offences concerning sharing or threatening to share intimate images, including deepfakes. Separate offences of intentionally creating, or requesting the creation of, a purported intimate image of an adult without consent or reasonable belief in consent came into force on 6 February 2026 under section 138 of the Data (Use and Access) Act 2025.\n\nScotland has a separate offence covering disclosure or threatened disclosure of intimate images, including deepfakes where the statutory conditions are met. As of July 2026, the Scottish Government was consulting on new creation and request offences; the England-and-Wales creation offences do not extend to Scotland.\n\nNorthern Ireland also has separate law. Official Northern Ireland material still described a gap for sexually explicit deepfakes of adults and proposed legislation was under consideration in 2026. Do not state that the England-and-Wales creation offence applies there.\n\nLegal outcomes depend on the image, conduct, date, location, consent and intent. Report the behaviour to police rather than trying to classify the offence yourself."
+        "The law differs across England and Wales, Scotland and Northern Ireland.\n\nIn England and Wales, the Online Safety Act 2023 introduced offences concerning sharing or threatening to share intimate images, including deepfakes. GOV.UK also states that a new offence covering the creation of non-consensual sexually explicit deepfakes came into force in February 2026. The exact offence depends on the image, conduct, intent, consent and date.\n\nScotland has a separate offence covering disclosure or threatened disclosure of intimate images, including deepfakes where the statutory conditions are met. As of July 2026, the Scottish Government was consulting on new creation and request offences; the England-and-Wales creation offences do not extend to Scotland.\n\nNorthern Ireland also has separate law. Official Northern Ireland material still described a gap for sexually explicit deepfakes of adults and proposed legislation was under consideration in 2026. Do not state that the England-and-Wales creation offence applies there.\n\nLegal outcomes depend on the image, conduct, date, location, consent and intent. Report the behaviour to police rather than trying to classify the offence yourself."
       ],
       [
         "Reporting and support",
@@ -9500,11 +9468,11 @@
     "sections": [
       [
         "What a fake SHEIN site can do",
-        "A clone can copy SHEIN branding and product images to collect card details, account credentials or payment for goods that never arrive. Fraudulent ads and social posts can also lead to survey, gift-card, parcel or fake-partnership pages.\n\nSHEIN’s own fraud guidance describes fake websites, prize or gift-card scams, unclaimed-package scams, account phishing and fake partnerships. A January 2026 fact check also records SHEIN confirming that a widely shared “free box of clothes for a survey and postage” offer was not genuine."
+        "A clone can copy SHEIN branding and product images to collect card details, account credentials or payment for goods that never arrive. Fraudulent ads and social posts can also lead to survey, gift-card, parcel or fake-partnership pages.\n\nSHEIN’s own fraud guidance describes fake websites, prize or gift-card scams, unclaimed-package scams, account phishing and fake partnerships. Full Fact reported in August 2025 that SHEIN confirmed a widely shared “free box of clothes for a survey and postage” offer was not genuine."
       ],
       [
         "Verify the domain and the offer",
-        "The current UK site is `www.shein.co.uk`; `shein.com` is also used by SHEIN for other markets and corporate services. Type the address yourself or use the official app. A domain containing the word “shein” is not necessarily controlled by SHEIN.\n\nDo not rely on the original draft’s claim that every genuine SHEIN email “only ever” comes from one email domain. That absolute rule was not substantiated and email infrastructure can vary. Verify the action by opening the account independently."
+        "The current UK site is `www.shein.co.uk`; `shein.com` is also used by SHEIN for other markets and corporate services. Type the address yourself or use the official app. A domain containing the word “shein” is not necessarily controlled by SHEIN.\n\nSHEIN’s email infrastructure can vary, so there is no single verified domain that every genuine SHEIN email will always come from. Do not use the sender domain alone to judge whether an email is genuine; instead verify by typing `shein.co.uk` directly into your browser or using the official app to check the account."
       ],
       [
         "Warning signs",
@@ -9522,7 +9490,7 @@
     "faq": [
       [
         "Is shein.co.uk genuine?",
-        "A direct check on 10 July 2026 found `www.shein.co.uk` serving the SHEIN UK site. Still type it yourself rather than trusting a link."
+        "Yes, `www.shein.co.uk` is the genuine SHEIN UK site. Still type it yourself rather than trusting a link."
       ],
       [
         "Does SHEIN run mystery-box or giveaway promotions?",
@@ -9530,7 +9498,7 @@
       ],
       [
         "Does SHEIN have fraud guidance?",
-        "Yes. The original claim that SHEIN had published no dedicated guidance was inaccurate; SHEIN publishes a fraud FAQ describing fake-site and related scams."
+        "Yes. SHEIN publishes a fraud FAQ describing fake-site and related scams."
       ]
     ],
     "keywords": [
@@ -10133,7 +10101,7 @@
     "sections": [
       [
         "The 'important account notice' text — what it looks like",
-        "A common pattern in O2 phishing texts is: 'IMPORTANT: Your O2 account requires immediate verification. To avoid suspension, confirm your details here: [link].' Another variant targets your payment: 'Your O2 direct debit of £XX has failed. Update your payment method within 24 hours or your service will be suspended: [link].' A third variant promises something: 'Congratulations — you are eligible for a free handset upgrade. Claim before midnight: [link].'\n\nAll three share the same three features: a false sense of urgency, a link you're pressured to click, and a claim that something bad will happen — or something good will be lost — if you don't act immediately. That urgency is the mechanism. The goal in every case is to get you to enter your O2 login credentials, card details, or personal information on a fake website."
+        "A common pattern in O2 phishing texts is: `IMPORTANT: Your O2 account requires immediate verification. To avoid suspension, confirm your details here: [link].` Another variant targets your payment: `Your O2 direct debit of £XX has failed. Update your payment method within 24 hours or your service will be suspended: [link].` A third variant promises something: `Congratulations — you are eligible for a free handset upgrade. Claim before midnight: [link].`\n\nAll three share the same three features: a false sense of urgency, a link you're pressured to click, and a claim that something bad will happen — or something good will be lost — if you don't act immediately. That urgency is the mechanism. The goal in every case is to get you to enter your O2 login credentials, card details, or personal information on a fake website."
       ],
       [
         "What real O2 texts look like — and what they never include",
@@ -10141,7 +10109,7 @@
       ],
       [
         "Five seconds to check before you tap any link",
-        "Before clicking any link in an O2 text, run through these checks:\n\n1. Check the sender field. Genuine O2 texts tend to come from a named sender rather than a mobile number, but sender names can be spoofed — so treat this as one signal, not proof.\n\n2. Preview the link before tapping. On iPhone, press and hold the link to see the destination URL. On Android, long-press to copy and then inspect it. If the domain is not o2.co.uk or o2.com, treat it as suspicious.\n\n3. Log in separately. Open your browser and type o2.co.uk yourself. If there is a genuine account issue, it will be shown on your account dashboard — no link required.\n\n4. Never call a number in the text. Scammers include fake O2 support numbers in some messages. From your O2 phone, dial 202 (free) or use the O2 app to reach genuine support.\n\n5. If in doubt, do nothing. Scammers rely on urgency to override your normal caution. If the message is real, the account issue will still be there in ten minutes when you have checked independently."
+        "Before clicking any link in an O2 text, run through these checks:\n\n1. Check the sender field. Genuine O2 texts tend to come from a named sender rather than a mobile number, but sender names can be spoofed — so treat this as one signal, not proof.\n\n2. Preview the link before tapping. On iPhone, press and hold the link to see the destination URL. On Android, long-press to copy and then inspect it. If the domain is not o2.co.uk or o2.com, treat it as suspicious.\n\n3. Log in separately. Open your browser and type o2.co.uk yourself. If there is a genuine account issue, it will be shown on your account dashboard — no link required.\n\n4. Never call a number in the text. Scammers include fake O2 support numbers in some messages. From your O2 phone, dial 202 (free) if you're Pay Monthly, or 4445 (free) if you're Pay As You Go — or use the O2 app to reach genuine support. From any other phone, use the O2 customer service number on your bill or o2.co.uk.\n\n5. If in doubt, do nothing. Scammers rely on urgency to override your normal caution. If the message is real, the account issue will still be there in ten minutes when you have checked independently."
       ],
       [
         "Already clicked or entered your details? Do this in order",
@@ -10163,7 +10131,7 @@
       ],
       [
         "I'm getting an O2 text saying I'm due a free handset upgrade — is this real?",
-        "It may be genuine, but treat it with caution. Check your upgrade eligibility by logging in directly at o2.co.uk or by dialling 202 from your O2 phone — do not use the link in the text. If you are genuinely eligible for an upgrade, it will show in your account independently of any message."
+        "It may be genuine, but treat it with caution. Check your upgrade eligibility by logging in directly at o2.co.uk or by dialling 202 (Pay Monthly) or 4445 (Pay As You Go) from your O2 phone — do not use the link in the text. If you are genuinely eligible for an upgrade, it will show in your account independently of any message."
       ],
       [
         "I forwarded the text to 7726 — what happens next?",
@@ -10354,8 +10322,8 @@
         "Hang up and call TalkTalk using the number on a bill or its official website. TalkTalk says customers can dial 150 from a TalkTalk home phone. If a bank is mentioned, hang up and use the bank's trusted number or 159 if the bank participates."
       ],
       [
-        "Correct CallSafe information",
-        "The original draft was wrong to call CallSafe free and wrong to say “dial 1471 then press 1” to activate it. TalkTalk's update says CallSafe costs £1 a month from 11 January 2026. It can be added or managed in My Account where compatible. Dialling 1472 is used to manage approved and blocked callers on a TalkTalk landline; 1471 is the caller-return service, not the CallSafe activation code.\n\nCallSafe screens some unknown callers by asking them to record their name, but it does not make every call safe and compatibility requirements apply."
+        "TalkTalk CallSafe",
+        "CallSafe costs £1 a month from 11 January 2026. It can be added or managed in My Account where compatible. Dialling 1472 is used to manage approved and blocked callers on a TalkTalk landline; 1471 is the separate caller-return service and does not activate CallSafe.\n\nCallSafe screens some unknown callers by asking them to record their name, but it does not make every call safe and compatibility requirements apply."
       ],
       [
         "If remote access or details were given",
@@ -10546,7 +10514,7 @@
       ],
       [
         "Current timing",
-        "Glastonbury Festival's official site confirms that 2026 is a fallow year and the next Festival is scheduled for Wednesday 23 June to Sunday 27 June 2027. Its current information says no official 2027 ticket or accommodation allocations have been announced, apart from a stated prize draw, and that booking information is expected in autumn 2026.\n\nThe original draft treated historic 2025 arrangements as if they were already confirmed for 2027. That was not supportable at the fact-check date."
+        "Glastonbury Festival's official site confirms that 2026 is a fallow year and the next Festival is scheduled for Wednesday 23 June to Sunday 27 June 2027. Its current information says no official 2027 ticket or accommodation allocations have been announced, apart from a stated prize draw, and that booking information is expected in autumn 2026.\n\nHistoric 2025 booking and accommodation arrangements are not confirmed for 2027. Treat any listing that presents 2025 terms, prices or allocations as if they already apply to 2027 as unverified until the Festival publishes current information."
       ],
       [
         "Official and third-party accommodation",
@@ -10566,7 +10534,7 @@
       ],
       [
         "Reporting in the UK",
-        "Report the crime to Report Fraud at `reportfraud.police.uk` or 0300 123 2040 in England, Wales or Northern Ireland; in Scotland, call Police Scotland on 101. For fake resale tickets rather than accommodation, see /guides/glastonbury-ticket-scam-uk/."
+        "Report the crime to Report Fraud at `reportfraud.police.uk` or 0300 123 2040 in England, Wales or Northern Ireland; in Scotland, call Police Scotland on 101. For fake resale tickets rather than accommodation, see the /guides/glastonbury-ticket-scam-uk/."
       ]
     ],
     "faq": [
@@ -10576,7 +10544,7 @@
       ],
       [
         "Are the 2027 accommodation options on sale?",
-        "Not at the fact-check date. The Festival says official 2027 booking information will be released in autumn 2026."
+        "No — official 2027 booking information is expected in autumn 2026; nothing is confirmed yet."
       ]
     ],
     "keywords": [
@@ -10813,7 +10781,7 @@
       ],
       [
         "The law is not identical across the UK",
-        "In England and Wales, a private hire vehicle (often called a minicab) can only be pre-booked through a licensed operator; licensed taxis can also be hailed or hired at a rank in the area where they are licensed. Scotland makes the same practical distinction between taxis and private hire cars under its own legislation.\n\nNorthern Ireland does not use the same two-category model. It has Classes A to D: Class C taxis are pre-book-only, while some Class A and Class B taxis can be hailed under the published conditions. The original statement that one uniform “UK law” applies was therefore too broad."
+        "In England and Wales, a private hire vehicle (often called a minicab) can only be pre-booked through a licensed operator; licensed taxis can also be hailed or hired at a rank in the area where they are licensed. Scotland makes the same practical distinction between taxis and private hire cars under its own legislation.\n\nTaxi and private-hire regulation differs across the UK; there is no single uniform \"UK law\" here. Northern Ireland does not use the same two-category model. It has Classes A to D: Class C taxis are pre-book only, while some Class A and Class B taxis can be hailed under the published conditions. In England, Wales and Scotland, private-hire vehicles generally must be pre-booked rather than hailed."
       ],
       [
         "Warning signs",
@@ -11688,7 +11656,7 @@
     "sections": [
       [
         "Scope of this guide",
-        "The HM Land Registry services and forms below apply to England and Wales, not the whole UK. Scotland uses Registers of Scotland and Northern Ireland uses Land & Property Services. The original UK-wide title overstated the geographic scope of the detailed advice."
+        "This guide's detailed advice is specific to England and Wales' HM Land Registry system, not the whole UK. The HM Land Registry services and forms below apply to England and Wales only. Scotland uses Registers of Scotland and Northern Ireland uses Land & Property Services."
       ],
       [
         "What property-title fraud looks like",
@@ -11696,7 +11664,7 @@
       ],
       [
         "Warning signs",
-        "- An unexpected Property Alert about an official search or application.\n- Correspondence about a sale, mortgage or register change that you did not authorise.\n- The contact address on the register is wrong or no longer monitored.\n\nProperty fraud remains relatively rare: HM Land Registry reported that 86 of more than 4.4 million applications in 2024–25 were identified as fraudulent. The risk is serious, but the article should not imply that title theft is common."
+        "- An unexpected Property Alert about an official search or application.\n- Correspondence about a sale, mortgage or register change that you did not authorise.\n- The contact address on the register is wrong or no longer monitored.\n\nProperty and title fraud remains rare: HM Land Registry recorded 86 fraudulent applications out of 4.4 million in 2024–25. The risk is serious for anyone it hits, but it affects only a small fraction of applications."
       ],
       [
         "Property Alert",
@@ -12006,7 +11974,7 @@
       ],
       [
         "Reporting in the UK",
-        "SLC's current social-media guidance asks customers to report suspected phishing to `cfs@slc.co.uk`. Suspicious emails can also be forwarded to `report@phishing.gov.uk`, and texts to 7726. If money was lost or an account was compromised, report the crime to Report Fraud at `reportfraud.police.uk` or 0300 123 2040 in England, Wales or Northern Ireland; in Scotland, call Police Scotland on 101."
+        "GOV.UK's student-finance phishing guidance asks anyone who gets a suspected scam email or text about student finance to forward it to `fcpu_alerts@slc.co.uk`. If you've already responded to a phishing message, SLC's account-security page also names `phishing@slc.co.uk` as a forwarding address, and `cfs@slc.co.uk` for general concerns about the safety of your account. Suspicious emails can also be forwarded to `report@phishing.gov.uk`, and texts to 7726. If money was lost or an account was compromised, report the crime to Report Fraud at `reportfraud.police.uk` or 0300 123 2040 in England, Wales or Northern Ireland; in Scotland, call Police Scotland on 101."
       ]
     ],
     "faq": [
@@ -12403,11 +12371,11 @@
       ],
       [
         "How to verify if a timeshare offer is genuine",
-        "Before attending any presentation or signing anything, take these steps: First, search the company name online alongside 'complaints', 'scam', and 'reviews'—look for patterns of dissatisfied customers or legal action. Second, check whether the company is registered with the FCA (Financial Conduct Authority) by visiting the FCA register on their website; most timeshare operators are not regulated, which is a warning sign. Third, if the offer involves a property abroad, contact the local consumer protection authority in that country (for example, the Spanish consumer authority if the property is in Spain). Fourth, ask for the full contract in writing before any meeting, and have it reviewed by a solicitor who specialises in property law—never rely on verbal promises. Fifth, contact Citizens Advice or a consumer rights organisation to ask whether the company has a known history of complaints. Sixth, be extremely wary of anyone offering to 'help you exit' a timeshare you've already bought—timeshare exit scams are a secondary fraud targeting people already trapped. If you're considering a timeshare, speak to an independent financial adviser about whether it makes sense for your circumstances; legitimate advisers will not pressure you or rush the decision."
+        "Before attending a presentation or signing anything, search the company name with terms such as “complaints” and “scam”, obtain the full contract in writing, and get independent legal or consumer advice. Check the FCA register only if the business is offering a financial service or claiming FCA authorisation; FCA registration is not a general test for a timeshare operator. If the property is abroad, check the relevant country’s consumer and property rules. Be wary of any exit or resale business that demands an upfront fee or promises a guaranteed result."
       ],
       [
         "What to do immediately if you've already signed",
-        "If you've signed a timeshare contract in the last 14 days, you may have a legal right to cancel under the Consumer Contracts Regulations. Check your contract for a cancellation clause and deadline—if you're within the window, write to the company immediately (by email and registered post) stating you wish to cancel and requesting a full refund. Keep copies of everything. If you signed more than 14 days ago, or if the company refuses to cancel, contact Citizens Advice on 0808 223 1133 for guidance on your legal options; they can advise whether the contract was unfairly sold or contains breaches of consumer law. Do not pay any further fees or sign any additional documents the company sends you. If you've already paid money and suspect fraud, contact your bank or credit card company immediately and ask about a chargeback or dispute—explain that you were misled or the service was not delivered as promised. Report the scam to Report Fraud on 0300 123 2040 or online at reportfraud.police.uk; provide all documentation including the contract, emails, and details of any payments made. If the scam involved a fake website or phishing email, also report it to the NCSC Suspicious Email Reporting Service at report@phishing.gov.uk."
+        "If the contract is a timeshare, long-term holiday product, resale or exchange contract within the scope of the 2010 Regulations, there is generally a 14-day withdrawal period and a ban on taking payment during that period. Check the contract and statutory information, and send written notice promptly; do not assume that every holiday or property contract has the same right. If money was paid or the terms were misleading, contact the bank or card provider, Citizens Advice and Report Fraud, keeping the contract and communications."
       ],
       [
         "Reporting the scam and getting help in the UK",
@@ -12417,11 +12385,11 @@
     "faq": [
       [
         "I was offered a free holiday and invited to a presentation—is this a scam?",
-        "Almost certainly yes, or at minimum a high-pressure sales trap. Legitimate holiday companies do not offer free stays to random people; this is a classic scam lure designed to get you to a sales office where you'll be pressured to sign a contract. If you've already attended or booked, do not sign anything, and do not provide payment details or personal information beyond what you've already given."
+        "It may be a sales promotion, but an unsolicited “free” holiday linked to a presentation is a reason to pause. Do not sign or pay under pressure; ask for written terms and check the company independently."
       ],
       [
         "I've already signed a timeshare contract. Can I get out of it?",
-        "If you signed within the last 14 days, you likely have a legal right to cancel under consumer protection law—check your contract for the cancellation deadline and write to the company immediately requesting cancellation and a full refund. If you're past 14 days, contact Citizens Advice on 0808 223 1133 for advice on your options; you may still have grounds to cancel if the contract was sold unfairly or contains breaches of law. Do not pay any exit fees to third-party companies claiming they can help you cancel—these are often secondary scams."
+        "If it is a qualifying timeshare, long-term holiday product, resale or exchange contract, the 2010 Regulations generally provide a 14-day withdrawal period and restrict payment during that period. If it is another kind of contract, different rules may apply. Send written notice promptly and obtain advice. Be cautious of exit companies demanding upfront fees."
       ],
       [
         "What should I do if I've already paid money to a timeshare company?",
@@ -12429,11 +12397,11 @@
       ],
       [
         "How can I check if a timeshare company is legitimate?",
-        "Search the company name online with 'complaints' and 'scam' to see if there are patterns of dissatisfied customers. Check the FCA register on the FCA website to see if the company is regulated (most timeshare operators are not). Ask for the full contract in writing before any meeting and have it reviewed by a solicitor. Contact Citizens Advice or a consumer rights organisation to ask about the company's history. Be wary of any company that pressures you to sign quickly or refuses to provide written terms in advance."
+        "Search independently for complaints and obtain the full contract before any meeting. Check the FCA register only for a financial-service claim, and ask Citizens Advice or a solicitor to review the contract. Do not treat a polished website, trade-association logo or verbal guarantee as proof of legitimacy."
       ],
       [
         "I received a call or email offering to help me exit my timeshare. Is this genuine?",
-        "Almost certainly not. Timeshare exit scams are a secondary fraud targeting people already trapped in contracts. Scammers claim they can cancel your contract or find a buyer, but demand upfront fees (often thousands of pounds) and deliver nothing. Never pay an exit company upfront. If you need help exiting a timeshare, contact Citizens Advice on 0808 223 1133 or a solicitor specialising in property law; legitimate advisers will not demand payment before results."
+        "Treat an unsolicited promise to cancel or resell a timeshare for an upfront fee as a serious warning sign. Do not pay until you have independently checked the business and contract. For advice, contact Citizens Advice or a solicitor with relevant experience."
       ]
     ],
     "keywords": [
@@ -12469,11 +12437,11 @@
       ],
       [
         "How to verify if a holiday club is genuine",
-        "Before you commit to any holiday club membership, take these verification steps. First, search the company name online alongside words like 'scam', 'complaint', or 'review' — check independent review sites such as Trustpilot, Which?, and the Citizens Advice consumer helpline website for any warnings or complaints. Second, ask the company for their registration details: legitimate travel companies operating in the UK should be registered with the Association of British Travel Agents (ABTA) or hold a licence from the Civil Aviation Authority (CAA) if they sell package holidays. You can verify this on the ABTA or CAA websites. Third, request a full written contract at least 14 days before you sign anything, and take it to a solicitor or Citizens Advice for independent review — never sign at a presentation or under time pressure. Fourth, contact previous customers directly (ask the company for contact details and verify them independently) and ask about their actual experience, costs, and whether they have been able to use the holidays as promised. Fifth, check the company's physical address and phone number — call the number yourself using a number from their official website, not one provided by a salesman. Scammers often use virtual offices or shared addresses. Finally, be extremely wary of any company that cannot or will not provide clear, written answers to your questions about costs and cancellation terms."
+        "Before you commit to any holiday club membership, take these verification steps. First, search the company name online alongside words like 'scam', 'complaint', or 'review' — check independent review sites such as Trustpilot, Which?, and the Citizens Advice consumer helpline website for any warnings or complaints. Second, you can check whether the company belongs to ABTA – The Travel Association (formerly the Association of British Travel Agents) or holds an ATOL licence from the Civil Aviation Authority (CAA) — but treat this as a useful extra check, not a pass/fail test. ABTA membership is voluntary, and an ATOL licence is only required for flight-inclusive package holidays. Most holiday club and long-term holiday product memberships aren't \"package holidays\" at all — they're covered separately, under the Timeshare, Holiday Products, Resale and Exchange Contracts Regulations 2010 — so a genuine holiday club can legitimately hold neither ABTA membership nor an ATOL licence, and their absence alone isn't a reliable sign of a scam for this type of product. Third, request a full written contract at least 14 days before you sign anything, and take it to a solicitor or Citizens Advice for independent review — never sign at a presentation or under time pressure. Fourth, contact previous customers directly (ask the company for contact details and verify them independently) and ask about their actual experience, costs, and whether they have been able to use the holidays as promised. Fifth, check the company's physical address and phone number — call the number yourself using a number from their official website, not one provided by a salesman. Scammers often use virtual offices or shared addresses. Finally, be extremely wary of any company that cannot or will not provide clear, written answers to your questions about costs and cancellation terms."
       ],
       [
         "What to do immediately if you have already signed",
-        "If you have signed a holiday club contract and now have doubts, act quickly. First, stop any further payments immediately — contact your bank or credit card provider and explain that you believe you have been defrauded or misled. Ask them to freeze the account or cancel any standing orders set up for membership fees. Second, request a full refund in writing from the holiday club company, citing your 14-day cooling-off right — holiday club and long-term holiday product contracts carry a 14-day withdrawal period under the Timeshare, Holiday Products, Resale and Exchange Contracts Regulations 2010 (even if you signed in person, you may still have rights). Send this request by recorded delivery and keep a copy. Third, gather all evidence: keep the contract, any emails, text messages, call recordings (if legal), receipts, and notes of what you were promised verbally versus what the contract actually says. Fourth, report the scam to Report Fraud on 0300 123 2040 or online at reportfraud.police.uk — provide as much detail as possible, including the company name, contact details, and dates of contact. Fifth, contact Citizens Advice on 0808 223 1133 for free guidance on your consumer rights and whether you have grounds for a chargeback or dispute with your bank."
+        "If you have signed a long-term holiday product contract and now have doubts, act quickly. The 2010 Regulations can provide a 14-day withdrawal period for contracts within their scope, including qualifying long-term holiday products, but not every holiday booking or membership is covered. Check the contract and the statutory information, and ask Citizens Advice or a solicitor if unsure. Stop further payments where you can, contact the bank or card provider, keep the contract and messages, and report suspected fraud to Report Fraud."
       ],
       [
         "Reporting a holiday club scam in the UK",
@@ -12481,21 +12449,21 @@
       ],
       [
         "Can you get your money back?",
-        "Recovery depends on how you paid and how quickly you act. If you paid by credit card and the transaction was within the last 120 days, you can request a chargeback through your card provider — this reverses the payment and forces the merchant to prove the transaction was legitimate. If you paid by bank transfer, your bank may be required to reimburse you under the Payment Systems Regulator's mandatory reimbursement rules for authorised push payment (APP) fraud, in force since October 2024 — report it as quickly as possible, ideally within a few days. If you signed a contract within the last 14 days, you may have a legal right to cancel under the Timeshare, Holiday Products, Resale and Exchange Contracts Regulations 2010, which give a 14-day cooling-off period even if you signed in person — write to the company demanding a full refund and cite these regulations. If the company refuses or ignores your request, you can escalate to Citizens Advice or consider small claims court (for amounts under £10,000). However, if significant time has passed or you paid in cash, recovery becomes much harder. This is why acting immediately is critical. Keep all evidence and documentation, as you will need it to support any claim or dispute."
+        "Recovery depends on the contract, payment method and evidence. Card chargeback time limits are set by the card scheme and vary; ask the issuer promptly rather than relying on a fixed number. A qualifying UK Faster Payments or CHAPS transfer made on or after 7 October 2024 may fall under the PSR’s APP reimbursement rules, subject to scope, exclusions and claim deadlines. A 14-day withdrawal right may apply to a qualifying long-term holiday product, not automatically to every holiday club or booking. Keep all evidence and obtain consumer or legal advice for a disputed contract."
       ]
     ],
     "faq": [
       [
         "How do I know if a holiday club company is real or a scam?",
-        "Check whether the company is registered with ABTA (Association of British Travel Agents) or holds a CAA licence — you can verify this on their official websites. Search the company name online for independent reviews on Trustpilot, Which?, and Citizens Advice, and look for complaints or warnings. Ask for a full written contract at least 14 days before signing, and take it to a solicitor or Citizens Advice for review. Be very suspicious of any company that pressures you to sign immediately, cannot provide clear written details of costs and cancellation terms, or refuses to let you contact previous customers independently."
+        "You can check whether the company belongs to ABTA – The Travel Association or holds an ATOL licence, but treat that as one factor among several rather than a decisive test — ABTA membership is voluntary and most holiday club memberships aren't package holidays, so a genuine operator may hold neither. Search the company name online for independent reviews on Trustpilot, Which?, and Citizens Advice, and look for complaints or warnings. Ask for a full written contract at least 14 days before signing, and take it to a solicitor or Citizens Advice for review. Be very suspicious of any company that pressures you to sign immediately, cannot provide clear written details of costs and cancellation terms, or refuses to let you contact previous customers independently."
       ],
       [
         "I signed a holiday club contract last week — can I cancel it?",
-        "Yes — holiday club and long-term holiday product contracts carry a 14-day cooling-off period under the Timeshare, Holiday Products, Resale and Exchange Contracts Regulations 2010, even if you signed in person at a presentation. Write to the company immediately by recorded delivery, stating that you wish to cancel and requesting a full refund. Cite the Timeshare, Holiday Products, Resale and Exchange Contracts Regulations 2010 in your letter. Keep a copy of your letter and the proof of delivery. If the company refuses, contact Citizens Advice on 0808 223 1133 for free advice on your next steps, or report the matter to Report Fraud on 0300 123 2040."
+        "A qualifying long-term holiday product can have a 14-day withdrawal period under the 2010 Regulations, even if signed in person. The right does not automatically cover every holiday membership or booking. Check the contract and send written notice promptly if the Regulations apply; contact Citizens Advice if the position is unclear."
       ],
       [
         "What should I do if I have already paid money to a holiday club scam?",
-        "Stop any further payments immediately by contacting your bank or credit card provider. If you paid by credit card within the last 120 days, request a chargeback. If you paid by bank transfer, contact your bank's fraud team and ask about reimbursement for authorised push payment (APP) fraud — since October 2024 most UK banks must reimburse if you report promptly. Report the scam to Report Fraud on 0300 123 2040 and to Citizens Advice on 0808 223 1133. Gather all evidence (contract, emails, receipts, notes of conversations) and keep it safe — you will need it to support any claim or dispute."
+        "Stop further payments and contact the bank or card provider promptly. Ask about chargeback or, for a qualifying UK bank transfer made on or after 7 October 2024, the PSR APP reimbursement rules. Eligibility and deadlines apply. Report suspected fraud and keep the contract, messages, receipts and payment details."
       ],
       [
         "Is there a way to check if a holiday club website is fake?",
