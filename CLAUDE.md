@@ -44,6 +44,7 @@ python3 scripts/generate_content_claude.py content/daily-publish-queue.csv \
 python3 scripts/rewrite_thin_guides.py --posts content/posts.json --threshold 400 --limit 10
 python3 scripts/audit_corpus.py                 # re-audit the whole corpus through the gate
 ANTHROPIC_API_KEY=… python3 scripts/gate_selftest.py   # after ANY gate change (or run the "Gate self-test" Action)
+python3 scripts/fact_reverify.py --limit 3       # cheap smoke test of the quarterly drift re-check (needs web search)
 ```
 
 ## Architecture
@@ -68,6 +69,8 @@ ANTHROPIC_API_KEY=… python3 scripts/gate_selftest.py   # after ANY gate change
 - Blanket "HMRC never texts/emails/links you" is FLAG-tier (HMRC runs genuine SMS/email campaigns with gov.uk links).
 
 **Flow:** every generation path runs `scripts/content_gate.py` first. BLOCK-tier issues (invented phone numbers, entity misattribution, the classes above) stop publication; FLAG-tier (legislation, dated events, non-canon sources) are recorded for review. On PASS, a per-guide **claim manifest** is written to `content/manifests/<slug>.json` (audit record of detected high-stakes claims — not a bibliography; the model has no internet and never cites). The **Weekly editorial audit** Action digests recent flag-tier claims and emails them for human review.
+
+**The gate only runs once, at generation time** — it can't notice a live guide's facts going stale later (a cap changes, a mailbox is retired, a deadline moves). `scripts/fact_reverify.py` + `.github/workflows/fact-reverify.yml` (quarterly, 1st of Jan/Apr/Jul/Oct) close that gap: a corpus-wide deterministic re-scan plus a web-search-enabled Claude pass over every live guide, opening a review PR (label `fact-audit`, deliberately distinct from `auto-content` so it doesn't trip the daily-publish backlog guard) with a drift report — never edits `posts.json` itself.
 
 **Operator review workflow:** for hand-written/bespoke content work, generate `docs/review/<slug>.md` and wait for the operator's `-c.md` fact-check reply before committing — even if you did your own web verification.
 

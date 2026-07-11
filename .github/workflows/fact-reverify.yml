@@ -1,0 +1,170 @@
+name: Quarterly fact re-verification
+
+# Audit safety net — content_gate.py only runs ONCE, at generation time, so it
+# never notices a guide's facts going stale after publish (a compensation cap
+# changes, a mailbox gets retired, a deadline gets extended). The 2026-07-10
+# manual full-corpus audit found exactly that class of error; this automates
+# it. scripts/fact_reverify.py runs a deterministic corpus-wide re-scan plus a
+# web-search-enabled Claude pass over every live guide and writes a drift
+# report to content/fact-reverify-reports/. It NEVER edits posts.json,
+# manifests, or dist/ — only the report is committed. A human applies any
+# corrections and merges (or closes to discard). Same "research, don't
+# publish" contract as the sister publication tuningdigital's fact-reverify.
+#
+# Cloud cron — runs on GitHub's servers using the existing ANTHROPIC_API_KEY
+# secret. ~181 guides x 1 web-search-enabled call each, 4 runs/year.
+
+on:
+  workflow_dispatch:
+    inputs:
+      limit:
+        description: "Only process the first N guides (cheap manual test run; leave blank for the full corpus)"
+        required: false
+        default: ""
+  schedule:
+    # 1st of Jan/Apr/Jul/Oct, 09:00 UTC. GitHub cron is best-effort and may be delayed.
+    - cron: '0 9 1 1,4,7,10 *'
+
+permissions:
+  contents: write
+  pull-requests: write
+  issues: write          # gh label create manages labels via the issues API
+
+# Own group, separate from content-pipeline — this workflow never touches
+# posts.json/sitemap so it can't race the daily crons, but two manual
+# dispatches of THIS workflow shouldn't overlap either.
+concurrency:
+  group: fact-reverify
+  cancel-in-progress: false
+
+jobs:
+  reverify:
+    runs-on: ubuntu-latest
+    env:
+      ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+      LIMIT: ${{ github.event.inputs.limit || '' }}
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
+        with:
+          fetch-depth: 0
+
+      - name: Sync with latest main
+        run: |
+          git config user.name  "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git pull --rebase origin main
+
+      - name: Setup Python
+        uses: actions/setup-python@ece7cb06caefa5fff74198d8649806c4678c61a1 # v6.3.0
+        with:
+          python-version: '3.12'
+
+      - name: Install dependencies
+        run: pip install -r requirements-claude.txt
+
+      - name: Run fact re-verification
+        id: reverify
+        run: |
+          ARGS=""
+          if [ -n "$LIMIT" ]; then
+            ARGS="--limit $LIMIT"
+          fi
+          OUTPUT=$(python scripts/fact_reverify.py $ARGS 2>&1)
+          echo "$OUTPUT"
+
+          # Scrape the script's marker lines. Validate charset before they
+          # become step outputs — same guard as run_daily_publish.py's
+          # NEW_ARTICLE_SLUGS scraping in daily-publish.yml: never trust
+          # model-influenced stdout as code downstream.
+          REPORT_PATH=$(echo "$OUTPUT" | grep "^REPORT_PATH=" | tail -1 | cut -d= -f2-)
+          DRIFT_COUNT=$(echo "$OUTPUT"  | grep "^DRIFT_COUNT="  | tail -1 | cut -d= -f2)
+          EXAMINED=$(echo "$OUTPUT"     | grep "^EXAMINED="     | tail -1 | cut -d= -f2)
+          QUARTER=$(echo "$OUTPUT"      | grep "^QUARTER="      | tail -1 | cut -d= -f2)
+
+          if ! echo "$REPORT_PATH" | grep -Eq '^content/fact-reverify-reports/[0-9]{4}-Q[1-4]\.md$'; then
+            echo "ERROR: REPORT_PATH failed validation: $REPORT_PATH"
+            exit 1
+          fi
+          if ! echo "$DRIFT_COUNT" | grep -Eq '^[0-9]+$'; then
+            echo "ERROR: DRIFT_COUNT failed validation: $DRIFT_COUNT"
+            exit 1
+          fi
+          if ! echo "$EXAMINED" | grep -Eq '^[0-9]+$'; then
+            echo "ERROR: EXAMINED failed validation: $EXAMINED"
+            exit 1
+          fi
+          if ! echo "$QUARTER" | grep -Eq '^[0-9]{4}-Q[1-4]$'; then
+            echo "ERROR: QUARTER failed validation: $QUARTER"
+            exit 1
+          fi
+
+          echo "report_path=$REPORT_PATH" >> "$GITHUB_OUTPUT"
+          echo "drift_count=$DRIFT_COUNT" >> "$GITHUB_OUTPUT"
+          echo "examined=$EXAMINED" >> "$GITHUB_OUTPUT"
+          echo "quarter=$QUARTER" >> "$GITHUB_OUTPUT"
+
+      - name: Open review pull request
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          REPORT_PATH: ${{ steps.reverify.outputs.report_path }}
+          DRIFT_COUNT: ${{ steps.reverify.outputs.drift_count }}
+          EXAMINED: ${{ steps.reverify.outputs.examined }}
+          QUARTER: ${{ steps.reverify.outputs.quarter }}
+        run: |
+          set -e
+          git config user.name  "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+          # Only ever stage the report — never posts.json, manifests, or dist/.
+          git add "$REPORT_PATH"
+          if git diff --cached --quiet; then
+            echo "ℹ️  No report file produced — nothing to open a PR for."
+            exit 0
+          fi
+
+          BRANCH="chore/fact-reverify-${QUARTER}"
+          git checkout -b "$BRANCH"
+          git commit -m "chore: ${QUARTER} fact re-verification (${DRIFT_COUNT} drifted)"
+          # actions/checkout only fetches the triggering ref, so there's no local
+          # remote-tracking ref for $BRANCH to lease against — fetch it first (if
+          # it exists) so a re-run within the same quarter (branch already on
+          # origin) doesn't get rejected as stale by --force-with-lease.
+          git fetch origin "+refs/heads/${BRANCH}:refs/remotes/origin/${BRANCH}" || true
+          git push --force-with-lease origin "$BRANCH"
+
+          gh label create fact-audit --color 5319e7 --description "Quarterly fact re-verification report awaiting editorial review" 2>/dev/null || true
+
+          BODY=$(cat <<EOF
+          Automated quarterly re-verification of the live corpus against current primary sources. **No facts were edited** — this PR only adds the drift report at \`${REPORT_PATH}\`. Apply any corrections by hand in \`content/posts.json\`, then merge (or close to discard).
+
+          - **Quarter:** ${QUARTER}
+          - **Guides examined:** ${EXAMINED}
+          - **Drifted (need a human edit):** ${DRIFT_COUNT}
+
+          ### Reviewer checklist
+          - [ ] For each drifted finding, confirm the new value against its cited primary source
+          - [ ] Edit the guide's \`sections\`/\`faq\` in \`content/posts.json\` by hand (never the legacy \`content\` field)
+          - [ ] Never use \`[text](/guides/slug/)\` bracket-links or \`**bold**\` in article prose — \`build.py\` has no renderer for either
+          - [ ] If a reporting route/phone number changed, update the canon in \`content/sources.json\` too
+          - [ ] Run \`python3 scripts/build.py\` and grep \`dist/\` for \`](\`, \`**\`, and \`…\` before committing
+          EOF
+          )
+
+          gh pr create --base main --head "$BRANCH" \
+            --title "chore: ${QUARTER} fact re-verification (${DRIFT_COUNT} drifted)" \
+            --body "$BODY" \
+            --label fact-audit \
+          || gh pr create --base main --head "$BRANCH" \
+            --title "chore: ${QUARTER} fact re-verification (${DRIFT_COUNT} drifted)" \
+            --body "$BODY"
+
+          echo "✅ Opened review PR from $BRANCH"
+
+      - name: Summary
+        if: always()
+        run: |
+          echo "## Quarterly fact re-verification" >> "$GITHUB_STEP_SUMMARY"
+          echo "Examined: ${{ steps.reverify.outputs.examined }} · Drifted: ${{ steps.reverify.outputs.drift_count }}" >> "$GITHUB_STEP_SUMMARY"
+          echo "Opens a review PR with the drift report — no facts edited, nothing published." >> "$GITHUB_STEP_SUMMARY"

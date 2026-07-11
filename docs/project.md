@@ -147,6 +147,7 @@ beatthescam-site/
 │   ├── audit_corpus.py                # Re-audits the whole corpus on demand
 │   ├── audit_digest.py                # Weekly audit digest emailer
 │   ├── gate_selftest.py               # Live self-test for the accuracy gate
+│   ├── fact_reverify.py               # Quarterly corpus-wide re-verification (deterministic re-scan + web-search LLM pass) — never edits posts.json
 │   └── ...                            # + 13 more: auth_google.py, check_twitter_auth.py, generate_trending_topics.py, generate_video.py, get_youtube_refresh_token.py, gsc_report.py, merge_new_posts.py, add_bank_codes_post.py, recover_courier_guides.py, recover_purged_pages_2.py, upload_to_youtube.py (see `ls scripts/` for the full current list)
 ├── content/
 │   ├── posts.json                     # All 189 published guides (source of truth)
@@ -156,6 +157,7 @@ beatthescam-site/
 │   ├── topics-claude-template.csv     # Topic template reference
 │   ├── sources.json                   # Verified source canon (reporting phones/emails) — gate + on-page "Report this scam" block derive from this
 │   ├── manifests/                     # Per-guide claim manifests (content/manifests/<slug>.json) — audit record of high-stakes claims detected by the gate
+│   ├── fact-reverify-reports/         # Quarterly drift reports (content/fact-reverify-reports/<YYYY>-Q<N>.md) written by scripts/fact_reverify.py
 │   ├── category-hubs.json             # Category hub page config
 │   └── tweeted_posts.json             # Dedupe ledger for auto-tweet
 ├── templates/
@@ -177,6 +179,7 @@ beatthescam-site/
 │       ├── daily-search-console.yml   # Search Console content-gap pipeline (05:23 UTC) — opens a review PR
 │       ├── tweet-on-publish.yml       # Fires on merge-to-main touching posts.json — tweets added slugs
 │       ├── weekly-audit.yml           # Digests recent claim manifests' flag-tier claims for human review
+│       ├── fact-reverify.yml          # Quarterly (1 Jan/Apr/Jul/Oct) — corpus-wide drift re-check, opens a review PR (label fact-audit)
 │       ├── gate-selftest.yml          # Manual workflow_dispatch — runs the content gate's live self-test
 │       └── codeql.yml                 # CodeQL SAST for JS + Python
 ├── package.json                       # JS deps for Netlify Functions only (@netlify/blobs)
@@ -1283,6 +1286,7 @@ A short credits file at `/humans.txt`. Useful for buyers / future contractors. O
 
 ### Quarterly
 
+- ✅ 1st of Jan/Apr/Jul/Oct, 09:00 UTC — Fact re-verification (`.github/workflows/fact-reverify.yml`) re-checks the whole live corpus against current primary sources and opens a review PR (label `fact-audit`) — review and merge/close it
 - Security re-scan (Security Headers, SSL Labs)
 - Accessibility audit (WAVE / axe-core)
 - WCAG 2.1 AA spot-checks
@@ -1396,7 +1400,9 @@ Revoke PATs after use at github.com → Settings → Developer settings → Pers
 
 34. **`build.py` has no Markdown renderer beyond backtick-code + bare-path auto-link (found 2026-07-10, during the content diversification project's final batches).** Confirmed by reading the code: article prose only supports backtick `` `code` `` spans and `linkify_bare_paths()`, which converts a literal bare `/guides/slug/` path into `<a href="...">{target page's own title}</a>` — it always substitutes the target's own title as link text, never custom text. Two real bugs this caused, both already live on published pages before being caught: (a) `[text](/guides/slug/)` bracket-link syntax isn't interpreted at all — the brackets are left as literal text while the bare path inside still gets auto-linkified, producing broken output like `[label](<a href="...">Real Title</a>)`; found on 6 already-published pages across 2 batches, fixed by rewriting to bare-path prose. (b) `**bold**` markdown has zero render support and shows as literal asterisks; found on 41 spots across 7 pages, including the core `is-this-website-a-scam` reference page. **Never use bracket-link syntax or bold markdown in article prose** — write bare `/guides/slug/` paths directly and phrase the sentence so the target's own (often long) title reads naturally as the visible link text; use plain, emphasis-free prose instead of bold. **Standard checks now, run against all of `dist/` after any content edit** (not caught by `content_gate.py`, which checks facts, not rendering): grep rendered HTML for literal `**` and for the regex `\[[a-zA-Z][^\]]*\]\(/guides/`, alongside the existing "…" truncation grep. Full detail: `docs/content-diversification-plan.md` §8's batch-20 entry.
 
-35. **`content_gate.py`'s legislation-citation regex lacked a word boundary after "Act" (fixed 2026-07-10, PR #53).** `_LEGISLATION_RES` matched `[A-Z]\w+ Act` with nothing requiring a boundary after "Act", so it flagged ordinary words like "Actually"/"Action"/"Active" whenever preceded by 1–5 capitalised words after "The"/"the" — hit on a draft title "...What the Software Actually Does", which the gate flagged as if it cited "the Software Act". Fixed with a trailing `\b`; genuine citations ("the Fraud Act 2006", "the Consumer Credit Act 1974") already had a natural word boundary after "Act" so detection is unaffected.
+35. **`content_gate.py` only runs ONCE, at generation time — it has no mechanism to notice a LIVE guide's facts going stale later (added 2026-07-11).** The 2026-07-10 manual full-corpus audit (16 parallel web-search agents) found real drift in guides that had been live for months: a PSTN switch-off date that moved, a retired Microsoft mailbox, a wrong CMA court-order date, a mis-routed reporting email — none of it caught by the generation-time gate or the 7-day-window weekly digest. `scripts/fact_reverify.py` + `.github/workflows/fact-reverify.yml` (quarterly, 1st of Jan/Apr/Jul/Oct) close that gap: Pass A re-runs `content_gate.run_gate(use_llm=False)` across the ENTIRE corpus regardless of publish date (surfaces old unresolved FLAG-tier claims the weekly digest's 7-day window never resurfaces); Pass B sends one Claude call per guide with the `web_search_20250305` server tool enabled, instructed to verify checkable claims (dates, figures, reporting routes, legal citations, "X was retired/rebranded") against current primary UK sources and report ONLY confirmed drift (an unverifiable claim is left alone, never guessed at). Both passes write one report to `content/fact-reverify-reports/<YYYY>-Q<N>.md` and open a PR labelled **`fact-audit`** — deliberately NOT `auto-content`, because `daily-publish.yml`'s backlog guard skips generation while any `auto-content` PR is open, and a fact-audit PR under review shouldn't pause daily publishing. This script/workflow NEVER edits `posts.json`/manifests/`dist/` — same human-review-gated contract as everything else, and the same pattern already proven on the sister publication `tuningdigital`'s `fact-reverify.yml`.
+
+36. **`content_gate.py`'s legislation-citation regex lacked a word boundary after "Act" (fixed 2026-07-10, PR #53).** `_LEGISLATION_RES` matched `[A-Z]\w+ Act` with nothing requiring a boundary after "Act", so it flagged ordinary words like "Actually"/"Action"/"Active" whenever preceded by 1–5 capitalised words after "The"/"the" — hit on a draft title "...What the Software Actually Does", which the gate flagged as if it cited "the Software Act". Fixed with a trailing `\b`; genuine citations ("the Fraud Act 2006", "the Consumer Credit Act 1974") already had a natural word boundary after "Act" so detection is unaffected.
 
 ### Anti-patterns — don't regress these
 
