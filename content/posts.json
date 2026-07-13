@@ -407,6 +407,12 @@
         "How do I report a fake DPD text message?",
         "Forward the text free to 7726 so your mobile network can investigate the sender, then delete it. If you lost money or shared personal or card details, report it to Report Fraud at reportfraud.police.uk or 0300 123 2040 (Police Scotland on 101 in Scotland). You can also report the fake DPD website to the NCSC and flag it to DPD through their official site."
       ]
+    ],
+    "sources_checked": [
+      [
+        "DPD — Warning about phishing emails and text messages",
+        "https://www.dpd.com/de/en/news/warning-about-phishing-e-mails-and-text-messages-in-the-name-of-dpd/"
+      ]
     ]
   },
   {
@@ -1331,7 +1337,13 @@
       "report crypto investment scam",
       "crypto guaranteed returns scam"
     ],
-    "updated": "2026-07-02"
+    "updated": "2026-07-02",
+    "sources_checked": [
+      [
+        "FCA — Warns consumers of risks in high-return cryptoasset investments",
+        "https://www.fca.org.uk/news/news-stories/fca-warns-consumers-risks-investments-advertising-high-returns-based-cryptoassets"
+      ]
+    ]
   },
   {
     "title": "Bank Transfer Scams UK: How to Spot a 'Safe Account' Con",
@@ -1556,7 +1568,13 @@
       "report debt relief scam",
       "debt management scam warning signs"
     ],
-    "updated": "2026-07-02"
+    "updated": "2026-07-02",
+    "sources_checked": [
+      [
+        "GOV.UK — Get free debt advice",
+        "https://www.gov.uk/debt-advice"
+      ]
+    ]
   },
   {
     "title": "Bitcoin Scam UK: Spot a Fake Crypto Investment",
@@ -2589,7 +2607,17 @@
       "DVLA payment failed text",
       "report DVLA scam text"
     ],
-    "updated": "2026-06-26"
+    "updated": "2026-06-26",
+    "sources_checked": [
+      [
+        "GOV.UK — Scam email warning for DVLA customers",
+        "https://www.gov.uk/government/news/scam-email-warning-for-dvla-customers"
+      ],
+      [
+        "GOV.UK — Vehicle tax refund",
+        "https://www.gov.uk/vehicle-tax-refund"
+      ]
+    ]
   },
   {
     "title": "TV Licensing Scam Text UK: Spot a Fake Licence SMS",
@@ -2808,7 +2836,13 @@
       "council tax refund scam UK",
       "report council tax scam text"
     ],
-    "updated": "2026-06-26"
+    "updated": "2026-06-26",
+    "sources_checked": [
+      [
+        "GOV.UK — Pay Council Tax arrears",
+        "https://www.gov.uk/council-tax-arrears"
+      ]
+    ]
   },
   {
     "title": "Parking Fine Scam Text UK: Spot a Fake PCN SMS",
@@ -3396,7 +3430,13 @@
       "report dvla email scam",
       "dvla phishing email"
     ],
-    "updated": "2026-06-29"
+    "updated": "2026-06-29",
+    "sources_checked": [
+      [
+        "GOV.UK — Scam email warning for DVLA customers",
+        "https://www.gov.uk/government/news/scam-email-warning-for-dvla-customers"
+      ]
+    ]
   },
   {
     "title": "Companies House Email Scam UK: How to Check and Report a Message",
@@ -4008,7 +4048,13 @@
       "dvla automated call scam",
       "report dvla scam call"
     ],
-    "updated": "2026-07-03"
+    "updated": "2026-07-03",
+    "sources_checked": [
+      [
+        "GOV.UK — Scam email warning for DVLA customers",
+        "https://www.gov.uk/government/news/scam-email-warning-for-dvla-customers"
+      ]
+    ]
   },
   {
     "title": "National Insurance Scam Call UK: The 'Suspended' Lie",
@@ -4342,7 +4388,13 @@
       "bitcoin payment scam UK",
       "crypto fraud UK"
     ],
-    "updated": "2026-07-10"
+    "updated": "2026-07-10",
+    "sources_checked": [
+      [
+        "FCA — Warns consumers of risks in high-return cryptoasset investments",
+        "https://www.fca.org.uk/news/news-stories/fca-warns-consumers-risks-investments-advertising-high-returns-based-cryptoassets"
+      ]
+    ]
   },
   {
     "title": "Apple Pay Scam UK: Spot Fake Security Alerts & Texts",
@@ -4567,7 +4619,13 @@
       "eBay overpayment scam",
       "report eBay scam"
     ],
-    "updated": "2026-06-26"
+    "updated": "2026-06-26",
+    "sources_checked": [
+      [
+        "eBay UK — Recognising phishing phone calls and emails",
+        "https://www.ebay.co.uk/help/account/protecting-account/recognising-spoof-emails?id=4195"
+      ]
+    ]
   },
   {
     "title": "Facebook Marketplace Fake Buyer Scam UK",
@@ -4786,7 +4844,13 @@
       "report depop scam uk",
       "depop buyer protection"
     ],
-    "updated": "2026-06-29"
+    "updated": "2026-06-29",
+    "sources_checked": [
+      [
+        "Depop Help Centre — Buying safely on Depop",
+        "https://depophelp.zendesk.com/hc/en-gb/articles/360001772568-Buying-safely-on-Depop"
+      ]
+    ]
   },
   {
     "title": "Autotrader Car Scam UK: Spot Fake Listings & Sellers",
@@ -5698,7 +5762,13 @@
       "second scam after crypto loss",
       "crypto recovery scam report"
     ],
-    "updated": "2026-07-06"
+    "updated": "2026-07-06",
+    "sources_checked": [
+      [
+        "FCA — Fake FCA communications (impersonation warning)",
+        "https://www.fca.org.uk/consumers/fake-fca-communications"
+      ]
+    ]
   },
   {
     "title": "NFT Scam UK: Wallet Drainers and Fake Mint Sites",
@@ -5980,7 +6050,17 @@
       "fake warrant email scam",
       "hmcts phishing report"
     ],
-    "updated": "2026-07-06"
+    "updated": "2026-07-06",
+    "sources_checked": [
+      [
+        "GOV.UK — HMCTS warning on email scams",
+        "https://www.gov.uk/government/news/hmcts-warning-on-email-scams"
+      ],
+      [
+        "TrustOnline (Registry Trust) — Register of Judgments, Orders and Fines",
+        "https://www.trustonline.org.uk/"
+      ]
+    ]
   },
   {
     "title": "Passport Renewal Scam UK: Spot a Fake HMPO Message",
@@ -7148,7 +7228,13 @@
       "fake website UK",
       "scam website UK"
     ],
-    "updated": "2026-07-10"
+    "updated": "2026-07-10",
+    "sources_checked": [
+      [
+        "USTR — 2025 Review of Notorious Markets for Counterfeiting and Piracy",
+        "https://ustr.gov/about/policy-offices/press-office/press-releases/2026/march/ustr-releases-2025-review-notorious-markets-counterfeiting-and-piracy"
+      ]
+    ]
   },
   {
     "title": "Is Wish a Scam? UK Guide to Fakes, Delays & Safe Buying",
@@ -11094,7 +11180,13 @@
       "rogue trader driveway scam",
       "unsolicited tradesman scam uk"
     ],
-    "updated": "2026-07-03"
+    "updated": "2026-07-03",
+    "sources_checked": [
+      [
+        "legislation.gov.uk — Consumer Contracts (Information, Cancellation and Additional Charges) Regulations 2013",
+        "https://www.legislation.gov.uk/uksi/2013/3134"
+      ]
+    ]
   },
   {
     "title": "Parcel Scam Texts Around Bank Holidays & Christmas",
@@ -11625,7 +11717,17 @@
       "property ownership fraud",
       "protect property deed"
     ],
-    "updated": "2026-07-10"
+    "updated": "2026-07-10",
+    "sources_checked": [
+      [
+        "HM Land Registry — Property Alert",
+        "https://propertyalert.landregistry.gov.uk/"
+      ],
+      [
+        "HM Land Registry — The true picture of property fraud in England and Wales",
+        "https://hmlandregistry.blog.gov.uk/2025/09/17/the-true-picture-of-property-fraud-in-england-and-wales/"
+      ]
+    ]
   },
   {
     "title": "Conveyancing Fraud UK: Stop “Friday Afternoon Fraud”",
@@ -11687,7 +11789,17 @@
       "conveyancing money transfer scam",
       "fake solicitor email scam"
     ],
-    "updated": "2026-07-10"
+    "updated": "2026-07-10",
+    "sources_checked": [
+      [
+        "The Law Society — How to identify a cyber-attack",
+        "https://www.lawsociety.org.uk/en/topics/cybersecurity/how-to-identify-a-cyber-attack"
+      ],
+      [
+        "SRA — Fraud guidance",
+        "https://guidance.sra.org.uk/consumers/problems/fraud-dishonesty/fraud/"
+      ]
+    ]
   },
   {
     "title": "CEO Fraud Email Scam UK: Spot a Fake Boss Request",
@@ -12017,7 +12129,13 @@
       "local authority housing fraud",
       "council house application scam"
     ],
-    "updated": "2026-07-10"
+    "updated": "2026-07-10",
+    "sources_checked": [
+      [
+        "legislation.gov.uk — Prevention of Social Housing Fraud Act 2013",
+        "https://www.legislation.gov.uk/ukpga/2013/3"
+      ]
+    ]
   },
   {
     "title": "Benefits Fraud Text Scam UK: Spot a Fake DWP Text",
@@ -12208,7 +12326,17 @@
       "Companies House impersonation scam",
       "government scam letter UK"
     ],
-    "updated": "2026-07-10"
+    "updated": "2026-07-10",
+    "sources_checked": [
+      [
+        "GOV.UK — Companies House fees are changing from 1 February 2026",
+        "https://www.gov.uk/government/news/companies-house-fees-are-changing-from-1-february-2026"
+      ],
+      [
+        "GOV.UK — Companies House confirms identity verification rollout from 18 November 2025",
+        "https://www.gov.uk/government/news/companies-house-confirms-identity-verification-rollout-from-18-november-2025"
+      ]
+    ]
   },
   {
     "title": "Booking.com Scam UK: Spot a Fake Payment Message",
