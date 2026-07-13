@@ -1,0 +1,21 @@
+{
+  "slug": "cruise-scam-uk",
+  "title": "Cruise Scam UK: Spot Fake Deals and Book Safely",
+  "date": "2026-07-13",
+  "model": null,
+  "gate_passed": true,
+  "claims": [
+    {
+      "type": "legislation",
+      "severity": "flag",
+      "text": "the Consumer Credit Act 1974",
+      "detail": "makes a legal/legislation claim ('the Consumer Credit Act 1974') — verify it is accurate."
+    },
+    {
+      "type": "legislation",
+      "severity": "flag",
+      "text": "the Consumer Rights Act",
+      "detail": "makes a legal/legislation claim ('the Consumer Rights Act') — verify it is accurate."
+    }
+  ]
+}

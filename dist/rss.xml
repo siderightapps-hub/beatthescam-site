@@ -1,5 +1,12 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Beat the Scam</title><link>https://beatthescam.com</link><description>Scam alerts, plain-English checks, and practical guides to help people verify suspicious emails, texts, websites, calls, and offers.</description><lastBuildDate>Sun, 05 Jul 2026 00:00:00 +0000</lastBuildDate><atom:link href="https://beatthescam.com/rss.xml" rel="self" type="application/rss+xml" />
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Beat the Scam</title><link>https://beatthescam.com</link><description>Scam alerts, plain-English checks, and practical guides to help people verify suspicious emails, texts, websites, calls, and offers.</description><lastBuildDate>Mon, 13 Jul 2026 00:00:00 +0000</lastBuildDate><atom:link href="https://beatthescam.com/rss.xml" rel="self" type="application/rss+xml" />
+        <item>
+          <title>Cruise Scam UK: Spot Fake Deals and Book Safely</title>
+          <link>https://beatthescam.com/guides/cruise-scam-uk/</link>
+          <guid isPermaLink="true">https://beatthescam.com/guides/cruise-scam-uk/</guid>
+          <pubDate>Mon, 13 Jul 2026 00:00:00 +0000</pubDate>
+          <description>Cruise scams use fake deals, &quot;free cruise&quot; prizes and bogus booking sites to take your money. How to spot one, book safely and get your money back.</description>
+        </item>
         <item>
           <title>Holiday Club Scam UK: How to Spot and Avoid Timeshare Fraud</title>
           <link>https://beatthescam.com/guides/holiday-club-scam-uk/</link>
@@ -202,11 +209,4 @@
           <guid isPermaLink="true">https://beatthescam.com/guides/dpd-delivery-scam-text/</guid>
           <pubDate>Fri, 05 Jun 2026 00:00:00 +0000</pubDate>
           <description>Fake DPD &#x27;missed delivery&#x27; or &#x27;redelivery fee&#x27; texts are smishing scams. Here&#x27;s how to spot a fake DPD text, verify a genuine one, and report it in the UK.</description>
-        </item>
-        <item>
-          <title>Yodel Scam Text Messages: How to Spot a Fake Yodel Text (UK)</title>
-          <link>https://beatthescam.com/guides/yodel-scam-text-messages/</link>
-          <guid isPermaLink="true">https://beatthescam.com/guides/yodel-scam-text-messages/</guid>
-          <pubDate>Fri, 05 Jun 2026 00:00:00 +0000</pubDate>
-          <description>Fake Yodel texts about a missed parcel or small &#x27;redelivery&#x27; fee are smishing scams. How to spot a fake Yodel text, check a real one, and report it.</description>
         </item></channel></rss>

@@ -18,7 +18,7 @@
 - [Social Media Scams](https://beatthescam.com/categories/social/): 5 guide(s)
 - [Tech Support Scams](https://beatthescam.com/categories/tech/): 10 guide(s)
 - [Text Message Scams](https://beatthescam.com/categories/sms/): 24 guide(s)
-- [Travel Scams](https://beatthescam.com/categories/travel/): 13 guide(s)
+- [Travel Scams](https://beatthescam.com/categories/travel/): 14 guide(s)
 - [Utility Scams](https://beatthescam.com/categories/utility/): 3 guide(s)
 - [Website Scams](https://beatthescam.com/categories/website/): 12 guide(s)
 
@@ -223,6 +223,7 @@
 
 - [Airport Transfer Taxi Scam UK: Spot a Fake or Illegal Ride](https://beatthescam.com/guides/airport-transfer-taxi-scam-uk/): Fake transfer sites and illegal touts target airport passengers. Use an official rank or a booking with a licensed operator and verify the vehicle.
 - [Booking.com Scam UK: Spot a Fake Payment Message](https://beatthescam.com/guides/booking-com-scam-uk/): A message uses real booking details and demands payment or card information. Compare it with the confirmation and contact Booking.com directly.
+- [Cruise Scam UK: Spot Fake Deals and Book Safely](https://beatthescam.com/guides/cruise-scam-uk/): Cruise scams use fake deals, "free cruise" prizes and bogus booking sites to take your money. How to spot one, book safely and get your money back.
 - [Fake Airline Ticket Scam UK: Spot a Bargain Flight Con](https://beatthescam.com/guides/fake-airline-ticket-scam-uk/): Found flights far cheaper than anywhere else, advertised on social media or by a 'travel agent'? How to spot a fake airline ticket scam and report it.
 - [Fake Travel Agent Scams UK: How to Spot Booking Fraud](https://beatthescam.com/guides/fake-travel-agent-scam-uk/): Booking a cheap holiday, flight or villa from an agent you don't know? How to spot a fake travel agent, verify ABTA/ATOL, and protect your money.
 - [Glastonbury Accommodation Scam: Spot a Fake Booking](https://beatthescam.com/guides/glastonbury-accommodation-scam-uk/): Fake Glastonbury accommodation listings demand deposits for places that may not exist. Check current Festival information and verify providers independently.
