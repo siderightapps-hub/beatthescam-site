@@ -698,7 +698,17 @@
         "Report Fraud is the central UK reporting service: reportfraud.police.uk or 0300 123 2040. For phishing emails, forward them to report@phishing.gov.uk. For scam texts, forward to 7726. If a card was charged, also report the merchant to your card issuer — repeat reports help payment networks block the merchant entirely."
       ]
     ],
-    "updated": "2026-07-10"
+    "updated": "2026-07-10",
+    "sources_checked": [
+      [
+        "Which? — Section 75 of the Consumer Credit Act",
+        "https://www.which.co.uk/consumer-rights/regulation/section-75-of-the-consumer-credit-act-aZCUb9i8Kwfa"
+      ],
+      [
+        "MoneySavingExpert — Section 75 refunds",
+        "https://www.moneysavingexpert.com/reclaim/section75-protect-your-purchases/"
+      ]
+    ]
   },
   {
     "title": "Amazon Scam Emails: How to Spot a Fake Amazon Email (UK)",
@@ -3841,7 +3851,17 @@
       "pension scam UK",
       "phone scam UK"
     ],
-    "updated": "2026-07-10"
+    "updated": "2026-07-10",
+    "sources_checked": [
+      [
+        "GOV.UK — Review of the Conditions for Transfers Regulations 2021",
+        "https://www.gov.uk/government/publications/conditions-for-transfers-regulations-2021-review-report/review-of-the-occupational-and-personal-pension-schemes-conditions-for-transfers-regulations-2021-si-20211237"
+      ],
+      [
+        "legislation.gov.uk — SI 2021/1237",
+        "https://www.legislation.gov.uk/uksi/2021/1237/note/made"
+      ]
+    ]
   },
   {
     "title": "DVLA Scam Calls: How to Spot a Fake Caller (UK)",
@@ -8183,6 +8203,16 @@
       "Ticketmaster scam",
       "ticket reseller fraud",
       "how to spot fake concert tickets"
+    ],
+    "sources_checked": [
+      [
+        "Which? — Section 75: 5 things to watch out for",
+        "https://www.which.co.uk/news/article/section-75-card-protection-5-things-you-need-to-watch-out-for-aOgTh0p8k9Ur"
+      ],
+      [
+        "MoneySavingExpert — Section 75 refunds",
+        "https://www.moneysavingexpert.com/reclaim/section75-protect-your-purchases/"
+      ]
     ]
   },
   {
@@ -8876,7 +8906,21 @@
       "sextortion deepfake",
       "video blackmail scam"
     ],
-    "updated": "2026-07-10"
+    "updated": "2026-07-10",
+    "sources_checked": [
+      [
+        "legislation.gov.uk — Data (Use and Access) Act 2025, Section 138",
+        "https://www.legislation.gov.uk/ukpga/2025/18/section/138"
+      ],
+      [
+        "Herbert Smith Freehills Kramer — Criminalising deepfakes",
+        "https://www.hsfkramer.com/notes/tmt/2024-05/criminalising-deepfakes-the-uks-new-offences-following-the-online-safety-act"
+      ],
+      [
+        "GOV.UK — Government crackdown on explicit deepfakes",
+        "https://www.gov.uk/government/news/government-crackdown-on-explicit-deepfakes"
+      ]
+    ]
   },
   {
     "title": "QR Code Scam UK: Spot a Fake 'Quishing' Code",
@@ -9334,7 +9378,17 @@
       "pandora fake website uk",
       "report fake pandora website"
     ],
-    "updated": "2026-07-03"
+    "updated": "2026-07-03",
+    "sources_checked": [
+      [
+        "Which? — Section 75 of the Consumer Credit Act",
+        "https://www.which.co.uk/consumer-rights/regulation/section-75-of-the-consumer-credit-act-aZCUb9i8Kwfa"
+      ],
+      [
+        "MoneySavingExpert — Section 75 refunds",
+        "https://www.moneysavingexpert.com/reclaim/section75-protect-your-purchases/"
+      ]
+    ]
   },
   {
     "title": "StubHub Ticket Scam UK: Spot a Fake Seller",
@@ -11888,7 +11942,21 @@
       "HMRC 60599",
       "HMRC tax scam"
     ],
-    "updated": "2026-07-09"
+    "updated": "2026-07-09",
+    "sources_checked": [
+      [
+        "GOV.UK — Check if a text message from HMRC is genuine",
+        "https://www.gov.uk/guidance/check-if-a-text-message-youve-received-from-hmrc-is-genuine"
+      ],
+      [
+        "GOV.UK — Identify HMRC-related scam messages",
+        "https://www.gov.uk/guidance/identify-hmrc-related-scam-phone-calls-emails-and-text-messages"
+      ],
+      [
+        "LITRG — Changes to HMRC text messages",
+        "https://www.litrg.org.uk/announcements/changes-hmrc-text-messages"
+      ]
+    ]
   },
   {
     "title": "Companies House Scam Letter UK: Spot a Fake Fee Demand",
@@ -12266,6 +12334,16 @@
       "cruise holiday fraud",
       "atol cruise",
       "cruise line scam"
+    ],
+    "sources_checked": [
+      [
+        "Which? — Section 75 of the Consumer Credit Act",
+        "https://www.which.co.uk/consumer-rights/regulation/section-75-of-the-consumer-credit-act-aZCUb9i8Kwfa"
+      ],
+      [
+        "MoneySavingExpert — Section 75 refunds",
+        "https://www.moneysavingexpert.com/reclaim/section75-protect-your-purchases/"
+      ]
     ]
   },
   {

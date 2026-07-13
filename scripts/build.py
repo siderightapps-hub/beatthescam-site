@@ -2099,7 +2099,7 @@ def build_legal_bodies(site):
     <h2>Editorial standards</h2>
     <p>Content is written to be understandable under pressure. That means short sections, clear headings, and advice that directs readers towards independent verification through official channels &mdash; never through links, numbers, or payment details supplied by a suspicious message.</p>
     <p>Where the site recommends a national reporting route &mdash; such as Report Fraud, the NCSC, or Citizens Advice &mdash; it uses the official published channel. For organisation-specific contact details, always confirm the number or web address against the official website, or the details on your card, bill, or statement, rather than relying solely on any number reproduced in a guide.</p>
-    <p>If a guide contains an error, email <a href="mailto:{site["contact_email"]}">{site["contact_email"]}</a> with the page URL and the issue. Corrections are made promptly.</p>
+    <p>If a guide contains an error, email <a href="mailto:{site["editorial_email"]}">{site["editorial_email"]}</a> with the page URL and the issue. Corrections are made promptly.</p>
 
     <h2>About the AI scam checker</h2>
     <p>The free scam checker on this site sends the suspicious message text you paste to Anthropic&#8217;s Claude API for analysis. The text is processed in real time to produce a verdict, list of red flags, and recommended actions &mdash; then discarded. Beat the Scam does not store the suspicious text you submit, and does not link it to your identity. To keep the free tool available and block abuse, the checker keeps a rate-limit counter keyed to a hashed form of your IP address &mdash; used only to enforce per-minute and daily usage limits, and never linked to your submission. As the processor, Anthropic may retain the text you submit and the model&#8217;s response for up to 30 days under its standard API data policy (and longer only where required for legal or safety reasons); it does not use API inputs or outputs to train its models.</p>
@@ -2107,7 +2107,7 @@ def build_legal_bodies(site):
     <p>The checker&#8217;s output is educational. It is not a definitive fraud determination. If you are unsure about a real-world payment or account access decision, contact your bank&#8217;s fraud team using the number on the back of your card.</p>
 
     <h2>Contact</h2>
-    <p>Editorial contact and correction requests: <a href="mailto:{site["contact_email"]}">{site["contact_email"]}</a></p>
+    <p>Editorial contact and correction requests: <a href="mailto:{site["editorial_email"]}">{site["editorial_email"]}</a></p>
 
     <p class="note" style="margin-top:2rem;color:#666;font-size:.9rem">Last reviewed: May 2026. The site is reviewed periodically and updated as scam patterns and reporting routes change.</p>
     '''
@@ -2217,13 +2217,13 @@ def build_legal_bodies(site):
     <p>These Terms are governed by the laws of <strong>England and Wales</strong>. If you are resident in <strong>Scotland</strong>, these Terms are governed by <strong>Scots law</strong> and the Scottish courts have non-exclusive jurisdiction over any dispute arising from them. If you are resident in <strong>Northern Ireland</strong>, the courts of Northern Ireland have non-exclusive jurisdiction. None of this affects your mandatory statutory consumer rights in your country of residence.</p>
 
     <h2>Contact</h2>
-    <p>For questions about these Terms, copyright, or other legal matters, email <a href="mailto:{site["legal_email"]}">{site["legal_email"]}</a>. For corrections to a guide, email <a href="mailto:{site["contact_email"]}">{site["contact_email"]}</a> with the page URL and the change requested. For privacy and data-protection requests, see the <a href="/privacy/">Privacy Policy</a>.</p>
+    <p>For questions about these Terms, copyright, or other legal matters, email <a href="mailto:{site["legal_email"]}">{site["legal_email"]}</a>. For corrections to a guide, email <a href="mailto:{site["editorial_email"]}">{site["editorial_email"]}</a> with the page URL and the change requested. For privacy and data-protection requests, see the <a href="/privacy/">Privacy Policy</a>.</p>
     '''
 
     contact = f'''
-    <p>For editorial contact, corrections, or partnership enquiries, email <a href="mailto:{site["contact_email"]}">{site["contact_email"]}</a>. For privacy, legal, or security matters, please use the dedicated addresses below.</p>
+    <p>For editorial contact or corrections, email <a href="mailto:{site["editorial_email"]}">{site["editorial_email"]}</a>. For partnership enquiries, email <a href="mailto:{site["contact_email"]}">{site["contact_email"]}</a>. For privacy, legal, or security matters, please use the dedicated addresses below.</p>
     <div class="tablelike">
-      <div class="table-row"><strong>Editorial &amp; corrections</strong><span><a href="mailto:{site["contact_email"]}">{site["contact_email"]}</a> &mdash; send the page URL and the correction you want reviewed.</span></div>
+      <div class="table-row"><strong>Editorial &amp; corrections</strong><span><a href="mailto:{site["editorial_email"]}">{site["editorial_email"]}</a> &mdash; send the page URL and the correction you want reviewed.</span></div>
       <div class="table-row"><strong>Advertising or partnerships</strong><span><a href="mailto:{site["contact_email"]}">{site["contact_email"]}</a> &mdash; include the business name, proposal, and relevant website.</span></div>
       <div class="table-row"><strong>Privacy &amp; data protection</strong><span><a href="mailto:{site["privacy_email"]}">{site["privacy_email"]}</a> &mdash; reference &#8220;Privacy request&#8221; in the subject line.</span></div>
       <div class="table-row"><strong>Legal &amp; copyright</strong><span><a href="mailto:{site["legal_email"]}">{site["legal_email"]}</a> &mdash; Terms, intellectual property, and reproduction requests.</span></div>
@@ -2247,7 +2247,7 @@ def build_legal_bodies(site):
     <p>The scam checker returns an <strong>automated, educational</strong> assessment generated by an AI model. It can be wrong in both directions &mdash; flagging genuine messages and missing real scams &mdash; and it does <strong>not</strong> make any decision that produces a legal or similarly significant effect on you. Do not rely on it alone for a high-stakes decision. The text you submit is processed to produce a verdict and is not stored by Beat the Scam; see the <a href="/privacy/">Privacy Policy</a> for how it handles data.</p>
 
     <h2>Accuracy and corrections</h2>
-    <p>We take accuracy seriously: every guide passes an automated accuracy gate before publication and is reviewed on a recurring schedule. Even so, the Site may contain errors, omissions, or information that has gone out of date. If you spot something wrong, please email <a href="mailto:{site["contact_email"]}">{site["contact_email"]}</a> with the page URL and we will correct it promptly.</p>
+    <p>We take accuracy seriously: every guide passes an automated accuracy gate before publication and is reviewed on a recurring schedule. Even so, the Site may contain errors, omissions, or information that has gone out of date. If you spot something wrong, please email <a href="mailto:{site["editorial_email"]}">{site["editorial_email"]}</a> with the page URL and we will correct it promptly.</p>
 
     <h2>External links</h2>
     <p>The Site links to third-party resources such as government sites, regulators, banks, and news outlets. Those sites operate under their own terms and privacy policies, and we have no control over and accept no responsibility for their content, accuracy, or availability.</p>

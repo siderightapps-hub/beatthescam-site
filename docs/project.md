@@ -88,14 +88,15 @@ A free, UK-focused consumer-protection publication that:
 |---|---|---|
 | `hello@beatthescam.com` | General public contact (footer + Contact page) | Active |
 | `socialmedia@beatthescam.com` | Social platform sign-ups, ElevenLabs, TikTok, YouTube brand account, Instagram | Active |
-| `privacy@beatthescam.com` | GDPR / data protection / right-to-be-forgotten enquiries | Reserved — should be activated |
-| `welcome@beatthescam.com` | Newsletter onboarding (future — planned newsletter feature) | Reserved |
-| `editorial@beatthescam.com` | Editorial / correction enquiries | Reserved — should be activated |
-| `legal@beatthescam.com` | DMCA / takedown / legal notices | Reserved — should be activated |
-| `security@beatthescam.com` | Responsible disclosure inbox (security.txt) | Reserved — recommended |
+| `privacy@beatthescam.com` | GDPR / data protection / right-to-be-forgotten enquiries; also the DMARC aggregate-report address (`dmarc@` is an alias of this) | Active (activated 2026-07-13) |
+| `welcome@beatthescam.com` | Reserved for newsletter onboarding, but not actually referenced anywhere — the newsletter sends from a separate Resend subdomain (`alerts@updates.beatthescam.com`, see `subscribe.js`'s `FROM_ADDRESS`), not this address | Active mailbox, unused in code |
+| `editorial@beatthescam.com` | Editorial / correction enquiries — intended purpose, but every "editorial contact"/correction paragraph in build.py currently points to `contact_email` (`hello@`) instead; never wired in | Active mailbox, unused in code |
+| `legal@beatthescam.com` | DMCA / takedown / legal notices — already wired into the Terms/copyright paragraphs via `legal_email` | Active (activated 2026-07-13) |
+| `security@beatthescam.com` | Responsible disclosure inbox (security.txt) — already wired in | Active (activated 2026-07-13) |
+| `abuse@beatthescam.com` | Not in code anywhere; exists per this doc's own recommendation below (directories/scanners look for it as a trust signal) | Active |
 | `siderightapps@gmail.com` | Dev / infra / billing master account (Netlify, GitHub, AdSense, YouTube brand owner) | Active |
 
-> **Recommendation:** activate all five reserved aliases as catch-alls or forwarders before public submission to directories. Many directories and security scanners look for `security@`, `privacy@`, and `abuse@` mailboxes — having them improves trust signals.
+> All reserved aliases were activated 2026-07-13. `welcome@` and `editorial@` are live mailboxes but not yet referenced by any code path — see the notes above if that should change.
 
 ### Public contact methods
 
