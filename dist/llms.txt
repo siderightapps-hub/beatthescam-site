@@ -39,7 +39,7 @@
 
 - [Amazon Scam Emails: How to Spot a Fake Amazon Email (UK)](https://beatthescam.com/guides/amazon-order-scam-email-checklist/): Got an Amazon email about an order problem, refund, or 'account locked'? How to tell a genuine Amazon email from a phishing scam — and check safely.
 - [CEO Fraud Email Scam UK: Spot a Fake Boss Request](https://beatthescam.com/guides/ceo-fraud-email-scam-uk/): A message appears to come from a senior colleague and requests an urgent payment or sensitive data. Verify it through a separate trusted channel.
-- [Companies House Email Scam UK: Spot a Fake Notice](https://beatthescam.com/guides/companies-house-email-scam-uk/): Verify a Companies House message through GOV.UK, protect your authentication and personal codes, and report suspicious email to the dedicated address.
+- [Companies House Email Scam UK: How to Check and Report a Message](https://beatthescam.com/guides/companies-house-email-scam-uk/): Fake Companies House emails use urgent verification, filing or payment claims. Learn how to check a message safely and report phishing in the UK.
 - [DVLA Email Scam UK: Spot a Fake Tax or Fine Email](https://beatthescam.com/guides/dvla-email-scam-uk/): Got a DVLA email about car tax, a refund, a fine, or your licence? How to spot a fake DVLA email, check safely on GOV.UK, and report it in the UK.
 - [Email Account Takeover UK: Recover and Lock It Down](https://beatthescam.com/guides/email-account-takeover-scam-uk/): Recover a compromised email account, remove forwarding rules and reused credentials, and use a passkey or two-step verification to secure it.
 - [Festival Lineup Email Scam UK: Spot a Fake Presale](https://beatthescam.com/guides/festival-lineup-email-scam-uk/): Got an email about a festival lineup announcement with a presale ticket link? How to spot a fake festival email scam and buy tickets safely.
@@ -50,7 +50,7 @@
 - [Netflix Billing Email Scam UK: Spot a Fake Message](https://beatthescam.com/guides/netflix-billing-email-scam-uk/): An email says your Netflix payment failed and your account will be suspended? Check it before clicking — genuine Netflix never asks this way.
 - [PayPal Account Limited Email Scam UK](https://beatthescam.com/guides/paypal-account-limited-email-scam-uk/): An email says your PayPal account is limited and you must verify now? Log in directly instead. Genuine emails use your account name.
 - [Santander Email Scam: How to Spot a Fake Bank Email (UK)](https://beatthescam.com/guides/santander-email-scam-uk/): A Santander email about a locked account or 'verify now'? How to spot a fake Santander email, check it safely, and report phishing in the UK.
-- [Sextortion Email Scam UK: How to Spot and Stop It](https://beatthescam.com/guides/sextortion-email-scam-uk/): Bulk sextortion emails claim to have webcam footage and may include an old password. The NCSC says the sender is usually guessing; do not pay or reply.
+- [Sextortion Email Scam UK: How to Respond Safely](https://beatthescam.com/guides/sextortion-email-scam-uk/): Sextortion scam emails claim to have compromising footage and demand payment. Learn how to respond, report the email and secure your accounts.
 - [TV Licence Scam Email UK: How to Spot a Fake](https://beatthescam.com/guides/tv-licence-email-scam-uk/): Genuine TV Licensing payment emails come from specific sender addresses. Here's how to check a TV Licence email is real before clicking any link.
 
 ### Employment Scams
@@ -249,13 +249,13 @@
 - [Fake Online Pharmacy UK: Spot an Illegal Medicine Site](https://beatthescam.com/guides/fake-online-pharmacy-uk-scam/): Found a site selling prescription medicine cheaply with no prescription needed? How to spot a fake online pharmacy, check it, and report it.
 - [Fake Pandora Website UK: Spot a Counterfeit Jewellery Site](https://beatthescam.com/guides/fake-pandora-website-uk-scam/): A 'Pandora' site selling charms at huge discounts? Check pandora.net and Pandora's authorised-retailer guidance before entering card details.
 - [Fake Ray-Ban Website Scam UK: Spot a Copycat Store](https://beatthescam.com/guides/fake-ray-ban-website-scam-uk/): Found a Ray-Ban site with huge discounts from a social ad? How to spot a fake Ray-Ban copycat website, buy safely, and report it in the UK.
-- [Fake UGG Website UK: Verify the Seller, Not Just the Name](https://beatthescam.com/guides/fake-ugg-website-uk/): Fake UGG shops copy the brand and product photos. Use ugg.com/uk or verify a retailer independently, and do not trust an obvious-looking domain alone.
+- [Fake SHEIN Website UK: How to Check the Site and Protect Your Details](https://beatthescam.com/guides/shein-fake-website-scam-uk/): Fake SHEIN websites can take payments or capture personal details. Check the real UK domain and learn what to do if you entered information.
+- [Fake UGG Website UK: How to Spot Counterfeit Boots and Protect Your Money](https://beatthescam.com/guides/fake-ugg-website-uk/): Fake UGG websites may sell counterfeits or take your money without delivering. Learn how to check a seller and what to do if you paid.
 - [Is AliExpress a Scam? UK Guide to Marketplace Risk](https://beatthescam.com/guides/aliexpress-scam-or-legit-uk-guide/): AliExpress is an Alibaba marketplace, but listings and sellers vary. Keep payment on-platform and use the dispute or return deadline shown on the order.
 - [Is DHgate a Scam? UK Guide to Seller and Counterfeit Risk](https://beatthescam.com/guides/dhgate-scam-uk-review/): DHgate is an operating marketplace, but seller quality and counterfeit risk vary. Keep payment on-platform and follow the deadline shown on your order.
 - [Is Temu a Scam? UK Guide to Fake Temu Offers](https://beatthescam.com/guides/is-temu-a-scam-uk/): Temu itself is a real marketplace, but scammers impersonate it. How to spot fake Temu cashback offers, texts, and lookalike sites, and report them.
 - [Is This Website a Scam? A Practical Checklist Before You Buy](https://beatthescam.com/guides/is-this-website-a-scam/): A plain-English checklist for judging whether a website is legitimate before you enter payment details, starting with the domain itself.
 - [Is Wish a Scam? UK Guide to Fakes, Delays & Safe Buying](https://beatthescam.com/guides/wish-scam-uk-review/): Is Wish a scam or just cheap? Wish is a real shopping app, but counterfeits, no-shows and fake 'Wish' emails are the real risks — here's how to buy safely.
-- [SHEIN Fake Website Scam UK: Check the Site and Offer](https://beatthescam.com/guides/shein-fake-website-scam-uk/): Fake SHEIN sites and giveaway pages can steal payments or logins. Open the genuine UK site yourself and verify promotions through official channels.
 
 ## Optional
 
