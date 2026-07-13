@@ -61,6 +61,12 @@
         "How do I report a fake Amazon call in the UK?",
         "Report it to Report Fraud at reportfraud.police.uk or on 0300 123 2040 (Police Scotland on 101 in Scotland), and flag the impersonation to Amazon via the 'Report Something Suspicious' pages on their official site. You can also report nuisance calls to your phone provider. If you received scam texts alongside the calls, forward them free to 7726."
       ]
+    ],
+    "sources_checked": [
+      [
+        "Amazon Customer Service — Identifying a scam",
+        "https://www.amazon.com/gp/help/customer/display.html?nodeId=G4YFYCCNUSENA23B"
+      ]
     ]
   },
   {
@@ -124,6 +130,12 @@
       [
         "Is a chargeback the same as a scam?",
         "No. A chargeback is a legitimate protection for when you're charged fraudulently or don't receive what you paid for, and UK credit-card Section 75 cover is a separate genuine safeguard. The scam is the deliberate abuse of the chargeback process to get a refund while keeping the goods. If you're targeted, fight the dispute with evidence and report it to Report Fraud at reportfraud.police.uk or 0300 123 2040."
+      ]
+    ],
+    "sources_checked": [
+      [
+        "UK Finance — Chargeback and Section 75",
+        "https://www.ukfinance.org.uk/our-expertise/cards/chargeback-and-section-75"
       ]
     ]
   },
@@ -324,7 +336,13 @@
       ]
     ],
     "excerpt": "Almost every scam — whatever the channel or story — relies on the same pattern of urgency, pressure, and requests to move money or share codes. Here's the core framework for spotting and avoiding any of them.",
-    "updated": "2026-07-10"
+    "updated": "2026-07-10",
+    "sources_checked": [
+      [
+        "Take Five to Stop Fraud — Stop. Challenge. Protect.",
+        "https://takefive-stopfraud.org.uk/"
+      ]
+    ]
   },
   {
     "slug": "dpd-delivery-scam-text",
@@ -616,6 +634,12 @@
         "My HMRC, Microsoft, or Google code isn't arriving — does the same advice apply?",
         "Yes, the universal fixes work for any service that sends verification codes by SMS. Reboot first, check signal and Do Not Disturb, and look for the message in any junk or filtered folder. Most major services also offer app-based or voice alternatives that bypass SMS entirely — for UK government services, sign in at gov.uk and switch your verification method in your Government Gateway settings. For Google, Apple, and Microsoft accounts, set up an authenticator app for codes that work even with no signal."
       ]
+    ],
+    "sources_checked": [
+      [
+        "NCSC — SMS and telephone best practice (SIM-swap checks)",
+        "https://www.ncsc.gov.uk/guidance/business-communications-sms-and-telephone-best-practice"
+      ]
     ]
   },
   {
@@ -781,7 +805,17 @@
       "Amazon order problem email",
       "report Amazon scam email"
     ],
-    "updated": "2026-06-26"
+    "updated": "2026-06-26",
+    "sources_checked": [
+      [
+        "Amazon Customer Service — Identifying a scam",
+        "https://www.amazon.com/gp/help/customer/display.html?nodeId=G4YFYCCNUSENA23B"
+      ],
+      [
+        "Amazon Customer Service — Report a scam",
+        "https://www.amazon.com/gp/help/customer/display.html?nodeId=GRGRY7AQ3LMPXVCV"
+      ]
+    ]
   },
   {
     "title": "Charity Scam UK: Spot a Fake Donation Appeal",
@@ -854,7 +888,17 @@
       "report charity scam uk",
       "disaster appeal scam"
     ],
-    "updated": "2026-07-02"
+    "updated": "2026-07-02",
+    "sources_checked": [
+      [
+        "GOV.UK — Search the charity register (Charity Commission, England & Wales)",
+        "https://www.gov.uk/find-charity-information"
+      ],
+      [
+        "OSCR — Search the Register (Scotland)",
+        "https://www.oscr.org.uk/about-charities/search-the-register/"
+      ]
+    ]
   },
   {
     "title": "Invoice Redirection Scam UK: Spot Fake Payment Requests",
@@ -1360,7 +1404,13 @@
       "bank impersonation transfer",
       "report bank transfer scam"
     ],
-    "updated": "2026-07-10"
+    "updated": "2026-07-10",
+    "sources_checked": [
+      [
+        "Pay.UK — Confirmation of Payee",
+        "https://www.wearepay.uk/what-we-do/overlay-services/confirmation-of-payee/"
+      ]
+    ]
   },
   {
     "title": "Tinder Scams UK: How to Spot a Fake Profile or Romance Con",
@@ -1579,7 +1629,13 @@
       "report bitcoin scam uk",
       "fake crypto exchange bitcoin"
     ],
-    "updated": "2026-07-02"
+    "updated": "2026-07-02",
+    "sources_checked": [
+      [
+        "FCA — Warns consumers of risks in high-return cryptoasset investments",
+        "https://www.fca.org.uk/news/news-stories/fca-warns-consumers-risks-investments-advertising-high-returns-based-cryptoassets"
+      ]
+    ]
   },
   {
     "title": "LinkedIn Job Scam UK: Spot a Fake Recruiter Offer",
@@ -2235,7 +2291,13 @@
       "Barclays new payee text",
       "report Barclays scam text"
     ],
-    "updated": "2026-06-26"
+    "updated": "2026-06-26",
+    "sources_checked": [
+      [
+        "Stop Scams UK — 159 phone number (participating banks)",
+        "https://stopscamsuk.org.uk/our-programmes/159-phone-number/"
+      ]
+    ]
   },
   {
     "title": "Lloyds Scam Texts: How to Spot a Fake Lloyds SMS (UK)",
@@ -2965,7 +3027,13 @@
       "report amazon scam text",
       "amazon failed delivery text"
     ],
-    "updated": "2026-06-29"
+    "updated": "2026-06-29",
+    "sources_checked": [
+      [
+        "Amazon Customer Service — Report a scam",
+        "https://www.amazon.com/gp/help/customer/display.html?nodeId=GRGRY7AQ3LMPXVCV"
+      ]
+    ]
   },
   {
     "title": "HMRC Tax Rebate Email Scam: Spot a Fake (UK)",
@@ -3710,7 +3778,13 @@
       "BT remote access scam",
       "report BT scam call"
     ],
-    "updated": "2026-06-26"
+    "updated": "2026-06-26",
+    "sources_checked": [
+      [
+        "BT Help — Scams",
+        "https://www.bt.com/help/security/scams"
+      ]
+    ]
   },
   {
     "title": "Police Impersonation Scam UK: Spot a Fake Officer Call",
@@ -4058,7 +4132,17 @@
       "bank transfer scam UK",
       "payment scam UK"
     ],
-    "updated": "2026-07-10"
+    "updated": "2026-07-10",
+    "sources_checked": [
+      [
+        "FCA — Loan fee fraud",
+        "https://www.fca.org.uk/consumers/loan-fee-fraud"
+      ],
+      [
+        "Gambling Commission — Lottery scams and fraud",
+        "https://www.gamblingcommission.gov.uk/public-and-players/guide/lottery-scams-and-fraud"
+      ]
+    ]
   },
   {
     "title": "Invoice Fraud UK: How to Verify a Payment Safely",
@@ -4331,7 +4415,13 @@
       "report apple pay scam",
       "apple pay safe account scam"
     ],
-    "updated": "2026-06-29"
+    "updated": "2026-06-29",
+    "sources_checked": [
+      [
+        "Apple Support — Recognize and avoid social engineering schemes",
+        "https://support.apple.com/en-us/102568"
+      ]
+    ]
   },
   {
     "title": "Monzo Scam UK: Spot a Fake 'Suspicious Activity' Alert",
@@ -4769,7 +4859,17 @@
       "buying a car online scam uk",
       "report car scam uk"
     ],
-    "updated": "2026-06-29"
+    "updated": "2026-06-29",
+    "sources_checked": [
+      [
+        "Autotrader UK — How to spot and avoid potential scams",
+        "https://www.autotrader.co.uk/content/advice/how-to-spot-and-avoid-potential-scams"
+      ],
+      [
+        "GOV.UK — Check the MOT history of a vehicle",
+        "https://www.gov.uk/check-mot-history"
+      ]
+    ]
   },
   {
     "title": "Rightmove Rental Scam UK: Spot Fake Property Listings",
@@ -4915,7 +5015,13 @@
       "report airbnb scam uk",
       "airbnb too good to be true listing"
     ],
-    "updated": "2026-07-03"
+    "updated": "2026-07-03",
+    "sources_checked": [
+      [
+        "Airbnb Help Center — If a host asks you to pay outside Airbnb",
+        "https://www.airbnb.com/help/article/199"
+      ]
+    ]
   },
   {
     "title": "Preloved Scam UK: Spot a Fake Seller or Listing",
@@ -5380,7 +5486,13 @@
       "cryptocurrency scam UK",
       "crypto fraud UK"
     ],
-    "updated": "2026-07-10"
+    "updated": "2026-07-10",
+    "sources_checked": [
+      [
+        "FCA — Cryptoassets: who needs to register",
+        "https://www.fca.org.uk/firms/cryptoassets-aml-ctf-regime/cryptoassets-who-needs-register"
+      ]
+    ]
   },
   {
     "title": "Binance Impersonation Scam UK: Spot a Fake Message",
@@ -5444,7 +5556,13 @@
       "crypto scam UK",
       "cryptocurrency scam UK"
     ],
-    "updated": "2026-07-10"
+    "updated": "2026-07-10",
+    "sources_checked": [
+      [
+        "Binance — official verification tool",
+        "https://www.binance.com/en/official-verification"
+      ]
+    ]
   },
   {
     "title": "Fake Crypto Exchange UK: Spot a Cloned Trading Platform",
@@ -6443,7 +6561,13 @@
       "romance scam UK",
       "report Bumble scam"
     ],
-    "updated": "2026-06-28"
+    "updated": "2026-06-28",
+    "sources_checked": [
+      [
+        "Bumble Support — Reporting someone",
+        "https://support.bumble.com/hc/en-us/articles/28783343585565-Reporting-someone"
+      ]
+    ]
   },
   {
     "title": "Pig Butchering Scam UK: Dating Apps & Fake Crypto",
@@ -6661,7 +6785,13 @@
       "report apple tech support scam",
       "fake apple security alert"
     ],
-    "updated": "2026-07-02"
+    "updated": "2026-07-02",
+    "sources_checked": [
+      [
+        "Apple Support — Recognize and avoid social engineering schemes",
+        "https://support.apple.com/en-us/102568"
+      ]
+    ]
   },
   {
     "title": "Remote Access Scam UK: What the Software Can Expose",
@@ -6862,7 +6992,13 @@
       "counterfeit asos clothing uk",
       "asos lookalike domain scam"
     ],
-    "updated": "2026-07-02"
+    "updated": "2026-07-02",
+    "sources_checked": [
+      [
+        "ASOS — Cyber Security / staying safe online",
+        "https://www.asos.com/discover/cyber-security/"
+      ]
+    ]
   },
   {
     "title": "Fake UGG Website UK: How to Spot Counterfeit Boots and Protect Your Money",
@@ -7230,7 +7366,13 @@
       "clone firm bonds shares scam",
       "fca register check firm"
     ],
-    "updated": "2026-07-05"
+    "updated": "2026-07-05",
+    "sources_checked": [
+      [
+        "FCA — Clone firms and individuals",
+        "https://www.fca.org.uk/consumers/clone-firms-individuals"
+      ]
+    ]
   },
   {
     "title": "Bond Scam UK: How Fake High-Return Bonds Work",
@@ -7294,7 +7436,13 @@
       "investment fraud UK",
       "financial fraud UK"
     ],
-    "updated": "2026-07-09"
+    "updated": "2026-07-09",
+    "sources_checked": [
+      [
+        "FSCS — London Capital & Finance (LCF) failure",
+        "https://www.fscs.org.uk/making-a-claim/failed-firms/lcf/"
+      ]
+    ]
   },
   {
     "title": "Land Banking Scam UK: Spot a Fake Land Investment",
@@ -7864,7 +8012,13 @@
       "british gas smart meter scam call",
       "british gas engineer scam"
     ],
-    "updated": "2026-07-05"
+    "updated": "2026-07-05",
+    "sources_checked": [
+      [
+        "Gas Safe Register — Check an engineer",
+        "https://www.gassaferegister.co.uk/find-an-engineer-or-check-the-register/check-an-engineer/"
+      ]
+    ]
   },
   {
     "title": "Smart Meter Scam Calls UK: What Genuine Energy Contacts Look Like",
@@ -8856,7 +9010,13 @@
       "cloned voice scam what to do",
       "voice cloning scam call"
     ],
-    "updated": "2026-07-05"
+    "updated": "2026-07-05",
+    "sources_checked": [
+      [
+        "Police Scotland — Voice cloning scams",
+        "https://www.scotland.police.uk/advice/scams-and-frauds/voice-cloning-scams/"
+      ]
+    ]
   },
   {
     "title": "Deepfake Sextortion UK: Fake Images or Video as Leverage",
@@ -9606,7 +9766,17 @@
       "report amazon prime scam",
       "amazon prime cancel subscription scam"
     ],
-    "updated": "2026-07-02"
+    "updated": "2026-07-02",
+    "sources_checked": [
+      [
+        "Amazon Customer Service — Identifying a scam",
+        "https://www.amazon.com/gp/help/customer/display.html?nodeId=G4YFYCCNUSENA23B"
+      ],
+      [
+        "Amazon Customer Service — Report a scam",
+        "https://www.amazon.com/gp/help/customer/display.html?nodeId=GRGRY7AQ3LMPXVCV"
+      ]
+    ]
   },
   {
     "title": "eBay Listing Fee Scam UK: Spot a Fake Notice",
@@ -10552,7 +10722,17 @@
       "airport taxi verification",
       "UK airport transport safety"
     ],
-    "updated": "2026-07-10"
+    "updated": "2026-07-10",
+    "sources_checked": [
+      [
+        "Transport for London — Changes to private hire regulation",
+        "https://tfl.gov.uk/info-for/taxis-and-private-hire/new-private-hire-regulations"
+      ],
+      [
+        "nidirect — Taxis and their services (Northern Ireland)",
+        "https://www.nidirect.gov.uk/articles/taxis-and-their-services"
+      ]
+    ]
   },
   {
     "title": "TUI Booking Scam UK: Spot a Fake Deal or Contact",
@@ -10986,7 +11166,17 @@
       "parcel redelivery fee scam",
       "christmas delivery scam text uk"
     ],
-    "updated": "2026-07-06"
+    "updated": "2026-07-06",
+    "sources_checked": [
+      [
+        "Royal Mail — What time, what days do you deliver",
+        "https://help.royalmail.com/personal/s/article/What-time-what-days-do-you-deliver"
+      ],
+      [
+        "Evri — Is this Evri text/email genuine?",
+        "https://www.evri.com/faqs/receiving-a-parcel/is-this-evri-text-email-genuine"
+      ]
+    ]
   },
   {
     "title": "Wedding Venue Deposit Scam UK: Verify Before Paying",
@@ -11555,7 +11745,13 @@
       "fake CEO email",
       "CEO fraud prevention"
     ],
-    "updated": "2026-07-10"
+    "updated": "2026-07-10",
+    "sources_checked": [
+      [
+        "NCSC — Business email compromise: defending your organisation",
+        "https://www.ncsc.gov.uk/section/respond-recover/ml-business-payment-fraud"
+      ]
+    ]
   },
   {
     "title": "Sextortion Email Scam UK: How to Respond Safely",
@@ -11879,7 +12075,13 @@
       "benefits scam text",
       "DWP impersonation scam"
     ],
-    "updated": "2026-07-10"
+    "updated": "2026-07-10",
+    "sources_checked": [
+      [
+        "GOV.UK — Winter Fuel Payment",
+        "https://www.gov.uk/winter-fuel-payment"
+      ]
+    ]
   },
   {
     "title": "HMRC Self Assessment Scam UK: Fake Refund & Tax Bill Texts",
@@ -12064,7 +12266,13 @@
       "travel booking scam",
       "holiday scam UK"
     ],
-    "updated": "2026-07-10"
+    "updated": "2026-07-10",
+    "sources_checked": [
+      [
+        "Booking.com — Online security awareness: phishing and email spoofing",
+        "https://partner.booking.com/en-us/help/legal-security/security/online-security-awareness-phishing-and-email-spoofing"
+      ]
+    ]
   },
   {
     "slug": "fake-travel-agent-scam-uk",
