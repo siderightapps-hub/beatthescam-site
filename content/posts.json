@@ -520,86 +520,6 @@
     ]
   },
   {
-    "slug": "isp-impersonation-scam-bt-sky-virgin-media",
-    "title": "ISP Impersonation Scams UK: BT, Sky, Virgin Media and Openreach Calls",
-    "description": "Scammers impersonate UK broadband providers or Openreach, then ask for remote access, payment or security details. How to check safely.",
-    "hero": "An unexpected broadband-support call is not a reason to install remote-access software or disclose banking information.",
-    "date": "2026-05-11",
-    "category": "tech",
-    "keywords": [
-      "ISP scam UK",
-      "BT scam call",
-      "BT internet scam",
-      "BT broadband scam",
-      "BT engineer scam",
-      "Sky broadband scam",
-      "Sky scam call",
-      "Sky internet scam",
-      "Virgin Media scam call",
-      "Virgin Media broadband scam",
-      "Virgin Media internet scam",
-      "Openreach scam",
-      "Openreach engineer scam",
-      "TalkTalk scam call",
-      "TalkTalk internet scam",
-      "Plusnet scam",
-      "EE broadband scam",
-      "broadband provider scam UK",
-      "internet provider scam UK",
-      "remote access scam UK",
-      "broadband engineer scam",
-      "fake engineer call UK",
-      "TeamViewer scam",
-      "AnyDesk scam",
-      "PSTN switchover scam",
-      "digital voice scam",
-      "tech support scam UK",
-      "phone scam broadband",
-      "ISP impersonation UK",
-      "broadband fault scam",
-      "internet scam call UK",
-      "BT scam",
-      "BT phone scam",
-      "Sky scam",
-      "Sky TV scam",
-      "Sky engineer scam",
-      "Virgin Media scam",
-      "Openreach call scam"
-    ],
-    "sections": [
-      [
-        "What the scam looks like",
-        "An unsolicited caller claims to be from BT, Sky, Virgin Media, Openreach or a technical partner. They may mention a fault, slow broadband, suspicious activity, a router problem or the Digital Voice transition, then ask you to install software, visit a link, share a password or make a payment.\n\nThe caller may know your name, address or provider. That information does not authenticate the call, and caller ID can be spoofed. The genuine software named by the caller may be a legitimate remote-support product; the danger is granting access because an unexpected caller tells you to."
-      ],
-      [
-        "Warning signs",
-        "- An unexpected call creates an urgent fault or disconnection story.\n- The caller asks for remote access to a computer, router or phone.\n- You are asked for a banking password, PIN, one-time code or card details.\n- You are told to pay an unexpected fee or to move money to protect an account.\n- The caller discourages you from hanging up or checking with the provider.\n- A link or phone number is supplied instead of asking you to use the provider’s official contact route.\n\nThe UK’s landline migration is real, but a real programme does not make an unexpected caller genuine. Check any Digital Voice information directly with your provider using a number or account you already trust."
-      ],
-      [
-        "How to respond",
-        "Hang up and contact your provider through its official website, app, bill or the number on your contract. Do not use a number supplied by the caller. Never install remote-access software or share security credentials because of an unsolicited call.\n\nIf you installed software, disconnect the affected device from the internet and seek help removing it. Contact your bank immediately if the caller saw banking information, codes or a payment was made. Keep the caller’s number, messages, websites and payment details as evidence.\n\nForward suspicious texts to 7726. Report fraud at `reportfraud.police.uk` or on 0300 123 2040 in England, Wales or Northern Ireland; in Scotland, call Police Scotland on 101. Report an unlicensed or misleading communications service to the relevant provider or regulator where appropriate."
-      ]
-    ],
-    "faq": [
-      [
-        "Will a genuine provider ever contact me about a fault?",
-        "Providers can contact customers, so the subject of a call is not enough to authenticate it. If the caller asks for remote access, passwords, banking details, codes or an unexpected payment, hang up and verify through the provider’s official route."
-      ],
-      [
-        "Is TeamViewer or AnyDesk itself a scam?",
-        "No. These are legitimate tools, but an unexpected caller who asks you to install or open them is a serious warning sign."
-      ],
-      [
-        "Do I need to pay for the Digital Voice transition?",
-        "Do not pay an unexpected caller. The transition and any equipment or plan changes should be confirmed through your provider’s official account or support channel, because arrangements differ between providers and customers."
-      ],
-      [
-        "I gave a caller remote access. What should I do?",
-        "Disconnect the device, contact your bank if financial information may have been exposed, change passwords from a clean device, and get trusted technical help before reconnecting it. Report the incident and preserve evidence."
-      ]
-    ]
-  },
-  {
     "slug": "bank-text-codes-not-arriving",
     "title": "Bank Text Messages Not Arriving? How to Fix It and Spot Scams",
     "description": "Bank texts not arriving? Most causes are routine — the quick fixes, common UK bank sender IDs, and the SIM-swap scam signs to watch for.",
@@ -1577,62 +1497,6 @@
       "debt management scam warning signs"
     ],
     "updated": "2026-07-02"
-  },
-  {
-    "title": "Is AliExpress a Scam? UK Guide to Marketplace Risk",
-    "slug": "aliexpress-scam-or-legit-uk-guide",
-    "category": "website",
-    "excerpt": "Learn how AliExpress scams work in the UK, including fake sellers, non-delivery, and counterfeit goods — and how to stay safe.",
-    "description": "AliExpress is an Alibaba marketplace, but listings and sellers vary. Keep payment on-platform and use the dispute or return deadline shown on the order.",
-    "hero": "AliExpress is an Alibaba Group retail marketplace; that does not make every third-party listing genuine or every purchase protected in the same way.",
-    "date": "2026-04-21",
-    "content": "## What is this scam?\n\nAliExpress itself is a genuine online marketplace owned by the Alibaba Group, but it hosts thousands of independent sellers — many of whom are scammers. The scam involves fraudulent sellers creating listings with extremely low prices for popular items like electronics, designer goods, or phone accessories. They take your payment via AliExpress's payment system, then either send nothing, send counterfeit goods, or send an item so cheap and useless that it's clearly not what was advertised. The scammer then disappears or ignores dispute messages. Because AliExpress sellers are based in China and Asia, UK enforcement is weak, and many scammers know they can operate with minimal consequences. The platform's long shipping times (30-60 days) and weak dispute resolution system make it easy for crooks to take money and vanish before the buyer realises they've been defrauded.\n\n## Warning signs to look for\n\n- Prices are dramatically lower than other sellers (often 50-80% cheaper) — especially for big-brand electronics or luxury goods. Legitimate sellers don't drastically undercut the market.\n- Seller has very few or suspiciously positive reviews, or reviews are written in broken English by accounts created recently.\n- Product photos are clearly stock images or stolen from brand websites, not genuine photos of the actual item.\n- Shipping address is listed as a generic warehouse in China or Southeast Asia with no clear seller contact details or business name.\n- Seller refuses to communicate via AliExpress messaging and asks you to pay via PayPal, bank transfer, or cryptocurrency instead.\n- Product description contains spelling errors, vague language, or deliberately avoids specifying brand, model number, or materials.\n- Seller offers a \"special discount\" or \"exclusive deal\" if you buy immediately or in large quantities.\n\n## How this scam works step by step\n\nStep 1: You browse AliExpress and spot an item — perhaps a brand-new iPhone or designer handbag — listed at a fraction of the normal price. The seller has a few positive reviews and ships to the UK. Step 2: You click 'Buy Now' and pay via AliExpress's integrated payment system (which accepts cards, PayPal, or Alipay). Your money goes to AliExpress or a payment processor, not directly to the seller. Step 3: The seller sends a tracking number within days, often from a logistics company like Cainiao. Step 4: The package takes 30-60 days to arrive. During this time, you have limited ability to cancel or dispute. Step 5: When it arrives, the item is either missing entirely, fake, damaged, or completely different from what was advertised (e.g., a toy rather than electronics). Step 6: You try to open a dispute or request a refund. The scammer either ignores messages or uploads fake photos claiming the item was 'returned successfully'. Step 7: AliExpress's dispute system often sides with the seller if they provided tracking, even if the item never arrives or is counterfeit. You lose your money.\n\n## How to verify if it is genuine\n\nBefore buying from any AliExpress seller, do these checks: First, compare the price to the same item on Amazon UK, eBay, or the brand's official website. If it's more than 40% cheaper, be extremely sceptical. Second, click on the seller's profile and check their history — look for a seller rating below 4.5 stars, very few reviews, or reviews in non-English languages from new accounts. Third, examine product photos closely: legitimate sellers use multiple high-quality photos from different angles. Fake listings often use single stock images or blurry photos. Fourth, check the seller's response time to questions — ask them a specific question about the product and see if they answer within 24 hours in clear English. Fifth, look at the seller's return/refund policy. Scammers often have 'No Returns' or 'Return at Buyer's Cost' policies. For high-value items, see our guide on /guides/is-this-website-a-scam/ for additional verification steps.\n\n## What to do if you have already interacted\n\nIf you've sent money but the item hasn't shipped yet, immediately open a dispute within AliExpress's Resolution Centre before the 90-day buyer protection window closes. Provide clear evidence (screenshots of the listing, photos of any correspondence) and request a full refund. Don't wait for the slow shipping. If the item has already arrived and is fake or counterfeit, photograph it immediately (showing the item and any packaging) and upload these to your dispute. Be specific: 'Item advertised as iPhone 14 Pro but is clearly a counterfeit or non-functional device.' If the seller ignores your dispute messages, escalate it to AliExpress customer service by requesting arbitration. Contact AliExpress's English-language support directly via their website. If you paid by credit card or PayPal, you can also file a chargeback with your bank or PayPal — but do this only if AliExpress dispute fails, as filing both can complicate matters. Keep all evidence: screenshots, photos, tracking numbers, and message records.\n\n## Reporting this scam in the UK\n\nReport the scam to Action Fraud (the UK's national fraud reporting service) on 0300 123 2040 or via actionfraud.police.uk. They use reports to identify patterns and target major scam operations. Report the specific seller account to AliExpress directly through their platform's 'Report Seller' button on their profile page — include evidence of the fraud. If you received a suspicious email claiming to be from AliExpress asking for personal information or payment details, forward it to the NCSC Suspicious Email Reporting Service at report@phishing.gov.uk. Report any fraudulent SMS messages by forwarding them to 7726 (spell it out as SPAM). Contact the Citizens Advice consumer helpline on 0808 223 1133 for advice on chargebacks or further steps. If the item was counterfeit goods (branded products), you can also report it to Trading Standards in your local council, as selling counterfeits breaches UK law. Keep a record of your case reference number from Action Fraud for your records.",
-    "sections": [
-      [
-        "What is verified about the platform",
-        "Alibaba Group says AliExpress launched in 2010 as a global retail e-commerce platform that connects consumers with manufacturers and merchants. It is therefore inaccurate to describe the whole platform as a fabricated site.\n\nBuyers can still encounter goods that do not arrive, do not match the listing, are unsafe or infringe intellectual-property rights. Assess the individual seller, listing and protection terms."
-      ],
-      [
-        "Warning signs",
-        "- A price that is implausibly low for the claimed brand or specification.\n- A seller with little history or reviews that do not discuss the actual product.\n- Stock images with no useful buyer evidence.\n- A request to pay, communicate or accept a refund outside AliExpress.\n- Pressure to confirm receipt before inspection."
-      ],
-      [
-        "Buyer Protection and Free Return are not one universal promise",
-        "AliExpress's 15-calendar-day Free Return window applies only to products carrying the `Free Return` label. It is a particular programme with its own eligibility and return-condition rules — not a universal 15-day guarantee for every order. Check the specific deadline shown on your own order rather than assuming the same window applies to non-delivery, damage or misdescription claims generally.\n\nFor a problem, open the order in the AliExpress account and use the dispute or return control before the deadline displayed there. Save screenshots of the listing, seller messages, tracking and the condition of the item.\n\nRefund processing times vary by payment method and dispute type, so check the timeframe given for your specific case rather than assuming a fixed number of working days."
-      ],
-      [
-        "UK card protection",
-        "Chargeback may apply under card-scheme rules, commonly with a time limit around 120 days. Section 75 may apply to a qualifying credit-card purchase where the cash price is over £100 and not more than £30,000, but a marketplace or payment intermediary can affect the required debtor-creditor-supplier relationship. Ask the issuer to assess the claim."
-      ],
-      [
-        "Reporting",
-        "Use the order’s dispute process and AliExpress Help Centre. If the issue is fraud and money was lost, report at `reportfraud.police.uk` or on 0300 123 2040 in England, Wales or Northern Ireland; in Scotland, call Police Scotland on 101. Unsafe products can also be reported to Citizens Advice for referral to Trading Standards."
-      ]
-    ],
-    "faq": [
-      [
-        "Is AliExpress owned by Alibaba Group?",
-        "Yes. Alibaba Group identifies AliExpress as one of its e-commerce businesses."
-      ],
-      [
-        "Does every AliExpress order have the same 15-day protection window?",
-        "No. Fifteen days applies specifically to eligible `Free Return` products; other dispute rights and deadlines depend on the specific order."
-      ],
-      [
-        "Is section 75 automatic on AliExpress?",
-        "No. The cash-price and credit requirements matter, and the marketplace/payment structure may affect the claim."
-      ]
-    ],
-    "keywords": [
-      "AliExpress scam",
-      "AliExpress fake sellers",
-      "AliExpress scam UK",
-      "AliExpress counterfeit",
-      "AliExpress non-delivery scam",
-      "fake website UK",
-      "scam website UK"
-    ],
-    "updated": "2026-07-10"
   },
   {
     "title": "Bitcoin Scam UK: Spot a Fake Crypto Investment",
@@ -2736,7 +2600,7 @@
     "description": "An NHS text about a cancelled appointment, a 'payment' or a link to confirm details? NHS care is free — here's how to spot the scam and check safely.",
     "hero": "Criminals are sending fake NHS text messages claiming your appointment is cancelled or needs confirmation—here's how to spot and avoid them.",
     "date": "2026-04-24",
-    "content": "## What is this scam?\n\nThe NHS appointment scam text is a phishing attempt where criminals send SMS messages pretending to be the NHS. The message typically claims your hospital or GP appointment has been cancelled, rescheduled, or needs urgent confirmation. It asks you to click a link, call a number, or reply with personal information. The scammers use official-sounding language and may even reference real NHS services to seem legitimate. Some variants mention COVID-19 vaccination appointments, blood test results, or prescription refills to increase urgency. Once you click the link, you're taken to a fake website designed to steal your NHS login details, bank information, or other sensitive data. In other cases, calling the fake number connects you to someone who convinces you to transfer money for a 'processing fee' or 'verification deposit.' This scam is widespread across the UK and is reported regularly to Action Fraud and the NCSC.\n\n## Warning signs to look for\n\n[\"- The message asks you to click a link to 'confirm your appointment' or 'reschedule urgently'—the NHS rarely asks you to do this via text.\", \"- It includes a suspicious URL that doesn't match NHS.uk—scammers use similar-looking domains like 'nhs-appointment.co.uk' or shortened links that hide the real address.\", '- The message creates false urgency, saying your appointment will be cancelled unless you act immediately within the next few hours.', '- It requests sensitive information like your NHS number, date of birth, or bank details—the NHS never asks for this information by text.', \"- The sender's name appears as a generic term like 'NHS' or 'NHS Appointments' rather than a specific hospital or GP surgery name you recognise.\", '- Grammar or spelling mistakes are present, or the tone feels slightly off compared to official NHS communications.', '- It asks you to call a phone number to confirm details—real NHS appointments are confirmed through official NHS systems, not phone calls prompted by random texts.', '- The message offers to reschedule or cancel for a small fee, which the NHS never does.']\n\n## How this scam works step by step\n\nThe scam usually begins with you receiving an unsolicited text message that appears to come from the NHS. It claims your appointment has been cancelled due to high demand, a staff shortage, or a missed confirmation deadline. The message creates pressure by stating you must act within a few hours. When you click the link, you're taken to a fake website that mimics the NHS login page or an appointment booking system. The site looks professional with NHS logos and colours, making it seem authentic. You're prompted to enter your NHS login credentials, personal details, or bank information to 'verify your identity' or 'reschedule.' Criminals capture this data in real time. Alternatively, some scams direct you to call a number instead. When you ring, a person claiming to be from the NHS asks you to confirm your details and may convince you to pay a 'booking fee' or 'processing charge' via bank transfer, gift card, or cryptocurrency. Once you've transferred money or entered your details, the scammers disappear. Your information is then used for identity theft, sold to other criminals, or your bank account is emptied.\n\n## How to verify if it is genuine\n\nIf you receive an NHS appointment text, do not click any links or call any numbers in the message. Instead, independently contact your GP surgery or hospital using the phone number from your appointment letter or the official NHS website (NHS.uk). Ask them directly whether they sent the text—they will confirm if it's genuine or fraudulent. Genuine NHS services never ask you to confirm sensitive data via text, and they don't send clickable links for appointment confirmation. Check the sender's phone number: real NHS texts typically come from specific numbers your surgery uses, not generic short codes. If you're unsure, visit your NHS app or online patient portal directly (don't use links from the text) and check your appointments there. You can also search for the sender's number online to see if other people have reported it as a scam. Visit our guide on [verifying suspicious websites](/guides/is-this-website-a-scam/) if you're unsure about any links. Remember: when in doubt, always contact your NHS provider directly using a number you know is correct.\n\n## What to do if you have already interacted\n\nIf you've clicked a link and entered your NHS login details, change your NHS app password immediately and check your email for any suspicious account activity. Log into your GP online portal and review recent appointments and requests—contact your surgery if anything looks wrong. If you entered your bank details or a payment card number, contact your bank immediately and tell them you've been scammed. Ask them to monitor your account for fraudulent transactions and consider requesting a new card. If money has been taken from your account, ask your bank to attempt a recall of the funds—they sometimes succeed within 48 hours. Report the scam to Action Fraud on 0300 123 2040 or online at reportfraud.org.uk; keep screenshots of the message and any receipts. Forward the original SMS to 7726 (Spam reporting shortcode). If you've shared your NHS number, date of birth, and address, contact the NHS directly to check for any unauthorised access to your medical records. Monitor your credit file with Experian, Equifax, or TransUnion for signs of identity fraud. Consider registering for a Cifas Protective Registration (cifas.org.uk) to protect yourself against further fraud.\n\n## Reporting this scam in the UK\n\nReport the scam to Action Fraud, the UK's official fraud reporting service, by calling 0300 123 2040 (free from UK landlines and mobiles) or visiting reportfraud.org.uk. You'll receive a crime reference number, which is essential if you've lost money. Forward the scam text message to 7726 (the free national spam reporting shortcode) to alert your mobile provider and help block similar messages. Report the phishing text to the NCSC's Suspicious Email Reporting Service at report@phishing.gov.uk—include screenshots and the sender's details. If the text included a malicious link, also report it to the NCSC so they can take action against the website. Contact Citizens Advice's consumer helpline on 0808 223 1133 (free and confidential) if you need guidance on whether you're eligible for a refund from your bank. Your mobile network provider may also help—contact them directly to report the number and request it be blocked. Report the scam on social media if other people are reporting it in your local area, as this helps raise awareness. Keep all documentation including screenshots, the crime reference number, and bank statements, as these are needed if you pursue a refund claim.",
+    "content": "## What is this scam?\n\nThe NHS appointment scam text is a phishing attempt where criminals send SMS messages pretending to be the NHS. The message typically claims your hospital or GP appointment has been cancelled, rescheduled, or needs urgent confirmation. It asks you to click a link, call a number, or reply with personal information. The scammers use official-sounding language and may even reference real NHS services to seem legitimate. Some variants mention COVID-19 vaccination appointments, blood test results, or prescription refills to increase urgency. Once you click the link, you're taken to a fake website designed to steal your NHS login details, bank information, or other sensitive data. In other cases, calling the fake number connects you to someone who convinces you to transfer money for a 'processing fee' or 'verification deposit.' This scam is widespread across the UK and is reported regularly to Action Fraud and the NCSC.\n\n## Warning signs to look for\n\n[\"- The message asks you to click a link to 'confirm your appointment' or 'reschedule urgently'—the NHS rarely asks you to do this via text.\", \"- It includes a suspicious URL that doesn't match NHS.uk—scammers use similar-looking domains like 'nhs-appointment.co.uk' or shortened links that hide the real address.\", '- The message creates false urgency, saying your appointment will be cancelled unless you act immediately within the next few hours.', '- It requests sensitive information like your NHS number, date of birth, or bank details—the NHS never asks for this information by text.', \"- The sender's name appears as a generic term like 'NHS' or 'NHS Appointments' rather than a specific hospital or GP surgery name you recognise.\", '- Grammar or spelling mistakes are present, or the tone feels slightly off compared to official NHS communications.', '- It asks you to call a phone number to confirm details—real NHS appointments are confirmed through official NHS systems, not phone calls prompted by random texts.', '- The message offers to reschedule or cancel for a small fee, which the NHS never does.']\n\n## How this scam works step by step\n\nThe scam usually begins with you receiving an unsolicited text message that appears to come from the NHS. It claims your appointment has been cancelled due to high demand, a staff shortage, or a missed confirmation deadline. The message creates pressure by stating you must act within a few hours. When you click the link, you're taken to a fake website that mimics the NHS login page or an appointment booking system. The site looks professional with NHS logos and colours, making it seem authentic. You're prompted to enter your NHS login credentials, personal details, or bank information to 'verify your identity' or 'reschedule.' Criminals capture this data in real time. Alternatively, some scams direct you to call a number instead. When you ring, a person claiming to be from the NHS asks you to confirm your details and may convince you to pay a 'booking fee' or 'processing charge' via bank transfer, gift card, or cryptocurrency. Once you've transferred money or entered your details, the scammers disappear. Your information is then used for identity theft, sold to other criminals, or your bank account is emptied.\n\n## How to verify if it is genuine\n\nIf you receive an NHS appointment text, do not click any links or call any numbers in the message. Instead, independently contact your GP surgery or hospital using the phone number from your appointment letter or the official NHS website (NHS.uk). Ask them directly whether they sent the text—they will confirm if it's genuine or fraudulent. Genuine NHS services never ask you to confirm sensitive data via text, and they don't send clickable links for appointment confirmation. Check the sender's phone number: real NHS texts typically come from specific numbers your surgery uses, not generic short codes. If you're unsure, visit your NHS app or online patient portal directly (don't use links from the text) and check your appointments there. You can also search for the sender's number online to see if other people have reported it as a scam. Visit our guide on [verifying suspicious websites](/guides/is-this-website-a-scam/) if you're unsure about any links. Remember: when in doubt, always contact your NHS provider directly using a number you know is correct.\n\n## What to do if you have already interacted\n\nIf you've clicked a link and entered your NHS login details, change your NHS app password immediately and check your email for any suspicious account activity. Log into your GP online portal and review recent appointments and requests—contact your surgery if anything looks wrong. If you entered your bank details or a payment card number, contact your bank immediately and tell them you've been scammed. Ask them to monitor your account for fraudulent transactions and consider requesting a new card. If money has been taken from your account, ask your bank to attempt a recall of the funds—they sometimes succeed within 48 hours. Report the scam to Action Fraud on 0300 123 2040 or online at reportfraud.police.uk; keep screenshots of the message and any receipts. Forward the original SMS to 7726 (Spam reporting shortcode). If you've shared your NHS number, date of birth, and address, contact the NHS directly to check for any unauthorised access to your medical records. Monitor your credit file with Experian, Equifax, or TransUnion for signs of identity fraud. Consider registering for a Cifas Protective Registration (cifas.org.uk) to protect yourself against further fraud.\n\n## Reporting this scam in the UK\n\nReport the scam to Action Fraud, the UK's official fraud reporting service, by calling 0300 123 2040 (free from UK landlines and mobiles) or visiting reportfraud.police.uk. You'll receive a crime reference number, which is essential if you've lost money. Forward the scam text message to 7726 (the free national spam reporting shortcode) to alert your mobile provider and help block similar messages. Report the phishing text to the NCSC's Suspicious Email Reporting Service at report@phishing.gov.uk—include screenshots and the sender's details. If the text included a malicious link, also report it to the NCSC so they can take action against the website. Contact Citizens Advice's consumer helpline on 0808 223 1133 (free and confidential) if you need guidance on whether you're eligible for a refund from your bank. Your mobile network provider may also help—contact them directly to report the number and request it be blocked. Report the scam on social media if other people are reporting it in your local area, as this helps raise awareness. Keep all documentation including screenshots, the crime reference number, and bank statements, as these are needed if you pursue a refund claim.",
     "sections": [
       [
         "What a fake NHS text looks like",
@@ -3167,65 +3031,6 @@
     "updated": "2026-06-28"
   },
   {
-    "title": "Microsoft Account Suspended Scam Email: How to Spot It",
-    "slug": "microsoft-account-suspended-email-scam-uk",
-    "category": "email",
-    "excerpt": "Learn how to identify fake Microsoft account suspension emails used to steal login details and personal data from UK users.",
-    "description": "A fake Microsoft email claims unusual activity or suspension and links to a bogus sign-in page. Open your Microsoft account directly instead.",
-    "hero": "Microsoft gives `micros0ft.com`, with a zero replacing the second “o”, as an example of a lookalike domain used in phishing.",
-    "date": "2026-04-26",
-    "content": "## What is this scam?\n\nThe Microsoft account suspended email scam targets UK users with urgent-sounding messages claiming their account has been locked, compromised, or will be deleted. The scammer uses Microsoft branding, logos, and official-looking design to create a convincing fake email. They claim you need to verify your identity immediately by clicking a link, entering your password, or confirming personal details. The email might mention suspicious activity, an unusual sign-in location, or overdue payment to create panic. Once you click the link, you're taken to a fake Microsoft login page (often with a URL that looks almost genuine but isn't). When you enter your details, the scammer captures your email address, password, security questions, recovery phone number, and sometimes payment card information. This access allows them to lock you out of your real account, reset your password, steal data, send emails from your account, or make unauthorised purchases.\n\n## Warning signs to look for\n\n['- The email asks you to click a link to verify your account or confirm your identity — Microsoft rarely does this via email.', \"- The sender's email address looks almost right but isn't (e.g., microsft-verify@mail.com or support-microsoft@domain.co.uk instead of microsoft.com).\", \"- The email uses vague language like 'suspicious activity detected' without specifying what happened or when.\", \"- There's extreme urgency: phrases like 'verify within 24 hours' or 'your account will be deleted' designed to make you panic.\", '- The email asks for your password, recovery email, phone number, or payment card details — Microsoft never asks for these via email.', '- Spelling or grammar mistakes appear in the message, especially in headings or action buttons.', \"- The link in the email doesn't go to a real Microsoft domain when you hover over it (right-click and select 'Copy link address').\", \"- The email doesn't address you by name or uses a generic greeting like 'Dear User' or 'Dear Customer'.\"]\n\n## How this scam works step by step\n\nThe scam begins when you receive an email that looks like it's from Microsoft, often arriving in your inbox alongside legitimate emails to avoid immediate suspicion. The subject line creates urgency — 'Your account has been suspended' or 'Confirm your Microsoft account now'. You open the email and see Microsoft logos, formatting that matches genuine Microsoft emails, and a message claiming something is wrong with your account. The email includes a button or link saying 'Verify Account', 'Confirm Identity', or 'Review Activity'. When you click the link, you're taken to a fake website that mirrors the real Microsoft login page perfectly. You enter your email address and password, thinking you're logging into Microsoft. The page may then ask for additional information: your recovery email, phone number, date of birth, or payment card details for 'account verification'. Once you've entered your details, the page either shows an error message (to avoid suspicion) or pretends to succeed. Behind the scenes, the scammer now has your credentials. They log into your real Microsoft account, change the password, add a recovery email they control, and lock you out. They can then reset passwords for linked services like Outlook, OneDrive, Skype, or Xbox, steal your data, or use your account to send phishing emails to your contacts.\n\n## How to verify if it is genuine\n\nNever click links in emails claiming your Microsoft account has been suspended. Instead, go directly to microsoft.com by typing it into your browser address bar yourself. Log in with your password, then look for any genuine alerts in your account dashboard. If there's a real issue, Microsoft will show it here without asking you to re-enter your password. Check the sender's email address carefully by clicking on their name in the email — genuine Microsoft emails come from @microsoft.com, @outlook.com, or @xbox.com addresses only. Hover over any links (don't click) and look at the URL in the bottom left of your screen — it should start with microsoft.com. If it says something else, it's fake. Microsoft will never ask for your password, recovery email, phone number, or payment details via email. If the email asks for these, it's definitely a scam. You can also check if others have reported the sender by searching the email address online or checking trusted security websites. For guidance on spotting fake websites, see our guide on /guides/is-this-website-a-scam/.\n\n## What to do if you have already interacted\n\nIf you clicked the link but didn't enter any details, you can stop here — no action is needed. If you entered your Microsoft password on the fake page, change your password immediately by going to account.microsoft.com in your browser and signing in with your current password. Click 'Security' on the left, then 'Change password' and create a strong new password that you haven't used anywhere else. If you also shared your recovery email or phone number, add a new recovery email or phone through the same security settings to prevent the scammer from locking you out. Check your account activity for any unauthorised sign-ins: go to account.microsoft.com, click 'Security', then 'View your activity'. If you see sign-ins from locations you don't recognise, sign out all other sessions immediately. If you entered payment card details, contact your bank straight away on the number on the back of your card (not a number from your email) to report the potential fraud and ask them to monitor your account or cancel the card. Review any linked accounts (Gmail, Apple, Amazon) and change those passwords too if you use the same one. Then follow the reporting steps below.\n\n## Reporting this scam in the UK\n\nReport the email to Action Fraud, the UK's national fraud reporting centre, by calling 0300 123 2040 or visiting actionfraud.police.uk. You'll need to describe what happened, the date you received the email, and any details about the scammer's email address or the website you visited. Forward the suspicious email to the NCSC (National Cyber Security Centre) by sending it to report@phishing.gov.uk — just forward the entire email as an attachment. They use reports to take down fake pages and warn other users. If you received the scam email through your work or organisation, also report it to their IT security team so they can block similar emails for other staff. You can additionally block the sender in your email client (Outlook, Gmail, etc.) by right-clicking the email and selecting 'Block Sender'. Report your Microsoft account as compromised by visiting account.microsoft.com and clicking on 'Security' — Microsoft can investigate and help protect your account. If you're unsure about next steps or want support, call Citizens Advice consumer helpline on 0808 223 1133 (free, weekdays 9am–5pm).",
-    "sections": [
-      [
-        "What the scam looks like",
-        "The email claims unusual sign-in activity, a security hold or an imminent suspension affecting a Microsoft, Outlook or Xbox account. It creates urgency and links to a page made to resemble a Microsoft sign-in. A fraudulent page may steal the credentials entered into it. A phone call or pop-up claiming to be Microsoft technical support is a different pattern; see the /guides/microsoft-support-scam-uk-guide/."
-      ],
-      [
-        "Microsoft's published warning signs",
-        "Microsoft advises users to watch for urgent demands, unexpected senders, generic greetings, poor spelling or grammar, mismatched links and lookalike domains. Its examples include `micros0ft.com` and `rnicrosoft.com`. None of those signs is conclusive on its own, and polished phishing emails may contain no language errors."
-      ],
-      [
-        "Outlook indicators",
-        "Outlook may show a question-mark icon for an unverified sender, an underlined “via” label when the visible From address differs from the authenticated sending domain, or a warning that it could not verify the sender. Microsoft cautions that not every unverified message or “via” label is malicious."
-      ],
-      [
-        "Check the account safely",
-        "Do not use the email link. Open a new tab and type `account.microsoft.com`, then review security and recent activity. Microsoft says that if an unusual-activity email is uncertain, you can safely sign in directly without clicking the email."
-      ],
-      [
-        "If credentials were entered",
-        "Use Microsoft's compromised-account guidance. Scan the affected computer for malware, change or reset the password, review recent activity and account settings, and enable two-step verification. Change the password on other accounts if it was reused. For a work or school account, notify the organisation's IT administrator as well."
-      ],
-      [
-        "Report the phishing email",
-        "In Microsoft 365 Outlook or Outlook.com, select the message and choose Report > Report phishing. Microsoft no longer publishes a general mailbox for forwarding phishing emails from other email clients; a work or school account holder can instead use the Submissions page in the Microsoft Defender portal, and anyone else should forward the email to the NCSC at `report@phishing.gov.uk`.\n\nIf money was lost or an account was hacked, report the crime to Report Fraud at `reportfraud.police.uk` or 0300 123 2040 in England, Wales or Northern Ireland; in Scotland, call Police Scotland on 101."
-      ]
-    ],
-    "faq": [
-      [
-        "Where should I check a claimed suspension?",
-        "Go directly to `account.microsoft.com`; do not follow the email link."
-      ],
-      [
-        "Does an Outlook warning prove the email is malicious?",
-        "No. It is a reason for caution, not proof. Verify the claim by signing in directly."
-      ]
-    ],
-    "keywords": [
-      "Microsoft account suspended email scam",
-      "fake Microsoft email UK",
-      "Microsoft phishing email",
-      "account suspension scam",
-      "Microsoft email scam warning",
-      "Microsoft scam UK",
-      "Microsoft tech support scam",
-      "fake Microsoft call",
-      "email scam UK",
-      "phishing email UK"
-    ],
-    "updated": "2026-07-10"
-  },
-  {
     "title": "Netflix Billing Email Scam UK: Spot a Fake Message",
     "slug": "netflix-billing-email-scam-uk",
     "category": "email",
@@ -3441,78 +3246,6 @@
       "report Santander phishing"
     ],
     "updated": "2026-06-26"
-  },
-  {
-    "title": "PayPal Account Limited Email Scam UK",
-    "slug": "paypal-account-limited-email-scam-uk",
-    "category": "email",
-    "excerpt": "Fake PayPal 'account limited' emails push you to click and enter card or login details on a lookalike page. Here's how to spot one and check safely.",
-    "description": "An email says your PayPal account is limited and you must verify now? Log in directly instead. Genuine emails use your account name.",
-    "hero": "A genuine PayPal email addresses you by the full name listed on your account, not 'Dear PayPal user'.",
-    "date": "2026-04-27",
-    "content": "## What is this scam?\n\nThe PayPal account limited scam is a phishing email that impersonates PayPal's official communications. Scammers send emails claiming your account has been limited due to suspicious activity, payment problems, or unverified details. They create urgency by threatening account closure or payment freezes, then direct you to click a link and enter your username, password, security questions, or bank details. The fraudsters use stolen PayPal branding, logos, and layout to make the email look genuine. Once you click the link, you're taken to a convincing fake PayPal website designed to harvest your credentials and financial information. This is a type of phishing scam specifically targeting PayPal users in the UK and worldwide. The goal is to gain access to your real PayPal account and connected bank accounts, then drain your funds or commit identity fraud.\n\n## Warning signs to look for\n\n[\"- The email address doesn't match PayPal's official domain. Check if it comes from @paypal.com or @service.paypal.com; anything else is suspicious.\", \"- Urgent language demanding immediate action within hours, such as 'Confirm your account within 24 hours or it will be closed'.\", \"- Generic greetings like 'Dear Customer' or 'Dear User' instead of your actual name, which PayPal always uses in real communications.\", \"- Spelling and grammar errors in the email body, such as 'Verify you details' or 'Our system detect unusual activity'.\", \"- A suspicious link that doesn't match PayPal's website when you hover over it; real links start with https://www.paypal.com.\", '- Requests to verify sensitive information like your full password, security answers, or complete card number—PayPal never asks this via email.', '- Poor image quality, misaligned logos, or outdated PayPal branding that looks slightly off compared to genuine emails.', \"- A tone that's threatening or unusual, such as promising a reward for verifying details or mentioning legal action if you don't respond.\"]\n\n## How this scam works step by step\n\nThe scam begins when you receive an email that appears to come from PayPal, with a subject line like 'Your PayPal Account Has Been Limited' or 'Urgent: Verify Your Account Now'. The email claims something is wrong with your account—perhaps unusual activity, a failed payment, or missing verification details. It emphasises urgency to prevent you from thinking critically, often saying your account will be frozen or closed if you don't act immediately. You're asked to click a link to 'resolve' the issue. When you click, you're taken to a fake PayPal login page that looks nearly identical to the real thing. You enter your email address and password to log in. The scammers then present a second form asking for additional verification details, such as your date of birth, mother's maiden name, security answers, debit card number, and sort code. Some fake pages even ask for your PIN. You submit this information, believing you're unlocking your account. Behind the scenes, the scammers now have your login credentials and financial details. They access your real PayPal account, reset the password, change the email address, and lock you out. They then make fraudulent purchases, transfer money to themselves, or use your details for further scams.\n\n## How to verify if it is genuine\n\nIf you receive an email claiming your PayPal account is limited, don't click any links in the email. Instead, open your web browser and navigate directly to paypal.com by typing it yourself—don't use email links. Log in using your own credentials (not anything the email prompted you with) and check your account status and messages directly. PayPal's genuine notifications appear in your Account Center under 'Messages' or 'Resolution Center', not just in email. Check PayPal's official Twitter account (@AskPayPal) or login page for any service announcements; real account limitations are always flagged there first. Call PayPal's UK customer service on 0203 214 8000 to confirm the email is legitimate. Look closely at the sender's email address in the email header—hover over the 'from' field to see the real domain. For more guidance on spotting fake emails, see our guide on identifying phishing emails. You can also verify the link's destination by hovering over it (don't click) and checking if it points to paypal.com. Real PayPal emails never ask you to confirm passwords, security answers, or full bank details via email or external links.\n\n## What to do if you have already interacted\n\nIf you've already clicked the link and entered your PayPal password, change your password immediately on the real PayPal website (not via email links). Then change the password for any email account linked to PayPal, as scammers often lock you out by changing the recovery email. If you entered credit card, debit card, or bank details, contact your bank immediately—tell them you've been phished and ask them to cancel your cards and watch for fraudulent transactions. Document the scam email by taking a screenshot of the full email including the sender's address and timestamp. Forward the phishing email to PayPal's official reporting address at spoof@paypal.com. Don't delete it yet. Log into your PayPal account (via the direct website) and check your transaction history, linked bank accounts, and security settings for any unauthorised changes. If your account has been accessed, file a dispute with PayPal for any fraudulent transactions. Monitor your bank accounts and credit file closely for the next 30 days for suspicious activity. Register yourself as a victim with Action Fraud (actionfraud.police.uk or 0300 123 2040) so there's an official record. Consider enabling two-factor authentication on your PayPal account if it isn't already active.\n\n## Reporting this scam in the UK\n\nReport the phishing email to PayPal's dedicated spoof reporting address at spoof@paypal.com. Include the full email header information and screenshots of the fake page if you visited it. Report the scam to Action Fraud, the UK's national fraud reporting service, either online at actionfraud.police.uk or by calling 0300 123 2040. They track fraud patterns and may use your report to warn others. Forward the phishing email to the NCSC's Suspicious Email Reporting Service at report@phishing.gov.uk—they work to take down fake websites and phishing infrastructure. If you received the scam via SMS or text message, forward it to 7726 (SPAM). Contact Citizens Advice's consumer helpline on 0808 223 1133 for guidance on next steps if you've lost money or had your identity compromised. Report the fake website domain to the Internet Watch Foundation at iwf.org.uk if you have the URL. Your bank should also be informed immediately if you shared card or account details. Keep records of all communications with PayPal, your bank, and authorities, as these may be needed for any dispute resolution or fraud investigation.",
-    "sections": [
-      [
-        "What a fake PayPal 'account limited' email looks like",
-        "This scam is an email designed to look like it's from PayPal, claiming your account has been limited and needs urgent verification. An example of the style: `Your account has been limited due to unusual activity. Verify your details within 24 hours to restore full access.` It usually includes a link to a page built to look like PayPal's genuine login."
-      ],
-      [
-        "Why these emails are convincing",
-        "PayPal genuinely can limit accounts, so the concept itself isn't unusual. The urgency and threat of losing account access pushes people to click before checking carefully."
-      ],
-      [
-        "Signs a PayPal email is a scam",
-        "- It's addressed to 'Dear PayPal user' or similar, rather than the full name listed on your account.\n- It asks you to click a link and enter your card, bank, or login details.\n- It creates urgency with a short deadline to 'verify' your account.\n- The link, when you hover over it, doesn't go to paypal.com."
-      ],
-      [
-        "How the scam works step by step",
-        "First, an email claims your account is limited and needs urgent action. Second, a link opens a page built to look like PayPal's genuine login or verification screen. Third, whatever you enter — login details, card number, or bank details — is captured. Fourth, the criminal can access your real PayPal account or use the payment details elsewhere."
-      ],
-      [
-        "How to check a PayPal email is genuine",
-        "Don't click the link. Log into PayPal directly through the app or by typing paypal.com yourself, and check the Resolution Centre there for any genuine account issue.\n\n- Genuine PayPal emails address you by the full name listed on your PayPal account, or your business name.\n- If there's a real limitation on your account, it will show up when you log in directly. You don't need to act on the email itself."
-      ],
-      [
-        "If you've already entered your details",
-        "Log into PayPal directly and change your password immediately. Check your account for any transactions or changes you don't recognise, and contact your bank if you entered card or bank details."
-      ],
-      [
-        "How to report a fake PayPal email (UK)",
-        "Forward it to PayPal at `phishing@paypal.com`. If you've lost money, also report it to Report Fraud at `reportfraud.police.uk` or 0300 123 2040 if you're in England, Wales, or Northern Ireland. In Scotland, report to Police Scotland on 101."
-      ]
-    ],
-    "faq": [
-      [
-        "How can I tell a genuine PayPal email from a fake one?",
-        "A genuine PayPal email addresses you by the full name listed on your account, not 'Dear PayPal user'. If in doubt, log into PayPal directly rather than clicking any link."
-      ],
-      [
-        "I entered my PayPal login details on a fake page. What should I do?",
-        "Log into PayPal directly through the app or by typing paypal.com yourself, change your password immediately, and check for any unfamiliar transactions."
-      ],
-      [
-        "Does PayPal have an email address for reporting phishing?",
-        "Yes. Forward suspicious emails to `phishing@paypal.com`."
-      ],
-      [
-        "Why might my real PayPal account actually be limited?",
-        "PayPal can limit an account for security, policy, or account-review reasons. Check the Resolution Centre by logging in directly to see any genuine issue."
-      ],
-      [
-        "How do I report a fake PayPal email in the UK?",
-        "Forward it to `phishing@paypal.com`. If you've lost money, also report it to Report Fraud at `reportfraud.police.uk` or 0300 123 2040 (Police Scotland on 101 in Scotland)."
-      ]
-    ],
-    "keywords": [
-      "paypal account limited email scam uk",
-      "fake paypal email",
-      "paypal phishing report email",
-      "is this paypal email real",
-      "paypal verify account scam",
-      "paypal dear user email scam",
-      "paypal resolution centre scam check"
-    ],
-    "updated": "2026-07-06"
   },
   {
     "title": "DVLA Email Scam UK: Spot a Fake Tax or Fine Email",
@@ -4541,62 +4274,6 @@
       "apple pay safe account scam"
     ],
     "updated": "2026-06-29"
-  },
-  {
-    "title": "PayPal Friends and Family Scam: Why Sellers Ask for It",
-    "slug": "paypal-friends-family-scam-uk",
-    "category": "payment",
-    "excerpt": "Scammers exploit PayPal's Friends and Family feature to steal money with no buyer protection. Learn how to identify and avoid this growing UK scam.",
-    "description": "PayPal Friends and Family payments are not eligible for Buyer Protection. Use Goods and Services for an eligible purchase and report scam payments promptly.",
-    "hero": "PayPal says using Friends and Family for a purchase is a scam warning sign and those payments are not eligible for Buyer Protection.",
-    "date": "2026-04-30",
-    "content": "## What is this scam?\n\nThe PayPal Friends and Family scam specifically targets the Friends and Family payment feature, which is designed for informal money transfers between people who know each other. Unlike standard PayPal Goods and Services transactions, Friends and Family payments have no buyer or seller protection — PayPal will not refund you if something goes wrong. Scammers deliberately ask victims to use this method because it makes their theft virtually risk-free. They typically pose as online sellers (especially on marketplace sites like Facebook Marketplace or eBay), claiming they only accept Friends and Family for faster payment or lower fees. Alternatively, they may impersonate someone the victim knows — a friend, family member, or work colleague — asking for urgent money via PayPal. Once the victim sends the payment, the scammer either never sends the promised item or disappears entirely. Because Friends and Family offers zero protection, PayPal will refuse to reverse the transaction, leaving the victim with no legitimate recourse and the money permanently lost.\n\n## Warning signs to look for\n\n[\"- Seller insists on Friends and Family payment instead of Goods and Services, claiming it's faster, cheaper, or avoids fees.\", \"- You're buying something online (especially high-value items like phones, laptops, or gaming consoles) and the seller requests Friends and Family rather than the standard protected payment method.\", '- Someone claiming to be a friend, family member, or business contact sends an unexpected message asking you to send money urgently via PayPal Friends and Family.', \"- The payment request comes from a new PayPal account with minimal activity or a profile that doesn't match the person's usual details.\", '- Pressure to send money quickly without time to think or ask questions, often citing an emergency or limited-time opportunity.', '- The seller has poor reviews, no feedback history, or their communication contains spelling mistakes and awkward phrasing.', \"- You're asked to send money for a refund, deposit, or booking fee — legitimate businesses use Goods and Services or never ask for upfront Friends and Family payments.\", \"- The payment reference or memo field contains unusual instructions like 'loan' or 'investment' rather than a straightforward description of what you're buying.\"]\n\n## How this scam works step by step\n\nThe scam typically begins when the fraudster contacts you via a marketplace listing, social media, or messaging app. If it's a shopping scam, they'll pose as a seller offering something desirable — often at a competitive price — and claim to accept PayPal. When you express interest and agree to buy, they'll explain why they need Friends and Family: 'It's faster,' 'I avoid fees that way,' or 'My business account is under maintenance.' Some scammers send fake screenshots showing a Friends and Family payment request to make it look official. Once you're convinced, they provide their PayPal email address and you send the money via the Friends and Family feature. The payment is instant and irreversible. The seller then goes silent, doesn't send the item, or blocks you. If it's an impersonation scam, a fraudster claims to be someone you know, says they're in urgent trouble, and asks you to send money via PayPal Friends and Family to help them out. The emotional appeal — combined with the speed of the request — bypasses your normal caution. By the time you realise it's a scam (usually when you contact the real person), the money has already left your account and cannot be recovered, since Friends and Family transfers have zero protection.\n\n## How to verify if it is genuine\n\nBefore sending any Friends and Family payment, take these verification steps. First, never use Friends and Family for online purchases — if a seller demands it, walk away. Legitimate businesses use Goods and Services (which protects both parties) or established payment methods like card payments. If someone claiming to be a contact asks for urgent money via Friends and Family, contact them directly using a phone number or email you know is theirs — don't use contact details they've provided. Call them on their actual mobile number or visit them in person if possible. For online sellers, check their marketplace profile thoroughly: look for reviews, previous sales, account age, and feedback from other buyers. Avoid new sellers with zero history asking for Friends and Family. Visit the official PayPal website directly (not via a link in a message) and check PayPal's guidance on safe payments. If you're suspicious about a payment link or request, read our guide on how to /guides/is-this-website-a-scam/ for additional website verification steps. Remember: Friends and Family has no protection by design. If protection matters — and it should for any purchase — use Goods and Services instead. PayPal's own safety guidance recommends never using Friends and Family for transactions with strangers.\n\n## What to do if you have already interacted\n\nIf you've sent money but haven't heard back from the seller or contact, act immediately. First, contact PayPal directly via the official app or website (not a link in an email) and report the transaction as fraud or unauthorized. Explain that you were scammed and provide all relevant details: the recipient's PayPal email, the item promised, screenshots of the conversation, and marketplace listing (if applicable). Be clear and factual. While Friends and Family has no formal protection, PayPal may occasionally reverse a transaction if it's reported quickly and the recipient's account is new or suspicious. Second, if you sent money to what you believed was a friend or family member, contact the real person immediately to confirm it was a scam. Third, document everything: take screenshots of the conversation, the PayPal transaction, and any marketplace listings. This will be essential for reporting. Fourth, if you paid using a debit or credit card linked to PayPal, contact your bank and report the fraud — they may be able to cancel the payment or dispute it on your behalf. Fifth, change your PayPal password and enable two-factor authentication if you haven't already. Monitor your account for any unusual activity. Finally, report the scam to Action Fraud (see reporting section below) so it's logged officially and helps authorities track scam patterns.\n\n## Reporting this scam in the UK\n\nReport this scam through multiple official channels to maximise the chance of action. Start by contacting Action Fraud (the UK's national fraud reporting service) on 0300 123 2040 or online at actionfraud.police.uk. Provide your case reference number and all evidence: screenshots, PayPal transaction details, the scammer's PayPal email, and the marketplace listing if relevant. Report the PayPal account directly to PayPal's fraud team via the app or website — go to the transaction, select 'Report', and explain it was a scam. If the scammer contacted you via email impersonating PayPal or another service, forward the email to the NCSC Suspicious Email Reporting Service at report@phishing.gov.uk. If you received scam SMS messages, forward them to 7726 (free, standard rates may apply). If the scam involved a marketplace platform like Facebook Marketplace or eBay, report the listing and seller there too — platforms take scam reports seriously and may remove the listing and ban the account. Contact Citizens Advice consumer helpline on 0808 223 1133 if you need additional support or guidance on your options. Keep a record of all reporting with reference numbers. While the money may not be recovered (Friends and Family offers no protection), reporting helps authorities identify and prosecute scammers and prevents others from becoming victims.",
-    "sections": [
-      [
-        "What the scam looks like",
-        "A seller asks the buyer to choose PayPal’s Friends and Family payment type for goods or services, often offering a discount or saying it avoids fees. The item then does not arrive or is worthless, and the buyer discovers the payment is outside PayPal Buyer Protection."
-      ],
-      [
-        "What PayPal currently says",
-        "PayPal UK says eligible Goods and Services payments can receive Buyer Protection. Its help pages list Friends and Family payments among transactions that are not eligible and describe a seller insisting on that method as a scam red flag.\n\nPayPal’s current scam-reporting page specifically describes item-not-received and low-value-item scams in which a fraudster persuades the buyer to use Friends and Family."
-      ],
-      [
-        "When Friends and Family is appropriate",
-        "Use it only for genuine personal transfers to someone you know and trust, such as sharing a bill or sending a gift where no purchase is taking place. It should not be used to buy an item or service from a seller."
-      ],
-      [
-        "If you already paid",
-        "Report the payment promptly through PayPal’s Resolution Centre using the scam-payment route if available for the transaction. Do not falsely describe an authorised payment as “unauthorised”; explain exactly how the scam worked.\n\nPayPal states that a PayPal-to-PayPal Friends and Family payment is not entitled to reimbursement under its APP Fraud Rules or Buyer Protection Programme. If the payment was funded by a linked card, you can ask the card issuer whether a chargeback is available, but PayPal’s role and the type of transaction can affect the outcome. Do not promise recovery.\n\nIf money was lost through fraud, report at `reportfraud.police.uk` or on 0300 123 2040 in England, Wales or Northern Ireland; in Scotland, call Police Scotland on 101."
-      ]
-    ],
-    "faq": [
-      [
-        "Is a Friends and Family purchase covered by PayPal Buyer Protection?",
-        "No. PayPal UK lists Friends and Family payments as ineligible."
-      ],
-      [
-        "Is Goods and Services protection automatic for every purchase?",
-        "No. The transaction and item must be eligible, the account must meet PayPal’s conditions, and the dispute must be filed in time."
-      ],
-      [
-        "Can my card issuer reverse a linked-card payment?",
-        "Possibly, under card-scheme rules, but the issuer must assess the transaction and PayPal’s role. It is not guaranteed."
-      ]
-    ],
-    "keywords": [
-      "PayPal Friends and Family scam UK",
-      "PayPal scam protection",
-      "PayPal money transfer fraud",
-      "how to spot PayPal scams",
-      "PayPal buyer protection",
-      "PayPal scam UK",
-      "PayPal email scam",
-      "fake PayPal email",
-      "PayPal phishing",
-      "bank transfer scam UK",
-      "payment scam UK"
-    ],
-    "updated": "2026-07-10"
   },
   {
     "title": "Monzo Scam UK: Spot a Fake 'Suspicious Activity' Alert",
@@ -6984,62 +6661,6 @@
     "updated": "2026-07-10"
   },
   {
-    "title": "Printer Support Scam UK: Spot a Fake HP Contact",
-    "slug": "printer-support-scam-uk",
-    "category": "tech",
-    "excerpt": "Scammers pose as HP printer support to trick you into paying for fake repairs or giving remote access to your device.",
-    "description": "An unsolicited caller or pop-up claims a printer fault and asks for remote access or payment. HP says it does not provide unsolicited technical support.",
-    "hero": "HP says it never contacts customers to provide unsolicited technical support. End the contact and open HP Support yourself.",
-    "date": "2026-05-09",
-    "content": "## What is this scam?\n\nThe printer support scam is a common fraud where criminals impersonate legitimate printer manufacturers — usually HP — to trick you into believing your printer has a serious problem. You might receive a cold call, a pop-up message on your computer, or a text alert claiming your printer has malfunctioned, has a virus, or is sending errors. The scammer then pressures you to call a fake support number, download remote access software, or pay upfront for repairs. In reality, there is no problem with your printer. The goal is to get money from you, steal your banking details, install malware on your computer, or access your personal files. These scams are particularly effective because printers are common household items and many people don't regularly check their printer status, making them easy targets. Scammers rely on urgency and fear to bypass your natural skepticism.\n\n## Warning signs to look for\n\n- Unsolicited phone calls claiming to be from 'HP Support' or 'Your Printer Company' — legitimate manufacturers rarely cold-call about printer issues.\n- Pop-up messages on your screen displaying error codes, warnings about viruses, or alerts to 'call support immediately' — these are fake browser alerts, not genuine system warnings.\n- Requests for remote access to your computer via software like TeamViewer, AnyDesk, or similar tools — legitimate HP support will never ask for this without you initiating contact first.\n- Demands for payment by bank transfer, gift card, or cryptocurrency before any work is done — real support charges only after repairs are confirmed and completed.\n- Caller cannot provide your printer model, serial number, or account details when you ask for verification.\n- Pressure to act immediately or threats that your printer will stop working, be blocked, or your data will be deleted if you don't comply.\n- Grammar errors, heavy accents unrelated to the company's location, or background noise suggesting a call centre in an unexpected location.\n- Requests to open Command Prompt, Device Manager, or to change system settings — a major red flag that malware is about to be installed.\n\n## How this scam works step by step\n\nThe scam typically begins with an unsolicited phone call or a pop-up message appearing on your computer screen. The caller claims to be from 'HP Technical Support' or uses a generic name like 'Windows Support Team' and tells you that errors have been detected on your printer or computer. They may reference specific error codes or claim your device is at risk. To convince you, they might ask you to check your printer's status or look at your computer's Event Viewer, where they'll interpret normal system logs as evidence of problems. Next, they'll ask for remote access to your computer by requesting you download a program like TeamViewer. Once you grant access, they'll make fake changes to your system, create fictional problems, or actually install malware. Finally, they'll demand payment for 'fixing' these non-existent issues, typically £150 to £500, and request payment by bank transfer, gift card, or even cryptocurrency. Some victims have also had their banking credentials, passwords, or personal documents stolen after granting remote access.\n\n## How to verify if it is genuine\n\nIf you receive a call or pop-up claiming to be from HP, do not follow their instructions immediately. Instead, hang up or close the pop-up and independently verify the contact. Go to the official HP website (hp.com) by typing the address directly into your browser — do not use links from the call or pop-up. Look up HP's genuine support phone number from their website and call them directly to confirm whether you have an outstanding issue. Genuine HP support will never cold-call you about printer errors or ask for remote access unprompted. Check your printer's actual status by looking at its control panel or checking its settings directly — if there are no error messages showing, the alert was fake. Be suspicious of any unsolicited contact, especially those creating urgency. For help identifying whether a website or contact is genuine, see our guide on /guides/is-this-website-a-scam/. Real manufacturers have verifiable contact details on their official websites and will always let you initiate support contact if you're concerned.\n\n## What to do if you have already interacted\n\nAct quickly if you've already engaged with this scam. If you granted remote access to your computer, disconnect it from the internet immediately and restart it in Safe Mode. Change your passwords for email, banking, and other sensitive accounts from a different device — use a friend's computer or your phone's mobile data rather than your home internet. If you've already sent money, contact your bank or payment service immediately and report the transaction as fraud. Most banks can freeze accounts or reverse transfers if you act within 24 hours. Do not send additional money or follow further instructions from the scammer. Scan your computer for malware using reputable antivirus software like Windows Defender (which is built into Windows) or Malwarebytes. If you downloaded any software from the scammer, uninstall it immediately. Finally, report the scam to Action Fraud (see reporting section below) and consider changing your WiFi password to prevent any installed malware from communicating with scammers. Keep records of all communication for the authorities.\n\n## Reporting this scam in the UK\n\nReport this scam to Action Fraud, the UK's national fraud reporting centre, by calling 0300 123 2040 or visiting actionfraud.police.uk. Provide as much detail as possible: the phone number that called you, any website links you were sent, software you were asked to download, and how much money (if any) was transferred. If you received a suspicious email or pop-up claiming to be from HP, forward it to the National Cyber Security Centre's Suspicious Email Reporting Service at report@phishing.gov.uk. If you received a text message with a malicious link, forward it to 7726 (free of charge). You can also report the scam to Citizens Advice's consumer helpline on 0808 223 1133, where advisers can guide you through next steps and potential refund options. Report the fraudulent phone number to your phone provider so they can flag it. If money was sent via a money transfer service like MoneyGram or Western Union, contact them immediately — they may be able to stop the transfer if it hasn't been collected yet. Reporting helps authorities track scam patterns and protect other UK residents.",
-    "sections": [
-      [
-        "What the scam looks like",
-        "A caller, email or browser page impersonates HP or another printer company and claims a fault, infection, expired driver or urgent support problem. It then seeks payment, credentials, or remote access to the computer."
-      ],
-      [
-        "What HP says",
-        "HP’s UK fraud alert says it never contacts customers to provide unsolicited technical support. It warns that scammers may spoof caller ID, request remote access, seek gift-card or card payment, or ask the user to install software.\n\nHP’s broader fraud guidance says genuine HP order emails use an `hp.com` email domain and gives `@hp.com` and `@dept.hp.com` as examples. This email-domain point is relevant to order-related messages; it does not turn every message with an HP-looking sender into proof of authenticity."
-      ],
-      [
-        "Warning signs",
-        "- An unexpected call or message claiming an urgent printer problem.\n- A browser warning with a phone number to call.\n- A request for remote control, passwords, gift cards or unusual payment.\n- A caller who prevents independent verification or becomes aggressive.\n- A support site reached through an advert rather than through the manufacturer’s site."
-      ],
-      [
-        "Verify support independently",
-        "Open `support.hp.com/gb-en/contact` yourself and identify the product to see available support options. Some contact routes require an active warranty. Do not use a number shown in a pop-up or supplied by an unsolicited caller.\n\nClose a suspicious browser tab or window without using buttons inside the page. If it will not close, use the operating system’s normal application controls and then reopen the browser without restoring the suspicious page."
-      ],
-      [
-        "If remote access or payment was given",
-        "End the session, disconnect the device from the network and contact the bank immediately from a different device if payment or banking was exposed. HP advises changing affected account passwords and running a security scan. Remove remote-access software and check for persistent access or other installed programs.\n\nReport fraud at `reportfraud.police.uk` or on 0300 123 2040 in England, Wales or Northern Ireland; in Scotland, call Police Scotland on 101."
-      ]
-    ],
-    "faq": [
-      [
-        "Does HP make unsolicited support calls?",
-        "HP’s published fraud guidance says no."
-      ],
-      [
-        "Does every real HP contact come from the same exact address?",
-        "No. HP says order emails use the `hp.com` domain and gives examples, but verify the requested action through HP Support independently."
-      ],
-      [
-        "Where is the official UK support page?",
-        "`support.hp.com/gb-en/contact`."
-      ]
-    ],
-    "keywords": [
-      "printer support scam",
-      "HP support scam UK",
-      "fake printer support",
-      "tech support scam",
-      "printer error scam",
-      "tech support scam UK",
-      "remote access scam UK"
-    ],
-    "updated": "2026-07-10"
-  },
-  {
     "title": "Fake Nike Website Scam UK: Spot a Counterfeit Shop",
     "slug": "fake-nike-website-uk",
     "category": "website",
@@ -9403,60 +9024,6 @@
     "updated": "2026-07-02"
   },
   {
-    "title": "Fake Wi-Fi Hotspot Scam UK: Verify the Network",
-    "slug": "fake-wifi-hotspot-scam-uk",
-    "category": "tech",
-    "excerpt": "Scammers create fake public Wi-Fi networks to steal passwords, banking details and personal data from unsuspecting UK users in cafes, airports and libraries.",
-    "description": "An “evil twin” copies a legitimate Wi-Fi name. Ask the venue for the correct network and prefer mobile data for sensitive activity.",
-    "hero": "Ask staff for the exact network name. For sensitive work, mobile data or a trusted, correctly configured VPN reduces exposure to a rogue hotspot.",
-    "date": "2026-05-20",
-    "content": "## What is this scam?\n\nA fake Wi-Fi hotspot scam involves criminals setting up bogus wireless networks in public spaces like coffee shops, airports, libraries and train stations across the UK. The fake network typically has a name (SSID) that mimics a legitimate business—for example, 'Free_WiFi_Cafe' or 'Airport_Guest_Network'—to look trustworthy. When you connect to the fake network, scammers use special software to monitor your internet traffic, capturing unencrypted data like passwords, banking login details, emails and personal information. They may also redirect you to fake login pages or use man-in-the-middle attacks to intercept your communications. Unlike phishing scams that trick you through emails, fake hotspot scams work silently in the background once you're connected, making them particularly dangerous because you may not realise your data is being stolen until fraudulent transactions appear on your accounts days or weeks later.\n\n## Warning signs to look for\n\n- The network name is suspiciously generic like 'Free WiFi', 'Public WiFi' or 'Guest Network' with no business branding or unusual spelling of familiar brands.\n- No password is required to connect, or the password is unusually simple and generic (like 'password' or '123456').\n- The network signal is strong from an unexpected location—for example, a powerful signal in a cafe corner where there's no visible router.\n- You're prompted to enter login details or personal information immediately after connecting, claiming to verify your identity.\n- Your device doesn't automatically reconnect to the network like it normally would with trusted networks.\n- Websites load unusually slowly or display strange redirect pages before loading properly.\n- Your device shows warnings about unencrypted connections or certificate errors when visiting normally secure websites.\n- Multiple identical network names appear in your available networks list (a sign of multiple fraudsters operating in the same area).\n\n## How this scam works step by step\n\nThe scam begins when a criminal uses a laptop and inexpensive Wi-Fi spoofing equipment to broadcast a fake wireless network in a public location. They choose a name that sounds legitimate or matches the venue—'Costa_Guest', 'Starbucks_WiFi' or 'Airport_Connect'—making users trust it without question. When you select and connect to this network, your device is now communicating through the criminal's equipment rather than a legitimate router. The scammer uses packet-sniffing software to monitor all unencrypted traffic passing through their network, capturing passwords, emails, banking credentials and personal data in real-time. They may also set up a fake login portal that appears when you first connect, asking you to enter personal details supposedly to activate the network. Once you've entered information or visited sensitive websites (like your bank), the criminal has harvested enough data to commit identity theft or access your accounts. Some advanced scammers use SSL stripping techniques to downgrade secure HTTPS connections to unencrypted HTTP, allowing them to intercept data from websites you believed were secure. The entire process can take minutes, and by the time you've finished your coffee and left the cafe, your financial details may already be compromised.\n\n## How to verify if it is genuine\n\nBefore connecting to any public Wi-Fi, always ask staff at the venue directly what the exact network name is—write it down or take a photo. Legitimate businesses can confirm their genuine network SSID, and staff will warn you about name variations used by scammers. Check the venue's official website or social media pages for their published Wi-Fi network name, as established cafes and airports list this information. Look for a notice or poster displayed at the location showing the correct network name and any security instructions. Be cautious if the business has no printed information about their Wi-Fi—many legitimate venues provide cards or signs with details. If using a cafe's Wi-Fi, ask for a password. Genuine public networks either require a simple password (written on receipts or walls) or direct you through a legitimate login portal with clear branding. For airport Wi-Fi, connect only through official kiosks or screens provided by the airport authority, never random networks with airport-like names. For banking, check our guide on recognising fake websites at /guides/is-this-website-a-scam/ to understand how to spot fraudulent pages before entering credentials. Enable two-factor authentication on all important accounts so that even if your password is stolen, criminals cannot access your accounts without a second verification code.\n\n## What to do if you have already interacted\n\nIf you've connected to a suspicious network, first disconnect immediately and move to a secure location. Check your device for any suspicious apps or software installed during the session—go to Settings > Apps (Android) or Settings > General > iPhone Storage (iOS) and uninstall anything unfamiliar. Change your passwords for all important accounts—email, banking, social media and work accounts—immediately using a secure connection (either your mobile data or a known safe Wi-Fi network). Use a strong, unique password for each account containing at least 12 characters with mixed case, numbers and symbols. Contact your bank and building society directly using the phone number on the back of your card (never use numbers from emails or texts) to report the potential compromise and ask them to monitor your accounts for suspicious activity. Request they place a fraud alert on your account and freeze credit if necessary. Enable two-factor authentication on all accounts that support it, including email, online banking and social media. Monitor your credit report for free at TransUnion, Experian, or Equifax to check for fraudulent accounts opened in your name. If you entered banking details on a fake login page, report this immediately to Action Fraud on 0300 123 2040 so the network of fake hotspots can be tracked and investigated.\n\n## Reporting this scam in the UK\n\nReport suspected fake Wi-Fi hotspot scams to Action Fraud immediately by calling 0300 123 2040 or visiting actionfraud.police.uk online. Provide them with the location where you encountered the suspicious network, the network name (SSID), the date and time you connected, and any suspicious websites or login pages you were shown. For scam emails or texts trying to direct you to fake hotspots, forward suspicious texts to 7726 (spoof) and report phishing emails to the NCSC Suspicious Email Reporting Service at report@phishing.gov.uk with full email headers attached. If the fake network was set up to impersonate a specific business, contact that company's security team directly and inform them their brand is being used fraudulently—most large UK businesses like Starbucks or airports have dedicated fraud reporting channels. Contact Citizens Advice consumer helpline on 0808 223 1133 for free advice about your rights and any financial losses. Report the specific location and network details to the venue owner directly, as they may not be aware their premises is being used for scamming. If you've suffered financial loss, also file a report with your bank's fraud team and provide them with Action Fraud's reference number. Keep detailed records of all communications and reports you make, including dates, times, names and reference numbers for your own protection.",
-    "sections": [
-      [
-        "What an evil twin is",
-        "NCSC describes an evil twin as an attacker-owned access point that uses the same or a similar name as a legitimate network, potentially allowing the attacker to intercept or manipulate traffic from connected devices.\n\nThe name alone is therefore not enough. Two networks can look identical in a phone’s Wi-Fi list."
-      ],
-      [
-        "HTTPS helps, but does not validate the hotspot",
-        "Modern banking, email and shopping services normally use HTTPS/TLS to encrypt traffic between the device and the genuine service. That materially limits what a local network attacker can read or alter.\n\nIt does not make a fake hotspot harmless. An attacker can still present a deceptive captive portal, exploit unencrypted or badly configured services, probe exposed local services, or direct the user to a phishing site. A padlock proves the connection to the domain shown in the browser, not that the Wi-Fi belongs to the venue."
-      ],
-      [
-        "Warning signs",
-        "- Duplicate or near-duplicate network names.\n- A captive portal asking for an email password, banking details or an unrelated account login.\n- Certificate or browser security warnings.\n- Staff cannot confirm the network name or access method.\n- The device reconnects automatically to an unexpected open network.\n\nAn open network is not automatically fraudulent; many legitimate venues operate one. Verification matters more than whether a password is present."
-      ],
-      [
-        "Safer connection choices",
-        "Ask venue staff to identify the correct network. For sensitive activity, using your own mobile connection instead of an unknown hotspot avoids the rogue-access-point problem. If an organisation provides a trusted, properly configured full-device VPN, it can protect traffic across an untrusted local network; NCSC’s “evil twin” exercise says VPN use can prevent this interception pattern.\n\nDo not install a random “free VPN” in response to a pop-up. A VPN operator can itself see or influence traffic and must be trusted."
-      ],
-      [
-        "If you connected to a suspicious network",
-        "Disconnect and forget the network so the device does not automatically rejoin. From a trusted connection, change any password entered into the hotspot or a suspicious page, review account sessions and enable a passkey or two-step verification. If software or a certificate profile was installed, remove it and follow the device vendor’s security guidance.\n\nIf money was lost or accounts were compromised, report at `reportfraud.police.uk` or on 0300 123 2040 in England, Wales or Northern Ireland; in Scotland, call Police Scotland on 101."
-      ]
-    ],
-    "faq": [
-      [
-        "Does HTTPS remove all public Wi-Fi risk?",
-        "No. It strongly protects traffic to a correctly authenticated HTTPS service, but it does not prove the network or a captive portal is genuine."
-      ],
-      [
-        "Is every password-free hotspot fake?",
-        "No. Confirm the network with the venue rather than using the presence or absence of a password as the deciding test."
-      ],
-      [
-        "Does NCSC tell every individual to buy a VPN?",
-        "No. NCSC’s detailed VPN guidance is mainly for organisations. Its evil-twin material says a VPN can prevent that attack, while other NCSC advice recommends verifying the hotspot or using mobile tethering."
-      ]
-    ],
-    "keywords": [
-      "fake Wi-Fi hotspot scam",
-      "fake public Wi-Fi UK",
-      "unsafe Wi-Fi networks",
-      "Wi-Fi scam signs",
-      "protect against Wi-Fi scams"
-    ],
-    "updated": "2026-07-10"
-  },
-  {
     "title": "SHEIN Fake Website Scam UK: Check the Site and Offer",
     "slug": "shein-fake-website-scam-uk",
     "category": "website",
@@ -9808,7 +9375,7 @@
     "description": "Got an email saying your Amazon Prime membership failed to renew or payment failed? How to spot a fake Prime renewal scam and report it in the UK.",
     "hero": "Scammers are sending fake Amazon Prime emails right now—here's exactly how to spot them and protect your account.",
     "date": "2026-05-21",
-    "content": "## What is this scam?\n\nThe Amazon Prime scam targets UK customers with fake emails and text messages claiming urgent action is needed on their account. Typical messages say your Prime membership is about to expire, your payment has failed, or your account has been suspended due to unusual activity. The scammer's goal is to trick you into clicking a link that looks like it goes to Amazon but actually takes you to a fake website designed to look identical to the real thing. Once you enter your email address and password—or worse, your payment card details—the scammer gains access to your real Amazon account. From there, they can make purchases, change your password, add new payment methods, or sell your account login details on the dark web. Some victims have reported fraudulent orders appearing on their accounts within hours, or their Amazon account being completely locked them out.\n\n## Warning signs to look for\n\n- The email asks you to 'confirm your payment details' or 'verify your account' by clicking a link—Amazon never asks this via email.\n- The sender's email address looks almost right but isn't quite: for example, 'amazon-security@amazonservices.co.uk' instead of a verified Amazon domain.\n- The message creates urgency: 'Your account will be closed in 24 hours' or 'Immediate action required'.\n- The link in the email doesn't go to amazon.co.uk when you hover over it (check before clicking).\n- The email contains spelling or grammar errors, awkward phrasing, or unusual formatting.\n- It asks you to confirm sensitive information like your full card number, CVV, or password—legitimate Amazon emails never do this.\n- The message arrived unexpectedly and you weren't expecting any payment issues.\n- The footer or contact information looks generic or unprofessional compared to genuine Amazon emails.\n\n## How this scam works step by step\n\nThe scam typically begins with a convincing email or SMS that appears to come from Amazon, claiming there's a problem with your Prime account or payment. The message uses official-looking logos, colours, and language copied from real Amazon emails to build trust. It instructs you to click a link urgently to 'update your payment method', 'confirm your identity', or 'reactivate your membership'. When you click, you're taken to a fake website that's nearly identical to the real amazon.co.uk—the same layout, colours, and logo. You enter your email address and password to 'log in', which goes straight to the scammer instead of Amazon's servers. Some fake sites then ask for additional details: your full card number, expiry date, CVV, and billing address. Within minutes, the scammer has everything needed to access your real Amazon account or make fraudulent purchases using your payment method. They may also sell your login credentials to other criminals. You might not notice anything wrong until you receive notification of unauthorized purchases, see your account locked, or your bank flags suspicious transactions.\n\n## How to verify if it is genuine\n\nIf you receive an email claiming to be from Amazon, do not click any links in the message. Instead, open a fresh browser tab and go directly to amazon.co.uk by typing the address yourself. Log in and check your account under 'Your Account' > 'Login & Security' or 'Payment options' to see if there's actually a problem. A genuine Amazon account issue will show warnings or alerts within your account dashboard. You can also check the sender's email address: hover your mouse over it (don't click) to see the actual email domain—it must be from @amazon.co.uk or @amazon.com. If the domain is different (e.g., @amazonservices-update.co.uk), it's fake. Call Amazon's customer service directly on 0871 354 9904 (available on your Amazon account under 'Contact Us') to confirm if there's a real issue. Never call a phone number provided in the suspicious email. For more guidance on identifying fake websites, see our guide on /guides/is-this-website-a-scam/.\n\n## What to do if you have already interacted\n\nIf you clicked the link but didn't enter any information, you've likely avoided the worst. Clear your browser history and cache to remove any tracking. If you entered your Amazon email and password into a fake site, change your Amazon password immediately by logging into amazon.co.uk directly (not via any email link). Use a strong, unique password with at least 12 characters mixing numbers, symbols, and letters. Next, check your Amazon account for unauthorized purchases, changes to your delivery address, or unfamiliar payment methods added—look under 'Your Account' > 'Your Orders' and 'Payment options'. If you find unauthorized activity, contact Amazon customer service immediately on 0871 354 9904 and ask them to reverse fraudulent purchases and secure your account. If you entered your payment card details, contact your bank or card issuer right away and request they cancel the card and issue a replacement. Ask them to monitor your account for suspicious transactions. Report the scam to Action Fraud (0300 123 2040) and the NCSC Suspicious Email Reporting Service. Do not ignore it—prompt action significantly reduces the damage.\n\n## Reporting this scam in the UK\n\nReport Amazon Prime scam emails to the National Cyber Security Centre (NCSC) by forwarding them to report@phishing.gov.uk—do not click any links in the email before reporting. The NCSC will investigate and attempt to take down the fake website. You should also report the scam to Action Fraud, the UK's national fraud reporting centre, either by calling 0300 123 2040 (Monday to Friday, 8am–8pm) or online at reportfraud.org.uk. Provide as much detail as possible: the sender's email address, the date received, and the fake website URL. If you received the scam via SMS, forward it to 7726 (standard rates apply). The Citizens Advice consumer helpline (0808 223 1133, free and confidential) can also provide guidance if you've lost money. Report the fake website to Amazon directly by going to amazon.co.uk/help and selecting 'Contact Us'—they can assist in getting the fraudulent site removed. Keep a record of all communications and reporting reference numbers for your own records.",
+    "content": "## What is this scam?\n\nThe Amazon Prime scam targets UK customers with fake emails and text messages claiming urgent action is needed on their account. Typical messages say your Prime membership is about to expire, your payment has failed, or your account has been suspended due to unusual activity. The scammer's goal is to trick you into clicking a link that looks like it goes to Amazon but actually takes you to a fake website designed to look identical to the real thing. Once you enter your email address and password—or worse, your payment card details—the scammer gains access to your real Amazon account. From there, they can make purchases, change your password, add new payment methods, or sell your account login details on the dark web. Some victims have reported fraudulent orders appearing on their accounts within hours, or their Amazon account being completely locked them out.\n\n## Warning signs to look for\n\n- The email asks you to 'confirm your payment details' or 'verify your account' by clicking a link—Amazon never asks this via email.\n- The sender's email address looks almost right but isn't quite: for example, 'amazon-security@amazonservices.co.uk' instead of a verified Amazon domain.\n- The message creates urgency: 'Your account will be closed in 24 hours' or 'Immediate action required'.\n- The link in the email doesn't go to amazon.co.uk when you hover over it (check before clicking).\n- The email contains spelling or grammar errors, awkward phrasing, or unusual formatting.\n- It asks you to confirm sensitive information like your full card number, CVV, or password—legitimate Amazon emails never do this.\n- The message arrived unexpectedly and you weren't expecting any payment issues.\n- The footer or contact information looks generic or unprofessional compared to genuine Amazon emails.\n\n## How this scam works step by step\n\nThe scam typically begins with a convincing email or SMS that appears to come from Amazon, claiming there's a problem with your Prime account or payment. The message uses official-looking logos, colours, and language copied from real Amazon emails to build trust. It instructs you to click a link urgently to 'update your payment method', 'confirm your identity', or 'reactivate your membership'. When you click, you're taken to a fake website that's nearly identical to the real amazon.co.uk—the same layout, colours, and logo. You enter your email address and password to 'log in', which goes straight to the scammer instead of Amazon's servers. Some fake sites then ask for additional details: your full card number, expiry date, CVV, and billing address. Within minutes, the scammer has everything needed to access your real Amazon account or make fraudulent purchases using your payment method. They may also sell your login credentials to other criminals. You might not notice anything wrong until you receive notification of unauthorized purchases, see your account locked, or your bank flags suspicious transactions.\n\n## How to verify if it is genuine\n\nIf you receive an email claiming to be from Amazon, do not click any links in the message. Instead, open a fresh browser tab and go directly to amazon.co.uk by typing the address yourself. Log in and check your account under 'Your Account' > 'Login & Security' or 'Payment options' to see if there's actually a problem. A genuine Amazon account issue will show warnings or alerts within your account dashboard. You can also check the sender's email address: hover your mouse over it (don't click) to see the actual email domain—it must be from @amazon.co.uk or @amazon.com. If the domain is different (e.g., @amazonservices-update.co.uk), it's fake. Call Amazon's customer service directly on 0871 354 9904 (available on your Amazon account under 'Contact Us') to confirm if there's a real issue. Never call a phone number provided in the suspicious email. For more guidance on identifying fake websites, see our guide on /guides/is-this-website-a-scam/.\n\n## What to do if you have already interacted\n\nIf you clicked the link but didn't enter any information, you've likely avoided the worst. Clear your browser history and cache to remove any tracking. If you entered your Amazon email and password into a fake site, change your Amazon password immediately by logging into amazon.co.uk directly (not via any email link). Use a strong, unique password with at least 12 characters mixing numbers, symbols, and letters. Next, check your Amazon account for unauthorized purchases, changes to your delivery address, or unfamiliar payment methods added—look under 'Your Account' > 'Your Orders' and 'Payment options'. If you find unauthorized activity, contact Amazon customer service immediately on 0871 354 9904 and ask them to reverse fraudulent purchases and secure your account. If you entered your payment card details, contact your bank or card issuer right away and request they cancel the card and issue a replacement. Ask them to monitor your account for suspicious transactions. Report the scam to Action Fraud (0300 123 2040) and the NCSC Suspicious Email Reporting Service. Do not ignore it—prompt action significantly reduces the damage.\n\n## Reporting this scam in the UK\n\nReport Amazon Prime scam emails to the National Cyber Security Centre (NCSC) by forwarding them to report@phishing.gov.uk—do not click any links in the email before reporting. The NCSC will investigate and attempt to take down the fake website. You should also report the scam to Action Fraud, the UK's national fraud reporting centre, either by calling 0300 123 2040 (Monday to Friday, 8am–8pm) or online at reportfraud.police.uk. Provide as much detail as possible: the sender's email address, the date received, and the fake website URL. If you received the scam via SMS, forward it to 7726 (standard rates apply). The Citizens Advice consumer helpline (0808 223 1133, free and confidential) can also provide guidance if you've lost money. Report the fake website to Amazon directly by going to amazon.co.uk/help and selecting 'Contact Us'—they can assist in getting the fraudulent site removed. Keep a record of all communications and reporting reference numbers for your own records.",
     "sections": [
       [
         "What a fake Amazon Prime renewal email looks like",
@@ -12552,5 +12119,587 @@
       "atol cruise",
       "cruise line scam"
     ]
+  },
+  {
+    "title": "PayPal Friends and Family Scam: Why Sellers Ask for It",
+    "slug": "paypal-friends-family-scam-uk",
+    "category": "payment",
+    "excerpt": "Scammers pose as friends or sellers to trick you into sending money via PayPal's Friends and Family option, which has no buyer protection.",
+    "description": "PayPal Friends and Family payments are not eligible for Buyer Protection. Use Goods and Services for an eligible purchase and report scam payments promptly.",
+    "hero": "PayPal says using Friends and Family for a purchase is a scam warning sign and those payments are not eligible for Buyer Protection.",
+    "date": "2026-04-30",
+    "content": "## What makes Friends and Family payments a scammer's favourite target\n\nPayPal's Friends and Family feature is designed for sending money to people you trust — family members, close friends, or people you know personally. Unlike standard PayPal payments or goods-and-services transactions, Friends and Family transfers come with almost no buyer protection. Once you send money this way, PayPal treats it as a personal gift, not a commercial transaction. This is exactly why scammers push you towards it. They know that if you realise you've been tricked, you have almost no recourse through PayPal's dispute system. The scam works because it exploits the trust implied by the payment method itself. Scammers either impersonate someone you know — a friend, family member, or colleague — or they pose as a seller (often on Gumtree, Facebook Marketplace, or eBay) and convince you that Friends and Family is the 'safer' or 'faster' way to pay. In reality, it's the safest way for them to steal from you.\n\n## Red flags that should stop you sending money via Friends and Family\n\n- A seller on Gumtree, Facebook Marketplace, or eBay insists you pay via Friends and Family instead of the platform's own payment system — legitimate sellers use the built-in protection.\n- Someone claiming to be a friend or family member asks for money urgently via PayPal, but their message tone, language, or phrasing feels slightly off — scammers often impersonate people via hacked accounts or spoofed messages.\n- A 'buyer' for something you're selling asks to pay via Friends and Family first, then claims the money didn't arrive and asks you to send it again — a common double-payment trick.\n- You receive a message from PayPal itself asking you to confirm a Friends and Family payment or verify your account — PayPal does not ask this via unsolicited messages.\n- Someone you don't know well asks you to act as a 'middleman' and receive money on their behalf via Friends and Family, then forward it elsewhere — this is often money laundering or a scam setup.\n- A seller offers an unusually large discount if you pay via Friends and Family instead of their normal payment method — they're trying to bypass protection systems.\n- The person claims Friends and Family is 'safer' for you as a buyer — it is the opposite.\n\n## How the scam unfolds: from contact to money loss\n\nThe scam typically begins in one of two ways. First, a scammer may hack or impersonate a real contact — a friend, family member, or colleague — and message you via WhatsApp, Facebook Messenger, email, or text claiming they need money urgently. They might say they're stuck abroad, in a car accident, or facing a financial emergency. The message often has a slight oddness to it (wrong name spelling, unusual phrasing, or a request to keep it quiet), but the urgency and emotional appeal override caution. Alternatively, you may be selling something online (a phone, furniture, a car part) and a 'buyer' contacts you. They seem keen, ask for your PayPal address, and request that you send them an invoice via Friends and Family so they can 'pay quickly'. Once you do, they send you a fake PayPal email or screenshot showing the payment has been made — but it hasn't. By the time you realise the money never arrived, they've disappeared. In the impersonation version, you send the money thinking you're helping someone you trust, only to discover later (when you contact them directly) that they never asked for it. The scammer has already withdrawn or transferred the funds.\n\n## How to check if a PayPal Friends and Family request is genuine\n\nIf someone claiming to be a friend or family member asks for money via PayPal, do not rely on the message alone. Contact them directly using a phone number or email address you already have — not one provided in the suspicious message. Call them, video call them, or message them on a platform you know is theirs (not a newly created account). Ask them directly if they sent the PayPal request. If they didn't, you've caught a scam. If you're being asked to pay a seller via Friends and Family, refuse. Legitimate sellers on Gumtree, Facebook Marketplace, eBay, and other platforms use their own payment systems or bank transfers with clear protections. If a seller insists on Friends and Family, they are either a scammer or trying to avoid accountability — either way, do not proceed. Check the PayPal email address or username of whoever is requesting the payment. Scammers often use addresses that look similar to real ones (e.g., 'paypa1' instead of 'paypal', or a name spelled slightly differently). If you're unsure, log into your own PayPal account directly (do not click links in messages) and check your recent activity or contacts. A genuine friend or family member will be someone you recognise in your PayPal contacts list.\n\n## What to do immediately if you've already sent money\n\nAct fast. First, log into your PayPal account and check the transaction status. If the money is still pending (not yet claimed or withdrawn), contact PayPal immediately via the official PayPal website or app — do not use any phone number from a message or email. Explain that you sent money via Friends and Family by mistake or due to a scam. PayPal may be able to cancel the payment if it hasn't been claimed. If the money has already been withdrawn, contact your bank or card issuer straight away. Tell them you sent money via PayPal to a scammer and ask if they can reverse the transaction or freeze the recipient's account. Banks can sometimes recover funds if they act quickly, especially if the money was sent to another UK bank account. Report the scam to Report Fraud on 0300 123 2040 or online at reportfraud.police.uk. Provide as much detail as possible: the PayPal address or username of the person who received the money, the date and amount, and any messages or contact details you have. If the scammer impersonated someone you know, contact that person and let them know their identity may have been compromised — they should change their passwords and check their account security. Do not send any more money or engage further with the scammer.\n\n## Reporting the scam in the UK\n\nReport the scam to Report Fraud immediately on 0300 123 2040 or via reportfraud.police.uk. They handle fraud reports and can flag patterns to law enforcement. Provide the PayPal username or email address of the person who received the money, the transaction ID (visible in your PayPal account), the date, amount, and any messages or contact details. Also report the scam directly to PayPal. Log into your account, go to the Resolution Centre, and report the transaction as unauthorised or fraudulent. PayPal has a dedicated fraud team and may be able to take action against the recipient's account. If the scammer impersonated someone via email or text, forward the suspicious message to the NCSC Suspicious Email Reporting Service at report@phishing.gov.uk. If it was a text message, forward it to 7726 (free, and your phone will confirm receipt). If you have contact details for the scammer (phone number, email, social media profile), report them to the platform they used — Facebook, WhatsApp, Gumtree, or eBay — so their account can be investigated and removed. Finally, contact Citizens Advice on 0808 223 1133 if you need support or guidance on next steps, especially if you've lost a significant amount of money.",
+    "sections": [
+      [
+        "What the scam looks like",
+        "A seller asks the buyer to choose PayPal’s Friends and Family payment type for goods or services, often offering a discount or saying it avoids fees. The item then does not arrive or is worthless, and the buyer discovers the payment is outside PayPal Buyer Protection."
+      ],
+      [
+        "What PayPal currently says",
+        "PayPal UK says eligible Goods and Services payments can receive Buyer Protection. Its help pages list Friends and Family payments among transactions that are not eligible and describe a seller insisting on that method as a scam red flag.\n\nPayPal’s current scam-reporting page specifically describes item-not-received and low-value-item scams in which a fraudster persuades the buyer to use Friends and Family."
+      ],
+      [
+        "When Friends and Family is appropriate",
+        "Use it only for genuine personal transfers to someone you know and trust, such as sharing a bill or sending a gift where no purchase is taking place. It should not be used to buy an item or service from a seller."
+      ],
+      [
+        "If you already paid",
+        "Report the payment promptly through PayPal’s Resolution Centre using the scam-payment route if available for the transaction. Do not falsely describe an authorised payment as “unauthorised”; explain exactly how the scam worked.\n\nPayPal states that a PayPal-to-PayPal Friends and Family payment is not entitled to reimbursement under its APP Fraud Rules or Buyer Protection Programme. If the payment was funded by a linked card, you can ask the card issuer whether a chargeback is available, but PayPal’s role and the type of transaction can affect the outcome. Do not promise recovery.\n\nIf money was lost through fraud, report at `reportfraud.police.uk` or on 0300 123 2040 in England, Wales or Northern Ireland; in Scotland, call Police Scotland on 101."
+      ]
+    ],
+    "faq": [
+      [
+        "Is a Friends and Family purchase covered by PayPal Buyer Protection?",
+        "No. PayPal UK lists Friends and Family payments as ineligible."
+      ],
+      [
+        "Is Goods and Services protection automatic for every purchase?",
+        "No. The transaction and item must be eligible, the account must meet PayPal’s conditions, and the dispute must be filed in time."
+      ],
+      [
+        "Can my card issuer reverse a linked-card payment?",
+        "Possibly, under card-scheme rules, but the issuer must assess the transaction and PayPal’s role. It is not guaranteed."
+      ]
+    ],
+    "keywords": [
+      "PayPal Friends and Family scam UK",
+      "PayPal scam protection",
+      "PayPal money transfer fraud",
+      "how to spot PayPal scams",
+      "PayPal buyer protection",
+      "PayPal scam UK",
+      "PayPal email scam",
+      "fake PayPal email",
+      "PayPal phishing",
+      "bank transfer scam UK",
+      "payment scam UK"
+    ],
+    "sources_checked": [
+      [
+        "PayPal UK: Avoiding common scams",
+        "https://www.paypal.com/uk/webapps/mpp/security/learn-about-scams"
+      ],
+      [
+        "PayPal UK: Report a scam payment",
+        "https://www.paypal.com/uk/cshelp/article/how-do-i-report-a-scam-payment-help1351"
+      ],
+      [
+        "PayPal UK: Buyer Protection eligibility",
+        "https://www.paypal.com/uk/cshelp/article/does-paypal-cover-my-purchase-if-theres-a-problem-help364"
+      ],
+      [
+        "PayPal UK: APP fraud and Friends and Family",
+        "https://www.paypal.com/uk/cshelp/article/what-is-app-fraud---help1195"
+      ],
+      [
+        "Report Fraud: reporting cyber crime and fraud",
+        "https://www.reportfraud.police.uk/reporting-a-fraud/"
+      ]
+    ],
+    "updated": "2026-07-13"
+  },
+  {
+    "title": "Printer Support Scam UK: Spot a Fake HP Contact",
+    "slug": "printer-support-scam-uk",
+    "category": "tech",
+    "excerpt": "Scammers pose as printer manufacturers to trick you into paying for fake repairs or handing over remote access. Learn how to spot and stop them.",
+    "description": "An unsolicited caller or pop-up claims a printer fault and asks for remote access or payment. HP says it does not provide unsolicited technical support.",
+    "hero": "HP says it never contacts customers to provide unsolicited technical support. End the contact and open HP Support yourself.",
+    "date": "2026-05-09",
+    "content": "## What is a printer support scam?\n\nA printer support scam is a fraud where criminals pretend to be technical support staff from a printer manufacturer (such as HP, Canon, Epson, or Brother) to trick you into paying for fake repairs or giving them access to your computer. The scam typically starts with a pop-up warning on your screen, a cold call, or an email claiming your printer has a critical error, security issue, or needs urgent maintenance. The scammer's goal is to either charge you money for a 'repair' that never happens, steal your bank details or passwords, or install malware on your device that lets them access your files, photos, or financial information. These scams are growing in frequency because printers are common household devices that many people don't monitor closely, and the technical nature of the problem makes it easy to sound convincing. The scammers rely on urgency and fear — they want you to act quickly without thinking or checking whether the warning is real.\n\n## How to spot the warning signs\n\n- **Unsolicited pop-up warnings on your screen** — A sudden full-screen message claiming your printer is broken, has a virus, or needs immediate repair. Genuine printer manufacturers do not send pop-ups to warn you of problems; they send emails or letters to your registered account.\n- **Cold calls claiming to be from printer support** — Someone rings you out of the blue saying they've detected a fault with your printer and need remote access to fix it. Real manufacturers do not cold-call customers about printer issues.\n- **Emails with urgent language and suspicious links** — Messages claiming your printer warranty is expiring, your device is at risk, or you need to 'verify your account' immediately. Check the sender's email address carefully — scammers often use addresses that look similar to the real brand but have slight misspellings.\n- **Requests for payment via gift cards, wire transfer, or cryptocurrency** — Legitimate printer support may charge a fee, but they use standard payment methods (credit card, debit card, invoice). Requests for iTunes cards, Google Play cards, or bank transfers are almost always a scam.\n- **Pressure to grant remote access to your computer** — The caller or pop-up insists you download software or allow them to control your screen to 'diagnose' the problem. This is a major red flag; legitimate support may ask for remote access, but only after you have initiated contact with them directly.\n- **Poor spelling, grammar, or awkward phrasing** — Scam emails and pop-ups often contain obvious errors. Real manufacturers employ professional communications teams.\n- **A phone number that doesn't match the official website** — If you call the number provided in the pop-up or email, it doesn't connect to the real manufacturer's support line. Always use the number on your printer's documentation or the official website.\n- **Requests for personal information beyond what's needed** — Asking for your full bank details, passwords, or social security number when they only need your printer model and serial number is a warning sign.\n\n## How the scam unfolds from first contact to loss\n\nThe scam typically begins when you see a pop-up warning while browsing the internet, or you receive an unsolicited phone call or email. The pop-up might claim your printer has detected a virus, is running out of storage, or has a critical hardware error — it often includes a fake countdown timer to create panic. If you click on the pop-up or call the number provided, you reach a scammer posing as technical support. They will ask you to describe the problem (which you may not have noticed before the pop-up), then offer to fix it remotely. To do this, they ask you to download software or visit a website where you can grant them remote access to your computer. Once they have access, they may install malware, steal passwords from your browser, or take screenshots of your banking apps and login details. Alternatively, they may simply claim the 'repair' costs £50 to £300 and ask you to pay via bank transfer, gift card, or online payment. Some scammers will also try to sell you a fake 'extended warranty' or 'antivirus subscription' that you'll be charged for repeatedly. By the time you realise the printer was never broken and the support was fake, the scammer has either taken your money, installed hidden software on your device, or stolen your personal information.\n\n## How to verify if a printer support contact is genuine\n\nIf you receive a pop-up, email, or call claiming to be from your printer manufacturer, do not click any links or call any numbers provided in the message. Instead, take these steps: First, check your printer itself — does it actually show any error messages or signs of a problem? If not, the warning is almost certainly fake. Second, go directly to the manufacturer's official website by typing the URL into your browser (do not click a link from the pop-up or email). Look for a 'Support' or 'Contact Us' section and find their official phone number or live chat. Call or message them using that contact method and ask whether they have any record of an issue with your device. Third, check your printer's documentation or the box it came in for the manufacturer's support contact details. Fourth, if you have an account with the manufacturer (for example, an HP account or Canon account), log in directly to your account on their official website and check for any notifications or alerts about your printer — scammers cannot send messages through your real account. Genuine manufacturers will never ask you to download software from a link in an unsolicited message, and they will never ask for payment via gift card or wire transfer. If you are unsure, contact Citizens Advice on 0808 223 1133 or the NCSC for guidance.\n\n## What to do immediately if you have already engaged with the scam\n\nIf you have already interacted with a printer support scammer, act quickly in this order: First, if you granted them remote access to your computer, disconnect it from the internet immediately and do not use it until you have taken further steps. Second, if you provided your bank details, passwords, or personal information, contact your bank right away using the number on the back of your card or the official website — do not use a number from any message you received. Tell them you may have been scammed and ask them to monitor your account for suspicious activity and consider freezing it temporarily. Third, change your passwords for any important accounts (email, online banking, social media) using a different device if possible, and use a strong, unique password for each. Fourth, run a full antivirus scan on your computer using reputable software such as Windows Defender (built into Windows) or Malwarebytes. If you downloaded any software from the scammer, uninstall it immediately. Fifth, if you paid money, report it to your bank and ask about a chargeback or reversal — you may be able to recover the funds if you act quickly. Finally, report the scam to Report Fraud on 0300 123 2040 and to the NCSC if you received a phishing email.\n\n## How to report printer support scams in the UK\n\nReport the scam through multiple channels to help protect others and aid law enforcement. Contact Report Fraud on 0300 123 2040 (Monday to Friday, 8am to 8pm) — they handle all types of fraud and will record your report. If you received a phishing email, forward it to the NCSC Suspicious Email Reporting Service at report@phishing.gov.uk; they will investigate and work to take down the scam website. If you received a text message with a suspicious link, forward it to 7726 (spells 'SPAM') — your mobile network will investigate. If you were cold-called, you can report it to Ofcom, the communications regulator, through their website. If you paid money and your bank has not already been notified, tell them immediately so they can flag the transaction and potentially reverse it. You can also report the scam to Citizens Advice on 0808 223 1133 — they maintain a scam database and can advise you on next steps. Keep records of all communications (screenshots of pop-ups, emails, call logs, payment confirmations) as evidence for your report.",
+    "sections": [
+      [
+        "What the scam looks like",
+        "A caller, email or browser page impersonates HP or another printer company and claims a fault, infection, expired driver or urgent support problem. It then seeks payment, credentials, or remote access to the computer."
+      ],
+      [
+        "What HP says",
+        "HP’s UK fraud alert says it never contacts customers to provide unsolicited technical support. It warns that scammers may spoof caller ID, request remote access, seek gift-card or card payment, or ask the user to install software."
+      ],
+      [
+        "Warning signs",
+        "- An unexpected call or message claiming an urgent printer problem.\n- A browser warning with a phone number to call.\n- A request for remote control, passwords, gift cards or unusual payment.\n- A caller who prevents independent verification or becomes aggressive.\n- A support site reached through an advert rather than through the manufacturer’s site."
+      ],
+      [
+        "Verify support independently",
+        "Open `support.hp.com/gb-en/contact` yourself and identify the product to see available support options. Some contact routes require an active warranty. Do not use a number shown in a pop-up or supplied by an unsolicited caller.\n\nClose a suspicious browser tab or window without using buttons inside the page. If it will not close, use the operating system’s normal application controls and then reopen the browser without restoring the suspicious page."
+      ],
+      [
+        "If remote access or payment was given",
+        "End the session, disconnect the device from the network and contact the bank immediately from a different device if payment or banking was exposed. HP advises changing affected account passwords and running a security scan. Remove remote-access software and check for persistent access or other installed programs.\n\nReport fraud at `reportfraud.police.uk` or on 0300 123 2040 in England, Wales or Northern Ireland; in Scotland, call Police Scotland on 101."
+      ]
+    ],
+    "faq": [
+      [
+        "Does HP make unsolicited support calls?",
+        "HP’s published fraud guidance says no."
+      ],
+      [
+        "Where is the official UK support page?",
+        "`support.hp.com/gb-en/contact`."
+      ]
+    ],
+    "keywords": [
+      "printer support scam",
+      "HP support scam UK",
+      "fake printer support",
+      "tech support scam",
+      "printer error scam",
+      "tech support scam UK",
+      "remote access scam UK"
+    ],
+    "sources_checked": [
+      [
+        "HP UK: Fraud alert",
+        "https://support.hp.com/gb-en/document/ish_9502771-9497438-16"
+      ],
+      [
+        "HP UK: Official support contact",
+        "https://support.hp.com/gb-en/contact"
+      ],
+      [
+        "Report Fraud: reporting cyber crime and fraud",
+        "https://www.reportfraud.police.uk/reporting-a-fraud/"
+      ]
+    ],
+    "updated": "2026-07-13"
+  },
+  {
+    "title": "ISP Impersonation Scams UK: BT, Sky, Virgin Media and Openreach Calls",
+    "slug": "isp-impersonation-scam-bt-sky-virgin-media",
+    "category": "tech",
+    "excerpt": "ISP scams impersonate your internet provider to steal passwords, remote access, or payment details. Learn how to spot them and stay safe.",
+    "description": "Scammers impersonate UK broadband providers or Openreach, then ask for remote access, payment or security details. How to check safely.",
+    "hero": "An unexpected broadband-support call is not a reason to install remote-access software or disclose banking information.",
+    "date": "2026-05-11",
+    "content": "## What is an ISP scam and who is being targeted\n\nAn ISP scam is when a fraudster impersonates your internet service provider — such as BT, Virgin Media, Sky, TalkTalk, or Plusnet — to trick you into revealing sensitive information or giving them remote access to your computer. The scammer typically claims there is a fault on your line, suspicious activity on your account, or an exclusive offer available. They may say your broadband will be disconnected unless you act immediately, or that you are owed a refund. The goal is to obtain your login credentials, bank details, or permission to install remote-access software so they can steal money or personal data. These scams target a broad range of people, but are particularly effective against older adults and those less familiar with technology. The scammers rely on the fact that most people trust their ISP and are worried about losing internet access or being overcharged.\n\n## How to recognise the warning signs of an ISP scam\n\n- Your ISP is calling you unexpectedly about a problem you did not report — genuine providers rarely cold-call about faults unless you have already contacted them.\n- The caller asks you to open a web browser and visit a specific website or enter your account details — real ISPs will never ask you to do this during an unsolicited call.\n- They pressure you to act immediately or threaten disconnection — scammers create urgency to stop you thinking clearly.\n- The caller asks for your full password, PIN, or security questions — your ISP already has your account details and will never ask for these over the phone.\n- They offer to install remote-access software or ask you to press specific keys to \"diagnose\" your connection — this is a classic way to gain control of your computer.\n- The number shown on your caller ID looks similar to your ISP's real number but is slightly different — scammers spoof numbers to appear legitimate.\n- They ask you to pay by gift card, bank transfer, or cryptocurrency — genuine ISPs accept payment through normal billing methods only.\n- The caller cannot answer basic questions about your account or uses vague technical language — real support staff will know your account details and speak clearly.\n\n## How the scam unfolds from first contact to theft\n\nThe scam typically begins with a phone call or text message claiming to be from your ISP. The caller may say there is unusual activity on your account, a billing error, or a network fault affecting your area. They will ask you to verify your identity by providing your account number, postcode, or other personal details — information that sounds routine but is actually being collected for fraud. Once they have established a sense of trust, they escalate the request: they may ask you to visit a fake website that looks identical to your real ISP's login page, where you enter your username and password. Alternatively, they may ask you to allow them remote access to your computer by downloading software or pressing keys to open a remote-access tool. Once they have access, they can see your screen, access your email, banking apps, and stored passwords. They may then transfer money from your account, change your email password to lock you out, or steal identity information. Some scammers also use the remote access to install malware that continues stealing data long after the call ends. The entire process can take minutes, and by the time you realise what has happened, the money or data is already gone.\n\n## How to verify if a call or message is genuinely from your ISP\n\nIf you receive an unexpected call or message claiming to be from your ISP, do not provide any information or click any links. Instead, hang up or delete the message and contact your ISP directly using the number on your bill or the official website. Never use a number provided by the caller, as scammers often give you a fake support line that they control. When you call your ISP's genuine number, ask them directly whether they have tried to contact you about the issue mentioned. Real ISPs will have a record of any legitimate contact attempts. Check your account online by logging in through the official website or app — if there is a genuine problem, it will be visible there. Your ISP will never ask you to visit a website during an unsolicited call, and they will never ask for your full password or PIN. If you are unsure whether a website is real, type the ISP's name directly into your browser rather than clicking a link from the call or message. Look for the padlock icon and \"https\" in the address bar, and check that the domain name is spelled correctly — scammers often use URLs that are very similar to the real one but with a subtle misspelling.\n\n## What to do immediately if you have already engaged with the scammer\n\nIf you have given remote access to your computer, disconnect it from the internet immediately and do not use it until you have taken action. If you provided your ISP password, log into your account from another device and change your password to something completely new. If you gave your bank details or made a payment, contact your bank right away on the number on the back of your card or the official website — do not use a number the scammer provided. Ask your bank to freeze your account and watch for unauthorised transactions. If you transferred money via bank transfer or paid by gift card, report it to your bank and the police as soon as possible; there is a small chance the money can be recovered if reported quickly. If you installed any software the scammer asked you to, consider running a full antivirus scan using reputable software such as Windows Defender (built into Windows) or Malwarebytes. If you are not confident doing this yourself, take your computer to a local IT repair shop. Change the passwords for your email, online banking, and any other important accounts, as the scammer may have access to them. Do not delay — the longer you wait, the more damage they can do.\n\n## How to report an ISP scam in the UK\n\nReport the scam to Report Fraud on 0300 123 2040 or online at reportfraud.police.uk. They will log the details and may be able to trace the scammer's bank account if money was transferred. If you received a suspicious text message, forward it to 7726 (spamming) — this alerts your mobile network to the scam. If the scam involved a phishing email or fake website, report it to the National Cyber Security Centre (NCSC) by emailing report@phishing.gov.uk with details of the website URL and any emails involved. You can also report the scam to Citizens Advice on 0808 223 1133; they keep records of scam patterns and can advise you on next steps. If money was stolen, also report it to your local police force via their online reporting tool or by calling 101 (non-emergency). Keep a record of all communications — screenshots of texts, the phone number that called you, the date and time, and any website URLs — as this information will be needed by investigators. The more people who report the same scammer, the faster action can be taken.",
+    "sections": [
+      [
+        "What the scam looks like",
+        "An unsolicited caller claims to be from BT, Sky, Virgin Media, Openreach or a technical partner. They may mention a fault, slow broadband, suspicious activity, a router problem or the Digital Voice transition, then ask you to install software, visit a link, share a password or make a payment.\n\nThe caller may know your name, address or provider. That information does not authenticate the call, and caller ID can be spoofed. The genuine software named by the caller may be a legitimate remote-support product; the danger is granting access because an unexpected caller tells you to."
+      ],
+      [
+        "Warning signs",
+        "- An unexpected call creates an urgent fault or disconnection story.\n- The caller asks for remote access to a computer, router or phone.\n- You are asked for a banking password, PIN, one-time code or card details.\n- You are told to pay an unexpected fee or to move money to protect an account.\n- The caller discourages you from hanging up or checking with the provider.\n- A link or phone number is supplied instead of asking you to use the provider’s official contact route.\n\nThe UK’s landline migration is real, but a real programme does not make an unexpected caller genuine. Check any Digital Voice information directly with your provider using a number or account you already trust."
+      ],
+      [
+        "How to respond",
+        "Hang up and contact your provider through its official website, app, bill or the number on your contract. Do not use a number supplied by the caller. Never install remote-access software or share security credentials because of an unsolicited call.\n\nIf you installed software, disconnect the affected device from the internet and seek help removing it. Contact your bank immediately if the caller saw banking information, codes or a payment was made. Keep the caller’s number, messages, websites and payment details as evidence.\n\nForward suspicious texts to 7726. Report fraud at `reportfraud.police.uk` or on 0300 123 2040 in England, Wales or Northern Ireland; in Scotland, call Police Scotland on 101. Report an unlicensed or misleading communications service to the relevant provider or regulator where appropriate."
+      ]
+    ],
+    "faq": [
+      [
+        "Will a genuine provider ever contact me about a fault?",
+        "Providers can contact customers, so the subject of a call is not enough to authenticate it. If the caller asks for remote access, passwords, banking details, codes or an unexpected payment, hang up and verify through the provider’s official route."
+      ],
+      [
+        "Is TeamViewer or AnyDesk itself a scam?",
+        "No. These are legitimate tools, but an unexpected caller who asks you to install or open them is a serious warning sign."
+      ],
+      [
+        "Do I need to pay for the Digital Voice transition?",
+        "Do not pay an unexpected caller. The transition and any equipment or plan changes should be confirmed through your provider’s official account or support channel, because arrangements differ between providers and customers."
+      ],
+      [
+        "I gave a caller remote access. What should I do?",
+        "Disconnect the device, contact your bank if financial information may have been exposed, change passwords from a clean device, and get trusted technical help before reconnecting it. Report the incident and preserve evidence."
+      ]
+    ],
+    "keywords": [
+      "ISP scam UK",
+      "BT scam call",
+      "BT internet scam",
+      "BT broadband scam",
+      "BT engineer scam",
+      "Sky broadband scam",
+      "Sky scam call",
+      "Sky internet scam",
+      "Virgin Media scam call",
+      "Virgin Media broadband scam",
+      "Virgin Media internet scam",
+      "Openreach scam",
+      "Openreach engineer scam",
+      "TalkTalk scam call",
+      "TalkTalk internet scam",
+      "Plusnet scam",
+      "EE broadband scam",
+      "broadband provider scam UK",
+      "internet provider scam UK",
+      "remote access scam UK",
+      "broadband engineer scam",
+      "fake engineer call UK",
+      "TeamViewer scam",
+      "AnyDesk scam",
+      "PSTN switchover scam",
+      "digital voice scam",
+      "tech support scam UK",
+      "phone scam broadband",
+      "ISP impersonation UK",
+      "broadband fault scam",
+      "internet scam call UK",
+      "BT scam",
+      "BT phone scam",
+      "Sky scam",
+      "Sky TV scam",
+      "Sky engineer scam",
+      "Virgin Media scam",
+      "Openreach call scam"
+    ],
+    "sources_checked": [
+      [
+        "BT: scam calls, texts and emails",
+        "https://www.bt.com/help/security/scams"
+      ],
+      [
+        "Sky: scam calls, emails, texts and online impersonation",
+        "https://www.sky.com/help/articles/sky-scams-help"
+      ],
+      [
+        "Virgin Media: identifying a genuine call",
+        "https://www.virginmedia.com/the-edit/tech-and-connectivity/genuine-call-virgin-media"
+      ],
+      [
+        "Ofcom: Calling Line Identification authentication",
+        "https://www.ofcom.org.uk/siteassets/resources/documents/phones-telecoms-and-internet/information-for-industry/scams/calling-line-identification-cli-authentication-assessment-and-future-roadmap"
+      ],
+      [
+        "Report Fraud: reporting cyber crime and fraud",
+        "https://www.reportfraud.police.uk/reporting-a-fraud/"
+      ]
+    ],
+    "updated": "2026-07-13"
+  },
+  {
+    "title": "Microsoft Account Suspended Scam Email: How to Spot It",
+    "slug": "microsoft-account-suspended-email-scam-uk",
+    "category": "email",
+    "excerpt": "Scammers send fake Microsoft account suspension emails to steal passwords and personal data. Learn how to spot them and what to do if you've clicked.",
+    "description": "A fake Microsoft email claims unusual activity or suspension and links to a bogus sign-in page. Open your Microsoft account directly instead.",
+    "hero": "Microsoft gives `micros0ft.com`, with a zero replacing the second “o”, as an example of a lookalike domain used in phishing.",
+    "date": "2026-04-26",
+    "content": "## What this scam looks like\n\nThe Microsoft account suspended email scam is a phishing attack where criminals send emails that appear to come from Microsoft, claiming your account has been locked, suspended, or flagged for suspicious activity. The email typically says you need to verify your identity, confirm your password, or update your payment details urgently — often within 24 hours. The message creates a false sense of panic by suggesting your account will be permanently closed or your data will be deleted unless you act immediately. The email includes a button or link that looks like it goes to Microsoft's official login page, but actually leads to a fake website controlled by the scammer. Once you enter your Microsoft account credentials, recovery email, or payment information on that fake page, the scammer has everything they need to access your real account, steal your data, or commit fraud in your name.\n\n## Red flags that give away the fake email\n\n- The sender's email address does not match Microsoft's official domain (microsoft.com). Look carefully — scammers use addresses like microsoftaccount-verify@gmail.com or support@microsoft-security.net that look similar but are not genuine.\n- The email asks you to click a link and log in, or to reply with your password or personal details. Microsoft never asks for passwords via email.\n- The message uses generic greetings like \"Dear User\" or \"Dear Customer\" instead of your actual name, which Microsoft systems typically include.\n- The email contains spelling, grammar, or formatting errors, or uses awkward phrasing that does not match Microsoft's professional tone.\n- Urgent language and artificial deadlines (\"verify within 24 hours\" or \"your account will be closed\") are designed to panic you into acting without thinking.\n- The link in the email does not go to a Microsoft domain when you hover over it (on desktop, move your mouse over the link without clicking to see the real URL).\n- The email arrived unexpectedly and you have not recently changed your account settings, made a suspicious login attempt, or requested a password reset.\n\n## How the scam unfolds from the first email\n\nThe scam begins when you receive an email that appears to come from Microsoft, with a subject line designed to alarm you — such as \"Your account has been suspended\" or \"Urgent: Verify your Microsoft account now.\" The email body explains that your account has been locked due to suspicious activity, an unrecognised login, or a security concern, and instructs you to click a link to verify your identity or confirm your details. When you click the link, you are taken to a fake Microsoft login page that looks almost identical to the real one. If you enter your email address and password, the scammer captures both. Some fake pages then ask for additional information, such as your recovery email address, phone number, or payment card details, claiming this is needed to \"unlock\" your account. Once the scammer has your credentials, they can log into your real Microsoft account, access your emails, OneDrive files, and linked services like Outlook. They may also use your account to send phishing emails to your contacts, reset your password to lock you out, or use your payment details to make purchases or subscriptions.\n\n## How to check if a Microsoft email is genuine\n\nIf you receive an email claiming to be from Microsoft, do not click any links in the email. Instead, open your web browser and go directly to account.microsoft.com by typing the address yourself, or use the Microsoft Authenticator app if you have it installed. Log in with your credentials and check your account status — if there are any genuine security alerts, they will appear in your account dashboard, not just in an email. You can also check your recent activity and login history to see if there has been any suspicious access. If you are unsure whether an email is real, contact Microsoft directly by visiting their official support website (support.microsoft.com) and using their contact options there — never use a phone number or email address from the suspicious email itself. Microsoft's official emails will always come from an address ending in @microsoft.com, and they will never ask you to verify your password or payment details by clicking a link in an email. If the email claims your account is suspended, log in to your account directly to verify — a genuine suspension would be visible in your account settings, not just announced in an email.\n\n## What to do immediately if you have already clicked or entered details\n\nIf you clicked the link but did not enter any information, you are likely safe — simply delete the email and move on. If you entered your Microsoft password on the fake page, change your password immediately by logging into your real Microsoft account at account.microsoft.com. Use a strong, unique password that you have not used anywhere else. If you also entered your recovery email address or phone number, update those in your account settings to ensure the scammer cannot use them to reset your password. If you entered payment card details, contact your bank or card issuer right away to report the incident and ask them to monitor your account for fraudulent transactions; they may issue you a new card as a precaution. Check your account's recent activity and login history to see if anyone else has accessed it since you entered your details. If you see unfamiliar logins or activity, change your password again and enable two-factor authentication (also called multi-factor authentication) on your Microsoft account to add an extra layer of security. If you have linked services such as Outlook, OneDrive, or Xbox to your Microsoft account, check those services for any unauthorised changes or activity as well.\n\n## Reporting the scam in the UK\n\nReport the phishing email to the NCSC Suspicious Email Reporting Service by forwarding it to report@phishing.gov.uk. Include the full email header if possible (most email clients have an option to view the original message or source code). You can also report the scam to Report Fraud by calling 0300 123 2040 or visiting their website — they handle fraud and scams across the UK and pass information to law enforcement and banks. If you have lost money or believe your account has been compromised, contact Citizens Advice consumer helpline on 0808 223 1133 for guidance on next steps and your rights. Report the fake website (if you noted the URL) to the NCSC as well, as they work to take down phishing pages. If the scammer has accessed your Microsoft account and sent emails from it to your contacts, consider notifying your contacts that your account may have been compromised so they do not fall for similar emails sent in your name. Keep a record of all emails, screenshots, and the date and time you received the message — this information is useful if you need to make a formal complaint or claim.",
+    "sections": [
+      [
+        "What the scam looks like",
+        "The email claims unusual sign-in activity, a security hold or an imminent suspension affecting a Microsoft, Outlook or Xbox account. It creates urgency and links to a page made to resemble a Microsoft sign-in. A fraudulent page may steal the credentials entered into it. A phone call or pop-up claiming to be Microsoft technical support is a different pattern; see the [Microsoft support scam guide](/guides/microsoft-support-scam-uk-guide/)."
+      ],
+      [
+        "Microsoft's published warning signs",
+        "Microsoft advises users to watch for urgent demands, unexpected senders, generic greetings, poor spelling or grammar, mismatched links and lookalike domains. Its examples include `micros0ft.com` and `rnicrosoft.com`. None of those signs is conclusive on its own, and polished phishing emails may contain no language errors."
+      ],
+      [
+        "Outlook indicators",
+        "Outlook may show a question-mark icon for an unverified sender, an underlined “via” label when the visible From address differs from the authenticated sending domain, or a warning that it could not verify the sender. Microsoft cautions that not every unverified message or “via” label is malicious."
+      ],
+      [
+        "Check the account safely",
+        "Do not use the email link. Open a new tab and type `account.microsoft.com`, then review security and recent activity. Microsoft says that if an unusual-activity email is uncertain, you can safely sign in directly without clicking the email."
+      ],
+      [
+        "If credentials were entered",
+        "Use Microsoft's compromised-account guidance. Scan the affected computer for malware, change or reset the password, review recent activity and account settings, and enable two-step verification. Change the password on other accounts if it was reused. For a work or school account, notify the organisation's IT administrator as well."
+      ],
+      [
+        "Report the phishing email",
+        "In Microsoft 365 Outlook or Outlook.com, select the message and choose `Report > Report phishing`. Microsoft no longer publishes a general mailbox for forwarding phishing emails from other email clients; a work or school account holder can instead use the Submissions page in the Microsoft Defender portal, and anyone else should forward the email to the NCSC at `report@phishing.gov.uk`.\n\nIf money was lost or an account was hacked, report the crime to Report Fraud at `reportfraud.police.uk` or 0300 123 2040 in England, Wales or Northern Ireland; in Scotland, call Police Scotland on 101."
+      ]
+    ],
+    "faq": [
+      [
+        "Where should I check a claimed suspension?",
+        "Go directly to `account.microsoft.com`; do not follow the email link."
+      ],
+      [
+        "Does an Outlook warning prove the email is malicious?",
+        "No. It is a reason for caution, not proof. Verify the claim by signing in directly."
+      ]
+    ],
+    "keywords": [
+      "Microsoft account suspended email scam",
+      "fake Microsoft email UK",
+      "Microsoft phishing email",
+      "account suspension scam",
+      "Microsoft email scam warning",
+      "Microsoft scam UK",
+      "Microsoft tech support scam",
+      "fake Microsoft call",
+      "email scam UK",
+      "phishing email UK"
+    ],
+    "sources_checked": [
+      [
+        "Microsoft Support: Protect yourself from phishing",
+        "https://support.microsoft.com/en-US/security/protect-yourself-from-phishing"
+      ],
+      [
+        "Microsoft Support: Phishing and suspicious behaviour in Outlook",
+        "https://support.microsoft.com/en-US/Outlook/mail/phishing-and-suspicious-behavior-in-outlook"
+      ],
+      [
+        "Microsoft Support: Check recent Microsoft-account sign-in activity",
+        "https://support.microsoft.com/en-us/account-billing/check-the-recent-sign-in-activity-for-your-microsoft-account-5b3cfb8e-70b3-2bd6-9a56-a50177863357"
+      ],
+      [
+        "Microsoft Support: Recover a hacked or compromised account",
+        "https://support.microsoft.com/en-us/accounts-billing/manage/how-to-recover-a-hacked-or-compromised-microsoft-account"
+      ],
+      [
+        "NCSC: Report a scam email",
+        "https://www.ncsc.gov.uk/collection/phishing-scams/report-scam-email"
+      ],
+      [
+        "Microsoft Learn: Report spam, non-spam, phishing, suspicious emails, Teams messages, and files to Microsoft",
+        "https://learn.microsoft.com/en-us/defender-office-365/submissions-report-messages-files-to-microsoft"
+      ],
+      [
+        "Report Fraud: reporting cyber crime and fraud",
+        "https://www.reportfraud.police.uk/reporting-a-fraud/"
+      ]
+    ],
+    "updated": "2026-07-13"
+  },
+  {
+    "title": "Is AliExpress a Scam? UK Guide to Marketplace Risk",
+    "slug": "aliexpress-scam-or-legit-uk-guide",
+    "category": "website",
+    "excerpt": "AliExpress scams use fake websites and phishing emails to steal payment details and personal data from UK shoppers. Learn how to spot them and stay safe.",
+    "description": "AliExpress is an Alibaba marketplace, but listings and sellers vary. Keep payment on-platform and use the dispute or return deadline shown on the order.",
+    "hero": "AliExpress is an Alibaba Group retail marketplace; that does not make every third-party listing genuine or every purchase protected in the same way.",
+    "date": "2026-04-21",
+    "content": "## What is the AliExpress scam?\n\nThe AliExpress scam comes in two main forms. First, scammers create fake AliExpress websites that look almost identical to the real one — same logo, layout, and product listings — but are designed to capture your payment card details, address, and login credentials when you try to buy something. Second, you receive phishing emails or text messages claiming to be from AliExpress, asking you to 'verify your account', 'confirm your payment method', or 'claim a refund'. These messages contain links to fake login pages or payment forms. The real AliExpress is a Chinese-owned online marketplace that operates legitimately in the UK, but its popularity makes it an attractive target for scammers. The fake sites and messages are so convincing that many UK shoppers don't realise they've been targeted until they see unauthorised charges on their bank statement or their account is compromised.\n\n## Warning signs of a fake AliExpress site or message\n\n- The website URL does not match the official AliExpress domain — check the address bar carefully; scammers use similar-looking URLs like 'aliexpress-uk.com' or 'aliexpress.co.uk' instead of the real domain.\n- The site asks you to log in or enter payment details before you've added anything to your basket — the real AliExpress does not do this.\n- The email or text claims there is an urgent problem with your account, a pending refund, or a security issue requiring immediate action — this is a classic phishing tactic.\n- The message contains spelling mistakes, awkward phrasing, or poor grammar — AliExpress communications are professionally written.\n- You are asked to click a link in an email or text to 'verify' or 'confirm' anything — AliExpress will never ask you to do this via email or SMS.\n- The website looks slightly off — colours are wrong, buttons are in odd places, or images are blurry or misaligned.\n- The site offers unrealistic discounts or claims you have won a prize you never entered — this is bait to get you to enter your details.\n- Payment options are limited to bank transfer or cryptocurrency only — the real AliExpress accepts major credit and debit cards.\n\n## How the scam works from start to finish\n\nThe scam typically begins when you receive an email or text message that appears to come from AliExpress. The message might say your account has been locked, a payment has failed, or you are eligible for a refund. It includes a link that takes you to a fake website that mimics the real AliExpress so closely that most people don't notice the difference. When you click the link and enter your login details, the scammers capture them immediately. If the fake site asks for payment information, you may enter your card details thinking you are completing a legitimate purchase or confirming a refund. Some scammers go further and create fake checkout pages that look identical to the real thing, complete with a fake order confirmation email sent to you afterwards. By the time you realise something is wrong — either because you see charges on your bank statement, your real AliExpress account is compromised, or you never receive the item you thought you bought — the scammers have already used your details to make fraudulent purchases, sell your information to other criminals, or drain your account.\n\n## How to verify you are on the real AliExpress website\n\nBefore you enter any personal or payment information, take these steps to confirm you are on the genuine AliExpress site. First, check the URL in the address bar — it must be 'www.aliexpress.com' or 'www.aliexpress.co.uk' (the UK version). Do not rely on what the page says; look at the actual web address. Second, if you received an email or text with a link, do not click it. Instead, open your web browser, type the AliExpress URL directly into the address bar, and log in from there. Third, look for the padlock icon next to the URL — this indicates the site uses encryption, though this alone does not guarantee it is safe. Fourth, check the site's security certificate by clicking the padlock; it should show the certificate is issued to AliExpress. Fifth, if you are logging in, use a strong, unique password that you do not use anywhere else. If you are ever unsure, contact AliExpress directly through their official website or app before entering any details. The real AliExpress will never ask you to verify your account via email or text message.\n\n## What to do if you have already entered your details\n\nAct quickly if you believe you have been caught by an AliExpress scam. First, if you entered your card details on a fake site, contact your bank immediately — use the number on the back of your card or the official number on your bank's website, never a number from the scam message. Ask your bank to cancel your card and watch for unauthorised transactions. Second, if you entered your AliExpress login details, change your password immediately by logging into the real AliExpress website (not via any link in an email). Use a strong, unique password. Third, check your real AliExpress account for any orders you did not make and cancel them if possible. Fourth, if you paid money directly to the scammers via bank transfer or cryptocurrency, contact your bank straight away — recovery is difficult but not impossible if you act within hours. Fifth, monitor your bank statements and credit reports for the next few months for any suspicious activity. If you see unauthorised charges, report them to your bank and ask them to dispute the transactions. Sixth, report the scam to Report Fraud on 0300 123 2040 and to the NCSC if you received a phishing email.\n\n## How to report an AliExpress scam in the UK\n\nReport the scam through multiple channels to help protect other UK shoppers and aid law enforcement. First, contact Report Fraud on 0300 123 2040 — this is the UK's national fraud reporting service and they will log your report and advise you on next steps. Second, if you received a phishing email, forward it to the NCSC Suspicious Email Reporting Service at report@phishing.gov.uk — include the full email header if possible. Third, if you received a phishing text message, forward it to 7726 (spells 'SPAM') — your mobile network will investigate. Fourth, report the fake website to the real AliExpress by contacting their customer service through the official website or app; they can take action to shut down the fake site. Fifth, if you have lost money, report it to your bank's fraud team and ask them to file a report with the Financial Conduct Authority if appropriate. Sixth, you can also contact Citizens Advice on 0808 223 1133 for guidance on your consumer rights and next steps. Keep records of all communications, screenshots of the fake site, and copies of any messages you received — these will help with your report and any potential recovery.",
+    "sections": [
+      [
+        "What is verified about the platform",
+        "Alibaba Group says AliExpress launched in 2010 as a global retail e-commerce platform that connects consumers with manufacturers and merchants. It is therefore inaccurate to describe the whole platform as a fabricated site.\n\nBuyers can still encounter goods that do not arrive, do not match the listing, are unsafe or infringe intellectual-property rights. Assess the individual seller, listing and protection terms."
+      ],
+      [
+        "Warning signs",
+        "- A price that is implausibly low for the claimed brand or specification.\n- A seller with little history or reviews that do not discuss the actual product.\n- Stock images with no useful buyer evidence.\n- A request to pay, communicate or accept a refund outside AliExpress.\n- Pressure to confirm receipt before inspection."
+      ],
+      [
+        "Buyer Protection and Free Return are not one universal promise",
+        "AliExpress's 15-calendar-day Free Return window applies only to products carrying the `Free Return` label. It is a particular programme with its own eligibility and return-condition rules — not a universal 15-day guarantee for every order. Check the specific deadline shown on your own order rather than assuming the same window applies to non-delivery, damage or misdescription claims generally.\n\nFor a problem, open the order in the AliExpress account and use the dispute or return control before the deadline displayed there. Save screenshots of the listing, seller messages, tracking and the condition of the item.\n\nRefund processing times vary by payment method and dispute type, so check the timeframe given for your specific case rather than assuming a fixed number of working days."
+      ],
+      [
+        "UK card protection",
+        "Chargeback may apply under card-scheme rules, commonly with a time limit around 120 days. Section 75 may apply to a qualifying credit-card purchase where the cash price is over £100 and not more than £30,000, but a marketplace or payment intermediary can affect the required debtor-creditor-supplier relationship. Ask the issuer to assess the claim."
+      ],
+      [
+        "Reporting",
+        "Use the order’s dispute process and AliExpress Help Centre. If the issue is fraud and money was lost, report at `reportfraud.police.uk` or on 0300 123 2040 in England, Wales or Northern Ireland; in Scotland, call Police Scotland on 101. Unsafe products can also be reported to Citizens Advice for referral to Trading Standards."
+      ]
+    ],
+    "faq": [
+      [
+        "Is AliExpress owned by Alibaba Group?",
+        "Yes. Alibaba Group identifies AliExpress as one of its e-commerce businesses."
+      ],
+      [
+        "Does every AliExpress order have the same 15-day protection window?",
+        "No. Fifteen days applies specifically to eligible `Free Return` products; other dispute rights and deadlines depend on the specific order."
+      ],
+      [
+        "Is section 75 automatic on AliExpress?",
+        "No. The cash-price and credit requirements matter, and the marketplace/payment structure may affect the claim."
+      ]
+    ],
+    "keywords": [
+      "AliExpress scam",
+      "AliExpress fake sellers",
+      "AliExpress scam UK",
+      "AliExpress counterfeit",
+      "AliExpress non-delivery scam",
+      "fake website UK",
+      "scam website UK"
+    ],
+    "sources_checked": [
+      [
+        "Alibaba Group: AliExpress",
+        "https://home.alibabagroup.com/en-US/about-alibaba-businesses-1747705938191581184"
+      ],
+      [
+        "AliExpress: Free Return terms",
+        "https://terms.alicdn.com/legal-agreement/terms/platform_service/20221103012551766/20221103012551766.html"
+      ],
+      [
+        "AliExpress Terms of Use",
+        "https://terms.alicdn.com/legal-agreement/terms/suit_bu1_aliexpress/suit_bu1_aliexpress202204182115_66077.html"
+      ],
+      [
+        "Financial Ombudsman Service: Section 75 and chargeback",
+        "https://www.financial-ombudsman.org.uk/consumers/complaints-can-help/credit-borrowing-money/goods-services-bought-credit"
+      ],
+      [
+        "Citizens Advice: get help with scams",
+        "https://www.citizensadvice.org.uk/consumer/scams/get-help-with-online-scams/"
+      ],
+      [
+        "Report Fraud: reporting cyber crime and fraud",
+        "https://www.reportfraud.police.uk/reporting-a-fraud/"
+      ]
+    ],
+    "updated": "2026-07-13"
+  },
+  {
+    "title": "PayPal Account Limited Email Scam UK",
+    "slug": "paypal-account-limited-email-scam-uk",
+    "category": "email",
+    "excerpt": "Scammers impersonate PayPal to trick you into confirming account details. Learn how to spot the fake email and protect your money.",
+    "description": "An email says your PayPal account is limited and you must verify now? Log in directly instead. Genuine emails use your account name.",
+    "hero": "A genuine PayPal email addresses you by the full name listed on your account, not 'Dear PayPal user'.",
+    "date": "2026-04-27",
+    "content": "## What this PayPal scam actually is\n\nThis is a phishing scam where criminals send an email that looks like it comes from PayPal, claiming your account has been limited, restricted, or flagged for suspicious activity. The email creates a false sense of urgency — saying you must act immediately to avoid losing access to your money. It includes a button or link that appears to take you to PayPal, but actually leads to a fake website controlled by the scammers. When you enter your login details on that fake site, the criminals capture your email address, password, and any payment card information you enter. They can then access your real PayPal account, steal money, make unauthorised purchases, or use your details to commit fraud elsewhere. The scam works because PayPal is a trusted brand that handles real money, so people are more likely to panic and click without thinking carefully.\n\n## Red flags that give away the fake PayPal email\n\n- The sender's email address does not match PayPal's official domain. Real PayPal emails come from addresses ending in @paypal.com or @service.paypal.com — anything else is a red flag.\n- The email uses generic greetings like 'Dear Customer' or 'Dear User' instead of your actual name. PayPal always addresses you by your registered name.\n- The message creates artificial urgency, saying your account will be closed, frozen, or limited unless you act within hours. Genuine PayPal notices give you time to respond.\n- The email asks you to click a link to 'verify', 'confirm', 'update', or 'reactivate' your account. PayPal rarely asks you to click email links to log in — they ask you to go directly to the website yourself.\n- The link in the email does not match the text it displays. Hover over the link (do not click) to see where it actually goes — if it points to a different website or a suspicious URL, it is fake.\n- The email contains spelling, grammar, or formatting errors, or uses odd phrasing that does not match PayPal's professional tone.\n- The email threatens account closure, legal action, or money loss if you do not act immediately. Real PayPal communications are firm but not threatening in this way.\n\n## How the scam unfolds from the fake email to stolen details\n\nThe scam begins when you receive an email that appears to come from PayPal, often with a subject line like 'Your Account Has Been Limited' or 'Urgent: Verify Your Account'. The email includes a button or hyperlink that says something like 'Confirm Your Account' or 'Verify Now'. When you click it, you are taken to a website that looks almost identical to the real PayPal login page — same colours, logos, and layout. You enter your email address and password, thinking you are logging into your genuine account. The fake site then asks for additional information: your date of birth, your full address, your card number, expiry date, and security code. Some versions ask for your bank details or security questions. Once you submit this information, it is sent directly to the scammers' server, not to PayPal. They now have everything needed to access your real PayPal account, drain your balance, or use your card details to make purchases. Many victims do not realise they have been scammed until they try to log into their real PayPal account and find the password no longer works — because the scammers have already changed it.\n\n## How to check if a PayPal email is genuine\n\nIf you receive an email claiming to be from PayPal, do not click any links in it. Instead, open your web browser and go directly to paypal.com by typing the address yourself — do not use a link from the email. Log into your account using your own password. Once logged in, check your account status and messages. If PayPal has genuinely limited your account, you will see a notification in your account dashboard, not just in an email. You can also contact PayPal directly by going to their Help Centre on the official website and using their secure messaging system. Another way to verify: check the sender's email address very carefully. Real PayPal emails come from @paypal.com or @service.paypal.com addresses only. If the email came from any other domain, it is definitely fake. You can also forward the suspicious email to the NCSC Suspicious Email Reporting Service at report@phishing.gov.uk — they will investigate and may take action against the scammers. Never reply to the email or click any links, as this confirms your email address is active and may lead to more scam attempts.\n\n## What to do immediately if you have already clicked the link or entered details\n\nIf you clicked the link and entered your PayPal login details, change your PayPal password right now. Go to the real PayPal website (paypal.com), log in if you can, and change your password to something completely new that you have not used before. If you cannot log in because the scammers have already changed the password, use PayPal's 'Forgot Password' option to reset it. If you entered your card details on the fake site, contact your bank or card issuer immediately — use the number on the back of your card or the number on your bank statement, never a number from the email. Ask them to cancel that card and issue a replacement. Monitor your account for unauthorised transactions over the next few weeks. If you entered your bank details, contact your bank directly and tell them you may have been scammed; they can flag your account for suspicious activity. Check your PayPal account for any unauthorised transactions, linked cards, or changes to your address or phone number. If you spot anything unusual, change your password again and contact PayPal's secure help centre. Report the scam to Report Fraud on 0300 123 2040 and to the NCSC at report@phishing.gov.uk.\n\n## How to report the PayPal scam in the UK\n\nReport the scam through multiple channels to maximise the chance of action. First, forward the suspicious email to the NCSC Suspicious Email Reporting Service at report@phishing.gov.uk — they investigate phishing emails and work to shut down fake websites. Second, report it to Report Fraud on 0300 123 2040 or online at reportfraud.police.uk. They log scam reports and share data with law enforcement and banks. Third, report it directly to PayPal by forwarding the email to their phishing team — you can find the correct address in PayPal's Help Centre under 'Report Suspicious Emails'. Fourth, if you have lost money, contact your bank or card issuer and ask them to file a fraud report on your behalf. Keep a copy of the fake email and take screenshots of the fake website if you can access it again (do not log in). Write down the date and time you received the email, what you clicked, and what information you entered. This information helps investigators trace the scammers and may support a claim for a refund.",
+    "sections": [
+      [
+        "What a fake PayPal 'account limited' email looks like",
+        "This scam is an email designed to look like it is from PayPal, claiming your account has been limited and needs urgent verification. An example of the style: `Your account has been limited due to unusual activity. Verify your details within 24 hours to restore full access.` It usually includes a link to a page built to look like PayPal's genuine login."
+      ],
+      [
+        "Why these emails are convincing",
+        "PayPal genuinely can limit accounts, so the concept itself is not unusual. The urgency and threat of losing account access pushes people to click before checking carefully."
+      ],
+      [
+        "Signs a PayPal email is a scam",
+        "- It is addressed to 'Dear PayPal user' or similar, rather than the full name listed on your account.\n- It asks you to click a link and enter your card, bank, or login details.\n- It creates urgency with a short deadline to 'verify' your account.\n- The link, when you hover over it, does not go to paypal.com."
+      ],
+      [
+        "How the scam works step by step",
+        "First, an email claims your account is limited and needs urgent action. Second, a link opens a page built to look like PayPal's genuine login or verification screen. Third, whatever you enter - login details, card number, or bank details - is captured. Fourth, the criminal can access your real PayPal account or use the payment details elsewhere."
+      ],
+      [
+        "How to check a PayPal email is genuine",
+        "Do not click the link. Log into PayPal directly through the app or by typing paypal.com yourself, and check the Resolution Centre there for any genuine account issue.\n\n- Genuine PayPal emails address you by the full name listed on your PayPal account, or your business name.\n- If there is a real limitation on your account, it will show up when you log in directly. You do not need to act on the email itself."
+      ],
+      [
+        "If you have already entered your details",
+        "Log into PayPal directly and change your password immediately. Check your account for any transactions or changes you do not recognise, and contact your bank if you entered card or bank details."
+      ],
+      [
+        "How to report a fake PayPal email (UK)",
+        "Forward it to PayPal at `phishing@paypal.com`. If you have lost money, also report it to Report Fraud at `reportfraud.police.uk` or 0300 123 2040 if you are in England, Wales, or Northern Ireland. In Scotland, report to Police Scotland on 101."
+      ]
+    ],
+    "faq": [
+      [
+        "How can I tell a genuine PayPal email from a fake one?",
+        "A genuine PayPal email addresses you by the full name listed on your account, not 'Dear PayPal user'. If in doubt, log into PayPal directly rather than clicking any link."
+      ],
+      [
+        "I entered my PayPal login details on a fake page. What should I do?",
+        "Log into PayPal directly through the app or by typing paypal.com yourself, change your password immediately, and check for any unfamiliar transactions."
+      ],
+      [
+        "Does PayPal have an email address for reporting phishing?",
+        "Yes. Forward suspicious emails to `phishing@paypal.com`."
+      ],
+      [
+        "Why might my real PayPal account actually be limited?",
+        "PayPal can limit an account for security, policy, or account-review reasons. Check the Resolution Centre by logging in directly to see any genuine issue."
+      ],
+      [
+        "How do I report a fake PayPal email in the UK?",
+        "Forward it to `phishing@paypal.com`. If you have lost money, also report it to Report Fraud at `reportfraud.police.uk` or 0300 123 2040 (Police Scotland on 101 in Scotland)."
+      ]
+    ],
+    "keywords": [
+      "paypal account limited email scam uk",
+      "fake paypal email",
+      "paypal phishing report email",
+      "is this paypal email real",
+      "paypal verify account scam",
+      "paypal dear user email scam",
+      "paypal resolution centre scam check"
+    ],
+    "sources_checked": [
+      [
+        "PayPal UK: spotting a fake or phishing email or website",
+        "https://www.paypal.com/uk/cshelp/article/how-do-i-spot-a-fake-fraudulent-or-phishing-paypal-email-or-website---help164"
+      ],
+      [
+        "PayPal UK: report suspicious messages",
+        "https://www.paypal.com/uk/security/report-suspicious-messages?locale.x=en_GB"
+      ],
+      [
+        "PayPal UK: report fraud, spoofing or unauthorised transactions",
+        "https://www.paypal.com/uk/cshelp/article/how-do-i-report-potential-fraud-spoof-or-unauthorised-transactions-to-paypal-help165"
+      ],
+      [
+        "Report Fraud: reporting cyber crime and fraud",
+        "https://www.reportfraud.police.uk/reporting-a-fraud/"
+      ]
+    ],
+    "updated": "2026-07-13"
+  },
+  {
+    "title": "Fake Wi-Fi Hotspot Scam UK: Verify the Network",
+    "slug": "fake-wifi-hotspot-scam-uk",
+    "category": "tech",
+    "excerpt": "Scammers create fake public Wi-Fi networks to steal your passwords, banking details, and personal data. Learn how to spot them and stay safe.",
+    "description": "An “evil twin” copies a legitimate Wi-Fi name. Ask the venue for the correct network and prefer mobile data for sensitive activity.",
+    "hero": "Ask staff for the exact network name. For sensitive work, mobile data or a trusted, correctly configured VPN reduces exposure to a rogue hotspot.",
+    "date": "2026-05-20",
+    "content": "## What is a fake Wi-Fi hotspot scam?\n\nA fake Wi-Fi hotspot scam happens when a criminal sets up a wireless network with a name that looks legitimate — often mimicking the real Wi-Fi of a cafe, airport, or hotel. When you connect to it, the scammer can see everything you do online: passwords, banking logins, emails, and personal messages. They may also inject malware onto your device or redirect you to fake websites designed to steal your details. The scam is particularly dangerous because it requires no interaction from you beyond connecting — you don't need to click a link or enter credentials. The criminal simply sits nearby with a laptop or small device, passively collecting data from everyone connected to their fake network. This type of attack is sometimes called 'evil twin' Wi-Fi because it impersonates a legitimate network.\n\n## Warning signs of a fake Wi-Fi hotspot\n\n- No password required: Real public Wi-Fi in businesses often has no password, but if a network appears suddenly and has no security, be cautious — especially if it's identical to the venue's usual network name.\n- Suspicious network name: Look for slight misspellings of the cafe or airport name, or generic names like 'Free Public Wi-Fi' or 'Airport Guest' that don't match the actual venue.\n- No login page: Legitimate public Wi-Fi usually shows a login or terms-of-service page when you first connect. If you connect and nothing appears, disconnect immediately.\n- Unusually slow speeds: If the network is extremely slow or keeps dropping, it may be a scammer's device with limited bandwidth.\n- Network appears suddenly: If a network with the venue's name appears when it wasn't there before, ask staff which is the real one.\n- Duplicate networks: If you see two networks with nearly identical names, one is likely fake — ask staff which is genuine.\n- You're asked to install software: Legitimate public Wi-Fi never asks you to install apps or drivers to connect.\n\n## How the scam works from connection to data theft\n\nThe scammer sets up a fake Wi-Fi network using a laptop, mobile hotspot, or dedicated device, usually in a busy public place where people expect free Wi-Fi. They give it a name that closely matches the real venue's network — for example, 'Costa_WiFi' instead of 'Costa Coffee Guest' — or a generic-sounding name like 'Airport Free Wi-Fi'. When you connect, your device begins sending data across the network. The scammer's device intercepts this traffic using freely available software tools. If you log into your email, online banking, or social media while connected, the scammer captures your username and password in real time. They can also see any sensitive information you type, including credit card numbers if you shop online. More sophisticated scammers may set up a fake login page that appears when you first connect, tricking you into entering your details directly. Once they have your credentials, they can access your accounts, steal money, or sell your information to other criminals. The entire process can happen without you noticing anything unusual.\n\n## How to verify you're connecting to the real Wi-Fi\n\nBefore connecting to any public Wi-Fi, ask staff at the venue for the exact network name and whether it requires a password. Most legitimate businesses can tell you this immediately. Check the venue's website or social media — many post their Wi-Fi details online. If the network name looks slightly wrong or you're unsure, do not connect. Look for a login page: when you connect to real public Wi-Fi, your browser should automatically open a login or welcome page within a few seconds. If nothing appears, disconnect. Check for HTTPS: before entering any sensitive information, look for the padlock icon in your browser's address bar, which indicates an encrypted connection. However, do not rely on this alone — scammers can sometimes fake this too. Use your phone's hotspot instead: if you're unsure about the Wi-Fi, use your mobile data or create a personal hotspot from your phone to share with your laptop. This is always safer than public Wi-Fi. Ask other people: if you're in a cafe or airport, ask someone else nearby if they're connected to the same network and whether it's working properly.\n\n## What to do immediately if you've connected to a fake Wi-Fi\n\nIf you suspect you've connected to a fake network, disconnect immediately and do not use that Wi-Fi again. Stop using the internet on that device until you've taken steps to secure it. Change your passwords from a different, secure network — ideally your home Wi-Fi or mobile data — starting with your email and online banking. Use a different device to change passwords if possible, so the compromised device doesn't capture your new credentials. Check your bank and credit card statements for any unauthorised transactions. If you entered banking details, credit card information, or passwords while connected, contact your bank immediately using the number on the back of your card or the official number on their website. Enable two-factor authentication on all your important accounts (email, banking, social media) if you haven't already. Run a malware scan on the device using reputable antivirus software. Consider changing your Wi-Fi password at home if you've recently connected to public networks from your home device. Monitor your credit report through Clearscore or Experian for signs of identity theft.\n\n## Reporting a fake Wi-Fi hotspot in the UK\n\nIf you've identified a fake Wi-Fi network or believe you've been targeted by one, report it to Report Fraud on 0300 123 2040 or online at reportfraud.police.uk. Provide the network name, location, date, and time you encountered it. If you've lost money or had your bank details compromised, your bank must be notified first — they can freeze accounts and dispute fraudulent transactions. Report the incident to the National Cyber Security Centre (NCSC) by emailing report@phishing.gov.uk if the scam involved a fake login page or phishing attempt. You can also contact Citizens Advice on 0808 223 1133 for guidance on next steps and your consumer rights. If you believe your identity has been stolen, register a Cifas Protective Registration, which flags your details to lenders and the credit reference agencies (Experian, Equifax and TransUnion) so they check more carefully before opening credit in your name. Keep records of all communications, screenshots of the network name, and any evidence of unauthorised access to your accounts. These details will help investigators and support any dispute claims with your bank.",
+    "sections": [
+      [
+        "What an evil twin is",
+        "NCSC describes an evil twin as an attacker-owned access point that uses the same or a similar name as a legitimate network, potentially allowing the attacker to intercept or manipulate traffic from connected devices.\n\nThe name alone is therefore not enough. Two networks can look identical in a phone’s Wi-Fi list."
+      ],
+      [
+        "HTTPS helps, but does not validate the hotspot",
+        "Modern banking, email and shopping services normally use HTTPS/TLS to encrypt traffic between the device and the genuine service. That materially limits what a local network attacker can read or alter.\n\nIt does not make a fake hotspot harmless. An attacker can still present a deceptive captive portal, exploit unencrypted or badly configured services, probe exposed local services, or direct the user to a phishing site. A padlock proves the connection to the domain shown in the browser, not that the Wi-Fi belongs to the venue."
+      ],
+      [
+        "Warning signs",
+        "- Duplicate or near-duplicate network names.\n- A captive portal asking for an email password, banking details or an unrelated account login.\n- Certificate or browser security warnings.\n- Staff cannot confirm the network name or access method.\n- The device reconnects automatically to an unexpected open network.\n\nAn open network is not automatically fraudulent; many legitimate venues operate one. Verification matters more than whether a password is present."
+      ],
+      [
+        "Safer connection choices",
+        "Ask venue staff to identify the correct network. For sensitive activity, using your own mobile connection instead of an unknown hotspot avoids the rogue-access-point problem. If an organisation provides a trusted, properly configured full-device VPN, it can protect traffic across an untrusted local network; NCSC’s “evil twin” exercise says VPN use can prevent this interception pattern.\n\nDo not install a random “free VPN” in response to a pop-up. A VPN operator can itself see or influence traffic and must be trusted."
+      ],
+      [
+        "If you connected to a suspicious network",
+        "Disconnect and forget the network so the device does not automatically rejoin. From a trusted connection, change any password entered into the hotspot or a suspicious page, review account sessions and enable a passkey or two-step verification. If software or a certificate profile was installed, remove it and follow the device vendor’s security guidance.\n\nIf money was lost or accounts were compromised, report at `reportfraud.police.uk` or on 0300 123 2040 in England, Wales or Northern Ireland; in Scotland, call Police Scotland on 101."
+      ]
+    ],
+    "faq": [
+      [
+        "Does HTTPS remove all public Wi-Fi risk?",
+        "No. It strongly protects traffic to a correctly authenticated HTTPS service, but it does not prove the network or a captive portal is genuine."
+      ],
+      [
+        "Is every password-free hotspot fake?",
+        "No. Confirm the network with the venue rather than using the presence or absence of a password as the deciding test."
+      ],
+      [
+        "Does NCSC tell every individual to buy a VPN?",
+        "No. NCSC’s detailed VPN guidance is mainly for organisations. Its evil-twin material says a VPN can prevent that attack, while other NCSC advice recommends verifying the hotspot or using mobile tethering."
+      ]
+    ],
+    "keywords": [
+      "fake Wi-Fi hotspot scam",
+      "fake public Wi-Fi UK",
+      "unsafe Wi-Fi networks",
+      "Wi-Fi scam signs",
+      "protect against Wi-Fi scams"
+    ],
+    "sources_checked": [
+      [
+        "NCSC: Connecting securely—micro exercise",
+        "https://www.ncsc.gov.uk/files/connecting-securely-micro-exercise.pdf"
+      ],
+      [
+        "NCSC: VPN guidance",
+        "https://www.ncsc.gov.uk/collection/device-security-guidance/infrastructure/virtual-private-networks"
+      ],
+      [
+        "NCSC: KRACK Wi-Fi guidance",
+        "https://www.ncsc.gov.uk/guidance/krack"
+      ],
+      [
+        "Report Fraud: reporting cyber crime and fraud",
+        "https://www.reportfraud.police.uk/reporting-a-fraud/"
+      ]
+    ],
+    "updated": "2026-07-13"
   }
 ]

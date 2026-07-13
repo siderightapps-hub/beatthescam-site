@@ -1505,6 +1505,28 @@ def _render_section_body(para) -> str:
     return "".join(parts)
 
 
+def sources_checked_block(post: dict) -> str:
+    """Render the optional per-guide 'Sources checked' citation list.
+
+    post['sources_checked'] is a list of [label, url] pairs added by the
+    human fact-check review pass (docs/review/<slug>-c.md), not part of the
+    AI generation schema. Rendered as real <a> tags directly (unlike section/
+    FAQ bodies, which are html.escape'd — see _inline — so markdown [text](url)
+    links there would render as literal broken text, not clickable links).
+    Uses the same rel/target convention as the other genuine editorial
+    citations in this template (plain noopener/noreferrer, no nofollow —
+    that's reserved for the affiliate cards, see affiliate_block()).
+    """
+    items = post.get("sources_checked") or []
+    if not items:
+        return ""
+    lis = "".join(
+        f'<li><a href="{html.escape(url)}" rel="noopener noreferrer" target="_blank">{html.escape(label)}</a></li>'
+        for label, url in items
+    )
+    return f'<h2>Sources checked</h2><ul class="sources-checked">{lis}</ul>'
+
+
 def render_post(site, post, all_posts, affiliates=None, sources=None, link_map=None, slug_titles=None):
     url   = site['domain'] + f'/guides/{post["slug"]}/'
     label = category_label(post["category"])
@@ -1581,6 +1603,7 @@ def render_post(site, post, all_posts, affiliates=None, sources=None, link_map=N
         {"".join(section_parts)}
         <h2>Frequently asked questions</h2>
         <div class="faq">{faq_html}</div>
+        {sources_checked_block(post)}
         <div class="notice" style="margin-top:2rem">
           <strong>Think you&#8217;ve spotted a scam?</strong>
           Use the <a href="/check/">AI scam checker</a> for an instant analysis, or report it to
