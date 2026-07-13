@@ -331,6 +331,7 @@ def affiliate_block(post: dict, affiliates: list) -> str:
       <h3 style="margin:.15rem 0 .4rem">{html.escape(p["name"])}</h3>
       <p class="note">{html.escape(p["tagline"])}</p>
       <a class="btn btn-secondary" href="{html.escape(p["href"])}" rel="nofollow noopener noreferrer" target="_blank" style="width:100%;margin-top:.6rem;text-align:center">{html.escape(p["cta"])}</a>
+      <p class="note" style="margin:.5rem 0 0;font-size:.72rem;color:var(--muted)">Unpaid editorial pick — we receive no commission.</p>
     </section>
     '''
 
@@ -2089,11 +2090,11 @@ def build_legal_bodies(site):
     '''
 
     # Bump PRIVACY_LAST_UPDATED when materially revising the Privacy Policy below.
-    PRIVACY_LAST_UPDATED = "6 July 2026"
+    PRIVACY_LAST_UPDATED = "13 July 2026"
     privacy = f'''
     <p class="note" style="color:#666;font-size:.95rem"><strong>Last updated:</strong> {PRIVACY_LAST_UPDATED}</p>
 
-    <p>This Privacy Policy explains how {html.escape(site["site_name"])} uses analytics, advertising, and website technologies when you browse the site. {html.escape(site["site_name"])} is an independent UK publication; for data-protection purposes the <strong>data controller</strong> is its publisher, who you can contact at <a href="mailto:{site["privacy_email"]}">{site["privacy_email"]}</a>.</p>
+    <p>This Privacy Policy explains how {html.escape(site["site_name"])} uses analytics, advertising, and website technologies when you browse the site. {html.escape(site["site_name"])} is operated by SideRight Apps; for data-protection purposes, <strong>SideRight Apps is the data controller</strong>, and you can contact us at <a href="mailto:{site["privacy_email"]}">{site["privacy_email"]}</a>.</p>
     <h2>What information we collect</h2>
     <p>The site does not offer user accounts, comments, or direct purchases. Standard server logs may record technical data such as browser type, device type, and approximate location.</p>
     <h2>AI scam checker</h2>
@@ -2812,7 +2813,8 @@ def build():
         canonical=site['domain'] + '/404.html',
         schema=page_schema(site, '404', 'Page not found.', site['domain'] + '/404.html'),
         site=site,
-        robots='noindex,follow'
+        robots='noindex,follow',
+        ads_mode='none'
     )
     write(DIST / '404.html', not_found_html)
     write(DIST / 'CNAME', 'beatthescam.com')

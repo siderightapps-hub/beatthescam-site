@@ -2,7 +2,10 @@
   "_note": "VERIFIED CANON of official UK reporting / consumer-protection routes. Single source of truth for: (1) the accuracy gate's allowed phone numbers (content_gate.py derives ALLOWED_PHONE_DIGITS from the phone/sms fields here), (2) the gate's reporting-email validation (check_sources), and (3) build.py's on-page 'Report this scam' block. NEVER hardcode an org number or reporting route anywhere else. Verify any change against the official source before committing. Phones are normalised to digits-only by the gate.",
   "report_emails": [
     "report@phishing.gov.uk",
-    "phishing@hmrc.gov.uk"
+    "phishing@hmrc.gov.uk",
+    "phishing@companieshouse.gov.uk",
+    "reportafraud@landregistry.gov.uk",
+    "branddefence@hmrc.gov.uk"
   ],
   "official_routes": [
     {
