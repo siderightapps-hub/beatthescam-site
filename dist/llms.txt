@@ -13,7 +13,7 @@
 - [Marketplace Scams](https://beatthescam.com/categories/marketplace/): 15 guide(s)
 - [Payment Scams](https://beatthescam.com/categories/payment/): 14 guide(s)
 - [Phone Scams](https://beatthescam.com/categories/phone/): 13 guide(s)
-- [Romance & Dating Scams](https://beatthescam.com/categories/dating/): 4 guide(s)
+- [Romance & Dating Scams](https://beatthescam.com/categories/dating/): 5 guide(s)
 - [Shopping Scams](https://beatthescam.com/categories/shopping/): 7 guide(s)
 - [Social Media Scams](https://beatthescam.com/categories/social/): 5 guide(s)
 - [Tech Support Scams](https://beatthescam.com/categories/tech/): 10 guide(s)
@@ -157,6 +157,7 @@
 ### Romance & Dating Scams
 
 - [Bumble Romance Scams UK: Spot a Fake Profile or Con](https://beatthescam.com/guides/bumble-romance-scam-uk/): A Bumble match who moves fast, avoids video calls, then needs money or pushes 'crypto'? How to spot a romance scam and protect yourself — without the shame.
+- [Hinge Romance Scam UK: How to Spot Fake Profiles and Protect Yourself](https://beatthescam.com/guides/hinge-romance-scam-uk/): Romance scammers create convincing Hinge profiles to build emotional connections with real users, then ask for money under false pretences. This guide explains the warning signs, how the scam unfolds, and what to do if you've already been targeted.
 - [Military Romance Scam UK: Spot a Fake Soldier Online](https://beatthescam.com/guides/military-romance-scam-uk/): Met a 'deployed soldier' online who needs money for leave, flights, or crypto? Spot a military romance scam, check safely, and report it in the UK.
 - [Pig Butchering Scam UK: Dating Apps & Fake Crypto](https://beatthescam.com/guides/pig-butchering-scam-uk/): A dating match slowly steers the conversation toward crypto investing? That pattern has a name — here's how to recognise and avoid it.
 - [Tinder Scams UK: How to Spot a Fake Profile or Romance Con](https://beatthescam.com/guides/tinder-scam-uk/): A Tinder match who moves fast, won't video-call, then needs money or pushes 'crypto'? How to spot a romance scam and protect yourself — without the shame.

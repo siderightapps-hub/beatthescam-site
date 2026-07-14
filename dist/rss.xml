@@ -1,5 +1,12 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Beat the Scam</title><link>https://beatthescam.com</link><description>Scam alerts, plain-English checks, and practical guides to help people verify suspicious emails, texts, websites, calls, and offers.</description><lastBuildDate>Mon, 13 Jul 2026 00:00:00 +0000</lastBuildDate><atom:link href="https://beatthescam.com/rss.xml" rel="self" type="application/rss+xml" />
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Beat the Scam</title><link>https://beatthescam.com</link><description>Scam alerts, plain-English checks, and practical guides to help people verify suspicious emails, texts, websites, calls, and offers.</description><lastBuildDate>Tue, 14 Jul 2026 00:00:00 +0000</lastBuildDate><atom:link href="https://beatthescam.com/rss.xml" rel="self" type="application/rss+xml" />
+        <item>
+          <title>Hinge Romance Scam UK: How to Spot Fake Profiles and Protect Yourself</title>
+          <link>https://beatthescam.com/guides/hinge-romance-scam-uk/</link>
+          <guid isPermaLink="true">https://beatthescam.com/guides/hinge-romance-scam-uk/</guid>
+          <pubDate>Tue, 14 Jul 2026 00:00:00 +0000</pubDate>
+          <description>Romance scammers create convincing Hinge profiles to build emotional connections with real users, then ask for money under false pretences. This guide explains the warning signs, how the scam unfolds, and what to do if you&#x27;ve already been targeted.</description>
+        </item>
         <item>
           <title>Cruise Scam UK: Spot Fake Deals and Book Safely</title>
           <link>https://beatthescam.com/guides/cruise-scam-uk/</link>
@@ -202,11 +209,4 @@
           <guid isPermaLink="true">https://beatthescam.com/guides/solar-panel-cold-caller-scam-uk/</guid>
           <pubDate>Sat, 06 Jun 2026 00:00:00 +0000</pubDate>
           <description>Got an unsolicited call or doorstep visit offering free solar panels or a &#x27;government grant&#x27;? How to spot a solar panel cold-calling scam in the UK.</description>
-        </item>
-        <item>
-          <title>DPD Scam Text Messages: How to Spot a Fake DPD Delivery Text</title>
-          <link>https://beatthescam.com/guides/dpd-delivery-scam-text/</link>
-          <guid isPermaLink="true">https://beatthescam.com/guides/dpd-delivery-scam-text/</guid>
-          <pubDate>Fri, 05 Jun 2026 00:00:00 +0000</pubDate>
-          <description>Fake DPD &#x27;missed delivery&#x27; or &#x27;redelivery fee&#x27; texts are smishing scams. Here&#x27;s how to spot a fake DPD text, verify a genuine one, and report it in the UK.</description>
         </item></channel></rss>
