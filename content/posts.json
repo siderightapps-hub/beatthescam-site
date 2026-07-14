@@ -201,6 +201,12 @@
         "How do I report a Gumtree scammer?",
         "Use the 'Report' link on the advert or the user's profile to flag it to Gumtree. If money or details were lost, report to Report Fraud at reportfraud.police.uk or 0300 123 2040 (Police Scotland on 101 in Scotland), and contact your bank immediately if you paid by transfer. Keep screenshots of the listing and chat as evidence."
       ]
+    ],
+    "sources_checked": [
+      [
+        "Gumtree — Safety advice",
+        "https://www.gumtree.com/info/safety/safety-advice/"
+      ]
     ]
   },
   {
@@ -264,6 +270,12 @@
       [
         "How do I report the Google Voice scam in the UK?",
         "Report the account to the marketplace or dating app it came from, and report the fraud to Report Fraud at reportfraud.police.uk or 0300 123 2040 (Police Scotland on 101 in Scotland). Reclaim any Google Voice number set up in your name at voice.google.com and report abuse to Google. Forward scam texts to 7726. Going forward, never share a one-time or verification code with anyone."
+      ]
+    ],
+    "sources_checked": [
+      [
+        "Google Voice Help — Protect your verification code",
+        "https://support.google.com/voice/answer/9177797"
       ]
     ]
   },
@@ -976,7 +988,13 @@
       "business email compromise uk",
       "payment diversion fraud"
     ],
-    "updated": "2026-07-03"
+    "updated": "2026-07-03",
+    "sources_checked": [
+      [
+        "NCSC — Business Email Compromise",
+        "https://www.ncsc.gov.uk/files/Business-email-compromise-payment-diversion-fraud.pdf"
+      ]
+    ]
   },
   {
     "title": "Recovery Scam UK: Spot a Fake 'Get Your Money Back' Firm",
@@ -1122,7 +1140,17 @@
       "Evri smishing",
       "report Evri scam text"
     ],
-    "updated": "2026-06-26"
+    "updated": "2026-06-26",
+    "sources_checked": [
+      [
+        "Evri — How to spot and report fraud",
+        "https://www.evri.com/cyber-security"
+      ],
+      [
+        "Evri — About us (Hermes rebrand, March 2022)",
+        "https://www.evri.com/about-us"
+      ]
+    ]
   },
   {
     "title": "WhatsApp 'Hi Mum' Scam UK: Spot a Fake Family Text",
@@ -1872,7 +1900,13 @@
       "facebook marketplace buyer protection",
       "facebook marketplace too good to be true"
     ],
-    "updated": "2026-07-02"
+    "updated": "2026-07-02",
+    "sources_checked": [
+      [
+        "Facebook — How Purchase Protection works",
+        "https://www.facebook.com/help/228307904608701"
+      ]
+    ]
   },
   {
     "title": "Job Offer Scam UK: Spot a Fake 'You're Hired' Message",
@@ -1945,7 +1979,13 @@
       "report job scam uk",
       "recruitment scam warning signs"
     ],
-    "updated": "2026-07-02"
+    "updated": "2026-07-02",
+    "sources_checked": [
+      [
+        "GOV.UK — Overview of the Conduct Regulations 2003 (employment agency fees)",
+        "https://www.gov.uk/government/publications/conduct-regulations-2003-guidance-for-employment-agencies-and-employment-businesses/overview-of-the-conduct-regulations-2003"
+      ]
+    ]
   },
   {
     "title": "Work From Home Scam UK: Envelope, Kit & Reshipping Cons",
@@ -2236,7 +2276,17 @@
       "claim tax refund scam",
       "report HMRC scam text"
     ],
-    "updated": "2026-06-26"
+    "updated": "2026-06-26",
+    "sources_checked": [
+      [
+        "GOV.UK — Check if a text message you've received from HMRC is genuine",
+        "https://www.gov.uk/guidance/check-if-a-text-message-youve-received-from-hmrc-is-genuine"
+      ],
+      [
+        "GOV.UK — If your tax calculation letter (P800) says you're due a refund",
+        "https://www.gov.uk/tax-overpayments-and-underpayments/if-youre-due-a-refund"
+      ]
+    ]
   },
   {
     "title": "Barclays Scam Texts: How to Spot a Fake Barclays SMS (UK)",
@@ -2534,7 +2584,17 @@
       "Halifax security alert text",
       "report Halifax scam text"
     ],
-    "updated": "2026-06-26"
+    "updated": "2026-06-26",
+    "sources_checked": [
+      [
+        "Halifax — How to protect yourself from fraud",
+        "https://www.halifax.co.uk/helpcentre/protecting-yourself-from-fraud.html"
+      ],
+      [
+        "Stop Scams UK — 159 phone number (participating banks)",
+        "https://stopscamsuk.org.uk/our-programmes/159-phone-number/"
+      ]
+    ]
   },
   {
     "title": "DVLA Vehicle Tax Text Scam: How to Spot the Fake (UK)",
@@ -2988,7 +3048,17 @@
       "Hermes smishing",
       "report Hermes scam text"
     ],
-    "updated": "2026-06-26"
+    "updated": "2026-06-26",
+    "sources_checked": [
+      [
+        "Evri — How to spot and report fraud",
+        "https://www.evri.com/cyber-security"
+      ],
+      [
+        "Evri — About us (Hermes rebrand, March 2022)",
+        "https://www.evri.com/about-us"
+      ]
+    ]
   },
   {
     "title": "Amazon Delivery Scam Text UK: Spot a Fake SMS",
@@ -3140,7 +3210,17 @@
       "HMRC rebate phishing",
       "report HMRC rebate email"
     ],
-    "updated": "2026-06-28"
+    "updated": "2026-06-28",
+    "sources_checked": [
+      [
+        "GOV.UK — Check if an email you've received from HMRC is genuine",
+        "https://www.gov.uk/guidance/check-if-an-email-youve-received-from-hmrc-is-genuine"
+      ],
+      [
+        "GOV.UK — If your tax calculation letter (P800) says you're due a refund",
+        "https://www.gov.uk/tax-overpayments-and-underpayments/if-youre-due-a-refund"
+      ]
+    ]
   },
   {
     "title": "Netflix Billing Email Scam UK: Spot a Fake Message",
@@ -3284,7 +3364,13 @@
       "hsbc account suspended email scam",
       "hsbc smishing text"
     ],
-    "updated": "2026-07-05"
+    "updated": "2026-07-05",
+    "sources_checked": [
+      [
+        "HSBC UK — Fraud guide",
+        "https://www.hsbc.co.uk/help/security-centre/fraud-guide/"
+      ]
+    ]
   },
   {
     "title": "Santander Email Scam: How to Spot a Fake Bank Email (UK)",
@@ -3745,7 +3831,17 @@
       "phone scam UK",
       "vishing UK"
     ],
-    "updated": "2026-07-10"
+    "updated": "2026-07-10",
+    "sources_checked": [
+      [
+        "GOV.UK — Check if a phone call you've received from HMRC is genuine",
+        "https://www.gov.uk/guidance/check-if-a-phone-call-youve-received-from-hmrc-is-genuine"
+      ],
+      [
+        "GOV.UK — Report suspicious HMRC emails, texts, social media accounts and phone calls",
+        "https://www.gov.uk/find-hmrc-contacts/report-suspicious-hmrc-emails-texts-social-media-accounts-and-phone-calls"
+      ]
+    ]
   },
   {
     "title": "BT Scam Calls: How to Spot a Fake BT Phone Call (UK)",
@@ -4268,7 +4364,21 @@
       "fake invoice scam uk",
       "paid a fraudulent invoice uk"
     ],
-    "updated": "2026-07-10"
+    "updated": "2026-07-10",
+    "sources_checked": [
+      [
+        "NCSC — Business Email Compromise",
+        "https://www.ncsc.gov.uk/files/Business-email-compromise-payment-diversion-fraud.pdf"
+      ],
+      [
+        "Direct Debit — The Direct Debit Guarantee",
+        "https://www.directdebit.co.uk/direct-debit-guarantee/"
+      ],
+      [
+        "Payment Systems Regulator — APP fraud reimbursement protections",
+        "https://www.psr.org.uk/information-for-consumers/app-fraud-reimbursement-protections/"
+      ]
+    ]
   },
   {
     "title": "Overpayment Scam UK: Do Not Send a Separate Refund",
@@ -5221,7 +5331,13 @@
       "Instagram forex scam",
       "investment scam UK"
     ],
-    "updated": "2026-07-10"
+    "updated": "2026-07-10",
+    "sources_checked": [
+      [
+        "FCA — FCA leads international crackdown on illegal finfluencers",
+        "https://www.fca.org.uk/news/press-releases/fca-leads-international-crackdown-illegal-finfluencers"
+      ]
+    ]
   },
   {
     "title": "WhatsApp Investment Scam UK: The Private-Chat Con",
@@ -5419,7 +5535,13 @@
       "counterfeit ad Facebook",
       "social media scam UK"
     ],
-    "updated": "2026-07-10"
+    "updated": "2026-07-10",
+    "sources_checked": [
+      [
+        "Meta Transparency Center — Ad Library tools",
+        "https://transparency.meta.com/researchtools/ad-library-tools"
+      ]
+    ]
   },
   {
     "title": "X Crypto Giveaway Scam UK: The Blue Tick Proves Nothing Now",
@@ -5690,7 +5812,17 @@
       "crypto scam UK",
       "cryptocurrency scam UK"
     ],
-    "updated": "2026-07-10"
+    "updated": "2026-07-10",
+    "sources_checked": [
+      [
+        "FCA — Cryptoasset firms marketing to UK consumers",
+        "https://www.fca.org.uk/firms/cryptoassets/marketing-uk-consumers"
+      ],
+      [
+        "FCA — Registered Cryptoasset Firms register",
+        "https://register.fca.org.uk/s/search?predefined=CA"
+      ]
+    ]
   },
   {
     "title": "Crypto Recovery Scam UK: A Second Scam to Avoid",
@@ -6278,7 +6410,13 @@
       "money mule job scam",
       "report Indeed job scam"
     ],
-    "updated": "2026-06-26"
+    "updated": "2026-06-26",
+    "sources_checked": [
+      [
+        "GOV.UK — Overview of the Conduct Regulations 2003 (employment agency fees)",
+        "https://www.gov.uk/government/publications/conduct-regulations-2003-guidance-for-employment-agencies-and-employment-businesses/overview-of-the-conduct-regulations-2003"
+      ]
+    ]
   },
   {
     "title": "Remote Work Scam UK: How to Spot a Fake Job Offer",
@@ -7380,7 +7518,13 @@
       "report iva scam uk",
       "fake debt solution company"
     ],
-    "updated": "2026-07-02"
+    "updated": "2026-07-02",
+    "sources_checked": [
+      [
+        "MoneyHelper — Debt advice locator",
+        "https://www.moneyhelper.org.uk/en/money-troubles/dealing-with-debt/debt-advice-locator"
+      ]
+    ]
   },
   {
     "title": "Clone Firm Investment Scam UK: Check Before You Invest",
@@ -7601,7 +7745,13 @@
       "greenfield land investment scam",
       "split land plot scam"
     ],
-    "updated": "2026-07-02"
+    "updated": "2026-07-02",
+    "sources_checked": [
+      [
+        "FCA — Land banking investment scams",
+        "https://www.fca.org.uk/consumers/land-banking-investment-scams"
+      ]
+    ]
   },
   {
     "title": "Package Holiday Scam UK: Spot a Fake Travel Deal",
@@ -7747,7 +7897,13 @@
       "fake booking confirmation flight",
       "bargain flight scam warning signs"
     ],
-    "updated": "2026-07-02"
+    "updated": "2026-07-02",
+    "sources_checked": [
+      [
+        "UK Civil Aviation Authority — What is ATOL?",
+        "https://www.caa.co.uk/newsroom/blogs/what-is-atol/"
+      ]
+    ]
   },
   {
     "title": "UK Visa Application Scam: Fake Consultants & Sites",
@@ -7963,7 +8119,17 @@
       "glastonbury registration ticket",
       "glastonbury ticket seller scam"
     ],
-    "updated": "2026-07-05"
+    "updated": "2026-07-05",
+    "sources_checked": [
+      [
+        "Glastonbury Festival — Info",
+        "https://www.glastonburyfestivals.co.uk/info/"
+      ],
+      [
+        "Glastonbury Festival — Ticket registration (See Tickets)",
+        "https://glastonbury.seetickets.com/registration/register"
+      ]
+    ]
   },
   {
     "title": "Is Viagogo Safe to Buy Tickets in the UK? What You Need to Know",
@@ -8310,7 +8476,33 @@
       "gphc register check",
       "counterfeit medicine online uk"
     ],
-    "updated": "2026-07-02"
+    "updated": "2026-07-02",
+    "sources_checked": [
+      [
+        "GPhC — How to check an online pharmacy is on the register",
+        "https://www.pharmacyregulation.org/how-check-online-pharmacy-register"
+      ],
+      [
+        "PSNI — Search the Register",
+        "https://registers.psni.org.uk/"
+      ],
+      [
+        "MHRA — Register of online sellers of medicines",
+        "https://medicine-seller-register.mhra.gov.uk/"
+      ],
+      [
+        "GOV.UK — Register for the Distance Selling logo",
+        "https://www.gov.uk/guidance/register-for-the-distance-selling-logo"
+      ],
+      [
+        "GOV.UK — Report a suspicious online seller of medicines",
+        "https://www.gov.uk/report-suspicious-online-medicine-seller"
+      ],
+      [
+        "MHRA Yellow Card — What to report",
+        "https://yellowcard.mhra.gov.uk/what-to-report"
+      ]
+    ]
   },
   {
     "title": "Forex Trading Scam UK: Spot a Fake Broker",
@@ -8382,7 +8574,17 @@
       "forex investment scam uk",
       "fca warning list"
     ],
-    "updated": "2026-07-05"
+    "updated": "2026-07-05",
+    "sources_checked": [
+      [
+        "FCA — Clone firms and individuals",
+        "https://www.fca.org.uk/consumers/clone-firms-individuals"
+      ],
+      [
+        "FCA — Warning List of unauthorised firms",
+        "https://www.fca.org.uk/consumers/warning-list-unauthorised-firms"
+      ]
+    ]
   },
   {
     "title": "Concert Ticket Scam UK: Where They Happen and How to Avoid Them",
@@ -8744,7 +8946,17 @@
       "fake etsy seller",
       "etsy buyer protection uk"
     ],
-    "updated": "2026-07-05"
+    "updated": "2026-07-05",
+    "sources_checked": [
+      [
+        "Etsy — Purchase Protection Program",
+        "https://help.etsy.com/hc/en-us/articles/7471925990807-Etsy-s-Purchase-Protection-Program"
+      ],
+      [
+        "Etsy — How to report an item or shop",
+        "https://help.etsy.com/hc/en-us/articles/360000344568-How-to-Report-an-Item-or-Shop"
+      ]
+    ]
   },
   {
     "title": "TSB Scam Text UK: Spot a Fake Bank SMS",
@@ -8963,7 +9175,17 @@
       "report hsbc scam call",
       "hsbc verify account call scam"
     ],
-    "updated": "2026-07-02"
+    "updated": "2026-07-02",
+    "sources_checked": [
+      [
+        "HSBC UK — Fraud guide",
+        "https://www.hsbc.co.uk/help/security-centre/fraud-guide/"
+      ],
+      [
+        "Stop Scams UK — 159 phone number (participating banks)",
+        "https://stopscamsuk.org.uk/our-programmes/159-phone-number/"
+      ]
+    ]
   },
   {
     "title": "Santander Phone Scam UK: What the Callers Say and How to Hang Up Safely",
@@ -9552,7 +9774,13 @@
       "ray-ban clearance scam uk",
       "ray-ban lookalike domain scam"
     ],
-    "updated": "2026-07-03"
+    "updated": "2026-07-03",
+    "sources_checked": [
+      [
+        "Ray-Ban — Report Fake",
+        "https://www.ray-ban.com/uk/getsupport/report-fakes"
+      ]
+    ]
   },
   {
     "title": "Fake Pandora Website UK: Spot a Counterfeit Jewellery Site",
@@ -9779,7 +10007,13 @@
       "festival ticket scam facebook",
       "section 75 ticket scam"
     ],
-    "updated": "2026-07-05"
+    "updated": "2026-07-05",
+    "sources_checked": [
+      [
+        "STAR — About us (Society of Ticket Agents and Retailers)",
+        "https://www.star.org.uk/about/"
+      ]
+    ]
   },
   {
     "title": "Amazon Prime Scam UK: Spot a Fake Renewal Email",
@@ -9934,7 +10168,17 @@
       "ebay spoof email report",
       "ebay unpaid fee email scam"
     ],
-    "updated": "2026-07-06"
+    "updated": "2026-07-06",
+    "sources_checked": [
+      [
+        "eBay — Fees for private sellers",
+        "https://www.ebay.co.uk/help/selling/fees-credits-invoices/fees-private-sellers-activated-managed-payments?id=4822"
+      ],
+      [
+        "eBay — Recognising spoof emails",
+        "https://www.ebay.co.uk/help/account/protecting-account/recognising-spoof-emails?id=4195"
+      ]
+    ]
   },
   {
     "title": "Shpock Scam UK: Spot a Fake Deal Safely",
@@ -10284,7 +10528,17 @@
       "ee phishing report",
       "ee 2fa account security"
     ],
-    "updated": "2026-07-06"
+    "updated": "2026-07-06",
+    "sources_checked": [
+      [
+        "EE — Avoid and prevent scams",
+        "https://ee.co.uk/help/security/staying-safe-online/avoid-and-prevent-scams"
+      ],
+      [
+        "EE — Account authentication (2FA)",
+        "https://ee.co.uk/help/profile/manage/account-authentication"
+      ]
+    ]
   },
   {
     "title": "TalkTalk Scam Call UK: Spot a Fake Support Call",
@@ -10545,7 +10799,13 @@
       "accommodation scam UK",
       "holiday rental scam"
     ],
-    "updated": "2026-07-10"
+    "updated": "2026-07-10",
+    "sources_checked": [
+      [
+        "Glastonbury Festival — Info",
+        "https://www.glastonburyfestivals.co.uk/info/"
+      ]
+    ]
   },
   {
     "title": "Vinted Festival Camping Gear Scam: Spot a Fake Seller",
@@ -10608,7 +10868,13 @@
       "Vinted tent scam",
       "marketplace scam UK"
     ],
-    "updated": "2026-07-09"
+    "updated": "2026-07-09",
+    "sources_checked": [
+      [
+        "Vinted — Buyer Protection",
+        "https://www.vinted.com/help/550-buyer-protection"
+      ]
+    ]
   },
   {
     "title": "Festival Lineup Email Scam UK: Spot a Fake Presale",
@@ -10754,7 +11020,13 @@
       "f1 resale ticket scam",
       "silverstone touting scam"
     ],
-    "updated": "2026-07-02"
+    "updated": "2026-07-02",
+    "sources_checked": [
+      [
+        "Silverstone — Can I screenshot my ticket and pass it on?",
+        "https://help.silverstone.co.uk/hc/en-gb/articles/10786628674461-Can-I-screenshot-my-ticket-and-pass-it-on"
+      ]
+    ]
   },
   {
     "title": "Airport Transfer Taxi Scam UK: Spot a Fake or Illegal Ride",
@@ -10962,7 +11234,13 @@
       "jet2 manage my booking",
       "jet2 phishing scam"
     ],
-    "updated": "2026-07-05"
+    "updated": "2026-07-05",
+    "sources_checked": [
+      [
+        "Jet2holidays — Keeping you safe with ATOL protection",
+        "https://www.jet2holidays.com/atol"
+      ]
+    ]
   },
   {
     "title": "Holiday Compensation Scam UK: Fake Claims Handlers",
@@ -11034,7 +11312,17 @@
       "is this claims company legit",
       "holiday compensation uk"
     ],
-    "updated": "2026-07-03"
+    "updated": "2026-07-03",
+    "sources_checked": [
+      [
+        "UK Civil Aviation Authority — Flight delays",
+        "https://www.caa.co.uk/air-passengers/travel-problems-and-rights/flight-delays-and-cancellations/delays/"
+      ],
+      [
+        "FCA — Claims management companies: our regulation",
+        "https://www.fca.org.uk/firms/claims-management-regulation"
+      ]
+    ]
   },
   {
     "title": "Solar Panel Cold Caller Scam UK: Spot the Warning Signs",
@@ -11659,7 +11947,17 @@
       "identity fraud reporting uk",
       "signs of identity theft uk"
     ],
-    "updated": "2026-07-05"
+    "updated": "2026-07-05",
+    "sources_checked": [
+      [
+        "ICO — Personal data breaches: a guide",
+        "https://ico.org.uk/for-organisations/report-a-breach/personal-data-breach/personal-data-breaches-a-guide/"
+      ],
+      [
+        "ICO — Credit",
+        "https://ico.org.uk/for-the-public/credit/"
+      ]
+    ]
   },
   {
     "title": "Deed Fraud: Protect Property in England and Wales",
@@ -12017,7 +12315,21 @@
       "Outlook account compromised",
       "email security UK"
     ],
-    "updated": "2026-07-10"
+    "updated": "2026-07-10",
+    "sources_checked": [
+      [
+        "NCSC — Recovering a hacked account",
+        "https://www.ncsc.gov.uk/guidance/recovering-a-hacked-account"
+      ],
+      [
+        "NCSC — Passkeys: what you need to know",
+        "https://www.ncsc.gov.uk/passkeys"
+      ],
+      [
+        "NCSC — Three random words",
+        "https://www.ncsc.gov.uk/collection/top-tips-for-staying-secure-online/three-random-words"
+      ]
+    ]
   },
   {
     "title": "Student Finance Scam UK: Spot a Fake SLC Message",
@@ -12464,6 +12776,20 @@
         "What is the difference between a fake travel agent and a legitimate discount travel site?",
         "A legitimate discount travel site should have verifiable company details, clear terms, a secure official payment flow, real customer-service routes, and booking references that can be checked with the supplier. A fake agent usually relies on urgency, unverifiable protection claims, poor or copied paperwork, and payment to a private or mismatched account."
       ]
+    ],
+    "sources_checked": [
+      [
+        "ABTA — How to avoid travel related fraud",
+        "https://www.abta.com/tips-and-advice/planning-and-booking-a-holiday/how-avoid-travel-related-fraud"
+      ],
+      [
+        "UK Civil Aviation Authority — Check an ATOL",
+        "https://www.caa.co.uk/atol-protection/check-an-atol/"
+      ],
+      [
+        "GOV.UK — Cancel a lost or stolen passport",
+        "https://www.gov.uk/report-a-lost-or-stolen-passport"
+      ]
     ]
   },
   {
@@ -12599,6 +12925,12 @@
       "holiday club fraud",
       "fake holiday club",
       "holiday scam warning signs"
+    ],
+    "sources_checked": [
+      [
+        "legislation.gov.uk — The Timeshare, Holiday Products, Resale and Exchange Contracts Regulations 2010",
+        "https://www.legislation.gov.uk/uksi/2010/2960/made"
+      ]
     ]
   },
   {
