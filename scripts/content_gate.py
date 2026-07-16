@@ -88,7 +88,34 @@ def _canon_report_emails(canon: Dict) -> set:
     return emails or set(_FALLBACK_REPORT_EMAILS)
 
 
+def _judge_canon_block(canon: Dict) -> str:
+    """Render the sources.json canon as a compact fact list for the LLM judge.
+
+    Without this, the judge has no way to know check_phones() has ALREADY
+    deterministically verified every phone number/route against this same
+    canon — it re-derives "is this real?" from its own training-data recall
+    on every call, which is what let it flip-flop across runs on whether 159
+    is a genuine number (2026-07-13, see memory llm-judge-run-to-run-
+    inconsistency). Giving it the canon stops it re-litigating settled facts."""
+    lines = []
+    for r in canon.get("official_routes", []):
+        parts = [r.get("name", "")]
+        if r.get("phone"):
+            parts.append(f"phone {r['phone']}")
+        if r.get("sms"):
+            parts.append(f"SMS shortcode {r['sms']}")
+        if r.get("email"):
+            parts.append(f"email {r['email']}")
+        if any(parts[1:]):
+            lines.append("- " + " — ".join(p for p in parts if p))
+    emails = [e for e in canon.get("report_emails", []) if e]
+    if emails:
+        lines.append("- Other verified official report emails: " + ", ".join(emails))
+    return "\n".join(lines)
+
+
 _CANON = _load_canon()
+_JUDGE_CANON_BLOCK = _judge_canon_block(_CANON)
 ALLOWED_PHONE_DIGITS = _canon_phone_digits(_CANON)
 ALLOWED_REPORT_EMAILS = _canon_report_emails(_CANON)
 
@@ -434,8 +461,8 @@ def check_nfd_routing(post: Dict) -> List[Dict]:
 # US-style "fraud alert on your credit file" is not a UK mechanism (that is a
 # Cifas Protective Registration). Imprecise rather than dangerous → FLAG (review).
 _FRAUD_ALERT_RE = re.compile(
-    r"fraud\s+alert[^.]{0,40}credit\s+(?:file|report|record)"
-    r"|credit\s+(?:file|report|record)[^.]{0,40}fraud\s+alert", re.I)
+    r"fraud\s+alert[^.]{0,40}credit\s+(?:file|report|record|reference\s+agenc(?:y|ies))"
+    r"|credit\s+(?:file|report|record|reference\s+agenc(?:y|ies))[^.]{0,40}fraud\s+alert", re.I)
 # HMRC runs genuine SMS/email campaigns and genuine texts can carry gov.uk links,
 # so blanket "HMRC never texts/emails/links you" is inaccurate → FLAG (review).
 _HMRC_CHANNEL_RE = re.compile(
@@ -565,12 +592,21 @@ def judge_llm(post: Dict, client, model: str) -> List[Dict]:
     body = _post_text(post)
     user = (f"Title: {post.get('title','')}\n\nReview this draft guide:\n\n{body}\n\n"
             "Return the JSON verdict.")
+    system_prompt = JUDGE_SYSTEM
+    if _JUDGE_CANON_BLOCK:
+        system_prompt += (
+            "\n\nThe following UK reporting routes, phone numbers, and email addresses have "
+            "already been independently verified against this site's canonical source list. "
+            "Treat them as accurate — do NOT flag them as fabricated, invented, or "
+            "unverifiable. Only flag one of these if the draft attributes it to the wrong "
+            "organisation or uses it in a clearly incorrect context:\n" + _JUDGE_CANON_BLOCK
+        )
     try:
         resp = client.messages.create(
             model=model,
             max_tokens=1500,
             temperature=0,
-            system=JUDGE_SYSTEM,
+            system=system_prompt,
             messages=[{"role": "user", "content": user}],
         )
         raw = "".join(b.text for b in resp.content if getattr(b, "type", None) == "text").strip()
