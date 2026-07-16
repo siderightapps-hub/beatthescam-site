@@ -489,6 +489,12 @@
         "Where do I report a fake Yodel text?",
         "Forward it free to 7726 so your network can act on the sender, then delete the message. If money or details were lost, report to Report Fraud at reportfraud.police.uk or 0300 123 2040 (Police Scotland on 101 in Scotland). You can also report the phishing site to the NCSC and notify Yodel via their official website."
       ]
+    ],
+    "sources_checked": [
+      [
+        "Yodel — Fraud: Information Security Advice",
+        "https://www.yodel.co.uk/privacy-cookies-policy/fraud"
+      ]
     ]
   },
   {
@@ -1235,7 +1241,17 @@
       "report whatsapp scam uk",
       "friend in need scam"
     ],
-    "updated": "2026-06-29"
+    "updated": "2026-06-29",
+    "sources_checked": [
+      [
+        "WhatsApp Help Center — About two-step verification",
+        "https://faq.whatsapp.com/1278661612895630"
+      ],
+      [
+        "WhatsApp Help Center — How to block and report someone",
+        "https://faq.whatsapp.com/1142481766359885/"
+      ]
+    ]
   },
   {
     "title": "Vinted Scams UK: Warning Signs for Buyers and Sellers",
@@ -1304,7 +1320,13 @@
       "is vinted safe",
       "vinted buyer protection"
     ],
-    "updated": "2026-07-03"
+    "updated": "2026-07-03",
+    "sources_checked": [
+      [
+        "Vinted — Parcel didn't arrive",
+        "https://www.vinted.co.uk/help/726"
+      ]
+    ]
   },
   {
     "title": "Crypto Investment Scam UK: Spot a Fake Platform",
@@ -5575,7 +5597,13 @@
       "WhatsApp crypto scam",
       "investment scam UK"
     ],
-    "updated": "2026-07-10"
+    "updated": "2026-07-10",
+    "sources_checked": [
+      [
+        "WhatsApp Help Center — How to block and report someone",
+        "https://faq.whatsapp.com/1142481766359885/"
+      ]
+    ]
   },
   {
     "title": "TikTok Shop Scams UK: Spot Fake Sellers & Bad Deals",
@@ -7711,7 +7739,13 @@
       "fake Wish email",
       "Wish refund UK"
     ],
-    "updated": "2026-06-28"
+    "updated": "2026-06-28",
+    "sources_checked": [
+      [
+        "Wish Help Center — Payment Method FAQ's",
+        "https://cs-help.wish.com/hc/en-us/articles/360028374711-Payment-Method-FAQ-s"
+      ]
+    ]
   },
   {
     "title": "IVA Scam UK: Spot a Fake Debt Solution Firm",
@@ -8247,7 +8281,17 @@
       "fake visa website uk",
       "visa application fee scam"
     ],
-    "updated": "2026-07-06"
+    "updated": "2026-07-06",
+    "sources_checked": [
+      [
+        "GOV.UK — Immigration Advice Authority",
+        "https://www.gov.uk/government/organisations/immigration-advice-authority"
+      ],
+      [
+        "Immigration Advice Authority — Adviser Finder",
+        "https://portal.immigrationadviceauthority.gov.uk/s/adviser-finder"
+      ]
+    ]
   },
   {
     "title": "Holiday Let Scam UK: Fake Independent Rentals",
@@ -9196,7 +9240,13 @@
       "report wise scam uk",
       "wise payment failed scam"
     ],
-    "updated": "2026-07-02"
+    "updated": "2026-07-02",
+    "sources_checked": [
+      [
+        "Wise — How to avoid online scams",
+        "https://wise.com/gb/blog/how-to-avoid-online-scams"
+      ]
+    ]
   },
   {
     "title": "Etsy Scam Sellers UK: Spot Fakes & Buy Safely",
@@ -10704,7 +10754,13 @@
       "virgin media remote access scam",
       "report virgin media scam call"
     ],
-    "updated": "2026-07-03"
+    "updated": "2026-07-03",
+    "sources_checked": [
+      [
+        "Virgin Media — Dealing with fraudulent calls and vishing",
+        "https://www.virginmedia.com/help/security/dealing-with-fraudulent-calls-and-vishing"
+      ]
+    ]
   },
   {
     "title": "O2 Warning: How to Spot Fake 'Important' Texts and What to Do",
@@ -10848,7 +10904,13 @@
       "report vodafone scam text",
       "vodafone phishing sms"
     ],
-    "updated": "2026-07-02"
+    "updated": "2026-07-02",
+    "sources_checked": [
+      [
+        "Vodafone — How to identify and report phishing scams",
+        "https://www.vodafone.co.uk/privacy/protecting-you/phishing"
+      ]
+    ]
   },
   {
     "title": "EE Scam Text UK: Spot a Fake Message",
@@ -12044,7 +12106,21 @@
       "venue deposit scam UK",
       "wedding venue impersonation"
     ],
-    "updated": "2026-07-10"
+    "updated": "2026-07-10",
+    "sources_checked": [
+      [
+        "National Crime Agency — NCA and NatWest launch campaign to protect against Invoice Fraud in business",
+        "https://www.nationalcrimeagency.gov.uk/news/nca-and-natwest-launch-campaign-to-protect-against-invoice-fraud-in-business"
+      ],
+      [
+        "GOV.UK — Wedding venues advised to play fair",
+        "https://www.gov.uk/government/news/wedding-venues-advised-to-play-fair"
+      ],
+      [
+        "Companies House — Service information",
+        "https://resources.companieshouse.gov.uk/serviceInformation.shtml"
+      ]
+    ]
   },
   {
     "title": "Wedding Photographer Scam UK: Verify Before You Book",
@@ -12098,7 +12174,13 @@
       "photography deposit scam",
       "how to verify wedding photographer"
     ],
-    "updated": "2026-07-10"
+    "updated": "2026-07-10",
+    "sources_checked": [
+      [
+        "Companies House — Service information",
+        "https://resources.companieshouse.gov.uk/serviceInformation.shtml"
+      ]
+    ]
   },
   {
     "title": "Recovery Room Scam UK: A Second Scam After the First",
