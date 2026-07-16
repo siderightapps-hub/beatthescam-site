@@ -569,9 +569,9 @@
   },
   {
     "slug": "bank-text-codes-not-arriving",
-    "title": "Bank Text Messages Not Arriving? How to Fix It and Spot Scams",
-    "description": "Bank texts not arriving? Most causes are routine — the quick fixes, common UK bank sender IDs, and the SIM-swap scam signs to watch for.",
-    "hero": "Why your UK bank verification codes or 2FA texts aren't arriving — and what to do about it.",
+    "title": "Bank Verification Text Not Arriving? UK Fixes",
+    "description": "Bank verification text not arriving? Check your registered number, signal and blocked messages, then contact the bank securely. Includes Halifax-specific steps.",
+    "hero": "Troubleshoot a missing UK bank verification text without mistaking a delivery problem for a scam.",
     "date": "2026-05-07",
     "category": "sms",
     "keywords": [
@@ -579,96 +579,79 @@
       "verification code not received",
       "2fa code not arriving",
       "security code not coming through",
-      "halifax",
-      "lloyds",
-      "natwest",
-      "barclays",
-      "hsbc",
-      "santander",
-      "nationwide",
-      "tsb",
-      "first direct",
-      "monzo",
-      "starling",
-      "uk bank scam",
+      "halifax text messages not arriving",
+      "halifax passcode not received",
+      "bank verification text troubleshooting",
       "sim swap",
-      "smishing",
       "two factor authentication",
-      "bank sender id",
-      "hmrc verification",
-      "google verification code",
-      "microsoft authenticator",
-      "Lloyds Bank scam",
-      "Lloyds fraud text",
-      "fake Lloyds email",
-      "NatWest scam",
-      "NatWest fraud text",
-      "fake NatWest email",
-      "Barclays scam",
-      "Barclays fraud text",
-      "fake Barclays email",
-      "Halifax scam",
-      "Halifax fraud text",
-      "fake Halifax email",
-      "text scam UK",
-      "SMS scam UK"
+      "bank text alerts",
+      "bank registered mobile number"
     ],
     "sections": [
       [
-        "Why your bank verification text might not be arriving",
-        "If your bank verification code or 2FA text has stopped arriving, possible causes include weak signal, phone settings, a blocked message, or a delay at the bank or mobile network. A SIM-swap or number-porting fraud is another possibility, but missing bank texts on their own do not prove that has happened. This guide starts with low-risk checks, then explains when to contact the bank and mobile network."
+        "First identify which bank text is missing",
+        "Banks send different kinds of messages: one-time passcodes for a payment or login, security checks, and optional account alerts. Confirm which message you expected and whether the bank still has your current mobile number. Do not keep requesting codes repeatedly; use one fresh request after completing the checks below. A single missing code can have several possible causes, so start with normal delivery and account checks; it is not proof of fraud or a SIM swap."
       ],
       [
-        "Quick fixes that work for any UK bank or service",
-        "Try restarting the phone, checking signal and Airplane Mode, looking in blocked or filtered messages, and requesting a new code once. Settings and menu names vary by phone. If other texts and calls work but the bank code does not, contact the bank through its app or the number on your card; ask whether it can offer an alternative verification method."
+        "Run these low-risk checks first",
+        "Check that the phone has signal and Airplane Mode is off, restart it, and look in blocked, filtered or junk-message folders. Confirm that the inbox has space and that you can receive an ordinary text or call from someone you know. Then request one new code and wait for the newest message; older codes may expire when a replacement is issued. Menu names vary, so use the phone manufacturer's official help if you cannot find a setting."
       ],
       [
-        "UK bank reference: sender IDs and how to verify a real bank message",
-        "Banks may use named sender IDs, but a sender name can be spoofed or hijacked and may appear in the same message thread as genuine texts. A mismatch is a warning sign, but a match is not proof. Treat any unexpected link asking you to log in, “verify” or enter security information as suspicious. Open the bank’s app yourself or type its address directly into the browser, and use the number on your card if you need to check a message."
+        "Halifax text messages not arriving: the relevant checks",
+        "Halifax says it needs an up-to-date mobile number to send passcodes and that extra security checks may use an app, an SMS passcode or a phone call, depending on the task and account. Halifax is transitioning its brand to Lloyds and says customers who have moved will approve Halifax-card payments in the Lloyds app. Type `halifax.co.uk` yourself and follow the current instructions shown for your account rather than assuming which branded app applies. If you cannot complete the check, contact the bank through the official app or the number printed on your card. This is a service-access problem; the separate /guides/halifax-bank-scam-text-uk/ guide covers unexpected messages claiming to be Halifax."
       ],
       [
-        "Do not use a sender-ID list as proof",
-        "There is no safe universal list of bank sender IDs: banks can use more than one sender and may change their messaging arrangements. Do not treat a named sender, a message thread or a partial personal detail as authentication. Verify in the official app or through a trusted contact route instead."
+        "Check the bank account and mobile number",
+        "Sign in through the bank's official app or a website address you typed yourself. Check that the registered mobile number is correct, including after a recent number change, new SIM or account update. Look for an in-app notice about maintenance or a security hold. If the app offers another verification route, follow only the instructions shown inside the official app; availability differs by bank and transaction."
       ],
       [
-        "Skip SMS: use app-based codes for banks and 2FA services",
-        "Some banks and online services offer in-app approval, an authenticator app, or another recovery method, but the options differ. Check the provider's official help page or app rather than assuming a particular method is available. Never install an authenticator app or approve a login because an unexpected caller tells you to."
+        "Contact the bank without using a message link",
+        "If other calls and texts arrive but only the bank message is missing, contact the bank through its official app or the number printed on your card. Ask it to confirm the registered number, whether the attempted action generated a code, and which alternative verification methods are available for your account. Do not use a support number from a search advert, unexpected text or caller."
       ],
       [
-        "When the bank or service network is at fault",
-        "Sometimes the problem isn't your phone or settings — it's the sending side. Bank SMS gateways occasionally have operational delays where text delivery to certain UK networks slows or stops temporarily. Mobile operators sometimes flag legitimate sender IDs as spam after a flood of malicious texts, blocking real bank messages alongside scams. UK government services like HMRC and NHS Digital have had similar SMS delivery issues during peak load (self-assessment deadline windows, vaccine appointment booking surges). If your phone is otherwise working normally — texts from friends arrive, calls work, mobile data works — but only specific service messages aren't appearing, the issue is on their end. The fix isn't on your phone. Call the service on a verified number (from the back of your card or their official website) to ask whether there's a known SMS issue, and arrange an alternative method of verification while it's resolved."
+        "When it may be a bank or network delivery issue",
+        "SMS passes through systems operated by the sender, messaging suppliers and mobile networks, so a delay can occur outside your phone. The NCSC advises organisations to understand and audit that supply chain because message content, sender details and delivery can be affected. Do not diagnose the cause from social-media posts alone. Check the bank's official service-status or help page, then ask the bank and mobile provider whether they can see a current delivery problem."
       ],
       [
-        "When missing codes could indicate something more serious",
-        "Missing bank or 2FA texts on their own can have routine causes. If you also see unexplained “no service” or “SOS only”, calls fail, mobile data stops or texts from other people do not arrive, contact your mobile network and bank promptly because a SIM swap or number port is one possible explanation. Missing codes alone do not establish that a SIM swap has happened."
+        "Separate a missing code from possible SIM-swap warning signs",
+        "The NCSC describes SIM-swap attacks as an attacker transferring a victim's number to another SIM so the attacker can receive calls and messages intended for that number. A missing bank code alone does not establish this. Possible reasons to make urgent checks include unexpected loss of normal calls and SMS, an unrecognised mobile-account or number-port change, or unauthorised financial activity; these are escalation prompts, not a definitive diagnostic list."
       ],
       [
-        "What to do if you see those warning signs",
-        "If the phone suddenly shows no service or SOS only, calls fail, or messages from other people also stop, use another phone to contact the bank and mobile network on verified numbers. Ask whether a SIM replacement or number port has been requested and secure the affected accounts. Report suspected fraud to Report Fraud. Do not assume that a bank-code delay alone means a SIM swap."
+        "What to do if there are SIM-swap warning signs",
+        "Use another phone or a secure internet connection to contact the mobile network and bank through official routes. Ask the network whether a SIM replacement or number port was requested, ask the bank to protect the account, and secure the email account used for recovery. Keep records of alerts and unauthorised changes. Report suspected fraud to Report Fraud, but do not describe a routine bank-code delay as a confirmed SIM swap."
       ]
     ],
     "faq": [
       [
-        "Why aren't my UK bank verification codes arriving?",
-        "Possible causes include weak signal, phone settings, filtered messages, or a delay at the bank or mobile network. Try the basic checks, then contact the bank through the app or the number on your card if the problem continues."
+        "Why is my bank verification text not arriving?",
+        "Check signal, Airplane Mode, blocked or filtered messages, and whether the bank has your current mobile number. Request one fresh code. If ordinary calls and texts work but the bank code still does not arrive, contact the bank through its app or the number on your card."
       ],
       [
-        "How do I know if a 'bank' text is real or a scam?",
-        "A mismatched sender is a warning sign, but a matching name is not proof because sender IDs can be spoofed or hijacked. Do not tap an unexpected link asking you to log in or verify. Check the account in the official app or contact the bank yourself, and forward a suspicious text to 7726."
+        "Why are my Halifax text messages not arriving?",
+        "Halifax says it needs your up-to-date mobile number to send a passcode and may use an app, SMS or phone call for extra checks. It is transitioning customers to the Lloyds brand, so follow the current instructions shown at `halifax.co.uk` or in your account rather than assuming which app applies. Contact the bank through the official app or the number on your card if the check still fails."
       ],
       [
-        "Can I get my verification codes without SMS at all?",
-        "Some banks and services provide app-based approval or authenticator options, but availability depends on the provider and account. Check the official app or help centre for the account concerned."
+        "Does a missing bank code mean my SIM was swapped?",
+        "No. A missing code alone has several routine explanations. Contact the network and bank urgently if the phone also loses service, ordinary calls and texts stop, or you discover a SIM replacement or number-port request you did not make."
       ],
       [
-        "My HMRC, Microsoft, or Google code isn't arriving — does the same advice apply?",
-        "Yes, the universal fixes work for any service that sends verification codes by SMS. Reboot first, check signal and Do Not Disturb, and look for the message in any junk or filtered folder. Most major services also offer app-based or voice alternatives that bypass SMS entirely — for UK government services, sign in at gov.uk and switch your verification method in your Government Gateway settings. For Google, Apple, and Microsoft accounts, set up an authenticator app for codes that work even with no signal."
+        "How do I know whether a bank text is genuine?",
+        "A familiar sender name or message thread is not proof because SMS origin information can be imitated. Do not use an unexpected link or share a code with a caller. Open the bank's app yourself or call the number on your card; forward a suspicious text to 7726."
       ]
     ],
+    "updated": "2026-07-16",
     "sources_checked": [
       [
-        "NCSC — SMS and telephone best practice (SIM-swap checks)",
+        "NCSC — Business communications: SMS and telephone best practice",
         "https://www.ncsc.gov.uk/guidance/business-communications-sms-and-telephone-best-practice"
+      ],
+      [
+        "NCSC — Protecting SMS used in critical business processes",
+        "https://www.ncsc.gov.uk/guidance/protecting-sms-messages-used-in-critical-business-processes"
+      ],
+      [
+        "Halifax — Extra security checks for shopping and banking online",
+        "https://www.halifax.co.uk/helpcentre/everyday-banking/payments-and-transfers/security-checks.html"
       ]
     ]
   },
@@ -1000,11 +983,11 @@
       "business email compromise uk",
       "payment diversion fraud"
     ],
-    "updated": "2026-07-03",
+    "updated": "2026-07-16",
     "sources_checked": [
       [
-        "NCSC — Business Email Compromise",
-        "https://www.ncsc.gov.uk/files/Business-email-compromise-payment-diversion-fraud.pdf"
+        "NCSC — Business payment fraud (Business Email Compromise)",
+        "https://www.ncsc.gov.uk/section/respond-recover/business-payment-fraud"
       ]
     ]
   },
@@ -2055,7 +2038,7 @@
     "sections": [
       [
         "What a classic work-from-home scam looks like",
-        "This scam is an advert offering home-based work — envelope-stuffing, product assembly, or \"running your own business\" — that asks you to pay upfront for a starter kit, materials, or registration before you can begin. An example of the style: `Earn £300/week stuffing envelopes from home. Send £45 for your starter kit to begin.` A second, distinct version recruits you to receive and repost parcels for a company, without making clear that the goods may be linked to fraud."
+        "This scam is an advert offering home-based work — envelope-stuffing, product assembly, or \"running your own business\" — that asks you to pay upfront for a starter kit, materials, or registration before you can begin. An example of the style: `Earn £300/week stuffing envelopes from home. Send £45 for your starter kit to begin.` A second, distinct version recruits you to receive and repost parcels for a company, without making clear that the goods may be linked to fraud. Requests to pay before earning and unexplained parcel handling are warning signs; the employment-agency fee rules have a narrower legal scope explained below."
       ],
       [
         "Why it's convincing",
@@ -2063,15 +2046,15 @@
       ],
       [
         "Signs a work-from-home offer is a scam",
-        "- You're asked to pay upfront for a \"starter kit\", materials, registration, customer leads, or instructions before you can start earning.\n- Completed piecework is repeatedly rejected as \"not up to the required standard\", so you're never actually paid.\n- You're asked to receive parcels at your home address and repost them elsewhere.\n- You're promised a specific weekly income for running \"your own business\" from home.\n- The company has no verifiable registration or presence beyond the advert itself."
+        "- You're asked to pay upfront for a \"starter kit\", materials, registration, customer leads, or instructions before you can start earning.\n- You complete work but the supposed business avoids paying you for it.\n- You're asked to receive parcels at your home address and repost them elsewhere.\n- You're promised a specific weekly income for running \"your own business\" from home.\n- The company has no verifiable registration or presence beyond the advert itself."
       ],
       [
         "How the scam works step by step",
-        "In the kit-fee version: first, an advert promises easy, flexible home-based earnings; second, you pay upfront for a starter kit or materials; third, either the kit is worthless or your completed work is rejected as substandard, so you're never paid, and the fee is gone.\n\nIn the reshipping version: first, you're recruited via a job ad to receive and repost parcels; second, the parcels may be goods bought using stolen card details or otherwise linked to fraud; third, you lose any postage costs, receive no real salary, and may become unknowingly involved in a wider fraud."
+        "In the kit-fee version: first, an advert promises easy, flexible home-based earnings; second, you pay upfront for a starter kit or materials; third, either the kit is worthless or the supposed business avoids paying you for work you have done, and the fee is gone.\n\nIn the reshipping version: first, you're recruited via a job ad to receive and repost parcels; second, the parcels may be goods bought using stolen card details or otherwise linked to fraud; third, you lose any postage costs, receive no real salary, and may become unknowingly involved in a wider fraud."
       ],
       [
         "How to check a work-from-home offer safely",
-        "The majority of legitimate employers shouldn't require you to pay anything to start working for them. Treat any upfront fee as a serious warning sign.\n\n- Research the company independently before paying anything or agreeing to receive parcels on its behalf.\n- Be especially wary of any \"job\" that asks you to handle parcels or payments on someone else's behalf.\n- If a piece of work is rejected, ask for specific, verifiable reasons. Vague \"not up to standard\" rejections with no detail are a classic sign of this scam."
+        "Treat an upfront payment to secure work as a serious warning sign. Under the UK work-finding rules, an employment agency or employment business generally must not charge a work-seeker a fee for finding work. Employment agencies in entertainment and modelling are an exception, and genuinely optional services unrelated to work-finding may be chargeable when buying them is not a condition of finding work.\n\n- Research the company independently before paying anything or agreeing to receive parcels on its behalf.\n- Be especially wary of any \"job\" that asks you to handle parcels or payments on someone else's behalf.\n- If promised payment for completed work never arrives, stop before paying another fee and report the offer."
       ],
       [
         "If you've already paid a fee or are reshipping parcels",
@@ -2113,7 +2096,17 @@
       "home assembly work scam",
       "is this work from home job a scam"
     ],
-    "updated": "2026-07-05"
+    "updated": "2026-07-16",
+    "sources_checked": [
+      [
+        "Report Fraud — Work from home scams",
+        "https://www.reportfraud.police.uk/work-from-home-scams/"
+      ],
+      [
+        "GOV.UK — Employment agency and employment business fees",
+        "https://www.gov.uk/government/publications/conduct-regulations-2003-guidance-for-employment-agencies-and-employment-businesses/overview-of-the-conduct-regulations-2003"
+      ]
+    ]
   },
   {
     "title": "Is Temu a Scam? UK Guide to Fake Temu Offers",
@@ -2127,7 +2120,7 @@
     "sections": [
       [
         "What a Temu impersonation scam looks like",
-        "Temu is a real low-cost shopping marketplace - this page is about criminals impersonating Temu through fake cashback offers, \"free gift\" texts, or lookalike websites to harvest your card and personal details. An example of the style is: `Temu: You've been selected for a £750 shopping spree! Claim your reward now: temu-rewards-uk.example`.\n\nDo not use a link in an unsolicited message to claim a reward, refund, or order issue. Check inside the official Temu app or by typing `temu.com` yourself instead. This guide shows the warning signs, how to check safely, and what to do if you have already responded."
+        "This page is specifically about criminals impersonating Temu through fake cashback offers, \"free gift\" texts, jobs, apps or lookalike websites to harvest card and personal details. It does not assess every Temu product, seller, consumer-rights issue, data practice or the marketplace overall. An example of the scam style is: `Temu: You've been selected for a £750 shopping spree! Claim your reward now: temu-rewards-uk.example`.\n\nDo not use a link in an unsolicited message to claim a reward, refund, or order issue. Check inside the official Temu app or by typing `temu.com` yourself instead. This guide shows the warning signs, how to check safely, and what to do if you have already responded."
       ],
       [
         "Why these scams are convincing",
@@ -2186,7 +2179,17 @@
       "report temu scam uk",
       "temu free gift scam"
     ],
-    "updated": "2026-07-02"
+    "updated": "2026-07-16",
+    "sources_checked": [
+      [
+        "Temu — Safety centre and suspicious-activity reporting",
+        "https://www.temu.com/csr/safety-center.html"
+      ],
+      [
+        "NCSC — Shopping and paying safely online",
+        "https://www.ncsc.gov.uk/guidance/shopping-online-securely"
+      ]
+    ]
   },
   {
     "title": "Royal Mail Scam Texts: Spot a Fake Delivery Text (UK)",
@@ -3676,7 +3679,7 @@
       ],
       [
         "How to verify a message safely",
-        "1. Do not reply, open an attachment or use a link while you are checking.\n2. Expand and inspect the complete sender address. Genuine Companies House email should end in `.gov.uk`, but remember that the visible From address is not conclusive by itself.\n3. Hover over a link without opening it and inspect the destination. Genuine services use GOV.UK and Companies House `.gov.uk` addresses. Be alert to deceptive endings such as an unrelated domain placed after familiar words.\n4. Open a new browser tab and start at [GOV.UK's Companies House service](https://www.gov.uk/government/organisations/companies-house). Check the public company record, filing history and official guidance relevant to the request.\n5. Contact Companies House using details obtained from GOV.UK. Its published enquiry number is `0303 1234 500`.\n\nNot every genuine matter will necessarily be reproduced as a private alert in an online account, so the absence of an account notification is not definitive. Confirm the specific filing, deadline, invoice or identity-verification request through the official service or by contacting Companies House."
+        "1. Do not reply, open an attachment or use a link while you are checking.\n2. Expand and inspect the complete sender address. Genuine Companies House email should end in `.gov.uk`, but remember that the visible From address is not conclusive by itself.\n3. Hover over a link without opening it and inspect the destination. Genuine services use GOV.UK and Companies House `.gov.uk` addresses. Be alert to deceptive endings such as an unrelated domain placed after familiar words.\n4. Open a new browser tab and start at the GOV.UK Companies House service: https://www.gov.uk/government/organisations/companies-house. Check the public company record, filing history and official guidance relevant to the request.\n5. Contact Companies House using details obtained from GOV.UK. Its published enquiry number is `0303 1234 500`.\n\nNot every genuine matter will necessarily be reproduced as a private alert in an online account, so the absence of an account notification is not definitive. Confirm the specific filing, deadline, invoice or identity-verification request through the official service or by contacting Companies House."
       ],
       [
         "If you clicked, disclosed information or paid",
@@ -3684,7 +3687,7 @@
       ],
       [
         "How to report it",
-        "- Forward a suspicious Companies House email to `phishing@companieshouse.gov.uk`, then delete it as Companies House advises.\n- You can also forward a suspicious email to the NCSC at `report@phishing.gov.uk` and submit a suspect URL through the [NCSC scam website reporting service](https://www.ncsc.gov.uk/section/about-this-website/report-scam-website).\n- If money or information was stolen, use [Report Fraud](https://www.reportfraud.police.uk/) or call `0300 123 2040` in England, Wales or Northern Ireland. In Scotland, report fraud to Police Scotland on `101`.\n- Mark the message as phishing with your email provider.\n- If you need consumer advice in England, contact Citizens Advice's consumer service on `0808 223 1133`; support arrangements differ elsewhere in the UK."
+        "- Forward a suspicious Companies House email to `phishing@companieshouse.gov.uk`, then delete it as Companies House advises.\n- You can also forward a suspicious email to the NCSC at `report@phishing.gov.uk` and submit a suspect URL through the NCSC scam website reporting service at https://www.ncsc.gov.uk/section/about-this-website/report-scam-website.\n- If money or information was stolen, use Report Fraud at https://www.reportfraud.police.uk/ or call `0300 123 2040` in England, Wales or Northern Ireland. In Scotland, report fraud to Police Scotland on `101`.\n- Mark the message as phishing with your email provider.\n- If you need consumer advice in England, contact Citizens Advice's consumer service on `0808 223 1133`; support arrangements differ elsewhere in the UK."
       ]
     ],
     "faq": [
@@ -4137,11 +4140,11 @@
       "report police impersonation scam",
       "police scam move money"
     ],
-    "updated": "2026-07-02",
+    "updated": "2026-07-16",
     "sources_checked": [
       [
-        "Action Fraud — Courier fraud",
-        "https://www.actionfraud.police.uk/courierfraud"
+        "Report Fraud — Courier fraud",
+        "https://www.reportfraud.police.uk/courier-fraud/"
       ]
     ]
   },
@@ -4520,11 +4523,11 @@
       "fake invoice scam uk",
       "paid a fraudulent invoice uk"
     ],
-    "updated": "2026-07-10",
+    "updated": "2026-07-16",
     "sources_checked": [
       [
-        "NCSC — Business Email Compromise",
-        "https://www.ncsc.gov.uk/files/Business-email-compromise-payment-diversion-fraud.pdf"
+        "NCSC — Business payment fraud (Business Email Compromise)",
+        "https://www.ncsc.gov.uk/section/respond-recover/business-payment-fraud"
       ],
       [
         "Direct Debit — The Direct Debit Guarantee",
@@ -4984,7 +4987,17 @@
       "facebook marketplace selling safely",
       "fake bank transfer screenshot scam"
     ],
-    "updated": "2026-07-02"
+    "updated": "2026-07-16",
+    "sources_checked": [
+      [
+        "Meta — About scams on Facebook Marketplace",
+        "https://www.facebook.com/help/2374002556073992"
+      ],
+      [
+        "NCSC — Shopping and paying safely online",
+        "https://www.ncsc.gov.uk/guidance/shopping-online-securely"
+      ]
+    ]
   },
   {
     "title": "Vinted Buyer Scam UK: Spot Fake 'Payment' Cons",
@@ -6824,7 +6837,17 @@
       "cheque bounced mystery shopper",
       "mystery shopper job offer scam"
     ],
-    "updated": "2026-07-05"
+    "updated": "2026-07-16",
+    "sources_checked": [
+      [
+        "Report Fraud — Work from home scams",
+        "https://www.reportfraud.police.uk/work-from-home-scams/"
+      ],
+      [
+        "Report Fraud — Recruitment scams",
+        "https://www.reportfraud.police.uk/recruitment-scams/"
+      ]
+    ]
   },
   {
     "title": "Data Entry Job Scams UK: Spot Fake Work-from-Home Offers",
@@ -6842,7 +6865,7 @@
       ],
       [
         "Why these scams are convincing",
-        "The offer matches what many people want: flexible work, simple tasks, no commute, and quick income. The first steps can feel legitimate. Scammers may use real-sounding company names, fake dashboards, small early payouts, and recruiter messages on WhatsApp or Telegram.\n\nThe safest rule is practical: genuine paid employment should not require you to pay to secure the role, unlock work, unlock withdrawals, or receive wages. If a supposed job says you must put money in before you can get money out, treat it as a scam."
+        "The offer matches what many people want: flexible work, simple tasks, no commute, and quick income. The first steps can feel legitimate. Scammers may use real-sounding company names, fake dashboards, small early payouts, and recruiter messages on WhatsApp or Telegram.\n\nThe safest rule is practical: treat a supposed data-entry job that makes you pay to secure the role, unlock work, unlock withdrawals or receive wages as a scam warning. Separately, UK employment agencies and employment businesses generally must not charge a work-seeker a fee for finding work. Employment agencies in entertainment and modelling are an exception, and genuinely optional services unrelated to work-finding may be chargeable when buying them is not a condition of finding work."
       ],
       [
         "Signs a data-entry job is a scam",
@@ -6897,7 +6920,17 @@
       "data entry upfront fee scam",
       "report data entry job scam"
     ],
-    "updated": "2026-06-28"
+    "updated": "2026-07-16",
+    "sources_checked": [
+      [
+        "Report Fraud — Recruitment scams",
+        "https://www.reportfraud.police.uk/recruitment-scams/"
+      ],
+      [
+        "GOV.UK — Employment agency and employment business fees",
+        "https://www.gov.uk/government/publications/conduct-regulations-2003-guidance-for-employment-agencies-and-employment-businesses/overview-of-the-conduct-regulations-2003"
+      ]
+    ]
   },
   {
     "title": "Recruitment Agency Scams UK: Spot a Fake Job Offer",
@@ -7206,7 +7239,17 @@
       "romance scam money back",
       "pig butchering romance scam"
     ],
-    "updated": "2026-06-29"
+    "updated": "2026-07-16",
+    "sources_checked": [
+      [
+        "Report Fraud — Romance fraud",
+        "https://www.reportfraud.police.uk/romance-fraud/"
+      ],
+      [
+        "Payment Systems Regulator — APP fraud reimbursement protections",
+        "https://www.psr.org.uk/information-for-consumers/app-fraud-reimbursement-protections/"
+      ]
+    ]
   },
   {
     "title": "Apple Tech Support Scam UK: Spot a Fake Pop-up",
@@ -7431,7 +7474,17 @@
       "report fake nike site",
       "too cheap nike trainers scam"
     ],
-    "updated": "2026-07-02"
+    "updated": "2026-07-16",
+    "sources_checked": [
+      [
+        "GOV.UK Intellectual Property Office — How to spot fake fashion",
+        "https://www.gov.uk/government/publications/how-to-spot-fake-fashion-when-shopping-second-hand"
+      ],
+      [
+        "NCSC — Shopping and paying safely online",
+        "https://www.ncsc.gov.uk/guidance/shopping-online-securely"
+      ]
+    ]
   },
   {
     "title": "Fake ASOS Website Scam UK: Spot a Copycat Store",
@@ -7532,7 +7585,7 @@
       ],
       [
         "How to verify a seller before buying",
-        "Go to [UGG's official UK website](https://www.ugg.com/uk/) by typing the address yourself or using a saved bookmark. UGG says the safest options are UGG.com, an UGG shop, or a reputable and trusted retailer; its official site includes a store locator for authorised shops.\n\nIf buying elsewhere:\n\n1. Check the complete domain, not just the page logo or search-result title.\n2. Search for the retailer independently and compare its address, contact details and returns policy across reliable sources.\n3. Compare the exact product and price with UGG's listing.\n4. Use a card or a recognised payment service that offers a dispute process. Do not pay by bank transfer merely because the seller claims it is required.\n5. Keep the product page, seller details, order confirmation and payment record.\n\nProduct photographs and packaging are not conclusive because counterfeiters copy genuine material and UGG changes labels, boxes and product details over time. UGG specifically notes that some genuine newer products may not carry the registered-trade-mark symbol."
+        "Go to UGG's official UK website at https://www.ugg.com/uk/ by typing the address yourself or using a saved bookmark. UGG says the safest options are UGG.com, an UGG shop, or a reputable and trusted retailer; its official site includes a store locator for authorised shops.\n\nIf buying elsewhere:\n\n1. Check the complete domain, not just the page logo or search-result title.\n2. Search for the retailer independently and compare its address, contact details and returns policy across reliable sources.\n3. Compare the exact product and price with UGG's listing.\n4. Use a card or a recognised payment service that offers a dispute process. Do not pay by bank transfer merely because the seller claims it is required.\n5. Keep the product page, seller details, order confirmation and payment record.\n\nProduct photographs and packaging are not conclusive because counterfeiters copy genuine material and UGG changes labels, boxes and product details over time. UGG specifically notes that some genuine newer products may not carry the registered-trade-mark symbol."
       ],
       [
         "What to do if you have already paid",
@@ -7540,7 +7593,7 @@
       ],
       [
         "How to report it in the UK",
-        "- Report a suspicious website through the [NCSC scam website reporting service](https://www.ncsc.gov.uk/section/about-this-website/report-scam-website).\n- Forward a suspicious email to `report@phishing.gov.uk`.\n- Forward a suspicious text to `7726`; Ofcom says this is free for most UK mobile customers and alerts the network provider.\n- If money or information was stolen, report it to [Report Fraud](https://www.reportfraud.police.uk/) or call `0300 123 2040` in England, Wales or Northern Ireland. In Scotland, report fraud to Police Scotland on `101`.\n- For consumer advice in England, contact the Citizens Advice consumer service on `0808 223 1133`. Consumer routes differ in Wales, Scotland and Northern Ireland.\n- Notify UGG through the contact options on `ugg.com`; do not use contact details supplied by the suspect seller."
+        "- Report a suspicious website through the NCSC scam website reporting service at https://www.ncsc.gov.uk/section/about-this-website/report-scam-website.\n- Forward a suspicious email to `report@phishing.gov.uk`.\n- You can forward a suspicious SMS text to `7726` free of charge. For RCS, iMessage and app messages, use the relevant built-in reporting tool.\n- If money or information was stolen, report it to Report Fraud at https://www.reportfraud.police.uk/ or call `0300 123 2040` in England, Wales or Northern Ireland. In Scotland, report fraud to Police Scotland on `101`.\n- For consumer advice in England, contact the Citizens Advice consumer service on `0808 223 1133`. Consumer routes differ in Wales, Scotland and Northern Ireland.\n- Notify UGG through the contact options on `ugg.com`; do not use contact details supplied by the suspect seller."
       ]
     ],
     "faq": [
@@ -7597,8 +7650,8 @@
         "https://www.psr.org.uk/information-for-consumers/app-fraud-reimbursement-protections/"
       ],
       [
-        "Ofcom: Reporting scam texts and calls to 7726",
-        "https://www.ofcom.org.uk/phones-and-broadband/scam-calls-and-messages/7726-reporting-scam-texts-and-calls"
+        "Ofcom: What to do about a scam call, text or message",
+        "https://www.ofcom.org.uk/phones-and-broadband/scam-calls-and-messages/what-to-do-about-a-scam-call-text-or-message"
       ]
     ]
   },
@@ -8363,7 +8416,17 @@
       "holiday rental scam facebook",
       "is this holiday rental a scam"
     ],
-    "updated": "2026-07-05"
+    "updated": "2026-07-16",
+    "sources_checked": [
+      [
+        "Report Fraud — Holiday fraud",
+        "https://www.reportfraud.police.uk/holiday-fraud/"
+      ],
+      [
+        "ABTA — How to avoid travel-related fraud",
+        "https://www.abta.com/tips-and-advice/planning-and-booking-a-holiday/how-avoid-travel-related-fraud"
+      ]
+    ]
   },
   {
     "title": "Glastonbury Ticket Scam UK: Spot a Fake Seller",
@@ -10035,7 +10098,7 @@
     "sections": [
       [
         "What a fake SHEIN website is",
-        "A fake retail or phishing site can copy SHEIN's branding, product images and checkout design to persuade visitors to enter account, contact or payment details. Depending on the operation, criminals may use the information for unauthorised transactions or account takeover, take payment without supplying the advertised goods, or redirect the visitor through another deceptive page.\n\nThe current official UK storefront is [shein.co.uk](https://www.shein.co.uk/). SHEIN's UK terms identify `shein.co.uk` as the site for the territory and say customers can be redirected to a local site when ordering for another country. A different domain is not the UK storefront, but do not accuse a site of fraud from its name alone: stop, verify independently and report it if it appears deceptive."
+        "A fake retail or phishing site can copy SHEIN's branding, product images and checkout design to persuade visitors to enter account, contact or payment details. Depending on the operation, criminals may use the information for unauthorised transactions or account takeover, take payment without supplying the advertised goods, or redirect the visitor through another deceptive page.\n\nThe current official UK storefront is https://www.shein.co.uk/. SHEIN's UK terms identify `shein.co.uk` as the site for the territory and say customers can be redirected to a local site when ordering for another country. A different domain is not the UK storefront, but do not accuse a site of fraud from its name alone: stop, verify independently and report it if it appears deceptive."
       ],
       [
         "How to check the website",
@@ -10051,7 +10114,7 @@
       ],
       [
         "How to report it",
-        "- Submit the URL through the [NCSC scam website reporting service](https://www.ncsc.gov.uk/section/about-this-website/report-scam-website).\n- Forward the original suspicious email to `report@phishing.gov.uk`.\n- Forward a suspicious SMS to `7726`. Ofcom says most UK mobile customers can use this service free of charge.\n- Report suspected loss or theft to [Report Fraud](https://www.reportfraud.police.uk/) or `0300 123 2040` in England, Wales or Northern Ireland. In Scotland, contact Police Scotland on `101`.\n- Notify SHEIN through the customer-service route reached from `shein.co.uk`, not through the suspect message.\n- For consumer guidance in England, the Citizens Advice consumer service is `0808 223 1133`; arrangements differ elsewhere in the UK."
+        "- Submit the URL through the NCSC scam website reporting service at https://www.ncsc.gov.uk/section/about-this-website/report-scam-website.\n- Forward the original suspicious email to `report@phishing.gov.uk`.\n- You can forward a suspicious SMS text to `7726` free of charge. For RCS, iMessage and app messages, use the relevant built-in reporting tool.\n- Report suspected loss or theft to Report Fraud at https://www.reportfraud.police.uk/ or `0300 123 2040` in England, Wales or Northern Ireland. In Scotland, contact Police Scotland on `101`.\n- Notify SHEIN through the customer-service route reached from `shein.co.uk`, not through the suspect message.\n- For consumer guidance in England, the Citizens Advice consumer service is `0808 223 1133`; arrangements differ elsewhere in the UK."
       ]
     ],
     "faq": [
@@ -10110,8 +10173,8 @@
         "https://www.psr.org.uk/information-for-consumers/app-fraud-reimbursement-protections/"
       ],
       [
-        "Ofcom: Reporting scam texts and calls to 7726",
-        "https://www.ofcom.org.uk/phones-and-broadband/scam-calls-and-messages/7726-reporting-scam-texts-and-calls"
+        "Ofcom: What to do about a scam call, text or message",
+        "https://www.ofcom.org.uk/phones-and-broadband/scam-calls-and-messages/what-to-do-about-a-scam-call-text-or-message"
       ],
       [
         "Stop Scams UK: The 159 service",
@@ -10790,7 +10853,7 @@
       ],
       [
         "How to report an O2 scam text",
-        "Forward the text to 7726. This is free on all UK networks and sends the message to your network's anti-spam team, who can identify and block the sender. You will receive a confirmation reply asking for the number it came from — reply with that number.\n\nIf the text contained a phishing link, report the link to the National Cyber Security Centre: forward phishing emails to report@phishing.gov.uk, or report a suspicious website at ncsc.gov.uk/report-a-suspicious-website.\n\nIf you have lost money or given financial details, file a full report with Report Fraud at reportfraud.police.uk or call 0300 123 2040. Keep the original text message as evidence — take a screenshot before you delete it."
+        "You can forward a suspicious SMS text to 7726 free of charge. For RCS, iMessage and messages received through apps, use the relevant built-in reporting tool.\n\nIf the text contained a phishing link, report the link to the National Cyber Security Centre: forward phishing emails to report@phishing.gov.uk, or report a suspicious website at ncsc.gov.uk/report-a-suspicious-website.\n\nIf you have lost money or given financial details, file a full report with Report Fraud at reportfraud.police.uk or call 0300 123 2040. Keep the original text message as evidence — take a screenshot before you delete it."
       ]
     ],
     "faq": [
@@ -10822,6 +10885,7 @@
       "O2 phishing scam",
       "how to spot O2 text scam"
     ],
+    "updated": "2026-07-16",
     "sources_checked": [
       [
         "O2 — How to prevent and report scam calls and messages",
@@ -10830,6 +10894,10 @@
       [
         "O2 — Contact us",
         "https://www.o2.co.uk/contactus"
+      ],
+      [
+        "Ofcom — What to do about a scam call, text or message",
+        "https://www.ofcom.org.uk/phones-and-broadband/scam-calls-and-messages/what-to-do-about-a-scam-call-text-or-message"
       ]
     ]
   },
@@ -11427,7 +11495,17 @@
       "report festival email scam",
       "fake festival ticket presale link"
     ],
-    "updated": "2026-07-03"
+    "updated": "2026-07-16",
+    "sources_checked": [
+      [
+        "Report Fraud — Ticket fraud",
+        "https://www.reportfraud.police.uk/ticket-fraud/"
+      ],
+      [
+        "STAR — Society of Ticket Agents and Retailers",
+        "https://www.star.org.uk/about/"
+      ]
+    ]
   },
   {
     "title": "F1 British GP Ticket Scam UK: Spot a Fake Silverstone Seller",
@@ -11560,11 +11638,11 @@
       "airport taxi verification",
       "UK airport transport safety"
     ],
-    "updated": "2026-07-10",
+    "updated": "2026-07-16",
     "sources_checked": [
       [
-        "Transport for London — Changes to private hire regulation",
-        "https://tfl.gov.uk/info-for/taxis-and-private-hire/new-private-hire-regulations"
+        "Transport for London — Private hire licence checker",
+        "https://tfl.gov.uk/info-for/taxis-and-private-hire/licensing/licence-checker"
       ],
       [
         "nidirect — Taxis and their services (Northern Ireland)",
@@ -12705,7 +12783,7 @@
     "sections": [
       [
         "What the mass sextortion email scam is",
-        "In the common phishing version, a criminal claims to have recorded the recipient visiting adult websites or using a webcam and threatens to share footage unless a cryptocurrency ransom is paid. The message may include technical-sounding details or a real password to make the story credible.\n\nThe [National Cyber Security Centre](https://www.ncsc.gov.uk/guidance/sextortion-scams-how-to-protect-yourself) says the senders of these mass emails are guessing: they do not know whether the recipient has a webcam, visited an adult site or communicates in the way claimed. A quoted password was probably obtained from a historic data breach. It is not evidence that a camera was accessed.\n\nHowever, sextortion is also a real form of blackmail. Criminals can obtain genuine images through social media, dating apps, account compromise, coerced video calls, stolen material or manipulated images such as deepfakes. If the sender possesses or threatens real intimate material, follow police sextortion guidance rather than assuming it is only a bulk-email bluff."
+        "In the common phishing version, a criminal claims to have recorded the recipient visiting adult websites or using a webcam and threatens to share footage unless a cryptocurrency ransom is paid. The message may include technical-sounding details or a real password to make the story credible.\n\nThe National Cyber Security Centre guidance at https://www.ncsc.gov.uk/guidance/sextortion-scams-how-to-protect-yourself says the senders of these mass emails are guessing: they do not know whether the recipient has a webcam, visited an adult site or communicates in the way claimed. A quoted password was probably obtained from a historic data breach. It is not evidence that a camera was accessed.\n\nHowever, sextortion is also a real form of blackmail. Criminals can obtain genuine images through social media, dating apps, account compromise, coerced video calls, stolen material or manipulated images such as deepfakes. If the sender possesses or threatens real intimate material, follow police sextortion guidance rather than assuming it is only a bulk-email bluff."
       ],
       [
         "Signs of the common phishing version",
@@ -12713,11 +12791,11 @@
       ],
       [
         "What to do when you receive one",
-        "For a typical mass-email claim with no indication that intimate material is real:\n\n1. Do not reply, pay or negotiate.\n2. Forward the email to the NCSC Suspicious Email Reporting Service at `report@phishing.gov.uk`, then delete it.\n3. Mark it as phishing or spam with your email provider.\n4. If the message quotes a password you still use, change it immediately everywhere it is used. Start with your email account and enable two-step verification.\n5. Check whether your email address appears in a known public breach using a reputable service such as [Have I Been Pwned](https://haveibeenpwned.com/), which the NCSC cites. Do not type a current password into an unfamiliar breach-checking site.\n6. Review your email and social-media account sessions, recovery details and security alerts for evidence of actual access.\n\nOpening a normal email does not by itself prove that the sender has camera access. Nonetheless, “safe to open” is too absolute: messages can contain tracking content, harmful links or attachments, and software vulnerabilities exist. Use your provider's reporting function, do not enable remote content unnecessarily, and do not interact with links or files."
+        "For a typical mass-email claim with no indication that intimate material is real:\n\n1. Do not reply, pay or negotiate.\n2. Forward the email to the NCSC Suspicious Email Reporting Service at `report@phishing.gov.uk`, then delete it.\n3. Mark it as phishing or spam with your email provider.\n4. If the message quotes a password you still use, change it immediately everywhere it is used. Start with your email account and enable two-step verification.\n5. Check whether your email address appears in a known public breach using a reputable service such as Have I Been Pwned at https://haveibeenpwned.com/, which the NCSC cites. Do not type a current password into an unfamiliar breach-checking site.\n6. Review your email and social-media account sessions, recovery details and security alerts for evidence of actual access.\n\nOpening a normal email does not by itself prove that the sender has camera access. Nonetheless, “safe to open” is too absolute: messages can contain tracking content, harmful links or attachments, and software vulnerabilities exist. Use your provider's reporting function, do not enable remote content unnecessarily, and do not interact with links or files."
       ],
       [
         "If the threat may involve real images",
-        "Stop contact and do not pay. Police.uk says payment does not guarantee that images will be deleted and offenders may demand more. Preserve usernames, account details, payment information, message times and the conversation so police can advise on evidence.\n\nReport through your local police force's online service or call `101`; call `999` if someone is in immediate danger. If you are in Scotland, use Police Scotland. Report the account to the platform as well.\n\nBe careful when preserving evidence. Police.uk warns not to screenshot, record or share an intimate image if you are unsure whether everyone shown is 18 or over, even when reporting; tell police what exists and follow their instructions. Adults worried that an intimate image may be shared can consider [StopNCII.org](https://stopncii.org/). Under-18s can use the UK [Report Remove](https://www.childline.org.uk/info-advice/bullying-abuse-safety/online-mobile-safety/report-remove/) service with Childline and the Internet Watch Foundation."
+        "Stop contact and do not pay. Police.uk says payment does not guarantee that images will be deleted and offenders may demand more. Preserve usernames, account details, payment information, message times and the conversation so police can advise on evidence.\n\nReport through your local police force's online service or call `101`; call `999` if someone is in immediate danger. If you are in Scotland, use Police Scotland. Report the account to the platform as well.\n\nBe careful when preserving evidence. Police.uk warns not to screenshot, record or share an intimate image if you are unsure whether everyone shown is 18 or over, even when reporting; tell police what exists and follow their instructions. Adults worried that an intimate image may be shared can consider StopNCII.org at https://stopncii.org/. Under-18s can use the UK Report Remove service at https://www.childline.org.uk/info-advice/bullying-abuse-safety/online-mobile-safety/report-remove/ with Childline and the Internet Watch Foundation."
       ],
       [
         "If you already paid or shared information",
@@ -12725,7 +12803,7 @@
       ],
       [
         "Reporting and support",
-        "- Suspicious email: forward it to `report@phishing.gov.uk`.\n- Fraud loss in England, Wales or Northern Ireland: use [Report Fraud](https://www.reportfraud.police.uk/) or call `0300 123 2040`.\n- Fraud in Scotland: call Police Scotland on `101` or use its online reporting routes.\n- Real or suspected sextortion: report to your local police force; use `999` in an emergency.\n- Emotional support: In England and Wales, Victim Support's free support line is `08 08 16 89 111`. Scotland and Northern Ireland have separate victim-support services. If you are in immediate danger or feel at risk of harming yourself, call `999` or seek urgent medical help."
+        "- Suspicious email: forward it to `report@phishing.gov.uk`.\n- Fraud loss in England, Wales or Northern Ireland: use Report Fraud at https://www.reportfraud.police.uk/ or call `0300 123 2040`.\n- Fraud in Scotland: call Police Scotland on `101` or use its online reporting routes.\n- Real or suspected sextortion: report to your local police force; use `999` in an emergency.\n- Emotional support: In England and Wales, Victim Support's free support line is `08 08 16 89 111`. Scotland and Northern Ireland have separate victim-support services. If you are in immediate danger or feel at risk of harming yourself, call `999` or seek urgent medical help."
       ]
     ],
     "faq": [
@@ -13393,10 +13471,19 @@
       "fake timeshare investment"
     ],
     "updated": "2026-07-10",
+    "updated": "2026-07-16",
     "sources_checked": [
       [
         "legislation.gov.uk — The Timeshare, Holiday Products, Resale and Exchange Contracts Regulations 2010",
         "https://www.legislation.gov.uk/uksi/2010/2960/made"
+      ],
+      [
+        "Ofcom — What to do about a scam call, text or message",
+        "https://www.ofcom.org.uk/phones-and-broadband/scam-calls-and-messages/what-to-do-about-a-scam-call-text-or-message"
+      ],
+      [
+        "Payment Systems Regulator — APP fraud reimbursement protections",
+        "https://www.psr.org.uk/information-for-consumers/app-fraud-reimbursement-protections/"
       ]
     ]
   },
@@ -13432,7 +13519,7 @@
       ],
       [
         "Reporting a holiday club scam in the UK",
-        "If you believe you have been targeted by or fallen victim to a holiday club scam, report it through multiple official channels to maximise the chance of action. Start by reporting to Report Fraud, the UK's national fraud reporting service, either by calling 0300 123 2040 or submitting a report online at reportfraud.police.uk. Provide as much detail as possible: the company name, website, phone number, email address, names of staff members you spoke to, dates of contact, and a description of what happened and how much money you lost. If you received a suspicious email or text message from the scammer, forward it to the NCSC Suspicious Email Reporting Service at report@phishing.gov.uk, or forward any spam text to 7726 (this is free on all UK networks and goes to your mobile operator). You should also report the matter to Citizens Advice on 0808 223 1133 — they maintain a consumer complaints database that helps identify patterns of fraud and can advise you on your legal rights. If you paid by credit card, contact your card provider's fraud team immediately and request a chargeback. If you paid by bank transfer, contact your bank's fraud team and ask about reimbursement for authorised push payment (APP) fraud — since October 2024 most UK banks are required to reimburse APP fraud victims under Payment Systems Regulator rules. Keep copies of all reports and reference numbers for your records."
+        "If you believe you have been targeted by or fallen victim to a holiday club scam, report it through multiple official channels to maximise the chance of action. Start by reporting to Report Fraud, the UK's national fraud reporting service, either by calling 0300 123 2040 or submitting a report online at reportfraud.police.uk. Provide as much detail as possible: the company name, website, phone number, email address, names of staff members you spoke to, dates of contact, and a description of what happened and how much money you lost. Forward a suspicious email to the NCSC Suspicious Email Reporting Service at report@phishing.gov.uk. You can forward a suspicious SMS text to 7726 free of charge; use the relevant built-in reporting tool for RCS, iMessage and app messages. You should also report the matter to Citizens Advice on 0808 223 1133 — they maintain a consumer complaints database that helps identify patterns of fraud and can advise you on your legal rights. If you paid by credit card, contact your card provider's fraud team immediately and request a chargeback. If you paid by bank transfer, contact your bank's fraud team and ask whether the mandatory APP reimbursement rules cover the payment; eligibility and exclusions depend on the payment type and circumstances. Keep copies of all reports and reference numbers for your records."
       ],
       [
         "Can you get your money back?",
@@ -13472,6 +13559,14 @@
       [
         "legislation.gov.uk — The Timeshare, Holiday Products, Resale and Exchange Contracts Regulations 2010",
         "https://www.legislation.gov.uk/uksi/2010/2960/made"
+      ],
+      [
+        "Ofcom — What to do about a scam call, text or message",
+        "https://www.ofcom.org.uk/phones-and-broadband/scam-calls-and-messages/what-to-do-about-a-scam-call-text-or-message"
+      ],
+      [
+        "Payment Systems Regulator — APP fraud reimbursement protections",
+        "https://www.psr.org.uk/information-for-consumers/app-fraud-reimbursement-protections/"
       ]
     ]
   },
@@ -13817,7 +13912,7 @@
     "sections": [
       [
         "What the scam looks like",
-        "The email claims unusual sign-in activity, a security hold or an imminent suspension affecting a Microsoft, Outlook or Xbox account. It creates urgency and links to a page made to resemble a Microsoft sign-in. A fraudulent page may steal the credentials entered into it. A phone call or pop-up claiming to be Microsoft technical support is a different pattern; see the [Microsoft support scam guide](/guides/microsoft-support-scam-uk-guide/)."
+        "The email claims unusual sign-in activity, a security hold or an imminent suspension affecting a Microsoft, Outlook or Xbox account. It creates urgency and links to a page made to resemble a Microsoft sign-in. A fraudulent page may steal the credentials entered into it. A phone call or pop-up claiming to be Microsoft technical support is a different pattern; see /guides/microsoft-support-scam-uk-guide/."
       ],
       [
         "Microsoft's published warning signs",

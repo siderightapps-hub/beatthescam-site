@@ -158,6 +158,10 @@ def _post_text(post: Dict) -> str:
     a high-stakes claim placed there (a hardcoded number, banned entity, false
     absolute) is checked too, not only the section bodies."""
     parts: List[str] = [str(post.get("title", ""))]
+    # Category hubs use an HTML `intro` field instead of a guide `hero`.
+    # Including it here lets the same deterministic accuracy contract cover
+    # every reader-visible hub claim when build.py runs its preflight gate.
+    parts.append(str(post.get("intro", "")))
     for item in post.get("sections", []):
         if isinstance(item, (list, tuple)) and len(item) >= 2:
             parts.append(str(item[0]))   # section heading
@@ -467,6 +471,26 @@ _FRAUD_ALERT_RE = re.compile(
 # so blanket "HMRC never texts/emails/links you" is inaccurate → FLAG (review).
 _HMRC_CHANNEL_RE = re.compile(
     r"HMRC[^.]{0,40}\bnever\b[^.]{0,40}\b(?:text|texts|sms|e-?mails?|links?)\b", re.I)
+
+# Other over-broad channel and reimbursement statements found in the 2026-07
+# category-hub audit. Genuine banks and public bodies sometimes send links, so
+# the safe rule is to verify independently and never disclose sensitive data.
+# Ofcom's current page says suspicious SMS texts can be forwarded to 7726 free
+# of charge; it does not claim universal network coverage, and directs RCS,
+# iMessage and app messages to their built-in reporting tools. Mandatory APP
+# reimbursement also has payment-rail, claimant, exception, cap, excess and
+# stop-clock qualifications.
+_BANK_LINK_ABSOLUTE_RE = re.compile(
+    r"\bbanks?\b[^.]{0,70}\b(?:never|don['’]t|do\s+not|won['’]t|will\s+not)\b"
+    r"[^.]{0,35}\b(?:send|include|contain|use)\b[^.]{0,20}\blinks?\b", re.I)
+_7726_ALL_NETWORKS_RE = re.compile(
+    r"\b7726\b[\s\S]{0,140}\b(?:all|every)\b[^.]{0,30}\b(?:UK\s+)?(?:mobile\s+)?networks?\b", re.I)
+_7726_NON_SMS_RE = re.compile(
+    r"\b(?:forward|send|report)\b[^.;]{0,100}"
+    r"\b(?:RCS|iMessage|WhatsApp|app\s+messages?)\b[^.;]{0,100}\b7726\b", re.I)
+_APP_REIMBURSEMENT_ABSOLUTE_RE = re.compile(
+    r"\b(?:UK\s+)?banks?\b[^.]{0,35}\b(?:must|are\s+required\s+to)\b"
+    r"[^.]{0,35}\breimburse\b[^.]{0,60}\b(?:five|5)\s+(?:business\s+)?days?\b", re.I)
 def check_uk_advice_flags(post: Dict) -> List[Dict]:
     text = _post_text(post)
     issues: List[Dict] = []
@@ -481,6 +505,28 @@ def check_uk_advice_flags(post: Dict) -> List[Dict]:
                        "detail": ("blanket 'HMRC never texts/emails/links you' — HMRC runs genuine SMS/email "
                                   "campaigns and genuine texts can carry gov.uk links. Say HMRC won't ask you "
                                   "to confirm details or 'claim' a refund via a link.")})
+    if _BANK_LINK_ABSOLUTE_RE.search(text):
+        issues.append({"check": "bank_link_absolute", "severity": SEVERITY_FLAG,
+                       "span": re.sub(r"\s+", " ", _BANK_LINK_ABSOLUTE_RE.search(text).group(0))[:140],
+                       "detail": ("blanket claim that banks never send/include links. Genuine messages can include "
+                                  "links; teach independent verification and never sharing passwords, PINs or codes.")})
+    if _7726_ALL_NETWORKS_RE.search(text):
+        issues.append({"check": "7726_scope", "severity": SEVERITY_FLAG,
+                       "span": re.sub(r"\s+", " ", _7726_ALL_NETWORKS_RE.search(text).group(0))[:140],
+                       "detail": ("claims 7726 works on all/every UK network. Current Ofcom guidance instead "
+                                  "says a suspicious SMS text can be forwarded to 7726 free of charge; use that "
+                                  "format-specific wording without asserting network coverage.")})
+    if _7726_NON_SMS_RE.search(text):
+        issues.append({"check": "7726_format_scope", "severity": SEVERITY_FLAG,
+                       "span": re.sub(r"\s+", " ", _7726_NON_SMS_RE.search(text).group(0))[:140],
+                       "detail": ("claims non-SMS formats can be forwarded to 7726. Current Ofcom guidance "
+                                  "limits 7726 forwarding to SMS; RCS, iMessage and app messages should use "
+                                  "their relevant built-in reporting tools.")})
+    if _APP_REIMBURSEMENT_ABSOLUTE_RE.search(text):
+        issues.append({"check": "app_reimbursement_scope", "severity": SEVERITY_FLAG,
+                       "span": re.sub(r"\s+", " ", _APP_REIMBURSEMENT_ABSOLUTE_RE.search(text).group(0))[:140],
+                       "detail": ("oversimplifies mandatory APP reimbursement. State the eligible claimants and "
+                                  "payment rails, exceptions, possible excess, cap, normal timetable and stop-clock.")})
     return issues
 
 

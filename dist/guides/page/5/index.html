@@ -27,18 +27,12 @@
   <!-- Resource hints for third-party origins. preconnect = full TCP+TLS
        handshake started immediately (good for resources we KNOW will load
        on every page). dns-prefetch = DNS lookup only (cheap fallback for
-       older browsers that ignore preconnect). googletagmanager loads GA4,
-       pagead2 loads AdSense — both are async <script> tags in <body>, so
-       preconnect shaves 100-300ms off their first paint on mobile.
-       Also adds tpc.googlesyndication.com (where ad creatives serve from)
-       and the ahrefs analytics host. -->
+       older browsers that ignore preconnect). AdSense resource hints are
+       injected only on pages eligible to serve ads. -->
   <link rel="preconnect" href="https://www.googletagmanager.com" crossorigin>
-  <link rel="preconnect" href="https://pagead2.googlesyndication.com" crossorigin>
-  <link rel="preconnect" href="https://tpc.googlesyndication.com" crossorigin>
   <link rel="dns-prefetch" href="https://www.googletagmanager.com">
-  <link rel="dns-prefetch" href="https://pagead2.googlesyndication.com">
-  <link rel="dns-prefetch" href="https://tpc.googlesyndication.com">
   <link rel="dns-prefetch" href="https://analytics.ahrefs.com">
+  <!-- AdSense resource hints intentionally omitted on this page -->
 
   <meta property="og:type" content="website">
   <meta property="og:title" content="Scam guides — page 5 | Beat the Scam">
@@ -79,12 +73,13 @@
     AdSense respects Google Consent Mode: the GA4 consent defaults above start
     denied, so visitors who haven't accepted get non-personalised ads and no
     ad-personalisation cookies until they do. The ad tag below is emitted per
-    page by make_base()/_ads_head(): omitted entirely on the /check/ tool, and
-    preceded by a requestNonPersonalizedAds flag on sensitive financial / victim
-    pages (Google restricts personalisation based on negative financial status).
+    page by make_base()/_ads_head(): omitted on navigational, tool and
+    sensitive-content pages, and preceded by a requestNonPersonalizedAds flag
+    on sensitive financial / victim pages (Google restricts personalisation
+    based on negative financial status).
     Ahrefs Web Analytics is cookieless. Custom GA4 events stay gated in app.js.
   -->
-  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1606633100797174" crossorigin="anonymous"></script>
+  <!-- Ads intentionally disabled on this page (excluded from Auto Ads) -->
   <script src="https://analytics.ahrefs.com/analytics.js" data-key="l1GHKUGfAKlhtjbYgIySAg" async></script>
 </head>
 <body>
@@ -159,7 +154,7 @@
       <div class="eyebrow">Marketplace Scams</div>
       <h3><a href="/guides/facebook-marketplace-fake-buyer-scam-uk/">Facebook Marketplace Fake Buyer Scam UK</a></h3>
       <p>Selling on Facebook Marketplace and a &#x27;buyer&#x27; sends a fake payment confirmation? How to spot a fake buyer, protect your sale, and report it in the UK.</p>
-      <p class="meta">Updated 2026-07-02</p>
+      <p class="meta">Updated 2026-07-16</p>
     </article>
     
     <article class="card guide-card" data-searchable="vinted buyer scam uk: spot fake &#x27;payment&#x27; cons selling on vinted and a buyer wants to pay off-app or &#x27;confirm your card&#x27;? how to spot a vinted buyer scam, keep your payment safe, and report it. marketplace vinted buyer scam uk vinted seller scam vinted fake payment email vinted off-app payment scam is this vinted buyer a scam vinted confirm card scam report vinted scam uk vinted pay off platform">
@@ -180,7 +175,7 @@
       <div class="eyebrow">Payment Scams</div>
       <h3><a href="/guides/invoice-fraud-uk-businesses/">Invoice Fraud UK: How to Verify a Payment Safely</a></h3>
       <p>A supplier email says their bank details have changed? Always verify by phone on a number you already have on file before you pay the invoice.</p>
-      <p class="meta">Updated 2026-07-10</p>
+      <p class="meta">Updated 2026-07-16</p>
     </article>
     
     <article class="card guide-card" data-searchable="overpayment scam uk: do not send a separate refund a buyer claims to have paid too much and wants money sent elsewhere. verify the payment in your own account and ask the provider to reverse it safely. payment overpayment scam uk accidental overpayment fraud refund scam payment reversal scam how to spot overpayment scams bank transfer scam uk payment scam uk">
@@ -257,7 +252,7 @@
       <div class="eyebrow">Phone Scams</div>
       <h3><a href="/guides/police-impersonation-scam-call-uk/">Police Impersonation Scam UK: Spot a Fake Officer Call</a></h3>
       <p>A &#x27;police officer&#x27; says your money is at risk and you must move it or help an investigation? How to spot the scam and report it in the UK.</p>
-      <p class="meta">Updated 2026-07-02</p>
+      <p class="meta">Updated 2026-07-16</p>
     </article>
     
     <article class="card guide-card" data-searchable="dvla email scam uk: spot a fake tax or fine email got a dvla email about car tax, a refund, a fine, or your licence? how to spot a fake dvla email, check safely on gov.uk, and report it in the uk. email dvla email scam uk fake dvla email dvla car tax email scam dvla refund email scam dvla licence email scam is this dvla email real report dvla email scam dvla phishing email">

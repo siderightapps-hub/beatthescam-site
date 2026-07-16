@@ -27,18 +27,12 @@
   <!-- Resource hints for third-party origins. preconnect = full TCP+TLS
        handshake started immediately (good for resources we KNOW will load
        on every page). dns-prefetch = DNS lookup only (cheap fallback for
-       older browsers that ignore preconnect). googletagmanager loads GA4,
-       pagead2 loads AdSense — both are async <script> tags in <body>, so
-       preconnect shaves 100-300ms off their first paint on mobile.
-       Also adds tpc.googlesyndication.com (where ad creatives serve from)
-       and the ahrefs analytics host. -->
+       older browsers that ignore preconnect). AdSense resource hints are
+       injected only on pages eligible to serve ads. -->
   <link rel="preconnect" href="https://www.googletagmanager.com" crossorigin>
-  <link rel="preconnect" href="https://pagead2.googlesyndication.com" crossorigin>
-  <link rel="preconnect" href="https://tpc.googlesyndication.com" crossorigin>
   <link rel="dns-prefetch" href="https://www.googletagmanager.com">
-  <link rel="dns-prefetch" href="https://pagead2.googlesyndication.com">
-  <link rel="dns-prefetch" href="https://tpc.googlesyndication.com">
   <link rel="dns-prefetch" href="https://analytics.ahrefs.com">
+  <!-- AdSense resource hints intentionally omitted on this page -->
 
   <meta property="og:type" content="website">
   <meta property="og:title" content="Scam guides — page 6 | Beat the Scam">
@@ -79,12 +73,13 @@
     AdSense respects Google Consent Mode: the GA4 consent defaults above start
     denied, so visitors who haven't accepted get non-personalised ads and no
     ad-personalisation cookies until they do. The ad tag below is emitted per
-    page by make_base()/_ads_head(): omitted entirely on the /check/ tool, and
-    preceded by a requestNonPersonalizedAds flag on sensitive financial / victim
-    pages (Google restricts personalisation based on negative financial status).
+    page by make_base()/_ads_head(): omitted on navigational, tool and
+    sensitive-content pages, and preceded by a requestNonPersonalizedAds flag
+    on sensitive financial / victim pages (Google restricts personalisation
+    based on negative financial status).
     Ahrefs Web Analytics is cookieless. Custom GA4 events stay gated in app.js.
   -->
-  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1606633100797174" crossorigin="anonymous"></script>
+  <!-- Ads intentionally disabled on this page (excluded from Auto Ads) -->
   <script src="https://analytics.ahrefs.com/analytics.js" data-key="l1GHKUGfAKlhtjbYgIySAg" async></script>
 </head>
 <body>
@@ -215,7 +210,7 @@
       <div class="eyebrow">Employment Scams</div>
       <h3><a href="/guides/work-from-home-scam-uk/">Work From Home Scam UK: Envelope, Kit &amp; Reshipping Cons</a></h3>
       <p>Asked to pay for a starter kit before your work-from-home job begins? Upfront fees are a serious warning sign. How to spot the scam and report it.</p>
-      <p class="meta">Updated 2026-07-05</p>
+      <p class="meta">Updated 2026-07-16</p>
     </article>
     
     <article class="card guide-card" data-searchable="amazon scam emails: how to spot a fake amazon email (uk) got an amazon email about an order problem, refund, or &#x27;account locked&#x27;? how to tell a genuine amazon email from a phishing scam — and check safely. email amazon scam email fake amazon email amazon phishing email is this amazon email real amazon account locked email amazon refund scam amazon order problem email report amazon scam email">
@@ -236,7 +231,7 @@
       <div class="eyebrow">Payment Scams</div>
       <h3><a href="/guides/invoice-redirection-scam-checklist/">Invoice Redirection Scam UK: Spot Fake Payment Requests</a></h3>
       <p>A supplier email says their bank details have changed? Verify it by phone on a number you already have — never one from the email itself.</p>
-      <p class="meta">Updated 2026-07-03</p>
+      <p class="meta">Updated 2026-07-16</p>
     </article>
     
     <article class="card guide-card" data-searchable="recovery scam uk: spot a fake &#x27;get your money back&#x27; firm lost money to a scam and now a &#x27;recovery agent&#x27; offers to get it back for a fee? how to spot a recovery scam, avoid a second loss, and report it in the uk. fraud recovery scam uk fraud recovery scam fake refund company uk get your money back scam is this recovery firm real recovery scam warning signs report recovery scam uk upfront fee recovery fraud">

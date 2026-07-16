@@ -1,6 +1,6 @@
 # Beat The Scam
 
-> Plain-English UK consumer-protection guides covering scams, fraud, and how to spot them before paying. New guide published daily by an editorial team focused on UK consumers.
+> Independent, plain-English UK consumer-protection publication covering scams, fraud, and checks to run before paying. Guides use AI-assisted drafting followed by editorial review and an automated accuracy gate.
 
 ## Categories
 
@@ -195,7 +195,7 @@
 ### Text Message Scams
 
 - [Amazon Delivery Scam Text UK: Spot a Fake SMS](https://beatthescam.com/guides/amazon-delivery-scam-text-uk/): Got an Amazon text about a failed delivery or a small redelivery fee? Spot a fake Amazon delivery SMS, check Your Orders, and report it in the UK.
-- [Bank Text Messages Not Arriving? How to Fix It and Spot Scams](https://beatthescam.com/guides/bank-text-codes-not-arriving/): Bank texts not arriving? Most causes are routine — the quick fixes, common UK bank sender IDs, and the SIM-swap scam signs to watch for.
+- [Bank Verification Text Not Arriving? UK Fixes](https://beatthescam.com/guides/bank-text-codes-not-arriving/): Bank verification text not arriving? Check your registered number, signal and blocked messages, then contact the bank securely. Includes Halifax-specific steps.
 - [Barclays Scam Texts: How to Spot a Fake Barclays SMS (UK)](https://beatthescam.com/guides/barclays-bank-text-scam-uk/): A Barclays text about a new payee or blocked payment? How to tell a genuine Barclays SMS from a scam, check it safely on 159, and report it in the UK.
 - [Council Tax Scam Texts: Spot a Fake Refund or Demand (UK)](https://beatthescam.com/guides/council-tax-scam-text-uk/): A text offering a council tax refund or threatening arrears? Council tax is run by your local council. How to spot the scam and check safely.
 - [DPD Scam Text Messages: How to Spot a Fake DPD Delivery Text](https://beatthescam.com/guides/dpd-delivery-scam-text/): Fake DPD 'missed delivery' or 'redelivery fee' texts are smishing scams. Here's how to spot a fake DPD text, verify a genuine one, and report it in the UK.
@@ -260,5 +260,5 @@
 ## Optional
 
 - [About](https://beatthescam.com/about/): site & methodology
-- [Contact](https://beatthescam.com/contact/): how to reach the editorial team
+- [Contact](https://beatthescam.com/contact/): how to reach the publisher and editor
 - [Privacy](https://beatthescam.com/privacy/): data handling & cookies

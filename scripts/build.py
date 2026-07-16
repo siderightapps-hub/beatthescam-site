@@ -290,6 +290,44 @@ def load_category_hubs(root: Path) -> dict:
         return {}
 
 
+def validate_category_hubs(hubs: dict) -> None:
+    """Run the deterministic editorial gate over every hand-authored hub.
+
+    Generated guides are gated before they reach posts.json. Category hubs are
+    edited directly, so the build is their publication boundary: a BLOCK issue
+    must stop the build before dist/ is deleted or regenerated. FLAG issues stay
+    visible in build output for operator review, matching the guide workflow.
+    """
+    try:
+        from content_gate import check_deterministic, SEVERITY_BLOCK
+    except ImportError:  # Support importing this file as scripts.build.
+        from scripts.content_gate import check_deterministic, SEVERITY_BLOCK
+
+    blocking = []
+    flagged = []
+    for slug, hub in (hubs or {}).items():
+        surface = dict(hub or {})
+        surface.setdefault("slug", f"category-{slug}")
+        surface.setdefault("category", slug)
+        surface.setdefault("keywords", [])
+        for issue in check_deterministic(surface):
+            row = (slug, issue)
+            if issue.get("severity") == SEVERITY_BLOCK:
+                blocking.append(row)
+            else:
+                flagged.append(row)
+
+    for slug, issue in flagged:
+        print(f"  Category hub accuracy FLAG [{issue.get('check')}]: {slug}: "
+              f"{issue.get('span') or issue.get('detail', '')}")
+    if blocking:
+        details = "; ".join(
+            f"{slug} [{issue.get('check')}]: {issue.get('span') or issue.get('detail', '')}"
+            for slug, issue in blocking
+        )
+        raise SystemExit(f"ERROR: category hub accuracy gate failed: {details}")
+
+
 def affiliate_block(post: dict, affiliates: list) -> str:
     """Return an HTML affiliate card relevant to this post, or empty string."""
     if not affiliates:
@@ -623,6 +661,18 @@ def _ads_head(site: dict, ads_mode: str) -> str:
     return tag
 
 
+def _ads_resource_hints(ads_mode: str) -> str:
+    """Only warm AdSense origins on pages that can actually serve ads."""
+    if ads_mode == "none":
+        return "<!-- AdSense resource hints intentionally omitted on this page -->"
+    return "\n  ".join([
+        '<link rel="preconnect" href="https://pagead2.googlesyndication.com" crossorigin>',
+        '<link rel="preconnect" href="https://tpc.googlesyndication.com" crossorigin>',
+        '<link rel="dns-prefetch" href="https://pagead2.googlesyndication.com">',
+        '<link rel="dns-prefetch" href="https://tpc.googlesyndication.com">',
+    ])
+
+
 # Pages whose subject implies "negative financial status" — debt/insolvency, or
 # recovery scams that target people who have already lost money. Google restricts
 # ad personalisation on these, so they get requestNonPersonalizedAds regardless
@@ -631,6 +681,17 @@ def _ads_head(site: dict, ads_mode: str) -> str:
 # deliberately tight: broad words like "victim", "refund", "compensation" or
 # "lost money" recur across almost every scam guide and would needlessly switch
 # the whole corpus to non-personalised ads.
+_NO_ADS_TERMS = (
+    # Sexual abuse / extortion and manipulated intimate imagery are excluded
+    # from advertising entirely. Non-personalised ads only change targeting;
+    # they do not remove content-eligibility risk.
+    "sextortion", "intimate image", "intimate-image", "revenge porn",
+    "webcam blackmail", "explicit image", "explicit photo", "nude photo",
+    "nude image", "deepfake",
+)
+_NO_ADS_RE = re.compile(
+    r"\b(?:" + "|".join(re.escape(t) for t in _NO_ADS_TERMS) + r")", re.I)
+
 _SENSITIVE_FINANCE_TERMS = (
     # Debt / insolvency / negative financial status (stems — leading \b only, so
     # "debt" also catches "debts", "insolven" catches "insolvency/insolvent").
@@ -640,11 +701,6 @@ _SENSITIVE_FINANCE_TERMS = (
     # Recovery scams (prey on people who already lost money)
     "recovery scam", "recover your money", "recover stolen", "money recovery",
     "fund recovery", "get your money back",
-    # Sexual / sextortion / intimate-image abuse — personalised ads are
-    # inappropriate alongside this content (Google also restricts personalisation).
-    "sextortion", "intimate image", "intimate-image", "revenge porn",
-    "webcam blackmail", "blackmail", "explicit image", "explicit photo",
-    "nude photo", "nude image", "deepfake",
     # Romance / relationship fraud
     "romance scam", "romance fraud", "catfish", "pig butchering", "pig-butchering",
     "military romance", "dating scam",
@@ -657,8 +713,8 @@ _SENSITIVE_FINANCE_RE = re.compile(
     r"\b(?:" + "|".join(re.escape(t) for t in _SENSITIVE_FINANCE_TERMS) + r")", re.I)
 
 def post_ads_mode(post: dict) -> str:
-    """Return "npa" for debt/insolvency, money-recovery, sexual/sextortion,
-    romance, or identity-theft pages, else "default"."""
+    """Return no ads for sexual-abuse/deepfake pages, NPA for other sensitive
+    financial/relationship topics, and default Auto Ads for other guides."""
     hay = " ".join([
         post.get("slug", ""), post.get("title", ""), post.get("category", ""),
         " ".join(post.get("keywords", []) or []),
@@ -666,6 +722,8 @@ def post_ads_mode(post: dict) -> str:
     # Normalise hyphens/underscores to spaces so a hyphenated slug
     # ("military-romance-scam-uk") matches the spaced terms ("military romance").
     hay = hay.replace("-", " ").replace("_", " ")
+    if _NO_ADS_RE.search(hay):
+        return "none"
     return "npa" if _SENSITIVE_FINANCE_RE.search(hay) else "default"
 
 
@@ -692,6 +750,7 @@ def make_base(content: str, *, title: str, description: str, canonical: str, sch
         "{{css_ver}}":           site.get("_asset_ver_css", ""),
         "{{js_ver}}":            site.get("_asset_ver_js", ""),
         "{{ads_head}}":          _ads_head(site, ads_mode),
+        "{{ads_resource_hints}}": _ads_resource_hints(ads_mode),
         "{{ga4_id}}":            site["ga4_id"],
         "{{year}}":              str(datetime.now(timezone.utc).year),
         "{{footer_cats}}":       _FOOTER_CATS_HTML,
@@ -1272,6 +1331,7 @@ def render_guides_index_page(site, page_posts, page_num: int, total_pages: int, 
         site=site,
         prev_url=prev_url,
         next_url=next_url,
+        ads_mode="none",
     )
 
 
@@ -1313,7 +1373,8 @@ def render_categories_index(site, categories):
         description='Browse all scam categories and find guides relevant to the message or situation you are checking.',
         canonical=site['domain'] + '/categories/',
         schema=schema,
-        site=site
+        site=site,
+        ads_mode="none",
     )
 
 
@@ -1342,9 +1403,9 @@ def render_category_page(site, category, posts, all_categories=None, hub=None):
     hub_body_html = hub_faq_html = ""
     hub_faq_pairs = []
     if hub:
-        intro = hub.get("intro", "")
+        intro = canonicalize_internal_guide_paths(hub.get("intro", ""))
         secs = "".join(
-            f'<section class="section"><div class="wrap"><h2>{html.escape(h)}</h2>{b}</div></section>'
+            f'<section class="section"><div class="wrap"><h2>{html.escape(h)}</h2>{canonicalize_internal_guide_paths(b)}</div></section>'
             for h, b in hub.get("sections", [])
         )
         hub_body_html = (f'<section class="section"><div class="wrap">{intro}</div></section>' if intro else "") + secs
@@ -1391,7 +1452,8 @@ def render_category_page(site, category, posts, all_categories=None, hub=None):
         description=seo_description(page_desc),
         canonical=canonical,
         schema=schema,
-        site=site
+        site=site,
+        ads_mode="default" if hub else "none",
     )
 
 
@@ -1658,6 +1720,7 @@ def render_post(site, post, all_posts, affiliates=None, sources=None, link_map=N
     # full page (as before) let a keyword match inside that boilerplate copy —
     # not just the article — so every guide picked up an identical, unrelated
     # auto-link (e.g. the newsletter band's "the latest UK scams" text).
+    content = canonicalize_internal_guide_paths(content)
     content = linkify_bare_paths(content, slug_titles or {})
     content = apply_internal_links(content, post['slug'], link_map or {})
     content = linkify_phones(content)
@@ -2070,7 +2133,7 @@ def build_legal_bodies(site):
     <div class="author-card" style="margin:1.5rem 0;padding:1.2rem;border:1px solid var(--line);border-radius:14px;background:#fafafa">
       <p style="margin:0 0 .35rem 0"><strong>Who runs this site</strong></p>
       <p style="margin:0 0 .5rem 0;font-size:.95rem;color:#555">{html.escape(site["site_name"])} is founded and edited by <a href="/author/"><strong>{html.escape(site["author"])}</strong></a>, an independent UK-based publisher who also runs <a href="https://cloudfintech.ai" rel="noopener noreferrer" target="_blank">CloudFintech</a> (fintech &amp; banking technology), <a href="https://tuningdigital.com" rel="noopener noreferrer" target="_blank">Tuning Digital</a> (AI &amp; SaaS productivity tools), and <a href="https://salestap.com" rel="noopener noreferrer" target="_blank">SalesTap</a> (B2B sales). He uses AI tooling to surface scam patterns and translate official UK guidance into plain-English checks.</p>
-      <p style="margin:0;font-size:.95rem;color:#555">He is not a journalist, lawyer, regulator, banker, or accredited consumer-affairs professional. This is an educational publication &mdash; every recommendation on the site directs you to the official UK authority that owns that decision.</p>
+      <p style="margin:0;font-size:.95rem;color:#555">He is not a journalist, lawyer, regulator, banker, or accredited consumer-affairs professional. This is an educational publication that prefers primary official sources for reporting routes, legal and regulatory claims, while clearly labelling relevant secondary sources.</p>
     </div>
 
     <p>The editorial model is simple: fast checks, plain-English explanations, and practical actions. The site is not a law firm, bank, or regulator. It is a free educational publication designed to reduce avoidable losses.</p>
@@ -2207,7 +2270,7 @@ def build_legal_bodies(site):
     <p>How we handle personal data and cookies is explained in our <a href="/privacy/">Privacy Policy</a> and <a href="/cookies/">Cookie Policy</a>. Use of the Site is subject to those documents as well as these Terms.</p>
 
     <h2>Limitation of liability</h2>
-    <p>To the maximum extent permitted by law, Beat the Scam, SideRight Apps, and the editorial team are not liable for any loss, damage, or expense arising from your use of the Site or your reliance on its content &mdash; including the AI scam checker. We make no warranty that the Site will be uninterrupted, error-free, or secure.</p>
+    <p>To the maximum extent permitted by law, Beat the Scam, SideRight Apps, and its publisher and editor are not liable for any loss, damage, or expense arising from your use of the Site or your reliance on its content &mdash; including the AI scam checker. We make no warranty that the Site will be uninterrupted, error-free, or secure.</p>
     <p><strong>Nothing in these Terms limits or excludes our liability for:</strong> (a) death or personal injury caused by our negligence; (b) fraud or fraudulent misrepresentation; (c) any other liability that cannot lawfully be limited or excluded under English, Scots, or Northern Ireland law &mdash; including your statutory rights as a consumer.</p>
 
     <h2>Changes to these Terms</h2>
@@ -2645,6 +2708,20 @@ def linkify_bare_paths(html_str: str, slug_titles: dict) -> str:
     return "".join(out)
 
 
+def canonicalize_internal_guide_paths(html_str: str) -> str:
+    """Replace internal links to redirected guide slugs with final URLs.
+
+    Edge redirects remain for external/history traffic, but internal navigation
+    should not add a crawl hop after articles are consolidated.
+    """
+    for old_slug, target in ARTICLE_REDIRECTS.items():
+        if target.startswith("__CAT__:"):
+            continue
+        html_str = html_str.replace(
+            f"/guides/{old_slug}/", f"/guides/{target}/")
+    return html_str
+
+
 # ─── PHONE LINKIFY ─────────────────────────────────────────────────────────
 
 # Match UK helpline patterns: 0300/0800/0808/0345 prefix, then space-separated digits.
@@ -2689,6 +2766,7 @@ def build():
     affiliates = load_affiliates(ROOT)
     sources    = load_sources(ROOT)
     category_hubs = load_category_hubs(ROOT)
+    validate_category_hubs(category_hubs)
 
     # Normalise category names
     for post in raw_posts:
@@ -2983,7 +3061,7 @@ def build():
     llms_lines = [
         "# Beat The Scam",
         "",
-        "> Plain-English UK consumer-protection guides covering scams, fraud, and how to spot them before paying. New guide published daily by an editorial team focused on UK consumers.",
+        "> Independent, plain-English UK consumer-protection publication covering scams, fraud, and checks to run before paying. Guides use AI-assisted drafting followed by editorial review and an automated accuracy gate.",
         "",
         "## Categories",
         "",
@@ -3008,7 +3086,7 @@ def build():
         "## Optional",
         "",
         f"- [About]({domain}/about/): site & methodology",
-        f"- [Contact]({domain}/contact/): how to reach the editorial team",
+        f"- [Contact]({domain}/contact/): how to reach the publisher and editor",
         f"- [Privacy]({domain}/privacy/): data handling & cookies",
         "",
     ])

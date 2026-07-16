@@ -27,18 +27,12 @@
   <!-- Resource hints for third-party origins. preconnect = full TCP+TLS
        handshake started immediately (good for resources we KNOW will load
        on every page). dns-prefetch = DNS lookup only (cheap fallback for
-       older browsers that ignore preconnect). googletagmanager loads GA4,
-       pagead2 loads AdSense — both are async <script> tags in <body>, so
-       preconnect shaves 100-300ms off their first paint on mobile.
-       Also adds tpc.googlesyndication.com (where ad creatives serve from)
-       and the ahrefs analytics host. -->
+       older browsers that ignore preconnect). AdSense resource hints are
+       injected only on pages eligible to serve ads. -->
   <link rel="preconnect" href="https://www.googletagmanager.com" crossorigin>
-  <link rel="preconnect" href="https://pagead2.googlesyndication.com" crossorigin>
-  <link rel="preconnect" href="https://tpc.googlesyndication.com" crossorigin>
   <link rel="dns-prefetch" href="https://www.googletagmanager.com">
-  <link rel="dns-prefetch" href="https://pagead2.googlesyndication.com">
-  <link rel="dns-prefetch" href="https://tpc.googlesyndication.com">
   <link rel="dns-prefetch" href="https://analytics.ahrefs.com">
+  <!-- AdSense resource hints intentionally omitted on this page -->
 
   <meta property="og:type" content="website">
   <meta property="og:title" content="Scam guides — page 2 | Beat the Scam">
@@ -79,12 +73,13 @@
     AdSense respects Google Consent Mode: the GA4 consent defaults above start
     denied, so visitors who haven't accepted get non-personalised ads and no
     ad-personalisation cookies until they do. The ad tag below is emitted per
-    page by make_base()/_ads_head(): omitted entirely on the /check/ tool, and
-    preceded by a requestNonPersonalizedAds flag on sensitive financial / victim
-    pages (Google restricts personalisation based on negative financial status).
+    page by make_base()/_ads_head(): omitted on navigational, tool and
+    sensitive-content pages, and preceded by a requestNonPersonalizedAds flag
+    on sensitive financial / victim pages (Google restricts personalisation
+    based on negative financial status).
     Ahrefs Web Analytics is cookieless. Custom GA4 events stay gated in app.js.
   -->
-  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1606633100797174" crossorigin="anonymous"></script>
+  <!-- Ads intentionally disabled on this page (excluded from Auto Ads) -->
   <script src="https://analytics.ahrefs.com/analytics.js" data-key="l1GHKUGfAKlhtjbYgIySAg" async></script>
 </head>
 <body>
@@ -159,7 +154,7 @@
       <div class="eyebrow">Travel Scams</div>
       <h3><a href="/guides/airport-transfer-taxi-scam-uk/">Airport Transfer Taxi Scam UK: Spot a Fake or Illegal Ride</a></h3>
       <p>Fake transfer sites and illegal touts target airport passengers. Use an official rank or a booking with a licensed operator and verify the vehicle.</p>
-      <p class="meta">Updated 2026-07-10</p>
+      <p class="meta">Updated 2026-07-16</p>
     </article>
     
     <article class="card guide-card" data-searchable="f1 british gp ticket scam uk: spot a fake silverstone seller offered british grand prix tickets below face value from a seller on social media? how to spot a fake silverstone ticket scam and buy safely. shopping f1 british gp ticket scam uk silverstone ticket scam fake f1 tickets uk is this silverstone seller real british grand prix ticket fraud report f1 ticket scam uk f1 resale ticket scam silverstone touting scam">
@@ -180,7 +175,7 @@
       <div class="eyebrow">Email Scams</div>
       <h3><a href="/guides/festival-lineup-email-scam-uk/">Festival Lineup Email Scam UK: Spot a Fake Presale</a></h3>
       <p>Got an email about a festival lineup announcement with a presale ticket link? How to spot a fake festival email scam and buy tickets safely.</p>
-      <p class="meta">Updated 2026-07-03</p>
+      <p class="meta">Updated 2026-07-16</p>
     </article>
     
     <article class="card guide-card" data-searchable="vinted festival camping gear scam: spot a fake seller festival season brings fake tent and camping-gear listings on vinted. paying through vinted keeps you inside its protection process. marketplace vinted scam uk festival camping gear scam vinted buyer protection fake vinted seller vinted tent scam marketplace scam uk">
@@ -222,7 +217,7 @@
       <div class="eyebrow">Text Message Scams</div>
       <h3><a href="/guides/o2-scam-text-uk/">O2 Warning: How to Spot Fake &#x27;Important&#x27; Texts and What to Do</a></h3>
       <p>Fake O2 texts claim your account needs urgent verification or a payment has failed, linking to bogus login pages. How to spot and report them.</p>
-      <p class="meta">Published 2026-05-23</p>
+      <p class="meta">Updated 2026-07-16</p>
     </article>
     
     <article class="card guide-card" data-searchable="vodafone scam text uk: spot a fake vodafone sms got a vodafone text about a billing issue, a refund, or account suspension? how to spot a fake vodafone sms, check safely, and report it in the uk. sms vodafone scam text uk fake vodafone text vodafone billing scam sms vodafone account suspended text scam is this vodafone text real vodafone refund text scam report vodafone scam text vodafone phishing sms">

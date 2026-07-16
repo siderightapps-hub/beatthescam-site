@@ -29,10 +29,14 @@ def main() -> int:
     ap.add_argument("--posts", default="content/posts.json")
     ap.add_argument("--manifests", default="content/manifests",
                     help="manifest directory (read existing model provenance from here)")
+    ap.add_argument("--hubs", default="content/category-hubs.json",
+                    help="hand-authored category hubs to include in the deterministic audit")
     ap.add_argument("--no-write", action="store_true", help="report only; don't write manifests")
     args = ap.parse_args()
 
     posts = json.loads(Path(args.posts).read_text(encoding="utf-8"))
+    hubs_path = Path(args.hubs)
+    hubs = json.loads(hubs_path.read_text(encoding="utf-8")) if hubs_path.exists() else {}
     mdir = Path(args.manifests)
     by_type = Counter()
     blocks = []                    # (slug, claim)
@@ -70,7 +74,25 @@ def main() -> int:
             else:
                 flags[c["type"]].append((p["slug"], c["text"]))
 
-    print(f"Audited {len(posts)} guides | manifests written: {written}")
+    # Hubs are hand-authored rather than generated, so they do not get claim
+    # manifests. They still run through the exact deterministic gate here and
+    # at build time, preventing this editorial surface from bypassing accuracy
+    # checks again.
+    for slug, hub in hubs.items():
+        surface = dict(hub or {})
+        surface.setdefault("slug", f"category-{slug}")
+        surface.setdefault("category", slug)
+        surface.setdefault("keywords", [])
+        result = run_gate(surface, use_llm=False)
+        for issue in result.issues:
+            by_type[issue.get("check")] += 1
+            text = issue.get("span") or issue.get("detail", "")[:160]
+            if issue.get("severity") == SEVERITY_BLOCK:
+                blocks.append((surface["slug"], {"type": issue.get("check"), "text": text}))
+            else:
+                flags[issue.get("check")].append((surface["slug"], text))
+
+    print(f"Audited {len(posts)} guides + {len(hubs)} category hubs | manifests written: {written}")
     print(f"Detected claim types: {dict(by_type)}\n")
 
     if blocks:

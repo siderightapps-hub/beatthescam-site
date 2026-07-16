@@ -127,6 +127,10 @@ FLAGS = {
         ["How to report",
          "Report it by emailing abuse@madeup-reports.gov.uk, or to Action Fraud "
          "on 0300 123 2040."],
+        ["Over-broad channel claims",
+         "Banks never send links in text messages. Forward texts to 7726 because it works on "
+         "all UK mobile networks. Forward RCS and iMessage chats to 7726 too. UK banks must "
+         "reimburse most APP fraud victims within five days."],
     ],
     "faq": [],
 }
@@ -146,6 +150,14 @@ EXPECT = [
      lambda r: any(i["check"] == "dated_event" for i in r.issues)),
     ("non-canon reporting email is RECORDED as a flag", "FLAGS",
      lambda r: any(i["check"] == "source" for i in r.issues)),
+    ("bank-link absolute is RECORDED as a flag",         "FLAGS",
+     lambda r: any(i["check"] == "bank_link_absolute" for i in r.issues)),
+    ("7726 network scope is RECORDED as a flag",         "FLAGS",
+     lambda r: any(i["check"] == "7726_scope" for i in r.issues)),
+    ("7726 message-format scope is RECORDED as a flag",  "FLAGS",
+     lambda r: any(i["check"] == "7726_format_scope" for i in r.issues)),
+    ("APP reimbursement scope is RECORDED as a flag",    "FLAGS",
+     lambda r: any(i["check"] == "app_reimbursement_scope" for i in r.issues)),
     # Regression guard: no DETERMINISTIC flag-tier class may ever emit a block —
     # a refactor promoting legislation/dated_event/source to block-tier would
     # otherwise still show a green self-test. The judge is excluded because it

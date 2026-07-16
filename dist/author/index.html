@@ -26,18 +26,15 @@
   <!-- Resource hints for third-party origins. preconnect = full TCP+TLS
        handshake started immediately (good for resources we KNOW will load
        on every page). dns-prefetch = DNS lookup only (cheap fallback for
-       older browsers that ignore preconnect). googletagmanager loads GA4,
-       pagead2 loads AdSense — both are async <script> tags in <body>, so
-       preconnect shaves 100-300ms off their first paint on mobile.
-       Also adds tpc.googlesyndication.com (where ad creatives serve from)
-       and the ahrefs analytics host. -->
+       older browsers that ignore preconnect). AdSense resource hints are
+       injected only on pages eligible to serve ads. -->
   <link rel="preconnect" href="https://www.googletagmanager.com" crossorigin>
+  <link rel="dns-prefetch" href="https://www.googletagmanager.com">
+  <link rel="dns-prefetch" href="https://analytics.ahrefs.com">
   <link rel="preconnect" href="https://pagead2.googlesyndication.com" crossorigin>
   <link rel="preconnect" href="https://tpc.googlesyndication.com" crossorigin>
-  <link rel="dns-prefetch" href="https://www.googletagmanager.com">
   <link rel="dns-prefetch" href="https://pagead2.googlesyndication.com">
   <link rel="dns-prefetch" href="https://tpc.googlesyndication.com">
-  <link rel="dns-prefetch" href="https://analytics.ahrefs.com">
 
   <meta property="og:type" content="website">
   <meta property="og:title" content="Alex Bacsa — Founder &amp; Editor, Beat the Scam">
@@ -73,14 +70,15 @@
     });
     gtag('config', 'G-JXNF856NBF');
   </script>
-  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Person","name":"Alex Bacsa","url":"https://beatthescam.com/author/","jobTitle":"Founder & Editor","worksFor":{"@type":"Organization","name":"Beat the Scam","url":"https://beatthescam.com"},"description":"Alex Bacsa is the founder and editor of Beat the Scam, an independent UK consumer-protection publication covering scams, fraud, and the plain-English verification checks readers need before they send money, share credentials, or install software they didn't ask for. He runs Beat the Scam from the UK as an outside operator — not a journalist, lawyer, regulator, or banker — paying close attention to the patterns that keep costing UK households tens of millions a year and translating them into checks anyone can run in under sixty seconds. Coverage is drafted with AI tooling against a strict editorial template, then run through an automated accuracy gate that validates reporting routes against a verified canon of official UK sources — Report Fraud, the FCA, the NCSC, and Citizens Advice — and holds back anything that fails; readers are invited to flag any error for prompt correction.","image":"https://beatthescam.com/assets/img/team/alex-bacsa.png","email":"hello@beatthescam.com","sameAs":["https://www.linkedin.com/in/alexbacsa/","https://cloudfintech.ai/author","https://tuningdigital.com/about.html#editor","https://salestap.com/about#editor"],"address":{"@type":"PostalAddress","addressCountry":"GB"}}</script><script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://beatthescam.com/"},{"@type":"ListItem","position":2,"name":"Author","item":"https://beatthescam.com/author/"}]}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Person","name":"Alex Bacsa","url":"https://beatthescam.com/author/","jobTitle":"Founder & Editor","worksFor":{"@type":"Organization","name":"Beat the Scam","url":"https://beatthescam.com"},"description":"Alex Bacsa is the founder and editor of Beat the Scam, an independent UK consumer-protection publication covering scams, fraud, and the plain-English verification checks readers need before they send money, share credentials, or install software they didn't ask for. He runs Beat the Scam from the UK as an outside operator — not a journalist, lawyer, regulator, or banker — studying the patterns criminals use to steal money and data from UK consumers and translating them into checks anyone can run in under sixty seconds. Coverage is drafted with AI tooling against a strict editorial template, then run through an automated accuracy gate that validates reporting routes against a verified canon of official UK sources — Report Fraud, the FCA, the NCSC, and Citizens Advice — and holds back anything that fails; readers are invited to flag any error for prompt correction.","image":"https://beatthescam.com/assets/img/team/alex-bacsa.png","email":"hello@beatthescam.com","sameAs":["https://www.linkedin.com/in/alexbacsa/","https://cloudfintech.ai/author","https://tuningdigital.com/about.html#editor","https://salestap.com/about#editor"],"address":{"@type":"PostalAddress","addressCountry":"GB"}}</script><script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://beatthescam.com/"},{"@type":"ListItem","position":2,"name":"Author","item":"https://beatthescam.com/author/"}]}</script>
   <!--
     AdSense respects Google Consent Mode: the GA4 consent defaults above start
     denied, so visitors who haven't accepted get non-personalised ads and no
     ad-personalisation cookies until they do. The ad tag below is emitted per
-    page by make_base()/_ads_head(): omitted entirely on the /check/ tool, and
-    preceded by a requestNonPersonalizedAds flag on sensitive financial / victim
-    pages (Google restricts personalisation based on negative financial status).
+    page by make_base()/_ads_head(): omitted on navigational, tool and
+    sensitive-content pages, and preceded by a requestNonPersonalizedAds flag
+    on sensitive financial / victim pages (Google restricts personalisation
+    based on negative financial status).
     Ahrefs Web Analytics is cookieless. Custom GA4 events stay gated in app.js.
   -->
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1606633100797174" crossorigin="anonymous"></script>
@@ -118,7 +116,7 @@
       <div class="wrap" style="display:flex;gap:2rem;align-items:flex-start;flex-wrap:wrap">
         <div style="flex:0 0 160px"><img src="/assets/img/team/alex-bacsa.png" alt="Alex Bacsa" width="160" height="160" loading="lazy" decoding="async" style="border-radius:50%;border:1px solid var(--line);background:#fafafa;object-fit:cover;display:block"></div>
         <article class="article" style="flex:1;min-width:280px">
-          <p>Alex Bacsa is the founder and editor of Beat the Scam, an independent UK consumer-protection publication covering scams, fraud, and the plain-English verification checks readers need before they send money, share credentials, or install software they didn&#x27;t ask for. He runs Beat the Scam from the UK as an outside operator — not a journalist, lawyer, regulator, or banker — paying close attention to the patterns that keep costing UK households tens of millions a year and translating them into checks anyone can run in under sixty seconds. Coverage is drafted with AI tooling against a strict editorial template, then run through an automated accuracy gate that validates reporting routes against a verified canon of official UK sources — Report Fraud, the FCA, the NCSC, and Citizens Advice — and holds back anything that fails; readers are invited to flag any error for prompt correction.</p>
+          <p>Alex Bacsa is the founder and editor of Beat the Scam, an independent UK consumer-protection publication covering scams, fraud, and the plain-English verification checks readers need before they send money, share credentials, or install software they didn&#x27;t ask for. He runs Beat the Scam from the UK as an outside operator — not a journalist, lawyer, regulator, or banker — studying the patterns criminals use to steal money and data from UK consumers and translating them into checks anyone can run in under sixty seconds. Coverage is drafted with AI tooling against a strict editorial template, then run through an automated accuracy gate that validates reporting routes against a verified canon of official UK sources — Report Fraud, the FCA, the NCSC, and Citizens Advice — and holds back anything that fails; readers are invited to flag any error for prompt correction.</p>
           <div class="badges" style="display:flex;flex-wrap:wrap;gap:.4rem;margin:.6rem 0 1.2rem"><span class="badge">UK consumer protection</span> <span class="badge">Fraud prevention</span> <span class="badge">Scam pattern analysis</span> <span class="badge">AI-assisted editorial workflows</span> <span class="badge">Fintech &amp; banking technology</span> <span class="badge">SaaS productivity tooling</span> <span class="badge">B2B sales</span></div>
           
         <h2>Also publishes on</h2>

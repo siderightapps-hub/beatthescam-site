@@ -26,18 +26,12 @@
   <!-- Resource hints for third-party origins. preconnect = full TCP+TLS
        handshake started immediately (good for resources we KNOW will load
        on every page). dns-prefetch = DNS lookup only (cheap fallback for
-       older browsers that ignore preconnect). googletagmanager loads GA4,
-       pagead2 loads AdSense — both are async <script> tags in <body>, so
-       preconnect shaves 100-300ms off their first paint on mobile.
-       Also adds tpc.googlesyndication.com (where ad creatives serve from)
-       and the ahrefs analytics host. -->
+       older browsers that ignore preconnect). AdSense resource hints are
+       injected only on pages eligible to serve ads. -->
   <link rel="preconnect" href="https://www.googletagmanager.com" crossorigin>
-  <link rel="preconnect" href="https://pagead2.googlesyndication.com" crossorigin>
-  <link rel="preconnect" href="https://tpc.googlesyndication.com" crossorigin>
   <link rel="dns-prefetch" href="https://www.googletagmanager.com">
-  <link rel="dns-prefetch" href="https://pagead2.googlesyndication.com">
-  <link rel="dns-prefetch" href="https://tpc.googlesyndication.com">
   <link rel="dns-prefetch" href="https://analytics.ahrefs.com">
+  <!-- AdSense resource hints intentionally omitted on this page -->
 
   <meta property="og:type" content="website">
   <meta property="og:title" content="Travel Scams | Beat the Scam">
@@ -78,12 +72,13 @@
     AdSense respects Google Consent Mode: the GA4 consent defaults above start
     denied, so visitors who haven't accepted get non-personalised ads and no
     ad-personalisation cookies until they do. The ad tag below is emitted per
-    page by make_base()/_ads_head(): omitted entirely on the /check/ tool, and
-    preceded by a requestNonPersonalizedAds flag on sensitive financial / victim
-    pages (Google restricts personalisation based on negative financial status).
+    page by make_base()/_ads_head(): omitted on navigational, tool and
+    sensitive-content pages, and preceded by a requestNonPersonalizedAds flag
+    on sensitive financial / victim pages (Google restricts personalisation
+    based on negative financial status).
     Ahrefs Web Analytics is cookieless. Custom GA4 events stay gated in app.js.
   -->
-  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1606633100797174" crossorigin="anonymous"></script>
+  <!-- Ads intentionally disabled on this page (excluded from Auto Ads) -->
   <script src="https://analytics.ahrefs.com/analytics.js" data-key="l1GHKUGfAKlhtjbYgIySAg" async></script>
 </head>
 <body>
@@ -134,7 +129,7 @@
       <div class="eyebrow">Travel Scams</div>
       <h3><a href="/guides/timeshare-scam-uk/">Timeshare Scam UK: How to Spot and Avoid Holiday Property Traps</a></h3>
       <p>Timeshare scams promise cheap holidays and investment returns, then trap you in contracts with escalating fees. The warning signs and how to get help.</p>
-      <p class="meta">Updated 2026-07-10</p>
+      <p class="meta">Updated 2026-07-16</p>
     </article>
     
     <article class="card guide-card" data-searchable="fake travel agent scams uk: how to spot booking fraud booking a cheap holiday, flight or villa from an agent you don&#x27;t know? how to spot a fake travel agent, verify abta/atol, and protect your money. travel fake travel agent scam uk travel booking fraud fake holiday website scam travel agent impersonation holiday booking scam">
@@ -176,7 +171,7 @@
       <div class="eyebrow">Travel Scams</div>
       <h3><a href="/guides/airport-transfer-taxi-scam-uk/">Airport Transfer Taxi Scam UK: Spot a Fake or Illegal Ride</a></h3>
       <p>Fake transfer sites and illegal touts target airport passengers. Use an official rank or a booking with a licensed operator and verify the vehicle.</p>
-      <p class="meta">Updated 2026-07-10</p>
+      <p class="meta">Updated 2026-07-16</p>
     </article>
     
     <article class="card guide-card" data-searchable="glastonbury accommodation scam: spot a fake booking fake glastonbury accommodation listings demand deposits for places that may not exist. check current festival information and verify providers independently. travel glastonbury accommodation scam fake glastonbury booking glastonbury festival fraud accommodation scam uk holiday rental scam">
@@ -190,7 +185,7 @@
       <div class="eyebrow">Travel Scams</div>
       <h3><a href="/guides/holiday-let-scam-uk/">Holiday Let Scam UK: Fake Independent Rentals</a></h3>
       <p>An independent holiday cottage &#x27;owner&#x27; insists on a bank transfer before you can view it? That single request is the biggest red flag going.</p>
-      <p class="meta">Updated 2026-07-05</p>
+      <p class="meta">Updated 2026-07-16</p>
     </article>
     
     <article class="card guide-card" data-searchable="package holiday scam uk: spot a fake travel deal found a package holiday deal far cheaper than anywhere else, advertised online or by a &#x27;travel agent&#x27;? how to spot a fake package holiday scam. travel package holiday scam uk fake travel package deal cheap package holiday scam is this holiday deal real fake travel agent package scam report package holiday scam atol protection package holiday bargain package holiday scam warning signs">
