@@ -1671,7 +1671,7 @@ def render_post(site, post, all_posts, affiliates=None, sources=None, link_map=N
           Use the <a href="/check/">AI scam checker</a> for an instant analysis, or report it to
           <a href="https://www.reportfraud.police.uk" rel="noopener noreferrer" target="_blank">Report Fraud</a>.
         </div>
-        <p class="meta" style="margin-top:1.4rem">Reporting routes in this guide are checked against our verified canon of official UK sources &#8212; <a href="https://www.reportfraud.police.uk/" rel="noopener" target="_blank">Report Fraud</a>, the <a href="https://www.ncsc.gov.uk/" rel="noopener" target="_blank">National Cyber Security Centre</a>, and <a href="https://www.citizensadvice.org.uk/consumer/scams/" rel="noopener" target="_blank">Citizens Advice</a> &#8212; by an automated accuracy gate before publication. {review_note} Read about <a href="/about/">how Beat the Scam writes guides</a>.</p>
+        <p class="meta" style="margin-top:1.4rem">Reporting routes in this guide are checked against our verified canon of official UK sources &#8212; <a href="https://www.reportfraud.police.uk/" rel="noopener" target="_blank">Report Fraud</a>, the <a href="https://www.ncsc.gov.uk/" rel="noopener" target="_blank">National Cyber Security Centre</a>, and <a href="https://www.citizensadvice.org.uk/consumer/scams/" rel="noopener" target="_blank">Citizens Advice</a> &#8212; by an automated accuracy gate before publication. {review_note} Read about <a href="/methodology/">how Beat the Scam writes guides</a>.</p>
       </article>
       <aside class="sidebar">
         <section class="sidebar-card">
@@ -2146,9 +2146,37 @@ def build_legal_bodies(site):
       <div class="table-row"><strong>Commercial model</strong><span>Advertising-supported using Google AdSense, with scope for consumer-safety partnerships.</span></div>
     </div>
 
+    <h2>How guides are fact-checked</h2>
+    <p>Every guide is drafted with AI assistance against a strict editorial template, checked by an automated accuracy gate before publication, reviewed by a human editor before it goes live, and re-verified quarterly against current UK sources. See the full <a href="/methodology/">editorial methodology</a> for exactly how that works, the sources we verify against, and how corrections are handled.</p>
+
+    <h2>About the AI scam checker</h2>
+    <p>The free scam checker on this site sends the suspicious message text you paste to Anthropic&#8217;s Claude API for analysis. The text is processed in real time to produce a verdict, list of red flags, and recommended actions &mdash; then discarded. Beat the Scam does not store the suspicious text you submit, and does not link it to your identity. To keep the free tool available and block abuse, the checker keeps a rate-limit counter keyed to a hashed form of your IP address &mdash; used only to enforce per-minute and daily usage limits, and never linked to your submission. As the processor, Anthropic may retain the text you submit and the model&#8217;s response for up to 30 days under its standard API data policy (and longer only where required for legal or safety reasons); it does not use API inputs or outputs to train its models.</p>
+    <p>For your own safety, do not paste full passwords, full bank account numbers, or other sensitive credentials into the checker. The tool is designed to analyse the suspicious content itself (the message, link, or scam pattern), not your private credentials.</p>
+    <p>The checker&#8217;s output is educational. It is not a definitive fraud determination. If you are unsure about a real-world payment or account access decision, contact your bank&#8217;s fraud team using the number on the back of your card.</p>
+
+    <h2>Contact</h2>
+    <p>Editorial contact and correction requests: <a href="mailto:{site["editorial_email"]}">{site["editorial_email"]}</a></p>
+
+    <p class="note" style="margin-top:2rem;color:#666;font-size:.9rem">Last reviewed: 17 July 2026. The site is reviewed periodically and updated as scam patterns and reporting routes change.</p>
+    '''
+
+    methodology = f'''
+    <p>This page explains, in detail, how {html.escape(site["site_name"])} researches, drafts, checks, and corrects its guides &mdash; so a reader, a journalist, an ad-network reviewer, or an AI system deciding whether to cite this site can see the actual process rather than take &#8220;fact-checked&#8221; on faith.</p>
+
     <h2>How content is researched and produced</h2>
     <p>Each guide on this site is drafted using AI assistance against a strict editorial template that forbids inventing statistics, quotes, or specific unverifiable claims, and that standardises the official UK reporting routes (Report Fraud, the NCSC, and Citizens Advice).</p>
-    <p>The drafting step uses Anthropic&#8217;s Claude API. The model is given a structured prompt covering the scam type, target audience, and required sections (what the scam looks like, warning signs, step-by-step pattern, verification, recovery actions, reporting routes). It is explicitly instructed not to invent statistics, predict outcomes, generate fake quotes, or assert specific claims about named companies or people. Before publication, every draft passes an automated accuracy gate: deterministic checks (no hard-coded organisation phone numbers, no defunct or unsafe entities, no unconditional safety guarantees, and reporting routes validated against a verified canon of official UK sources) plus a low-temperature AI fact-checking pass that fails closed on possible fabrication &mdash; drafts that fail are held back, never published. The high-stakes claims in each guide are recorded and reviewed on a recurring schedule. If you still spot an error, please report it (see below) and we will correct it promptly.</p>
+    <p>The drafting step uses Anthropic&#8217;s Claude API. The model is given a structured prompt covering the scam type, target audience, and required sections (what the scam looks like, warning signs, step-by-step pattern, verification, recovery actions, reporting routes). It is explicitly instructed not to invent statistics, predict outcomes, generate fake quotes, or assert specific claims about named companies or people.</p>
+
+    <h2>The accuracy gate</h2>
+    <p>Before publication, every draft passes an automated accuracy gate: deterministic checks (no hard-coded organisation phone numbers, no defunct or unsafe entities, no unconditional safety guarantees, and reporting routes validated against a verified canon of official UK sources) plus a low-temperature AI fact-checking pass that fails closed on possible fabrication &mdash; drafts that fail are held back, never published.</p>
+
+    <h2>Every guide is reviewed by a human before it goes live</h2>
+    <p>The gate is not the last step. New and updated guides are opened for editorial review and held back until a human editor reads and approves the batch &mdash; nothing is published, monetised, or announced automatically. If a guide fails that review, it is corrected or dropped, not shipped.</p>
+
+    <h2>Ongoing accuracy checks after publication</h2>
+    <p>Facts drift after a guide is published &mdash; a phone number changes, a scheme is renamed, a threshold is updated. High-stakes claims flagged during drafting are logged and reviewed by a human editor on a recurring schedule. Separately, a quarterly, corpus-wide sweep (the 1st of January, April, July, and October) re-checks every live guide against current official sources and flags anything that may have gone stale for correction.</p>
+
+    <h2>Sources we verify against</h2>
     <p>Verification draws on UK-specific public sources, including:</p>
     <ul>
       <li><a href="https://www.reportfraud.police.uk/" rel="noopener noreferrer" target="_blank">Report Fraud</a> (formerly Action Fraud) &mdash; the UK&#8217;s national reporting centre for fraud and cybercrime</li>
@@ -2162,17 +2190,11 @@ def build_legal_bodies(site):
     <h2>Editorial standards</h2>
     <p>Content is written to be understandable under pressure. That means short sections, clear headings, and advice that directs readers towards independent verification through official channels &mdash; never through links, numbers, or payment details supplied by a suspicious message.</p>
     <p>Where the site recommends a national reporting route &mdash; such as Report Fraud, the NCSC, or Citizens Advice &mdash; it uses the official published channel. For organisation-specific contact details, always confirm the number or web address against the official website, or the details on your card, bill, or statement, rather than relying solely on any number reproduced in a guide.</p>
-    <p>If a guide contains an error, email <a href="mailto:{site["editorial_email"]}">{site["editorial_email"]}</a> with the page URL and the issue. Corrections are made promptly.</p>
 
-    <h2>About the AI scam checker</h2>
-    <p>The free scam checker on this site sends the suspicious message text you paste to Anthropic&#8217;s Claude API for analysis. The text is processed in real time to produce a verdict, list of red flags, and recommended actions &mdash; then discarded. Beat the Scam does not store the suspicious text you submit, and does not link it to your identity. To keep the free tool available and block abuse, the checker keeps a rate-limit counter keyed to a hashed form of your IP address &mdash; used only to enforce per-minute and daily usage limits, and never linked to your submission. As the processor, Anthropic may retain the text you submit and the model&#8217;s response for up to 30 days under its standard API data policy (and longer only where required for legal or safety reasons); it does not use API inputs or outputs to train its models.</p>
-    <p>For your own safety, do not paste full passwords, full bank account numbers, or other sensitive credentials into the checker. The tool is designed to analyse the suspicious content itself (the message, link, or scam pattern), not your private credentials.</p>
-    <p>The checker&#8217;s output is educational. It is not a definitive fraud determination. If you are unsure about a real-world payment or account access decision, contact your bank&#8217;s fraud team using the number on the back of your card.</p>
+    <h2>Corrections</h2>
+    <p>If a guide contains an error, email <a href="mailto:{site["editorial_email"]}">{site["editorial_email"]}</a> with the page URL and the issue. Corrections are made promptly &mdash; we would rather fix a mistake than defend it.</p>
 
-    <h2>Contact</h2>
-    <p>Editorial contact and correction requests: <a href="mailto:{site["editorial_email"]}">{site["editorial_email"]}</a></p>
-
-    <p class="note" style="margin-top:2rem;color:#666;font-size:.9rem">Last reviewed: May 2026. The site is reviewed periodically and updated as scam patterns and reporting routes change.</p>
+    <p class="note" style="margin-top:2rem;color:#666;font-size:.9rem">Last materially reviewed: 17 July 2026.</p>
     '''
 
     # Bump PRIVACY_LAST_UPDATED when materially revising the Privacy Policy below.
@@ -2322,7 +2344,7 @@ def build_legal_bodies(site):
     <p>To the maximum extent permitted by law, Beat the Scam and SideRight Apps accept no liability for any loss or damage arising from your use of, or reliance on, the Site or the AI scam checker. Nothing here limits any liability that cannot lawfully be excluded &mdash; including for death or personal injury caused by negligence, or for fraud. The full limitation of liability is set out in our <a href="/terms/">Terms</a>.</p>
     '''
 
-    return about, privacy, cookies, terms, contact, disclaimer
+    return about, privacy, cookies, terms, contact, disclaimer, methodology
 
 
 # ─── DEDUPLICATE ────────────────────────────────────────────────────────────
@@ -2892,13 +2914,14 @@ def build():
 
     write(DIST / 'check/index.html', render_check_page(site))
 
-    about, privacy, cookies, terms, contact, disclaimer = build_legal_bodies(site)
-    write(DIST / 'about/index.html',   render_simple_page(site, 'About',          'Beat the Scam is a free UK consumer protection site. Learn how guides are researched, who writes them, and how the AI scam checker works.',        about,   'about'))
+    about, privacy, cookies, terms, contact, disclaimer, methodology = build_legal_bodies(site)
+    write(DIST / 'about/index.html',   render_simple_page(site, 'About',          'Beat the Scam is a free UK consumer protection site. Learn who runs it, how it is funded, and how the AI scam checker works.',        about,   'about'))
     write(DIST / 'privacy/index.html', render_simple_page(site, 'Privacy Policy', 'How Beat the Scam uses Google Analytics, Google AdSense, and the Anthropic Claude API. Understand your data choices and cookie consent options.',          privacy, 'privacy'))
     write(DIST / 'cookies/index.html', render_simple_page(site, 'Cookie Policy',  'How Beat the Scam uses cookies for analytics, advertising, and consent preferences. Learn what is stored and how to manage your cookie settings.',                   cookies, 'cookies'))
     write(DIST / 'terms/index.html',   render_simple_page(site, 'Terms',          'Terms of use for Beat the Scam. Educational scam guidance only — not legal or financial advice. Read before relying on any content for important decisions.',                                 terms,   'terms'))
     write(DIST / 'contact/index.html', render_simple_page(site, 'Contact',        'Contact Beat the Scam for editorial corrections, privacy questions, or partnership enquiries. We aim to respond to all editorial requests promptly.',     contact, 'contact'))
     write(DIST / 'disclaimer/index.html', render_simple_page(site, 'Disclaimer',  'Important disclaimer for Beat the Scam: the guides and AI scam checker are general consumer-awareness information only — not legal, financial, or other professional advice.', disclaimer, 'disclaimer'))
+    write(DIST / 'methodology/index.html', render_simple_page(site, 'How We Fact-Check', 'How Beat the Scam researches, drafts, gate-checks, human-reviews, and re-verifies every guide — the sources we check against and how corrections work.', methodology, 'methodology'))
 
     # Named author page — Alex Bacsa, cross-linked with CloudFintech /
     # TuningDigital / SalesTap via the Person.sameAs block in the page schema.
@@ -2971,12 +2994,16 @@ def build():
     # NOT the build timestamp, so unchanged pages don't advertise false freshness
     # on every rebuild.
     STATIC_LASTMOD = "2026-06-23"
+    # Pages materially edited today — kept separate from STATIC_LASTMOD so the
+    # untouched legal pages don't advertise false freshness on every rebuild.
+    RECENT_LASTMOD = "2026-07-17"
     static_url_lastmods = {
-        '/':            newest_post_date,
-        '/guides/':     newest_post_date,
-        '/categories/': newest_post_date,
-        '/check/':      STATIC_LASTMOD,
-        '/about/':      STATIC_LASTMOD,
+        '/':             newest_post_date,
+        '/guides/':      newest_post_date,
+        '/categories/':  newest_post_date,
+        '/check/':       STATIC_LASTMOD,
+        '/about/':       RECENT_LASTMOD,
+        '/methodology/': RECENT_LASTMOD,
         # /author/ only renders when site.json has an author_profile — keep the
         # sitemap consistent with what was actually written to dist/.
         **({'/author/': STATIC_LASTMOD} if author_rendered else {}),
@@ -3026,7 +3053,7 @@ def build():
         f"/* PUBLISHER */\n"
         f"Name: {site['author']}\n"
         f"Notes: Independent educational publication. Not a law firm, bank, or regulator.\n"
-        f"Methodology: see {site['domain']}/about/\n\n"
+        f"Methodology: see {site['domain']}/methodology/\n\n"
         f"/* SOURCES */\n"
         f"Report Fraud — https://www.reportfraud.police.uk/\n"
         f"NCSC — https://www.ncsc.gov.uk/\n"
@@ -3085,7 +3112,8 @@ def build():
     llms_lines.extend([
         "## Optional",
         "",
-        f"- [About]({domain}/about/): site & methodology",
+        f"- [About]({domain}/about/): who runs the site",
+        f"- [Methodology]({domain}/methodology/): how guides are researched, gate-checked, human-reviewed, and re-verified",
         f"- [Contact]({domain}/contact/): how to reach the publisher and editor",
         f"- [Privacy]({domain}/privacy/): data handling & cookies",
         "",

@@ -7,7 +7,7 @@ Coverage: UK consumer protection — scam alerts, verification guides, AI scam c
 /* PUBLISHER */
 Name: Alex Bacsa
 Notes: Independent educational publication. Not a law firm, bank, or regulator.
-Methodology: see https://beatthescam.com/about/
+Methodology: see https://beatthescam.com/methodology/
 
 /* SOURCES */
 Report Fraud — https://www.reportfraud.police.uk/
@@ -16,4 +16,4 @@ Citizens Advice — https://www.citizensadvice.org.uk/consumer/scams/
 FCA Firm Checker — https://www.fca.org.uk/consumers/fca-firm-checker
 
 /* LAST UPDATE */
-2026-07-16
+2026-07-17

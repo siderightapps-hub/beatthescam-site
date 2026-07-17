@@ -259,6 +259,7 @@
 
 ## Optional
 
-- [About](https://beatthescam.com/about/): site & methodology
+- [About](https://beatthescam.com/about/): who runs the site
+- [Methodology](https://beatthescam.com/methodology/): how guides are researched, gate-checked, human-reviewed, and re-verified
 - [Contact](https://beatthescam.com/contact/): how to reach the publisher and editor
 - [Privacy](https://beatthescam.com/privacy/): data handling & cookies
