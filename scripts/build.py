@@ -1,5 +1,7 @@
 import hashlib
 import html
+import csv
+import io
 import json
 import re
 import shutil
@@ -412,6 +414,19 @@ def read_json(path: Path):
 def write(path: Path, text: str):
     path.parent.mkdir(parents=True, exist_ok=True)
     path.write_text(text.strip() + "\n", encoding="utf-8")
+
+def load_research_reports(root: Path):
+    """Load dated public research sources, newest first."""
+    reports_dir = root / "content" / "research"
+    if not reports_dir.is_dir():
+        return []
+    reports = [read_json(path) for path in sorted(reports_dir.glob("*.json"))]
+    required = {"slug", "title", "published", "summary", "bing_ai", "google_search", "method", "limitations"}
+    for report in reports:
+        missing = required - set(report)
+        if missing:
+            raise SystemExit(f"ERROR: research report {report.get('slug', '<unknown>')} missing {sorted(missing)}")
+    return sorted(reports, key=lambda report: report["published"], reverse=True)
 
 def slugify(value: str) -> str:
     return re.sub(r"[^a-z0-9]+", "-", value.lower().strip()).strip("-")
@@ -1043,7 +1058,7 @@ def render_card(post):
 
 # ─── PAGE RENDERERS ────────────────────────────────────────────────────────
 
-def render_home(site, posts, categories):
+def render_home(site, posts, categories, research_reports=None):
     post_count = len(posts)
     cat_count  = len(categories)
 
@@ -1077,6 +1092,34 @@ def render_home(site, posts, categories):
         f'<details><summary>{html.escape(q)}</summary><p>{html.escape(a)}</p></details>'
         for q, a in faq_pairs
     )
+
+    research_html = ""
+    if research_reports:
+        latest = research_reports[0]
+        bing = latest["bing_ai"]
+        google = latest["google_search"]
+        research_html = f'''
+    <section class="section" aria-labelledby="latest-research-heading">
+      <div class="wrap">
+        <div class="callout research-promo">
+          <div>
+            <div class="kicker">Original data · {html.escape(latest["published"])}</div>
+            <h2 id="latest-research-heading">Latest visibility research</h2>
+            <p>Our transparent monthly snapshot tracks how UK scam guidance appears in Google Search and in Bing-powered AI answers. The data, method and limitations are published for scrutiny.</p>
+            <div class="hero-actions">
+              <a class="btn btn-primary" href="/research/{html.escape(latest['slug'])}/">Read the latest report</a>
+              <a class="btn btn-secondary" href="/research/methodology/">See the research method</a>
+            </div>
+          </div>
+          <div class="research-promo-metrics" aria-label="Latest research headline figures">
+            <div><strong>{bing['total_citations']:,}</strong><span>Bing AI citations</span></div>
+            <div><strong>{google['impressions']:,}</strong><span>Google impressions</span></div>
+            <div><strong>{bing['cited_page_count']:,}</strong><span>pages cited by Bing AI</span></div>
+          </div>
+        </div>
+      </div>
+    </section>
+        '''
 
     content = f'''
     <section class="hero">
@@ -1127,6 +1170,8 @@ def render_home(site, posts, categories):
         </div>
       </div>
     </section>
+
+    {research_html}
 
     <section class="section">
       <div class="wrap">
@@ -2101,6 +2146,327 @@ def render_check_page(site):
     )
 
 
+def research_dataset_schema(site, report):
+    slug = report["slug"]
+    bing = report["bing_ai"]
+    google = report["google_search"]
+    return json_ld({
+        "@context": "https://schema.org",
+        "@type": "Dataset",
+        "name": report["title"],
+        "description": report["summary"],
+        "url": f'{site["domain"]}/research/{slug}/',
+        "datePublished": report["published"],
+        "creator": {
+            "@type": "Organization",
+            "name": site["site_name"],
+            "url": site["domain"],
+        },
+        "distribution": [
+            {
+                "@type": "DataDownload",
+                "encodingFormat": "application/json",
+                "contentUrl": f'{site["domain"]}/research/data/{slug}.json',
+            },
+            {
+                "@type": "DataDownload",
+                "encodingFormat": "text/csv",
+                "contentUrl": f'{site["domain"]}/research/data/{slug}-bing-daily.csv',
+            },
+        ],
+        "variableMeasured": [
+            "Bing AI citations",
+            "Bing AI cited pages",
+            "Google Search clicks",
+            "Google Search impressions",
+            "Google Search click-through rate",
+        ],
+        "temporalCoverage": f'{min(bing["start_date"], google["start_date"])}/{max(bing["end_date"], google["end_date"])}',
+        "spatialCoverage": "United Kingdom",
+        "isAccessibleForFree": True,
+    })
+
+
+def _research_chart(daily):
+    if len(daily) < 2:
+        return ""
+    width, height, pad = 760, 260, 32
+    values = [row["citations"] for row in daily]
+    peak = max(values) or 1
+    points = []
+    for index, value in enumerate(values):
+        x = pad + index * (width - 2 * pad) / (len(values) - 1)
+        y = height - pad - value * (height - 2 * pad) / peak
+        points.append(f"{x:.1f},{y:.1f}")
+    start = html.escape(daily[0]["date"])
+    end = html.escape(daily[-1]["date"])
+    return f'''
+    <figure class="research-chart">
+      <svg viewBox="0 0 {width} {height}" role="img" aria-labelledby="citation-chart-title citation-chart-desc">
+        <title id="citation-chart-title">Daily Bing AI citations</title>
+        <desc id="citation-chart-desc">Daily citations from {start} to {end}; the highest daily count was {peak:,}.</desc>
+        <line x1="{pad}" y1="{height-pad}" x2="{width-pad}" y2="{height-pad}" class="chart-axis"/>
+        <line x1="{pad}" y1="{pad}" x2="{pad}" y2="{height-pad}" class="chart-axis"/>
+        <polyline points="{' '.join(points)}" class="chart-line"/>
+        <text x="{pad}" y="{height-8}" class="chart-label">{start}</text>
+        <text x="{width-pad}" y="{height-8}" text-anchor="end" class="chart-label">{end}</text>
+        <text x="{pad+6}" y="{pad+4}" class="chart-label">Peak {peak:,}</text>
+      </svg>
+      <figcaption>Daily Bing AI citations in the exported period. Platform counts can be revised; this is a dated snapshot.</figcaption>
+    </figure>
+    '''
+
+
+def render_research_index(site, reports):
+    cards = []
+    for report in reports:
+        bing = report["bing_ai"]
+        cards.append(f'''
+        <article class="card research-card">
+          <div class="eyebrow">Monthly visibility report</div>
+          <h2><a href="/research/{html.escape(report['slug'])}/">{html.escape(report['title'])}</a></h2>
+          <p>{html.escape(report['summary'])}</p>
+          <div class="badge-row">
+            <span class="badge">{bing['total_citations']:,} AI citations</span>
+            <span class="badge">{bing['cited_page_count']:,} cited pages</span>
+          </div>
+          <p class="meta">Published {html.escape(report['published'])} · Includes downloadable JSON and CSV</p>
+        </article>
+        ''')
+    description = "Original, downloadable datasets tracking how Beat the Scam guidance appears in Google Search and Bing-powered AI answers, with a transparent method."
+    content = f'''
+    <section class="hero research-hero">
+      <div class="wrap">
+        <div class="breadcrumbs"><a href="/">Home</a> / Research</div>
+        <div class="kicker">Open methods · Downloadable data</div>
+        <h1>Research and visibility datasets</h1>
+        <p class="lead">We publish recurring snapshots of search discovery and AI citations so readers, journalists and researchers can inspect the numbers behind our visibility claims.</p>
+        <div class="notice"><strong>Scope:</strong> these reports measure visibility for Beat the Scam. They are not estimates of UK scam incidence, financial loss or population-wide search demand.</div>
+        <div class="hero-actions"><a class="btn btn-secondary" href="/research/methodology/">Read the research method</a></div>
+      </div>
+    </section>
+    <section class="section"><div class="wrap research-list">{''.join(cards)}</div></section>
+    '''
+    schema = page_schema(site, "Research and visibility datasets", description, site["domain"] + "/research/")
+    schema += itemlist_schema(
+        [(report["title"], f'{site["domain"]}/research/{report["slug"]}/') for report in reports],
+        "Beat the Scam research reports",
+    )
+    return make_base(content, title=f'Research & Data | {site["site_name"]}', description=description,
+                     canonical=site["domain"] + "/research/", schema=schema, site=site, ads_mode="none")
+
+
+def render_research_methodology(site):
+    title = "Search and AI visibility research methodology"
+    description = "How Beat the Scam collects, normalises, publishes and interprets Google Search Console and Bing AI Performance visibility data."
+    content = f'''
+    <section class="hero"><div class="wrap">
+      <div class="breadcrumbs"><a href="/">Home</a> / <a href="/research/">Research</a> / Methodology</div>
+      <h1>{title}</h1>
+      <p class="lead">A repeatable method for measuring search discovery, AI citations, consolidation effects and click-through rate without overstating what the data can prove.</p>
+    </div></section>
+    <section class="section"><div class="wrap"><article class="article">
+      <h2>What we measure</h2>
+      <p><strong>Google Search Console:</strong> final web-search clicks, impressions, CTR and average position for the latest complete 28-day period, compared with the immediately preceding equal period. Page and query views are retained internally; the public dataset includes site totals and named focus pages.</p>
+      <p><strong>Bing AI Performance:</strong> total citations, daily cited-page counts, cited URLs and the grounding-query sample supplied by Bing Webmaster Tools. The public report uses the dashboard&#8217;s 30-day exports; a three-month export is retained internally for longer comparisons.</p>
+
+      <h2>Monthly collection process</h2>
+      <ol>
+        <li>Export the 30-day and three-month Overview, Pages and Grounding queries CSV files from Bing AI Performance.</li>
+        <li>Run the measurement script, which retrieves final Search Console data, normalises the Bing exports and creates an immutable dated snapshot.</li>
+        <li>Check totals, date coverage and focus-page mappings before publishing the normalized public JSON and CSV files.</li>
+        <li>Compare equal 28-day periods. Use seven-day results only as an early directional check.</li>
+        <li>For a redirected or consolidated guide, assess the old and new URLs together until the source URL disappears from platform reports.</li>
+      </ol>
+
+      <h2>Interpretation rules</h2>
+      <ul>
+        <li>A Bing citation is a source appearance, not a ranking, endorsement, visit or guarantee of prominent placement.</li>
+        <li>Bing grounding queries are a sample, and Bing&#8217;s generated intent and topic labels can change.</li>
+        <li>Search Console omits anonymized queries; filtering and aggregation can make dimension totals differ.</li>
+        <li>Average position is contextual. We prioritize impressions, clicks and CTR, then use position to diagnose page-level changes.</li>
+        <li>An editorial release is treated as an intervention. A before-and-after change can correlate with the release but does not prove causation.</li>
+        <li>Visibility data for this site is not evidence of national scam prevalence or financial harm.</li>
+      </ul>
+
+      <h2>Privacy and reproducibility</h2>
+      <p>No message submitted to the scam checker, personal information or subscriber data is collected for these reports. Each release names its source periods, publishes normalized files and preserves its raw source exports internally for audit.</p>
+
+      <h2>Primary platform documentation</h2>
+      <ul>
+        <li><a href="https://blogs.bing.com/webmaster/February-2026/Introducing-AI-Performance-in-Bing-Webmaster-Tools-Public-Preview" rel="noopener noreferrer">Bing: AI Performance in Webmaster Tools</a></li>
+        <li><a href="https://support.google.com/webmasters/answer/12919192?hl=en" rel="noopener noreferrer">Google: exporting Search Console performance data</a></li>
+        <li><a href="https://support.google.com/webmasters/answer/17010961?hl=en" rel="noopener noreferrer">Google: common Search Console analysis tasks</a></li>
+      </ul>
+      <p class="note">Method version 1.0 · Published 18 July 2026. Material changes will be documented on this page.</p>
+    </article></div></section>
+    '''
+    return make_base(content, title=f'{title} | {site["site_name"]}', description=description,
+                     canonical=site["domain"] + "/research/methodology/",
+                     schema=page_schema(site, title, description, site["domain"] + "/research/methodology/"),
+                     site=site, ads_mode="none")
+
+
+def render_research_report(site, report):
+    slug = report["slug"]
+    bing = report["bing_ai"]
+    google = report["google_search"]
+    previous = google.get("previous_period", {})
+    previous_focus = google.get("focus_pages_previous", {})
+    def change(current, old):
+        return "n/a" if not old else f"{((current - old) / old * 100):+.1f}%"
+    top_page_rows = "".join(
+        f'<tr><td><a href="{html.escape(row["page"])}">{html.escape(row["page"].replace(site["domain"], ""))}</a></td><td>{row["citations"]:,}</td></tr>'
+        for row in bing["top_pages"][:15]
+    )
+    query_rows = "".join(
+        f'<tr><td>{html.escape(row["grounding_query"])}</td><td>{html.escape(row.get("intent", ""))}</td><td>{row["citations"]:,}</td><td>{html.escape(row.get("citation_share", ""))}</td></tr>'
+        for row in bing["top_grounding_queries"][:15]
+    )
+    focus_rows = []
+    for url, metrics in google["focus_pages"].items():
+        old = previous_focus.get(url, {})
+        focus_rows.append(
+            f'<tr><td>{html.escape(url.replace(site["domain"], ""))}</td>'
+            f'<td>{metrics.get("impressions", 0):g}</td><td>{old.get("impressions", 0):g}</td>'
+            f'<td>{change(metrics.get("impressions", 0), old.get("impressions", 0))}</td>'
+            f'<td>{metrics.get("clicks", 0):g}</td><td>{metrics.get("ctr", 0) * 100:.2f}%</td>'
+            f'<td>{old.get("ctr", 0) * 100:.2f}%</td><td>{metrics.get("position", 0):.1f}</td></tr>'
+        )
+    focus_rows = "".join(focus_rows)
+    consolidation_rows = "".join(
+        f'<tr><td>{html.escape(item["from"].replace(site["domain"], ""))}<br>+ {html.escape(item["to"].replace(site["domain"], ""))}</td>'
+        f'<td>{item["combined_current"]["impressions"]:g}</td><td>{item["combined_previous"]["impressions"]:g}</td>'
+        f'<td>{item["combined_current"]["clicks"]:g}</td><td>{item["combined_previous"]["clicks"]:g}</td>'
+        f'<td>{item["combined_current"]["ctr"] * 100:.2f}%</td><td>{item["combined_previous"]["ctr"] * 100:.2f}%</td></tr>'
+        for item in google.get("consolidations", [])
+    )
+    method_items = "".join(f"<li>{html.escape(item)}</li>" for item in report["method"])
+    limitation_items = "".join(f"<li>{html.escape(item)}</li>" for item in report["limitations"])
+    content = f'''
+    <section class="hero research-hero"><div class="wrap">
+      <div class="breadcrumbs"><a href="/">Home</a> / <a href="/research/">Research</a> / {html.escape(report['title'])}</div>
+      <div class="kicker">Monthly dataset · {html.escape(report['published'])}</div>
+      <h1>{html.escape(report['title'])}</h1>
+      <p class="lead">{html.escape(report['summary'])}</p>
+      <div class="notice"><strong>Read this first:</strong> {html.escape(report['scope_note'])}</div>
+    </div></section>
+
+    <section class="section"><div class="wrap">
+      <div class="stat-strip research-stat-strip">
+        <div class="metric-card"><strong>{bing['total_citations']:,}</strong><span>Bing AI citations</span></div>
+        <div class="metric-card"><strong>{bing['average_cited_pages']:.1f}</strong><span>average cited pages per returned day</span></div>
+        <div class="metric-card"><strong>{google['impressions']:,}</strong><span>Google impressions</span></div>
+        <div class="metric-card"><strong>{google['ctr'] * 100:.2f}%</strong><span>Google click-through rate</span></div>
+      </div>
+    </div></section>
+
+    <section class="section"><div class="wrap"><article class="article research-article">
+      <h2>What the snapshot shows</h2>
+      <p>Between <strong>{html.escape(bing['start_date'])}</strong> and <strong>{html.escape(bing['end_date'])}</strong>, Bing recorded {bing['total_citations']:,} citations across {bing['cited_page_count']:,} Beat the Scam pages. Its export returned {bing['days_returned']} days and {bing['grounding_query_sample_count']:,} sampled grounding queries.</p>
+      <p>Google&#8217;s separate final-data window runs from <strong>{html.escape(google['start_date'])}</strong> to <strong>{html.escape(google['end_date'])}</strong>: {google['impressions']:,} impressions, {google['clicks']:g} clicks, {google['ctr'] * 100:.2f}% CTR and an average position of {google['average_position']:.1f}. Source periods differ because the platforms expose complete data on different schedules.</p>
+      <div class="evidence-table-wrap"><table class="evidence-table"><thead><tr><th>Google signal</th><th>Current 28 days</th><th>Previous 28 days</th><th>Change</th></tr></thead><tbody>
+        <tr><th scope="row">Impressions</th><td>{google['impressions']:,}</td><td>{previous.get('impressions', 0):,}</td><td>{change(google['impressions'], previous.get('impressions', 0))}</td></tr>
+        <tr><th scope="row">Clicks</th><td>{google['clicks']:g}</td><td>{previous.get('clicks', 0):g}</td><td>{change(google['clicks'], previous.get('clicks', 0))}</td></tr>
+        <tr><th scope="row">CTR</th><td>{google['ctr'] * 100:.2f}%</td><td>{previous.get('ctr', 0) * 100:.2f}%</td><td>{(google['ctr'] - previous.get('ctr', 0)) * 100:+.2f} pp</td></tr>
+        <tr><th scope="row">Average position</th><td>{google['average_position']:.1f}</td><td>{previous.get('average_position', 0):.1f}</td><td>{google['average_position'] - previous.get('average_position', 0):+.1f}</td></tr>
+      </tbody></table></div>
+      <p class="note">Both Google periods end before the 18 July editorial release. They are the baseline for future comparisons, not evidence of a post-release effect.</p>
+
+      {_research_chart(bing['daily'])}
+
+      <h2>Most-cited pages</h2>
+      <div class="evidence-table-wrap"><table class="evidence-table"><thead><tr><th>Page</th><th>Citations</th></tr></thead><tbody>{top_page_rows}</tbody></table></div>
+
+      <h2>Sampled grounding queries</h2>
+      <p>Bing describes these as a sample of the queries used to ground AI answers. Citation share is the share Bing reports for the site on that sampled query; it is not conventional search rank.</p>
+      <div class="evidence-table-wrap"><table class="evidence-table"><thead><tr><th>Grounding query</th><th>Intent</th><th>Citations</th><th>Citation share</th></tr></thead><tbody>{query_rows}</tbody></table></div>
+
+      <h2>Google focus-page baseline</h2>
+      <p>These are the pages named before the 18 July editorial release. They create a pre-change baseline for later seven- and 28-day comparisons.</p>
+      <div class="evidence-table-wrap"><table class="evidence-table"><thead><tr><th>Page</th><th>Impr. current</th><th>Impr. previous</th><th>Change</th><th>Clicks current</th><th>CTR current</th><th>CTR previous</th><th>Position current</th></tr></thead><tbody>{focus_rows}</tbody></table></div>
+
+      <h2>Consolidation baseline</h2>
+      <p>Redirect source and target URLs are combined so migration between them cannot be mistaken for a visibility gain or loss.</p>
+      <div class="evidence-table-wrap"><table class="evidence-table"><thead><tr><th>Source + target cluster</th><th>Impr. current</th><th>Impr. previous</th><th>Clicks current</th><th>Clicks previous</th><th>CTR current</th><th>CTR previous</th></tr></thead><tbody>{consolidation_rows}</tbody></table></div>
+
+      <h2>Download the data</h2>
+      <div class="download-grid">
+        <a class="card" href="/research/data/{slug}.json" download><strong>Normalized report</strong><span>JSON · headline, daily, page, query and focus-page data</span></a>
+        <a class="card" href="/research/data/{slug}-bing-daily.csv" download><strong>Bing daily trend</strong><span>CSV · citations and cited pages by day</span></a>
+        <a class="card" href="/research/data/{slug}-bing-pages.csv" download><strong>Bing cited pages</strong><span>CSV · top 25 published pages</span></a>
+        <a class="card" href="/research/data/{slug}-bing-queries.csv" download><strong>Bing query sample</strong><span>CSV · top 25 published grounding queries</span></a>
+        <a class="card" href="/research/data/{slug}-gsc-focus-pages.csv" download><strong>Google comparisons</strong><span>CSV · focus pages and consolidation clusters across equal periods</span></a>
+      </div>
+
+      <h2>Method</h2><ol>{method_items}</ol>
+      <h2>Limitations</h2><ul>{limitation_items}</ul>
+      <p><a href="/research/methodology/">Read the full recurring measurement method</a>.</p>
+    </article></div></section>
+    '''
+    schema = research_dataset_schema(site, report)
+    schema += breadcrumb_schema([
+        ("Home", site["domain"] + "/"),
+        ("Research", site["domain"] + "/research/"),
+        (report["title"], f'{site["domain"]}/research/{slug}/'),
+    ])
+    return make_base(content, title=seo_title(report["title"], site["site_name"], brand=False),
+                     description=report["summary"], canonical=f'{site["domain"]}/research/{slug}/',
+                     schema=schema, site=site, og_type="article", ads_mode="none")
+
+
+def _csv_text(fieldnames, rows):
+    buffer = io.StringIO(newline="")
+    writer = csv.DictWriter(buffer, fieldnames=fieldnames, lineterminator="\n")
+    writer.writeheader()
+    writer.writerows(rows)
+    return buffer.getvalue()
+
+
+def write_research_data(report):
+    slug = report["slug"]
+    target = DIST / "research" / "data"
+    bing = report["bing_ai"]
+    google = report["google_search"]
+    write(target / f"{slug}.json", json.dumps(report, ensure_ascii=False, indent=2))
+    write(target / f"{slug}-bing-daily.csv", _csv_text(["date", "citations", "cited_pages"], bing["daily"]))
+    write(target / f"{slug}-bing-pages.csv", _csv_text(["page", "citations"], bing["top_pages"]))
+    write(target / f"{slug}-bing-queries.csv", _csv_text(
+        ["grounding_query", "intent", "topic", "citations", "citation_share"],
+        bing["top_grounding_queries"],
+    ))
+    previous_focus = google.get("focus_pages_previous", {})
+    focus_rows = []
+    for url, metrics in google["focus_pages"].items():
+        old = previous_focus.get(url, {})
+        focus_rows.append({
+            "row_type": "focus_page", "page_or_cluster": url,
+            "current_clicks": metrics.get("clicks", 0),
+            "previous_clicks": old.get("clicks", 0),
+            "current_impressions": metrics.get("impressions", 0),
+            "previous_impressions": old.get("impressions", 0),
+            "current_ctr": metrics.get("ctr", 0),
+            "previous_ctr": old.get("ctr", 0),
+            "current_position": metrics.get("position", 0),
+            "previous_position": old.get("position", 0),
+        })
+    for item in google.get("consolidations", []):
+        current = item["combined_current"]
+        old = item["combined_previous"]
+        focus_rows.append({
+            "row_type": "consolidation", "page_or_cluster": f'{item["from"]} + {item["to"]}',
+            "current_clicks": current["clicks"], "previous_clicks": old["clicks"],
+            "current_impressions": current["impressions"], "previous_impressions": old["impressions"],
+            "current_ctr": current["ctr"], "previous_ctr": old["ctr"],
+            "current_position": current["position"], "previous_position": old["position"],
+        })
+    write(target / f"{slug}-gsc-focus-pages.csv", _csv_text(
+        ["row_type", "page_or_cluster", "current_clicks", "previous_clicks",
+         "current_impressions", "previous_impressions", "current_ctr", "previous_ctr",
+         "current_position", "previous_position"], focus_rows,
+    ))
+
+
 def render_simple_page(site, title, description, body, slug):
     content = f'''
     <section class="hero">
@@ -2986,6 +3352,7 @@ def linkify_phones(html_str: str) -> str:
 def build():
     site     = read_json(ROOT / 'content/site.json')
     raw_posts = read_json(ROOT / 'content/posts.json')
+    research_reports = load_research_reports(ROOT)
 
     affiliates = load_affiliates(ROOT)
     sources    = load_sources(ROOT)
@@ -3090,7 +3457,7 @@ def build():
             if src.is_file():
                 shutil.copy2(src, DIST / src.name)
 
-    write(DIST / 'index.html',       render_home(site, posts, categories))
+    write(DIST / 'index.html',       render_home(site, posts, categories, research_reports))
     write(DIST / 'categories/index.html', render_categories_index(site, categories))
     for cat, items in categories.items():
         write(DIST / 'categories' / slugify(cat) / 'index.html', render_category_page(site, cat, items, categories, hub=category_hubs.get(cat)))
@@ -3129,6 +3496,14 @@ def build():
         print(f"  Generated {og_gen_count} per-post OG images in /assets/og/")
 
     write(DIST / 'check/index.html', render_check_page(site))
+
+    # Public research section. Reports are generated from retained, dated
+    # platform snapshots and rendered ad-free with normalized downloads.
+    write(DIST / 'research/index.html', render_research_index(site, research_reports))
+    write(DIST / 'research/methodology/index.html', render_research_methodology(site))
+    for report in research_reports:
+        write(DIST / 'research' / report['slug'] / 'index.html', render_research_report(site, report))
+        write_research_data(report)
 
     about, privacy, cookies, terms, contact, disclaimer, methodology, corrections, recovery = build_legal_bodies(site)
     write(DIST / 'about/index.html',   render_simple_page(site, 'About',          'Beat the Scam is a free UK consumer protection site. Learn who runs it, how it is funded, and how the AI scam checker works.',        about,   'about'))
@@ -3224,6 +3599,8 @@ def build():
         '/methodology/': RECENT_LASTMOD,
         '/corrections/': RECENT_LASTMOD,
         '/recovery/':    RECENT_LASTMOD,
+        '/research/':    max((r['published'] for r in research_reports), default=RECENT_LASTMOD),
+        '/research/methodology/': RECENT_LASTMOD,
         # /author/ only renders when site.json has an author_profile — keep the
         # sitemap consistent with what was actually written to dist/.
         **({'/author/': STATIC_LASTMOD} if author_rendered else {}),
@@ -3251,6 +3628,12 @@ def build():
         sitemap_lines.append(
             f'<url><loc>{site["domain"]}/guides/{p["slug"]}/</loc>'
             f'<lastmod>{post_lastmod}</lastmod><changefreq>monthly</changefreq></url>'
+        )
+
+    for report in research_reports:
+        sitemap_lines.append(
+            f'<url><loc>{site["domain"]}/research/{report["slug"]}/</loc>'
+            f'<lastmod>{report["published"]}</lastmod><changefreq>monthly</changefreq></url>'
         )
 
     for cat, items in categories.items():
@@ -3310,10 +3693,20 @@ def build():
         "# Beat The Scam",
         "",
         "> Independent, plain-English UK consumer-protection publication covering scams, fraud, and checks to run before paying. Guides use AI-assisted drafting followed by editorial review and an automated accuracy gate.",
-        "",
-        "## Categories",
-        "",
     ]
+    if research_reports:
+        llms_lines.extend(["", "## Research and datasets", ""])
+        llms_lines.append(
+            f'- [Research index]({domain}/research/): recurring search-discovery and AI-citation reports with downloadable normalized data'
+        )
+        llms_lines.append(
+            f'- [Research methodology]({domain}/research/methodology/): collection cadence, source definitions, interpretation rules and limitations'
+        )
+        for report in research_reports:
+            llms_lines.append(
+                f'- [{report["title"]}]({domain}/research/{report["slug"]}/): {report["summary"]}'
+            )
+    llms_lines.extend(["", "## Categories", ""])
     sorted_cats = sorted(categories.keys(), key=lambda c: category_label(c).lower())
     for cat in sorted_cats:
         llms_lines.append(

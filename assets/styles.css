@@ -222,6 +222,31 @@ p{margin:.75rem 0}
   .checker-promo{grid-template-columns:1fr}
 }
 
+/* ─── RESEARCH & DATA ────────────────────────────────────────────────── */
+.research-promo{display:grid;grid-template-columns:1.25fr .75fr;gap:1.5rem;align-items:center;padding:1.8rem 2rem}
+.research-promo h2{color:#fff;margin:.65rem 0 .5rem}
+.research-promo-metrics{display:grid;gap:.65rem}
+.research-promo-metrics div{padding:.85rem 1rem;border:1px solid rgba(255,255,255,.14);border-radius:16px;background:rgba(255,255,255,.06)}
+.research-promo-metrics strong{display:block;color:#fff;font-size:1.55rem;line-height:1.1}
+.research-promo-metrics span{color:rgba(255,255,255,.75);font-size:.9rem}
+.research-hero h1{font-size:clamp(2.2rem,4vw,3.7rem);max-width:18ch}
+.research-list{display:grid;gap:1rem}
+.research-card h2{font-size:clamp(1.45rem,2vw,2rem)}
+.research-article{max-width:none}
+.research-chart{margin:1.5rem 0;padding:1rem;border:1px solid var(--line);border-radius:18px;background:#f8fbff}
+.research-chart svg{display:block;width:100%;height:auto;overflow:visible}
+.chart-axis{stroke:#a8b8ca;stroke-width:1}
+.chart-line{fill:none;stroke:var(--accent);stroke-width:4;stroke-linecap:round;stroke-linejoin:round}
+.chart-label{fill:var(--muted);font:13px Inter,system-ui,sans-serif}
+.research-chart figcaption{margin-top:.5rem;color:var(--muted);font-size:.92rem}
+.download-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:.75rem;margin:1rem 0 1.5rem}
+.download-grid a{display:flex;flex-direction:column;gap:.3rem;color:var(--text);padding:1rem}
+.download-grid a:hover{border-color:#9bb8e8;text-decoration:none}
+.download-grid span{color:var(--muted);font-size:.92rem}
+@media(max-width:1100px){
+  .research-promo,.download-grid{grid-template-columns:1fr}
+}
+
 /* ─── AFFILIATE CARD ─────────────────────────────────────────────────── */
 .affiliate-card{border-color:#e2d9f3;background:linear-gradient(135deg,#faf8ff,#f5f0ff)}
 .affiliate-card .btn-secondary{border-color:#c4b5fd;color:#5b21b6}

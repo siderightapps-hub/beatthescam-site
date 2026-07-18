@@ -2,6 +2,12 @@
 
 > Independent, plain-English UK consumer-protection publication covering scams, fraud, and checks to run before paying. Guides use AI-assisted drafting followed by editorial review and an automated accuracy gate.
 
+## Research and datasets
+
+- [Research index](https://beatthescam.com/research/): recurring search-discovery and AI-citation reports with downloadable normalized data
+- [Research methodology](https://beatthescam.com/research/methodology/): collection cadence, source definitions, interpretation rules and limitations
+- [UK Scam Guidance Visibility Report — July 2026](https://beatthescam.com/research/uk-scam-search-ai-trends-2026-07/): An original monthly snapshot of how UK scam guidance is discovered in Google Search and cited across Microsoft Copilot, Bing AI answers and selected partners.
+
 ## Categories
 
 - [Crypto Scams](https://beatthescam.com/categories/crypto/): 8 guide(s)

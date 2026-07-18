@@ -4,6 +4,7 @@
 from __future__ import annotations
 
 import json
+import csv
 import sys
 from html.parser import HTMLParser
 from pathlib import Path
@@ -135,6 +136,58 @@ def main() -> int:
     if "adsbygoogle" in recovery or 'data-ad-slot=' in recovery:
         errors.append("recovery page must remain ad-free")
 
+    research_index = DIST / "research" / "index.html"
+    research_method = DIST / "research" / "methodology" / "index.html"
+    if not research_index.is_file() or not research_method.is_file():
+        errors.append("research index and methodology pages must be generated")
+    for source_path in sorted((ROOT / "content" / "research").glob("*.json")):
+        report = json.loads(source_path.read_text(encoding="utf-8"))
+        slug = report["slug"]
+        report_path = DIST / "research" / slug / "index.html"
+        data_dir = DIST / "research" / "data"
+        expected_data = [
+            data_dir / f"{slug}.json",
+            data_dir / f"{slug}-bing-daily.csv",
+            data_dir / f"{slug}-bing-pages.csv",
+            data_dir / f"{slug}-bing-queries.csv",
+            data_dir / f"{slug}-gsc-focus-pages.csv",
+        ]
+        if not report_path.is_file():
+            errors.append(f"research report missing: {slug}")
+            continue
+        report_html = report_path.read_text(encoding="utf-8")
+        if "adsbygoogle" in report_html or 'data-ad-slot=' in report_html:
+            errors.append(f"research report must remain ad-free: {slug}")
+        report_parser = pages.get(report_path)
+        schema_types = []
+        if report_parser:
+            for payload in report_parser.json_ld:
+                value = json.loads(payload)
+                schema_types.append(value.get("@type"))
+        if "Dataset" not in schema_types:
+            errors.append(f"research report missing Dataset schema: {slug}")
+        for data_path in expected_data:
+            if not data_path.is_file() or not data_path.read_text(encoding="utf-8").strip():
+                errors.append(f"research download missing or empty: {data_path.name}")
+        public_json = data_dir / f"{slug}.json"
+        if public_json.is_file() and json.loads(public_json.read_text(encoding="utf-8")) != report:
+            errors.append(f"published research JSON differs from source: {slug}")
+        daily_csv = data_dir / f"{slug}-bing-daily.csv"
+        if daily_csv.is_file():
+            with daily_csv.open(encoding="utf-8", newline="") as handle:
+                daily_rows = list(csv.DictReader(handle))
+            if len(daily_rows) != report["bing_ai"]["days_returned"]:
+                errors.append(f"Bing daily CSV row count mismatch: {slug}")
+
+    for research_html in sorted((DIST / "research").rglob("*.html")):
+        text = research_html.read_text(encoding="utf-8")
+        if "adsbygoogle" in text or 'data-ad-slot=' in text:
+            errors.append(f"research page must remain ad-free: {research_html.relative_to(DIST)}")
+
+    llms_text = (DIST / "llms.txt").read_text(encoding="utf-8")
+    if "## Research and datasets" not in llms_text or "/research/methodology/" not in llms_text:
+        errors.append("llms.txt must expose research reports and methodology")
+
     if errors:
         print("FAIL")
         for error in errors:
@@ -146,7 +199,7 @@ def main() -> int:
         f"OK — {len(html_files)} HTML files; {len(sitemap_urls)} indexable canonicals; "
         f"{json_ld_blocks} JSON-LD blocks; 0 broken local links"
     )
-    print("Priority evidence contracts and ad-free recovery page: OK")
+    print("Priority evidence contracts plus ad-free recovery and research pages: OK")
     return 0
 
 

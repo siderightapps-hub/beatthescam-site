@@ -1,0 +1,25 @@
+{
+  "schema_version": 1,
+  "interventions": [
+    {
+      "id": "2026-07-18-audit-growth-release",
+      "date": "2026-07-18",
+      "description": "Accuracy remediation, five intent-led guide rewrites, Hermes/Evri consolidation, recovery hub, evidence snapshots and IndexNow deployment.",
+      "measurement_windows_days": [7, 28],
+      "focus_urls": [
+        "https://beatthescam.com/guides/dpd-delivery-scam-text/",
+        "https://beatthescam.com/guides/bank-text-codes-not-arriving/",
+        "https://beatthescam.com/guides/halifax-bank-scam-text-uk/",
+        "https://beatthescam.com/guides/nhs-appointment-scam-text-uk/",
+        "https://beatthescam.com/guides/dvla-vehicle-tax-text-scam/",
+        "https://beatthescam.com/recovery/"
+      ],
+      "consolidations": [
+        {
+          "from": "https://beatthescam.com/guides/hermes-parcel-scam-text-uk/",
+          "to": "https://beatthescam.com/guides/evri-delivery-scam-guide/"
+        }
+      ]
+    }
+  ]
+}
