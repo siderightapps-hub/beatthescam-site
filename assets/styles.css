@@ -81,6 +81,8 @@ p{margin:.75rem 0}
 .btn-primary{background:var(--accent);color:#fff}
 .btn-dark{background:var(--brand);color:#fff}
 .btn-secondary{background:#fff;color:var(--brand);border-color:var(--line)}
+.btn-recovery{background:#fef3c7;color:#78350f;border-color:#fcd34d}
+.btn-recovery:hover{background:#fde68a;text-decoration:none}
 .card h3 a,.guide-card h3 a,.category-card h3 a{color:var(--brand)}
 .guide-card{display:flex;flex-direction:column;gap:.6rem;padding:1.2rem}
 .eyebrow{display:inline-flex;align-items:center;gap:.45rem;font-size:.78rem;font-weight:900;text-transform:uppercase;letter-spacing:.08em;color:var(--danger)}

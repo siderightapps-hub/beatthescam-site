@@ -1086,8 +1086,9 @@ def render_home(site, posts, categories):
           <h1>Check scams. Protect your money.</h1>
           <p class="lead">Beat the Scam helps you review suspicious texts, emails, websites, calls, job offers, crypto pitches, and payment requests before money or data is lost.</p>
           <div class="hero-actions">
-            <a class="btn btn-primary" href="/guides/">Browse guides</a>
-            <a class="btn btn-secondary" href="/check/">Check a message</a>
+            <a class="btn btn-primary" href="/check/">Check a message</a>
+            <a class="btn btn-recovery" href="/recovery/">Recover after a scam</a>
+            <a class="btn btn-secondary" href="/guides/">Browse guides</a>
           </div>
           <div class="hero-points">
             <div class="hero-point"><strong>{post_count}</strong><span>guides published</span></div>
