@@ -491,6 +491,18 @@ _7726_NON_SMS_RE = re.compile(
 _APP_REIMBURSEMENT_ABSOLUTE_RE = re.compile(
     r"\b(?:UK\s+)?banks?\b[^.]{0,35}\b(?:must|are\s+required\s+to)\b"
     r"[^.]{0,35}\breimburse\b[^.]{0,60}\b(?:five|5)\s+(?:business\s+)?days?\b", re.I)
+_COURIER_PAYMENT_ABSOLUTE_RE = re.compile(
+    r"\b(?:DPD|Royal\s+Mail|couriers?)\b[^.]{0,80}\b(?:never|do(?:es)?\s+not|won['’]t|will\s+not)\b"
+    r"[^.]{0,45}\b(?:asks?|requested?|requests?|sends?|includes?|contains?)\b[^.]{0,35}\b(?:payment|pay|fee|card)\b", re.I)
+_RETAILER_COMPANY_ABSOLUTE_RE = re.compile(
+    r"\b(?:legitimate|genuine|real)\s+(?:UK\s+)?retailers?\b[^.]{0,80}"
+    r"\b(?:registered\s+company\s+number|registered[^.]{0,20}Companies\s+House)\b", re.I)
+_AMAZON_COLD_CALL_ABSOLUTE_RE = re.compile(
+    r"\bAmazon\b[^.]{0,45}\b(?:does\s+not|doesn['’]t|never)\b[^.]{0,25}\bcold[- ]?call", re.I)
+_PAYPAL_180_GENERIC_RE = re.compile(
+    r"\bPayPal\b[^.]{0,90}\b(?:dispute|claim)\b[^.]{0,40}\bwithin\s+180\s+days\b", re.I)
+_SECTION75_INCLUSIVE_RE = re.compile(
+    r"\bSection\s+75\b[^.]{0,90}(?:£\s*100\s+(?:to|-)|card\s+payments?\s+(?:over|above)\s+£\s*100)", re.I)
 def check_uk_advice_flags(post: Dict) -> List[Dict]:
     text = _post_text(post)
     issues: List[Dict] = []
@@ -523,10 +535,26 @@ def check_uk_advice_flags(post: Dict) -> List[Dict]:
                                   "limits 7726 forwarding to SMS; RCS, iMessage and app messages should use "
                                   "their relevant built-in reporting tools.")})
     if _APP_REIMBURSEMENT_ABSOLUTE_RE.search(text):
-        issues.append({"check": "app_reimbursement_scope", "severity": SEVERITY_FLAG,
+        issues.append({"check": "app_reimbursement_scope", "severity": SEVERITY_BLOCK,
                        "span": re.sub(r"\s+", " ", _APP_REIMBURSEMENT_ABSOLUTE_RE.search(text).group(0))[:140],
                        "detail": ("oversimplifies mandatory APP reimbursement. State the eligible claimants and "
                                   "payment rails, exceptions, possible excess, cap, normal timetable and stop-clock.")})
+    for rx, check, detail in (
+        (_COURIER_PAYMENT_ABSOLUTE_RE, "courier_payment_absolute",
+         "blanket claim that a courier never requests payment. Genuine import duties/taxes can be notified electronically; distinguish standard redelivery scams and require independent parcel verification."),
+        (_RETAILER_COMPANY_ABSOLUTE_RE, "retailer_company_absolute",
+         "treats Companies House registration as universal proof. Legitimate sole traders are not Companies House companies; apply that check only to a business claiming to be incorporated."),
+        (_AMAZON_COLD_CALL_ABSOLUTE_RE, "amazon_cold_call_absolute",
+         "claims Amazon never cold-calls. Use the sourced rules on OTPs/confidential information and tell readers to verify an unexpected call through their account."),
+        (_PAYPAL_180_GENERIC_RE, "paypal_deadline",
+         "gives a generic 180-day PayPal deadline. Item Not Received and Significantly Not as Described have different current deadlines; tell readers to open the Resolution Centre immediately and state both rules."),
+        (_SECTION75_INCLUSIVE_RE, "section75_scope",
+         "misstates Section 75 as inclusive of £100 or as generic card protection. Use a qualifying credit purchase with a cash price over £100 and no more than £30,000, subject to the required relationship."),
+    ):
+        m = rx.search(text)
+        if m:
+            issues.append({"check": check, "severity": SEVERITY_BLOCK,
+                           "span": re.sub(r"\s+", " ", m.group(0))[:160], "detail": detail})
     return issues
 
 

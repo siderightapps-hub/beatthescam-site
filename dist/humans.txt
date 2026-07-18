@@ -9,6 +9,8 @@ Name: Alex Bacsa
 Notes: Independent educational publication. Not a law firm, bank, or regulator.
 Methodology: see https://beatthescam.com/methodology/
 
+Corrections: see https://beatthescam.com/corrections/
+
 /* SOURCES */
 Report Fraud — https://www.reportfraud.police.uk/
 NCSC — https://www.ncsc.gov.uk/
@@ -16,4 +18,4 @@ Citizens Advice — https://www.citizensadvice.org.uk/consumer/scams/
 FCA Firm Checker — https://www.fca.org.uk/consumers/fca-firm-checker
 
 /* LAST UPDATE */
-2026-07-17
+2026-07-18
