@@ -11,22 +11,22 @@
 ## Categories
 
 - [Crypto Scams](https://beatthescam.com/categories/crypto/): 8 guide(s)
-- [Email Scams](https://beatthescam.com/categories/email/): 13 guide(s)
+- [Email Scams](https://beatthescam.com/categories/email/): 15 guide(s)
 - [Employment Scams](https://beatthescam.com/categories/employment/): 8 guide(s)
-- [Fraud & Impersonation](https://beatthescam.com/categories/fraud/): 8 guide(s)
-- [Government Impersonation](https://beatthescam.com/categories/government/): 8 guide(s)
+- [Fraud & Impersonation](https://beatthescam.com/categories/fraud/): 9 guide(s)
+- [Government Impersonation](https://beatthescam.com/categories/government/): 10 guide(s)
 - [Investment & Finance Scams](https://beatthescam.com/categories/finance/): 11 guide(s)
 - [Marketplace Scams](https://beatthescam.com/categories/marketplace/): 15 guide(s)
-- [Payment Scams](https://beatthescam.com/categories/payment/): 13 guide(s)
-- [Phone Scams](https://beatthescam.com/categories/phone/): 12 guide(s)
+- [Payment Scams](https://beatthescam.com/categories/payment/): 14 guide(s)
+- [Phone Scams](https://beatthescam.com/categories/phone/): 13 guide(s)
 - [Romance & Dating Scams](https://beatthescam.com/categories/dating/): 4 guide(s)
 - [Shopping Scams](https://beatthescam.com/categories/shopping/): 7 guide(s)
 - [Social Media Scams](https://beatthescam.com/categories/social/): 5 guide(s)
-- [Tech Support Scams](https://beatthescam.com/categories/tech/): 8 guide(s)
+- [Tech Support Scams](https://beatthescam.com/categories/tech/): 10 guide(s)
 - [Text Message Scams](https://beatthescam.com/categories/sms/): 23 guide(s)
-- [Travel Scams](https://beatthescam.com/categories/travel/): 13 guide(s)
+- [Travel Scams](https://beatthescam.com/categories/travel/): 14 guide(s)
 - [Utility Scams](https://beatthescam.com/categories/utility/): 3 guide(s)
-- [Website Scams](https://beatthescam.com/categories/website/): 10 guide(s)
+- [Website Scams](https://beatthescam.com/categories/website/): 12 guide(s)
 
 ## Guides
 
@@ -44,12 +44,14 @@
 ### Email Scams
 
 - [Amazon Scam Emails: How to Spot a Fake Amazon Email (UK)](https://beatthescam.com/guides/amazon-order-scam-email-checklist/): Got an Amazon email about an order problem, refund, or 'account locked'? How to tell a genuine Amazon email from a phishing scam — and check safely.
+- [CEO Fraud Email Scam UK: Spot a Fake Boss Request](https://beatthescam.com/guides/ceo-fraud-email-scam-uk/): A message appears to come from a senior colleague and requests an urgent payment or sensitive data. Verify it through a separate trusted channel.
 - [Companies House Email Scam UK: How to Check and Report a Message](https://beatthescam.com/guides/companies-house-email-scam-uk/): Fake Companies House emails use urgent verification, filing or payment claims. Learn how to check a message safely and report phishing in the UK.
 - [DVLA Email Scam UK: Spot a Fake Tax or Fine Email](https://beatthescam.com/guides/dvla-email-scam-uk/): Got a DVLA email about car tax, a refund, a fine, or your licence? How to spot a fake DVLA email, check safely on GOV.UK, and report it in the UK.
 - [Email Account Takeover UK: Recover and Lock It Down](https://beatthescam.com/guides/email-account-takeover-scam-uk/): Recover a compromised email account, remove forwarding rules and reused credentials, and use a passkey or two-step verification to secure it.
 - [Festival Lineup Email Scam UK: Spot a Fake Presale](https://beatthescam.com/guides/festival-lineup-email-scam-uk/): Got an email about a festival lineup announcement with a presale ticket link? How to spot a fake festival email scam and buy tickets safely.
 - [HMRC Tax Rebate Email Scam: Spot a Fake (UK)](https://beatthescam.com/guides/hmrc-tax-rebate-email-scam/): An HMRC email saying you're owed a tax rebate, with a link to claim? Real rebates aren't claimed through an email link — how to spot the scam and check safely.
 - [HSBC Phishing Email Scam UK: Spot a Fake Message](https://beatthescam.com/guides/hsbc-phishing-email-scam-uk/): An email claiming to be HSBC asks you to verify your details urgently, or risk suspension? Check it carefully before you click anything.
+- [Microsoft Account Suspended Scam Email: How to Spot It](https://beatthescam.com/guides/microsoft-account-suspended-email-scam-uk/): A fake Microsoft email claims unusual activity or suspension and links to a bogus sign-in page. Open your Microsoft account directly instead.
 - [NatWest Phishing Emails: Spot a Fake NatWest Email (UK)](https://beatthescam.com/guides/natwest-phishing-email-uk/): A NatWest email about 'unusual activity' or 'verify your account', with a button to click? How to tell a genuine NatWest email from phishing — and check safely.
 - [Netflix Billing Email Scam UK: Spot a Fake Message](https://beatthescam.com/guides/netflix-billing-email-scam-uk/): An email says your Netflix payment failed and your account will be suspended? Check it before clicking — genuine Netflix never asks this way.
 - [PayPal Account Limited Email Scam UK](https://beatthescam.com/guides/paypal-account-limited-email-scam-uk/): An email says your PayPal account is limited and you must verify now? Log in directly instead. Genuine emails use your account name.
@@ -71,6 +73,7 @@
 ### Fraud & Impersonation
 
 - [Charity Scam UK: Spot a Fake Donation Appeal](https://beatthescam.com/guides/charity-donation-scam-checklist/): Asked to donate to a charity appeal by phone, text, or social media? How to spot a fake charity scam, check it's genuine, and give safely in the UK.
+- [Conveyancing Fraud UK: Stop “Friday Afternoon Fraud”](https://beatthescam.com/guides/conveyancing-fraud-uk/): Criminals alter conveyancing emails and redirect completion money. Establish bank details early and verify any change through a trusted channel.
 - [Deed Fraud: Protect Property in England and Wales](https://beatthescam.com/guides/deed-fraud-uk-property-scam/): Criminals may impersonate an owner to sell or mortgage a property. HM Land Registry offers alerts and title restrictions in England and Wales.
 - [Driveway Cowboy Scam UK: Spot a Fake Contractor](https://beatthescam.com/guides/driveway-cowboy-scam-uk/): An unsolicited caller offers cheap driveway or roof repairs using 'leftover materials'? How to spot a doorstep cowboy trader and report it in the UK.
 - [Google Voice Verification Code Scam UK: Don't Share That Code](https://beatthescam.com/guides/google-voice-verification-scam/): Someone asks you to read back a Google verification code to 'prove you're real'? It's a scam to hijack your number. Here's how it works and what to do.
@@ -82,6 +85,8 @@
 ### Government Impersonation
 
 - [Benefits Fraud Text Scam UK: Spot a Fake DWP Text](https://beatthescam.com/guides/benefits-fraud-text-scam-uk/): Fake DWP texts use benefit reviews or payments to steal personal and bank details. Do not use the link; check through your official benefit account.
+- [Companies House Scam Letter UK: Spot a Fake Fee Demand](https://beatthescam.com/guides/companies-house-scam-letter-uk/): Fake Companies House letters demand invented registration or filing fees. Check the official register and current fees before paying or scanning a QR code.
+- [Council Housing Scam UK: Spot a Fake Housing Offer](https://beatthescam.com/guides/council-housing-scam-uk/): A criminal claims they can sell a council home, priority or a guaranteed place. Apply and verify offers through the local council's official channels.
 - [Fake Court Summons Email UK: Check Before You Panic](https://beatthescam.com/guides/court-summons-scam-email-uk/): An email claims you've an unpaid fine or court date and must act now? Check the HMCTS domain and verify through official court details.
 - [HMRC Self Assessment Scam UK: Fake Refund & Tax Bill Texts](https://beatthescam.com/guides/hmrc-self-assessment-scam-uk/): Fake HMRC messages spike around Self Assessment deadlines, claiming a refund or overdue bill. HMRC never asks you to 'confirm' bank details by text.
 - [Passport Renewal Scam UK: Spot a Fake HMPO Message](https://beatthescam.com/guides/passport-renewal-scam-uk/): A text or email says your passport application needs an urgent extra fee? Check your own application on gov.uk first. How to spot the fake message.
@@ -132,6 +137,7 @@
 - [Invoice Redirection Scam UK: Spot Fake Payment Requests](https://beatthescam.com/guides/invoice-redirection-scam-checklist/): A supplier email says their bank details have changed? Verify it by phone on a number you already have — never one from the email itself.
 - [Monzo Scam UK: Spot a Fake 'Suspicious Activity' Alert](https://beatthescam.com/guides/monzo-scam-transfer-uk/): Got a call, text, or in-app message claiming 'suspicious activity' on your Monzo account? How to spot a Monzo scam, check safely, and report it in the UK.
 - [Overpayment Scam UK: Do Not Send a Separate Refund](https://beatthescam.com/guides/overpayment-scam-uk/): A buyer claims to have paid too much and wants money sent elsewhere. Verify the payment in your own account and ask the provider to reverse it safely.
+- [PayPal Friends and Family Scam: Why Sellers Ask for It](https://beatthescam.com/guides/paypal-friends-family-scam-uk/): PayPal Friends and Family payments are not eligible for Buyer Protection. Use Goods and Services for an eligible purchase and report scam payments promptly.
 - [Revolut Scam UK: Spot a Fake 'Security' Contact](https://beatthescam.com/guides/revolut-scam-uk/): A message or call claims to be Revolut security asking you to move money to a 'safe account'? Stop and check inside the Revolut app.
 - [Starling Bank Scam UK: Spot a Fake Fraud Alert](https://beatthescam.com/guides/starling-bank-scam-uk/): Got a text, call, or email claiming to be Starling about suspicious activity on your account? How to spot a Starling scam and report it in the UK.
 - [Wedding Photographer Scam UK: Verify Before You Book](https://beatthescam.com/guides/wedding-photographer-scam-uk/): A portfolio and social profile can be copied. Verify the photographer, contract and payment recipient, and understand card protection before paying.
@@ -151,6 +157,7 @@
 - [Police Impersonation Scam UK: Spot a Fake Officer Call](https://beatthescam.com/guides/police-impersonation-scam-call-uk/): A 'police officer' says your money is at risk and you must move it or help an investigation? How to spot the scam and report it in the UK.
 - [Santander Phone Scam UK: What the Callers Say and How to Hang Up Safely](https://beatthescam.com/guides/santander-phone-scam-uk/): Callers posing as Santander's fraud team push you to confirm details, share codes or move money to a safe account. How to spot the scam and hang up.
 - [Solar Panel Cold Caller Scam UK: Spot the Warning Signs](https://beatthescam.com/guides/solar-panel-cold-caller-scam-uk/): Got an unsolicited call or doorstep visit offering free solar panels or a 'government grant'? How to spot a solar panel cold-calling scam in the UK.
+- [TalkTalk Scam Call UK: Spot a Fake Support Call](https://beatthescam.com/guides/talktalk-scam-call-uk/): Fake TalkTalk callers claim a fault or refund and request passwords, bank details or remote access. Hang up and call TalkTalk through an official route.
 - [Virgin Media Scam Call UK: How to Spot a Fake Caller](https://beatthescam.com/guides/virgin-media-scam-call-uk/): A 'Virgin Media' caller warns of a virus and wants remote access to your device? Hang up and verify through Virgin Media's official channels.
 
 ### Romance & Dating Scams
@@ -183,8 +190,10 @@
 - [AI Voice Cloning Scam UK: A Call That Isn't Them](https://beatthescam.com/guides/ai-voice-cloning-scam-uk/): A call sounds exactly like your relative but something feels off? AI can clone a voice from a short public clip — here's how to check safely.
 - [Apple Tech Support Scam UK: Spot a Fake Pop-up](https://beatthescam.com/guides/apple-tech-support-scam-uk/): Got a pop-up or call saying your iPhone or Mac is infected and Apple support needs access? How to spot an Apple tech support scam and report it.
 - [Deepfake Sextortion UK: Fake Images or Video as Leverage](https://beatthescam.com/guides/deepfake-video-scam-uk/): Criminals can use AI-generated sexual images or video in sextortion. Stop contact, do not pay, preserve evidence and use the correct UK support route.
+- [Fake Wi-Fi Hotspot Scam UK: Verify the Network](https://beatthescam.com/guides/fake-wifi-hotspot-scam-uk/): An “evil twin” copies a legitimate Wi-Fi name. Ask the venue for the correct network and prefer mobile data for sensitive activity.
 - [ISP Impersonation Scams UK: BT, Sky, Virgin Media and Openreach Calls](https://beatthescam.com/guides/isp-impersonation-scam-bt-sky-virgin-media/): Scammers impersonate UK broadband providers or Openreach, then ask for remote access, payment or security details. How to check safely.
 - [Microsoft Support Scam UK: Spot Fake PC Virus Calls](https://beatthescam.com/guides/microsoft-support-scam-uk-guide/): Got a call or pop-up saying your PC is infected and Microsoft needs remote access? How to spot a Microsoft support scam and report it.
+- [Printer Support Scam UK: Spot a Fake HP Contact](https://beatthescam.com/guides/printer-support-scam-uk/): An unsolicited caller or pop-up claims a printer fault and asks for remote access or payment. HP says it does not provide unsolicited technical support.
 - [QR Code Scam UK: Spot a Fake 'Quishing' Code](https://beatthescam.com/guides/qr-code-scam-uk/): A QR code sticker looks slightly different from the one next to it? That mismatch is the clearest sign of a tampered parking or payment code.
 - [Remote Access Scam UK: What the Software Can Expose](https://beatthescam.com/guides/remote-access-scam-uk/): Remote-access tools are legitimate but can expose apps, files and banking when granted to a scammer. Disconnect, contact the bank and secure the device.
 - [SIM Swap Fraud UK: Warning Signs & What to Do](https://beatthescam.com/guides/sim-swap-fraud-uk/): Suddenly lost mobile signal with no clear reason why? Here's what a SIM swap fraud attempt looks like, and exactly how to respond fast.
@@ -222,6 +231,7 @@
 - [Cruise Scam UK: Spot Fake Deals and Book Safely](https://beatthescam.com/guides/cruise-scam-uk/): Cruise scams use fake deals, "free cruise" prizes and bogus booking sites to take your money. How to spot one, book safely and get your money back.
 - [Fake Airline Ticket Scam UK: Spot a Bargain Flight Con](https://beatthescam.com/guides/fake-airline-ticket-scam-uk/): Found flights far cheaper than anywhere else, advertised on social media or by a 'travel agent'? How to spot a fake airline ticket scam and report it.
 - [Fake Travel Agent Scams UK: How to Spot Booking Fraud](https://beatthescam.com/guides/fake-travel-agent-scam-uk/): Booking a cheap holiday, flight or villa from an agent you don't know? How to spot a fake travel agent, verify ABTA/ATOL, and protect your money.
+- [Glastonbury Accommodation Scam: Spot a Fake Booking](https://beatthescam.com/guides/glastonbury-accommodation-scam-uk/): Fake Glastonbury accommodation listings demand deposits for places that may not exist. Check current Festival information and verify providers independently.
 - [Holiday Club Scam UK: How to Spot and Avoid Timeshare Fraud](https://beatthescam.com/guides/holiday-club-scam-uk/): Holiday club scams push discounted-travel memberships in high-pressure presentations, locking you into costly contracts. How to spot one and get out.
 - [Holiday Compensation Scam UK: Fake Claims Handlers](https://beatthescam.com/guides/holiday-compensation-scam-uk/): Cold-called about compensation you're owed for a delayed or cancelled trip? Check the firm is FCA-authorised before sharing any details.
 - [Holiday Let Scam UK: Fake Independent Rentals](https://beatthescam.com/guides/holiday-let-scam-uk/): An independent holiday cottage 'owner' insists on a bank transfer before you can view it? That single request is the biggest red flag going.
@@ -246,6 +256,8 @@
 - [Fake Ray-Ban Website Scam UK: Spot a Copycat Store](https://beatthescam.com/guides/fake-ray-ban-website-scam-uk/): Found a Ray-Ban site with huge discounts from a social ad? How to spot a fake Ray-Ban copycat website, buy safely, and report it in the UK.
 - [Fake SHEIN Website UK: How to Check the Site and Protect Your Details](https://beatthescam.com/guides/shein-fake-website-scam-uk/): Fake SHEIN websites can take payments or capture personal details. Check the real UK domain and learn what to do if you entered information.
 - [Fake UGG Website UK: How to Spot Counterfeit Boots and Protect Your Money](https://beatthescam.com/guides/fake-ugg-website-uk/): Fake UGG websites may sell counterfeits or take your money without delivering. Learn how to check a seller and what to do if you paid.
+- [Is AliExpress a Scam? UK Guide to Marketplace Risk](https://beatthescam.com/guides/aliexpress-scam-or-legit-uk-guide/): AliExpress is an Alibaba marketplace, but listings and sellers vary. Keep payment on-platform and use the dispute or return deadline shown on the order.
+- [Is DHgate a Scam? UK Guide to Seller and Counterfeit Risk](https://beatthescam.com/guides/dhgate-scam-uk-review/): DHgate is an operating marketplace, but seller quality and counterfeit risk vary. Keep payment on-platform and follow the deadline shown on your order.
 - [Is Temu a Scam? UK Guide to Fake Temu Offers](https://beatthescam.com/guides/is-temu-a-scam-uk/): Temu itself is a real marketplace, but scammers impersonate it. How to spot fake Temu cashback offers, texts, and lookalike sites, and report them.
 - [Is This Website a Scam? A Practical Checklist Before You Buy](https://beatthescam.com/guides/is-this-website-a-scam/): A plain-English checklist for judging whether a website is legitimate before you enter payment details, starting with the domain itself.
 - [Is Wish a Scam? UK Guide to Fakes, Delays & Safe Buying](https://beatthescam.com/guides/wish-scam-uk-review/): Is Wish a scam or just cheap? Wish is a real shopping app, but counterfeits, no-shows and fake 'Wish' emails are the real risks — here's how to buy safely.

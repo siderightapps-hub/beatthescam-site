@@ -192,26 +192,6 @@ CONSOLIDATED_LIVE_SLUGS = {
     "hermes-parcel-scam-text-uk",
 }
 
-# Pages awaiting a substantive editorial rewrite. They remain directly
-# accessible so existing bookmarks do not break, but are ad-free, noindex, and
-# omitted from every discovery surface (home/category/guide lists, sitemap,
-# search index, RSS, internal auto-link map and llms.txt). This avoids presenting
-# under-developed inventory to users, crawlers or an AdSense reviewer.
-UNDER_REVIEW_SLUGS = {
-    "printer-support-scam-uk",
-    "paypal-friends-family-scam-uk",
-    "microsoft-account-suspended-email-scam-uk",
-    "aliexpress-scam-or-legit-uk-guide",
-    "ceo-fraud-email-scam-uk",
-    "conveyancing-fraud-uk",
-    "dhgate-scam-uk-review",
-    "companies-house-scam-letter-uk",
-    "fake-wifi-hotspot-scam-uk",
-    "council-housing-scam-uk",
-    "glastonbury-accommodation-scam-uk",
-    "talktalk-scam-call-uk",
-}
-
 CATEGORY_LABELS = {
     "marketplace": "Marketplace Scams",
     "sms":         "Text Message Scams",
@@ -401,7 +381,7 @@ def affiliate_block(post: dict, affiliates: list) -> str:
       <p class="note" style="margin:0 0 .4rem;font-size:.8rem;text-transform:uppercase;letter-spacing:.06em;font-weight:800;color:var(--muted)">Recommended</p>
       <h3 style="margin:.15rem 0 .4rem">{html.escape(p["name"])}</h3>
       <p class="note">{html.escape(p["tagline"])}</p>
-      <a class="btn btn-secondary" href="{html.escape(p["href"])}" rel="nofollow noopener noreferrer" target="_blank" style="width:100%;margin-top:.6rem;text-align:center">{html.escape(p["cta"])}</a>
+      <a class="btn btn-secondary" href="{html.escape(p["href"])}" rel="nofollow noopener noreferrer" target="_blank" data-affiliate-id="{html.escape(p["id"])}" data-affiliate-name="{html.escape(p["name"])}" data-commercial-status="unpaid-editorial" style="width:100%;margin-top:.6rem;text-align:center">{html.escape(p["cta"])}</a>
       <p class="note" style="margin:.5rem 0 0;font-size:.72rem;color:var(--muted)">Unpaid editorial pick — we receive no commission.</p>
     </section>
     '''
@@ -1890,8 +1870,8 @@ def render_post(site, post, all_posts, affiliates=None, sources=None, link_map=N
         site=site,
         og_type='article',
         og_image=og_image_url,
-        robots="noindex,follow" if post["slug"] in UNDER_REVIEW_SLUGS else "index,follow",
-        ads_mode="none" if post["slug"] in UNDER_REVIEW_SLUGS else post_ads_mode(post),
+        robots="index,follow",
+        ads_mode=post_ads_mode(post),
     )
 
 
@@ -2015,6 +1995,12 @@ def render_check_page(site):
       btn.addEventListener("click", function() {
         var message = input.value.trim();
         if (!message || message.length < 10) { input.focus(); return; }
+        var startedAt = Date.now();
+        if (typeof window.btsTrackEvent === "function") {
+          window.btsTrackEvent("scam_check_submitted", {
+            checker_type: typeEl.value
+          });
+        }
         btn.disabled = true;
         btn.textContent = "Analysing\u2026";
         resultCol.hidden = false;
@@ -2032,9 +2018,24 @@ def render_check_page(site):
         })
         .then(function(data) {
           renderResult(data);
+          if (typeof window.btsTrackEvent === "function") {
+            window.btsTrackEvent("scam_check_success", {
+              checker_type: typeEl.value,
+              verdict: data.verdict || "unclear",
+              confidence: data.confidence || "unknown",
+              duration_ms: Date.now() - startedAt
+            });
+          }
         })
-        .catch(function() {
+        .catch(function(err) {
           renderError();
+          if (typeof window.btsTrackEvent === "function") {
+            window.btsTrackEvent("scam_check_error", {
+              checker_type: typeEl.value,
+              error_reason: (err && err.message) || "unknown",
+              duration_ms: Date.now() - startedAt
+            });
+          }
         })
         .finally(function() {
           btn.disabled = false;
@@ -2146,6 +2147,41 @@ def render_check_page(site):
     )
 
 
+def render_newsletter_confirmed_page(site):
+    """Static success page reached only after the double-opt-in POST succeeds.
+
+    app.js records the consented confirmation event from the marker below. The
+    Resend audience remains the source of truth for the total subscriber count,
+    because visitors who decline analytics are intentionally not measured in GA4.
+    """
+    content = '''
+    <section class="hero" id="newsletter-confirmed" data-newsletter-confirmed="true">
+      <div class="wrap" style="max-width:760px">
+        <div class="breadcrumbs"><a href="/">Home</a> / Newsletter confirmed</div>
+        <h1>You&#8217;re on the list</h1>
+        <p class="lead">Your subscription is confirmed. Look out for plain-English scam alerts and practical checks in your inbox.</p>
+        <div class="hero-actions">
+          <a class="btn btn-primary" href="/guides/">Browse scam guides</a>
+          <a class="btn btn-secondary" href="/check/">Check a suspicious message</a>
+        </div>
+      </div>
+    </section>
+    '''
+    return make_base(
+        content,
+        title=f'Newsletter confirmed | {site["site_name"]}',
+        description='Your Beat the Scam newsletter subscription is confirmed.',
+        canonical=site['domain'] + '/newsletter-confirmed/',
+        schema=page_schema(
+            site,
+            'Newsletter confirmed',
+            'Your Beat the Scam newsletter subscription is confirmed.',
+            site['domain'] + '/newsletter-confirmed/',
+        ),
+        site=site,
+        robots='noindex,follow',
+        ads_mode='none',
+    )
 def research_dataset_schema(site, report):
     slug = report["slug"]
     bing = report["bing_ai"]
@@ -3377,14 +3413,13 @@ def build():
         if target not in {p["slug"] for p in posts_after_consolidation}:
             raise SystemExit(f"ERROR: consolidation target {target} for {post['slug']} is not a live guide")
 
-    under_review_posts = [p for p in posts_after_consolidation if p["slug"] in UNDER_REVIEW_SLUGS]
-    posts = [p for p in posts_after_consolidation if p["slug"] not in UNDER_REVIEW_SLUGS]
+    posts = posts_after_consolidation
 
     # A live guide must never share a slug with an ARTICLE_REDIRECTS key: the
     # 301 is emitted with "301!" (forced), which overrides the static file at
     # the edge, so the page would build fine yet be unreachable with no error
     # anywhere. Fail the build loudly instead.
-    shadowed = set(ARTICLE_REDIRECTS) & {p["slug"] for p in posts + under_review_posts}
+    shadowed = set(ARTICLE_REDIRECTS) & {p["slug"] for p in posts}
     if shadowed:
         raise SystemExit(
             f"ERROR: live guide slug(s) shadowed by a forced ARTICLE_REDIRECTS 301: "
@@ -3480,7 +3515,7 @@ def build():
     og_dir.mkdir(parents=True, exist_ok=True)
     og_gen_count = 0
 
-    for post in posts + under_review_posts:
+    for post in posts:
         # Generate the OG image first so the rendered HTML references a real file.
         og_out = og_dir / f"{post['slug']}.png"
         if generate_og_image(og_out, post["title"], category_label(post["category"]), site["site_name"]):
@@ -3496,6 +3531,7 @@ def build():
         print(f"  Generated {og_gen_count} per-post OG images in /assets/og/")
 
     write(DIST / 'check/index.html', render_check_page(site))
+    write(DIST / 'newsletter-confirmed/index.html', render_newsletter_confirmed_page(site))
 
     # Public research section. Reports are generated from retained, dated
     # platform snapshots and rendered ad-free with normalized downloads.

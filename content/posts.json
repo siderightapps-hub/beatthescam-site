@@ -11273,7 +11273,7 @@
       ],
       [
         "TalkTalk's published “never” rules",
-        "TalkTalk says it will not:\n\n- use the TalkTalk account number to prove the call is genuine;\n- ask for the full password — it says it asks for only two digits;\n- ask for bank details to process a refund; or\n- ask for money through MoneyGram or Western Union.\n\nIts current nuisance-call guidance also says TalkTalk does not make automated calls and identifies automated “press 1” calls claiming to be TalkTalk as scams."
+        "TalkTalk says it will not:\n\n- use the TalkTalk account number to prove the call is genuine;\n- ask for the full password — it says it asks for only two digits;\n- ask for bank details to process a refund; or\n- ask for money through MoneyGram or Western Union.\n\nIts current guidance also describes automated “press 1” engineer calls claiming to be TalkTalk as a scam pattern."
       ],
       [
         "Warning signs",
@@ -11285,7 +11285,7 @@
       ],
       [
         "TalkTalk CallSafe",
-        "CallSafe costs £1 a month from 11 January 2026. It can be added or managed in My Account where compatible. Dialling 1472 is used to manage approved and blocked callers on a TalkTalk landline; 1471 is the separate caller-return service and does not activate CallSafe.\n\nCallSafe screens some unknown callers by asking them to record their name, but it does not make every call safe and compatibility requirements apply."
+        "CallSafe costs £1 a month from 11 January 2026. It can be added or managed in My Account where compatible. TalkTalk says that after a withheld-number call, dialling 1472 lets a CallSafe user block or approve that caller. The separate 1471 caller-return service does not activate CallSafe.\n\nCallSafe screens some unknown callers by asking them to record their name, but it does not make every call safe and compatibility requirements apply."
       ],
       [
         "If remote access or details were given",
@@ -11303,7 +11303,7 @@
       ],
       [
         "Does dialling 1471 activate CallSafe?",
-        "No. TalkTalk uses 1472 for CallSafe list management; add or manage the service through My Account where available."
+        "No. Add or manage CallSafe through My Account where available. TalkTalk describes 1472 specifically for blocking or approving a withheld caller after that call."
       ]
     ],
     "keywords": [
@@ -11313,7 +11313,7 @@
       "TalkTalk support scam",
       "fake TalkTalk calls"
     ],
-    "updated": "2026-07-10",
+    "updated": "2026-07-19",
     "sources_checked": [
       [
         "TalkTalk — Scam Phone calls",
@@ -12897,6 +12897,10 @@
         "https://www.lawsociety.org.uk/en/topics/cybersecurity/how-to-identify-a-cyber-attack"
       ],
       [
+        "The Law Society — Conveyancing Quality Scheme",
+        "https://www.lawsociety.org.uk/topics/firm-accreditations/conveyancing-quality-scheme/"
+      ],
+      [
         "SRA — Fraud guidance",
         "https://guidance.sra.org.uk/consumers/problems/fraud-dishonesty/fraud/"
       ]
@@ -12914,15 +12918,15 @@
     "sections": [
       [
         "What CEO fraud looks like",
-        "CEO fraud is a form of business email compromise. A criminal impersonates a senior executive and asks an employee to make an urgent payment, buy gift cards or disclose valuable information. The message may come from a spoofed or lookalike address, or from a real account that has been compromised."
+        "CEO fraud is a form of business email compromise. A criminal sends an email tailored to the organisation, impersonates a senior executive or another regular contact, and asks an employee to make an urgent payment, buy gift cards or disclose valuable information. The message may include an invoice or changed bank details that look genuine."
       ],
       [
         "Why it can be convincing",
-        "The request combines authority, urgency and sometimes secrecy. Normal email filters may struggle with low-volume, tailored messages, particularly when a legitimate account has been taken over. A familiar display name or a correct internal address is therefore not proof that the request is genuine."
+        "The request combines authority, urgency and sometimes secrecy. Normal email filters may struggle with a low-volume, tailored message. A familiar display name or an address that looks correct is therefore not proof that the request is genuine."
       ],
       [
         "Warning signs",
-        "- The request is urgent and confidential.\n- It bypasses the normal payment or data-release process.\n- The supposed executive is said to be unavailable for a call.\n- The payment method, payee or type of information requested is unusual.\n- You are told to ignore a Confirmation of Payee warning or not involve another approver.\n\nThese are indicators, not a test: a compromised real account may contain no obvious spelling or address error."
+        "- The request is urgent and confidential.\n- It bypasses the normal payment or data-release process.\n- The supposed executive is said to be unavailable for a call.\n- The payment method, payee or type of information requested is unusual.\n- You are told to ignore a Confirmation of Payee warning or not involve another approver.\n\nThese are indicators, not a test: a tailored impersonation message may contain no obvious spelling or address error."
       ],
       [
         "How to verify the request",
@@ -12943,8 +12947,8 @@
     ],
     "faq": [
       [
-        "Could the email come from the executive's real account?",
-        "Yes. Business email compromise can involve a real account, which is why independent verification matters more than the displayed sender."
+        "Can a convincing internal-looking email still be fraudulent?",
+        "Yes. A tailored impersonation can look familiar, which is why independent verification matters more than the displayed sender."
       ],
       [
         "What is the strongest practical control?",
@@ -12958,11 +12962,15 @@
       "fake CEO email",
       "CEO fraud prevention"
     ],
-    "updated": "2026-07-10",
+    "updated": "2026-07-19",
     "sources_checked": [
       [
-        "NCSC — Business email compromise: defending your organisation",
-        "https://www.ncsc.gov.uk/section/respond-recover/ml-business-payment-fraud"
+        "NCSC — Business payment fraud",
+        "https://www.ncsc.gov.uk/section/respond-recover/business-payment-fraud"
+      ],
+      [
+        "NCSC — Phishing attacks: defending your organisation",
+        "https://www.ncsc.gov.uk/guidance/phishing"
       ]
     ]
   },
@@ -13250,13 +13258,21 @@
       "local authority housing fraud",
       "council house application scam"
     ],
-    "updated": "2026-07-10",
     "sources_checked": [
+      [
+        "GOV.UK — Apply for a council home",
+        "https://www.gov.uk/council-housing/apply-for-a-council-home"
+      ],
+      [
+        "GOV.UK — Council housing fraud",
+        "https://www.gov.uk/council-housing/council-housing-fraud"
+      ],
       [
         "legislation.gov.uk — Prevention of Social Housing Fraud Act 2013",
         "https://www.legislation.gov.uk/ukpga/2013/3"
       ]
-    ]
+    ],
+    "updated": "2026-07-19"
   },
   {
     "title": "Benefits Fraud Text Scam UK: Spot a Fake DWP Text",
@@ -13939,7 +13955,7 @@
       ],
       [
         "What HP says",
-        "HP’s UK fraud alert says it never contacts customers to provide unsolicited technical support. It warns that scammers may spoof caller ID, request remote access, seek gift-card or card payment, or ask the user to install software."
+        "HP’s fraud alert says it never contacts customers to provide unsolicited technical support. It warns that scammers may spoof caller ID, request remote access, seek gift-card or card payment, or ask the user to install software."
       ],
       [
         "Warning signs",
@@ -13975,8 +13991,8 @@
     ],
     "sources_checked": [
       [
-        "HP UK: Fraud alert",
-        "https://support.hp.com/gb-en/document/ish_9502771-9497438-16"
+        "HP: Fraud alert",
+        "https://support.hp.com/us-en/document/ish_9502771-9497438-16"
       ],
       [
         "HP UK: Official support contact",
@@ -13987,7 +14003,7 @@
         "https://www.reportfraud.police.uk/reporting-a-fraud/"
       ]
     ],
-    "updated": "2026-07-13"
+    "updated": "2026-07-19"
   },
   {
     "title": "ISP Impersonation Scams UK: BT, Sky, Virgin Media and Openreach Calls",
@@ -14419,6 +14435,10 @@
       [
         "NCSC: KRACK Wi-Fi guidance",
         "https://www.ncsc.gov.uk/guidance/krack"
+      ],
+      [
+        "NCSC: Small Business Guide — avoid unknown Wi-Fi hotspots",
+        "https://www.ncsc.gov.uk/files/cyber_security_small_business_guide_1.3..pdf"
       ],
       [
         "Report Fraud: reporting cyber crime and fraud",

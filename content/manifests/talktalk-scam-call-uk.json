@@ -1,8 +1,8 @@
 {
   "slug": "talktalk-scam-call-uk",
   "title": "TalkTalk Scam Call UK: Spot a Fake Support Call",
-  "date": "2026-07-10",
-  "model": "claude-sonnet-5 (manual diversification batch 19, post-factcheck, bold-strip fix)",
+  "date": "2026-07-19",
+  "model": "gpt-5 (manual operator-review reconciliation and wording correction)",
   "gate_passed": true,
   "claims": []
 }

@@ -110,7 +110,7 @@ The brief asked to "add any other information that I may have missed." Items add
 - **Niche edits vs guest posts ROI ranking** — captured per the brief's emphasis
 - **Reddit / Quora cadence with anti-pattern warnings** — "be a contributor first, link-dropper never"
 - **HARO / Featured.com** — explicit listing
-- **Asset valuation matrix** — 30–40× multiple math + standalone domain value
+- **Evidence-led acquisition brief** — current asset perimeter, verified baseline, valuation policy and sale-readiness gaps
 - **Buyer-fit archetypes** — UK ID-protection, cybersecurity SaaS, insurance, consumer-finance media
 - **Transfer playbook** — pointer to a separate dedicated document
 - **Operational cadence** broken into daily / weekly / monthly / quarterly / annual
