@@ -12,8 +12,8 @@
   <meta name="robots" content="index,follow">
   <meta name="theme-color" content="#0b1220">
   <meta name="format-detection" content="telephone=no">
-  
-  
+
+
 
   <!-- Favicons -->
   <link rel="icon" href="/favicon.ico" sizes="any">
@@ -26,18 +26,15 @@
   <!-- Resource hints for third-party origins. preconnect = full TCP+TLS
        handshake started immediately (good for resources we KNOW will load
        on every page). dns-prefetch = DNS lookup only (cheap fallback for
-       older browsers that ignore preconnect). googletagmanager loads GA4,
-       pagead2 loads AdSense — both are async <script> tags in <body>, so
-       preconnect shaves 100-300ms off their first paint on mobile.
-       Also adds tpc.googlesyndication.com (where ad creatives serve from)
-       and the ahrefs analytics host. -->
+       older browsers that ignore preconnect). AdSense resource hints are
+       injected only on pages eligible to serve ads. -->
   <link rel="preconnect" href="https://www.googletagmanager.com" crossorigin>
+  <link rel="dns-prefetch" href="https://www.googletagmanager.com">
+  <link rel="dns-prefetch" href="https://analytics.ahrefs.com">
   <link rel="preconnect" href="https://pagead2.googlesyndication.com" crossorigin>
   <link rel="preconnect" href="https://tpc.googlesyndication.com" crossorigin>
-  <link rel="dns-prefetch" href="https://www.googletagmanager.com">
   <link rel="dns-prefetch" href="https://pagead2.googlesyndication.com">
   <link rel="dns-prefetch" href="https://tpc.googlesyndication.com">
-  <link rel="dns-prefetch" href="https://analytics.ahrefs.com">
 
   <meta property="og:type" content="article">
   <meta property="og:title" content="Chargeback Scam UK: How Chargeback Fraud Works and How to Avoid It">
@@ -58,7 +55,7 @@
        value= attribute (not content=) — validators flag it; do not "fix" it
        or their crawler stops verifying the site. -->
   <meta name='impact-site-verification' value='e0dda02c-a1b6-4056-9f92-16f7c916bd4b'>
-  <link rel="stylesheet" href="/assets/styles.css?v=2aec57b620">
+  <link rel="stylesheet" href="/assets/styles.css?v=d1fc9faba4">
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-JXNF856NBF"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
@@ -78,9 +75,10 @@
     AdSense respects Google Consent Mode: the GA4 consent defaults above start
     denied, so visitors who haven't accepted get non-personalised ads and no
     ad-personalisation cookies until they do. The ad tag below is emitted per
-    page by make_base()/_ads_head(): omitted entirely on the /check/ tool, and
-    preceded by a requestNonPersonalizedAds flag on sensitive financial / victim
-    pages (Google restricts personalisation based on negative financial status).
+    page by make_base()/_ads_head(): omitted on navigational, tool and
+    sensitive-content pages, and preceded by a requestNonPersonalizedAds flag
+    on sensitive financial / victim pages (Google restricts personalisation
+    based on negative financial status).
     Ahrefs Web Analytics is cookieless. Custom GA4 events stay gated in app.js.
   -->
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1606633100797174" crossorigin="anonymous"></script>
@@ -99,6 +97,8 @@
         <a href="/">Home</a>
         <a href="/guides/">Guides</a>
         <a href="/categories/">Categories</a>
+        <a href="/research/">Research</a>
+        <a href="/recovery/">Recovery</a>
         <a href="/about/">About</a>
         <a href="/contact/">Contact</a>
         <a class="nav-cta" href="/check/">Check a message</a>
@@ -106,7 +106,7 @@
     </div>
   </header>
   <main id="main">
-    
+
     <section class="hero">
       <div class="wrap">
         <div class="breadcrumbs"><a href="/">Home</a> / <a href="/guides/">Guides</a> / <a href="/categories/payment/">Payment Scams</a> / <span class="bc-title">Chargeback Scam UK: How Chargeback Fraud Works and How to Avoid It</span></div>
@@ -123,27 +123,28 @@
           &middot; <time itemprop="datePublished" datetime="2026-06-07">Published 2026-06-07</time>
           &middot; 5 min read
         </p>
-        <div class="badge-row"><span class="badge">chargeback scam</span><span class="badge">chargeback scammer</span><span class="badge">chargeback fraud uk</span><span class="badge">friendly fraud</span><span class="badge">chargeback scams</span><span class="badge">fraudulent chargebacks</span><span class="badge">paypal chargeback scam</span><span class="badge">chargeback scam selling</span><span class="badge">chargeback abuse</span><span class="badge">how to avoid chargeback fraud</span></div>
+        <div class="badge-row"><span class="badge">chargeback scam</span><span class="badge">chargeback scammer</span><span class="badge">chargeback fraud uk</span></div>
         <div class="notice"><strong>Key rule:</strong> verify through an official route you opened yourself, not the link, number, app, or payment details supplied by the suspicious message.</div>
         <aside class="do-now" aria-label="What to do if you are being targeted right now">
           <p class="do-now-title">Being targeted right now? Do this</p>
           <ol>
             <li><strong>Stop.</strong> Don&#8217;t pay, transfer money, or share passwords, PINs, or one-time codes.</li>
             <li><strong>Contact your bank</strong> on the number on the back of your card if your money or details may be at risk.</li>
-            <li><strong>Report it</strong> &#8212; call Report Fraud on <a href="tel:+443001232040">0300 123 2040</a> (Police Scotland: 101), and forward scam texts to 7726.</li>
+            <li><strong>Use the right recovery route.</strong> Follow the <a href="/recovery/">payment, account and identity checklist</a>; reporting differs in Scotland.</li>
           </ol>
         </aside>
+
         <div class="toc"><strong>On this page</strong><ol><li><a href="#what-is-a-chargeback-scam">What is a chargeback scam?</a></li><li><a href="#how-chargeback-fraud-works-step-by-step">How chargeback fraud works, step by step</a></li><li><a href="#who-scammers-target-and-common-set-ups">Who scammers target and common set-ups</a></li><li><a href="#warning-signs-of-a-chargeback-scammer">Warning signs of a chargeback scammer</a></li><li><a href="#how-to-protect-yourself">How to protect yourself</a></li><li><a href="#legitimate-chargebacks-vs-abuse-and-how-to-report">Legitimate chargebacks vs abuse — and how to report</a></li></ol></div>
         <h2 id="what-is-a-chargeback-scam">What is a chargeback scam?</h2><p>A chargeback is a legitimate consumer protection: if your card is used fraudulently, or a seller fails to deliver, your bank can reverse the payment. A chargeback scam abuses that system. The scammer pays for goods or a service with a card or PayPal, receives what they bought, and then files a dispute with their bank claiming the transaction was unauthorised or never delivered — so they get their money back and keep the item. The seller loses both the goods and the payment, and often a dispute fee on top.</p><p>It&#x27;s sometimes called &#x27;friendly fraud&#x27; because the &#x27;fraud&#x27; comes from a real customer rather than a stolen card. Private sellers on marketplaces, freelancers, and small businesses are the usual targets.</p><h2 id="how-chargeback-fraud-works-step-by-step">How chargeback fraud works, step by step</h2><ul><li>The scammer buys from you and pays by card, PayPal, or a similar reversible method.</li><li>You send the goods or deliver the service in good faith.</li><li>Days or weeks later, the scammer contacts their card issuer or PayPal and disputes the payment — claiming it was unauthorised, the item never arrived, or it &#x27;wasn&#x27;t as described&#x27;.</li><li>The bank provisionally refunds them while it investigates, pulling the money back from you.</li><li>Without solid proof of delivery and a legitimate transaction, you struggle to win the dispute — so you lose the money and the item.</li><li>A variant: the scammer &#x27;overpays&#x27;, asks you to refund the difference by bank transfer, then charges back the original card payment, leaving you doubly out of pocket.</li></ul><h2 id="who-scammers-target-and-common-set-ups">Who scammers target and common set-ups</h2><p>Chargeback fraud most often hits people selling to strangers: private sellers on Gumtree, Facebook Marketplace, eBay and Vinted; freelancers and digital sellers; and small online shops. Watch for buyers who push to move off a platform&#x27;s protected checkout, who insist on paying by &#x27;friends and family&#x27; on PayPal (which has no buyer or seller protection), who arrange their own courier for collection, or who send a screenshot or email &#x27;confirming&#x27; a payment that never lands in your account. High-value, easily-resold items — phones, consoles, designer goods, event tickets — attract the most chargeback abuse.</p><h2 id="warning-signs-of-a-chargeback-scammer">Warning signs of a chargeback scammer</h2><ul><li>The buyer wants to pay by a reversible method but rushes the handover before funds clearly clear.</li><li>They insist on their own courier, or on collection, then later claim the item never arrived.</li><li>They ask you to refund an &#x27;overpayment&#x27; by bank transfer.</li><li>They push communication and payment off the platform&#x27;s protected system.</li><li>They send a payment-confirmation email or screenshot rather than you seeing the money in your own account.</li><li>The story changes, or pressure ramps up to complete quickly and quietly.</li></ul><h2 id="how-to-protect-yourself">How to protect yourself</h2><ul><li>Sell through a platform&#x27;s protected checkout where you can and keep all communication on-platform.</li><li>Never accept PayPal &#x27;friends and family&#x27; for a sale — it strips seller protection.</li><li>Wait for funds to actually appear in your own account; ignore emailed &#x27;confirmations&#x27; and screenshots.</li><li>Use tracked, signed-for delivery and keep the proof; for collection, get a signed receipt and photos.</li><li>Keep records: listing, messages, payment, postage, serial numbers — evidence wins disputes.</li><li>Be wary of &#x27;overpayment&#x27; and never refund the difference by a separate method.</li><li>For higher-value items, consider only accepting cleared bank transfer or cash on collection with ID.</li></ul><h2 id="legitimate-chargebacks-vs-abuse-and-how-to-report">Legitimate chargebacks vs abuse — and how to report</h2><p>Not every chargeback is a scam: if you genuinely didn&#x27;t receive goods, or your card was used without permission, a chargeback is your right under card scheme rules, and the Section 75 protection on UK credit-card purchases over £100 is a separate, legitimate safeguard. Chargeback fraud is the deliberate misuse of that process to steal. If you&#x27;re hit, respond to the dispute promptly with your evidence through your payment provider, and report the fraud to Report Fraud at reportfraud.police.uk or <a href="tel:+443001232040">0300 123 2040</a> (Police Scotland on 101 in Scotland).</p><p>Report the buyer to the marketplace too, so they can act on the account.</p>
         <h2>Frequently asked questions</h2>
         <div class="faq"><details><summary>What is a chargeback scam or &#x27;friendly fraud&#x27;?</summary><p>It&#x27;s when a real buyer pays for something, receives it, then disputes the payment with their bank or PayPal to claw the money back while keeping the goods. Because the dispute comes from a genuine customer rather than a stolen card, it&#x27;s nicknamed &#x27;friendly fraud&#x27;. The seller loses the item and the money. Private sellers, freelancers and small businesses are the main targets.</p></details><details><summary>Can someone really chargeback and keep the item?</summary><p>Yes — if the seller can&#x27;t prove a legitimate, delivered transaction, the bank often sides with the cardholder and reverses the payment, leaving the seller out of pocket. That&#x27;s why proof matters: tracked and signed-for delivery, on-platform payment, and full records of the listing and messages are what let you win a dispute and deter the scam in the first place.</p></details><details><summary>How do I protect myself from chargeback fraud as a seller?</summary><p>Sell through protected checkouts, keep communication and payment on the platform, and never accept PayPal &#x27;friends and family&#x27; for a sale. Wait for funds to land in your own account rather than trusting emailed confirmations. Use tracked, signed-for postage and keep all evidence. Refuse &#x27;overpayment&#x27; refunds. For pricey items, prefer cleared bank transfer or cash on collection with ID.</p></details><details><summary>Is a chargeback the same as a scam?</summary><p>No. A chargeback is a legitimate protection for when you&#x27;re charged fraudulently or don&#x27;t receive what you paid for, and UK credit-card Section 75 cover is a separate genuine safeguard. The scam is the deliberate abuse of the chargeback process to get a refund while keeping the goods. If you&#x27;re targeted, fight the dispute with evidence and report it to Report Fraud at reportfraud.police.uk or <a href="tel:+443001232040">0300 123 2040</a>.</p></details></div>
-        
+        <h2>Sources checked</h2><ul class="sources-checked"><li><a href="https://www.ukfinance.org.uk/our-expertise/cards/chargeback-and-section-75" rel="noopener noreferrer" target="_blank">UK Finance — Chargeback and Section 75</a></li></ul>
         <div class="notice" style="margin-top:2rem">
           <strong>Think you&#8217;ve spotted a scam?</strong>
           Use the <a href="/check/">AI scam checker</a> for an instant analysis, or report it to
           <a href="https://www.reportfraud.police.uk" rel="noopener noreferrer" target="_blank">Report Fraud</a>.
         </div>
-        <p class="meta" style="margin-top:1.4rem">Reporting routes in this guide are checked against our verified canon of official UK sources &#8212; <a href="https://www.reportfraud.police.uk/" rel="noopener" target="_blank">Report Fraud</a>, the <a href="https://www.ncsc.gov.uk/" rel="noopener" target="_blank">National Cyber Security Centre</a>, and <a href="https://www.citizensadvice.org.uk/consumer/scams/" rel="noopener" target="_blank">Citizens Advice</a> &#8212; by an automated accuracy gate before publication. Published 2026-06-07. Read about <a href="/about/">how Beat the Scam writes guides</a>.</p>
+        <p class="meta" style="margin-top:1.4rem">Reporting routes in this guide are checked against our verified canon of official UK sources &#8212; <a href="https://www.reportfraud.police.uk/" rel="noopener" target="_blank">Report Fraud</a>, the <a href="https://www.ncsc.gov.uk/" rel="noopener" target="_blank">National Cyber Security Centre</a>, and <a href="https://www.citizensadvice.org.uk/consumer/scams/" rel="noopener" target="_blank">Citizens Advice</a> &#8212; by an automated accuracy gate before publication. Published 2026-06-07. Read about <a href="/methodology/">how Beat the Scam writes guides</a>.</p>
       </article>
       <aside class="sidebar">
         <section class="sidebar-card">
@@ -168,18 +169,18 @@
           <p class="note">Paste the suspicious message into the free AI checker for an instant plain-English verdict.</p>
           <a class="btn btn-primary" href="/check/" style="width:100%;margin-top:.5rem;text-align:center">Check a message</a>
         </section>
-        
+
     <section class="sidebar-card affiliate-card">
       <p class="note" style="margin:0 0 .4rem;font-size:.8rem;text-transform:uppercase;letter-spacing:.06em;font-weight:800;color:var(--muted)">Recommended</p>
       <h3 style="margin:.15rem 0 .4rem">Which? Legal</h3>
       <p class="note">Get expert legal advice if you have lost money to a scam and need help recovering it.</p>
-      <a class="btn btn-secondary" href="https://legalservice.which.co.uk/" rel="nofollow noopener noreferrer" target="_blank" style="width:100%;margin-top:.6rem;text-align:center">Get advice from Which? Legal</a>
+      <a class="btn btn-secondary" href="https://legalservice.which.co.uk/" rel="nofollow noopener noreferrer" target="_blank" data-affiliate-id="which-legal" data-affiliate-name="Which? Legal" data-commercial-status="unpaid-editorial" style="width:100%;margin-top:.6rem;text-align:center">Get advice from Which? Legal</a>
       <p class="note" style="margin:.5rem 0 0;font-size:.72rem;color:var(--muted)">Unpaid editorial pick — we receive no commission.</p>
     </section>
-    
+
       </aside>
     </section>
-    
+
   </main>
   <section class="newsletter-band" aria-labelledby="nl-heading">
     <div class="wrap newsletter-inner">
@@ -215,6 +216,8 @@
         <h3>Explore</h3>
         <ul>
           <li><a href="/guides/">All guides</a></li>
+          <li><a href="/research/">Research &amp; data</a></li>
+          <li><a href="/recovery/">Scam recovery checklist</a></li>
           <li><a href="/categories/sms/">Text Message Scams</a></li>
 <li><a href="/categories/email/">Email Scams</a></li>
 <li><a href="/categories/marketplace/">Marketplace Scams</a></li>
@@ -238,6 +241,8 @@
         <h3>Trust & legal</h3>
         <ul>
           <li><a href="/about/">About</a></li>
+          <li><a href="/methodology/">How we fact-check</a></li>
+          <li><a href="/corrections/">Corrections</a></li>
           <li><a href="/privacy/">Privacy Policy</a></li>
           <li><a href="/cookies/">Cookie Policy</a></li>
           <li><button class="link-button" type="button" id="openCookieSettings">Cookie settings</button></li>
@@ -262,6 +267,6 @@
       <button class="btn btn-primary" id="cookieAccept" type="button">Accept</button>
     </div>
   </div>
-  <script src="/assets/app.js?v=227604ee69" defer></script>
+  <script src="/assets/app.js?v=59ecb206a0" defer></script>
 </body>
 </html>

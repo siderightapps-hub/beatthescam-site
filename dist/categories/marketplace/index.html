@@ -12,8 +12,8 @@
   <meta name="robots" content="index,follow">
   <meta name="theme-color" content="#0b1220">
   <meta name="format-detection" content="telephone=no">
-  
-  
+
+
 
   <!-- Favicons -->
   <link rel="icon" href="/favicon.ico" sizes="any">
@@ -26,18 +26,12 @@
   <!-- Resource hints for third-party origins. preconnect = full TCP+TLS
        handshake started immediately (good for resources we KNOW will load
        on every page). dns-prefetch = DNS lookup only (cheap fallback for
-       older browsers that ignore preconnect). googletagmanager loads GA4,
-       pagead2 loads AdSense — both are async <script> tags in <body>, so
-       preconnect shaves 100-300ms off their first paint on mobile.
-       Also adds tpc.googlesyndication.com (where ad creatives serve from)
-       and the ahrefs analytics host. -->
+       older browsers that ignore preconnect). AdSense resource hints are
+       injected only on pages eligible to serve ads. -->
   <link rel="preconnect" href="https://www.googletagmanager.com" crossorigin>
-  <link rel="preconnect" href="https://pagead2.googlesyndication.com" crossorigin>
-  <link rel="preconnect" href="https://tpc.googlesyndication.com" crossorigin>
   <link rel="dns-prefetch" href="https://www.googletagmanager.com">
-  <link rel="dns-prefetch" href="https://pagead2.googlesyndication.com">
-  <link rel="dns-prefetch" href="https://tpc.googlesyndication.com">
   <link rel="dns-prefetch" href="https://analytics.ahrefs.com">
+  <!-- AdSense resource hints intentionally omitted on this page -->
 
   <meta property="og:type" content="website">
   <meta property="og:title" content="Marketplace Scams | Beat the Scam">
@@ -58,7 +52,7 @@
        value= attribute (not content=) — validators flag it; do not "fix" it
        or their crawler stops verifying the site. -->
   <meta name='impact-site-verification' value='e0dda02c-a1b6-4056-9f92-16f7c916bd4b'>
-  <link rel="stylesheet" href="/assets/styles.css?v=2aec57b620">
+  <link rel="stylesheet" href="/assets/styles.css?v=d1fc9faba4">
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-JXNF856NBF"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
@@ -78,12 +72,13 @@
     AdSense respects Google Consent Mode: the GA4 consent defaults above start
     denied, so visitors who haven't accepted get non-personalised ads and no
     ad-personalisation cookies until they do. The ad tag below is emitted per
-    page by make_base()/_ads_head(): omitted entirely on the /check/ tool, and
-    preceded by a requestNonPersonalizedAds flag on sensitive financial / victim
-    pages (Google restricts personalisation based on negative financial status).
+    page by make_base()/_ads_head(): omitted on navigational, tool and
+    sensitive-content pages, and preceded by a requestNonPersonalizedAds flag
+    on sensitive financial / victim pages (Google restricts personalisation
+    based on negative financial status).
     Ahrefs Web Analytics is cookieless. Custom GA4 events stay gated in app.js.
   -->
-  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1606633100797174" crossorigin="anonymous"></script>
+  <!-- Ads intentionally disabled on this page (excluded from Auto Ads) -->
   <script src="https://analytics.ahrefs.com/analytics.js" data-key="l1GHKUGfAKlhtjbYgIySAg" async></script>
 </head>
 <body>
@@ -99,6 +94,8 @@
         <a href="/">Home</a>
         <a href="/guides/">Guides</a>
         <a href="/categories/">Categories</a>
+        <a href="/research/">Research</a>
+        <a href="/recovery/">Recovery</a>
         <a href="/about/">About</a>
         <a href="/contact/">Contact</a>
         <a class="nav-cta" href="/check/">Check a message</a>
@@ -106,7 +103,7 @@
     </div>
   </header>
   <main id="main">
-    
+
     <section class="hero">
       <div class="wrap">
         <div class="breadcrumbs"><a href="/">Home</a> / <a href="/categories/">Categories</a> / Marketplace Scams</div>
@@ -114,116 +111,86 @@
         <p class="lead">Guides covering Facebook Marketplace, Gumtree, Vinted, and eBay scams targeting UK buyers and sellers. Spot payment fraud, advance fees, and collection scams.</p>
       </div>
     </section>
-    
-    <section class="section"><div class="wrap"><h2>Latest marketplace scams</h2><div class="grid-3">
-    <article class="card guide-card" data-searchable="gumtree scams uk: how to spot and avoid fake listings and buyers gumtree is legitimate, but scammers use it. here are the most common gumtree scams targeting uk buyers and sellers, the warning signs, and how to stay safe. marketplace gumtree scams scams on gumtree gumtree scam gumtree scammers gumtree buyer scam gumtree seller scam gumtree fake listing is gumtree safe gumtree overpayment scam gumtree courier scam">
+
+    <section class="section"><div class="wrap"><h2>Latest marketplace scams</h2><div class="grid-3"><article class="card guide-card" data-searchable="gumtree scams uk: how to spot and avoid fake listings and buyers gumtree is legitimate, but scammers use it. here are the most common gumtree scams targeting uk buyers and sellers, the warning signs, and how to stay safe. marketplace gumtree scams scams on gumtree gumtree scam gumtree scammers gumtree buyer scam gumtree seller scam gumtree fake listing is gumtree safe gumtree overpayment scam gumtree courier scam">
       <div class="eyebrow">Marketplace Scams</div>
       <h3><a href="/guides/gumtree-scam-uk-guide/">Gumtree Scams UK: How to Spot and Avoid Fake Listings and Buyers</a></h3>
       <p>Gumtree is legitimate, but scammers use it. Here are the most common Gumtree scams targeting UK buyers and sellers, the warning signs, and how to stay safe.</p>
       <p class="meta">Published 2026-06-07</p>
-    </article>
-    
-    <article class="card guide-card" data-searchable="vinted festival camping gear scam: spot a fake seller festival season brings fake tent and camping-gear listings on vinted. paying through vinted keeps you inside its protection process. marketplace vinted scam uk festival camping gear scam vinted buyer protection fake vinted seller vinted tent scam marketplace scam uk">
+    </article><article class="card guide-card" data-searchable="vinted festival camping gear scam: spot a fake seller festival season brings fake tent and camping-gear listings on vinted. paying through vinted keeps you inside its protection process. marketplace vinted scam uk festival camping gear scam vinted buyer protection fake vinted seller vinted tent scam marketplace scam uk">
       <div class="eyebrow">Marketplace Scams</div>
       <h3><a href="/guides/festival-camping-equipment-vinted-scam/">Vinted Festival Camping Gear Scam: Spot a Fake Seller</a></h3>
       <p>Festival season brings fake tent and camping-gear listings on Vinted. Paying through Vinted keeps you inside its protection process.</p>
       <p class="meta">Updated 2026-07-09</p>
-    </article>
-    
-    <article class="card guide-card" data-searchable="ebay listing fee scam uk: spot a fake notice an email says you owe an unpaid ebay listing fee or your listing will be removed? check my ebay or seller hub directly, not a link. marketplace ebay listing fee scam uk fake ebay fee email ebay account suspended fee scam ebay seller phishing is this ebay email real ebay spoof email report ebay unpaid fee email scam">
+    </article><article class="card guide-card" data-searchable="ebay listing fee scam uk: spot a fake notice an email says you owe an unpaid ebay listing fee or your listing will be removed? check my ebay or seller hub directly, not a link. marketplace ebay listing fee scam uk fake ebay fee email ebay account suspended fee scam ebay seller phishing is this ebay email real ebay spoof email report ebay unpaid fee email scam">
       <div class="eyebrow">Marketplace Scams</div>
       <h3><a href="/guides/ebay-listing-fee-scam-uk/">eBay Listing Fee Scam UK: Spot a Fake Notice</a></h3>
       <p>An email says you owe an unpaid eBay listing fee or your listing will be removed? Check My eBay or Seller Hub directly, not a link.</p>
       <p class="meta">Updated 2026-07-06</p>
-    </article>
-    
-    <article class="card guide-card" data-searchable="shpock scam uk: spot a fake deal safely asked to pay a deposit before collecting on shpock? check the item in person first and keep payment links out of the chat. how to spot a fake deal. marketplace shpock scam uk shpock deposit scam fake shpock courier is shpock safe uk shpock buyer protection shpock scam report shpock collection deal scam">
+    </article><article class="card guide-card" data-searchable="shpock scam uk: spot a fake deal safely asked to pay a deposit before collecting on shpock? check the item in person first and keep payment links out of the chat. how to spot a fake deal. marketplace shpock scam uk shpock deposit scam fake shpock courier is shpock safe uk shpock buyer protection shpock scam report shpock collection deal scam">
       <div class="eyebrow">Marketplace Scams</div>
       <h3><a href="/guides/shpock-scam-uk/">Shpock Scam UK: Spot a Fake Deal Safely</a></h3>
       <p>Asked to pay a deposit before collecting on Shpock? Check the item in person first and keep payment links out of the chat. How to spot a fake deal.</p>
       <p class="meta">Updated 2026-07-06</p>
-    </article>
-    
-    <article class="card guide-card" data-searchable="etsy scam sellers uk: spot fakes &amp; buy safely asked to pay an etsy seller outside the site to save on fees? that&#x27;s the biggest scam red flag on the platform. how to spot fakes and buy safely. marketplace etsy scam sellers uk etsy purchase protection etsy seller asking to pay outside site is etsy safe uk etsy scam report fake etsy seller etsy buyer protection uk">
+    </article><article class="card guide-card" data-searchable="etsy scam sellers uk: spot fakes &amp; buy safely asked to pay an etsy seller outside the site to save on fees? that&#x27;s the biggest scam red flag on the platform. how to spot fakes and buy safely. marketplace etsy scam sellers uk etsy purchase protection etsy seller asking to pay outside site is etsy safe uk etsy scam report fake etsy seller etsy buyer protection uk">
       <div class="eyebrow">Marketplace Scams</div>
       <h3><a href="/guides/etsy-scam-sellers-uk-guide/">Etsy Scam Sellers UK: Spot Fakes &amp; Buy Safely</a></h3>
       <p>Asked to pay an Etsy seller outside the site to save on fees? That&#x27;s the biggest scam red flag on the platform. How to spot fakes and buy safely.</p>
       <p class="meta">Updated 2026-07-05</p>
-    </article>
-    
-    <article class="card guide-card" data-searchable="autotrader car scam uk: spot fake listings &amp; sellers a cheap autotrader car from a seller who can&#x27;t meet and wants a deposit? spot a fake listing, avoid &#x27;escrow&#x27; cons, and report it in the uk. marketplace auto trader scam uk fake car listing scam car deposit scam uk autotrader fake seller vehicle escrow scam uk is this car listing a scam buying a car online scam uk report car scam uk">
+    </article><article class="card guide-card" data-searchable="autotrader car scam uk: spot fake listings &amp; sellers a cheap autotrader car from a seller who can&#x27;t meet and wants a deposit? spot a fake listing, avoid &#x27;escrow&#x27; cons, and report it in the uk. marketplace auto trader scam uk fake car listing scam car deposit scam uk autotrader fake seller vehicle escrow scam uk is this car listing a scam buying a car online scam uk report car scam uk">
       <div class="eyebrow">Marketplace Scams</div>
       <h3><a href="/guides/autotrader-car-scam-uk/">Autotrader Car Scam UK: Spot Fake Listings &amp; Sellers</a></h3>
       <p>A cheap Autotrader car from a seller who can&#x27;t meet and wants a deposit? Spot a fake listing, avoid &#x27;escrow&#x27; cons, and report it in the UK.</p>
-      <p class="meta">Updated 2026-06-29</p>
-    </article>
-    
-    <article class="card guide-card" data-searchable="rightmove rental scam uk: spot fake property listings renting a place you found on rightmove? how to spot a fake listing or landlord, avoid losing a deposit to a &#x27;pay to hold it&#x27; con, and report it in the uk. marketplace rightmove rental scam uk fake rental listing uk rental deposit scam fake landlord scam uk is this rightmove listing real holding deposit scam uk report fake rightmove listing rent scam before viewing">
+      <p class="meta">Updated 2026-07-18</p>
+    </article><article class="card guide-card" data-searchable="rightmove rental scam uk: spot fake property listings renting a place you found on rightmove? how to spot a fake listing or landlord, avoid losing a deposit to a &#x27;pay to hold it&#x27; con, and report it in the uk. marketplace rightmove rental scam uk fake rental listing uk rental deposit scam fake landlord scam uk is this rightmove listing real holding deposit scam uk report fake rightmove listing rent scam before viewing">
       <div class="eyebrow">Marketplace Scams</div>
       <h3><a href="/guides/rightmove-rental-scam-uk/">Rightmove Rental Scam UK: Spot Fake Property Listings</a></h3>
       <p>Renting a place you found on Rightmove? How to spot a fake listing or landlord, avoid losing a deposit to a &#x27;pay to hold it&#x27; con, and report it in the UK.</p>
-      <p class="meta">Updated 2026-06-29</p>
-    </article>
-    
-    <article class="card guide-card" data-searchable="airbnb scam uk: spot a fake listing found an airbnb listing that asks you to pay outside the app before booking? how to spot a fake or hijacked airbnb listing and book safely in the uk. marketplace airbnb scam uk fake airbnb listing airbnb pay outside app scam is this airbnb listing real airbnb hijacked account scam airbnb deposit scam uk report airbnb scam uk airbnb too good to be true listing">
+      <p class="meta">Updated 2026-07-18</p>
+    </article><article class="card guide-card" data-searchable="airbnb scam uk: spot a fake listing found an airbnb listing that asks you to pay outside the app before booking? how to spot a fake or hijacked airbnb listing and book safely in the uk. marketplace airbnb scam uk fake airbnb listing airbnb pay outside app scam is this airbnb listing real airbnb hijacked account scam airbnb deposit scam uk report airbnb scam uk airbnb too good to be true listing">
       <div class="eyebrow">Marketplace Scams</div>
       <h3><a href="/guides/airbnb-scam-uk-listings/">Airbnb Scam UK: Spot a Fake Listing</a></h3>
       <p>Found an Airbnb listing that asks you to pay outside the app before booking? How to spot a fake or hijacked Airbnb listing and book safely in the UK.</p>
-      <p class="meta">Updated 2026-07-03</p>
-    </article>
-    
-    <article class="card guide-card" data-searchable="preloved scam uk: spot a fake seller or listing buying on preloved and asked to pay by bank transfer before you can view the item? how to spot a fake preloved seller, buy safely, and report it. marketplace preloved scam uk preloved fake seller preloved bank transfer scam is this preloved seller a scam preloved deposit scam report preloved scam uk preloved buyer protection preloved too good to be true">
+      <p class="meta">Updated 2026-07-18</p>
+    </article><article class="card guide-card" data-searchable="preloved scam uk: spot a fake seller or listing buying on preloved and asked to pay by bank transfer before you can view the item? how to spot a fake preloved seller, buy safely, and report it. marketplace preloved scam uk preloved fake seller preloved bank transfer scam is this preloved seller a scam preloved deposit scam report preloved scam uk preloved buyer protection preloved too good to be true">
       <div class="eyebrow">Marketplace Scams</div>
       <h3><a href="/guides/preloved-scam-uk/">Preloved Scam UK: Spot a Fake Seller or Listing</a></h3>
       <p>Buying on Preloved and asked to pay by bank transfer before you can view the item? How to spot a fake Preloved seller, buy safely, and report it.</p>
-      <p class="meta">Updated 2026-07-02</p>
-    </article>
-    
-    <article class="card guide-card" data-searchable="ebay scams uk: how to spot a fake buyer, seller or email asked to pay or deal outside ebay, or got an &#x27;ebay&#x27; email about a held payment? how to spot the common ebay scams and keep your money protected. marketplace ebay scam ebay buyer scam ebay seller scam ebay buyer protection scam is this ebay email real ebay off-platform payment scam ebay overpayment scam report ebay scam">
+      <p class="meta">Updated 2026-07-18</p>
+    </article><article class="card guide-card" data-searchable="ebay scams uk: how to spot a fake buyer, seller or email asked to pay or deal outside ebay, or got an &#x27;ebay&#x27; email about a held payment? how to spot the common ebay scams and keep your money protected. marketplace ebay scam ebay buyer scam ebay seller scam ebay buyer protection scam is this ebay email real ebay off-platform payment scam ebay overpayment scam report ebay scam">
       <div class="eyebrow">Marketplace Scams</div>
       <h3><a href="/guides/ebay-buyer-scam-uk/">eBay Scams UK: How to Spot a Fake Buyer, Seller or Email</a></h3>
       <p>Asked to pay or deal outside eBay, or got an &#x27;eBay&#x27; email about a held payment? How to spot the common eBay scams and keep your money protected.</p>
-      <p class="meta">Updated 2026-06-26</p>
-    </article>
-    
-    <article class="card guide-card" data-searchable="facebook marketplace fake buyer scam uk selling on facebook marketplace and a &#x27;buyer&#x27; sends a fake payment confirmation? how to spot a fake buyer, protect your sale, and report it in the uk. marketplace facebook marketplace fake buyer scam facebook marketplace seller scam uk fake payment confirmation facebook marketplace is this facebook marketplace buyer a scam facebook marketplace overpayment scam report facebook marketplace fake buyer facebook marketplace selling safely fake bank transfer screenshot scam">
+      <p class="meta">Updated 2026-07-18</p>
+    </article><article class="card guide-card" data-searchable="facebook marketplace fake buyer scam uk selling on facebook marketplace and a &#x27;buyer&#x27; sends a fake payment confirmation? how to spot a fake buyer, protect your sale, and report it in the uk. marketplace facebook marketplace fake buyer scam facebook marketplace seller scam uk fake payment confirmation facebook marketplace is this facebook marketplace buyer a scam facebook marketplace overpayment scam report facebook marketplace fake buyer facebook marketplace selling safely fake bank transfer screenshot scam">
       <div class="eyebrow">Marketplace Scams</div>
       <h3><a href="/guides/facebook-marketplace-fake-buyer-scam-uk/">Facebook Marketplace Fake Buyer Scam UK</a></h3>
       <p>Selling on Facebook Marketplace and a &#x27;buyer&#x27; sends a fake payment confirmation? How to spot a fake buyer, protect your sale, and report it in the UK.</p>
-      <p class="meta">Updated 2026-07-02</p>
-    </article>
-    
-    <article class="card guide-card" data-searchable="vinted buyer scam uk: spot fake &#x27;payment&#x27; cons selling on vinted and a buyer wants to pay off-app or &#x27;confirm your card&#x27;? how to spot a vinted buyer scam, keep your payment safe, and report it. marketplace vinted buyer scam uk vinted seller scam vinted fake payment email vinted off-app payment scam is this vinted buyer a scam vinted confirm card scam report vinted scam uk vinted pay off platform">
+      <p class="meta">Updated 2026-07-18</p>
+    </article><article class="card guide-card" data-searchable="vinted buyer scam uk: spot fake &#x27;payment&#x27; cons selling on vinted and a buyer wants to pay off-app or &#x27;confirm your card&#x27;? how to spot a vinted buyer scam, keep your payment safe, and report it. marketplace vinted buyer scam uk vinted seller scam vinted fake payment email vinted off-app payment scam is this vinted buyer a scam vinted confirm card scam report vinted scam uk vinted pay off platform">
       <div class="eyebrow">Marketplace Scams</div>
       <h3><a href="/guides/vinted-buyer-scam-uk/">Vinted Buyer Scam UK: Spot Fake &#x27;Payment&#x27; Cons</a></h3>
       <p>Selling on Vinted and a buyer wants to pay off-app or &#x27;confirm your card&#x27;? How to spot a Vinted buyer scam, keep your payment safe, and report it.</p>
-      <p class="meta">Updated 2026-07-02</p>
-    </article>
-    
-    <article class="card guide-card" data-searchable="depop scams uk: spot fake sellers &amp; off-app payment cons buying or selling on depop? spot fake sellers, hacked accounts, and &#x27;pay me off-app&#x27; cons that strip your buyer protection — and how to report it. marketplace depop scam uk depop fake seller depop off-app payment scam depop bank transfer scam is this depop seller a scam depop paypal friends and family scam report depop scam uk depop buyer protection">
+      <p class="meta">Updated 2026-07-18</p>
+    </article><article class="card guide-card" data-searchable="depop scams uk: spot fake sellers &amp; off-app payment cons buying or selling on depop? spot fake sellers, hacked accounts, and &#x27;pay me off-app&#x27; cons that strip your buyer protection — and how to report it. marketplace depop scam uk depop fake seller depop off-app payment scam depop bank transfer scam is this depop seller a scam depop paypal friends and family scam report depop scam uk depop buyer protection">
       <div class="eyebrow">Marketplace Scams</div>
       <h3><a href="/guides/depop-scam-uk/">Depop Scams UK: Spot Fake Sellers &amp; Off-App Payment Cons</a></h3>
       <p>Buying or selling on Depop? Spot fake sellers, hacked accounts, and &#x27;pay me off-app&#x27; cons that strip your buyer protection — and how to report it.</p>
-      <p class="meta">Updated 2026-06-29</p>
-    </article>
-    
-    <article class="card guide-card" data-searchable="vinted scams uk: warning signs for buyers and sellers buying or selling on vinted? the main risk on both sides is being pushed off the app — here&#x27;s how vinted&#x27;s protection works and what to watch for. marketplace vinted scam vinted scams vinted online meeting scam how to not get scammed on vinted vinted buyers uk scam verification scams on vinted is vinted safe vinted buyer protection">
+      <p class="meta">Updated 2026-07-18</p>
+    </article><article class="card guide-card" data-searchable="vinted scams uk: warning signs for buyers and sellers buying or selling on vinted? the main risk on both sides is being pushed off the app — here&#x27;s how vinted&#x27;s protection works and what to watch for. marketplace vinted scam vinted scams vinted online meeting scam how to not get scammed on vinted vinted buyers uk scam verification scams on vinted is vinted safe vinted buyer protection">
       <div class="eyebrow">Marketplace Scams</div>
       <h3><a href="/guides/vinted-scam-warning-uk/">Vinted Scams UK: Warning Signs for Buyers and Sellers</a></h3>
       <p>Buying or selling on Vinted? The main risk on both sides is being pushed off the app — here&#x27;s how Vinted&#x27;s protection works and what to watch for.</p>
       <p class="meta">Updated 2026-07-03</p>
-    </article>
-    
-    <article class="card guide-card" data-searchable="facebook marketplace scam uk: spot a fake seller buying on facebook marketplace and asked to pay by bank transfer before viewing the item? spot a fake seller, buy safely, and report it in the uk. marketplace facebook marketplace scam uk fake seller facebook marketplace facebook marketplace bank transfer scam is this facebook marketplace seller a scam facebook marketplace deposit scam report facebook marketplace scam facebook marketplace buyer protection facebook marketplace too good to be true">
+    </article><article class="card guide-card" data-searchable="facebook marketplace scam uk: spot a fake seller buying on facebook marketplace and asked to pay by bank transfer before viewing the item? spot a fake seller, buy safely, and report it in the uk. marketplace facebook marketplace scam uk fake seller facebook marketplace facebook marketplace bank transfer scam is this facebook marketplace seller a scam facebook marketplace deposit scam report facebook marketplace scam facebook marketplace buyer protection facebook marketplace too good to be true">
       <div class="eyebrow">Marketplace Scams</div>
       <h3><a href="/guides/facebook-marketplace-scam-uk/">Facebook Marketplace Scam UK: Spot a Fake Seller</a></h3>
       <p>Buying on Facebook Marketplace and asked to pay by bank transfer before viewing the item? Spot a fake seller, buy safely, and report it in the UK.</p>
-      <p class="meta">Updated 2026-07-02</p>
-    </article>
-    </div></div></section>
-    
-    <section class="section"><div class="wrap"><h2>Browse other scam categories</h2><ul class="list-clean"><li><a href="/categories/sms/">Text Message Scams</a> <span class="meta">(24 guides)</span></li><li><a href="/categories/email/">Email Scams</a> <span class="meta">(15 guides)</span></li><li><a href="/categories/travel/">Travel Scams</a> <span class="meta">(14 guides)</span></li><li><a href="/categories/payment/">Payment Scams</a> <span class="meta">(14 guides)</span></li><li><a href="/categories/phone/">Phone Scams</a> <span class="meta">(13 guides)</span></li><li><a href="/categories/website/">Website Scams</a> <span class="meta">(12 guides)</span></li></ul></div></section>
-    
+      <p class="meta">Updated 2026-07-18</p>
+    </article></div></div></section>
+
+    <section class="section"><div class="wrap"><h2>Browse other scam categories</h2><ul class="list-clean"><li><a href="/categories/sms/">Text Message Scams</a> <span class="meta">(23 guides)</span></li><li><a href="/categories/email/">Email Scams</a> <span class="meta">(15 guides)</span></li><li><a href="/categories/travel/">Travel Scams</a> <span class="meta">(14 guides)</span></li><li><a href="/categories/payment/">Payment Scams</a> <span class="meta">(14 guides)</span></li><li><a href="/categories/phone/">Phone Scams</a> <span class="meta">(13 guides)</span></li><li><a href="/categories/website/">Website Scams</a> <span class="meta">(12 guides)</span></li></ul></div></section>
+
   </main>
   <section class="newsletter-band" aria-labelledby="nl-heading">
     <div class="wrap newsletter-inner">
@@ -259,6 +226,8 @@
         <h3>Explore</h3>
         <ul>
           <li><a href="/guides/">All guides</a></li>
+          <li><a href="/research/">Research &amp; data</a></li>
+          <li><a href="/recovery/">Scam recovery checklist</a></li>
           <li><a href="/categories/sms/">Text Message Scams</a></li>
 <li><a href="/categories/email/">Email Scams</a></li>
 <li><a href="/categories/marketplace/">Marketplace Scams</a></li>
@@ -282,6 +251,8 @@
         <h3>Trust & legal</h3>
         <ul>
           <li><a href="/about/">About</a></li>
+          <li><a href="/methodology/">How we fact-check</a></li>
+          <li><a href="/corrections/">Corrections</a></li>
           <li><a href="/privacy/">Privacy Policy</a></li>
           <li><a href="/cookies/">Cookie Policy</a></li>
           <li><button class="link-button" type="button" id="openCookieSettings">Cookie settings</button></li>
@@ -306,6 +277,6 @@
       <button class="btn btn-primary" id="cookieAccept" type="button">Accept</button>
     </div>
   </div>
-  <script src="/assets/app.js?v=227604ee69" defer></script>
+  <script src="/assets/app.js?v=59ecb206a0" defer></script>
 </body>
 </html>

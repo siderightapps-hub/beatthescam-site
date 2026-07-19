@@ -12,8 +12,8 @@
   <meta name="robots" content="index,follow">
   <meta name="theme-color" content="#0b1220">
   <meta name="format-detection" content="telephone=no">
-  
-  
+
+
 
   <!-- Favicons -->
   <link rel="icon" href="/favicon.ico" sizes="any">
@@ -26,18 +26,12 @@
   <!-- Resource hints for third-party origins. preconnect = full TCP+TLS
        handshake started immediately (good for resources we KNOW will load
        on every page). dns-prefetch = DNS lookup only (cheap fallback for
-       older browsers that ignore preconnect). googletagmanager loads GA4,
-       pagead2 loads AdSense — both are async <script> tags in <body>, so
-       preconnect shaves 100-300ms off their first paint on mobile.
-       Also adds tpc.googlesyndication.com (where ad creatives serve from)
-       and the ahrefs analytics host. -->
+       older browsers that ignore preconnect). AdSense resource hints are
+       injected only on pages eligible to serve ads. -->
   <link rel="preconnect" href="https://www.googletagmanager.com" crossorigin>
-  <link rel="preconnect" href="https://pagead2.googlesyndication.com" crossorigin>
-  <link rel="preconnect" href="https://tpc.googlesyndication.com" crossorigin>
   <link rel="dns-prefetch" href="https://www.googletagmanager.com">
-  <link rel="dns-prefetch" href="https://pagead2.googlesyndication.com">
-  <link rel="dns-prefetch" href="https://tpc.googlesyndication.com">
   <link rel="dns-prefetch" href="https://analytics.ahrefs.com">
+  <!-- AdSense resource hints intentionally omitted on this page -->
 
   <meta property="og:type" content="website">
   <meta property="og:title" content="Crypto Scams | Beat the Scam">
@@ -58,7 +52,7 @@
        value= attribute (not content=) — validators flag it; do not "fix" it
        or their crawler stops verifying the site. -->
   <meta name='impact-site-verification' value='e0dda02c-a1b6-4056-9f92-16f7c916bd4b'>
-  <link rel="stylesheet" href="/assets/styles.css?v=2aec57b620">
+  <link rel="stylesheet" href="/assets/styles.css?v=d1fc9faba4">
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-JXNF856NBF"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
@@ -78,12 +72,13 @@
     AdSense respects Google Consent Mode: the GA4 consent defaults above start
     denied, so visitors who haven't accepted get non-personalised ads and no
     ad-personalisation cookies until they do. The ad tag below is emitted per
-    page by make_base()/_ads_head(): omitted entirely on the /check/ tool, and
-    preceded by a requestNonPersonalizedAds flag on sensitive financial / victim
-    pages (Google restricts personalisation based on negative financial status).
+    page by make_base()/_ads_head(): omitted on navigational, tool and
+    sensitive-content pages, and preceded by a requestNonPersonalizedAds flag
+    on sensitive financial / victim pages (Google restricts personalisation
+    based on negative financial status).
     Ahrefs Web Analytics is cookieless. Custom GA4 events stay gated in app.js.
   -->
-  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1606633100797174" crossorigin="anonymous"></script>
+  <!-- Ads intentionally disabled on this page (excluded from Auto Ads) -->
   <script src="https://analytics.ahrefs.com/analytics.js" data-key="l1GHKUGfAKlhtjbYgIySAg" async></script>
 </head>
 <body>
@@ -99,6 +94,8 @@
         <a href="/">Home</a>
         <a href="/guides/">Guides</a>
         <a href="/categories/">Categories</a>
+        <a href="/research/">Research</a>
+        <a href="/recovery/">Recovery</a>
         <a href="/about/">About</a>
         <a href="/contact/">Contact</a>
         <a class="nav-cta" href="/check/">Check a message</a>
@@ -106,7 +103,7 @@
     </div>
   </header>
   <main id="main">
-    
+
     <section class="hero">
       <div class="wrap">
         <div class="breadcrumbs"><a href="/">Home</a> / <a href="/categories/">Categories</a> / Crypto Scams</div>
@@ -114,67 +111,51 @@
         <p class="lead">Guides covering fake crypto investment platforms, withdrawal fee traps, and romance fraud. Learn to identify cryptocurrency scams before sending money.</p>
       </div>
     </section>
-    
-    <section class="section"><div class="wrap"><h2>Latest crypto scams</h2><div class="grid-3">
-    <article class="card guide-card" data-searchable="bitcoin atm scam uk: why a caller sending you to one is a scam scammers pose as your bank or hmrc and walk you to a bitcoin atm to &#x27;secure&#x27; your money. no genuine official will ask you to do this. crypto bitcoin atm scam uk crypto atm illegal uk fca crypto atm bitcoin atm fraud is bitcoin atm illegal uk cryptocurrency scam uk crypto fraud uk">
+
+    <section class="section"><div class="wrap"><h2>Latest crypto scams</h2><div class="grid-3"><article class="card guide-card" data-searchable="bitcoin atm scam uk: why a caller sending you to one is a scam scammers pose as your bank or hmrc and walk you to a bitcoin atm to &#x27;secure&#x27; your money. no genuine official will ask you to do this. crypto bitcoin atm scam uk crypto atm illegal uk fca crypto atm bitcoin atm fraud is bitcoin atm illegal uk cryptocurrency scam uk crypto fraud uk">
       <div class="eyebrow">Crypto Scams</div>
       <h3><a href="/guides/bitcoin-atm-scam-uk/">Bitcoin ATM Scam UK: Why a Caller Sending You to One Is a Scam</a></h3>
       <p>Scammers pose as your bank or HMRC and walk you to a Bitcoin ATM to &#x27;secure&#x27; your money. No genuine official will ask you to do this.</p>
       <p class="meta">Updated 2026-07-10</p>
-    </article>
-    
-    <article class="card guide-card" data-searchable="binance impersonation scam uk: spot a fake message fake binance emails and texts claim your account is suspended, to steal your login. binance&#x27;s own verify tool confirms if a message is genuine. crypto binance impersonation scam uk fake binance email binance phishing scam binance verify tool is this binance email real crypto scam uk cryptocurrency scam uk">
+    </article><article class="card guide-card" data-searchable="binance impersonation scam uk: spot a fake message fake binance emails and texts claim your account is suspended, to steal your login. binance&#x27;s own verify tool confirms if a message is genuine. crypto binance impersonation scam uk fake binance email binance phishing scam binance verify tool is this binance email real crypto scam uk cryptocurrency scam uk">
       <div class="eyebrow">Crypto Scams</div>
       <h3><a href="/guides/binance-impersonation-scam-uk/">Binance Impersonation Scam UK: Spot a Fake Message</a></h3>
       <p>Fake Binance emails and texts claim your account is suspended, to steal your login. Binance&#x27;s own Verify tool confirms if a message is genuine.</p>
       <p class="meta">Updated 2026-07-10</p>
-    </article>
-    
-    <article class="card guide-card" data-searchable="fake crypto exchange uk: spot a cloned trading platform fake exchanges copy a real platform&#x27;s branding and let you deposit, even withdraw small amounts, before vanishing. check the fca firm checker first. crypto fake crypto exchange uk crypto exchange scam cloned trading platform fca firm checker crypto is this crypto exchange real crypto scam uk cryptocurrency scam uk">
+    </article><article class="card guide-card" data-searchable="fake crypto exchange uk: spot a cloned trading platform fake exchanges copy a real platform&#x27;s branding and let you deposit, even withdraw small amounts, before vanishing. check the fca firm checker first. crypto fake crypto exchange uk crypto exchange scam cloned trading platform fca firm checker crypto is this crypto exchange real crypto scam uk cryptocurrency scam uk">
       <div class="eyebrow">Crypto Scams</div>
       <h3><a href="/guides/fake-crypto-exchange-uk/">Fake Crypto Exchange UK: Spot a Cloned Trading Platform</a></h3>
       <p>Fake exchanges copy a real platform&#x27;s branding and let you deposit, even withdraw small amounts, before vanishing. Check the FCA Firm Checker first.</p>
       <p class="meta">Updated 2026-07-10</p>
-    </article>
-    
-    <article class="card guide-card" data-searchable="crypto recovery scam uk: a second scam to avoid told your crypto has been recovered after a scam and just needs a fee to claim? don&#x27;t pay or share wallet keys. verify independently. crypto crypto recovery scam uk fake crypto recovery service fca crypto wallet recovered scam crypto asset recovery scam seed phrase recovery scam second scam after crypto loss crypto recovery scam report">
+    </article><article class="card guide-card" data-searchable="crypto recovery scam uk: a second scam to avoid told your crypto has been recovered after a scam and just needs a fee to claim? don&#x27;t pay or share wallet keys. verify independently. crypto crypto recovery scam uk fake crypto recovery service fca crypto wallet recovered scam crypto asset recovery scam seed phrase recovery scam second scam after crypto loss crypto recovery scam report">
       <div class="eyebrow">Crypto Scams</div>
       <h3><a href="/guides/crypto-recovery-scam-uk/">Crypto Recovery Scam UK: A Second Scam to Avoid</a></h3>
       <p>Told your crypto has been recovered after a scam and just needs a fee to claim? Don&#x27;t pay or share wallet keys. Verify independently.</p>
       <p class="meta">Updated 2026-07-06</p>
-    </article>
-    
-    <article class="card guide-card" data-searchable="nft scam uk: wallet drainers and fake mint sites a common high-value nft threat is a &#x27;wallet drainer&#x27; site tricking you into signing away access to your wallet. here&#x27;s how to check first. crypto nft scam uk wallet drainer scam nft approval phishing fake nft mint site opensea scam report crypto scam uk cryptocurrency scam uk">
+    </article><article class="card guide-card" data-searchable="nft scam uk: wallet drainers and fake mint sites a common high-value nft threat is a &#x27;wallet drainer&#x27; site tricking you into signing away access to your wallet. here&#x27;s how to check first. crypto nft scam uk wallet drainer scam nft approval phishing fake nft mint site opensea scam report crypto scam uk cryptocurrency scam uk">
       <div class="eyebrow">Crypto Scams</div>
       <h3><a href="/guides/nft-scam-uk/">NFT Scam UK: Wallet Drainers and Fake Mint Sites</a></h3>
       <p>A common high-value NFT threat is a &#x27;wallet drainer&#x27; site tricking you into signing away access to your wallet. Here&#x27;s how to check first.</p>
       <p class="meta">Updated 2026-07-10</p>
-    </article>
-    
-    <article class="card guide-card" data-searchable="cryptocurrency payment scam uk: why unexpected crypto demands are a red flag unexpected demands to pay in cryptocurrency are a major scam warning sign. here&#x27;s why criminals ask for crypto, and what to do instead. crypto cryptocurrency payment scam uk why do scammers want bitcoin crypto payment red flag asked to pay in bitcoin crypto atm scam warning bitcoin payment scam uk crypto fraud uk">
+    </article><article class="card guide-card" data-searchable="cryptocurrency payment scam uk: why unexpected crypto demands are a red flag unexpected demands to pay in cryptocurrency are a major scam warning sign. here&#x27;s why criminals ask for crypto, and what to do instead. crypto cryptocurrency payment scam uk why do scammers want bitcoin crypto payment red flag asked to pay in bitcoin crypto atm scam warning bitcoin payment scam uk crypto fraud uk">
       <div class="eyebrow">Crypto Scams</div>
       <h3><a href="/guides/cryptocurrency-payment-scam-uk/">Cryptocurrency Payment Scam UK: Why Unexpected Crypto Demands Are a Red Flag</a></h3>
       <p>Unexpected demands to pay in cryptocurrency are a major scam warning sign. Here&#x27;s why criminals ask for crypto, and what to do instead.</p>
       <p class="meta">Updated 2026-07-10</p>
-    </article>
-    
-    <article class="card guide-card" data-searchable="crypto investment scam uk: spot a fake platform approached about a crypto investment with celebrity endorsements or guaranteed returns? spot a crypto investment scam and protect yourself in the uk. crypto crypto investment scam uk fake crypto platform celebrity crypto endorsement scam crypto pig butchering uk is this crypto platform real crypto investment fraud warning signs report crypto investment scam crypto guaranteed returns scam">
+    </article><article class="card guide-card" data-searchable="crypto investment scam uk: spot a fake platform approached about a crypto investment with celebrity endorsements or guaranteed returns? spot a crypto investment scam and protect yourself in the uk. crypto crypto investment scam uk fake crypto platform celebrity crypto endorsement scam crypto pig butchering uk is this crypto platform real crypto investment fraud warning signs report crypto investment scam crypto guaranteed returns scam">
       <div class="eyebrow">Crypto Scams</div>
       <h3><a href="/guides/crypto-investment-scams-uk-protection/">Crypto Investment Scam UK: Spot a Fake Platform</a></h3>
       <p>Approached about a crypto investment with celebrity endorsements or guaranteed returns? Spot a crypto investment scam and protect yourself in the UK.</p>
-      <p class="meta">Updated 2026-07-02</p>
-    </article>
-    
-    <article class="card guide-card" data-searchable="bitcoin scam uk: spot a fake crypto investment approached about a bitcoin &#x27;investment opportunity&#x27; promising guaranteed returns? how to spot a bitcoin scam, protect your wallet, and report it in the uk. crypto bitcoin scam uk fake bitcoin investment bitcoin wallet scam is this bitcoin platform real bitcoin recovery scam bitcoin investment fraud uk report bitcoin scam uk fake crypto exchange bitcoin">
+      <p class="meta">Updated 2026-07-18</p>
+    </article><article class="card guide-card" data-searchable="bitcoin scam uk: spot a fake crypto investment approached about a bitcoin &#x27;investment opportunity&#x27; promising guaranteed returns? how to spot a bitcoin scam, protect your wallet, and report it in the uk. crypto bitcoin scam uk fake bitcoin investment bitcoin wallet scam is this bitcoin platform real bitcoin recovery scam bitcoin investment fraud uk report bitcoin scam uk fake crypto exchange bitcoin">
       <div class="eyebrow">Crypto Scams</div>
       <h3><a href="/guides/bitcoin-scam-uk/">Bitcoin Scam UK: Spot a Fake Crypto Investment</a></h3>
       <p>Approached about a Bitcoin &#x27;investment opportunity&#x27; promising guaranteed returns? How to spot a Bitcoin scam, protect your wallet, and report it in the UK.</p>
-      <p class="meta">Updated 2026-07-02</p>
-    </article>
-    </div></div></section>
-    
-    <section class="section"><div class="wrap"><h2>Browse other scam categories</h2><ul class="list-clean"><li><a href="/categories/sms/">Text Message Scams</a> <span class="meta">(24 guides)</span></li><li><a href="/categories/email/">Email Scams</a> <span class="meta">(15 guides)</span></li><li><a href="/categories/marketplace/">Marketplace Scams</a> <span class="meta">(15 guides)</span></li><li><a href="/categories/travel/">Travel Scams</a> <span class="meta">(14 guides)</span></li><li><a href="/categories/payment/">Payment Scams</a> <span class="meta">(14 guides)</span></li><li><a href="/categories/phone/">Phone Scams</a> <span class="meta">(13 guides)</span></li></ul></div></section>
-    
+      <p class="meta">Updated 2026-07-18</p>
+    </article></div></div></section>
+
+    <section class="section"><div class="wrap"><h2>Browse other scam categories</h2><ul class="list-clean"><li><a href="/categories/sms/">Text Message Scams</a> <span class="meta">(23 guides)</span></li><li><a href="/categories/email/">Email Scams</a> <span class="meta">(15 guides)</span></li><li><a href="/categories/marketplace/">Marketplace Scams</a> <span class="meta">(15 guides)</span></li><li><a href="/categories/travel/">Travel Scams</a> <span class="meta">(14 guides)</span></li><li><a href="/categories/payment/">Payment Scams</a> <span class="meta">(14 guides)</span></li><li><a href="/categories/phone/">Phone Scams</a> <span class="meta">(13 guides)</span></li></ul></div></section>
+
   </main>
   <section class="newsletter-band" aria-labelledby="nl-heading">
     <div class="wrap newsletter-inner">
@@ -210,6 +191,8 @@
         <h3>Explore</h3>
         <ul>
           <li><a href="/guides/">All guides</a></li>
+          <li><a href="/research/">Research &amp; data</a></li>
+          <li><a href="/recovery/">Scam recovery checklist</a></li>
           <li><a href="/categories/sms/">Text Message Scams</a></li>
 <li><a href="/categories/email/">Email Scams</a></li>
 <li><a href="/categories/marketplace/">Marketplace Scams</a></li>
@@ -233,6 +216,8 @@
         <h3>Trust & legal</h3>
         <ul>
           <li><a href="/about/">About</a></li>
+          <li><a href="/methodology/">How we fact-check</a></li>
+          <li><a href="/corrections/">Corrections</a></li>
           <li><a href="/privacy/">Privacy Policy</a></li>
           <li><a href="/cookies/">Cookie Policy</a></li>
           <li><button class="link-button" type="button" id="openCookieSettings">Cookie settings</button></li>
@@ -257,6 +242,6 @@
       <button class="btn btn-primary" id="cookieAccept" type="button">Accept</button>
     </div>
   </div>
-  <script src="/assets/app.js?v=227604ee69" defer></script>
+  <script src="/assets/app.js?v=59ecb206a0" defer></script>
 </body>
 </html>

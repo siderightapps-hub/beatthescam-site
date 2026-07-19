@@ -12,8 +12,8 @@
   <meta name="robots" content="index,follow">
   <meta name="theme-color" content="#0b1220">
   <meta name="format-detection" content="telephone=no">
-  
-  
+
+
 
   <!-- Favicons -->
   <link rel="icon" href="/favicon.ico" sizes="any">
@@ -26,18 +26,12 @@
   <!-- Resource hints for third-party origins. preconnect = full TCP+TLS
        handshake started immediately (good for resources we KNOW will load
        on every page). dns-prefetch = DNS lookup only (cheap fallback for
-       older browsers that ignore preconnect). googletagmanager loads GA4,
-       pagead2 loads AdSense — both are async <script> tags in <body>, so
-       preconnect shaves 100-300ms off their first paint on mobile.
-       Also adds tpc.googlesyndication.com (where ad creatives serve from)
-       and the ahrefs analytics host. -->
+       older browsers that ignore preconnect). AdSense resource hints are
+       injected only on pages eligible to serve ads. -->
   <link rel="preconnect" href="https://www.googletagmanager.com" crossorigin>
-  <link rel="preconnect" href="https://pagead2.googlesyndication.com" crossorigin>
-  <link rel="preconnect" href="https://tpc.googlesyndication.com" crossorigin>
   <link rel="dns-prefetch" href="https://www.googletagmanager.com">
-  <link rel="dns-prefetch" href="https://pagead2.googlesyndication.com">
-  <link rel="dns-prefetch" href="https://tpc.googlesyndication.com">
   <link rel="dns-prefetch" href="https://analytics.ahrefs.com">
+  <!-- AdSense resource hints intentionally omitted on this page -->
 
   <meta property="og:type" content="website">
   <meta property="og:title" content="Shopping Scams | Beat the Scam">
@@ -58,7 +52,7 @@
        value= attribute (not content=) — validators flag it; do not "fix" it
        or their crawler stops verifying the site. -->
   <meta name='impact-site-verification' value='e0dda02c-a1b6-4056-9f92-16f7c916bd4b'>
-  <link rel="stylesheet" href="/assets/styles.css?v=2aec57b620">
+  <link rel="stylesheet" href="/assets/styles.css?v=d1fc9faba4">
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-JXNF856NBF"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
@@ -78,12 +72,13 @@
     AdSense respects Google Consent Mode: the GA4 consent defaults above start
     denied, so visitors who haven't accepted get non-personalised ads and no
     ad-personalisation cookies until they do. The ad tag below is emitted per
-    page by make_base()/_ads_head(): omitted entirely on the /check/ tool, and
-    preceded by a requestNonPersonalizedAds flag on sensitive financial / victim
-    pages (Google restricts personalisation based on negative financial status).
+    page by make_base()/_ads_head(): omitted on navigational, tool and
+    sensitive-content pages, and preceded by a requestNonPersonalizedAds flag
+    on sensitive financial / victim pages (Google restricts personalisation
+    based on negative financial status).
     Ahrefs Web Analytics is cookieless. Custom GA4 events stay gated in app.js.
   -->
-  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1606633100797174" crossorigin="anonymous"></script>
+  <!-- Ads intentionally disabled on this page (excluded from Auto Ads) -->
   <script src="https://analytics.ahrefs.com/analytics.js" data-key="l1GHKUGfAKlhtjbYgIySAg" async></script>
 </head>
 <body>
@@ -99,6 +94,8 @@
         <a href="/">Home</a>
         <a href="/guides/">Guides</a>
         <a href="/categories/">Categories</a>
+        <a href="/research/">Research</a>
+        <a href="/recovery/">Recovery</a>
         <a href="/about/">About</a>
         <a href="/contact/">Contact</a>
         <a class="nav-cta" href="/check/">Check a message</a>
@@ -106,7 +103,7 @@
     </div>
   </header>
   <main id="main">
-    
+
     <section class="hero">
       <div class="wrap">
         <div class="breadcrumbs"><a href="/">Home</a> / <a href="/categories/">Categories</a> / Shopping Scams</div>
@@ -114,60 +111,46 @@
         <p class="lead">Guides covering fake online retailers, counterfeit goods, pet scams, and marketplace fraud. Learn to shop safely and spot fraudulent sellers in the UK.</p>
       </div>
     </section>
-    
-    <section class="section"><div class="wrap"><h2>Latest shopping scams</h2><div class="grid-3">
-    <article class="card guide-card" data-searchable="f1 british gp ticket scam uk: spot a fake silverstone seller offered british grand prix tickets below face value from a seller on social media? how to spot a fake silverstone ticket scam and buy safely. shopping f1 british gp ticket scam uk silverstone ticket scam fake f1 tickets uk is this silverstone seller real british grand prix ticket fraud report f1 ticket scam uk f1 resale ticket scam silverstone touting scam">
+
+    <section class="section"><div class="wrap"><h2>Latest shopping scams</h2><div class="grid-3"><article class="card guide-card" data-searchable="f1 british gp ticket scam uk: spot a fake silverstone seller offered british grand prix tickets below face value from a seller on social media? how to spot a fake silverstone ticket scam and buy safely. shopping f1 british gp ticket scam uk silverstone ticket scam fake f1 tickets uk is this silverstone seller real british grand prix ticket fraud report f1 ticket scam uk f1 resale ticket scam silverstone touting scam">
       <div class="eyebrow">Shopping Scams</div>
       <h3><a href="/guides/f1-british-gp-ticket-scam-uk/">F1 British GP Ticket Scam UK: Spot a Fake Silverstone Seller</a></h3>
       <p>Offered British Grand Prix tickets below face value from a seller on social media? How to spot a fake Silverstone ticket scam and buy safely.</p>
-      <p class="meta">Updated 2026-07-02</p>
-    </article>
-    
-    <article class="card guide-card" data-searchable="fake festival ticket scam uk: how to buy safely tempted by a cheap festival ticket you spotted on social media? here&#x27;s how to spot a fake seller and buy safely before you pay a penny. shopping fake festival ticket scam uk festival ticket scam social media star accredited ticket seller fake ticket bank transfer scam is this festival ticket real festival ticket scam facebook section 75 ticket scam">
+      <p class="meta">Updated 2026-07-18</p>
+    </article><article class="card guide-card" data-searchable="fake festival ticket scam uk: how to buy safely tempted by a cheap festival ticket you spotted on social media? here&#x27;s how to spot a fake seller and buy safely before you pay a penny. shopping fake festival ticket scam uk festival ticket scam social media star accredited ticket seller fake ticket bank transfer scam is this festival ticket real festival ticket scam facebook section 75 ticket scam">
       <div class="eyebrow">Shopping Scams</div>
       <h3><a href="/guides/fake-festival-ticket-scam-uk/">Fake Festival Ticket Scam UK: How to Buy Safely</a></h3>
       <p>Tempted by a cheap festival ticket you spotted on social media? Here&#x27;s how to spot a fake seller and buy safely before you pay a penny.</p>
       <p class="meta">Updated 2026-07-05</p>
-    </article>
-    
-    <article class="card guide-card" data-searchable="amazon prime scam uk: spot a fake renewal email got an email saying your amazon prime membership failed to renew or payment failed? how to spot a fake prime renewal scam and report it in the uk. shopping amazon prime scam uk fake amazon prime renewal email amazon prime payment failed scam is this amazon prime email real amazon prime membership scam text amazon prime phishing email report amazon prime scam amazon prime cancel subscription scam">
+    </article><article class="card guide-card" data-searchable="amazon prime scam uk: spot a fake renewal email got an email saying your amazon prime membership failed to renew or payment failed? how to spot a fake prime renewal scam and report it in the uk. shopping amazon prime scam uk fake amazon prime renewal email amazon prime payment failed scam is this amazon prime email real amazon prime membership scam text amazon prime phishing email report amazon prime scam amazon prime cancel subscription scam">
       <div class="eyebrow">Shopping Scams</div>
       <h3><a href="/guides/amazon-prime-scam-uk/">Amazon Prime Scam UK: Spot a Fake Renewal Email</a></h3>
       <p>Got an email saying your Amazon Prime membership failed to renew or payment failed? How to spot a fake Prime renewal scam and report it in the UK.</p>
-      <p class="meta">Updated 2026-07-02</p>
-    </article>
-    
-    <article class="card guide-card" data-searchable="stubhub ticket scam uk: spot a fake seller buying resale tickets on stubhub and offered a deal that bypasses the platform? how to spot a fake stubhub seller, buy safely, and report it. shopping stubhub ticket scam uk stubhub fake seller stubhub off-platform scam is this stubhub seller real stubhub fake tickets uk stubhub buyer protection report stubhub scam uk stubhub too good to be true">
+      <p class="meta">Updated 2026-07-18</p>
+    </article><article class="card guide-card" data-searchable="stubhub ticket scam uk: spot a fake seller buying resale tickets on stubhub and offered a deal that bypasses the platform? how to spot a fake stubhub seller, buy safely, and report it. shopping stubhub ticket scam uk stubhub fake seller stubhub off-platform scam is this stubhub seller real stubhub fake tickets uk stubhub buyer protection report stubhub scam uk stubhub too good to be true">
       <div class="eyebrow">Shopping Scams</div>
       <h3><a href="/guides/stubhub-ticket-scam-uk/">StubHub Ticket Scam UK: Spot a Fake Seller</a></h3>
       <p>Buying resale tickets on StubHub and offered a deal that bypasses the platform? How to spot a fake StubHub seller, buy safely, and report it.</p>
-      <p class="meta">Updated 2026-07-02</p>
-    </article>
-    
-    <article class="card guide-card" data-searchable="concert ticket scam uk: where they happen and how to avoid them fake ticket sellers target sold-out gigs on facebook marketplace, instagram and copycat sites. where the scams happen and how to buy resale safely. shopping concert ticket scam uk fake ticket seller ticketmaster scam ticket reseller fraud how to spot fake concert tickets">
+      <p class="meta">Updated 2026-07-18</p>
+    </article><article class="card guide-card" data-searchable="concert ticket scam uk: where they happen and how to avoid them fake ticket sellers target sold-out gigs on facebook marketplace, instagram and copycat sites. where the scams happen and how to buy resale safely. shopping concert ticket scam uk fake ticket seller ticketmaster scam ticket reseller fraud how to spot fake concert tickets">
       <div class="eyebrow">Shopping Scams</div>
       <h3><a href="/guides/concert-ticket-scam-uk/">Concert Ticket Scam UK: Where They Happen and How to Avoid Them</a></h3>
       <p>Fake ticket sellers target sold-out gigs on Facebook Marketplace, Instagram and copycat sites. Where the scams happen and how to buy resale safely.</p>
-      <p class="meta">Published 2026-05-17</p>
-    </article>
-    
-    <article class="card guide-card" data-searchable="glastonbury ticket scam uk: spot a fake seller offered a glastonbury ticket outside the official route? check the festival and see tickets directly before paying a private seller. shopping glastonbury ticket scam fake glastonbury ticket glastonbury ticket resale glastonbury vip ticket scam is this glastonbury ticket real glastonbury registration ticket glastonbury ticket seller scam">
+      <p class="meta">Updated 2026-07-18</p>
+    </article><article class="card guide-card" data-searchable="glastonbury ticket scam uk: spot a fake seller offered a glastonbury ticket outside the official route? check the festival and see tickets directly before paying a private seller. shopping glastonbury ticket scam fake glastonbury ticket glastonbury ticket resale glastonbury vip ticket scam is this glastonbury ticket real glastonbury registration ticket glastonbury ticket seller scam">
       <div class="eyebrow">Shopping Scams</div>
       <h3><a href="/guides/glastonbury-ticket-scam-uk/">Glastonbury Ticket Scam UK: Spot a Fake Seller</a></h3>
       <p>Offered a Glastonbury ticket outside the official route? Check the festival and See Tickets directly before paying a private seller.</p>
       <p class="meta">Updated 2026-07-05</p>
-    </article>
-    
-    <article class="card guide-card" data-searchable="is viagogo safe to buy tickets in the uk? what you need to know viagogo is a real resale marketplace, not a scam company, but hidden fees and refund problems are common. what uk buyers should know before paying. shopping viagogo scam uk fake viagogo tickets viagogo ticket fraud viagogo impersonation scam buying tickets safely online shopping scam uk fake online shop uk">
+    </article><article class="card guide-card" data-searchable="is viagogo safe to buy tickets in the uk? what you need to know viagogo is a real resale marketplace, not a scam company, but hidden fees and refund problems are common. what uk buyers should know before paying. shopping viagogo scam uk fake viagogo tickets viagogo ticket fraud viagogo impersonation scam buying tickets safely online shopping scam uk fake online shop uk">
       <div class="eyebrow">Shopping Scams</div>
       <h3><a href="/guides/viagogo-scam-uk/">Is Viagogo Safe to Buy Tickets in the UK? What You Need to Know</a></h3>
       <p>Viagogo is a real resale marketplace, not a scam company, but hidden fees and refund problems are common. What UK buyers should know before paying.</p>
       <p class="meta">Published 2026-05-13</p>
-    </article>
-    </div></div></section>
-    
-    <section class="section"><div class="wrap"><h2>Browse other scam categories</h2><ul class="list-clean"><li><a href="/categories/sms/">Text Message Scams</a> <span class="meta">(24 guides)</span></li><li><a href="/categories/email/">Email Scams</a> <span class="meta">(15 guides)</span></li><li><a href="/categories/marketplace/">Marketplace Scams</a> <span class="meta">(15 guides)</span></li><li><a href="/categories/travel/">Travel Scams</a> <span class="meta">(14 guides)</span></li><li><a href="/categories/payment/">Payment Scams</a> <span class="meta">(14 guides)</span></li><li><a href="/categories/phone/">Phone Scams</a> <span class="meta">(13 guides)</span></li></ul></div></section>
-    
+    </article></div></div></section>
+
+    <section class="section"><div class="wrap"><h2>Browse other scam categories</h2><ul class="list-clean"><li><a href="/categories/sms/">Text Message Scams</a> <span class="meta">(23 guides)</span></li><li><a href="/categories/email/">Email Scams</a> <span class="meta">(15 guides)</span></li><li><a href="/categories/marketplace/">Marketplace Scams</a> <span class="meta">(15 guides)</span></li><li><a href="/categories/travel/">Travel Scams</a> <span class="meta">(14 guides)</span></li><li><a href="/categories/payment/">Payment Scams</a> <span class="meta">(14 guides)</span></li><li><a href="/categories/phone/">Phone Scams</a> <span class="meta">(13 guides)</span></li></ul></div></section>
+
   </main>
   <section class="newsletter-band" aria-labelledby="nl-heading">
     <div class="wrap newsletter-inner">
@@ -203,6 +186,8 @@
         <h3>Explore</h3>
         <ul>
           <li><a href="/guides/">All guides</a></li>
+          <li><a href="/research/">Research &amp; data</a></li>
+          <li><a href="/recovery/">Scam recovery checklist</a></li>
           <li><a href="/categories/sms/">Text Message Scams</a></li>
 <li><a href="/categories/email/">Email Scams</a></li>
 <li><a href="/categories/marketplace/">Marketplace Scams</a></li>
@@ -226,6 +211,8 @@
         <h3>Trust & legal</h3>
         <ul>
           <li><a href="/about/">About</a></li>
+          <li><a href="/methodology/">How we fact-check</a></li>
+          <li><a href="/corrections/">Corrections</a></li>
           <li><a href="/privacy/">Privacy Policy</a></li>
           <li><a href="/cookies/">Cookie Policy</a></li>
           <li><button class="link-button" type="button" id="openCookieSettings">Cookie settings</button></li>
@@ -250,6 +237,6 @@
       <button class="btn btn-primary" id="cookieAccept" type="button">Accept</button>
     </div>
   </div>
-  <script src="/assets/app.js?v=227604ee69" defer></script>
+  <script src="/assets/app.js?v=59ecb206a0" defer></script>
 </body>
 </html>

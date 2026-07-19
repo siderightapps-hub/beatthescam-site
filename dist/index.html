@@ -12,8 +12,8 @@
   <meta name="robots" content="index,follow">
   <meta name="theme-color" content="#0b1220">
   <meta name="format-detection" content="telephone=no">
-  
-  
+
+
 
   <!-- Favicons -->
   <link rel="icon" href="/favicon.ico" sizes="any">
@@ -26,18 +26,12 @@
   <!-- Resource hints for third-party origins. preconnect = full TCP+TLS
        handshake started immediately (good for resources we KNOW will load
        on every page). dns-prefetch = DNS lookup only (cheap fallback for
-       older browsers that ignore preconnect). googletagmanager loads GA4,
-       pagead2 loads AdSense — both are async <script> tags in <body>, so
-       preconnect shaves 100-300ms off their first paint on mobile.
-       Also adds tpc.googlesyndication.com (where ad creatives serve from)
-       and the ahrefs analytics host. -->
+       older browsers that ignore preconnect). AdSense resource hints are
+       injected only on pages eligible to serve ads. -->
   <link rel="preconnect" href="https://www.googletagmanager.com" crossorigin>
-  <link rel="preconnect" href="https://pagead2.googlesyndication.com" crossorigin>
-  <link rel="preconnect" href="https://tpc.googlesyndication.com" crossorigin>
   <link rel="dns-prefetch" href="https://www.googletagmanager.com">
-  <link rel="dns-prefetch" href="https://pagead2.googlesyndication.com">
-  <link rel="dns-prefetch" href="https://tpc.googlesyndication.com">
   <link rel="dns-prefetch" href="https://analytics.ahrefs.com">
+  <!-- AdSense resource hints intentionally omitted on this page -->
 
   <meta property="og:type" content="website">
   <meta property="og:title" content="Beat the Scam | Scam Alerts, Checks &amp; Protection Guides">
@@ -58,7 +52,7 @@
        value= attribute (not content=) — validators flag it; do not "fix" it
        or their crawler stops verifying the site. -->
   <meta name='impact-site-verification' value='e0dda02c-a1b6-4056-9f92-16f7c916bd4b'>
-  <link rel="stylesheet" href="/assets/styles.css?v=2aec57b620">
+  <link rel="stylesheet" href="/assets/styles.css?v=d1fc9faba4">
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-JXNF856NBF"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
@@ -78,12 +72,13 @@
     AdSense respects Google Consent Mode: the GA4 consent defaults above start
     denied, so visitors who haven't accepted get non-personalised ads and no
     ad-personalisation cookies until they do. The ad tag below is emitted per
-    page by make_base()/_ads_head(): omitted entirely on the /check/ tool, and
-    preceded by a requestNonPersonalizedAds flag on sensitive financial / victim
-    pages (Google restricts personalisation based on negative financial status).
+    page by make_base()/_ads_head(): omitted on navigational, tool and
+    sensitive-content pages, and preceded by a requestNonPersonalizedAds flag
+    on sensitive financial / victim pages (Google restricts personalisation
+    based on negative financial status).
     Ahrefs Web Analytics is cookieless. Custom GA4 events stay gated in app.js.
   -->
-  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1606633100797174" crossorigin="anonymous"></script>
+  <!-- Ads intentionally disabled on this page (excluded from Auto Ads) -->
   <script src="https://analytics.ahrefs.com/analytics.js" data-key="l1GHKUGfAKlhtjbYgIySAg" async></script>
 </head>
 <body>
@@ -99,6 +94,8 @@
         <a href="/">Home</a>
         <a href="/guides/">Guides</a>
         <a href="/categories/">Categories</a>
+        <a href="/research/">Research</a>
+        <a href="/recovery/">Recovery</a>
         <a href="/about/">About</a>
         <a href="/contact/">Contact</a>
         <a class="nav-cta" href="/check/">Check a message</a>
@@ -106,7 +103,7 @@
     </div>
   </header>
   <main id="main">
-    
+
     <section class="hero">
       <div class="wrap hero-grid">
         <div class="hero-panel">
@@ -114,11 +111,12 @@
           <h1>Check scams. Protect your money.</h1>
           <p class="lead">Beat the Scam helps you review suspicious texts, emails, websites, calls, job offers, crypto pitches, and payment requests before money or data is lost.</p>
           <div class="hero-actions">
-            <a class="btn btn-primary" href="/guides/">Browse guides</a>
-            <a class="btn btn-secondary" href="/check/">Check a message</a>
+            <a class="btn btn-primary" href="/check/">Check a message</a>
+            <a class="btn btn-recovery" href="/recovery/">Recover after a scam</a>
+            <a class="btn btn-secondary" href="/guides/">Browse guides</a>
           </div>
           <div class="hero-points">
-            <div class="hero-point"><strong>183</strong><span>guides published</span></div>
+            <div class="hero-point"><strong>182</strong><span>guides published</span></div>
             <div class="hero-point"><strong>17</strong><span>scam categories</span></div>
             <div class="hero-point"><strong>Free</strong><span>no account needed</span></div>
           </div>
@@ -134,7 +132,7 @@
           </section>
           <section class="feature-panel">
             <h3>Latest scam alerts</h3>
-            <ul class="list-clean"><li><a href="/guides/hinge-romance-scam-uk/">Hinge Romance Scam UK: How to Spot Fake Profiles and Protect Yourself</a></li><li><a href="/guides/cruise-scam-uk/">Cruise Scam UK: Spot Fake Deals and Book Safely</a></li><li><a href="/guides/holiday-club-scam-uk/">Holiday Club Scam UK: How to Spot and Avoid Timeshare Fraud</a></li><li><a href="/guides/timeshare-scam-uk/">Timeshare Scam UK: How to Spot and Avoid Holiday Property Traps</a></li><li><a href="/guides/fake-travel-agent-scam-uk/">Fake Travel Agent Scams UK: How to Spot Booking Fraud</a></li></ul>
+            <ul class="list-clean"><li><a href="/guides/hinge-romance-scam-uk/">Hinge Romance Scam UK: Warning Signs and What to Do</a></li><li><a href="/guides/cruise-scam-uk/">Cruise Scam UK: Spot Fake Deals and Book Safely</a></li><li><a href="/guides/holiday-club-scam-uk/">Holiday Club Scam UK: How to Spot and Avoid Timeshare Fraud</a></li><li><a href="/guides/timeshare-scam-uk/">Timeshare Scam UK: How to Spot and Avoid Holiday Property Traps</a></li><li><a href="/guides/fake-travel-agent-scam-uk/">Fake Travel Agent Scams UK: How to Spot Booking Fraud</a></li></ul>
           </section>
           <section class="callout">
             <h3>Quick verification rule</h3>
@@ -155,6 +153,29 @@
       </div>
     </section>
 
+
+    <section class="section" aria-labelledby="latest-research-heading">
+      <div class="wrap">
+        <div class="callout research-promo">
+          <div>
+            <div class="kicker">Original data · 2026-07-18</div>
+            <h2 id="latest-research-heading">Latest visibility research</h2>
+            <p>Our transparent monthly snapshot tracks how UK scam guidance appears in Google Search and in Bing-powered AI answers. The data, method and limitations are published for scrutiny.</p>
+            <div class="hero-actions">
+              <a class="btn btn-primary" href="/research/uk-scam-search-ai-trends-2026-07/">Read the latest report</a>
+              <a class="btn btn-secondary" href="/research/methodology/">See the research method</a>
+            </div>
+          </div>
+          <div class="research-promo-metrics" aria-label="Latest research headline figures">
+            <div><strong>11,481</strong><span>Bing AI citations</span></div>
+            <div><strong>549</strong><span>Google impressions</span></div>
+            <div><strong>97</strong><span>pages cited by Bing AI</span></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+
     <section class="section">
       <div class="wrap">
         <div class="section-head">
@@ -164,47 +185,31 @@
           </div>
           <a href="/categories/">View all categories</a>
         </div>
-        <div class="category-grid">
-        <article class="card category-card">
+        <div class="category-grid"><article class="card category-card">
           <h3><a href="/categories/sms/">Text Message Scams</a></h3>
           <p>Guides covering fake delivery texts, bank impersonation SMS, HMRC alerts, and smishing attacks. Learn to spot and report suspicious texts targeting UK phones.</p>
-        </article>
-        
-        <article class="card category-card">
+        </article><article class="card category-card">
           <h3><a href="/categories/email/">Email Scams</a></h3>
           <p>Guides covering phishing emails, business email compromise, fake invoices, and email impersonation. Learn to identify and report suspicious emails in the UK.</p>
-        </article>
-        
-        <article class="card category-card">
+        </article><article class="card category-card">
           <h3><a href="/categories/marketplace/">Marketplace Scams</a></h3>
           <p>Guides covering Facebook Marketplace, Gumtree, Vinted, and eBay scams targeting UK buyers and sellers. Spot payment fraud, advance fees, and collection scams.</p>
-        </article>
-        
-        <article class="card category-card">
+        </article><article class="card category-card">
           <h3><a href="/categories/travel/">Travel Scams</a></h3>
           <p>Guides covering fake holiday listings, advance-fee travel fraud, and ticket scams targeting UK travellers. Verify travel offers before paying a deposit.</p>
-        </article>
-        
-        <article class="card category-card">
+        </article><article class="card category-card">
           <h3><a href="/categories/payment/">Payment Scams</a></h3>
           <p>Guides covering bank transfer fraud, advance fee scams, fake invoices, and APP fraud in the UK. Learn how to verify payment requests and protect your money.</p>
-        </article>
-        
-        <article class="card category-card">
+        </article><article class="card category-card">
           <h3><a href="/categories/phone/">Phone Scams</a></h3>
           <p>Guides covering vishing calls, fake bank calls, HMRC phone scams, and voice fraud targeting UK residents. Learn to verify callers and avoid phone-based scams.</p>
-        </article>
-        
-        <article class="card category-card">
+        </article><article class="card category-card">
           <h3><a href="/categories/website/">Website Scams</a></h3>
           <p>Guides covering fake online shops, lookalike domains, and website verification. Learn how to check if a website is legitimate before buying or sharing details.</p>
-        </article>
-        
-        <article class="card category-card">
+        </article><article class="card category-card">
           <h3><a href="/categories/finance/">Investment &amp; Finance Scams</a></h3>
           <p>Guides covering fake investment opportunities, pension fraud, clone firm scams, and financial impersonation targeting UK consumers. Protect your savings.</p>
-        </article>
-        </div>
+        </article></div>
       </div>
     </section>
 
@@ -217,49 +222,37 @@
           </div>
           <a href="/guides/">Browse all guides</a>
         </div>
-        <div class="grid-3">
-    <article class="card guide-card" data-searchable="hinge romance scam uk: how to spot fake profiles and protect yourself romance scammers create convincing hinge profiles to build emotional connections with real users, then ask for money under false pretences. this guide explains the warning signs, how the scam unfolds, and what to do if you&#x27;ve already been targeted. dating hinge romance scam uk fake hinge profiles dating app scam romance scammer warning signs hinge catfish scam">
+        <div class="grid-3"><article class="card guide-card" data-searchable="hinge romance scam uk: warning signs and what to do learn the warning signs of a hinge romance scam, what online checks can prove, how uk bank reimbursement works and where to report it. dating hinge romance scam uk fake hinge profiles dating app scam romance scammer warning signs hinge catfish scam">
       <div class="eyebrow">Romance &amp; Dating Scams</div>
-      <h3><a href="/guides/hinge-romance-scam-uk/">Hinge Romance Scam UK: How to Spot Fake Profiles and Protect Yourself</a></h3>
-      <p>Romance scammers create convincing Hinge profiles to build emotional connections with real users, then ask for money under false pretences. This guide explains the warning signs, how the scam unfolds, and what to do if you&#x27;ve already been targeted.</p>
-      <p class="meta">Published 2026-07-14</p>
-    </article>
-    
-    <article class="card guide-card" data-searchable="cruise scam uk: spot fake deals and book safely cruise scams use fake deals, &quot;free cruise&quot; prizes and bogus booking sites to take your money. how to spot one, book safely and get your money back. travel cruise scam uk fake cruise deal free cruise scam cruise booking scam cruise holiday fraud atol cruise cruise line scam">
+      <h3><a href="/guides/hinge-romance-scam-uk/">Hinge Romance Scam UK: Warning Signs and What to Do</a></h3>
+      <p>Learn the warning signs of a Hinge romance scam, what online checks can prove, how UK bank reimbursement works and where to report it.</p>
+      <p class="meta">Updated 2026-07-19</p>
+    </article><article class="card guide-card" data-searchable="cruise scam uk: spot fake deals and book safely cruise scams use fake deals, &quot;free cruise&quot; prizes and bogus booking sites to take your money. how to spot one, book safely and get your money back. travel cruise scam uk fake cruise deal free cruise scam cruise booking scam cruise holiday fraud atol cruise cruise line scam">
       <div class="eyebrow">Travel Scams</div>
       <h3><a href="/guides/cruise-scam-uk/">Cruise Scam UK: Spot Fake Deals and Book Safely</a></h3>
       <p>Cruise scams use fake deals, &quot;free cruise&quot; prizes and bogus booking sites to take your money. How to spot one, book safely and get your money back.</p>
       <p class="meta">Published 2026-07-13</p>
-    </article>
-    
-    <article class="card guide-card" data-searchable="holiday club scam uk: how to spot and avoid timeshare fraud holiday club scams push discounted-travel memberships in high-pressure presentations, locking you into costly contracts. how to spot one and get out. travel holiday club scam uk timeshare scam uk holiday club fraud fake holiday club holiday scam warning signs">
+    </article><article class="card guide-card" data-searchable="holiday club scam uk: how to spot and avoid timeshare fraud holiday club scams push discounted-travel memberships in high-pressure presentations, locking you into costly contracts. how to spot one and get out. travel holiday club scam uk timeshare scam uk holiday club fraud fake holiday club holiday scam warning signs">
       <div class="eyebrow">Travel Scams</div>
       <h3><a href="/guides/holiday-club-scam-uk/">Holiday Club Scam UK: How to Spot and Avoid Timeshare Fraud</a></h3>
       <p>Holiday club scams push discounted-travel memberships in high-pressure presentations, locking you into costly contracts. How to spot one and get out.</p>
       <p class="meta">Published 2026-07-05</p>
-    </article>
-    
-    <article class="card guide-card" data-searchable="timeshare scam uk: how to spot and avoid holiday property traps timeshare scams promise cheap holidays and investment returns, then trap you in contracts with escalating fees. the warning signs and how to get help. travel timeshare scam uk timeshare fraud holiday property scam timeshare exit scam fake timeshare investment">
+    </article><article class="card guide-card" data-searchable="timeshare scam uk: how to spot and avoid holiday property traps timeshare scams promise cheap holidays and investment returns, then trap you in contracts with escalating fees. the warning signs and how to get help. travel timeshare scam uk timeshare fraud holiday property scam timeshare exit scam fake timeshare investment">
       <div class="eyebrow">Travel Scams</div>
       <h3><a href="/guides/timeshare-scam-uk/">Timeshare Scam UK: How to Spot and Avoid Holiday Property Traps</a></h3>
       <p>Timeshare scams promise cheap holidays and investment returns, then trap you in contracts with escalating fees. The warning signs and how to get help.</p>
-      <p class="meta">Updated 2026-07-10</p>
-    </article>
-    
-    <article class="card guide-card" data-searchable="fake travel agent scams uk: how to spot booking fraud booking a cheap holiday, flight or villa from an agent you don&#x27;t know? how to spot a fake travel agent, verify abta/atol, and protect your money. travel fake travel agent scam uk travel booking fraud fake holiday website scam travel agent impersonation holiday booking scam">
+      <p class="meta">Updated 2026-07-16</p>
+    </article><article class="card guide-card" data-searchable="fake travel agent scams uk: how to spot booking fraud booking a cheap holiday, flight or villa from an agent you don&#x27;t know? how to spot a fake travel agent, verify abta/atol, and protect your money. travel fake travel agent scam uk travel booking fraud fake holiday website scam travel agent impersonation holiday booking scam">
       <div class="eyebrow">Travel Scams</div>
       <h3><a href="/guides/fake-travel-agent-scam-uk/">Fake Travel Agent Scams UK: How to Spot Booking Fraud</a></h3>
       <p>Booking a cheap holiday, flight or villa from an agent you don&#x27;t know? How to spot a fake travel agent, verify ABTA/ATOL, and protect your money.</p>
-      <p class="meta">Published 2026-06-28</p>
-    </article>
-    
-    <article class="card guide-card" data-searchable="booking.com scam uk: spot a fake payment message a message uses real booking details and demands payment or card information. compare it with the confirmation and contact booking.com directly. travel booking.com scam uk fake booking.com email booking.com phishing travel booking scam holiday scam uk">
+      <p class="meta">Updated 2026-07-18</p>
+    </article><article class="card guide-card" data-searchable="booking.com scam uk: spot a fake payment message a message uses real booking details and demands payment or card information. compare it with the confirmation and contact booking.com directly. travel booking.com scam uk fake booking.com email booking.com phishing travel booking scam holiday scam uk">
       <div class="eyebrow">Travel Scams</div>
       <h3><a href="/guides/booking-com-scam-uk/">Booking.com Scam UK: Spot a Fake Payment Message</a></h3>
       <p>A message uses real booking details and demands payment or card information. Compare it with the confirmation and contact Booking.com directly.</p>
       <p class="meta">Updated 2026-07-10</p>
-    </article>
-    </div>
+    </article></div>
       </div>
     </section>
 
@@ -313,7 +306,7 @@
         </div>
       </div>
     </section>
-    
+
   </main>
   <section class="newsletter-band" aria-labelledby="nl-heading">
     <div class="wrap newsletter-inner">
@@ -349,6 +342,8 @@
         <h3>Explore</h3>
         <ul>
           <li><a href="/guides/">All guides</a></li>
+          <li><a href="/research/">Research &amp; data</a></li>
+          <li><a href="/recovery/">Scam recovery checklist</a></li>
           <li><a href="/categories/sms/">Text Message Scams</a></li>
 <li><a href="/categories/email/">Email Scams</a></li>
 <li><a href="/categories/marketplace/">Marketplace Scams</a></li>
@@ -372,6 +367,8 @@
         <h3>Trust & legal</h3>
         <ul>
           <li><a href="/about/">About</a></li>
+          <li><a href="/methodology/">How we fact-check</a></li>
+          <li><a href="/corrections/">Corrections</a></li>
           <li><a href="/privacy/">Privacy Policy</a></li>
           <li><a href="/cookies/">Cookie Policy</a></li>
           <li><button class="link-button" type="button" id="openCookieSettings">Cookie settings</button></li>
@@ -396,6 +393,6 @@
       <button class="btn btn-primary" id="cookieAccept" type="button">Accept</button>
     </div>
   </div>
-  <script src="/assets/app.js?v=227604ee69" defer></script>
+  <script src="/assets/app.js?v=59ecb206a0" defer></script>
 </body>
 </html>

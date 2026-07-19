@@ -35,7 +35,32 @@
     }
   }
 
-  function consentAccepted(){ return safeGet(storageKey) === 'accepted'; }
+  function consentAccepted(){
+    if(safeGet(storageKey) === 'accepted') return true;
+    // Google's certified CMP writes Consent Mode updates through gtag rather
+    // than our fallback preference key. Read the latest analytics_storage
+    // decision so CMP-consented visitors are measured too, while a denial (or
+    // no decision yet) continues to suppress custom events.
+    var dl = window.dataLayer || [];
+    for(var i = dl.length - 1; i >= 0; i--){
+      var item = dl[i];
+      if(item && item[0] === 'consent' && item[1] === 'update' && item[2] &&
+         typeof item[2].analytics_storage === 'string'){
+        return item[2].analytics_storage === 'granted';
+      }
+    }
+    return false;
+  }
+
+  // One consent-aware analytics gateway for every conversion surface. Event
+  // payloads must never include checker text, email addresses, or other user
+  // input. GA4 intentionally under-counts visitors who decline analytics.
+  function trackEvent(name, params){
+    if(typeof gtag !== 'function' || !consentAccepted()) return false;
+    gtag('event', name, params || {});
+    return true;
+  }
+  window.btsTrackEvent = trackEvent;
 
   // Best-effort signal: does UK/EEA data-protection law (and thus the IAB TCF)
   // apply to this visitor? null = unknown. Populated from the TCF stub below.
@@ -182,9 +207,17 @@
 
   document.addEventListener('click', function(e){
     const link = e.target.closest('a');
-    if(!link || typeof gtag !== 'function' || !consentAccepted()) return;
+    if(!link) return;
+    if(link.dataset && link.dataset.affiliateId){
+      trackEvent('affiliate_click', {
+        affiliate_id: link.dataset.affiliateId,
+        affiliate_name: link.dataset.affiliateName || '',
+        commercial_status: link.dataset.commercialStatus || 'unknown',
+        link_url: link.href
+      });
+    }
     if(link.hostname && link.hostname !== window.location.hostname){
-      gtag('event', 'outbound_click', {
+      trackEvent('outbound_click', {
         event_category: 'engagement',
         event_label: link.href,
         transport_type: 'beacon'
@@ -243,9 +276,10 @@
         if(r.ok){
           nlForm.reset();
           nlShow("Almost there — check your inbox and click the link to confirm your subscription.", 'success');
-          if(typeof gtag === 'function' && consentAccepted()){
-            gtag('event', 'newsletter_signup', { event_category: 'engagement' });
-          }
+          trackEvent('newsletter_confirmation_requested', {
+            event_category: 'engagement',
+            method: 'double_opt_in'
+          });
         } else {
           nlShow((r.data && r.data.error) || 'Something went wrong. Please try again.', 'error');
         }
@@ -255,5 +289,21 @@
         if(nlSubmit){ nlSubmit.disabled = false; nlSubmit.textContent = 'Subscribe'; }
       });
     });
+  }
+
+  // This marker is rendered only after confirm-subscribe has successfully
+  // added or reactivated the address in Resend and issued a 303 redirect.
+  if(document.querySelector('[data-newsletter-confirmed="true"]')){
+    (function trackConfirmedSignup(attemptsLeft){
+      var sent = trackEvent('newsletter_signup_confirmed', {
+        event_category: 'conversion',
+        method: 'double_opt_in'
+      });
+      // The CMP can resolve after deferred app.js runs. Retry until it records
+      // a consent decision; stop immediately after one successful send.
+      if(!sent && attemptsLeft > 0){
+        setTimeout(function(){ trackConfirmedSignup(attemptsLeft - 1); }, 500);
+      }
+    })(16);
   }
 })();

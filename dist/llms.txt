@@ -1,6 +1,12 @@
 # Beat The Scam
 
-> Plain-English UK consumer-protection guides covering scams, fraud, and how to spot them before paying. New guide published daily by an editorial team focused on UK consumers.
+> Independent, plain-English UK consumer-protection publication covering scams, fraud, and checks to run before paying. Guides use AI-assisted drafting followed by editorial review and an automated accuracy gate.
+
+## Research and datasets
+
+- [Research index](https://beatthescam.com/research/): recurring search-discovery and AI-citation reports with downloadable normalized data
+- [Research methodology](https://beatthescam.com/research/methodology/): collection cadence, source definitions, interpretation rules and limitations
+- [UK Scam Guidance Visibility Report — July 2026](https://beatthescam.com/research/uk-scam-search-ai-trends-2026-07/): An original monthly snapshot of how UK scam guidance is discovered in Google Search and cited across Microsoft Copilot, Bing AI answers and selected partners.
 
 ## Categories
 
@@ -17,7 +23,7 @@
 - [Shopping Scams](https://beatthescam.com/categories/shopping/): 7 guide(s)
 - [Social Media Scams](https://beatthescam.com/categories/social/): 5 guide(s)
 - [Tech Support Scams](https://beatthescam.com/categories/tech/): 10 guide(s)
-- [Text Message Scams](https://beatthescam.com/categories/sms/): 24 guide(s)
+- [Text Message Scams](https://beatthescam.com/categories/sms/): 23 guide(s)
 - [Travel Scams](https://beatthescam.com/categories/travel/): 14 guide(s)
 - [Utility Scams](https://beatthescam.com/categories/utility/): 3 guide(s)
 - [Website Scams](https://beatthescam.com/categories/website/): 12 guide(s)
@@ -140,7 +146,7 @@
 
 ### Phone Scams
 
-- [Amazon Scam Phone Calls UK: How to Spot a Fake Amazon Call](https://beatthescam.com/guides/amazon-phone-call-scam-uk/): Got an automated 'Amazon' call about a suspicious order or account? It's almost certainly a scam. Here's how the fake Amazon call works and how to stop it.
+- [Amazon Scam Phone Calls UK: How to Spot a Fake Amazon Call](https://beatthescam.com/guides/amazon-phone-call-scam-uk/): Got an unexpected automated 'Amazon' call about an order or account? Treat it as unverified. Here is how to check it safely and stop a phone scam.
 - [BT Scam Calls: How to Spot a Fake BT Phone Call (UK)](https://beatthescam.com/guides/bt-broadband-scam-calls-uk/): An unexpected 'BT' call about your router, a refund, or being cut off? How to spot a fake BT caller, and what a genuine BT call will never ask.
 - [DVLA Scam Calls: How to Spot a Fake Caller (UK)](https://beatthescam.com/guides/dvla-phone-scam-uk/): An unexpected call claims your vehicle tax has failed or your licence is at risk? Hang up and check your status directly through GOV.UK.
 - [HMRC Phone Call Scam UK: Spot a Fake Tax Call](https://beatthescam.com/guides/hmrc-phone-call-scam-uk/): A fake HMRC call threatens arrest or urgent legal action. HMRC may phone or use voice prompts, but it says it will never threaten arrest.
@@ -157,7 +163,7 @@
 ### Romance & Dating Scams
 
 - [Bumble Romance Scams UK: Spot a Fake Profile or Con](https://beatthescam.com/guides/bumble-romance-scam-uk/): A Bumble match who moves fast, avoids video calls, then needs money or pushes 'crypto'? How to spot a romance scam and protect yourself — without the shame.
-- [Hinge Romance Scam UK: How to Spot Fake Profiles and Protect Yourself](https://beatthescam.com/guides/hinge-romance-scam-uk/): Romance scammers create convincing Hinge profiles to build emotional connections with real users, then ask for money under false pretences. This guide explains the warning signs, how the scam unfolds, and what to do if you've already been targeted.
+- [Hinge Romance Scam UK: Warning Signs and What to Do](https://beatthescam.com/guides/hinge-romance-scam-uk/): Learn the warning signs of a Hinge romance scam, what online checks can prove, how UK bank reimbursement works and where to report it.
 - [Military Romance Scam UK: Spot a Fake Soldier Online](https://beatthescam.com/guides/military-romance-scam-uk/): Met a 'deployed soldier' online who needs money for leave, flights, or crypto? Spot a military romance scam, check safely, and report it in the UK.
 - [Pig Butchering Scam UK: Dating Apps & Fake Crypto](https://beatthescam.com/guides/pig-butchering-scam-uk/): A dating match slowly steers the conversation toward crypto investing? That pattern has a name — here's how to recognise and avoid it.
 - [Tinder Scams UK: How to Spot a Fake Profile or Romance Con](https://beatthescam.com/guides/tinder-scam-uk/): A Tinder match who moves fast, won't video-call, then needs money or pushes 'crypto'? How to spot a romance scam and protect yourself — without the shame.
@@ -196,20 +202,19 @@
 ### Text Message Scams
 
 - [Amazon Delivery Scam Text UK: Spot a Fake SMS](https://beatthescam.com/guides/amazon-delivery-scam-text-uk/): Got an Amazon text about a failed delivery or a small redelivery fee? Spot a fake Amazon delivery SMS, check Your Orders, and report it in the UK.
-- [Bank Text Messages Not Arriving? How to Fix It and Spot Scams](https://beatthescam.com/guides/bank-text-codes-not-arriving/): Bank texts not arriving? Most causes are routine — the quick fixes, common UK bank sender IDs, and the SIM-swap scam signs to watch for.
 - [Barclays Scam Texts: How to Spot a Fake Barclays SMS (UK)](https://beatthescam.com/guides/barclays-bank-text-scam-uk/): A Barclays text about a new payee or blocked payment? How to tell a genuine Barclays SMS from a scam, check it safely on 159, and report it in the UK.
 - [Council Tax Scam Texts: Spot a Fake Refund or Demand (UK)](https://beatthescam.com/guides/council-tax-scam-text-uk/): A text offering a council tax refund or threatening arrears? Council tax is run by your local council. How to spot the scam and check safely.
-- [DPD Scam Text Messages: How to Spot a Fake DPD Delivery Text](https://beatthescam.com/guides/dpd-delivery-scam-text/): Fake DPD 'missed delivery' or 'redelivery fee' texts are smishing scams. Here's how to spot a fake DPD text, verify a genuine one, and report it in the UK.
-- [DVLA Vehicle Tax Text Scam: How to Spot the Fake (UK)](https://beatthescam.com/guides/dvla-vehicle-tax-text-scam/): A 'DVLA vehicle tax' text asking you to pay or 'update' details? How to spot the fake, why DVLA won't text like that, and how to check on GOV.UK.
+- [DPD Scam Text or Genuine Message? Check a Fake Delivery Text](https://beatthescam.com/guides/dpd-delivery-scam-text/): Received a DPD delivery text? Check the parcel independently, distinguish a fake redelivery fee from genuine import charges, and report a scam safely.
+- [DVLA Vehicle Tax Text: Is It Genuine or a Scam?](https://beatthescam.com/guides/dvla-vehicle-tax-text-scam/): A DVLA text says vehicle tax failed or a refund is waiting? DVLA says it will not ask for bank or payment details this way. Check only through GOV.UK.
 - [EE Scam Text UK: Spot a Fake Message](https://beatthescam.com/guides/ee-scam-text-uk/): A text claiming to be EE asks for your PIN or password? EE says it doesn't ask for either by text. Here's how to check a suspicious message safely.
 - [Evri Scam Texts: How to Spot a Fake Parcel Text (UK)](https://beatthescam.com/guides/evri-delivery-scam-guide/): An Evri text about a missed delivery or a small fee? How to tell a genuine Evri message from a scam text, and how to track your parcel safely.
-- [Halifax Scam Texts: How to Spot a Fake Halifax SMS (UK)](https://beatthescam.com/guides/halifax-bank-scam-text-uk/): Got a Halifax text about 'suspicious activity' or a locked account? Learn how to tell a genuine Halifax SMS from a scam — and how to check safely on 159.
-- [Hermes Scam Texts: How to Spot a Fake Parcel Text (UK)](https://beatthescam.com/guides/hermes-parcel-scam-text-uk/): A 'Hermes' text about a missed delivery or small fee? Hermes is now Evri — here's how to spot a fake courier text and check your parcel safely.
+- [Fake Halifax Text? Scam Checks, 159 and Safe Reporting](https://beatthescam.com/guides/halifax-bank-scam-text-uk/): Received an unexpected Halifax fraud or payment text? Do not share a passcode or move money. Check it in the app, through the card number or via 159.
+- [Halifax Text Not Arriving? Bank Verification Code Fixes](https://beatthescam.com/guides/bank-text-codes-not-arriving/): Halifax or another bank verification text not arriving? Check the registered number, app, signal and message filters, then use a safe alternative verification route.
 - [HMRC Tax Refund Text Scam: Spot the Fake (UK)](https://beatthescam.com/guides/hmrc-tax-refund-text-scam-uk/): An HMRC text saying you're owed a tax refund — click to claim? Real refunds aren't claimed by text link. How to spot the scam and check safely on GOV.UK.
+- [Is This NHS Appointment Text Genuine? Checks and Scam Signs](https://beatthescam.com/guides/nhs-appointment-scam-text-uk/): The NHS can send appointment texts and NHS App fallback messages. Check the appointment independently and recognise links asking for payment or sensitive details.
 - [Lloyds Scam Texts: How to Spot a Fake Lloyds SMS (UK)](https://beatthescam.com/guides/lloyds-bank-scam-text/): Got a Lloyds text about a new payee or 'suspicious activity'? How to tell a genuine Lloyds SMS from a scam — and how to check it safely on 159.
 - [Nationwide Scam Text UK: Spot a Fake Building Society SMS](https://beatthescam.com/guides/nationwide-scam-text-uk/): Got a Nationwide text about suspicious activity, a blocked account, or a payment to verify? How to spot a fake Nationwide SMS and report it in the UK.
 - [NatWest Scam Texts: How to Spot a Fake NatWest SMS (UK)](https://beatthescam.com/guides/natwest-fraud-text-message-scam-uk/): Got a NatWest 'fraud alert' text about a payment or new device? How to tell a genuine NatWest SMS from a scam — and how to check it safely on 159.
-- [NHS Appointment Scam Texts: Warning Signs & How to Report](https://beatthescam.com/guides/nhs-appointment-scam-text-uk/): An NHS text about a cancelled appointment, a 'payment' or a link to confirm details? NHS care is free — here's how to spot the scam and check safely.
 - [O2 Warning: How to Spot Fake 'Important' Texts and What to Do](https://beatthescam.com/guides/o2-scam-text-uk/): Fake O2 texts claim your account needs urgent verification or a payment has failed, linking to bogus login pages. How to spot and report them.
 - [Parcel Scam Texts Around Bank Holidays & Christmas](https://beatthescam.com/guides/bank-holiday-parcel-scam-wave-uk/): A 'missed delivery' text arrives after a public holiday or during the Christmas rush? Real delays can make fake parcel texts seem plausible.
 - [Parking Fine Scam Text UK: Spot a Fake PCN SMS](https://beatthescam.com/guides/parking-fine-scam-text-uk/): Got a text about an unpaid parking fine or PCN with a pay-now link? How to spot a fake parking fine text, check the real issuer, and report it.
@@ -260,6 +265,9 @@
 
 ## Optional
 
-- [About](https://beatthescam.com/about/): site & methodology
-- [Contact](https://beatthescam.com/contact/): how to reach the editorial team
+- [About](https://beatthescam.com/about/): who runs the site
+- [Methodology](https://beatthescam.com/methodology/): how guides are researched, gate-checked, human-reviewed, and re-verified
+- [Corrections](https://beatthescam.com/corrections/): material editorial corrections and how to request one
+- [Scam recovery checklist](https://beatthescam.com/recovery/): payment, account, device, identity and reporting steps after a scam
+- [Contact](https://beatthescam.com/contact/): how to reach the publisher and editor
 - [Privacy](https://beatthescam.com/privacy/): data handling & cookies

@@ -10,7 +10,7 @@
       ],
       [
         "How to tell if a text is a scam",
-        "<p>Genuine organisations don't behave the way scam texts do. Treat a message as a scam if any of these apply:</p><ul><li>It contains a <strong>link asking you to pay, log in or 'verify'</strong> — banks, couriers and government bodies don't do this by text.</li><li>It demands a <strong>small fee</strong> ('redelivery', 'release', 'customs') to free a parcel or fix an account.</li><li>It creates <strong>urgency</strong> — act within hours, your account will be closed, your parcel returned.</li><li>It comes from an <strong>ordinary mobile or international number</strong>, not a recognised sender ID.</li><li>The web address isn't the official one — watch for extra words, hyphens or odd endings (e.g. 'royalmail-redelivery' rather than royalmail.com).</li><li>It asks for a <strong>card number, PIN, password or one-time code</strong> — no genuine body needs these by text.</li></ul>"
+        "<p>Scam texts often combine several warning signs. Treat a message as suspicious and verify it independently if any of these apply:</p><ul><li>It contains a <strong>link asking you to pay, log in or 'verify'</strong>. Genuine organisations sometimes send links — <a href='https://www.gov.uk/guidance/check-if-a-text-message-youve-received-from-hmrc-is-genuine' rel='nofollow noopener'>HMRC lists genuine campaigns</a> that may include GOV.UK information or webchat links — so the link alone is not proof; open the official app or website yourself instead.</li><li>It demands a <strong>small fee</strong> ('redelivery', 'release', 'customs') to free a parcel or fix an account.</li><li>It creates <strong>urgency</strong> — act within hours, your account will be closed, your parcel returned.</li><li>It comes from an <strong>ordinary mobile or international number</strong> when the organisation normally uses another channel. <a href='https://www.ncsc.gov.uk/guidance/business-communications-sms-and-telephone-best-practice' rel='nofollow noopener'>NCSC guidance</a> says telecoms systems cannot reliably tell a recipient who originated a call or SMS, so a familiar sender name is not proof.</li><li>The web address isn't the official one — watch for extra words, hyphens or odd endings (e.g. 'royalmail-redelivery' rather than royalmail.com).</li><li>It asks for a <strong>full card number, PIN, password or one-time code</strong>. Never disclose these in response to an unexpected text.</li></ul>"
       ],
       [
         "How to check a suspicious text safely",
@@ -22,17 +22,17 @@
       ],
       [
         "How to report a scam text in the UK",
-        "<p>Reporting takes under a minute and genuinely helps shut these campaigns down.</p><ul><li><strong>Forward the text free to 7726</strong> — the spam-reporting shortcode run by mobile networks (it spells 'SPAM' on a keypad) — then delete it.</li><li><strong>Report to Report Fraud</strong> at <a href='https://www.reportfraud.police.uk' rel='nofollow'>reportfraud.police.uk</a> or 0300 123 2040 if you've lost money or shared details (in Scotland, contact Police Scotland on 101).</li><li>Report phishing websites to the National Cyber Security Centre (NCSC).</li></ul>"
+        "<p>Reporting takes under a minute and genuinely helps providers investigate these campaigns.</p><ul><li><strong>Forward a suspicious SMS text to 7726 free of charge</strong>, as explained in <a href='https://www.ofcom.org.uk/phones-and-broadband/scam-calls-and-messages/what-to-do-about-a-scam-call-text-or-message' rel='nofollow noopener'>Ofcom's current guidance</a>. For RCS, iMessage and messages received through apps, use the service's built-in reporting tools.</li><li><strong>Report to Report Fraud</strong> at <a href='https://www.reportfraud.police.uk' rel='nofollow'>reportfraud.police.uk</a> or 0300 123 2040 if you've lost money or shared details (in Scotland, contact Police Scotland on 101).</li><li>Report phishing websites to the National Cyber Security Centre (NCSC).</li></ul>"
       ]
     ],
     "faq": [
       [
         "Will my bank, Royal Mail or HMRC ever text me a link?",
-        "Genuine organisations may send texts, but they won't ask you to pay, log in, or 'verify' your account through a link in the message, and they'll never ask for your full card number, PIN, password or a one-time code by text. If a text does any of that, treat it as a scam and check directly via the official app or website."
+        "Genuine organisations may send texts and some include links. Do not decide from the presence of a link alone. Treat an unexpected link asking you to pay, log in or verify an account as suspicious; open the official app or website independently instead. Never disclose a full card number, PIN, password or one-time code in response to an unexpected text."
       ],
       [
         "What is 7726 and how do I use it?",
-        "7726 is a free shortcode run by UK mobile networks for reporting scam texts (the digits spell 'SPAM'). Forward the suspicious message to 7726 so your network can investigate and help block the sender, then delete it. It costs nothing and works on all the major UK networks."
+        "You can forward a suspicious SMS text to 7726 free of charge. The digits spell 'SPAM' on a phone keypad. RCS, iMessage and app messages use different systems, so report those with the relevant built-in reporting tool."
       ],
       [
         "I clicked a link in a scam text — what should I do?",
@@ -40,7 +40,7 @@
       ],
       [
         "How do I know if a text is really from my bank?",
-        "Real bank texts come from a named sender ID (e.g. 'Halifax', 'Barclays') rather than a phone number, often include part of your name or account details, and never contain a link asking you to log in or 'verify'. If you're unsure, don't tap anything — open your banking app or call the number on the back of your card to check."
+        "A genuine bank text may use a named sender ID, but sender names and message threads can be spoofed, so neither is proof. Do not use an unexpected link to log in or verify an account. Open your banking app yourself or call the number on the back of your card to check."
       ]
     ]
   },
@@ -51,7 +51,7 @@
     "sections": [
       [
         "The most common UK payment scams",
-        "<p><strong>Bank transfer and 'safe account' scams</strong> are the big one — see <a href='/guides/bank-transfer-scam-uk/'>bank transfer fraud</a> and <a href='/guides/push-payment-fraud-uk/'>push payment fraud</a>. Other frequent tricks include <a href='/guides/advance-fee-scam-uk/'>advance-fee scams</a>, <a href='/guides/overpayment-scam-uk/'>overpayment scams</a>, <a href='/guides/invoice-fraud-uk-businesses/'>invoice fraud</a>, <a href='/guides/paypal-friends-family-scam-uk/'>PayPal 'friends and family' scams</a>, <a href='/guides/qr-code-scam-uk/'>QR-code (quishing) scams</a> and <a href='/guides/chargeback-scam-uk/'>chargeback fraud</a>.</p><p><strong>Fake banking-app messages</strong> impersonate the apps people trust — <a href='/guides/monzo-scam-transfer-uk/'>Monzo</a>, <a href='/guides/revolut-scam-uk/'>Revolut</a>, <a href='/guides/starling-bank-scam-uk/'>Starling</a>, <a href='/guides/wise-transfer-scam-uk/'>Wise</a> and <a href='/guides/apple-pay-scam-uk/'>Apple Pay</a> — to push you into sending money or sharing codes.</p>"
+        "<p><strong>Bank transfer and 'safe account' scams</strong> are the big one — our <a href='/guides/bank-transfer-scam-uk/'>bank transfer and APP fraud guide</a> explains the pattern and recovery options. Other frequent tricks include <a href='/guides/advance-fee-scam-uk/'>advance-fee scams</a>, <a href='/guides/overpayment-scam-uk/'>overpayment scams</a>, <a href='/guides/invoice-fraud-uk-businesses/'>invoice fraud</a>, <a href='/guides/paypal-friends-family-scam-uk/'>PayPal 'friends and family' scams</a>, <a href='/guides/qr-code-scam-uk/'>QR-code (quishing) scams</a> and <a href='/guides/chargeback-scam-uk/'>chargeback fraud</a>.</p><p><strong>Fake banking-app messages</strong> impersonate the apps people trust — <a href='/guides/monzo-scam-transfer-uk/'>Monzo</a>, <a href='/guides/revolut-scam-uk/'>Revolut</a>, <a href='/guides/starling-bank-scam-uk/'>Starling</a>, <a href='/guides/wise-transfer-scam-uk/'>Wise</a> and <a href='/guides/apple-pay-scam-uk/'>Apple Pay</a> — to push you into sending money or sharing codes.</p>"
       ],
       [
         "How APP (authorised push payment) fraud works",
@@ -63,7 +63,7 @@
       ],
       [
         "What to do if you've sent money to a scammer",
-        "<ul><li><strong>Contact your bank immediately</strong> — the sooner you report, the better the chance of recovery. Since October 2024, UK banks must reimburse most victims of APP fraud, usually within five days, up to a set limit.</li><li>Report it to Report Fraud and keep all evidence — messages, payment details, account numbers.</li><li>Change passwords for any account whose details you shared and turn on two-step verification.</li><li>Watch for a follow-up 'we can recover your money' approach — recovery scams target people who've just been defrauded.</li></ul>"
+        "<ul><li><strong>Contact your bank immediately</strong> — the sooner you report, the better the chance of stopping or tracing the payment. A claim normally must be made within 13 months of the last relevant payment.</li><li>Under the <a href='https://www.psr.org.uk/information-for-consumers/app-fraud-reimbursement-protections/' rel='nofollow noopener'>Payment Systems Regulator's protections</a>, qualifying UK-to-UK Faster Payments and CHAPS APP claims made by individuals, microenterprises and charities have been covered since 7 October 2024. Reimbursement is normally expected within five business days of a claim, but a stop-clock of up to 35 business days, a possible excess of up to £100 (not for vulnerable consumers) and an £85,000 mandatory cap can apply. Card, cash and cheque payments, unauthorised fraud and ordinary civil disputes are outside this APP scheme. Complicity or gross negligence may prevent reimbursement; the PSR describes gross negligence as a high bar and says it does not apply to vulnerable consumers.</li><li>Report it to Report Fraud and keep all evidence — messages, payment details, account numbers.</li><li>Change passwords for any account whose details you shared and turn on two-step verification.</li><li>Watch for a follow-up 'we can recover your money' approach — recovery scams target people who've just been defrauded.</li></ul>"
       ],
       [
         "How to report payment fraud in the UK",
@@ -77,7 +77,7 @@
       ],
       [
         "Can I get my money back if I was scammed into a bank transfer?",
-        "Often, yes. Since October 2024, UK banks are required to reimburse most victims of APP fraud, usually within five days and up to a set limit, for payments made by Faster Payments. Report it to your bank immediately — speed matters, and reimbursement can depend on the circumstances, so don't delay or assume the money is gone."
+        "Possibly. Mandatory protections apply to qualifying UK-to-UK Faster Payments and CHAPS APP claims by individuals, microenterprises and charities. Reimbursement is normally expected within five business days of a claim, but exclusions, a stop-clock of up to 35 business days, a possible excess of up to £100 (not for vulnerable consumers) and an £85,000 mandatory cap can apply. Report promptly and normally within 13 months of the last relevant payment."
       ],
       [
         "What is the 159 number?",
@@ -96,7 +96,7 @@
     "sections": [
       [
         "The most common UK government scams",
-        "<p><strong>HMRC</strong> is the most impersonated — fake <a href='/guides/hmrc-tax-refund-text-scam-uk/'>tax-refund texts</a> and emails, plus threats of unpaid-tax 'arrest'. <strong>The DVLA</strong> sends fake <a href='/guides/dvla-email-scam-car-tax/'>car-tax renewal and refund</a> messages. Benefit and immigration scams impersonate the <strong>DWP</strong> (<a href='/guides/universal-credit-scam-uk/'>Universal Credit</a>) and the <strong>Home Office</strong> (<a href='/guides/ukvi-visa-scam-uk/'>UKVI visa</a> messages).</p><p>Others include fake <a href='/guides/passport-renewal-scam-uk/'>passport-renewal sites</a> (HMPO), <a href='/guides/tv-licence-scam-letter-uk/'>TV Licence demands</a>, <a href='/guides/court-summons-scam-email-uk/'>court-summons emails</a> (HMCTS), and <a href='/guides/council-tax-scam-text-uk/'>council-tax texts</a>.</p>"
+        "<p><strong>HMRC</strong> is the most impersonated — fake <a href='/guides/hmrc-tax-refund-text-scam-uk/'>tax-refund texts</a> and emails, plus threats of unpaid-tax 'arrest'. <strong>The DVLA</strong> is impersonated in fake <a href='/guides/dvla-email-scam-uk/'>car-tax renewal and refund emails</a>. Benefit and immigration scams impersonate the <strong>DWP</strong> (<a href='/guides/universal-credit-scam-uk/'>Universal Credit</a>) and the <strong>Home Office</strong> (<a href='/guides/ukvi-visa-scam-uk/'>UKVI visa</a> messages).</p><p>Others include fake <a href='/guides/passport-renewal-scam-uk/'>passport-renewal sites</a> (HMPO), <a href='/guides/tv-licence-scam-letter-uk/'>TV Licence demands</a>, <a href='/guides/court-summons-scam-email-uk/'>court-summons emails</a> (HMCTS), and <a href='/guides/council-tax-scam-text-uk/'>council-tax texts</a>.</p>"
       ],
       [
         "How government impersonation scams work",
@@ -104,7 +104,7 @@
       ],
       [
         "How to check a 'government' message safely",
-        "<ul><li><strong>Go to gov.uk yourself.</strong> Search for the service (tax, vehicle tax, Universal Credit, passport) and sign in to your own account there — never via the link in the message.</li><li><strong>Know what they won't do.</strong> HMRC never notifies a tax refund, or asks for personal or payment details, by text or email with a link.</li><li><strong>Don't be rushed.</strong> Real government processes don't demand payment within hours or threaten immediate arrest by text.</li><li><strong>Ask the checker.</strong> Paste the message into our free <a href='/check/'>AI scam checker</a> for a second opinion.</li></ul>"
+        "<ul><li><strong>Go to gov.uk yourself.</strong> Search for the service (tax, vehicle tax, Universal Credit, passport) and sign in to your own account there — never via the link in the message.</li><li><strong>Use HMRC's exact safety rule.</strong> <a href='https://www.gov.uk/guidance/check-if-a-text-message-youve-received-from-hmrc-is-genuine' rel='nofollow noopener'>HMRC's current guidance</a> says it sends some genuine texts and some can include GOV.UK information or webchat links, but it will not ask for personal or financial information in a text. Compare the message with the current campaign list or check in your tax account.</li><li><strong>Don't be rushed.</strong> A message demanding payment within hours or threatening immediate arrest is a serious warning sign; verify the claim directly with the department.</li><li><strong>Ask the checker.</strong> Paste the message into our free <a href='/check/'>AI scam checker</a> for a second opinion.</li></ul>"
       ],
       [
         "What to do if you've responded or paid",
@@ -118,11 +118,11 @@
     "faq": [
       [
         "Does HMRC text or email you about tax refunds?",
-        "No. HMRC never notifies a tax refund, or asks for personal or payment details, by text or email containing a link. Genuine refunds are handled through your Personal Tax Account or by cheque — never by clicking a link in a message. Any 'HMRC refund' text or email with a link is a scam; check by signing in at gov.uk yourself."
+        "HMRC does send some genuine texts and emails, including messages about Self Assessment repayments, and some genuine campaigns include GOV.UK information or webchat links. HMRC says it will not ask for personal or financial information in a text. Do not use an unexpected message to submit details or claim money; sign in through GOV.UK yourself and compare the message with HMRC's current campaign guidance."
       ],
       [
         "How do I check if a DVLA or gov.uk message is real?",
-        "Don't use the link in the message. Go to gov.uk directly, search for the service (for example vehicle tax), and sign in to your own account there. The DVLA doesn't send texts or emails asking you to 'confirm' payment details via a link, and official addresses end in gov.uk — watch for lookalikes with extra words or different endings."
+        "Don't use the link in the message. Go to GOV.UK directly, search for the service (for example vehicle tax), and use the contact or account route shown there. Treat any unexpected request to confirm payment details through a message link as suspicious, and watch for lookalike addresses with extra words or different endings."
       ],
       [
         "I clicked a fake HMRC or DVLA link — what should I do?",

@@ -367,6 +367,19 @@ function textResponse(statusCode, body, extraHeaders) {
   };
 }
 
+function redirectResponse(location) {
+  return {
+    statusCode: 303,
+    headers: {
+      "Location": location,
+      "Cache-Control": "no-store",
+      "X-Robots-Tag": "noindex",
+      ...SECURITY_HEADERS,
+    },
+    body: "",
+  };
+}
+
 // ─── HANDLER ──────────────────────────────────────────────────────────────────
 exports.handler = async function(event) {
   const clientIp =
@@ -399,8 +412,7 @@ exports.handler = async function(event) {
     const added = await addContact(email);
     if (added) {
       await sendWelcome(email);
-      return htmlResponse(200, page("Subscribed",
-        `<p style="font-size:16px;">You're confirmed and on the list &#9989; Check your inbox for a welcome email.</p>`));
+      return redirectResponse("/newsletter-confirmed/");
     }
     await releaseConfirmToken(token);   // add failed — let them retry the same link
     return htmlResponse(200, page("Confirm subscription",

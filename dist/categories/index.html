@@ -12,8 +12,8 @@
   <meta name="robots" content="index,follow">
   <meta name="theme-color" content="#0b1220">
   <meta name="format-detection" content="telephone=no">
-  
-  
+
+
 
   <!-- Favicons -->
   <link rel="icon" href="/favicon.ico" sizes="any">
@@ -26,18 +26,12 @@
   <!-- Resource hints for third-party origins. preconnect = full TCP+TLS
        handshake started immediately (good for resources we KNOW will load
        on every page). dns-prefetch = DNS lookup only (cheap fallback for
-       older browsers that ignore preconnect). googletagmanager loads GA4,
-       pagead2 loads AdSense — both are async <script> tags in <body>, so
-       preconnect shaves 100-300ms off their first paint on mobile.
-       Also adds tpc.googlesyndication.com (where ad creatives serve from)
-       and the ahrefs analytics host. -->
+       older browsers that ignore preconnect). AdSense resource hints are
+       injected only on pages eligible to serve ads. -->
   <link rel="preconnect" href="https://www.googletagmanager.com" crossorigin>
-  <link rel="preconnect" href="https://pagead2.googlesyndication.com" crossorigin>
-  <link rel="preconnect" href="https://tpc.googlesyndication.com" crossorigin>
   <link rel="dns-prefetch" href="https://www.googletagmanager.com">
-  <link rel="dns-prefetch" href="https://pagead2.googlesyndication.com">
-  <link rel="dns-prefetch" href="https://tpc.googlesyndication.com">
   <link rel="dns-prefetch" href="https://analytics.ahrefs.com">
+  <!-- AdSense resource hints intentionally omitted on this page -->
 
   <meta property="og:type" content="website">
   <meta property="og:title" content="Categories | Beat the Scam">
@@ -58,7 +52,7 @@
        value= attribute (not content=) — validators flag it; do not "fix" it
        or their crawler stops verifying the site. -->
   <meta name='impact-site-verification' value='e0dda02c-a1b6-4056-9f92-16f7c916bd4b'>
-  <link rel="stylesheet" href="/assets/styles.css?v=2aec57b620">
+  <link rel="stylesheet" href="/assets/styles.css?v=d1fc9faba4">
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-JXNF856NBF"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
@@ -78,12 +72,13 @@
     AdSense respects Google Consent Mode: the GA4 consent defaults above start
     denied, so visitors who haven't accepted get non-personalised ads and no
     ad-personalisation cookies until they do. The ad tag below is emitted per
-    page by make_base()/_ads_head(): omitted entirely on the /check/ tool, and
-    preceded by a requestNonPersonalizedAds flag on sensitive financial / victim
-    pages (Google restricts personalisation based on negative financial status).
+    page by make_base()/_ads_head(): omitted on navigational, tool and
+    sensitive-content pages, and preceded by a requestNonPersonalizedAds flag
+    on sensitive financial / victim pages (Google restricts personalisation
+    based on negative financial status).
     Ahrefs Web Analytics is cookieless. Custom GA4 events stay gated in app.js.
   -->
-  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1606633100797174" crossorigin="anonymous"></script>
+  <!-- Ads intentionally disabled on this page (excluded from Auto Ads) -->
   <script src="https://analytics.ahrefs.com/analytics.js" data-key="l1GHKUGfAKlhtjbYgIySAg" async></script>
 </head>
 <body>
@@ -99,6 +94,8 @@
         <a href="/">Home</a>
         <a href="/guides/">Guides</a>
         <a href="/categories/">Categories</a>
+        <a href="/research/">Research</a>
+        <a href="/recovery/">Recovery</a>
         <a href="/about/">About</a>
         <a href="/contact/">Contact</a>
         <a class="nav-cta" href="/check/">Check a message</a>
@@ -106,7 +103,7 @@
     </div>
   </header>
   <main id="main">
-    
+
     <section class="hero">
       <div class="wrap">
         <div class="breadcrumbs"><a href="/">Home</a> / Categories</div>
@@ -114,110 +111,76 @@
         <p class="lead">Browse guides by scam type. Each category covers a specific pattern &#8212; from SMS phishing to marketplace fraud to government impersonation.</p>
       </div>
     </section>
-    <section class="section"><div class="wrap"><div class="category-grid">
-        <article class="card category-card">
+    <section class="section"><div class="wrap"><div class="category-grid"><article class="card category-card">
           <h3><a href="/categories/sms/">Text Message Scams</a></h3>
           <p>Guides covering fake delivery texts, bank impersonation SMS, HMRC alerts, and smishing attacks. Learn to spot and report suspicious texts targeting UK phones.</p>
-          <p class="meta">24 guides</p>
-        </article>
-        
-        <article class="card category-card">
+          <p class="meta">23 guides</p>
+        </article><article class="card category-card">
           <h3><a href="/categories/email/">Email Scams</a></h3>
           <p>Guides covering phishing emails, business email compromise, fake invoices, and email impersonation. Learn to identify and report suspicious emails in the UK.</p>
           <p class="meta">15 guides</p>
-        </article>
-        
-        <article class="card category-card">
+        </article><article class="card category-card">
           <h3><a href="/categories/marketplace/">Marketplace Scams</a></h3>
           <p>Guides covering Facebook Marketplace, Gumtree, Vinted, and eBay scams targeting UK buyers and sellers. Spot payment fraud, advance fees, and collection scams.</p>
           <p class="meta">15 guides</p>
-        </article>
-        
-        <article class="card category-card">
+        </article><article class="card category-card">
           <h3><a href="/categories/travel/">Travel Scams</a></h3>
           <p>Guides covering fake holiday listings, advance-fee travel fraud, and ticket scams targeting UK travellers. Verify travel offers before paying a deposit.</p>
           <p class="meta">14 guides</p>
-        </article>
-        
-        <article class="card category-card">
+        </article><article class="card category-card">
           <h3><a href="/categories/payment/">Payment Scams</a></h3>
           <p>Guides covering bank transfer fraud, advance fee scams, fake invoices, and APP fraud in the UK. Learn how to verify payment requests and protect your money.</p>
           <p class="meta">14 guides</p>
-        </article>
-        
-        <article class="card category-card">
+        </article><article class="card category-card">
           <h3><a href="/categories/phone/">Phone Scams</a></h3>
           <p>Guides covering vishing calls, fake bank calls, HMRC phone scams, and voice fraud targeting UK residents. Learn to verify callers and avoid phone-based scams.</p>
           <p class="meta">13 guides</p>
-        </article>
-        
-        <article class="card category-card">
+        </article><article class="card category-card">
           <h3><a href="/categories/website/">Website Scams</a></h3>
           <p>Guides covering fake online shops, lookalike domains, and website verification. Learn how to check if a website is legitimate before buying or sharing details.</p>
           <p class="meta">12 guides</p>
-        </article>
-        
-        <article class="card category-card">
+        </article><article class="card category-card">
           <h3><a href="/categories/finance/">Investment &amp; Finance Scams</a></h3>
           <p>Guides covering fake investment opportunities, pension fraud, clone firm scams, and financial impersonation targeting UK consumers. Protect your savings.</p>
           <p class="meta">11 guides</p>
-        </article>
-        
-        <article class="card category-card">
+        </article><article class="card category-card">
           <h3><a href="/categories/government/">Government Impersonation</a></h3>
           <p>Guides covering HMRC, DVLA, TV Licensing, and government impersonation scams. Learn to verify official communications and avoid paying fake fines or fees.</p>
           <p class="meta">10 guides</p>
-        </article>
-        
-        <article class="card category-card">
+        </article><article class="card category-card">
           <h3><a href="/categories/tech/">Tech Support Scams</a></h3>
           <p>Guides covering fake tech support calls, remote access scams, and malicious software targeting UK users. Learn to spot and shut down tech support fraud.</p>
           <p class="meta">10 guides</p>
-        </article>
-        
-        <article class="card category-card">
+        </article><article class="card category-card">
           <h3><a href="/categories/fraud/">Fraud &amp; Impersonation</a></h3>
           <p>Guides covering recovery scams, impersonation fraud, and advance-fee tactics targeting UK consumers. Recognise fraud patterns and report them correctly.</p>
           <p class="meta">9 guides</p>
-        </article>
-        
-        <article class="card category-card">
+        </article><article class="card category-card">
           <h3><a href="/categories/employment/">Employment Scams</a></h3>
           <p>Guides covering fake job ads, work-from-home schemes, and advance-fee employment fraud targeting UK jobseekers. Learn to spot recruitment scams before applying.</p>
           <p class="meta">8 guides</p>
-        </article>
-        
-        <article class="card category-card">
+        </article><article class="card category-card">
           <h3><a href="/categories/crypto/">Crypto Scams</a></h3>
           <p>Guides covering fake crypto investment platforms, withdrawal fee traps, and romance fraud. Learn to identify cryptocurrency scams before sending money.</p>
           <p class="meta">8 guides</p>
-        </article>
-        
-        <article class="card category-card">
+        </article><article class="card category-card">
           <h3><a href="/categories/shopping/">Shopping Scams</a></h3>
           <p>Guides covering fake online retailers, counterfeit goods, pet scams, and marketplace fraud. Learn to shop safely and spot fraudulent sellers in the UK.</p>
           <p class="meta">7 guides</p>
-        </article>
-        
-        <article class="card category-card">
+        </article><article class="card category-card">
           <h3><a href="/categories/dating/">Romance &amp; Dating Scams</a></h3>
           <p>Guides covering romance scams, fake profiles, and relationship fraud on dating apps. Learn to identify and avoid romance fraud before money or data is lost.</p>
           <p class="meta">5 guides</p>
-        </article>
-        
-        <article class="card category-card">
+        </article><article class="card category-card">
           <h3><a href="/categories/social/">Social Media Scams</a></h3>
           <p>Guides covering scams on Facebook, Instagram, WhatsApp, and other platforms. Learn to spot fake profiles, impersonation fraud, and social media scam tactics.</p>
           <p class="meta">5 guides</p>
-        </article>
-        
-        <article class="card category-card">
+        </article><article class="card category-card">
           <h3><a href="/categories/utility/">Utility Scams</a></h3>
           <p>Guides covering fake energy supplier calls, smart meter scams, and utility impersonation. Learn to verify energy contacts and avoid utility fraud in the UK.</p>
           <p class="meta">3 guides</p>
-        </article>
-        </div></div></section>
-    
+        </article></div></div></section>
+
   </main>
   <section class="newsletter-band" aria-labelledby="nl-heading">
     <div class="wrap newsletter-inner">
@@ -253,6 +216,8 @@
         <h3>Explore</h3>
         <ul>
           <li><a href="/guides/">All guides</a></li>
+          <li><a href="/research/">Research &amp; data</a></li>
+          <li><a href="/recovery/">Scam recovery checklist</a></li>
           <li><a href="/categories/sms/">Text Message Scams</a></li>
 <li><a href="/categories/email/">Email Scams</a></li>
 <li><a href="/categories/marketplace/">Marketplace Scams</a></li>
@@ -276,6 +241,8 @@
         <h3>Trust & legal</h3>
         <ul>
           <li><a href="/about/">About</a></li>
+          <li><a href="/methodology/">How we fact-check</a></li>
+          <li><a href="/corrections/">Corrections</a></li>
           <li><a href="/privacy/">Privacy Policy</a></li>
           <li><a href="/cookies/">Cookie Policy</a></li>
           <li><button class="link-button" type="button" id="openCookieSettings">Cookie settings</button></li>
@@ -300,6 +267,6 @@
       <button class="btn btn-primary" id="cookieAccept" type="button">Accept</button>
     </div>
   </div>
-  <script src="/assets/app.js?v=227604ee69" defer></script>
+  <script src="/assets/app.js?v=59ecb206a0" defer></script>
 </body>
 </html>

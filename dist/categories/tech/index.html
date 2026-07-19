@@ -12,8 +12,8 @@
   <meta name="robots" content="index,follow">
   <meta name="theme-color" content="#0b1220">
   <meta name="format-detection" content="telephone=no">
-  
-  
+
+
 
   <!-- Favicons -->
   <link rel="icon" href="/favicon.ico" sizes="any">
@@ -26,18 +26,12 @@
   <!-- Resource hints for third-party origins. preconnect = full TCP+TLS
        handshake started immediately (good for resources we KNOW will load
        on every page). dns-prefetch = DNS lookup only (cheap fallback for
-       older browsers that ignore preconnect). googletagmanager loads GA4,
-       pagead2 loads AdSense — both are async <script> tags in <body>, so
-       preconnect shaves 100-300ms off their first paint on mobile.
-       Also adds tpc.googlesyndication.com (where ad creatives serve from)
-       and the ahrefs analytics host. -->
+       older browsers that ignore preconnect). AdSense resource hints are
+       injected only on pages eligible to serve ads. -->
   <link rel="preconnect" href="https://www.googletagmanager.com" crossorigin>
-  <link rel="preconnect" href="https://pagead2.googlesyndication.com" crossorigin>
-  <link rel="preconnect" href="https://tpc.googlesyndication.com" crossorigin>
   <link rel="dns-prefetch" href="https://www.googletagmanager.com">
-  <link rel="dns-prefetch" href="https://pagead2.googlesyndication.com">
-  <link rel="dns-prefetch" href="https://tpc.googlesyndication.com">
   <link rel="dns-prefetch" href="https://analytics.ahrefs.com">
+  <!-- AdSense resource hints intentionally omitted on this page -->
 
   <meta property="og:type" content="website">
   <meta property="og:title" content="Tech Support Scams | Beat the Scam">
@@ -58,7 +52,7 @@
        value= attribute (not content=) — validators flag it; do not "fix" it
        or their crawler stops verifying the site. -->
   <meta name='impact-site-verification' value='e0dda02c-a1b6-4056-9f92-16f7c916bd4b'>
-  <link rel="stylesheet" href="/assets/styles.css?v=2aec57b620">
+  <link rel="stylesheet" href="/assets/styles.css?v=d1fc9faba4">
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-JXNF856NBF"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
@@ -78,12 +72,13 @@
     AdSense respects Google Consent Mode: the GA4 consent defaults above start
     denied, so visitors who haven't accepted get non-personalised ads and no
     ad-personalisation cookies until they do. The ad tag below is emitted per
-    page by make_base()/_ads_head(): omitted entirely on the /check/ tool, and
-    preceded by a requestNonPersonalizedAds flag on sensitive financial / victim
-    pages (Google restricts personalisation based on negative financial status).
+    page by make_base()/_ads_head(): omitted on navigational, tool and
+    sensitive-content pages, and preceded by a requestNonPersonalizedAds flag
+    on sensitive financial / victim pages (Google restricts personalisation
+    based on negative financial status).
     Ahrefs Web Analytics is cookieless. Custom GA4 events stay gated in app.js.
   -->
-  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1606633100797174" crossorigin="anonymous"></script>
+  <!-- Ads intentionally disabled on this page (excluded from Auto Ads) -->
   <script src="https://analytics.ahrefs.com/analytics.js" data-key="l1GHKUGfAKlhtjbYgIySAg" async></script>
 </head>
 <body>
@@ -99,6 +94,8 @@
         <a href="/">Home</a>
         <a href="/guides/">Guides</a>
         <a href="/categories/">Categories</a>
+        <a href="/research/">Research</a>
+        <a href="/recovery/">Recovery</a>
         <a href="/about/">About</a>
         <a href="/contact/">Contact</a>
         <a class="nav-cta" href="/check/">Check a message</a>
@@ -106,7 +103,7 @@
     </div>
   </header>
   <main id="main">
-    
+
     <section class="hero">
       <div class="wrap">
         <div class="breadcrumbs"><a href="/">Home</a> / <a href="/categories/">Categories</a> / Tech Support Scams</div>
@@ -114,81 +111,61 @@
         <p class="lead">Guides covering fake tech support calls, remote access scams, and malicious software targeting UK users. Learn to spot and shut down tech support fraud.</p>
       </div>
     </section>
-    
-    <section class="section"><div class="wrap"><h2>Latest tech support scams</h2><div class="grid-3">
-    <article class="card guide-card" data-searchable="ai voice cloning scam uk: a call that isn&#x27;t them a call sounds exactly like your relative but something feels off? ai can clone a voice from a short public clip — here&#x27;s how to check safely. tech ai voice cloning scam uk voice clone phone scam ai scam call family emergency deepfake voice scam family codeword scam protection cloned voice scam what to do voice cloning scam call">
+
+    <section class="section"><div class="wrap"><h2>Latest tech support scams</h2><div class="grid-3"><article class="card guide-card" data-searchable="ai voice cloning scam uk: a call that isn&#x27;t them a call sounds exactly like your relative but something feels off? ai can clone a voice from a short public clip — here&#x27;s how to check safely. tech ai voice cloning scam uk voice clone phone scam ai scam call family emergency deepfake voice scam family codeword scam protection cloned voice scam what to do voice cloning scam call">
       <div class="eyebrow">Tech Support Scams</div>
       <h3><a href="/guides/ai-voice-cloning-scam-uk/">AI Voice Cloning Scam UK: A Call That Isn&#x27;t Them</a></h3>
       <p>A call sounds exactly like your relative but something feels off? AI can clone a voice from a short public clip — here&#x27;s how to check safely.</p>
       <p class="meta">Updated 2026-07-05</p>
-    </article>
-    
-    <article class="card guide-card" data-searchable="deepfake sextortion uk: fake images or video as leverage criminals can use ai-generated sexual images or video in sextortion. stop contact, do not pay, preserve evidence and use the correct uk support route. tech deepfake video scam uk fake video blackmail ai video extortion sextortion deepfake video blackmail scam">
+    </article><article class="card guide-card" data-searchable="deepfake sextortion uk: fake images or video as leverage criminals can use ai-generated sexual images or video in sextortion. stop contact, do not pay, preserve evidence and use the correct uk support route. tech deepfake video scam uk fake video blackmail ai video extortion sextortion deepfake video blackmail scam">
       <div class="eyebrow">Tech Support Scams</div>
       <h3><a href="/guides/deepfake-video-scam-uk/">Deepfake Sextortion UK: Fake Images or Video as Leverage</a></h3>
       <p>Criminals can use AI-generated sexual images or video in sextortion. Stop contact, do not pay, preserve evidence and use the correct UK support route.</p>
       <p class="meta">Updated 2026-07-10</p>
-    </article>
-    
-    <article class="card guide-card" data-searchable="qr code scam uk: spot a fake &#x27;quishing&#x27; code a qr code sticker looks slightly different from the one next to it? that mismatch is the clearest sign of a tampered parking or payment code. tech qr code scam uk quishing fake qr code parking qr code parking meter scam qr code phishing email how to spot a fake qr code scanned qr code scam what to do">
+    </article><article class="card guide-card" data-searchable="qr code scam uk: spot a fake &#x27;quishing&#x27; code a qr code sticker looks slightly different from the one next to it? that mismatch is the clearest sign of a tampered parking or payment code. tech qr code scam uk quishing fake qr code parking qr code parking meter scam qr code phishing email how to spot a fake qr code scanned qr code scam what to do">
       <div class="eyebrow">Tech Support Scams</div>
       <h3><a href="/guides/qr-code-scam-uk/">QR Code Scam UK: Spot a Fake &#x27;Quishing&#x27; Code</a></h3>
       <p>A QR code sticker looks slightly different from the one next to it? That mismatch is the clearest sign of a tampered parking or payment code.</p>
       <p class="meta">Updated 2026-07-05</p>
-    </article>
-    
-    <article class="card guide-card" data-searchable="sim swap fraud uk: warning signs &amp; what to do suddenly lost mobile signal with no clear reason why? here&#x27;s what a sim swap fraud attempt looks like, and exactly how to respond fast. tech sim swap fraud uk phone suddenly lost signal scam sim swap warning signs how to protect against sim swap sim swap bank account hacked porting fraud uk what to do if sim swapped uk">
+    </article><article class="card guide-card" data-searchable="sim swap fraud uk: warning signs &amp; what to do suddenly lost mobile signal with no clear reason why? here&#x27;s what a sim swap fraud attempt looks like, and exactly how to respond fast. tech sim swap fraud uk phone suddenly lost signal scam sim swap warning signs how to protect against sim swap sim swap bank account hacked porting fraud uk what to do if sim swapped uk">
       <div class="eyebrow">Tech Support Scams</div>
       <h3><a href="/guides/sim-swap-fraud-uk/">SIM Swap Fraud UK: Warning Signs &amp; What to Do</a></h3>
       <p>Suddenly lost mobile signal with no clear reason why? Here&#x27;s what a SIM swap fraud attempt looks like, and exactly how to respond fast.</p>
       <p class="meta">Updated 2026-07-05</p>
-    </article>
-    
-    <article class="card guide-card" data-searchable="fake wi-fi hotspot scam uk: verify the network an “evil twin” copies a legitimate wi-fi name. ask the venue for the correct network and prefer mobile data for sensitive activity. tech fake wi-fi hotspot scam fake public wi-fi uk unsafe wi-fi networks wi-fi scam signs protect against wi-fi scams">
+    </article><article class="card guide-card" data-searchable="fake wi-fi hotspot scam uk: verify the network an “evil twin” copies a legitimate wi-fi name. ask the venue for the correct network and prefer mobile data for sensitive activity. tech fake wi-fi hotspot scam fake public wi-fi uk unsafe wi-fi networks wi-fi scam signs protect against wi-fi scams">
       <div class="eyebrow">Tech Support Scams</div>
       <h3><a href="/guides/fake-wifi-hotspot-scam-uk/">Fake Wi-Fi Hotspot Scam UK: Verify the Network</a></h3>
       <p>An “evil twin” copies a legitimate Wi-Fi name. Ask the venue for the correct network and prefer mobile data for sensitive activity.</p>
       <p class="meta">Updated 2026-07-13</p>
-    </article>
-    
-    <article class="card guide-card" data-searchable="isp impersonation scams uk: bt, sky, virgin media and openreach calls scammers impersonate uk broadband providers or openreach, then ask for remote access, payment or security details. how to check safely. tech isp scam uk bt scam call bt internet scam bt broadband scam bt engineer scam sky broadband scam sky scam call sky internet scam virgin media scam call virgin media broadband scam virgin media internet scam openreach scam openreach engineer scam talktalk scam call talktalk internet scam plusnet scam ee broadband scam broadband provider scam uk internet provider scam uk remote access scam uk broadband engineer scam fake engineer call uk teamviewer scam anydesk scam pstn switchover scam digital voice scam tech support scam uk phone scam broadband isp impersonation uk broadband fault scam internet scam call uk bt scam bt phone scam sky scam sky tv scam sky engineer scam virgin media scam openreach call scam">
+    </article><article class="card guide-card" data-searchable="isp impersonation scams uk: bt, sky, virgin media and openreach calls scammers impersonate uk broadband providers or openreach, then ask for remote access, payment or security details. how to check safely. tech isp scam uk bt scam call bt internet scam bt broadband scam bt engineer scam sky broadband scam sky scam call sky internet scam virgin media scam call virgin media broadband scam virgin media internet scam openreach scam openreach engineer scam talktalk scam call talktalk internet scam plusnet scam ee broadband scam broadband provider scam uk internet provider scam uk remote access scam uk broadband engineer scam fake engineer call uk teamviewer scam anydesk scam pstn switchover scam digital voice scam tech support scam uk phone scam broadband isp impersonation uk broadband fault scam internet scam call uk bt scam bt phone scam sky scam sky tv scam sky engineer scam virgin media scam openreach call scam">
       <div class="eyebrow">Tech Support Scams</div>
       <h3><a href="/guides/isp-impersonation-scam-bt-sky-virgin-media/">ISP Impersonation Scams UK: BT, Sky, Virgin Media and Openreach Calls</a></h3>
       <p>Scammers impersonate UK broadband providers or Openreach, then ask for remote access, payment or security details. How to check safely.</p>
       <p class="meta">Updated 2026-07-13</p>
-    </article>
-    
-    <article class="card guide-card" data-searchable="apple tech support scam uk: spot a fake pop-up got a pop-up or call saying your iphone or mac is infected and apple support needs access? how to spot an apple tech support scam and report it. tech apple tech support scam uk fake apple pop-up virus warning apple support scam call is this apple call real apple id locked scam popup apple remote access scam report apple tech support scam fake apple security alert">
+    </article><article class="card guide-card" data-searchable="apple tech support scam uk: spot a fake pop-up got a pop-up or call saying your iphone or mac is infected and apple support needs access? how to spot an apple tech support scam and report it. tech apple tech support scam uk fake apple pop-up virus warning apple support scam call is this apple call real apple id locked scam popup apple remote access scam report apple tech support scam fake apple security alert">
       <div class="eyebrow">Tech Support Scams</div>
       <h3><a href="/guides/apple-tech-support-scam-uk/">Apple Tech Support Scam UK: Spot a Fake Pop-up</a></h3>
       <p>Got a pop-up or call saying your iPhone or Mac is infected and Apple support needs access? How to spot an Apple tech support scam and report it.</p>
-      <p class="meta">Updated 2026-07-02</p>
-    </article>
-    
-    <article class="card guide-card" data-searchable="remote access scam uk: what the software can expose remote-access tools are legitimate but can expose apps, files and banking when granted to a scammer. disconnect, contact the bank and secure the device. tech remote access scam uk fake tech support scam remote desktop scam computer control scam teamviewer scam uk tech support scam uk">
+      <p class="meta">Updated 2026-07-18</p>
+    </article><article class="card guide-card" data-searchable="remote access scam uk: what the software can expose remote-access tools are legitimate but can expose apps, files and banking when granted to a scammer. disconnect, contact the bank and secure the device. tech remote access scam uk fake tech support scam remote desktop scam computer control scam teamviewer scam uk tech support scam uk">
       <div class="eyebrow">Tech Support Scams</div>
       <h3><a href="/guides/remote-access-scam-uk/">Remote Access Scam UK: What the Software Can Expose</a></h3>
       <p>Remote-access tools are legitimate but can expose apps, files and banking when granted to a scammer. Disconnect, contact the bank and secure the device.</p>
       <p class="meta">Updated 2026-07-10</p>
-    </article>
-    
-    <article class="card guide-card" data-searchable="printer support scam uk: spot a fake hp contact an unsolicited caller or pop-up claims a printer fault and asks for remote access or payment. hp says it does not provide unsolicited technical support. tech printer support scam hp support scam uk fake printer support tech support scam printer error scam tech support scam uk remote access scam uk">
+    </article><article class="card guide-card" data-searchable="printer support scam uk: spot a fake hp contact an unsolicited caller or pop-up claims a printer fault and asks for remote access or payment. hp says it does not provide unsolicited technical support. tech printer support scam hp support scam uk fake printer support tech support scam printer error scam tech support scam uk remote access scam uk">
       <div class="eyebrow">Tech Support Scams</div>
       <h3><a href="/guides/printer-support-scam-uk/">Printer Support Scam UK: Spot a Fake HP Contact</a></h3>
       <p>An unsolicited caller or pop-up claims a printer fault and asks for remote access or payment. HP says it does not provide unsolicited technical support.</p>
-      <p class="meta">Updated 2026-07-13</p>
-    </article>
-    
-    <article class="card guide-card" data-searchable="microsoft support scam uk: spot fake pc virus calls got a call or pop-up saying your pc is infected and microsoft needs remote access? how to spot a microsoft support scam and report it. tech microsoft support scam uk fake microsoft virus call microsoft tech support scam pc infected pop-up scam is this microsoft call real remote access scam uk report microsoft scam uk windows security alert scam">
+      <p class="meta">Updated 2026-07-19</p>
+    </article><article class="card guide-card" data-searchable="microsoft support scam uk: spot fake pc virus calls got a call or pop-up saying your pc is infected and microsoft needs remote access? how to spot a microsoft support scam and report it. tech microsoft support scam uk fake microsoft virus call microsoft tech support scam pc infected pop-up scam is this microsoft call real remote access scam uk report microsoft scam uk windows security alert scam">
       <div class="eyebrow">Tech Support Scams</div>
       <h3><a href="/guides/microsoft-support-scam-uk-guide/">Microsoft Support Scam UK: Spot Fake PC Virus Calls</a></h3>
       <p>Got a call or pop-up saying your PC is infected and Microsoft needs remote access? How to spot a Microsoft support scam and report it.</p>
-      <p class="meta">Updated 2026-06-29</p>
-    </article>
-    </div></div></section>
-    
-    <section class="section"><div class="wrap"><h2>Browse other scam categories</h2><ul class="list-clean"><li><a href="/categories/sms/">Text Message Scams</a> <span class="meta">(24 guides)</span></li><li><a href="/categories/email/">Email Scams</a> <span class="meta">(15 guides)</span></li><li><a href="/categories/marketplace/">Marketplace Scams</a> <span class="meta">(15 guides)</span></li><li><a href="/categories/travel/">Travel Scams</a> <span class="meta">(14 guides)</span></li><li><a href="/categories/payment/">Payment Scams</a> <span class="meta">(14 guides)</span></li><li><a href="/categories/phone/">Phone Scams</a> <span class="meta">(13 guides)</span></li></ul></div></section>
-    
+      <p class="meta">Updated 2026-07-18</p>
+    </article></div></div></section>
+
+    <section class="section"><div class="wrap"><h2>Browse other scam categories</h2><ul class="list-clean"><li><a href="/categories/sms/">Text Message Scams</a> <span class="meta">(23 guides)</span></li><li><a href="/categories/email/">Email Scams</a> <span class="meta">(15 guides)</span></li><li><a href="/categories/marketplace/">Marketplace Scams</a> <span class="meta">(15 guides)</span></li><li><a href="/categories/travel/">Travel Scams</a> <span class="meta">(14 guides)</span></li><li><a href="/categories/payment/">Payment Scams</a> <span class="meta">(14 guides)</span></li><li><a href="/categories/phone/">Phone Scams</a> <span class="meta">(13 guides)</span></li></ul></div></section>
+
   </main>
   <section class="newsletter-band" aria-labelledby="nl-heading">
     <div class="wrap newsletter-inner">
@@ -224,6 +201,8 @@
         <h3>Explore</h3>
         <ul>
           <li><a href="/guides/">All guides</a></li>
+          <li><a href="/research/">Research &amp; data</a></li>
+          <li><a href="/recovery/">Scam recovery checklist</a></li>
           <li><a href="/categories/sms/">Text Message Scams</a></li>
 <li><a href="/categories/email/">Email Scams</a></li>
 <li><a href="/categories/marketplace/">Marketplace Scams</a></li>
@@ -247,6 +226,8 @@
         <h3>Trust & legal</h3>
         <ul>
           <li><a href="/about/">About</a></li>
+          <li><a href="/methodology/">How we fact-check</a></li>
+          <li><a href="/corrections/">Corrections</a></li>
           <li><a href="/privacy/">Privacy Policy</a></li>
           <li><a href="/cookies/">Cookie Policy</a></li>
           <li><button class="link-button" type="button" id="openCookieSettings">Cookie settings</button></li>
@@ -271,6 +252,6 @@
       <button class="btn btn-primary" id="cookieAccept" type="button">Accept</button>
     </div>
   </div>
-  <script src="/assets/app.js?v=227604ee69" defer></script>
+  <script src="/assets/app.js?v=59ecb206a0" defer></script>
 </body>
 </html>

@@ -26,18 +26,12 @@
   <!-- Resource hints for third-party origins. preconnect = full TCP+TLS
        handshake started immediately (good for resources we KNOW will load
        on every page). dns-prefetch = DNS lookup only (cheap fallback for
-       older browsers that ignore preconnect). googletagmanager loads GA4,
-       pagead2 loads AdSense — both are async <script> tags in <body>, so
-       preconnect shaves 100-300ms off their first paint on mobile.
-       Also adds tpc.googlesyndication.com (where ad creatives serve from)
-       and the ahrefs analytics host. -->
+       older browsers that ignore preconnect). AdSense resource hints are
+       injected only on pages eligible to serve ads. -->
   <link rel="preconnect" href="https://www.googletagmanager.com" crossorigin>
-  <link rel="preconnect" href="https://pagead2.googlesyndication.com" crossorigin>
-  <link rel="preconnect" href="https://tpc.googlesyndication.com" crossorigin>
   <link rel="dns-prefetch" href="https://www.googletagmanager.com">
-  <link rel="dns-prefetch" href="https://pagead2.googlesyndication.com">
-  <link rel="dns-prefetch" href="https://tpc.googlesyndication.com">
   <link rel="dns-prefetch" href="https://analytics.ahrefs.com">
+  {{ads_resource_hints}}
 
   <meta property="og:type" content="{{og_type}}">
   <meta property="og:title" content="{{og_title}}">
@@ -78,9 +72,10 @@
     AdSense respects Google Consent Mode: the GA4 consent defaults above start
     denied, so visitors who haven't accepted get non-personalised ads and no
     ad-personalisation cookies until they do. The ad tag below is emitted per
-    page by make_base()/_ads_head(): omitted entirely on the /check/ tool, and
-    preceded by a requestNonPersonalizedAds flag on sensitive financial / victim
-    pages (Google restricts personalisation based on negative financial status).
+    page by make_base()/_ads_head(): omitted on navigational, tool and
+    sensitive-content pages, and preceded by a requestNonPersonalizedAds flag
+    on sensitive financial / victim pages (Google restricts personalisation
+    based on negative financial status).
     Ahrefs Web Analytics is cookieless. Custom GA4 events stay gated in app.js.
   -->
   {{ads_head}}
@@ -99,6 +94,8 @@
         <a href="{{asset_prefix}}/">Home</a>
         <a href="{{asset_prefix}}/guides/">Guides</a>
         <a href="{{asset_prefix}}/categories/">Categories</a>
+        <a href="{{asset_prefix}}/research/">Research</a>
+        <a href="{{asset_prefix}}/recovery/">Recovery</a>
         <a href="{{asset_prefix}}/about/">About</a>
         <a href="{{asset_prefix}}/contact/">Contact</a>
         <a class="nav-cta" href="{{asset_prefix}}/check/">Check a message</a>
@@ -142,6 +139,8 @@
         <h3>Explore</h3>
         <ul>
           <li><a href="{{asset_prefix}}/guides/">All guides</a></li>
+          <li><a href="{{asset_prefix}}/research/">Research &amp; data</a></li>
+          <li><a href="{{asset_prefix}}/recovery/">Scam recovery checklist</a></li>
           {{footer_cats}}
         </ul>
       </div>
@@ -149,6 +148,8 @@
         <h3>Trust & legal</h3>
         <ul>
           <li><a href="{{asset_prefix}}/about/">About</a></li>
+          <li><a href="{{asset_prefix}}/methodology/">How we fact-check</a></li>
+          <li><a href="{{asset_prefix}}/corrections/">Corrections</a></li>
           <li><a href="{{asset_prefix}}/privacy/">Privacy Policy</a></li>
           <li><a href="{{asset_prefix}}/cookies/">Cookie Policy</a></li>
           <li><button class="link-button" type="button" id="openCookieSettings">Cookie settings</button></li>

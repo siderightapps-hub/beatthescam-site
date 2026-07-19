@@ -12,8 +12,8 @@
   <meta name="robots" content="index,follow">
   <meta name="theme-color" content="#0b1220">
   <meta name="format-detection" content="telephone=no">
-  
-  
+
+
 
   <!-- Favicons -->
   <link rel="icon" href="/favicon.ico" sizes="any">
@@ -26,18 +26,12 @@
   <!-- Resource hints for third-party origins. preconnect = full TCP+TLS
        handshake started immediately (good for resources we KNOW will load
        on every page). dns-prefetch = DNS lookup only (cheap fallback for
-       older browsers that ignore preconnect). googletagmanager loads GA4,
-       pagead2 loads AdSense — both are async <script> tags in <body>, so
-       preconnect shaves 100-300ms off their first paint on mobile.
-       Also adds tpc.googlesyndication.com (where ad creatives serve from)
-       and the ahrefs analytics host. -->
+       older browsers that ignore preconnect). AdSense resource hints are
+       injected only on pages eligible to serve ads. -->
   <link rel="preconnect" href="https://www.googletagmanager.com" crossorigin>
-  <link rel="preconnect" href="https://pagead2.googlesyndication.com" crossorigin>
-  <link rel="preconnect" href="https://tpc.googlesyndication.com" crossorigin>
   <link rel="dns-prefetch" href="https://www.googletagmanager.com">
-  <link rel="dns-prefetch" href="https://pagead2.googlesyndication.com">
-  <link rel="dns-prefetch" href="https://tpc.googlesyndication.com">
   <link rel="dns-prefetch" href="https://analytics.ahrefs.com">
+  <!-- AdSense resource hints intentionally omitted on this page -->
 
   <meta property="og:type" content="website">
   <meta property="og:title" content="Website Scams | Beat the Scam">
@@ -58,7 +52,7 @@
        value= attribute (not content=) — validators flag it; do not "fix" it
        or their crawler stops verifying the site. -->
   <meta name='impact-site-verification' value='e0dda02c-a1b6-4056-9f92-16f7c916bd4b'>
-  <link rel="stylesheet" href="/assets/styles.css?v=2aec57b620">
+  <link rel="stylesheet" href="/assets/styles.css?v=d1fc9faba4">
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-JXNF856NBF"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
@@ -78,12 +72,13 @@
     AdSense respects Google Consent Mode: the GA4 consent defaults above start
     denied, so visitors who haven't accepted get non-personalised ads and no
     ad-personalisation cookies until they do. The ad tag below is emitted per
-    page by make_base()/_ads_head(): omitted entirely on the /check/ tool, and
-    preceded by a requestNonPersonalizedAds flag on sensitive financial / victim
-    pages (Google restricts personalisation based on negative financial status).
+    page by make_base()/_ads_head(): omitted on navigational, tool and
+    sensitive-content pages, and preceded by a requestNonPersonalizedAds flag
+    on sensitive financial / victim pages (Google restricts personalisation
+    based on negative financial status).
     Ahrefs Web Analytics is cookieless. Custom GA4 events stay gated in app.js.
   -->
-  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1606633100797174" crossorigin="anonymous"></script>
+  <!-- Ads intentionally disabled on this page (excluded from Auto Ads) -->
   <script src="https://analytics.ahrefs.com/analytics.js" data-key="l1GHKUGfAKlhtjbYgIySAg" async></script>
 </head>
 <body>
@@ -99,6 +94,8 @@
         <a href="/">Home</a>
         <a href="/guides/">Guides</a>
         <a href="/categories/">Categories</a>
+        <a href="/research/">Research</a>
+        <a href="/recovery/">Recovery</a>
         <a href="/about/">About</a>
         <a href="/contact/">Contact</a>
         <a class="nav-cta" href="/check/">Check a message</a>
@@ -106,7 +103,7 @@
     </div>
   </header>
   <main id="main">
-    
+
     <section class="hero">
       <div class="wrap">
         <div class="breadcrumbs"><a href="/">Home</a> / <a href="/categories/">Categories</a> / Website Scams</div>
@@ -114,95 +111,71 @@
         <p class="lead">Guides covering fake online shops, lookalike domains, and website verification. Learn how to check if a website is legitimate before buying or sharing details.</p>
       </div>
     </section>
-    
-    <section class="section"><div class="wrap"><h2>Latest website scams</h2><div class="grid-3">
-    <article class="card guide-card" data-searchable="is this website a scam? a practical checklist before you buy a plain-english checklist for judging whether a website is legitimate before you enter payment details, starting with the domain itself. website is this website a scam website scam checker fake online shop">
+
+    <section class="section"><div class="wrap"><h2>Latest website scams</h2><div class="grid-3"><article class="card guide-card" data-searchable="is this website a scam? a practical checklist before you buy a plain-english checklist for judging whether a website is legitimate before you enter payment details, starting with the domain itself. website is this website a scam website scam checker fake online shop">
       <div class="eyebrow">Website Scams</div>
       <h3><a href="/guides/is-this-website-a-scam/">Is This Website a Scam? A Practical Checklist Before You Buy</a></h3>
       <p>A plain-English checklist for judging whether a website is legitimate before you enter payment details, starting with the domain itself.</p>
-      <p class="meta">Updated 2026-07-10</p>
-    </article>
-    
-    <article class="card guide-card" data-searchable="fake shein website uk: how to check the site and protect your details fake shein websites can take payments or capture personal details. check the real uk domain and learn what to do if you entered information. website shein fake website uk shein scam website fake shein shopping site shein phishing scam uk how to spot fake shein website">
+      <p class="meta">Updated 2026-07-18</p>
+    </article><article class="card guide-card" data-searchable="fake shein website uk: how to check the site and protect your details fake shein websites can take payments or capture personal details. check the real uk domain and learn what to do if you entered information. website shein fake website uk shein scam website fake shein shopping site shein phishing scam uk how to spot fake shein website">
       <div class="eyebrow">Website Scams</div>
       <h3><a href="/guides/shein-fake-website-scam-uk/">Fake SHEIN Website UK: How to Check the Site and Protect Your Details</a></h3>
       <p>Fake SHEIN websites can take payments or capture personal details. Check the real UK domain and learn what to do if you entered information.</p>
       <p class="meta">Updated 2026-07-13</p>
-    </article>
-    
-    <article class="card guide-card" data-searchable="fake ray-ban website scam uk: spot a copycat store found a ray-ban site with huge discounts from a social ad? how to spot a fake ray-ban copycat website, buy safely, and report it in the uk. website fake ray-ban website uk ray-ban copycat scam counterfeit ray-ban sunglasses uk is this ray-ban website real fake ray-ban discount scam report fake ray-ban site ray-ban clearance scam uk ray-ban lookalike domain scam">
+    </article><article class="card guide-card" data-searchable="fake ray-ban website scam uk: spot a copycat store found a ray-ban site with huge discounts from a social ad? how to spot a fake ray-ban copycat website, buy safely, and report it in the uk. website fake ray-ban website uk ray-ban copycat scam counterfeit ray-ban sunglasses uk is this ray-ban website real fake ray-ban discount scam report fake ray-ban site ray-ban clearance scam uk ray-ban lookalike domain scam">
       <div class="eyebrow">Website Scams</div>
       <h3><a href="/guides/fake-ray-ban-website-scam-uk/">Fake Ray-Ban Website Scam UK: Spot a Copycat Store</a></h3>
       <p>Found a Ray-Ban site with huge discounts from a social ad? How to spot a fake Ray-Ban copycat website, buy safely, and report it in the UK.</p>
-      <p class="meta">Updated 2026-07-03</p>
-    </article>
-    
-    <article class="card guide-card" data-searchable="fake pandora website uk: spot a counterfeit jewellery site a &#x27;pandora&#x27; site selling charms at huge discounts? check pandora.net and pandora&#x27;s authorised-retailer guidance before entering card details. website fake pandora website pandora scam site is this pandora site real pandora jewellery scam uk counterfeit pandora charms pandora fake website uk report fake pandora website">
+      <p class="meta">Updated 2026-07-18</p>
+    </article><article class="card guide-card" data-searchable="fake pandora website uk: spot a counterfeit jewellery site a &#x27;pandora&#x27; site selling charms at huge discounts? check pandora.net and pandora&#x27;s authorised-retailer guidance before entering card details. website fake pandora website pandora scam site is this pandora site real pandora jewellery scam uk counterfeit pandora charms pandora fake website uk report fake pandora website">
       <div class="eyebrow">Website Scams</div>
       <h3><a href="/guides/fake-pandora-website-uk-scam/">Fake Pandora Website UK: Spot a Counterfeit Jewellery Site</a></h3>
       <p>A &#x27;Pandora&#x27; site selling charms at huge discounts? Check pandora.net and Pandora&#x27;s authorised-retailer guidance before entering card details.</p>
       <p class="meta">Updated 2026-07-03</p>
-    </article>
-    
-    <article class="card guide-card" data-searchable="fake online pharmacy uk: spot an illegal medicine site found a site selling prescription medicine cheaply with no prescription needed? how to spot a fake online pharmacy, check it, and report it. website fake online pharmacy uk illegal medicine website uk is this online pharmacy legit online pharmacy no prescription scam fake prescription medicine website report fake pharmacy uk gphc register check counterfeit medicine online uk">
+    </article><article class="card guide-card" data-searchable="fake online pharmacy uk: spot an illegal medicine site found a site selling prescription medicine cheaply with no prescription needed? how to spot a fake online pharmacy, check it, and report it. website fake online pharmacy uk illegal medicine website uk is this online pharmacy legit online pharmacy no prescription scam fake prescription medicine website report fake pharmacy uk gphc register check counterfeit medicine online uk">
       <div class="eyebrow">Website Scams</div>
       <h3><a href="/guides/fake-online-pharmacy-uk-scam/">Fake Online Pharmacy UK: Spot an Illegal Medicine Site</a></h3>
       <p>Found a site selling prescription medicine cheaply with no prescription needed? How to spot a fake online pharmacy, check it, and report it.</p>
-      <p class="meta">Updated 2026-07-02</p>
-    </article>
-    
-    <article class="card guide-card" data-searchable="fake nike website scam uk: spot a counterfeit shop found a nike site with huge discounts you reached from a social ad? how to spot a fake nike website, buy safely, and report it in the uk. website fake nike website uk nike scam website counterfeit nike trainers uk nike outlet scam is this nike website real fake nike shop uk report fake nike site too cheap nike trainers scam">
+      <p class="meta">Updated 2026-07-18</p>
+    </article><article class="card guide-card" data-searchable="fake nike website scam uk: spot a counterfeit shop found a nike site with huge discounts you reached from a social ad? how to spot a fake nike website, buy safely, and report it in the uk. website fake nike website uk nike scam website counterfeit nike trainers uk nike outlet scam is this nike website real fake nike shop uk report fake nike site too cheap nike trainers scam">
       <div class="eyebrow">Website Scams</div>
       <h3><a href="/guides/fake-nike-website-uk/">Fake Nike Website Scam UK: Spot a Counterfeit Shop</a></h3>
       <p>Found a Nike site with huge discounts you reached from a social ad? How to spot a fake Nike website, buy safely, and report it in the UK.</p>
-      <p class="meta">Updated 2026-07-02</p>
-    </article>
-    
-    <article class="card guide-card" data-searchable="fake asos website scam uk: spot a copycat store found an asos-looking site with huge discounts from a social ad? how to spot a fake asos copycat website, buy safely, and report it in the uk. website asos copycat scam uk fake asos website asos clone site scam is this asos website real fake asos discount scam report fake asos site counterfeit asos clothing uk asos lookalike domain scam">
+      <p class="meta">Updated 2026-07-18</p>
+    </article><article class="card guide-card" data-searchable="fake asos website scam uk: spot a copycat store found an asos-looking site with huge discounts from a social ad? how to spot a fake asos copycat website, buy safely, and report it in the uk. website asos copycat scam uk fake asos website asos clone site scam is this asos website real fake asos discount scam report fake asos site counterfeit asos clothing uk asos lookalike domain scam">
       <div class="eyebrow">Website Scams</div>
       <h3><a href="/guides/asos-copycat-scam-uk/">Fake ASOS Website Scam UK: Spot a Copycat Store</a></h3>
       <p>Found an ASOS-looking site with huge discounts from a social ad? How to spot a fake ASOS copycat website, buy safely, and report it in the UK.</p>
-      <p class="meta">Updated 2026-07-02</p>
-    </article>
-    
-    <article class="card guide-card" data-searchable="fake ugg website uk: how to spot counterfeit boots and protect your money fake ugg websites may sell counterfeits or take your money without delivering. learn how to check a seller and what to do if you paid. website fake ugg website uk counterfeit ugg boots scam fake ugg online store ugg website scam warning signs how to spot fake ugg boots online fake website uk scam website uk">
+      <p class="meta">Updated 2026-07-18</p>
+    </article><article class="card guide-card" data-searchable="fake ugg website uk: how to spot counterfeit boots and protect your money fake ugg websites may sell counterfeits or take your money without delivering. learn how to check a seller and what to do if you paid. website fake ugg website uk counterfeit ugg boots scam fake ugg online store ugg website scam warning signs how to spot fake ugg boots online fake website uk scam website uk">
       <div class="eyebrow">Website Scams</div>
       <h3><a href="/guides/fake-ugg-website-uk/">Fake UGG Website UK: How to Spot Counterfeit Boots and Protect Your Money</a></h3>
       <p>Fake UGG websites may sell counterfeits or take your money without delivering. Learn how to check a seller and what to do if you paid.</p>
       <p class="meta">Updated 2026-07-13</p>
-    </article>
-    
-    <article class="card guide-card" data-searchable="is dhgate a scam? uk guide to seller and counterfeit risk dhgate is an operating marketplace, but seller quality and counterfeit risk vary. keep payment on-platform and follow the deadline shown on your order. website dhgate scam uk dhgate fake reviews dhgate counterfeit goods dhgate non-delivery is dhgate safe uk fake website uk scam website uk">
+    </article><article class="card guide-card" data-searchable="is dhgate a scam? uk guide to seller and counterfeit risk dhgate is an operating marketplace, but seller quality and counterfeit risk vary. keep payment on-platform and follow the deadline shown on your order. website dhgate scam uk dhgate fake reviews dhgate counterfeit goods dhgate non-delivery is dhgate safe uk fake website uk scam website uk">
       <div class="eyebrow">Website Scams</div>
       <h3><a href="/guides/dhgate-scam-uk-review/">Is DHgate a Scam? UK Guide to Seller and Counterfeit Risk</a></h3>
       <p>DHgate is an operating marketplace, but seller quality and counterfeit risk vary. Keep payment on-platform and follow the deadline shown on your order.</p>
       <p class="meta">Updated 2026-07-10</p>
-    </article>
-    
-    <article class="card guide-card" data-searchable="is wish a scam? uk guide to fakes, delays &amp; safe buying is wish a scam or just cheap? wish is a real shopping app, but counterfeits, no-shows and fake &#x27;wish&#x27; emails are the real risks — here&#x27;s how to buy safely. website is wish a scam wish scam uk wish review uk is wish legit wish counterfeit wish item not arrived fake wish email wish refund uk">
+    </article><article class="card guide-card" data-searchable="is wish a scam? uk guide to fakes, delays &amp; safe buying is wish a scam or just cheap? wish is a real shopping app, but counterfeits, no-shows and fake &#x27;wish&#x27; emails are the real risks — here&#x27;s how to buy safely. website is wish a scam wish scam uk wish review uk is wish legit wish counterfeit wish item not arrived fake wish email wish refund uk">
       <div class="eyebrow">Website Scams</div>
       <h3><a href="/guides/wish-scam-uk-review/">Is Wish a Scam? UK Guide to Fakes, Delays &amp; Safe Buying</a></h3>
       <p>Is Wish a scam or just cheap? Wish is a real shopping app, but counterfeits, no-shows and fake &#x27;Wish&#x27; emails are the real risks — here&#x27;s how to buy safely.</p>
-      <p class="meta">Updated 2026-06-28</p>
-    </article>
-    
-    <article class="card guide-card" data-searchable="is temu a scam? uk guide to fake temu offers temu itself is a real marketplace, but scammers impersonate it. how to spot fake temu cashback offers, texts, and lookalike sites, and report them. website is temu a scam uk fake temu offer temu cashback scam temu text message scam is this temu message real temu impersonation scam uk report temu scam uk temu free gift scam">
+      <p class="meta">Updated 2026-07-18</p>
+    </article><article class="card guide-card" data-searchable="is temu a scam? uk guide to fake temu offers temu itself is a real marketplace, but scammers impersonate it. how to spot fake temu cashback offers, texts, and lookalike sites, and report them. website is temu a scam uk fake temu offer temu cashback scam temu text message scam is this temu message real temu impersonation scam uk report temu scam uk temu free gift scam">
       <div class="eyebrow">Website Scams</div>
       <h3><a href="/guides/is-temu-a-scam-uk/">Is Temu a Scam? UK Guide to Fake Temu Offers</a></h3>
       <p>Temu itself is a real marketplace, but scammers impersonate it. How to spot fake Temu cashback offers, texts, and lookalike sites, and report them.</p>
-      <p class="meta">Updated 2026-07-02</p>
-    </article>
-    
-    <article class="card guide-card" data-searchable="is aliexpress a scam? uk guide to marketplace risk aliexpress is an alibaba marketplace, but listings and sellers vary. keep payment on-platform and use the dispute or return deadline shown on the order. website aliexpress scam aliexpress fake sellers aliexpress scam uk aliexpress counterfeit aliexpress non-delivery scam fake website uk scam website uk">
+      <p class="meta">Updated 2026-07-18</p>
+    </article><article class="card guide-card" data-searchable="is aliexpress a scam? uk guide to marketplace risk aliexpress is an alibaba marketplace, but listings and sellers vary. keep payment on-platform and use the dispute or return deadline shown on the order. website aliexpress scam aliexpress fake sellers aliexpress scam uk aliexpress counterfeit aliexpress non-delivery scam fake website uk scam website uk">
       <div class="eyebrow">Website Scams</div>
       <h3><a href="/guides/aliexpress-scam-or-legit-uk-guide/">Is AliExpress a Scam? UK Guide to Marketplace Risk</a></h3>
       <p>AliExpress is an Alibaba marketplace, but listings and sellers vary. Keep payment on-platform and use the dispute or return deadline shown on the order.</p>
       <p class="meta">Updated 2026-07-13</p>
-    </article>
-    </div></div></section>
-    
-    <section class="section"><div class="wrap"><h2>Browse other scam categories</h2><ul class="list-clean"><li><a href="/categories/sms/">Text Message Scams</a> <span class="meta">(24 guides)</span></li><li><a href="/categories/email/">Email Scams</a> <span class="meta">(15 guides)</span></li><li><a href="/categories/marketplace/">Marketplace Scams</a> <span class="meta">(15 guides)</span></li><li><a href="/categories/travel/">Travel Scams</a> <span class="meta">(14 guides)</span></li><li><a href="/categories/payment/">Payment Scams</a> <span class="meta">(14 guides)</span></li><li><a href="/categories/phone/">Phone Scams</a> <span class="meta">(13 guides)</span></li></ul></div></section>
-    
+    </article></div></div></section>
+
+    <section class="section"><div class="wrap"><h2>Browse other scam categories</h2><ul class="list-clean"><li><a href="/categories/sms/">Text Message Scams</a> <span class="meta">(23 guides)</span></li><li><a href="/categories/email/">Email Scams</a> <span class="meta">(15 guides)</span></li><li><a href="/categories/marketplace/">Marketplace Scams</a> <span class="meta">(15 guides)</span></li><li><a href="/categories/travel/">Travel Scams</a> <span class="meta">(14 guides)</span></li><li><a href="/categories/payment/">Payment Scams</a> <span class="meta">(14 guides)</span></li><li><a href="/categories/phone/">Phone Scams</a> <span class="meta">(13 guides)</span></li></ul></div></section>
+
   </main>
   <section class="newsletter-band" aria-labelledby="nl-heading">
     <div class="wrap newsletter-inner">
@@ -238,6 +211,8 @@
         <h3>Explore</h3>
         <ul>
           <li><a href="/guides/">All guides</a></li>
+          <li><a href="/research/">Research &amp; data</a></li>
+          <li><a href="/recovery/">Scam recovery checklist</a></li>
           <li><a href="/categories/sms/">Text Message Scams</a></li>
 <li><a href="/categories/email/">Email Scams</a></li>
 <li><a href="/categories/marketplace/">Marketplace Scams</a></li>
@@ -261,6 +236,8 @@
         <h3>Trust & legal</h3>
         <ul>
           <li><a href="/about/">About</a></li>
+          <li><a href="/methodology/">How we fact-check</a></li>
+          <li><a href="/corrections/">Corrections</a></li>
           <li><a href="/privacy/">Privacy Policy</a></li>
           <li><a href="/cookies/">Cookie Policy</a></li>
           <li><button class="link-button" type="button" id="openCookieSettings">Cookie settings</button></li>
@@ -285,6 +262,6 @@
       <button class="btn btn-primary" id="cookieAccept" type="button">Accept</button>
     </div>
   </div>
-  <script src="/assets/app.js?v=227604ee69" defer></script>
+  <script src="/assets/app.js?v=59ecb206a0" defer></script>
 </body>
 </html>

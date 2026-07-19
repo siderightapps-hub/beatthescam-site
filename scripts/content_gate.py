@@ -88,7 +88,34 @@ def _canon_report_emails(canon: Dict) -> set:
     return emails or set(_FALLBACK_REPORT_EMAILS)
 
 
+def _judge_canon_block(canon: Dict) -> str:
+    """Render the sources.json canon as a compact fact list for the LLM judge.
+
+    Without this, the judge has no way to know check_phones() has ALREADY
+    deterministically verified every phone number/route against this same
+    canon — it re-derives "is this real?" from its own training-data recall
+    on every call, which is what let it flip-flop across runs on whether 159
+    is a genuine number (2026-07-13, see memory llm-judge-run-to-run-
+    inconsistency). Giving it the canon stops it re-litigating settled facts."""
+    lines = []
+    for r in canon.get("official_routes", []):
+        parts = [r.get("name", "")]
+        if r.get("phone"):
+            parts.append(f"phone {r['phone']}")
+        if r.get("sms"):
+            parts.append(f"SMS shortcode {r['sms']}")
+        if r.get("email"):
+            parts.append(f"email {r['email']}")
+        if any(parts[1:]):
+            lines.append("- " + " — ".join(p for p in parts if p))
+    emails = [e for e in canon.get("report_emails", []) if e]
+    if emails:
+        lines.append("- Other verified official report emails: " + ", ".join(emails))
+    return "\n".join(lines)
+
+
 _CANON = _load_canon()
+_JUDGE_CANON_BLOCK = _judge_canon_block(_CANON)
 ALLOWED_PHONE_DIGITS = _canon_phone_digits(_CANON)
 ALLOWED_REPORT_EMAILS = _canon_report_emails(_CANON)
 
@@ -131,6 +158,10 @@ def _post_text(post: Dict) -> str:
     a high-stakes claim placed there (a hardcoded number, banned entity, false
     absolute) is checked too, not only the section bodies."""
     parts: List[str] = [str(post.get("title", ""))]
+    # Category hubs use an HTML `intro` field instead of a guide `hero`.
+    # Including it here lets the same deterministic accuracy contract cover
+    # every reader-visible hub claim when build.py runs its preflight gate.
+    parts.append(str(post.get("intro", "")))
     for item in post.get("sections", []):
         if isinstance(item, (list, tuple)) and len(item) >= 2:
             parts.append(str(item[0]))   # section heading
@@ -434,12 +465,44 @@ def check_nfd_routing(post: Dict) -> List[Dict]:
 # US-style "fraud alert on your credit file" is not a UK mechanism (that is a
 # Cifas Protective Registration). Imprecise rather than dangerous → FLAG (review).
 _FRAUD_ALERT_RE = re.compile(
-    r"fraud\s+alert[^.]{0,40}credit\s+(?:file|report|record)"
-    r"|credit\s+(?:file|report|record)[^.]{0,40}fraud\s+alert", re.I)
+    r"fraud\s+alert[^.]{0,40}credit\s+(?:file|report|record|reference\s+agenc(?:y|ies))"
+    r"|credit\s+(?:file|report|record|reference\s+agenc(?:y|ies))[^.]{0,40}fraud\s+alert", re.I)
 # HMRC runs genuine SMS/email campaigns and genuine texts can carry gov.uk links,
 # so blanket "HMRC never texts/emails/links you" is inaccurate → FLAG (review).
 _HMRC_CHANNEL_RE = re.compile(
     r"HMRC[^.]{0,40}\bnever\b[^.]{0,40}\b(?:text|texts|sms|e-?mails?|links?)\b", re.I)
+
+# Other over-broad channel and reimbursement statements found in the 2026-07
+# category-hub audit. Genuine banks and public bodies sometimes send links, so
+# the safe rule is to verify independently and never disclose sensitive data.
+# Ofcom's current page says suspicious SMS texts can be forwarded to 7726 free
+# of charge; it does not claim universal network coverage, and directs RCS,
+# iMessage and app messages to their built-in reporting tools. Mandatory APP
+# reimbursement also has payment-rail, claimant, exception, cap, excess and
+# stop-clock qualifications.
+_BANK_LINK_ABSOLUTE_RE = re.compile(
+    r"\bbanks?\b[^.]{0,70}\b(?:never|don['’]t|do\s+not|won['’]t|will\s+not)\b"
+    r"[^.]{0,35}\b(?:send|include|contain|use)\b[^.]{0,20}\blinks?\b", re.I)
+_7726_ALL_NETWORKS_RE = re.compile(
+    r"\b7726\b[\s\S]{0,140}\b(?:all|every)\b[^.]{0,30}\b(?:UK\s+)?(?:mobile\s+)?networks?\b", re.I)
+_7726_NON_SMS_RE = re.compile(
+    r"\b(?:forward|send|report)\b[^.;]{0,100}"
+    r"\b(?:RCS|iMessage|WhatsApp|app\s+messages?)\b[^.;]{0,100}\b7726\b", re.I)
+_APP_REIMBURSEMENT_ABSOLUTE_RE = re.compile(
+    r"\b(?:UK\s+)?banks?\b[^.]{0,35}\b(?:must|are\s+required\s+to)\b"
+    r"[^.]{0,35}\breimburse\b[^.]{0,60}\b(?:five|5)\s+(?:business\s+)?days?\b", re.I)
+_COURIER_PAYMENT_ABSOLUTE_RE = re.compile(
+    r"\b(?:DPD|Royal\s+Mail|couriers?)\b[^.]{0,80}\b(?:never|do(?:es)?\s+not|won['’]t|will\s+not)\b"
+    r"[^.]{0,45}\b(?:asks?|requested?|requests?|sends?|includes?|contains?)\b[^.]{0,35}\b(?:payment|pay|fee|card)\b", re.I)
+_RETAILER_COMPANY_ABSOLUTE_RE = re.compile(
+    r"\b(?:legitimate|genuine|real)\s+(?:UK\s+)?retailers?\b[^.]{0,80}"
+    r"\b(?:registered\s+company\s+number|registered[^.]{0,20}Companies\s+House)\b", re.I)
+_AMAZON_COLD_CALL_ABSOLUTE_RE = re.compile(
+    r"\bAmazon\b[^.]{0,45}\b(?:does\s+not|doesn['’]t|never)\b[^.]{0,25}\bcold[- ]?call", re.I)
+_PAYPAL_180_GENERIC_RE = re.compile(
+    r"\bPayPal\b[^.]{0,90}\b(?:dispute|claim)\b[^.]{0,40}\bwithin\s+180\s+days\b", re.I)
+_SECTION75_INCLUSIVE_RE = re.compile(
+    r"\bSection\s+75\b[^.]{0,90}(?:£\s*100\s+(?:to|-)|card\s+payments?\s+(?:over|above)\s+£\s*100)", re.I)
 def check_uk_advice_flags(post: Dict) -> List[Dict]:
     text = _post_text(post)
     issues: List[Dict] = []
@@ -454,6 +517,44 @@ def check_uk_advice_flags(post: Dict) -> List[Dict]:
                        "detail": ("blanket 'HMRC never texts/emails/links you' — HMRC runs genuine SMS/email "
                                   "campaigns and genuine texts can carry gov.uk links. Say HMRC won't ask you "
                                   "to confirm details or 'claim' a refund via a link.")})
+    if _BANK_LINK_ABSOLUTE_RE.search(text):
+        issues.append({"check": "bank_link_absolute", "severity": SEVERITY_FLAG,
+                       "span": re.sub(r"\s+", " ", _BANK_LINK_ABSOLUTE_RE.search(text).group(0))[:140],
+                       "detail": ("blanket claim that banks never send/include links. Genuine messages can include "
+                                  "links; teach independent verification and never sharing passwords, PINs or codes.")})
+    if _7726_ALL_NETWORKS_RE.search(text):
+        issues.append({"check": "7726_scope", "severity": SEVERITY_FLAG,
+                       "span": re.sub(r"\s+", " ", _7726_ALL_NETWORKS_RE.search(text).group(0))[:140],
+                       "detail": ("claims 7726 works on all/every UK network. Current Ofcom guidance instead "
+                                  "says a suspicious SMS text can be forwarded to 7726 free of charge; use that "
+                                  "format-specific wording without asserting network coverage.")})
+    if _7726_NON_SMS_RE.search(text):
+        issues.append({"check": "7726_format_scope", "severity": SEVERITY_FLAG,
+                       "span": re.sub(r"\s+", " ", _7726_NON_SMS_RE.search(text).group(0))[:140],
+                       "detail": ("claims non-SMS formats can be forwarded to 7726. Current Ofcom guidance "
+                                  "limits 7726 forwarding to SMS; RCS, iMessage and app messages should use "
+                                  "their relevant built-in reporting tools.")})
+    if _APP_REIMBURSEMENT_ABSOLUTE_RE.search(text):
+        issues.append({"check": "app_reimbursement_scope", "severity": SEVERITY_BLOCK,
+                       "span": re.sub(r"\s+", " ", _APP_REIMBURSEMENT_ABSOLUTE_RE.search(text).group(0))[:140],
+                       "detail": ("oversimplifies mandatory APP reimbursement. State the eligible claimants and "
+                                  "payment rails, exceptions, possible excess, cap, normal timetable and stop-clock.")})
+    for rx, check, detail in (
+        (_COURIER_PAYMENT_ABSOLUTE_RE, "courier_payment_absolute",
+         "blanket claim that a courier never requests payment. Genuine import duties/taxes can be notified electronically; distinguish standard redelivery scams and require independent parcel verification."),
+        (_RETAILER_COMPANY_ABSOLUTE_RE, "retailer_company_absolute",
+         "treats Companies House registration as universal proof. Legitimate sole traders are not Companies House companies; apply that check only to a business claiming to be incorporated."),
+        (_AMAZON_COLD_CALL_ABSOLUTE_RE, "amazon_cold_call_absolute",
+         "claims Amazon never cold-calls. Use the sourced rules on OTPs/confidential information and tell readers to verify an unexpected call through their account."),
+        (_PAYPAL_180_GENERIC_RE, "paypal_deadline",
+         "gives a generic 180-day PayPal deadline. Item Not Received and Significantly Not as Described have different current deadlines; tell readers to open the Resolution Centre immediately and state both rules."),
+        (_SECTION75_INCLUSIVE_RE, "section75_scope",
+         "misstates Section 75 as inclusive of £100 or as generic card protection. Use a qualifying credit purchase with a cash price over £100 and no more than £30,000, subject to the required relationship."),
+    ):
+        m = rx.search(text)
+        if m:
+            issues.append({"check": check, "severity": SEVERITY_BLOCK,
+                           "span": re.sub(r"\s+", " ", m.group(0))[:160], "detail": detail})
     return issues
 
 
@@ -565,12 +666,21 @@ def judge_llm(post: Dict, client, model: str) -> List[Dict]:
     body = _post_text(post)
     user = (f"Title: {post.get('title','')}\n\nReview this draft guide:\n\n{body}\n\n"
             "Return the JSON verdict.")
+    system_prompt = JUDGE_SYSTEM
+    if _JUDGE_CANON_BLOCK:
+        system_prompt += (
+            "\n\nThe following UK reporting routes, phone numbers, and email addresses have "
+            "already been independently verified against this site's canonical source list. "
+            "Treat them as accurate — do NOT flag them as fabricated, invented, or "
+            "unverifiable. Only flag one of these if the draft attributes it to the wrong "
+            "organisation or uses it in a clearly incorrect context:\n" + _JUDGE_CANON_BLOCK
+        )
     try:
         resp = client.messages.create(
             model=model,
             max_tokens=1500,
             temperature=0,
-            system=JUDGE_SYSTEM,
+            system=system_prompt,
             messages=[{"role": "user", "content": user}],
         )
         raw = "".join(b.text for b in resp.content if getattr(b, "type", None) == "text").strip()

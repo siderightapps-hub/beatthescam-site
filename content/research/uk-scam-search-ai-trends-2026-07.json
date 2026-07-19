@@ -1,0 +1,593 @@
+{
+  "schema_version": 1,
+  "slug": "uk-scam-search-ai-trends-2026-07",
+  "title": "UK Scam Guidance Visibility Report \u2014 July 2026",
+  "published": "2026-07-18",
+  "summary": "An original monthly snapshot of how UK scam guidance is discovered in Google Search and cited across Microsoft Copilot, Bing AI answers and selected partners.",
+  "scope_note": "This dataset measures visibility for beatthescam.com. It does not estimate how many scams occurred, how much money was lost, or population-level search demand.",
+  "bing_ai": {
+    "source": "Bing Webmaster Tools AI Performance CSV exports",
+    "start_date": "2026-06-18",
+    "end_date": "2026-07-16",
+    "days_returned": 29,
+    "total_citations": 11481,
+    "average_cited_pages": 52.9,
+    "cited_page_count": 97,
+    "grounding_query_sample_count": 118,
+    "daily": [
+      {
+        "date": "2026-06-18",
+        "citations": 103,
+        "cited_pages": 30
+      },
+      {
+        "date": "2026-06-19",
+        "citations": 147,
+        "cited_pages": 28
+      },
+      {
+        "date": "2026-06-20",
+        "citations": 77,
+        "cited_pages": 15
+      },
+      {
+        "date": "2026-06-21",
+        "citations": 153,
+        "cited_pages": 25
+      },
+      {
+        "date": "2026-06-22",
+        "citations": 272,
+        "cited_pages": 39
+      },
+      {
+        "date": "2026-06-23",
+        "citations": 269,
+        "cited_pages": 40
+      },
+      {
+        "date": "2026-06-24",
+        "citations": 244,
+        "cited_pages": 45
+      },
+      {
+        "date": "2026-06-25",
+        "citations": 231,
+        "cited_pages": 38
+      },
+      {
+        "date": "2026-06-26",
+        "citations": 268,
+        "cited_pages": 56
+      },
+      {
+        "date": "2026-06-27",
+        "citations": 235,
+        "cited_pages": 47
+      },
+      {
+        "date": "2026-06-28",
+        "citations": 212,
+        "cited_pages": 34
+      },
+      {
+        "date": "2026-06-29",
+        "citations": 427,
+        "cited_pages": 56
+      },
+      {
+        "date": "2026-06-30",
+        "citations": 474,
+        "cited_pages": 60
+      },
+      {
+        "date": "2026-07-01",
+        "citations": 415,
+        "cited_pages": 58
+      },
+      {
+        "date": "2026-07-02",
+        "citations": 307,
+        "cited_pages": 61
+      },
+      {
+        "date": "2026-07-03",
+        "citations": 261,
+        "cited_pages": 55
+      },
+      {
+        "date": "2026-07-04",
+        "citations": 312,
+        "cited_pages": 47
+      },
+      {
+        "date": "2026-07-05",
+        "citations": 389,
+        "cited_pages": 41
+      },
+      {
+        "date": "2026-07-06",
+        "citations": 693,
+        "cited_pages": 58
+      },
+      {
+        "date": "2026-07-07",
+        "citations": 684,
+        "cited_pages": 62
+      },
+      {
+        "date": "2026-07-08",
+        "citations": 747,
+        "cited_pages": 68
+      },
+      {
+        "date": "2026-07-09",
+        "citations": 594,
+        "cited_pages": 77
+      },
+      {
+        "date": "2026-07-10",
+        "citations": 545,
+        "cited_pages": 73
+      },
+      {
+        "date": "2026-07-11",
+        "citations": 357,
+        "cited_pages": 63
+      },
+      {
+        "date": "2026-07-12",
+        "citations": 370,
+        "cited_pages": 59
+      },
+      {
+        "date": "2026-07-13",
+        "citations": 592,
+        "cited_pages": 74
+      },
+      {
+        "date": "2026-07-14",
+        "citations": 656,
+        "cited_pages": 70
+      },
+      {
+        "date": "2026-07-15",
+        "citations": 591,
+        "cited_pages": 68
+      },
+      {
+        "date": "2026-07-16",
+        "citations": 856,
+        "cited_pages": 87
+      }
+    ],
+    "top_pages": [
+      {
+        "page": "https://beatthescam.com/guides/tv-licence-email-scam-uk/",
+        "citations": 1979
+      },
+      {
+        "page": "https://beatthescam.com/guides/tv-licence-scam-letter-uk/",
+        "citations": 942
+      },
+      {
+        "page": "https://beatthescam.com/guides/indeed-job-scam-uk/",
+        "citations": 447
+      },
+      {
+        "page": "https://beatthescam.com/guides/bt-broadband-scam-calls-uk/",
+        "citations": 432
+      },
+      {
+        "page": "https://beatthescam.com/guides/santander-email-scam-uk/",
+        "citations": 355
+      },
+      {
+        "page": "https://beatthescam.com/guides/natwest-fraud-text-message-scam-uk/",
+        "citations": 353
+      },
+      {
+        "page": "https://beatthescam.com/guides/airport-transfer-taxi-scam-uk/",
+        "citations": 315
+      },
+      {
+        "page": "https://beatthescam.com/guides/work-from-home-scam-uk/",
+        "citations": 311
+      },
+      {
+        "page": "https://beatthescam.com/guides/viagogo-scam-uk/",
+        "citations": 308
+      },
+      {
+        "page": "https://beatthescam.com/guides/evri-delivery-scam-guide/",
+        "citations": 283
+      },
+      {
+        "page": "https://beatthescam.com/guides/is-temu-a-scam-uk/",
+        "citations": 242
+      },
+      {
+        "page": "https://beatthescam.com/guides/virgin-media-scam-call-uk/",
+        "citations": 242
+      },
+      {
+        "page": "https://beatthescam.com/guides/nationwide-scam-text-uk/",
+        "citations": 181
+      },
+      {
+        "page": "https://beatthescam.com/guides/revolut-scam-uk/",
+        "citations": 118
+      },
+      {
+        "page": "https://beatthescam.com/guides/barclays-bank-text-scam-uk/",
+        "citations": 116
+      },
+      {
+        "page": "https://beatthescam.com/guides/vinted-scam-warning-uk/",
+        "citations": 114
+      },
+      {
+        "page": "https://beatthescam.com/guides/recruitment-agency-scam-uk/",
+        "citations": 113
+      },
+      {
+        "page": "https://beatthescam.com/guides/stubhub-ticket-scam-uk/",
+        "citations": 108
+      },
+      {
+        "page": "https://beatthescam.com/guides/dvla-email-scam-car-tax/",
+        "citations": 104
+      },
+      {
+        "page": "https://beatthescam.com/guides/smart-meter-scam-call-uk/",
+        "citations": 100
+      },
+      {
+        "page": "https://beatthescam.com/guides/remote-work-scam-uk-2026/",
+        "citations": 98
+      },
+      {
+        "page": "https://beatthescam.com/guides/isp-impersonation-scam-bt-sky-virgin-media/",
+        "citations": 97
+      },
+      {
+        "page": "https://beatthescam.com/guides/nhs-appointment-scam-text-uk/",
+        "citations": 93
+      },
+      {
+        "page": "https://beatthescam.com/guides/british-gas-scam-call-uk/",
+        "citations": 87
+      },
+      {
+        "page": "https://beatthescam.com/guides/apple-pay-scam-uk/",
+        "citations": 87
+      }
+    ],
+    "top_grounding_queries": [
+      {
+        "grounding_query": "tv licence scam email reporting",
+        "intent": "Informational",
+        "topic": "Security",
+        "citations": 413,
+        "citation_share": "47.31%"
+      },
+      {
+        "grounding_query": "tv licence scam",
+        "intent": "Informational",
+        "topic": "Security",
+        "citations": 311,
+        "citation_share": "28.72%"
+      },
+      {
+        "grounding_query": "how to spot work from home scams uk",
+        "intent": "Learn and Solve",
+        "topic": "Security",
+        "citations": 132,
+        "citation_share": "36.67%"
+      },
+      {
+        "grounding_query": "santander scam email",
+        "intent": "Informational",
+        "topic": "Security",
+        "citations": 132,
+        "citation_share": "40.00%"
+      },
+      {
+        "grounding_query": "tv licensing scam email",
+        "intent": "Informational",
+        "topic": "Security",
+        "citations": 132,
+        "citation_share": "56.90%"
+      },
+      {
+        "grounding_query": "bt scam calls",
+        "intent": "Informational",
+        "topic": "Security",
+        "citations": 126,
+        "citation_share": "24.51%"
+      },
+      {
+        "grounding_query": "is viagogo safe to buy tickets",
+        "intent": "Research",
+        "topic": "Security",
+        "citations": 118,
+        "citation_share": "7.83%"
+      },
+      {
+        "grounding_query": "tv licence scams uk",
+        "intent": "Informational",
+        "topic": "Security",
+        "citations": 117,
+        "citation_share": "38.11%"
+      },
+      {
+        "grounding_query": "tv licensing scam emails uk",
+        "intent": "Informational",
+        "topic": "Security",
+        "citations": 106,
+        "citation_share": "48.62%"
+      },
+      {
+        "grounding_query": "tv licence email address uk",
+        "intent": "Informational",
+        "topic": "Government Services & Benefits",
+        "citations": 102,
+        "citation_share": "49.51%"
+      },
+      {
+        "grounding_query": "nationwide fraud",
+        "intent": "Informational",
+        "topic": "Security",
+        "citations": 102,
+        "citation_share": "19.65%"
+      },
+      {
+        "grounding_query": "tvlicensing co uk renew",
+        "intent": "Commercial",
+        "topic": "Security",
+        "citations": 96,
+        "citation_share": "15.58%"
+      },
+      {
+        "grounding_query": "tv licensing phishing email reporting",
+        "intent": "Learn and Solve",
+        "topic": "Security Audits & Best Practices",
+        "citations": 87,
+        "citation_share": "45.55%"
+      },
+      {
+        "grounding_query": "Indeed job platform scams",
+        "intent": "Informational",
+        "topic": "Employment",
+        "citations": 86,
+        "citation_share": "11.65%"
+      },
+      {
+        "grounding_query": "tv licensing scam",
+        "intent": "Informational",
+        "topic": "Security",
+        "citations": 85,
+        "citation_share": "24.43%"
+      },
+      {
+        "grounding_query": "tv licence scams",
+        "intent": "Informational",
+        "topic": "Security",
+        "citations": 77,
+        "citation_share": "39.29%"
+      },
+      {
+        "grounding_query": "tv licence renewal scam",
+        "intent": "Informational",
+        "topic": "Security",
+        "citations": 68,
+        "citation_share": "27.53%"
+      },
+      {
+        "grounding_query": "Indeed pricing scam",
+        "intent": "Research",
+        "topic": "Security",
+        "citations": 66,
+        "citation_share": "9.35%"
+      },
+      {
+        "grounding_query": "warning signs scam job postings Indeed",
+        "intent": "Learn and Solve",
+        "topic": "Employment",
+        "citations": 64,
+        "citation_share": "11.45%"
+      },
+      {
+        "grounding_query": "virgin media telephone call scam",
+        "intent": "Research",
+        "topic": "Security",
+        "citations": 63,
+        "citation_share": "29.03%"
+      },
+      {
+        "grounding_query": "scammers list",
+        "intent": "Informational",
+        "topic": "Online Safety & Cybersecurity",
+        "citations": 62,
+        "citation_share": "9.61%"
+      },
+      {
+        "grounding_query": "how to avoid scams when looking for work from home jobs in uk",
+        "intent": "Learn and Solve",
+        "topic": "Remote & Hybrid Work",
+        "citations": 55,
+        "citation_share": "14.71%"
+      },
+      {
+        "grounding_query": "santander phishing email address",
+        "intent": "Informational",
+        "topic": "Security Audits & Best Practices",
+        "citations": 49,
+        "citation_share": "31.82%"
+      },
+      {
+        "grounding_query": "viagogo is a scam",
+        "intent": "Research",
+        "topic": "Security",
+        "citations": 49,
+        "citation_share": "31.82%"
+      },
+      {
+        "grounding_query": "red flags online pharmacy counterfeit medicines",
+        "intent": "Research",
+        "topic": "Health",
+        "citations": 47,
+        "citation_share": "21.17%"
+      }
+    ]
+  },
+  "google_search": {
+    "source": "Google Search Console Search Analytics API, final web-search data",
+    "start_date": "2026-06-19",
+    "end_date": "2026-07-16",
+    "clicks": 3,
+    "impressions": 549,
+    "ctr": 0.00546448087431694,
+    "average_position": 50.68852459016394,
+    "previous_period": {
+      "start_date": "2026-05-22",
+      "end_date": "2026-06-18",
+      "clicks": 3,
+      "impressions": 555,
+      "ctr": 0.005405405405405406,
+      "average_position": 36.5045045045045
+    },
+    "focus_pages": {
+      "https://beatthescam.com/guides/dpd-delivery-scam-text/": {
+        "clicks": 0,
+        "impressions": 45,
+        "ctr": 0,
+        "position": 49.84444444444444
+      },
+      "https://beatthescam.com/guides/bank-text-codes-not-arriving/": {
+        "clicks": 0,
+        "impressions": 6,
+        "ctr": 0,
+        "position": 16.833333333333336
+      },
+      "https://beatthescam.com/guides/halifax-bank-scam-text-uk/": {
+        "clicks": 0,
+        "impressions": 41,
+        "ctr": 0,
+        "position": 63.1219512195122
+      },
+      "https://beatthescam.com/guides/nhs-appointment-scam-text-uk/": {
+        "clicks": 0,
+        "impressions": 30,
+        "ctr": 0,
+        "position": 10.866666666666667
+      },
+      "https://beatthescam.com/guides/dvla-vehicle-tax-text-scam/": {
+        "clicks": 0,
+        "impressions": 1,
+        "ctr": 0,
+        "position": 31
+      },
+      "https://beatthescam.com/recovery/": {
+        "clicks": 0,
+        "impressions": 0,
+        "ctr": 0,
+        "position": 0
+      },
+      "https://beatthescam.com/guides/hermes-parcel-scam-text-uk/": {
+        "clicks": 0,
+        "impressions": 1,
+        "ctr": 0,
+        "position": 73
+      },
+      "https://beatthescam.com/guides/evri-delivery-scam-guide/": {
+        "clicks": 0,
+        "impressions": 0,
+        "ctr": 0,
+        "position": 0
+      }
+    },
+    "focus_pages_previous": {
+      "https://beatthescam.com/guides/dpd-delivery-scam-text/": {
+        "clicks": 0,
+        "impressions": 8,
+        "ctr": 0,
+        "position": 60.625
+      },
+      "https://beatthescam.com/guides/bank-text-codes-not-arriving/": {
+        "clicks": 0,
+        "impressions": 9,
+        "ctr": 0,
+        "position": 9.222222222222221
+      },
+      "https://beatthescam.com/guides/halifax-bank-scam-text-uk/": {
+        "clicks": 0,
+        "impressions": 15,
+        "ctr": 0,
+        "position": 59.13333333333333
+      },
+      "https://beatthescam.com/guides/nhs-appointment-scam-text-uk/": {
+        "clicks": 1,
+        "impressions": 35,
+        "ctr": 0.02857142857142857,
+        "position": 11.028571428571428
+      },
+      "https://beatthescam.com/guides/dvla-vehicle-tax-text-scam/": {
+        "clicks": 0,
+        "impressions": 2,
+        "ctr": 0,
+        "position": 33
+      },
+      "https://beatthescam.com/recovery/": {
+        "clicks": 0,
+        "impressions": 0,
+        "ctr": 0,
+        "position": 0
+      },
+      "https://beatthescam.com/guides/hermes-parcel-scam-text-uk/": {
+        "clicks": 0,
+        "impressions": 21,
+        "ctr": 0,
+        "position": 61.95238095238095
+      },
+      "https://beatthescam.com/guides/evri-delivery-scam-guide/": {
+        "clicks": 0,
+        "impressions": 3,
+        "ctr": 0,
+        "position": 11
+      }
+    },
+    "consolidations": [
+      {
+        "from": "https://beatthescam.com/guides/hermes-parcel-scam-text-uk/",
+        "to": "https://beatthescam.com/guides/evri-delivery-scam-guide/",
+        "combined_current": {
+          "clicks": 0.0,
+          "impressions": 1.0,
+          "ctr": 0.0,
+          "position": 73.0
+        },
+        "combined_previous": {
+          "clicks": 0.0,
+          "impressions": 24.0,
+          "ctr": 0.0,
+          "position": 55.583333333333336
+        }
+      }
+    ]
+  },
+  "method": [
+    "Bing figures are retained from the dashboard's 30-day overview, cited-pages and grounding-query CSV exports.",
+    "Google figures use final Search Console web-search data for the latest complete 28-day window, ending two days before the snapshot date.",
+    "The published tables retain the top 25 Bing cited pages and sampled grounding queries; raw exports are archived internally.",
+    "No user-submitted messages, personal data or checker input are collected or included.",
+    "Counts can be revised by the source platforms; each monthly release is an immutable dated snapshot."
+  ],
+  "limitations": [
+    "Bing says grounding queries represent a sample of overall citation activity.",
+    "Bing citation counts do not show placement, importance, answer ranking, traffic or endorsement.",
+    "Search Console omits anonymized queries and can show different totals under different aggregation dimensions.",
+    "Changes after an editorial release can correlate with, but do not by themselves prove, an effect from that release.",
+    "This is a visibility dataset for one publication, not a national fraud-incidence dataset."
+  ]
+}

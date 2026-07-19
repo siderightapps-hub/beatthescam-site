@@ -12,8 +12,8 @@
   <meta name="robots" content="index,follow">
   <meta name="theme-color" content="#0b1220">
   <meta name="format-detection" content="telephone=no">
-  
-  
+
+
 
   <!-- Favicons -->
   <link rel="icon" href="/favicon.ico" sizes="any">
@@ -26,18 +26,12 @@
   <!-- Resource hints for third-party origins. preconnect = full TCP+TLS
        handshake started immediately (good for resources we KNOW will load
        on every page). dns-prefetch = DNS lookup only (cheap fallback for
-       older browsers that ignore preconnect). googletagmanager loads GA4,
-       pagead2 loads AdSense — both are async <script> tags in <body>, so
-       preconnect shaves 100-300ms off their first paint on mobile.
-       Also adds tpc.googlesyndication.com (where ad creatives serve from)
-       and the ahrefs analytics host. -->
+       older browsers that ignore preconnect). AdSense resource hints are
+       injected only on pages eligible to serve ads. -->
   <link rel="preconnect" href="https://www.googletagmanager.com" crossorigin>
-  <link rel="preconnect" href="https://pagead2.googlesyndication.com" crossorigin>
-  <link rel="preconnect" href="https://tpc.googlesyndication.com" crossorigin>
   <link rel="dns-prefetch" href="https://www.googletagmanager.com">
-  <link rel="dns-prefetch" href="https://pagead2.googlesyndication.com">
-  <link rel="dns-prefetch" href="https://tpc.googlesyndication.com">
   <link rel="dns-prefetch" href="https://analytics.ahrefs.com">
+  <!-- AdSense resource hints intentionally omitted on this page -->
 
   <meta property="og:type" content="website">
   <meta property="og:title" content="Phone Scams | Beat the Scam">
@@ -58,7 +52,7 @@
        value= attribute (not content=) — validators flag it; do not "fix" it
        or their crawler stops verifying the site. -->
   <meta name='impact-site-verification' value='e0dda02c-a1b6-4056-9f92-16f7c916bd4b'>
-  <link rel="stylesheet" href="/assets/styles.css?v=2aec57b620">
+  <link rel="stylesheet" href="/assets/styles.css?v=d1fc9faba4">
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-JXNF856NBF"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
@@ -78,12 +72,13 @@
     AdSense respects Google Consent Mode: the GA4 consent defaults above start
     denied, so visitors who haven't accepted get non-personalised ads and no
     ad-personalisation cookies until they do. The ad tag below is emitted per
-    page by make_base()/_ads_head(): omitted entirely on the /check/ tool, and
-    preceded by a requestNonPersonalizedAds flag on sensitive financial / victim
-    pages (Google restricts personalisation based on negative financial status).
+    page by make_base()/_ads_head(): omitted on navigational, tool and
+    sensitive-content pages, and preceded by a requestNonPersonalizedAds flag
+    on sensitive financial / victim pages (Google restricts personalisation
+    based on negative financial status).
     Ahrefs Web Analytics is cookieless. Custom GA4 events stay gated in app.js.
   -->
-  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1606633100797174" crossorigin="anonymous"></script>
+  <!-- Ads intentionally disabled on this page (excluded from Auto Ads) -->
   <script src="https://analytics.ahrefs.com/analytics.js" data-key="l1GHKUGfAKlhtjbYgIySAg" async></script>
 </head>
 <body>
@@ -99,6 +94,8 @@
         <a href="/">Home</a>
         <a href="/guides/">Guides</a>
         <a href="/categories/">Categories</a>
+        <a href="/research/">Research</a>
+        <a href="/recovery/">Recovery</a>
         <a href="/about/">About</a>
         <a href="/contact/">Contact</a>
         <a class="nav-cta" href="/check/">Check a message</a>
@@ -106,7 +103,7 @@
     </div>
   </header>
   <main id="main">
-    
+
     <section class="hero">
       <div class="wrap">
         <div class="breadcrumbs"><a href="/">Home</a> / <a href="/categories/">Categories</a> / Phone Scams</div>
@@ -114,102 +111,76 @@
         <p class="lead">Guides covering vishing calls, fake bank calls, HMRC phone scams, and voice fraud targeting UK residents. Learn to verify callers and avoid phone-based scams.</p>
       </div>
     </section>
-    
-    <section class="section"><div class="wrap"><h2>Latest phone scams</h2><div class="grid-3">
-    <article class="card guide-card" data-searchable="amazon scam phone calls uk: how to spot a fake amazon call got an automated &#x27;amazon&#x27; call about a suspicious order or account? it&#x27;s almost certainly a scam. here&#x27;s how the fake amazon call works and how to stop it. phone amazon scam calls uk amazon scam phone call uk fake amazon call amazon phone scam report amazon scam calls uk amazon account scam call amazon refund scam call amazon press 1 scam is amazon calling me a scam amazon iphone order scam call">
+
+    <section class="section"><div class="wrap"><h2>Latest phone scams</h2><div class="grid-3"><article class="card guide-card" data-searchable="amazon scam phone calls uk: how to spot a fake amazon call got an unexpected automated &#x27;amazon&#x27; call about an order or account? treat it as unverified. here is how to check it safely and stop a phone scam. phone amazon scam calls uk amazon scam phone call uk fake amazon call amazon phone scam report amazon scam calls uk amazon account scam call amazon refund scam call amazon press 1 scam is amazon calling me a scam amazon iphone order scam call">
       <div class="eyebrow">Phone Scams</div>
       <h3><a href="/guides/amazon-phone-call-scam-uk/">Amazon Scam Phone Calls UK: How to Spot a Fake Amazon Call</a></h3>
-      <p>Got an automated &#x27;Amazon&#x27; call about a suspicious order or account? It&#x27;s almost certainly a scam. Here&#x27;s how the fake Amazon call works and how to stop it.</p>
-      <p class="meta">Published 2026-06-07</p>
-    </article>
-    
-    <article class="card guide-card" data-searchable="solar panel cold caller scam uk: spot the warning signs got an unsolicited call or doorstep visit offering free solar panels or a &#x27;government grant&#x27;? how to spot a solar panel cold-calling scam in the uk. phone solar panel cold caller scam uk free solar panels scam solar panel government grant scam is this solar panel offer real solar panel doorstep scam solar panel cold call warning signs report solar panel scam uk solar panel high pressure sales scam">
+      <p>Got an unexpected automated &#x27;Amazon&#x27; call about an order or account? Treat it as unverified. Here is how to check it safely and stop a phone scam.</p>
+      <p class="meta">Updated 2026-07-18</p>
+    </article><article class="card guide-card" data-searchable="solar panel cold caller scam uk: spot the warning signs got an unsolicited call or doorstep visit offering free solar panels or a &#x27;government grant&#x27;? how to spot a solar panel cold-calling scam in the uk. phone solar panel cold caller scam uk free solar panels scam solar panel government grant scam is this solar panel offer real solar panel doorstep scam solar panel cold call warning signs report solar panel scam uk solar panel high pressure sales scam">
       <div class="eyebrow">Phone Scams</div>
       <h3><a href="/guides/solar-panel-cold-caller-scam-uk/">Solar Panel Cold Caller Scam UK: Spot the Warning Signs</a></h3>
       <p>Got an unsolicited call or doorstep visit offering free solar panels or a &#x27;government grant&#x27;? How to spot a solar panel cold-calling scam in the UK.</p>
-      <p class="meta">Updated 2026-07-03</p>
-    </article>
-    
-    <article class="card guide-card" data-searchable="virgin media scam call uk: how to spot a fake caller a &#x27;virgin media&#x27; caller warns of a virus and wants remote access to your device? hang up and verify through virgin media&#x27;s official channels. phone virgin media scam call virgin media scams virgin media phishing people posing as virgin media fake virgin media caller virgin media remote access scam report virgin media scam call">
+      <p class="meta">Updated 2026-07-18</p>
+    </article><article class="card guide-card" data-searchable="virgin media scam call uk: how to spot a fake caller a &#x27;virgin media&#x27; caller warns of a virus and wants remote access to your device? hang up and verify through virgin media&#x27;s official channels. phone virgin media scam call virgin media scams virgin media phishing people posing as virgin media fake virgin media caller virgin media remote access scam report virgin media scam call">
       <div class="eyebrow">Phone Scams</div>
       <h3><a href="/guides/virgin-media-scam-call-uk/">Virgin Media Scam Call UK: How to Spot a Fake Caller</a></h3>
       <p>A &#x27;Virgin Media&#x27; caller warns of a virus and wants remote access to your device? Hang up and verify through Virgin Media&#x27;s official channels.</p>
       <p class="meta">Updated 2026-07-03</p>
-    </article>
-    
-    <article class="card guide-card" data-searchable="talktalk scam call uk: spot a fake support call fake talktalk callers claim a fault or refund and request passwords, bank details or remote access. hang up and call talktalk through an official route. phone talktalk scam call talktalk phone scam uk talktalk impersonation talktalk support scam fake talktalk calls">
+    </article><article class="card guide-card" data-searchable="talktalk scam call uk: spot a fake support call fake talktalk callers claim a fault or refund and request passwords, bank details or remote access. hang up and call talktalk through an official route. phone talktalk scam call talktalk phone scam uk talktalk impersonation talktalk support scam fake talktalk calls">
       <div class="eyebrow">Phone Scams</div>
       <h3><a href="/guides/talktalk-scam-call-uk/">TalkTalk Scam Call UK: Spot a Fake Support Call</a></h3>
       <p>Fake TalkTalk callers claim a fault or refund and request passwords, bank details or remote access. Hang up and call TalkTalk through an official route.</p>
-      <p class="meta">Updated 2026-07-10</p>
-    </article>
-    
-    <article class="card guide-card" data-searchable="number spoofing scam uk: spot a fake caller id got a call from a number that looked exactly like your bank or a government agency? how caller id spoofing works and how to stay safe in the uk. phone number spoofing scam uk fake caller id caller id spoofing explained is this call really from my bank spoofed phone number scam how to check a spoofed call report number spoofing uk phone number spoofing protection">
+      <p class="meta">Updated 2026-07-19</p>
+    </article><article class="card guide-card" data-searchable="number spoofing scam uk: spot a fake caller id got a call from a number that looked exactly like your bank or a government agency? how caller id spoofing works and how to stay safe in the uk. phone number spoofing scam uk fake caller id caller id spoofing explained is this call really from my bank spoofed phone number scam how to check a spoofed call report number spoofing uk phone number spoofing protection">
       <div class="eyebrow">Phone Scams</div>
       <h3><a href="/guides/number-spoofing-scam-uk/">Number Spoofing Scam UK: Spot a Fake Caller ID</a></h3>
       <p>Got a call from a number that looked exactly like your bank or a government agency? How caller ID spoofing works and how to stay safe in the UK.</p>
-      <p class="meta">Updated 2026-07-02</p>
-    </article>
-    
-    <article class="card guide-card" data-searchable="hsbc scam call uk: spot a fake fraud team call got a call claiming to be hsbc&#x27;s fraud team about suspicious activity on your account? how to spot an hsbc scam call, check safely, and report it. phone hsbc scam call uk fake hsbc fraud team call hsbc safe account scam call is this hsbc call real hsbc impersonation phone scam hsbc caller id spoofing scam report hsbc scam call hsbc verify account call scam">
+      <p class="meta">Updated 2026-07-18</p>
+    </article><article class="card guide-card" data-searchable="hsbc scam call uk: spot a fake fraud team call got a call claiming to be hsbc&#x27;s fraud team about suspicious activity on your account? how to spot an hsbc scam call, check safely, and report it. phone hsbc scam call uk fake hsbc fraud team call hsbc safe account scam call is this hsbc call real hsbc impersonation phone scam hsbc caller id spoofing scam report hsbc scam call hsbc verify account call scam">
       <div class="eyebrow">Phone Scams</div>
       <h3><a href="/guides/hsbc-bank-scam-call-uk/">HSBC Scam Call UK: Spot a Fake Fraud Team Call</a></h3>
       <p>Got a call claiming to be HSBC&#x27;s fraud team about suspicious activity on your account? How to spot an HSBC scam call, check safely, and report it.</p>
-      <p class="meta">Updated 2026-07-02</p>
-    </article>
-    
-    <article class="card guide-card" data-searchable="santander phone scam uk: what the callers say and how to hang up safely callers posing as santander&#x27;s fraud team push you to confirm details, share codes or move money to a safe account. how to spot the scam and hang up. phone santander phone scam uk santander scam call fake santander phone call santander fraud call how to spot santander scam">
+      <p class="meta">Updated 2026-07-18</p>
+    </article><article class="card guide-card" data-searchable="santander phone scam uk: what the callers say and how to hang up safely callers posing as santander&#x27;s fraud team push you to confirm details, share codes or move money to a safe account. how to spot the scam and hang up. phone santander phone scam uk santander scam call fake santander phone call santander fraud call how to spot santander scam">
       <div class="eyebrow">Phone Scams</div>
       <h3><a href="/guides/santander-phone-scam-uk/">Santander Phone Scam UK: What the Callers Say and How to Hang Up Safely</a></h3>
       <p>Callers posing as Santander&#x27;s fraud team push you to confirm details, share codes or move money to a safe account. How to spot the scam and hang up.</p>
       <p class="meta">Published 2026-05-19</p>
-    </article>
-    
-    <article class="card guide-card" data-searchable="pension liberation scam uk: the 55% tax trap pension liberation offers early access to your pension before 55 — but it can trigger a tax charge of up to 55% of the amount you take out. phone pension liberation scam uk early pension access scam pension unlocking scam unauthorised payment charge pension pension wise pension scam uk phone scam uk">
+    </article><article class="card guide-card" data-searchable="pension liberation scam uk: the 55% tax trap pension liberation offers early access to your pension before 55 — but it can trigger a tax charge of up to 55% of the amount you take out. phone pension liberation scam uk early pension access scam pension unlocking scam unauthorised payment charge pension pension wise pension scam uk phone scam uk">
       <div class="eyebrow">Phone Scams</div>
       <h3><a href="/guides/pension-liberation-scam-uk/">Pension Liberation Scam UK: The 55% Tax Trap</a></h3>
       <p>Pension liberation offers early access to your pension before 55 — but it can trigger a tax charge of up to 55% of the amount you take out.</p>
       <p class="meta">Updated 2026-07-10</p>
-    </article>
-    
-    <article class="card guide-card" data-searchable="dvla scam calls: how to spot a fake caller (uk) an unexpected call claims your vehicle tax has failed or your licence is at risk? hang up and check your status directly through gov.uk. phone dvla scam call dvla phone scam is there a dvla scam dvla scamline dvla vehicle tax phone call fake dvla caller dvla automated call scam report dvla scam call">
+    </article><article class="card guide-card" data-searchable="dvla scam calls: how to spot a fake caller (uk) an unexpected call claims your vehicle tax has failed or your licence is at risk? hang up and check your status directly through gov.uk. phone dvla scam call dvla phone scam is there a dvla scam dvla scamline dvla vehicle tax phone call fake dvla caller dvla automated call scam report dvla scam call">
       <div class="eyebrow">Phone Scams</div>
       <h3><a href="/guides/dvla-phone-scam-uk/">DVLA Scam Calls: How to Spot a Fake Caller (UK)</a></h3>
       <p>An unexpected call claims your vehicle tax has failed or your licence is at risk? Hang up and check your status directly through GOV.UK.</p>
       <p class="meta">Updated 2026-07-03</p>
-    </article>
-    
-    <article class="card guide-card" data-searchable="national insurance scam call uk: the &#x27;suspended&#x27; lie a robocall claims your national insurance number is &#x27;suspended&#x27; and pushes you to confirm your details. there&#x27;s no such thing as a suspended ni number. phone national insurance scam call uk ni number suspended scam fake hmrc robocall national insurance fraud call hmrc impersonation scam phone scam uk vishing uk">
+    </article><article class="card guide-card" data-searchable="national insurance scam call uk: the &#x27;suspended&#x27; lie a robocall claims your national insurance number is &#x27;suspended&#x27; and pushes you to confirm your details. there&#x27;s no such thing as a suspended ni number. phone national insurance scam call uk ni number suspended scam fake hmrc robocall national insurance fraud call hmrc impersonation scam phone scam uk vishing uk">
       <div class="eyebrow">Phone Scams</div>
       <h3><a href="/guides/national-insurance-scam-call-uk/">National Insurance Scam Call UK: The &#x27;Suspended&#x27; Lie</a></h3>
       <p>A robocall claims your National Insurance number is &#x27;suspended&#x27; and pushes you to confirm your details. There&#x27;s no such thing as a suspended NI number.</p>
       <p class="meta">Updated 2026-07-09</p>
-    </article>
-    
-    <article class="card guide-card" data-searchable="hmrc phone call scam uk: spot a fake tax call a fake hmrc call threatens arrest or urgent legal action. hmrc may phone or use voice prompts, but it says it will never threaten arrest. phone hmrc phone call scam fake hmrc calls uk tax fraud scam hmrc impersonation phone scam hmrc hmrc scam hmrc tax scam hmrc email scam hmrc text scam fake hmrc letter phone scam uk vishing uk">
+    </article><article class="card guide-card" data-searchable="hmrc phone call scam uk: spot a fake tax call a fake hmrc call threatens arrest or urgent legal action. hmrc may phone or use voice prompts, but it says it will never threaten arrest. phone hmrc phone call scam fake hmrc calls uk tax fraud scam hmrc impersonation phone scam hmrc hmrc scam hmrc tax scam hmrc email scam hmrc text scam fake hmrc letter phone scam uk vishing uk">
       <div class="eyebrow">Phone Scams</div>
       <h3><a href="/guides/hmrc-phone-call-scam-uk/">HMRC Phone Call Scam UK: Spot a Fake Tax Call</a></h3>
       <p>A fake HMRC call threatens arrest or urgent legal action. HMRC may phone or use voice prompts, but it says it will never threaten arrest.</p>
       <p class="meta">Updated 2026-07-10</p>
-    </article>
-    
-    <article class="card guide-card" data-searchable="bt scam calls: how to spot a fake bt phone call (uk) an unexpected &#x27;bt&#x27; call about your router, a refund, or being cut off? how to spot a fake bt caller, and what a genuine bt call will never ask. phone bt scam call fake bt phone call bt broadband scam is this bt call real bt refund scam call bt router hacked scam bt remote access scam report bt scam call">
+    </article><article class="card guide-card" data-searchable="bt scam calls: how to spot a fake bt phone call (uk) an unexpected &#x27;bt&#x27; call about your router, a refund, or being cut off? how to spot a fake bt caller, and what a genuine bt call will never ask. phone bt scam call fake bt phone call bt broadband scam is this bt call real bt refund scam call bt router hacked scam bt remote access scam report bt scam call">
       <div class="eyebrow">Phone Scams</div>
       <h3><a href="/guides/bt-broadband-scam-calls-uk/">BT Scam Calls: How to Spot a Fake BT Phone Call (UK)</a></h3>
       <p>An unexpected &#x27;BT&#x27; call about your router, a refund, or being cut off? How to spot a fake BT caller, and what a genuine BT call will never ask.</p>
-      <p class="meta">Updated 2026-06-26</p>
-    </article>
-    
-    <article class="card guide-card" data-searchable="police impersonation scam uk: spot a fake officer call a &#x27;police officer&#x27; says your money is at risk and you must move it or help an investigation? how to spot the scam and report it in the uk. phone police impersonation scam uk fake police phone call police safe account scam courier fraud uk is this police call real fake officer scam call report police impersonation scam police scam move money">
+      <p class="meta">Updated 2026-07-18</p>
+    </article><article class="card guide-card" data-searchable="police impersonation scam uk: spot a fake officer call a &#x27;police officer&#x27; says your money is at risk and you must move it or help an investigation? how to spot the scam and report it in the uk. phone police impersonation scam uk fake police phone call police safe account scam courier fraud uk is this police call real fake officer scam call report police impersonation scam police scam move money">
       <div class="eyebrow">Phone Scams</div>
       <h3><a href="/guides/police-impersonation-scam-call-uk/">Police Impersonation Scam UK: Spot a Fake Officer Call</a></h3>
       <p>A &#x27;police officer&#x27; says your money is at risk and you must move it or help an investigation? How to spot the scam and report it in the UK.</p>
-      <p class="meta">Updated 2026-07-02</p>
-    </article>
-    </div></div></section>
-    
-    <section class="section"><div class="wrap"><h2>Browse other scam categories</h2><ul class="list-clean"><li><a href="/categories/sms/">Text Message Scams</a> <span class="meta">(24 guides)</span></li><li><a href="/categories/email/">Email Scams</a> <span class="meta">(15 guides)</span></li><li><a href="/categories/marketplace/">Marketplace Scams</a> <span class="meta">(15 guides)</span></li><li><a href="/categories/travel/">Travel Scams</a> <span class="meta">(14 guides)</span></li><li><a href="/categories/payment/">Payment Scams</a> <span class="meta">(14 guides)</span></li><li><a href="/categories/website/">Website Scams</a> <span class="meta">(12 guides)</span></li></ul></div></section>
-    
+      <p class="meta">Updated 2026-07-18</p>
+    </article></div></div></section>
+
+    <section class="section"><div class="wrap"><h2>Browse other scam categories</h2><ul class="list-clean"><li><a href="/categories/sms/">Text Message Scams</a> <span class="meta">(23 guides)</span></li><li><a href="/categories/email/">Email Scams</a> <span class="meta">(15 guides)</span></li><li><a href="/categories/marketplace/">Marketplace Scams</a> <span class="meta">(15 guides)</span></li><li><a href="/categories/travel/">Travel Scams</a> <span class="meta">(14 guides)</span></li><li><a href="/categories/payment/">Payment Scams</a> <span class="meta">(14 guides)</span></li><li><a href="/categories/website/">Website Scams</a> <span class="meta">(12 guides)</span></li></ul></div></section>
+
   </main>
   <section class="newsletter-band" aria-labelledby="nl-heading">
     <div class="wrap newsletter-inner">
@@ -245,6 +216,8 @@
         <h3>Explore</h3>
         <ul>
           <li><a href="/guides/">All guides</a></li>
+          <li><a href="/research/">Research &amp; data</a></li>
+          <li><a href="/recovery/">Scam recovery checklist</a></li>
           <li><a href="/categories/sms/">Text Message Scams</a></li>
 <li><a href="/categories/email/">Email Scams</a></li>
 <li><a href="/categories/marketplace/">Marketplace Scams</a></li>
@@ -268,6 +241,8 @@
         <h3>Trust & legal</h3>
         <ul>
           <li><a href="/about/">About</a></li>
+          <li><a href="/methodology/">How we fact-check</a></li>
+          <li><a href="/corrections/">Corrections</a></li>
           <li><a href="/privacy/">Privacy Policy</a></li>
           <li><a href="/cookies/">Cookie Policy</a></li>
           <li><button class="link-button" type="button" id="openCookieSettings">Cookie settings</button></li>
@@ -292,6 +267,6 @@
       <button class="btn btn-primary" id="cookieAccept" type="button">Accept</button>
     </div>
   </div>
-  <script src="/assets/app.js?v=227604ee69" defer></script>
+  <script src="/assets/app.js?v=59ecb206a0" defer></script>
 </body>
 </html>

@@ -52,23 +52,23 @@
 - **Live URL:** https://beatthescam.com
 - **Country focus:** United Kingdom (UK consumer protection)
 - **Vertical:** Consumer protection · Cybersecurity · Personal finance safety · Fraud awareness
-- **Editorial persona:** "Beat the Scam Editorial Team" (collective byline — the earlier "James Carter" pseudonym has been retired)
+- **Named editor:** Alex Bacsa, Founder & Editor (the earlier pseudonymous/collective bylines have been retired)
 
 ### Purpose
 
 A free, UK-focused consumer-protection publication that:
 
-1. Publishes plain-English **scam awareness guides** (now 181 published, with a queue of additional topics being released ~1/day).
+1. Publishes plain-English **scam awareness guides** (182 source records and 181 indexable guides after one documented consolidation).
 2. Offers a **free AI-powered Scam Checker** at `/check/` where users paste suspicious messages and receive a verdict, confidence score, red flags, green flags, recommended actions, and reporting links.
 3. Routes users to legitimate UK reporting bodies (Report Fraud / `reportfraud.police.uk`, NCSC, FCA Firm Checker, Take Five, Citizens Advice).
-4. Generates revenue via Google AdSense (in review), affiliate partnerships (Experian, Norton, Cifas, Which? Legal), and future newsletter / sponsorship channels.
+4. Is being prepared to monetise through Google AdSense, affiliate partnerships and future newsletter/sponsorship channels; no revenue should be claimed until supported by platform statements or receipts.
 5. Builds topical authority over the medium-term to rank for UK fraud and scam queries.
 
 ### Why this brand has standalone value
 
-- The exact-match keyword domain `beatthescam.com` is short, memorable, and category-defining.
-- Consumer fraud is a **YMYL** (your-money-or-your-life) niche with high RPMs once authority is established.
-- The site already has 189 original articles, technical SEO foundation, security A+, schema markup, and an AI utility (scam checker) that competitors don't offer.
+- The brandable domain `beatthescam.com` is short, memorable, and clearly communicates the consumer-protection purpose.
+- Consumer fraud is a **YMYL** (your-money-or-your-life) niche, so verifiable expertise, accuracy and trust controls matter more than speculative advertising-rate claims.
+- The site has 181 indexable UK-focused guides, a mature technical SEO foundation, schema markup, original public research and a secured AI scam checker.
 - The brand is portable: it could be acquired by a consumer-finance publisher, a cybersecurity SaaS vendor, an insurance / identity-protection brand, or a UK media group.
 
 ---
@@ -358,8 +358,8 @@ This is the **complete inventory of every external account** the site depends on
 ### Google — AdSense
 
 - **Publisher ID:** `ca-pub-1606633100797174`
-- **Status:** **In review** (review restarted ~2026-04-21 after `ads.txt` was fixed; typical 3–14 day window).
-- **Auto Ads:** Enabled in dashboard, pending site approval to begin serving.
+- **Last repository record:** **In review** after `ads.txt` was fixed. The current dashboard outcome has not been captured in this repository and must be checked before any buyer, revenue or approval claim is made.
+- **Auto Ads:** Configured in the site; actual serving/approval must be evidenced from the current dashboard.
 - **ads.txt** at `https://beatthescam.com/ads.txt` — verified Authorised.
 - **Ad units:** None manually placed yet; relying on Auto Ads. Once approved, plan to add:
   - In-article unit (mid-article, after section 2)
@@ -497,8 +497,11 @@ Email: apex on **Microsoft 365** (MX `beatthescam-com.mail.protection.outlook.co
 - **Events tracked:**
   - `page_view` (standard)
   - `outbound_click` (custom — fires on any `a[target="_blank"]` or non-same-domain link)
-  - *(planned)* `scam_check_submitted`, `affiliate_click`, `newsletter_signup`
-- **Conversion goals:** TBC — recommend setting "scam check submitted" as a key event.
+  - `scam_check_submitted`, `scam_check_success`, `scam_check_error`
+  - `newsletter_confirmation_requested` (diagnostic, not a subscriber conversion)
+  - `newsletter_signup_confirmed` (fires on the consented success page only after Resend adds/reactivates the contact)
+  - `affiliate_click` (includes partner ID and current paid/unpaid status)
+- **Recommended key event:** `newsletter_signup_confirmed`. Use `scam_check_success` as the primary product-use event. Resend remains the authoritative total-subscriber count because GA4 is consent-limited.
 
 ### Tag implementation
 
@@ -1521,33 +1524,47 @@ Superseded by [`docs/next-session.md`](next-session.md), which is updated far mo
 
 ## 22. Asset Valuation & Acquisition Brief
 
-> Maintained for potential buyer / acquirer briefings.
+> Last reconciled: 2026-07-19. Maintained for potential buyer/acquirer briefings. Evidence index: [`docs/buyer-data-room/`](buyer-data-room/README.md).
 
-### What's included
+### Current asset perimeter
 
-- Domain: `beatthescam.com` (exact-match keyword, ~3 months old, no penalties, clean WHOIS)
-- GitHub repository (`siderightapps-hub/beatthescam-site`) — full transfer
-- 189 original UK-focused guides in `content/posts.json`
-- AI scam checker (live, rate-limited, secured)
-- Daily content generation pipeline (GitHub Actions + Anthropic Claude)
-- Netlify hosting setup (transferable)
-- Google Analytics 4 property
-- Google AdSense Publisher ID (in review — will need re-verification on transfer)
-- Social channels: Twitter `@BeatTheScamUK`, TikTok `@BeatTheScamUK`, Instagram `@beatthescamuk`, YouTube "Beat The Scam"
-- 3 published Shorts/TikToks (and assets)
-- All branding assets (logo variants, OG image, banners, end card)
-- This document and all session handoff documents
+- Domain: `beatthescam.com`, registered February 2026 (approximately five months old at this review).
+- Repository and generated site, including the static-site generator and Netlify Functions.
+- 182 guide records in `content/posts.json`; 181 indexable guides after one documented Hermes-to-Evri consolidation.
+- AI scam checker with durable rate limits, daily cap and UK reporting-link allow-list.
+- Human-review-gated content pipeline, source canon, claim manifests, correction log and quarterly reverification workflow.
+- Public research section, transparent methodology and retained Search Console/Bing AI snapshots.
+- Newsletter double-opt-in/unsubscribe implementation; audience size and transfer basis still require evidence.
+- Branding and documented social handles. Account ownership and platform transferability must be verified during diligence.
+- GA4, Search Console, Bing Webmaster and hosting configurations, subject to platform-specific access/transfer rules.
 
-### Valuation matrix
+AdSense and affiliate accounts are not represented as transferable assets. The site/ad inventory and configurations are in scope; the purchaser may need its own publisher/partner approval and credentials.
 
-| Scenario | Monthly traffic | Monthly net revenue | Estimated value (30–40× multiple) |
-|---|---|---|---|
-| Conservative | 2,000–5,000 visits | £30–£80 (AdSense only) | £1,000–£3,000 |
-| Moderate | 10,000–25,000 visits | £250–£700 (AdSense + 1–2 affiliates) | £8,000–£25,000 |
-| Strong | 40,000–80,000 visits | £900–£2,200 (AdSense + 3–4 affiliates) | £30,000–£80,000 |
-| Premium (with URL checker + newsletter) | 80,000+ visits | £2,500–£5,000+ | £80,000–£200,000+ |
+### Verified operating baseline
 
-Plus the **standalone domain value** (`beatthescam.com` as an exact-match keyword in the consumer-finance / cybersecurity vertical) — comparable category-defining domains have sold for £5,000–£25,000 alone.
+| Evidence | Verified result | Reporting window |
+|---|---:|---|
+| Google Search Console clicks | 3 | 19 Jun–16 Jul 2026 |
+| Google Search Console impressions | 549 | 19 Jun–16 Jul 2026 |
+| Google Search CTR / average position | 0.55% / 50.7 | 19 Jun–16 Jul 2026 |
+| Bing AI citations | 11,481 | 18 Jun–16 Jul 2026 |
+| Bing cited pages / sampled grounding queries | 97 / 118 | 18 Jun–16 Jul 2026 |
+
+Bing citations are source appearances, not visits, rankings, endorsements or revenue. The retained evidence is in `analytics/search-ai/2026-07-18/`.
+
+### Commercial position
+
+- No verified revenue history is recorded in the repository.
+- All four configured product recommendations are currently unpaid direct-destination links, not affiliate-network tracking URLs; consented onsite clicks are now measured separately.
+- AdSense's current dashboard decision and the Awin/CJ/direct-partner statuses require owner verification.
+- Confirmed subscriber count, checker-use baseline and GA4 conversion history have not yet been recorded.
+- Monthly KPI and P&L ledgers begin in [`analytics/commercial/`](../analytics/commercial/README.md); blanks mean unknown, not zero.
+
+### Valuation policy
+
+Do not publish an asking-price range from article count, domain wording or hypothetical traffic. At the current pre-evidence stage, a buyer would principally be acquiring a domain, brand, codebase, content/research corpus and operational setup rather than a proven cash-flow business.
+
+Once revenue exists, valuation work should use normalized trailing results, documented owner workload, traffic/revenue concentration, growth/decline, transfer risk and defensibility. As one marketplace example rather than a universal rule, [Empire Flippers](https://empireflippers.com/sell-your-site/) describes pricing based on average monthly net profit and normally requires a substantial operating/revenue history. Any domain comparable must name the actual comparable sale, date and source.
 
 ### Buyer fit
 
@@ -1557,9 +1574,16 @@ Plus the **standalone domain value** (`beatthescam.com` as an exact-match keywor
 - Consumer-finance media group (MoneyWeek, Which?, MoneySavingExpert competitors)
 - UK media holding company building a portfolio
 
-### Transfer playbook
+### Sale-readiness evidence still required
 
-A separate transfer-playbook document should cover: domain push, Netlify team transfer, GitHub repo transfer, GA4 property transfer, AdSense publisher transfer (re-verification required), social handle transfers (TikTok via support, YouTube via Brand Account swap, Twitter via email change), Anthropic billing reassignment, ElevenLabs reassignment, password / 2FA handover via password manager export.
+1. Exact legal owner/data-controller identity, service address and signed IP ownership schedule.
+2. Six to twelve months of monthly traffic, subscriber, conversion, revenue, cost and normalized-profit evidence.
+3. Current AdSense and partner statuses plus documentary approval/payment history where applicable.
+4. Traffic, page, query and partner concentration analysis.
+5. Trademark clearance/filing decision and third-party licence schedule.
+6. Successful backup restoration and transfer rehearsal with second-administrator coverage.
+
+The working transfer sequence and risk register now live in [`docs/buyer-data-room/`](buyer-data-room/README.md). They deliberately do not promise that personal or publisher accounts can be sold.
 
 ---
 

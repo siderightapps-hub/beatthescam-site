@@ -1,5 +1,7 @@
 import hashlib
 import html
+import csv
+import io
 import json
 import re
 import shutil
@@ -177,6 +179,17 @@ ARTICLE_REDIRECTS = {
     # covered in depth by the dedicated conveyancing-fraud-uk page (now
     # cross-linked from the survivor) — no unique content lost.
     "push-payment-fraud-uk":                       "bank-transfer-scam-uk",
+    # 2026-07-18 editorial consolidation: Hermes rebranded to Evri in 2022 and
+    # the two live guides repeated the same parcel-text advice. Keep one current
+    # canonical guide and preserve the historic query with a permanent redirect.
+    "hermes-parcel-scam-text-uk":                  "evri-delivery-scam-guide",
+}
+
+# These entries still exist in posts.json so their researched material can be
+# grafted into the survivor, but they must not build as live pages because the
+# forced ARTICLE_REDIRECTS rule above is their canonical outcome.
+CONSOLIDATED_LIVE_SLUGS = {
+    "hermes-parcel-scam-text-uk",
 }
 
 CATEGORY_LABELS = {
@@ -290,6 +303,44 @@ def load_category_hubs(root: Path) -> dict:
         return {}
 
 
+def validate_category_hubs(hubs: dict) -> None:
+    """Run the deterministic editorial gate over every hand-authored hub.
+
+    Generated guides are gated before they reach posts.json. Category hubs are
+    edited directly, so the build is their publication boundary: a BLOCK issue
+    must stop the build before dist/ is deleted or regenerated. FLAG issues stay
+    visible in build output for operator review, matching the guide workflow.
+    """
+    try:
+        from content_gate import check_deterministic, SEVERITY_BLOCK
+    except ImportError:  # Support importing this file as scripts.build.
+        from scripts.content_gate import check_deterministic, SEVERITY_BLOCK
+
+    blocking = []
+    flagged = []
+    for slug, hub in (hubs or {}).items():
+        surface = dict(hub or {})
+        surface.setdefault("slug", f"category-{slug}")
+        surface.setdefault("category", slug)
+        surface.setdefault("keywords", [])
+        for issue in check_deterministic(surface):
+            row = (slug, issue)
+            if issue.get("severity") == SEVERITY_BLOCK:
+                blocking.append(row)
+            else:
+                flagged.append(row)
+
+    for slug, issue in flagged:
+        print(f"  Category hub accuracy FLAG [{issue.get('check')}]: {slug}: "
+              f"{issue.get('span') or issue.get('detail', '')}")
+    if blocking:
+        details = "; ".join(
+            f"{slug} [{issue.get('check')}]: {issue.get('span') or issue.get('detail', '')}"
+            for slug, issue in blocking
+        )
+        raise SystemExit(f"ERROR: category hub accuracy gate failed: {details}")
+
+
 def affiliate_block(post: dict, affiliates: list) -> str:
     """Return an HTML affiliate card relevant to this post, or empty string."""
     if not affiliates:
@@ -330,7 +381,7 @@ def affiliate_block(post: dict, affiliates: list) -> str:
       <p class="note" style="margin:0 0 .4rem;font-size:.8rem;text-transform:uppercase;letter-spacing:.06em;font-weight:800;color:var(--muted)">Recommended</p>
       <h3 style="margin:.15rem 0 .4rem">{html.escape(p["name"])}</h3>
       <p class="note">{html.escape(p["tagline"])}</p>
-      <a class="btn btn-secondary" href="{html.escape(p["href"])}" rel="nofollow noopener noreferrer" target="_blank" style="width:100%;margin-top:.6rem;text-align:center">{html.escape(p["cta"])}</a>
+      <a class="btn btn-secondary" href="{html.escape(p["href"])}" rel="nofollow noopener noreferrer" target="_blank" data-affiliate-id="{html.escape(p["id"])}" data-affiliate-name="{html.escape(p["name"])}" data-commercial-status="unpaid-editorial" style="width:100%;margin-top:.6rem;text-align:center">{html.escape(p["cta"])}</a>
       <p class="note" style="margin:.5rem 0 0;font-size:.72rem;color:var(--muted)">Unpaid editorial pick — we receive no commission.</p>
     </section>
     '''
@@ -343,6 +394,19 @@ def read_json(path: Path):
 def write(path: Path, text: str):
     path.parent.mkdir(parents=True, exist_ok=True)
     path.write_text(text.strip() + "\n", encoding="utf-8")
+
+def load_research_reports(root: Path):
+    """Load dated public research sources, newest first."""
+    reports_dir = root / "content" / "research"
+    if not reports_dir.is_dir():
+        return []
+    reports = [read_json(path) for path in sorted(reports_dir.glob("*.json"))]
+    required = {"slug", "title", "published", "summary", "bing_ai", "google_search", "method", "limitations"}
+    for report in reports:
+        missing = required - set(report)
+        if missing:
+            raise SystemExit(f"ERROR: research report {report.get('slug', '<unknown>')} missing {sorted(missing)}")
+    return sorted(reports, key=lambda report: report["published"], reverse=True)
 
 def slugify(value: str) -> str:
     return re.sub(r"[^a-z0-9]+", "-", value.lower().strip()).strip("-")
@@ -623,6 +687,18 @@ def _ads_head(site: dict, ads_mode: str) -> str:
     return tag
 
 
+def _ads_resource_hints(ads_mode: str) -> str:
+    """Only warm AdSense origins on pages that can actually serve ads."""
+    if ads_mode == "none":
+        return "<!-- AdSense resource hints intentionally omitted on this page -->"
+    return "\n  ".join([
+        '<link rel="preconnect" href="https://pagead2.googlesyndication.com" crossorigin>',
+        '<link rel="preconnect" href="https://tpc.googlesyndication.com" crossorigin>',
+        '<link rel="dns-prefetch" href="https://pagead2.googlesyndication.com">',
+        '<link rel="dns-prefetch" href="https://tpc.googlesyndication.com">',
+    ])
+
+
 # Pages whose subject implies "negative financial status" — debt/insolvency, or
 # recovery scams that target people who have already lost money. Google restricts
 # ad personalisation on these, so they get requestNonPersonalizedAds regardless
@@ -631,6 +707,17 @@ def _ads_head(site: dict, ads_mode: str) -> str:
 # deliberately tight: broad words like "victim", "refund", "compensation" or
 # "lost money" recur across almost every scam guide and would needlessly switch
 # the whole corpus to non-personalised ads.
+_NO_ADS_TERMS = (
+    # Sexual abuse / extortion and manipulated intimate imagery are excluded
+    # from advertising entirely. Non-personalised ads only change targeting;
+    # they do not remove content-eligibility risk.
+    "sextortion", "intimate image", "intimate-image", "revenge porn",
+    "webcam blackmail", "explicit image", "explicit photo", "nude photo",
+    "nude image", "deepfake",
+)
+_NO_ADS_RE = re.compile(
+    r"\b(?:" + "|".join(re.escape(t) for t in _NO_ADS_TERMS) + r")", re.I)
+
 _SENSITIVE_FINANCE_TERMS = (
     # Debt / insolvency / negative financial status (stems — leading \b only, so
     # "debt" also catches "debts", "insolven" catches "insolvency/insolvent").
@@ -640,11 +727,6 @@ _SENSITIVE_FINANCE_TERMS = (
     # Recovery scams (prey on people who already lost money)
     "recovery scam", "recover your money", "recover stolen", "money recovery",
     "fund recovery", "get your money back",
-    # Sexual / sextortion / intimate-image abuse — personalised ads are
-    # inappropriate alongside this content (Google also restricts personalisation).
-    "sextortion", "intimate image", "intimate-image", "revenge porn",
-    "webcam blackmail", "blackmail", "explicit image", "explicit photo",
-    "nude photo", "nude image", "deepfake",
     # Romance / relationship fraud
     "romance scam", "romance fraud", "catfish", "pig butchering", "pig-butchering",
     "military romance", "dating scam",
@@ -657,8 +739,8 @@ _SENSITIVE_FINANCE_RE = re.compile(
     r"\b(?:" + "|".join(re.escape(t) for t in _SENSITIVE_FINANCE_TERMS) + r")", re.I)
 
 def post_ads_mode(post: dict) -> str:
-    """Return "npa" for debt/insolvency, money-recovery, sexual/sextortion,
-    romance, or identity-theft pages, else "default"."""
+    """Return no ads for sexual-abuse/deepfake pages, NPA for other sensitive
+    financial/relationship topics, and default Auto Ads for other guides."""
     hay = " ".join([
         post.get("slug", ""), post.get("title", ""), post.get("category", ""),
         " ".join(post.get("keywords", []) or []),
@@ -666,6 +748,8 @@ def post_ads_mode(post: dict) -> str:
     # Normalise hyphens/underscores to spaces so a hyphenated slug
     # ("military-romance-scam-uk") matches the spaced terms ("military romance").
     hay = hay.replace("-", " ").replace("_", " ")
+    if _NO_ADS_RE.search(hay):
+        return "none"
     return "npa" if _SENSITIVE_FINANCE_RE.search(hay) else "default"
 
 
@@ -692,6 +776,7 @@ def make_base(content: str, *, title: str, description: str, canonical: str, sch
         "{{css_ver}}":           site.get("_asset_ver_css", ""),
         "{{js_ver}}":            site.get("_asset_ver_js", ""),
         "{{ads_head}}":          _ads_head(site, ads_mode),
+        "{{ads_resource_hints}}": _ads_resource_hints(ads_mode),
         "{{ga4_id}}":            site["ga4_id"],
         "{{year}}":              str(datetime.now(timezone.utc).year),
         "{{footer_cats}}":       _FOOTER_CATS_HTML,
@@ -702,11 +787,12 @@ def make_base(content: str, *, title: str, description: str, canonical: str, sch
     # already-substituted values, so a literal "{{year}}" etc. inside article
     # content (plausible on a site that quotes phishing-template text) would
     # get substituted too. re.sub visits each template token exactly once.
-    return re.sub(
+    rendered = re.sub(
         r"\{\{(?:%s)\}\}" % "|".join(re.escape(k[2:-2]) for k in replacements),
         lambda m: replacements[m.group(0)],
         BASE,
     )
+    return "\n".join(line.rstrip() for line in rendered.splitlines()) + "\n"
 
 
 # ─── SCHEMA ────────────────────────────────────────────────────────────────
@@ -815,8 +901,16 @@ def article_schema(site, post, url, og_image_url=None):
         "inLanguage": site.get("locale", "en_GB").replace("_", "-"),
         "isAccessibleForFree": True,
     }
-    if modified and modified != published:
-        data["reviewedBy"] = author
+    # Do not infer an independent reviewer from dateModified. A reviewedBy
+    # assertion is only appropriate when a distinct, named reviewer and their
+    # credentials are recorded in the content data.
+    reviewer = post.get("reviewed_by")
+    if isinstance(reviewer, dict) and reviewer.get("name"):
+        reviewed_by = {"@type": "Person", "name": reviewer["name"]}
+        for key in ("url", "jobTitle"):
+            if reviewer.get(key):
+                reviewed_by[key] = reviewer[key]
+        data["reviewedBy"] = reviewed_by
     return json_ld(data)
 
 
@@ -939,12 +1033,12 @@ def render_card(post):
       <p>{html.escape(post["description"])}</p>
       <p class="meta">{date_label}</p>
     </article>
-    '''
+    '''.strip()
 
 
 # ─── PAGE RENDERERS ────────────────────────────────────────────────────────
 
-def render_home(site, posts, categories):
+def render_home(site, posts, categories, research_reports=None):
     post_count = len(posts)
     cat_count  = len(categories)
 
@@ -959,7 +1053,7 @@ def render_home(site, posts, categories):
           <h3><a href="/categories/{slugify(cat)}/">{html.escape(label)}</a></h3>
           <p>{html.escape(desc)}</p>
         </article>
-        ''')
+        '''.strip())
 
     latest_links = "".join(
         f'<li><a href="/guides/{p["slug"]}/">{html.escape(p["title"])}</a></li>'
@@ -979,6 +1073,34 @@ def render_home(site, posts, categories):
         for q, a in faq_pairs
     )
 
+    research_html = ""
+    if research_reports:
+        latest = research_reports[0]
+        bing = latest["bing_ai"]
+        google = latest["google_search"]
+        research_html = f'''
+    <section class="section" aria-labelledby="latest-research-heading">
+      <div class="wrap">
+        <div class="callout research-promo">
+          <div>
+            <div class="kicker">Original data · {html.escape(latest["published"])}</div>
+            <h2 id="latest-research-heading">Latest visibility research</h2>
+            <p>Our transparent monthly snapshot tracks how UK scam guidance appears in Google Search and in Bing-powered AI answers. The data, method and limitations are published for scrutiny.</p>
+            <div class="hero-actions">
+              <a class="btn btn-primary" href="/research/{html.escape(latest['slug'])}/">Read the latest report</a>
+              <a class="btn btn-secondary" href="/research/methodology/">See the research method</a>
+            </div>
+          </div>
+          <div class="research-promo-metrics" aria-label="Latest research headline figures">
+            <div><strong>{bing['total_citations']:,}</strong><span>Bing AI citations</span></div>
+            <div><strong>{google['impressions']:,}</strong><span>Google impressions</span></div>
+            <div><strong>{bing['cited_page_count']:,}</strong><span>pages cited by Bing AI</span></div>
+          </div>
+        </div>
+      </div>
+    </section>
+        '''
+
     content = f'''
     <section class="hero">
       <div class="wrap hero-grid">
@@ -987,8 +1109,9 @@ def render_home(site, posts, categories):
           <h1>Check scams. Protect your money.</h1>
           <p class="lead">Beat the Scam helps you review suspicious texts, emails, websites, calls, job offers, crypto pitches, and payment requests before money or data is lost.</p>
           <div class="hero-actions">
-            <a class="btn btn-primary" href="/guides/">Browse guides</a>
-            <a class="btn btn-secondary" href="/check/">Check a message</a>
+            <a class="btn btn-primary" href="/check/">Check a message</a>
+            <a class="btn btn-recovery" href="/recovery/">Recover after a scam</a>
+            <a class="btn btn-secondary" href="/guides/">Browse guides</a>
           </div>
           <div class="hero-points">
             <div class="hero-point"><strong>{post_count}</strong><span>guides published</span></div>
@@ -1027,6 +1150,8 @@ def render_home(site, posts, categories):
         </div>
       </div>
     </section>
+
+    {research_html}
 
     <section class="section">
       <div class="wrap">
@@ -1115,6 +1240,7 @@ def render_home(site, posts, categories):
         canonical=site["domain"] + '/',
         schema=schema,
         site=site,
+        ads_mode="none",
     )
 
 
@@ -1272,6 +1398,7 @@ def render_guides_index_page(site, page_posts, page_num: int, total_pages: int, 
         site=site,
         prev_url=prev_url,
         next_url=next_url,
+        ads_mode="none",
     )
 
 
@@ -1286,7 +1413,7 @@ def render_categories_index(site, categories):
           <p>{html.escape(desc)}</p>
           <p class="meta">{len(posts)} guide{"s" if len(posts) != 1 else ""}</p>
         </article>
-        ''')
+        '''.strip())
     content = f'''
     <section class="hero">
       <div class="wrap">
@@ -1313,7 +1440,8 @@ def render_categories_index(site, categories):
         description='Browse all scam categories and find guides relevant to the message or situation you are checking.',
         canonical=site['domain'] + '/categories/',
         schema=schema,
-        site=site
+        site=site,
+        ads_mode="none",
     )
 
 
@@ -1342,9 +1470,9 @@ def render_category_page(site, category, posts, all_categories=None, hub=None):
     hub_body_html = hub_faq_html = ""
     hub_faq_pairs = []
     if hub:
-        intro = hub.get("intro", "")
+        intro = canonicalize_internal_guide_paths(hub.get("intro", ""))
         secs = "".join(
-            f'<section class="section"><div class="wrap"><h2>{html.escape(h)}</h2>{b}</div></section>'
+            f'<section class="section"><div class="wrap"><h2>{html.escape(h)}</h2>{canonicalize_internal_guide_paths(b)}</div></section>'
             for h, b in hub.get("sections", [])
         )
         hub_body_html = (f'<section class="section"><div class="wrap">{intro}</div></section>' if intro else "") + secs
@@ -1391,7 +1519,8 @@ def render_category_page(site, category, posts, all_categories=None, hub=None):
         description=seo_description(page_desc),
         canonical=canonical,
         schema=schema,
-        site=site
+        site=site,
+        ads_mode="default" if hub else "none",
     )
 
 
@@ -1465,6 +1594,7 @@ def related_posts(posts, current, count=4):
 
 
 _INLINE_CODE_RE = re.compile(r"`([^`]+)`")
+_INTERNAL_MARKDOWN_LINK_RE = re.compile(r"\[([^\]\n]+)\]\((/[a-z0-9/_-]+/?)\)", re.I)
 
 
 def _inline(text: str) -> str:
@@ -1472,7 +1602,14 @@ def _inline(text: str) -> str:
     Used for example scam domains / messages and technical tokens (URLs, emails)
     so they read as literal, non-clickable strings. Phones are left un-backticked
     in content so linkify_phones can still wrap them in tel: anchors."""
-    return _INLINE_CODE_RE.sub(lambda m: f"<code>{m.group(1)}</code>", html.escape(text))
+    escaped = html.escape(text)
+    escaped = _INLINE_CODE_RE.sub(lambda m: f"<code>{m.group(1)}</code>", escaped)
+    # Content data can use a deliberately narrow Markdown subset for internal
+    # links. Only root-relative, slug-safe paths are accepted, so an article
+    # cannot inject attributes, scripts, or an unreviewed external destination.
+    return _INTERNAL_MARKDOWN_LINK_RE.sub(
+        lambda m: f'<a href="{m.group(2)}">{m.group(1)}</a>', escaped
+    )
 
 
 def _render_section_body(para) -> str:
@@ -1527,6 +1664,60 @@ def sources_checked_block(post: dict) -> str:
     return f'<h2>Sources checked</h2><ul class="sources-checked">{lis}</ul>'
 
 
+def evidence_snapshot_block(post: dict) -> str:
+    """Render optional page-specific evidence and illustrative examples.
+
+    This is intentionally opt-in. A generic template table on every guide
+    would add markup without adding evidence; only guides carrying reviewed
+    `evidence` or `message_examples` data get the block.
+    """
+    evidence = post.get("evidence") or []
+    examples = post.get("message_examples") or []
+    if not evidence and not examples:
+        return ""
+
+    parts = ['<section class="evidence-snapshot" aria-labelledby="evidence-snapshot-heading">',
+             '<h2 id="evidence-snapshot-heading">Evidence snapshot</h2>']
+    checked = post.get("updated") or post.get("dateModified") or post.get("date")
+    if checked:
+        parts.append(f'<p class="evidence-date">Checked against the cited official sources on {html.escape(checked)}.</p>')
+
+    if evidence:
+        rows = []
+        for item in evidence:
+            signal = html.escape(str(item.get("signal", "")))
+            finding = _inline(str(item.get("finding", "")))
+            basis = _inline(str(item.get("basis", "")))
+            rows.append(
+                '<tr>'
+                f'<th scope="row">{signal}</th>'
+                f'<td>{finding}</td>'
+                f'<td>{basis}</td>'
+                '</tr>'
+            )
+        parts.append(
+            '<div class="evidence-table-wrap"><table class="evidence-table">'
+            '<thead><tr><th>Check</th><th>What it means</th><th>Official basis</th></tr></thead>'
+            f'<tbody>{"".join(rows)}</tbody></table></div>'
+        )
+
+    if examples:
+        parts.append('<div class="message-examples">')
+        for item in examples:
+            label = html.escape(str(item.get("label", "Illustrative example")))
+            message = html.escape(str(item.get("message", "")))
+            assessment = _inline(str(item.get("assessment", "")))
+            parts.append(
+                '<article class="message-example">'
+                f'<h3>{label}</h3><code>{message}</code><p>{assessment}</p>'
+                '</article>'
+            )
+        parts.append('</div>')
+
+    parts.append('<p class="evidence-note">Examples are reconstructed from documented scam patterns; they are not presented as verbatim messages received by the publisher.</p></section>')
+    return "".join(parts)
+
+
 def render_post(site, post, all_posts, affiliates=None, sources=None, link_map=None, slug_titles=None):
     url   = site['domain'] + f'/guides/{post["slug"]}/'
     label = category_label(post["category"])
@@ -1549,7 +1740,9 @@ def render_post(site, post, all_posts, affiliates=None, sources=None, link_map=N
 
     toc      = "".join(f'<li><a href="#{sid}">{html.escape(t)}</a></li>' for sid, t in section_ids)
     faq_html = "".join(f'<details><summary>{_inline(q)}</summary><p>{_inline(a)}</p></details>' for q, a in post['faq'])
-    badges   = "".join(f'<span class="badge">{html.escape(k)}</span>' for k in post['keywords'])
+    # Keep the header reader-first on small screens. The full keyword set stays
+    # in metadata/search data; only three concise labels are shown visually.
+    badges   = "".join(f'<span class="badge">{html.escape(k)}</span>' for k in post['keywords'][:3])
     related  = "".join(
         f'<a href="/guides/{p["slug"]}/">{html.escape(p["title"])}<span class="meta">{html.escape(category_label(p["category"]))} &middot; {p["date"]}</span></a>'
         for p in related_posts(all_posts, post)
@@ -1567,7 +1760,7 @@ def render_post(site, post, all_posts, affiliates=None, sources=None, link_map=N
     # `updated` when the editor approves a guide.
     role = (site.get("author_profile") or {}).get("role") or "Editor"
     if updated != published:
-        review_note = (f'Fact-checked and updated by {byline}, {html.escape(role)}, '
+        review_note = (f'Editorially updated by {byline}, {html.escape(role)}, '
                        f'on {html.escape(updated)}.')
     else:
         review_note = f'Published {html.escape(published)}.'
@@ -1596,9 +1789,10 @@ def render_post(site, post, all_posts, affiliates=None, sources=None, link_map=N
           <ol>
             <li><strong>Stop.</strong> Don&#8217;t pay, transfer money, or share passwords, PINs, or one-time codes.</li>
             <li><strong>Contact your bank</strong> on the number on the back of your card if your money or details may be at risk.</li>
-            <li><strong>Report it</strong> &#8212; call Report Fraud on 0300 123 2040 (Police Scotland: 101), and forward scam texts to 7726.</li>
+            <li><strong>Use the right recovery route.</strong> Follow the <a href="/recovery/">payment, account and identity checklist</a>; reporting differs in Scotland.</li>
           </ol>
         </aside>
+        {evidence_snapshot_block(post)}
         <div class="toc"><strong>On this page</strong><ol>{toc}</ol></div>
         {"".join(section_parts)}
         <h2>Frequently asked questions</h2>
@@ -1609,7 +1803,7 @@ def render_post(site, post, all_posts, affiliates=None, sources=None, link_map=N
           Use the <a href="/check/">AI scam checker</a> for an instant analysis, or report it to
           <a href="https://www.reportfraud.police.uk" rel="noopener noreferrer" target="_blank">Report Fraud</a>.
         </div>
-        <p class="meta" style="margin-top:1.4rem">Reporting routes in this guide are checked against our verified canon of official UK sources &#8212; <a href="https://www.reportfraud.police.uk/" rel="noopener" target="_blank">Report Fraud</a>, the <a href="https://www.ncsc.gov.uk/" rel="noopener" target="_blank">National Cyber Security Centre</a>, and <a href="https://www.citizensadvice.org.uk/consumer/scams/" rel="noopener" target="_blank">Citizens Advice</a> &#8212; by an automated accuracy gate before publication. {review_note} Read about <a href="/about/">how Beat the Scam writes guides</a>.</p>
+        <p class="meta" style="margin-top:1.4rem">Reporting routes in this guide are checked against our verified canon of official UK sources &#8212; <a href="https://www.reportfraud.police.uk/" rel="noopener" target="_blank">Report Fraud</a>, the <a href="https://www.ncsc.gov.uk/" rel="noopener" target="_blank">National Cyber Security Centre</a>, and <a href="https://www.citizensadvice.org.uk/consumer/scams/" rel="noopener" target="_blank">Citizens Advice</a> &#8212; by an automated accuracy gate before publication. {review_note} Read about <a href="/methodology/">how Beat the Scam writes guides</a>.</p>
       </article>
       <aside class="sidebar">
         <section class="sidebar-card">
@@ -1658,9 +1852,13 @@ def render_post(site, post, all_posts, affiliates=None, sources=None, link_map=N
     # full page (as before) let a keyword match inside that boilerplate copy —
     # not just the article — so every guide picked up an identical, unrelated
     # auto-link (e.g. the newsletter band's "the latest UK scams" text).
+    content = canonicalize_internal_guide_paths(content)
     content = linkify_bare_paths(content, slug_titles or {})
     content = apply_internal_links(content, post['slug'], link_map or {})
     content = linkify_phones(content)
+    # Optional blocks can leave indentation-only lines in the article template.
+    # Keep generated HTML clean so repository whitespace checks remain useful.
+    content = "\n".join(line.rstrip() for line in content.splitlines())
 
     return make_base(
         content,
@@ -1672,6 +1870,7 @@ def render_post(site, post, all_posts, affiliates=None, sources=None, link_map=N
         site=site,
         og_type='article',
         og_image=og_image_url,
+        robots="index,follow",
         ads_mode=post_ads_mode(post),
     )
 
@@ -1796,6 +1995,12 @@ def render_check_page(site):
       btn.addEventListener("click", function() {
         var message = input.value.trim();
         if (!message || message.length < 10) { input.focus(); return; }
+        var startedAt = Date.now();
+        if (typeof window.btsTrackEvent === "function") {
+          window.btsTrackEvent("scam_check_submitted", {
+            checker_type: typeEl.value
+          });
+        }
         btn.disabled = true;
         btn.textContent = "Analysing\u2026";
         resultCol.hidden = false;
@@ -1813,9 +2018,24 @@ def render_check_page(site):
         })
         .then(function(data) {
           renderResult(data);
+          if (typeof window.btsTrackEvent === "function") {
+            window.btsTrackEvent("scam_check_success", {
+              checker_type: typeEl.value,
+              verdict: data.verdict || "unclear",
+              confidence: data.confidence || "unknown",
+              duration_ms: Date.now() - startedAt
+            });
+          }
         })
-        .catch(function() {
+        .catch(function(err) {
           renderError();
+          if (typeof window.btsTrackEvent === "function") {
+            window.btsTrackEvent("scam_check_error", {
+              checker_type: typeEl.value,
+              error_reason: (err && err.message) || "unknown",
+              duration_ms: Date.now() - startedAt
+            });
+          }
         })
         .finally(function() {
           btn.disabled = false;
@@ -1925,6 +2145,362 @@ def render_check_page(site):
         site=site,
         ads_mode="none",
     )
+
+
+def render_newsletter_confirmed_page(site):
+    """Static success page reached only after the double-opt-in POST succeeds.
+
+    app.js records the consented confirmation event from the marker below. The
+    Resend audience remains the source of truth for the total subscriber count,
+    because visitors who decline analytics are intentionally not measured in GA4.
+    """
+    content = '''
+    <section class="hero" id="newsletter-confirmed" data-newsletter-confirmed="true">
+      <div class="wrap" style="max-width:760px">
+        <div class="breadcrumbs"><a href="/">Home</a> / Newsletter confirmed</div>
+        <h1>You&#8217;re on the list</h1>
+        <p class="lead">Your subscription is confirmed. Look out for plain-English scam alerts and practical checks in your inbox.</p>
+        <div class="hero-actions">
+          <a class="btn btn-primary" href="/guides/">Browse scam guides</a>
+          <a class="btn btn-secondary" href="/check/">Check a suspicious message</a>
+        </div>
+      </div>
+    </section>
+    '''
+    return make_base(
+        content,
+        title=f'Newsletter confirmed | {site["site_name"]}',
+        description='Your Beat the Scam newsletter subscription is confirmed.',
+        canonical=site['domain'] + '/newsletter-confirmed/',
+        schema=page_schema(
+            site,
+            'Newsletter confirmed',
+            'Your Beat the Scam newsletter subscription is confirmed.',
+            site['domain'] + '/newsletter-confirmed/',
+        ),
+        site=site,
+        robots='noindex,follow',
+        ads_mode='none',
+    )
+def research_dataset_schema(site, report):
+    slug = report["slug"]
+    bing = report["bing_ai"]
+    google = report["google_search"]
+    return json_ld({
+        "@context": "https://schema.org",
+        "@type": "Dataset",
+        "name": report["title"],
+        "description": report["summary"],
+        "url": f'{site["domain"]}/research/{slug}/',
+        "datePublished": report["published"],
+        "creator": {
+            "@type": "Organization",
+            "name": site["site_name"],
+            "url": site["domain"],
+        },
+        "distribution": [
+            {
+                "@type": "DataDownload",
+                "encodingFormat": "application/json",
+                "contentUrl": f'{site["domain"]}/research/data/{slug}.json',
+            },
+            {
+                "@type": "DataDownload",
+                "encodingFormat": "text/csv",
+                "contentUrl": f'{site["domain"]}/research/data/{slug}-bing-daily.csv',
+            },
+        ],
+        "variableMeasured": [
+            "Bing AI citations",
+            "Bing AI cited pages",
+            "Google Search clicks",
+            "Google Search impressions",
+            "Google Search click-through rate",
+        ],
+        "temporalCoverage": f'{min(bing["start_date"], google["start_date"])}/{max(bing["end_date"], google["end_date"])}',
+        "spatialCoverage": "United Kingdom",
+        "isAccessibleForFree": True,
+    })
+
+
+def _research_chart(daily):
+    if len(daily) < 2:
+        return ""
+    width, height, pad = 760, 260, 32
+    values = [row["citations"] for row in daily]
+    peak = max(values) or 1
+    points = []
+    for index, value in enumerate(values):
+        x = pad + index * (width - 2 * pad) / (len(values) - 1)
+        y = height - pad - value * (height - 2 * pad) / peak
+        points.append(f"{x:.1f},{y:.1f}")
+    start = html.escape(daily[0]["date"])
+    end = html.escape(daily[-1]["date"])
+    return f'''
+    <figure class="research-chart">
+      <svg viewBox="0 0 {width} {height}" role="img" aria-labelledby="citation-chart-title citation-chart-desc">
+        <title id="citation-chart-title">Daily Bing AI citations</title>
+        <desc id="citation-chart-desc">Daily citations from {start} to {end}; the highest daily count was {peak:,}.</desc>
+        <line x1="{pad}" y1="{height-pad}" x2="{width-pad}" y2="{height-pad}" class="chart-axis"/>
+        <line x1="{pad}" y1="{pad}" x2="{pad}" y2="{height-pad}" class="chart-axis"/>
+        <polyline points="{' '.join(points)}" class="chart-line"/>
+        <text x="{pad}" y="{height-8}" class="chart-label">{start}</text>
+        <text x="{width-pad}" y="{height-8}" text-anchor="end" class="chart-label">{end}</text>
+        <text x="{pad+6}" y="{pad+4}" class="chart-label">Peak {peak:,}</text>
+      </svg>
+      <figcaption>Daily Bing AI citations in the exported period. Platform counts can be revised; this is a dated snapshot.</figcaption>
+    </figure>
+    '''
+
+
+def render_research_index(site, reports):
+    cards = []
+    for report in reports:
+        bing = report["bing_ai"]
+        cards.append(f'''
+        <article class="card research-card">
+          <div class="eyebrow">Monthly visibility report</div>
+          <h2><a href="/research/{html.escape(report['slug'])}/">{html.escape(report['title'])}</a></h2>
+          <p>{html.escape(report['summary'])}</p>
+          <div class="badge-row">
+            <span class="badge">{bing['total_citations']:,} AI citations</span>
+            <span class="badge">{bing['cited_page_count']:,} cited pages</span>
+          </div>
+          <p class="meta">Published {html.escape(report['published'])} · Includes downloadable JSON and CSV</p>
+        </article>
+        ''')
+    description = "Original, downloadable datasets tracking how Beat the Scam guidance appears in Google Search and Bing-powered AI answers, with a transparent method."
+    content = f'''
+    <section class="hero research-hero">
+      <div class="wrap">
+        <div class="breadcrumbs"><a href="/">Home</a> / Research</div>
+        <div class="kicker">Open methods · Downloadable data</div>
+        <h1>Research and visibility datasets</h1>
+        <p class="lead">We publish recurring snapshots of search discovery and AI citations so readers, journalists and researchers can inspect the numbers behind our visibility claims.</p>
+        <div class="notice"><strong>Scope:</strong> these reports measure visibility for Beat the Scam. They are not estimates of UK scam incidence, financial loss or population-wide search demand.</div>
+        <div class="hero-actions"><a class="btn btn-secondary" href="/research/methodology/">Read the research method</a></div>
+      </div>
+    </section>
+    <section class="section"><div class="wrap research-list">{''.join(cards)}</div></section>
+    '''
+    schema = page_schema(site, "Research and visibility datasets", description, site["domain"] + "/research/")
+    schema += itemlist_schema(
+        [(report["title"], f'{site["domain"]}/research/{report["slug"]}/') for report in reports],
+        "Beat the Scam research reports",
+    )
+    return make_base(content, title=f'Research & Data | {site["site_name"]}', description=description,
+                     canonical=site["domain"] + "/research/", schema=schema, site=site, ads_mode="none")
+
+
+def render_research_methodology(site):
+    title = "Search and AI visibility research methodology"
+    description = "How Beat the Scam collects, normalises, publishes and interprets Google Search Console and Bing AI Performance visibility data."
+    content = f'''
+    <section class="hero"><div class="wrap">
+      <div class="breadcrumbs"><a href="/">Home</a> / <a href="/research/">Research</a> / Methodology</div>
+      <h1>{title}</h1>
+      <p class="lead">A repeatable method for measuring search discovery, AI citations, consolidation effects and click-through rate without overstating what the data can prove.</p>
+    </div></section>
+    <section class="section"><div class="wrap"><article class="article">
+      <h2>What we measure</h2>
+      <p><strong>Google Search Console:</strong> final web-search clicks, impressions, CTR and average position for the latest complete 28-day period, compared with the immediately preceding equal period. Page and query views are retained internally; the public dataset includes site totals and named focus pages.</p>
+      <p><strong>Bing AI Performance:</strong> total citations, daily cited-page counts, cited URLs and the grounding-query sample supplied by Bing Webmaster Tools. The public report uses the dashboard&#8217;s 30-day exports; a three-month export is retained internally for longer comparisons.</p>
+
+      <h2>Monthly collection process</h2>
+      <ol>
+        <li>Export the 30-day and three-month Overview, Pages and Grounding queries CSV files from Bing AI Performance.</li>
+        <li>Run the measurement script, which retrieves final Search Console data, normalises the Bing exports and creates an immutable dated snapshot.</li>
+        <li>Check totals, date coverage and focus-page mappings before publishing the normalized public JSON and CSV files.</li>
+        <li>Compare equal 28-day periods. Use seven-day results only as an early directional check.</li>
+        <li>For a redirected or consolidated guide, assess the old and new URLs together until the source URL disappears from platform reports.</li>
+      </ol>
+
+      <h2>Interpretation rules</h2>
+      <ul>
+        <li>A Bing citation is a source appearance, not a ranking, endorsement, visit or guarantee of prominent placement.</li>
+        <li>Bing grounding queries are a sample, and Bing&#8217;s generated intent and topic labels can change.</li>
+        <li>Search Console omits anonymized queries; filtering and aggregation can make dimension totals differ.</li>
+        <li>Average position is contextual. We prioritize impressions, clicks and CTR, then use position to diagnose page-level changes.</li>
+        <li>An editorial release is treated as an intervention. A before-and-after change can correlate with the release but does not prove causation.</li>
+        <li>Visibility data for this site is not evidence of national scam prevalence or financial harm.</li>
+      </ul>
+
+      <h2>Privacy and reproducibility</h2>
+      <p>No message submitted to the scam checker, personal information or subscriber data is collected for these reports. Each release names its source periods, publishes normalized files and preserves its raw source exports internally for audit.</p>
+
+      <h2>Primary platform documentation</h2>
+      <ul>
+        <li><a href="https://blogs.bing.com/webmaster/February-2026/Introducing-AI-Performance-in-Bing-Webmaster-Tools-Public-Preview" rel="noopener noreferrer">Bing: AI Performance in Webmaster Tools</a></li>
+        <li><a href="https://support.google.com/webmasters/answer/12919192?hl=en" rel="noopener noreferrer">Google: exporting Search Console performance data</a></li>
+        <li><a href="https://support.google.com/webmasters/answer/17010961?hl=en" rel="noopener noreferrer">Google: common Search Console analysis tasks</a></li>
+      </ul>
+      <p class="note">Method version 1.0 · Published 18 July 2026. Material changes will be documented on this page.</p>
+    </article></div></section>
+    '''
+    return make_base(content, title=f'{title} | {site["site_name"]}', description=description,
+                     canonical=site["domain"] + "/research/methodology/",
+                     schema=page_schema(site, title, description, site["domain"] + "/research/methodology/"),
+                     site=site, ads_mode="none")
+
+
+def render_research_report(site, report):
+    slug = report["slug"]
+    bing = report["bing_ai"]
+    google = report["google_search"]
+    previous = google.get("previous_period", {})
+    previous_focus = google.get("focus_pages_previous", {})
+    def change(current, old):
+        return "n/a" if not old else f"{((current - old) / old * 100):+.1f}%"
+    top_page_rows = "".join(
+        f'<tr><td><a href="{html.escape(row["page"])}">{html.escape(row["page"].replace(site["domain"], ""))}</a></td><td>{row["citations"]:,}</td></tr>'
+        for row in bing["top_pages"][:15]
+    )
+    query_rows = "".join(
+        f'<tr><td>{html.escape(row["grounding_query"])}</td><td>{html.escape(row.get("intent", ""))}</td><td>{row["citations"]:,}</td><td>{html.escape(row.get("citation_share", ""))}</td></tr>'
+        for row in bing["top_grounding_queries"][:15]
+    )
+    focus_rows = []
+    for url, metrics in google["focus_pages"].items():
+        old = previous_focus.get(url, {})
+        focus_rows.append(
+            f'<tr><td>{html.escape(url.replace(site["domain"], ""))}</td>'
+            f'<td>{metrics.get("impressions", 0):g}</td><td>{old.get("impressions", 0):g}</td>'
+            f'<td>{change(metrics.get("impressions", 0), old.get("impressions", 0))}</td>'
+            f'<td>{metrics.get("clicks", 0):g}</td><td>{metrics.get("ctr", 0) * 100:.2f}%</td>'
+            f'<td>{old.get("ctr", 0) * 100:.2f}%</td><td>{metrics.get("position", 0):.1f}</td></tr>'
+        )
+    focus_rows = "".join(focus_rows)
+    consolidation_rows = "".join(
+        f'<tr><td>{html.escape(item["from"].replace(site["domain"], ""))}<br>+ {html.escape(item["to"].replace(site["domain"], ""))}</td>'
+        f'<td>{item["combined_current"]["impressions"]:g}</td><td>{item["combined_previous"]["impressions"]:g}</td>'
+        f'<td>{item["combined_current"]["clicks"]:g}</td><td>{item["combined_previous"]["clicks"]:g}</td>'
+        f'<td>{item["combined_current"]["ctr"] * 100:.2f}%</td><td>{item["combined_previous"]["ctr"] * 100:.2f}%</td></tr>'
+        for item in google.get("consolidations", [])
+    )
+    method_items = "".join(f"<li>{html.escape(item)}</li>" for item in report["method"])
+    limitation_items = "".join(f"<li>{html.escape(item)}</li>" for item in report["limitations"])
+    content = f'''
+    <section class="hero research-hero"><div class="wrap">
+      <div class="breadcrumbs"><a href="/">Home</a> / <a href="/research/">Research</a> / {html.escape(report['title'])}</div>
+      <div class="kicker">Monthly dataset · {html.escape(report['published'])}</div>
+      <h1>{html.escape(report['title'])}</h1>
+      <p class="lead">{html.escape(report['summary'])}</p>
+      <div class="notice"><strong>Read this first:</strong> {html.escape(report['scope_note'])}</div>
+    </div></section>
+
+    <section class="section"><div class="wrap">
+      <div class="stat-strip research-stat-strip">
+        <div class="metric-card"><strong>{bing['total_citations']:,}</strong><span>Bing AI citations</span></div>
+        <div class="metric-card"><strong>{bing['average_cited_pages']:.1f}</strong><span>average cited pages per returned day</span></div>
+        <div class="metric-card"><strong>{google['impressions']:,}</strong><span>Google impressions</span></div>
+        <div class="metric-card"><strong>{google['ctr'] * 100:.2f}%</strong><span>Google click-through rate</span></div>
+      </div>
+    </div></section>
+
+    <section class="section"><div class="wrap"><article class="article research-article">
+      <h2>What the snapshot shows</h2>
+      <p>Between <strong>{html.escape(bing['start_date'])}</strong> and <strong>{html.escape(bing['end_date'])}</strong>, Bing recorded {bing['total_citations']:,} citations across {bing['cited_page_count']:,} Beat the Scam pages. Its export returned {bing['days_returned']} days and {bing['grounding_query_sample_count']:,} sampled grounding queries.</p>
+      <p>Google&#8217;s separate final-data window runs from <strong>{html.escape(google['start_date'])}</strong> to <strong>{html.escape(google['end_date'])}</strong>: {google['impressions']:,} impressions, {google['clicks']:g} clicks, {google['ctr'] * 100:.2f}% CTR and an average position of {google['average_position']:.1f}. Source periods differ because the platforms expose complete data on different schedules.</p>
+      <div class="evidence-table-wrap"><table class="evidence-table"><thead><tr><th>Google signal</th><th>Current 28 days</th><th>Previous 28 days</th><th>Change</th></tr></thead><tbody>
+        <tr><th scope="row">Impressions</th><td>{google['impressions']:,}</td><td>{previous.get('impressions', 0):,}</td><td>{change(google['impressions'], previous.get('impressions', 0))}</td></tr>
+        <tr><th scope="row">Clicks</th><td>{google['clicks']:g}</td><td>{previous.get('clicks', 0):g}</td><td>{change(google['clicks'], previous.get('clicks', 0))}</td></tr>
+        <tr><th scope="row">CTR</th><td>{google['ctr'] * 100:.2f}%</td><td>{previous.get('ctr', 0) * 100:.2f}%</td><td>{(google['ctr'] - previous.get('ctr', 0)) * 100:+.2f} pp</td></tr>
+        <tr><th scope="row">Average position</th><td>{google['average_position']:.1f}</td><td>{previous.get('average_position', 0):.1f}</td><td>{google['average_position'] - previous.get('average_position', 0):+.1f}</td></tr>
+      </tbody></table></div>
+      <p class="note">Both Google periods end before the 18 July editorial release. They are the baseline for future comparisons, not evidence of a post-release effect.</p>
+
+      {_research_chart(bing['daily'])}
+
+      <h2>Most-cited pages</h2>
+      <div class="evidence-table-wrap"><table class="evidence-table"><thead><tr><th>Page</th><th>Citations</th></tr></thead><tbody>{top_page_rows}</tbody></table></div>
+
+      <h2>Sampled grounding queries</h2>
+      <p>Bing describes these as a sample of the queries used to ground AI answers. Citation share is the share Bing reports for the site on that sampled query; it is not conventional search rank.</p>
+      <div class="evidence-table-wrap"><table class="evidence-table"><thead><tr><th>Grounding query</th><th>Intent</th><th>Citations</th><th>Citation share</th></tr></thead><tbody>{query_rows}</tbody></table></div>
+
+      <h2>Google focus-page baseline</h2>
+      <p>These are the pages named before the 18 July editorial release. They create a pre-change baseline for later seven- and 28-day comparisons.</p>
+      <div class="evidence-table-wrap"><table class="evidence-table"><thead><tr><th>Page</th><th>Impr. current</th><th>Impr. previous</th><th>Change</th><th>Clicks current</th><th>CTR current</th><th>CTR previous</th><th>Position current</th></tr></thead><tbody>{focus_rows}</tbody></table></div>
+
+      <h2>Consolidation baseline</h2>
+      <p>Redirect source and target URLs are combined so migration between them cannot be mistaken for a visibility gain or loss.</p>
+      <div class="evidence-table-wrap"><table class="evidence-table"><thead><tr><th>Source + target cluster</th><th>Impr. current</th><th>Impr. previous</th><th>Clicks current</th><th>Clicks previous</th><th>CTR current</th><th>CTR previous</th></tr></thead><tbody>{consolidation_rows}</tbody></table></div>
+
+      <h2>Download the data</h2>
+      <div class="download-grid">
+        <a class="card" href="/research/data/{slug}.json" download><strong>Normalized report</strong><span>JSON · headline, daily, page, query and focus-page data</span></a>
+        <a class="card" href="/research/data/{slug}-bing-daily.csv" download><strong>Bing daily trend</strong><span>CSV · citations and cited pages by day</span></a>
+        <a class="card" href="/research/data/{slug}-bing-pages.csv" download><strong>Bing cited pages</strong><span>CSV · top 25 published pages</span></a>
+        <a class="card" href="/research/data/{slug}-bing-queries.csv" download><strong>Bing query sample</strong><span>CSV · top 25 published grounding queries</span></a>
+        <a class="card" href="/research/data/{slug}-gsc-focus-pages.csv" download><strong>Google comparisons</strong><span>CSV · focus pages and consolidation clusters across equal periods</span></a>
+      </div>
+
+      <h2>Method</h2><ol>{method_items}</ol>
+      <h2>Limitations</h2><ul>{limitation_items}</ul>
+      <p><a href="/research/methodology/">Read the full recurring measurement method</a>.</p>
+    </article></div></section>
+    '''
+    schema = research_dataset_schema(site, report)
+    schema += breadcrumb_schema([
+        ("Home", site["domain"] + "/"),
+        ("Research", site["domain"] + "/research/"),
+        (report["title"], f'{site["domain"]}/research/{slug}/'),
+    ])
+    return make_base(content, title=seo_title(report["title"], site["site_name"], brand=False),
+                     description=report["summary"], canonical=f'{site["domain"]}/research/{slug}/',
+                     schema=schema, site=site, og_type="article", ads_mode="none")
+
+
+def _csv_text(fieldnames, rows):
+    buffer = io.StringIO(newline="")
+    writer = csv.DictWriter(buffer, fieldnames=fieldnames, lineterminator="\n")
+    writer.writeheader()
+    writer.writerows(rows)
+    return buffer.getvalue()
+
+
+def write_research_data(report):
+    slug = report["slug"]
+    target = DIST / "research" / "data"
+    bing = report["bing_ai"]
+    google = report["google_search"]
+    write(target / f"{slug}.json", json.dumps(report, ensure_ascii=False, indent=2))
+    write(target / f"{slug}-bing-daily.csv", _csv_text(["date", "citations", "cited_pages"], bing["daily"]))
+    write(target / f"{slug}-bing-pages.csv", _csv_text(["page", "citations"], bing["top_pages"]))
+    write(target / f"{slug}-bing-queries.csv", _csv_text(
+        ["grounding_query", "intent", "topic", "citations", "citation_share"],
+        bing["top_grounding_queries"],
+    ))
+    previous_focus = google.get("focus_pages_previous", {})
+    focus_rows = []
+    for url, metrics in google["focus_pages"].items():
+        old = previous_focus.get(url, {})
+        focus_rows.append({
+            "row_type": "focus_page", "page_or_cluster": url,
+            "current_clicks": metrics.get("clicks", 0),
+            "previous_clicks": old.get("clicks", 0),
+            "current_impressions": metrics.get("impressions", 0),
+            "previous_impressions": old.get("impressions", 0),
+            "current_ctr": metrics.get("ctr", 0),
+            "previous_ctr": old.get("ctr", 0),
+            "current_position": metrics.get("position", 0),
+            "previous_position": old.get("position", 0),
+        })
+    for item in google.get("consolidations", []):
+        current = item["combined_current"]
+        old = item["combined_previous"]
+        focus_rows.append({
+            "row_type": "consolidation", "page_or_cluster": f'{item["from"]} + {item["to"]}',
+            "current_clicks": current["clicks"], "previous_clicks": old["clicks"],
+            "current_impressions": current["impressions"], "previous_impressions": old["impressions"],
+            "current_ctr": current["ctr"], "previous_ctr": old["ctr"],
+            "current_position": current["position"], "previous_position": old["position"],
+        })
+    write(target / f"{slug}-gsc-focus-pages.csv", _csv_text(
+        ["row_type", "page_or_cluster", "current_clicks", "previous_clicks",
+         "current_impressions", "previous_impressions", "current_ctr", "previous_ctr",
+         "current_position", "previous_position"], focus_rows,
+    ))
 
 
 def render_simple_page(site, title, description, body, slug):
@@ -2060,6 +2636,7 @@ def render_author_page(site):
         canonical=site["domain"] + "/author/",
         schema=schema,
         site=site,
+        ads_mode="none",
     )
 
 
@@ -2070,7 +2647,7 @@ def build_legal_bodies(site):
     <div class="author-card" style="margin:1.5rem 0;padding:1.2rem;border:1px solid var(--line);border-radius:14px;background:#fafafa">
       <p style="margin:0 0 .35rem 0"><strong>Who runs this site</strong></p>
       <p style="margin:0 0 .5rem 0;font-size:.95rem;color:#555">{html.escape(site["site_name"])} is founded and edited by <a href="/author/"><strong>{html.escape(site["author"])}</strong></a>, an independent UK-based publisher who also runs <a href="https://cloudfintech.ai" rel="noopener noreferrer" target="_blank">CloudFintech</a> (fintech &amp; banking technology), <a href="https://tuningdigital.com" rel="noopener noreferrer" target="_blank">Tuning Digital</a> (AI &amp; SaaS productivity tools), and <a href="https://salestap.com" rel="noopener noreferrer" target="_blank">SalesTap</a> (B2B sales). He uses AI tooling to surface scam patterns and translate official UK guidance into plain-English checks.</p>
-      <p style="margin:0;font-size:.95rem;color:#555">He is not a journalist, lawyer, regulator, banker, or accredited consumer-affairs professional. This is an educational publication &mdash; every recommendation on the site directs you to the official UK authority that owns that decision.</p>
+      <p style="margin:0;font-size:.95rem;color:#555">He is not a journalist, lawyer, regulator, banker, or accredited consumer-affairs professional. This is an educational publication that prefers primary official sources for reporting routes, legal and regulatory claims, while clearly labelling relevant secondary sources.</p>
     </div>
 
     <p>The editorial model is simple: fast checks, plain-English explanations, and practical actions. The site is not a law firm, bank, or regulator. It is a free educational publication designed to reduce avoidable losses.</p>
@@ -2083,9 +2660,37 @@ def build_legal_bodies(site):
       <div class="table-row"><strong>Commercial model</strong><span>Advertising-supported using Google AdSense, with scope for consumer-safety partnerships.</span></div>
     </div>
 
+    <h2>How guides are fact-checked</h2>
+    <p>Guides use AI-assisted drafting and a deterministic accuracy gate, followed by editorial review. The gate catches defined error classes; it is not a substitute for checking each material claim against a current source. Existing guides are re-audited in scheduled corpus sweeps, and pages that need substantive work are removed from discovery and advertising until reviewed. See the full <a href="/methodology/">editorial methodology</a> and public <a href="/corrections/">corrections log</a>.</p>
+
+    <h2>About the AI scam checker</h2>
+    <p>The free scam checker on this site sends the suspicious message text you paste to Anthropic&#8217;s Claude API for analysis. The text is processed in real time to produce a verdict, list of red flags, and recommended actions &mdash; then discarded. Beat the Scam does not store the suspicious text you submit, and does not link it to your identity. To keep the free tool available and block abuse, the checker keeps a rate-limit counter keyed to a hashed form of your IP address &mdash; used only to enforce per-minute and daily usage limits, and never linked to your submission. As the processor, Anthropic may retain the text you submit and the model&#8217;s response for up to 30 days under its standard API data policy (and longer only where required for legal or safety reasons); it does not use API inputs or outputs to train its models.</p>
+    <p>For your own safety, do not paste full passwords, full bank account numbers, or other sensitive credentials into the checker. The tool is designed to analyse the suspicious content itself (the message, link, or scam pattern), not your private credentials.</p>
+    <p>The checker&#8217;s output is educational. It is not a definitive fraud determination. If you are unsure about a real-world payment or account access decision, contact your bank&#8217;s fraud team using the number on the back of your card.</p>
+
+    <h2>Contact</h2>
+    <p>Editorial contact and correction requests: <a href="mailto:{site["editorial_email"]}">{site["editorial_email"]}</a></p>
+
+    <p class="note" style="margin-top:2rem;color:#666;font-size:.9rem">Last reviewed: 18 July 2026. The site is reviewed periodically and updated as scam patterns and reporting routes change.</p>
+    '''
+
+    methodology = f'''
+    <p>This page explains, in detail, how {html.escape(site["site_name"])} researches, drafts, checks, and corrects its guides &mdash; so a reader, a journalist, an ad-network reviewer, or an AI system deciding whether to cite this site can see the actual process rather than take &#8220;fact-checked&#8221; on faith.</p>
+
     <h2>How content is researched and produced</h2>
     <p>Each guide on this site is drafted using AI assistance against a strict editorial template that forbids inventing statistics, quotes, or specific unverifiable claims, and that standardises the official UK reporting routes (Report Fraud, the NCSC, and Citizens Advice).</p>
-    <p>The drafting step uses Anthropic&#8217;s Claude API. The model is given a structured prompt covering the scam type, target audience, and required sections (what the scam looks like, warning signs, step-by-step pattern, verification, recovery actions, reporting routes). It is explicitly instructed not to invent statistics, predict outcomes, generate fake quotes, or assert specific claims about named companies or people. Before publication, every draft passes an automated accuracy gate: deterministic checks (no hard-coded organisation phone numbers, no defunct or unsafe entities, no unconditional safety guarantees, and reporting routes validated against a verified canon of official UK sources) plus a low-temperature AI fact-checking pass that fails closed on possible fabrication &mdash; drafts that fail are held back, never published. The high-stakes claims in each guide are recorded and reviewed on a recurring schedule. If you still spot an error, please report it (see below) and we will correct it promptly.</p>
+    <p>The drafting step uses Anthropic&#8217;s Claude API. The model is given a structured prompt covering the scam type, target audience, and required sections (what the scam looks like, warning signs, step-by-step pattern, verification, recovery actions, reporting routes). It is explicitly instructed not to invent statistics, predict outcomes, generate fake quotes, or assert specific claims about named companies or people.</p>
+
+    <h2>The accuracy gate</h2>
+    <p>Before publication, drafts pass an automated gate with narrow, testable checks: non-canon organisation phone numbers, known unsafe entities, defined reader-safety absolutes, reporting emails, selected UK consumer-protection errors, legislation flags, and reporting routes validated against a maintained canon. The publishing pipeline can also run a low-temperature AI critic to flag possible fabrication. These checks reduce repeat errors; they do not establish that every sentence is true, and a clean result is never presented as proof of accuracy.</p>
+
+    <h2>Editorial review before publication</h2>
+    <p>The gate is not the last step. New and updated guides are opened for editorial review before publication. An update date means the named editor changed and reviewed the page on that date; it does not imply review by an independent lawyer, regulator or financial professional. Where a distinct qualified reviewer is used, that person and role will be named explicitly.</p>
+
+    <h2>Ongoing accuracy checks after publication</h2>
+    <p>Facts drift after publication &mdash; a reporting route changes, a scheme is renamed, or a threshold is updated. High-stakes claims flagged during drafting are recorded for review, and scheduled corpus sweeps re-run deterministic checks and identify stale or weakly sourced pages. A sweep is triage, not a claim that every sentence has been independently verified. Pages needing substantive work can be made ad-free and removed from indexes while the review is completed.</p>
+
+    <h2>Sources we verify against</h2>
     <p>Verification draws on UK-specific public sources, including:</p>
     <ul>
       <li><a href="https://www.reportfraud.police.uk/" rel="noopener noreferrer" target="_blank">Report Fraud</a> (formerly Action Fraud) &mdash; the UK&#8217;s national reporting centre for fraud and cybercrime</li>
@@ -2099,17 +2704,86 @@ def build_legal_bodies(site):
     <h2>Editorial standards</h2>
     <p>Content is written to be understandable under pressure. That means short sections, clear headings, and advice that directs readers towards independent verification through official channels &mdash; never through links, numbers, or payment details supplied by a suspicious message.</p>
     <p>Where the site recommends a national reporting route &mdash; such as Report Fraud, the NCSC, or Citizens Advice &mdash; it uses the official published channel. For organisation-specific contact details, always confirm the number or web address against the official website, or the details on your card, bill, or statement, rather than relying solely on any number reproduced in a guide.</p>
-    <p>If a guide contains an error, email <a href="mailto:{site["editorial_email"]}">{site["editorial_email"]}</a> with the page URL and the issue. Corrections are made promptly.</p>
 
-    <h2>About the AI scam checker</h2>
-    <p>The free scam checker on this site sends the suspicious message text you paste to Anthropic&#8217;s Claude API for analysis. The text is processed in real time to produce a verdict, list of red flags, and recommended actions &mdash; then discarded. Beat the Scam does not store the suspicious text you submit, and does not link it to your identity. To keep the free tool available and block abuse, the checker keeps a rate-limit counter keyed to a hashed form of your IP address &mdash; used only to enforce per-minute and daily usage limits, and never linked to your submission. As the processor, Anthropic may retain the text you submit and the model&#8217;s response for up to 30 days under its standard API data policy (and longer only where required for legal or safety reasons); it does not use API inputs or outputs to train its models.</p>
-    <p>For your own safety, do not paste full passwords, full bank account numbers, or other sensitive credentials into the checker. The tool is designed to analyse the suspicious content itself (the message, link, or scam pattern), not your private credentials.</p>
-    <p>The checker&#8217;s output is educational. It is not a definitive fraud determination. If you are unsure about a real-world payment or account access decision, contact your bank&#8217;s fraud team using the number on the back of your card.</p>
+    <h2>Corrections</h2>
+    <p>If a guide contains an error, email <a href="mailto:{site["editorial_email"]}">{site["editorial_email"]}</a> with the page URL, disputed wording and supporting source. Material factual changes are recorded in the public <a href="/corrections/">corrections log</a>; minor spelling and formatting edits are not normally logged.</p>
 
-    <h2>Contact</h2>
-    <p>Editorial contact and correction requests: <a href="mailto:{site["editorial_email"]}">{site["editorial_email"]}</a></p>
+    <p class="note" style="margin-top:2rem;color:#666;font-size:.9rem">Last materially reviewed: 18 July 2026.</p>
+    '''
 
-    <p class="note" style="margin-top:2rem;color:#666;font-size:.9rem">Last reviewed: May 2026. The site is reviewed periodically and updated as scam patterns and reporting routes change.</p>
+    corrections = f'''
+    <p class="note" style="color:#666;font-size:.95rem"><strong>Last updated:</strong> 18 July 2026</p>
+    <p>This log records material factual corrections to published Beat the Scam guides. It does not list spelling, formatting, accessibility, or purely stylistic changes.</p>
+
+    <h2>How to request a correction</h2>
+    <p>Email <a href="mailto:{site["editorial_email"]}">{site["editorial_email"]}</a> with the page URL, the wording you believe is wrong, and a primary or authoritative source where possible. We assess the claim, update the guide when warranted, and record a material change below.</p>
+
+    <h2>18 July 2026</h2>
+    <ul>
+      <li><strong>DPD scam text guide:</strong> removed the blanket claim that DPD never requests payment by text. The guide now distinguishes fraudulent redelivery fees from genuine import duties or taxes and requires independent parcel verification.</li>
+      <li><strong>Website-checking guide:</strong> removed universal company-number, Companies House, product-photography, and one-working-day response tests. Added sole-trader, new-company, statutory-rights, PayPal-deadline, APP-timetable, and Section 75 qualifications.</li>
+      <li><strong>Amazon phone-call guide:</strong> replaced the unsupported claim that Amazon never cold-calls with the narrower, sourced rules on OTPs, confidential information, remote access and independent account verification.</li>
+      <li><strong>Concert-ticket and holiday-compensation guides:</strong> corrected Section 75 wording from an inclusive £100 threshold or generic card payment to a qualifying credit purchase with a cash price over £100 and no more than £30,000, subject to the required relationship and other conditions.</li>
+      <li><strong>Methodology and structured data:</strong> clarified the limits of automated checks and stopped inferring an independent <code>reviewedBy</code> reviewer from an update date.</li>
+    </ul>
+
+    <h2>Editorial status</h2>
+    <p>Pages found to be too thin or insufficiently distinctive are made ad-free and removed from search/discovery inventories while they are rewritten or consolidated. This is a publishing control, not a claim that unlisted pages are unsafe.</p>
+    '''
+
+    recovery = f'''
+    <p class="note" style="color:#666;font-size:.95rem"><strong>Information checked:</strong> 18 July 2026</p>
+    <p>If you have paid a scammer, entered banking details, shared a password, installed software, or lost control of an account, start with the row that matches what happened. Do not wait for a police report before contacting a bank or securing an account.</p>
+
+    <h2>What to do first</h2>
+    <div class="tablelike">
+      <div class="table-row"><strong>You only received the message</strong><span>Do not reply, click, or call a number in it. Forward a suspicious SMS to 7726 free of charge. For WhatsApp, iMessage, RCS and other app messages, also use the app or phone's built-in block and report controls.</span></div>
+      <div class="table-row"><strong>You opened a link</strong><span>If you did not enter information, download a file or install software, the NCSC says further action is unlikely to be needed, but watch for unusual account activity. If anything downloaded or installed, disconnect the device from the internet and run a full security scan.</span></div>
+      <div class="table-row"><strong>You shared a password</strong><span>Use a clean device to change it immediately. Change every account where the password was reused, starting with the email account used for password resets. Sign out other sessions and turn on strong multi-factor authentication.</span></div>
+      <div class="table-row"><strong>You shared card or bank details</strong><span>Contact the bank or card issuer immediately through its official app or the number printed on the card. Ask it to secure the account or card and identify any payment or account change you did not authorise.</span></div>
+      <div class="table-row"><strong>You approved or sent a bank transfer</strong><span>Tell the sending bank immediately that the payment was induced by fraud and ask it to contact the receiving bank. Ask whether the APP reimbursement rules apply; do not describe an authorised scam payment merely as an unauthorised transaction.</span></div>
+      <div class="table-row"><strong>You installed remote-access software</strong><span>Disconnect the device, end the remote session and contact the bank from a different trusted device. Remove the software, run a full scan, change exposed passwords, and do not use the affected device for banking until it is secure.</span></div>
+      <div class="table-row"><strong>You shared identity documents or personal data</strong><span>Secure the affected accounts, check all three UK credit-reference files for applications you do not recognise, and consider Cifas Protective Registration where identity misuse is a realistic risk.</span></div>
+    </div>
+
+    <h2>Which money-recovery route applies?</h2>
+    <div class="evidence-table-wrap"><table class="evidence-table">
+      <thead><tr><th>How you paid</th><th>What to ask for</th><th>Important limits</th></tr></thead>
+      <tbody>
+        <tr><th scope="row">UK bank transfer</th><td>Report an APP scam claim to the bank or payment firm immediately.</td><td>For eligible Faster Payments and CHAPS payments made on or after 7 October 2024, firms normally decide within five business days. They can stop the clock for information, but must reach an outcome within 35 business days. Scope, exclusions, vulnerability rules, a possible excess of up to £100 and the £85,000 reimbursement cap can affect a claim.</td></tr>
+        <tr><th scope="row">Debit, credit or prepaid card</th><td>Ask the issuer to secure the card and whether chargeback fits the transaction.</td><td>Chargeback is a card-scheme process, not a statutory right. MoneyHelper says claims commonly need to be made within 120 days, with timing depending on the transaction, so contact the issuer promptly.</td></tr>
+        <tr><th scope="row">Qualifying credit purchase</th><td>Ask whether Section 75 of the Consumer Credit Act 1974 applies.</td><td>The cash price must be over £100 and no more than £30,000, and the required debtor-creditor-supplier relationship and other conditions must be present. It is not generic protection for every card payment.</td></tr>
+        <tr><th scope="row">PayPal Goods and Services</th><td>Open the Resolution Centre immediately and check Buyer Protection.</td><td>PayPal's UK terms give 180 days for Item Not Received. A Significantly Not as Described dispute must be opened by the earlier of 30 days after delivery or 180 days after payment.</td></tr>
+        <tr><th scope="row">Cash, gift card or cryptocurrency</th><td>Contact the platform, exchange or gift-card issuer immediately and preserve the transaction details.</td><td>Recovery can be difficult, but a fast report may help stop an unused balance or identify a destination. Never pay a recovery service that promises guaranteed results.</td></tr>
+      </tbody>
+    </table></div>
+
+    <h2>Report the incident</h2>
+    <ul>
+      <li><strong>England, Wales or Northern Ireland:</strong> use <a href="https://www.reportfraud.police.uk/reporting-a-fraud/" rel="noopener noreferrer" target="_blank">Report Fraud</a> online or call 0300 123 2040.</li>
+      <li><strong>Scotland:</strong> report fraud and cybercrime to Police Scotland on 101. Call 999 if a crime is happening now or someone is in immediate danger.</li>
+      <li><strong>Suspicious SMS:</strong> forward it to 7726 free of charge. For other message types, use the relevant app or device reporting controls as well.</li>
+      <li><strong>Phishing email:</strong> forward it to <a href="mailto:report@phishing.gov.uk">report@phishing.gov.uk</a>. The NCSC also accepts suspicious website reports.</li>
+      <li><strong>Impersonated organisation:</strong> tell the bank, retailer, courier, platform or public body through contact details you find independently.</li>
+    </ul>
+
+    <h2>Preserve useful evidence</h2>
+    <p>Keep the original message, screenshots, sender details, website address, payment receipt, account number or wallet address, call time, and a short timeline of what happened. Do not keep a malicious page open merely to collect evidence. Never send passwords, PINs or full one-time codes in a report.</p>
+
+    <h2>If the bank rejects the claim</h2>
+    <p>Ask for the decision and reasons in writing, then use the firm's formal complaints process. If the complaint is not resolved, ask the <a href="https://www.financial-ombudsman.org.uk/consumers/how-to-complain" rel="noopener noreferrer" target="_blank">Financial Ombudsman Service</a> whether it can consider the case. Time limits apply, so do not delay.</p>
+
+    <h2>Primary sources</h2>
+    <ul class="sources-checked">
+      <li><a href="https://www.ncsc.gov.uk/section/respond-recover/phishing" rel="noopener noreferrer" target="_blank">National Cyber Security Centre — phishing response and recovery</a></li>
+      <li><a href="https://www.psr.org.uk/news-and-updates/latest-news/news/groundbreaking-new-protections-for-victims-of-app-scams-start-today/" rel="noopener noreferrer" target="_blank">Payment Systems Regulator — APP reimbursement protections</a></li>
+      <li><a href="https://www.moneyhelper.org.uk/en/everyday-money/credit/how-youre-protected-when-you-pay-by-card" rel="noopener noreferrer" target="_blank">MoneyHelper — Section 75 and chargeback</a></li>
+      <li><a href="https://www.reportfraud.police.uk/reporting-a-fraud/" rel="noopener noreferrer" target="_blank">Report Fraud — reporting routes by nation</a></li>
+      <li><a href="https://www.ofcom.org.uk/phones-and-broadband/scam-calls-and-messages/what-to-do-about-a-scam-call-text-or-message" rel="noopener noreferrer" target="_blank">Ofcom — reporting suspicious calls and messages</a></li>
+      <li><a href="https://www.paypal.com/uk/legalhub/buyer-protection?locale.x=en_US" rel="noopener noreferrer" target="_blank">PayPal UK — Buyer Protection terms</a></li>
+    </ul>
+
+    <p class="note" style="margin-top:2rem">This checklist is general educational information, not legal or financial advice. Payment protections depend on the facts of the transaction.</p>
     '''
 
     # Bump PRIVACY_LAST_UPDATED when materially revising the Privacy Policy below.
@@ -2207,7 +2881,7 @@ def build_legal_bodies(site):
     <p>How we handle personal data and cookies is explained in our <a href="/privacy/">Privacy Policy</a> and <a href="/cookies/">Cookie Policy</a>. Use of the Site is subject to those documents as well as these Terms.</p>
 
     <h2>Limitation of liability</h2>
-    <p>To the maximum extent permitted by law, Beat the Scam, SideRight Apps, and the editorial team are not liable for any loss, damage, or expense arising from your use of the Site or your reliance on its content &mdash; including the AI scam checker. We make no warranty that the Site will be uninterrupted, error-free, or secure.</p>
+    <p>To the maximum extent permitted by law, Beat the Scam, SideRight Apps, and its publisher and editor are not liable for any loss, damage, or expense arising from your use of the Site or your reliance on its content &mdash; including the AI scam checker. We make no warranty that the Site will be uninterrupted, error-free, or secure.</p>
     <p><strong>Nothing in these Terms limits or excludes our liability for:</strong> (a) death or personal injury caused by our negligence; (b) fraud or fraudulent misrepresentation; (c) any other liability that cannot lawfully be limited or excluded under English, Scots, or Northern Ireland law &mdash; including your statutory rights as a consumer.</p>
 
     <h2>Changes to these Terms</h2>
@@ -2229,7 +2903,7 @@ def build_legal_bodies(site):
       <div class="table-row"><strong>Legal &amp; copyright</strong><span><a href="mailto:{site["legal_email"]}">{site["legal_email"]}</a> &mdash; Terms, intellectual property, and reproduction requests.</span></div>
       <div class="table-row"><strong>Security disclosure</strong><span><a href="mailto:{site["security_email"]}">{site["security_email"]}</a> &mdash; see also our <a href="/.well-known/security.txt">security.txt</a>.</span></div>
     </div>
-    <p class="note" style="margin-top:1.5rem">To report a scam to UK authorities directly, use <a href="https://www.reportfraud.police.uk/" rel="noopener noreferrer" target="_blank">Report Fraud</a> or forward suspicious texts to <strong>7726</strong> (free on all UK networks).</p>
+    <p class="note" style="margin-top:1.5rem">To report a scam to UK authorities directly, use <a href="https://www.reportfraud.police.uk/" rel="noopener noreferrer" target="_blank">Report Fraud</a>. Ofcom says suspicious SMS texts can be forwarded to <strong>7726</strong> free of charge; use the relevant app's own reporting tool for non-SMS messages.</p>
     '''
 
     disclaimer = f'''
@@ -2259,7 +2933,7 @@ def build_legal_bodies(site):
     <p>To the maximum extent permitted by law, Beat the Scam and SideRight Apps accept no liability for any loss or damage arising from your use of, or reliance on, the Site or the AI scam checker. Nothing here limits any liability that cannot lawfully be excluded &mdash; including for death or personal injury caused by negligence, or for fraud. The full limitation of liability is set out in our <a href="/terms/">Terms</a>.</p>
     '''
 
-    return about, privacy, cookies, terms, contact, disclaimer
+    return about, privacy, cookies, terms, contact, disclaimer, methodology, corrections, recovery
 
 
 # ─── DEDUPLICATE ────────────────────────────────────────────────────────────
@@ -2386,30 +3060,45 @@ _INTERNAL_LINK_STOPWORDS = {
     "bank scam", "uk", "scam", "phone", "text",
 }
 
+# Ambiguous phrases are not auto-linked unless editorially assigned here. This
+# prevents list order from silently deciding which of several competing guides
+# receives every link for a shared keyword.
+_CANONICAL_KEYWORD_OWNERS = {
+    "remote access scam uk": "remote-access-scam-uk",
+}
+
 
 def build_internal_link_map(posts):
     """Build a phrase → guide-URL map from each post's keywords.
 
-    Filters keywords to phrases that are 2+ words long, lowercase, not
-    stop-listed, not duplicated. First post wins on duplicates (since
-    posts are deduped + date-sorted newest-first, this gives links to
-    the freshest authoritative post on a phrase).
+    Filters keywords to phrases that are 2+ words long, lowercase and not
+    stop-listed. A duplicated phrase is excluded unless it has an explicit
+    editorial owner in _CANONICAL_KEYWORD_OWNERS.
     """
-    link_map: dict = {}
+    phrase_posts = defaultdict(list)
     for post in posts:
         slug = post.get("slug")
         if not slug:
             continue
-        url = f"/guides/{slug}/"
         for kw in post.get("keywords", []):
             phrase = (kw or "").lower().strip()
             if not phrase or len(phrase.split()) < 2:
                 continue
             if phrase in _INTERNAL_LINK_STOPWORDS:
                 continue
-            if phrase in link_map:
-                continue
-            link_map[phrase] = url
+            if slug not in phrase_posts[phrase]:
+                phrase_posts[phrase].append(slug)
+
+    live_slugs = {p.get("slug") for p in posts}
+    link_map: dict = {}
+    for phrase, slugs in phrase_posts.items():
+        owner = _CANONICAL_KEYWORD_OWNERS.get(phrase)
+        if owner:
+            if owner not in live_slugs:
+                raise SystemExit(f"ERROR: internal-link owner {owner!r} for {phrase!r} is not live")
+            link_map[phrase] = f"/guides/{owner}/"
+        elif len(slugs) == 1:
+            link_map[phrase] = f"/guides/{slugs[0]}/"
     return link_map
 
 
@@ -2645,6 +3334,20 @@ def linkify_bare_paths(html_str: str, slug_titles: dict) -> str:
     return "".join(out)
 
 
+def canonicalize_internal_guide_paths(html_str: str) -> str:
+    """Replace internal links to redirected guide slugs with final URLs.
+
+    Edge redirects remain for external/history traffic, but internal navigation
+    should not add a crawl hop after articles are consolidated.
+    """
+    for old_slug, target in ARTICLE_REDIRECTS.items():
+        if target.startswith("__CAT__:"):
+            continue
+        html_str = html_str.replace(
+            f"/guides/{old_slug}/", f"/guides/{target}/")
+    return html_str
+
+
 # ─── PHONE LINKIFY ─────────────────────────────────────────────────────────
 
 # Match UK helpline patterns: 0300/0800/0808/0345 prefix, then space-separated digits.
@@ -2685,17 +3388,32 @@ def linkify_phones(html_str: str) -> str:
 def build():
     site     = read_json(ROOT / 'content/site.json')
     raw_posts = read_json(ROOT / 'content/posts.json')
+    research_reports = load_research_reports(ROOT)
 
     affiliates = load_affiliates(ROOT)
     sources    = load_sources(ROOT)
     category_hubs = load_category_hubs(ROOT)
+    validate_category_hubs(category_hubs)
 
     # Normalise category names
     for post in raw_posts:
         post["category"] = normalize_category(post["category"])
 
-    # Disambiguate slug collisions — preserve all posts, never silently drop
-    posts = disambiguate_slugs(raw_posts)
+    # Disambiguate slug collisions — preserve all posts, never silently drop.
+    all_posts = disambiguate_slugs(raw_posts)
+
+    # Explicitly consolidated entries are retained in source data but replaced
+    # at the edge by their declared permanent redirect.
+    consolidated = [p for p in all_posts if p["slug"] in CONSOLIDATED_LIVE_SLUGS]
+    posts_after_consolidation = [p for p in all_posts if p["slug"] not in CONSOLIDATED_LIVE_SLUGS]
+    for post in consolidated:
+        target = ARTICLE_REDIRECTS.get(post["slug"], "")
+        if not target or target.startswith("__CAT__:"):
+            raise SystemExit(f"ERROR: consolidated live slug {post['slug']} lacks an article redirect target")
+        if target not in {p["slug"] for p in posts_after_consolidation}:
+            raise SystemExit(f"ERROR: consolidation target {target} for {post['slug']} is not a live guide")
+
+    posts = posts_after_consolidation
 
     # A live guide must never share a slug with an ARTICLE_REDIRECTS key: the
     # 301 is emitted with "301!" (forced), which overrides the static file at
@@ -2774,7 +3492,7 @@ def build():
             if src.is_file():
                 shutil.copy2(src, DIST / src.name)
 
-    write(DIST / 'index.html',       render_home(site, posts, categories))
+    write(DIST / 'index.html',       render_home(site, posts, categories, research_reports))
     write(DIST / 'categories/index.html', render_categories_index(site, categories))
     for cat, items in categories.items():
         write(DIST / 'categories' / slugify(cat) / 'index.html', render_category_page(site, cat, items, categories, hub=category_hubs.get(cat)))
@@ -2813,14 +3531,26 @@ def build():
         print(f"  Generated {og_gen_count} per-post OG images in /assets/og/")
 
     write(DIST / 'check/index.html', render_check_page(site))
+    write(DIST / 'newsletter-confirmed/index.html', render_newsletter_confirmed_page(site))
 
-    about, privacy, cookies, terms, contact, disclaimer = build_legal_bodies(site)
-    write(DIST / 'about/index.html',   render_simple_page(site, 'About',          'Beat the Scam is a free UK consumer protection site. Learn how guides are researched, who writes them, and how the AI scam checker works.',        about,   'about'))
+    # Public research section. Reports are generated from retained, dated
+    # platform snapshots and rendered ad-free with normalized downloads.
+    write(DIST / 'research/index.html', render_research_index(site, research_reports))
+    write(DIST / 'research/methodology/index.html', render_research_methodology(site))
+    for report in research_reports:
+        write(DIST / 'research' / report['slug'] / 'index.html', render_research_report(site, report))
+        write_research_data(report)
+
+    about, privacy, cookies, terms, contact, disclaimer, methodology, corrections, recovery = build_legal_bodies(site)
+    write(DIST / 'about/index.html',   render_simple_page(site, 'About',          'Beat the Scam is a free UK consumer protection site. Learn who runs it, how it is funded, and how the AI scam checker works.',        about,   'about'))
     write(DIST / 'privacy/index.html', render_simple_page(site, 'Privacy Policy', 'How Beat the Scam uses Google Analytics, Google AdSense, and the Anthropic Claude API. Understand your data choices and cookie consent options.',          privacy, 'privacy'))
     write(DIST / 'cookies/index.html', render_simple_page(site, 'Cookie Policy',  'How Beat the Scam uses cookies for analytics, advertising, and consent preferences. Learn what is stored and how to manage your cookie settings.',                   cookies, 'cookies'))
     write(DIST / 'terms/index.html',   render_simple_page(site, 'Terms',          'Terms of use for Beat the Scam. Educational scam guidance only — not legal or financial advice. Read before relying on any content for important decisions.',                                 terms,   'terms'))
     write(DIST / 'contact/index.html', render_simple_page(site, 'Contact',        'Contact Beat the Scam for editorial corrections, privacy questions, or partnership enquiries. We aim to respond to all editorial requests promptly.',     contact, 'contact'))
     write(DIST / 'disclaimer/index.html', render_simple_page(site, 'Disclaimer',  'Important disclaimer for Beat the Scam: the guides and AI scam checker are general consumer-awareness information only — not legal, financial, or other professional advice.', disclaimer, 'disclaimer'))
+    write(DIST / 'methodology/index.html', render_simple_page(site, 'How We Fact-Check', 'How Beat the Scam researches, drafts, gate-checks, human-reviews, and re-verifies every guide — the sources we check against and how corrections work.', methodology, 'methodology'))
+    write(DIST / 'corrections/index.html', render_simple_page(site, 'Corrections', 'Material corrections to Beat the Scam guides, including what changed, when it changed, and how to request a review.', corrections, 'corrections'))
+    write(DIST / 'recovery/index.html', render_simple_page(site, 'Scam Recovery Checklist', 'Act quickly after a scam: the UK steps for bank transfers, card payments, passwords, remote access, identity details, reporting and complaints.', recovery, 'recovery'))
 
     # Named author page — Alex Bacsa, cross-linked with CloudFintech /
     # TuningDigital / SalesTap via the Person.sameAs block in the page schema.
@@ -2893,12 +3623,20 @@ def build():
     # NOT the build timestamp, so unchanged pages don't advertise false freshness
     # on every rebuild.
     STATIC_LASTMOD = "2026-06-23"
+    # Pages materially edited today — kept separate from STATIC_LASTMOD so the
+    # untouched legal pages don't advertise false freshness on every rebuild.
+    RECENT_LASTMOD = "2026-07-18"
     static_url_lastmods = {
-        '/':            newest_post_date,
-        '/guides/':     newest_post_date,
-        '/categories/': newest_post_date,
-        '/check/':      STATIC_LASTMOD,
-        '/about/':      STATIC_LASTMOD,
+        '/':             newest_post_date,
+        '/guides/':      newest_post_date,
+        '/categories/':  newest_post_date,
+        '/check/':       STATIC_LASTMOD,
+        '/about/':       RECENT_LASTMOD,
+        '/methodology/': RECENT_LASTMOD,
+        '/corrections/': RECENT_LASTMOD,
+        '/recovery/':    RECENT_LASTMOD,
+        '/research/':    max((r['published'] for r in research_reports), default=RECENT_LASTMOD),
+        '/research/methodology/': RECENT_LASTMOD,
         # /author/ only renders when site.json has an author_profile — keep the
         # sitemap consistent with what was actually written to dist/.
         **({'/author/': STATIC_LASTMOD} if author_rendered else {}),
@@ -2928,6 +3666,12 @@ def build():
             f'<lastmod>{post_lastmod}</lastmod><changefreq>monthly</changefreq></url>'
         )
 
+    for report in research_reports:
+        sitemap_lines.append(
+            f'<url><loc>{site["domain"]}/research/{report["slug"]}/</loc>'
+            f'<lastmod>{report["published"]}</lastmod><changefreq>monthly</changefreq></url>'
+        )
+
     for cat, items in categories.items():
         # Category lastmod = newest member's date (or build today if empty)
         cat_lastmod = max((p.get("updated") or p.get("dateModified") or p["date"] for p in items), default=today)
@@ -2948,7 +3692,8 @@ def build():
         f"/* PUBLISHER */\n"
         f"Name: {site['author']}\n"
         f"Notes: Independent educational publication. Not a law firm, bank, or regulator.\n"
-        f"Methodology: see {site['domain']}/about/\n\n"
+        f"Methodology: see {site['domain']}/methodology/\n\n"
+        f"Corrections: see {site['domain']}/corrections/\n\n"
         f"/* SOURCES */\n"
         f"Report Fraud — https://www.reportfraud.police.uk/\n"
         f"NCSC — https://www.ncsc.gov.uk/\n"
@@ -2983,11 +3728,21 @@ def build():
     llms_lines = [
         "# Beat The Scam",
         "",
-        "> Plain-English UK consumer-protection guides covering scams, fraud, and how to spot them before paying. New guide published daily by an editorial team focused on UK consumers.",
-        "",
-        "## Categories",
-        "",
+        "> Independent, plain-English UK consumer-protection publication covering scams, fraud, and checks to run before paying. Guides use AI-assisted drafting followed by editorial review and an automated accuracy gate.",
     ]
+    if research_reports:
+        llms_lines.extend(["", "## Research and datasets", ""])
+        llms_lines.append(
+            f'- [Research index]({domain}/research/): recurring search-discovery and AI-citation reports with downloadable normalized data'
+        )
+        llms_lines.append(
+            f'- [Research methodology]({domain}/research/methodology/): collection cadence, source definitions, interpretation rules and limitations'
+        )
+        for report in research_reports:
+            llms_lines.append(
+                f'- [{report["title"]}]({domain}/research/{report["slug"]}/): {report["summary"]}'
+            )
+    llms_lines.extend(["", "## Categories", ""])
     sorted_cats = sorted(categories.keys(), key=lambda c: category_label(c).lower())
     for cat in sorted_cats:
         llms_lines.append(
@@ -3007,8 +3762,11 @@ def build():
     llms_lines.extend([
         "## Optional",
         "",
-        f"- [About]({domain}/about/): site & methodology",
-        f"- [Contact]({domain}/contact/): how to reach the editorial team",
+        f"- [About]({domain}/about/): who runs the site",
+        f"- [Methodology]({domain}/methodology/): how guides are researched, gate-checked, human-reviewed, and re-verified",
+        f"- [Corrections]({domain}/corrections/): material editorial corrections and how to request one",
+        f"- [Scam recovery checklist]({domain}/recovery/): payment, account, device, identity and reporting steps after a scam",
+        f"- [Contact]({domain}/contact/): how to reach the publisher and editor",
         f"- [Privacy]({domain}/privacy/): data handling & cookies",
         "",
     ])

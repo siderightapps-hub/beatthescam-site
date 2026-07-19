@@ -12,8 +12,8 @@
   <meta name="robots" content="index,follow">
   <meta name="theme-color" content="#0b1220">
   <meta name="format-detection" content="telephone=no">
-  
-  
+
+
 
   <!-- Favicons -->
   <link rel="icon" href="/favicon.ico" sizes="any">
@@ -26,18 +26,15 @@
   <!-- Resource hints for third-party origins. preconnect = full TCP+TLS
        handshake started immediately (good for resources we KNOW will load
        on every page). dns-prefetch = DNS lookup only (cheap fallback for
-       older browsers that ignore preconnect). googletagmanager loads GA4,
-       pagead2 loads AdSense — both are async <script> tags in <body>, so
-       preconnect shaves 100-300ms off their first paint on mobile.
-       Also adds tpc.googlesyndication.com (where ad creatives serve from)
-       and the ahrefs analytics host. -->
+       older browsers that ignore preconnect). AdSense resource hints are
+       injected only on pages eligible to serve ads. -->
   <link rel="preconnect" href="https://www.googletagmanager.com" crossorigin>
+  <link rel="dns-prefetch" href="https://www.googletagmanager.com">
+  <link rel="dns-prefetch" href="https://analytics.ahrefs.com">
   <link rel="preconnect" href="https://pagead2.googlesyndication.com" crossorigin>
   <link rel="preconnect" href="https://tpc.googlesyndication.com" crossorigin>
-  <link rel="dns-prefetch" href="https://www.googletagmanager.com">
   <link rel="dns-prefetch" href="https://pagead2.googlesyndication.com">
   <link rel="dns-prefetch" href="https://tpc.googlesyndication.com">
-  <link rel="dns-prefetch" href="https://analytics.ahrefs.com">
 
   <meta property="og:type" content="article">
   <meta property="og:title" content="Is Viagogo Safe to Buy Tickets in the UK? What You Need to Know">
@@ -58,7 +55,7 @@
        value= attribute (not content=) — validators flag it; do not "fix" it
        or their crawler stops verifying the site. -->
   <meta name='impact-site-verification' value='e0dda02c-a1b6-4056-9f92-16f7c916bd4b'>
-  <link rel="stylesheet" href="/assets/styles.css?v=2aec57b620">
+  <link rel="stylesheet" href="/assets/styles.css?v=d1fc9faba4">
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-JXNF856NBF"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
@@ -78,9 +75,10 @@
     AdSense respects Google Consent Mode: the GA4 consent defaults above start
     denied, so visitors who haven't accepted get non-personalised ads and no
     ad-personalisation cookies until they do. The ad tag below is emitted per
-    page by make_base()/_ads_head(): omitted entirely on the /check/ tool, and
-    preceded by a requestNonPersonalizedAds flag on sensitive financial / victim
-    pages (Google restricts personalisation based on negative financial status).
+    page by make_base()/_ads_head(): omitted on navigational, tool and
+    sensitive-content pages, and preceded by a requestNonPersonalizedAds flag
+    on sensitive financial / victim pages (Google restricts personalisation
+    based on negative financial status).
     Ahrefs Web Analytics is cookieless. Custom GA4 events stay gated in app.js.
   -->
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1606633100797174" crossorigin="anonymous"></script>
@@ -99,6 +97,8 @@
         <a href="/">Home</a>
         <a href="/guides/">Guides</a>
         <a href="/categories/">Categories</a>
+        <a href="/research/">Research</a>
+        <a href="/recovery/">Recovery</a>
         <a href="/about/">About</a>
         <a href="/contact/">Contact</a>
         <a class="nav-cta" href="/check/">Check a message</a>
@@ -106,7 +106,7 @@
     </div>
   </header>
   <main id="main">
-    
+
     <section class="hero">
       <div class="wrap">
         <div class="breadcrumbs"><a href="/">Home</a> / <a href="/guides/">Guides</a> / <a href="/categories/shopping/">Shopping Scams</a> / <span class="bc-title">Is Viagogo Safe to Buy Tickets in the UK? What You Need to Know</span></div>
@@ -123,27 +123,28 @@
           &middot; <time itemprop="datePublished" datetime="2026-05-13">Published 2026-05-13</time>
           &middot; 5 min read
         </p>
-        <div class="badge-row"><span class="badge">Viagogo scam UK</span><span class="badge">fake Viagogo tickets</span><span class="badge">Viagogo ticket fraud</span><span class="badge">Viagogo impersonation scam</span><span class="badge">buying tickets safely</span><span class="badge">online shopping scam UK</span><span class="badge"><a href="/guides/is-this-website-a-scam/">fake online shop</a> UK</span></div>
+        <div class="badge-row"><span class="badge">Viagogo scam UK</span><span class="badge">fake Viagogo tickets</span><span class="badge">Viagogo ticket fraud</span></div>
         <div class="notice"><strong>Key rule:</strong> verify through an official route you opened yourself, not the link, number, app, or payment details supplied by the suspicious message.</div>
         <aside class="do-now" aria-label="What to do if you are being targeted right now">
           <p class="do-now-title">Being targeted right now? Do this</p>
           <ol>
             <li><strong>Stop.</strong> Don&#8217;t pay, transfer money, or share passwords, PINs, or one-time codes.</li>
             <li><strong>Contact your bank</strong> on the number on the back of your card if your money or details may be at risk.</li>
-            <li><strong>Report it</strong> &#8212; call Report Fraud on <a href="tel:+443001232040">0300 123 2040</a> (Police Scotland: 101), and forward scam texts to 7726.</li>
+            <li><strong>Use the right recovery route.</strong> Follow the <a href="/recovery/">payment, account and identity checklist</a>; reporting differs in Scotland.</li>
           </ol>
         </aside>
+
         <div class="toc"><strong>On this page</strong><ol><li><a href="#what-viagogo-is-and-why-it-has-such-a-bad-reputation">What Viagogo is — and why it has such a bad reputation</a></li><li><a href="#the-fees-what-you-actually-pay-versus-the-listed-price">The fees: what you actually pay versus the listed price</a></li><li><a href="#are-viagogo-tickets-valid-what-can-go-wrong">Are Viagogo tickets valid? What can go wrong</a></li><li><a href="#your-rights-if-something-goes-wrong">Your rights if something goes wrong</a></li><li><a href="#when-it-is-definitely-a-scam-not-just-viagogo-being-viagogo">When it is definitely a scam — not just Viagogo being Viagogo</a></li></ol></div>
         <h2 id="what-viagogo-is-and-why-it-has-such-a-bad-reputation">What Viagogo is — and why it has such a bad reputation</h2><p>Viagogo is a secondary ticket marketplace, meaning it connects people who have tickets to sell with people who want to buy them. It is a real company that has operated in the UK since 2006. However, it built a lasting bad reputation through a practice called drip pricing: listing tickets at an attractive base price, then adding large booking fees, order processing charges, and delivery costs at the checkout stage, by which point many buyers had already committed emotionally to the purchase.</p><p>In 2018, the UK Competition and Markets Authority (CMA) secured a court order against Viagogo — one of the few times the CMA had to go to court after a company refused to offer undertakings voluntarily. The order required Viagogo to show the total ticket price upfront and to provide clearer information about sellers. The CMA subsequently monitored compliance and threatened contempt proceedings before suspending further action once changes were made. Buyer complaints about fees, refunds, and invalid tickets have continued to be reported since then.</p><h2 id="the-fees-what-you-actually-pay-versus-the-listed-price">The fees: what you actually pay versus the listed price</h2><p>The advertised price and the final payable total can differ because compulsory fees and delivery charges may apply. Check the total, currency and delivery terms before entering payment details.</p><p>The CMA’s enforcement action required clearer pricing and seller information. That does not make every listing good value or every ticket valid, so compare the final total with the face value and any official resale option.</p><h2 id="are-viagogo-tickets-valid-what-can-go-wrong">Are Viagogo tickets valid? What can go wrong</h2><p>Many buyers receive valid tickets and attend their event without issue. However, several things can go wrong:</p><ul><li>Duplicate or cancelled tickets. A seller may list the same ticket to multiple buyers, or the original ticket may be cancelled by the promoter. Viagogo should replace these under its buyer guarantee, but the process takes time and can be difficult if the event has already passed.</li></ul><ul><li>Nominative or restricted tickets. Some events link tickets to the original buyer or restrict resale. The promoter’s terms may allow cancellation or refusal of entry, even where the ticket itself is genuine.</li></ul><ul><li>Late or non-delivery. Viagogo often releases tickets close to the event date, though timing varies by event. If tickets have not arrived, contact Viagogo support through the platform before assuming fraud.</li></ul><h2 id="your-rights-if-something-goes-wrong">Your rights if something goes wrong</h2><p>Viagogo publishes a buyer guarantee that may provide replacement tickets or a refund when a ticket is invalid, subject to its current terms and deadlines. Contact the platform promptly; disputes are harder after an event has passed.</p><p>For stronger protection:</p><ul><li>Pay by credit card where practical. Section 75 may apply to a qualifying credit-card purchase over £100 and not more than £30,000, but the required credit and supplier relationship must be present; ask the card issuer to assess the facts.</li></ul><ul><li>Chargeback. If you paid by card and the seller does not deliver, contact the card issuer promptly and ask whether the card-scheme rules allow a chargeback. Time limits vary.</li></ul><ul><li>If a seller contacts you and asks for payment outside the Viagogo platform — by bank transfer, PayPal Friends and Family, or gift cards — stop immediately. This is a scam separate from Viagogo&#x27;s own practices, and no buyer protection applies. Report it to Viagogo and to Report Fraud.</li></ul><h2 id="when-it-is-definitely-a-scam-not-just-viagogo-being-viagogo">When it is definitely a scam — not just Viagogo being Viagogo</h2><p>Separate from Viagogo&#x27;s own controversial practices, fraudsters exploit Viagogo&#x27;s reputation in specific ways:</p><ul><li>Fake Viagogo websites. Scammers build replica sites with near-identical URLs (viag0go.com, viagogo-tickets.co.uk, or similar) to harvest payment details. Always confirm the URL is viagogo.com exactly before entering any information. Type the address directly into your browser rather than clicking a link from an email or social media.</li></ul><ul><li>Off-platform sellers. Someone contacts you on social media, by email, or via a classified ad claiming to have Viagogo tickets and asking for direct payment. Viagogo does not operate this way. Any seller asking you to pay outside the platform is conducting a fraud.</li></ul><ul><li>Fake order confirmation emails. Phishing emails can imitate booking confirmations and direct you to a lookalike sign-in or payment page. Check the order by opening Viagogo yourself rather than using the email link.</li></ul>
         <h2>Frequently asked questions</h2>
         <div class="faq"><details><summary>Is Viagogo a scam or a legitimate company?</summary><p>Viagogo is a real, registered company, not a scam operation. It is a secondary ticket resale marketplace that has operated since 2006 and has been subject to formal enforcement by the UK Competition and Markets Authority. The company changed some of its practices following that action. Legitimate and risk-free are not the same thing with Viagogo — buyers should understand the fee structure, refund limitations, and ticket validity risks before purchasing.</p></details><details><summary>Are Viagogo tickets genuine and will they work at the door?</summary><p>Many buyers receive valid tickets and attend without issue. However, there is a meaningful risk that tickets are invalid, duplicated, or nominative (linked to the original buyer&#x27;s name, which venues can refuse). The risk is higher for very high-demand events where promoters actively cancel resold tickets.</p></details><details><summary>Can I get a refund from Viagogo if the event is cancelled?</summary><p>Check Viagogo’s current terms and contact it promptly. A qualifying credit-card purchase may also give you a Section 75 route, but eligibility depends on the payment and supplier arrangements.</p></details><details><summary>What did the CMA do about Viagogo?</summary><p>In 2018, the UK Competition and Markets Authority secured a court order against Viagogo after the company refused to offer undertakings voluntarily — unlike StubHub, GetMeIn, and Seatwave, which offered undertakings at an earlier stage. The court order required Viagogo to show full prices upfront and provide clearer seller information. The CMA then monitored compliance before suspending further proceedings. The CMA case is publicly documented on gov.uk.</p></details><details><summary>Is there a safer alternative to Viagogo for resale tickets?</summary><p>Yes. Twickets is a face-value resale platform where sellers cannot charge above the original ticket price. Ticketmaster&#x27;s Fan-to-Fan exchange and the official resale functions on See Tickets and Eventim allow sellers to list tickets with verified ownership within the original platform. Buying directly from the venue or official ticketing site eliminates resale risk entirely. The Society of Ticket Agents and Retailers (STAR) maintains a list of approved members who follow a consumer protection code of practice.</p></details></div>
-        
+        <h2>Sources checked</h2><ul class="sources-checked"><li><a href="https://www.gov.uk/government/news/cma-secures-court-order-against-viagogo" rel="noopener noreferrer" target="_blank">GOV.UK — CMA secures court order against viagogo</a></li><li><a href="https://support.viagogo.co.uk/articles/61000310201-what-is-the-viagogo-guarantee" rel="noopener noreferrer" target="_blank">Viagogo UK Support — What is the viagogo Guarantee?</a></li></ul>
         <div class="notice" style="margin-top:2rem">
           <strong>Think you&#8217;ve spotted a scam?</strong>
           Use the <a href="/check/">AI scam checker</a> for an instant analysis, or report it to
           <a href="https://www.reportfraud.police.uk" rel="noopener noreferrer" target="_blank">Report Fraud</a>.
         </div>
-        <p class="meta" style="margin-top:1.4rem">Reporting routes in this guide are checked against our verified canon of official UK sources &#8212; <a href="https://www.reportfraud.police.uk/" rel="noopener" target="_blank">Report Fraud</a>, the <a href="https://www.ncsc.gov.uk/" rel="noopener" target="_blank">National Cyber Security Centre</a>, and <a href="https://www.citizensadvice.org.uk/consumer/scams/" rel="noopener" target="_blank">Citizens Advice</a> &#8212; by an automated accuracy gate before publication. Published 2026-05-13. Read about <a href="/about/">how Beat the Scam writes guides</a>.</p>
+        <p class="meta" style="margin-top:1.4rem">Reporting routes in this guide are checked against our verified canon of official UK sources &#8212; <a href="https://www.reportfraud.police.uk/" rel="noopener" target="_blank">Report Fraud</a>, the <a href="https://www.ncsc.gov.uk/" rel="noopener" target="_blank">National Cyber Security Centre</a>, and <a href="https://www.citizensadvice.org.uk/consumer/scams/" rel="noopener" target="_blank">Citizens Advice</a> &#8212; by an automated accuracy gate before publication. Published 2026-05-13. Read about <a href="/methodology/">how Beat the Scam writes guides</a>.</p>
       </article>
       <aside class="sidebar">
         <section class="sidebar-card">
@@ -168,18 +169,18 @@
           <p class="note">Paste the suspicious message into the free AI checker for an instant plain-English verdict.</p>
           <a class="btn btn-primary" href="/check/" style="width:100%;margin-top:.5rem;text-align:center">Check a message</a>
         </section>
-        
+
     <section class="sidebar-card affiliate-card">
       <p class="note" style="margin:0 0 .4rem;font-size:.8rem;text-transform:uppercase;letter-spacing:.06em;font-weight:800;color:var(--muted)">Recommended</p>
       <h3 style="margin:.15rem 0 .4rem">Which? Legal</h3>
       <p class="note">Get expert legal advice if you have lost money to a scam and need help recovering it.</p>
-      <a class="btn btn-secondary" href="https://legalservice.which.co.uk/" rel="nofollow noopener noreferrer" target="_blank" style="width:100%;margin-top:.6rem;text-align:center">Get advice from Which? Legal</a>
+      <a class="btn btn-secondary" href="https://legalservice.which.co.uk/" rel="nofollow noopener noreferrer" target="_blank" data-affiliate-id="which-legal" data-affiliate-name="Which? Legal" data-commercial-status="unpaid-editorial" style="width:100%;margin-top:.6rem;text-align:center">Get advice from Which? Legal</a>
       <p class="note" style="margin:.5rem 0 0;font-size:.72rem;color:var(--muted)">Unpaid editorial pick — we receive no commission.</p>
     </section>
-    
+
       </aside>
     </section>
-    
+
   </main>
   <section class="newsletter-band" aria-labelledby="nl-heading">
     <div class="wrap newsletter-inner">
@@ -215,6 +216,8 @@
         <h3>Explore</h3>
         <ul>
           <li><a href="/guides/">All guides</a></li>
+          <li><a href="/research/">Research &amp; data</a></li>
+          <li><a href="/recovery/">Scam recovery checklist</a></li>
           <li><a href="/categories/sms/">Text Message Scams</a></li>
 <li><a href="/categories/email/">Email Scams</a></li>
 <li><a href="/categories/marketplace/">Marketplace Scams</a></li>
@@ -238,6 +241,8 @@
         <h3>Trust & legal</h3>
         <ul>
           <li><a href="/about/">About</a></li>
+          <li><a href="/methodology/">How we fact-check</a></li>
+          <li><a href="/corrections/">Corrections</a></li>
           <li><a href="/privacy/">Privacy Policy</a></li>
           <li><a href="/cookies/">Cookie Policy</a></li>
           <li><button class="link-button" type="button" id="openCookieSettings">Cookie settings</button></li>
@@ -262,6 +267,6 @@
       <button class="btn btn-primary" id="cookieAccept" type="button">Accept</button>
     </div>
   </div>
-  <script src="/assets/app.js?v=227604ee69" defer></script>
+  <script src="/assets/app.js?v=59ecb206a0" defer></script>
 </body>
 </html>

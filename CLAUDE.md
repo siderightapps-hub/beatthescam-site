@@ -4,7 +4,7 @@ Guidance for Claude Code sessions in this repository. Read this fully before mak
 
 ## What this is
 
-Beat The Scam (https://beatthescam.com) is a UK consumer-protection site: 181 plain-English scam guides + a free AI scam checker. It is a **bespoke Python static-site generator** — not Next.js, Hugo, or Jekyll. `scripts/build.py` reads JSON content and renders through one HTML template into `dist/`. The only dynamic surfaces are **five Netlify Functions** in `netlify/functions/`: `check-scam`, `subscribe`, `confirm-subscribe`, `unsubscribe`, `csp-report`.
+Beat The Scam (https://beatthescam.com) is a UK consumer-protection site: 182 guide source records, 181 indexable guides after one documented consolidation, and a free AI scam checker. It is a **bespoke Python static-site generator** — not Next.js, Hugo, or Jekyll. `scripts/build.py` reads JSON content and renders through one HTML template into `dist/`. The only dynamic surfaces are **five Netlify Functions** in `netlify/functions/`: `check-scam`, `subscribe`, `confirm-subscribe`, `unsubscribe`, `csp-report`.
 
 **`docs/project.md` is the master source-of-truth** (full architecture, secrets inventory, security history, runbook; Section 20 is the gotcha log). `docs/next-session.md` is the fast-start front door with current status and pending work. This file holds only what every session must know.
 

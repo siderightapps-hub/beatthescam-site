@@ -12,8 +12,8 @@
   <meta name="robots" content="index,follow">
   <meta name="theme-color" content="#0b1220">
   <meta name="format-detection" content="telephone=no">
-  
-  
+
+
 
   <!-- Favicons -->
   <link rel="icon" href="/favicon.ico" sizes="any">
@@ -26,18 +26,12 @@
   <!-- Resource hints for third-party origins. preconnect = full TCP+TLS
        handshake started immediately (good for resources we KNOW will load
        on every page). dns-prefetch = DNS lookup only (cheap fallback for
-       older browsers that ignore preconnect). googletagmanager loads GA4,
-       pagead2 loads AdSense — both are async <script> tags in <body>, so
-       preconnect shaves 100-300ms off their first paint on mobile.
-       Also adds tpc.googlesyndication.com (where ad creatives serve from)
-       and the ahrefs analytics host. -->
+       older browsers that ignore preconnect). AdSense resource hints are
+       injected only on pages eligible to serve ads. -->
   <link rel="preconnect" href="https://www.googletagmanager.com" crossorigin>
-  <link rel="preconnect" href="https://pagead2.googlesyndication.com" crossorigin>
-  <link rel="preconnect" href="https://tpc.googlesyndication.com" crossorigin>
   <link rel="dns-prefetch" href="https://www.googletagmanager.com">
-  <link rel="dns-prefetch" href="https://pagead2.googlesyndication.com">
-  <link rel="dns-prefetch" href="https://tpc.googlesyndication.com">
   <link rel="dns-prefetch" href="https://analytics.ahrefs.com">
+  <!-- AdSense resource hints intentionally omitted on this page -->
 
   <meta property="og:type" content="website">
   <meta property="og:title" content="Social Media Scams | Beat the Scam">
@@ -58,7 +52,7 @@
        value= attribute (not content=) — validators flag it; do not "fix" it
        or their crawler stops verifying the site. -->
   <meta name='impact-site-verification' value='e0dda02c-a1b6-4056-9f92-16f7c916bd4b'>
-  <link rel="stylesheet" href="/assets/styles.css?v=2aec57b620">
+  <link rel="stylesheet" href="/assets/styles.css?v=d1fc9faba4">
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-JXNF856NBF"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
@@ -78,12 +72,13 @@
     AdSense respects Google Consent Mode: the GA4 consent defaults above start
     denied, so visitors who haven't accepted get non-personalised ads and no
     ad-personalisation cookies until they do. The ad tag below is emitted per
-    page by make_base()/_ads_head(): omitted entirely on the /check/ tool, and
-    preceded by a requestNonPersonalizedAds flag on sensitive financial / victim
-    pages (Google restricts personalisation based on negative financial status).
+    page by make_base()/_ads_head(): omitted on navigational, tool and
+    sensitive-content pages, and preceded by a requestNonPersonalizedAds flag
+    on sensitive financial / victim pages (Google restricts personalisation
+    based on negative financial status).
     Ahrefs Web Analytics is cookieless. Custom GA4 events stay gated in app.js.
   -->
-  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1606633100797174" crossorigin="anonymous"></script>
+  <!-- Ads intentionally disabled on this page (excluded from Auto Ads) -->
   <script src="https://analytics.ahrefs.com/analytics.js" data-key="l1GHKUGfAKlhtjbYgIySAg" async></script>
 </head>
 <body>
@@ -99,6 +94,8 @@
         <a href="/">Home</a>
         <a href="/guides/">Guides</a>
         <a href="/categories/">Categories</a>
+        <a href="/research/">Research</a>
+        <a href="/recovery/">Recovery</a>
         <a href="/about/">About</a>
         <a href="/contact/">Contact</a>
         <a class="nav-cta" href="/check/">Check a message</a>
@@ -106,7 +103,7 @@
     </div>
   </header>
   <main id="main">
-    
+
     <section class="hero">
       <div class="wrap">
         <div class="breadcrumbs"><a href="/">Home</a> / <a href="/categories/">Categories</a> / Social Media Scams</div>
@@ -114,46 +111,36 @@
         <p class="lead">Guides covering scams on Facebook, Instagram, WhatsApp, and other platforms. Learn to spot fake profiles, impersonation fraud, and social media scam tactics.</p>
       </div>
     </section>
-    
-    <section class="section"><div class="wrap"><h2>Latest social media scams</h2><div class="grid-3">
-    <article class="card guide-card" data-searchable="whatsapp investment scam uk: the private-chat con unlike a public instagram pitch, a whatsapp investment scam builds a personal &#x27;relationship&#x27; privately over days. here&#x27;s how to spot it. social whatsapp investment scam uk whatsapp trading scam private investment scam whatsapp crypto scam investment scam uk">
+
+    <section class="section"><div class="wrap"><h2>Latest social media scams</h2><div class="grid-3"><article class="card guide-card" data-searchable="whatsapp investment scam uk: the private-chat con unlike a public instagram pitch, a whatsapp investment scam builds a personal &#x27;relationship&#x27; privately over days. here&#x27;s how to spot it. social whatsapp investment scam uk whatsapp trading scam private investment scam whatsapp crypto scam investment scam uk">
       <div class="eyebrow">Social Media Scams</div>
       <h3><a href="/guides/whatsapp-investment-scam-uk/">WhatsApp Investment Scam UK: The Private-Chat Con</a></h3>
       <p>Unlike a public Instagram pitch, a WhatsApp investment scam builds a personal &#x27;relationship&#x27; privately over days. Here&#x27;s how to spot it.</p>
       <p class="meta">Updated 2026-07-10</p>
-    </article>
-    
-    <article class="card guide-card" data-searchable="tiktok shop scams uk: spot fake sellers &amp; bad deals a tiktok shop deal that&#x27;s too good, or a seller wanting paypal &#x27;friends and family&#x27;? how to spot a tiktok shop scam and keep your money protected. social tiktok shop scam fake tiktok shop seller tiktok shop scam uk is tiktok shop safe tiktok shop counterfeit tiktok giveaway scam tiktok shop off-platform payment report tiktok shop scam">
+    </article><article class="card guide-card" data-searchable="tiktok shop scams uk: spot fake sellers &amp; bad deals a tiktok shop deal that&#x27;s too good, or a seller wanting paypal &#x27;friends and family&#x27;? how to spot a tiktok shop scam and keep your money protected. social tiktok shop scam fake tiktok shop seller tiktok shop scam uk is tiktok shop safe tiktok shop counterfeit tiktok giveaway scam tiktok shop off-platform payment report tiktok shop scam">
       <div class="eyebrow">Social Media Scams</div>
       <h3><a href="/guides/tiktok-shop-scam-uk/">TikTok Shop Scams UK: Spot Fake Sellers &amp; Bad Deals</a></h3>
       <p>A TikTok Shop deal that&#x27;s too good, or a seller wanting PayPal &#x27;friends and family&#x27;? How to spot a TikTok Shop scam and keep your money protected.</p>
-      <p class="meta">Updated 2026-06-28</p>
-    </article>
-    
-    <article class="card guide-card" data-searchable="facebook ad scam uk: check the ad library first fake investment and counterfeit-goods ads run on facebook using copied branding. meta&#x27;s own ad library shows what&#x27;s really running. social facebook ad scam uk meta ad library check fake facebook advert facebook investment ad scam counterfeit ad facebook social media scam uk">
+      <p class="meta">Updated 2026-07-18</p>
+    </article><article class="card guide-card" data-searchable="facebook ad scam uk: check the ad library first fake investment and counterfeit-goods ads run on facebook using copied branding. meta&#x27;s own ad library shows what&#x27;s really running. social facebook ad scam uk meta ad library check fake facebook advert facebook investment ad scam counterfeit ad facebook social media scam uk">
       <div class="eyebrow">Social Media Scams</div>
       <h3><a href="/guides/facebook-ad-scam-uk/">Facebook Ad Scam UK: Check the Ad Library First</a></h3>
       <p>Fake investment and counterfeit-goods ads run on Facebook using copied branding. Meta&#x27;s own Ad Library shows what&#x27;s really running.</p>
       <p class="meta">Updated 2026-07-10</p>
-    </article>
-    
-    <article class="card guide-card" data-searchable="x crypto giveaway scam uk: the blue tick proves nothing now fake celebrity accounts on x promise to double any cryptocurrency you send. a blue checkmark is not proof that the account is genuine. social twitter crypto giveaway scam x crypto scam uk x blue checkmark scam fake celebrity crypto giveaway x verification scam crypto scam uk">
+    </article><article class="card guide-card" data-searchable="x crypto giveaway scam uk: the blue tick proves nothing now fake celebrity accounts on x promise to double any cryptocurrency you send. a blue checkmark is not proof that the account is genuine. social twitter crypto giveaway scam x crypto scam uk x blue checkmark scam fake celebrity crypto giveaway x verification scam crypto scam uk">
       <div class="eyebrow">Social Media Scams</div>
       <h3><a href="/guides/twitter-crypto-giveaway-scam-uk/">X Crypto Giveaway Scam UK: The Blue Tick Proves Nothing Now</a></h3>
       <p>Fake celebrity accounts on X promise to double any cryptocurrency you send. A blue checkmark is not proof that the account is genuine.</p>
       <p class="meta">Updated 2026-07-09</p>
-    </article>
-    
-    <article class="card guide-card" data-searchable="instagram investment scam uk: fake trader profiles fake &#x27;trader&#x27; profiles dm uk instagram users promising guaranteed crypto or forex returns, backed by edited screenshots. here&#x27;s how to check first. social instagram investment scam uk fake trader instagram instagram crypto scam fca finfluencer rules instagram forex scam investment scam uk">
+    </article><article class="card guide-card" data-searchable="instagram investment scam uk: fake trader profiles fake &#x27;trader&#x27; profiles dm uk instagram users promising guaranteed crypto or forex returns, backed by edited screenshots. here&#x27;s how to check first. social instagram investment scam uk fake trader instagram instagram crypto scam fca finfluencer rules instagram forex scam investment scam uk">
       <div class="eyebrow">Social Media Scams</div>
       <h3><a href="/guides/instagram-investment-scam-uk/">Instagram Investment Scam UK: Fake Trader Profiles</a></h3>
       <p>Fake &#x27;trader&#x27; profiles DM UK Instagram users promising guaranteed crypto or forex returns, backed by edited screenshots. Here&#x27;s how to check first.</p>
       <p class="meta">Updated 2026-07-10</p>
-    </article>
-    </div></div></section>
-    
-    <section class="section"><div class="wrap"><h2>Browse other scam categories</h2><ul class="list-clean"><li><a href="/categories/sms/">Text Message Scams</a> <span class="meta">(24 guides)</span></li><li><a href="/categories/email/">Email Scams</a> <span class="meta">(15 guides)</span></li><li><a href="/categories/marketplace/">Marketplace Scams</a> <span class="meta">(15 guides)</span></li><li><a href="/categories/travel/">Travel Scams</a> <span class="meta">(14 guides)</span></li><li><a href="/categories/payment/">Payment Scams</a> <span class="meta">(14 guides)</span></li><li><a href="/categories/phone/">Phone Scams</a> <span class="meta">(13 guides)</span></li></ul></div></section>
-    
+    </article></div></div></section>
+
+    <section class="section"><div class="wrap"><h2>Browse other scam categories</h2><ul class="list-clean"><li><a href="/categories/sms/">Text Message Scams</a> <span class="meta">(23 guides)</span></li><li><a href="/categories/email/">Email Scams</a> <span class="meta">(15 guides)</span></li><li><a href="/categories/marketplace/">Marketplace Scams</a> <span class="meta">(15 guides)</span></li><li><a href="/categories/travel/">Travel Scams</a> <span class="meta">(14 guides)</span></li><li><a href="/categories/payment/">Payment Scams</a> <span class="meta">(14 guides)</span></li><li><a href="/categories/phone/">Phone Scams</a> <span class="meta">(13 guides)</span></li></ul></div></section>
+
   </main>
   <section class="newsletter-band" aria-labelledby="nl-heading">
     <div class="wrap newsletter-inner">
@@ -189,6 +176,8 @@
         <h3>Explore</h3>
         <ul>
           <li><a href="/guides/">All guides</a></li>
+          <li><a href="/research/">Research &amp; data</a></li>
+          <li><a href="/recovery/">Scam recovery checklist</a></li>
           <li><a href="/categories/sms/">Text Message Scams</a></li>
 <li><a href="/categories/email/">Email Scams</a></li>
 <li><a href="/categories/marketplace/">Marketplace Scams</a></li>
@@ -212,6 +201,8 @@
         <h3>Trust & legal</h3>
         <ul>
           <li><a href="/about/">About</a></li>
+          <li><a href="/methodology/">How we fact-check</a></li>
+          <li><a href="/corrections/">Corrections</a></li>
           <li><a href="/privacy/">Privacy Policy</a></li>
           <li><a href="/cookies/">Cookie Policy</a></li>
           <li><button class="link-button" type="button" id="openCookieSettings">Cookie settings</button></li>
@@ -236,6 +227,6 @@
       <button class="btn btn-primary" id="cookieAccept" type="button">Accept</button>
     </div>
   </div>
-  <script src="/assets/app.js?v=227604ee69" defer></script>
+  <script src="/assets/app.js?v=59ecb206a0" defer></script>
 </body>
 </html>

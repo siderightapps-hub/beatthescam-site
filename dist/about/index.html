@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>About | Beat the Scam</title>
-  <meta name="description" content="Beat the Scam is a free UK consumer protection site. Learn how guides are researched, who writes them, and how the AI scam checker works.">
+  <meta name="description" content="Beat the Scam is a free UK consumer protection site. Learn who runs it, how it is funded, and how the AI scam checker works.">
   <link rel="canonical" href="https://beatthescam.com/about/">
   <link rel="alternate" hreflang="en-GB" href="https://beatthescam.com/about/">
   <link rel="alternate" hreflang="x-default" href="https://beatthescam.com/about/">
@@ -12,8 +12,8 @@
   <meta name="robots" content="index,follow">
   <meta name="theme-color" content="#0b1220">
   <meta name="format-detection" content="telephone=no">
-  
-  
+
+
 
   <!-- Favicons -->
   <link rel="icon" href="/favicon.ico" sizes="any">
@@ -26,22 +26,16 @@
   <!-- Resource hints for third-party origins. preconnect = full TCP+TLS
        handshake started immediately (good for resources we KNOW will load
        on every page). dns-prefetch = DNS lookup only (cheap fallback for
-       older browsers that ignore preconnect). googletagmanager loads GA4,
-       pagead2 loads AdSense — both are async <script> tags in <body>, so
-       preconnect shaves 100-300ms off their first paint on mobile.
-       Also adds tpc.googlesyndication.com (where ad creatives serve from)
-       and the ahrefs analytics host. -->
+       older browsers that ignore preconnect). AdSense resource hints are
+       injected only on pages eligible to serve ads. -->
   <link rel="preconnect" href="https://www.googletagmanager.com" crossorigin>
-  <link rel="preconnect" href="https://pagead2.googlesyndication.com" crossorigin>
-  <link rel="preconnect" href="https://tpc.googlesyndication.com" crossorigin>
   <link rel="dns-prefetch" href="https://www.googletagmanager.com">
-  <link rel="dns-prefetch" href="https://pagead2.googlesyndication.com">
-  <link rel="dns-prefetch" href="https://tpc.googlesyndication.com">
   <link rel="dns-prefetch" href="https://analytics.ahrefs.com">
+  <!-- AdSense resource hints intentionally omitted on this page -->
 
   <meta property="og:type" content="website">
   <meta property="og:title" content="About | Beat the Scam">
-  <meta property="og:description" content="Beat the Scam is a free UK consumer protection site. Learn how guides are researched, who writes them, and how the AI scam checker works.">
+  <meta property="og:description" content="Beat the Scam is a free UK consumer protection site. Learn who runs it, how it is funded, and how the AI scam checker works.">
   <meta property="og:url" content="https://beatthescam.com/about/">
   <meta property="og:site_name" content="Beat the Scam">
   <meta property="og:locale" content="en_GB">
@@ -51,14 +45,14 @@
   <meta property="og:image:alt" content="About | Beat the Scam">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="About | Beat the Scam">
-  <meta name="twitter:description" content="Beat the Scam is a free UK consumer protection site. Learn how guides are researched, who writes them, and how the AI scam checker works.">
+  <meta name="twitter:description" content="Beat the Scam is a free UK consumer protection site. Learn who runs it, how it is funded, and how the AI scam checker works.">
   <meta name="twitter:image" content="https://beatthescam.com/assets/og-image-v2.png">
   <meta name="twitter:site" content="@beatthescam">
   <!-- Impact.com dictates this exact tag verbatim, including the non-standard
        value= attribute (not content=) — validators flag it; do not "fix" it
        or their crawler stops verifying the site. -->
   <meta name='impact-site-verification' value='e0dda02c-a1b6-4056-9f92-16f7c916bd4b'>
-  <link rel="stylesheet" href="/assets/styles.css?v=2aec57b620">
+  <link rel="stylesheet" href="/assets/styles.css?v=d1fc9faba4">
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-JXNF856NBF"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
@@ -73,14 +67,15 @@
     });
     gtag('config', 'G-JXNF856NBF');
   </script>
-  <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebPage","name":"About","description":"Beat the Scam is a free UK consumer protection site. Learn how guides are researched, who writes them, and how the AI scam checker works.","url":"https://beatthescam.com/about/","isPartOf":{"@type":"WebSite","name":"Beat the Scam","url":"https://beatthescam.com"}}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebPage","name":"About","description":"Beat the Scam is a free UK consumer protection site. Learn who runs it, how it is funded, and how the AI scam checker works.","url":"https://beatthescam.com/about/","isPartOf":{"@type":"WebSite","name":"Beat the Scam","url":"https://beatthescam.com"}}</script>
   <!--
     AdSense respects Google Consent Mode: the GA4 consent defaults above start
     denied, so visitors who haven't accepted get non-personalised ads and no
     ad-personalisation cookies until they do. The ad tag below is emitted per
-    page by make_base()/_ads_head(): omitted entirely on the /check/ tool, and
-    preceded by a requestNonPersonalizedAds flag on sensitive financial / victim
-    pages (Google restricts personalisation based on negative financial status).
+    page by make_base()/_ads_head(): omitted on navigational, tool and
+    sensitive-content pages, and preceded by a requestNonPersonalizedAds flag
+    on sensitive financial / victim pages (Google restricts personalisation
+    based on negative financial status).
     Ahrefs Web Analytics is cookieless. Custom GA4 events stay gated in app.js.
   -->
   <!-- Ads intentionally disabled on this page (excluded from Auto Ads) -->
@@ -99,6 +94,8 @@
         <a href="/">Home</a>
         <a href="/guides/">Guides</a>
         <a href="/categories/">Categories</a>
+        <a href="/research/">Research</a>
+        <a href="/recovery/">Recovery</a>
         <a href="/about/">About</a>
         <a href="/contact/">Contact</a>
         <a class="nav-cta" href="/check/">Check a message</a>
@@ -106,12 +103,12 @@
     </div>
   </header>
   <main id="main">
-    
+
     <section class="hero">
       <div class="wrap">
         <div class="breadcrumbs"><a href="/">Home</a> / About</div>
         <h1>About</h1>
-        <p class="lead">Beat the Scam is a free UK consumer protection site. Learn how guides are researched, who writes them, and how the AI scam checker works.</p>
+        <p class="lead">Beat the Scam is a free UK consumer protection site. Learn who runs it, how it is funded, and how the AI scam checker works.</p>
       </div>
     </section>
     <section class="section"><div class="wrap"><article class="article">
@@ -120,7 +117,7 @@
     <div class="author-card" style="margin:1.5rem 0;padding:1.2rem;border:1px solid var(--line);border-radius:14px;background:#fafafa">
       <p style="margin:0 0 .35rem 0"><strong>Who runs this site</strong></p>
       <p style="margin:0 0 .5rem 0;font-size:.95rem;color:#555">Beat the Scam is founded and edited by <a href="/author/"><strong>Alex Bacsa</strong></a>, an independent UK-based publisher who also runs <a href="https://cloudfintech.ai" rel="noopener noreferrer" target="_blank">CloudFintech</a> (fintech &amp; banking technology), <a href="https://tuningdigital.com" rel="noopener noreferrer" target="_blank">Tuning Digital</a> (AI &amp; SaaS productivity tools), and <a href="https://salestap.com" rel="noopener noreferrer" target="_blank">SalesTap</a> (B2B sales). He uses AI tooling to surface scam patterns and translate official UK guidance into plain-English checks.</p>
-      <p style="margin:0;font-size:.95rem;color:#555">He is not a journalist, lawyer, regulator, banker, or accredited consumer-affairs professional. This is an educational publication &mdash; every recommendation on the site directs you to the official UK authority that owns that decision.</p>
+      <p style="margin:0;font-size:.95rem;color:#555">He is not a journalist, lawyer, regulator, banker, or accredited consumer-affairs professional. This is an educational publication that prefers primary official sources for reporting routes, legal and regulatory claims, while clearly labelling relevant secondary sources.</p>
     </div>
 
     <p>The editorial model is simple: fast checks, plain-English explanations, and practical actions. The site is not a law firm, bank, or regulator. It is a free educational publication designed to reduce avoidable losses.</p>
@@ -133,23 +130,8 @@
       <div class="table-row"><strong>Commercial model</strong><span>Advertising-supported using Google AdSense, with scope for consumer-safety partnerships.</span></div>
     </div>
 
-    <h2>How content is researched and produced</h2>
-    <p>Each guide on this site is drafted using AI assistance against a strict editorial template that forbids inventing statistics, quotes, or specific unverifiable claims, and that standardises the official UK reporting routes (Report Fraud, the NCSC, and Citizens Advice).</p>
-    <p>The drafting step uses Anthropic&#8217;s Claude API. The model is given a structured prompt covering the scam type, target audience, and required sections (what the scam looks like, warning signs, step-by-step pattern, verification, recovery actions, reporting routes). It is explicitly instructed not to invent statistics, predict outcomes, generate fake quotes, or assert specific claims about named companies or people. Before publication, every draft passes an automated accuracy gate: deterministic checks (no hard-coded organisation phone numbers, no defunct or unsafe entities, no unconditional safety guarantees, and reporting routes validated against a verified canon of official UK sources) plus a low-temperature AI fact-checking pass that fails closed on possible fabrication &mdash; drafts that fail are held back, never published. The high-stakes claims in each guide are recorded and reviewed on a recurring schedule. If you still spot an error, please report it (see below) and we will correct it promptly.</p>
-    <p>Verification draws on UK-specific public sources, including:</p>
-    <ul>
-      <li><a href="https://www.reportfraud.police.uk/" rel="noopener noreferrer" target="_blank">Report Fraud</a> (formerly Action Fraud) &mdash; the UK&#8217;s national reporting centre for fraud and cybercrime</li>
-      <li><a href="https://www.ncsc.gov.uk/" rel="noopener noreferrer" target="_blank">National Cyber Security Centre (NCSC)</a> &mdash; for phishing reporting routes and current threat patterns</li>
-      <li><a href="https://www.citizensadvice.org.uk/" rel="noopener noreferrer" target="_blank">Citizens Advice</a> &mdash; consumer protection guidance and helpline routes</li>
-      <li><a href="https://www.fca.org.uk/consumers/fca-firm-checker" rel="noopener noreferrer" target="_blank">FCA Firm Checker</a> &mdash; for investment and financial services scams</li>
-      <li><a href="https://takefive-stopfraud.org.uk/" rel="noopener noreferrer" target="_blank">Take Five</a> &mdash; UK banking sector consumer fraud campaign</li>
-      <li>Government UK pages for HMRC, DVLA, TV Licensing, and other public bodies commonly impersonated</li>
-    </ul>
-
-    <h2>Editorial standards</h2>
-    <p>Content is written to be understandable under pressure. That means short sections, clear headings, and advice that directs readers towards independent verification through official channels &mdash; never through links, numbers, or payment details supplied by a suspicious message.</p>
-    <p>Where the site recommends a national reporting route &mdash; such as Report Fraud, the NCSC, or Citizens Advice &mdash; it uses the official published channel. For organisation-specific contact details, always confirm the number or web address against the official website, or the details on your card, bill, or statement, rather than relying solely on any number reproduced in a guide.</p>
-    <p>If a guide contains an error, email <a href="mailto:editorial@beatthescam.com">editorial@beatthescam.com</a> with the page URL and the issue. Corrections are made promptly.</p>
+    <h2>How guides are fact-checked</h2>
+    <p>Guides use AI-assisted drafting and a deterministic accuracy gate, followed by editorial review. The gate catches defined error classes; it is not a substitute for checking each material claim against a current source. Existing guides are re-audited in scheduled corpus sweeps, and pages that need substantive work are removed from discovery and advertising until reviewed. See the full <a href="/methodology/">editorial methodology</a> and public <a href="/corrections/">corrections log</a>.</p>
 
     <h2>About the AI scam checker</h2>
     <p>The free scam checker on this site sends the suspicious message text you paste to Anthropic&#8217;s Claude API for analysis. The text is processed in real time to produce a verdict, list of red flags, and recommended actions &mdash; then discarded. Beat the Scam does not store the suspicious text you submit, and does not link it to your identity. To keep the free tool available and block abuse, the checker keeps a rate-limit counter keyed to a hashed form of your IP address &mdash; used only to enforce per-minute and daily usage limits, and never linked to your submission. As the processor, Anthropic may retain the text you submit and the model&#8217;s response for up to 30 days under its standard API data policy (and longer only where required for legal or safety reasons); it does not use API inputs or outputs to train its models.</p>
@@ -159,9 +141,9 @@
     <h2>Contact</h2>
     <p>Editorial contact and correction requests: <a href="mailto:editorial@beatthescam.com">editorial@beatthescam.com</a></p>
 
-    <p class="note" style="margin-top:2rem;color:#666;font-size:.9rem">Last reviewed: May 2026. The site is reviewed periodically and updated as scam patterns and reporting routes change.</p>
+    <p class="note" style="margin-top:2rem;color:#666;font-size:.9rem">Last reviewed: 18 July 2026. The site is reviewed periodically and updated as scam patterns and reporting routes change.</p>
     </article></div></section>
-    
+
   </main>
   <section class="newsletter-band" aria-labelledby="nl-heading">
     <div class="wrap newsletter-inner">
@@ -197,6 +179,8 @@
         <h3>Explore</h3>
         <ul>
           <li><a href="/guides/">All guides</a></li>
+          <li><a href="/research/">Research &amp; data</a></li>
+          <li><a href="/recovery/">Scam recovery checklist</a></li>
           <li><a href="/categories/sms/">Text Message Scams</a></li>
 <li><a href="/categories/email/">Email Scams</a></li>
 <li><a href="/categories/marketplace/">Marketplace Scams</a></li>
@@ -220,6 +204,8 @@
         <h3>Trust & legal</h3>
         <ul>
           <li><a href="/about/">About</a></li>
+          <li><a href="/methodology/">How we fact-check</a></li>
+          <li><a href="/corrections/">Corrections</a></li>
           <li><a href="/privacy/">Privacy Policy</a></li>
           <li><a href="/cookies/">Cookie Policy</a></li>
           <li><button class="link-button" type="button" id="openCookieSettings">Cookie settings</button></li>
@@ -244,6 +230,6 @@
       <button class="btn btn-primary" id="cookieAccept" type="button">Accept</button>
     </div>
   </div>
-  <script src="/assets/app.js?v=227604ee69" defer></script>
+  <script src="/assets/app.js?v=59ecb206a0" defer></script>
 </body>
 </html>
