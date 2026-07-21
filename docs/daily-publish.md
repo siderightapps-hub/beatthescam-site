@@ -1,5 +1,7 @@
 Daily publishing system for Beat the Scam
 
+Status last verified 2026-07-19: PR #61 merged, no open `auto-content` PR remains, and 26 queue topics are pending. Review or close each generated PR within 24 hours because the backlog guard pauses both content crons while an `auto-content` PR is open.
+
 Files:
 - .github/workflows/daily-publish.yml
 - scripts/run_daily_publish.py

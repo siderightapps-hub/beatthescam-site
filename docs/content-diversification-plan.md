@@ -4,7 +4,7 @@
 **Trigger:** 4th external audit flagged 178/190 guides sharing one six-section outline (AdSense scaled-content risk).
 **Inputs:** live 90-day Search Console pull (`scripts/gsc_report.py`, token refreshed 2026-06-26) + corpus structure analysis + the ~12 already-diversified in-corpus exemplars.
 
-> **Status:** IN PROGRESS. This doc is the work-list.
+> **Status:** COMPLETE since 2026-07-10. This is the historical work log and methodology record, not a current task list. Current priorities are in [`next-session.md`](next-session.md).
 >
 > **Decisions locked 2026-06-26:** (1) **Full diversification, in impression order** — apply the complete §4 recipe to each page top-down by impressions (not a title-only CTR sprint). (2) **Specimens are illustrative-only** — clearly-labelled paraphrased examples from known scam patterns; no live links, no invented numbers/sender IDs. (3) First page built as the reference template, then sign-off, then rollout.
 

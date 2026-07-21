@@ -1,5 +1,7 @@
 # Fact-check audit — 11 July 2026
 
+> **Historical point-in-time audit (2026-07-11).** Later remediation, corpus releases and live validation supersede the open recommendations and counts below. Preserve this file as audit evidence; use `docs/next-session.md`, `docs/project.md` and `scripts/validate_dist.py` for current status.
+
 ## Executive result
 
 This is a fresh audit of the 181 guide records in `content/posts.json` and the 181 generated guide pages in `dist/guides/`.

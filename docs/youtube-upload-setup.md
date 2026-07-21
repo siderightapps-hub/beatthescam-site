@@ -1,5 +1,7 @@
 # YouTube Shorts auto-upload — one-time OAuth setup
 
+> **HISTORICAL / INACTIVE:** video production was discontinued 2026-06-15. Do not create credentials or revive this workflow unless the owner explicitly restarts the channel. See [`video-pipeline.md`](video-pipeline.md) for the decision record.
+
 Setting up OAuth for `scripts/upload_to_youtube.py` is a 10–15 minute task. You do it once, then every future upload is a single command.
 
 ## What you'll create

@@ -1,6 +1,7 @@
 # Master Documentation — Summary
 
 > Created: 2026-05-20
+> Last reviewed: 2026-07-19
 > Companion summary to `project.md` and `project-template.md`.
 
 ---
@@ -9,14 +10,17 @@
 
 | # | File | Purpose | Audience |
 |---|---|---|---|
-| 0 | [`next-session.md`](next-session.md) | **Fast-start punch list — read this first when opening a new chat.** Covers where things stand, what to do next, and what data to bring. ~3-minute read. | Owner · new Claude chats |
-| 1 | [`project.md`](project.md) | Complete, project-specific source-of-truth for the Beat The Scam website | Owner · new Claude chats · potential buyers · contractors |
+| 0 | [`next-session.md`](next-session.md) | **Fast-start punch list — read this first when opening a new session.** Covers the verified baseline, priorities and operating rules. | Owner · Codex/Claude sessions |
+| 1 | [`project.md`](project.md) | Complete, project-specific source-of-truth for the Beat The Scam website | Owner · Codex/Claude sessions · potential buyers · contractors |
 | 2 | [`project-template.md`](project-template.md) | Generic, reusable template for any future website project — also doubles as a baseline `CLAUDE.md` for Claude Code | Future projects |
 | 3 | [`video-pipeline.md`](video-pipeline.md) | **HISTORICAL** — video production pipeline (Pillow text cards + ElevenLabs + MoviePy). Video was **discontinued 2026-06-15**; kept for reference only | Historical reference |
 | 3b | [`dns-hardening-checklist.md`](dns-hardening-checklist.md) | DNS / email-auth / TLS operator runbook (DMARC, DKIM, CAA, DNSSEC, HSTS) — tranche F of the 2026-06-22 Executive Verdict | Owner · DNS work |
-| 4 | [`youtube-upload-setup.md`](youtube-upload-setup.md) | One-time OAuth setup for `scripts/upload_to_youtube.py` | Setup only |
+| 4 | [`youtube-upload-setup.md`](youtube-upload-setup.md) | **HISTORICAL / INACTIVE** OAuth setup for the discontinued upload workflow | Historical reference |
 | 5 | [`daily-publish.md`](daily-publish.md) | Daily-publish operational runbook | Pipeline debugging |
-| 6 | `README.md` *(this file)* | Quick-reference index, summary of what the documents cover, and "where do I look for X?" map | All audiences |
+| 6 | [`search-ai-measurement.md`](search-ai-measurement.md) | Monthly Search Console and Bing AI visibility measurement method | Owner · growth analysis · buyers |
+| 7 | [`buyer-data-room/README.md`](buyer-data-room/README.md) | Non-confidential diligence index, asset perimeter and transfer-readiness evidence map | Owner · advisers · potential buyers |
+| 8 | [`site-content-adsense-search-audit-2026-07-16.md`](site-content-adsense-search-audit-2026-07-16.md) and [`site-content-adsense-search-audit-2026-07-17.md`](site-content-adsense-search-audit-2026-07-17.md) | **HISTORICAL** point-in-time audit evidence; not the current task list | Audit trail |
+| 9 | `README.md` *(this file)* | Quick-reference index, summary of what the documents cover, and "where do I look for X?" map | All audiences |
 
 **The fastest way to start a new session** is to open `docs/next-session.md`. It has been written specifically to be the front door for resuming work and links into the other docs on demand.
 
@@ -41,15 +45,15 @@
                                │ inspired
                                ▼
 ┌────────────────────────────────────────────────────────────┐
-│  project-template.md                          │
+│  project-template.md                                      │
 │  ────────────────────────────────                          │
 │  Same structure, placeholders instead of facts.            │
 │  Copy → new project → fill in → live.                      │
-│  Doubles as a baseline CLAUDE.md.                          │
+│  Doubles as a baseline agent-instruction document.         │
 └────────────────────────────────────────────────────────────┘
 ```
 
-The five existing handoff documents (`ProjectHandoffDocument.md`, `SecurityAuditHandoff.md`, the two `SessionHandoff-…` files, and `video-pipeline.md`) remain useful as **historical records** of specific work sessions, but going forward the **master document is the canonical reference**. Update the master first, the session handoffs second.
+The former root handoff documents have already been retired and are no longer present. `video-pipeline.md`, dated audits and the completed diversification plan remain as **historical records**. Update `project.md` for durable facts and `next-session.md` for the current operational state; do not create a second independent current-status list.
 
 ---
 
@@ -148,34 +152,9 @@ The brief asked to "add any other information that I may have missed." Items add
 
 ## Recommended next actions
 
-> **For the next-session focus**, see [`next-session.md`](next-session.md) — it has the punch list, the data you need to gather, and the order to tackle it in.
+[`next-session.md`](next-session.md) is the sole current punch list. At the 2026-07-19 documentation review, its priorities are: capture monetisation/conversion evidence; establish the saleable asset perimeter; reduce key-person and transfer risk; complete the evidence-gated DMARC ramp; earn authority and continue measurable research; and keep the human-review publishing queue healthy.
 
-Pulled forward from `project.md` Section 21:
-
-### Next session — primary focus
-
-**This checklist was retired 2026-07-04** — it had drifted a full month out of date (207 commits landed since its last update on 2026-06-04, including three remediation rounds, the editorial-accuracy gate + source canon, the human-review PR gate, and 14 content-diversification batches), because keeping two independently-updated "what's next" lists is exactly how documentation goes stale. **For current priorities, see [`next-session.md`](next-session.md)** (actively maintained, updated most sessions) and [`content-diversification-plan.md`](content-diversification-plan.md) (the content workstream's own resume line, now the dominant day-to-day work). Mailbox aliases and the Awin reapply window, both listed as open below as of 2026-06-04, are done/elapsed — check `next-session.md` for current status rather than this list.
-
-### Recently completed (2026-06-04) — historical snapshot only, not current status; see `project.md` Section 21 for the full dated history
-- ✅ `/terms/` full UK rewrite (E&W + Scotland + NI)
-- ✅ Named author + cross-publication E-E-A-T (Alex Bacsa, real headshot, `sameAs` to 3 sister pubs)
-- ✅ `/author/` page generated
-- ✅ `/.well-known/security.txt` (RFC 9116) live
-- ✅ GSC failing-validation URL triage (1 fix, 9 already resolved)
-- ✅ Mobile LCP optimisation (AdSense preconnect)
-- ✅ PageSpeed baseline captured (mobile 92–97 Performance across pages)
-
-### Near-term (4–8 weeks)
-- Near-miss query optimisation pass
-- Contextual in-body internal-linking sweep across top 30 guides
-- Foundation backlinks (5/week directory submissions, Reddit/Quora cadence)
-- Affiliate `href` replacement as programmes approve
-
-### Medium-term (8–24 weeks)
-- URL Checker feature (VirusTotal + Google Safe Browsing)
-- ~~Email newsletter launch~~ — ✅ **LIVE** (Resend, double opt-in)
-- First guest-post placement on DA 40+ UK publication
-- Trademark filing
+Do not copy that checklist into another document. Durable facts and dated history belong in `project.md`; workstream methods belong in their runbooks; completed audits and the diversification plan remain historical evidence.
 
 ---
 
@@ -184,12 +163,13 @@ Pulled forward from `project.md` Section 21:
 ### For the owner
 
 1. **Update `project.md` first** whenever anything material changes — keys rotated, affiliate approved, security re-scanned, new section in the build pipeline, etc.
-2. Then optionally write a thin `SessionHandoff-[topic].md` for the session-specific narrative.
-3. Update `Last updated:` at the top of the master document on every meaningful change.
+2. Update `next-session.md` when the verified baseline or priorities change.
+3. Update the relevant specialist runbook or buyer-data-room register when its evidence changes.
+4. Update `Last updated:` at the top of the master document on every meaningful change.
 
-### For Claude Code / new chat sessions
+### For Codex, Claude Code and new sessions
 
-Paste the relevant section(s) of `project.md` into the chat. If using Claude Code on this repo, point Claude at the file directly with `@project.md` or place a thin `CLAUDE.md` at the repo root that links to it.
+Read the root instruction file first, then [`next-session.md`](next-session.md) and only the relevant section(s) of `project.md`. This repository intentionally keeps root `AGENTS.md` (discovered by Codex) and `CLAUDE.md` (used by Claude tooling) as exact byte-for-byte duplicates. Update both together and verify with `cmp -s AGENTS.md CLAUDE.md`.
 
 ### For potential buyers
 
@@ -203,9 +183,9 @@ Copy `project-template.md` to the new project's repo as `PROJECT.md` (or `CLAUDE
 
 ## Document versioning
 
+- **v1.5 — 2026-07-19** — Refreshed the operational-document index, added the Search/AI measurement and buyer data-room workstreams, clarified historical audit status, and documented the exact `AGENTS.md`/`CLAUDE.md` mirror policy for Codex and Claude sessions.
 - **v1.4 — 2026-06-04** — Technical-build closeout. Added [`next-session.md`](next-session.md) as the fast-start front door for resuming work. `project.md` updates: top header + new "Recently completed (2026-06-04 session)" block (Terms rewrite, named author E-E-A-T, security.txt, GSC URL triage, AdSense preconnect, Lighthouse baseline), Section 9 gains PageSpeed Insights subsection with baseline numbers + API rate-limit gotcha, Section 18 `security.txt` flipped Live, Section 21 "This week / next session" refocused on the two primary growth items (cross-platform analytics review + backlinks push). README's "What was produced" table now includes all 6 docs with relative links + flags next-session.md as the front door.
 - **v1.3 — 2026-05-30** — Three-front session: Instagram channel activated (`@beatthescamuk`), full Semrush remediation pass (Site Health 96% → 98%, AI Search 88% → 99%, 454 issue-instances cleared), Google disavow file uploaded for 66 toxic domains. project.md gains Section 14 Disavow Policy subsection + Section 9 Semrush subsection.
-- **v1.2 — 2026-05-22 (afternoon)** — Three further capability ships:
 - **v1.2 — 2026-05-22 (afternoon)** — Three further capability ships:
   - **Auto-thumbnail generation + auto-upload.** `scripts/generate_video.py` now renders a brand-aligned 1280×720 JPEG sidecar; `scripts/upload_to_youtube.py` uploads it via `yt.thumbnails().set()` after the video upload (non-fatal on phone-verification failure). Per-family `thumbnail_text` in `HOOK_TEMPLATES` keeps copy topic-correct.
   - **Never-cut-mid-sentence guarantee.** `shorten_warning()`'s ellipsis-fallback step was deleted entirely. If no clean clause boundary exists within 90 chars, the function returns the full original sentence. Eliminates the `"bank…"` / `"didn't expect…"` failure mode by construction, not by best-effort.
@@ -225,4 +205,4 @@ Future updates should bump the version and note what changed.
 
 ---
 
-*End of Summary. The three documents (`project.md`, `project-template.md`, `README.md`) plus `video-pipeline.md` together replace the entire ad-hoc handoff document set as the canonical project documentation. The prior session handoffs (`beatthescam-chat-handoff.md`, the in-flight `SessionHandoff-*` markdown files at repo root, `ProjectHandoffDocument.md`, `SecurityAuditHandoff.md`, `Template.md`) can be deleted — every fact from them that's still load-bearing is now in this canonical set.*
+*End of summary. Current status lives in `next-session.md` and `project.md`; operational detail lives in the linked runbooks; dated audits and retired pipeline documents remain historical evidence rather than current task lists.*

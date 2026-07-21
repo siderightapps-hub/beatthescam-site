@@ -5,6 +5,8 @@ Verdict audit (2026-06-22). These are **manual dashboard tasks** — none of thi
 lives in the repo. Status reflects the live state confirmed by `dig` on
 2026-06-22.
 
+> **Documentation review 2026-07-19:** no later DMARC-policy or HSTS-preload outcome is recorded in the repository. Treat the values below as the last verified snapshot and recheck live DNS plus the accumulated `dmarc@` reports before changing enforcement.
+
 ## Where everything is managed
 
 | Thing | Provider | Notes |

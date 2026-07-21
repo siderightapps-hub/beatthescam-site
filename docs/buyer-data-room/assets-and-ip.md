@@ -6,7 +6,7 @@ Last reviewed: 2026-07-19
 |---|---|---|---|---|
 | `beatthescam.com` domain | Registrar account + DNS records | SideRight Apps / exact legal owner TBC | Domain push or registrar transfer | Registration invoice; confirm registrant name |
 | Beat the Scam brand and logo | Repository history and design assets | SideRight Apps / exact legal owner TBC | Intended sale asset | Trademark clearance/filing decision |
-| Guide corpus | 182 source records; 181 indexable guides after one documented consolidation | Exact legal owner TBC | Intended sale asset | Written authorship/IP declaration; contractor assignments if any |
+| Guide corpus | 183 source records; 182 indexable guides after one documented consolidation | Exact legal owner TBC | Intended sale asset | Written authorship/IP declaration; contractor assignments if any |
 | Static-site generator and functions | Git history in repository | Exact legal owner TBC | Intended sale asset | Third-party dependency/licence schedule |
 | Research datasets and reports | Dated source snapshots, method and public normalized releases | Exact legal owner TBC | Intended sale asset | Dataset licence statement and raw-export retention schedule |
 | AI scam checker | Source code + Anthropic integration | Exact legal owner TBC | Code transfers; purchaser needs own billing credentials | Model/vendor terms and current cost history |

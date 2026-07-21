@@ -1,5 +1,7 @@
 # Beat the Scam: site, content, AdSense and search audit
 
+> **Historical point-in-time audit (2026-07-16).** Subsequent remediation and reviewed releases changed the live corpus. Do not treat unchecked items or counts in this report as current status; use `docs/next-session.md`, `docs/project.md` and `scripts/validate_dist.py`.
+
 **Audit date:** 16 July 2026
 **Scope:** all 182 published guides, all category hubs and generated public pages, live deployment, source links, structured data, crawl/index controls, advertising placement, and 90-day Google Search Console performance.
 

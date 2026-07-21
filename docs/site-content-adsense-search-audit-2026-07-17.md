@@ -1,5 +1,7 @@
 # Beat the Scam: content, AdSense, search and AI-discovery audit
 
+> **Historical point-in-time audit (2026-07-17).** Subsequent remediation and reviewed releases changed the live corpus. Do not treat unchecked items or counts in this report as current status; use `docs/next-session.md`, `docs/project.md` and `scripts/validate_dist.py`.
+
 **Audit date:** 17 July 2026
 **Scope:** the current source corpus, generated site and live production site. Previous audit documents were deliberately not used.
 

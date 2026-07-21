@@ -52,34 +52,37 @@ beatthescam.com · hello@beatthescam.com
 
 **Answer template — courier/delivery text (DPD / Evri / Yodel / Royal Mail):**
 ```
-That's a textbook smishing text. DPD (and Evri/Yodel/Royal Mail) don't charge a
-"redelivery" or "release" fee by text, and they never ask for card details through
-a link — so anything telling you to pay a small fee to free a parcel is a scam. The
-tell is a link + a fee or "confirm your details"; a real DPD text just gives a
-delivery window and a dpd.co.uk tracking link, no payment.
+An unexpected courier text asking for a small redelivery or release fee is a
+common smishing pattern, but do not decide from the message alone. DPD can send
+genuine payment notifications for import duties or taxes. Avoid the message link:
+open the retailer or courier app/site independently and enter the tracking number.
+If the parcel or charge is not shown there, contact the courier through its
+official website.
 
 If you tapped it and entered card details, ring your bank now on the number on the
-back of your card and ask them to block it — and be ready for a follow-up call
-pretending to be "your bank's fraud team", because that's usually stage two of the
-same scam. You can forward the text free to 7726 and report it at
+back of your card and explain exactly what was entered. Be cautious about a
+follow-up call pretending to be your bank's fraud team. You can forward a
+suspicious text free to 7726 and report the fraud at
 reportfraud.police.uk.
 
-If you didn't enter anything, just delete it — no harm done.
+If you opened the link but entered nothing, close it and avoid downloading or
+installing anything. If you entered a password, change it on the genuine service
+and anywhere it was reused.
 ```
 
 **Answer template — bank verification codes not arriving:**
 ```
-Before assuming the worst — missing bank texts are almost always mundane: weak
-signal, Do Not Disturb/Focus, a full message inbox, or the bank's SMS gateway
-lagging. Reboot, check DND and your blocked-numbers list, and request the code
-again. Most UK banks also let you approve logins in-app instead of by SMS, which
-sidesteps the whole problem.
+Missing bank texts can have routine causes: weak signal, Do Not Disturb/Focus, a
+full message inbox, a blocked sender or a bank/network delay. Reboot, check those
+settings and request the code again. If your bank offers approval in its genuine
+app, use that route rather than following a message link.
 
 The one time it's serious is if your whole phone loses service ("No SIM" / "SOS
 only") and both texts and calls stop — that combination can signal a SIM-swap. If
 that's happening, use another phone to call your bank and your mobile network
-straight away. But if only the bank text is missing while everything else works,
-it's almost certainly just delivery, not fraud.
+straight away. If only one bank text is missing while everything else works, a
+delivery problem is more likely, but verify through the bank's official app or
+the number on your card if you remain concerned.
 ```
 
 ---
@@ -90,15 +93,17 @@ Quora tolerates one cited source link per answer. Answer fully, add the link as 
 
 **Template — "How do I know if a [DPD] text is real / a scam?":**
 ```
-Short version: if a "DPD" text asks you to pay a fee or "confirm" details through a
-link, it's a scam. DPD doesn't charge a redelivery fee by text and never needs your
-card number, PIN or a banking code to deliver a parcel.
+Short version: treat an unexpected "DPD" redelivery-fee text as suspicious, but
+verify independently rather than using one absolute rule. DPD can send genuine
+payment notifications for import duties or taxes. DPD does not need your PIN or a
+one-time banking code to deliver a parcel.
 
 What a genuine DPD text looks like: it relates to a parcel you're actually
 expecting, gives a one-hour delivery window, and links to dpd.co.uk to track or
-reschedule — no payment. Scam versions come from random mobile or international
-numbers, use lookalike web addresses (dpd-redelivery-something rather than
-dpd.co.uk), and pressure you to act within hours.
+reschedule. A payment request should also appear when you independently check the
+parcel. Scam versions may use random mobile or international numbers, lookalike
+web addresses (dpd-redelivery-something rather than dpd.co.uk), and pressure you
+to act within hours.
 
 How to check safely: don't tap the link. Find the tracking number in the dispatch
 email from the shop you ordered from, then type dpd.co.uk yourself (or open the DPD

@@ -8,9 +8,9 @@
 > 3. Potential buyers / acquirers — full due-diligence briefing on the asset.
 > 4. Contractors, future editors, security reviewers — onboarding pack.
 >
-> **Last updated:** 2026-07-10
+> **Last updated:** 2026-07-21
 > **Domain age:** ~5 months (registered February 2026)
-> **Site state:** 181 guides published (grows ~1/day via the gated cron, net of occasional consolidations — see `docs/content-diversification-plan.md` for the current count), 17 normalised categories, AI checker live (durable rate limit + daily spend cap), newsletter live (Resend, **double opt-in** + signed one-click unsubscribe), UK/EEA ad+analytics consent via Google's certified CMP, llms.txt + security.txt deployed, full UK Terms (E&W + Scotland + NI), named author E-E-A-T (Alex Bacsa) with cross-publication identity (CloudFintech + Tuning Digital + SalesTap + LinkedIn). **Video production (YouTube Shorts + TikTok + Instagram Reels) was discontinued 2026-06-15** — it built neither domain authority nor backlinks; see `docs/video-pipeline.md`. Semrush Site Health **98%**, AI Search Health **99%**, Lighthouse mobile Performance **92–97** / Accessibility **95–98** / Best Practices **92** / SEO **100** across homepage, guide, author pages. ~191 residual Semrush warnings all from Google's AdSense CDN (irreducible third-party floor). **Technical build is mature and stable.** Editorial accuracy is now defence-in-depth: autonomous publishing is gated (deterministic + LLM judge), reporting routes are validated against a verified source canon (`content/sources.json`), every guide carries a claim manifest (`content/manifests/`), and a weekly audit digest surfaces flag-tier claims for human review — see the content-accuracy section.
+> **Site state:** 184 guide source records and 183 indexable guides after one documented consolidation, 17 normalised categories, 225 generated HTML files and 223 indexable canonical pages as validated on 2026-07-21. The AI checker, consent-aware conversion events and Resend double-opt-in newsletter are live. Original research, Search Console/Bing AI snapshots, commercial ledgers and a buyer data-room structure are present. No `auto-content` PR is open after reviewed Hinge guide PR #61 merged. **Technical build is mature and stable; the open work is commercial evidence, external-account status, authority growth, sale-readiness documentation and the DMARC enforcement ramp.** Video production was discontinued 2026-06-15; see `docs/video-pipeline.md`.
 > **Maintainer:** Alex — SideRight Apps (GitHub: `siderightapps-hub`)
 
 ---
@@ -58,7 +58,7 @@
 
 A free, UK-focused consumer-protection publication that:
 
-1. Publishes plain-English **scam awareness guides** (182 source records and 181 indexable guides after one documented consolidation).
+1. Publishes plain-English **scam awareness guides** (184 source records and 183 indexable guides after one documented consolidation).
 2. Offers a **free AI-powered Scam Checker** at `/check/` where users paste suspicious messages and receive a verdict, confidence score, red flags, green flags, recommended actions, and reporting links.
 3. Routes users to legitimate UK reporting bodies (Report Fraud / `reportfraud.police.uk`, NCSC, FCA Firm Checker, Take Five, Citizens Advice).
 4. Is being prepared to monetise through Google AdSense, affiliate partnerships and future newsletter/sponsorship channels; no revenue should be claimed until supported by platform statements or receipts.
@@ -68,7 +68,7 @@ A free, UK-focused consumer-protection publication that:
 
 - The brandable domain `beatthescam.com` is short, memorable, and clearly communicates the consumer-protection purpose.
 - Consumer fraud is a **YMYL** (your-money-or-your-life) niche, so verifiable expertise, accuracy and trust controls matter more than speculative advertising-rate claims.
-- The site has 181 indexable UK-focused guides, a mature technical SEO foundation, schema markup, original public research and a secured AI scam checker.
+- The site has 183 indexable UK-focused guides, a mature technical SEO foundation, schema markup, original public research and a secured AI scam checker.
 - The brand is portable: it could be acquired by a consumer-finance publisher, a cybersecurity SaaS vendor, an insurance / identity-protection brand, or a UK media group.
 
 ---
@@ -112,7 +112,7 @@ A free, UK-focused consumer-protection publication that:
 |---|---|---|
 | Site generation | **Custom Python static site generator** (`scripts/build.py`) | NOT Next.js, NOT Hugo, NOT Jekyll. Bespoke Python that reads `content/posts.json` + `content/site.json` and renders into `dist/` using `templates/base.html`. |
 | Templating | Single `templates/base.html` shell with `{{placeholder}}` substitution | Simple, fast, no framework dependency. |
-| Source of truth (content) | `content/posts.json` | All 181 guides as JSON records (grows ~1/day via the gated daily cron). |
+| Source of truth (content) | `content/posts.json` | 184 source records; 183 indexable guides after one documented consolidation (grows via the gated daily cron). |
 | Hosting / CDN | **Netlify** (Personal plan — $9/month, 1000 build credits) | Auto-deploys on push to `main`. |
 | Serverless functions | **Netlify Functions** (5: `check-scam`, `subscribe`, `confirm-subscribe`, `unsubscribe`, `csp-report`) | AI checker proxy + double opt-in newsletter (subscribe/confirm/unsubscribe) + CSP violation collector. Functions now carry a `package.json` (`@netlify/blobs`). |
 | AI for scam checker | **Anthropic Claude — `claude-haiku-4-5-20251001`** | Returns structured JSON verdict. Durable per-IP rate limit + daily spend cap (`DAILY_CALL_CAP=2000`/UTC-day) via Netlify Blobs. |
@@ -379,8 +379,8 @@ This is the **complete inventory of every external account** the site depends on
 ### Twitter / X
 
 - **Handle:** `@BeatTheScamUK`
-- **API access tier:** Free or Basic (confirm)
-- **OAuth credentials:** stored as GitHub Secrets for `tweet_new_articles.py`
+- **API access tier:** Last recorded as Free or Basic; current tier requires dashboard verification.
+- **OAuth credentials:** Expected as GitHub Secrets for `tweet_new_articles.py`; presence must be verified before relying on automation.
 - **Posting frequency:** On every new article publish (via `tweet-on-publish.yml`, fires on merge to `main`)
 
 ### TikTok
@@ -398,7 +398,7 @@ This is the **complete inventory of every external account** the site depends on
 
 - **Channel:** Beat The Scam (Brand Account)
 - **Owner Google account:** `siderightapps@gmail.com`
-- **Channel handle:** TBC
+- **Channel handle:** Not recorded; verify in YouTube Studio if the dormant channel is included in a future transfer.
 - **Posting (historical):** Manual upload of Shorts via the YouTube Studio interface
 - **API:** Not used
 
@@ -407,7 +407,7 @@ This is the **complete inventory of every external account** the site depends on
 **[DISCONTINUED 2026-06-15 — key deleted, plan should be downgraded/cancelled]**
 
 - **Account email:** `socialmedia@beatthescam.com`
-- **Plan:** Starter ($6/month) — should be downgraded/cancelled now that the key is deleted
+- **Plan:** Last recorded as Starter ($6/month); cancellation/downgrade outcome is not evidenced in the repository.
 - **Voice used:** Daniel (British male) — changed from Grace
 - **Used for (historical):** Voiceovers in Shorts/TikTok videos
 
@@ -427,17 +427,16 @@ This is the **complete inventory of every external account** the site depends on
 
 ### Impact.com (affiliate network)
 
-- **Status:** Account created, site verified via meta tag
-- **Programmes pending:** Norton 360 (via Impact)
+- **Last recorded status:** Account created and site verified via meta tag; Norton 360 application pending. Re-verify in the dashboard before treating either state as current.
 
 ### Awin (affiliate network)
 
-- **Status:** Application rejected on first attempt (new domain). **Reapply window: 2026-06-12 onwards** (~4–6 weeks post rejection) with Search Console traffic evidence.
+- **Last recorded status:** Application rejected on first attempt; the reapply window opened 2026-06-12. The repository contains no evidence that a later application was submitted or approved.
 - **Programmes targeted:** Experian IdentityPlus
 
 ### CJ Affiliate (Commission Junction)
 
-- **Status:** Application in progress; publisher description submitted
+- **Last recorded status:** Application in progress and publisher description submitted. Current outcome requires dashboard verification.
 - **Programmes targeted:** Norton 360 (alternative route), Which? Legal
 
 ### Direct affiliate outreach (planned)
@@ -551,17 +550,17 @@ Semrush exposes a Looker Studio connector under the Site Audit "Export" menu. No
 
 ### Channel status table
 
-⚠️ Table dated 2026-05-20 — re-verify each row's status, especially Awin (reapply window has since opened).
+Repository evidence reviewed 2026-07-19. External dashboard states remain unknown until supported by a dated export or screenshot; the earlier revenue ranges were speculative and are not valuation evidence.
 
-| Channel | Status (2026-05-20) | Estimated revenue at scale |
+| Channel | Last repository-supported state | Evidence needed next |
 |---|---|---|
-| **Google AdSense** | In review since ~2026-04-21 | £30–£900/mo depending on traffic |
-| **Experian IdentityPlus (via Awin)** | Awin rejected, reapply 2026-06-12+ (reapply window opened 2026-06-12 — confirm with operator whether this happened) | £50–£300/mo if approved |
-| **Norton 360 (via Impact/CJ)** | Impact verified, CJ application in progress | £50–£250/mo if approved |
-| **Which? Legal (direct outreach)** | Email outreach drafted | £30–£150/mo if approved |
-| **Cifas Protective Registration** | Direct outreach planned | £20–£100/mo (lower commission tier) |
-| **Newsletter sponsorships** | Newsletter live (Resend, double opt-in) — list size TBC | £100–£500/mo per sponsored issue once list >2,000 |
-| **Direct sponsorships** | None yet | Untapped — security SaaS brands relevant |
+| **Google AdSense** | Last recorded as in review since ~2026-04-21 | Current AdSense home/Policy Centre decision and first statement if approved |
+| **Experian IdentityPlus (via Awin)** | Initial application rejected; reapply window opened 2026-06-12 | Current application/programme decision and approved tracking terms |
+| **Norton 360 (via Impact/CJ)** | Impact account verified; programme/CJ outcome not recorded | Current programme decisions and approved tracking terms |
+| **Which? Legal (direct outreach)** | Draft outreach exists; no approval recorded | Written partner response and commercial terms |
+| **Cifas Protective Registration** | Direct outreach planned; no commercial approval recorded | Written partner response and commercial terms |
+| **Newsletter sponsorships** | Resend double-opt-in newsletter live; active subscriber count not recorded | Dated Resend export, engagement history and signed sponsor order |
+| **Direct sponsorships** | No signed arrangement recorded | Signed insertion order/contract and payment evidence |
 
 ### AdSense — readiness checklist
 
@@ -571,7 +570,7 @@ Semrush exposes a Looker Studio connector under the Site Audit "Export" menu. No
 - [x] Cookie Policy page live (`/cookies/`)
 - [x] `ads.txt` served and Authorised at `/ads.txt`
 - [x] `robots.txt` does not block `Mediapartners-Google` or `AdsBot-Google`
-- [x] Original, regularly-published content (181 guides, gated daily publishing pipeline)
+- [x] Original, regularly-published content (183 indexable guides, gated daily publishing pipeline)
 - [x] Working HTTPS with valid certificate
 - [x] Site has clear navigation and footer
 
@@ -637,8 +636,8 @@ multiplex_unit:       <add after creation>
 
 ### Current state
 
-- **Published guides:** 181 across 17 normalised categories
-- **Queue:** ~30 remaining topics in `content/daily-publish-queue.csv` (~30 days at 1/day)
+- **Published guides:** 183 indexable guides across 17 normalised categories (184 source records before consolidation)
+- **Queue:** 26 remaining topics in `content/daily-publish-queue.csv` (~26 publishing days at 1/day)
 - **Avg article length:** 900–1,200 words (post-rewrite of 20 thin guides)
 - **Structure per article:** 6 sections × 120–180 words + 4 FAQs + sidebar (Fast checks, Related guides, Report this scam, Checker CTA, Affiliate card) + FAQ schema
 - **Reporting links & brand:** `reportfraud.police.uk`, branded **"Report Fraud"** throughout the canon (`content/sources.json`) and every template surface (guide footer, `/check/`, `/about/`, `/terms/`, `/contact/`, `/disclaimer/`, `humans.txt`) — fixed 2026-07-10; the link had been migrated earlier but ~15 hardcoded spots in `build.py` plus the canon `name`/`info_url` fields still said "Action Fraud" / `actionfraud.police.uk` until then. **Guide prose sweep also done (2026-07-10, `f70802f41` / PR #56):** every rendered field (`sections`/`faq`/`title`/`description`) in `content/posts.json` is now "Report Fraud"-branded and `dist/` carries zero `actionfraud.police.uk` links. The only remaining "Action Fraud" strings in `posts.json` sit in the dead, never-rendered legacy `content` field (169 guides — harmless, see the legacy-field gotcha) plus the intentional "(formerly Action Fraud)" parenthetical the canon report block renders on-page. See `docs/content-diversification-plan.md` §8.
@@ -727,7 +726,7 @@ python3 scripts/upload_to_youtube.py <slug>         # auto-upload Unlisted
 # TikTok upload remains manual via tiktok.com web
 ```
 
-The pipeline ([`scripts/generate_video.py`](scripts/generate_video.py)):
+The pipeline ([`scripts/generate_video.py`](../scripts/generate_video.py)):
 
 - Reads any post from `content/posts.json` by slug.
 - Renders 8 Pillow text cards (Hook → Promise → 3 Signs → Verify → CTA → End card) on the brand palette (`#0b1220` navy, `#3a86ff` accent, `#ff5c5c` alert red).
@@ -737,7 +736,7 @@ The pipeline ([`scripts/generate_video.py`](scripts/generate_video.py)):
 - Outputs 1080×1920 H.264 MP4 at ~45s, ~28MB, to `out/videos/<slug>.mp4` (gitignored).
 - Renders per-card frames + audio for debug at `out/videos/<slug>-frames/` and `out/videos/<slug>-audio/`.
 
-YouTube auto-upload ([`scripts/upload_to_youtube.py`](scripts/upload_to_youtube.py)) reads the MP4 + the `.upload.md` sidecar, uploads via the YouTube Data API v3 (Unlisted by default for 24h review, `--public` to publish immediately). After the video upload, it also auto-uploads the brand thumbnail (1280×720 JPEG) via `yt.thumbnails().set()` and creates a **macOS Reminder** ("Upload `<slug>` to TikTok" at 07:30 local time) so the remaining manual TikTok step doesn't get forgotten. Reminder syncs to iPhone via iCloud. One-time OAuth setup: `docs/youtube-upload-setup.md` (~15 min). First-run macOS permission grant: `python3 scripts/upload_to_youtube.py --test-reminder`.
+YouTube auto-upload ([`scripts/upload_to_youtube.py`](../scripts/upload_to_youtube.py)) reads the MP4 + the `.upload.md` sidecar, uploads via the YouTube Data API v3 (Unlisted by default for 24h review, `--public` to publish immediately). After the video upload, it also auto-uploads the brand thumbnail (1280×720 JPEG) via `yt.thumbnails().set()` and creates a **macOS Reminder** ("Upload `<slug>` to TikTok" at 07:30 local time) so the remaining manual TikTok step doesn't get forgotten. Reminder syncs to iPhone via iCloud. One-time OAuth setup: `docs/youtube-upload-setup.md` (~15 min). First-run macOS permission grant: `python3 scripts/upload_to_youtube.py --test-reminder`.
 
 ### Hashtag template
 
@@ -781,7 +780,7 @@ This site is engineered for three search modes simultaneously:
 - Reading time on every article
 - Table of contents on every article
 - Related-guides sidebar (cross-category scoring — shared keywords count, not just same category)
-- **Pagination of `/guides/`** at 30/page (currently 6 pages) with `rel=prev/next` + per-page canonicals
+- **Pagination of `/guides/`** at 30/page (currently 7 pages) with `rel=prev/next` + per-page canonicals
 - `sitemap.xml` auto-generated, **per-category `lastmod` reflects newest member** (not build date); submitted to Search Console + Bing Webmaster Tools
 - `robots.txt` tightened (blocks `/search/`, `*.php`, `?l=` spam patterns)
 - Category 301s deployed via `dist/_redirects`
@@ -1233,7 +1232,7 @@ google.com, pub-1606633100797174, DIRECT, f08c47fec0942fa0
 
 [`llms.txt`](https://llmstxt.org/) is the emerging standard for telling LLM crawlers (ChatGPT, Claude, Perplexity, Gemini) what content on the site is canonical and citation-worthy. **Live at https://beatthescam.com/llms.txt** — generated by `scripts/build.py` from `content/posts.json` on every build.
 
-Structure: a brief site description, then categories listed (with guide counts), then every guide grouped by category with title + URL + description, then an "Optional" section for About/Contact/Privacy. Line count will drift with corpus size — check `dist/search.json` for the exact current figure (181 entries as of 2026-07-10).
+Structure: a brief site description, then categories listed (with guide counts), then every guide grouped by category with title + URL + description, then an "Optional" section for About/Contact/Privacy. Line count will drift with corpus size — check `dist/search.json` for the exact current figure (182 entries as of 2026-07-19).
 
 Impact: AI Search Health jumped from 88% → 99% in the Semrush audit on the next crawl after deployment.
 
@@ -1343,11 +1342,11 @@ Revoke PATs after use at github.com → Settings → Developer settings → Pers
 
 5. **Netlify credit usage cap.** 1,000 credits/month. Pipeline only deploys when `dist/` changes. Monitor monthly.
 
-6. **AdSense approval delay.** Site has been in review since ~2026-04-21 (re-started after `ads.txt` fix) — well past the original "chase after 14 days" trigger as of 2026-07-04. Chase now if still pending; current status can't be verified from the repo.
+6. **AdSense status is externally unverified.** The last repository record says review began around 2026-04-21 after the `ads.txt` fix. As of the 2026-07-19 documentation review, no later dashboard decision or revenue evidence is retained. Check AdSense and its Policy Centre; record the dated result without inferring approval.
 
-7. **Awin rejected.** Reapply window opened 2026-06-12 with Search Console traffic data — that date has passed (today is 2026-07-04); confirm with the operator whether the reapply happened.
+7. **Affiliate application states are externally unverified.** The Awin reapply window opened 2026-06-12, but no later Awin, Impact or CJ decision is retained. Recommendations remain direct/untracked until documentary approval and tracking links exist.
 
-8. **Content queue depletion.** ~30 topics remaining in `content/daily-publish-queue.csv` at 1/day (the daily-publish cron's actual rate — verified against the CSV: 214 rows, 30 not yet published) = ~30 days. Add new topics before queue empties.
+8. **Content queue depletion.** 26 topics remain in `content/daily-publish-queue.csv` at 1/day (verified 2026-07-19: 214 rows, 187 published, 1 skipped, 26 pending) = ~26 publishing days. Add a fact-checked, evidence-led tranche before the queue empties.
 
 9. **Local Mac keyboard interference.** Some pasted commands containing `build.py` were silently converted to markdown link format on the local laptop. Workaround: tab-completion or rename file when running locally. CI is unaffected.
 
@@ -1365,7 +1364,7 @@ Revoke PATs after use at github.com → Settings → Developer settings → Pers
 
 16. **Mailbox aliases — DONE 2026-06-09.** `abuse@`, `hello@`, `legal@`, `privacy@`, `security@`, `socialmedia@` are all live and routed to dedicated inboxes, driven by `content/site.json` keys `security_email`/`privacy_email`/`legal_email` (`security.txt` + contact page → `security@`; Privacy/Cookie policies → `privacy@`; Terms/copyright → `legal@`; general/editorial stays on `hello@`). No open item here — see `docs/next-session.md` for anything DNS-level still tracked.
 
-17. **No `/terms/` page audit confirmed.** Verify it exists and is current.
+17. **Terms page is live.** `/terms/` is generated by `build.py` and was substantively rewritten/audited 2026-06-04. Keep `TERMS_LAST_UPDATED` aligned with future legal-copy changes.
 
 18. **No formal trademark filing.** Recommend UK IPO classes 41 + 42.
 
@@ -1491,26 +1490,24 @@ Superseded by [`docs/next-session.md`](next-session.md), which is updated far mo
 
 ### Near-term (4–8 weeks)
 
-- [ ] Near-miss query optimisation pass (top 5 queries from Search Console)
-- [ ] Contextual in-body internal-linking sweep across top 30 guides
-- [ ] Replace placeholder `href` values in `affiliates.json` as programmes approve
-- [ ] Reapply to Awin (window opens 2026-06-12)
-- [ ] Follow up CJ Affiliate
-- [ ] Direct outreach: Experian, Norton, Which? Legal, Cifas
-- [ ] AdSense approval — chase if still pending after 2026-05-25
-- [ ] Foundation backlinks: niche directory submissions (5/week for 6 weeks)
-- [ ] Reddit / Quora cadence — 3–5/week
+- [ ] Capture current AdSense, GA4, Resend and affiliate-platform evidence; begin monthly KPI/P&L closes.
+- [ ] Record exact legal ownership/data-controller details, IP assignments and the sale asset perimeter.
+- [ ] Complete the credential/admin inventory and document a cold-backup restoration test.
+- [ ] Review DMARC aggregate reports and complete the staged quarantine→reject ramp if alignment is clean.
+- [ ] Follow up authority outreach, start a consistent expert-contribution cadence and record only evidenced wins.
+- [ ] Publish the next recurring trend report and compare equal Search Console/Bing AI periods against the July baseline.
+- [ ] Add an evidence-led queue tranche before the remaining 26 topics are exhausted.
+- [ ] Re-verify Awin, Impact and CJ; replace direct/placeholder links only after written programme approval.
 
 ### Medium-term (8–24 weeks)
 
 - [ ] **URL Checker feature** — integrate VirusTotal + Google Safe Browsing into the scam checker. Biggest single SEO/PR opportunity on the site.
-- [ ] **Email newsletter** — list-building for direct revenue + domain value. Provider TBD (ConvertKit / Buttondown / MailerLite).
 - [ ] **"Was this guide helpful?" widget** — Yes/No micro-feedback for dwell-time signals and editorial improvement.
 - [ ] First guest-post placement on a DA 40+ UK publication
 - [ ] HARO / Featured.com responses → first quoted-source placement
 - [ ] Trademark filing (UK IPO classes 41 + 42)
 - [ ] WCAG 2.1 AA accessibility audit
-- [ ] Set up offline cold backup cadence
+- [ ] Build newsletter engagement history and a documented sponsorship proposition after subscriber evidence supports it.
 
 ### Long-term (6–12 months)
 
@@ -1530,7 +1527,7 @@ Superseded by [`docs/next-session.md`](next-session.md), which is updated far mo
 
 - Domain: `beatthescam.com`, registered February 2026 (approximately five months old at this review).
 - Repository and generated site, including the static-site generator and Netlify Functions.
-- 182 guide records in `content/posts.json`; 181 indexable guides after one documented Hermes-to-Evri consolidation.
+- 184 guide records in `content/posts.json`; 183 indexable guides after one documented Hermes-to-Evri consolidation.
 - AI scam checker with durable rate limits, daily cap and UK reporting-link allow-list.
 - Human-review-gated content pipeline, source canon, claim manifests, correction log and quarterly reverification workflow.
 - Public research section, transparent methodology and retained Search Console/Bing AI snapshots.
