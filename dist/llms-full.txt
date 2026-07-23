@@ -8901,13 +8901,15 @@ Report it to Microsoft through `microsoft.com/en-us/concern/scam` or `reportfrau
 ## Printer Support Scam UK: Spot a Fake HP Contact
 
 URL: https://beatthescam.com/guides/printer-support-scam-uk/
-Category: Tech Support Scams · Updated: 2026-07-19
+Category: Tech Support Scams · Updated: 2026-07-23
 
 An unsolicited caller or pop-up claims a printer fault and asks for remote access or payment. HP says it does not provide unsolicited technical support.
 
 ### What the scam looks like
 
 A caller, email or browser page impersonates HP or another printer company and claims a fault, infection, expired driver or urgent support problem. It then seeks payment, credentials, or remote access to the computer.
+
+Genuine printer problems such as driver conflicts, Wi-Fi drop-outs and jobs stuck in the queue can make a fake support approach feel plausible when someone is already frustrated and searching for help.
 
 ### What HP says
 
@@ -8920,6 +8922,12 @@ HP’s fraud alert says it never contacts customers to provide unsolicited techn
 - A request for remote control, passwords, gift cards or unusual payment.
 - A caller who prevents independent verification or becomes aggressive.
 - A support site reached through an advert rather than through the manufacturer’s site.
+
+### How the scam usually starts: search ads and fake support sites
+
+One version starts when someone searches online for printer help and reaches a misleading advert or lookalike support site. Searching phrases like 'HP printer support number UK' or 'printer not printing help' can surface paid adverts and lookalike sites that imitate a manufacturer's support page and display a phone number the real company never uses. Ringing it connects you to the scammer, who 'diagnoses' a fault, asks for remote access, and charges for unnecessary work or for software that is available directly from the manufacturer's official support page.
+
+A related version charges a fee for something the manufacturer does for nothing, such as reinstalling a driver you can download yourself. Reach support only by typing the manufacturer's own address — for example `support.hp.com`, `epson.co.uk` or `canon.co.uk` — rather than clicking an advert, and treat any 'support line' that demands payment up front before naming the fault as a red flag.
 
 ### Verify support independently
 
@@ -8937,11 +8945,19 @@ Report fraud at `reportfraud.police.uk` or on 0300 123 2040 in England, Wales or
 
 **Does HP make unsolicited support calls?**
 
-HP’s published fraud guidance says no.
+HP's published fraud guidance says no — it never contacts customers to provide unsolicited technical support. Treat an unexpected call, email or pop-up claiming to be HP support as unverified. Do not use its links or contact details; reach HP through the official support page you open yourself. Caller ID is not proof because it can be spoofed.
 
 **Where is the official UK support page?**
 
-`support.hp.com/gb-en/contact`.
+`support.hp.com/gb-en/contact` — type it yourself rather than following an advert or pop-up. Identify your product there to see the support options available; some contact routes require an active warranty. Other manufacturers follow the same pattern: use the support section of `epson.co.uk` or `canon.co.uk` typed directly into the browser.
+
+**I let the caller install remote-access software — what should I do?**
+
+Disconnect the computer from the internet, then uninstall the remote-access program they had you install and restart the machine. Change the passwords for any account you used while they were connected — starting with email and banking — from a different device, and run a security scan. If you paid or your banking was exposed, call your bank straight away using the number on your card, or 159. Then report it to Report Fraud at `reportfraud.police.uk` or on 0300 123 2040 (Police Scotland on 101 in Scotland).
+
+**Are all third-party printer repair companies scams?**
+
+No — independent repair shops are legitimate. The scam pattern is different: unsolicited contact, a 'support line' found through an advert that imitates the manufacturer, urgency about a fault you have not verified, demands for remote access, or payment demanded up front in gift cards or by bank transfer. A legitimate repairer may sometimes offer remote help for printer software or configuration, but only proceed after you selected and contacted the business independently, verified who it is, and agreed the work and price. Refusal to let you verify the business or end the session is a warning sign.
 
 ## QR Code Scam UK: Spot a Fake 'Quishing' Code
 
