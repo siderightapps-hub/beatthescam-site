@@ -1,0 +1,15 @@
+{
+  "slug": "whatsapp-stranger-scam-uk",
+  "title": "WhatsApp Stranger Scam UK: How to Spot and Stop It",
+  "date": "2026-07-22",
+  "model": "claude-haiku-4-5-20251001",
+  "gate_passed": true,
+  "claims": [
+    {
+      "type": "fraud_alert",
+      "severity": "flag",
+      "text": "fraud alert on your credit file",
+      "detail": "uses US-style 'fraud alert on your credit file'. The UK mechanism is a Cifas Protective Registration (cifas.org.uk); free CRA monitoring is separate."
+    }
+  ]
+}

@@ -1,5 +1,12 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Beat the Scam</title><link>https://beatthescam.com</link><description>Scam alerts, plain-English checks, and practical guides to help people verify suspicious emails, texts, websites, calls, and offers.</description><lastBuildDate>Mon, 20 Jul 2026 00:00:00 +0000</lastBuildDate><atom:link href="https://beatthescam.com/rss.xml" rel="self" type="application/rss+xml" />
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Beat the Scam</title><link>https://beatthescam.com</link><description>Scam alerts, plain-English checks, and practical guides to help people verify suspicious emails, texts, websites, calls, and offers.</description><lastBuildDate>Wed, 22 Jul 2026 00:00:00 +0000</lastBuildDate><atom:link href="https://beatthescam.com/rss.xml" rel="self" type="application/rss+xml" />
+        <item>
+          <title>WhatsApp Stranger Scam UK: How to Spot and Stop It</title>
+          <link>https://beatthescam.com/guides/whatsapp-stranger-scam-uk/</link>
+          <guid isPermaLink="true">https://beatthescam.com/guides/whatsapp-stranger-scam-uk/</guid>
+          <pubDate>Wed, 22 Jul 2026 00:00:00 +0000</pubDate>
+          <description>A stranger messaged you on WhatsApp? Learn the warning signs, how to verify who they are, protect your accounts, recover money and report the scam.</description>
+        </item>
         <item>
           <title>Facebook Dating Scam UK: How to Spot Fake Profiles and Protect Yourself</title>
           <link>https://beatthescam.com/guides/facebook-dating-scam-uk/</link>
@@ -202,11 +209,4 @@
           <guid isPermaLink="true">https://beatthescam.com/guides/beatthescamcom-guide-spotting-and-avoiding-uk-consumer-scams/</guid>
           <pubDate>Sun, 07 Jun 2026 00:00:00 +0000</pubDate>
           <description>Every scam relies on the same handful of tricks. Learn the pattern once and you&#x27;ll recognise it in a call, text, or email you&#x27;ve never seen before.</description>
-        </item>
-        <item>
-          <title>Driveway Cowboy Scam UK: Spot a Fake Contractor</title>
-          <link>https://beatthescam.com/guides/driveway-cowboy-scam-uk/</link>
-          <guid isPermaLink="true">https://beatthescam.com/guides/driveway-cowboy-scam-uk/</guid>
-          <pubDate>Sun, 07 Jun 2026 00:00:00 +0000</pubDate>
-          <description>An unsolicited caller offers cheap driveway or roof repairs using &#x27;leftover materials&#x27;? How to spot a doorstep cowboy trader and report it in the UK.</description>
         </item></channel></rss>
