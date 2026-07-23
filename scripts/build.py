@@ -2712,11 +2712,26 @@ def build_legal_bodies(site):
     '''
 
     corrections = f'''
-    <p class="note" style="color:#666;font-size:.95rem"><strong>Last updated:</strong> 18 July 2026</p>
+    <p class="note" style="color:#666;font-size:.95rem"><strong>Last updated:</strong> 23 July 2026</p>
     <p>This log records material factual corrections to published Beat the Scam guides. It does not list spelling, formatting, accessibility, or purely stylistic changes.</p>
 
     <h2>How to request a correction</h2>
     <p>Email <a href="mailto:{site["editorial_email"]}">{site["editorial_email"]}</a> with the page URL, the wording you believe is wrong, and a primary or authoritative source where possible. We assess the claim, update the guide when warranted, and record a material change below.</p>
+
+    <h2>23 July 2026</h2>
+    <p>Following a full corpus fact re-check against current primary sources:</p>
+    <ul>
+      <li><strong>O2 text guide:</strong> replaced a defunct NCSC reporting URL and narrowed blanket &ldquo;a genuine O2 text will never&hellip;&rdquo; claims to O2's published commitment (no requests for codes, passwords or security information).</li>
+      <li><strong>Shpock guide:</strong> Buyer Protection is now described as optional paid cover that the seller must enable and the buyer must purchase with the in-app payment, with claim deadlines of seven days from proof of postage (24 hours from receipt for Parcel2Go deliveries); reporting is now routed via the item page or Shpock's trust team.</li>
+      <li><strong>Rightmove rental guide:</strong> deposit-protection wording updated for the end of assured shorthold tenancies in England and occupation contracts in Wales.</li>
+      <li><strong>Google Voice code guide:</strong> clarified that Google Voice registration targets US numbers; for UK numbers the read-back code may relate to a different or undetermined Google security flow (or another service's one-time code), and remediation steps were reworked accordingly.</li>
+      <li><strong>Bitcoin ATM guide:</strong> replaced check-the-register framing with the FCA's actual position that no registered firm is approved to operate crypto ATMs and any machine in the UK is operating illegally.</li>
+      <li><strong>IVA guide:</strong> verification route corrected &mdash; IVAs are run by licensed insolvency practitioners outside FCA authorisation, so the guide now points to the Insolvency Service's register of insolvency practitioners.</li>
+      <li><strong>Online pharmacy guide:</strong> scoped the MHRA online medicine seller register to Northern Ireland-based sellers; Great Britain checks rely on the GPhC register.</li>
+      <li><strong>Invoice redirection checklist:</strong> added the mandatory APP reimbursement scheme's eligibility scope &mdash; individuals, qualifying micro-enterprises and qualifying charities; larger businesses fall outside the mandatory scheme but retain recall and complaint routes.</li>
+      <li><strong>Santander call guide:</strong> removed an unsourced description of Santander's outbound-call identity checks in favour of hang-up-and-call-back guidance.</li>
+      <li><strong>Passport guide:</strong> stopped describing third-party application websites as &ldquo;check and send&rdquo; services, to avoid confusion with the Post Office's official Check and Send service.</li>
+    </ul>
 
     <h2>18 July 2026</h2>
     <ul>

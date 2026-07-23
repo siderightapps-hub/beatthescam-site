@@ -232,11 +232,11 @@
     "sections": [
       [
         "What is the Google Voice verification code scam?",
-        "In this scam, someone you've met online — often a 'buyer' replying to a marketplace listing, or a new match on a dating app — asks to verify that you're 'a real person and not a bot'. They say they'll send a verification code to your phone and ask you to read it back. In reality they are trying to register a Google Voice phone number using YOUR mobile number as the verification, or to take over an account tied to your number. The six-digit code Google texts you is the key to that — so by reading it out, you hand them the ability to set up a Google Voice number in your name, which they then use to scam other people while hiding their own identity. The whole 'are you real?' framing exists only to get the code out of you."
+        "In this scam, someone you've met online — often a 'buyer' replying to a marketplace listing, or a new match on a dating app — asks to verify that you're 'a real person and not a bot'. They say they'll send a verification code to your phone and ask you to read it back. In reality they have used your phone number to trigger a genuine verification code — and by reading it back, you hand them whatever that code unlocks. In the classic US version of this scam they register a Google Voice number against the victim's number and use it to defraud others while hiding their identity. Google Voice personal accounts are US-only, so the classic Voice-linking version generally concerns a US number. If a UK mobile receives a Google verification code, don't assume which flow was triggered: Google uses SMS codes for account creation, sign-in, recovery and other security checks, and other services send one-time codes too — whatever it unlocks, it is tied to your number. Either way, the whole 'are you real?' framing exists only to get the code out of you."
       ],
       [
         "How the scam works, step by step",
-        "- A stranger contacts you — a too-keen buyer for your marketplace item, or a fast-moving dating-app match.\n- They claim they've been scammed before and want to 'verify' you, or check you're 'not a bot'.\n- They say they're sending a Google (or other) verification code to your number and ask you to share or read it back.\n- A six-digit code arrives by text — it's actually Google verifying a Google Voice sign-up that uses your number.\n- If you read the code back, they complete the sign-up and now control a Google Voice number linked to you.\n- They use that number to defraud others; if your number was tied to your own accounts, they may also try to break into those."
+        "- A stranger contacts you — a too-keen buyer for your marketplace item, or a fast-moving dating-app match.\n- They claim they've been scammed before and want to 'verify' you, or check you're 'not a bot'.\n- They say they're sending a Google (or other) verification code to your number and ask you to share or read it back.\n- A six-digit code arrives by text — really a genuine verification code the scammer has triggered against your number, such as a Google account sign-in or recovery code (or, for US numbers, a Google Voice sign-up).\n- If you read the code back, they complete that sign-up, login, or account recovery as if they were you.\n- In the US version they now control a Google Voice number linked to you and use it to defraud others; for a UK number the code could belong to any of Google's security flows or another service, so the outcome can be the scammer signing into or recovering an account tied to your number."
       ],
       [
         "Where it happens and who's targeted",
@@ -248,29 +248,29 @@
       ],
       [
         "What to do if you shared the code",
-        "- Don't panic, but act. If you gave away a Google verification code, go to voice.google.com, sign in, and reclaim or remove any Google Voice number linked to your number (Google has a dedicated process for this).\n- Change your Google account password and turn on two-step verification.\n- Review your other accounts that use your phone number for security, and update any passwords you're unsure about.\n- Watch for unusual texts or calls suggesting your number is being used to contact others.\n- Stop contact with the scammer and report them on the platform you met them."
+        "- Don't panic, but act. If you gave away a Google verification code, don't assume which flow was triggered — change your Google account password, review your recent security activity at myaccount.google.com, and follow Google's recovery guidance for the affected account.\n- Turn on two-step verification for your Google account if it is not already on.\n- If a Google Voice number was set up against your number (possible for US numbers), Google has a dedicated reclaim process at voice.google.com.\n- Review your other accounts that use your phone number for security, and update any passwords you're unsure about.\n- Watch for unusual texts or calls suggesting your number is being used to contact others.\n- Stop contact with the scammer and report them on the platform you met them."
       ],
       [
         "How to report it in the UK",
-        "Report the account to the platform where it happened (the marketplace or dating app) so they can ban it. Report the fraud to Report Fraud at reportfraud.police.uk or 0300 123 2040 (in Scotland, contact Police Scotland on 101). You can reclaim a Google Voice number taken out in your name at voice.google.com, and report abuse to Google. Forward scam text messages free to 7726. The simplest protection going forward: never share a verification or one-time code with anyone — no genuine person or company needs you to read one back."
+        "Report the account to the platform where it happened (the marketplace or dating app) so they can ban it. Report the fraud to Report Fraud at reportfraud.police.uk or 0300 123 2040 (in Scotland, contact Police Scotland on 101). If a Google Voice number was registered against your number, you can reclaim it at voice.google.com and report the abuse to Google. Forward scam text messages free to 7726. The simplest protection going forward: never share a verification or one-time code with anyone — no genuine person or company needs you to read one back."
       ]
     ],
     "faq": [
       [
         "What is the Google Voice verification code scam?",
-        "It's a trick where a stranger online asks you to read back a verification code 'to prove you're real'. The code is actually Google verifying a Google Voice number being set up using your mobile number. If you share it, the scammer registers that number in your name and uses it to defraud others while hiding their identity. The 'are you a real person?' line is just bait for the code."
+        "It's a trick where a stranger online asks you to read back a verification code 'to prove you're real'. The code is a genuine one the scammer has triggered against your mobile number — in the classic US version it registers a Google Voice number in the victim's name; for a UK number it may relate to any of Google's security flows — account creation, sign-in, recovery or other checks — or another service's one-time code. Share it and the scammer completes that sign-up or login as you. The 'are you a real person?' line is just bait for the code."
       ],
       [
         "Why do they want my verification code?",
-        "Because a code sent to your phone authorises something tied to your number — most often creating a Google Voice number, but the same trick works against other accounts' one-time codes. With your code, the scammer completes a sign-up or login as if they were you. That's why no genuine buyer, match, or company ever needs you to read a code back — the code is for you alone."
+        "Because a code sent to your phone authorises something tied to your number — creating a Google Voice number in the US version of the scam, or signing into or recovering one of your own accounts, such as your Google account. With your code, the scammer completes a sign-up or login as if they were you. That's why no genuine buyer, match, or company ever needs you to read a code back — the code is for you alone."
       ],
       [
         "I shared the code — what do I do?",
-        "Go to voice.google.com, sign in, and reclaim or remove any Google Voice number linked to your number using Google's process. Change your Google password and enable two-step verification, and review other accounts that rely on your phone number. Stop contact with the scammer, report them on the platform you met them, and report the fraud to Report Fraud at reportfraud.police.uk or 0300 123 2040."
+        "Change your Google password and enable two-step verification, review your recent Google account security activity, and check other accounts that rely on your phone number. If a Google Voice number was set up against your number, reclaim or remove it using Google's process at voice.google.com. Stop contact with the scammer, report them on the platform you met them, and report the fraud to Report Fraud at reportfraud.police.uk or 0300 123 2040."
       ],
       [
         "How do I report the Google Voice scam in the UK?",
-        "Report the account to the marketplace or dating app it came from, and report the fraud to Report Fraud at reportfraud.police.uk or 0300 123 2040 (Police Scotland on 101 in Scotland). Reclaim any Google Voice number set up in your name at voice.google.com and report abuse to Google. Forward scam texts to 7726. Going forward, never share a one-time or verification code with anyone."
+        "Report the account to the marketplace or dating app it came from, and report the fraud to Report Fraud at reportfraud.police.uk or 0300 123 2040 (Police Scotland on 101 in Scotland). If a Google Voice number was set up in your name, reclaim it at voice.google.com and report the abuse to Google. Forward scam texts to 7726. Going forward, never share a one-time or verification code with anyone."
       ]
     ],
     "sources_checked": [
@@ -278,7 +278,8 @@
         "Google Voice Help — Protect your verification code",
         "https://support.google.com/voice/answer/9177797"
       ]
-    ]
+    ],
+    "updated": "2026-07-23"
   },
   {
     "slug": "beatthescamcom-guide-spotting-and-avoiding-uk-consumer-scams",
@@ -1019,7 +1020,7 @@
       ],
       [
         "If you've already paid a fraudulent account",
-        "Contact your bank immediately, using its official contact details, and ask it to attempt to recall the payment — acting within hours meaningfully improves the chance of recovery. If you sent money by UK bank transfer on or after 7 October 2024, mandatory APP fraud reimbursement rules may apply to Faster Payments and CHAPS transfers, subject to a 13-month claim window, a maximum claim of £85,000, and a possible excess of up to £100.\n\nAlso contact the genuine supplier directly, by phone, so they know their name was used and the real invoice remains unpaid."
+        "Contact your bank immediately, using its official contact details, and ask it to attempt to recall the payment — acting within hours meaningfully improves the chance of recovery. For eligible Faster Payments and CHAPS transfers made on or after 7 October 2024, the mandatory APP reimbursement scheme covers individuals, microenterprises with fewer than 10 staff and annual turnover or a balance-sheet total no greater than €2 million, and charities with annual income below £1 million — subject to a 13-month claim window, a maximum claim of £85,000, and a possible excess of up to £100. Larger businesses are outside the mandatory scheme, but should still ask the bank to attempt a recall and use any other recovery or complaint route available.\n\nAlso contact the genuine supplier directly, by phone, so they know their name was used and the real invoice remains unpaid."
       ],
       [
         "How to report an invoice redirection scam (UK)",
@@ -1037,7 +1038,7 @@
       ],
       [
         "We've already paid an invoice to the wrong account — can we get the money back?",
-        "Contact your bank immediately and ask it to attempt a recall; acting within hours improves the chance of success. Eligible UK transfers since 7 October 2024 may also qualify for APP fraud reimbursement, subject to limits and exclusions."
+        "Contact your bank immediately and ask it to attempt a recall; acting within hours improves the chance of success. Eligible Faster Payments and CHAPS transfers made on or after 7 October 2024 may also qualify for reimbursement under the mandatory APP scheme, which covers individuals, qualifying microenterprises, and qualifying charities. Larger businesses are outside the mandatory scheme, but should still pursue the bank recall and any other recovery or complaint route available."
       ],
       [
         "What's the single most effective check against this scam?",
@@ -1057,7 +1058,7 @@
       "business email compromise uk",
       "payment diversion fraud"
     ],
-    "updated": "2026-07-16",
+    "updated": "2026-07-23",
     "sources_checked": [
       [
         "NCSC — Business payment fraud (Business Email Compromise)",
@@ -5462,7 +5463,7 @@
       ],
       [
         "How to rent safely",
-        "Slow the process down and verify before paying anything.\n\n- View the property in person before paying a deposit, holding deposit, or first month's rent.\n- Never transfer money to \"hold\" a property you have not seen and verified.\n- Verify a letting agent independently - find their details yourself and check they are a real, registered agent.\n- Ask which tenancy deposit scheme will protect your deposit. In England and Wales, most assured shorthold tenancy deposits must be protected in a government-backed scheme.\n- Be wary of a landlord who is \"abroad\", cannot meet, or rushes you.\n\nIf you are unsure whether a listing or site is genuine, our guide on /guides/is-this-website-a-scam/ helps, and our /guides/airbnb-scam-uk-listings/ and /guides/council-housing-scam-uk/ guides cover related property cons."
+        "Slow the process down and verify before paying anything.\n\n- View the property in person before paying a deposit, holding deposit, or first month's rent.\n- Never transfer money to \"hold\" a property you have not seen and verified.\n- Verify a letting agent independently - find their details yourself and check they are a real, registered agent.\n- Ask which tenancy deposit scheme will protect your deposit. In England, deposits for most private residential tenancies must be protected in a government-backed scheme, and the same applies to occupation contracts in Wales.\n- Be wary of a landlord who is \"abroad\", cannot meet, or rushes you.\n\nIf you are unsure whether a listing or site is genuine, our guide on /guides/is-this-website-a-scam/ helps, and our /guides/airbnb-scam-uk-listings/ and /guides/council-housing-scam-uk/ guides cover related property cons."
       ],
       [
         "If you have already paid",
@@ -5505,7 +5506,7 @@
       "report fake rightmove listing",
       "rent scam before viewing"
     ],
-    "updated": "2026-07-18",
+    "updated": "2026-07-23",
     "sources_checked": [
       [
         "Rightmove — Safety and Security Centre",
@@ -6053,7 +6054,7 @@
       ],
       [
         "Why the FCA treats crypto ATMs as high risk",
-        "Any business that runs a cryptoasset ATM in the UK must register with the FCA under the Money Laundering, Terrorist Financing and Transfer of Funds Regulations 2017. The FCA has taken enforcement action against unregistered crypto ATMs and has warned consumers not to use illegal machines. Because registration status can change, check the FCA's current register directly if you are ever unsure, but never use any crypto ATM because an unexpected caller, texter, or \"support\" contact told you to."
+        "Any business that runs a cryptoasset ATM in the UK must register with the FCA under the Money Laundering, Terrorist Financing and Transfer of Funds Regulations 2017 — and none of the firms registered with the FCA is approved to offer crypto ATM services. The FCA's position is blunt: any crypto ATM operating in the UK is doing so illegally, its enforcement action has shut machines down across the country, and it warns consumers not to use them at all. There is no 'legitimate' machine to look for — and never use any crypto ATM because an unexpected caller, texter, or \"support\" contact told you to."
       ],
       [
         "Warning signs of the scam",
@@ -6075,7 +6076,7 @@
     "faq": [
       [
         "Are Bitcoin ATMs legal in the UK?",
-        "Cryptoasset ATM operators must be registered with the FCA under UK money-laundering rules, and the FCA has taken action against unregistered machines. Check the FCA's current register directly if you need to verify a business, but a caller telling you to use a Bitcoin ATM is enough on its own to treat the contact as a scam."
+        "There are no legally operating crypto ATMs in the UK: operators must be FCA-registered, no registered firm is approved to offer crypto ATM services, and the FCA says any machine operating here is doing so illegally and warns consumers not to use them. A caller telling you to use a Bitcoin ATM is enough on its own to treat the contact as a scam."
       ],
       [
         "My bank/HMRC/tech support told me to use a Bitcoin ATM to fix a problem — is that genuine?",
@@ -6099,7 +6100,7 @@
       "cryptocurrency scam UK",
       "crypto fraud UK"
     ],
-    "updated": "2026-07-10",
+    "updated": "2026-07-23",
     "sources_checked": [
       [
         "FCA — Cryptoassets: who needs to register",
@@ -6675,7 +6676,7 @@
       ],
       [
         "How to check a passport contact is genuine",
-        "Apply for or renew a passport only through gov.uk — type the address yourself rather than following a link or search ad.\n\n- Track a genuine application using the official tracking service on gov.uk, with the reference from your own confirmation — not a reference someone else gives you.\n- As of writing, the standard adult passport fee is `£102` online or `£115.50` by paper form, with paid Premium (1-day) and Fast Track (1-week) services also available for renewals — check gov.uk/passport-fees for the current figure, as fees do change.\n- Unofficial 'check and send' websites that charge a fee to submit a gov.uk application for you are not illegal, but they are not HMPO and typically cost far more than applying yourself directly — if a site doesn't clearly say it's unaffiliated with HMPO, be suspicious.\n- For account queries, use the Passport Adviceline number published on gov.uk — never a number given to you in a suspicious message."
+        "Apply for or renew a passport only through gov.uk — type the address yourself rather than following a link or search ad.\n\n- Track a genuine application using the official tracking service on gov.uk, with the reference from your own confirmation — not a reference someone else gives you.\n- As of writing, the standard adult passport fee is `£102` online or `£115.50` by paper form, with paid Premium (1-day) and Fast Track (1-week) services also available for renewals — check gov.uk/passport-fees for the current figure, as fees do change.\n- A fee-charging third-party passport site is not automatically fraudulent, but it is not HM Passport Office and may cost more than applying directly — and a site that misleads people about its identity or official status should be treated as suspect. Don't confuse such sites with the Post Office's official Check and Send service, an in-branch assisted option that currently costs £16 on top of the passport application fee (plus photo costs for paper applications).\n- For account queries, use the Passport Adviceline number published on gov.uk — never a number given to you in a suspicious message."
       ],
       [
         "If you've already paid or shared details",
@@ -6693,7 +6694,7 @@
       ],
       [
         "Are third-party passport-renewal websites illegal?",
-        "Not necessarily — some are legal but unofficial 'check and send' services that charge a markup for submitting a gov.uk application on your behalf. They aren't HMPO, and applying directly on gov.uk yourself is normally far cheaper. Be suspicious of any site that doesn't clearly disclose it's unaffiliated with HMPO."
+        "Not necessarily. Some are commercial middlemen rather than HM Passport Office, but a third-party fee does not prove a site is legitimate — a site that misleads you about its identity or official status should be treated as suspect. Apply directly at GOV.UK unless you deliberately want a paid service. The Post Office's official Check and Send is a separate in-branch service."
       ],
       [
         "I already paid a fee to what I now think is a scam — what do I do?",
@@ -6717,7 +6718,7 @@
       "gov.uk passport scam",
       "hmpo phishing"
     ],
-    "updated": "2026-07-05",
+    "updated": "2026-07-23",
     "sources_checked": [
       [
         "GOV.UK — Passport fees",
@@ -8014,7 +8015,7 @@
       ],
       [
         "Signs an IVA offer is a scam or bad advice",
-        "- You are contacted or find a firm shortly after searching for debt help online.\n- It pushes you towards an IVA specifically, without discussing other debt options first.\n- It charges a large upfront fee before you have received proper advice.\n- It plays down the serious consequences of an IVA, such as its effect on your credit file.\n- It pressures you to sign quickly or discourages independent advice.\n- The firm is not authorised by the FCA, or does not have permission for the debt service it is offering."
+        "- You are contacted or find a firm shortly after searching for debt help online.\n- It pushes you towards an IVA specifically, without discussing other debt options first.\n- It charges a large upfront fee before you have received proper advice.\n- It plays down the serious consequences of an IVA, such as its effect on your credit file.\n- It pressures you to sign quickly or discourages independent advice.\n- You cannot find the named insolvency practitioner on the Insolvency Service's register — every genuine IVA is run by a licensed insolvency practitioner."
       ],
       [
         "How the scam works",
@@ -8022,7 +8023,7 @@
       ],
       [
         "How to find genuine debt advice",
-        "Free, regulated debt advice is available before you commit to an IVA or any other solution.\n\n- Contact a free debt-advice organisation such as StepChange, National Debtline, or Citizens Advice before agreeing to anything.\n- Use MoneyHelper's debt advice locator to find free, impartial help.\n- Ask about all your debt options, not just an IVA, and understand the pros and cons of each.\n- Check that any firm is authorised by the FCA and has permission for the service it is offering.\n- Never pay a large upfront fee before receiving genuine advice.\n\nIf you are unsure whether a linked site is genuine, our guide on /guides/is-this-website-a-scam/ helps, and our /guides/debt-relief-scam-uk/ guide covers the wider upfront-fee debt-help pattern."
+        "Free, regulated debt advice is available before you commit to an IVA or any other solution.\n\n- Contact a free debt-advice organisation such as StepChange, National Debtline, or Citizens Advice before agreeing to anything.\n- Use MoneyHelper's debt advice locator to find free, impartial help.\n- Ask about all your debt options, not just an IVA, and understand the pros and cons of each.\n- Ask for the name of the licensed insolvency practitioner who would run your IVA and check them on the Insolvency Service's register of insolvency practitioners. IVAs are administered by licensed insolvency practitioners rather than FCA-authorised IVA firms, so a genuine IVA provider may not appear on the FCA register at all. A separate firm that gives you debt advice must generally be FCA-authorised; a lead generator that only takes basic information and provides factual information may not be authorised, but it must not give debt advice.\n- Never pay a large upfront fee before receiving genuine advice.\n\nIf you are unsure whether a linked site is genuine, our guide on /guides/is-this-website-a-scam/ helps, and our /guides/debt-relief-scam-uk/ guide covers the wider upfront-fee debt-help pattern."
       ],
       [
         "If you have already paid a fee or signed up",
@@ -8044,7 +8045,7 @@
       ],
       [
         "How do I know if an IVA firm is legitimate?",
-        "Check whether it is authorised by the FCA and has permission for the debt service it is offering, and be very wary of any firm demanding a large fee before explaining your full range of options."
+        "Ask for the name of the licensed insolvency practitioner who would supervise your IVA and check them on the Insolvency Service's register of insolvency practitioners — IVA firms operate under insolvency practitioner licences from professional bodies rather than FCA authorisation, so absence from the FCA register is not itself a scam sign. Be very wary of any firm demanding a large fee before explaining your full range of options."
       ],
       [
         "I've already paid an upfront fee — can I get it back?",
@@ -8065,7 +8066,7 @@
       "report iva scam uk",
       "fake debt solution company"
     ],
-    "updated": "2026-07-18",
+    "updated": "2026-07-23",
     "sources_checked": [
       [
         "MoneyHelper — Debt advice locator",
@@ -9032,7 +9033,7 @@
       ],
       [
         "Signs an online pharmacy is fake",
-        "- It sells prescription-only medicines with no prescription or clinical consultation required.\n- Prices are far below normal UK pharmacy prices.\n- There is no verifiable UK address, registered pharmacist, or contact number.\n- It uses pressure tactics such as limited stock or time-limited discounts.\n- The website has spelling errors, a generic template look, or an unusual web address.\n- It arrived by unsolicited email or a social-media ad rather than a search for a known pharmacy.\n- You cannot find the business on the pharmacy or medicines-seller registers below."
+        "- It sells prescription-only medicines with no prescription or clinical consultation required.\n- Prices are far below normal UK pharmacy prices.\n- There is no verifiable UK address, registered pharmacist, or contact number.\n- It uses pressure tactics such as limited stock or time-limited discounts.\n- The website has spelling errors, a generic template look, or an unusual web address.\n- It arrived by unsolicited email or a social-media ad rather than a search for a known pharmacy.\n- You cannot find the business on the pharmacy register for its part of the UK (the GPhC register for Great Britain, or the PSNI register for Northern Ireland)."
       ],
       [
         "How the scam works",
@@ -9040,7 +9041,7 @@
       ],
       [
         "How to check an online pharmacy is genuine",
-        "Do not order from a site just because it looks professional or appears in an advert.\n\n- Check the pharmacy is registered on the General Pharmaceutical Council (GPhC) register for England, Scotland, and Wales, or the Pharmaceutical Society of Northern Ireland (PSNI) register for Northern Ireland.\n- Check the seller on the MHRA's register of authorised online sellers of medicines.\n- In Great Britain, do not rely on an EU-style distance-selling logo as proof of legitimacy; MHRA says the GB logo scheme stopped from 1 January 2021. Northern Ireland has separate rules, so still verify the seller directly.\n- Never buy a prescription-only medicine from a site that avoids a genuine prescription or lawful clinical assessment.\n- Be suspicious of prices far below normal UK prices and of sites you cannot verify independently.\n- If in doubt, use the NHS website or a pharmacy you already know.\n\nIf you are unsure whether a linked site is genuine, our guide on /guides/is-this-website-a-scam/ helps, and our /guides/fake-pandora-website-uk-scam/ guide covers the same pattern with counterfeit goods."
+        "Do not order from a site just because it looks professional or appears in an advert.\n\n- Check the pharmacy is registered on the General Pharmaceutical Council (GPhC) register for England, Scotland, and Wales, or the Pharmaceutical Society of Northern Ireland (PSNI) register for Northern Ireland.\n- For Northern Ireland-based sellers only, also check the MHRA's register of online medicine sellers — since 1 January 2021 that register no longer covers Great Britain, so a genuine GB pharmacy will not appear on it.\n- In Great Britain, do not rely on an EU-style distance-selling logo as proof of legitimacy; MHRA says the GB logo scheme stopped from 1 January 2021. Northern Ireland has separate rules, so still verify the seller directly.\n- Never buy a prescription-only medicine from a site that avoids a genuine prescription or lawful clinical assessment.\n- Check the MHRA's official 'Not Recommended' list of suspicious online medicine sellers at gov.uk/check-suspicious-online-medicine-seller — being on it is a clear do-not-buy sign.\n- Be suspicious of prices far below normal UK prices and of sites you cannot verify independently.\n- If in doubt, use the NHS website or a pharmacy you already know.\n\nIf you are unsure whether a linked site is genuine, our guide on /guides/is-this-website-a-scam/ helps, and our /guides/fake-pandora-website-uk-scam/ guide covers the same pattern with counterfeit goods."
       ],
       [
         "If you have already ordered",
@@ -9054,7 +9055,7 @@
     "faq": [
       [
         "Is buying from an online pharmacy ever safe in the UK?",
-        "Yes, if it is a genuine registered pharmacy and the medicine is supplied through a lawful route. Check the pharmacy register for your part of the UK and the MHRA register of authorised online medicine sellers before ordering."
+        "Yes, if it is a genuine registered pharmacy and the medicine is supplied through a lawful route. Check the pharmacy register for your part of the UK before ordering — the GPhC register for England, Scotland, and Wales, or the PSNI register in Northern Ireland (where the MHRA's online medicine seller register also applies)."
       ],
       [
         "A site sells prescription medicine with no prescription needed - is that legal?",
@@ -9062,7 +9063,7 @@
       ],
       [
         "How do I check if an online pharmacy is genuinely registered?",
-        "Search for the pharmacy on the GPhC register for England, Scotland, and Wales, or the PSNI register for Northern Ireland, and check the MHRA register of authorised online medicine sellers."
+        "Search for the pharmacy on the GPhC register for England, Scotland, and Wales, or the PSNI register for Northern Ireland. The MHRA's online medicine seller register covers Northern Ireland-based sellers only, so do not treat a GB pharmacy's absence from it as a scam sign."
       ],
       [
         "I've taken medicine from a site I'm now unsure about - what should I do?",
@@ -9083,7 +9084,7 @@
       "gphc register check",
       "counterfeit medicine online uk"
     ],
-    "updated": "2026-07-18",
+    "updated": "2026-07-23",
     "sources_checked": [
       [
         "GPhC — How to check an online pharmacy is on the register",
@@ -9853,7 +9854,7 @@
       ],
       [
         "What Santander will and will never ask for by phone",
-        "Santander may call you to flag account activity, and at the start of an outbound call they may ask you to confirm part of a memorable word or your date of birth to establish the call is with the right person.\n\nSantander will never: ask for your full PIN, full online banking password, or full passcode; ask you to read a One-Time Passcode that has just arrived on your phone; ask you to move money to a \"safe account\" (no bank ever does this); ask you to install remote access software on your computer or phone; or advise you to give a false reason when withdrawing cash at a branch counter.\n\nIf the person calling you is asking for any of the above, the call is fraudulent, regardless of how professional they sound or what number appears on your screen."
+        "An incoming call may be genuine, but caller ID cannot authenticate it. Treat an unexpected call with suspicion, hang up, and contact Santander using the number on the back of your card or the number shown in its mobile app, or dial 159.\n\nSantander will never: ask for your full PIN, full online banking password, or full passcode; ask you to read a One-Time Passcode that has just arrived on your phone; ask you to move money to a \"safe account\" (no bank ever does this); ask you to install remote access software on your computer or phone; or advise you to give a false reason when withdrawing cash at a branch counter.\n\nIf the person calling you is asking for any of the above, the call is fraudulent, regardless of how professional they sound or what number appears on your screen."
       ],
       [
         "The \"safe account\" instruction — the single biggest red flag",
@@ -9902,7 +9903,8 @@
         "Stop Scams UK — 159 phone number (participating banks)",
         "https://stopscamsuk.org.uk/our-programmes/159-phone-number/"
       ]
-    ]
+    ],
+    "updated": "2026-07-23"
   },
   {
     "title": "AI Voice Cloning Scam UK: A Call That Isn't Them",
@@ -10888,7 +10890,7 @@
       ],
       [
         "How to buy and sell safely on Shpock",
-        "For collection deals, meet in a safe location and only hand over money once you're happy with the item and are taking it home.\n\n- Keep communication in Shpock's own app. Shpock says it can't help if something goes wrong and you haven't spoken via chat.\n- Don't open payment links sent directly in chat. Shpock says those links are fake and are designed to gather card information.\n- If you aren't meeting up, Shpock says to pay directly through the app so you're covered by Buyer Protection.\n- Shpock Secure Delivery includes a Buyer Protection Guarantee if the item doesn't arrive or isn't as described."
+        "For collection deals, meet in a safe location and only hand over money once you're happy with the item and are taking it home.\n\n- Keep communication in Shpock's own app. Shpock says it can't help if something goes wrong and you haven't spoken via chat.\n- Don't open payment links sent directly in chat. Shpock says those links are fake and are designed to gather card information.\n- If you aren't meeting up, use Shpock's integrated payment only where the listing is enabled for Buyer Protection, and make sure Buyer Protection is included in the purchase price — in-app payment alone is not enough.\n- Buyer Protection covers items that don't arrive or aren't as described. Report a problem within the deadline shown for your deal: the standard terms use seven days from proof of postage, but Parcel2Go deliveries have a 24-hour window from receipt."
       ],
       [
         "If you've already paid a deposit or clicked a link",
@@ -10896,7 +10898,7 @@
       ],
       [
         "How to report a Shpock scam (UK)",
-        "Report the user directly in the app. For a collection deal, open the chat and use the three-dot menu, then `Report partner`. For a delivery deal, open the chat and use `Help`, then `Report user`. If you've lost money, also report it to Report Fraud at `reportfraud.police.uk` or 0300 123 2040 if you're in England, Wales, or Northern Ireland. In Scotland, report to Police Scotland on 101."
+        "Report suspicious activity through the item page or Shpock's Trust-team contact route so it can investigate. If you've lost money, also report it to Report Fraud at `reportfraud.police.uk` or 0300 123 2040 if you're in England, Wales, or Northern Ireland. In Scotland, report to Police Scotland on 101."
       ]
     ],
     "faq": [
@@ -10910,7 +10912,7 @@
       ],
       [
         "Is there buyer protection on Shpock?",
-        "Shpock says Secure Delivery includes a Buyer Protection Guarantee if the item doesn't arrive or isn't as described. For non-meet-up deals, pay directly through the app rather than using links or bank-transfer arrangements sent in chat."
+        "Yes, but it is optional paid cover, not automatic: the seller must enable Buyer Protection on the listing and it must be included in the purchase price when you pay through Shpock's integrated payment service — in-app payment alone is not enough. It covers non-delivery and items not as described; claim within the deadline shown for your deal (standard terms: seven days from proof of postage; 24 hours from receipt for Parcel2Go deliveries). For non-meet-up deals, always pay through the app rather than using links or bank-transfer arrangements sent in chat."
       ],
       [
         "I paid a deposit and the seller disappeared. Can I get my money back?",
@@ -10918,7 +10920,7 @@
       ],
       [
         "How do I report a scam on Shpock?",
-        "Report the deal partner from the chat. Use `Report partner` for collection deals or `Report user` for delivery deals, then report any money lost to Report Fraud at `reportfraud.police.uk` or 0300 123 2040 (Police Scotland on 101 in Scotland)."
+        "Report the problem through the item page or Shpock's Trust-team contact route, then report any money lost to Report Fraud at `reportfraud.police.uk` or 0300 123 2040 (Police Scotland on 101 in Scotland)."
       ]
     ],
     "keywords": [
@@ -10930,7 +10932,7 @@
       "shpock scam report",
       "shpock collection deal scam"
     ],
-    "updated": "2026-07-06",
+    "updated": "2026-07-23",
     "sources_checked": [
       [
         "Shpock — Buyer protection",
@@ -11035,8 +11037,8 @@
         "A common pattern in O2 phishing texts is: `IMPORTANT: Your O2 account requires immediate verification. To avoid suspension, confirm your details here: [link].` Another variant targets your payment: `Your O2 direct debit of £XX has failed. Update your payment method within 24 hours or your service will be suspended: [link].` A third variant promises something: `Congratulations — you are eligible for a free handset upgrade. Claim before midnight: [link].`\n\nAll three share the same three features: a false sense of urgency, a link you're pressured to click, and a claim that something bad will happen — or something good will be lost — if you don't act immediately. That urgency is the mechanism. The goal in every case is to get you to enter your O2 login credentials, card details, or personal information on a fake website."
       ],
       [
-        "What real O2 texts look like — and what they never include",
-        "O2 does send genuine texts — data usage alerts, bill-ready notifications, and upgrade reminders — so the presence of a text from 'O2' is not suspicious by itself. What matters is what the message asks you to do.\n\nIf a text asks you to log in and verify your details via a link, do not use it — go directly to o2.co.uk yourself instead. Other things a genuine O2 text will never do: threaten account suspension within hours; claim your payment has failed and demand you update card details via a link; or send you a one-time code and immediately ask you to share it by replying or following a link.\n\nGenuine O2 texts tend to come from a named sender rather than a random mobile number, but sender names can be spoofed — a message displaying as 'O2' is not proof on its own that it is genuine. If there is a genuine account issue, it will also be visible when you log in directly at o2.co.uk, independently of any text message."
+        "What real O2 texts look like — and what O2 says it will never ask for",
+        "O2 does send genuine texts — data usage alerts, bill-ready notifications, and upgrade reminders — so the presence of a text from 'O2' is not suspicious by itself. What matters is what the message asks you to do.\n\nIf a text asks you to log in and verify your details via a link, do not use it — go directly to o2.co.uk yourself instead. O2's published commitment is specific: it says it will never call, text, or email you asking for a one-time code, password, or other security information. Be careful with broader assumptions — O2 does send genuine billing and payment texts, so a payment-problem message is not automatically fake. The test is not the topic but the action: log in directly at o2.co.uk or through the official app to check an account or billing issue. If the position is not clear there, contact O2 using contact details you found independently rather than replying to the message.\n\nGenuine O2 texts tend to come from a named sender rather than a random mobile number, but sender names can be spoofed — a message displaying as 'O2' is not proof on its own that it is genuine. Check any claimed account issue by logging in directly at o2.co.uk, independently of any text message, and if the position is not clear there, contact O2 through contact details you found independently."
       ],
       [
         "Five seconds to check before you tap any link",
@@ -11048,17 +11050,17 @@
       ],
       [
         "How to report an O2 scam text",
-        "You can forward a suspicious SMS text to 7726 free of charge. For RCS, iMessage and messages received through apps, use the relevant built-in reporting tool.\n\nIf the text contained a phishing link, report the link to the National Cyber Security Centre: forward phishing emails to report@phishing.gov.uk, or report a suspicious website at ncsc.gov.uk/report-a-suspicious-website.\n\nIf you have lost money or given financial details, file a full report with Report Fraud at reportfraud.police.uk or call 0300 123 2040. Keep the original text message as evidence — take a screenshot before you delete it."
+        "You can forward a suspicious SMS text to 7726 free of charge. For RCS, iMessage and messages received through apps, use the relevant built-in reporting tool.\n\nIf the text contained a phishing link, report the link to the National Cyber Security Centre: forward phishing emails to report@phishing.gov.uk, or use the NCSC's report-a-scam-website form at ncsc.gov.uk/section/about-this-website/report-scam-website.\n\nIf you have lost money or given financial details, file a full report with Report Fraud at reportfraud.police.uk or call 0300 123 2040. Keep the original text message as evidence — take a screenshot before you delete it."
       ]
     ],
     "faq": [
       [
         "Does O2 send texts about account problems, or is any O2 text a scam?",
-        "O2 does send genuine texts — bill reminders, data alerts, and upgrade offers — so receiving a text from O2 is not automatically suspicious. What matters is what it asks you to do. A genuine O2 text will never contain a link asking you to log in and verify your details, and will never threaten to suspend your account within hours. If you are unsure about any message, log in directly at o2.co.uk rather than using any link in the text."
+        "O2 does send genuine texts — bill reminders, data alerts, and upgrade offers — so receiving a text from O2 is not automatically suspicious. What matters is what it asks you to do. O2 says it will never call, text, or email you asking for a one-time code, password, or other security information. Whatever a message claims — billing problem, suspension, upgrade — check it by logging in directly at o2.co.uk rather than using any link in the text."
       ],
       [
         "The text came from a number labelled 'O2' in my phone — how can it still be fake?",
-        "SMS sender names can be spoofed. A scammer can send a message that displays as 'O2' or 'O2 Alerts' just as easily as the real company can. This is called SMS spoofing. The displayed sender name is not proof the text is genuine. The only reliable check is whether the link destination is o2.co.uk or o2.com — everything else can be faked."
+        "SMS sender names can be spoofed. A scammer can send a message that displays as 'O2' or 'O2 Alerts' just as easily as the real company can. This is called SMS spoofing. The displayed sender name is not proof the text is genuine. The reliable approach is to ignore the link entirely and log in yourself at o2.co.uk; if the position is not clear there, contact O2 using contact details you found independently."
       ],
       [
         "I'm getting an O2 text saying I'm due a free handset upgrade — is this real?",
@@ -11080,7 +11082,7 @@
       "O2 phishing scam",
       "how to spot O2 text scam"
     ],
-    "updated": "2026-07-16",
+    "updated": "2026-07-23",
     "sources_checked": [
       [
         "O2 — How to prevent and report scam calls and messages",
