@@ -6,6 +6,6 @@
 
 Contact: mailto:security@beatthescam.com
 Contact: https://beatthescam.com/contact/
-Expires: 2027-06-22T00:00:00.000Z
+Expires: 2027-06-23T00:00:00.000Z
 Preferred-Languages: en
 Canonical: https://beatthescam.com/.well-known/security.txt
