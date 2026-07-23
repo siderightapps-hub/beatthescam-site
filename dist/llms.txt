@@ -1,4 +1,4 @@
-# Beat The Scam
+# Beat the Scam
 
 > Independent, plain-English UK consumer-protection publication covering scams, fraud, and checks to run before paying. Guides use AI-assisted drafting followed by editorial review and an automated accuracy gate.
 
@@ -273,3 +273,4 @@
 - [Scam recovery checklist](https://beatthescam.com/recovery/): payment, account, device, identity and reporting steps after a scam
 - [Contact](https://beatthescam.com/contact/): how to reach the publisher and editor
 - [Privacy](https://beatthescam.com/privacy/): data handling & cookies
+- [Full corpus](https://beatthescam.com/llms-full.txt): every guide's complete text in one file

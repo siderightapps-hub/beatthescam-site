@@ -802,6 +802,32 @@ def make_base(content: str, *, title: str, description: str, canonical: str, sch
 
 # ─── SCHEMA ────────────────────────────────────────────────────────────────
 
+# Official site profiles for schema.org sameAs — entity reconciliation is how
+# search and answer engines confirm the publisher is a real organisation.
+ORG_SAME_AS = [
+    "https://x.com/beatthescam",
+    "https://twitter.com/beatthescam",
+]
+
+def org_logo(site):
+    # PNG ImageObject rather than a bare SVG URL: some parsers (Bing
+    # especially) drop SVG-only publisher logos.
+    return {
+        "@type": "ImageObject",
+        "url": abs_url(site, "/favicon-512x512.png"),
+        "width": 512,
+        "height": 512,
+    }
+
+def publisher_org(site):
+    return {
+        "@type": "Organization",
+        "name": site["site_name"],
+        "url": site["domain"],
+        "logo": org_logo(site),
+        "sameAs": ORG_SAME_AS,
+    }
+
 def website_schema(site):
     return json_ld({
         "@context": "https://schema.org",
@@ -809,12 +835,7 @@ def website_schema(site):
         "name": site["site_name"],
         "url": site["domain"],
         "description": site["tagline"],
-        "publisher": {
-            "@type": "Organization",
-            "name": site["site_name"],
-            "url": site["domain"],
-            "logo": abs_url(site, "/assets/logo-mark.svg")
-        },
+        "publisher": publisher_org(site),
         "potentialAction": {
             "@type": "SearchAction",
             "target": abs_url(site, "/guides/?q={search_term_string}"),
@@ -829,7 +850,8 @@ def org_schema(site):
         "name": site["site_name"],
         "url": site["domain"],
         "email": site["contact_email"],
-        "logo": abs_url(site, "/assets/logo-mark.svg")
+        "logo": org_logo(site),
+        "sameAs": ORG_SAME_AS,
     })
 
 def page_schema(site, title, description, url):
@@ -893,12 +915,7 @@ def article_schema(site, post, url, og_image_url=None):
         "datePublished": published,
         "dateModified": modified,
         "author": author,
-        "publisher": {
-            "@type": "Organization",
-            "name": site["site_name"],
-            "url": site["domain"],
-            "logo": {"@type": "ImageObject", "url": abs_url(site, "/assets/logo-mark.svg")}
-        },
+        "publisher": publisher_org(site),
         "mainEntityOfPage": {"@type": "WebPage", "@id": url},
         "image": [image_url],
         "articleSection": post["category"],
@@ -3462,8 +3479,11 @@ def build():
     # Copy assets → dist, but never the audio/ bed: it's a local video-render
     # asset (licensed stock music). Serving the raw file publicly would breach
     # most free-music licenses (no standalone redistribution) and bloat the deploy.
+    # video/ (end-card for the discontinued video pipeline) and the superseded
+    # og-image.png (og-image-v2.png is the referenced card) are local-only too.
     shutil.copytree(ROOT / 'assets', DIST / 'assets',
-                    ignore=shutil.ignore_patterns('audio', '*.mp3', '*.wav', '*.aac'))
+                    ignore=shutil.ignore_patterns('audio', '*.mp3', '*.wav', '*.aac',
+                                                  'video', 'og-image.png', '.DS_Store'))
 
     # Minify styles.css + app.js in place — clears the Semrush
     # "unminified JS/CSS" warnings (counted on every crawled page, so the
@@ -3571,7 +3591,7 @@ def build():
     write(DIST / 'cookies/index.html', render_simple_page(site, 'Cookie Policy',  'How Beat the Scam uses cookies for analytics, advertising, and consent preferences. Learn what is stored and how to manage your cookie settings.',                   cookies, 'cookies'))
     write(DIST / 'terms/index.html',   render_simple_page(site, 'Terms',          'Terms of use for Beat the Scam. Educational scam guidance only — not legal or financial advice. Read before relying on any content for important decisions.',                                 terms,   'terms'))
     write(DIST / 'contact/index.html', render_simple_page(site, 'Contact',        'Contact Beat the Scam for editorial corrections, privacy questions, or partnership enquiries. We aim to respond to all editorial requests promptly.',     contact, 'contact'))
-    write(DIST / 'disclaimer/index.html', render_simple_page(site, 'Disclaimer',  'Important disclaimer for Beat the Scam: the guides and AI scam checker are general consumer-awareness information only — not legal, financial, or other professional advice.', disclaimer, 'disclaimer'))
+    write(DIST / 'disclaimer/index.html', render_simple_page(site, 'Disclaimer',  'Beat the Scam disclaimer: the guides and AI scam checker are general consumer-awareness information only — not legal, financial, or professional advice.', disclaimer, 'disclaimer'))
     write(DIST / 'methodology/index.html', render_simple_page(site, 'How We Fact-Check', 'How Beat the Scam researches, drafts, gate-checks, human-reviews, and re-verifies every guide — the sources we check against and how corrections work.', methodology, 'methodology'))
     write(DIST / 'corrections/index.html', render_simple_page(site, 'Corrections', 'Material corrections to Beat the Scam guides, including what changed, when it changed, and how to request a review.', corrections, 'corrections'))
     write(DIST / 'recovery/index.html', render_simple_page(site, 'Scam Recovery Checklist', 'Act quickly after a scam: the UK steps for bank transfers, card payments, passwords, remote access, identity details, reporting and complaints.', recovery, 'recovery'))
@@ -3750,7 +3770,7 @@ def build():
     # AI Visibility / 2 cited pages, so there's real lift to be had.
     domain = site["domain"].rstrip("/")
     llms_lines = [
-        "# Beat The Scam",
+        "# Beat the Scam",
         "",
         "> Independent, plain-English UK consumer-protection publication covering scams, fraud, and checks to run before paying. Guides use AI-assisted drafting followed by editorial review and an automated accuracy gate.",
     ]
@@ -3792,9 +3812,48 @@ def build():
         f"- [Scam recovery checklist]({domain}/recovery/): payment, account, device, identity and reporting steps after a scam",
         f"- [Contact]({domain}/contact/): how to reach the publisher and editor",
         f"- [Privacy]({domain}/privacy/): data handling & cookies",
+        f"- [Full corpus]({domain}/llms-full.txt): every guide's complete text in one file",
         "",
     ])
     write(DIST / "llms.txt", "\n".join(llms_lines))
+
+    # llms-full.txt — the complete guide corpus inline (llmstxt.org
+    # convention), so agentic fetchers can ingest every guide in a single
+    # request instead of crawling 180+ pages. ~1 MB of plain markdown.
+    full_lines = [
+        "# Beat the Scam",
+        "",
+        "> Full text of every Beat the Scam guide — an independent, plain-English UK",
+        "> consumer-protection publication. Index of guides: " + domain + "/llms.txt",
+        "",
+    ]
+    for cat in sorted_cats:
+        items = sorted(categories[cat], key=lambda p: p["title"].lower())
+        for p in items:
+            full_lines.append(f'## {p["title"]}')
+            full_lines.append("")
+            full_lines.append(f'URL: {domain}/guides/{p["slug"]}/')
+            full_lines.append(f'Category: {category_label(cat)} · Updated: {p.get("updated") or p.get("date")}')
+            full_lines.append("")
+            desc = (p.get("description") or "").strip()
+            if desc:
+                full_lines.append(desc)
+                full_lines.append("")
+            for heading, body in p.get("sections", []):
+                full_lines.append(f"### {heading}")
+                full_lines.append("")
+                full_lines.append(body.strip())
+                full_lines.append("")
+            faqs = p.get("faq") or []
+            if faqs:
+                full_lines.append("### Frequently asked questions")
+                full_lines.append("")
+                for q, a in faqs:
+                    full_lines.append(f"**{q}**")
+                    full_lines.append("")
+                    full_lines.append(a.strip())
+                    full_lines.append("")
+    write(DIST / "llms-full.txt", "\n".join(full_lines))
 
     # IndexNow key — tells Bing/Yandex about new/updated pages instantly.
     # Key must match the filename. Generate once and keep stable.
