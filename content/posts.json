@@ -11283,7 +11283,7 @@
       ],
       [
         "Check the call safely",
-        "Hang up and call TalkTalk using the number on a bill or its official website. TalkTalk says customers can dial 150 from a TalkTalk home phone. If a bank is mentioned, hang up and use the bank's trusted number or 159 if the bank participates."
+        "Hang up and contact TalkTalk using the number on your bill or its current official contact page. TalkTalk currently lists 0345 172 0088 for customer service; calls to it are free from TalkTalk home phone services, while charges from other providers or mobile networks depend on the caller's plan. If a bank is mentioned, hang up and use the bank's trusted number or 159 if the bank participates."
       ],
       [
         "TalkTalk CallSafe",
@@ -11315,7 +11315,7 @@
       "TalkTalk support scam",
       "fake TalkTalk calls"
     ],
-    "updated": "2026-07-19",
+    "updated": "2026-07-23",
     "sources_checked": [
       [
         "TalkTalk — Scam Phone calls",
@@ -14144,7 +14144,7 @@
       ],
       [
         "Report the phishing email",
-        "In Microsoft 365 Outlook or Outlook.com, select the message and choose `Report > Report phishing`. Microsoft no longer publishes a general mailbox for forwarding phishing emails from other email clients; a work or school account holder can instead use the Submissions page in the Microsoft Defender portal, and anyone else should forward the email to the NCSC at `report@phishing.gov.uk`.\n\nIf money was lost or an account was hacked, report the crime to Report Fraud at `reportfraud.police.uk` or 0300 123 2040 in England, Wales or Northern Ireland; in Scotland, call Police Scotland on 101."
+        "In Microsoft 365 Outlook or Outlook.com, select the message and choose `Report > Report phishing`. If you use another email client, Microsoft says to send the phishing message as an attachment in a new email to `phish@office365.microsoft.com` — attach the original rather than forwarding it, so the technical headers are preserved. A Microsoft 365 administrator can also use the Submissions page in the Microsoft Defender portal. UK readers should additionally forward the email to the NCSC at `report@phishing.gov.uk`.\n\nIf money was lost or an account was hacked, report the crime to Report Fraud at `reportfraud.police.uk` or 0300 123 2040 in England, Wales or Northern Ireland; in Scotland, call Police Scotland on 101."
       ]
     ],
     "faq": [
@@ -14199,7 +14199,7 @@
         "https://www.reportfraud.police.uk/reporting-a-fraud/"
       ]
     ],
-    "updated": "2026-07-13"
+    "updated": "2026-07-23"
   },
   {
     "title": "Is AliExpress a Scam? UK Guide to Marketplace Risk",
