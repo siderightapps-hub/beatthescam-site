@@ -364,7 +364,7 @@
     "description": "Received a DPD delivery text? Check the parcel independently, distinguish a fake redelivery fee from genuine import charges, and report a scam safely.",
     "hero": "A DPD text is not proved genuine by its sender name. Match it to a real order and parcel number through DPD's official site or app before using any payment route.",
     "date": "2026-06-05",
-    "updated": "2026-07-18",
+    "updated": "2026-07-23",
     "category": "sms",
     "keywords": [
       "dpd scam text",
@@ -402,7 +402,7 @@
       ],
       [
         "How to report a DPD scam text in the UK",
-        "Reporting these texts is quick and genuinely helps shut the scams down. Forward the message free of charge to 7726 — the spam-reporting shortcode run by mobile networks, which spells 'SPAM' on a keypad — then delete it. Report the scam to Report Fraud at reportfraud.police.uk or on 0300 123 2040 if you've lost money or shared details; in Scotland, report to Police Scotland on 101. You can also report phishing that impersonates DPD to the National Cyber Security Centre by forwarding suspicious emails to report@phishing.gov.uk, and let DPD know through the security or contact section of their official website so they can act on the fake domains."
+        "Forward a suspicious SMS free of charge to 7726 — which spells `SPAM` on a phone keypad — then delete it; this alerts your mobile provider so it can investigate and block the sender. For an iMessage, RCS or app message, also use the service's built-in junk or spam reporting tool. If you lost money or shared personal or card details, report the scam to Report Fraud at `reportfraud.police.uk` or on 0300 123 2040; in Scotland, report it to Police Scotland on 101. Forward suspicious emails impersonating DPD to the National Cyber Security Centre at `report@phishing.gov.uk`."
       ]
     ],
     "faq": [
@@ -420,13 +420,13 @@
       ],
       [
         "How do I report a fake DPD text message?",
-        "Forward the text free to 7726 so your mobile network can investigate the sender, then delete it. If you lost money or shared personal or card details, report it to Report Fraud at reportfraud.police.uk or 0300 123 2040 (Police Scotland on 101 in Scotland). You can also report the fake DPD website to the NCSC and flag it to DPD through their official site."
+        "Forward the text free to 7726 so your mobile network can investigate the sender, then delete it. If you lost money or shared personal or card details, report it to Report Fraud at reportfraud.police.uk or 0300 123 2040 (Police Scotland on 101 in Scotland). You can also report the fake DPD website to the NCSC."
       ]
     ],
     "sources_checked": [
       [
-        "DPD — Warning about phishing emails and text messages",
-        "https://www.dpd.com/de/en/news/warning-about-phishing-e-mails-and-text-messages-in-the-name-of-dpd/"
+        "DPD UK — Cyber Security (phishing guidance)",
+        "https://www.dpd.co.uk/content/about_dpd/phishing.jsp"
       ],
       [
         "DPD UK International — duties and taxes payment support",
@@ -435,6 +435,10 @@
       [
         "Ofcom — What to do about a scam call, text or message",
         "https://www.ofcom.org.uk/phones-and-broadband/scam-calls-and-messages/what-to-do-about-a-scam-call-text-or-message"
+      ],
+      [
+        "Report Fraud — Reporting cyber crime and fraud",
+        "https://www.reportfraud.police.uk/reporting-a-fraud/"
       ]
     ],
     "evidence": [
@@ -610,7 +614,7 @@
   {
     "slug": "bank-text-codes-not-arriving",
     "title": "Halifax Text Not Arriving? Bank Verification Code Fixes",
-    "description": "Halifax or another bank verification text not arriving? Check the registered number, app, signal and message filters, then use a safe alternative verification route.",
+    "description": "Halifax or another bank verification text not arriving? Check the registered number, app, signal and message filters, then use a safe alternative route.",
     "hero": "A missing Halifax or bank passcode is usually a delivery or account-verification problem, not proof of a scam. Run these checks once, then contact the bank safely.",
     "date": "2026-05-07",
     "category": "sms",
@@ -627,7 +631,7 @@
     "sections": [
       [
         "First identify which bank text is missing",
-        "If a Halifax or other bank verification text has not arrived, first check whether the bank has your current mobile number, whether the official app is offering approval instead, and whether ordinary calls and texts still work. Then request one fresh code only. Repeated requests can leave several short-lived codes arriving out of order.\n\nA missing expected code is different from an unexpected message claiming to be the bank. This page solves non-delivery. If a text arrived and asks you to log in, share a code or move money, use the separate [Halifax scam-text guide](/guides/halifax-bank-scam-text-uk/)."
+        "A single missing bank code can have several possible causes and is not proof of fraud or a SIM swap — start with the normal delivery and account checks below. Banks send different kinds of messages: one-time passcodes for a payment or login, security checks, and optional account alerts. Confirm which message you expected and whether the bank still has your current mobile number. Do not keep requesting codes repeatedly; use one fresh request after completing the checks below."
       ],
       [
         "Run these low-risk checks first",
@@ -635,7 +639,7 @@
       ],
       [
         "Halifax text messages not arriving: the relevant checks",
-        "Halifax says its extra security checks can use the Mobile Banking app, a texted passcode or an automated phone call. It also says the mobile number on the account must be current.\n\n- Open Halifax through a trusted bookmark or type `halifax.co.uk` yourself.\n- Check or update the mobile number shown for the account.\n- If the official screen offers app approval or an automated call, use that route rather than waiting for repeated texts.\n- Halifax is moving customers to the Lloyds brand, so follow the current instructions displayed for your own account and card rather than assuming which app applies.\n- If no offered method works, contact Halifax through the app or the number printed on the card. Halifax says a One Time Password can be posted when a passcode cannot be received by text or automated call, although that is not an instant fix."
+        "Check that Halifax has your current mobile number — it needs this to send passcodes, and extra security checks may use an app, an SMS passcode or a phone call depending on the task and account. Halifax is transitioning its brand to Lloyds and says customers who have moved will approve Halifax-card payments in the Lloyds app, so type `halifax.co.uk` yourself and follow the current instructions shown for your account rather than assuming which branded app applies. If you cannot complete the check, contact the bank through the official app or the number printed on your card. This is a service-access problem; the separate /guides/halifax-bank-scam-text-uk/ guide covers unexpected messages claiming to be Halifax."
       ],
       [
         "Check the bank account and mobile number",
@@ -647,11 +651,11 @@
       ],
       [
         "When it may be a bank or network delivery issue",
-        "SMS passes through systems operated by the sender, messaging suppliers and mobile networks, so a delay can occur outside your phone. The NCSC advises organisations to understand and audit that supply chain because message content, sender details and delivery can be affected. Do not diagnose the cause from social-media posts alone. Check the bank's official service-status or help page, then ask the bank and mobile provider whether they can see a current delivery problem."
+        "Check the bank's official service-status or help page, then ask the bank and mobile provider whether they can see a current delivery problem — don't diagnose the cause from social-media posts alone. SMS passes through systems operated by the sender, messaging suppliers and mobile networks, so a delay can occur outside your phone; the NCSC advises organisations to understand and audit that supply chain because message content, sender details and delivery can be affected."
       ],
       [
         "Separate a missing code from possible SIM-swap warning signs",
-        "The NCSC describes SIM-swap attacks as an attacker transferring a victim's number to another SIM so the attacker can receive calls and messages intended for that number. A missing bank code alone does not establish this. Possible reasons to make urgent checks include unexpected loss of normal calls and SMS, an unrecognised mobile-account or number-port change, or unauthorised financial activity; these are escalation prompts, not a definitive diagnostic list."
+        "A missing bank code alone does not establish a SIM swap. The NCSC describes SIM-swap attacks as an attacker transferring a victim's number to another SIM so the attacker can receive calls and messages intended for that number — make urgent checks if you also notice unexpected loss of normal calls and SMS, an unrecognised mobile-account or number-port change, or unauthorised financial activity; these are escalation prompts, not a definitive diagnostic list."
       ],
       [
         "What to do if there are SIM-swap warning signs",
@@ -3010,7 +3014,7 @@
     "title": "Is This NHS Appointment Text Genuine? Checks and Scam Signs",
     "slug": "nhs-appointment-scam-text-uk",
     "category": "sms",
-    "description": "The NHS can send appointment texts and NHS App fallback messages. Check the appointment independently and recognise links asking for payment or sensitive details.",
+    "description": "The NHS does send appointment texts and NHS App fallback messages. Check the appointment independently and beware links asking for payment or details.",
     "hero": "Yes, NHS services can send genuine appointment texts. The decisive check is whether the message matches your NHS App, provider or appointment—not whether it merely says NHS.",
     "date": "2026-04-24",
     "sections": [
@@ -3964,19 +3968,19 @@
       ],
       [
         "How to tell a genuine TV Licensing email from a fake one",
-        "TV Licensing's own guidance is specific about this, which makes it one of the more checkable scams. Genuine TV Licensing payment emails are sent from `donotreply@tvlicensing.co.uk` or `donotreply@spp.tvlicensing.co.uk` — TVL Pay app customers may also hear from `noreply@paypoint.com`, and a small number of genuine research emails come from `tvlfieldresearchteam@tvlicensing.co.uk`. If you've given TV Licensing your name, a genuine email will address you by your last name and title, and will only include your name and/or part of your postcode — not your full address or account number.\n\nTV Licensing also says it only emails you about a payment if you have actually missed one — it does not proactively email about a \"problem\" with a valid, up-to-date licence."
+        "Check your licence directly at `tvlicensing.co.uk` rather than treating a matching sender address as proof, because TV Licensing warns that scammers can spoof its genuine addresses. TV Licensing says its emails come from `donotreply@tvlicensing.co.uk` or `donotreply@spp.tvlicensing.co.uk`; TVL Pay app customers may also receive emails from `noreply@paypoint.com`, field-research emails may come from `tvlfieldresearchteam@tvlicensing.co.uk`, and its current Themis Recoveries trial uses `mailing@themisglobal.co.uk` for people whose licence has expired. If you've given TV Licensing your name, a genuine email will address you by your last name and title, and genuine emails will only include your name and/or part of your postcode. TV Licensing also says it only emails about payments if you have missed one, so independently check any unexpected claim about a problem with a licence you believe is valid and up to date."
       ],
       [
         "Signs a TV Licensing email is a scam",
-        "- The sender address is not one of the sender addresses TV Licensing identifies for genuine payment, TVL Pay app, or field-research emails.\n- It greets you generically, such as \"Dear Customer\" or \"Dear client\", instead of using your name.\n- It claims an urgent payment or licence problem you did not already know about.\n- The link does not go to `tvlicensing.co.uk` when you check it — hover over it or long-press without tapping.\n- It threatens a fine or enforcement action unless you act within a short deadline.\n- It includes a licence or reference number you cannot verify against your own account."
+        "- The sender address is not one TV Licensing currently identifies for genuine payment, TVL Pay app, field-research, or Themis Recoveries trial emails — though a matching address is not proof the other way, because genuine addresses can be spoofed.\n- It greets you generically, such as \"Dear Customer\" or \"Dear client\", instead of using your name.\n- It claims an urgent payment or licence problem you did not already know about.\n- The link does not go to `tvlicensing.co.uk` when you check it — hover over it or long-press without tapping.\n- It threatens a fine or enforcement action unless you act within a short deadline.\n- It includes a licence or reference number you cannot verify against your own account."
       ],
       [
         "How the scam works step by step",
-        "First, an email claims a payment, licence, or refund problem, using TV Licensing branding to look official. Second, urgency — a fine or a short deadline — pushes you to click without checking. Third, a fake page copying `tvlicensing.co.uk` asks for card, bank, or personal details. Fourth, criminals capture those details for card fraud, bank fraud, or identity theft, and may follow up by phone pretending to be TV Licensing or your bank.\n\nChecking the sender address and going to `tvlicensing.co.uk` yourself, rather than trusting the email, breaks the chain at the first step."
+        "First, an email claims a payment, licence, or refund problem, using TV Licensing branding to look official. Second, urgency — a fine or a short deadline — pushes you to click without checking. Third, a fake page copying `tvlicensing.co.uk` asks for card, bank, or personal details. Fourth, criminals capture those details for card fraud, bank fraud, or identity theft, and may follow up by phone pretending to be TV Licensing or your bank.\n\nGoing to `tvlicensing.co.uk` yourself and checking your licence there, rather than trusting the email or its sender address (which can be spoofed), breaks the chain at the first step."
       ],
       [
         "How to check a TV Licensing email safely",
-        "Do not click the link or reply with any details.\n\n- Check the sender address carefully against the genuine addresses above.\n- Type `tvlicensing.co.uk` into your browser yourself, or sign in from an account you already have, rather than using the email's link.\n- Remember a real no-licence fine can be up to £1,000 and the current licence fee is £180, but neither is settled by entering card details on a page reached from an email link.\n- If in doubt, do nothing with the email and check your account directly instead."
+        "Do not click the link or reply with any details.\n\n- Check the sender address against the genuine addresses above, treating it as one signal only — scammers can spoof genuine TV Licensing addresses, so a matching sender is not proof.\n- Type `tvlicensing.co.uk` into your browser yourself, or sign in from an account you already have, rather than using the email's link.\n- Remember a real no-licence fine can be up to £1,000 and the current licence fee is £180, but neither is settled by entering card details on a page reached from an email link.\n- If in doubt, do nothing with the email and check your account directly instead."
       ],
       [
         "If you clicked the link or shared details",
@@ -3990,11 +3994,11 @@
     "faq": [
       [
         "Is confirmation@tvlicensing.co.uk a genuine TV Licensing address?",
-        "Treat it with caution. The verified genuine sender addresses are `donotreply@tvlicensing.co.uk` and `donotreply@spp.tvlicensing.co.uk` (plus `noreply@paypoint.com` for TVL Pay app customers and `tvlfieldresearchteam@tvlicensing.co.uk` for field research). If an email comes from a different address, don't click any links in it — check your licence directly at `tvlicensing.co.uk` instead."
+        "Treat it with caution. TV Licensing's currently identified senders are `donotreply@tvlicensing.co.uk` and `donotreply@spp.tvlicensing.co.uk` (plus `noreply@paypoint.com` for TVL Pay app customers, `tvlfieldresearchteam@tvlicensing.co.uk` for field research, and `mailing@themisglobal.co.uk` for its Themis Recoveries expired-licence trial). An address outside that list is a warning sign — but a matching address is not proof either, because genuine addresses can be spoofed. Don't click links; check your licence directly at `tvlicensing.co.uk` instead."
       ],
       [
         "What is TV Licensing's official email address?",
-        "TV Licensing identifies `donotreply@tvlicensing.co.uk` and `donotreply@spp.tvlicensing.co.uk` as genuine payment-email senders. Genuine emails use your name and/or part of your postcode, not a generic \"Dear Customer\" greeting."
+        "TV Licensing identifies `donotreply@tvlicensing.co.uk` and `donotreply@spp.tvlicensing.co.uk` as its genuine payment-email senders, with further genuine addresses for the TVL Pay app, field research, and its current Themis Recoveries trial. Genuine emails use your name and/or part of your postcode rather than a generic greeting — but scammers can spoof genuine addresses, so always verify at `tvlicensing.co.uk` rather than relying on the sender alone."
       ],
       [
         "Does TV Licensing really email people about missed payments?",
@@ -4019,7 +4023,7 @@
       "is confirmation@tvlicensing.co.uk legitimate",
       "tv licensing scam email"
     ],
-    "updated": "2026-07-03",
+    "updated": "2026-07-23",
     "sources_checked": [
       [
         "TV Licensing — Helping you avoid TV Licensing scams",
@@ -14439,8 +14443,8 @@
         "https://www.ncsc.gov.uk/guidance/krack"
       ],
       [
-        "NCSC: Small Business Guide — avoid unknown Wi-Fi hotspots",
-        "https://www.ncsc.gov.uk/files/cyber_security_small_business_guide_1.3..pdf"
+        "NCSC: Small Organisations' Guide to Cyber Security — avoid unknown Wi-Fi hotspots",
+        "https://www.ncsc.gov.uk/collection/small-organisations-guide-to-cyber-security"
       ],
       [
         "Report Fraud: reporting cyber crime and fraud",

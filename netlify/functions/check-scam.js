@@ -348,6 +348,7 @@ Analyse the provided content and respond ONLY with a valid JSON object — no ma
 }
 
 Rules:
+- The UK's national fraud reporting service is called "Report Fraud" (reportfraud.police.uk, 0300 123 2040). It replaced Action Fraud in December 2025 — never call it "Action Fraud" except as a parenthetical former name, and always link https://www.reportfraud.police.uk, never actionfraud.police.uk.
 - red_flags and green_flags must be specific to the content provided, not generic.
 - recommended_actions must be concrete and actionable, not generic advice.
 - reporting_links should include only UK-relevant links appropriate to the scam type.
@@ -429,9 +430,24 @@ Rules:
     // "act now" instruction as the trusted anchor text of a legitimate gov.uk
     // link. scrubContact runs before the length cap so a redaction match can't
     // be truncated away by the slice.
+    // Canonicalise the fraud-reporting service link: the model's training data
+    // predates the Dec 2025 Action Fraud → Report Fraud rebrand, so it still
+    // emits actionfraud.police.uk links and "Action Fraud" naming. Rewrite both
+    // deterministically rather than relying on the prompt rule alone.
+    const canonicaliseReportFraud = (l) => {
+      try {
+        const host = new URL(l.url).hostname.toLowerCase();
+        if (host === "actionfraud.police.uk" || host === "www.actionfraud.police.uk" ||
+            host === "reportfraud.police.uk" || host === "www.reportfraud.police.uk") {
+          return { url: "https://www.reportfraud.police.uk", name: "Report Fraud (Police)" };
+        }
+      } catch { /* leave non-URL values for the allowlist filter to drop */ }
+      return l;
+    };
     const safeLinks = Array.isArray(parsed.reporting_links)
       ? parsed.reporting_links
           .filter(l => l && typeof l.url === "string" && isAllowedReportUrl(l.url))
+          .map(canonicaliseReportFraud)
           .map(l => ({ url: l.url, name: scrubContact(String(l.name || "")).slice(0, 120) }))
       : [];
 

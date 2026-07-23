@@ -732,6 +732,11 @@ _SENSITIVE_FINANCE_TERMS = (
     "military romance", "dating scam",
     # Identity theft (the victim's own identity stolen — not org impersonation)
     "identity theft", "identity fraud", "stolen identity",
+    # Welfare / benefits (government-assistance interest category) and pensions
+    # (retirement finances, older/vulnerable audience). "money mule scam" is
+    # deliberately narrower than "money mule" so employment guides that merely
+    # mention mule recruitment in keywords keep default ads.
+    "universal credit", "benefit", "pension", "money mule scam",
 )
 # Leading word boundary only — avoids "iva" matching inside "festival", while
 # still matching word-initial stems like "debt"/"debts".
@@ -2721,6 +2726,8 @@ def build_legal_bodies(site):
     <h2>23 July 2026</h2>
     <p>Following a full corpus fact re-check against current primary sources:</p>
     <ul>
+      <li><strong>DPD text guide:</strong> the reporting section no longer directs readers to a DPD fraud-reporting route that DPD UK's phishing guidance does not offer; reporting now goes via 7726, Report Fraud and the NCSC, and the guide's sources now cite DPD UK rather than DPD Germany.</li>
+      <li><strong>TV Licence email guide:</strong> sender-address guidance updated &mdash; TV Licensing warns that scammers can spoof its genuine addresses, and its current Themis Recoveries trial legitimately emails from mailing@themisglobal.co.uk about expired licences; a matching sender address is no longer presented as proof an email is genuine.</li>
       <li><strong>Microsoft account email guide:</strong> restored Microsoft's published phishing-forwarding mailbox for non-Outlook clients (phish@office365.microsoft.com, sent as an attachment so headers are preserved), which the guide previously said no longer existed; the Microsoft Defender portal's Submissions page is now described as an administrator route.</li>
       <li><strong>TalkTalk call guide:</strong> call-back guidance now uses TalkTalk's current published customer-service number (0345 172 0088, free from TalkTalk home phones) rather than the legacy 150 short code, which TalkTalk's current contact page no longer lists.</li>
       <li><strong>O2 text guide:</strong> replaced a defunct NCSC reporting URL and narrowed blanket &ldquo;a genuine O2 text will never&hellip;&rdquo; claims to O2's published commitment (no requests for codes, passwords or security information).</li>
