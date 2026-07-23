@@ -117,7 +117,7 @@ A free, UK-focused consumer-protection publication that:
 | Serverless functions | **Netlify Functions** (5: `check-scam`, `subscribe`, `confirm-subscribe`, `unsubscribe`, `csp-report`) | AI checker proxy + double opt-in newsletter (subscribe/confirm/unsubscribe) + CSP violation collector. Functions now carry a `package.json` (`@netlify/blobs`). |
 | AI for scam checker | **Anthropic Claude — `claude-haiku-4-5-20251001`** | Returns structured JSON verdict. Durable per-IP rate limit + daily spend cap (`DAILY_CALL_CAP=2000`/UTC-day) via Netlify Blobs. |
 | AI for content generation | **Anthropic Claude — `claude-haiku-4-5-20251001`** | Generates 6 sections × 120–180 words + 4 FAQs per guide, gated by `scripts/content_gate.py` before publish. |
-| Content automation | **GitHub Actions** (`.github/workflows/daily-publish.yml`) | Daily at 05:07 UTC, batch of 1, gated by the accuracy gate. |
+| Content automation | **GitHub Actions** (`.github/workflows/daily-publish.yml`) | Mon/Wed/Fri at 05:07 UTC (daily until 2026-07-23), batch of 1, gated by the accuracy gate. |
 | Analytics | **Google Analytics 4** | ID `G-JXNF856NBF`. Consent via Google Consent Mode driven by the certified CMP. |
 | Ads | **Google AdSense** | Publisher ID `ca-pub-1606633100797174`. UK/EEA consent via Google's certified CMP (Privacy & messaging). |
 | Email distribution | **Resend** (live, double opt-in) | Audiences + transactional confirm/welcome/unsubscribe emails via `subscribe.js`/`confirm-subscribe.js`/`unsubscribe.js`. |
@@ -176,7 +176,7 @@ beatthescam-site/
 │       └── csp-report.js              # CSP violation report collector
 ├── .github/
 │   └── workflows/
-│       ├── daily-publish.yml          # Daily content pipeline (05:07 UTC) — opens a review PR
+│       ├── daily-publish.yml          # Content pipeline (Mon/Wed/Fri 05:07 UTC) — opens a review PR
 │       ├── daily-search-console.yml   # Search Console content-gap pipeline (05:23 UTC) — opens a review PR
 │       ├── tweet-on-publish.yml       # Fires on merge-to-main touching posts.json — tweets added slugs
 │       ├── weekly-audit.yml           # Digests recent claim manifests' flag-tier claims for human review
@@ -235,7 +235,7 @@ Developer pushes to main  →  GitHub webhook  →  Netlify pulls repo  →  Ser
 **Human-review gate (2026-06-25):** the cron no longer pushes straight to `main`. It opens a pull request instead — nothing publishes, gets ads, or is tweeted until the operator merges it.
 
 ```
-05:07 UTC  →  GitHub Actions starts daily-publish.yml
+05:07 UTC (Mon/Wed/Fri)  →  GitHub Actions starts daily-publish.yml
             →  Calls Claude API → generates 1 guide → content_gate.py (deterministic + LLM judge); FAIL → quarantine; PASS → write content/manifests/<slug>.json → updates posts.json
             →  Runs python scripts/build.py → rebuilds dist/
             →  Verifies dist/index.html, dist/robots.txt, dist/_redirects, 50+ guide directories exist
@@ -647,7 +647,7 @@ multiplex_unit:       <add after creation>
 | Item | Value |
 |---|---|
 | Workflow file | `.github/workflows/daily-publish.yml` |
-| Schedule | Daily at **05:07 UTC** (06:07 BST) — moved off popular minute/hour slots to reduce GitHub-Actions scheduling delay. Cron is best-effort, not on-time. |
+| Schedule | Mon/Wed/Fri at **05:07 UTC** (06:07 BST; daily until 2026-07-23) — moved off popular minute/hour slots to reduce GitHub-Actions scheduling delay. Cron is best-effort, not on-time. |
 | Batch size | **1 guide per run** (was 5 until 2026-05-22; reduced to keep velocity sane and avoid burying posts) |
 | Queue file | `content/daily-publish-queue.csv` |
 | Model | `claude-haiku-4-5-20251001` |
@@ -656,7 +656,7 @@ multiplex_unit:       <add after creation>
 
 ### Search Console article generator (parallel pipeline)
 
-- Runs at **05:23 UTC** daily (was 06:30 UTC until 2026-05-22). Off popular slots to reduce delay; queued behind `daily-publish` via shared `concurrency: content-pipeline` group.
+- Runs at **05:23 UTC** on Mon/Wed/Fri (daily until 2026-07-23; was 06:30 UTC until 2026-05-22). Off popular slots to reduce delay; queued behind `daily-publish` via shared `concurrency: content-pipeline` group.
 - Pulls trending queries from Search Console
 - Identifies content gaps (queries with impressions but no matching guide)
 - Generates new article via Claude API, runs it through the accuracy gate, and rebuilds

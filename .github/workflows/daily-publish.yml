@@ -16,7 +16,8 @@ on:
         required: false
         default: "10"
   schedule:
-    # Daily at 05:07 UTC (06:07 BST). GitHub cron is best-effort and can be
+    # Mon/Wed/Fri at 05:07 UTC (06:07 BST) — reduced from daily on 2026-07-23
+    # to slow the publish cadence. GitHub cron is best-effort and can be
     # delayed by hours. Generation runs through scripts/content_gate.py
     # (deterministic checks + LLM judge) before anything is written; gate
     # failures are quarantined.
@@ -27,7 +28,7 @@ on:
     # Google's requirement that automatically-generated content be reviewed or
     # curated before it carries advertising. Auto-tweet now lives in
     # tweet-on-publish.yml, which fires only after the PR is merged to main.
-    - cron: '7 5 * * *'
+    - cron: '7 5 * * 1,3,5'
 
 permissions:
   contents: write

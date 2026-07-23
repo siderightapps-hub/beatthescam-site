@@ -77,7 +77,7 @@ python3 scripts/fact_reverify.py --limit 3       # cheap smoke test of the quart
 
 ## Publishing pipeline (human-review gated)
 
-Two scheduled crons (`.github/workflows/daily-publish.yml` 05:07 UTC, `daily-search-console.yml` 05:23 UTC): call Claude → run the gate → append to `posts.json` → `build.py` → **open a review PR** (label `auto-content`) — nothing publishes, gets ads, or is tweeted until the operator merges. Serialized via the shared `concurrency: content-pipeline` group.
+Two scheduled crons, Mon/Wed/Fri since 2026-07-23 (`.github/workflows/daily-publish.yml` 05:07 UTC, `daily-search-console.yml` 05:23 UTC): call Claude → run the gate → append to `posts.json` → `build.py` → **open a review PR** (label `auto-content`) — nothing publishes, gets ads, or is tweeted until the operator merges. Serialized via the shared `concurrency: content-pipeline` group.
 
 - **Backlog guard:** both crons skip generation while any `auto-content` PR is open — the queue's "published" marks only reach `main` on merge, so a stale queue re-picks the same topics. Merge or close review PRs same-day.
 - **Auto-tweet** is `tweet-on-publish.yml`: fires on push to `main` touching `posts.json`, tweets only the slugs added in that push (≤3-slug cap + `tweeted_posts.json` dedupe).

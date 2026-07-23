@@ -8,7 +8,7 @@ Files:
 - content/daily-publish-queue.csv
 
 What it does:
-1. Every day at 05:07 UTC, or when triggered manually, GitHub Actions runs.
+1. Every Monday, Wednesday and Friday at 05:07 UTC (reduced from daily on 2026-07-23), or when triggered manually, GitHub Actions runs.
 2. It picks the next unpublished rows from content/daily-publish-queue.csv.
 3. It writes those rows into content/topics-claude-template.csv.
 4. It runs scripts/generate_content_claude.py in Claude mode with Claude Haiku.
@@ -27,7 +27,7 @@ What it does:
    content/tweeted_posts.json) — tweeting is no longer part of this workflow.
 8. It marks published rows in the queue file (by TOPIC slug) once the PR merges.
 
-The sibling cron .github/workflows/daily-search-console.yml (05:23 UTC) runs the
+The sibling cron .github/workflows/daily-search-console.yml (05:23 UTC, same Mon/Wed/Fri schedule) runs the
 same generate -> gate -> review-PR flow, filling Search Console content gaps
 instead of working the queue.
 
