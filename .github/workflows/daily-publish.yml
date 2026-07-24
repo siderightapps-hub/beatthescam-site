@@ -47,7 +47,7 @@ jobs:
     runs-on: ubuntu-latest
     env:
       ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
-      # Scheduled runs have no inputs, so the fallback applies: 1 article/day.
+      # Scheduled runs have no inputs, so the fallback applies: 1 article per run.
       BATCH_SIZE: ${{ github.event.inputs.batch_size || '1' }}
       REWRITE_THIN: ${{ github.event.inputs.rewrite_thin || 'false' }}
       REWRITE_LIMIT: ${{ github.event.inputs.rewrite_limit || '10' }}

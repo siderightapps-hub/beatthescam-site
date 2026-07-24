@@ -73,7 +73,7 @@ python3 scripts/fact_reverify.py --limit 3       # cheap smoke test of the quart
 
 **The gate only runs once, at generation time** — it can't notice a live guide's facts going stale later (a cap changes, a mailbox is retired, a deadline moves). `scripts/fact_reverify.py` + `.github/workflows/fact-reverify.yml` (quarterly, 1st of Jan/Apr/Jul/Oct) close that gap: a corpus-wide deterministic re-scan plus a web-search-enabled Claude pass over every live guide, opening a review PR (label `fact-audit`, deliberately distinct from `auto-content` so it doesn't trip the daily-publish backlog guard) with a drift report — never edits `posts.json` itself.
 
-**Operator review workflow:** for hand-written/bespoke content work, generate `docs/review/<slug>.md` and wait for the operator's `-c.md` fact-check reply before committing — even if you did your own web verification.
+**Operator review workflow:** for hand-written/bespoke content work, generate `docs/review/<slug>.md` and wait for the operator's `-c.md` fact-check reply before committing — even if you did your own web verification. The folder accumulates replies from multiple sessions: check a reply's audit-date line before treating it as the answer to your draft.
 
 ## Publishing pipeline (human-review gated)
 

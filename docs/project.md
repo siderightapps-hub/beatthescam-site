@@ -230,7 +230,7 @@ Developer pushes to main  →  GitHub webhook  →  Netlify pulls repo  →  Ser
                                               ↳  Bundles netlify/functions/* into Lambda
 ```
 
-### Daily pipeline flow
+### Pipeline flow (Tue/Fri)
 
 **Human-review gate (2026-06-25):** the cron no longer pushes straight to `main`. It opens a pull request instead — nothing publishes, gets ads, or is tweeted until the operator merges it.
 
@@ -248,6 +248,8 @@ Developer pushes to main  →  GitHub webhook  →  Netlify pulls repo  →  Ser
 ```
 
 There is no rebase-retry loop anymore: each cron run branches fresh off `main` and pushes a brand-new branch, so there is nothing to conflict with on push.
+
+**Operator review reminder (local, outside this repo):** a Claude Code scheduled task `content-pr-review-reminder` on the operator's Mac runs **Tue/Fri at 10:04 local** and reports any open `auto-content` PR (read-only — it never merges or comments). It was updated in step with the 2026-07-23 cadence change; if the generation schedule changes again, update that task too (`~/.claude/scheduled-tasks/content-pr-review-reminder/SKILL.md`).
 
 ### Credit usage discipline
 
@@ -1406,6 +1408,8 @@ Revoke PATs after use at github.com → Settings → Developer settings → Pers
 35. **`content_gate.py` only runs ONCE, at generation time — it has no mechanism to notice a LIVE guide's facts going stale later (added 2026-07-11).** The 2026-07-10 manual full-corpus audit (16 parallel web-search agents) found real drift in guides that had been live for months: a PSTN switch-off date that moved, a retired Microsoft mailbox, a wrong CMA court-order date, a mis-routed reporting email — none of it caught by the generation-time gate or the 7-day-window weekly digest. `scripts/fact_reverify.py` + `.github/workflows/fact-reverify.yml` (quarterly, 1st of Jan/Apr/Jul/Oct) close that gap: Pass A re-runs `content_gate.run_gate(use_llm=False)` across the ENTIRE corpus regardless of publish date (surfaces old unresolved FLAG-tier claims the weekly digest's 7-day window never resurfaces); Pass B sends one Claude call per guide with the `web_search_20250305` server tool enabled, instructed to verify checkable claims (dates, figures, reporting routes, legal citations, "X was retired/rebranded") against current primary UK sources and report ONLY confirmed drift (an unverifiable claim is left alone, never guessed at). Both passes write one report to `content/fact-reverify-reports/<YYYY>-Q<N>.md` and open a PR labelled **`fact-audit`** — deliberately NOT `auto-content`, because `daily-publish.yml`'s backlog guard skips generation while any `auto-content` PR is open, and a fact-audit PR under review shouldn't pause daily publishing. This script/workflow NEVER edits `posts.json`/manifests/`dist/` — same human-review-gated contract as everything else, and the same pattern already proven on the sister publication `tuningdigital`'s `fact-reverify.yml`.
 
 36. **`content_gate.py`'s legislation-citation regex lacked a word boundary after "Act" (fixed 2026-07-10, PR #53).** `_LEGISLATION_RES` matched `[A-Z]\w+ Act` with nothing requiring a boundary after "Act", so it flagged ordinary words like "Actually"/"Action"/"Active" whenever preceded by 1–5 capitalised words after "The"/"the" — hit on a draft title "...What the Software Actually Does", which the gate flagged as if it cited "the Software Act". Fixed with a trailing `\b`; genuine citations ("the Fraud Act 2006", "the Consumer Credit Act 1974") already had a natural word boundary after "Act" so detection is unaffected.
+
+37. **`docs/review/` accumulates operator `-c.md` replies from MULTIPLE sessions — always check a reply's audit-date line before treating it as the answer to YOUR draft (learned 2026-07-23).** During the 2026-07-21 full-audit remediation, `microsoft-…-c.md` and `talktalk-…-c.md` already existed on disk as 2026-07-19 replies to a *previous* session's drafts and reached the *opposite* conclusions to the fresh audit; treating them as current replies would have shipped wrong content. Related hold-back gotcha: if you apply a proposed edit to the working tree, then revert it to keep it out of an interim commit, the draft's "applied in working tree" claim goes stale — the operator's next audit will correctly report the change as missing (this happened with the printer-support thickening). When resubmitting, paste the exact renderable text into the draft.
 
 ### Anti-patterns — don't regress these
 

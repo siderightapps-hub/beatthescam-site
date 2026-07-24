@@ -1,21 +1,27 @@
 # Start here next session
 
-> **Last updated:** 2026-07-21
-> **Repository state:** `main` at `d1ccf8e72` (PR #62 daily publish merged, auto-tweet recorded); production verified; no open `auto-content` PR at close.
+> **Last updated:** 2026-07-24
+> **Repository state:** `main` at `1d95eb264`; production verified live; no open `auto-content` PR at close; working tree clean.
+
+## Since 2026-07-21 (audit remediation session, closed 2026-07-23)
+
+- The 2026-07-21 full fact-check audit (all articles + site) is **fully remediated and shipped** across commits `a7433d21` → `1d95eb26`: 28 guides corrected under the operator `-c.md` review workflow, all material corrections logged on `/corrections/`. Operator review rejected four proposals (EE, Ray-Ban, Hinge, and the smart-meter statutory-inspection claim) — the originals stand; treat those audit findings as withdrawn.
+- Site-level fixes shipped: checker function no longer leaks "Action Fraud" branding (prompt rule + link canonicaliser), non-personalised-ads terms extended to welfare/pension/money-mule pages, Organization `sameAs` + PNG logo `ImageObject` in all schema, `llms-full.txt` generated at build, truncated meta descriptions fixed, dead assets dropped from `dist/`.
+- **Content cadence reduced: both generation crons now run Tue/Fri only** (05:07 / 05:23 UTC; commits `38eb445d`, `2b5206f1`). The local Claude Code review-reminder task now also runs Tue/Fri 10:04.
 
 This is the short operational front door. `docs/project.md` is the detailed source of truth; dated audit and diversification documents are historical records and should not be used as current punch lists.
 
 ## Current verified baseline
 
-- 184 guide source records; 183 indexable guides after one documented consolidation.
+- 185 guide source records; 184 indexable guides after one documented consolidation.
 - 17 normalised categories.
-- 225 generated HTML files; 223 indexable canonical pages; 649 JSON-LD blocks; zero broken local links at the 2026-07-21 validation.
-- 183 entries in `dist/search.json` and seven `/guides/` listing pages.
+- 226 generated HTML files; 224 indexable canonical pages; zero broken local links at the 2026-07-21 validation.
+- 184 entries in `dist/search.json` and seven `/guides/` listing pages.
 - AI scam checker, Google CMP, consent-aware GA4 events and Resend double opt-in are live.
 - Original public research and its transparent method are live.
 - Search Console and Bing AI baseline snapshots are retained under `analytics/search-ai/`.
 - Commercial KPI/P&L ledgers and a non-confidential buyer data-room structure are present.
-- Daily review-PR pipeline is unblocked. The queue has 26 pending topics, approximately 26 publishing days at one per day.
+- Review-PR pipeline is unblocked and now runs Tue/Fri (reduced from daily on 2026-07-23). The queue has 24 pending topics — roughly 12 weeks at one per daily-publish run.
 
 ## Outstanding work — priority order
 
