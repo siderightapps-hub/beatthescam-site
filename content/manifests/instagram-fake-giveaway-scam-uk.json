@@ -1,0 +1,15 @@
+{
+  "slug": "instagram-fake-giveaway-scam-uk",
+  "title": "Instagram Fake Giveaway Scam UK: How to Spot and Report It",
+  "date": "2026-07-24",
+  "model": "claude-haiku-4-5-20251001",
+  "gate_passed": true,
+  "claims": [
+    {
+      "type": "7726_scope",
+      "severity": "flag",
+      "text": "7726 (free, works on all UK networks",
+      "detail": "claims 7726 works on all/every UK network. Current Ofcom guidance instead says a suspicious SMS text can be forwarded to 7726 free of charge; use that format-specific wording without asserting network coverage."
+    }
+  ]
+}

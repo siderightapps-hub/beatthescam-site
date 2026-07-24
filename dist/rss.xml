@@ -1,5 +1,12 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Beat the Scam</title><link>https://beatthescam.com</link><description>Scam alerts, plain-English checks, and practical guides to help people verify suspicious emails, texts, websites, calls, and offers.</description><lastBuildDate>Wed, 22 Jul 2026 00:00:00 +0000</lastBuildDate><atom:link href="https://beatthescam.com/rss.xml" rel="self" type="application/rss+xml" />
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Beat the Scam</title><link>https://beatthescam.com</link><description>Scam alerts, plain-English checks, and practical guides to help people verify suspicious emails, texts, websites, calls, and offers.</description><lastBuildDate>Fri, 24 Jul 2026 00:00:00 +0000</lastBuildDate><atom:link href="https://beatthescam.com/rss.xml" rel="self" type="application/rss+xml" />
+        <item>
+          <title>Instagram Fake Giveaway Scam UK: How to Spot and Report It</title>
+          <link>https://beatthescam.com/guides/instagram-fake-giveaway-scam-uk/</link>
+          <guid isPermaLink="true">https://beatthescam.com/guides/instagram-fake-giveaway-scam-uk/</guid>
+          <pubDate>Fri, 24 Jul 2026 00:00:00 +0000</pubDate>
+          <description>Instagram fake giveaway scams trick users into following fake accounts, sharing personal details, or sending money for &#x27;entry fees&#x27;. We explain how to verify genuine giveaways, what to do if you&#x27;ve already engaged, and how to report the scam.</description>
+        </item>
         <item>
           <title>WhatsApp Stranger Scam UK: How to Spot and Stop It</title>
           <link>https://beatthescam.com/guides/whatsapp-stranger-scam-uk/</link>
@@ -202,11 +209,4 @@
           <guid isPermaLink="true">https://beatthescam.com/guides/google-voice-verification-scam/</guid>
           <pubDate>Sun, 07 Jun 2026 00:00:00 +0000</pubDate>
           <description>Someone asks you to read back a Google verification code to &#x27;prove you&#x27;re real&#x27;? It&#x27;s a scam to hijack your number. Here&#x27;s how it works and what to do.</description>
-        </item>
-        <item>
-          <title>How to Spot and Avoid Scams in the UK: The Core Rules</title>
-          <link>https://beatthescam.com/guides/beatthescamcom-guide-spotting-and-avoiding-uk-consumer-scams/</link>
-          <guid isPermaLink="true">https://beatthescam.com/guides/beatthescamcom-guide-spotting-and-avoiding-uk-consumer-scams/</guid>
-          <pubDate>Sun, 07 Jun 2026 00:00:00 +0000</pubDate>
-          <description>Every scam relies on the same handful of tricks. Learn the pattern once and you&#x27;ll recognise it in a call, text, or email you&#x27;ve never seen before.</description>
         </item></channel></rss>
