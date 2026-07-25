@@ -95,6 +95,11 @@ p{margin:.75rem 0}
 .callout{background:linear-gradient(135deg,#0d1d33,#193154);color:#fff;border-radius:28px;padding:1.4rem 1.5rem;border:1px solid rgba(255,255,255,.08)}
 .callout h3,.callout p,.callout a{color:#fff}
 .notice{padding:1rem 1.1rem;border-left:4px solid var(--danger);background:var(--danger-soft);border-radius:16px;margin:1.1rem 0 1.2rem}
+.quick-answer{padding:1rem 1.1rem;border-left:4px solid var(--brand);background:var(--accent-soft);border-radius:16px;margin:1.1rem 0 1.2rem}
+.quick-answer strong{color:var(--brand)}
+.stat-record{margin:1rem 0}
+.stat-record h3{margin:0 0 .35rem}
+.stat-record .stat-value{font-weight:600;margin:0 0 .4rem}
 .do-now{background:var(--accent-soft);border-left:4px solid var(--accent);border-radius:16px;padding:1rem 1.2rem;margin:1.1rem 0 1.2rem}
 .do-now-title{font-weight:700;color:var(--accent);margin:0 0 .5rem;font-size:1.02rem}
 .do-now ol{margin:0;padding-left:1.2rem}

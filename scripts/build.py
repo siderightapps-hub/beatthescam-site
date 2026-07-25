@@ -737,6 +737,10 @@ _SENSITIVE_FINANCE_TERMS = (
     # deliberately narrower than "money mule" so employment guides that merely
     # mention mule recruitment in keywords keep default ads.
     "universal credit", "benefit", "pension", "money mule scam",
+    # Loan-fee fraud (loans interest category) and medicines (health interest
+    # category). Stems chosen so each matches exactly one guide's topic fields:
+    # "advance fee" → advance-fee-scam-uk, "pharmacy" → fake-online-pharmacy-uk-scam.
+    "advance fee", "pharmacy",
 )
 # Leading word boundary only — avoids "iva" matching inside "festival", while
 # still matching word-initial stems like "debt"/"debts".
@@ -934,6 +938,23 @@ def article_schema(site, post, url, og_image_url=None):
                 reviewed_by[key] = reviewer[key]
         data["reviewedBy"] = reviewed_by
     return json_ld(data)
+
+
+def speakable_schema(url, post):
+    """WebPage speakable markup pointing voice/AI assistants at the Quick
+    answer box. Emitted only for guides that carry a quick_answer field."""
+    if not (post.get("quick_answer") or "").strip():
+        return ""
+    return json_ld({
+        "@context": "https://schema.org",
+        "@type": "WebPage",
+        "@id": url,
+        "url": url,
+        "speakable": {
+            "@type": "SpeakableSpecification",
+            "cssSelector": [".quick-answer"],
+        },
+    })
 
 
 def breadcrumb_schema(items):
@@ -1787,6 +1808,14 @@ def render_post(site, post, all_posts, affiliates=None, sources=None, link_map=N
     else:
         review_note = f'Published {html.escape(published)}.'
 
+    # Page-specific 2–3 sentence direct answer, rendered above the generic Key
+    # rule so AI assistants and skimming readers get the guide's core verdict
+    # first. Optional per post; paired with speakable_schema() below.
+    qa = (post.get("quick_answer") or "").strip()
+    qa_html = ""
+    if qa:
+        qa_html = f'\n        <div class="quick-answer"><strong>Quick answer:</strong> {_inline(qa)}</div>'
+
     content = f'''
     <section class="hero">
       <div class="wrap">
@@ -1804,7 +1833,7 @@ def render_post(site, post, all_posts, affiliates=None, sources=None, link_map=N
           &middot; <time itemprop="datePublished" datetime="{html.escape(published)}">Published {html.escape(published)}</time>{updated_html}
           &middot; {mins} min read
         </p>
-        <div class="badge-row">{badges}</div>
+        <div class="badge-row">{badges}</div>{qa_html}
         <div class="notice"><strong>Key rule:</strong> verify through an official route you opened yourself, not the link, number, app, or payment details supplied by the suspicious message.</div>
         <aside class="do-now" aria-label="What to do if you are being targeted right now">
           <p class="do-now-title">Being targeted right now? Do this</p>
@@ -1867,6 +1896,7 @@ def render_post(site, post, all_posts, affiliates=None, sources=None, link_map=N
         + faq_schema(post['faq'])
         + breadcrumb_schema(breadcrumbs)
         + howto_schema(site, post, url)
+        + speakable_schema(url, post)
     )
 
     # Linkify passes run on the article body ONLY, before make_base() wraps it
@@ -2275,8 +2305,17 @@ def _research_chart(daily):
     '''
 
 
-def render_research_index(site, reports):
+def render_research_index(site, reports, stats_page=None):
     cards = []
+    if stats_page:
+        cards.append(f'''
+        <article class="card research-card">
+          <div class="eyebrow">Reference dataset · updated quarterly</div>
+          <h2><a href="/research/{html.escape(stats_page['slug'])}/">{html.escape(stats_page['title'])}</a></h2>
+          <p>{html.escape(stats_page['summary'])}</p>
+          <p class="meta">Updated {html.escape(stats_page['updated'])} · Includes downloadable CSV and JSON</p>
+        </article>
+        ''')
     for report in reports:
         bing = report["bing_ai"]
         cards.append(f'''
@@ -2471,6 +2510,122 @@ def render_research_report(site, report):
     return make_base(content, title=seo_title(report["title"], site["site_name"], brand=False),
                      description=report["summary"], canonical=f'{site["domain"]}/research/{slug}/',
                      schema=schema, site=site, og_type="article", ads_mode="none")
+
+
+def load_stats_page(root: Path):
+    """Load the curated UK scam statistics dataset (optional page)."""
+    path = root / "content" / "uk-scam-statistics.json"
+    if not path.exists():
+        return None
+    data = json.loads(path.read_text(encoding="utf-8"))
+    required = {"slug", "title", "updated", "summary", "sections", "gaps"}
+    missing = required - set(data)
+    if missing:
+        raise SystemExit(f"ERROR: uk-scam-statistics.json missing {sorted(missing)}")
+    return data
+
+
+def stats_dataset_schema(site, data):
+    slug = data["slug"]
+    url = f'{site["domain"]}/research/{slug}/'
+    return json_ld({
+        "@context": "https://schema.org",
+        "@type": "Dataset",
+        "name": data["title"],
+        "description": data["summary"],
+        "url": url,
+        "dateModified": data["updated"],
+        "license": "https://creativecommons.org/licenses/by/4.0/",
+        "creator": {"@type": "Organization", "name": site["site_name"], "url": site["domain"]},
+        "distribution": [
+            {"@type": "DataDownload", "encodingFormat": "text/csv",
+             "contentUrl": f'{site["domain"]}/research/data/{slug}.csv'},
+            {"@type": "DataDownload", "encodingFormat": "application/json",
+             "contentUrl": f'{site["domain"]}/research/data/{slug}.json'},
+        ],
+    })
+
+
+def render_stats_page(site, data):
+    slug = data["slug"]
+    url = f'{site["domain"]}/research/{slug}/'
+    section_parts = []
+    for sec in data["sections"]:
+        rows = []
+        for st in sec["stats"]:
+            meta_bits = [st["period"], st["publisher"], f'published {st["published"]}']
+            if st.get("geography"):
+                meta_bits.insert(1, st["geography"])
+            notes = f'<p class="note">{html.escape(st["notes"])}</p>' if st.get("notes") else ""
+            rows.append(f'''
+            <article class="card stat-record">
+              <h3>{html.escape(st["metric"])}</h3>
+              <p class="stat-value">{html.escape(st["value"])}</p>
+              <p class="meta">{html.escape(" · ".join(meta_bits))} ·
+                <a href="{html.escape(st["source_url"])}" rel="noopener noreferrer" target="_blank">Source</a></p>
+              {notes}
+            </article>''')
+        intro = f'<p>{html.escape(sec["intro"])}</p>' if sec.get("intro") else ""
+        sid = slugify(sec["heading"])
+        section_parts.append(f'<h2 id="{sid}">{html.escape(sec["heading"])}</h2>{intro}{"".join(rows)}')
+
+    gaps_html = "".join(f'<li>{html.escape(g)}</li>' for g in data["gaps"])
+    content = f'''
+    <section class="hero research-hero">
+      <div class="wrap">
+        <div class="breadcrumbs"><a href="/">Home</a> / <a href="/research/">Research</a> / UK Scam Statistics</div>
+        <div class="kicker">Original data · Updated {html.escape(data["updated"])}</div>
+        <h1>{html.escape(data["title"])}</h1>
+        <p class="lead">{html.escape(data["summary"])}</p>
+        <div class="notice"><strong>Reading the numbers:</strong> {html.escape(data["scope_note"])}</div>
+      </div>
+    </section>
+    <section class="section"><div class="wrap">
+      {"".join(section_parts)}
+      <h2 id="data-gaps">Known data gaps</h2>
+      <p>Honest limits of the current official data — recorded so a missing figure is not mistaken for a missing problem.</p>
+      <ul>{gaps_html}</ul>
+      <h2 id="downloads">Download the dataset</h2>
+      <div class="cards download-grid">
+        <a class="card" href="/research/data/{slug}.csv" download><strong>Full dataset</strong><span>CSV · every figure with period, publisher, publication date and source URL</span></a>
+        <a class="card" href="/research/data/{slug}.json" download><strong>Structured data</strong><span>JSON · the same records grouped by section, plus gap notes</span></a>
+      </div>
+      <h2 id="method">Method and update cadence</h2>
+      <p>{html.escape(data["methodology_note"])}</p>
+      <p>{html.escape(data["cadence_note"])} Next scheduled refresh: {html.escape(data.get("next_update", "quarterly"))}.</p>
+      <p class="meta">Cite as: {html.escape(site["site_name"])}, &#8220;{html.escape(data["title"])}&#8221;, {html.escape(data["updated"])}, {html.escape(url)}. Licensed CC BY 4.0 &#8212; reuse with attribution.</p>
+    </div></section>
+    '''
+    breadcrumbs = [
+        ("Home", site["domain"] + "/"),
+        ("Research", site["domain"] + "/research/"),
+        (data["title"], url),
+    ]
+    schema = (page_schema(site, data["title"], data["summary"], url)
+              + stats_dataset_schema(site, data)
+              + breadcrumb_schema(breadcrumbs))
+    return make_base(content, title=seo_title(data["title"], site["site_name"], brand=False),
+                     description=data["summary"], canonical=url,
+                     schema=schema, site=site, og_type="article", ads_mode="none")
+
+
+def write_stats_data(data):
+    slug = data["slug"]
+    out = DIST / "research" / "data"
+    out.mkdir(parents=True, exist_ok=True)
+    rows = []
+    for sec in data["sections"]:
+        for st in sec["stats"]:
+            rows.append({
+                "section": sec["heading"], "metric": st["metric"], "value": st["value"],
+                "period": st["period"], "geography": st.get("geography", ""),
+                "publisher": st["publisher"],
+                "published": st["published"], "source_url": st["source_url"],
+                "notes": st.get("notes", ""),
+            })
+    write(out / f"{slug}.csv", _csv_text(
+        ["section", "metric", "value", "period", "geography", "publisher", "published", "source_url", "notes"], rows))
+    write(out / f"{slug}.json", json.dumps(data, indent=2, ensure_ascii=False))
 
 
 def _csv_text(fieldnames, rows):
@@ -3436,6 +3591,7 @@ def build():
     site     = read_json(ROOT / 'content/site.json')
     raw_posts = read_json(ROOT / 'content/posts.json')
     research_reports = load_research_reports(ROOT)
+    stats_page = load_stats_page(ROOT)
 
     affiliates = load_affiliates(ROOT)
     sources    = load_sources(ROOT)
@@ -3585,11 +3741,14 @@ def build():
 
     # Public research section. Reports are generated from retained, dated
     # platform snapshots and rendered ad-free with normalized downloads.
-    write(DIST / 'research/index.html', render_research_index(site, research_reports))
+    write(DIST / 'research/index.html', render_research_index(site, research_reports, stats_page))
     write(DIST / 'research/methodology/index.html', render_research_methodology(site))
     for report in research_reports:
         write(DIST / 'research' / report['slug'] / 'index.html', render_research_report(site, report))
         write_research_data(report)
+    if stats_page:
+        write(DIST / 'research' / stats_page['slug'] / 'index.html', render_stats_page(site, stats_page))
+        write_stats_data(stats_page)
 
     about, privacy, cookies, terms, contact, disclaimer, methodology, corrections, recovery = build_legal_bodies(site)
     write(DIST / 'about/index.html',   render_simple_page(site, 'About',          'Beat the Scam is a free UK consumer protection site. Learn who runs it, how it is funded, and how the AI scam checker works.',        about,   'about'))
@@ -3721,6 +3880,11 @@ def build():
             f'<url><loc>{site["domain"]}/research/{report["slug"]}/</loc>'
             f'<lastmod>{report["published"]}</lastmod><changefreq>monthly</changefreq></url>'
         )
+    if stats_page:
+        sitemap_lines.append(
+            f'<url><loc>{site["domain"]}/research/{stats_page["slug"]}/</loc>'
+            f'<lastmod>{stats_page["updated"]}</lastmod><changefreq>monthly</changefreq></url>'
+        )
 
     for cat, items in categories.items():
         # Category lastmod = newest member's date (or build today if empty)
@@ -3792,6 +3956,10 @@ def build():
             llms_lines.append(
                 f'- [{report["title"]}]({domain}/research/{report["slug"]}/): {report["summary"]}'
             )
+    if stats_page:
+        llms_lines.append(
+            f'- [{stats_page["title"]}]({domain}/research/{stats_page["slug"]}/): {stats_page["summary"]}'
+        )
     llms_lines.extend(["", "## Categories", ""])
     sorted_cats = sorted(categories.keys(), key=lambda c: category_label(c).lower())
     for cat in sorted_cats:

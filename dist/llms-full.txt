@@ -8178,15 +8178,15 @@ Instagram fake giveaway scams trick users into following fake accounts, sharing 
 
 ### What is an Instagram fake giveaway scam?
 
-An Instagram fake giveaway scam is when a fraudster creates a fake account impersonating a real brand, celebrity, or influencer, then posts a fake giveaway to trick people into engaging. The scammer might claim you've won a prize (iPhone, holiday, cash) and ask you to click a link, follow the account, share personal details, or pay an 'entry fee' or 'shipping cost' to claim it. The account looks convincing — it may copy the real brand's profile picture, bio, and posting style — but it is controlled entirely by the scammer. A blue tick is not proof a giveaway is genuine: it now mainly shows that an account pays for a Meta Verified subscription and has had its identity checked, so scammers can buy one and some legitimate brands go without. Once you engage, you either lose money, have your account compromised, or your personal data is sold to other criminals. Real brands rarely run giveaways via Instagram DMs or ask winners to pay upfront.
+An Instagram fake giveaway scam is when a fraudster creates a fake account impersonating a real brand, celebrity, or influencer, then posts a fake giveaway to trick people into engaging. The scammer might claim you've won a prize (iPhone, holiday, cash) and ask you to click a link, follow the account, share personal details, or pay an 'entry fee' or 'shipping cost' to claim it. The account looks convincing — it may copy the real brand's profile picture, bio, and posting style — but it is controlled entirely by the scammer. A blue tick is not proof a giveaway is genuine: some ticks are older notability-based verifications, and others simply mean the account pays for a Meta Verified subscription with an identity check — so a Meta Verified tick can be bought, and some legitimate brands go without one. Once you engage, you either lose money, have your account compromised, or your personal data is sold to other criminals. Real brands rarely run giveaways via Instagram DMs or ask winners to pay upfront.
 
 ### Red flags that an Instagram giveaway is fake
 
-- The account is not the brand's genuine profile. Don't rely on the blue tick either way — it now only shows a paid Meta Verified subscription (scammers can buy one, and some real brands don't have it), so confirm the account by finding the brand's official profile through their own website.
+- The account is not the brand's genuine profile. Don't rely on the blue tick either way — a tick can be a paid Meta Verified subscription rather than an old-style notability verification (scammers can buy one, and some real brands don't have it), so confirm the account by finding the brand's official profile through their own website.
 - The account has very few followers or was created recently. Scammers often set up new accounts; check the 'About' section or look at when the account was created if possible.
 - The giveaway asks you to pay money upfront — for 'shipping', 'processing', 'entry fee', or 'tax'. Legitimate giveaways never charge winners to claim prizes.
 - The post asks you to click a link outside Instagram or visit a suspicious website. Real brands run giveaways within Instagram or direct you to their official website only.
-- The giveaway asks for sensitive personal information like your full address, bank details, passport number, or social security number before you've won anything. Legitimate brands only ask for essential contact details after confirming you've won.
+- The giveaway asks for sensitive personal information like your full address, bank details, passport number, or National Insurance number before you've won anything. Legitimate brands should not ask for sensitive financial or identity information before you have independently confirmed the giveaway and its terms.
 - The account name is slightly different from the real brand — for example, 'Apple_UK_Official' instead of 'Apple'. Scammers use similar names to confuse you.
 - The giveaway promise is too good to be true — a brand-new iPhone, £5,000 cash, or a luxury holiday with no clear entry mechanism. If the prize seems unrealistic, it almost certainly is.
 - The post has poor grammar, spelling errors, or awkward phrasing. Many scammers operate from outside the UK and their English may be noticeably off.
@@ -8197,7 +8197,7 @@ The scam typically starts when you see a post from what looks like a real brand 
 
 ### How to verify if an Instagram giveaway is genuine
 
-Before engaging with any giveaway, take these steps to confirm it's real. First, don't treat the blue tick as proof — it only shows that the account pays for a Meta Verified subscription with a checked identity, which scammers can also buy and some genuine brands go without, so a tick is not a green light and a missing tick is not proof of a scam. Second, visit the brand's official website or their official Instagram account directly (search for them fresh, don't click links from the giveaway post) and check their recent posts — do they mention this giveaway? Real brands promote genuine giveaways on their own official accounts and website. Third, look at the account's history: how long has it existed, how many followers does it have, and what kind of posts does it usually make? A brand-new account with 50 followers claiming to give away iPhones is almost certainly fake. Fourth, check the giveaway terms: does it ask for payment, sensitive personal data, or your Instagram login details? Legitimate giveaways never do. Fifth, if you're unsure, contact the brand directly using the contact details on their official website — not via the suspicious account — and ask if they're running this giveaway. Finally, be wary of giveaways that ask you to click external links; real brands usually run giveaways entirely within Instagram or direct you to their official domain only.
+Before engaging with any giveaway, take these steps to confirm it's real. First, don't treat the blue tick as proof — a tick may be an older notability-based verification or just a paid Meta Verified subscription with an identity check, which scammers can also buy, and some genuine brands go without one, so a tick is not a green light and a missing tick is not proof of a scam. Second, visit the brand's official website or their official Instagram account directly (search for them fresh, don't click links from the giveaway post) and check their recent posts — do they mention this giveaway? Real brands promote genuine giveaways on their own official accounts and website. Third, look at the account's history: how long has it existed, how many followers does it have, and what kind of posts does it usually make? A brand-new account with 50 followers claiming to give away iPhones is almost certainly fake. Fourth, check the giveaway terms: does it ask for payment, sensitive personal data, or your Instagram login details? Legitimate giveaways never do. Fifth, if you're unsure, contact the brand directly using the contact details on their official website — not via the suspicious account — and ask if they're running this giveaway. Finally, be wary of giveaways that ask you to click external links; real brands usually run giveaways entirely within Instagram or direct you to their official domain only.
 
 ### What to do immediately if you've already engaged
 
@@ -8211,7 +8211,7 @@ Report the scam through multiple channels to maximise the chance of action. Firs
 
 **Does a blue verification tick mean an Instagram giveaway is genuine?**
 
-No. The blue tick now mainly shows that an account pays for a Meta Verified subscription and has had its identity checked — scammers can buy one, and some genuine brands don't have it — so a tick is not an endorsement of any giveaway and a missing tick doesn't by itself prove a scam. The reliable check is to find the brand's real profile another way: visit their official website and follow the Instagram link they publish there, then compare the username character by character. Treat any giveaway you reached from a random post or DM with caution, however professional the account looks.
+No. A blue tick can be an older notability-based verification or simply a paid Meta Verified subscription with an identity check — scammers can buy Meta Verified, and some genuine brands don't have a tick — so a tick is not an endorsement of any giveaway and a missing tick doesn't by itself prove a scam. The reliable check is to find the brand's real profile another way: visit their official website and follow the Instagram link they publish there, then compare the username character by character. Treat any giveaway you reached from a random post or DM with caution, however professional the account looks.
 
 **I clicked a link from a fake giveaway and entered my Instagram password. What should I do?**
 
@@ -9522,21 +9522,31 @@ Forward the text free to 7726 so your mobile network can investigate the sender,
 ## DVLA Vehicle Tax Text: Is It Genuine or a Scam?
 
 URL: https://beatthescam.com/guides/dvla-vehicle-tax-text-scam/
-Category: Text Message Scams · Updated: 2026-07-18
+Category: Text Message Scams · Updated: 2026-07-25
 
 A DVLA text says vehicle tax failed or a refund is waiting? DVLA says it will not ask for bank or payment details this way. Check only through GOV.UK.
 
 ### What the fake DVLA tax text says
 
-Fake DVLA texts commonly claim a vehicle-tax payment failed, tax is overdue, a penalty is imminent, or a refund is waiting. They direct the recipient to a GOV.UK-style copycat page that collects card, bank or identity details.
+Fake DVLA texts commonly claim a vehicle-tax payment failed, tax is overdue, a penalty is imminent, or a refund is waiting. They direct the recipient to a GOV.UK-style copycat page that collects card, bank or identity details. In its April 2025 scam-awareness news story, DVLA said almost 20,000 customers called its contact centre in 2024 to report fraudulent activity.
 
-DVLA's current advice makes the answer narrower and more reliable than judging the sender name: it will not ask for bank-account details or ask you to confirm payment details by email or text, and vehicle-tax refunds are issued automatically rather than claimed through an emailed link. Older DVLA guidance also states that it does not send text messages about vehicle-tax refunds. Use GOV.UK yourself to check the vehicle instead of opening the message route.
+DVLA's current advice makes the answer narrower and more reliable than judging the sender name: a message asking for bank or card details, confirmation of payment details, or a vehicle-tax refund through a link is the scam sign. DVLA will not ask for your bank-account details or ask you to confirm payment details, and vehicle-tax refunds are issued automatically — never via an email with a link. Genuine reminders do exist, so check and tax the vehicle only through GOV.UK.
 
 ### Why a "DVLA" text is easy to fake
 
-Scammers can use official-looking sender names, GOV.UK-style design, and urgent wording. Timing can also make a fake feel real if it arrives near a renewal date.
+Scammers can use official-looking sender names, GOV.UK-style design, and urgent wording. Sender IDs can be spoofed, so `DVLA` showing as the sender proves nothing — the fake can even land in the same thread as a genuine message. Timing can also make a fake feel real if it arrives near a renewal date.
 
-The key facts are clearer than the message: DVLA has said the only place to access official information on DVLA and its services is GOV.UK, that it never asks for bank details by email, and that it never sends text messages about vehicle-tax refunds. A DVLA official also said DVLA never asks for bank or credit-card details by text message or email.
+The key facts are clearer than the message: DVLA has said the only place to access official information on DVLA and its services is GOV.UK, that it never sends text messages about vehicle-tax refunds, and — per a DVLA official — that it never asks for bank or credit-card details by text message or email.
+
+The same criminals run a phone version — an automated call claiming your tax payment failed — covered at /guides/dvla-phone-scam-uk/.
+
+### What genuine DVLA reminders actually look like
+
+Knowing the real process makes the fake obvious.
+
+- The standard tax-due reminder is a letter — the V11 — posted to the address on your V5C log book. GOV.UK also refers to reminders arriving by email or text, so a reminder in your inbox is not automatically fake — but a genuine one never asks for bank details.
+- If a Direct Debit payment fails through lack of funds, DVLA says the account holder gets an email and it retries within 4 working days; if that fails too, a further email says the Direct Debit is cancelled and the vehicle is no longer taxed. Note what is missing: no request for bank details, no urgent payment link.
+- A genuine refund is a cheque, issued automatically for any full months left once you tell DVLA the vehicle is sold, scrapped, exported or SORNed, sent to the address on the log book — nothing to claim, no link, no bank details.
 
 ### Signs a "DVLA" text is a scam
 
@@ -9544,7 +9554,8 @@ The key facts are clearer than the message: DVLA has said the only place to acce
 - The link is not on `gov.uk`, or it uses a lookalike, extra words, or a shortened URL.
 - It threatens a fine, penalty, or deadline if you do not act immediately.
 - It asks for card numbers, bank details, or personal information.
-- It claims a vehicle-tax refund is waiting by text. DVLA says it does not send text messages about vehicle-tax refunds.
+- It claims a refund is waiting — genuine refunds arrive as automatic cheques, not links.
+- It asks you to upload or confirm driving-licence or V5C details. DVLA warns against sharing these online (identity-theft risk).
 - It looks official but asks you to use a route outside GOV.UK.
 
 ### How the vehicle-tax scam works
@@ -9557,45 +9568,55 @@ Some pages ask for a small "fee" to seem believable while harvesting details for
 
 Close the message and type `gov.uk` yourself. Use:
 
-- `gov.uk/check-vehicle-tax` to check whether a vehicle is taxed.
-- `gov.uk/vehicle-tax` to tax a vehicle through the official service.
+- `gov.uk/check-vehicle-tax` to check free whether a vehicle is taxed or SORNed — you only need the registration number. Records can take up to 2 working days to update after you tax.
+- `gov.uk/vehicle-tax` to tax a vehicle officially, using the reference from your V11 reminder, your V5C log book, or the green new-keeper slip.
 - `gov.uk/vehicle-tax-refund` to understand when a refund is issued automatically.
 
-DVLA says it may ask a person to confirm personal details by email or text when there is a live enquiry, so 'DVLA never texts' is not a safe universal rule. The red line is a text or email asking for bank details, asking you to confirm payment details, or directing you to claim a vehicle-tax refund. If a message refers to a real enquiry, confirm it through the GOV.UK service or contact route you open yourself.
+DVLA says it may ask a person to confirm personal details by email or text when there is a live enquiry, so 'DVLA never texts' is not a safe universal rule. The red line is a message asking for bank details, confirmation of payment details, or a vehicle-tax refund claim. If a message refers to a real enquiry, confirm it through a GOV.UK service or contact route you open yourself.
 
 ### If you paid or shared card details
 
-Contact your bank or card issuer immediately using the number on the back of your card. Tell them it was a scam, ask them to stop the card if needed, and ask about disputing the transaction. A card payment may be recoverable through chargeback, but that depends on the circumstances and card scheme rules.
+Contact your bank or card issuer immediately using the number on the back of your card. Tell them it was a scam, ask them to stop the card if needed, and ask about disputing the transaction. A card payment may be recoverable through chargeback, depending on the circumstances and card scheme rules.
+
+Then take stock of what the fake page collected. Card details: watch statements for small "test" transactions. Name, address, date of birth or licence details: consider Cifas Protective Registration and monitor your credit reports with Experian, Equifax and TransUnion. Our checklist at /recovery/ walks through this in order.
 
 ### How to report a DVLA text scam (UK)
 
-Forward the text to 7726. The NCSC says most UK phone providers let customers report suspicious texts for free this way, so the provider can investigate.
+Forward the text to 7726. Ofcom says forwarding scam texts to 7726 is free and alerts your mobile provider to investigate and block the number.
 
 If you lost money, shared sensitive information, or were hacked, report it to Report Fraud at `reportfraud.police.uk` or on 0300 123 2040 if you are in England, Wales, or Northern Ireland. In Scotland, report to Police Scotland on 101.
 
-If a similar scam arrived by email, forward it to `report@phishing.gov.uk`. DVLA's own GOV.UK guidance points readers to these same official routes.
+If a similar scam arrived by email, forward it to `report@phishing.gov.uk`; DVLA also suggests reporting misleading copycat adverts to the search engine.
 
 ### Frequently asked questions
 
 **Does DVLA send texts about vehicle tax refunds?**
 
-DVLA has said it never sends text messages about vehicle-tax refunds. Treat any "refund waiting" text link as a scam.
+DVLA has said it never sends text messages about vehicle-tax refunds — a genuine refund is an automatic cheque to the address on your V5C. Treat any "refund waiting" link as a scam.
 
 **Does DVLA ask for bank or card details by text or email?**
 
-DVLA has said it never asks for bank or credit-card details by text message or email. Use GOV.UK instead.
+DVLA says it will never ask you for your bank-account details or ask you to confirm payment details. Use GOV.UK instead.
+
+**Does DVLA ever send genuine emails or texts at all?**
+
+Yes — which is why the sender name proves nothing. GOV.UK refers to tax reminders arriving by letter (the V11), email or text, and DVLA emails you if a Direct Debit fails. None of those ask for bank or payment details.
 
 **The text arrived when my tax was due - could it be genuine?**
 
-Timing proves nothing. Ignore the link and check directly on GOV.UK.
+Timing proves nothing — scam texts go out in bulk. Ignore the link and check directly on GOV.UK.
+
+**A message says my Direct Debit for vehicle tax failed - what should I do?**
+
+Do not use anything in the message. Check the vehicle yourself at `gov.uk/check-vehicle-tax`, and retax at `gov.uk/vehicle-tax` if the tax really has lapsed.
 
 **I entered card details on a DVLA-style site - what now?**
 
-Contact your bank or card issuer immediately using the number on your card. Ask them to secure the card and dispute the payment. Then report the scam.
+Contact your bank or card issuer immediately using the number on your card. Ask them to secure the card and dispute the payment. If you also gave personal details, consider Cifas Protective Registration. Then report the scam.
 
 **How do I report a fake DVLA text?**
 
-Forward it to 7726. If you lost money or shared sensitive details, report it to Report Fraud in England, Wales, or Northern Ireland, or to Police Scotland on 101 in Scotland.
+Forward it to 7726 (free). If you lost money or shared sensitive details, report it to Report Fraud in England, Wales, or Northern Ireland, or to Police Scotland on 101 in Scotland.
 
 ## EE Scam Text UK: Spot a Fake Message
 
@@ -9745,49 +9766,61 @@ Forward it to 7726. If the message mentions Evri, also use Evri's cyber-security
 ## Fake Halifax Text? Scam Checks, 159 and Safe Reporting
 
 URL: https://beatthescam.com/guides/halifax-bank-scam-text-uk/
-Category: Text Message Scams · Updated: 2026-07-18
+Category: Text Message Scams · Updated: 2026-07-25
 
 Received an unexpected Halifax fraud or payment text? Do not share a passcode or move money. Check it in the app, through the card number or via 159.
 
 ### What a fake Halifax text looks like
 
-A Halifax scam text impersonates the bank to make you tap a link, disclose banking details, share a passcode or move money. Common stories include a blocked payment, new payee, locked account or suspicious login. The wording is not proof either way.
+A Halifax scam text impersonates the bank to make you tap a link, disclose banking details, share a passcode or move money. Common stories include a blocked payment, new payee, locked account or suspicious login. An example of the style: `HALIFAX: A new device was registered to your account. Not you? Verify now: halifax-secure-check.example`. The wording is not proof either way.
 
-Use this page when a message arrived unexpectedly. If you initiated a login or card payment and the expected verification text did not arrive, go to the [Halifax text-not-arriving guide](/guides/bank-text-codes-not-arriving/) instead.
+Use this page when a message arrived unexpectedly. If an expected verification text did not arrive, that is a service problem - see /guides/bank-text-codes-not-arriving/ instead.
 
 ### Why a Halifax text can look convincing
 
-Scammers can use familiar-looking sender names and wording. A fake may appear near genuine alerts on your phone, so you cannot rely on sender display or message position alone.
+Scammers can use familiar-looking sender names and wording that copies real bank alerts, and a fake can sit right beside genuine Halifax messages on your phone - sender display and message grouping prove nothing either way.
 
-Halifax's official fraud contact page says Halifax will never ask you to tell them your account details, share your Personal Security Number, tell them your PIN or card expiry date, or move money to another account. If a text asks you to do any of those things, treat it as a scam.
+Halifax's official fraud contact page says Halifax will never ask you to tell them your account details, share your Personal Security Number, tell them your PIN or card expiry date, or move money to another account. If a text asks for any of those, it is a scam.
+
+### The Halifax-to-Lloyds brand change: a new hook for scammers
+
+Halifax is being rebranded as Lloyds: announced on 2 July 2026, closed to new customers since 16 July 2026, with existing customers moved to the Lloyds app and rebranded accounts in stages over the coming months. Sort codes, account numbers, cards, PINs and payments carry on unchanged.
+
+Fraudsters exploit announcements like this with urgent texts: "confirm your details for the switch", "re-register for the Lloyds app". Halifax says it will only contact customers about the transition by email, letter or a banking message - it will not call or text you about it, will not ask you to log in through a link or QR code, and will not ask for your PIN.
+
+So a text about the change that asks you to tap, log in, verify or move money is a scam. Customers who have already moved approve Halifax-card payments in the Lloyds app - type `halifax.co.uk` yourself for the current instructions.
 
 ### Signs a Halifax text is a scam
 
 - It pressures you to act fast: an account "locked", payment "held", or deadline.
-- It asks you to tap a link to "verify", "reconfirm", "secure", log in, or re-enter card details.
-- The link uses a lookalike or unusual domain. Do not use text-message links for banking; open the app or type the address yourself.
+- It asks you to tap a link to "verify", "secure", log in, or re-enter card details.
+- The link uses a lookalike or unusual domain. Never use text links for banking.
 - It asks for your password, PIN, Personal Security Number, card details, or one-time passcode.
 - It tells you to move money to a new, holding, or "safe" account.
-- A generic greeting can be a clue, but it is weaker by text than by email.
-- Errors can help, but a polished text can still be fraudulent.
+- It mentions the change to Lloyds and asks you to log in, register or confirm anything - Halifax says it will not text you about the transition.
 
 ### How the Halifax text scam works
 
-First, a text appears to come from Halifax, warning of a blocked payment, new payee, or suspicious login. Second, it pushes you to a link to stop the payment or restore access. Third, the link opens a copycat page that asks for banking or card details. Fourth, the criminals capture what you enter. Fifth, they may trigger a real one-time passcode and ask you to enter it. Finally, they try to move money, add payees, or use the details in further fraud.
+First, a text appears to come from Halifax, warning of a blocked payment, new payee, suspicious login or a problem with the move to Lloyds. Second, it pushes you to a link to fix it. Third, the link opens a copycat page that asks for banking or card details. Fourth, the criminals capture what you enter. Fifth, they may trigger a real one-time passcode and ask for it - Halifax says a passcode is like a PIN: never shared. Finally, they try to move money, add payees, or use the details in further fraud. The safest point to break the chain is before tapping the link.
 
 ### How to check if a Halifax text is genuine
 
-Do not reply, use the link or call a number in the message. Open the official Halifax or Lloyds app used for your account, call the number printed on your card, or call 159; Stop Scams UK lists Halifax as a participating bank.
+Do not reply, use the link or call a number in the message. Check independently:
 
-During the Halifax-to-Lloyds brand change, Halifax says links or QR codes it sends will be for general information only: it will not use them to ask you to log in or verify yourself. Halifax also says it will not ask you to share personal details or move money by phone, email or text. A request for a passcode, app approval or transfer to a 'safe account' is therefore enough to end the interaction and contact the bank independently.
+- Call 159. Stop Scams UK's participant list includes Halifax, Lloyds Bank and Bank of Scotland, and it says 159 covers more than 99% of UK retail current accounts.
+- Open the official Halifax or Lloyds app for your account and check activity and secure messages.
+- Call the number printed on the back of your card.
+- Type the bank's address yourself, or use a trusted bookmark.
 
-### What to do if you have already tapped the link or shared details
+Halifax also says it will not ask you to share personal details or move money by phone, email or text - a passcode request, app approval or "safe account" transfer is reason enough to hang up and check. Not every genuine text appears in-app; if you cannot confirm the claim, contact the bank directly. If a linked website looks suspect, /guides/is-this-website-a-scam/ walks through the checks.
 
-If you entered login details, card details, or a passcode, call 159 or the number on your card immediately. Ask Halifax to secure the account and check for payments, payees, card activity, or account changes you do not recognise.
+### If you tapped the link, shared details or moved money
 
-Change your Halifax password only through the official app or by typing the address yourself. Change it anywhere else you reused it. If you shared card details, ask Halifax to stop and reissue the card.
+If you entered login details, card details, or a passcode, call 159 or the number on your card immediately and say you may have been phished. Ask Halifax to secure the account and check for activity you do not recognise. Change your Halifax password only through the official app or by typing the address yourself, and anywhere else you reused it. If you shared card details, ask for the card to be stopped and reissued.
 
-If you bank elsewhere, the same checks apply — see, for example, our /guides/lloyds-bank-scam-text/ guide.
+If you sent money by UK bank transfer on or after 7 October 2024, mandatory APP fraud reimbursement rules may apply to Faster Payments and CHAPS transfers, subject to a 13-month claim window, a maximum claim of £85,000, and a possible excess of up to £100 - ask the bank to assess the claim; /recovery/ covers the wider steps.
+
+If you shared personal details such as your date of birth or address, be alert to identity-theft attempts and consider a Cifas Protective Registration. If you bank elsewhere, the same checks apply — see /guides/lloyds-bank-scam-text/.
 
 ### How to report a Halifax scam text in the UK
 
@@ -9795,7 +9828,7 @@ Forward the text to 7726. The NCSC says most UK phone providers let customers re
 
 If you lost money, shared sensitive information, or were hacked, report it to Report Fraud at `reportfraud.police.uk` or on 0300 123 2040 if you are in England, Wales, or Northern Ireland. In Scotland, report to Police Scotland on 101.
 
-If the scam arrived by email, forward it to the NCSC at `report@phishing.gov.uk`. Tell Halifax through the app or the number on your card, and keep screenshots.
+If the scam arrived by email, forward it to the NCSC at `report@phishing.gov.uk`. Tell Halifax through the app or the number on your card.
 
 ### Frequently asked questions
 
@@ -9803,9 +9836,9 @@ If the scam arrived by email, forward it to the NCSC at `report@phishing.gov.uk`
 
 No. A link alone is not proof either way. Never use a text link to log in, confirm details, enter a one-time code, or move money. Check independently.
 
-**Can a scam text appear with genuine Halifax messages?**
+**Will Halifax text me about the change to Lloyds?**
 
-Yes. Sender display and phone grouping are not reliable proof. Verify through the app, 159, or the number on your card.
+No. Halifax says it will only contact customers about the brand change by email, letter or a banking message - never by call or text - and will not ask for a login via link or QR code, or your PIN.
 
 **What number should I call to check a Halifax text safely?**
 
@@ -9813,11 +9846,11 @@ Call 159 or the number printed on the back of your card. Do not call a number su
 
 **I tapped the link and entered my details - what should I do now?**
 
-Contact Halifax immediately using 159, the app, or the number on your card. Change your password through the official app or site, stop your card if needed, and report any payment you did not make.
+Contact Halifax immediately via 159, the app, or the number on your card. Change your password through the official app, stop your card if needed, and report any payment you did not make.
 
 **How do I report a fake Halifax text in the UK?**
 
-Forward it to 7726. If you lost money or shared sensitive information, report it to Report Fraud in England, Wales, or Northern Ireland, or to Police Scotland on 101 in Scotland.
+Forward it to 7726. If you lost money or shared sensitive information, report it to Report Fraud (Police Scotland on 101 in Scotland).
 
 ## Halifax Text Not Arriving? Bank Verification Code Fixes
 
@@ -9879,7 +9912,7 @@ A familiar sender name or message thread is not proof because SMS origin informa
 ## HMRC Tax Refund Text Scam: Spot the Fake (UK)
 
 URL: https://beatthescam.com/guides/hmrc-tax-refund-text-scam-uk/
-Category: Text Message Scams · Updated: 2026-07-18
+Category: Text Message Scams · Updated: 2026-07-24
 
 An HMRC text saying you're owed a tax refund — click to claim? Real refunds aren't claimed by text link. How to spot the scam and check safely on GOV.UK.
 
@@ -9893,7 +9926,7 @@ The promise of a refund is the hook, and the amount is often specific to make th
 
 Scammers can spoof a sender name such as `HMRC` or `GOV.UK`, so the sender label is not enough to prove the message is genuine. The important nuance is that HMRC does send some genuine text messages. GOV.UK lists recent genuine HMRC text-message campaigns, and some genuine texts can include links to GOV.UK information or HMRC webchat.
 
-The fact that cuts through the scam is this: HMRC says it will never ask for personal or financial information when it sends text messages. It also says it will never send a notification of a tax rebate or ask you to disclose personal or payment information by text message. For Self Assessment tax refunds, a genuine HMRC text may confirm that a refund is being processed and when you can expect it, but it will not ask for personal or financial information or provide website links.
+The fact that cuts through the scam is this: HMRC says it will never ask for personal or financial information when it sends text messages, and GOV.UK's advice on any text offering a tax refund is blunt — do not open the link. For Self Assessment tax refunds, a genuine HMRC text may confirm that a refund is being processed and when you can expect it, but it will not ask for personal or financial information or provide website links.
 
 For P800 tax-overpayment refunds, your tax calculation letter tells you how to claim. GOV.UK says you may be able to claim online, through your Personal Tax Account or the HMRC app, by contacting HMRC, or you may automatically get a cheque if your letter says so. You do not claim a refund through a random text link.
 
@@ -9903,7 +9936,7 @@ For P800 tax-overpayment refunds, your tax calculation letter tells you how to c
 - It asks for bank details, card details, your National Insurance number, or other personal information.
 - It says you must act quickly or lose the refund.
 - It links to a lookalike GOV.UK page, a shortened URL, or a page outside the route you reached yourself by typing `gov.uk`.
-- It claims a tax rebate is waiting by text; HMRC says it will not notify you of a tax rebate by text message.
+- It announces a rebate out of the blue. A genuine Self Assessment refund text only confirms a refund you already requested is being processed, and a P800 overpayment refund starts with a tax calculation letter — not a text link.
 - It threatens a fine, arrest, or legal action unless you pay immediately.
 - It looks official but asks you to use a route outside GOV.UK, the HMRC app, or your HMRC online account.
 
@@ -9959,7 +9992,7 @@ Forward the text to 60599. You can also forward it to 7726. Report scam emails c
 ## Is This NHS Appointment Text Genuine? Checks and Scam Signs
 
 URL: https://beatthescam.com/guides/nhs-appointment-scam-text-uk/
-Category: Text Message Scams · Updated: 2026-07-18
+Category: Text Message Scams · Updated: 2026-07-25
 
 The NHS does send appointment texts and NHS App fallback messages. Check the appointment independently and beware links asking for payment or details.
 
@@ -9974,6 +10007,8 @@ NHS England's current messaging guidance gives one specific fallback example: a 
 Scammers use sender names, timing, and health-related urgency to make a message feel important. A missed appointment or cancelled treatment can make people act quickly. Some texts also offer a grant, refund, or payment to lure people into entering bank details.
 
 Two facts help. First, the NHS App lets people manage healthcare and, where available, book or manage appointments and view messages. Second, the NHS Constitution says NHS services are free of charge except limited circumstances sanctioned by Parliament. A surprise text asking you to pay a fee to keep, rebook, or receive an NHS appointment should be treated as a scam until you have checked directly.
+
+Real NHS charges do exist. In England the everyday examples are prescription charges, paid at the pharmacy or covered by a prepayment certificate, and NHS dental band charges, paid to the dental practice. What those genuine charges have in common is that none of them is collected through a payment link in an unexpected text about your appointment.
 
 ### Signs an NHS text is a scam
 
@@ -10022,7 +10057,7 @@ Yes, NHS services can send genuine messages, including text messages. That means
 
 **The NHS is free - so why would an NHS text ask for payment?**
 
-Be cautious. The NHS Constitution says NHS services are free of charge except limited circumstances sanctioned by Parliament. A surprise text asking you to pay to keep, rebook, or receive an NHS appointment is not a normal way to handle care and should be checked directly.
+Be cautious. The NHS Constitution says NHS services are free of charge except limited circumstances sanctioned by Parliament. A surprise text asking you to pay to keep, rebook, or receive an NHS appointment is not a normal way to handle care and should be checked directly. The genuine exceptions include prescription charges and NHS dental charges in England, which you pay at the pharmacy or to the dental practice — not through a link in a text demanding money to hold an appointment.
 
 **Can the NHS really cancel my appointment by text?**
 

@@ -1,0 +1,354 @@
+{
+  "schema_version": 1,
+  "slug": "uk-scam-statistics",
+  "title": "UK Scam Statistics 2026: Fraud Losses, Cases and Reimbursement",
+  "updated": "2026-07-25",
+  "next_update": "October 2026 (after the PSR Q2 dashboard and ONS quarterly bulletin)",
+  "summary": "The current official numbers on UK fraud in one place: how much is being stolen, how many people are affected, how much victims get back, and where the data has gaps — every figure dated and linked to its primary source.",
+  "scope_note": "Figures come from different measurement systems that answer different questions. UK Finance counts confirmed fraud reported by its member banks; the ONS Crime Survey estimates true incidence by asking households; GASA/Cifas survey consumers about self-reported losses. The three headline numbers differ because they measure different things — not because any of them is wrong.",
+  "sections": [
+    {
+      "heading": "Headline figures",
+      "intro": "Three numbers frame the UK fraud picture, each from a different measurement system.",
+      "stats": [
+        {
+          "metric": "Total UK payment fraud losses (unauthorised + APP)",
+          "value": "Almost £1.3 billion (components: £703.4m unauthorised + £576.4m APP = £1,279.8m, derived sum; widely reported as £1.28bn, up 4% on 2024)",
+          "period": "Calendar year 2025",
+          "published": "2026-06-15",
+          "publisher": "UK Finance — Annual Fraud Report 2026",
+          "source_url": "https://www.ukfinance.org.uk/news-and-insight/press-release/fraud-report-2026-press-release",
+          "notes": "Press release headline: criminals 'steal almost £1.3 billion'. The +4% year-on-year change is stated in the report/coverage, not in the press-release body itself. Covers fraud on payment cards, remote banking and APP scams reported by UK Finance members — NOT all fraud (survey-based estimates are far higher, see GASA and ONS entries). Report PDF: https://www.ukfinance.org.uk/system/files/2026-06/UK%20Finance%20Fraud%20Report%202026.pdf",
+          "geography": "UK"
+        },
+        {
+          "metric": "Total confirmed payment fraud cases (derived sum)",
+          "value": "4.06 million cases (derived: 3.81 million unauthorised cases, up 11%, + 248,070 APP cases, up 7%); secondary coverage reports 'a record 4.06 million, up 11%'",
+          "period": "Calendar year 2025",
+          "published": "2026-06-15",
+          "publisher": "UK Finance — Annual Fraud Report 2026",
+          "source_url": "https://www.ukfinance.org.uk/news-and-insight/press-release/fraud-report-2026-press-release",
+          "notes": "UK Finance counts cards/accounts defrauded, not people. Equivalent to roughly eight people defrauded every minute (UK Finance's own framing in launch coverage). CONFLICT NOTE (record-both rule): one secondary source (Refundee, 2026) states '4.68 million cases' and another (Comms Council UK, 19 June 2026) describes 'an 11% increase' as if it applied to losses — both are misreadings; the press-release figures are 4.06m cases (+11%) and £1.28bn losses (+4%).",
+          "geography": "UK"
+        },
+        {
+          "metric": "Unauthorised fraud losses (card, remote banking, cheque)",
+          "value": "£703.4 million, down 5% vs 2024. Breakdown: remote purchase card fraud £423.5m (up 3%, 3.2m cases up 13%); lost & stolen £109.8m (down 2%, 449,189 cases up 2%); remote banking £104.4m (down 27%, 37,646 cases up 11%, driven by a 21% rise in mobile banking cases); contactless £46.8m (up 8%)",
+          "period": "Calendar year 2025",
+          "published": "2026-06-15",
+          "publisher": "UK Finance — Annual Fraud Report 2026",
+          "source_url": "https://www.ukfinance.org.uk/news-and-insight/press-release/fraud-report-2026-press-release",
+          "notes": "High-volume, low-value model: losses fell while case numbers rose. Victims of unauthorised fraud are legally protected and banks refund almost all cases.",
+          "geography": "UK"
+        },
+        {
+          "metric": "CSEW estimated fraud incidents (survey measure — the best estimate of true scale)",
+          "value": "4.5 million fraud incidents; no statistically significant change vs year ending March 2025 (4.2m). 3.8 million adult victims (up 10% from 3.4m); prevalence 7.8% of adults (up 0.7pp). Bank and credit account fraud c.2.8m incidents (up 15%)",
+          "period": "Year ending March 2026",
+          "published": "2026-07-23",
+          "publisher": "Office for National Statistics — Crime in England and Wales: year ending March 2026",
+          "source_url": "https://www.ons.gov.uk/peoplepopulationandcommunity/crimeandjustice/bulletins/crimeinenglandandwales/yearendingmarch2026",
+          "notes": "Re-verified by direct fetch 2026-07-25 (published two days ago — the most current national fraud estimate available). England and Wales only. Fraud = 4.5m of 9.6m CSEW headline crime incidents, i.e. roughly 47% of headline crime (derived ratio of two published figures; Ofcom's July 2026 statement uses 'approximately 45% of all reported crime'). Computer misuse: 798,000 incidents, no significant change. Fraud is up 30% on the earliest comparable year (YE March 2017, ~3.4m incidents, per the YE Dec 2025 bulletin).",
+          "geography": "England and Wales"
+        },
+        {
+          "metric": "Consumer-survey estimate of total UK scam losses (GASA)",
+          "value": "£9.4 billion estimated stolen from UK consumers in 12 months (down from £11.4bn in the 2024 edition); 20% of adults had money taken; average loss £878.60 per victim; 77% of victims reported to their payment provider; 47% recovered at least some money; millennials' average loss £1,456.90 — c. triple Gen X's £444.10",
+          "period": "12 months to autumn 2025",
+          "published": "2025-11-05",
+          "publisher": "Global Anti-Scam Alliance (GASA) with Cifas — State of Scams in the UK 2025",
+          "source_url": "https://www.cifas.org.uk/newsroom/9.4billion_stolenfromconsumers",
+          "notes": "Re-verified by direct fetch 2026-07-25 (the £11.4bn prior-year comparison comes from the 2024 edition, not this page). Survey-based extrapolation — methodologically different from (and much larger than) UK Finance's £1.28bn confirmed payment fraud. Present as 'estimated total consumer losses' with the caveat. Shopping/purchase scams were the most common type (45% of victims). Striking secondary finding: those claiming they 'always recognise a scam' had the highest average losses (£1,591.90).",
+          "geography": "UK"
+        }
+      ]
+    },
+    {
+      "heading": "Fraud is nearly half of all crime — and most of it is never reported",
+      "intro": "The Crime Survey for England and Wales estimates 4.5 million fraud incidents a year, out of 9.6 million headline crime incidents — a derived share of roughly 47% (ONS itself describes fraud as approximately 45% of reported crime). Both figures cover England and Wales only. Yet the last available recorded figure — 1.4 million fraud offences referred to the National Fraud Intelligence Bureau in the year to September 2025 — is under a third of that, and even that series is currently suspended while Action Fraud migrates to the new Report Fraud service (launched 4 December 2025). Until the data supply resumes, no official police-recorded fraud figures are being published at all.",
+      "stats": [
+        {
+          "metric": "Fraud reported to police/NFIB (recorded-crime measure) — latest available figure",
+          "value": "1.4 million fraud offences referred to the National Fraud Intelligence Bureau (via Action Fraud, Cifas and UK Finance) in YE September 2025, up 12% on the previous year (1.2 million, YE June 2025 and YE September 2024)",
+          "period": "Year ending September 2025 (LAST PUBLISHED FIGURE — series then suspended)",
+          "published": "2026-01-29",
+          "publisher": "Office for National Statistics — Crime in England and Wales: year ending September 2025",
+          "source_url": "https://www.ons.gov.uk/peoplepopulationandcommunity/crimeandjustice/bulletins/crimeinenglandandwales/yearendingseptember2025",
+          "notes": "Exact bulletin quote, verified twice on 2026-07-25: 'The recorded crime series showed a 12% increase in fraud offences in YE September 2025 (1.4 million offences) compared with the previous year (1.2 million offences).' THE GAP EXPLAINED: the CSEW estimated 4.2 million fraud incidents in the same period — roughly three times the recorded figure — because most victims never report, and the recorded total is itself inflated relative to public reports by bulk industry referrals from Cifas and UK Finance. City of London Police then temporarily suspended recorded fraud data supply while migrating from Action Fraud to the new Report Fraud service (launched 4 December 2025; NFIB renamed Report Fraud Analysis Services), so the YE Dec 2025 and YE Mar 2026 ONS bulletins contain NO recorded fraud figures. ONS warns recorded fraud is an unreliable indicator of true volume.",
+          "geography": "England and Wales"
+        }
+      ]
+    },
+    {
+      "heading": "APP scams and reimbursement",
+      "intro": "Authorised push payment (APP) fraud — victims tricked into sending money themselves — reversed its two-year decline in 2025. Two reimbursement rates circulate and both are correct: UK Finance's 61% covers all APP fraud across all payment types; the PSR's 89% covers only claims in scope of the mandatory reimbursement rules (Faster Payments and CHAPS, from 7 October 2024, capped at £85,000). Survey data adds the missing perspective for fraud beyond bank payments: reimbursement drops sharply outside bank and credit account fraud.",
+      "stats": [
+        {
+          "metric": "APP (authorised push payment) scam losses",
+          "value": "£576.4 million, up 19% vs 2024; 248,070 cases, up 7%. £500.8m personal losses + £75.6m business losses",
+          "period": "Calendar year 2025",
+          "published": "2026-06-15",
+          "publisher": "UK Finance — Annual Fraud Report 2026",
+          "source_url": "https://www.ukfinance.org.uk/news-and-insight/press-release/fraud-report-2026-press-release",
+          "notes": "Sharp reversal of the 2023–2024 downward trend, driven by AI-enabled social engineering per UK Finance.",
+          "geography": "UK"
+        },
+        {
+          "metric": "APP reimbursement (UK Finance measure, all APP)",
+          "value": "£354.3 million reimbursed to APP fraud victims = 61% of APP losses",
+          "period": "Calendar year 2025",
+          "published": "2026-06-15",
+          "publisher": "UK Finance — Annual Fraud Report 2026",
+          "source_url": "https://www.ukfinance.org.uk/news-and-insight/press-release/fraud-report-2026-press-release",
+          "notes": "Lower than the PSR's 89% because UK Finance covers a wider range of payment and account types than the PSR mandatory-reimbursement rules — UK Finance states this explicitly. Quote both figures together on the stats page.",
+          "geography": "UK"
+        },
+        {
+          "metric": "APP reimbursement under the PSR mandatory rules (Faster Payments/CHAPS, in scope)",
+          "value": "89% of money lost to in-scope APP scams reimbursed (£243m of £273m) in the first 15 months of the rules; Q4 2025 alone: 85% of claims value, £70.2m; £215m reimbursed across 2025; 82% of Q4 claims closed within 5 business days, 98% within 35; only 2% of Q4 claims rejected for insufficient consumer caution",
+          "period": "7 October 2024 – 31 December 2025 (cumulative) and Q4 2025",
+          "published": "2026-06-11",
+          "publisher": "Payment Systems Regulator — APP scams reimbursement dashboard, Q4 2025",
+          "source_url": "https://www.psr.org.uk/information-for-consumers/app-scams-reimbursement-dashboard/",
+          "notes": "15-month totals: 243,000 reimbursable claims out of 352,000 reported. Mandatory reimbursement (max £85,000, split 50/50 between sending and receiving firm) began 7 October 2024. Re-verified 2026-07-25.",
+          "geography": "UK"
+        },
+        {
+          "metric": "Reimbursement improvement one year into the mandatory scheme (PSR review)",
+          "value": "88% of money claimed back from payment firms was returned to victims (October 2024 – June 2025), up from 66% in the equivalent 2023/24 period; £112 million reimbursed in the first nine months; claim volumes down ~15% (126,000 claims); 84% of claims resolved within 5 business days",
+          "period": "October 2024 – June 2025 vs October 2023 – June 2024",
+          "published": "2025-10-08",
+          "publisher": "Payment Systems Regulator — 'One year on: impact of APP reimbursement on victims'",
+          "source_url": "https://www.psr.org.uk/news-and-updates/latest-news/news/one-year-on-impact-of-app-reimbursement-on-victims/",
+          "notes": "Verified by direct fetch 2026-07-25. PSR attributes the fall in claims to firms 'stepping up and stopping fraud in response to the requirements'. Complements (does not duplicate) the Q4 2025 dashboard entry above.",
+          "geography": "UK"
+        },
+        {
+          "metric": "Effect of the PSR reimbursement policy on fraud (independent evaluation)",
+          "value": "In-scope APP scam losses over Faster Payments down c.21% — about £73 million a year — and nearly 35,000 fewer APP scams; reimbursement rate for all claims up from 54% to 65%, and 97% for in-scope claims; short-term net benefit £17m–£29m",
+          "period": "Policy effect measured since 7 October 2024",
+          "published": "2026-07-01",
+          "publisher": "Payment Systems Regulator / Frontier Economics (independent evaluation)",
+          "source_url": "https://www.psr.org.uk/news-and-updates/latest-news/news/payment-fraud-falls-by-73m-following-psr-reimbursement-scheme/",
+          "notes": "PSR will consult on changes in December 2026. Firms with historically high fraud levels improved most. Corroborated by Norton Rose Fulbright's Regulation Tomorrow coverage (July 2026). Measures a different population and period from the PSR dashboard's 89% figure — the two rates are not directly comparable.",
+          "geography": "UK"
+        },
+        {
+          "metric": "Fraud victims' reimbursement experience (all fraud, survey measure)",
+          "value": "Of the c.3 million CSEW fraud incidents involving an initial financial loss, victims were fully reimbursed in 70% of cases — but rates vary sharply by type: 85% for bank and credit account fraud vs 48% for consumer and retail fraud and 40% for 'other' fraud",
+          "period": "Year ending March 2025",
+          "published": "2026-03-26",
+          "publisher": "Office for National Statistics — Nature of fraud and computer misuse in England and Wales",
+          "source_url": "https://www.ons.gov.uk/peoplepopulationandcommunity/crimeandjustice/articles/natureoffraudandcomputermisuseinenglandandwales/yearendingmarch2025",
+          "notes": "Verified by direct fetch 2026-07-25 (fetch reported the complements: 15%/52%/60% NOT fully reimbursed for bank/consumer/other — arithmetically consistent; spot-check the exact table in the article before publishing). Pairs well with the PSR 89% figure to show protection is strong for bank transfers but weak for purchase-type scams.",
+          "geography": "England and Wales"
+        }
+      ]
+    },
+    {
+      "heading": "Losses by scam type (2025)",
+      "intro": "Investment scams took the most money; purchase scams were by far the most common. Romance fraud appears twice deliberately — the bank-reported (UK Finance) and police-reported (Report Fraud) measures capture different populations and both hit records in 2025.",
+      "stats": [
+        {
+          "metric": "Investment fraud (APP) losses",
+          "value": "£221.5 million, up 40% vs 2024 — the largest share of APP losses and a record high; 14,893 cases, up 26%",
+          "period": "Calendar year 2025",
+          "published": "2026-06-15",
+          "publisher": "UK Finance — Annual Fraud Report 2026",
+          "source_url": "https://www.ukfinance.org.uk/news-and-insight/press-release/fraud-report-2026-press-release",
+          "notes": "Often starts with fraudulent advertising on social media, per UK Finance. £ figure corroborated by four independent secondary reports on 2026-07-25.",
+          "geography": "UK"
+        },
+        {
+          "metric": "Purchase scams (APP)",
+          "value": "71% of all APP cases; losses £118.1 million, up 20% vs 2024 — record case levels",
+          "period": "Calendar year 2025",
+          "published": "2026-06-15",
+          "publisher": "UK Finance — Annual Fraud Report 2026",
+          "source_url": "https://www.ukfinance.org.uk/news-and-insight/press-release/fraud-report-2026-press-release",
+          "notes": "Typically starts on online marketplaces; UK Finance is calling for mandatory seller verification. (The H1 2025 half-year report used 72% of APP cases; 71% is the full-year 2025 figure.)",
+          "geography": "UK"
+        },
+        {
+          "metric": "Romance fraud (APP, bank-reported)",
+          "value": "£39.2 million, up 23% vs 2024; case numbers up 22% — record high",
+          "period": "Calendar year 2025",
+          "published": "2026-06-15",
+          "publisher": "UK Finance — Annual Fraud Report 2026",
+          "source_url": "https://www.ukfinance.org.uk/news-and-insight/press-release/fraud-report-2026-press-release",
+          "notes": "Bank-transfer losses only; total romance fraud harm is higher (crypto payments etc. not captured) — see the police-reported £102m entry below and quote the two together with the measurement difference explained.",
+          "geography": "UK"
+        },
+        {
+          "metric": "Romance fraud (police-reported, Report Fraud)",
+          "value": "£102 million lost in 2025; 10,784 reports, up 29% on 2024; average loss £9,500 per victim (~£280,000 lost every day); largest single reported loss £1 million; people aged 55–74 accounted for nearly half of total losses; men filed more reports but women lost more money (just over 40% of reported value)",
+          "period": "Calendar year 2025",
+          "published": "2026-05-05",
+          "publisher": "City of London Police — Report Fraud (reportfraud.police.uk) data",
+          "source_url": "https://www.cityoflondon.police.uk/news/city-of-london/news/2026/may/romance-fraud-costs-uk-victims-102-million-in-a-year-as-reports-surge-by-nearly-a-third/",
+          "notes": "CoLP site blocks scripted fetches; figures corroborated 2026-07-25 via The Register (fetched in full), FStech and Leicestershire Police force release. Higher than UK Finance's £39.2m because Report Fraud captures losses across all payment types (including crypto and cash), not just bank transfers reported by UK Finance members.",
+          "geography": "England, Wales and Northern Ireland (Report Fraud reporting area)"
+        },
+        {
+          "metric": "Impersonation fraud (APP)",
+          "value": "Losses down 12% and cases down 11% vs 2024 (second consecutive fall)",
+          "period": "Calendar year 2025",
+          "published": "2026-06-15",
+          "publisher": "UK Finance — Annual Fraud Report 2026",
+          "source_url": "https://www.ukfinance.org.uk/news-and-insight/press-release/fraud-report-2026-press-release",
+          "notes": "Bank/police 'safe account' impersonation. Absolute £ figure not in the press release — it is in the full report PDF (site blocks scripted access; pull the number from the PDF manually if needed for the page). UK Finance credits education campaigns for the fall.",
+          "geography": "UK"
+        },
+        {
+          "metric": "Courier fraud",
+          "value": "More than £21 million stolen; 1,891 reports (up c.10% from 1,721 in 2024; losses up from £19.5m); average loss per victim £15,311.08; victims aged 76–96 account for c.62% of all reports; London and the Home Counties c.65% of victims",
+          "period": "Calendar year 2025",
+          "published": "2026-06-15",
+          "publisher": "City of London Police (national lead force for fraud)",
+          "source_url": "https://www.cityoflondon.police.uk/news/city-of-london/news/2026/june/over-70s-targeted-as-courier-fraud-exceeds-21-million-in-2025-with-london-and-home-counties-hit-hardest/",
+          "notes": "2025 trend: victims persuaded to buy jewellery and gold for courier collection — the highest-loss variant. Based on Report Fraud reports, so a substantial undercount. URL existence re-confirmed via search index 2026-07-25 (site 403s scripted fetches); Derbyshire Police ran the same campaign June 2026.",
+          "geography": "England, Wales and Northern Ireland (Report Fraud reporting area)"
+        }
+      ]
+    },
+    {
+      "heading": "Where scams start",
+      "intro": "Most APP fraud starts online — but telephone-initiated scams take disproportionately large sums.",
+      "stats": [
+        {
+          "metric": "Where APP fraud starts (channel origination)",
+          "value": "66% of APP cases originate online (32% of losses); 17% via telecommunications (28% of losses); 1% via email (7% of losses)",
+          "period": "Calendar year 2025",
+          "published": "2026-06-15",
+          "publisher": "UK Finance — Annual Fraud Report 2026",
+          "source_url": "https://www.ukfinance.org.uk/news-and-insight/press-release/fraud-report-2026-press-release",
+          "notes": "Telecoms-originated scams are higher-value per case (17% of cases but 28% of losses). Remainder: other 5%/8%, unknown 11%/24%. The 66%/17% pair independently corroborated by Neopay and Comms Council UK on 2026-07-25.",
+          "geography": "UK"
+        },
+        {
+          "metric": "How fraudsters contact victims (all fraud, survey measure)",
+          "value": "79% of CSEW fraud incidents involved no offender–victim contact; where there was contact: telephone 39%, online/social media 32%, email 13%, in person 9%, text 4%. 71% of fraud incidents involved a loss; of those, 70% lost under £250 and 11% lost £1,000+",
+          "period": "Year ending March 2025",
+          "published": "2026-03-26",
+          "publisher": "Office for National Statistics — Nature of fraud and computer misuse in England and Wales",
+          "source_url": "https://www.ons.gov.uk/peoplepopulationandcommunity/crimeandjustice/articles/natureoffraudandcomputermisuseinenglandandwales/yearendingmarch2025",
+          "notes": "Also found women had higher odds of fraud victimisation than men; Asian/Asian British adults lower odds than White adults. No age breakdown in this edition.",
+          "geography": "England and Wales"
+        },
+        {
+          "metric": "Scam texts/messages prevalence (Ofcom)",
+          "value": "40% of UK mobile users received at least one suspicious message on their mobile in the previous three months (survey fielded February 2026); mobile operators are blocking at least 600 million suspected scam messages a year (average c.50 million/month, January–March 2025); UK mobile users reported an estimated 100 million suspicious messages via the free 7726 service in the year to April 2025",
+          "period": "Survey February 2026; blocking and 7726 data to Q1/April 2025",
+          "published": "2026-07-15",
+          "publisher": "Ofcom — statement 'Combatting mobile messaging scams'",
+          "source_url": "https://www.ofcom.org.uk/siteassets/resources/documents/consultations/category-3-4-weeks/consultation-combatting-mobile-messaging-scams/main-document/statement-combatting-mobile-messaging-scams.pdf?v=422471",
+          "notes": "All figures read directly from the 195-page statement PDF on 2026-07-25 (accessible summary: https://www.ofcom.org.uk/phones-and-broadband/scam-calls-and-messages/new-rules-to-thwart-text-message-scammers-and-protect-consumers-and-businesses). New rules require operators to block scam messages in transit, set PAYG SIM volume limits and run KYC on business (A2P) senders. 7726 reporting surged after one-click reporting arrived on iOS (10m+ reports/month December 2024 – March 2025). CAUTION: the widely circulated '45 million people / 82% targeted' figure is from Ofcom's OCTOBER 2021 research — do not present it as current.",
+          "geography": "UK"
+        },
+        {
+          "metric": "Suspicious calls prevalence and four-year trend (Ofcom)",
+          "value": "32% of mobile users received at least one suspicious call on their mobile in the previous three months, down from 40% in 2022; 39% of landline users received one on their landline, down from 53% in 2022",
+          "period": "Survey fielded February 2026 (trend vs 2022)",
+          "published": "2026-07-15",
+          "publisher": "Ofcom — statement 'Combatting mobile messaging scams' (consumer research section)",
+          "source_url": "https://www.ofcom.org.uk/siteassets/resources/documents/consultations/category-3-4-weeks/consultation-combatting-mobile-messaging-scams/main-document/statement-combatting-mobile-messaging-scams.pdf?v=422471",
+          "notes": "Exact quote read from the PDF on 2026-07-25: prevalence 'has fallen over the last four years, although it remains high'. Ofcom simultaneously finalised measures against foreign scam calls spoofing UK mobile numbers. Statement also references the Government's Fraud Strategy 2026–2029.",
+          "geography": "UK"
+        }
+      ]
+    },
+    {
+      "heading": "Identity fraud and account takeover",
+      "intro": "",
+      "stats": [
+        {
+          "metric": "Identity fraud and National Fraud Database filings (Cifas)",
+          "value": "Record 444,993 cases filed to the National Fraud Database in 2025 (up 6% on 2024; over 1,200 a day). Identity fraud: 242,000+ cases (54% of filings, down 3%). Facility/account takeover: 78,000+ cases (18% of filings, up 6%); unauthorised SIM swaps up 38%. Misuse of facility: 106,000+ cases (up 43%), incl. 22,000+ money-muling cases. 72% of all cases linked to identity fraud or facility takeover. Cifas members prevented £2.4 billion of fraud losses",
+          "period": "Calendar year 2025",
+          "published": "2026-03-12",
+          "publisher": "Cifas — Fraudscape 2026",
+          "source_url": "https://www.cifas.org.uk/newsroom/fraudscape2026",
+          "notes": "Re-verified by direct fetch 2026-07-25. NFD cases are organisation-confirmed fraud risk filings, not consumer reports. Cifas reads the identity-fraud dip as displacement into account takeover, not reduced harm. Also: c.90% of takeovers hit mobile phone products, online retail and personal credit cards; identity fraud against bank accounts up 10% (63,000+), insurance up 26% (16,000+). Full report: https://www.fraudscape.co.uk/",
+          "geography": "UK"
+        }
+      ]
+    },
+    {
+      "heading": "Who gets scammed",
+      "intro": "No single official age breakdown exists (see data gaps), but the strongest published patterns are consistent: courier fraud overwhelmingly hits the very oldest, romance-fraud losses concentrate in the 55–74 group, FCA-impersonation reports skew 56+, while survey data shows younger adults losing money more often overall.",
+      "stats": [
+        {
+          "metric": "People deceived by scams (Citizens Advice)",
+          "value": "More than 7 million UK adults deceived by a scam in the past 12 months; top types among victims: online shopping scam 26%, investment scam 18%, other financial scam 18%, friend/family 'needs help' scam 16%, mobile network scam 14%; 20% of victims significantly affected financially, 12% fell into debt or borrowed, 10% used emergency savings",
+          "period": "12 months to September 2025 (Savanta survey of 2,222 UK adults, 5–7 September 2025)",
+          "published": "2025-10-20",
+          "publisher": "Citizens Advice — Scams Awareness campaign press release",
+          "source_url": "https://www.citizensadvice.org.uk/about-us/media-centre/press-releases/millions-stung-by-scams-with-online-shopping-the-top-trap-says-citizens/",
+          "notes": "Re-verified by direct fetch 2026-07-25. 2025 Scams Awareness campaign ran 20 October – 2 November 2025; the 2026 consumer campaign (#ShopAware) runs 8–21 June 2026.",
+          "geography": "UK"
+        },
+        {
+          "metric": "FCA impersonation scams",
+          "value": "4,465 reports of scammers impersonating the FCA in H1 2025, with 480 victims sending money (full-year 2024: 10,379 reports, 991 victims). Nearly two-thirds of reports came from people aged 56+",
+          "period": "January–June 2025",
+          "published": "2025-08-27 (updated 2025-12-05)",
+          "publisher": "Financial Conduct Authority",
+          "source_url": "https://www.fca.org.uk/news/press-releases/fake-fca-scams-reported-6-months-2025",
+          "notes": "Re-verified by direct fetch 2026-07-25. Common variants: fake crypto-wallet fund recovery, recovery-scam follow-ups on earlier victims, fake CCJ payment demands — including 'pig butchering' second-wave fraud.",
+          "geography": "UK"
+        },
+        {
+          "metric": "Adults experiencing investment/pension/crypto fraud (FCA survey measure)",
+          "value": "1.5% of UK adults — around 800,000 people — experienced a pensions-related and/or investments-related (including cryptocurrency) fraud or scam in the 12 months to May 2024 (survey of 17,950 adults)",
+          "period": "12 months to May 2024",
+          "published": "May 2025 — Financial Lives 2024 survey",
+          "publisher": "Financial Conduct Authority",
+          "source_url": "https://www.fca.org.uk/financial-lives/financial-lives-2024",
+          "notes": "DATED (period pre-2025) — flag on page as the most recent available; Financial Lives runs roughly every two years and the FCA says the 2024 fraud question is not comparable with earlier waves. Related context: 8% of UK adults own cryptoassets (FCA Cryptoasset Consumer Research Wave 6, December 2025 — confirm exact figure/URL on fca.org.uk before citing).",
+          "geography": "UK"
+        }
+      ]
+    },
+    {
+      "heading": "Enforcement and prevention",
+      "intro": "",
+      "stats": [
+        {
+          "metric": "Fraud prevented by the banking industry",
+          "value": "£1.68 billion of unauthorised fraud prevented (equivalent to c.70p in every £1 of attempted fraud, per UK Finance launch coverage)",
+          "period": "Calendar year 2025",
+          "published": "2026-06-15",
+          "publisher": "UK Finance — Annual Fraud Report 2026",
+          "source_url": "https://www.ukfinance.org.uk/news-and-insight/press-release/fraud-report-2026-press-release",
+          "notes": "Press release states the £1.68bn prevented figure for unauthorised fraud.",
+          "geography": "UK"
+        },
+        {
+          "metric": "FCA action against investment/crypto scams",
+          "value": "2,329 FCA warnings about unauthorised or potentially scam firms in 2025 (vs 2,240 in 2024); Firm Checker used 1.9+ million times since its January 2025 launch; warning messages protected an average 694 consumers a week after the early-2026 campaign (up 49%); 17 criminal convictions secured",
+          "period": "Calendar year 2025 / to mid-2026",
+          "published": "2026-07-09",
+          "publisher": "Financial Conduct Authority — press release, first year of new strategy",
+          "source_url": "https://www.fca.org.uk/news/press-releases/fca-cracks-down-illegal-promotions-and-market-abuse-first-year-new-strategy",
+          "notes": "Re-verified by direct fetch 2026-07-25. Note site canon: 'FCA Firm Checker' (ScamSmart branding retired). The FCA publishes no aggregate £ figure for consumer crypto scam losses — see gaps.",
+          "geography": "UK"
+        }
+      ]
+    }
+  ],
+  "gaps": [
+    "Police-recorded fraud (NFIB) data is SUSPENDED from the YE December 2025 ONS bulletin onwards: City of London Police paused the recorded cybercrime/fraud data supply during the Action Fraud → Report Fraud migration (Report Fraud launched 4 December 2025; NFIB renamed Report Fraud Analysis Services). Latest available figure: 1.4m offences, YE September 2025 (published 29 January 2026) — NOT 1.2m/YE June 2025 as an earlier draft stated. reportfraud.police.uk publishes no public statistics dashboard yet; watch the ONS YE June 2026 bulletin (due ~October 2026) for resumption.",
+    "No current per-bank APP fraud league table: the PSR's per-firm performance reports cover pre-October-2024 data only; the Q4 2025 reimbursement dashboard is aggregate. Expect possible per-firm data after the PSR's December 2026 consultation.",
+    "No official FCA aggregate figure for consumer £ losses to crypto scams — the FCA publishes warnings/enforcement counts and impersonation-report counts, not loss totals; crypto investment fraud loss figures previously came from NFIB data, which is suspended. Nearest official datapoints: FCA Financial Lives ~800,000 adults (to May 2024, dated) and UK Finance investment fraud £221.5m (2025).",
+    "No up-to-date national fraud victimisation breakdown by age: the ONS YE March 2026 bulletin and the Nature of Fraud article (YE March 2025) omit age; the last detailed CSEW age analysis dates from c.2022 (45–54s highest prevalence) — DATED, avoid presenting as current. Current official age signals: romance fraud (55–74s = nearly half of losses, CoLP 2026), courier fraud (76–96 = 62% of reports), FCA impersonation (two-thirds of reports from 56+), GASA (millennials' average loss triple Gen X's).",
+    "No current official 'X% of fraud is cyber-enabled' statistic: ONS stopped publishing a clean cyber-flag percentage; nearest current proxies are UK Finance's 66% of APP cases originating online and ONS contact-channel data.",
+    "Impersonation fraud absolute £ loss for 2025 is in the UK Finance full report PDF (Akamai-blocked to scripted fetches) — press release gives percentage changes only; retrieve manually before publishing.",
+    "ukfinance.org.uk and cityoflondon.police.uk return HTTP 403 to all automated clients (confirmed again 2026-07-25) — their figures here were browser-verified on 2026-07-24 and secondary-corroborated on 2026-07-25, but re-check both URLs in a normal browser at each quarterly update.",
+    "Ofcom's famous '45 million people targeted by scam calls and texts (82%)' figure is from October 2021 — dated; do not use as current (the February 2026 survey figures above replace it).",
+    "GASA Global State of Scams 2025 has no headline UK-only figure in its global release ($442bn across 42 markets globally); use the separate GASA/Cifas UK report (£9.4bn) instead.",
+    "UK Finance report itself notes the sum of APP channel components may not equal totals due to rounding; 11% of APP cases have 'unknown' origin covering 24% of losses.",
+    "No Citizens Advice scams data newer than the 20 October 2025 release found; check after their June 2026 #ShopAware campaign wrap-up and the autumn 2026 Scams Awareness push."
+  ],
+  "methodology_note": "Compiled across two research sessions (2026-07-24 and 2026-07-25). Every source_url was fetched live and the figure confirmed on the page, with two exceptions: ukfinance.org.uk and cityoflondon.police.uk block scripted fetches (HTTP 403 via Akamai) — those figures were confirmed in a real browser session on 2026-07-24 and independently re-corroborated on 2026-07-25 against multiple secondary reports quoting the primary text (FinTech Futures, Neopay, Financier Worldwide, Comms Council UK, The Register, FStech, Leicestershire Police). No figure is estimated or interpolated; where a value is a sum/ratio of two published components it is marked 'derived' in notes. CORRECTION vs the 2026-07-24 draft: the latest police-recorded fraud figure is 1.4 million offences (YE September 2025, ONS bulletin published 29 January 2026, quote re-verified twice on 2026-07-25) — the recorded-fraud series was suspended only from the YE December 2025 bulletin onwards.",
+  "cadence_note": "Update cadence of the underlying sources: PSR reimbursement dashboard roughly quarterly; ONS crime bulletins quarterly; UK Finance Annual Fraud Report each June; Cifas Fraudscape each March; GASA/Cifas State of Scams each November."
+}
