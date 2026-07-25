@@ -376,7 +376,7 @@ def main():
             continue
 
         # Accuracy gate — PASS → publish, FAIL → quarantine (never published or tweeted).
-        result = run_gate(post, client=gate_client, model=GATE_MODEL, use_llm=True)
+        result = run_gate(post, client=gate_client, model=GATE_MODEL, use_llm=True, corpus=posts)
         if not result.passed:
             quarantine_post(post, result, date.today().isoformat())
             print(f"🚫 QUARANTINED '{gap['query']}' — {result.summary()}")

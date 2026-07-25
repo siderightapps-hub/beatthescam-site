@@ -77,6 +77,18 @@ def _canon_phone_digits(canon: Dict) -> set:
                 d = re.sub(r"\D", "", str(v))
                 if d:
                     digits.add(d)
+    # verified_org_contacts is a deliberately separate list from
+    # official_routes: a company's own support line is NOT a national
+    # reporting route and must never surface in build.py's "Report this scam"
+    # block, but a guide may legitimately name one when the org's own site
+    # publishes it. Entries carry source_url + checked_on so they can be
+    # re-verified quarterly rather than rotting silently.
+    for r in canon.get("verified_org_contacts", []):
+        v = r.get("phone")
+        if v:
+            d = re.sub(r"\D", "", str(v))
+            if d:
+                digits.add(d)
     return digits or set(_FALLBACK_PHONE_DIGITS)
 
 
@@ -616,6 +628,72 @@ def check_recurring_accuracy(post: Dict) -> List[Dict]:
     return issues
 
 
+SIMILARITY_SHINGLE_K = 7
+SIMILARITY_FLAG_AT = 0.15
+SIMILARITY_BLOCK_AT = 0.30
+
+
+def _body_words(post: Dict) -> List[str]:
+    """Rendered body words only (sections + faq), normalised for comparison.
+    Titles/descriptions/quick answers are excluded: they are already unique by
+    construction, and including them would mask body-level duplication."""
+    parts = []
+    for h, b in post.get("sections") or []:
+        parts.append(f"{h} {b}")
+    for q, a in post.get("faq") or []:
+        parts.append(f"{q} {a}")
+    text = re.sub(r"[^a-z0-9 ]", " ", " ".join(parts).lower())
+    return re.sub(r"\s+", " ", text).split()
+
+
+def body_shingles(post: Dict, k: int = SIMILARITY_SHINGLE_K) -> set:
+    w = _body_words(post)
+    return {tuple(w[i:i + k]) for i in range(len(w) - k + 1)}
+
+
+def check_similarity(post: Dict, corpus: Optional[List[Dict]] = None) -> List[Dict]:
+    """Flag a draft that reuses another live guide's body copy.
+
+    The 2026-07-25 audit found five published pairs above 0.30 Jaccard
+    similarity on seven-word shingles (top pair 0.538, with an identical
+    recovery section) — the single clearest AdSense "scaled content"/
+    "cookie-cutter" risk on the site. The generation-time gate had no notion
+    of the rest of the corpus, so nothing could catch it before publication.
+
+    Deliberately compares against ALL other guides, not just same-category
+    ones: the worst offenders (shopping brands, bank texts) sit inside one
+    category, but travel/marketplace overlaps cross categories.
+    """
+    if not corpus:
+        return []
+    mine = body_shingles(post)
+    if len(mine) < 50:  # too short to judge meaningfully
+        return []
+    slug = post.get("slug")
+    issues: List[Dict] = []
+    for other in corpus:
+        if other.get("slug") == slug:
+            continue
+        theirs = body_shingles(other)
+        if not theirs:
+            continue
+        union = len(mine | theirs)
+        if not union:
+            continue
+        jac = len(mine & theirs) / union
+        if jac >= SIMILARITY_FLAG_AT:
+            issues.append({
+                "check": "similarity",
+                "severity": SEVERITY_BLOCK if jac >= SIMILARITY_BLOCK_AT else SEVERITY_FLAG,
+                "span": other.get("slug", "?"),
+                "detail": (f"body copy is {jac:.0%} identical to '{other.get('slug')}' "
+                           f"({len(mine & theirs)} shared {SIMILARITY_SHINGLE_K}-word sequences). "
+                           f"Rewrite from this page's own decision problem, or consolidate the "
+                           f"two guides — do not ship near-duplicate bodies."),
+            })
+    return sorted(issues, key=lambda i: i["detail"], reverse=True)
+
+
 def check_deterministic(post: Dict) -> List[Dict]:
     # Note: no deterministic domain/URL check — these guides intentionally
     # contain example scam/lookalike domains, so a domain allowlist is pure
@@ -705,9 +783,13 @@ def judge_llm(post: Dict, client, model: str) -> List[Dict]:
 # ─── ENTRY POINT ─────────────────────────────────────────────────────────────
 
 def run_gate(post: Dict, client=None, model: Optional[str] = None,
-             use_llm: bool = True) -> GateResult:
-    """Run the full gate on a post. PASS unless a blocking issue is found."""
+             use_llm: bool = True, corpus: Optional[List[Dict]] = None) -> GateResult:
+    """Run the full gate on a post. PASS unless a blocking issue is found.
+
+    Pass `corpus` (the existing posts.json list) to also check the draft for
+    body-copy duplication against already-published guides."""
     issues = check_deterministic(post)
+    issues += check_similarity(post, corpus)
     if use_llm and client is not None and model:
         issues += judge_llm(post, client, model)
     passed = not any(i.get("severity") == SEVERITY_BLOCK for i in issues)

@@ -35,8 +35,12 @@ applies any fixes by hand (see CLAUDE.md's "Operator review workflow").
     python3 scripts/fact_reverify.py --limit 3              # cheap smoke test
     ANTHROPIC_API_KEY=...  python3 scripts/fact_reverify.py --model claude-sonnet-5
 
-Exit 0 on a completed run (drift found or not) — a non-zero exit means the
-run itself failed to complete (e.g. no API key), not that drift was found.
+Exit 0 ONLY on a run where every guide was actually checked (drift found or
+not). Exit 1 if any guide could not be checked after retries, and 2 if the run
+could not start at all (e.g. no API key). "0 drifted" from a run where every
+call failed is the one outcome this script must never report as success —
+that defect shipped and was caught by the 2026-07-25 audit. Use
+--allow-errors only for deliberately partial local runs; CI must not set it.
 """
 from __future__ import annotations
 
@@ -45,6 +49,7 @@ import json
 import os
 import re
 import sys
+import time
 from datetime import date
 from pathlib import Path
 from typing import Dict, List, Optional, Tuple
@@ -114,30 +119,92 @@ def build_reverify_prompt(post: Dict) -> str:
     return f"Title: {post.get('title', '')}\n\nRe-verify this LIVE guide:\n\n{body}\n\nReturn the JSON verdict."
 
 
-def reverify_post_llm(post: Dict, client, model: str, today: str) -> List[Dict]:
-    """Pass B: one web-search-enabled call per guide. Never raises — a failure
-    is returned as a single confidence='error' dict and the caller moves on to
-    the next guide. This is a non-blocking retrospective audit, not a publish
-    gate, so one bad call must not abort the whole quarterly run."""
+_FENCED_JSON_RE = re.compile(r"```(?:json)?\s*(\{.*?\})\s*```", re.IGNORECASE | re.DOTALL)
+
+
+def extract_findings_json(raw: str) -> Dict:
+    """Pull the findings object out of a model response.
+
+    The model is asked for bare JSON, but in practice it also returns
+    prose-then-fenced-JSON and bare-JSON-with-trailing-commentary. Stripping a
+    fence only when it wraps the WHOLE response (the original behaviour) turned
+    every one of those into a json.loads failure, i.e. a silently unchecked
+    guide. Order matters: try the whole string, then a fenced block, then the
+    outermost brace-balanced object.
+    """
+    raw = (raw or "").strip()
+    if not raw:
+        raise ValueError("empty response")
     try:
-        resp = client.messages.create(
-            model=model,
-            max_tokens=2000,
-            temperature=0,
-            system=REVERIFY_SYSTEM.format(today=today),
-            messages=[{"role": "user", "content": build_reverify_prompt(post)}],
-            tools=[{"type": "web_search_20250305", "name": "web_search", "max_uses": 5}],
-        )
-        raw = "".join(b.text for b in resp.content if getattr(b, "type", None) == "text").strip()
-        raw = re.sub(r"^```(?:json)?\s*|\s*```$", "", raw, flags=re.IGNORECASE).strip()
-        data = json.loads(raw)
-        findings = list(data.get("findings") or [])
-        for f in findings:
-            f.setdefault("confidence", "medium")
-        return findings
-    except Exception as e:  # noqa: BLE001 — must never abort the whole run
-        return [{"claim_text": None, "issue": f"re-verification failed: {type(e).__name__}: {e}",
-                  "correct_value": None, "source_url": None, "confidence": "error"}]
+        return json.loads(raw)
+    except json.JSONDecodeError:
+        pass
+    m = _FENCED_JSON_RE.search(raw)
+    if m:
+        try:
+            return json.loads(m.group(1))
+        except json.JSONDecodeError:
+            pass
+    start = raw.find("{")
+    if start != -1:
+        depth, in_str, esc = 0, False, False
+        for i, ch in enumerate(raw[start:], start):
+            if in_str:
+                if esc:
+                    esc = False
+                elif ch == "\\":
+                    esc = True
+                elif ch == '"':
+                    in_str = False
+                continue
+            if ch == '"':
+                in_str = True
+            elif ch == "{":
+                depth += 1
+            elif ch == "}":
+                depth -= 1
+                if depth == 0:
+                    return json.loads(raw[start:i + 1])
+    raise ValueError(f"no JSON object found in response: {raw[:200]!r}")
+
+
+def reverify_post_llm(post: Dict, client, model: str, today: str,
+                       attempts: int = 3, sleep_fn=time.sleep) -> List[Dict]:
+    """Pass B: one web-search-enabled call per guide, retried on transient
+    failure. Never raises — after the final attempt a failure is returned as a
+    single confidence='error' dict and the caller moves on to the next guide,
+    but the caller MUST treat a non-empty error list as a failed run (see
+    main()): a quarterly report that says '0 drifted' because every call died
+    is worse than no report at all.
+
+    No sampling parameters are sent: the default model rejects `temperature`
+    alongside the web-search tool, which failed every call in the 2026-07-25
+    audit.
+    """
+    last_err = None
+    for attempt in range(1, attempts + 1):
+        try:
+            resp = client.messages.create(
+                model=model,
+                max_tokens=2000,
+                system=REVERIFY_SYSTEM.format(today=today),
+                messages=[{"role": "user", "content": build_reverify_prompt(post)}],
+                tools=[{"type": "web_search_20250305", "name": "web_search", "max_uses": 5}],
+            )
+            raw = "".join(b.text for b in resp.content if getattr(b, "type", None) == "text").strip()
+            data = extract_findings_json(raw)
+            findings = list(data.get("findings") or [])
+            for f in findings:
+                f.setdefault("confidence", "medium")
+            return findings
+        except Exception as e:  # noqa: BLE001 — must never abort the whole run
+            last_err = e
+            if attempt < attempts:
+                sleep_fn(min(2 ** attempt, 30))
+    return [{"claim_text": None,
+             "issue": f"re-verification failed after {attempts} attempts: "
+                      f"{type(last_err).__name__}: {last_err}",
+             "correct_value": None, "source_url": None, "confidence": "error"}]
 
 
 def find_affected_slugs(posts: List[Dict], claim_text: Optional[str], skip_slug: str) -> List[str]:
@@ -280,6 +347,11 @@ def main() -> int:
     ap.add_argument("--limit", type=int, default=None,
                      help="only process the first N guides (cheap smoke test)")
     ap.add_argument("--quarter", default=None, help="override quarter label, e.g. 2026-Q3")
+    ap.add_argument("--attempts", type=int, default=3,
+                     help="attempts per guide before recording it as unchecked (default 3)")
+    ap.add_argument("--allow-errors", action="store_true",
+                     help="exit 0 even if some guides could not be checked. Local partial "
+                          "runs only — CI must never set this, or a fully failed run reports clean.")
     args = ap.parse_args()
 
     load_env()
@@ -311,7 +383,7 @@ def main() -> int:
     for idx, p in enumerate(posts, 1):
         slug = p.get("slug", "?")
         print(f"[{idx}/{len(posts)}] re-verifying {slug}...", file=sys.stderr)
-        for f in reverify_post_llm(p, client, args.model, today_str):
+        for f in reverify_post_llm(p, client, args.model, today_str, attempts=args.attempts):
             if f.get("confidence") == "error":
                 errors.append((slug, f.get("issue", "unknown error")))
             else:
@@ -329,10 +401,22 @@ def main() -> int:
                                 cross_refs, errors, today_str, args.model)
 
     real_drift = len([f for f in llm_findings if f[1].get("confidence") != "error"])
+    checked = len(posts) - len({slug for slug, _ in errors})
     print(f"\nREPORT_PATH={report_path}")
     print(f"DRIFT_COUNT={real_drift}")
     print(f"EXAMINED={len(posts)}")
+    print(f"CHECKED={checked}")
+    print(f"ERROR_COUNT={len(errors)}")
     print(f"QUARTER={quarter}")
+
+    # Fail closed. DRIFT_COUNT only counts guides the model actually reported
+    # on, so an all-failed run would otherwise print DRIFT_COUNT=0 and let the
+    # workflow open a "0 drifted" PR that means the opposite of what it says.
+    if errors and not args.allow_errors:
+        print(f"\nERROR: {len(errors)} of {len(posts)} guides could not be re-verified "
+              f"after retries — refusing to report this run as clean. "
+              f"See the Errors section of {report_path}.", file=sys.stderr)
+        return 1
     return 0
 
 

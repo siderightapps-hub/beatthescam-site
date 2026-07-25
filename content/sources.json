@@ -1,5 +1,5 @@
 {
-  "_note": "VERIFIED CANON of official UK reporting / consumer-protection routes. Single source of truth for: (1) the accuracy gate's allowed phone numbers (content_gate.py derives ALLOWED_PHONE_DIGITS from the phone/sms fields here), (2) the gate's reporting-email validation (check_sources), and (3) build.py's on-page 'Report this scam' block. NEVER hardcode an org number or reporting route anywhere else. Verify any change against the official source before committing. Phones are normalised to digits-only by the gate.",
+  "_note": "VERIFIED CANON of official UK reporting / consumer-protection routes. Single source of truth for: (1) the accuracy gate's allowed phone numbers (content_gate.py derives ALLOWED_PHONE_DIGITS from the phone/sms fields in official_routes AND the phone field in verified_org_contacts), (2) the gate's reporting-email validation (check_sources), and (3) build.py's on-page 'Report this scam' block. NEVER hardcode an org number or reporting route anywhere else. Verify any change against the official source before committing. Phones are normalised to digits-only by the gate. verified_org_contacts is SEPARATE from official_routes: it holds a company's own published support/fraud line, verified against that company's own site, so a guide can name it without the gate treating it as invented. These are NOT national reporting routes and are never rendered in build.py's 'Report this scam' block. Every entry needs source_url + checked_on and must be re-verified quarterly — commercial numbers change far more often than official ones. Prefer telling readers to use the number on their bill/card/official site; only add an entry when naming the number genuinely helps.",
   "report_emails": [
     "report@phishing.gov.uk",
     "phishing@hmrc.gov.uk",
@@ -105,6 +105,16 @@
       "info_url": "https://www.victimsupport.org.uk/more-us/contact-us/",
       "phone": "0808 168 9111",
       "on_page": false
+    }
+  ],
+  "verified_org_contacts": [
+    {
+      "key": "talktalk",
+      "name": "TalkTalk customer support",
+      "phone": "0345 172 0088",
+      "source_url": "https://help-centre.talktalk.co.uk/Need_help_with_something_else/Something_else/How_to_contact_TalkTalk_Broadband",
+      "checked_on": "2026-07-25",
+      "note": "Main TalkTalk support line (account, billing, technical). Text Relay: 18001 0345 172 0088. Used by guides/talktalk-scam-call-uk to tell readers to hang up and call TalkTalk back on its published number."
     }
   ]
 }

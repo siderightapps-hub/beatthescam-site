@@ -380,7 +380,7 @@ def main() -> int:
         result = None
         if args.mode == "claude" and not args.no_gate:
             result = run_gate(post, client=client, model=args.model,
-                              use_llm=not args.gate_no_llm)
+                              use_llm=not args.gate_no_llm, corpus=posts)
             if not result.passed:
                 quarantine_post(post, result, args.date)
                 quarantined_topics.append(slug)

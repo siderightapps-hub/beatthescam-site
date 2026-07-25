@@ -71,7 +71,12 @@ jobs:
           if [ -n "$LIMIT" ]; then
             ARGS="--limit $LIMIT"
           fi
+          # Capture the exit status without aborting the step first, so the
+          # run's own diagnostics still reach the log on a failure.
+          set +e
           OUTPUT=$(python scripts/fact_reverify.py $ARGS 2>&1)
+          RUN_STATUS=$?
+          set -e
           echo "$OUTPUT"
 
           # Scrape the script's marker lines. Validate charset before they
@@ -81,7 +86,25 @@ jobs:
           REPORT_PATH=$(echo "$OUTPUT" | grep "^REPORT_PATH=" | tail -1 | cut -d= -f2-)
           DRIFT_COUNT=$(echo "$OUTPUT"  | grep "^DRIFT_COUNT="  | tail -1 | cut -d= -f2)
           EXAMINED=$(echo "$OUTPUT"     | grep "^EXAMINED="     | tail -1 | cut -d= -f2)
+          ERROR_COUNT=$(echo "$OUTPUT"  | grep "^ERROR_COUNT="  | tail -1 | cut -d= -f2)
           QUARTER=$(echo "$OUTPUT"      | grep "^QUARTER="      | tail -1 | cut -d= -f2)
+
+          # Fail closed. DRIFT_COUNT only counts guides the model actually
+          # reported on, so a run where every call failed would otherwise
+          # publish a "0 drifted" PR meaning the exact opposite (2026-07-25
+          # audit finding). No report is better than a falsely reassuring one.
+          if [ "$RUN_STATUS" -ne 0 ]; then
+            echo "ERROR: fact_reverify.py exited $RUN_STATUS — not opening a review PR."
+            exit 1
+          fi
+          if ! echo "$ERROR_COUNT" | grep -Eq '^[0-9]+$'; then
+            echo "ERROR: ERROR_COUNT missing or malformed: $ERROR_COUNT"
+            exit 1
+          fi
+          if [ "$ERROR_COUNT" -ne 0 ]; then
+            echo "ERROR: $ERROR_COUNT guide(s) could not be re-verified — refusing to report this run as clean."
+            exit 1
+          fi
 
           if ! echo "$REPORT_PATH" | grep -Eq '^content/fact-reverify-reports/[0-9]{4}-Q[1-4]\.md$'; then
             echo "ERROR: REPORT_PATH failed validation: $REPORT_PATH"
