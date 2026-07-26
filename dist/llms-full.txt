@@ -7106,86 +7106,102 @@ Tell Virgin Media through the number on your bill or `virginmedia.com`. If you l
 ## Bumble Romance Scams UK: Spot a Fake Profile or Con
 
 URL: https://beatthescam.com/guides/bumble-romance-scam-uk/
-Category: Romance & Dating Scams · Updated: 2026-07-18
+Category: Romance & Dating Scams · Updated: 2026-07-26
 
 A Bumble match who moves fast, avoids video calls, then needs money or pushes 'crypto'? How to spot a romance scam and protect yourself — without the shame.
 
-### What a Bumble scam looks like
+### Who sends the first message, and why it proves nothing
 
-A Bumble scam is a romance scam: someone uses a fake or misleading profile to build trust, then exploits that trust for money, personal information, investment deposits, or intimate images. The pattern is consistent across dating apps. A match seems ideal, pushes the chat off Bumble to WhatsApp or Telegram, talks about strong feelings quickly, and repeatedly has a reason they cannot meet or video call.
+On Bumble, who opens a conversation depends on the match. In heterosexual connections, women decide how the first move is made; where an Opening Move has been set, a match can reply to it regardless of whose move it otherwise is. In same-gender and non-binary matches, either person can start. Against everyday nuisance behaviour that works well.
 
-The ask may be an emergency, such as a medical bill, travel cost, customs fee, or being stranded abroad. It may also be a crypto or investment opportunity. Report Fraud describes romance fraud, sometimes called pig butchering, as a fictitious romantic relationship used to gain trust and exploit someone financially.
+Fraud is built around the rule rather than stopped by it. A scam account never needs to start a conversation; it only needs to be swiped right on. So the profile is engineered to be picked — warm photographs, a plausible profession, prompts that echo whatever the target says she is looking for — and then it waits.
 
-### Why romance scams are so convincing
+There may be a cognitive trap in that, and it is worth naming as a possibility rather than an established Bumble-specific finding: it can be harder to re-examine somebody you feel you chose yourself. Whether or not that applies to you, the mechanical point stands on its own. Opening the conversation tells you nothing whatsoever about who is at the other end of it.
 
-Romance scammers can spend days, weeks, or longer building a believable connection before asking for anything. They may use stolen photos, claim work that explains distance or poor availability, and mirror your interests. Common cover stories include overseas work, military deployment, oil rigs, contract work abroad, or travel connected to medicine or humanitarian work.
+### The 24-hour clock, and the urgency it hands a fraudster
 
-The emotional connection can feel real even when the identity is false. A safer test is the pattern: someone you have not met avoids live verification, asks for secrecy or urgency, then needs money, vouchers, cryptocurrency, or investment deposits.
+A Bumble match expires if no one sends a message within 24 hours of matching. In ordinary use that keeps queues moving. Inside a scam it supplies urgency the fraudster never has to invent.
 
-### Signs a Bumble match is a scammer
+Watch how the deadline gets used.
 
-- They push to move the conversation off Bumble very quickly, especially to WhatsApp, Telegram, or another private channel.
-- They profess strong feelings unusually fast, before you have met.
-- They repeatedly have reasons they cannot meet in person or do a live video call.
-- Their story explains distance or unreliable contact, such as deployment, overseas work, an oil rig, or a contract abroad.
-- They ask for money for an emergency, travel, customs, medical costs, a visa, or family trouble.
-- They ask for payment by bank transfer, gift card, voucher, or cryptocurrency.
-- They steer you toward a crypto or investment platform, especially one promising guaranteed returns.
-- They ask for intimate photos or videos, which can later be used for blackmail.
-- Their details do not add up, or their photos appear online under different names.
+- 'Send me your WhatsApp before this expires' in the earliest exchanges. The countdown becomes the pretext for leaving the one place where moderation and reporting function.
+- Any framing that turns Bumble's timer into a reason you must answer tonight rather than tomorrow, or send something now rather than think about it.
 
-### How the romance scam works
+The clock belongs to Bumble, not to them, and letting a match lapse costs very little. Every member gets one free Extend a day, which buys another 24 hours. Paid tiers can extend without limit, and Boost and Premium include Rematch, so a genuine connection is recoverable. A deadline is never a reason to make a decision you would otherwise take slowly.
 
-First, a fake profile matches with you and builds rapport. Second, the conversation moves to a private app, where it is harder for the dating platform to moderate or preserve evidence. Third, the scammer avoids meeting while increasing emotional pressure. Fourth, an emergency or investment opportunity appears. Fifth, once you send money, the requests usually continue with new reasons and higher amounts.
+### Two different verifications, and what each one can prove
 
-In relationship-investment scams, the fake platform may show invented profits to build confidence. When you try to withdraw, it may demand taxes, release fees, verification deposits, or more investment. Those extra charges are part of the scam.
+Bumble runs two checks that are easy to confuse, and the difference changes what you can conclude.
 
-### How to protect yourself
+- Photo Verification is a selfie check confirming that a member matches their profile photos. This is what Bumble Support's request feature triggers: you ask a match to verify, they receive a prompt to take a selfie, and an approved check shows on their profile.
+- ID Verification is optional in the UK, launched there in March 2025, and asks for a government-issued document plus a live selfie. Bumble's privacy policy names Veriff as its ID-check provider.
 
-Keep your guard up until you have genuinely verified who you are talking to.
+The request you can send inside the app is the Photo Verification one, so do not expect it to put a match through the full ID process. It is still the most useful single message you can send to anybody who will not get on a call. You can also filter your experience towards members who have verified.
 
-- Keep enough of the conversation on Bumble to preserve evidence and use the platform's reporting tools.
-- Ask for a live video call and treat repeated excuses as a serious warning sign.
-- Search their photos online to see whether they appear under different names.
-- Never send money, vouchers, gift cards, cryptocurrency, or banking details to someone you have not met in person.
-- Treat any romantic interest who offers a crypto or investment opportunity as high risk, especially if returns are guaranteed.
-- Do not send intimate images to someone you have not met and trust.
+Be clear about the ceiling on both. Verification can add confidence that the person in the photographs is the person typing. Neither check proves intentions, and neither tests a single financial claim anybody makes. Because verification is voluntary, a missing badge proves very little — plenty of genuine members never bother with it. A match who declines a verification request while declaring strong feelings has answered a different question, and answered it clearly.
 
-If a link or investment platform they sent looks doubtful, our guide on /guides/is-this-website-a-scam/ walks through the checks, and our /guides/military-romance-scam-uk/ guide covers a common cover story in detail.
+Behind the scenes Bumble also runs Deception Detector, the machine-learning screen it introduced in 2024. Bumble says that in testing it automatically blocked 95 per cent of the accounts it had identified as spam or scam profiles — the denominator there is accounts Bumble's systems had already flagged, not every fraudulent account on the app. No automated tool guarantees that a profile is safe.
 
-### If you sent money or shared details
+### What UK police record as romance fraud
 
-First, this is not your fault. Report Fraud specifically warns that romance fraud uses manipulation, urgency, and secrecy; embarrassment is one reason people delay reporting.
+Report Fraud describes dating and romance fraud as deceiving someone into a fictitious romantic relationship, often online, in order to gain their trust and exploit them financially. INTERPOL has asked organisations to stop using the 'pig butchering' nickname, which describes victims as livestock, and to use romance baiting instead — that is the term used here.
 
-If you paid by card, ask your card issuer about disputing the transaction. If you paid by cryptocurrency, voucher, or gift card, recovery is difficult, but you should still report quickly, preserve wallet addresses, receipts, voucher codes, usernames, phone numbers, and screenshots, and stop any further payments.
+City of London Police figures published in May 2026 put UK romance-fraud losses at more than £102 million in 2025, across 10,784 reports, a 29 per cent rise on the year before. People aged 55 to 74 accounted for almost half of everything stolen. Men filed more reports overall, while women accounted for a larger share of the value lost.
 
-### How to report a Bumble scam (UK)
+Two things follow. Police guidance is explicit that romance-fraud victims are not to blame and should not feel ashamed or embarrassed, so making a report is a statement of fact rather than a confession. And the heaviest losses sit later in life, which is worth knowing if you are reading this about a parent rather than about yourself.
 
-Report the profile or chat inside Bumble so the platform can review the account. Keep screenshots of the profile, messages, payment requests, phone numbers, usernames, and any wallet or bank details before blocking.
+### Testing a Bumble match without accusing anyone
 
-If you lost money, shared sensitive information, or were hacked, report it to Report Fraud at `reportfraud.police.uk` or on 0300 123 2040 if you are in England, Wales, or Northern Ireland. In Scotland, report to Police Scotland on 101.
+Every check below fits inside an ordinary conversation.
+
+- Ask for a voice or video call inside Bumble rather than on another platform — Bumble provides both in the app. A refusal that survives two or three attempts is itself the finding.
+- Send a Photo Verification request and watch whether the answer is agreement or a story.
+- Keep talking in Bumble. If the account ever needs reporting, the messages are still sitting there for moderators to read.
+- Use Share Date before you meet: it tells a trusted contact who you are seeing, where and when, and can update them in the app if the plan changes.
+- Reverse-search the photographs. Uniformly polished images, no candid shots and nobody else in frame is a pattern worth noticing.
+- Notice who raises money first. Report Fraud puts the test simply: any request for money from someone you know only online should ring an alarm bell — and that covers vouchers, cryptocurrency and investment opportunities exactly as much as it covers cash.
+
+### Reporting on Bumble, and what happens next
+
+To report a profile, open it, scroll to the bottom, choose Report or Block and Report, and follow the prompts. To report one specific message in a chat, use the three-dot menu on that message. Either way, moderators act faster on specifics: the number they gave you, the platform they named, the wallet they sent.
+
+Already unmatched? The in-app buttons have gone with the match, but the route has not — contact Bumble Support directly with the person's name, your reason for reporting and any screenshots, since the investigation depends on what you can supply. Reports are confidential, so the person will not learn who reported them. You can follow the progress of a report in the Help Hub, though do not expect to be told what moderation action was finally taken.
+
+Take your screenshots before you block, not after.
+
+### Money has gone: the first 24 hours
+
+Speed matters more than anything else now, and self-blame is the thing that slows people down most.
+
+- Telephone your bank immediately. Where a transfer left a UK account through Faster Payments or CHAPS on or after 7 October 2024, reimbursement may be available under the current rules: the maximum is £85,000, firms may apply an excess of up to £100, and a claim must be raised within 13 months. Each claim turns on its own facts, so no outcome is promised.
+- Cryptocurrency, vouchers and gift cards are far harder to unwind, which makes saving wallet addresses, transaction IDs and voucher serial numbers urgent rather than optional.
+- Ask Cifas about Protective Registration if identity documents or personal details were shared.
+- File with Report Fraud (`reportfraud.police.uk`, 0300 123 2040) if you are in England, Wales or Northern Ireland. Police Scotland take reports on 101.
+- Tell one person you trust today. Isolation is part of the method, and it also makes every practical step harder to face alone.
+
+Our /recovery/ page sets out the order to work through. Victim Support runs a free, confidential line on 0808 168 9111 if you want to talk it through with somebody outside your circle first.
 
 ### Frequently asked questions
 
-**Is Bumble safe, or is everyone on it a scammer?**
+**I made the first move, so how could it be a scam?**
 
-Bumble is a genuine dating app, and many people use it honestly. The risk is that romance scammers also use dating apps. Watch for the pattern: moving off the app fast, avoiding live verification, and eventually asking for money, intimate images, or investment.
+Scam profiles are built to be swiped right on, not to start conversations. Who sends the first message on Bumble depends on the match and on any Opening Move that has been set; it is not a check on who sits behind the profile. Having opened the chat is neutral evidence, and it may make later warnings feel easier to dismiss.
 
-**My Bumble match needs money for an emergency - should I send it?**
+**Can I make a Bumble match prove who they are?**
 
-No. Report Fraud says any request for money from someone you have only met online should ring alarm bells, including requests for vouchers, cryptocurrency, or investment money. Do not send it.
+Up to a point. The request you can send in the app asks a match to complete Photo Verification — a selfie check that they match their profile photos. ID Verification, which uses a government-issued document plus a live selfie, is separate and optional in the UK. Neither proves intentions or financial claims, and because both are voluntary an absent badge proves little on its own. A refusal alongside declarations of love is still informative.
 
-**My match suggested a crypto or investment opportunity - is that a scam?**
+**My match says reply now or we will expire. Is that a warning sign?**
 
-Treat it as a scam. A romantic interest steering you toward a crypto or investment platform, especially with guaranteed returns or withdrawal fees, matches a known romance-investment scam pattern.
+On its own, no — a Bumble match expires if no one sends a message within 24 hours of matching, so the timer is a normal rule. Paired with pressure to move to WhatsApp before the countdown ends, yes. One free Extend a day, plus Rematch on Boost and Premium, means a lapsed match is not a lost one.
 
-**I have already sent money - can I get it back?**
+**Doesn't Deception Detector remove the fake profiles for me?**
 
-Possibly, depending on how you paid. Contact your bank immediately. APP reimbursement rules may apply to eligible UK bank transfers over Faster Payments or CHAPS made on or after 7 October 2024, subject to limits and exclusions. Crypto, vouchers, and gift cards are harder to recover, but you should still report and keep evidence.
+Not reliably. Bumble says that in testing it automatically blocked 95 per cent of the accounts it had identified as spam or scam profiles — the denominator is accounts Bumble had already identified, not every fraudulent account. No automated tool guarantees that a profile is safe, and screening is weakest against one patient human who does nothing unusual for weeks.
 
-**How do I report a Bumble romance scam?**
+**How do I report someone on Bumble after unmatching?**
 
-Report and block the profile in Bumble first so the account can be reviewed. If money, sensitive details, or hacking were involved, report it to Report Fraud in England, Wales, or Northern Ireland, or to Police Scotland on 101 in Scotland.
+The in-app buttons go with the match, so contact Bumble Support instead, giving the person's name, your reason and any screenshots or payment details you kept. You can check the report's progress in the Help Hub. Where money was lost, report to Report Fraud as well, or to Police Scotland on 101 if you are in Scotland.
 
 ## Facebook Dating Scam UK: How to Spot Fake Profiles and Protect Yourself
 
@@ -7517,88 +7533,103 @@ Report it to Report Fraud at `reportfraud.police.uk` or 0300 123 2040 (Police Sc
 ## Tinder Scams UK: How to Spot a Fake Profile or Romance Con
 
 URL: https://beatthescam.com/guides/tinder-scam-uk/
-Category: Romance & Dating Scams · Updated: 2026-07-18
+Category: Romance & Dating Scams · Updated: 2026-07-26
 
 A Tinder match who moves fast, won't video-call, then needs money or pushes 'crypto'? How to spot a romance scam and protect yourself — without the shame.
 
-### What a Tinder scam looks like
+### Three high-risk decision points on Tinder
 
-A Tinder scam is a romance scam: someone creates a fake or misleading profile, builds trust, and then tries to take money, personal information, or intimate images. An example of the style is a match who moves quickly from Tinder to WhatsApp or Telegram, avoids meeting or video calling, and later says they need urgent help with travel, medical costs, customs fees, or a family emergency.
+Three moments on Tinder carry most of the financial risk, and each has a clean decision attached to it.
 
-Another common version is the romance-investment scam: the match builds the relationship first, then introduces a crypto or investment "opportunity". This is often called pig butchering, because the scammer spends time building trust before pushing the victim to invest more money.
+- A new match asks you to prove you are real by using a link they send you. Decision: never open it. A match cannot issue or complete Tinder verification for you.
+- A match wants your number in the first handful of exchanges. Decision: slow down. That is a red flag rather than conclusive proof of fraud, and Tinder's own safety tips say to keep conversations on Tinder while you are getting to know someone.
+- Weeks in, a warm and attentive person mentions a trading platform they use. Decision: treat that as fraud from its first mention, however long you have been talking. Tinder's safety tips put it plainly: do not let a match talk you into investing or opening an account with a service or website they share.
 
-Anyone can be targeted. The useful test is not whether the person seems kind or attractive; it is whether the pattern involves secrecy, urgency, avoidance of real-world verification, and eventually money or financial details.
+None of this requires you to be suspicious of people in general. Each one is a discrete choice with a right answer, which is why it is worth settling them in advance rather than mid-conversation with someone you are enjoying.
 
-### Why romance scams are so convincing
+### What the Photo Verified badge actually proves
 
-Romance scammers can spend days, weeks, or longer building a believable connection before asking for anything. They may use stolen photos, claim a job that explains distance or unreliable contact, and mirror your interests. Common cover stories include working overseas, being in the military, being on an oil rig, working as a contractor, or travelling for medical or humanitarian work.
+From 26 March 2026 Tinder began rolling Face Check out to new UK users, and describes it as required for all new UK users. You record a short video selfie in the app; Tinder's system tests that a real, physically present person took it and compares the face with the profile photos, then awards the Photo Verified badge. In earlier Face Check markets Tinder reported more than a 60 per cent fall in exposure to potential bad actors and more than a 40 per cent fall in bad-actor reports — those are Tinder's own measured results. Separately, Tinder offers an optional ID + Photo Verification process, which checks a government-issued ID against a selfie and profile likeness and confirms age; Tinder says expressly that it does not guarantee the ID's validity or a user's safety.
 
-The emotional connection can feel real even when the identity is false. That is why the ask for money can feel like helping someone you care about. A safer approach is to treat the pattern as the evidence: a person who will not meet or video call, moves the chat off the app quickly, and eventually asks for money or investment is not behaving like a genuine new partner.
+Read the badge for exactly what it is. The badge shows that Tinder's liveness and face-matching checks succeeded. Tinder also uses Face Check to detect the same face across multiple accounts, but neither the badge nor that detection guarantees a person's name, biography, location, relationship status or intentions.
 
-### Signs a Tinder match is a scammer
+The mandatory Face Check announcement applies to new users, so an older account should not be assumed to have completed it.
 
-- They push to move the conversation off Tinder very quickly, especially to WhatsApp, Telegram, or another private channel.
-- They profess strong feelings unusually fast, before you have met.
-- They always have a reason they cannot meet in person or do a live video call.
-- Their story explains distance or poor availability, such as overseas work, deployment, an oil rig, or a contract abroad.
-- They ask for money for an emergency, travel, customs, medical costs, a visa, or a family problem.
-- They ask for payment by bank transfer, gift card, cryptocurrency, or another hard-to-reverse method.
-- They steer you toward a crypto or investment platform, especially one promising guaranteed returns.
-- They ask for intimate photos or videos, which could later be used for blackmail.
-- Their details do not add up, or their photos appear online under different names.
+Face Check is a floor, not a character reference. Tinder's safety tips suggest a phone or video call as a screening step before meeting, and somebody who keeps producing reasons never to take one has told you something the badge cannot. Note, though, that Tinder's in-app Face to Face video chat has been discontinued, so any such call will run on a separate service. Arrange it if you want to, and carry on talking in Tinder afterwards rather than abandoning the in-app record.
 
-### How the romance scam works
+### The 'get yourself verified first' link is always a scam
 
-First, a fake profile matches with you and builds rapport. Second, the conversation moves to a private app, where it is harder for the dating platform to moderate or preserve evidence. Third, the scammer avoids a real meeting while increasing emotional pressure. Fourth, an emergency or investment opportunity appears. Fifth, once you send money, the requests usually continue with new reasons and higher amounts.
+One pattern is close to universal on Tinder. An enthusiastic new match explains that she only meets people who are safety-verified, then sends a link to a site with a name in the style of `safe-dating-verify.com` or `datesafe-id.net`. The page imitates a background-check service. It wants your name, date of birth, email address and card number, and promises the card is only there to confirm you are an adult.
 
-In pig-butchering-style scams, the fake investment site may show invented profits to encourage further deposits. When you try to withdraw, the site may demand taxes, release fees, or verification payments. Those extra charges are part of the scam.
+An unsolicited verification page like that may steal personal or payment information, and nothing on the page tells you which. There is no upside to filling it in.
 
-### How to protect yourself
+The rule to hold on to is narrow and it is reliable. A match cannot issue or complete Tinder verification for you. Never use a verification link sent by a match. Start any genuine account or age-verification process only from Tinder's own app, site or help flow.
 
-Keep your guard up until you have genuinely verified who you are talking to.
+It is worded that way on purpose, because Tinder itself can send you outwards: an account restricted on age grounds may be directed from an in-app prompt to a third-party age-verification service. What matters is where the journey starts. A link that arrives in a chat is not a Tinder flow, and the response is to report the account rather than reason with it. If the same lure reaches you by email, forward it to report@phishing.gov.uk.
 
-- Keep the conversation on Tinder until you have enough confidence to move elsewhere.
-- Ask for a live video call and treat repeated excuses as a serious warning sign.
-- Search their photos online to see whether they appear under different names.
-- Never send money, gift cards, cryptocurrency, or banking details to someone you have not met in person.
-- Treat any romantic interest who offers a crypto or investment opportunity as a high-risk contact, especially if returns are guaranteed.
-- Do not send intimate images to someone you have not met and trust.
+### Tinder's safety prompts, and what they do not tell you
 
-If a link or investment platform they sent looks doubtful, our guide on /guides/is-this-website-a-scam/ walks through the checks, and our /guides/bumble-romance-scam-uk/ guide covers the same pattern on other dating apps.
+Several Tinder features fire on their own. Read them as safety prompts, which is what Tinder calls them — not as findings about the person you are talking to.
 
-### If you sent money or shared details
+- Contact Exchange Alerts appear when Tinder detects contact details being shared in a chat. The prompt surfaces safety information; it does not mean the app has judged the timing, or the person, abnormal.
+- Are You Sure? asks a sender to reconsider a message that looks inappropriate, and Does This Bother You? offers the person receiving it an immediate route to report.
+- Photo Verified Chat, when you enable it, restricts incoming messages to Photo Verified members. Tinder does not claim it removes any particular share of throwaway or bot accounts.
+- Block Contacts lets you pre-block people from your phone's contact list. It is best-effort by Tinder's own account: Tinder says it cannot prevent two people seeing each other if the uploaded contact details do not match the details used to create the account.
 
-First, this is not your fault. Romance scams are designed to create trust and embarrassment, and embarrassment is one reason people delay reporting.
+None of these stops a patient, funded operator. What they do is interrupt you for a second, which is the only thing a prompt can do — the decision still belongs to you.
 
-If you paid by card, ask your card issuer about disputing the transaction. If you paid by cryptocurrency or gift card, recovery is difficult, but you should still report quickly, preserve wallet addresses, receipts, voucher codes, usernames, phone numbers, and screenshots, and stop any further payments.
+### When Telegram and a trading app enter the conversation
 
-### How to report a Tinder scam (UK)
+The most expensive Tinder pattern is not the urgent-emergency story. It is the slow one, where there is no crisis, no request and nothing to refuse. Across several weeks a match becomes a fixture of your day, mentions in passing that an uncle or a mentor handles money for the family, and eventually shares an app or web platform with a tidy interface and a balance that ticks upward.
 
-Report the profile or chat inside Tinder so the platform can review the account. Keep screenshots of the profile, messages, payment requests, and any usernames or phone numbers before blocking.
+A small opening deposit appears to grow. That screen is fabricated. Attempt a withdrawal and a charge appears: tax, a compliance fee, an account-upgrade minimum, an unlocking payment. Every one of those is another deposit into the same fraud, and paying one always reveals another.
 
-If you lost money, shared sensitive information, or were hacked, report it to Report Fraud at `reportfraud.police.uk` or on 0300 123 2040 if you are in England, Wales, or Northern Ireland. In Scotland, report to Police Scotland on 101.
+Two details are specific to how this reaches you through Tinder. First, the chat usually leaves the app early, for WhatsApp or Telegram. Tinder holds the messages that remain in its own service and cannot review a conversation on another platform at all, so moving off-platform takes everything that follows out of Tinder's in-app moderation view unless you preserve it and supply it yourself.
+
+Second, check the named platform on the FCA Firm Checker at `register.fca.org.uk` before any money moves, not afterwards. Look the firm up, read what it is actually authorised to do, and confirm that every contact detail you have been given matches the register. A fraudulent platform may be missing from the register altogether — but a scammer may equally impersonate an authorised firm or quote a genuine firm's real details, so a name that does appear is not a clean bill of health. Start the check from the FCA's own page, never from a link the match supplies. To pressure-test the site itself, our guide at /guides/is-this-website-a-scam/ walks through the checks.
+
+### Screenshot first, then unmatch, block and report
+
+Order matters. Capture screenshots first: the profile, the photos, the whole chat, any usernames, numbers, links or wallet addresses. The moment you unmatch, the conversation disappears from your side of the app.
+
+Then open the three-dot menu on the profile or in the chat and choose to report — there is also a report button at the foot of every profile you can see. Follow the on-screen prompts, pick a reason, and add the details that help. Who submitted a report and what it said stay confidential, but Tinder does say a reported person may receive a generic notification that a report led to their account being reviewed, so do not assume nobody is told anything. Blocking removes their profile from your feed and stops them contacting you again.
+
+If you unmatched first and only later realised what was happening, you have not lost the chance. Tinder's Safety Center carries an online route for reporting someone you unmatched, or who unmatched you, so the report is still possible once the connection is gone. Make it anyway: yours may be the report that closes an account currently working through dozens of other people.
+
+### If you have already paid
+
+Being targeted says nothing bad about your judgement. These are staffed, scripted operations run at industrial scale, working through many people at once with material that has been tested on other targets before it reached you.
+
+Work in this order.
+
+- Ring your bank today and use the phrase authorised push payment fraud. Money sent by Faster Payments or CHAPS from a UK account on or after 7 October 2024 may be reimbursable under the rules currently in force, to a maximum of £85,000, with a possible excess of up to £100 and a 13-month window to claim. Every case is assessed individually, so treat this as a claim worth making rather than a refund to expect.
+- Card payments run on a separate track: ask your issuer about disputing the transaction.
+- Ask Cifas about Protective Registration if you handed over identity documents or personal details.
+- Report it to Report Fraud at `reportfraud.police.uk` or on 0300 123 2040 in England, Wales and Northern Ireland. In Scotland, call Police Scotland on 101.
+
+Our /recovery/ checklist sets out the full sequence, including what to preserve as evidence and who to tell in what order.
 
 ### Frequently asked questions
 
-**Is Tinder safe, or is everyone on it a scammer?**
+**Does a Photo Verified badge mean my Tinder match is genuine?**
 
-Tinder is a genuine dating app, and many people use it honestly. The risk is that scammers also use dating apps. Watch for the pattern: moving off the app fast, avoiding live verification, and eventually asking for money, intimate images, or investment.
+It means Tinder's liveness and face-matching checks succeeded — a live person recorded a selfie that matched the profile photos. It guarantees nothing about their name, biography, location, relationship status or intentions. Tinder says Face Check is required for new UK users from 26 March 2026, so the badge is now ordinary rather than remarkable.
 
-**My match needs money for an emergency - should I send it?**
+**A match sent a link to get me 'safety verified' before we meet. Is it real?**
 
-No. A request for money from someone you have not met is a major romance-scam warning sign, even when the story sounds urgent or emotional. Do not send bank transfers, gift cards, or crypto.
+No. A match cannot issue or complete Tinder verification for you, so a verification link that arrives in a chat is never legitimate. The page may steal personal or payment information. Start any genuine account or age-verification process only from Tinder's own app, site or help flow, and report the account instead of replying.
 
-**My match suggested a crypto or investment opportunity - is that a scam?**
+**Tinder showed a safety warning when we swapped numbers. Should I worry?**
 
-Treat it as a scam. A romantic interest steering you toward a crypto or investment platform, especially with guaranteed returns, matches a known romance-investment pattern often called pig butchering.
+That is Contact Exchange Alerts working as designed. It is a safety prompt triggered by contact details being shared, not a judgement about the timing or the person, so it is not an accusation and not evidence. Use the pause it gives you: Tinder's own tips suggest staying in the app while you get to know someone.
 
-**I have already sent money - can I get it back?**
+**I unmatched before I thought about reporting. Is it too late?**
 
-Possibly, depending on how you paid. Contact your bank immediately. APP reimbursement rules may apply to eligible UK bank transfers over Faster Payments or CHAPS made on or after 7 October 2024, subject to limits and exclusions. Crypto and gift cards are harder to recover, but you should still report and keep evidence.
+No. Tinder's Safety Center has an online route covering someone you unmatched, or who unmatched you, so a report is still possible. Whatever you screenshotted beforehand will make it far more useful to their moderators.
 
-**How do I report a Tinder scam, and who first?**
+**My match steered me into a trading app and now I cannot withdraw. What now?**
 
-Report and block the profile in Tinder first so the account can be reviewed. If money, sensitive details, or hacking were involved, report it to Report Fraud in England, Wales, or Northern Ireland, or to Police Scotland on 101 in Scotland.
+Stop paying. Withdrawal taxes, release charges and upgrade minimums are all part of the same fraud. Phone your bank the same day, look the platform up on the FCA Firm Checker starting from the FCA's own site, and report it. Recovery is uncertain, particularly with cryptocurrency, but speed genuinely improves the odds.
 
 ## Amazon Prime Scam UK: Spot a Fake Renewal Email
 
@@ -10158,80 +10189,82 @@ Possibly. Eligible UK bank transfers over Faster Payments or CHAPS made on or af
 ## Nationwide Scam Text UK: Spot a Fake Building Society SMS
 
 URL: https://beatthescam.com/guides/nationwide-scam-text-uk/
-Category: Text Message Scams · Updated: 2026-07-18
+Category: Text Message Scams · Updated: 2026-07-26
 
 Got a Nationwide text about suspicious activity, a blocked account, or a payment to verify? How to spot a fake Nationwide SMS and report it in the UK.
 
-### What a fake Nationwide text looks like
+### Check before you pay, not after
 
-A Nationwide scam text is a smishing message that pretends to be from Nationwide Building Society so you tap a link and hand over login, card, or personal details. Common hooks are suspicious activity, a blocked account, or a payment you need to "verify". An example of the style is: `Nationwide: Unusual activity detected on your account. Verify your details now to avoid restriction: nationwide-secure-login.example`.
+The most useful thing Nationwide offers a member staring at a suspicious text is used before any money moves. Its Scam Checker Service invites you to run a payment past staff first — the wording on nationwide.co.uk is to talk to the society if you are unsure about a payment you are about to make, and it will look into it. The freephone line published on the Scam Protection Promise page runs 24 hours a day, seven days a week, branch staff will do the same review in person, and the service covers payments set up through the app, the Internet Bank and Open Banking.
 
-The link opens a fake Nationwide login page. Nationwide does send genuine texts, so the red flag is not the channel — it is an unexpected message asking you to log in or confirm details through a link.
+The Scam Protection Promise is attached to that conversation and inseparable from it. If you talked to Nationwide through Scam Checker before making the payment, and it did not tell you not to proceed, it says it will give you back every penny should the payment turn out to be a scam. It is not an after-the-event refund guarantee for a payment you made without asking. The Promise applies to Faster Payments, CHAPS and electronic transfers between Nationwide accounts. Card payments, cash withdrawals, cheques and overseas payments sent by SWIFT or SEPA fall outside it, and Nationwide says it may change or withdraw the Promise, telling members in branch and on its website if it does.
 
-### Why these texts fool people
+That pre-payment conversation is precisely what an urgent SMS is designed to rush you past.
 
-An account or payment alert creates instant concern, and the threat of restriction adds urgency. The sender ID and link can both be made to look official, mirroring Nationwide's real branding closely.
+### Call Checker: proving who is on the line
 
-The reliable check is to go to the source yourself: open the Nationwide app or type nationwide.co.uk into your browser directly, rather than tapping a link in a text, to see your genuine account and recent activity.
+Since January 2026 the Nationwide banking app has carried Call Checker, which answers a question 159 cannot. Dialling 159 reaches the society on a line you opened yourself; it tells you nothing about the person already talking to you. Call Checker does exactly that.
 
-### Signs a Nationwide text is a scam
+Stay on the call, open the app, go to More and pick the Call Checker tile. The screen states either that you are on a call with a named Nationwide colleague or that you are not on a call with the society. If it says the second thing, the caller is impersonating Nationwide, no matter how much they appear to know about your accounts.
 
-- It claims unusual activity or that your account will be restricted or blocked.
-- It asks you to "verify" or confirm your details through a link.
-- The link is not nationwide.co.uk (a lookalike such as `nationwide-secure-login.example`).
-- It gives a short deadline to act.
-- It arrives from an unfamiliar number rather than Nationwide's usual sender.
-- It pressures you to act before checking your real account.
+Nationwide launched the tool because impersonation runs through so much of the fraud its members report, and a scam text is very often the reconnaissance step for that call.
 
-### How the scam works
+### Four things Nationwide will never ask a member to do
 
-First, a text claims an account or activity problem. Second, urgency pushes you to tap the link. Third, a fake Nationwide login page captures your details. Fourth, criminals use them to access your real account or commit card fraud. Fifth, they may follow up by phone pretending to be Nationwide fraud prevention.
+The society publishes a short list. It will never ask you to:
 
-Checking directly in the Nationwide app or on nationwide.co.uk, rather than tapping the link, breaks the chain.
+- Give it your full one-time code or card reader code.
+- Transfer your money to a safe account.
+- Log into the Internet Bank through a link in an email, text or social media message.
+- Use, re-enable or re-sync your card reader over the phone.
 
-### How to check a Nationwide text safely
+The third entry decides most texts on its own. A message telling you to sign in through its link is requesting the one thing Nationwide states it never requests.
 
-Do not tap the link or call a number from the text.
+### Member-shaped bait: Fairer Share and restriction warnings
 
-- Open the Nationwide app or type nationwide.co.uk yourself and check your account and recent transactions there.
-- Never enter your login, card, or personal details on a page you reached from a text.
-- If you think a payment or your card is affected, call Nationwide using the number on your card, its dedicated fraud helpline published on nationwide.co.uk, or 159.
-- If someone calls claiming to be Nationwide, use Call Checker in the Nationwide app where available; if you cannot use the app, hang up and call 159.
-- Treat any unexpected "account restricted" or "verify now" message with suspicion.
+Membership hands fraudsters hooks a high-street bank cannot offer. The Fairer Share Payment is the obvious one: in 2026 more than four million eligible members received £100 between 10 and 30 June, paid automatically into an open Nationwide current account, with nothing to apply for.
 
-If you are unsure whether a linked page is genuine, our guide on /guides/is-this-website-a-scam/ helps, and our /guides/tsb-bank-scam-text-messages-uk/ and /guides/starling-bank-scam-uk/ guides cover the same pattern with other providers.
+Because no application or claim process exists, the fraudulent discriminator is a request to do something with the payment. A message asking you to claim it, confirm your details for it, sign in to receive it or release it is invented — for example `Nationwide: your Fairer Share payment could not be processed. Confirm your details: nationwide-member.example`. A text that merely links to genuine Fairer Share information is not, by itself, proof of fraud; it is the demand for an action on your side that gives it away.
 
-### If you tapped the link or shared details
+The other family leans on loss instead of reward: unusual activity, a restriction about to be applied, a card about to be stopped. Both want the same outcome, which is you signing in somewhere that is not the society's own app.
 
-Act now using the payment, account and identity steps in our [scam recovery checklist](/recovery/).
+Open that app and look for yourself. Your genuine balance, your genuine payment history and any action Nationwide actually needs from you all appear there, and no real restriction is ever lifted by completing a web form you arrived at from an SMS.
 
-### How to report a Nationwide scam text (UK)
+### Reporting it as a member
 
-Forward suspicious Nationwide emails, texts, or messages to `phishing@nationwide.co.uk`. You can also forward scam texts to 7726 so your mobile provider can investigate. If the same scam reached you by email, forward it to the NCSC at `report@phishing.gov.uk`.
+Nationwide asks members to send suspicious emails, texts and messages to `phishing@nationwide.co.uk`. It does not reply to each one, but it says it reviews what arrives, and the detail helps shut down the infrastructure behind a campaign. Forward the SMS to `7726` as well so your mobile network sees the sender, and pass an emailed version to the NCSC at `report@phishing.gov.uk`.
 
-If you lost money or shared sensitive information, report it to Report Fraud at `reportfraud.police.uk` or on 0300 123 2040 if you are in England, Wales, or Northern Ireland. In Scotland, report to Police Scotland on 101. Keep the original message and any screenshots.
+Where money has actually gone, or you have given away enough for someone to impersonate you, add a police record: Report Fraud takes reports at `reportfraud.police.uk` and on 0300 123 2040, while in Scotland that report goes to Police Scotland on 101 instead.
+
+### If you have already replied, tapped or paid
+
+Ring the society immediately. Its 24-hour fraud number is published in the app, on nationwide.co.uk and on the back of your card. 159 routes participating callers to Nationwide — Stop Scams UK describes the service as connecting customers of more than 99% of UK retail bank current accounts, which is not a guarantee for every handset or network, so use the published number if 159 does not connect for you. Say which of three things happened: you entered credentials, you approved a one-time code, or you sent a payment. They trigger different responses inside the society.
+
+Nationwide's Scam Protection Promise may apply only if you used its Scam Checker and talked to the society before making the covered payment, and it did not tell you not to proceed. Separately, the mandatory reimbursement rules may apply to eligible Faster Payments or CHAPS transfers made from 7 October 2024. Those rules cap an eligible claim at £85,000 and allow 13 months from the payment to raise a case, and they are conditional every time rather than automatic.
+
+While a claim is open, work through the payment, account and identity actions in our [scam recovery checklist](/recovery/).
 
 ### Frequently asked questions
 
-**Does Nationwide send texts, or is every Nationwide text a scam?**
+**Where is Call Checker in the Nationwide app?**
 
-Nationwide does send genuine texts, so the channel alone is not proof. Treat any message that asks you to log in or confirm details through a link as a scam, and check your account through the Nationwide app or nationwide.co.uk instead.
+Stay on the call, open the banking app, tap More and choose the Call Checker tile. It has been available since January 2026 and shows either that you are on a call with a named Nationwide colleague or that you are not on a call with the society.
 
-**A text says my Nationwide account will be restricted — is that real?**
+**I got a text about my Fairer Share payment — can it be genuine?**
 
-Check it yourself in the Nationwide app or on nationwide.co.uk rather than tapping the link. A genuine account issue is visible in your account or app, not resolved through a texted link with a short deadline.
+Not one that asks you to claim it, confirm details for it, sign in for it or release it. Nationwide pays Fairer Share automatically into an open current account; the 2026 payment of £100 landed between 10 and 30 June with no application process. A message that only links to genuine information is not by itself proof of fraud — the request for an action from you is.
 
-**A text asks me to 'verify' my details — should I tap the link?**
+**Does the Scam Protection Promise guarantee my money back?**
 
-No. Never verify or confirm login or card details through a link in a text. Check your real account in the Nationwide app, and call Nationwide using the number on your card or 159 if you are unsure.
+Nationwide says it will refund every penny of a covered scam payment if you talked to it through Scam Checker before paying and it did not tell you not to proceed. The Promise covers Faster Payments, CHAPS and electronic transfers between Nationwide accounts; listed exclusions include cards, cash, cheques and SWIFT/SEPA payments. Nationwide may change or withdraw the Promise.
 
-**I entered my login on a Nationwide-looking site — what now?**
+**Would Nationwide ever ask me to move money to a safe account?**
 
-Contact Nationwide immediately using the number on your card, its dedicated fraud helpline published on nationwide.co.uk, or 159 to secure your account, and change your password through the official app or website. If you shared personal details, consider Cifas Protective Registration and monitor your credit reports.
+Never. It sits on the society's published list of things it will never ask a member to do, alongside handing over a full one-time code, signing in through a link, and re-syncing a card reader over the phone.
 
-**How do I report a Nationwide scam text?**
+**Where do I report a Nationwide scam text?**
 
-Forward it to `phishing@nationwide.co.uk` and to 7726. If you lost money or shared details, report it to Report Fraud in England, Wales, or Northern Ireland, or to Police Scotland on 101 in Scotland.
+Send it to `phishing@nationwide.co.uk` and forward it to `7726`. If a payment left your account, ring the society's 24-hour fraud line or 159 first, then log the case with Report Fraud — Police Scotland on 101 if you are in Scotland.
 
 ## NatWest Scam Texts: How to Spot a Fake NatWest SMS (UK)
 
@@ -10625,80 +10658,83 @@ Forward it to 7726. If you lost money or shared sensitive information, report it
 ## TSB Scam Text UK: Spot a Fake Bank SMS
 
 URL: https://beatthescam.com/guides/tsb-bank-scam-text-messages-uk/
-Category: Text Message Scams · Updated: 2026-07-18
+Category: Text Message Scams · Updated: 2026-07-26
 
 Got a TSB text about suspicious activity, a blocked account, or a payment to confirm? How to spot a fake TSB SMS, check safely, and report it in the UK.
 
-### What a fake TSB text looks like
+### TSB publishes one set of checks for email and different advice for texts
 
-A TSB scam text is a smishing message that pretends to be from TSB so you tap a link and hand over login, card, or personal details. Common hooks are suspicious activity, a blocked account, or a payment you need to "confirm" or "cancel". An example of the style is: `TSB: A payment of £450 is pending on your account. If this wasn't you, cancel it now: tsb-secure-login.example`.
+The two are routinely run together and that is how people reach the wrong answer. TSB's published SMS advice contains no identifier that marks a text as genuine. What it does say is that scam texts often carry spelling and grammar mistakes, that links may take you to a website built to steal your details, and that you should not reply or click on anything.
 
-The link opens a fake TSB login page. TSB does send genuine texts, so the red flag is not the channel — it is an unexpected message asking you to log in or confirm details through a link.
+So the test for a text is behavioural rather than forensic. Treat a message as unverified whenever it arrives unexpectedly, carries a link, manufactures a deadline, or asks for security information — something along the lines of `TSB: a payment of £450 is pending. Cancel now: tsb-secure-login.example`, which is an illustration rather than a real campaign. Then settle it independently, away from the message: open the TSB app yourself, or go through an official contact route you already hold, such as the number printed on the back of your card.
 
-### Why these texts fool people
+One aside, clearly labelled because it is the part most often misapplied. TSB does publish identifiers for its genuine emails: it says an email will greet you personally by name and will include the last four digits of your TSB current account number, the last four digits of another TSB product you hold, or the last three digits of your postcode, and that its email addresses end in `tsb.co.uk`. Those are email checks. A text is not fraudulent merely because it lacks them, and finding something that looks like one inside a text proves nothing either way.
 
-A payment or account alert creates instant concern, and the threat of a blocked account adds urgency. The sender ID and link can both be made to look official, mirroring TSB's real branding closely.
+### What TSB says a fraudster asks for
 
-The reliable check is to go to the source yourself: open the TSB app or type tsb.co.uk into your browser directly, rather than tapping a link in a text, to see your genuine account and recent activity.
+TSB frames these three on its fraud-prevention pages as warnings about telephone calls:
 
-### Signs a TSB text is a scam
+- A caller asking for your PIN. TSB says it will never ask you for it.
+- A caller asking for your full password or memorable information.
+- A caller saying your money is not safe and telling you to move it into a "safe" bank account.
 
-- It claims a payment needs to be confirmed or cancelled through a link.
-- It says your account is blocked, limited, or under review.
-- It asks you to log in or "verify" your details through a link.
-- The link is not tsb.co.uk (a lookalike such as `tsb-secure-login.example`).
-- It gives a short deadline to act.
-- It arrives from an unfamiliar number, or the sender looks plausible but the link or request is unusual.
-- It pressures you to act before checking your real account.
+The scope of that source is calls, so it should not be quoted as a statement about texts. The substance still travels, though, because the underlying banking facts do not change with the channel: no genuine process needs your PIN or your full password, and no genuine instruction moves your money into another account for safekeeping. A text asking for those secrets, or pushing you towards a safe account, is fraudulent however convincing the sender name looks.
 
-### How the scam works
+### The Fraud Refund Guarantee ended in 2024 — what applies now
 
-First, a text claims a payment or account problem. Second, urgency pushes you to tap the link. Third, a fake TSB login page captures your details. Fourth, criminals use them to access your real account or commit card fraud. Fifth, they may follow up by phone pretending to be TSB fraud prevention.
+TSB launched the UK's first Fraud Refund Guarantee in April 2019. It is no longer running. TSB confirms the guarantee ended at midnight on 6 October 2024 and now applies only to eligible fraud transactions that took place before that moment.
 
-Checking directly in the TSB app or on tsb.co.uk, rather than tapping the link, breaks the chain.
+Money sent from 7 October 2024 onwards falls under the mandatory reimbursement rules instead, and those are narrower than the old promise:
 
-### How to check a TSB text safely
+- They cover authorised push payment fraud — money you were tricked into sending yourself — made by Faster Payments or CHAPS. International payments, card payments, cash and cheques sit outside them.
+- Reimbursement is capped at £85,000 for each eligible claim.
+- You have 13 months from the payment to report it.
+- A firm may deduct an excess of up to £100 per claim; TSB's published position is that it will not apply that excess on claims it refunds.
+- An approved claim is repaid within five business days.
 
-Do not tap the link or call a number from the text.
+None of that amounts to a guaranteed refund. Claims are assessed individually and reimbursement can be reduced or refused, so the decision that actually protects your money is the one you take before the payment leaves, not the argument afterwards.
 
-- Open the TSB app or type tsb.co.uk yourself and check your account and recent transactions there.
-- Never enter your login, card, or personal details on a page you reached from a text.
-- If you think a payment or your card is affected, call TSB using the number on your card or 159.
-- Treat any unexpected "blocked account" or "confirm payment" message with suspicion.
+### The call that usually comes next
 
-If you are unsure whether a linked page is genuine, our guide on /guides/is-this-website-a-scam/ helps, and our /guides/hsbc-bank-scam-call-uk/ and /guides/santander-phone-scam-uk/ guides cover the same bank-impersonation pattern by phone.
+A smishing text is often the opening move rather than the whole scam. Whatever a fake login page harvests makes the follow-up call convincing: the voice already knows your name, your balance and a recent transaction, and wants you to move funds somewhere safe.
 
-### If you tapped the link or shared details
+TSB is one of the institutions reachable on 159, the Stop Scams UK number that cannot itself be spoofed or impersonated. Use it in one direction only. 159 is a number you dial out on; it says nothing about whoever is already talking to you. TSB's published guidance tells customers to end a suspicious call and contact it through 159. Hang up first, then dial 159 or use the number on the back of the card.
 
-Act now using the payment, account and identity steps in our [scam recovery checklist](/recovery/).
+### Where to send the text
 
-### How to report a TSB scam text (UK)
+- `emailscams@tsb.co.uk` — TSB's mailbox for suspicious emails and texts. TSB says screenshots of a text message can be sent here, which is the practical way to pass an SMS on.
+- `7726` — the free shortcode that puts the sender in front of your mobile network.
+- `report@phishing.gov.uk` — the NCSC's address, if the same bait also landed in your inbox.
 
-Forward the scam text to 7726 so your mobile provider can investigate. TSB also asks customers to forward suspicious email or text details to `emailscams@tsb.co.uk`. If the same scam reached you by email, forward it to the NCSC at `report@phishing.gov.uk`.
+Losses, or credentials you have already handed over, belong with Report Fraud too: `reportfraud.police.uk`, or 0300 123 2040 in England, Wales and Northern Ireland. Scottish reports go to Police Scotland on 101. Hold on to the original message until every report is filed.
 
-If you lost money or shared sensitive information, report it to Report Fraud at `reportfraud.police.uk` or on 0300 123 2040 if you are in England, Wales, or Northern Ireland. In Scotland, report to Police Scotland on 101. Keep the original message and any screenshots.
+### If you already tapped through
+
+Speed matters more than tidiness here. Ring TSB on the number on the back of your card, or 159, and say plainly that you entered details on a page you reached from an SMS — that gets the account flagged rather than merely watched. If a payment went out, say so in the same call: the 13-month reporting window is generous, but a Faster Payment raised within minutes stands the best chance of being stopped at the receiving end.
+
+Then work through the payment, account and identity steps in our [scam recovery checklist](/recovery/). Where identity details such as your date of birth or address history went across alongside banking credentials, Cifas Protective Registration adds an extra check to applications made in your name.
 
 ### Frequently asked questions
 
-**Does TSB send texts, or is every TSB text a scam?**
+**Is TSB's Fraud Refund Guarantee still running?**
 
-TSB does send genuine texts, so the channel alone is not proof. Treat any message that asks you to log in or confirm details through a link as a scam, and check your account through the TSB app or tsb.co.uk instead.
+No. TSB confirms it ended at midnight on 6 October 2024 and now covers only eligible fraud transactions from before then. Anything from 7 October 2024 is assessed under the mandatory reimbursement rules — conditional, capped at £85,000, and limited to Faster Payments and CHAPS.
 
-**A text says my TSB account is blocked — is that real?**
+**Will TSB take the £100 excess out of a fraud claim?**
 
-Check it yourself in the TSB app or on tsb.co.uk rather than tapping the link. A genuine account issue is visible in your account or app, not resolved through a texted link with a short deadline.
+The rules allow a firm to deduct up to £100 per claim, and TSB's published position is that it will not apply that excess on claims it refunds. That does not make repayment automatic: the claim still has to be accepted on its facts.
 
-**A text asks me to 'confirm' or 'cancel' a payment — should I tap the link?**
+**How do I tell a genuine TSB message from a fake?**
 
-No. Never confirm or cancel a payment through a link in a text. Check your real account in the TSB app, and if you think a payment is genuinely suspicious, call TSB using the number on your card or 159.
+TSB publishes its name and partial-account/postcode checks for email, not SMS. For texts, it warns about spelling or grammar errors and links that may steal details, and says not to reply or click. Check the TSB app independently, forward a suspicious text to `7726`, and send TSB a screenshot at `emailscams@tsb.co.uk`.
 
-**I entered my login on a TSB-looking site — what now?**
+**Someone rang claiming to be the TSB fraud team — how do I check?**
 
-Contact TSB immediately using the number on your card or 159 to secure your account, and change your password through the official app or website. If you shared personal details, consider Cifas Protective Registration and monitor your credit reports.
+TSB's published guidance tells customers to end a suspicious call and contact it through 159. Hang up first, then dial 159 or use the number on the back of the card.
 
 **How do I report a TSB scam text?**
 
-Forward it to 7726 and send the details to TSB at `emailscams@tsb.co.uk`. If you lost money or shared details, report it to Report Fraud in England, Wales, or Northern Ireland, or to Police Scotland on 101 in Scotland.
+Screenshot it, email it to `emailscams@tsb.co.uk`, then forward the message itself to `7726`. Where money moved or credentials went across, add a Report Fraud case at `reportfraud.police.uk`, or dial 101 for Police Scotland.
 
 ## TV Licensing Scam Text UK: Spot a Fake Licence SMS
 
@@ -12130,160 +12166,212 @@ Report it to Report Fraud at `reportfraud.police.uk` or 0300 123 2040 (Police Sc
 ## Fake ASOS Website Scam UK: Spot a Copycat Store
 
 URL: https://beatthescam.com/guides/asos-copycat-scam-uk/
-Category: Website Scams · Updated: 2026-07-18
+Category: Website Scams · Updated: 2026-07-26
 
 Found an ASOS-looking site with huge discounts from a social ad? How to spot a fake ASOS copycat website, buy safely, and report it in the UK.
 
-### What a fake ASOS website looks like
+### ASOS plus a sale word decides nothing
 
-A fake ASOS website copies ASOS branding, layout, and product photos to sell counterfeit or non-existent clothing, or to harvest your card details at checkout. They are usually advertised through social-media posts and ads offering huge discounts. An example of the style is: `ASOS Clearance Outlet - up to 80% off everything, today only: asos-outlet-uk.example`.
+ASOS says ordinary ASOS shopping takes place at `asos.com`, but its UK help page also identifies `asossamplesale.com` as the official ASOS Sample Sale. A name containing ASOS, outlet, sale or clearance is therefore neither proof of legitimacy nor proof of fraud. Start from ASOS's UK Customer Care page and follow the official link it publishes.
 
-The deal is the bait; the site either ships fakes, sends nothing, or captures your card details. This guide shows the warning signs, how to buy safely, and what to do if you have already paid.
+The Sample Sale help pages put it plainly: ASOS Sample Sale is part of ASOS.com, and the Sample Sale terms say the contract is with ASOS.com Limited and that all products offered there are ASOS products. That is why a word test cannot work in either direction — reading the letters in an address will not separate an ASOS-run sale from somebody else's shop wearing ASOS branding. What replaces it is a habit: reach an address the way ASOS publishes it, not the way an advert offers it.
 
-### Why these sites are convincing
+### The verification route, step by step
 
-Copied branding, real product photos lifted from `asos.com`, and a polished social-media ad all make the site look genuine at a glance. A steep "today only" discount and a countdown timer push you to buy before checking properly.
+- Open a fresh tab and type `asos.com` by hand. Do not arrive from a search advert, a social post, an email or a message.
+- Go to Customer Care from there, and look for the official links ASOS itself publishes for shopping and for its Sample Sale.
+- Compare the address you were sent against the one ASOS publishes, character for character. A near miss is a miss.
+- If it appears nowhere in ASOS's own help pages, treat it as unverified and keep your card details to yourself.
+- Still unsure? Ask ASOS Customer Care through the official site before paying, not after.
 
-The rule that protects you: genuine ASOS shopping happens on `asos.com` or the official ASOS app. A big discount on an unfamiliar site you reached from a social ad is a strong red flag, however convincing it looks.
+This works because it takes your judgement out of the loop. Copied logos, lifted product photography and a working basket are cheap to assemble, so how convincing a page looks carries almost no information — where you got the address from carries all of it. NCSC guidance on shopping and paying safely online makes the same point about deceptive shopping sites: navigate to a retailer independently instead of trusting a link you were handed.
 
-### Signs an ASOS website is fake
+### Reading a web address, and what that can and cannot settle
 
-- Prices are far below normal, especially on current or popular items.
-- You reached it from a social-media ad or post, not by typing `asos.com` yourself.
-- The web address is a lookalike, such as `asos-outlet-uk.example`, not `asos.com`.
-- There is heavy "today only" or countdown pressure.
-- The only payment options are bank transfer or unusual methods, or the checkout looks off.
-- Contact details, returns, and company information are missing or vague.
-- The site has odd phrasing, poor image quality on some pages, or broken links.
+Reading an address is worth learning, as long as you know what it proves. The owner is the part immediately to the left of the first single slash. In `asos.shop-deals.example/sale` the owner is `shop-deals.example`, and every character further left — brand names included — is decoration chosen by whoever holds it.
 
-### How the scam works
+These are warning signs to resolve against ASOS's own help pages, never verdicts on their own:
+- The brand pushed into a subdomain, so it reads as ASOS at a glance.
+- The right name with a different ending welded on, such as `.shop`, `.online` or `.com.co`.
+- A country or year tag that makes the address look like a regional ASOS site.
+- A brand plus sale word combination — the one that genuinely cannot be read, because ASOS publishes its own Sample Sale address.
+- A padlock in the address bar, which certifies encryption and nothing about honesty. Certificates are free.
 
-First, a social ad or post advertises heavily discounted ASOS-branded items. Second, the link opens a convincing fake shop. Third, you order and pay by card or transfer. Fourth, you receive counterfeit goods, the wrong item, or nothing at all - or your card details are used for fraud. Finally, the site ignores you or disappears.
+### Checking an `asos.com` order, and the limit of that check
 
-Buying only from `asos.com` or the official ASOS app breaks the chain.
+An order placed through `asos.com` should appear in the correct ASOS account under My Orders. ASOS Sample Sale orders use a separate account and do not appear there. If an expected `asos.com` order is missing, check that you used the right account and contact ASOS Customer Care through the official site before deciding what happened.
 
-### How to shop safely
+ASOS documents where an ordinary order lives: My Account, then My Orders, then Track parcel, with the estimated delivery date shown in the account and in the confirmation email. ASOS Sample Sale is explicit that its orders sit outside that view — you will not see Sample Sale orders on an ASOS.com account, and viewing them means creating a separate Sample Sale account. A blank My Orders page is therefore a prompt to check which account and which ASOS service you used, not evidence that nothing was bought from ASOS.
 
-Slow down and check before you pay.
+Treat the messages around an order the same way. ASOS's help pages warn that people impersonate it through social media, free webmail accounts, WhatsApp and fake sites, and say ASOS contacts customers through an ASOS-branded email address or a verified social account. A confirmation email proves little on its own, because whoever built a fake shop also wrote its emails.
 
-- Buy from `asos.com` or the official ASOS app, typing the address yourself.
-- Treat a big discount on an unfamiliar site, especially from a social ad, as a warning sign.
-- Check the exact web address rather than trusting the logo or a padlock alone.
-- Prefer paying by card, which offers more practical dispute options than a bank transfer.
-- Look for genuine contact details, returns, and company information before buying.
+### If you entered personal details on a site you now doubt
 
-If you are unsure whether a shop is genuine, our guide on /guides/is-this-website-a-scam/ walks through the checks, and our /guides/fake-nike-website-uk/ and /guides/fake-ray-ban-website-scam-uk/ guides cover the same trick with other brands.
+A fashion checkout collects more than a card number: a name, a delivery address, a contact number, often a password for a new account. Rather than guessing what will be done with any of it, treat what you typed as exposed and close the openings you control.
 
-### If you have already paid
+- Change the password anywhere you reused whatever you set on that site, starting with the email account attached to it.
+- If card details went in, ring your card issuer on the number printed on the card or shown in its own app, and ask about stopping the card and watching the account.
+- Keep the confirmation page and everything that arrives afterwards, and check any claim about the order by returning to the address you typed yourself.
 
-Act now using the payment, account and identity steps in our [scam recovery checklist](/recovery/).
+Cifas Protective Registration is a narrower step, not a routine response to every suspicious checkout. It is a paid service running for two years that places a warning flag against your name and details so participating organisations carry out extra checks, and Cifas presents it as a measure for people at heightened risk of identity fraud. It is not insurance, and it does not guarantee every application in your name will be checked.
 
-### How to report a fake ASOS website (UK)
+### Legal rights may be hard to enforce against an untraceable seller
 
-If the scam reached you by email, forward the email to `report@phishing.gov.uk`. You can also report suspicious websites and links to the NCSC so they can be investigated for takedown. If the link reached you by text, forward it to 7726, and report the advert to the social-media platform you saw it on.
+Statutory rights do not vanish because a trader used a brand's name without permission. GOV.UK sets out the usual distance-sale sequence for an online purchase: tell the trader you are cancelling within 14 days of receiving the goods, send them back within a further 14 days, and receive the refund within 14 days of the trader receiving the goods or evidence that you returned them. The standard delivery charge you paid is refundable, and exceptions and possible deductions still apply.
 
-If you lost money or shared card details, report it to Report Fraud at `reportfraud.police.uk` or on 0300 123 2040 if you are in England, Wales, or Northern Ireland. In Scotland, report to Police Scotland on 101. Keep all the evidence.
+The difficulty is the trader, not the right. A cancellation notice needs somebody to serve it on, and a seller hiding behind a lookalike address may not reply, may publish no returns address, and may not be identifiable at all. Where a reply does arrive and makes the refund conditional on confirming your card number, or on installing software so the money can be sent, that is a continuation of the same approach rather than a resolution — and your realistic route then runs through the payment instead of the seller.
+
+### If you already paid
+
+Screenshot the shop while it is still standing — the product page, the basket total, the address bar — and keep the advert or message that delivered you there. Sites like this are built to disappear.
+
+Then look at how the money left. Section 75 of the Consumer Credit Act 1974 may apply, never automatically, to a purchase funded by credit. It needs the required relationship between the credit and the supplier, plus a cash price — counted per item, or per qualifying set — of more than £100 and no more than £30,000. MoneyHelper explains that an intermediary in the payment chain can affect whether cover exists at all, and the Financial Ombudsman Service has reported that misunderstanding credit protection has cost consumers money. So a £45 clothing order sits under the price test whatever card paid for it, and a credit card alone does not make a claim valid.
+
+Chargeback is a card-scheme process rather than a statutory entitlement, with rules and deadlines set by the scheme, so raise it with your issuer promptly instead of waiting to see whether a parcel turns up. Money sent by bank transfer for clothing is the hardest version of this: tell your bank the same day.
+
+If poor-quality goods did arrive, keep them — they are evidence, and [what a counterfeit means for a refund](/guides/fake-ray-ban-website-scam-uk/) is covered separately. The [scam recovery checklist](/recovery/) puts the payment, account and identity steps in order.
+
+### Where to report a copycat ASOS shop
+
+Tell ASOS through the Customer Care pages you reach by typing `asos.com`, so the brand knows the address is circulating. Then use the public routes:
+
+- A suspicious website goes to the NCSC, through its reporting form for scam websites.
+- A paid advert goes to the Advertising Standards Authority. Flagging it inside the platform that served it is a useful extra step rather than a substitute.
+- A phishing email goes to `report@phishing.gov.uk`.
+- A suspicious SMS text can be forwarded to 7726 free of charge, and your mobile network will look into the sender.
+- Lost money belongs in a fraud report. Report Fraud takes them online at `reportfraud.police.uk` and on 0300 123 2040; readers in Scotland should call Police Scotland on 101 instead.
 
 ### Frequently asked questions
 
-**Is every cheap ASOS website a scam?**
+**Is `asossamplesale.com` a real ASOS website?**
 
-Not every one, but a big discount on an unfamiliar site - especially one you reached from a social-media ad - is a strong warning sign. Buy from `asos.com` or the official ASOS app, and check the exact web address.
+Yes. ASOS's Sample Sale help pages say ASOS Sample Sale is part of ASOS.com, and its terms say the contract is with ASOS.com Limited and that all products offered there are ASOS products. That is exactly why the word test fails: an address pairing the ASOS name with a sale word can be genuine. Confirm any address from ASOS's UK Customer Care page rather than from the words in it.
 
-**How can I tell a fake ASOS site from the real one?**
+**An advert sent me to an "ASOS outlet" address. Is it a copycat?**
 
-Check the exact address is `asos.com`, not a lookalike. Be wary of prices far below normal and heavy countdown pressure, and look for genuine contact, returns, and company details. A logo or padlock alone proves nothing.
+Not automatically, and not automatically genuine either. Because ASOS publishes its own Sample Sale address, the words prove nothing in either direction. Open a fresh tab, type `asos.com`, go to Customer Care and see whether the address you were sent matches a link ASOS itself publishes. If it does not appear there, do not pay.
 
-**I ordered clothes that turned out to be fake or never arrived - what can I do?**
+**I received an order confirmation email. Doesn't that make the shop real?**
 
-Contact your bank about a chargeback, and for credit-card purchases over £100 ask whether Section 75 applies. Keep the order details and report the site. Do not buy from it again or respond to follow-up offers.
+Not on its own, because whoever built a fake shop also wrote its emails. ASOS says it contacts customers through an ASOS-branded email address or a verified social media account, so free webmail or a WhatsApp number announcing itself as ASOS customer care does not match that description. Check the order in the account it was placed with, and ask ASOS Customer Care through the official site.
 
-**Is it safe to pay by bank transfer on a discount site?**
+**My order is not in My Orders. Does that prove no order was placed with ASOS?**
 
-No. A bank transfer gives you fewer practical recovery options if the goods are fake or never arrive. Prefer a card, which may offer chargeback and, on eligible credit-card purchases over £100, Section 75 protection.
+No. An order placed through `asos.com` should appear in the correct ASOS account under My Orders, but ASOS Sample Sale orders use a separate Sample Sale account and do not appear there. Check that you signed in to the right account, then contact ASOS Customer Care through the official site before deciding what happened.
 
-**How do I report a fake ASOS website?**
+**Is `asos.shop-deals.example` an ASOS address?**
 
-Forward scam emails to `report@phishing.gov.uk`, forward scam texts to 7726, and report the advert to the platform. If you lost money, report it to Report Fraud in England, Wales, or Northern Ireland, or to Police Scotland on 101 in Scotland.
+No. The owner of a web address is the part immediately to the left of the first single slash, which here is `shop-deals.example`. Everything further left, brand names included, is decoration the site chose for itself. Reading the address this way rules an address out; confirming one in ASOS's own help pages is what rules it in.
+
+**I paid £45 by debit card and nothing arrived. Where does that leave me?**
+
+Below the Section 75 cash-price test, which needs more than £100, and on a debit card rather than a credit agreement. Ask your bank about chargeback instead, since card schemes set their own rules and deadlines for it, and raise it promptly. Report the loss as well so the site is on record.
+
+**Is it worth reporting a copycat if I never bought anything?**
+
+Yes, and it costs nothing. Send the address to the NCSC through its reporting form for scam websites, tell ASOS through its Customer Care pages, and take a paid advert to the Advertising Standards Authority as well as reporting it inside the platform that ran it.
 
 ## Fake Nike Website Scam UK: Spot a Counterfeit Shop
 
 URL: https://beatthescam.com/guides/fake-nike-website-uk/
-Category: Website Scams · Updated: 2026-07-18
+Category: Website Scams · Updated: 2026-07-26
 
 Found a Nike site with huge discounts you reached from a social ad? How to spot a fake Nike website, buy safely, and report it in the UK.
 
-### What a fake Nike website looks like
+### No single signal decides it — weigh several together
 
-A fake Nike website is a scam shop that copies Nike's branding to sell counterfeit trainers, or to take your money and card details for goods that never arrive. They are often advertised through social-media posts and ads promising huge discounts. An example of the style is: `Nike Official Outlet - Air Max up to 70% off, today only: nike-clearance-uk.example`.
+Trainer advice usually opens with the discount. The more useful opening is that no single fact about a sneaker listing settles the question, so the method has to be a risk screen rather than a test with one answer.
 
-The deal is the bait; the site either ships fakes, sends nothing, or harvests your card details. This guide shows the warning signs, how to buy safely, and what to do if you have already paid.
+Availability that conflicts with how Nike released a shoe is genuinely useful evidence. It is not proof, because Nike does not sell only through its own app and site: it refers to Nike-authorised retailers, and stock also reaches resale sellers who acquired it lawfully. So collect several signals and read how they combine:
+- Seller identity, established away from the seller's own website and advertising.
+- Release history: does this exact shoe, in these sizes, square with how and when Nike released it?
+- Price, read against both retail and the current resale market rather than retail alone.
+- Payment method, and whether it leaves you any route back.
+- Returns and complaints information, and whether it names a company you can look up.
+- The domain, opened by typing it rather than by following a link.
 
-### Why these scams are convincing
+One weak signal is a reason to look harder. Several at once — an unfamiliar seller, a scarce release, a full size run, a price far below the market and a payment method with no recourse — is the pattern to walk away from.
 
-The sites look professional, use real Nike product photos, and often appear in polished social ads, so they feel legitimate. A steep "today only" discount and a countdown timer rush you past the checks that would expose them.
+### How Nike releases coveted shoes, and where else they legitimately appear
 
-The rule that protects you: the safest route is Nike's own website, app, or stores, or an established retailer you can verify independently. A big discount on an unfamiliar site you reached from a social ad is a strong red flag, however convincing it looks.
+Nike describes SNKRS as its destination for highly coveted releases, and its help pages document a launch calendar, SNKRS Drawings and SNKRS Pass reservations. In a Drawing you enter inside a window and learn afterwards whether you were selected. A SNKRS Pass reserves a pair, and Nike's own SNKRS material says selected pairs may be reserved for collection at a nearby retailer, not only at a Nike store. SNKRS Reserve works differently again: it can make sizes to order during a limited pre-order window.
 
-### Signs a Nike website is fake
+That is why the release mechanism is a lead rather than a conclusion. A shop holding stock of a sold-out shoe is not describing something impossible, so check the specific release in Nike's launch calendar and then check the specific seller. Do not accept a seller's own claim to be authorised: Nike lists its own stores in a retail directory, and an established sports retailer is something you can confirm away from its advertising. Allocation, date and provenance all still need checking on the individual listing.
 
-- Prices are far below normal, especially on current or in-demand trainers.
-- You reached it from a social-media ad or post, not by typing nike.com yourself.
-- The web address is a lookalike, such as `nike-clearance-uk.example`, not `nike.com`.
-- There is heavy "today only" or countdown pressure.
-- The only payment options are bank transfer or unusual methods, or the checkout looks off.
-- Contact details, returns, and company information are missing or vague.
-- The text has odd phrasing or errors.
+### Genuine resale is not the same thing as counterfeit
 
-### How the scam works
+Paying more than retail for a sold-out pair is a normal, lawful transaction. Resale is an established market, scarcity genuinely pushes prices up, and a high asking price is not by itself a fraud signal.
 
-First, a social ad or post advertises heavily discounted Nike items. Second, the link opens a convincing fake shop. Third, you order and pay by card or transfer. Fourth, you receive counterfeit goods, the wrong item, or nothing at all - or your card details are used for fraud. Finally, the site ignores you or disappears.
+The risk lives in the seller and the payment rather than in the figure. Above retail, from a seller whose authentication process you can examine, is a premium you are choosing to pay. Brand new, in every size, well under the market, from a site you had not heard of yesterday, is the combination worth refusing.
 
-Buying from Nike's own site, app, or stores, or from a retailer you already know and can verify, breaks the chain.
+Scale and familiarity are not verification either. In 2024 Nike and Converse brought a US lawsuit against alleged counterfeiting networks; reporting on that case describes 52 alleged networks operating 98 websites and 267 social media handles. Separately, Nike has taken legal action against StockX. Neither of those is a judgement on any listing in front of you. They are only a reason not to treat a platform's size as a substitute for checking a seller.
 
-### How to buy safely
+### Factory, outlet and clearance are not the test
 
-Slow down and check before you pay.
+Nike operates genuine Factory and Clearance stores and lists its UK stores in its own retail directory, so the word in a domain is not the finding. What matters is whether the address is exactly the one Nike publishes, and whether the company behind an unfamiliar one can be identified at all.
 
-- Buy from `nike.com`, the Nike app, Nike stores, or a retailer you already know and can verify, typing the address yourself.
-- Treat a big discount on an unfamiliar site, especially from a social ad, as a warning sign.
-- Check the exact web address rather than trusting the logo or a padlock alone.
-- Prefer paying by card, which usually gives you more dispute options than a bank transfer.
-- Look for genuine contact details, returns, and company information before buying.
+- Type the address by hand. `nike.com` opened yourself is not the same thing as a lookalike reached from an advert.
+- Check any address you were sent against Nike's own help pages and store directory, which you get to from the address you typed, rather than against a search result.
+- Identify the company independently. A named, established sports retailer can be checked away from its own site; an anonymous shop cannot.
+- Prefer a payment route with recourse, because bank transfer, cryptocurrency and gift-card codes remove yours.
+- Read the returns and complaints information and ask whether a real business could operate on it.
 
-If you are unsure whether a shop is genuine, our guide on /guides/is-this-website-a-scam/ walks through the checks, and our /guides/fake-ray-ban-website-scam-uk/ guide covers the same trick with other brands.
+### What happens if counterfeit goods reach the UK border
 
-### If you have already paid
+GOV.UK sets out the process. Border Force can detain goods it suspects infringe intellectual property rights. Under the standard procedure, where the rights holder confirms the goods infringe and the importer or owner agrees or does not respond, the goods can be destroyed. An objection can instead lead to court proceedings or to the goods being released, so a rights holder's confirmation does not automatically close every case. Small postal or courier consignments can follow a separate simplified procedure. The Government's customs intellectual property enforcement report covering 2021 to 2023 says destruction was the main outcome for articles confirmed as counterfeit.
 
-Act now using the payment, account and identity steps in our [scam recovery checklist](/recovery/).
+For a shopper the practical reading is blunt: money paid overseas for counterfeit goods can end up buying nothing at all, with no seller left to argue with.
 
-### How to report a fake Nike website (UK)
+### The unexpected customs fee
 
-If the scam reached you by email, forward the email to `report@phishing.gov.uk`. You can also report suspicious websites and links to the NCSC so they can be investigated for takedown. If the link reached you by text, forward it to 7726 so your mobile provider can investigate. Report the advert to the social-media platform you saw it on.
+Do not pay through an unexpected customs link. Check the parcel directly with the courier using contact details you obtained independently. Genuine import VAT or duty may be collected by the parcel company, while confirmed counterfeit goods are handled through the Border Force infringement process rather than released because a shopper pays a surprise fee.
 
-If you lost money or shared card details, report it to Report Fraud at `reportfraud.police.uk` or on 0300 123 2040 if you are in England, Wales, or Northern Ireland. In Scotland, report to Police Scotland on 101. Keep all the evidence.
+GOV.UK explains when VAT, customs duty and handling charges apply to goods sent from abroad, so a charge existing at all is not the tell. What marks out the scam version is the route it arrives by: an unexpected message, a short deadline, and a payment page you did not reach by going to the parcel company yourself.
+
+### If you already paid
+
+Keep the shoes and the box if anything arrived, together with the order page, the advert and any tracking reference. Do not assume Nike will authenticate them for you — its public help material does not promise that its ordinary contact channels will inspect a suspected counterfeit. Report the seller through the contact route on `nike.com`, hold on to the physical evidence, and ask Citizens Advice or your card issuer what to do next.
+
+On the money: a Section 75 claim under the Consumer Credit Act 1974 may be available on a credit-funded purchase. It depends on the required relationship between the credit and the supplier, and on a cash price — per item, or per qualifying set — of more than £100 and no more than £30,000. A £160 pair might therefore fall inside it where the identical pair bought on a debit card does not, but the figure and the card type do not settle a claim between them; MoneyHelper is the place to read what a covered arrangement looks like. Debit purchases lean on chargeback, governed by each card scheme's own rules and deadlines rather than by statute. A bank transfer to a shop that has stopped replying needs a call to your bank immediately.
+
+Citizens Advice sets out the refund position for counterfeit goods. That guidance is published as advice for England, with its own Wales, Scotland and Northern Ireland versions, so use the one for your nation. Our [scam recovery checklist](/recovery/) puts these steps in order.
+
+### Reporting a fake Nike shop
+
+One limitation worth stating plainly: several third-party sites publish Nike brand-protection email addresses that we could not match against Nike's own published contacts, so we do not repeat them here. Use the contact route on `nike.com`, reached by typing the address in yourself.
+
+- The web address itself goes to the NCSC, through its scam-website reporting form.
+- Phishing emails go to `report@phishing.gov.uk`.
+- A suspicious SMS text can be forwarded to 7726, free of charge.
+- Paid adverts are the Advertising Standards Authority's remit; the platform that ran one should hear about it as well.
+- Money lost goes into a Report Fraud report — `reportfraud.police.uk`, or 0300 123 2040. In Scotland: Police Scotland, on 101.
+- Counterfeit goods have a route of their own. The Citizens Advice consumer helpline, on 0808 223 1133, passes reports to Trading Standards.
 
 ### Frequently asked questions
 
-**Is every cheap Nike website a scam?**
+**A site has a sold-out release in every size at half price. Is that possible?**
 
-Not every one, but a big discount on an unfamiliar site - especially one you reached from a social-media ad - is a strong warning sign. Buy from `nike.com`, the Nike app, Nike stores, or a retailer you already know and can verify.
+It is a high-risk claim, especially after a scarce release has sold out, but it is not impossible by definition. Check the exact release in Nike's launch calendar, verify whether the seller is an established retailer, and do not rely on the seller's own claim that it is authorised.
 
-**How can I tell a fake Nike site from the real one?**
+**Is paying above retail on a resale platform a scam?**
 
-Check the exact address is `nike.com`, not a lookalike. Be wary of prices far below normal and heavy countdown pressure, and look for genuine contact, returns, and company details. A logo or a padlock alone proves nothing.
+Not in itself. Resale is a legitimate market and scarcity genuinely pushes prices up. The risk lives in the seller's authentication process and in your payment protection, not in the fact that the figure exceeds what Nike charged.
 
-**I bought trainers that turned out to be fake or never arrived - what can I do?**
+**What is SNKRS, and does buying elsewhere mean a shop is fake?**
 
-Contact your bank about a chargeback, and for credit-card purchases over £100 ask whether Section 75 applies. Keep the order details and report the site. Do not buy from it again or respond to follow-up offers.
+SNKRS is Nike's destination for highly coveted releases, with a launch calendar, Drawings and Pass reservations, and SNKRS Reserve can make sizes to order in a limited pre-order window. It is not the only route. Nike refers to Nike-authorised retailers, and a SNKRS Pass can reserve selected pairs at a nearby retailer, so buying elsewhere proves nothing on its own.
 
-**Is it safe to pay by bank transfer on a discount site?**
+**Could customs really destroy trainers I have paid for?**
 
-No. A bank transfer gives you fewer practical recovery options if the goods are fake or never arrive. Prefer a card, which may offer chargeback and, on eligible credit-card purchases over £100, Section 75 protection.
+Border Force can detain goods it suspects infringe intellectual property rights, and under the standard process they can be destroyed where the rights holder confirms infringement and the importer or owner agrees or does not respond. An objection can lead to proceedings or release instead. Government reporting covering 2021 to 2023 says destruction was the main outcome for articles confirmed as counterfeit.
 
-**How do I report a fake Nike website?**
+**A message says my parcel is held and a fee is due. Is that always a scam?**
 
-Forward scam emails to `report@phishing.gov.uk`, forward scam texts to 7726, and report the advert to the platform. If you lost money, report it to Report Fraud in England, Wales, or Northern Ireland, or to Police Scotland on 101 in Scotland.
+Not always, because genuine import VAT or duty may be collected by the parcel company. Do not pay through an unexpected link, though. Check the parcel with the courier on contact details you obtained independently. Confirmed counterfeit goods are handled through the Border Force infringement process rather than released because a shopper pays a surprise fee.
+
+**How do I report the shop to Nike itself?**
+
+Through the contact route on `nike.com`, opened by typing the address. We print no brand-protection email address, because the ones circulating on third-party sites could not be matched against Nike's own published contacts. Do not expect Nike's ordinary contact channels to authenticate your shoes; keep them as evidence instead.
 
 ## Fake Online Pharmacy UK: Spot an Illegal Medicine Site
 
@@ -12446,81 +12534,95 @@ Report it to Pandora through its brand-protection pages at `pandoragroup.com`, t
 ## Fake Ray-Ban Website Scam UK: Spot a Copycat Store
 
 URL: https://beatthescam.com/guides/fake-ray-ban-website-scam-uk/
-Category: Website Scams · Updated: 2026-07-18
+Category: Website Scams · Updated: 2026-07-26
 
 Found a Ray-Ban site with huge discounts from a social ad? How to spot a fake Ray-Ban copycat website, buy safely, and report it in the UK.
 
-### What a fake Ray-Ban website looks like
+### A very low price is a warning sign, not a verdict
 
-A fake Ray-Ban website copies Ray-Ban's branding and product photos to sell counterfeit sunglasses, or to harvest your card details at checkout. They are usually advertised through social-media posts and ads offering huge discounts. An example of the style is: `Ray-Ban Clearance Sale — up to 75% off Aviators and Wayfarers, today only: rayban-outlet-uk.example`.
+Counterfeiters copy branding, photography and increasingly the packaging, and the low number is the whole pitch. What that number cannot do is settle the question by itself, because Ray-Ban discounts too: its current UK terms of sale advertise reductions of up to 50% on selected styles. A figure well under the usual one is a reason to stop and check rather than a finding you can act on.
 
-The deal is the bait; the site either ships fakes, sends nothing, or captures your card details. This guide shows the warning signs, how to buy safely, and what to do if you have already paid.
+Treat the price as the trigger for the checks instead of the answer to them. Note the exact model on offer — the model number, the frame colour, the lens — then reach Ray-Ban's own site by typing `ray-ban.com` and find that model there. A gap far wider than anything Ray-Ban itself is advertising, on a seller you cannot otherwise verify, is the combination that should end the purchase. On its own, though, no price authenticates or condemns a particular pair of sunglasses.
 
-### Why these sites are convincing
+### What the UK store locator can and cannot confirm
 
-Copied branding, real Ray-Ban product photos, and a polished social-media ad all make the site look genuine at a glance. A steep "today only" discount and a countdown timer push you to buy before checking properly.
+Ray-Ban is an EssilorLuxottica brand and it publishes a UK store locator. That locator does one narrow job well: it confirms that a physical shop a seller names is actually a listed Ray-Ban location. It does not do the wider jobs a seller would like you to assume. It does not show that an unrelated web address belongs to a listed shop, and it is not a complete register of every authorised online seller.
 
-The rule that protects you: genuine Ray-Ban sunglasses are sold through ray-ban.com or authorised retailers you can verify independently. A big discount on an unfamiliar site you reached from a social ad is a strong red flag, however convincing it looks.
+So take a locator match as one piece of evidence, then finish the job separately:
+- Look the shop up independently and obtain its contact details for yourself, rather than using the ones printed on the site you are assessing.
+- Ring or email the shop on those independently obtained details and ask whether the website is theirs.
+- Where a site claims an online affiliation with the brand, ask Ray-Ban Customer Care to confirm it.
 
-### Signs a Ray-Ban website is fake
+A partner badge, a certificate graphic or a registration number dropped into a footer is a claim a site has made about itself. None of it is verification, and none of it substitutes for a check you carried out from the brand's side.
 
-- Prices are far below normal, especially on popular styles.
-- You reached it from a social-media ad or post, not by typing ray-ban.com yourself.
-- The web address is a lookalike, such as `rayban-outlet-uk.example`, not ray-ban.com.
-- There is heavy "today only" or countdown pressure.
-- The only payment options are bank transfer or unusual methods, or the checkout looks off.
-- Contact details, returns, and company information are missing or vague.
-- Product photos or descriptions look slightly inconsistent between pages.
+### A documented 2016 social-media campaign, and the current picture
 
-### How the scam works
+Security researchers at ESET documented one version of this in detail in 2016. In the Facebook campaign they observed, posts spread through compromised accounts and tagged the account holder's friends so a link read as a personal recommendation; advertised discounts ran as high as 90%; and some of the checkout pages sent card details without encryption. That is a historical example of the mechanism, not a description of what any particular advert is doing today.
 
-First, a social ad or post advertises heavily discounted Ray-Ban sunglasses. Second, the link opens a convincing fake shop. Third, you order and pay by card or transfer. Fourth, you receive counterfeit sunglasses, the wrong item, or nothing at all — or your card details are used for fraud. Finally, the site ignores you or disappears.
+For the current picture Ray-Ban's own FAQ is the better source. It says counterfeiters operate through websites, marketplaces and social media, and it describes account compromise and misuse of personal data among the harms. Two habits follow from that. Ask a friend on a different channel whether they really posted a sale link before you trust it. And treat a warehouse sale, closing-down sale or clearance event that exists only inside a social feed, with nothing about it on Ray-Ban's own site, as unverified until you have checked it there.
 
-Buying only from ray-ban.com or a verified authorised retailer breaks the chain.
+### Physical tells are supporting evidence, never a conclusive test
 
-### How to shop safely
+There is no visual inspection on this page that will authenticate a pair of sunglasses, and it is worth being sceptical of any page that offers one.
 
-Slow down and check before you pay.
+Ray-Ban does say that an SKU is usually printed inside the left temple, and it uses that code in its own support process. Checking the code against the same model on the official site is worth doing, and a mismatch is a genuine warning. A matching code is not proof of provenance — a code can be reproduced like anything else printed on a frame.
 
-- Buy from ray-ban.com or a retailer you already know and can verify independently, typing the address yourself.
-- Treat a big discount on an unfamiliar site, especially from a social ad, as a warning sign.
-- Check the exact web address rather than trusting the logo or a padlock alone.
-- Prefer paying by card, which offers more practical dispute options than a bank transfer.
-- Look for genuine contact details, returns, and company information before buying.
+The same limit applies to etching, hinge feel, frame weight and what is in the box. An inconsistency there is supporting evidence worth taking seriously; a clean pass is not a certificate. If you are genuinely unsure what you are holding, ask the seller for evidence of where the pair came from, and ask Ray-Ban Customer Care what it can tell you about the model. Provenance is the more answerable question, and it is answered by checking the seller rather than by squinting at a lens.
 
-If you are unsure whether a shop is genuine, our guide on /guides/is-this-website-a-scam/ walks through the checks, and our /guides/fake-nike-website-uk/ and /guides/asos-copycat-scam-uk/ guides cover the same trick with other brands.
+### Limit what a bad outcome costs you
 
-### If you have already paid
+NCSC guidance on shopping and paying safely online covers the part of an eyewear purchase you control most. Before a card number goes into a site you have not verified:
+- Reach the site by typing its address, not by following an advert, an email or a social post.
+- Use a payment route that leaves you somewhere to go. A shop insisting on bank transfer, cryptocurrency or gift-card codes has removed your recourse deliberately.
+- Set a password you use nowhere else if the site makes you create an account.
+- Look for named company details, a stated returns address and a complaints route. Be wary where a single web form is the only way to reach anybody.
 
-Act now using the payment, account and identity steps in our [scam recovery checklist](/recovery/).
+None of that authenticates the sunglasses. It reduces what a wrong decision costs, which is a different objective and a far more achievable one.
 
-### How to report a fake Ray-Ban website (UK)
+### If a pair has already arrived
 
-Report the site to Ray-Ban through its official "Report Fake" page at `ray-ban.com/uk/getsupport/report-fakes`. If the scam reached you by email, forward the email to `report@phishing.gov.uk`. You can also report suspicious websites and links to the NCSC so they can be investigated for takedown. If the link reached you by text, forward it to 7726, and report the advert to the social-media platform you saw it on.
+Keep the frames, the case, the packaging and any printed insert, and photograph the listing and the advert before both disappear. With counterfeits the goods themselves are the evidence.
 
-If you lost money or shared card details, report it to Report Fraud at `reportfraud.police.uk` or on 0300 123 2040 if you are in England, Wales, or Northern Ireland. In Scotland, report to Police Scotland on 101. Keep all the evidence.
+Citizens Advice says a buyer has a legal right to a full refund for counterfeit goods within 30 days of paying, with different remedies after that window closes. Its guidance page is written as advice for England and offers separate versions for Wales, Scotland and Northern Ireland, so read the one for your own region rather than treating a single page as a UK-wide route. Citizens Advice also points debit-card users towards chargeback and eligible credit-card users towards Section 75, and its consumer helpline on 0808 223 1133 passes what you tell it to Trading Standards.
+
+Eyewear prices sit right on the Section 75 boundary, so read that carefully. A Section 75 claim under the Consumer Credit Act 1974 may be available, not guaranteed. It turns on three things: credit funded the purchase, the required credit-to-supplier relationship exists, and the cash price — per item, or per qualifying set — came to more than £100 and no more than £30,000. So a £140 pair charged directly to a qualifying credit arrangement may be covered, while a £96 pair falls under the price floor. A high enough figure plus a credit card is not a guarantee; MoneyHelper's guidance on card protection explains what the arrangement itself has to look like. Chargeback is worth raising either way, though card schemes rather than statute set its rules and deadlines.
+
+Our [scam recovery checklist](/recovery/) covers the card, account and identity steps in sequence.
+
+### Reporting a fake Ray-Ban shop
+
+Ray-Ban runs its own route for reporting a suspicious listing, website, social profile or post: a report-fakes form linked from its FAQ. Reach it by typing `ray-ban.com` and following the brand's own links, never by clicking anything inside the advert. Ray-Ban's FAQ says Luxottica has requested takedowns and works with customs and law enforcement, so a brand report is worth making — alongside the public routes rather than instead of them.
+
+- Submit the web address itself to the NCSC, using its scam-website reporting form.
+- Complain to the Advertising Standards Authority about a paid advert, and flag the post inside whichever platform served it.
+- Forward a phishing email to `report@phishing.gov.uk`.
+- Where money has gone: Report Fraud, at `reportfraud.police.uk` or on 0300 123 2040. Scottish readers report instead to Police Scotland, on 101.
 
 ### Frequently asked questions
 
-**Is every cheap Ray-Ban website a scam?**
+**Could £29 Ray-Bans ever be a real clearance deal?**
 
-Not every one, but a big discount on an unfamiliar site — especially one you reached from a social-media ad — is a strong warning sign. Buy from ray-ban.com or a retailer you can verify independently.
+It is a strong warning sign rather than a verdict. Ray-Ban's UK terms of sale currently advertise reductions of up to 50% on selected styles, so genuine discounts do exist, but a figure far below anything Ray-Ban itself offers, from a seller you cannot verify, is a reason to stop rather than to buy. Compare the exact model on `ray-ban.com` and verify the seller before paying.
 
-**How can I tell a fake Ray-Ban site from the real one?**
+**How much does the Ray-Ban store locator prove about a seller?**
 
-Check the exact address is ray-ban.com, not a lookalike. Be wary of prices far below normal and heavy countdown pressure, and look for genuine contact, returns, and company details. A logo or padlock alone proves nothing.
+That a physical shop it lists exists, and little more. The locator does not show that a web address belongs to a listed shop, and it is not a full register of authorised online sellers. Look the shop up independently, ask it on contact details you obtained yourself whether the site is theirs, and ask Ray-Ban Customer Care to confirm any claimed online affiliation.
 
-**I ordered sunglasses that turned out to be fake or never arrived — what can I do?**
+**The sale link came from a friend's account, so is it safe?**
 
-Contact your bank about a chargeback, and for credit-card purchases over £100 ask whether Section 75 applies. Keep the order details and report the site. Do not buy from it again or respond to follow-up offers.
+Not necessarily. ESET documented a 2016 Facebook campaign that spread through compromised accounts and tagged the holder's friends so posts read as personal recommendations, and Ray-Ban's current FAQ says counterfeiters still work through social media. Message your friend on a different channel and ask whether they actually shared it.
 
-**Is it safe to pay by bank transfer on a discount site?**
+**Can I tell a fake from the etching, hinges and weight?**
 
-No. A bank transfer gives you fewer practical recovery options if the goods are fake or never arrive. Prefer a card, which may offer chargeback and, on eligible credit-card purchases over £100, Section 75 protection.
+Not conclusively. Ray-Ban says an SKU is usually inside the left temple and uses it in its own support process, so checking that code against the official site is worthwhile and a mismatch is a real warning. A matching code is still not proof of provenance, and marking or packaging inconsistencies are supporting evidence rather than a verdict. If you are unsure, ask the seller for evidence of origin and ask Ray-Ban Customer Care.
 
-**How do I report a fake Ray-Ban website?**
+**The sunglasses are clearly counterfeit. What refund can I ask for?**
 
-Report the site through Ray-Ban's official "Report Fake" page, forward scam emails to `report@phishing.gov.uk`, forward scam texts to 7726, and report the advert to the platform. If you lost money, report it to Report Fraud in England, Wales, or Northern Ireland, or to Police Scotland on 101 in Scotland.
+Citizens Advice says you have a legal right to a full refund for counterfeit goods within 30 days of paying, with different remedies later. That page is written as advice for England, so read the Wales, Scotland or Northern Ireland version if that is where you live. Keep the frames and packaging, and tell the Citizens Advice consumer helpline on 0808 223 1133 so Trading Standards sees it.
+
+**How do I report a fake Ray-Ban site to the brand?**
+
+Ray-Ban publishes a report-fakes form for a suspicious listing, website, social profile or post, linked from its FAQ. Reach it by typing `ray-ban.com` yourself. Send the address to the NCSC as well, and take a paid advert both to the Advertising Standards Authority and to the platform that ran it.
 
 ## Fake SHEIN Website UK: How to Check the Site and Protect Your Details
 
