@@ -1448,7 +1448,7 @@
       ],
       [
         "Why these scams are convincing",
-        "Fake celebrity endorsements, sometimes using manipulated images, video, or deepfakes, borrow a well-known face's credibility. Slick apps and dashboards showing steady, rising profits look like a genuine trading platform, and contact through social media or a dating app can build weeks of trust before money is mentioned.\n\nThe fact that protects you: no genuine investment can guarantee returns, and the FCA warns that crypto is high risk — you should be prepared to lose all the money you put in, even with a regulated firm."
+        "Fake celebrity endorsements, sometimes using manipulated images, video, or deepfakes, borrow a well-known face's credibility. Slick apps and dashboards showing steady, rising profits look like a genuine trading platform, and contact through social media or a dating app can build weeks of trust before money is mentioned.\n\nThe fact that protects you: a promise of guaranteed or unusually high returns is a serious scam warning, and the FCA warns that crypto is high risk — you should be prepared to lose all the money you put in, even where the firm is registered with it."
       ],
       [
         "Signs a crypto investment is a scam",
@@ -1460,15 +1460,15 @@
       ],
       [
         "How to protect yourself",
-        "Treat any guaranteed-return crypto pitch as high risk.\n\n- Never invest based on a celebrity endorsement without verifying it directly through the celebrity's own official channels.\n- Check whether the firm is registered with the FCA or has permission to promote crypto products in the UK, but remember registration does not guarantee FSCS or Financial Ombudsman protection.\n- Be very wary of a relationship that turns into an investment tip, especially from someone you have not met.\n- Never pay a further \"fee\" or \"tax\" to release your own funds.\n- Keep wallet private keys and recovery phrases secret from everyone.\n\nIf you are unsure, our /guides/pig-butchering-scam-uk/ and /guides/bitcoin-scam-uk/ guides cover the wider crypto-investment pattern in more detail."
+        "Treat a platform promising guaranteed or unusually high returns as a serious scam warning, and check it before you deposit anything.\n\n- Never invest on the strength of a celebrity endorsement without confirming it through that person's own official channels.\n- Look the firm up in the FCA Firm Checker at `register.fca.org.uk` to see whether it is authorised and has permission for what it is selling you. The FCA's full Financial Services Register carries more detail, including restrictions on crypto activity that the Firm Checker may not show, so read the status, permissions, restrictions and contact details rather than treating a search result as approval of the investment.\n- Checked on 26 July 2026, cryptoasset exchange providers, custodian wallet providers and crypto-ATM operators doing that business in the UK must register with the FCA under the Money Laundering Regulations. That is an anti-money-laundering registration, not approval of the product. The FCA says its new cryptoasset regime under the Financial Services and Markets Act is scheduled to start on 25 October 2027, so check the current position before relying on this.\n- Absence from the register is a warning, not the whole test. Fraudsters also clone authorised firms and quote a genuine firm's real name, address and reference number, so call the firm back on the contact details shown on the register rather than any supplied to you.\n- The FCA says access to the Financial Ombudsman Service or the Financial Services Compensation Scheme is unlikely for most cryptoassets, so do not treat registration as a safety net.\n- Treat an investment recommendation from a new online friend or romantic contact as a serious scam warning, especially where the person directs you to a particular platform or coach.\n- Refuse any payment demanded to unlock your own balance, and keep private keys and recovery phrases to yourself.\n\nIf you are unsure, our /guides/pig-butchering-scam-uk/ and /guides/bitcoin-scam-uk/ guides cover the wider crypto-investment pattern in more detail."
       ],
       [
         "If you have already invested",
-        "Act now using the payment, account and identity steps in our [scam recovery checklist](/recovery/)."
+        "Stop sending money, including any \"fee\" or \"tax\" demanded to release a balance, and do not let the platform talk you into one more deposit to fix it. Export or screenshot the account history, the deposit records and the chat before your access is withdrawn — a fake platform can be switched off without notice.\n\nTell your bank or card issuer how the money left your account, then follow the payment, account and identity steps in the [scam recovery checklist](/recovery/)."
       ],
       [
         "How to report a crypto investment scam (UK)",
-        "If the scam reached you by email, forward it to the NCSC at `report@phishing.gov.uk`; if by text, forward it to 7726.\n\nIf you lost money, report it to Report Fraud at `reportfraud.police.uk` or on 0300 123 2040 if you are in England, Wales, or Northern Ireland. In Scotland, report to Police Scotland on 101. You can also report unauthorised investment activity to the Financial Conduct Authority. Keep all your evidence."
+        "Take the right route to the Financial Conduct Authority. A misleading promotion connected to an authorised firm goes through the FCA's financial promotion reporting form. A firm you suspect is unauthorised, or a clone using a real firm's details, goes through the FCA's scam and unauthorised-firm contact route, or its consumer helpline on 0800 111 6768. Say clearly which one you think it is, because a clone is a different investigation from an unregistered platform.\n\nA financial loss also belongs in a fraud report: `reportfraud.police.uk` or 0300 123 2040 for England, Wales and Northern Ireland, and Police Scotland on 101. Forwarding addresses for a scam email or text are listed in the [scam recovery checklist](/recovery/)."
       ]
     ],
     "faq": [
@@ -1482,15 +1482,15 @@
       ],
       [
         "Does FCA registration mean a crypto firm is safe?",
-        "Not entirely. The FCA says registration does not guarantee you access to the FSCS or Financial Ombudsman if something goes wrong, and crypto remains high risk even with registered firms."
+        "No. Registration under the Money Laundering Regulations is an anti-money-laundering check on the business, not approval of the investment, and the FCA says access to the Financial Ombudsman Service or the Financial Services Compensation Scheme is unlikely for most cryptoassets. Crypto remains high risk even with a registered firm."
       ],
       [
         "Can I get my money back from a crypto investment scam?",
-        "Possibly, but often difficult once crypto has moved on. If you funded the purchase by card, ask your bank about a chargeback. Eligible UK bank transfers since 7 October 2024 may fall under APP reimbursement rules, subject to limits and exclusions."
+        "Possibly, but often difficult once crypto has moved on. If you funded the purchase by card, ask your bank about a chargeback. An eligible domestic consumer payment sent by Faster Payments or CHAPS on or after 7 October 2024 may be covered by the mandatory APP reimbursement rules, subject to exclusions, an £85,000 cap, a possible excess of up to £100 that cannot be applied to a consumer the firm assesses as vulnerable, and a 13-month outer reporting limit. Report it immediately rather than relying on that window."
       ],
       [
         "How do I report a crypto investment scam?",
-        "Forward scam emails to `report@phishing.gov.uk` and scam texts to 7726. Report it to Report Fraud in England, Wales, or Northern Ireland, or to Police Scotland on 101 in Scotland, and consider reporting to the FCA."
+        "Two routes matter. Report a misleading promotion from an authorised firm on the FCA's financial promotion form, and a suspected unauthorised or clone firm through its scam contact route or consumer helpline on 0800 111 6768. A financial loss goes to Report Fraud at `reportfraud.police.uk`, or to Police Scotland on 101 north of the border."
       ]
     ],
     "keywords": [
@@ -1503,14 +1503,42 @@
       "report crypto investment scam",
       "crypto guaranteed returns scam"
     ],
-    "updated": "2026-07-18",
+    "updated": "2026-07-26",
     "sources_checked": [
       [
         "FCA — Warns consumers of risks in high-return cryptoasset investments",
         "https://www.fca.org.uk/news/news-stories/fca-warns-consumers-risks-investments-advertising-high-returns-based-cryptoassets"
+      ],
+      [
+        "FCA — How to check a firm or individual is authorised",
+        "https://www.fca.org.uk/consumers/how-check-firm-individual-authorised"
+      ],
+      [
+        "FCA — Firm Checker",
+        "https://www.fca.org.uk/consumers/fca-firm-checker"
+      ],
+      [
+        "FCA — Cryptoassets AML/CTF regime",
+        "https://www.fca.org.uk/firms/financial-crime/money-laundering-terrorist-financing/cryptoassets-aml-ctf-regime"
+      ],
+      [
+        "FCA — New regime for cryptoasset regulation: what you need to do",
+        "https://www.fca.org.uk/firms/new-regime-cryptoasset-regulation/what-you-need-to-do"
+      ],
+      [
+        "FCA — Misleading financial promotions",
+        "https://www.fca.org.uk/consumers/misleading-financial-promotions"
+      ],
+      [
+        "FCA — Warning on clone firm investment scams",
+        "https://www.fca.org.uk/news/press-releases/fca-scamsmart-warning-clone-firm-investment-scams"
+      ],
+      [
+        "Payment Systems Regulator — APP fraud reimbursement protections",
+        "https://www.psr.org.uk/information-for-consumers/app-fraud-reimbursement-protections/"
       ]
     ],
-    "quick_answer": "A crypto platform promising guaranteed returns or backed by an unverifiable celebrity endorsement is a scam — no genuine investment can guarantee returns, and the FCA warns you should be prepared to lose everything you put into crypto. Never pay a 'fee' or 'tax' to release your own funds, and report losses to Report Fraud."
+    "quick_answer": "Treat a crypto platform promising guaranteed or unusually high returns as a serious scam warning. Check the firm in the FCA's tools, then verify its contact details and permissions because registration is not approval of the investment and clones reuse real firms' details. Never pay an extra fee or tax to unlock a displayed balance, and report losses promptly."
   },
   {
     "title": "Bank Transfer Scams UK: How to Spot a 'Safe Account' Con",
@@ -1804,11 +1832,11 @@
     "sections": [
       [
         "What a Bitcoin scam looks like",
-        "A Bitcoin scam uses the promise of guaranteed or fast returns to get you to send cryptocurrency to a fraudster, hand over your wallet details, or invest through a fake platform. Contact often comes through social media, a dating app, or an unsolicited call. An example of the style is: `Our AI trading bot guarantees 20% weekly returns on Bitcoin. Deposit now and start withdrawing profits within days.`\n\nOnce you send Bitcoin, it is very hard to get back - a confirmed crypto transfer normally cannot be reversed like a card or bank payment. This guide shows the warning signs, how to protect yourself, and what to do if you have already sent crypto."
+        "A Bitcoin scam uses the promise of guaranteed or fast returns to get you to send cryptocurrency to a fraudster, hand over your wallet details, or invest through a fake platform. Contact often comes through social media, a dating app, or an unsolicited call. An example of the style is: `Our AI trading bot guarantees 20% weekly returns on Bitcoin. Deposit now and start withdrawing profits within days.`\n\nOnce a Bitcoin payment is confirmed there is no cancellation or chargeback mechanism, and only the person who received it can choose to send it back. This guide shows the warning signs, how to protect yourself, and what to do if you have already sent crypto."
       ],
       [
         "Why these scams are convincing",
-        "Bitcoin's real-world price rises fuel a fear of missing out, and slick platforms with fake trading dashboards showing rising \"profits\" look genuine. Scammers on dating apps or social media may build a relationship for weeks before introducing the \"investment\", a pattern often called relationship-investment fraud.\n\nThe fact that protects you: no genuine investment can guarantee returns, and the FCA says crypto is high risk and you should be prepared to lose all the money you invest."
+        "Bitcoin's real-world price rises fuel a fear of missing out, and slick platforms with fake trading dashboards showing rising \"profits\" look genuine. Scammers on dating apps or social media may build a relationship for weeks before introducing the \"investment\", a pattern often called relationship-investment fraud.\n\nThe fact that protects you: a promise of guaranteed or unusually high returns is a serious scam warning, and the FCA says crypto is high risk and you should be prepared to lose all the money you invest."
       ],
       [
         "Signs a Bitcoin opportunity is a scam",
@@ -1816,19 +1844,19 @@
       ],
       [
         "How the scam works",
-        "First, contact begins through an unsolicited approach, social media, or a dating app. Second, trust is built, sometimes over weeks. Third, you are shown a platform or app with rising profits and encouraged to deposit more. Fourth, when you try to withdraw, you are told to pay a fee or tax first, or the platform simply disappears with your crypto.\n\nBecause confirmed crypto transfers are difficult to reverse, verifying any platform independently before you send anything is the only real protection."
+        "First, contact begins through an unsolicited approach, social media, or a dating app. Second, trust is built, sometimes over weeks. Third, you are shown a platform or app with rising profits and encouraged to deposit more. Fourth, when you try to withdraw, you are told to pay a fee or tax first, or the platform simply disappears with your crypto.\n\nBecause a confirmed Bitcoin payment cannot be undone, verifying any platform independently before you send anything is the only real protection."
       ],
       [
         "How to protect yourself",
-        "Treat any guaranteed-return crypto pitch as a scam.\n\n- Never send crypto based on a guarantee of fixed or high returns - no genuine investment can promise this.\n- Check whether the firm is registered with the FCA or has permission to promote crypto products in the UK, while remembering that registration is not a guarantee that you will be protected if something goes wrong.\n- Be very wary of a relationship that turns into an investment tip, especially from someone you have not met.\n- Never pay a further \"fee\" or \"tax\" to release your own funds or profits.\n- Keep your wallet's private keys and recovery phrase secret from everyone, including anyone claiming to offer help.\n\nIf you are unsure, our /guides/pig-butchering-scam-uk/ and /guides/crypto-investment-scams-uk-protection/ guides cover the wider crypto-investment pattern."
+        "Treat a Bitcoin pitch promising guaranteed or unusually high returns as a serious scam warning. Do not send until you have independently checked the firm, the promotion and the receiving party.\n\n- Think about the payment rail before you think about the pitch. Bitcoin itself has no chargeback or cancellation mechanism once a payment is confirmed. A card or bank provider may have a dispute or recovery process of its own, though that is not a simple recall right on an ordinary bank transfer, so sending Bitcoin is effectively the last decision you get to make.\n- Do not use a crypto ATM. As checked on 26 July 2026, the FCA says there are no legally operated crypto ATMs in the UK. Check the FCA's current guidance before relying on that status because registrations and rules can change.\n- Do not send Bitcoin solely because an online friend, romantic contact, broker or support agent supplied a wallet address. Independently establish who controls it and why payment is due.\n- Refuse any \"fee\" or \"tax\" charged for unlocking your own profits; paying it usually just funds the next demand.\n- Your private keys and recovery phrase go to nobody: not support staff, not a broker, not anyone offering to fix your account.\n\nFor the relationship-led version of this fraud, see our /guides/pig-butchering-scam-uk/ guide; /guides/crypto-investment-scams-uk-protection/ covers fake platforms, FCA registration checks and celebrity-endorsement adverts."
       ],
       [
         "If you have already sent Bitcoin",
-        "Act now using the payment, account and identity steps in our [scam recovery checklist](/recovery/)."
+        "Copy the transaction IDs and the destination wallet addresses now. An on-chain record is one of the few pieces of evidence that survives a platform disappearing.\n\nContact the exchange or app used to make the withdrawal immediately. It may be able to stop a pending withdrawal or flag an account it controls, but a confirmed payment to a self-hosted wallet cannot be reversed by the exchange. Preserve the transaction ID, wallet address, account history and messages for the provider and investigators.\n\nBe realistic about what follows. Much of the useful work is closing off the accounts and identity exposure around the loss — the [scam recovery checklist](/recovery/) sets those steps out in order."
       ],
       [
         "How to report a Bitcoin scam (UK)",
-        "If the scam reached you by email, forward it to the NCSC at `report@phishing.gov.uk`; if by text, forward it to 7726.\n\nIf you lost money, report it to Report Fraud at `reportfraud.police.uk` or on 0300 123 2040 if you are in England, Wales, or Northern Ireland. In Scotland, report to Police Scotland on 101. You can also report suspected unauthorised investment activity to the Financial Conduct Authority. Keep all wallet addresses and transaction evidence."
+        "Report it first to the provider you actually used to send the funds, and give it the transaction IDs and destination addresses. A custodial exchange or app may be able to halt a pending withdrawal or restrict an account it controls; a non-custodial wallet service may have no account to act on at all.\n\nTell the Financial Conduct Authority about the investment platform or the promotion behind it, using its financial promotion form for an authorised firm or its scam contact route and consumer helpline on 0800 111 6768 for a suspected unauthorised or clone firm.\n\nThen file the loss itself through the national fraud route: `reportfraud.police.uk` or 0300 123 2040 in England, Wales and Northern Ireland, and Police Scotland on 101 in Scotland. Scam emails and texts have their own forwarding routes, set out in the [scam recovery checklist](/recovery/)."
       ]
     ],
     "faq": [
@@ -1842,7 +1870,7 @@
       ],
       [
         "Can I get my Bitcoin back once I've sent it?",
-        "Usually not. Confirmed cryptocurrency transfers normally cannot be reversed like a card or bank payment, so recovery is often limited once crypto has moved on. Contact the exchange you used and report it, but be realistic about the chances of getting it back."
+        "Usually not. A confirmed Bitcoin payment has no cancellation or chargeback mechanism, and only the recipient can choose to return it. Contact the provider you sent from straight away: a custodial exchange or app may be able to stop a pending withdrawal or restrict an account it controls, though it cannot reverse a confirmed payment to a self-hosted wallet. Keep the transaction IDs and be realistic about the chances of recovery."
       ],
       [
         "Someone is offering to recover my lost Bitcoin for a fee - is that genuine?",
@@ -1850,7 +1878,7 @@
       ],
       [
         "How do I report a Bitcoin scam?",
-        "Forward scam emails to `report@phishing.gov.uk` and scam texts to 7726. Report it to Report Fraud in England, Wales, or Northern Ireland, or to Police Scotland on 101 in Scotland, and consider reporting to the FCA if it involved an investment platform."
+        "Start with the provider you sent the funds from and give it the transaction IDs, because it may still be able to stop a pending withdrawal or restrict an account it controls. Tell the FCA about the platform or promotion, and report the loss itself to Report Fraud, or to Police Scotland on 101 in Scotland."
       ]
     ],
     "keywords": [
@@ -1863,14 +1891,38 @@
       "report bitcoin scam uk",
       "fake crypto exchange bitcoin"
     ],
-    "updated": "2026-07-18",
+    "updated": "2026-07-26",
     "sources_checked": [
       [
         "FCA — Warns consumers of risks in high-return cryptoasset investments",
         "https://www.fca.org.uk/news/news-stories/fca-warns-consumers-risks-investments-advertising-high-returns-based-cryptoassets"
+      ],
+      [
+        "FCA — Warning on illegal crypto ATMs operating in the UK",
+        "https://www.fca.org.uk/news/news-stories/warning-illegal-crypto-atms-operating-uk"
+      ],
+      [
+        "FCA — Seven crypto ATMs seized, two arrested on suspicion of illegal cryptoasset exchange",
+        "https://www.fca.org.uk/news/press-releases/seven-crypto-atms-seized-two-arrested-suspicion-illegal-cryptoasset-exchange"
+      ],
+      [
+        "FCA — Misleading financial promotions",
+        "https://www.fca.org.uk/consumers/misleading-financial-promotions"
+      ],
+      [
+        "Bitcoin.org — You need to know",
+        "https://bitcoin.org/en/you-need-to-know"
+      ],
+      [
+        "Bitcoin.org — Protect your privacy and avoid scams",
+        "https://bitcoin.org/en/scams"
+      ],
+      [
+        "Coinbase Help — Can I cancel a digital currency transaction?",
+        "https://help.coinbase.com/en/coinbase/getting-started/crypto-education/can-i-cancel-a-digital-currency-transaction"
       ]
     ],
-    "quick_answer": "Any Bitcoin pitch guaranteeing fixed or fast returns is a scam — no genuine investment can promise that, and confirmed crypto transfers normally cannot be reversed. Never pay a 'fee' or 'tax' to unlock withdrawals, and keep your private keys secret from everyone. Report losses to Report Fraud and consider telling the FCA."
+    "quick_answer": "Treat guaranteed or unusually high Bitcoin returns and extra fees to unlock a balance as serious scam warnings. Verify the firm and receiving party before sending because a confirmed Bitcoin payment has no cancellation or chargeback mechanism. If you already sent funds, preserve the transaction ID and wallet address and contact the exchange, your bank and the reporting authorities promptly."
   },
   {
     "title": "LinkedIn Job Scam UK: Spot a Fake Recruiter Offer",
@@ -2627,11 +2679,11 @@
       ],
       [
         "Why the fake can look real",
-        "Scammers can use familiar-looking sender names and copy the tone of real bank alerts. A fake text can appear near genuine bank messages on your phone, so you cannot rely on the display name or conversation thread.\n\nLloyds' official fraud contact page says Lloyds Bank will never ask you to tell them account details, share your Personal Security Number, tell them your PIN or card expiry date, or move money to another account. If a text asks for any of that, treat it as a scam."
+        "Scammers can use familiar-looking sender names and copy the tone of real bank alerts. A fake text can appear near genuine bank messages on your phone, so you cannot rely on the display name or conversation thread.\n\nLloyds' official fraud contact page says Lloyds Bank will never ask you to tell them account details, share your Personal Security Number, tell them your PIN or card expiry date, or move money to another account. If a text asks for any of that, treat it as a scam.\n\nLloyds' current scam-messages page also says it may send you links to its secure app or to pages with more information, but that it will never link directly to its Internet Banking log on page or to a page asking for your logon, banking or personal details. So the presence of a link is not the test — what the page then asks you for is."
       ],
       [
         "Signs a Lloyds text is a scam",
-        "- It rushes you: a payee \"added\", card \"blocked\", or deadline to avoid losing access.\n- It links you to \"cancel\", \"verify\", \"secure\", log in, or re-enter card details.\n- The link goes to a lookalike or unfamiliar domain. Do not use text-message links for banking.\n- It asks for your password, memorable information, PIN, card details, Personal Security Number, or one-time passcode.\n- It tells you to move money to a new, holding, or \"safe\" account.\n- A generic greeting can be a clue, but it is weaker in SMS than email.\n- Errors can be clues, but a tidy text is not proof."
+        "- It rushes you: a payee \"added\", card \"blocked\", or deadline to avoid losing access.\n- It links you to \"cancel\", \"verify\", \"secure\", log in, or re-enter card details.\n- The link goes to a lookalike or unfamiliar domain. Do not use text-message links for banking.\n- It asks for banking details, card details, a passcode or your Personal Security Number. Lloyds says it will never ask you to share any of these, and the same goes for your log-on password, user ID or memorable information.\n- It tells you to move money to a new, holding, or \"safe\" account.\n- A generic greeting can be a clue, but it is weaker in SMS than email.\n- Errors can be clues, but a tidy text is not proof."
       ],
       [
         "How the scam plays out",
@@ -2639,29 +2691,29 @@
       ],
       [
         "Check it safely, without tapping anything",
-        "Do not use a number or link from the text. Use one of these independent routes:\n\n- Call 159. Stop Scams UK lists Lloyds Bank as a 159 participant.\n- Open the official Lloyds app and check activity or secure messages.\n- Type `lloydsbank.com` yourself, or use a trusted bookmark.\n- Call the number printed on the back of your card.\n\nNot every genuine text will show as an in-app message. If you cannot confirm the claim, contact Lloyds directly.\n\nIf you are unsure whether a linked website is a copycat, our guide on /guides/is-this-website-a-scam/ walks through the checks."
+        "Never dial a number or open a link that the text itself supplied. Reach Lloyds by a route you chose:\n\n- Hang up and dial `159` yourself. Stop Scams UK says the route you reach by dialling `159` cannot be spoofed or impersonated, and `159` will never call you. Lloyds Bank is one of the participating banks.\n- Open the official Lloyds app and read your activity and secure messages there.\n- Type `lloydsbank.com` into the browser yourself, or use a bookmark you saved earlier.\n- Ring the number printed on the back of your Lloyds card.\n\nNot every genuine text is mirrored as an in-app message, so silence in the app is not by itself a warning sign. If nothing independent confirms the claim, contact Lloyds directly.\n\nIf you are unsure whether a linked website is a copycat, our guide on /guides/is-this-website-a-scam/ walks through the checks."
       ],
       [
         "If you tapped the link or shared details",
-        "If you entered login details, card details, or a passcode, call 159 or the number on your card immediately. Ask Lloyds to secure the account and check for payments, payees, card activity, or account changes you do not recognise.\n\nChange your Lloyds password only through the official app or by typing the address yourself. Change it anywhere else you reused it. If you shared card details, ask Lloyds to stop and reissue the card.\n\nIf you bank elsewhere, the same checks apply — see, for example, our /guides/halifax-bank-scam-text-uk/ guide."
+        "If you entered banking details, card details, a passcode or your Personal Security Number, call 159 or the number on your card straight away and ask Lloyds to secure the account. Change your Lloyds password only inside the official app or on an address you typed yourself, and change it anywhere else you reused it.\n\nOur [scam recovery checklist](/recovery/) takes the rest in order: stopping and reissuing the card, spotting payments, payees and account changes you did not authorise, and the money-recovery routes.\n\nIf you bank elsewhere, the same checks apply — see, for example, our /guides/halifax-bank-scam-text-uk/ guide."
       ],
       [
         "How to report a Lloyds scam text (UK)",
-        "Forward the text to 7726. The NCSC says most UK phone providers let customers report suspicious texts for free this way.\n\nIf you lost money, shared sensitive information, or were hacked, report it to Report Fraud at `reportfraud.police.uk` or on 0300 123 2040 if you are in England, Wales, or Northern Ireland. In Scotland, report to Police Scotland on 101.\n\nIf the scam arrived by email, forward it to the NCSC at `report@phishing.gov.uk`. Tell Lloyds through the app or the number on your card, and keep screenshots."
+        "Forward the text to 7726. The NCSC says most UK phone providers let customers report suspicious texts for free this way.\n\nIf you lost money, shared sensitive information, or were hacked, report it to Report Fraud at `reportfraud.police.uk` or on 0300 123 2040 if you are in England, Wales, or Northern Ireland. In Scotland, report to Police Scotland on 101.\n\nTell Lloyds what happened using the app or your card number, and screenshot the message before you delete it."
       ]
     ],
     "faq": [
       [
         "Is a Lloyds text with a link always a scam?",
-        "No. A link alone is not proof either way. Never use a text link to log in, confirm details, enter a one-time code, or move money. Check independently."
+        "No. Genuine Lloyds messages can carry links, so the link alone settles nothing. Judge the request instead: never use a text link to sign in, confirm details, key in a one-time passcode, or move money."
       ],
       [
         "Can a scam text appear with real Lloyds messages?",
-        "Yes. Sender display and phone grouping are not reliable proof. Verify through the app, 159, or the number on your card."
+        "Yes. A spoofed sender ID drops the fake into the same thread as genuine alerts, so where a message sits in the thread is not evidence. Confirm it in the Lloyds app, on 159, or using your card."
       ],
       [
         "What number should I call to check a Lloyds text safely?",
-        "Call 159 or the number printed on the back of your card. Do not call a number supplied in the suspicious text."
+        "Call 159, or the number printed on the back of your Lloyds card. Never ring a number that the suspicious text supplied — it may connect you straight to the criminals."
       ],
       [
         "I tapped the link and entered my details - what now?",
@@ -2682,18 +2734,34 @@
       "Lloyds new payee text",
       "report Lloyds scam text"
     ],
-    "updated": "2026-07-18",
+    "updated": "2026-07-26",
     "sources_checked": [
+      [
+        "Lloyds Bank — Scam messages",
+        "https://www.lloydsbank.com/help-guidance/protecting-yourself-from-fraud/scam-messages.html"
+      ],
+      [
+        "Lloyds Bank — Fraud contact us",
+        "https://www.lloydsbank.com/help-guidance/protecting-yourself-from-fraud/contact-us.html"
+      ],
+      [
+        "Lloyds Bank — Passcode scams",
+        "https://www.lloydsbank.com/help-guidance/protecting-yourself-from-fraud/bank-safely-sms-one-time-passcode.html"
+      ],
       [
         "Lloyds Bank — How we protect you",
         "https://www.lloydsbank.com/help-guidance/protecting-yourself-from-fraud/bank-safely-how-we-protect-you.html"
       ],
       [
-        "Stop Scams UK — 159 phone number (participating banks)",
-        "https://stopscamsuk.org.uk/our-programmes/159-phone-number/"
+        "Stop Scams UK — Get help now (159)",
+        "https://stopscamsuk.org.uk/campaign/get-help-now/"
+      ],
+      [
+        "NCSC — Report a scam text message",
+        "https://www.ncsc.gov.uk/collection/phishing-scams/report-scam-text-message"
       ]
     ],
-    "quick_answer": "Treat any Lloyds text asking for security details or urging you to tap a link as a scam — Lloyds says it will never ask for your account details, PIN or Personal Security Number, or tell you to move money. Check safely via the official app, lloydsbank.com typed yourself, or 159, and forward the text to `7726`."
+    "quick_answer": "Lloyds may send links to its secure app or information pages, so a link alone does not prove a scam. Never use a message link to enter logon, banking or personal details or move money. Open the Lloyds app yourself, type `lloydsbank.com`, or dial `159`, and forward a suspicious text to `7726`."
   },
   {
     "title": "NatWest Scam Texts: How to Spot a Fake NatWest SMS (UK)",
@@ -2723,29 +2791,29 @@
       ],
       [
         "How to check a NatWest text safely",
-        "Do not use a number or link from the text. Use one of these independent routes:\n\n- Call 159. Stop Scams UK lists NatWest as a 159 participant.\n- Open the official NatWest app and check activity, messages, or My Security Profile.\n- Type `natwest.com` yourself, or use a trusted bookmark.\n- Call the number on the back of your card.\n\nNatWest's own guidance says to check transactions in the mobile app or call the number on the back of your card.\n\nIf you are unsure whether a linked website is a copycat, our guide on /guides/is-this-website-a-scam/ walks through the checks."
+        "Do not use a number or link from the text. Use one of these independent routes:\n\n- Call 159. Stop Scams UK lists NatWest as a 159 participant.\n- Open the official NatWest app and check activity, messages, or My Security Profile.\n- Type `natwest.com` yourself, or use a trusted bookmark.\n- Use the phone number on your card or a recent statement.\n\nNatWest's own guidance says to check transactions in the mobile app or call the number on the back of your card.\n\nThe email version of this impersonation is covered in our /guides/natwest-phishing-email-uk/ guide; to judge the linked site itself, see /guides/is-this-website-a-scam/."
       ],
       [
         "Already responded? Do this now",
-        "If you entered login details, card details, or a passcode, call 159 or the number on your card immediately. Ask NatWest to secure the account and check for payments, payees, card activity, or account changes you do not recognise.\n\nChange your NatWest password only through the official app or by typing the address yourself. Change it anywhere else you reused it. If you shared card details, ask NatWest to stop and reissue the card.\n\nIf you bank elsewhere, the same checks apply — see, for example, our /guides/barclays-bank-text-scam-uk/ guide."
+        "If you gave away login details, card details, or a one-time passcode, call 159 or the number on your card now and tell NatWest the account may be compromised. Reset your NatWest password only from inside the app or from an address you typed yourself, and replace it anywhere you reused it.\n\nWork through our [scam recovery checklist](/recovery/) for the rest, including getting the card stopped and reissued, reviewing payments and payees, and the routes to recover money.\n\nIf you bank elsewhere, the same checks apply — see, for example, our /guides/barclays-bank-text-scam-uk/ guide."
       ],
       [
         "Where to report a NatWest scam text",
-        "NatWest says suspicious texts referring to NatWest can be forwarded to 88355; standard network rates apply and it is not a premium-rate number. You can also forward scam texts to 7726. The NCSC says most UK phone providers let customers report suspicious texts to 7726 for free.\n\nIf you lost money, shared sensitive information, or were hacked, report it to Report Fraud at `reportfraud.police.uk` or on 0300 123 2040 if you are in England, Wales, or Northern Ireland. In Scotland, report to Police Scotland on 101.\n\nIf the scam arrived by email, forward it to the NCSC at `report@phishing.gov.uk`. Tell NatWest through the app or the number on your card, and keep screenshots."
+        "NatWest says suspicious texts referring to NatWest can be forwarded to 88355, the bank's own reporting route; standard network rates apply and it is not a premium-rate number. Scam texts can also be forwarded free of charge to 7726, the spam-reporting shortcode run by the UK mobile networks.\n\nIf you lost money, shared sensitive information, or were hacked, report it to Report Fraud at `reportfraud.police.uk` or on 0300 123 2040 if you are in England, Wales, or Northern Ireland. In Scotland, report to Police Scotland on 101.\n\nIf the same scam also reached you by email, send it to the NCSC at `report@phishing.gov.uk`. Keep screenshots before anything is deleted, and let NatWest know through the app."
       ]
     ],
     "faq": [
       [
         "Is a NatWest text with a link always a scam?",
-        "No. A link alone is not proof either way. Never use a text link to log in, confirm details, enter a one-time code, or move money. Check independently."
+        "NatWest says it will never ask you to call a number in a text to confirm or cancel a payment, or ask you to disclose your full PIN, full password or security code. A genuine code message is not permission to give the code to a caller or enter it on a page reached from an unexpected text."
       ],
       [
         "Can a fake NatWest text land with real alerts?",
-        "Yes. Sender display and phone grouping are not reliable proof. Verify through the app, 159, or the number on your card."
+        "Yes. Sender IDs can be forged, so a fake can sit in the same thread as real NatWest alerts. Its position there is not evidence — check in the app or on 159 instead."
       ],
       [
         "What is the safest number to call to check?",
-        "Call 159 or the number printed on the back of your card. Do not call a number supplied in the suspicious text."
+        "159, or the number on your NatWest card. Do not ring a number the text gave you, however official the number looks."
       ],
       [
         "Can I get my money back after a NatWest text scam?",
@@ -2753,7 +2821,7 @@
       ],
       [
         "How do I report a NatWest fraud text?",
-        "Forward NatWest-related suspicious texts to 88355 and forward scam texts to 7726. If you lost money or shared sensitive information, report it to Report Fraud in England, Wales, or Northern Ireland, or Police Scotland on 101 in Scotland."
+        "Forward suspicious texts referring to NatWest to 88355, which is NatWest's own reporting route. Any scam text can also go to 7726, the spam-reporting shortcode run by the UK mobile networks. If you lost money or shared sensitive information, report it to Report Fraud in England, Wales, or Northern Ireland, or Police Scotland on 101 in Scotland."
       ]
     ],
     "keywords": [
@@ -2766,15 +2834,23 @@
       "NatWest security alert text",
       "report NatWest scam text"
     ],
-    "updated": "2026-07-18",
+    "updated": "2026-07-26",
     "sources_checked": [
       [
-        "NatWest — Scam texts",
+        "NatWest — Text message fraud",
         "https://www.natwest.com/fraud-and-security/fraud-guide/text-message-fraud.html"
       ],
       [
-        "Stop Scams UK — 159 phone number (participating banks)",
-        "https://stopscamsuk.org.uk/our-programmes/159-phone-number/"
+        "NatWest — My Security Profile",
+        "https://www.natwest.com/fraud-and-security/my-security-profile.html"
+      ],
+      [
+        "Stop Scams UK — Get help now (159)",
+        "https://stopscamsuk.org.uk/campaign/get-help-now/"
+      ],
+      [
+        "NCSC — Report a scam text message",
+        "https://www.ncsc.gov.uk/collection/phishing-scams/report-scam-text-message"
       ]
     ],
     "quick_answer": "A NatWest text telling you to tap a link or call a number to confirm a blocked payment is a scam — NatWest says it will never ask you to call a number in a text to confirm or cancel payments. Verify through the app, 159, or the number on your card, then forward the text to `7726` or `88355`."
@@ -3860,7 +3936,7 @@
     "sections": [
       [
         "What a fake Santander email looks like",
-        "A Santander email scam is a phishing message that imitates the bank so you click a link and give away login details, card details, one-time passcodes, or personal information. An example of the style is an email from a display name such as \"Santander Security\" with a subject like `Your account has been temporarily locked`, followed by a button saying \"Restore access\".\n\nThe pretext changes - a locked account, a blocked payment, a new device, or a security check - but the goal is to rush you onto a fake login page or form. This guide shows how to spot the warning signs, verify safely, and report the message."
+        "A Santander email scam is a phishing message dressed as bank correspondence. Its job is to move you onto a copycat sign-in page, where whatever you type — Santander credentials, card numbers, a one-time passcode, or personal details — is collected by criminals. A typical example arrives from a display name such as \"Santander Security\", carries a subject like `Your account has been temporarily locked`, and ends in a large \"Restore access\" button.\n\nThe excuse varies: a locked account, a held payment, an unrecognised device, an overdue security check. The mechanism does not. This guide covers the warning signs, the safe way to check, and where to report the message in the UK."
       ],
       [
         "Why these emails fool people",
@@ -3872,33 +3948,33 @@
       ],
       [
         "How the email scam works",
-        "First, an email lands that appears to be a Santander security alert. Second, it pushes you to click a button or link. Third, the link opens a copycat login page or form. Fourth, anything you type is captured by criminals. Fifth, they may trigger a real one-time passcode and ask you to enter it on the fake page. Finally, they try to access the account, approve a payment, steal card details, or use the information in later scams.\n\nChecking independently before you click breaks the chain."
+        "The chain has five links. It opens with an unexpected alert styled as Santander security. The alert supplies the pressure and the button. The button lands on a copycat sign-in page that harvests every keystroke. The fake page may ask for a genuine one-time passcode that Santander has just sent. The real message explains what the code would authorise. If the description does not match what you are doing, stop; giving the code to the fake page may let the criminal complete that separate action. What follows is a payment approved, a card raided, or your details resold for the next attempt.\n\nBreak the chain at the button: check independently instead of clicking."
       ],
       [
         "How to check if a Santander email is genuine",
-        "Do not click links or open attachments in a suspicious email. Instead:\n\n- Open the Santander app and check messages and account activity there.\n- Type `santander.co.uk` yourself, or use a trusted bookmark.\n- Call the number on the back of your card.\n- Use 159. Stop Scams UK lists Santander as a 159 participant.\n\nHovering over a link can reveal where it points, but it should not be your only check. If you cannot confirm the message independently, contact Santander directly.\n\nIf you are unsure whether a linked website is a copycat, our guide on /guides/is-this-website-a-scam/ walks through the checks."
+        "Leave the email alone — no clicks, no attachments — and go to Santander by a route you picked yourself:\n\n- Open the Santander app and read your messages and recent activity there.\n- Type `santander.co.uk` into the browser, or use a bookmark you saved earlier.\n- Ring the number printed on the back of your card.\n- Use 159. Stop Scams UK lists Santander as a 159 participant.\n\nSantander's fraud pages state that a genuine bank or organisation will never contact you out of the blue to ask for your PIN, password, or one-time passcode. Hovering over a link can reveal where it really points, but treat that as one signal rather than a verdict. If nothing independent confirms the message, contact Santander directly.\n\nIf you are unsure whether a linked website is a copycat, our guide on /guides/is-this-website-a-scam/ walks through the checks."
       ],
       [
         "If you clicked or entered details",
-        "If you entered login details, card details, or a passcode, contact Santander immediately using the app, the number on your card, or 159. Tell them you may have been phished and ask them to secure the account and check for payments or changes you do not recognise.\n\nChange your Santander password only through the official app or by typing the address yourself. Change it anywhere else you reused it. If you shared card details, ask for the card to be stopped and reissued. If you opened an attachment, run a security scan."
+        "If you typed credentials, card numbers, or a passcode into that page, call Santander at once on the number on your card or through 159, and say plainly that you may have been phished so it is handled as an account compromise. Change the Santander password from inside the app or an address you typed, and everywhere else you reused it. Run a security scan if you opened an attachment.\n\nOur [scam recovery checklist](/recovery/) covers the rest in sequence: cards, payments, passwords, identity details, and what to do once money has gone."
       ],
       [
         "How to report a fake Santander email (UK)",
-        "Forward the email to the NCSC at `report@phishing.gov.uk`. The NCSC says it can analyse reported emails and websites and, where malicious activity is found, work to remove links to malicious websites.\n\nReport suspicious Santander emails to `phishing@santander.co.uk`. If it was a text referring to Santander, forward it to 7726 and email it to `smishing@santander.co.uk`, as Santander advises.\n\nIf you lost money, shared sensitive information, or were hacked, report it to Report Fraud at `reportfraud.police.uk` or on 0300 123 2040 if you are in England, Wales, or Northern Ireland. In Scotland, report to Police Scotland on 101."
+        "Send the email to the NCSC at `report@phishing.gov.uk` and to Santander at `phishing@santander.co.uk`. Santander handles suspicious texts separately: forward those to 7726 and email them to `smishing@santander.co.uk`.\n\nIf you lost money, shared sensitive information, or were hacked, report it to Report Fraud at `reportfraud.police.uk` or on 0300 123 2040 if you are in England, Wales, or Northern Ireland. In Scotland, report to Police Scotland on 101."
       ]
     ],
     "faq": [
       [
         "Does Santander send emails with links?",
-        "Genuine bank emails can contain links, so a link alone is not proof of a scam. The safer rule is not to use email links to log in, confirm details, enter a one-time code, or move money."
+        "Some genuine Santander emails contain links, so a link alone is not proof. Never use an unexpected email link to enter banking or security details. Santander's app may tell you to expect an email-verification link during a process you initiated; only follow it when the app itself has confirmed the step on the same device. Otherwise open the app or type `santander.co.uk` yourself."
       ],
       [
         "How can I tell who really sent a Santander email?",
-        "Check the full sender address and hover over links, but do not rely on those checks alone. Sender names can be faked and links can be disguised. Verify through the app, by typing the address yourself, or by calling the number on your card."
+        "Often you cannot, from the message alone. Display names are trivial to forge and link text can hide its real destination, so treat sender inspection as a hint. The answer comes from the Santander app, a typed `santander.co.uk`, or the number on your card."
       ],
       [
         "I clicked the link and entered my details - what now?",
-        "Contact Santander immediately using the app, 159, or the number on your card. Change your password through the official app or site, stop your card if card details were shared, and report any payment you did not make."
+        "Ring Santander now on 159 or the number on your card and say you may have been phished. Then change the password from the app, have the card stopped if its details were shared, and work through our [scam recovery checklist](/recovery/)."
       ],
       [
         "Can I get my money back after a Santander email scam?",
@@ -3919,15 +3995,31 @@
       "Santander verify email scam",
       "report Santander phishing"
     ],
-    "updated": "2026-07-18",
+    "updated": "2026-07-26",
     "sources_checked": [
       [
         "Santander — How to report fraud",
         "https://www.santander.co.uk/personal/support/fraud-and-security/how-to-report-fraud"
       ],
       [
-        "Stop Scams UK — 159 phone number (participating banks)",
-        "https://stopscamsuk.org.uk/our-programmes/159-phone-number/"
+        "Santander — Our top security tips",
+        "https://www.santander.co.uk/personal/support/fraud-and-security/our-top-security-tips"
+      ],
+      [
+        "Santander — Fraud updates",
+        "https://www.santander.co.uk/personal/support/fraud-and-security/fraud-updates"
+      ],
+      [
+        "Santander — Trouble logging on to Online Banking",
+        "https://www.santander.co.uk/personal/support/customer-support/trouble-logging-on-to-online-banking"
+      ],
+      [
+        "NCSC — Report a scam email",
+        "https://www.ncsc.gov.uk/collection/phishing-scams/report-scam-email"
+      ],
+      [
+        "Stop Scams UK — Get help now (159)",
+        "https://stopscamsuk.org.uk/campaign/get-help-now/"
       ]
     ],
     "quick_answer": "A Santander email urging you to 'restore access' or verify a locked account through a link is phishing — no genuine bank email requires your password, a passcode, or a money transfer. Check through the app, santander.co.uk typed yourself, or 159, and forward the email to phishing@santander.co.uk and report@phishing.gov.uk."
@@ -4211,11 +4303,11 @@
       ],
       [
         "Why these NatWest emails fool people",
-        "Phishing emails can copy NatWest branding, and the visible sender name can be set to almost anything. Link text can look like a real NatWest address while leading somewhere else. A message can also come from a compromised mailbox, so checking only the sender display name is not enough.\n\nNatWest says scam emails often impersonate trusted organisations and advises customers to avoid clicking links, QR codes, and attachments from unknown sources. NatWest also says it will include some personal details in its emails, such as part of your name and postcode. That makes a generic urgent email more suspicious, but the safest check is still to go to NatWest independently."
+        "Phishing emails can copy NatWest branding, and the visible sender name can be set to almost anything. Link text can look like a real NatWest address while leading somewhere else. A message can also come from a compromised mailbox, so checking only the sender display name is not enough.\n\nNatWest says scam emails often impersonate trusted organisations and advises customers to avoid clicking links, QR codes, and attachments from unknown sources. It also says it will never ask for your full PIN, full password or card-reader codes by text, email or phone — wording that is deliberately scoped, because partial security checks can happen when you are the one who made contact. NatWest also says it will include some personal details in its emails, such as part of your name and postcode. That makes a generic urgent email more suspicious, but the safest check is still to go to NatWest independently."
       ],
       [
         "Signs a NatWest email is phishing",
-        "- A generic greeting such as `Dear Customer`, especially with urgent pressure.\n- The sender address is not clearly NatWest-owned, or a link points to an unfamiliar domain.\n- It pushes you to `verify`, `restore`, `secure`, or `unlock` your account through a button.\n- It asks for your password, PIN, full card details, one-time passcode, or bank account details.\n- It tells you to move money to a new or \"safe\" account.\n- It includes an unexpected attachment or QR code.\n- Spelling and layout errors can help, but polished emails can still be scams."
+        "- A generic greeting such as `Dear Customer`, especially with urgent pressure.\n- The sender address is not clearly NatWest-owned, or a link points to an unfamiliar domain.\n- It pushes you to `verify`, `restore`, `secure`, or `unlock` your account through a button.\n- It asks for your full password, full PIN, card-reader codes, full card details, a one-time passcode, or bank account details.\n- It tells you to move money to a new or \"safe\" account.\n- It includes an unexpected attachment or QR code.\n- Spelling and layout errors can help, but polished emails can still be scams."
       ],
       [
         "How the NatWest email scam works",
@@ -4227,7 +4319,7 @@
       ],
       [
         "If you clicked or shared details",
-        "Act quickly. If you entered login details, card details, or a one-time code, contact NatWest immediately using the app, 159, or the number on your card. Tell them you may have been phished and ask them to secure the account and check for payments, new payees, or changes you do not recognise.\n\nChange your NatWest password only through the official app or website. Change it anywhere else you reused it. If you shared card details, ask for the card to be stopped and reissued. If you opened an attachment, run a security scan."
+        "Act quickly. If you entered login details, card details, or a one-time code, contact NatWest immediately using the app, 159, or the number on your card. Tell them you may have been phished and ask them to secure the account. Change your NatWest password only through the official app or website, and anywhere else you reused it. Run a security scan if you opened an attachment.\n\nOur [scam recovery checklist](/recovery/) sets out what comes next: stopping and replacing the card, reviewing payments and new payees, protecting identity details, and the money-recovery routes."
       ],
       [
         "How to report a fake NatWest email (UK)",
@@ -4266,11 +4358,19 @@
       "NatWest smishing email",
       "report NatWest phishing"
     ],
-    "updated": "2026-07-18",
+    "updated": "2026-07-26",
     "sources_checked": [
       [
-        "NatWest — Scam emails",
+        "NatWest — Email fraud",
         "https://www.natwest.com/fraud-and-security/fraud-guide/email-fraud.html"
+      ],
+      [
+        "NatWest — Report fraud",
+        "https://www.natwest.com/fraud-and-security/report-fraud.html"
+      ],
+      [
+        "NatWest — I have received a suspicious email, what do I do?",
+        "https://www.natwest.com/support-centre/help-with-your-card/fraud/i-have-received-a-suspicious-email-what-do-i-do.html"
       ]
     ],
     "quick_answer": "An email about 'unusual activity' on your NatWest account with a button to restore access is a phishing attempt to capture your login and one-time codes. Check activity in the NatWest app, by typing natwest.com yourself, or by calling 159, and forward the email to phishing@natwest.com and report@phishing.gov.uk."
@@ -5145,7 +5245,7 @@
       ],
       [
         "Signs a Monzo message is a scam",
-        "- It claims suspicious activity or a compromised account and demands immediate action.\n- It asks you to \"verify\" through a link, or to confirm your PIN, password, card details, or a one-time code.\n- You are told to move money to a new, \"safe\", or \"holding\" account.\n- A caller claims to be from Monzo's fraud team and pressures you to stay on the line.\n- The link is not `monzo.com` or inside the genuine Monzo app.\n- You are asked to install screen-sharing or remote-access software during the call."
+        "- It claims suspicious activity or a compromised account and demands immediate action.\n- It asks you to \"verify\" through a link, or to confirm your PIN, card details, or a one-time code.\n- You are told to move money to a new, \"safe\", or \"holding\" account.\n- A caller claims to be from Monzo's fraud team and pressures you to stay on the line.\n- The link is not `monzo.com` or inside the genuine Monzo app.\n- You are asked to install screen-sharing or remote-access software during the call."
       ],
       [
         "How the scam works",
@@ -5153,15 +5253,15 @@
       ],
       [
         "How to check a Monzo alert safely",
-        "If anything feels rushed, stop.\n\n- Open the Monzo app directly and check your transactions and account status there.\n- If someone says they are calling from Monzo, use Monzo's Call Status feature in the app to check whether the call is genuine.\n- Use in-app chat to contact Monzo support if you are unsure, or use the phone numbers published on Monzo's own fraud page if you have been tricked into sending money. Never use a number given to you by a suspicious caller.\n- Never move money to a \"safe\", \"holding\", or \"protected\" account; Monzo will not ask you to.\n- Never read out a one-time code, your PIN, your card details, or your password to anyone.\n- Do not install remote-access or screen-sharing software during an unexpected call.\n\nIf you are unsure whether a linked page is genuine, our guide on /guides/is-this-website-a-scam/ helps, and our /guides/impersonation-scams-when-criminals-pretend-to-be-your-bank-or-the-police/ guide covers the safe-account con in detail."
+        "If anything feels rushed, stop. Nothing genuine is lost by hanging up and checking for yourself.\n\n- Open the Monzo app from your own home screen and look at your transactions and account status there.\n- Check the call status on the app's Overview screen. Monzo says that if it does not show a member of the Monzo team talking to you, hang up right away and report it.\n- Know what that indicator covers: Call Status works when Monzo calls you, not when you call Monzo. If your phone is offline, it shows that it cannot verify the call; reconnect before continuing with anyone claiming to be Monzo. A caller who explains away what it shows is telling you what they need you to believe.\n- Put questions to Monzo yourself, through in-app chat or the fraud contact numbers on Monzo's own help pages — never a number read out to you.\n- Monzo says it will never ask you during a call or message to move money to a safe, holding or other account. Treat a \"safe account\" instruction as the end of the call.\n- Keep one-time codes, your Monzo PIN and card details private. Monzo also says it will never ask for your email password.\n- Refuse remote-access or screen-sharing software on an unexpected call.\n\nNot sure whether a linked page is real? Our /guides/is-this-website-a-scam/ walkthrough helps, and /guides/impersonation-scams-when-criminals-pretend-to-be-your-bank-or-the-police/ covers the safe-account con in detail."
       ],
       [
         "If you responded or shared details",
-        "If you shared your login, PIN, one-time code, or moved money, open the Monzo app immediately and use in-app chat to report it and freeze your card if needed. Monzo also publishes dedicated fraud contact numbers on its own website for UK and international callers. Use only details from Monzo's own website or app, not details supplied in the suspicious message."
+        "In the Monzo app, freeze your card and open in-app chat to tell Monzo what happened; if you are locked out, use the fraud contact numbers on Monzo's own help pages, never one from the message.\n\nThen work through our [scam recovery checklist](/recovery/): the bank, password, device and identity steps, in order."
       ],
       [
         "How to report a Monzo scam (UK)",
-        "Report it to Monzo directly through the in-app chat, or through the fraud phone numbers on Monzo's own fraud page if you have been tricked into sending money. If the scam reached you by email, forward it to the NCSC at `report@phishing.gov.uk`; if by text, forward it to 7726.\n\nIf you lost money or shared sensitive information, report it to Report Fraud at `reportfraud.police.uk` or on 0300 123 2040 if you are in England, Wales, or Northern Ireland. In Scotland, report to Police Scotland on 101. Keep the evidence and report it as soon as possible."
+        "Tell Monzo first, through in-app chat or the fraud numbers on its own help pages, so the account can be secured while a payment is still traceable. Forward a scam email to the NCSC at `report@phishing.gov.uk` and a scam text to 7726.\n\nIf you lost money or shared sensitive information, also report it to Report Fraud at `reportfraud.police.uk` or on 0300 123 2040 in England, Wales, or Northern Ireland; in Scotland, report to Police Scotland on 101. Our [scam recovery checklist](/recovery/) covers the evidence worth keeping."
       ]
     ],
     "faq": [
@@ -5175,11 +5275,11 @@
       ],
       [
         "A caller claims to be from Monzo's fraud team - how do I check?",
-        "Use Monzo Call Status in the app. If the app does not show that Monzo is talking to you, hang up. Contact Monzo through the app or through numbers published on Monzo's own website, and never share a one-time code, PIN, card details, or password."
+        "Use Monzo Call Status in the app. If the app does not show that Monzo is talking to you, hang up. Contact Monzo through the app or through numbers published on Monzo's own website, and never share a one-time code, your Monzo PIN, card details, or your email password."
       ],
       [
         "I shared my login or moved money - can I get it back?",
-        "Maybe. Report it to Monzo immediately through the app or official fraud phone route. Eligible UK transfers since 7 October 2024 may fall under APP reimbursement rules, subject to limits and exclusions."
+        "Possibly, but reimbursement is not automatic. Tell Monzo immediately through the app or an official route. An eligible consumer Faster Payment made on or after 7 October 2024 may fall under the mandatory APP reimbursement rules. The scheme has exclusions, an £85,000 cap and a 13-month outer reporting limit. A firm may apply an excess of up to £100, but not where it assesses the consumer as vulnerable."
       ],
       [
         "How do I report a Monzo scam?",
@@ -5196,7 +5296,7 @@
       "report monzo scam uk",
       "monzo impersonation call"
     ],
-    "updated": "2026-07-18",
+    "updated": "2026-07-26",
     "sources_checked": [
       [
         "Monzo — Check it's us calling with Call Status",
@@ -5205,6 +5305,22 @@
       [
         "Monzo — Safe account scams",
         "https://monzo.com/help/monzo-fraud-category/safe-account-scam"
+      ],
+      [
+        "Monzo — Reporting fraud",
+        "https://monzo.com/help/emergencies/report-fraud"
+      ],
+      [
+        "Monzo — Payments (Faster Payments)",
+        "https://monzo.com/features/payments"
+      ],
+      [
+        "Monzo — How do I know if it's really Monzo calling me?",
+        "https://monzo.com/learn/keeping-your-money-safe/is-monzo-calling-me"
+      ],
+      [
+        "Payment Systems Regulator — APP fraud reimbursement protections",
+        "https://www.psr.org.uk/information-for-consumers/app-fraud-reimbursement-protections/"
       ]
     ],
     "quick_answer": "A call or message saying your Monzo account is compromised and your money must move to a 'safe account' is a scam — Monzo will never ask you to move money to protect it. Use Monzo's Call Status feature in the app to check any caller, and report the scam through in-app chat."
@@ -8700,11 +8816,11 @@
       ],
       [
         "Why these scams are convincing",
-        "An unusually low all-inclusive price is tempting, especially near school holidays, and a fake confirmation email or PDF itinerary can look identical to a genuine one. A seller who claims to have bulk operator rates or a special allocation sounds like they have access to a deal you cannot get elsewhere.\n\nThe fact that protects you: a qualifying package holiday that includes a flight and is sold by or through an ATOL holder should be ATOL protected, and you should receive an ATOL Certificate. You can check a company's ATOL status independently before booking or paying anything."
+        "An unusually low all-inclusive price is tempting, especially near school holidays, and a fake confirmation email or PDF itinerary can look identical to a genuine one. A seller who claims to have bulk operator rates or a special allocation sounds like they have access to a deal you cannot get elsewhere.\n\nThe fact that protects you: a qualifying package holiday that includes a flight and is sold by or through an ATOL holder should be ATOL protected, and you should receive an ATOL Certificate as soon as you pay anything, including a deposit. The certificate names the ATOL holder providing that protection, and you can check that holder independently before you part with more money."
       ],
       [
         "Signs a package holiday deal is a scam",
-        "- The price is far below any genuine travel company for the same holiday.\n- You are asked to pay by bank transfer to a personal account rather than through a recognised travel company.\n- The seller cannot confirm ATOL protection or provide clear ATOL holder details for a flight-inclusive package.\n- You are pressured to book quickly because the deal is \"about to expire\".\n- The booking confirmation cannot be verified with the airline, hotel, or tour operator directly.\n- The company has no verifiable address, landline, or Companies House record."
+        "- The price is far below any genuine travel company for the same holiday.\n- You are asked to pay by bank transfer to a personal account rather than through a recognised travel company.\n- The seller will not name the ATOL holder providing protection for a flight-inclusive package, or gives details that do not match the certificate.\n- You are pressured to book quickly because the deal is \"about to expire\".\n- The booking confirmation cannot be verified with the airline, hotel, or tour operator directly.\n- The company has no verifiable address, landline, or Companies House record."
       ],
       [
         "How the scam works",
@@ -8712,15 +8828,15 @@
       ],
       [
         "How to book a package holiday safely",
-        "Book through a recognised, ATOL-protected travel company.\n\n- Check whether the company and the specific flight-inclusive package are ATOL protected before you pay, using the official ATOL check.\n- Check that the exact company or trading name and ATOL number match, and make sure you receive an ATOL Certificate for an ATOL-protected booking.\n- Book through a well-known travel agent or tour operator's own website, not a personal seller found on social media or a classified ad.\n- Verify any booking confirmation directly with the airline, hotel, or operator named in it.\n- Be suspicious of an all-inclusive price dramatically below every other source for the same trip.\n- Prefer paying by card, which offers more practical dispute options than a bank transfer.\n\nIf you are unsure, our /guides/fake-airline-ticket-scam-uk/ and /guides/fake-travel-agent-scam-uk/ guides cover related travel-booking cons."
+        "Book through a recognised, ATOL-protected travel company.\n\n- Ask whether the flight-inclusive package is ATOL protected and who the ATOL holder is before you pay, then search that name or number in the official ATOL check.\n- Remember a travel agent may sell on behalf of another company's ATOL and does not need one of its own, so check the holder named on the certificate rather than only the shop front.\n- Make sure an ATOL Certificate actually arrives when you pay, and that the trip, passengers and holder on it match what you booked.\n- Book through a well-known travel agent or tour operator's own website, not a personal seller found on social media or a classified ad.\n- Verify any booking confirmation directly with the airline, hotel, or operator named in it.\n- Be suspicious of an all-inclusive price dramatically below every other source for the same trip.\n- Prefer paying by card, which offers more practical dispute options than a bank transfer.\n\nIf you are unsure, our /guides/fake-airline-ticket-scam-uk/ and /guides/fake-travel-agent-scam-uk/ guides cover related travel-booking cons."
       ],
       [
         "If you have already paid",
-        "Act now using the payment, account and identity steps in our [scam recovery checklist](/recovery/)."
+        "Save the advert, messages, payment record and every itinerary or certificate before the listing disappears, then contact your bank. If ATOL protection was claimed, check the certificate for the name and number of the ATOL holder providing it. A travel agent may sell on behalf of another ATOL holder, so search both the seller and the disclosed holder and confirm the relationship with the holder using contact details you found independently. If no certificate was supplied, ask the agent why and seek advice from the CAA.\n\nA package holiday is usually paid for weeks or months ahead of departure, so there is often more time to act than with a last-minute purchase. Then work through the payment, account and identity steps in the [scam recovery checklist](/recovery/)."
       ],
       [
         "How to report a package holiday scam (UK)",
-        "Report the advert or seller to the platform you found it on. If the scam reached you by email, forward it to the NCSC at `report@phishing.gov.uk`; if by text, forward it to 7726.\n\nIf you lost money, report it to Report Fraud at `reportfraud.police.uk` or on 0300 123 2040 if you are in England, Wales, or Northern Ireland. In Scotland, report to Police Scotland on 101. Keep all your evidence, including any fake booking confirmation."
+        "Tell the platform that carried the advert, and tell the airline, hotel or tour operator named on the confirmation. Notifying the named supplier helps it investigate misuse of its brand.\n\nIf the seller quoted an ATOL number or claimed ATOL protection, report that to the CAA as well: it licenses ATOL holders and runs the search that would have shown whether the licence was real.\n\nIf you lost money, report it to Report Fraud at `reportfraud.police.uk`, or on 0300 123 2040, or to Police Scotland on 101 in Scotland. The [scam recovery checklist](/recovery/) has the phishing email and text-forwarding routes and the steps that follow a report."
       ]
     ],
     "faq": [
@@ -8730,19 +8846,19 @@
       ],
       [
         "Does ATOL protect every package holiday?",
-        "No. ATOL is for qualifying flight-inclusive package trips sold by or through an ATOL holder, and you should receive an ATOL Certificate. Non-flight packages, many flight-only bookings, and ordinary travel disputes are different, so check the specific company's ATOL status and the exact booking before paying."
+        "No. ATOL is for qualifying flight-inclusive package trips sold by or through an ATOL holder, and you should receive an ATOL Certificate. Non-flight packages and ordinary travel disputes are different. A travel agent can sell a protected trip on another company's ATOL, so ask who the ATOL holder is and check that holder before paying."
       ],
       [
-        "I have a booking confirmation — does that prove the holiday is real?",
-        "No. Fake booking confirmations can look identical to genuine ones. Verify the booking directly with the airline, hotel, or tour operator named in it before relying on it."
+        "I have a booking confirmation — does that mean the holiday is real?",
+        "No. Contact the airline, hotel or tour operator through details you found independently and ask it to confirm what has actually been booked. For an ATOL-protected trip, you should also receive an ATOL Certificate as soon as you pay. A missing or inconsistent certificate is a serious warning; check the named ATOL holder and ask the CAA for advice rather than assuming the document or its absence settles the question by itself."
       ],
       [
         "I've already paid for a package holiday that turned out to be fake — can I get my money back?",
-        "Possibly. If you paid by card, ask your bank about a chargeback. Eligible UK transfers since 7 October 2024 may fall under APP reimbursement rules, subject to limits and exclusions. Report it and keep all your evidence."
+        "Sometimes. If a credit agreement funded the holiday, Section 75 of the Consumer Credit Act 1974 may apply: it needs the required relationship between the credit and the supplier, and a cash price of more than £100 and no more than £30,000, counted per item or qualifying set. Paying on credit does not guarantee cover, because intermediaries and the exact debtor-creditor-supplier relationship can affect a claim. Otherwise ask your card issuer about chargeback, which is a card-scheme process with scheme-set deadlines rather than a legal right. Where an eligible domestic consumer payment left by Faster Payments or CHAPS on or after 7 October 2024, the mandatory APP reimbursement rules may apply, subject to their exclusions, an £85,000 cap, a 13-month outer reporting limit and a possible excess of up to £100 that cannot be applied to a consumer the firm assesses as vulnerable. Report it as soon as you can and keep the advert, the confirmation and the payment receipt."
       ],
       [
         "How do I report a fake package holiday deal?",
-        "Report the seller or advert to the platform, then if you lost money, report it to Report Fraud in England, Wales, or Northern Ireland, or to Police Scotland on 101 in Scotland."
+        "Start with the platform that hosted the advert, then tell the airline, hotel or operator named on the confirmation so it can investigate misuse of its brand. If an ATOL number or ATOL protection was claimed, tell the CAA. A financial loss goes to Report Fraud, or to Police Scotland on 101 if you are in Scotland."
       ]
     ],
     "keywords": [
@@ -8755,14 +8871,46 @@
       "atol protection package holiday",
       "bargain package holiday scam warning signs"
     ],
-    "updated": "2026-07-18",
+    "updated": "2026-07-26",
     "sources_checked": [
       [
         "UK Civil Aviation Authority — Check an ATOL",
         "https://www.caa.co.uk/atol-protection/check-an-atol/"
+      ],
+      [
+        "ATOL — What does ATOL protection mean?",
+        "https://www.atol.org/about-atol/what-does-atol-protection-mean/"
+      ],
+      [
+        "ATOL — ATOL Certificates",
+        "https://www.atol.org/about-atol/atol-certificates/"
+      ],
+      [
+        "ATOL — Check for ATOL",
+        "https://www.atol.org/check-for-atol/"
+      ],
+      [
+        "ATOL — Avoiding travel-related fraud",
+        "https://www.atol.org/holiday-fraud/avoiding-travel-related-fraud/"
+      ],
+      [
+        "UK Civil Aviation Authority — Problems with a travel agent",
+        "https://www.caa.co.uk/air-passengers/travel-problems-and-rights/airline-and-travel-company-problems/problems-with-a-travel-agent/"
+      ],
+      [
+        "MoneyHelper — Section 75 and chargeback protection",
+        "https://www.moneyhelper.org.uk/en/everyday-money/credit/how-youre-protected-when-you-pay-by-card"
+      ],
+      [
+        "Payment Systems Regulator — APP fraud reimbursement protections",
+        "https://www.psr.org.uk/information-for-consumers/app-fraud-reimbursement-protections/"
+      ],
+      [
+        "Bank of England — A brief introduction to RTGS and CHAPS",
+        "https://www.bankofengland.co.uk/payments/a-brief-introduction-to-the-real-time-gross-settlement-system-and-chaps"
       ]
     ],
-    "quick_answer": "A package deal priced far below every genuine travel company, paid by bank transfer, is the classic fake holiday pattern. Check the company's ATOL protection through the official ATOL check before paying, and verify any confirmation directly with the airline, hotel or operator. Report losses to Report Fraud."
+    "quick_answer": "A cheap package advertised by an unfamiliar seller and payable by bank transfer is high risk, but check more than the seller's name. An agent can sell under another company's ATOL. Verify the ATOL holder named on the certificate, then confirm the flight, hotel and operator independently. Contact your bank promptly if anything fails those checks."
   },
   {
     "title": "Fake Airline Ticket Scam UK: Spot a Bargain Flight Con",
@@ -8780,27 +8928,27 @@
       ],
       [
         "Why these scams are convincing",
-        "An unusually low price for a popular route is tempting, especially near school holidays or for in-demand destinations, and a fake booking reference or PDF confirmation can look identical to a genuine one. A seller who claims to have bulk or agent-rate tickets sounds like they have inside access to a deal you cannot get elsewhere.\n\nThe fact that protects you: a genuine airline booking should be verifiable directly with the airline or through its official \"manage my booking\" service using the booking reference. If the airline cannot find the booking, do not rely on the confirmation."
+        "An unusually low price for a popular route is tempting, especially near school holidays or for in-demand destinations, and a fake booking reference or PDF confirmation can look identical to a genuine one. A seller who claims to have bulk or agent-rate tickets sounds like they have inside access to a deal you cannot get elsewhere.\n\nThe fact that protects you: only the airline can tell you whether a reservation and a ticket really exist. Its \"manage my booking\" service is the quick first check, but a reference that does not appear there is a warning rather than a verdict, because some legitimate agent, group, charter and partner bookings are not fully visible in self-service tools. Ask the airline itself before you rely on any confirmation."
       ],
       [
         "Signs a flight deal is a scam",
-        "- The price is far below any genuine airline or comparison site for the same route and dates.\n- You are asked to pay by bank transfer to a personal account rather than through the airline or an established travel site.\n- The seller found you on social media, or advertises through an unofficial page or group.\n- You are pressured to book quickly because seats are \"almost gone\".\n- The booking confirmation cannot be verified on the airline's own website.\n- The seller avoids identifying the travel company, or for a flight-inclusive package, its ATOL details."
+        "- The price is far below any genuine airline or comparison site for the same route and dates.\n- You are asked to pay by bank transfer to a personal account rather than through the airline or an established travel site.\n- The seller found you on social media, or advertises through an unofficial page or group.\n- You are pressured to book quickly because seats are \"almost gone\".\n- The airline cannot confirm a reservation or ticket when you contact it using details from its own site.\n- The seller avoids identifying the travel company, or for a flight-inclusive package, its ATOL details."
       ],
       [
         "How the scam works",
-        "First, an advert or message offers a bargain flight deal. Second, you pay, usually by bank transfer, to secure the \"discounted\" seats. Third, you may receive a fake booking confirmation that looks genuine. Fourth, when you check with the airline directly, no booking exists. Finally, the seller stops responding.\n\nVerifying any booking reference directly with the airline before you rely on it breaks the chain."
+        "First, an advert or message offers a bargain flight deal. Second, you pay, usually by bank transfer, to secure the \"discounted\" seats. Third, you may receive a fake booking confirmation that looks genuine. Fourth, when you check with the airline directly, no booking exists. Finally, the seller stops responding.\n\nAsking the airline itself to confirm the reservation and the ticket, before you rely on any confirmation, breaks the chain."
       ],
       [
         "How to book flights safely",
-        "Book through the airline directly or a recognised travel agent.\n\n- Book through the airline's own website or app, or a well-known travel agent, not a personal seller found on social media.\n- Verify any booking reference directly on the airline's \"manage my booking\" page before you rely on it.\n- Be suspicious of a price dramatically below every other source for the same flight.\n- Prefer paying by card, which offers more practical dispute options than a bank transfer.\n- If you are buying a package trip that includes a flight, check whether the travel company is ATOL protected.\n\nIf you are unsure, our /guides/is-this-website-a-scam/ and /guides/fake-travel-agent-scam-uk/ guides cover related travel-booking cons."
+        "Book through the airline directly or a recognised travel agent.\n\n- Book through the airline's own website or app, or a well-known travel agent, not a personal seller found on social media.\n- Put any booking reference into the airline's \"manage my booking\" page, and contact the airline directly if it does not appear or the itinerary is incomplete.\n- Be suspicious of a price dramatically below every other source for the same flight.\n- Prefer paying by card, which offers more practical dispute options than a bank transfer.\n- If you are buying a package trip that includes a flight, check whether the travel company is ATOL protected and who the ATOL holder is.\n\nIf you are unsure, our /guides/is-this-website-a-scam/ and /guides/fake-travel-agent-scam-uk/ guides cover related travel-booking cons."
       ],
       [
         "If you have already paid",
-        "Act now using the payment, account and identity steps in our [scam recovery checklist](/recovery/)."
+        "Try the reference and passenger name on the airline's own manage-booking page and screenshot the result. If it is not recognised, contact the airline using details from its official site and ask it to confirm whether a valid reservation and ticket exist. Keep both the lookup result and the airline's response for your bank.\n\nThen contact your bank or card issuer the same day, keep the seller's messages and the confirmation PDF, and follow the payment, account and identity steps in the [scam recovery checklist](/recovery/)."
       ],
       [
         "How to report a fake airline ticket scam (UK)",
-        "Report the advert or seller to the platform you found it on. If the scam reached you by email, forward it to the NCSC at `report@phishing.gov.uk`; if by text, forward it to 7726.\n\nIf you lost money, report it to Report Fraud at `reportfraud.police.uk` or on 0300 123 2040 if you are in England, Wales, or Northern Ireland. In Scotland, report to Police Scotland on 101. Keep all your evidence, including any fake booking confirmation."
+        "Report the seller's page or advert inside the platform that hosted it, and tell the airline whose name appeared on the confirmation, using the contact route on its own site. Ask it to verify whether any booking exists and let it know its brand is being used to sell tickets.\n\nMoney lost belongs in a fraud report: Police Scotland takes reports on 101 in Scotland, and `reportfraud.police.uk` or 0300 123 2040 covers England, Wales and Northern Ireland. Forwarding routes for a scam email or text, and what to do after reporting, are in the [scam recovery checklist](/recovery/)."
       ]
     ],
     "faq": [
@@ -8809,20 +8957,20 @@
         "Treat it as high risk. Book directly through the airline or a recognised travel agent instead. A stranger offering bargain flights on social media is a common scam pattern."
       ],
       [
-        "I have a booking confirmation - does that prove the flight is real?",
-        "No. Fake booking confirmations can look identical to genuine ones. Verify the booking reference directly on the airline's own \"manage my booking\" page before relying on it."
+        "I have a booking confirmation - does that mean the flight is real?",
+        "No. Check the reference and passenger name on the airline's own site, then contact the airline if the booking is missing or incomplete. Some legitimate agent, group, charter and partner bookings are not fully visible in self-service tools, so a failed lookup is a warning rather than final proof. Ask the airline to confirm whether a valid booking and e-ticket exist."
       ],
       [
         "Does ATOL cover every flight booking?",
-        "No. ATOL is financial protection for package trips that include a flight. It does not automatically cover every standalone flight booking, especially a flight bought directly from an airline."
+        "No. A flight bought directly from an airline, where a valid e-ticket is issued in exchange for payment, is not covered by ATOL. Some flight-only bookings made through an ATOL holder can be protected, and the certificate you receive then says \"Flight-Only\". ATOL's main role is protecting flight-inclusive package trips, so ask the travel company to make the position clear before you book."
       ],
       [
         "I've already paid for tickets that turned out to be fake - can I get my money back?",
-        "Possibly. If you paid by card, ask your bank about a chargeback. Eligible UK transfers since 7 October 2024 may fall under APP reimbursement rules, subject to limits and exclusions. Report it and keep all your evidence."
+        "Sometimes, but move quickly. An airline cannot refund a ticket it never issued, so the claim sits with whoever moved the money. Ask your card issuer whether chargeback fits the transaction — it is a card-scheme process with scheme-set deadlines, not a statutory entitlement. An eligible domestic consumer payment sent by Faster Payments or CHAPS on or after 7 October 2024 may be covered by the mandatory APP reimbursement rules, which carry exclusions, an £85,000 cap, a possible excess of up to £100 that cannot be applied to a consumer the firm assesses as vulnerable, and a 13-month outer reporting limit — so report it immediately rather than relying on that window. Keep the booking reference, the seller's messages and the payment record."
       ],
       [
         "How do I report a fake airline ticket scam?",
-        "Report the seller or advert to the platform, then if you lost money, report it to Report Fraud in England, Wales, or Northern Ireland, or to Police Scotland on 101 in Scotland."
+        "Report the listing inside the platform that carried it, and tell the airline whose brand was used so it can check whether any booking exists. Put any money lost into a fraud report: `reportfraud.police.uk` covers England, Wales and Northern Ireland, and Police Scotland takes reports on 101."
       ]
     ],
     "keywords": [
@@ -8835,14 +8983,38 @@
       "fake booking confirmation flight",
       "bargain flight scam warning signs"
     ],
-    "updated": "2026-07-18",
+    "updated": "2026-07-26",
     "sources_checked": [
       [
         "UK Civil Aviation Authority — What is ATOL?",
         "https://www.caa.co.uk/newsroom/blogs/what-is-atol/"
+      ],
+      [
+        "UK Civil Aviation Authority — Problems with a travel agent",
+        "https://www.caa.co.uk/air-passengers/travel-problems-and-rights/airline-and-travel-company-problems/problems-with-a-travel-agent/"
+      ],
+      [
+        "ATOL — What does ATOL protection mean?",
+        "https://www.atol.org/about-atol/what-does-atol-protection-mean/"
+      ],
+      [
+        "ATOL — Claims information",
+        "https://www.atol.org/claims/claims-information/"
+      ],
+      [
+        "British Airways — Manage My Booking FAQs",
+        "https://www.britishairways.com/travel/mmbfaqs/public/en_gb"
+      ],
+      [
+        "Payment Systems Regulator — APP fraud reimbursement protections",
+        "https://www.psr.org.uk/information-for-consumers/app-fraud-reimbursement-protections/"
+      ],
+      [
+        "Bank of England — A brief introduction to RTGS and CHAPS",
+        "https://www.bankofengland.co.uk/payments/a-brief-introduction-to-the-real-time-gross-settlement-system-and-chaps"
       ]
     ],
-    "quick_answer": "Bargain flights offered by a stranger on social media, paid by bank transfer, are very often tickets that do not exist. Verify any booking reference on the airline's own manage-my-booking page before relying on it, and book through the airline or a recognised agent. Report losses to Report Fraud."
+    "quick_answer": "A flight confirmation can be fabricated. Check the reference and passenger name through the airline's official site, then contact the airline if it is missing because some legitimate agent or partner bookings are not fully visible online. Ask whether a valid reservation and e-ticket exist, preserve the response, and contact your bank promptly if the seller took payment for nothing."
   },
   {
     "title": "UK Visa Application Scam: Fake Consultants & Sites",
@@ -9762,19 +9934,19 @@
       ],
       [
         "Why these scams are convincing",
-        "Because Starling has no branches, people are used to managing everything by app, call, or message, which makes a fake \"security\" contact feel plausible. A caller who already knows your name or partial account details, and a spoofed number, add to the pressure.\n\nThe fact that protects you: Starling says it will never ask you to make or approve payments to keep your account safe, and any request to move money to a \"safe account\" is a scam."
+        "Starling has no branches, so customers are used to managing the account digitally and receiving support through the app, phone or message. That familiarity can make an impersonator's contact feel plausible. A spoofed number and a caller who already knows your name or part of your account details do the rest.\n\nStarling built its answer into the app. The call status indicator, introduced in 2024, tells you which of a handful of states applies — including \"We've never called you\" and \"You're on a call with Starling\" — and it sits on the home screen and the payment screen, so it is in front of you exactly when a caller is pressing you to send money. Starling says it will never ask you to make or approve payments to keep your account safe, and that no bank would ask for your full card number or PIN."
       ],
       [
         "Signs a Starling message is a scam",
-        "- It claims suspicious activity or a compromised account and demands immediate action.\n- It asks you to \"verify\" through a link, or to confirm your PIN, password, or a one-time code.\n- You are told to move money to a new, \"safe\", or \"holding\" account.\n- A caller claims to be from Starling's fraud team and pressures you to stay on the line.\n- The link is not starling.com or inside the genuine Starling app.\n- You are asked to install screen-sharing software during the call."
+        "- It claims suspicious activity or a compromised account and demands immediate action.\n- It asks you to \"verify\" through a link, or to confirm your PIN, password, or a one-time code.\n- You are told to move money to a new, \"safe\", or \"holding\" account.\n- A caller claims to be from Starling's fraud team and pressures you to stay on the line.\n- The link is not `starlingbank.com` or inside the genuine Starling app.\n- You are asked to install screen-sharing software during the call."
       ],
       [
         "How the scam works",
-        "First, a call, text, or email claims a problem with your account. Second, urgency and fear push you to act immediately. Third, you are asked to \"verify\" through a link, share a one-time code, or move money to a \"safe account\". Fourth, criminals use the details to access your account or the transfer sends your money straight to them. Fifth, they may call again posing as Starling to extend the scam.\n\nChecking directly in the Starling app, and never moving money because of a call or message, breaks the chain."
+        "The sequence keeps you inside the Starling app while working against your own interests. It opens with an unexpected call, text or email about \"suspicious activity\". It escalates: a payment is supposedly leaving your account now, and only an immediate transfer will stop it. Then comes the destination — a \"safe account\" read out to you, or a new payee you are talked through adding. Because you tap the buttons yourself, the payment counts as authorised, which is why criminals want it done this way rather than stealing a card. \"Authorised\" describes how the payment was initiated; it does not automatically mean the customer is ineligible under the mandatory APP reimbursement rules.\n\nThe pressure is designed to prevent you checking independently, including reading the Call Status on the payment screen. Checking anyway, and declining to move money on the strength of a phone call, ends the attempt."
       ],
       [
         "How to check a Starling alert safely",
-        "If anything feels rushed, stop.\n\n- Open the Starling app directly and check your transactions and account status there.\n- Use the Starling app's Call Status feature to check whether Starling is calling you. If it does not show Starling is calling, hang up.\n- Use in-app chat, or Starling's official fraud number published on starlingbank.com, if you need help, and call 159 if a payment request feels suspicious.\n- Never move money to a \"safe\", \"holding\", or \"protected\" account; Starling will not ask you to.\n- Never share a one-time code, your PIN, or your full password to anyone.\n- Do not install remote-access or screen-sharing software during an unexpected call.\n\nIf you are unsure whether a linked page is genuine, our guide on /guides/is-this-website-a-scam/ helps, and our /guides/monzo-scam-transfer-uk/ guide covers the same pattern with another app-based bank."
+        "If anything feels rushed, stop.\n\n- Open the Starling app directly and check your transactions and account status there.\n- Use the Starling app's Call Status feature to check whether Starling is calling you. If it does not show Starling is calling, hang up.\n- Know its limits: Starling says a genuine call may not display correctly if your app is out of date or there is no internet connection. Do not continue the call on that basis — reconnect, or hang up and dial `159`.\n- Use in-app chat, or Starling's official fraud number published on starlingbank.com, if you need help, and call `159` if a payment request feels suspicious.\n- Never move money to a \"safe\", \"holding\", or \"protected\" account; Starling will not ask you to.\n- Never share a one-time code, your PIN, or your full password to anyone.\n- Do not install remote-access or screen-sharing software during an unexpected call.\n\nIf you are unsure whether a linked page is genuine, our guide on /guides/is-this-website-a-scam/ helps, and our /guides/monzo-scam-transfer-uk/ guide covers the same pattern with another app-based bank."
       ],
       [
         "If you responded or shared details",
@@ -9782,7 +9954,7 @@
       ],
       [
         "How to report a Starling scam (UK)",
-        "Report it to Starling directly through in-app chat or by calling its official fraud number published on starlingbank.com. If a payment request feels suspicious during a call, hang up and call 159. If the scam reached you by email, forward it to the NCSC at `report@phishing.gov.uk`; if by text, forward it to 7726.\n\nIf you lost money or shared sensitive information, report it to Report Fraud at `reportfraud.police.uk` or on 0300 123 2040 if you are in England, Wales, or Northern Ireland. In Scotland, report to Police Scotland on 101. Keep the evidence and report it as soon as possible."
+        "Report it to Starling through in-app chat or the official fraud number published on starlingbank.com. If a payment request feels wrong mid-call, hang up and dial `159` instead — Starling is one of the participating banks, so the call goes out on a line you chose rather than one the caller controls. Scam texts can be forwarded to 7726; phishing emails go to `report@phishing.gov.uk`.\n\nWhere money has gone or security details were shared, our [scam recovery checklist](/recovery/) sets out the police routes for each UK nation, the evidence worth keeping, and the complaint route if a claim is refused."
       ]
     ],
     "faq": [
@@ -9796,11 +9968,11 @@
       ],
       [
         "A caller claims to be from Starling's fraud team — how do I check?",
-        "Check the Starling app's Call Status feature. If it does not show Starling is calling, hang up and contact Starling through in-app chat, its official fraud number on starlingbank.com, or 159. Never call a number given to you during the suspicious call, and never share a one-time code, PIN, or password."
+        "Check the Starling app's Call Status feature. If it does not show Starling is calling, hang up and contact Starling through in-app chat, its official fraud number on starlingbank.com, or `159`. If the banner does not appear at all, check whether your app is out of date or your phone is offline rather than trusting the caller's explanation. Never call a number given to you during the suspicious call, and never share a one-time code, PIN, or password."
       ],
       [
         "I shared my login or moved money — can I get it back?",
-        "Maybe. Report it in the Starling app immediately, or call Starling's official fraud number on starlingbank.com, to secure your account. Eligible UK transfers since 7 October 2024 may fall under APP reimbursement rules, subject to limits and exclusions."
+        "Maybe. Report it in the Starling app immediately, or call Starling's official fraud number on starlingbank.com, to secure your account. Eligible UK transfers since 7 October 2024 may fall under APP reimbursement rules, subject to limits and exclusions. Being told the payment was \"authorised\" does not by itself end a claim."
       ],
       [
         "How do I report a Starling scam?",
@@ -9817,11 +9989,31 @@
       "report starling scam uk",
       "starling suspicious activity text"
     ],
-    "updated": "2026-07-18",
+    "updated": "2026-07-26",
     "sources_checked": [
       [
         "Starling Bank — Starling launches new in-app tool to combat bank impersonation",
         "https://www.starlingbank.com/news/starling-bank-launches-in-app-tool-to-combat-bank-impersonation/"
+      ],
+      [
+        "Starling Bank — Impersonation scams: what you need to know",
+        "https://www.starlingbank.com/blog/impersonation-scams-what-you-need-to-know/"
+      ],
+      [
+        "Starling Bank — How to protect yourself from fraud and scams",
+        "https://www.starlingbank.com/mobile-banking-security/fraud/"
+      ],
+      [
+        "Starling Bank help — How can I tell if a payment request is a scam?",
+        "https://help.starlingbank.com/joint/topics/uk-payments/how-can-i-tell-if-a-payment-request-is-a-scam/"
+      ],
+      [
+        "Stop Scams UK — 159 and its participating banks",
+        "https://stopscamsuk.org.uk/159"
+      ],
+      [
+        "Stop Scams UK — Get help now",
+        "https://stopscamsuk.org.uk/campaign/get-help-now/"
       ]
     ],
     "quick_answer": "Starling will never ask you to make or approve payments to keep your account safe, so any 'move your money' contact is a scam. Check alerts in the Starling app itself, use its Call Status feature to verify callers, and call 159 if a payment request feels suspicious."
