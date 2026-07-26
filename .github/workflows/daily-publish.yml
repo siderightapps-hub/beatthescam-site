@@ -15,7 +15,7 @@ on:
         description: "Max thin guides to rewrite per run"
         required: false
         default: "10"
-  schedule:
+  # schedule:   # PAUSED 2026-07-26 — see note below; uncomment with the cron to resume
     # Tue/Fri at 05:07 UTC (06:07 BST) — reduced from daily on 2026-07-23
     # to slow the publish cadence. GitHub cron is best-effort and can be
     # delayed by hours. Generation runs through scripts/content_gate.py
@@ -28,7 +28,15 @@ on:
     # Google's requirement that automatically-generated content be reviewed or
     # curated before it carries advertising. Auto-tweet now lives in
     # tweet-on-publish.yml, which fires only after the PR is merged to main.
-    - cron: '7 5 * * 2,5'
+    #
+    # ── PAUSED 2026-07-26 (operator instruction) ─────────────────────────────
+    # Automatic content generation is paused until the operator's editorial
+    # audits come back completely clean. Rationale: every auto-published guide
+    # adds fresh surface to fact-check while the 2026-07-25 audit remediation
+    # is still in progress, and unreviewed generation competes with that work.
+    # The workflow itself is unchanged and still runnable on demand via
+    # workflow_dispatch. To resume, uncomment the cron line below.
+    # - cron: '7 5 * * 2,5'
 
 permissions:
   contents: write

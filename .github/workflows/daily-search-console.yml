@@ -11,7 +11,7 @@ on:
         description: "Days of Search Console data to analyse"
         required: false
         default: "28"
-  schedule:
+  # schedule:   # PAUSED 2026-07-26 — see note below; uncomment with the cron to resume
     # Tue/Fri at 05:23 UTC (06:23 BST) — reduced from daily on 2026-07-23,
     # matching daily-publish.yml. Queued behind daily-publish via the concurrency
     # group. The generator runs every draft through scripts/content_gate.py.
@@ -19,7 +19,12 @@ on:
     # HUMAN-REVIEW GATE (2026-06-25): like daily-publish.yml, this no longer
     # commits to main — it opens a review PR. Nothing is published, monetised, or
     # tweeted until a human merges. Auto-tweet lives in tweet-on-publish.yml.
-    - cron: '23 5 * * 2,5'
+    #
+    # ── PAUSED 2026-07-26 (operator instruction) ─────────────────────────────
+    # Paused alongside daily-publish.yml until the operator's editorial audits
+    # come back completely clean. Still runnable on demand via
+    # workflow_dispatch. To resume, uncomment the cron line below.
+    # - cron: '23 5 * * 2,5'
 
 permissions:
   contents: write
