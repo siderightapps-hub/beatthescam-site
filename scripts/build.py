@@ -868,12 +868,29 @@ def page_schema(site, title, description, url):
         "isPartOf": {"@type": "WebSite", "name": site["site_name"], "url": site["domain"]}
     })
 
+# Body Markdown subset: only root-relative, slug-safe internal links are
+# accepted, so article data cannot inject attributes, scripts, or an
+# unreviewed external destination. Used by _inline() when rendering and by
+# _schema_plain() when flattening the same text for structured data.
+_INTERNAL_MARKDOWN_LINK_RE = re.compile(r"\[([^\]\n]+)\]\((/[a-z0-9/_-]+/?)\)", re.I)
+
+
+def _schema_plain(text: str) -> str:
+    """Strip the body Markdown subset so schema text matches what the reader
+    sees. Backticks are cosmetic (<code> on the page), and an internal
+    [label](/path/) renders as an anchor whose visible text is the label — so
+    the schema must carry the label, not the raw markup. Google requires
+    FAQPage content to match the visible answer."""
+    text = str(text).strip().replace("`", "")
+    return _INTERNAL_MARKDOWN_LINK_RE.sub(lambda m: m.group(1), text)
+
+
 def faq_schema(pairs):
     if not pairs:
         return ""
     # Skip any malformed entries — must be 2-element sequences with non-empty strings
     valid = [
-        (str(q).strip().replace("`", ""), str(a).strip().replace("`", ""))
+        (_schema_plain(q), _schema_plain(a))
         for item in pairs
         if isinstance(item, (list, tuple)) and len(item) == 2
         for q, a in [item]
@@ -1637,9 +1654,6 @@ def related_posts(posts, current, count=4):
 
 
 _INLINE_CODE_RE = re.compile(r"`([^`]+)`")
-_INTERNAL_MARKDOWN_LINK_RE = re.compile(r"\[([^\]\n]+)\]\((/[a-z0-9/_-]+/?)\)", re.I)
-
-
 def _inline(text: str) -> str:
     """html-escape, then render `…` markdown code-spans as <code>…</code>.
     Used for example scam domains / messages and technical tokens (URLs, emails)

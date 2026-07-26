@@ -18,4 +18,4 @@ Citizens Advice — https://www.citizensadvice.org.uk/consumer/scams/
 FCA Firm Checker — https://www.fca.org.uk/consumers/fca-firm-checker
 
 /* LAST UPDATE */
-2026-07-25
+2026-07-26

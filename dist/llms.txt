@@ -227,7 +227,7 @@
 - [TV Licensing Scam Text UK: Spot a Fake Licence SMS](https://beatthescam.com/guides/tv-licensing-scam-text-message-uk/): Got a TV Licensing text about a failed payment, an expired licence, or a refund? How to spot a fake TV Licensing SMS and report it in the UK.
 - [UPS Scam Text Messages: Spot a Fake UPS Delivery Text (UK)](https://beatthescam.com/guides/ups-delivery-scam-text-messages-uk/): Fake UPS texts about a missed delivery or 'customs fee' are smishing scams. Here's how to spot a fake UPS text, verify a genuine one, and report it in the UK.
 - [Vodafone Scam Text UK: Spot a Fake Vodafone SMS](https://beatthescam.com/guides/vodafone-scam-text-uk/): Got a Vodafone text about a billing issue, a refund, or account suspension? How to spot a fake Vodafone SMS, check safely, and report it in the UK.
-- [Yodel Scam Text Messages: How to Spot a Fake Yodel Text (UK)](https://beatthescam.com/guides/yodel-scam-text-messages/): Fake Yodel texts about a missed parcel or small 'redelivery' fee are smishing scams. How to spot a fake Yodel text, check a real one, and report it.
+- [Yodel Scam Text Messages: How to Spot a Fake Yodel Text (UK)](https://beatthescam.com/guides/yodel-scam-text-messages/): Fake Yodel texts about a missed parcel or small 'redelivery' fee are smishing scams. Yodel is now part of InPost — how to check a real delivery, spot a fake text, and report it.
 
 ### Travel Scams
 

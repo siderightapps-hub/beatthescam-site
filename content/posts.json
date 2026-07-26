@@ -480,8 +480,8 @@
   {
     "slug": "yodel-scam-text-messages",
     "title": "Yodel Scam Text Messages: How to Spot a Fake Yodel Text (UK)",
-    "description": "Fake Yodel texts about a missed parcel or small 'redelivery' fee are smishing scams. How to spot a fake Yodel text, check a real one, and report it.",
-    "hero": "A text from 'Yodel' says your parcel is waiting and needs a small fee or new details? Here's how to spot a Yodel scam text.",
+    "description": "Fake Yodel texts about a missed parcel or small 'redelivery' fee are smishing scams. Yodel is now part of InPost — how to check a real delivery, spot a fake text, and report it.",
+    "hero": "A text from 'Yodel' says your parcel needs a small fee or new details? Yodel now runs as Yodel by InPost, and tracking has moved — here is how to check a delivery properly and spot the fake.",
     "date": "2026-06-05",
     "category": "sms",
     "keywords": [
@@ -498,55 +498,80 @@
     ],
     "sections": [
       [
-        "What is the Yodel scam text?",
-        "A Yodel scam text is a fake message impersonating the UK courier Yodel to steal your personal and payment details. It typically says a parcel couldn't be delivered, is 'waiting' for you, or needs your address confirmed, and includes a link to arrange redelivery. Because Yodel handles a large volume of online-shopping deliveries and does send genuine tracking texts, a fake message blends in easily. The criminals behind these texts send them in bulk to random numbers — they have no idea whether you've ordered anything, but rely on the fact that many people have a parcel on the way at any given time. The goal is to get you onto a fake Yodel page and hand over enough information to defraud you."
+        "What changed in July 2026, and why scammers benefit",
+        "Yodel now operates as Yodel by InPost, and the customer-facing tools moved during July 2026. Yodel's own help centre says the Yodel by InPost app is no longer available from 17 July, and InPost's Yodel help page says Yodel by InPost web accounts also stopped being available from that date. Parcels are handled by InPost, and customers are told to use the InPost app or `inpost.co.uk` to track and manage deliveries.\n\nThat transition is exactly the kind of moment smishing gangs wait for. When people are unsure which app, brand, or web address is now correct, a text saying \"your Yodel parcel needs attention\" is harder to dismiss. InPost also warns that during the move you may receive updates from both Yodel by InPost and InPost, so two genuine senders is now normal — which removes the easy assumption that anything unexpected must be fake.\n\nThe practical rule has not changed, though: judge a delivery message by whether you can match it to a real parcel through a route you opened yourself, never by the branding or the link inside it."
       ],
       [
-        "How the Yodel text scam works, step by step",
-        "- You receive a text claiming to be from Yodel about a missed or waiting parcel, usually with a link and an urgent tone.\n- Tapping the link opens a counterfeit version of the Yodel site on a lookalike web address rather than the real yodel.co.uk.\n- The page asks you to re-enter your address and pay a small 'redelivery' or 'service' fee to release the parcel.\n- The card details, address, and contact information you submit are captured by the scammers immediately.\n- A common follow-up is a phone call or further texts using those details to impersonate your bank, pressuring you to authorise payments or move money — the stage at which people lose the most."
+        "What a fake Yodel text is trying to get",
+        "A Yodel scam text impersonates the courier so you tap a link and hand over payment or personal details. It usually claims a delivery failed, a parcel is waiting, or an address needs confirming, then asks for a small 'redelivery' or 'release' fee.\n\nThese are sent in bulk to random numbers. The sender has no idea whether you have ordered anything — the bet is simply that many people have a parcel moving at any given time. The small fee is deliberate: a couple of pounds feels too trivial to be worth defrauding someone over, which is what makes people enter a card number. The card details are the actual target, and a follow-up call impersonating your bank is where the large losses happen."
       ],
       [
-        "Warning signs of a fake Yodel text",
-        "- It asks you to pay any fee to receive or redeliver a parcel. Yodel does not charge the recipient a fee to reattempt a standard delivery.\n- There's a link asking for personal or card details — genuine tracking links never need your card number or banking codes.\n- The sender is a random mobile or international number rather than a clearly identifiable Yodel sender.\n- The web address is not the official yodel.co.uk; watch for added words, hyphens, or odd endings.\n- The message uses a generic greeting and a tight deadline to rush you.\n- You haven't ordered anything, or the details don't match a parcel you're expecting."
+        "The one commitment that settles a fee demand",
+        "Yodel by InPost's own fraud and information-security page states it will never send emails or text messages asking you to provide your bank details or phone number, and that it will never ask for a fee for redelivery of a parcel.\n\nSo a message demanding money to release or redeliver a parcel contradicts the courier's own published commitment, whichever brand name it uses. Note the limit of that rule: it covers redelivery fees and requests for bank details or phone numbers. Genuine delivery notifications do exist, and a retailer or an import charge can legitimately involve money elsewhere in a purchase — so \"a message mentioned money\" is not the test. \"A courier asked me to pay a fee to get my parcel redelivered\" is."
       ],
       [
-        "How to check whether a Yodel text is genuine",
-        "Don't tap any link in the message. If you're expecting a delivery, look up the tracking number in the confirmation email from the shop you ordered from, then visit the official yodel.co.uk site or app by typing the address in yourself and entering the tracking number. The genuine tracking page will show your parcel without ever asking for payment or card details. If nothing matches, treat the text as a scam. You can also contact the retailer directly to confirm which courier is handling your order and whether anything is actually out for delivery. Remember that a real courier never needs your full card number, PIN, online banking password, or a one-time passcode to complete a delivery."
+        "Signs the text is not from the courier",
+        "- It asks for any payment to receive or redeliver a parcel.\n- It asks for bank details, card details, or your phone number.\n- The link is not on `inpost.co.uk` or `yodel.co.uk` — watch for added words, hyphens, or unusual endings.\n- It arrives from a random mobile or international number.\n- It pressures you with a deadline, a holding fee, or a threat to return the parcel.\n- You cannot match it to an order you actually placed.\n- It asks for a one-time passcode, password, or date of birth. Yodel's fraud page notes that genuine companies do not email asking for usernames, passwords, dates of birth, or card details."
       ],
       [
-        "What to do if you interacted with a Yodel scam text",
-        "- Call your bank immediately on the number printed on your card and tell them you may have entered card details on a fake site; ask them to freeze the card and watch for fraud.\n- Change any password or security detail you typed in, and treat one-time codes you shared as compromised.\n- Expect a possible follow-up call pretending to be your bank — hang up and call back on the official number. Your bank will never tell you to move money to a 'safe account'.\n- Save the text and any receipt as evidence before reporting.\n- Keep an eye on your statements and credit file for anything you don't recognise."
+        "Checking a delivery now that tracking has moved",
+        "Do not tap the link in the message. Instead:\n- Find the tracking number in the dispatch confirmation from the shop you ordered from, not from the text.\n- Open the InPost app, or type `inpost.co.uk` into your browser yourself, and enter that tracking number.\n- If you still have a Yodel tracking reference, `yodel.co.uk` remains the brand's own site and directs customers to the current InPost route — reach it by typing the address, never through a message link.\n- Ask the retailer which courier is carrying the order and whether anything is genuinely out for delivery. The retailer is often the fastest independent check.\n\nA genuine tracking page shows your parcel without asking for a card number, a PIN, a banking password, or a one-time passcode. Yodel's fraud page also says its legitimate emails come from `donotreply@yodel.co.uk` or `noreply@yodel.co.uk`, which is useful context for email — but treat a sender address as a clue, not proof, because sender details can be spoofed."
       ],
       [
-        "How to report a Yodel scam text in the UK",
-        "Forward the message free to 7726, the spam-reporting shortcode that lets your mobile network investigate and block the sender, then delete it. If you've lost money or handed over details, report it to Report Fraud at reportfraud.police.uk or 0300 123 2040 (in Scotland, contact Police Scotland on 101). Suspicious links and phishing pages can be reported to the National Cyber Security Centre, and you can alert Yodel through the contact or security section of their official website so they can take down the fake domains. Reporting takes a minute and helps protect the next person who receives the same text."
+        "If you tapped the link or entered details",
+        "Delivery scams have a distinctive second act, so the order of these steps matters.\n\n- Call your bank on the number printed on your card and say you may have entered card details on a fake courier site. Ask them to stop the card and watch the account.\n- Expect a follow-up. Criminals who harvest details from a parcel page often ring within days posing as your bank's fraud team, using the real details you just gave them to sound credible. No genuine bank will tell you to move money to a safe account. Hang up and call back on the number on your card.\n- Treat any one-time passcode you shared as compromised, and change any password you typed.\n- Keep the message and any payment receipt before deleting anything — you will need them to report.\n\nIf money has left your account, the payment route decides what protection applies. Our [scam recovery checklist](/recovery/) sets out the card, transfer, account and identity steps in order, including how reporting differs in Scotland."
+      ],
+      [
+        "Reporting a fake Yodel or InPost text",
+        "Forward the text free to `7726`. That shortcode is run by the mobile networks and lets them investigate and block the sender.\n\nYodel's fraud page asks customers to forward suspicious emails to `information.security@yodel.co.uk` rather than clicking anything inside them, so the brand can act on fake domains. Phishing emails can also go to the National Cyber Security Centre at `report@phishing.gov.uk`.\n\nIf you lost money or handed over details, report it to Report Fraud at `reportfraud.police.uk` or on 0300 123 2040 if you are in England, Wales, or Northern Ireland. In Scotland, report to Police Scotland on 101."
       ]
     ],
     "faq": [
       [
+        "Is the Yodel app still available?",
+        "No. Yodel's help centre says the Yodel by InPost app is no longer available from 17 July, and InPost says Yodel by InPost web accounts stopped being available from the same date. Parcels are handled by InPost, so tracking and delivery preferences now live in the InPost app or at `inpost.co.uk`. Reach either by typing the address yourself rather than following a link in a message."
+      ],
+      [
         "Does Yodel charge a fee to redeliver a parcel?",
-        "No. Yodel does not charge the recipient a fee to reattempt a standard delivery, and it won't ask for payment through a link in a text. A message demanding a small 'redelivery' or 'release' fee to free your parcel is a scam built to harvest your card details. To check a delivery, use the tracking number from your order confirmation on the official yodel.co.uk site rather than any link in the text."
+        "No. Yodel by InPost's fraud page says it will never ask for a fee for redelivery of a parcel, and will never email or text asking for your bank details or phone number. A message demanding a small 'redelivery' or 'release' fee through a link is a scam aimed at your card details."
       ],
       [
-        "How can I tell a real Yodel text from a scam?",
-        "A genuine Yodel text relates to a parcel you're actually expecting and links to the real yodel.co.uk for tracking; it never requests a fee, your card number, or a banking code. Scam texts come from random numbers, use lookalike web addresses, and pressure you to pay or 'confirm' details quickly. If in doubt, don't tap the link — type yodel.co.uk in yourself and enter the tracking number to check."
+        "A text still says 'Yodel' — does the rebrand make it fake?",
+        "Not by itself. Yodel by InPost is a live brand and you may receive genuine updates from both Yodel by InPost and InPost while the move completes, so Yodel branding alone proves nothing either way. Check whether the message matches a real order by entering the tracking number from your dispatch confirmation into the InPost app or `inpost.co.uk`, opened independently."
       ],
       [
-        "I entered my details on a Yodel link — what now?",
-        "Contact your bank right away using the number on the back of your card, say you entered details on a scam site, and ask them to block the card and monitor for fraud. Change any passwords or codes you shared. Be wary of a follow-up call claiming to be your bank's fraud team — that's part of the scam. Report what happened to Report Fraud at reportfraud.police.uk or 0300 123 2040."
+        "I entered my card details on a courier link — what now?",
+        "Ring your bank on the number on your card, say you entered details on a fake courier site, and ask them to stop the card and monitor the account. Change anything else you typed, and treat a shared one-time passcode as compromised. Be ready for a call claiming to be the bank's fraud team — that is the next stage of the same scam. Then work through the [scam recovery checklist](/recovery/)."
       ],
       [
-        "Where do I report a fake Yodel text?",
-        "Forward it free to 7726 so your network can act on the sender, then delete the message. If money or details were lost, report to Report Fraud at reportfraud.police.uk or 0300 123 2040 (Police Scotland on 101 in Scotland). You can also report the phishing site to the NCSC and notify Yodel via their official website."
+        "Where do I report a fake courier text?",
+        "Forward it free to `7726` so your network can act on the sender. Suspicious emails can go to Yodel at `information.security@yodel.co.uk` and to the NCSC at `report@phishing.gov.uk`. If money or details were lost, report it to Report Fraud at `reportfraud.police.uk` or 0300 123 2040, or Police Scotland on 101 in Scotland."
       ]
     ],
     "sources_checked": [
       [
-        "Yodel — Fraud: Information Security Advice",
-        "https://www.yodel.co.uk/privacy-cookies-policy/fraud"
+        "Yodel by InPost — can I still use my Yodel by InPost app?",
+        "https://www.yodel.co.uk/help-centre/can-i-still-use-my-yodel-by-inpost-app"
+      ],
+      [
+        "InPost — Yodel help and the move to InPost",
+        "https://inpost.co.uk/yodel-help"
+      ],
+      [
+        "Yodel — Fraud: information security advice",
+        "https://www.yodel.co.uk/privacy-cookies-policy/fraud/"
+      ],
+      [
+        "Ofcom — reporting scam texts to 7726",
+        "https://www.ofcom.org.uk/phones-and-broadband/scam-calls-and-messages/"
+      ],
+      [
+        "Report Fraud — report fraud and cyber crime",
+        "https://www.reportfraud.police.uk/"
       ]
     ],
-    "quick_answer": "A text asking you to pay a small fee to redeliver a Yodel parcel is a scam — Yodel does not charge recipients to reattempt a standard delivery. Don't tap the link; check any parcel by typing yodel.co.uk yourself and entering your tracking number. Forward the text free to `7726`."
+    "quick_answer": "A courier text demanding a fee to redeliver a parcel is a scam: Yodel by InPost says it never asks for a redelivery fee or for your bank details by text. Yodel's app and web accounts ended on 17 July 2026, so check parcels in the InPost app or at inpost.co.uk, opened yourself, and forward the text to `7726`.",
+    "updated": "2026-07-26"
   },
   {
     "slug": "ups-delivery-scam-text-messages-uk",
@@ -2732,7 +2757,7 @@
       ],
       [
         "The Halifax-to-Lloyds brand change: a new hook for scammers",
-        "Halifax is being rebranded as Lloyds: announced on 2 July 2026, closed to new customers since 16 July 2026, with existing customers moved to the Lloyds app and rebranded accounts in stages over the coming months. Sort codes, account numbers, cards, PINs and payments carry on unchanged.\n\nFraudsters exploit announcements like this with urgent texts: \"confirm your details for the switch\", \"re-register for the Lloyds app\". Halifax says it will only contact customers about the transition by email, letter or a banking message - it will not call or text you about it, will not ask you to log in through a link or QR code, and will not ask for your PIN.\n\nSo a text about the change that asks you to tap, log in, verify or move money is a scam. Customers who have already moved approve Halifax-card payments in the Lloyds app - type `halifax.co.uk` yourself for the current instructions."
+        "Halifax is being rebranded as Lloyds: announced on 1 July 2026, closed to new customers since 16 July 2026, with existing customers moved to the Lloyds app and rebranded accounts in stages over the coming months. Sort codes, account numbers, cards, PINs and payments carry on unchanged.\n\nFraudsters exploit announcements like this with urgent texts: \"confirm your details for the switch\", \"re-register for the Lloyds app\". Halifax says it will only contact customers about the transition by email, letter or a banking message - it will not call or text you about it, will not ask you to log in through a link or QR code, and will not ask for your PIN.\n\nSo a text about the change that asks you to tap, log in, verify or move money is a scam. Customers who have already moved approve Halifax-card payments in the Lloyds app - type `halifax.co.uk` yourself for the current instructions."
       ],
       [
         "Signs a Halifax text is a scam",
@@ -2787,7 +2812,7 @@
       "Halifax security alert text",
       "report Halifax scam text"
     ],
-    "updated": "2026-07-25",
+    "updated": "2026-07-26",
     "sources_checked": [
       [
         "Halifax — Latest scams and the Halifax-to-Lloyds brand change",
@@ -2812,6 +2837,10 @@
       [
         "Stop Scams UK — 159 participating banks",
         "https://stopscamsuk.org.uk/our-programmes/159-phone-number/"
+      ],
+      [
+        "Lloyds Banking Group — Halifax to rebrand to Lloyds (1 July 2026)",
+        "https://www.lloydsbankinggroup.com/media/press-releases/2026/lloyds-banking-group/halifax-rebrand-to-lloyds.html"
       ]
     ],
     "evidence": [
@@ -3963,7 +3992,7 @@
       ],
       [
         "What genuine Companies House email can look like",
-        "Companies House says its real emails come from an address ending in `.gov.uk`—not exclusively `@companieshouse.gov.uk`. For example, its published March 2026 notice says a legitimate message about the WebFiling security issue was sent from `companies.house@notifications.service.gov.uk`.\n\nGenuine Companies House services can also send emails containing links. Its Follow service sends alerts linking to a company's filing history, and its guidance gives `ewf.companieshouse.gov.uk` as an example of a genuine password-reset address. Companies House and the Intellectual Property Office also stated in 2026 that invoices are usually posted but can be sent by email.\n\nTherefore, “it contains a link”, “it asks for payment” or “it does not come from `@companieshouse.gov.uk`” cannot each be used as an automatic verdict. Verify independently.\n\nCompanies House says it will never ask for your company authentication code. It also says it will not call to ask for passwords, bank details, authentication codes, or details of directors or company officers."
+        "Companies House says its real emails come from an address ending in `.gov.uk`—not exclusively `@companieshouse.gov.uk`. For example, its published notice of 17 March 2026 about the WebFiling security issue said those emails would come from `companies.house@notifications.service.gov.uk`. That is a documented example of one genuine Companies House sender for that specific communication — not a permanent universal address, and not authentication on its own, because sender details can be spoofed.\n\nGenuine Companies House services can also send emails containing links. Its Follow service sends alerts linking to a company's filing history, and its guidance gives `ewf.companieshouse.gov.uk` as an example of a genuine password-reset address. Companies House and the Intellectual Property Office also stated in 2026 that invoices are usually posted but can be sent by email.\n\nTherefore, “it contains a link”, “it asks for payment” or “it does not come from `@companieshouse.gov.uk`” cannot each be used as an automatic verdict. Verify independently.\n\nCompanies House says it will never ask for your company authentication code. It also says it will not call to ask for passwords, bank details, authentication codes, or details of directors or company officers."
       ],
       [
         "How to verify a message safely",
