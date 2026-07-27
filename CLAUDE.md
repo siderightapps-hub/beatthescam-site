@@ -65,7 +65,7 @@ python3 scripts/fact_reverify.py --limit 3       # cheap smoke test of the quart
 **Branding canon that models' training data gets wrong** (the generator prompt and gate already enforce these — keep any new prose consistent):
 - **"Report Fraud"** (reportfraud.police.uk, 0300 123 2040) is the current UK reporting service — **"Action Fraud" was rebranded Dec 2025** (full launch Jan 2026). Write "Report Fraud"; "Action Fraud" only as a parenthetical former name.
 - **"FCA Firm Checker"** (register.fca.org.uk) — the **"ScamSmart" branding is retired** (FLAG-tier in the gate).
-- UK credit reference agencies are **Experian, Equifax, TransUnion only** (ClearScore/CallCredit misclassification is BLOCK-tier).
+- UK credit reference agencies: **Experian, Equifax and TransUnion are the three main ones, and MoneyHelper also lists Crediva** as offering a free statutory report — say "the four agencies MoneyHelper lists" or "the three main agencies plus Crediva", never "the three CRAs" as if exhaustive. **ClearScore is a free app (it resells Equifax data) and CallCredit is the obsolete name for TransUnion** — presenting either as a current agency stays BLOCK-tier.
 - The **National Fraud Database is a Cifas service** — direct readers to Cifas Protective Registration, never route it via Report Fraud/Citizens Advice (BLOCK-tier). US-style "fraud alert on your credit file" is FLAG-tier (the UK mechanism is Cifas Protective Registration).
 - Blanket "HMRC never texts/emails/links you" is FLAG-tier (HMRC runs genuine SMS/email campaigns with gov.uk links).
 

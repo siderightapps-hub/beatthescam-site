@@ -262,6 +262,49 @@ def run() -> int:
                                     "Scotland. Then report the loss to Report Fraud at "
                                     "reportfraud.police.uk, or Police Scotland on 101 in "
                                     "Scotland.</p>"]])))
+    # Citizens Advice covers ENGLAND AND WALES only. Naming it as a general UK
+    # helpline strands Scottish and Northern Irish readers (operator review,
+    # 2026-07-27). It is also a research publisher, so a CITATION must not flag.
+    def qa_blocks(t):
+        return bool([i for i in check_deterministic(post(quick_answer=t))
+                     if i["check"] == "nation_consumer_routing"])
+    check("an unscoped Citizens Advice helpline blocks",
+          qa_blocks("Contact Citizens Advice on 0808 223 1133 for help with the trader."))
+    check("the bare England-and-Wales number blocks",
+          qa_blocks("Call 0808 223 1133 for help with the trader."))
+    check("Citizens Advice in a list of advice bodies blocks",
+          qa_blocks("Free debt advice is available from StepChange, National Debtline "
+                    "and Citizens Advice, so never pay to get started."))
+    check("the three-nation form passes",
+          not qa_blocks("Citizens Advice in England and Wales on 0808 223 1133, Advice Direct "
+                        "Scotland in Scotland on 0808 800 9060, or Consumerline in Northern "
+                        "Ireland on 0300 123 6262."))
+    check("CITING Citizens Advice research is not a route",
+          not qa_blocks("Online shopping was the most commonly reported scam type in Citizens "
+                        "Advice's 2025 Scams Awareness survey, at 26%."))
+    check("pointing at the reader's own nation passes",
+          not qa_blocks("Ask your nation's consumer service about the trader."))
+
+    # A Police Scotland + 101 match is only a ROUTE when a positive route verb
+    # governs it and no negation governs that verb. Co-occurrence is not a route,
+    # and the negation vocabulary must cover call/ring/dial (operator review,
+    # 2026-07-27).
+    check("a Police Scotland 101 STATISTIC is not a route",
+          hub_blocks(hub([["R", "<p>Report it to Report Fraud. Police Scotland recorded 101 "
+                                "reports last month.</p>"]])))
+    check("'Do not call Police Scotland on 101' is not a route",
+          hub_blocks(hub([["R", "<p>Report it to Report Fraud. Do not call Police Scotland "
+                                "on 101.</p>"]])))
+    check("'Never ring Police Scotland on 101' is not a route",
+          hub_blocks(hub([["R", "<p>Report it to Report Fraud. Never ring Police Scotland "
+                                "on 101.</p>"]])))
+    check("'Instead of contacting Police Scotland on 101' is not a route",
+          hub_blocks(hub([["R", "<p>Report it to Report Fraud. Instead of contacting Police "
+                                "Scotland on 101, keep the evidence.</p>"]])))
+    check("a negation in an EARLIER clause does not negate the route",
+          not hub_blocks(hub([["R", "<p>Don't pay; report it to Report Fraud or Police Scotland "
+                                    "on 101.</p>"]])))
+
     # NB: a mention placed BEFORE the scope+route block is served, not stranded —
     # that is the approved guide form (instruction, scope, route) and the reader
     # reaches the route by reading on. Only a mention with no route within the

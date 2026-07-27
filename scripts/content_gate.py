@@ -413,8 +413,11 @@ def check_dated_events(post: Dict) -> List[Dict]:
 # Catches the exact recurring factual errors that audit found in the corpus.
 
 # ClearScore is a free credit-checking APP (it resells Equifax data); "CallCredit"
-# was renamed TransUnion in 2018. Neither is a UK credit reference agency — the
-# three CRAs are Experian, Equifax, TransUnion. Presenting ClearScore/CallCredit
+# was renamed TransUnion in 2018. Neither is a UK credit reference agency. The
+# three MAIN CRAs are Experian, Equifax and TransUnion; MoneyHelper also lists
+# Crediva as offering a free statutory report, so "the three CRAs" must not be
+# written as if exhaustive (operator review, 2026-07-27). Presenting
+# ClearScore/CallCredit
 # AS an agency (enumerated alongside BOTH Experian and Equifax, or right next to
 # "credit reference agenc[y]") is the misclassification to BLOCK. A correct,
 # standalone mention of ClearScore as a free app sits apart from the trio, so
@@ -449,8 +452,9 @@ def check_cra_misclassification(post: Dict) -> List[Dict]:
                 "check": "cra_misclassification",
                 "severity": SEVERITY_BLOCK,
                 "span": seg.strip()[:160],
-                "detail": (f"presents '{name}' as a UK credit reference agency. The three CRAs are "
-                           f"Experian, Equifax, and TransUnion — ClearScore is a free credit-checking "
+                "detail": (f"presents '{name}' as a UK credit reference agency. The three main CRAs "
+                           f"are Experian, Equifax and TransUnion, and MoneyHelper also lists Crediva "
+                           f"as offering a free statutory report — ClearScore is a free credit-checking "
                            f"app and CallCredit was renamed TransUnion in 2018. Use TransUnion."),
             })
     return issues
@@ -724,8 +728,44 @@ _REPORT_FRAUD_NAMED_RE = re.compile(
 _REPORT_VERB_RE = re.compile(r"\breport(?:s|ed|ing)?\b|\btell\b|\bcontact\b", re.I)
 _SCOTLAND_ACTIONABLE_RE = re.compile(
     r"Police\s+Scotland[^.;]{0,40}\b101\b|\b101\b[^.;]{0,40}Police\s+Scotland", re.I)
+# Verbs that can actually GOVERN a reporting route. "call", "ring" and "dial"
+# were missing, so "Do not call Police Scotland on 101" read as a valid route
+# (operator review, 2026-07-27).
+_ROUTE_VERB_RE = re.compile(
+    r"\b(?:report(?:s|ed|ing)?|tell(?:s|ing)?|told|contact(?:s|ed|ing)?"
+    r"|call(?:s|ed|ing)?|ring(?:s|ing)?|rang|dial(?:s|led|ling|ed|ing)?"
+    r"|file(?:s|d|ing)?|submit(?:s|ted|ting)?|raise(?:s|d)?|raising)\b", re.I)
 _NEGATED_DIRECTIVE_RE = re.compile(
-    r"\b(?:do\s+not|don't|never|instead\s+of|rather\s+than|no\s+need\s+to)\b", re.I)
+    r"\b(?:do\s+not|don['’]t|does\s+not|doesn['’]t|never|instead\s+of"
+    r"|rather\s+than|no\s+need\s+to)\b", re.I)
+
+
+def _route_is_actionable(sent: str, route_m) -> bool:
+    """True only if a positive route verb governs this Police Scotland + 101
+    match and no negation governs that verb.
+
+    Two failure modes this closes (operator review, 2026-07-27):
+
+      "Police Scotland recorded 101 reports last month."  -> statistic, not a
+      route. No verb precedes the match, and `reports` AFTER it is a noun, so
+      the lead is what must be inspected, never the whole sentence.
+
+      "Do not call Police Scotland on 101."               -> negated route.
+
+    Scope: only the LAST route verb before the match can govern it, and only a
+    negation in the same clause negates that verb — so "Don't pay; report it to
+    Report Fraud or Police Scotland on 101" stays a valid route, because the
+    clause boundary ends the reach of "Don't".
+    """
+    lead = sent[:route_m.start()]
+    verbs = list(_ROUTE_VERB_RE.finditer(lead))
+    if not verbs:
+        return False
+    seg = lead[max(0, verbs[-1].start() - 25):verbs[-1].start()]
+    for boundary in (";", ".", ":"):
+        if boundary in seg:
+            seg = seg.rsplit(boundary, 1)[1]
+    return not _NEGATED_DIRECTIVE_RE.search(seg)
 
 
 def _sentences(text: str) -> List[str]:
@@ -746,8 +786,7 @@ def _has_scottish_route(text: str) -> bool:
         # report it to..." are both correct directives, and a whole-sentence
         # negation test false-flagged them.
         route_m = _SCOTLAND_ACTIONABLE_RE.search(sent)
-        lead = sent[max(0, route_m.start() - 45):route_m.start()]
-        if _NEGATED_DIRECTIVE_RE.search(lead) and _REPORT_VERB_RE.search(lead):
+        if not _route_is_actionable(sent, route_m):
             continue
         # The route must be offered as an ALTERNATIVE to Report Fraud in the same
         # sentence. Without this, "Police Scotland recorded 101 reports last
@@ -855,16 +894,56 @@ def _field_routes_scotland(text: str) -> bool:
         served = False
         for w in window:
             m = _SCOTLAND_ACTIONABLE_RE.search(w)
-            if not m:
-                continue
-            lead = w[max(0, m.start() - 45):m.start()]
-            if _NEGATED_DIRECTIVE_RE.search(lead) and _REPORT_VERB_RE.search(lead):
+            if not m or not _route_is_actionable(w, m):
                 continue
             served = True
             break
         if not served:
             return False
     return True
+
+
+# Only a ROUTE counts. Citizens Advice is also a research publisher, and citing
+# "Citizens Advice's 2025 Scams Awareness survey" is not a consumer-advice
+# instruction — flagging that was a false positive on the marketplace hub.
+_CA_NAMED_RE = re.compile(
+    r"0808\s*223\s*1133"
+    r"|(?:contact|call|ring|phone|ask|speak\s+to|report\s+to|available\s+from|from"
+    r"|through|via)\b[^.]{0,60}?\bCitizens\s+Advice(?![\u2019']s)"
+    r"|Citizens\s+Advice(?:\s+consumer)?\s+(?:helpline|consumer\s+service|adviser)", re.I)
+# The other two nations' consumer services, either named or by number.
+_CA_SCOPED_RE = re.compile(
+    r"England\s+and\s+Wales|Advice\s+Direct\s+Scotland|0808\s*800\s*9060"
+    r"|Consumerline|0300\s*123\s*6262|your\s+nation|each\s+nation", re.I)
+
+
+def check_nation_consumer_routing(post: Dict) -> List[Dict]:
+    """Citizens Advice is the consumer service for ENGLAND AND WALES only.
+
+    Scotland uses Advice Direct Scotland (0808 800 9060) and Northern Ireland
+    uses Consumerline (0300 123 6262) — both added to the verified canon on
+    2026-07-27. Naming Citizens Advice as a general UK helpline strands Scottish
+    and Northern Irish readers exactly as an unqualified Report Fraud route
+    does, and 23 live guides did so (operator review, 2026-07-27).
+
+    Checked per field, like the Scotland reporting route: a scope note buried in
+    a later section does not help a reader who only sees the quick answer.
+    """
+    issues: List[Dict] = []
+    for label, text in _route_fields(post):
+        if not text.strip():
+            continue
+        if _CA_NAMED_RE.search(text) and not _CA_SCOPED_RE.search(text):
+            issues.append({
+                "check": "nation_consumer_routing",
+                "severity": SEVERITY_BLOCK,
+                "span": text[:160],
+                "detail": (f"the {label} names Citizens Advice without scoping it. Citizens Advice "
+                           f"covers England and Wales; add Advice Direct Scotland on 0808 800 9060 "
+                           f"and Consumerline on 0300 123 6262, or point to the service for the "
+                           f"reader's nation."),
+            })
+    return issues
 
 
 def check_scotland_routing(post: Dict) -> List[Dict]:
@@ -990,7 +1069,8 @@ def check_deterministic(post: Dict) -> List[Dict]:
             + check_legislation(post) + check_dated_events(post)
             + check_cra_misclassification(post) + check_nfd_routing(post)
             + check_uk_advice_flags(post) + check_recurring_accuracy(post)
-            + check_scotland_routing(post) + check_canon_guards(post)
+            + check_scotland_routing(post) + check_nation_consumer_routing(post)
+            + check_canon_guards(post)
             + check_text_wellformed(post))
 
 

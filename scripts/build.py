@@ -321,8 +321,33 @@ def validate_category_hubs(hubs: dict) -> None:
     # unknown key, the renderer skips it, and the build silently publishes nothing
     # — the gate would pass vacuously because the wrapper has no prose to inspect
     # (operator review, 2026-07-27). Fail loudly instead.
+    # This runs BEFORE dist/ is removed. A shape the validator waves through but
+    # the renderer cannot unpack — `["label"]` in sources_checked, say — would
+    # otherwise crash after the committed output tree had already been deleted
+    # (operator review, 2026-07-27).
     known = set(CATEGORY_LABELS) | set(CATEGORY_CANON.values())
     structural = []
+    if hubs is not None and not isinstance(hubs, dict):
+        raise SystemExit(f"ERROR: category hub file must be an object keyed by category slug, "
+                         f"got {type(hubs).__name__}")
+
+    def _pairs(slug, field, value, a_name, b_name, require_url=False):
+        if value is None:
+            return
+        if not isinstance(value, list):
+            structural.append(f"{slug}: {field!r} must be a list, got {type(value).__name__}")
+            return
+        for n, pair in enumerate(value):
+            if not (isinstance(pair, (list, tuple)) and len(pair) == 2):
+                structural.append(f"{slug}: {field}[{n}] must be a [{a_name}, {b_name}] pair")
+                continue
+            a, b = pair
+            if not isinstance(a, str) or not isinstance(b, str):
+                structural.append(f"{slug}: {field}[{n}] {a_name}/{b_name} must both be strings")
+                continue
+            if require_url and not b.startswith(("http://", "https://")):
+                structural.append(f"{slug}: {field}[{n}] {b_name} must be an http(s) URL, got {b!r}")
+
     for slug, hub in (hubs or {}).items():
         if slug not in known:
             structural.append(f"unknown category slug {slug!r} — hubs are keyed by canonical "
@@ -332,15 +357,29 @@ def validate_category_hubs(hubs: dict) -> None:
             structural.append(f"{slug}: record is {type(hub).__name__}, expected an object")
             continue
         for field in ("title", "description"):
-            if not str(hub.get(field) or "").strip():
-                structural.append(f"{slug}: missing or empty {field!r}")
+            if not isinstance(hub.get(field), str) or not hub.get(field, "").strip():
+                structural.append(f"{slug}: {field!r} must be a non-empty string")
+        if "intro" in hub and not isinstance(hub.get("intro"), str):
+            structural.append(f"{slug}: 'intro' must be a string")
         sections = hub.get("sections")
         if not isinstance(sections, list) or not sections:
             structural.append(f"{slug}: 'sections' must be a non-empty list")
         else:
-            for n, pair in enumerate(sections):
-                if not (isinstance(pair, (list, tuple)) and len(pair) == 2):
-                    structural.append(f"{slug}: sections[{n}] must be a [heading, body] pair")
+            _pairs(slug, "sections", sections, "heading", "body")
+        _pairs(slug, "faq", hub.get("faq"), "question", "answer")
+        _pairs(slug, "sources_checked", hub.get("sources_checked"), "label", "url", require_url=True)
+        updated = hub.get("updated")
+        if updated is not None:
+            if not isinstance(updated, str) or not re.fullmatch(r"\d{4}-\d{2}-\d{2}", updated):
+                structural.append(f"{slug}: 'updated' must be an ISO date (YYYY-MM-DD), got {updated!r}")
+            else:
+                try:
+                    datetime.strptime(updated, "%Y-%m-%d")
+                except ValueError:
+                    structural.append(f"{slug}: 'updated' is not a real date: {updated!r}")
+        ads = hub.get("ads_mode")
+        if ads is not None and ads not in ("none", "npa", "default"):
+            structural.append(f"{slug}: 'ads_mode' must be none|npa|default, got {ads!r}")
     if structural:
         for msg in structural:
             print(f"  Category hub STRUCTURE: {msg}")
@@ -787,6 +826,36 @@ def post_ads_mode(post: dict) -> str:
     # Normalise hyphens/underscores to spaces so a hyphenated slug
     # ("military-romance-scam-uk") matches the spaced terms ("military romance").
     hay = hay.replace("-", " ").replace("_", " ")
+    if _NO_ADS_RE.search(hay):
+        return "none"
+    return "npa" if _SENSITIVE_FINANCE_RE.search(hay) else "default"
+
+
+def hub_ads_mode(slug: str, hub: dict) -> str:
+    """Ad mode for a category hub page.
+
+    `render_category_page()` used to pass a flat "default" for every hub, so ten
+    long pages covering debt, lost money, identity theft, recovery, romance,
+    sextortion and intimate images would all have carried personalised-capable
+    Auto Ads — inconsistent with the site's per-page policy and the reason
+    `post_ads_mode()` exists (operator review, 2026-07-27).
+
+    Assesses the WHOLE hub, not just the category name: a hub's own prose is
+    what a reader and an ad network actually see, and `crypto` or `email` gives
+    away nothing about the sextortion and debt material inside. An explicit
+    `ads_mode` on the record wins, so an editor can always override.
+    """
+    explicit = str((hub or {}).get("ads_mode") or "").strip().lower()
+    if explicit:
+        if explicit not in ("none", "npa", "default"):
+            raise SystemExit(f"ERROR: hub {slug}: ads_mode must be none|npa|default, got {explicit!r}")
+        return explicit
+    hay = " ".join([
+        slug, str(hub.get("title") or ""), str(hub.get("description") or ""),
+        str(hub.get("intro") or ""),
+        " ".join(f"{h} {b}" for h, b in (hub.get("sections") or [])),
+        " ".join(f"{q} {a}" for q, a in (hub.get("faq") or [])),
+    ]).replace("-", " ").replace("_", " ")
     if _NO_ADS_RE.search(hay):
         return "none"
     return "npa" if _SENSITIVE_FINANCE_RE.search(hay) else "default"
@@ -1649,7 +1718,7 @@ def render_category_page(site, category, posts, all_categories=None, hub=None):
         canonical=canonical,
         schema=schema,
         site=site,
-        ads_mode="default" if hub else "none",
+        ads_mode=hub_ads_mode(slug, hub) if hub else "none",
     )
 
 
