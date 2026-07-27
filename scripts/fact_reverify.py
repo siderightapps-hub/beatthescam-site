@@ -90,7 +90,10 @@ elsewhere on the site) — only flag a DEVIATION from these, never re-report the
 - Current reporting route name is "Report Fraud" (reportfraud.police.uk, 0300 123 2040); \
 "Action Fraud" is its former name (rebranded Dec 2025).
 - FCA's checker is the "FCA Firm Checker" (register.fca.org.uk); "ScamSmart" is retired branding.
-- UK credit reference agencies are Experian, Equifax, TransUnion only.
+- UK credit reference agencies: Experian, Equifax and TransUnion are the three MAIN agencies, and
+  MoneyHelper also lists Crediva as offering a free statutory report. Treat "the three CRAs",
+  "all three" or "the other two" written as EXHAUSTIVE as drift. ClearScore is a free app and
+  CallCredit is the obsolete name for TransUnion — neither is a current agency.
 - The National Fraud Database is a Cifas service (Cifas Protective Registration) — not routed via \
 Report Fraud or Citizens Advice. There is no UK "credit freeze"; the UK mechanism is Cifas \
 Protective Registration.

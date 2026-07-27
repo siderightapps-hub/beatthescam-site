@@ -285,6 +285,29 @@ def run() -> int:
     check("pointing at the reader's own nation passes",
           not qa_blocks("Ask your nation's consumer service about the trader."))
 
+    # Experian, Equifax and TransUnion are the three MAIN agencies; MoneyHelper
+    # also lists Crediva (operator review, 2026-07-27). "Three main" is correct;
+    # an exhaustive "all three" / "the other two" is not.
+    def cra_blocks(t):
+        return bool([i for i in check_deterministic(post(quick_answer=t))
+                     if i["check"] == "cra_exhaustive"])
+    check("'all three UK credit reference agencies' blocks",
+          cra_blocks("Check all three UK credit reference agencies — Experian, Equifax and TransUnion."))
+    check("'the other two credit reference agencies' blocks",
+          cra_blocks("Then check your file with the other two credit reference agencies."))
+    check("naming all four agencies passes",
+          not cra_blocks("Check the reports held by all four agencies MoneyHelper lists — Experian, "
+                         "Equifax and TransUnion, the three main ones, plus the smaller Crediva."))
+    check("'three main agencies' passes",
+          not cra_blocks("Experian, Equifax and TransUnion are the three main agencies."))
+    check("naming the three without an exhaustive claim passes",
+          not cra_blocks("Check your credit file with Experian, Equifax and TransUnion."))
+    check("a three-dot MENU instruction does not block",
+          not cra_blocks("Report the profile: tap the three-dot menu on the profile or in the chat "
+                         "and choose to report it."))
+    check("'all three' about something else does not block",
+          not cra_blocks("All three of your bank cards should be replaced immediately."))
+
     # A Police Scotland + 101 match is only a ROUTE when a positive route verb
     # governs it and no negation governs that verb. Co-occurrence is not a route,
     # and the negation vocabulary must cover call/ring/dial (operator review,
@@ -304,6 +327,16 @@ def run() -> int:
     check("a negation in an EARLIER clause does not negate the route",
           not hub_blocks(hub([["R", "<p>Don't pay; report it to Report Fraud or Police Scotland "
                                     "on 101.</p>"]])))
+
+    check("a narrative 'we reported ... Police Scotland recorded 101' is not a route",
+          hub_blocks(hub([["R", "<p>Report it to Report Fraud. We reported yesterday that Police "
+                                "Scotland recorded 101 cases.</p>"]])))
+    check("a LONG-DISTANCE negation still blocks the route",
+          hub_blocks(hub([["R", "<p>Report it to Report Fraud. Do not under any circumstances ever "
+                                "call Police Scotland on 101.</p>"]])))
+    check("post-verbal contrast ('contact X, not Police Scotland') is not a route",
+          hub_blocks(hub([["R", "<p>Report it to Report Fraud. Contact your bank, not Police "
+                                "Scotland on 101.</p>"]])))
 
     # NB: a mention placed BEFORE the scope+route block is served, not stranded —
     # that is the approved guide form (instruction, scope, route) and the reader

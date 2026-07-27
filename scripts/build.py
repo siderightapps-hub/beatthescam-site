@@ -7,6 +7,7 @@ import re
 import shutil
 from collections import defaultdict
 from datetime import datetime, timedelta, timezone
+from urllib.parse import urlparse
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -297,10 +298,14 @@ def load_category_hubs(root: Path) -> dict:
     path = root / "content" / "category-hubs.json"
     if not path.exists():
         return {}
+    # FAIL CLOSED. Swallowing the error and returning {} meant a malformed hub
+    # file silently published every category as a plain page instead of stopping
+    # the build (operator review, 2026-07-27). Absent is a valid state; present
+    # but unreadable is not.
     try:
         return json.loads(path.read_text(encoding="utf-8"))
-    except Exception:
-        return {}
+    except Exception as exc:
+        raise SystemExit(f"ERROR: {path} exists but could not be read or parsed: {exc}")
 
 
 def validate_category_hubs(hubs: dict) -> None:
@@ -327,6 +332,7 @@ def validate_category_hubs(hubs: dict) -> None:
     # (operator review, 2026-07-27).
     known = set(CATEGORY_LABELS) | set(CATEGORY_CANON.values())
     structural = []
+    unsourced_legacy = []
     if hubs is not None and not isinstance(hubs, dict):
         raise SystemExit(f"ERROR: category hub file must be an object keyed by category slug, "
                          f"got {type(hubs).__name__}")
@@ -345,8 +351,15 @@ def validate_category_hubs(hubs: dict) -> None:
             if not isinstance(a, str) or not isinstance(b, str):
                 structural.append(f"{slug}: {field}[{n}] {a_name}/{b_name} must both be strings")
                 continue
-            if require_url and not b.startswith(("http://", "https://")):
-                structural.append(f"{slug}: {field}[{n}] {b_name} must be an http(s) URL, got {b!r}")
+            if not a.strip():
+                structural.append(f"{slug}: {field}[{n}] {a_name} is empty")
+            if not require_url and not b.strip():
+                structural.append(f"{slug}: {field}[{n}] {b_name} is empty")
+            if require_url:
+                parsed = urlparse(b)
+                if parsed.scheme not in ("http", "https") or not parsed.netloc:
+                    structural.append(f"{slug}: {field}[{n}] {b_name} must be an http(s) URL "
+                                      f"with a host, got {b!r}")
 
     for slug, hub in (hubs or {}).items():
         if slug not in known:
@@ -359,15 +372,34 @@ def validate_category_hubs(hubs: dict) -> None:
         for field in ("title", "description"):
             if not isinstance(hub.get(field), str) or not hub.get(field, "").strip():
                 structural.append(f"{slug}: {field!r} must be a non-empty string")
-        if "intro" in hub and not isinstance(hub.get("intro"), str):
-            structural.append(f"{slug}: 'intro' must be a string")
+        if "intro" in hub and (not isinstance(hub.get("intro"), str) or not hub["intro"].strip()):
+            structural.append(f"{slug}: 'intro' must be a non-empty string")
         sections = hub.get("sections")
         if not isinstance(sections, list) or not sections:
             structural.append(f"{slug}: 'sections' must be a non-empty list")
         else:
             _pairs(slug, "sections", sections, "heading", "body")
         _pairs(slug, "faq", hub.get("faq"), "question", "answer")
-        _pairs(slug, "sources_checked", hub.get("sources_checked"), "label", "url", require_url=True)
+        srcs = hub.get("sources_checked")
+        if isinstance(srcs, list) and srcs:
+            _pairs(slug, "sources_checked", srcs, "label", "url", require_url=True)
+        elif hub.get("updated"):
+            # A hub carrying a review date is a reviewed hub: it renders a trust
+            # layer, so it must have sources to render. Required, not advisory.
+            structural.append(f"{slug}: 'sources_checked' must be a non-empty list — this hub "
+                              f"declares a review date, so the trust layer renders from it")
+        else:
+            # `sms`, `payment` and `government` predate the trust layer and carry
+            # neither sources nor a review date. Making this a hard error today
+            # would break the build on live content, so it is a loud warning
+            # until they are sourced — at which point this branch should go
+            # (operator review, 2026-07-27).
+            unsourced_legacy.append(slug)
+        unknown = set(hub) - {"title", "description", "intro", "sections", "faq",
+                              "sources_checked", "updated", "ads_mode"}
+        if unknown:
+            structural.append(f"{slug}: unknown key(s) {sorted(unknown)} — a misspelling such as "
+                              f"'source_checked' would silently drop the trust layer")
         updated = hub.get("updated")
         if updated is not None:
             if not isinstance(updated, str) or not re.fullmatch(r"\d{4}-\d{2}-\d{2}", updated):
@@ -380,6 +412,9 @@ def validate_category_hubs(hubs: dict) -> None:
         ads = hub.get("ads_mode")
         if ads is not None and ads not in ("none", "npa", "default"):
             structural.append(f"{slug}: 'ads_mode' must be none|npa|default, got {ads!r}")
+    for slug in unsourced_legacy:
+        print(f"  Category hub WARNING: {slug} has no 'sources_checked' and no review date — it "
+              f"predates the trust layer and renders no sources. Add both, then make this an error.")
     if structural:
         for msg in structural:
             print(f"  Category hub STRUCTURE: {msg}")
@@ -846,19 +881,23 @@ def hub_ads_mode(slug: str, hub: dict) -> str:
     `ads_mode` on the record wins, so an editor can always override.
     """
     explicit = str((hub or {}).get("ads_mode") or "").strip().lower()
-    if explicit:
-        if explicit not in ("none", "npa", "default"):
-            raise SystemExit(f"ERROR: hub {slug}: ads_mode must be none|npa|default, got {explicit!r}")
-        return explicit
+    if explicit and explicit not in ("none", "npa", "default"):
+        raise SystemExit(f"ERROR: hub {slug}: ads_mode must be none|npa|default, got {explicit!r}")
     hay = " ".join([
         slug, str(hub.get("title") or ""), str(hub.get("description") or ""),
         str(hub.get("intro") or ""),
         " ".join(f"{h} {b}" for h, b in (hub.get("sections") or [])),
         " ".join(f"{q} {a}" for q, a in (hub.get("faq") or [])),
     ]).replace("-", " ").replace("_", " ")
-    if _NO_ADS_RE.search(hay):
-        return "none"
-    return "npa" if _SENSITIVE_FINANCE_RE.search(hay) else "default"
+    derived = "none" if _NO_ADS_RE.search(hay) else (
+        "npa" if _SENSITIVE_FINANCE_RE.search(hay) else "default")
+    if not explicit:
+        return derived
+    # An explicit value may only be EQUALLY or MORE restrictive. Returning it
+    # before scanning let a future record carrying sextortion or intimate-image
+    # material set "default" and bypass the safer derived "none".
+    rank = {"default": 0, "npa": 1, "none": 2}
+    return explicit if rank[explicit] >= rank[derived] else derived
 
 
 def make_base(content: str, *, title: str, description: str, canonical: str, schema: str, site: dict,
@@ -3097,7 +3136,7 @@ def build_legal_bodies(site):
       <div class="table-row"><strong>You shared card or bank details</strong><span>Contact the bank or card issuer immediately through its official app or the number printed on the card. Ask it to secure the account or card and identify any payment or account change you did not authorise.</span></div>
       <div class="table-row"><strong>You approved or sent a bank transfer</strong><span>Tell the sending bank immediately that the payment was induced by fraud and ask it to contact the receiving bank. Ask whether the APP reimbursement rules apply; do not describe an authorised scam payment merely as an unauthorised transaction.</span></div>
       <div class="table-row"><strong>You installed remote-access software</strong><span>Disconnect the device, end the remote session and contact the bank from a different trusted device. Remove the software, run a full scan, change exposed passwords, and do not use the affected device for banking until it is secure.</span></div>
-      <div class="table-row"><strong>You shared identity documents or personal data</strong><span>Secure the affected accounts, check all three UK credit-reference files for applications you do not recognise, and consider Cifas Protective Registration where identity misuse is a realistic risk.</span></div>
+      <div class="table-row"><strong>You shared identity documents or personal data</strong><span>Secure the affected accounts, check your credit-reference files for applications you do not recognise — Experian, Equifax and TransUnion are the three main agencies, and MoneyHelper also lists Crediva, and consider Cifas Protective Registration where identity misuse is a realistic risk.</span></div>
     </div>
 
     <h2>Which money-recovery route applies?</h2>

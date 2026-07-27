@@ -37,7 +37,10 @@ ACCURACY_BLOCK = """ACCURACY — THIS OVERRIDES EVERY STYLE AND SEO RULE BELOW. 
 - Never present a named company as "legitimate", "genuine", or "trusted" unless it is a well-known real brand; do not invent example company names.
 - If you are not certain of the exact relationship, date, figure, or attribution, describe it in general terms WITHOUT naming a specific deal/number — or omit it. Inventing a product or vendor name, or pairing a real company with the wrong partner, tool, or capability, is forbidden.
 - Before finalising, re-read every sentence that names a real company, person, or product alongside a date, number, deal, price, or feature. If you are not confident it is a true public fact, rewrite it as a general statement or delete it.
-- Do NOT state a phone number for any specific company (bank, courier, retailer, utility, etc.). The ONLY phone numbers permitted anywhere are: Report Fraud 0300 123 2040, Citizens Advice 0808 223 1133, the FCA consumer helpline 0800 111 6768, 159 (to reach your bank), and 7726 (forward spam texts). For any organisation, tell readers to use the number on their card, bill, or the organisation's official website — never state or invent a company's own number."""
+- Do NOT state a phone number for any specific company (bank, courier, retailer, utility, etc.). The ONLY phone numbers permitted anywhere are: Report Fraud 0300 123 2040, Citizens Advice 0808 223 1133, the FCA consumer helpline 0800 111 6768, 159 (to reach your bank), and 7726 (forward spam texts). For any organisation, tell readers to use the number on their card, bill, or the organisation's official website — never state or invent a company's own number.
+- UK credit reference agencies: Experian, Equifax and TransUnion are the three MAIN agencies; MoneyHelper also lists Crediva as offering a free statutory report. Never write "the three CRAs", "all three" or "the other two" as if exhaustive. ClearScore is a free app and CallCredit is the obsolete name for TransUnion.
+- Consumer advice is nation-specific: Citizens Advice covers England and Wales (0808 223 1133), Advice Direct Scotland covers Scotland (0808 800 9060), Consumerline covers Northern Ireland (0300 123 6262). Never present Citizens Advice as a UK-wide helpline.
+"""
 
 # ─── ALLOWLISTS / BLOCKLISTS ─────────────────────────────────────────────────
 
@@ -53,8 +56,12 @@ ACCURACY_BLOCK = """ACCURACY — THIS OVERRIDES EVERY STYLE AND SEO RULE BELOW. 
 # fails to load, and any number in the canon but missing here would then be
 # false-BLOCKed (e.g. the Revenge Porn Helpline was added to the canon after
 # this fallback was first written and had drifted).
+# Emergency fallback only — the real allow-list loads from content/sources.json.
+# Advice Direct Scotland and Consumerline were missing, so a canon-load failure
+# would have produced a false BLOCK on correct three-nation routing.
 _FALLBACK_PHONE_DIGITS = {
-    "03001232040", "08082231133", "08001116768", "03456000459", "7726", "159",
+    "03001232040", "08082231133", "08088009060", "03001236262", "08082231144",
+    "08001116768", "03456000459", "7726", "159",
     "0800111999", "105", "999", "112", "101",
 }
 _FALLBACK_REPORT_EMAILS = {"report@phishing.gov.uk"}
@@ -740,36 +747,72 @@ _NEGATED_DIRECTIVE_RE = re.compile(
     r"|rather\s+than|no\s+need\s+to)\b", re.I)
 
 
+# A contrast marker between the verb and the route flips it into a non-route:
+# "Contact your bank, not Police Scotland on 101."
+_ROUTE_CONTRAST_RE = re.compile(r"\bnot\b|\brather\s+than\b|\binstead\s+of\b", re.I)
+# Verbs that make 101 a STATISTIC rather than a number to dial.
+_ROUTE_STATISTIC_RE = re.compile(
+    r"\b(?:recorded|received|logged|took|taken|handled|reported|registered|saw|counted)\b", re.I)
+
+
 def _route_is_actionable(sent: str, route_m) -> bool:
     """True only if a positive route verb governs this Police Scotland + 101
-    match and no negation governs that verb.
+    match and nothing negates or contrasts it.
 
-    Two failure modes this closes (operator review, 2026-07-27):
+    Rejects, in order (operator reviews, 2026-07-27):
 
-      "Police Scotland recorded 101 reports last month."  -> statistic, not a
-      route. No verb precedes the match, and `reports` AFTER it is a noun, so
-      the lead is what must be inspected, never the whole sentence.
+      "Police Scotland recorded 101 reports last month."
+          statistic — a counting verb sits inside the matched span.
+      "We reported yesterday that Police Scotland recorded 101 cases."
+          same, and the earlier `reported` is narrative, not a directive.
+      "Do not under any circumstances ever call Police Scotland on 101."
+          negated — the whole clause before the verb is scanned, not a fixed
+          character window, so distance does not defeat it.
+      "Contact your bank, not Police Scotland on 101."
+          post-verbal contrast: the verb governs the bank, not the route.
 
-      "Do not call Police Scotland on 101."               -> negated route.
-
-    Scope: only the LAST route verb before the match can govern it, and only a
-    negation in the same clause negates that verb — so "Don't pay; report it to
-    Report Fraud or Police Scotland on 101" stays a valid route, because the
-    clause boundary ends the reach of "Don't".
+    Accepts "Don't pay; report it to Report Fraud or Police Scotland on 101" —
+    a clause boundary ends the earlier negation's reach.
     """
+    # 1. A counting verb inside the match means 101 is a quantity, not a number.
+    if _ROUTE_STATISTIC_RE.search(route_m.group(0)):
+        return False
     lead = sent[:route_m.start()]
-    verbs = list(_ROUTE_VERB_RE.finditer(lead))
+    # 2. Work within the clause the route sits in.
+    # A colon INTRODUCES the routes rather than ending a clause — "file the loss
+    # through the national fraud route: … and Police Scotland on 101" is governed
+    # by "file", so treating ":" as a boundary lost the verb and false-flagged
+    # four correct guides.
+    boundary = max(lead.rfind(";"), lead.rfind(". "))
+    clause = lead[boundary + 1:] if boundary >= 0 else lead
+    verbs = list(_ROUTE_VERB_RE.finditer(clause))
     if not verbs:
         return False
-    seg = lead[max(0, verbs[-1].start() - 25):verbs[-1].start()]
-    for boundary in (";", ".", ":"):
-        if boundary in seg:
-            seg = seg.rsplit(boundary, 1)[1]
-    return not _NEGATED_DIRECTIVE_RE.search(seg)
+    verb = verbs[-1]
+    # 3. Nothing between the governing verb and the route may contrast it.
+    if _ROUTE_CONTRAST_RE.search(clause[verb.end():]):
+        return False
+    # 4. Nothing earlier may negate that verb. A comma ends a negation's scope,
+    #    so "Don't pay, end the contact, and report it to … Police Scotland on
+    #    101" stays a valid route while "Do not under any circumstances ever call
+    #    Police Scotland on 101" does not. The contrast rule above is what
+    #    catches "contact your bank, not Police Scotland" — hence the asymmetry.
+    before = clause[:verb.start()]
+    if "," in before:
+        before = before.rsplit(",", 1)[1]
+    return not _NEGATED_DIRECTIVE_RE.search(before)
 
 
 def _sentences(text: str) -> List[str]:
-    return [s for s in re.split(r"(?<=[.!?;])\s+", text or "") if s.strip()]
+    # Hub and guide bodies are HTML. Without normalising tags to whitespace,
+    # "…vulnerable consumers.</p><li>Report it to…" collapses to
+    # "consumers.Report it to…", which the splitter cannot see as two sentences —
+    # so a negation in one sentence leaked into the analysis of the next and
+    # false-flagged a correct route (operator review, 2026-07-27). A space keeps
+    # every character while restoring the boundary, and leaves dotted tokens like
+    # reportfraud.police.uk intact inside their sentence.
+    text = re.sub(r"<[^>]+>", " ", text or "")
+    return [s for s in re.split(r"(?<=[.!?;])\s+", text) if s.strip()]
 
 
 def _has_scottish_route(text: str) -> bool:
@@ -915,6 +958,52 @@ _CA_NAMED_RE = re.compile(
 _CA_SCOPED_RE = re.compile(
     r"England\s+and\s+Wales|Advice\s+Direct\s+Scotland|0808\s*800\s*9060"
     r"|Consumerline|0300\s*123\s*6262|your\s+nation|each\s+nation", re.I)
+
+
+# "Three main agencies" is correct; "the three CRAs" written as EXHAUSTIVE is
+# not — MoneyHelper also lists Crediva as offering a free statutory report
+# (operator review, 2026-07-27). Deliberately narrow: it fires only on an
+# explicitly exhaustive construction near a credit-agency context.
+# Field-level gate: the text must be ABOUT credit reference agencies. Without it
+# "tap the three-dot menu ... choose Report" matched, because "the three" sat
+# within 60 characters of "report" — five false positives on UI instructions.
+_CRA_CONTEXT_RE = re.compile(
+    r"credit\s+reference|credit[- ]reference|credit\s+files?|credit\s+reports?"
+    r"|\bCRAs?\b|Experian|Equifax|TransUnion|Crediva", re.I)
+_CRA_EXHAUSTIVE_RE = re.compile(
+    r"\b(?:all\s+three|the\s+three|only\s+three|the\s+other\s+two|both\s+other)\b"
+    r"[^.]{0,60}\b(?:credit\s+reference|credit[- ]reference|CRAs?|agenc\w+|credit\s+files?"
+    r"|credit\s+reports?|Experian|Equifax|TransUnion)\b"
+    r"|\b(?:credit\s+reference|credit[- ]reference)\s+agenc\w*[^.]{0,40}"
+    r"\b(?:all\s+three|the\s+three|only\s+three|the\s+other\s+two)\b", re.I)
+_CRA_MAIN_QUALIFIED_RE = re.compile(r"\bthree\s+main\b|\bmain\s+(?:three|agencies)\b|Crediva", re.I)
+
+
+def check_cra_exhaustive(post: Dict) -> List[Dict]:
+    """Flag credit-agency advice written as if three agencies were all of them.
+
+    Experian, Equifax and TransUnion are the three MAIN agencies. A recovery
+    guide telling a reader to check "all three" or "the other two" leaves out an
+    agency that also holds a free statutory report.
+    """
+    issues: List[Dict] = []
+    for label, text in _route_fields(post):
+        if not text.strip():
+            continue
+        if not _CRA_CONTEXT_RE.search(text):
+            continue
+        m = _CRA_EXHAUSTIVE_RE.search(text)
+        if m and not _CRA_MAIN_QUALIFIED_RE.search(text):
+            issues.append({
+                "check": "cra_exhaustive",
+                "severity": SEVERITY_BLOCK,
+                "span": re.sub(r"\s+", " ", m.group(0))[:160],
+                "detail": ("presents the credit reference agencies as an exhaustive set of three. "
+                           "Experian, Equifax and TransUnion are the three MAIN agencies; MoneyHelper "
+                           "also lists Crediva as offering a free statutory report. Say \"the three "
+                           "main agencies\" or name all four."),
+            })
+    return issues
 
 
 def check_nation_consumer_routing(post: Dict) -> List[Dict]:
@@ -1070,6 +1159,7 @@ def check_deterministic(post: Dict) -> List[Dict]:
             + check_cra_misclassification(post) + check_nfd_routing(post)
             + check_uk_advice_flags(post) + check_recurring_accuracy(post)
             + check_scotland_routing(post) + check_nation_consumer_routing(post)
+            + check_cra_exhaustive(post)
             + check_canon_guards(post)
             + check_text_wellformed(post))
 
