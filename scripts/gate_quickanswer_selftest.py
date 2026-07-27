@@ -279,6 +279,9 @@ def run() -> int:
           not qa_blocks("Citizens Advice in England and Wales on 0808 223 1133, Advice Direct "
                         "Scotland in Scotland on 0808 800 9060, or Consumerline in Northern "
                         "Ireland on 0300 123 6262."))
+    check("a correct three-nation sentence does NOT excuse a later mention",
+          qa_blocks("Ask your nation's consumer service about reviews. Then take the contract "
+                    "to Citizens Advice."))
     check("CITING Citizens Advice research is not a route",
           not qa_blocks("Online shopping was the most commonly reported scam type in Citizens "
                         "Advice's 2025 Scams Awareness survey, at 26%."))
@@ -302,6 +305,14 @@ def run() -> int:
           not cra_blocks("Experian, Equifax and TransUnion are the three main agencies."))
     check("naming the three without an exhaustive claim passes",
           not cra_blocks("Check your credit file with Experian, Equifax and TransUnion."))
+    check("a correct CRA sentence does NOT excuse a later exhaustive one",
+          cra_blocks("Experian, Equifax and TransUnion are the three main agencies; Crediva is "
+                     "also listed. Later, check all three UK credit reference agencies."))
+    check("'Crediva is also listed' does not excuse 'the other two'",
+          cra_blocks("Crediva is also listed by MoneyHelper. Check the other two credit "
+                     "reference agencies as well."))
+    check("'the only UK credit reference agencies are' blocks",
+          cra_blocks("The only UK credit reference agencies are Experian, Equifax and TransUnion."))
     check("a three-dot MENU instruction does not block",
           not cra_blocks("Report the profile: tap the three-dot menu on the profile or in the chat "
                          "and choose to report it."))

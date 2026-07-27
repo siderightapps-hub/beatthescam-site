@@ -37,7 +37,7 @@ ACCURACY_BLOCK = """ACCURACY — THIS OVERRIDES EVERY STYLE AND SEO RULE BELOW. 
 - Never present a named company as "legitimate", "genuine", or "trusted" unless it is a well-known real brand; do not invent example company names.
 - If you are not certain of the exact relationship, date, figure, or attribution, describe it in general terms WITHOUT naming a specific deal/number — or omit it. Inventing a product or vendor name, or pairing a real company with the wrong partner, tool, or capability, is forbidden.
 - Before finalising, re-read every sentence that names a real company, person, or product alongside a date, number, deal, price, or feature. If you are not confident it is a true public fact, rewrite it as a general statement or delete it.
-- Do NOT state a phone number for any specific company (bank, courier, retailer, utility, etc.). The ONLY phone numbers permitted anywhere are: Report Fraud 0300 123 2040, Citizens Advice 0808 223 1133, the FCA consumer helpline 0800 111 6768, 159 (to reach your bank), and 7726 (forward spam texts). For any organisation, tell readers to use the number on their card, bill, or the organisation's official website — never state or invent a company's own number.
+- Do NOT state a phone number for any specific company (bank, courier, retailer, utility, etc.). The only phone numbers permitted anywhere are the official reporting and support routes in the verified canon, `content/sources.json` — the same list the gate enforces at publish time. Do not work from a memorised list: if a number is not in that canon, do not print it. For any organisation, tell readers to use the number on their card, bill, or the organisation's official website.
 - UK credit reference agencies: Experian, Equifax and TransUnion are the three MAIN agencies; MoneyHelper also lists Crediva as offering a free statutory report. Never write "the three CRAs", "all three" or "the other two" as if exhaustive. ClearScore is a free app and CallCredit is the obsolete name for TransUnion.
 - Consumer advice is nation-specific: Citizens Advice covers England and Wales (0808 223 1133), Advice Direct Scotland covers Scotland (0808 800 9060), Consumerline covers Northern Ireland (0300 123 6262). Never present Citizens Advice as a UK-wide helpline.
 """
@@ -951,8 +951,9 @@ def _field_routes_scotland(text: str) -> bool:
 # instruction — flagging that was a false positive on the marketplace hub.
 _CA_NAMED_RE = re.compile(
     r"0808\s*223\s*1133"
-    r"|(?:contact|call|ring|phone|ask|speak\s+to|report\s+to|available\s+from|from"
-    r"|through|via)\b[^.]{0,60}?\bCitizens\s+Advice(?![\u2019']s)"
+    r"|(?:contact|call|ring|phone|ask|speak\s+to|report\s+to|refer\s+to|take\s+it\s+to"
+    r"|take\s+the\s+\w+\s+to|available\s+from|from|through|via)"
+    r"\b[^.]{0,60}?\bCitizens\s+Advice(?![\u2019']s)"
     r"|Citizens\s+Advice(?:\s+consumer)?\s+(?:helpline|consumer\s+service|adviser)", re.I)
 # The other two nations' consumer services, either named or by number.
 _CA_SCOPED_RE = re.compile(
@@ -971,7 +972,8 @@ _CRA_CONTEXT_RE = re.compile(
     r"credit\s+reference|credit[- ]reference|credit\s+files?|credit\s+reports?"
     r"|\bCRAs?\b|Experian|Equifax|TransUnion|Crediva", re.I)
 _CRA_EXHAUSTIVE_RE = re.compile(
-    r"\b(?:all\s+three|the\s+three|only\s+three|the\s+other\s+two|both\s+other)\b"
+    r"\b(?:all\s+three|the\s+three|only\s+three|the\s+other\s+two|both\s+other"
+    r"|the\s+only(?:\s+\w+){0,3}?)\b"
     r"[^.]{0,60}\b(?:credit\s+reference|credit[- ]reference|CRAs?|agenc\w+|credit\s+files?"
     r"|credit\s+reports?|Experian|Equifax|TransUnion)\b"
     r"|\b(?:credit\s+reference|credit[- ]reference)\s+agenc\w*[^.]{0,40}"
@@ -988,16 +990,20 @@ def check_cra_exhaustive(post: Dict) -> List[Dict]:
     """
     issues: List[Dict] = []
     for label, text in _route_fields(post):
-        if not text.strip():
+        if not text.strip() or not _CRA_CONTEXT_RE.search(text):
             continue
-        if not _CRA_CONTEXT_RE.search(text):
-            continue
-        m = _CRA_EXHAUSTIVE_RE.search(text)
-        if m and not _CRA_MAIN_QUALIFIED_RE.search(text):
+        # PER SENTENCE. A field-wide qualification check let a correct "three
+        # main agencies ... Crediva" sentence excuse a separate later "check all
+        # three UK credit reference agencies" in the same field, and only the
+        # FIRST match was ever examined (operator review, 2026-07-27).
+        for sent in _sentences(text):
+            m = _CRA_EXHAUSTIVE_RE.search(sent)
+            if not m or _CRA_MAIN_QUALIFIED_RE.search(sent):
+                continue
             issues.append({
                 "check": "cra_exhaustive",
                 "severity": SEVERITY_BLOCK,
-                "span": re.sub(r"\s+", " ", m.group(0))[:160],
+                "span": re.sub(r"\s+", " ", sent)[:160],
                 "detail": ("presents the credit reference agencies as an exhaustive set of three. "
                            "Experian, Equifax and TransUnion are the three MAIN agencies; MoneyHelper "
                            "also lists Crediva as offering a free statutory report. Say \"the three "
@@ -1022,11 +1028,21 @@ def check_nation_consumer_routing(post: Dict) -> List[Dict]:
     for label, text in _route_fields(post):
         if not text.strip():
             continue
-        if _CA_NAMED_RE.search(text) and not _CA_SCOPED_RE.search(text):
+        # PER MENTION, scoped locally. A field-wide `_CA_SCOPED_RE.search(text)`
+        # let one correct three-nation sentence excuse a separate later "take the
+        # contract to Citizens Advice" in the same field (operator review,
+        # 2026-07-27) — the same suppression bug the Report Fraud matcher had.
+        sents = _sentences(text)
+        for n, sent in enumerate(sents):
+            if not _CA_NAMED_RE.search(sent):
+                continue
+            window = " ".join([sent] + sents[n + 1:n + 3])
+            if _CA_SCOPED_RE.search(window):
+                continue
             issues.append({
                 "check": "nation_consumer_routing",
                 "severity": SEVERITY_BLOCK,
-                "span": text[:160],
+                "span": re.sub(r"\s+", " ", sent)[:160],
                 "detail": (f"the {label} names Citizens Advice without scoping it. Citizens Advice "
                            f"covers England and Wales; add Advice Direct Scotland on 0808 800 9060 "
                            f"and Consumerline on 0300 123 6262, or point to the service for the "

@@ -30,5 +30,15 @@ jobs:
       - name: Install dependencies
         run: pip install -r requirements-claude.txt
 
+      # These two are OFFLINE and deterministic, so they run FIRST and gate the
+      # API-backed test below. Neither was wired into CI before 2026-07-27, so
+      # the routing, canon, hub-schema and ad-mode guards depended on a
+      # one-session measurement (operator review).
+      - name: Run quick-answer, routing and canon self-test (offline)
+        run: python scripts/gate_quickanswer_selftest.py
+
+      - name: Run hub loading, schema and ad-mode self-test (offline)
+        run: python scripts/hub_selftest.py
+
       - name: Run gate self-test
         run: python scripts/gate_selftest.py

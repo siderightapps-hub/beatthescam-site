@@ -877,8 +877,12 @@ def hub_ads_mode(slug: str, hub: dict) -> str:
 
     Assesses the WHOLE hub, not just the category name: a hub's own prose is
     what a reader and an ad network actually see, and `crypto` or `email` gives
-    away nothing about the sextortion and debt material inside. An explicit
-    `ads_mode` on the record wins, so an editor can always override.
+    away nothing about the sextortion and debt material inside.
+
+    An explicit `ads_mode` may only KEEP or INCREASE restriction
+    (default < npa < none). A less restrictive explicit value is ignored in
+    favour of the content-derived mode, so a record carrying sextortion or
+    intimate-image material cannot set "default" and bypass a derived "none".
     """
     explicit = str((hub or {}).get("ads_mode") or "").strip().lower()
     if explicit and explicit not in ("none", "npa", "default"):
