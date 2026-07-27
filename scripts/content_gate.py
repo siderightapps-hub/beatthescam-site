@@ -703,8 +703,13 @@ def check_similarity(post: Dict, corpus: Optional[List[Dict]] = None) -> List[Di
     return sorted(issues, key=lambda i: i["detail"], reverse=True)
 
 
+# "Report Fraud" is matched CASE-SENSITIVELY because it is a brand name that is
+# also an ordinary verb phrase. With re.I this pattern matched "block the card
+# and report fraud" — 111 of 134 corpus findings were that false positive, and it
+# broke the build by failing all three live hubs (operator review, 2026-07-27).
+# The URL and phone number stay case-insensitive; they are unambiguous.
 _REPORT_FRAUD_NAMED_RE = re.compile(
-    r"Report\s+Fraud|reportfraud\.police\.uk|0300\s*123\s*2040", re.I)
+    r"Report\s+Fraud|(?i:reportfraud\.police\.uk)|0300\s*123\s*2040")
 # An ACTIONABLE Scottish route inside a POSITIVE reporting directive.
 #
 # Three earlier versions were each too loose, and each one reported clean on
@@ -791,6 +796,76 @@ def check_text_wellformed(post: Dict) -> List[Dict]:
     return issues
 
 
+def _route_fields(post: Dict):
+    """Every reader-visible field that can carry a reporting route, as
+    (label, text) pairs. Category hubs put their routes in `intro`, section
+    bodies and FAQ answers and have no `quick_answer`, so a check limited to
+    `quick_answer`/`description` inspected none of a hub's prose — a hub whose
+    section said only "Report it to Report Fraud on 0300 123 2040." passed
+    `validate_category_hubs()` clean (operator review, 2026-07-27)."""
+    yield "quick answer", str(post.get("quick_answer") or "")
+    yield "meta description", str(post.get("description") or "")
+    yield "hero", str(post.get("hero") or "")
+    yield "intro", str(post.get("intro") or "")
+    for head, body in (post.get("sections") or []):
+        yield f"section '{head}'", str(body)
+    for q, a in (post.get("faq") or []):
+        yield f"FAQ '{q[:40]}'", str(a)
+
+
+def _field_routes_scotland(text: str) -> bool:
+    """True if every sentence naming Report Fraud in this field is served by an
+    actionable Police Scotland + 101 route, in that sentence or the one
+    immediately after it.
+
+    The adjacent-sentence allowance exists because the operator's own prescribed
+    GUIDE BODY wording is deliberately two sentences —
+
+        "Report Fraud covers England, Wales and Northern Ireland. If you live in
+         Scotland or the crime happened there, contact Police Scotland on 101."
+
+    — so a strict same-sentence rule would flag the approved copy. The allowance
+    is exactly one sentence and never crosses a field, so a route buried in a
+    later section or FAQ still fails.
+    """
+    sents = _sentences(text)
+
+    # The operator's APPROVED canonical block for guide/hub prose is two
+    # sentences: a Report Fraud scope statement followed by the Scottish route.
+    # When a field carries that block, every reader of the field gets correct
+    # routing wherever the block sits, so the field is served. Recognising the
+    # construction explicitly is more honest than widening the sentence window
+    # to whatever number happens to make the approved copy pass.
+    scope_re = re.compile(r"Report\s+Fraud\b[^.]{0,60}England[^.]{0,40}Wales", re.I)
+    for i, sent in enumerate(sents):
+        if not scope_re.search(sent):
+            continue
+        for nxt in sents[i + 1:i + 2]:
+            m = _SCOTLAND_ACTIONABLE_RE.search(nxt)
+            if m:
+                lead = nxt[max(0, m.start() - 45):m.start()]
+                if not (_NEGATED_DIRECTIVE_RE.search(lead) and _REPORT_VERB_RE.search(lead)):
+                    return True
+
+    for i, sent in enumerate(sents):
+        if not _REPORT_FRAUD_NAMED_RE.search(sent):
+            continue
+        window = [sent] + (sents[i + 1:i + 2])
+        served = False
+        for w in window:
+            m = _SCOTLAND_ACTIONABLE_RE.search(w)
+            if not m:
+                continue
+            lead = w[max(0, m.start() - 45):m.start()]
+            if _NEGATED_DIRECTIVE_RE.search(lead) and _REPORT_VERB_RE.search(lead):
+                continue
+            served = True
+            break
+        if not served:
+            return False
+    return True
+
+
 def check_scotland_routing(post: Dict) -> List[Dict]:
     """Flag a reporting route that names Report Fraud without the Scottish route.
 
@@ -806,11 +881,10 @@ def check_scotland_routing(post: Dict) -> List[Dict]:
     the quick answer read aloud.
     """
     issues: List[Dict] = []
-    for field, label in (("quick_answer", "quick answer"), ("description", "meta description")):
-        text = str(post.get(field) or "")
+    for label, text in _route_fields(post):
         if not text.strip():
             continue
-        if _REPORT_FRAUD_NAMED_RE.search(text) and not _has_scottish_route(text):
+        if _REPORT_FRAUD_NAMED_RE.search(text) and not _field_routes_scotland(text):
             issues.append({
                 "check": "scotland_routing",
                 "severity": SEVERITY_BLOCK,

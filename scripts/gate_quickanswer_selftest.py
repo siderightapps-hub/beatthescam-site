@@ -164,8 +164,15 @@ def run() -> int:
           blocks("Police Scotland recorded 101 reports last month. Report it to Report Fraud."))
     check("negated route is not a route",
           blocks("Do not report this to Police Scotland on 101; report it to Report Fraud."))
-    check("route in a different sentence from Report Fraud blocks",
-          blocks("Report it to Report Fraud. In Scotland, contact Police Scotland on 101."))
+    # CONTRACT CHANGED 2026-07-27: the operator's approved prose form is two
+    # sentences, so a route in the IMMEDIATELY FOLLOWING sentence of the SAME
+    # field is now served. A route further away, or in another field, is not —
+    # covered by the "later section" test below.
+    check("route in the immediately next sentence of the same field is served",
+          not blocks("Report it to Report Fraud. In Scotland, contact Police Scotland on 101."))
+    check("route three sentences later in the same field is NOT served",
+          blocks("Report it to Report Fraud. Keep your evidence. Save the messages. "
+                 "In Scotland, contact Police Scotland on 101."))
 
     # The two malformed strings that a bulk edit actually shipped past review.
     check("v1 failure: trailing dangling 'or.' blocks",
@@ -194,6 +201,41 @@ def run() -> int:
     check("dangling 'to' IS still malformed",
           any(i["check"] == "malformed_text" for i in check_deterministic(post(
               description="Report it to. Then contact your bank."))))
+
+    # ── hub prose coverage + case sensitivity (operator review 2026-07-27) ────
+    def hub(sections, faq=None, intro="<p>Intro.</p>"):
+        return {"slug": "t", "title": "T" * 40, "description": "D" * 140,
+                "intro": intro, "sections": sections, "faq": faq or [["Q?", "A."]]}
+    def hub_blocks(h): return not run_gate(h, use_llm=False).passed
+    SCOPE = ("Report Fraud covers England, Wales and Northern Ireland. If you live in Scotland "
+             "or the crime happened there, contact Police Scotland on 101.")
+
+    check("hub SECTION with an incomplete route blocks",
+          hub_blocks(hub([["R", "<p>Report it to Report Fraud on 0300 123 2040.</p>"]])))
+    check("hub FAQ with an incomplete route blocks",
+          hub_blocks(hub([["S", "<p>x</p>"]], [["How?", "Use Report Fraud on 0300 123 2040."]])))
+    check("hub INTRO with an incomplete route blocks",
+          hub_blocks(hub([["S", "<p>x</p>"]], intro="<p>Report it to Report Fraud.</p>")))
+    check("hub section with a paired route passes",
+          not hub_blocks(hub([["R", "<p>Report it to Report Fraud or Police Scotland on 101.</p>"]])))
+    check("a route in a LATER section does not serve an earlier one",
+          hub_blocks(hub([["A", "<p>Report it to Report Fraud.</p>"],
+                          ["B", "<p>In Scotland, contact Police Scotland on 101.</p>"]])))
+    check("the operator's canonical two-sentence block is accepted",
+          not hub_blocks(hub([["R", f"<p>Report suspected fraud to Report Fraud. {SCOPE}</p>"]])))
+    check("a scope sentence WITHOUT the route sentence still blocks",
+          hub_blocks(hub([["R", "<p>Report it to Report Fraud. Report Fraud covers England, Wales "
+                                "and Northern Ireland.</p>"]])))
+
+    # "Report Fraud" is a brand name that is also an ordinary verb phrase. Matching
+    # it case-insensitively produced 111 false positives and broke the build.
+    check("lowercase 'report fraud' as a verb phrase is NOT treated as the service",
+          not hub_blocks(hub([["R", "<p>Contact your bank on the number on your card, block the "
+                                    "card and report fraud.</p>"]])))
+    check("the service name IS still caught",
+          hub_blocks(hub([["R", "<p>Report it to Report Fraud.</p>"]])))
+    check("the reportfraud.police.uk URL is caught case-insensitively",
+          hub_blocks(hub([["R", "<p>See REPORTFRAUD.POLICE.UK for details.</p>"]])))
     print()
     if FAILURES:
         print(f"{len(FAILURES)} check(s) FAILED: {', '.join(FAILURES)}")
