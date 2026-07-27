@@ -165,11 +165,20 @@ class GateResult:
 # ─── TEXT EXTRACTION ─────────────────────────────────────────────────────────
 
 def _post_text(post: Dict) -> str:
-    """All reader-visible text from a post — title, section HEADINGS and bodies,
-    faq, hero, description, and keywords. Headings/title/keywords are included so
-    a high-stakes claim placed there (a hardcoded number, banned entity, false
-    absolute) is checked too, not only the section bodies."""
+    """All reader-visible text from a post — title, quick answer, section
+    HEADINGS and bodies, faq, hero, description, and keywords. Headings/title/
+    keywords are included so a high-stakes claim placed there (a hardcoded
+    number, banned entity, false absolute) is checked too, not only the section
+    bodies.
+
+    `quick_answer` was added to the post schema on 2026-07-25 and is rendered in
+    a highlighted box AND targeted by speakable structured data — i.e. it is the
+    single most extractable passage on the page. It was omitted here until
+    2026-07-27, so nothing in the gate inspected it: 57 live quick answers named
+    Report Fraud with no Scotland route and passed clean. Any new
+    reader-visible field MUST be added here at the same time it is rendered."""
     parts: List[str] = [str(post.get("title", ""))]
+    parts.append(str(post.get("quick_answer", "")))
     # Category hubs use an HTML `intro` field instead of a guide `hero`.
     # Including it here lets the same deterministic accuracy contract cover
     # every reader-visible hub claim when build.py runs its preflight gate.
@@ -694,6 +703,42 @@ def check_similarity(post: Dict, corpus: Optional[List[Dict]] = None) -> List[Di
     return sorted(issues, key=lambda i: i["detail"], reverse=True)
 
 
+_REPORT_FRAUD_NAMED_RE = re.compile(
+    r"Report\s+Fraud|reportfraud\.police\.uk|0300\s*123\s*2040", re.I)
+_SCOTLAND_ROUTE_RE = re.compile(r"Police\s+Scotland|\bScotland\b|\b101\b", re.I)
+
+
+def check_scotland_routing(post: Dict) -> List[Dict]:
+    """Flag a reporting route that names Report Fraud without the Scottish route.
+
+    Report Fraud covers England, Wales and Northern Ireland; Scotland reports
+    through Police Scotland on 101. The corpus gets this right in section bodies
+    (165 of 176 that name Report Fraud also route Scotland) but the
+    `quick_answer` field — which feeds speakable markup and is the most
+    extractable passage on the page — dropped the qualifier on 57 guides,
+    because `_post_text` did not include that field until 2026-07-27.
+
+    Checked per-field rather than over the concatenated post text: a Scotland
+    route buried in a later section does not help a reader who only ever sees
+    the quick answer read aloud.
+    """
+    issues: List[Dict] = []
+    for field, label in (("quick_answer", "quick answer"), ("description", "meta description")):
+        text = str(post.get(field) or "")
+        if not text.strip():
+            continue
+        if _REPORT_FRAUD_NAMED_RE.search(text) and not _SCOTLAND_ROUTE_RE.search(text):
+            issues.append({
+                "check": "scotland_routing",
+                "severity": SEVERITY_FLAG,
+                "span": text[:160],
+                "detail": (f"the {label} names Report Fraud without the Scottish route. Report Fraud "
+                           f"covers England, Wales and Northern Ireland; add Police Scotland on 101 "
+                           f"for Scotland, or drop the specific service and point to the guide body."),
+            })
+    return issues
+
+
 def check_deterministic(post: Dict) -> List[Dict]:
     # Note: no deterministic domain/URL check — these guides intentionally
     # contain example scam/lookalike domains, so a domain allowlist is pure
@@ -702,7 +747,8 @@ def check_deterministic(post: Dict) -> List[Dict]:
             + check_absolutes(post) + check_sources(post)
             + check_legislation(post) + check_dated_events(post)
             + check_cra_misclassification(post) + check_nfd_routing(post)
-            + check_uk_advice_flags(post) + check_recurring_accuracy(post))
+            + check_uk_advice_flags(post) + check_recurring_accuracy(post)
+            + check_scotland_routing(post))
 
 
 # ─── LLM JUDGE ───────────────────────────────────────────────────────────────
