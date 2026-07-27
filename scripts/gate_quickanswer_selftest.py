@@ -104,6 +104,40 @@ def run() -> int:
     check("scotland_routing is FLAG tier, not BLOCK (it does not stop a publish)",
           run_gate(bad, use_llm=False).passed)
 
+
+    # ── canon guards added 2026-07-27 from the operator review corrections ───
+    check("159 described as free is flagged",
+          any(i["check"] == "159_cost" for i in check_deterministic(post(
+              sections=[["Reporting", "Use the free 159 service to reach your bank."]]))))
+    check("'159 is not necessarily free' is NOT flagged (negation)",
+          not any(i["check"] == "159_cost" for i in check_deterministic(post(
+              sections=[["Reporting", "Your provider sets the price of a 159 call, so it is not necessarily free."]]))))
+
+    check("DBS without Disclosure Scotland/AccessNI is flagged",
+          any(i["check"] == "dbs_jurisdiction" for i in check_deterministic(post(
+              sections=[["Checks", "GOV.UK lists a basic DBS check fee."]]))))
+    check("DBS alongside the other nations is NOT flagged",
+          not any(i["check"] == "dbs_jurisdiction" for i in check_deterministic(post(
+              sections=[["Checks", "DBS covers England and Wales; Scotland uses Disclosure Scotland and "
+                                    "Northern Ireland uses AccessNI."]]))))
+
+    check("fee exception without professional sport is flagged",
+          any(i["check"] == "fee_exception_scope" for i in check_deterministic(post(
+              sections=[["Fees", "Agencies in entertainment and modelling are an exception."]]))))
+    check("fee exception naming professional sports people is NOT flagged",
+          not any(i["check"] == "fee_exception_scope" for i in check_deterministic(post(
+              sections=[["Fees", "Schedule 3 covers entertainment and modelling occupations and "
+                                  "professional sports people."]]))))
+
+    check("unsourced 'thousands' in a hero is flagged",
+          any(i["check"] == "scale_claim" for i in check_deterministic(post(
+              hero="These scams cost UK victims thousands every month."))))
+    check("attributed 'thousands' is NOT flagged",
+          not any(i["check"] == "scale_claim" for i in check_deterministic(post(
+              hero="UK Finance reported thousands of cases in 2025."))))
+    check("scale claim in a section body is NOT flagged (surfaces only)",
+          not any(i["check"] == "scale_claim" for i in check_deterministic(post(
+              sections=[["Losses", "Victims can lose thousands."]]))))
     print()
     if FAILURES:
         print(f"{len(FAILURES)} check(s) FAILED: {', '.join(FAILURES)}")

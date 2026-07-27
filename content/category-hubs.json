@@ -2,7 +2,7 @@
   "sms": {
     "title": "Scam Text Messages UK: Spot, Check & Report",
     "description": "A scam text? Learn the UK smishing patterns — fake delivery, bank, HMRC and DVLA texts — how to check a suspicious message safely, and how to report it to 7726.",
-    "intro": "<p>Scam texts — known as <strong>smishing</strong> (SMS phishing) — are one of the most common frauds in the UK. A message pretends to be a courier, your bank, HMRC, the DVLA or the NHS, and pushes you to tap a link, pay a small fee, or hand over a code. The golden rule never changes: <strong>never act on the link, phone number or payment details inside the message itself</strong> — open the official app or website yourself and check. This hub explains the texts doing the rounds in the UK, how to tell a fake from the real thing, and how to report one in under a minute.</p><p>Not sure about a message right now? Paste it into our free <a href='/check/'>AI scam checker</a> for an instant verdict.</p>",
+    "intro": "<p>Scam texts — known as <strong>smishing</strong> (SMS phishing) — are among the most frequently reported frauds in the UK — Ofcom's February 2026 research found 40% of UK mobile users had received at least one suspicious message in the previous three months. A message pretends to be a courier, your bank, HMRC, the DVLA or the NHS, and pushes you to tap a link, pay a small fee, or hand over a code. The golden rule never changes: <strong>never act on the link, phone number or payment details inside the message itself</strong> — open the official app or website yourself and check. This hub explains the texts doing the rounds in the UK, how to tell a fake from the real thing, and how to report one in under a minute.</p><p>Not sure about a message right now? Paste it into our free <a href='/check/'>AI scam checker</a> for an instant verdict.</p>",
     "sections": [
       [
         "The most common UK scam texts",
@@ -59,7 +59,7 @@
       ],
       [
         "How to check a payment request safely",
-        "<ul><li><strong>Stop and verify independently.</strong> Hang up or close the message and contact the bank, company or person on a number or address you already have — never one supplied in the message.</li><li><strong>Use Confirmation of Payee.</strong> If the account name doesn't match who you think you're paying, don't send.</li><li><strong>Beware changed bank details.</strong> For invoices or deposits, confirm any 'new' account details by phone with a known contact before paying.</li><li><strong>Call 159.</strong> The free 159 service connects you securely to your bank to check whether a call or request is genuine.</li><li><strong>Ask the checker.</strong> Run the message through our free <a href='/check/'>AI scam checker</a> first.</li></ul>"
+        "<ul><li><strong>Stop and verify independently.</strong> Hang up or close the message and contact the bank, company or person on a number or address you already have — never one supplied in the message.</li><li><strong>Use Confirmation of Payee.</strong> If the account name doesn't match who you think you're paying, don't send.</li><li><strong>Beware changed bank details.</strong> For invoices or deposits, confirm any 'new' account details by phone with a known contact before paying.</li><li><strong>Call 159.</strong> Dialling <strong>159</strong> yourself connects you to a participating bank to check whether a call or request is genuine. Your phone provider sets the price of a 159 call and it may not be included in your allowance, so check its current charges.</li><li><strong>Ask the checker.</strong> Run the message through our free <a href='/check/'>AI scam checker</a> first.</li></ul>"
       ],
       [
         "What to do if you've sent money to a scammer",
@@ -67,7 +67,7 @@
       ],
       [
         "How to report payment fraud in the UK",
-        "<p>Report to <strong>your bank first</strong> — they hold the reimbursement process and can try to stop the payment. Use the free <strong>159</strong> service to reach your bank's fraud team securely. Then report to <strong>Report Fraud</strong> at <a href='https://www.reportfraud.police.uk' rel='nofollow'>reportfraud.police.uk</a> or 0300 123 2040 (in Scotland, Police Scotland on 101). Forward any scam texts to 7726, and report phishing emails to report@phishing.gov.uk.</p>"
+        "<p>Report to <strong>your bank first</strong> — they hold the reimbursement process and can try to stop the payment. Dial <strong>159</strong> yourself to reach your bank's fraud team, or use the number on your card. Your provider sets the price of a 159 call. Then report to <strong>Report Fraud</strong> at <a href='https://www.reportfraud.police.uk' rel='nofollow'>reportfraud.police.uk</a> or 0300 123 2040 (in Scotland, Police Scotland on 101). Forward any scam texts to 7726, and report phishing emails to report@phishing.gov.uk.</p>"
       ]
     ],
     "faq": [
@@ -81,7 +81,7 @@
       ],
       [
         "What is the 159 number?",
-        "159 is a free, secure service — backed by Stop Scams UK and the major banks — that connects you straight to your bank's fraud team, much like 101 for the police. If you get a call, text or email about a payment and you're unsure, hang up and dial 159 to check whether it's genuine before moving any money."
+        "159 is a secure service — backed by Stop Scams UK and the major banks — that connects you straight to your bank's fraud team, much like 101 for the police. If you get a call, text or email about a payment and you're unsure, hang up and dial 159 to check whether it's genuine before moving any money. Your phone provider sets the price of a 159 call, so it is not necessarily free and may not be included in your allowance."
       ],
       [
         "Someone overpaid me and wants a refund — is it a scam?",

@@ -739,6 +739,90 @@ def check_scotland_routing(post: Dict) -> List[Dict]:
     return issues
 
 
+# ── Canon guards derived from the 2026-07-26/27 operator reviews ─────────────
+# Each of these encodes a rule the operator had to correct by hand, so the class
+# cannot silently reappear. All FLAG tier: they mark passages for editorial
+# judgement rather than blocking a publish, because each has legitimate uses
+# (a negation, an attributed statement, a claim that carries its own caveat).
+# Suppression logic below mirrors the false-positive patterns found when these
+# were first run over the corpus — without it the noise makes them useless.
+
+_159_FREE_RE = re.compile(r"\b159\b[^.]{0,50}\bfree\b|\bfree\b[^.]{0,25}\b159\b", re.I)
+_DBS_RE = re.compile(r"\bDBS\b")
+_DBS_OTHER_NATIONS_RE = re.compile(r"Disclosure Scotland|AccessNI", re.I)
+_FEE_EXCEPTION_RE = re.compile(r"entertainment (?:and|or) modelling", re.I)
+_SPORTS_EXCEPTION_RE = re.compile(r"\bsports?\s+(?:person|people)\b|professional sport\b", re.I)
+_SCALE_CLAIM_RE = re.compile(
+    r"\b(?:thousands|millions|hundreds of thousands)\b", re.I)
+_SCALE_ATTRIB_RE = re.compile(
+    r"UK Finance|ONS|Office for National Statistics|Cifas|FCA|Ofcom|Citizens Advice|"
+    r"City of London Police|according to|survey", re.I)
+_NEGATION_NEAR_RE = re.compile(
+    r"\b(?:not|never|no|none|isn't|is not|does not|doesn't|cannot|can't)\b", re.I)
+
+
+def check_canon_guards(post: Dict) -> List[Dict]:
+    """FLAG passages matching error classes the operator has corrected before.
+
+    Checked per reader-visible field, because `quick_answer` and `description`
+    are surfaced independently (speakable markup and search snippets) — a
+    caveat present only in a later section does not reach that reader.
+    """
+    issues: List[Dict] = []
+    whole = _post_text(post)
+
+    def add(check, field, span, detail):
+        issues.append({"check": check, "severity": SEVERITY_FLAG,
+                       "span": re.sub(r"\s+", " ", str(span))[:160], "detail": detail})
+
+    surfaces = [("quick answer", str(post.get("quick_answer") or "")),
+                ("meta description", str(post.get("description") or "")),
+                ("hero", str(post.get("hero") or ""))]
+    bodies = [("section body", b) for _, b in (post.get("sections") or [])]
+    bodies += [("FAQ answer", a) for _, a in (post.get("faq") or [])]
+
+    # 159 is not free — the caller's provider sets the price (Ofcom/Stop Scams UK).
+    for label, text in surfaces + bodies:
+        m = _159_FREE_RE.search(text)
+        # Suppress the correct usage: "159 ... is not necessarily free", "not free".
+        while m and _NEGATION_NEAR_RE.search(text[max(0, m.start() - 40):m.end()]):
+            m = _159_FREE_RE.search(text, m.end())
+        if m:
+            add("159_cost", label, m.group(0),
+                "describes 159 as free. The caller's provider sets the price and it may not be "
+                "included in an allowance — state that instead.")
+            break
+
+    # DBS is England and Wales only.
+    if _DBS_RE.search(whole) and not _DBS_OTHER_NATIONS_RE.search(whole):
+        m = _DBS_RE.search(whole)
+        add("dbs_jurisdiction", "post", m.group(0),
+            "names DBS without Disclosure Scotland or AccessNI. DBS covers work in England and "
+            "Wales; Scotland uses Disclosure Scotland (Level 1 direct, Level 2/PVG "
+            "organisation-started) and Northern Ireland uses AccessNI.")
+
+    # Work-finding fee exception must include professional sport, and GB/NI differ.
+    if _FEE_EXCEPTION_RE.search(whole) and not _SPORTS_EXCEPTION_RE.search(whole):
+        add("fee_exception_scope", "post", _FEE_EXCEPTION_RE.search(whole).group(0),
+            "states the work-finding fee exception without professional sports people. Schedule 3 "
+            "covers specified performers and creative occupations, photographic or fashion models "
+            "AND professional sports people; Great Britain and Northern Ireland have separate "
+            "regulations.")
+
+    # Unsourced scale claims ("costs you thousands") — flagged in hero/description
+    # only, where they function as the page's headline promise.
+    for label, text in surfaces:
+        m = _SCALE_CLAIM_RE.search(text)
+        if m and not _SCALE_ATTRIB_RE.search(text):
+            add("scale_claim", label, m.group(0),
+                f"unsourced scale claim in the {label}. Either attribute it to a published figure "
+                f"(the site's own /research/uk-scam-statistics/ dataset names its publishers) or "
+                f"describe the harm without quantifying it.")
+            break
+
+    return issues
+
+
 def check_deterministic(post: Dict) -> List[Dict]:
     # Note: no deterministic domain/URL check — these guides intentionally
     # contain example scam/lookalike domains, so a domain allowlist is pure
@@ -748,7 +832,7 @@ def check_deterministic(post: Dict) -> List[Dict]:
             + check_legislation(post) + check_dated_events(post)
             + check_cra_misclassification(post) + check_nfd_routing(post)
             + check_uk_advice_flags(post) + check_recurring_accuracy(post)
-            + check_scotland_routing(post))
+            + check_scotland_routing(post) + check_canon_guards(post))
 
 
 # ─── LLM JUDGE ───────────────────────────────────────────────────────────────
