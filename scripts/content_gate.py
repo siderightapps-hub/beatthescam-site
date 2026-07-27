@@ -705,7 +705,44 @@ def check_similarity(post: Dict, corpus: Optional[List[Dict]] = None) -> List[Di
 
 _REPORT_FRAUD_NAMED_RE = re.compile(
     r"Report\s+Fraud|reportfraud\.police\.uk|0300\s*123\s*2040", re.I)
-_SCOTLAND_ROUTE_RE = re.compile(r"Police\s+Scotland|\bScotland\b|\b101\b", re.I)
+# An ACTIONABLE Scottish route: the force must be named AND reachable. A bare
+# mention of "Scotland" is not a route — the first version of this guard accepted
+# any occurrence of "Scotland" or "101", so it passed two malformed insertions
+# ("...or Police Scotland in Scotland or." and a clause spliced into the middle
+# of an unrelated list) and reported zero findings on broken text.
+_SCOTLAND_ROUTE_RE = re.compile(r"Police\s+Scotland[^.]{0,40}\b101\b|\b101\b[^.]{0,40}Police\s+Scotland", re.I)
+# Text that is syntactically broken — usually the residue of a regex edit.
+_MALFORMED_RES = (
+    (re.compile(r"\b(?:or|and|on|at|to)\s*\.\s*$"), "sentence ends in a dangling conjunction or preposition"),
+    (re.compile(r"\b(or|and)\s+\1\b", re.I), "duplicated conjunction"),
+    (re.compile(r",\s*,|\s,|\.\s*\."), "doubled or orphaned punctuation"),
+    (re.compile(r"\b(Police Scotland)\b(?:[^.]{0,80}\b\1\b)"), "Police Scotland named twice in one sentence"),
+)
+
+
+def check_text_wellformed(post: Dict) -> List[Dict]:
+    """Catch syntactically broken reader-visible text.
+
+    Added 2026-07-27 after a bulk edit shipped two malformed quick answers that
+    every property-based check passed: the clause was present, the word count
+    was in range, no stale number remained — but one sentence ended "...or." and
+    another spliced a reporting route into the middle of an unrelated list.
+    Checking that the required token EXISTS is not the same as checking the
+    sentence still reads."""
+    issues: List[Dict] = []
+    for field in ("quick_answer", "description", "hero"):
+        text = str(post.get(field) or "").strip()
+        if not text:
+            continue
+        for rx, why in _MALFORMED_RES:
+            m = rx.search(text)
+            if m:
+                issues.append({"check": "malformed_text", "severity": SEVERITY_BLOCK,
+                               "span": re.sub(r"\s+", " ", text[max(0, m.start() - 60):m.end() + 30]),
+                               "detail": f"{field} is malformed — {why}. Reader-visible text must be "
+                                         f"syntactically complete."})
+                break
+    return issues
 
 
 def check_scotland_routing(post: Dict) -> List[Dict]:
@@ -832,7 +869,8 @@ def check_deterministic(post: Dict) -> List[Dict]:
             + check_legislation(post) + check_dated_events(post)
             + check_cra_misclassification(post) + check_nfd_routing(post)
             + check_uk_advice_flags(post) + check_recurring_accuracy(post)
-            + check_scotland_routing(post) + check_canon_guards(post))
+            + check_scotland_routing(post) + check_canon_guards(post)
+            + check_text_wellformed(post))
 
 
 # ─── LLM JUDGE ───────────────────────────────────────────────────────────────
