@@ -733,8 +733,17 @@ def _has_scottish_route(text: str) -> bool:
     for sent in _sentences(text):
         if not _SCOTLAND_ACTIONABLE_RE.search(sent):
             continue
-        if _NEGATED_DIRECTIVE_RE.search(sent):
-            continue          # "do not report this to Police Scotland on 101"
+        # Only treat the ROUTE as negated when the negation governs it — i.e.
+        # appears shortly before the route with a reporting verb in between
+        # ("do NOT report this to Police Scotland on 101"). A negation earlier in
+        # the sentence usually governs something else entirely: "DON'T pay, end
+        # the contact, and report it to..." and "NEVER grant remote access, and
+        # report it to..." are both correct directives, and a whole-sentence
+        # negation test false-flagged them.
+        route_m = _SCOTLAND_ACTIONABLE_RE.search(sent)
+        lead = sent[max(0, route_m.start() - 45):route_m.start()]
+        if _NEGATED_DIRECTIVE_RE.search(lead) and _REPORT_VERB_RE.search(lead):
+            continue
         # The route must be offered as an ALTERNATIVE to Report Fraud in the same
         # sentence. Without this, "Police Scotland recorded 101 reports last
         # month." satisfies the matcher — `reports` is a noun there, but the
@@ -747,7 +756,10 @@ def _has_scottish_route(text: str) -> bool:
     return False
 # Text that is syntactically broken — usually the residue of a regex edit.
 _MALFORMED_RES = (
-    (re.compile(r"\b(?:or|and|on|at|to)\s*[.!?]"), "a sentence ends in a dangling conjunction or preposition"),
+    # "on" is deliberately EXCLUDED: it is a legitimate phrasal-verb particle at
+    # sentence end ("bank a cheque and wire money on", "pass it on"), and
+    # including it false-flagged mystery-shopper-scam-uk's correct description.
+    (re.compile(r"\b(?:or|and|at|to)\s*[.!?]"), "a sentence ends in a dangling conjunction or preposition"),
     (re.compile(r"\b(or|and)\s+\1\b", re.I), "duplicated conjunction"),
     (re.compile(r",\s*,|\s,|\.\s*\."), "doubled or orphaned punctuation"),
     (re.compile(r"\b(Police Scotland)\b(?:[^.]{0,80}\b\1\b)"), "Police Scotland named twice in one sentence"),

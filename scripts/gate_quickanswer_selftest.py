@@ -175,6 +175,25 @@ def run() -> int:
                  "Scotland, the Financial Ombudsman — never charge a fee."))
     check("malformed text mid-field is caught, not just at the end",
           blocks("Do not pay or. Report it to Report Fraud or Police Scotland on 101."))
+    # False positive found by running the guard over the live corpus: "on" is a
+    # phrasal-verb particle here, not a dangling preposition.
+    check("phrasal verb ending a sentence is NOT malformed",
+          not any(i["check"] == "malformed_text" for i in check_deterministic(post(
+              description="No genuine company needs you to bank a cheque and wire money on."))))
+    # Two false positives found by running the tightened matcher over the
+    # operator-approved replacement answers: a negation earlier in the sentence
+    # usually governs a DIFFERENT clause, not the reporting route.
+    check("negation on a different clause does NOT block (Don't pay ... report it)",
+          not blocks("Don't pay, end the contact, and report it to Report Fraud or Police Scotland on 101."))
+    check("negation on a different clause does NOT block (never grant ... report it)",
+          not blocks("Close the tab, never grant remote access, and report it to reportphishing@apple.com "
+                     "and any loss to Report Fraud or Police Scotland on 101."))
+    check("the route itself being negated DOES still block",
+          blocks("Do not report this to Police Scotland on 101; report it to Report Fraud."))
+
+    check("dangling 'to' IS still malformed",
+          any(i["check"] == "malformed_text" for i in check_deterministic(post(
+              description="Report it to. Then contact your bank."))))
     print()
     if FAILURES:
         print(f"{len(FAILURES)} check(s) FAILED: {', '.join(FAILURES)}")
