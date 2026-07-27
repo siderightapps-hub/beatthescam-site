@@ -705,15 +705,49 @@ def check_similarity(post: Dict, corpus: Optional[List[Dict]] = None) -> List[Di
 
 _REPORT_FRAUD_NAMED_RE = re.compile(
     r"Report\s+Fraud|reportfraud\.police\.uk|0300\s*123\s*2040", re.I)
-# An ACTIONABLE Scottish route: the force must be named AND reachable. A bare
-# mention of "Scotland" is not a route — the first version of this guard accepted
-# any occurrence of "Scotland" or "101", so it passed two malformed insertions
-# ("...or Police Scotland in Scotland or." and a clause spliced into the middle
-# of an unrelated list) and reported zero findings on broken text.
-_SCOTLAND_ROUTE_RE = re.compile(r"Police\s+Scotland[^.]{0,40}\b101\b|\b101\b[^.]{0,40}Police\s+Scotland", re.I)
+# An ACTIONABLE Scottish route inside a POSITIVE reporting directive.
+#
+# Three earlier versions were each too loose, and each one reported clean on
+# text a human then had to catch:
+#   v1  any occurrence of "Scotland" or "101"      -> passed "...in Scotland or."
+#   v2  "Police Scotland" within 40 chars of "101" -> passed "Police Scotland
+#       recorded 101 reports last month" (a statistic, not a route) and
+#       "Do not report this to Police Scotland on 101" (a negated route)
+# So the match now requires all three of: a reporting verb, Report Fraud, and an
+# actionable Police Scotland + 101 route, in ONE sentence, with no negation
+# governing that sentence.
+_REPORT_VERB_RE = re.compile(r"\breport(?:s|ed|ing)?\b|\btell\b|\bcontact\b", re.I)
+_SCOTLAND_ACTIONABLE_RE = re.compile(
+    r"Police\s+Scotland[^.;]{0,40}\b101\b|\b101\b[^.;]{0,40}Police\s+Scotland", re.I)
+_NEGATED_DIRECTIVE_RE = re.compile(
+    r"\b(?:do\s+not|don't|never|instead\s+of|rather\s+than|no\s+need\s+to)\b", re.I)
+
+
+def _sentences(text: str) -> List[str]:
+    return [s for s in re.split(r"(?<=[.!?;])\s+", text or "") if s.strip()]
+
+
+def _has_scottish_route(text: str) -> bool:
+    """True only if some sentence positively directs the reader to Police
+    Scotland on 101. Co-occurrence is not a route."""
+    for sent in _sentences(text):
+        if not _SCOTLAND_ACTIONABLE_RE.search(sent):
+            continue
+        if _NEGATED_DIRECTIVE_RE.search(sent):
+            continue          # "do not report this to Police Scotland on 101"
+        # The route must be offered as an ALTERNATIVE to Report Fraud in the same
+        # sentence. Without this, "Police Scotland recorded 101 reports last
+        # month." satisfies the matcher — `reports` is a noun there, but the
+        # verb pattern cannot tell. Requiring the pairing encodes what the
+        # approved wording actually is: one instruction naming both routes.
+        if not _REPORT_FRAUD_NAMED_RE.search(sent):
+            continue
+        if _REPORT_VERB_RE.search(sent):
+            return True
+    return False
 # Text that is syntactically broken — usually the residue of a regex edit.
 _MALFORMED_RES = (
-    (re.compile(r"\b(?:or|and|on|at|to)\s*\.\s*$"), "sentence ends in a dangling conjunction or preposition"),
+    (re.compile(r"\b(?:or|and|on|at|to)\s*[.!?]"), "a sentence ends in a dangling conjunction or preposition"),
     (re.compile(r"\b(or|and)\s+\1\b", re.I), "duplicated conjunction"),
     (re.compile(r",\s*,|\s,|\.\s*\."), "doubled or orphaned punctuation"),
     (re.compile(r"\b(Police Scotland)\b(?:[^.]{0,80}\b\1\b)"), "Police Scotland named twice in one sentence"),
@@ -764,10 +798,10 @@ def check_scotland_routing(post: Dict) -> List[Dict]:
         text = str(post.get(field) or "")
         if not text.strip():
             continue
-        if _REPORT_FRAUD_NAMED_RE.search(text) and not _SCOTLAND_ROUTE_RE.search(text):
+        if _REPORT_FRAUD_NAMED_RE.search(text) and not _has_scottish_route(text):
             issues.append({
                 "check": "scotland_routing",
-                "severity": SEVERITY_FLAG,
+                "severity": SEVERITY_BLOCK,
                 "span": text[:160],
                 "detail": (f"the {label} names Report Fraud without the Scottish route. Report Fraud "
                            f"covers England, Wales and Northern Ireland; add Police Scotland on 101 "

@@ -101,8 +101,11 @@ def run() -> int:
           str([i["check"] for i in check_deterministic(s75)]))
 
     # ── severity contract ────────────────────────────────────────────────────
-    check("scotland_routing is FLAG tier, not BLOCK (it does not stop a publish)",
-          run_gate(bad, use_llm=False).passed)
+    # Promoted to BLOCK on 2026-07-27: sending a whole nation to the wrong
+    # reporting route is exactly what the gate exists to stop, and FLAG tier
+    # meant run_gate() still returned passed=True on all 57 live cases.
+    check("scotland_routing is BLOCK tier — a missing Scottish route stops a publish",
+          not run_gate(bad, use_llm=False).passed)
 
 
     # ── canon guards added 2026-07-27 from the operator review corrections ───
@@ -138,6 +141,40 @@ def run() -> int:
     check("scale claim in a section body is NOT flagged (surfaces only)",
           not any(i["check"] == "scale_claim" for i in check_deterministic(post(
               sections=[["Losses", "Victims can lose thousands."]]))))
+
+    # ── Scotland-routing matcher: the real regression cases ──────────────────
+    # These exist because three earlier versions of the matcher each reported
+    # clean on text a human then had to catch, and because a previous commit
+    # message claimed these tests existed when they did not.
+    def qa(text): return post(quick_answer=text)
+    def blocks(text): return not run_gate(qa(text), use_llm=False).passed
+
+    check("approved compact clause passes",
+          not blocks("Hang up, and report it to Report Fraud or Police Scotland on 101."))
+    check("full geography-qualified form passes",
+          not blocks("Report it to Report Fraud in England, Wales or Northern Ireland, or "
+                     "Police Scotland on 101 in Scotland."))
+    check("missing Scottish route BLOCKS a publish",
+          blocks("Report it to Report Fraud on 0300 123 2040."))
+    check("bare 'Scotland' with no 101 blocks",
+          blocks("Report it to Report Fraud, or Police Scotland in Scotland."))
+    check("bare 101 without naming the force blocks",
+          blocks("Report it to Report Fraud or call 101."))
+    check("101 as a statistic is not a route",
+          blocks("Police Scotland recorded 101 reports last month. Report it to Report Fraud."))
+    check("negated route is not a route",
+          blocks("Do not report this to Police Scotland on 101; report it to Report Fraud."))
+    check("route in a different sentence from Report Fraud blocks",
+          blocks("Report it to Report Fraud. In Scotland, contact Police Scotland on 101."))
+
+    # The two malformed strings that a bulk edit actually shipped past review.
+    check("v1 failure: trailing dangling 'or.' blocks",
+          blocks("...report the call to Report Fraud, or Police Scotland in Scotland or."))
+    check("v1 failure: clause spliced into an unrelated list blocks",
+          blocks("Official routes — your bank, the police, Report Fraud, or Police Scotland in "
+                 "Scotland, the Financial Ombudsman — never charge a fee."))
+    check("malformed text mid-field is caught, not just at the end",
+          blocks("Do not pay or. Report it to Report Fraud or Police Scotland on 101."))
     print()
     if FAILURES:
         print(f"{len(FAILURES)} check(s) FAILED: {', '.join(FAILURES)}")
