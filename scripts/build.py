@@ -858,15 +858,22 @@ def org_schema(site):
         "sameAs": ORG_SAME_AS,
     })
 
-def page_schema(site, title, description, url):
-    return json_ld({
+def page_schema(site, title, description, url, date_modified=None):
+    """WebPage schema. `date_modified` is optional and emits ONLY dateModified —
+    deliberately no datePublished, because a hand-authored hub has no reliable
+    publication date and inventing one would fabricate a history (operator
+    review 2026-07-27)."""
+    data = {
         "@context": "https://schema.org",
         "@type": "WebPage",
         "name": title,
         "description": description,
         "url": url,
         "isPartOf": {"@type": "WebSite", "name": site["site_name"], "url": site["domain"]}
-    })
+    }
+    if date_modified:
+        data["dateModified"] = str(date_modified)
+    return json_ld(data)
 
 # Body Markdown subset: only root-relative, slug-safe internal links are
 # accepted, so article data cannot inject attributes, scripts, or an
@@ -1544,6 +1551,31 @@ def render_category_page(site, category, posts, all_categories=None, hub=None):
             )
             hub_faq_html = f'<section class="section"><div class="wrap"><h2>Common questions</h2><div class="faq-panel">{items}</div></div></section>'
 
+    # Trust layer for hubs (operator review 2026-07-27): ten long YMYL pages
+    # carrying platform policies, reporting routes, legislation and statistics
+    # should not make a reader or an answer engine infer the evidence from prose.
+    # Reuses the guide source-block markup so the two surfaces look identical.
+    hub_trust_html = ""
+    if hub:
+        hub_sources = [(l, u) for l, u in (hub.get("sources_checked") or []) if l and u]
+        reviewed = str(hub.get("updated") or "").strip()
+        bits = []
+        if hub_sources:
+            lis = "".join(
+                f'<li><a href="{html.escape(u)}" rel="noopener noreferrer" target="_blank">'
+                f'{html.escape(l)}</a></li>' for l, u in hub_sources
+            )
+            bits.append(f'<h2>Sources checked</h2><ul class="sources-checked">{lis}</ul>')
+        if reviewed:
+            bits.append(
+                f'<p class="meta">Last reviewed <time itemprop="dateModified" '
+                f'datetime="{html.escape(reviewed)}">{html.escape(reviewed)}</time>. '
+                f'Reporting routes are checked against our verified canon of official UK sources. '
+                f'Read about <a href="/methodology/">how Beat the Scam writes guides</a>.</p>')
+        if bits:
+            hub_trust_html = ('<section class="section"><div class="wrap">'
+                              + "".join(bits) + '</div></section>')
+
     grid_heading = f"All {html.escape(label.lower())} guides" if hub else f"Latest {html.escape(label.lower())}"
     content = f'''
     <section class="hero">
@@ -1555,7 +1587,7 @@ def render_category_page(site, category, posts, all_categories=None, hub=None):
     </section>
     {hub_body_html}
     <section class="section"><div class="wrap"><h2>{grid_heading}</h2><div class="grid-3">{"".join(render_card(p) for p in posts)}</div></div></section>
-    {hub_faq_html}
+    {hub_faq_html}{hub_trust_html}
     {related_cats_html}
     '''
     canonical = site['domain'] + f'/categories/{slug}/'
@@ -1568,7 +1600,8 @@ def render_category_page(site, category, posts, all_categories=None, hub=None):
     page_title = hub.get("title") if hub and hub.get("title") else label
     page_desc  = hub.get("description") if hub and hub.get("description") else desc
     schema = (
-        page_schema(site, label, page_desc, canonical)
+        page_schema(site, label, page_desc, canonical,
+                    date_modified=(hub or {}).get('updated'))
         + itemlist_schema(item_pairs, list_name=label)
         + breadcrumb_schema(breadcrumbs)
         + (faq_schema(hub_faq_pairs) if hub_faq_pairs else "")
