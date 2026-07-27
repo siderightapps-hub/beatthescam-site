@@ -824,33 +824,34 @@ def _field_routes_scotland(text: str) -> bool:
         "Report Fraud covers England, Wales and Northern Ireland. If you live in
          Scotland or the crime happened there, contact Police Scotland on 101."
 
-    — so a strict same-sentence rule would flag the approved copy. The allowance
-    is exactly one sentence and never crosses a field, so a route buried in a
-    later section or FAQ still fails.
+    — so a strict same-sentence rule would flag the approved copy. The window is
+    two sentences, because the approved GUIDE form puts the instruction first and
+    the route last:
+
+        "Report it to Report Fraud. Report Fraud covers England, Wales and
+         Northern Ireland. If you live in Scotland ... Police Scotland on 101."
+
+    The window never crosses a field, so a route buried in a later section or FAQ
+    still fails.
+
+    EVERY named mention must be served. An earlier version short-circuited on the
+    first canonical scope+route pair and returned True for the whole field, so a
+    later unpaired mention in the same field was never inspected —
+
+        "Report Fraud covers England, Wales and Northern Ireland. In Scotland,
+         contact Police Scotland on 101. Later, report the loss to Report Fraud."
+
+    — passed despite the third sentence stranding a Scottish reader (operator
+    review, 2026-07-27). The per-mention loop below already accepts the approved
+    two-sentence form via its own window, so that shortcut was redundant as well
+    as unsound; it is deliberately not reinstated.
     """
     sents = _sentences(text)
-
-    # The operator's APPROVED canonical block for guide/hub prose is two
-    # sentences: a Report Fraud scope statement followed by the Scottish route.
-    # When a field carries that block, every reader of the field gets correct
-    # routing wherever the block sits, so the field is served. Recognising the
-    # construction explicitly is more honest than widening the sentence window
-    # to whatever number happens to make the approved copy pass.
-    scope_re = re.compile(r"Report\s+Fraud\b[^.]{0,60}England[^.]{0,40}Wales", re.I)
-    for i, sent in enumerate(sents):
-        if not scope_re.search(sent):
-            continue
-        for nxt in sents[i + 1:i + 2]:
-            m = _SCOTLAND_ACTIONABLE_RE.search(nxt)
-            if m:
-                lead = nxt[max(0, m.start() - 45):m.start()]
-                if not (_NEGATED_DIRECTIVE_RE.search(lead) and _REPORT_VERB_RE.search(lead)):
-                    return True
 
     for i, sent in enumerate(sents):
         if not _REPORT_FRAUD_NAMED_RE.search(sent):
             continue
-        window = [sent] + (sents[i + 1:i + 2])
+        window = [sent] + (sents[i + 1:i + 3])
         served = False
         for w in window:
             m = _SCOTLAND_ACTIONABLE_RE.search(w)

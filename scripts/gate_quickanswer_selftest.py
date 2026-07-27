@@ -236,6 +236,37 @@ def run() -> int:
           hub_blocks(hub([["R", "<p>Report it to Report Fraud.</p>"]])))
     check("the reportfraud.police.uk URL is caught case-insensitively",
           hub_blocks(hub([["R", "<p>See REPORTFRAUD.POLICE.UK for details.</p>"]])))
+
+    # EVERY named mention must be served. The first implementation short-circuited
+    # on the first canonical scope+route pair and returned "served" for the whole
+    # field, so a later unpaired mention was never inspected (operator review,
+    # 2026-07-27). These four cases are the operator's prescribed regression set.
+    check("a correct pair followed by an unpaired mention in the SAME field blocks",
+          hub_blocks(hub([["R", f"<p>{SCOPE} Later, report the loss to Report Fraud.</p>"]]))),
+    check("an unpaired mention in a SEPARATE section blocks",
+          hub_blocks(hub([["R", f"<p>Report suspected fraud to Report Fraud. {SCOPE}</p>"],
+                          ["More", "<p>You can also report the loss to Report Fraud.</p>"]])))
+    check("an unpaired mention in a SEPARATE FAQ blocks",
+          hub_blocks(hub([["R", f"<p>Report suspected fraud to Report Fraud. {SCOPE}</p>"]],
+                         faq=[["Where do I report it?", "Report it to Report Fraud."]])))
+    check("the approved adjacent two-sentence canonical pair still passes",
+          not hub_blocks(hub([["R", "<p>Report Fraud covers England, Wales and Northern Ireland. "
+                                    "If you live in Scotland or the crime happened there, contact "
+                                    "Police Scotland on 101.</p>"]])))
+    check("the approved same-sentence pair still passes",
+          not hub_blocks(hub([["R", "<p>Report it to Report Fraud at reportfraud.police.uk or "
+                                    "0300 123 2040 in England, Wales or Northern Ireland, or to "
+                                    "Police Scotland on 101 in Scotland.</p>"]])))
+    check("two correctly-paired mentions in one field pass",
+          not hub_blocks(hub([["R", "<p>Report it to Report Fraud, or Police Scotland on 101 in "
+                                    "Scotland. Then report the loss to Report Fraud at "
+                                    "reportfraud.police.uk, or Police Scotland on 101 in "
+                                    "Scotland.</p>"]])))
+    # NB: a mention placed BEFORE the scope+route block is served, not stranded —
+    # that is the approved guide form (instruction, scope, route) and the reader
+    # reaches the route by reading on. Only a mention with no route within the
+    # two-sentence window strands anyone; "route three sentences later in the
+    # same field is NOT served" above is the case that pins the window down.
     print()
     if FAILURES:
         print(f"{len(FAILURES)} check(s) FAILED: {', '.join(FAILURES)}")

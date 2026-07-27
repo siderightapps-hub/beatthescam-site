@@ -316,6 +316,36 @@ def validate_category_hubs(hubs: dict) -> None:
     except ImportError:  # Support importing this file as scripts.build.
         from scripts.content_gate import check_deterministic, SEVERITY_BLOCK
 
+    # Structural validation first. content/category-hubs.json is keyed by canonical
+    # category slug at the TOP level. A packet shaped {"hubs": {...}} merges as one
+    # unknown key, the renderer skips it, and the build silently publishes nothing
+    # — the gate would pass vacuously because the wrapper has no prose to inspect
+    # (operator review, 2026-07-27). Fail loudly instead.
+    known = set(CATEGORY_LABELS) | set(CATEGORY_CANON.values())
+    structural = []
+    for slug, hub in (hubs or {}).items():
+        if slug not in known:
+            structural.append(f"unknown category slug {slug!r} — hubs are keyed by canonical "
+                              f"category slug at the top level, with no wrapper object")
+            continue
+        if not isinstance(hub, dict):
+            structural.append(f"{slug}: record is {type(hub).__name__}, expected an object")
+            continue
+        for field in ("title", "description"):
+            if not str(hub.get(field) or "").strip():
+                structural.append(f"{slug}: missing or empty {field!r}")
+        sections = hub.get("sections")
+        if not isinstance(sections, list) or not sections:
+            structural.append(f"{slug}: 'sections' must be a non-empty list")
+        else:
+            for n, pair in enumerate(sections):
+                if not (isinstance(pair, (list, tuple)) and len(pair) == 2):
+                    structural.append(f"{slug}: sections[{n}] must be a [heading, body] pair")
+    if structural:
+        for msg in structural:
+            print(f"  Category hub STRUCTURE: {msg}")
+        raise SystemExit(f"ERROR: category hub file is malformed: {len(structural)} problem(s)")
+
     blocking = []
     flagged = []
     for slug, hub in (hubs or {}).items():
@@ -1576,13 +1606,21 @@ def render_category_page(site, category, posts, all_categories=None, hub=None):
             hub_trust_html = ('<section class="section"><div class="wrap">'
                               + "".join(bits) + '</div></section>')
 
+    # A hub's differentiated title/description must be the SAME string across the
+    # title element, the visible H1, the lead and the schema name — otherwise the
+    # carefully distinguished metadata contradicts the page a crawler renders
+    # (operator review, 2026-07-27). The short label stays in the breadcrumb,
+    # where a compact name is what a reader wants.
+    page_title = hub.get("title") if hub and hub.get("title") else label
+    page_desc  = hub.get("description") if hub and hub.get("description") else desc
+
     grid_heading = f"All {html.escape(label.lower())} guides" if hub else f"Latest {html.escape(label.lower())}"
     content = f'''
     <section class="hero">
       <div class="wrap">
         <div class="breadcrumbs"><a href="/">Home</a> / <a href="/categories/">Categories</a> / {html.escape(label)}</div>
-        <h1>{html.escape(label)}</h1>
-        <p class="lead">{html.escape(desc)}</p>
+        <h1>{html.escape(page_title)}</h1>
+        <p class="lead">{html.escape(page_desc)}</p>
       </div>
     </section>
     {hub_body_html}
@@ -1597,10 +1635,8 @@ def render_category_page(site, category, posts, all_categories=None, hub=None):
         ("Categories",    site["domain"] + "/categories/"),
         (label,           canonical),
     ]
-    page_title = hub.get("title") if hub and hub.get("title") else label
-    page_desc  = hub.get("description") if hub and hub.get("description") else desc
     schema = (
-        page_schema(site, label, page_desc, canonical,
+        page_schema(site, page_title, page_desc, canonical,
                     date_modified=(hub or {}).get('updated'))
         + itemlist_schema(item_pairs, list_name=label)
         + breadcrumb_schema(breadcrumbs)
@@ -3934,8 +3970,14 @@ def build():
         )
 
     for cat, items in categories.items():
-        # Category lastmod = newest member's date (or build today if empty)
+        # Category lastmod = newest member's date (or build today if empty). For a
+        # hub category the page also carries hand-authored prose, so an editorial
+        # revision to the hub moves the page even when no member guide changed —
+        # take the later of the two (operator review, 2026-07-27).
         cat_lastmod = max((p.get("updated") or p.get("dateModified") or p["date"] for p in items), default=today)
+        hub_reviewed = str((category_hubs.get(cat) or {}).get("updated") or "").strip()
+        if hub_reviewed:
+            cat_lastmod = max(cat_lastmod, hub_reviewed)
         sitemap_lines.append(
             f'<url><loc>{site["domain"]}/categories/{slugify(cat)}/</loc>'
             f'<lastmod>{cat_lastmod}</lastmod><changefreq>weekly</changefreq></url>'
