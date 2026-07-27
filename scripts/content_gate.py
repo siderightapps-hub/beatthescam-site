@@ -71,7 +71,7 @@ def _load_canon() -> Dict:
 def _canon_phone_digits(canon: Dict) -> set:
     digits = set()
     for r in canon.get("official_routes", []):
-        for field in ("phone", "sms"):
+        for field in ("phone", "sms", "phone_welsh"):
             v = r.get(field)
             if v:
                 d = re.sub(r"\D", "", str(v))

@@ -28,12 +28,16 @@
     },
     {
       "key": "citizens-advice",
-      "name": "Citizens Advice consumer helpline",
+      "name": "Citizens Advice consumer helpline (England and Wales)",
       "report_url": "https://www.citizensadvice.org.uk/consumer/scams/reporting-a-scam/",
       "info_url": "https://www.citizensadvice.org.uk/consumer/scams/",
       "phone": "0808 223 1133",
-      "report_label": "Citizens Advice",
-      "on_page": true
+      "report_label": "Citizens Advice (England and Wales)",
+      "on_page": true,
+      "nation": "England and Wales",
+      "phone_welsh": "0808 223 1144",
+      "source_url": "https://www.gov.uk/consumer-advice",
+      "checked_on": "2026-07-27"
     },
     {
       "key": "fca-firm-checker",
@@ -105,6 +109,30 @@
       "info_url": "https://www.victimsupport.org.uk/more-us/contact-us/",
       "phone": "0808 168 9111",
       "on_page": false
+    },
+    {
+      "key": "advice-direct-scotland",
+      "name": "Advice Direct Scotland consumer helpline (Scotland)",
+      "report_url": "https://www.advice.scot/",
+      "info_url": "https://www.advice.scot/",
+      "phone": "0808 800 9060",
+      "report_label": "Advice Direct Scotland (Scotland)",
+      "nation": "Scotland",
+      "on_page": true,
+      "source_url": "https://www.gov.uk/consumer-advice",
+      "checked_on": "2026-07-27"
+    },
+    {
+      "key": "consumerline-ni",
+      "name": "Consumerline consumer helpline (Northern Ireland)",
+      "report_url": "https://www.nidirect.gov.uk/contacts/consumerline",
+      "info_url": "https://www.nidirect.gov.uk/contacts/consumerline",
+      "phone": "0300 123 6262",
+      "report_label": "Consumerline (Northern Ireland)",
+      "nation": "Northern Ireland",
+      "on_page": true,
+      "source_url": "https://www.gov.uk/consumer-advice",
+      "checked_on": "2026-07-27"
     }
   ],
   "verified_org_contacts": [
