@@ -147,7 +147,7 @@ The six essentials to cover (in whatever order, under whatever natural headings 
 - How it works — from first contact through to the money or data loss (150-200 words)
 - How to verify whether it is genuine — verification steps specific to THIS exact scam. Where relevant, link to a related guide using one of these internal URLs: {related_str}
 - What to do if you have already interacted — recovery actions in order of urgency (120-160 words)
-- How to report it in the UK — specific routes with org names: Report Fraud (0300 123 2040), NCSC Suspicious Email Reporting Service (report@phishing.gov.uk), forward SMS to 7726, Citizens Advice consumer helpline (0808 223 1133) (120-150 words)
+- How to report it in the UK — specific routes with org names, taken from the verified canon in content/sources.json and SCOPED BY NATION: Report Fraud (0300 123 2040) for England, Wales and Northern Ireland and Police Scotland on 101 for Scotland; NCSC Suspicious Email Reporting Service (report@phishing.gov.uk); forward SMS to 7726; and the consumer service for the reader's nation — Citizens Advice (0808 223 1133) in England and Wales, Advice Direct Scotland (0808 800 9060) in Scotland, or Consumerline (0300 123 6262) in Northern Ireland. Never present Citizens Advice as a UK-wide helpline. (120-150 words)
 
 FAQ requirements — write 3 to 5 FAQs that are the REAL questions someone would type about THIS specific scam, varied from guide to guide (do not force a fixed set). Phrase each the natural way a worried person would ask it; do NOT write "Is [X] a legitimate company?" when [X] is a scam type rather than an actual company. Good candidates: whether a specific message / website / caller is genuine, what to do if money or details were already shared, a detail unique to this scam, and how to report it.
 
@@ -271,7 +271,9 @@ def normalise(data: Dict, topic: Topic, today: str, strict: bool = False) -> Dic
              f"Report to Report Fraud online at reportfraud.police.uk or by phone on 0300 123 2040. "
              f"If you received a suspicious email, forward it to report@phishing.gov.uk (the NCSC's Suspicious Email Reporting Service). "
              f"If you received a suspicious text, forward it to 7726 — this is free on all UK networks and goes to your mobile operator. "
-             f"You can also report to Citizens Advice on 0808 223 1133. "
+             f"For consumer advice, use the service for your nation: Citizens Advice in England "
+             f"and Wales on 0808 223 1133, Advice Direct Scotland in Scotland on 0808 800 9060, "
+             f"or Consumerline in Northern Ireland on 0300 123 6262. "
              f"If money left your account, your bank's fraud team should be your first call — they can sometimes recall payments within 24 hours."],
         ]
 

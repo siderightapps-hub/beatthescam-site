@@ -68,7 +68,12 @@ _FALLBACK_PHONE_DIGITS = {
     "0800111999", "105", "999", "112", "101",
     "03031234500", "03451720088", "08081689111",
 }
-_FALLBACK_REPORT_EMAILS = {"report@phishing.gov.uk"}
+# Held equal to content/sources.json by canon_fallback_drift(), asserted by the
+# self-test in BOTH directions. Four addresses were missing.
+_FALLBACK_REPORT_EMAILS = {
+    "report@phishing.gov.uk", "phishing@hmrc.gov.uk", "branddefence@hmrc.gov.uk",
+    "phishing@companieshouse.gov.uk", "reportafraud@landregistry.gov.uk",
+}
 
 
 def _load_canon() -> Dict:
@@ -117,13 +122,26 @@ def _canon_phone_digits(canon: Dict) -> set:
     return digits or set(_FALLBACK_PHONE_DIGITS)
 
 
-def canon_fallback_drift() -> set:
-    """Numbers in the canon that the emergency fallback is missing.
+def canon_fallback_drift() -> Dict[str, set]:
+    """SYMMETRIC difference between the canon and the emergency fallbacks.
 
-    Empty set == in sync. Exposed so a self-test can assert equality rather
-    than the comment merely documenting it.
+    A one-way subtraction only caught numbers MISSING from the fallback, so an
+    obsolete, mistyped or unauthorised EXTRA fallback entry passed while the
+    docstring and test both claimed "equality" (operator review, 2026-07-28).
+    Reporting emails were not compared at all: the canon holds five permitted
+    addresses and the fallback held one, so four correct guides could false-BLOCK
+    on a genuinely absent canon file.
+
+    All four sets empty == in sync.
     """
-    return _canon_phone_digits(_load_canon()) - set(_FALLBACK_PHONE_DIGITS)
+    canon = _load_canon()
+    cp, ce = _canon_phone_digits(canon), _canon_report_emails(canon)
+    return {
+        "phone_missing_from_fallback": cp - set(_FALLBACK_PHONE_DIGITS),
+        "phone_extra_in_fallback": set(_FALLBACK_PHONE_DIGITS) - cp,
+        "email_missing_from_fallback": ce - set(_FALLBACK_REPORT_EMAILS),
+        "email_extra_in_fallback": set(_FALLBACK_REPORT_EMAILS) - ce,
+    }
 
 
 def _canon_report_emails(canon: Dict) -> set:
@@ -1253,7 +1271,7 @@ cases") is fine; an unconditional absolute is not
 - any organisation-specific phone number (banks, couriers, utilities) — these should not be hardcoded
 
 Do NOT flag: general scam-pattern description, the standard UK reporting routes (Report Fraud \
-0300 123 2040, Citizens Advice 0808 223 1133, forward texts to 7726, report@phishing.gov.uk), \
+0300 123 2040 for England, Wales and Northern Ireland; Police Scotland 101 for Scotland; the consumer service for the reader's nation — Citizens Advice 0808 223 1133 in England and Wales, Advice Direct Scotland 0808 800 9060, Consumerline 0300 123 6262; forward texts to 7726; report@phishing.gov.uk), \
 clearly directional language ("growing rapidly", "many victims"), or the site accurately \
 describing a SCAMMER's own false promise (e.g. "the scammer claims your funds are 100% safe").
 

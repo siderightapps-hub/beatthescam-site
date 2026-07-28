@@ -24,6 +24,8 @@ on:
       - 'scripts/gate_quickanswer_selftest.py'
       - 'scripts/hub_selftest.py'
       - 'scripts/gate_selftest.py'
+      - 'scripts/generate_content_claude.py'
+      - 'scripts/search_console_articles.py'
       - 'content/sources.json'
       - 'content/category-hubs.json'
       - '.github/workflows/gate-selftest.yml'

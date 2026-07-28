@@ -293,8 +293,26 @@ def run() -> int:
     # House, TalkTalk or Victim Support (operator review, 2026-07-27).
     from content_gate import canon_fallback_drift
     drift = canon_fallback_drift()
-    check("the emergency phone fallback matches content/sources.json",
-          not drift, f"canon numbers missing from the fallback: {sorted(drift)}")
+    for key, extra in sorted(drift.items()):
+        check(f"canon/fallback in sync: {key}", not extra, str(sorted(extra)))
+    # A one-way subtraction let an unauthorised EXTRA fallback entry through while
+    # still reporting "equality" (operator review, 2026-07-28). Prove both
+    # directions are actually compared.
+    import content_gate as _cg
+    _saved = set(_cg._FALLBACK_PHONE_DIGITS)
+    try:
+        _cg._FALLBACK_PHONE_DIGITS.add("01234567890")
+        check("an EXTRA fallback number is detected",
+              bool(_cg.canon_fallback_drift()["phone_extra_in_fallback"]))
+    finally:
+        _cg._FALLBACK_PHONE_DIGITS.clear(); _cg._FALLBACK_PHONE_DIGITS.update(_saved)
+    _savede = set(_cg._FALLBACK_REPORT_EMAILS)
+    try:
+        _cg._FALLBACK_REPORT_EMAILS.discard("report@phishing.gov.uk")
+        check("a MISSING fallback email is detected",
+              bool(_cg.canon_fallback_drift()["email_missing_from_fallback"]))
+    finally:
+        _cg._FALLBACK_REPORT_EMAILS.clear(); _cg._FALLBACK_REPORT_EMAILS.update(_savede)
 
     # Citation prose is not a consumer route.
     check("'Data from Citizens Advice shows...' is a citation, not a route",

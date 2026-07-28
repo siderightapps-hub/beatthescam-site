@@ -266,10 +266,16 @@ def load_sources(root: Path) -> list:
     path = root / "content" / "sources.json"
     if not path.exists():
         return []
+    # FAIL CLOSED on a present-but-malformed canon. Swallowing the error and
+    # returning [] made report_block() fall back to hard-coded routes that omit
+    # Police Scotland, Advice Direct Scotland and Consumerline and call Citizens
+    # Advice a general UK route — publishing a geographically unsafe sidebar at
+    # exactly the moment the single source of truth had failed (operator review,
+    # 2026-07-28). The gate already fails closed here; the build now matches.
     try:
         return json.loads(path.read_text(encoding="utf-8")).get("official_routes", [])
-    except Exception:
-        return []
+    except Exception as exc:
+        raise SystemExit(f"ERROR: {path} exists but could not be parsed: {exc}")
 
 
 def report_block(sources: list) -> str:
@@ -278,10 +284,23 @@ def report_block(sources: list) -> str:
     unavailable, so a guide never ships without reporting routes."""
     routes = [r for r in (sources or []) if r.get("on_page") and r.get("report_url")]
     if not routes:
+        # Only reachable when content/sources.json is genuinely ABSENT — a
+        # malformed file now stops the build. Every nation is represented, and
+        # each label carries its own geography, because this list ships without
+        # the canon to correct it.
         routes = [
-            {"report_url": "https://www.reportfraud.police.uk", "report_label": "Report Fraud (Action Fraud)"},
-            {"report_url": "https://www.ncsc.gov.uk/collection/phishing-scams", "report_label": "NCSC — report phishing"},
-            {"report_url": "https://www.citizensadvice.org.uk/consumer/scams/reporting-a-scam/", "report_label": "Citizens Advice"},
+            {"report_url": "https://www.reportfraud.police.uk",
+             "report_label": "Report Fraud (formerly Action Fraud) — England, Wales and Northern Ireland"},
+            {"report_url": "https://www.scotland.police.uk/contact-us/non-emergencies/",
+             "report_label": "Police Scotland on 101 — Scotland"},
+            {"report_url": "https://www.ncsc.gov.uk/collection/phishing-scams",
+             "report_label": "NCSC — report phishing"},
+            {"report_url": "https://www.citizensadvice.org.uk/consumer/scams/reporting-a-scam/",
+             "report_label": "Citizens Advice — England and Wales"},
+            {"report_url": "https://www.advicedirect.scot/",
+             "report_label": "Advice Direct Scotland — Scotland"},
+            {"report_url": "https://www.nidirect.gov.uk/contacts/consumerline",
+             "report_label": "Consumerline — Northern Ireland"},
         ]
     items = "".join(
         f'<li><a href="{html.escape(r["report_url"])}" rel="noopener noreferrer" target="_blank">'
@@ -2049,7 +2068,7 @@ def render_post(site, post, all_posts, affiliates=None, sources=None, link_map=N
           Use the <a href="/check/">AI scam checker</a> for an instant analysis, or report it to
           <a href="https://www.reportfraud.police.uk" rel="noopener noreferrer" target="_blank">Report Fraud</a>.
         </div>
-        <p class="meta" style="margin-top:1.4rem">Reporting routes in this guide are checked against our verified canon of official UK sources &#8212; <a href="https://www.reportfraud.police.uk/" rel="noopener" target="_blank">Report Fraud</a>, the <a href="https://www.ncsc.gov.uk/" rel="noopener" target="_blank">National Cyber Security Centre</a>, and <a href="https://www.citizensadvice.org.uk/consumer/scams/" rel="noopener" target="_blank">Citizens Advice</a> &#8212; by an automated accuracy gate before publication. {review_note} Read about <a href="/methodology/">how Beat the Scam writes guides</a>.</p>
+        <p class="meta" style="margin-top:1.4rem">Reporting routes in this guide are checked against our verified canon of official UK sources &#8212; <a href="https://www.reportfraud.police.uk/" rel="noopener" target="_blank">Report Fraud</a> for England, Wales and Northern Ireland, Police Scotland on 101 for Scotland, the <a href="https://www.ncsc.gov.uk/" rel="noopener" target="_blank">National Cyber Security Centre</a>, and the consumer service for each nation &#8212; by an automated accuracy gate before publication. {review_note} Read about <a href="/methodology/">how Beat the Scam writes guides</a>.</p>
       </article>
       <aside class="sidebar">
         <section class="sidebar-card">
@@ -3050,7 +3069,7 @@ def build_legal_bodies(site):
     <p>This page explains, in detail, how {html.escape(site["site_name"])} researches, drafts, checks, and corrects its guides &mdash; so a reader, a journalist, an ad-network reviewer, or an AI system deciding whether to cite this site can see the actual process rather than take &#8220;fact-checked&#8221; on faith.</p>
 
     <h2>How content is researched and produced</h2>
-    <p>Each guide on this site is drafted using AI assistance against a strict editorial template that forbids inventing statistics, quotes, or specific unverifiable claims, and that standardises the official UK reporting routes (Report Fraud, the NCSC, and Citizens Advice).</p>
+    <p>Each guide on this site is drafted using AI assistance against a strict editorial template that forbids inventing statistics, quotes, or specific unverifiable claims, and that standardises the official UK reporting routes, scoped by nation (Report Fraud for England, Wales and Northern Ireland; Police Scotland on 101 for Scotland; the NCSC; and Citizens Advice, Advice Direct Scotland or Consumerline depending on where the reader lives).</p>
     <p>The drafting step uses Anthropic&#8217;s Claude API. The model is given a structured prompt covering the scam type, target audience, and required sections (what the scam looks like, warning signs, step-by-step pattern, verification, recovery actions, reporting routes). It is explicitly instructed not to invent statistics, predict outcomes, generate fake quotes, or assert specific claims about named companies or people.</p>
 
     <h2>The accuracy gate</h2>
@@ -3067,7 +3086,7 @@ def build_legal_bodies(site):
     <ul>
       <li><a href="https://www.reportfraud.police.uk/" rel="noopener noreferrer" target="_blank">Report Fraud</a> (formerly Action Fraud) &mdash; the UK&#8217;s national reporting centre for fraud and cybercrime</li>
       <li><a href="https://www.ncsc.gov.uk/" rel="noopener noreferrer" target="_blank">National Cyber Security Centre (NCSC)</a> &mdash; for phishing reporting routes and current threat patterns</li>
-      <li><a href="https://www.citizensadvice.org.uk/" rel="noopener noreferrer" target="_blank">Citizens Advice</a> &mdash; consumer protection guidance and helpline routes</li>
+      <li><a href="https://www.gov.uk/consumer-advice" rel="noopener noreferrer" target="_blank">GOV.UK consumer advice</a> &mdash; the consumer service for each UK nation: Citizens Advice in England and Wales, Advice Direct Scotland in Scotland, Consumerline in Northern Ireland</li>
       <li><a href="https://www.fca.org.uk/consumers/fca-firm-checker" rel="noopener noreferrer" target="_blank">FCA Firm Checker</a> &mdash; for investment and financial services scams</li>
       <li><a href="https://takefive-stopfraud.org.uk/" rel="noopener noreferrer" target="_blank">Take Five</a> &mdash; UK banking sector consumer fraud campaign</li>
       <li>Government UK pages for HMRC, DVLA, TV Licensing, and other public bodies commonly impersonated</li>
@@ -3075,7 +3094,7 @@ def build_legal_bodies(site):
 
     <h2>Editorial standards</h2>
     <p>Content is written to be understandable under pressure. That means short sections, clear headings, and advice that directs readers towards independent verification through official channels &mdash; never through links, numbers, or payment details supplied by a suspicious message.</p>
-    <p>Where the site recommends a national reporting route &mdash; such as Report Fraud, the NCSC, or Citizens Advice &mdash; it uses the official published channel. For organisation-specific contact details, always confirm the number or web address against the official website, or the details on your card, bill, or statement, rather than relying solely on any number reproduced in a guide.</p>
+    <p>Where the site recommends an official reporting route &mdash; such as Report Fraud, Police Scotland, the NCSC, or the consumer service for a reader's nation &mdash; it uses the official published channel and states which nations it covers. For organisation-specific contact details, always confirm the number or web address against the official website, or the details on your card, bill, or statement, rather than relying solely on any number reproduced in a guide.</p>
 
     <h2>Corrections</h2>
     <p>If a guide contains an error, email <a href="mailto:{site["editorial_email"]}">{site["editorial_email"]}</a> with the page URL, disputed wording and supporting source. Material factual changes are recorded in the public <a href="/corrections/">corrections log</a>; minor spelling and formatting edits are not normally logged.</p>
@@ -3248,7 +3267,7 @@ def build_legal_bodies(site):
 
     <h2>Educational purpose &mdash; not professional advice</h2>
     <p>Everything published here is general educational information. It is <strong>not</strong> legal, financial, investment, tax, medical, cybersecurity, or regulatory advice, and reading it does not create an advisor&ndash;client relationship. See our full <a href="/disclaimer/">Disclaimer</a> for the detail.</p>
-    <p>Scam tactics change rapidly. No article can guarantee that a specific message, listing, website or interaction is safe or fraudulent. If anything you read here is material to your circumstances, verify it through official UK channels (Report Fraud, the FCA Register, Companies House, Citizens Advice, your bank&#8217;s published fraud line) or seek qualified professional advice.</p>
+    <p>Scam tactics change rapidly. No article can guarantee that a specific message, listing, website or interaction is safe or fraudulent. If anything you read here is material to your circumstances, verify it through official UK channels (Report Fraud or Police Scotland, the FCA Register, Companies House, the consumer service for your nation, your bank&#8217;s published fraud line) or seek qualified professional advice.</p>
 
     <h2>The AI scam checker</h2>
     <p>The AI scam checker is an educational tool that returns an automated plain-English assessment. Its output is <strong>not</strong> a definitive fraud determination and we make no warranty that it will identify every scam or that flagged messages are necessarily fraudulent.</p>
@@ -3309,7 +3328,7 @@ def build_legal_bodies(site):
     <p>Everything published on <strong>{html.escape(site["site_name"])}</strong> &mdash; the guides, the AI scam checker, and any other material &mdash; is provided for <strong>general education and consumer awareness only</strong>. This page sets out the limits of that information. By using the Site you accept this disclaimer alongside our <a href="/terms/">Terms</a>.</p>
 
     <h2>Not professional advice</h2>
-    <p>The content here is <strong>not</strong> legal, financial, investment, tax, accounting, cybersecurity, or regulatory advice, and reading it does <strong>not</strong> create an advisor&ndash;client or other professional relationship. It cannot account for your individual circumstances. Before acting on anything that materially affects your money, identity, or legal position, seek advice from a suitably qualified professional or an official UK body &mdash; for example the <a href="https://www.fca.org.uk/" rel="noopener noreferrer" target="_blank">FCA</a>, <a href="https://www.citizensadvice.org.uk/" rel="noopener noreferrer" target="_blank">Citizens Advice</a>, or your bank&#8217;s published fraud line.</p>
+    <p>The content here is <strong>not</strong> legal, financial, investment, tax, accounting, cybersecurity, or regulatory advice, and reading it does <strong>not</strong> create an advisor&ndash;client or other professional relationship. It cannot account for your individual circumstances. Before acting on anything that materially affects your money, identity, or legal position, seek advice from a suitably qualified professional or an official UK body &mdash; for example the <a href="https://www.fca.org.uk/" rel="noopener noreferrer" target="_blank">FCA</a>, the <a href="https://www.gov.uk/consumer-advice" rel="noopener noreferrer" target="_blank">consumer service for your nation</a>, or your bank&#8217;s published fraud line.</p>
 
     <h2>No guarantees about specific messages or websites</h2>
     <p>Scam tactics change constantly. No guide, and no result from the AI scam checker, can guarantee that a particular message, email, website, listing, phone call, or investment is either safe or fraudulent. A &#8220;probably legitimate&#8221; result is not a green light, and the absence of a warning is not a guarantee of safety. Always verify independently through an official channel you find yourself &mdash; never through a link, phone number, or payment detail supplied in the suspicious message.</p>
@@ -4112,7 +4131,8 @@ def build():
         f"/* SOURCES */\n"
         f"Report Fraud — https://www.reportfraud.police.uk/\n"
         f"NCSC — https://www.ncsc.gov.uk/\n"
-        f"Citizens Advice — https://www.citizensadvice.org.uk/consumer/scams/\n"
+        f"Consumer advice by nation (Citizens Advice in England and Wales, Advice Direct Scotland, "
+        f"Consumerline in Northern Ireland) — https://www.gov.uk/consumer-advice\n"
         f"FCA Firm Checker — https://www.fca.org.uk/consumers/fca-firm-checker\n\n"
         f"/* LAST UPDATE */\n"
         f"{today}\n"
