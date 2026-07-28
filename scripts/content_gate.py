@@ -59,16 +59,34 @@ ACCURACY_BLOCK = """ACCURACY — THIS OVERRIDES EVERY STYLE AND SEO RULE BELOW. 
 # Emergency fallback only — the real allow-list loads from content/sources.json.
 # Advice Direct Scotland and Consumerline were missing, so a canon-load failure
 # would have produced a false BLOCK on correct three-nation routing.
+# Kept in lockstep with content/sources.json by canon_fallback_drift(), which
+# gate_quickanswer_selftest asserts is empty. Do not hand-edit one without the
+# other. Companies House, TalkTalk and Victim Support were missing.
 _FALLBACK_PHONE_DIGITS = {
     "03001232040", "08082231133", "08088009060", "03001236262", "08082231144",
     "08001116768", "03456000459", "7726", "159",
     "0800111999", "105", "999", "112", "101",
+    "03031234500", "03451720088", "08081689111",
 }
 _FALLBACK_REPORT_EMAILS = {"report@phishing.gov.uk"}
 
 
 def _load_canon() -> Dict:
+    """Load the verified canon. FAILS CLOSED on a malformed file.
+
+    A hand-maintained fallback drifts: it held 14 numbers while the canon
+    produced 17, so a canon-load failure would have false-BLOCKed guides
+    correctly citing Companies House, TalkTalk or Victim Support (operator
+    review, 2026-07-27). The fallback is retained only for a genuinely ABSENT
+    file, and `check_canon_fallback_matches()` pins it to the canon so the two
+    cannot silently diverge again.
+    """
     path = Path(__file__).resolve().parents[1] / "content" / "sources.json"
+    if path.exists():
+        try:
+            return json.loads(path.read_text(encoding="utf-8"))
+        except Exception as exc:
+            raise SystemExit(f"ERROR: {path} exists but could not be parsed: {exc}")
     try:
         return json.loads(path.read_text(encoding="utf-8"))
     except Exception:
@@ -97,6 +115,15 @@ def _canon_phone_digits(canon: Dict) -> set:
             if d:
                 digits.add(d)
     return digits or set(_FALLBACK_PHONE_DIGITS)
+
+
+def canon_fallback_drift() -> set:
+    """Numbers in the canon that the emergency fallback is missing.
+
+    Empty set == in sync. Exposed so a self-test can assert equality rather
+    than the comment merely documenting it.
+    """
+    return _canon_phone_digits(_load_canon()) - set(_FALLBACK_PHONE_DIGITS)
 
 
 def _canon_report_emails(canon: Dict) -> set:
@@ -951,8 +978,11 @@ def _field_routes_scotland(text: str) -> bool:
 # instruction — flagging that was a false positive on the marketplace hub.
 _CA_NAMED_RE = re.compile(
     r"0808\s*223\s*1133"
+    # `from` must be ROUTE-SHAPED. Bare `from` turned "Data from Citizens Advice
+    # shows…" into a routing instruction (operator review, 2026-07-27).
     r"|(?:contact|call|ring|phone|ask|speak\s+to|report\s+to|refer\s+to|take\s+it\s+to"
-    r"|take\s+the\s+\w+\s+to|available\s+from|from|through|via)"
+    r"|take\s+the\s+\w+\s+to|(?:advice|help|support|guidance)\s+(?:is\s+)?(?:available\s+)?from"
+    r"|available\s+from|go\s+through|apply\s+via)"
     r"\b[^.]{0,60}?\bCitizens\s+Advice(?![\u2019']s)"
     r"|Citizens\s+Advice(?:\s+consumer)?\s+(?:helpline|consumer\s+service|adviser)", re.I)
 # The other two nations' consumer services, either named or by number.
@@ -974,11 +1004,27 @@ _CRA_CONTEXT_RE = re.compile(
 _CRA_EXHAUSTIVE_RE = re.compile(
     r"\b(?:all\s+three|the\s+three|only\s+three|the\s+other\s+two|both\s+other"
     r"|the\s+only(?:\s+\w+){0,3}?)\b"
-    r"[^.]{0,60}\b(?:credit\s+reference|credit[- ]reference|CRAs?|agenc\w+|credit\s+files?"
+    r"[^.,;\u2014]{0,60}\b(?:credit\s+reference|credit[- ]reference|CRAs?|agenc\w+|credit\s+files?"
     r"|credit\s+reports?|Experian|Equifax|TransUnion)\b"
-    r"|\b(?:credit\s+reference|credit[- ]reference)\s+agenc\w*[^.]{0,40}"
+    r"|\b(?:credit\s+reference|credit[- ]reference)\s+agenc\w*[^.,;\u2014]{0,40}"
     r"\b(?:all\s+three|the\s+three|only\s+three|the\s+other\s+two)\b", re.I)
 _CRA_MAIN_QUALIFIED_RE = re.compile(r"\bthree\s+main\b|\bmain\s+(?:three|agencies)\b|Crediva", re.I)
+
+
+# Clause boundaries for local qualification. A contrastive conjunction matters
+# most: "X are the three main agencies, BUT check all three" must not be excused
+# by the correct first half.
+_CLAUSE_SPLIT_RE = re.compile(r"[;,\u2014]|\s+(?:but|however|though|although|whereas)\s+", re.I)
+
+
+def _clause_around(sent: str, m) -> str:
+    """The clause of `sent` containing match `m`."""
+    starts = [0] + [b.end() for b in _CLAUSE_SPLIT_RE.finditer(sent)]
+    ends = [b.start() for b in _CLAUSE_SPLIT_RE.finditer(sent)] + [len(sent)]
+    for a, b in zip(starts, ends):
+        if a <= m.start() < b:
+            return sent[a:b]
+    return sent
 
 
 def check_cra_exhaustive(post: Dict) -> List[Dict]:
@@ -997,18 +1043,22 @@ def check_cra_exhaustive(post: Dict) -> List[Dict]:
         # three UK credit reference agencies" in the same field, and only the
         # FIRST match was ever examined (operator review, 2026-07-27).
         for sent in _sentences(text):
-            m = _CRA_EXHAUSTIVE_RE.search(sent)
-            if not m or _CRA_MAIN_QUALIFIED_RE.search(sent):
-                continue
-            issues.append({
-                "check": "cra_exhaustive",
-                "severity": SEVERITY_BLOCK,
-                "span": re.sub(r"\s+", " ", sent)[:160],
-                "detail": ("presents the credit reference agencies as an exhaustive set of three. "
-                           "Experian, Equifax and TransUnion are the three MAIN agencies; MoneyHelper "
-                           "also lists Crediva as offering a free statutory report. Say \"the three "
-                           "main agencies\" or name all four."),
-            })
+            for m in _CRA_EXHAUSTIVE_RE.finditer(sent):
+                # Qualification must be LOCAL to the matched claim. Suppressing the
+                # whole sentence let "…are the three main agencies, but check all
+                # three UK credit reference agencies" pass, and only the first
+                # match was examined (operator review, 2026-07-27).
+                if _CRA_MAIN_QUALIFIED_RE.search(_clause_around(sent, m)):
+                    continue
+                issues.append({
+                    "check": "cra_exhaustive",
+                    "severity": SEVERITY_BLOCK,
+                    "span": re.sub(r"\s+", " ", _clause_around(sent, m))[:160],
+                    "detail": ("presents the credit reference agencies as an exhaustive set of "
+                               "three. Experian, Equifax and TransUnion are the three MAIN agencies; "
+                               "MoneyHelper also lists Crediva as offering a free statutory report. "
+                               "Say \"the three main agencies\" or name all four."),
+                })
     return issues
 
 

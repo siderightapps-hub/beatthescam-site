@@ -288,6 +288,23 @@ def run() -> int:
     check("pointing at the reader's own nation passes",
           not qa_blocks("Ask your nation's consumer service about the trader."))
 
+    # The emergency fallback allow-list drifted from the canon: 14 numbers against
+    # 17, so a canon-load failure would have false-BLOCKed guides citing Companies
+    # House, TalkTalk or Victim Support (operator review, 2026-07-27).
+    from content_gate import canon_fallback_drift
+    drift = canon_fallback_drift()
+    check("the emergency phone fallback matches content/sources.json",
+          not drift, f"canon numbers missing from the fallback: {sorted(drift)}")
+
+    # Citation prose is not a consumer route.
+    check("'Data from Citizens Advice shows...' is a citation, not a route",
+          not qa_blocks("Data from Citizens Advice shows online shopping complaints are common."))
+    check("'Research from Citizens Advice found...' is a citation, not a route",
+          not qa_blocks("Research from Citizens Advice found that scams cause harm."))
+    check("'advice is available from ... Citizens Advice' IS a route",
+          qa_blocks("Free debt advice is available from StepChange, National Debtline and "
+                    "Citizens Advice."))
+
     # Experian, Equifax and TransUnion are the three MAIN agencies; MoneyHelper
     # also lists Crediva (operator review, 2026-07-27). "Three main" is correct;
     # an exhaustive "all three" / "the other two" is not.
@@ -313,6 +330,12 @@ def run() -> int:
                      "reference agencies as well."))
     check("'the only UK credit reference agencies are' blocks",
           cra_blocks("The only UK credit reference agencies are Experian, Equifax and TransUnion."))
+    check("a correct clause does NOT excuse a contrasting one in the same sentence",
+          cra_blocks("Experian, Equifax and TransUnion are the three main agencies, but check "
+                     "all three UK credit reference agencies."))
+    check("'Crediva is also listed, but ... the other two' blocks",
+          cra_blocks("Crediva is also listed, but you only need to check the other two credit "
+                     "reference agencies."))
     check("a three-dot MENU instruction does not block",
           not cra_blocks("Report the profile: tap the three-dot menu on the profile or in the chat "
                          "and choose to report it."))

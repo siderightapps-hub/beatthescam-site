@@ -116,6 +116,17 @@ def run() -> int:
             payload = bad(mut)
         check(f"validator rejects: {name}", rejects(payload))
 
+    check("validator rejects: empty FAQ answer",
+          rejects(bad(lambda h: h["faq"].append(["Q?", "   "]))))
+    # After the legacy exemption is removed this must fail; while it stands, an
+    # unreviewed hub with no sources only warns. Pinned either way so the change
+    # of behaviour is deliberate and visible.
+    unreviewed = {"payment": {k: v for k, v in hub().items()
+                              if k not in ("updated", "sources_checked")}}
+    legacy_exempt = not rejects(unreviewed)
+    check("a hub with neither 'updated' nor sources is currently EXEMPT (legacy branch present)",
+          legacy_exempt,
+          "the legacy branch appears to be gone — flip this expectation to rejects()")
     check("a wrapper object is rejected", rejects({"hubs": {"payment": hub()}}))
     check("a non-object root is rejected", rejects([]))
     check("a valid explicit ads_mode is accepted", not rejects(bad(lambda h: h.__setitem__("ads_mode", "npa"))))
@@ -127,15 +138,44 @@ def run() -> int:
         "payment": "npa", "phone": "npa", "shopping": "npa", "website": "npa",
         "marketplace": "default", "sms": "default", "travel": "default",
     }
-    proposed = ROOT / "docs" / "review" / "hubs-v6.json"
+    # SELF-CONTAINED. This previously read docs/review/hubs-v6.json — an ignored,
+    # by then absent file — and then `continue`d past any category missing from
+    # the live three-record file, silently skipping TEN of the thirteen promised
+    # cases while still reporting success (operator review, 2026-07-27).
+    #
+    # Fixtures below are the minimum prose that drives each mode, committed here
+    # so the test behaves identically on a clean CI checkout.
+    SEXTORTION = "Threats to share intimate images or sextortion demands, and deepfake material."
+    DEBT = "Debt, insolvency, an IVA, bailiffs and recovering money you have lost."
+    BENIGN = "How to check a parcel delivery text before tapping a link."
+    FIXTURE_PROSE = {
+        "email": SEXTORTION, "tech": SEXTORTION,
+        "crypto": DEBT, "finance": DEBT, "fraud": DEBT, "government": DEBT,
+        "payment": DEBT, "phone": DEBT, "shopping": DEBT, "website": DEBT,
+        "marketplace": BENIGN, "sms": BENIGN, "travel": BENIGN,
+    }
+    missing = sorted(set(EXPECTED) - set(FIXTURE_PROSE))
+    check("every expected category has a committed fixture", not missing, str(missing))
+    for slug, want in EXPECTED.items():
+        fixture = hub(sections=[["S", f"<p>{FIXTURE_PROSE[slug]}</p>"]])
+        got = B.hub_ads_mode(slug, fixture)
+        check(f"ad mode for {slug} is {want}", got == want, f"got {got}")
+
+    # And the LIVE/proposed records must produce the same modes. Any expected
+    # category absent from the merged map is a FAILURE, never a skip.
     merged = dict(live)
-    if proposed.exists():
-        merged.update(json.loads(proposed.read_text(encoding="utf-8")))
+    for name in ("hubs-v8.json", "hubs-v7.json"):
+        cand = ROOT / "docs" / "review" / name
+        if cand.exists():
+            merged.update(json.loads(cand.read_text(encoding="utf-8")))
+            break
     for slug, want in EXPECTED.items():
         if slug not in merged:
+            check(f"live/proposed record present for {slug}", False,
+                  "absent from content/category-hubs.json and the proposed hub packet")
             continue
         got = B.hub_ads_mode(slug, merged[slug])
-        check(f"ad mode for {slug} is {want}", got == want, f"got {got}")
+        check(f"live/proposed ad mode for {slug} is {want}", got == want, f"got {got}")
 
     sensitive = hub(sections=[["S", "<p>Sextortion and intimate image threats, and debt problems.</p>"]])
     check("a sensitive hub with no explicit mode is not 'default'",

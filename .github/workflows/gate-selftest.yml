@@ -1,20 +1,62 @@
 name: Gate self-test
 
-# Manual-only validation of the content accuracy gate (scripts/content_gate.py)
-# against scripts/gate_selftest.py's fixtures, using the existing
-# ANTHROPIC_API_KEY GitHub secret — so it can be run without anyone holding the
-# key locally. Side-effect-free: the self-test never writes posts.json or the
-# quarantine, and this job never commits. A red run = the gate regressed; do not
-# ship gate changes until it's green. Click "Run workflow" in the Actions tab.
+# Two jobs with different triggers, because they cost different things.
+#
+# `offline` runs the deterministic self-tests — routing, canon, hub schema and
+# ad modes. No API key, no network, so it runs AUTOMATICALLY on every push and
+# pull request that touches the gate, the build, the canon or the tests. That is
+# the release property that matters: gate/validator/hub code cannot be merged
+# while its deterministic checks are red or silently skipped (operator review,
+# 2026-07-27 — before then nothing ran these in CI at all).
+#
+# `llm` runs the API-backed fixture suite against the existing ANTHROPIC_API_KEY
+# secret, so it can be exercised without anyone holding the key locally. It
+# spends money, so it stays manual: click "Run workflow" in the Actions tab.
+# Side-effect-free: the self-tests never write posts.json or the quarantine, and
+# neither job commits.
 
 on:
   workflow_dispatch:
+  push:
+    paths: &selftest_paths
+      - 'scripts/content_gate.py'
+      - 'scripts/build.py'
+      - 'scripts/gate_quickanswer_selftest.py'
+      - 'scripts/hub_selftest.py'
+      - 'scripts/gate_selftest.py'
+      - 'content/sources.json'
+      - 'content/category-hubs.json'
+      - '.github/workflows/gate-selftest.yml'
+  pull_request:
+    paths: *selftest_paths
 
 permissions:
   contents: read
 
 jobs:
-  selftest:
+  offline:
+    name: Deterministic self-tests (no API key)
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
+
+      - name: Setup Python
+        uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97 # v7.0.0
+        with:
+          python-version: '3.12'
+
+      # Standard library only — these must not depend on requirements resolving.
+      - name: Run quick-answer, routing and canon self-test
+        run: python scripts/gate_quickanswer_selftest.py
+
+      - name: Run hub loading, schema and ad-mode self-test
+        run: python scripts/hub_selftest.py
+
+  llm:
+    name: Model-backed gate fixtures (manual, spends API credit)
+    if: github.event_name == 'workflow_dispatch'
+    needs: offline
     runs-on: ubuntu-latest
     env:
       ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
@@ -29,16 +71,6 @@ jobs:
 
       - name: Install dependencies
         run: pip install -r requirements-claude.txt
-
-      # These two are OFFLINE and deterministic, so they run FIRST and gate the
-      # API-backed test below. Neither was wired into CI before 2026-07-27, so
-      # the routing, canon, hub-schema and ad-mode guards depended on a
-      # one-session measurement (operator review).
-      - name: Run quick-answer, routing and canon self-test (offline)
-        run: python scripts/gate_quickanswer_selftest.py
-
-      - name: Run hub loading, schema and ad-mode self-test (offline)
-        run: python scripts/hub_selftest.py
 
       - name: Run gate self-test
         run: python scripts/gate_selftest.py
