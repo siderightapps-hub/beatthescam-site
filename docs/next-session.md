@@ -1,132 +1,233 @@
 # Start here next session
 
-> **Last updated:** 2026-07-25
-> **Repository state:** `main` at `5b935f85e`; production verified live; no open `auto-content` PR at close; working tree clean.
+> **Last updated:** 2026-07-29
+> **Repository state:** `main` at `5b9ea29fb`; working tree clean; **`dist/` deliberately stale — see the invariant-1 warning below.**
 
-## Since 2026-07-24 (fresh full audit + remediation session, closed 2026-07-25)
+This is the short operational front door. `docs/project.md` is the detailed source of
+truth; dated audit and diversification documents are historical records and should not be
+used as current punch lists. The 2026-07-25 session summary that used to head this file is
+now history — the release described below supersedes it.
 
-- A **fresh 15-agent full audit** (all 186 guides live fact-checked + technical SEO + AdSense readiness + AI visibility) found the corpus near-perfect: 184/186 clean, 3 findings in 2 guides, AdSense verdict PASS_WITH_FIXES with **zero blockers**, no HIGH technical-SEO issues, AI visibility already top-tier. All remediation was operator-approved (7/7 `-c.md` replies) and **shipped live at `5b935f85e`**:
-  - Content fixes: `hmrc-tax-refund-text-scam-uk` (GOV.UK dropped the "never notify a rebate by text" absolute in Dec 2024), `instagram-fake-giveaway-scam-uk` (blue tick = legacy notability OR paid Meta Verified; NI number; + missing `sources_checked` — corpus now 185/185 sourced).
-  - **Quick answer box on all 185 guides** (`quick_answer` field; verdict-first 35–60-word summary rendered above the Key rule, with `speakable` schema). Operator standing rule: when a guide's content changes, regenerate/recheck its quick answer.
-  - **New `/research/uk-scam-statistics/`** — 28 live-verified official records with per-record geography labels, CSV+JSON downloads, Dataset schema (CC BY 4.0). Quarterly refresh due **October 2026**.
-  - Guide expansions: dvla-vehicle-tax-text-scam (~1,200 words), halifax-bank-scam-text-uk (incl. Halifax→Lloyds brand-change section — announced 2 Jul 2026, closed to new customers 16 Jul 2026), nhs-appointment-scam-text-uk (genuine-NHS-charges nuance, England-labelled).
-  - NPA ad mode extended to advance-fee-scam-uk and fake-online-pharmacy-uk-scam.
-- Audit findings that turned out to be non-issues: the "4 thin guides ~300 words" flag was a measurement error (real counts 835–1,119); the 4 keyword-cannibalisation groups have 2–33 GSC impressions and 0 clicks — no consolidation warranted. GSC OAuth token refreshed successfully during the session.
+---
 
-This is the short operational front door. `docs/project.md` is the detailed source of truth; dated audit and diversification documents are historical records and should not be used as current punch lists.
+## Where things stand in one paragraph
 
-## Current verified baseline
+A large accuracy release is **fully prepared but not applied**. Eight commits of gate,
+build and CI hardening are on `main`. Five content packets sit in `docs/review/` awaiting
+the operator's `-c.md` fact-check replies; a sixth (`FINAL-9-guides-v4`) is already
+approved. Applying all six takes the corpus from **176 deterministic BLOCKs to zero**.
+Nothing has been written to `content/posts.json` or `content/category-hubs.json`.
 
-- 186 guide source records; 185 indexable guides after one documented consolidation; all 185 carry `sources_checked` and `quick_answer`.
-- 17 normalised categories.
-- 228 generated HTML files; 226 indexable canonical pages; zero broken local links at the 2026-07-25 validation.
-- 185 entries in `dist/search.json` and seven `/guides/` listing pages.
+---
+
+## CRITICAL: `dist/` is stale right now (invariant-1 breach)
+
+Five commits changed `scripts/` and `content/` with **zero `dist/` files**. 185 committed
+pages still render the old `Report Fraud (Action Fraud)` sidebar, while
+`content/sources.json` now says `Report Fraud (formerly Action Fraud) — England, Wales and
+Northern Ireland` and adds a `police-scotland` on-page route.
+
+Nothing is broken live, because Netlify serves the stale committed `dist/`. But source and
+served output disagree. This was a deliberate deferral — the operator instructed *"do not
+build this incomplete packet"* — and the fix is the **single non-concurrent build at the
+end of the release** (step 6 below). Do not do a partial build to tidy up; it ships half a
+release and produces a confusing diff.
+
+---
+
+## The five packets awaiting operator review
+
+All in `docs/review/`, which is **gitignored** — they exist on disk only, so they are not
+in git history and will not appear on another machine.
+
+| Packet | New prose since the last reply | Size |
+|---|---|---|
+| `scotland-routing-v10` | **5 fields** — Yodel description + four `/recovery/` anchors | 147 fields, 89 guides |
+| `nation-consumer-routing-v3` | **2 passages** — Facebook FAQ 1 recast, Holiday Club advice/review split | 21 fields, 14 guides |
+| `hubs-v10` | **none** — ten records unchanged | 10 new category hubs |
+| `legacy-hubs-v5` | **none** — three records unchanged from approved v4 | `sms`, `payment`, `government` |
+| `shpock-scam-uk-v10` | **none** — record approved since v5 | 1 guide |
+
+`FINAL-9-guides-v4` (nine guides) is **APPROVED** and ready, but cannot ship alone — it
+overlaps the Scotland patch map.
+
+Each packet is a `.md` (human review) + `.json` (applyable payload) pair. Every `-c.md` in
+that folder is an operator reply; check its audit-date line before treating it as current.
+
+---
+
+## Release procedure — one atomic session
+
+Order matters and is **cryptographically enforced**, not merely documented.
+
+1. **Verify the FINAL-9 receipts**: `scotland-routing-v10.json` →
+   `prerequisite_state.record_digests`. Nine SHA-256 digests over canonical JSON of the
+   post-FINAL-9 records. Measured: **0/9 match before FINAL-9, 9/9 after**. Then apply
+   `FINAL-9-guides-v4`.
+2. Apply `scotland-routing-v10` **+** `shpock-scam-uk-v10` to one proposed corpus —
+   mandatory companions, neither releases alone. After all full-record replacements,
+   re-assert every overlap `sources_checked_add` URL: a later full-record write must not
+   drop the 11 rows across six job guides.
+3. **Verify the nation receipts**: `nation-consumer-routing-v3.json` — 14 digests over
+   `{quick_answer, sections, faq}` in the post-FINAL-9 + post-Scotland state. 7/14 match
+   early because those guides are untouched upstream; 14/14 after. Then apply it.
+4. Apply `hubs-v10` **+** `legacy-hubs-v5` — all thirteen hub records land together.
+5. **In the same patch as step 4** (splitting it breaks the suite):
+   - require a non-empty `sources_checked` for every hub unconditionally;
+   - delete the `unsourced_legacy` warning/exemption branch in `validate_category_hubs()`;
+   - flip `scripts/hub_selftest.py`'s `legacy_exempt` expectation to `rejects(unreviewed)`;
+   - make the hub self-test require the **exact thirteen keys**, dropping the legacy-three
+     allowance.
+6. Run both self-tests **from a clean checkout**
+   (`rm -rf /tmp/cc && mkdir /tmp/cc && git archive HEAD | tar -x -C /tmp/cc`), require
+   zero corpus BLOCKs, then **one non-concurrent build**.
+7. Re-run the render greps on `dist/` (`**`, `](`, `…`), then commit source, code, tests
+   and regenerated `dist/` **together**.
+
+Application contracts require setting `updated` to the **actual application date**, not
+the `2026-07-27` placeholder carried in the payloads.
+
+---
+
+## Verified end-state (measured 2026-07-29, published order)
+
+- **0 BLOCK** across 186 source records / 185 indexable guides
+- 28 review-tier FLAGs: 14 legislation, 11 scale-claim, 1 source, 1 dated-event, 1 hmrc-channel
+- Zero precondition failures; no overlap source rows lost
+- Every quick answer ≤60 words; zero bare `/recovery/` paths corpus-wide
+- 13 hubs at zero BLOCK, with one disclosed `website` legislation FLAG
+- Clean checkout: **103 gate checks + 66 hub checks**, zero failures
+
+"Zero BLOCK" means the deterministic gate is satisfied. The 28 FLAGs remain open editorial
+items and **no model-based LLM judge has run on any of this release**.
+
+---
+
+## The eight commits
+
+| Commit | Substance |
+|---|---|
+| `29598fdf5` | Every named Report Fraud mention must carry a Scottish route; gate covers hub prose |
+| `3a6d1f3a6` | Scotland route needs a positive verb; new `check_nation_consumer_routing` (BLOCK) |
+| `25852a6c2` | Clause-aware routing; `_sentences()` normalises HTML; CRA canon → four agencies; hub validation fails closed |
+| `f936578f5` | Canon guards scoped **per mention** (both had field-wide suppression); `scripts/hub_selftest.py` created; CI wired |
+| `db0330aaa` | CRA qualification local to the matched clause; route-shaped `from`; canon/fallback sync; clean-CI hub test |
+| `844c03c63` | `_load_canon()` and `load_sources()` fail closed; symmetric drift check; hub test independent of gitignored files |
+| `98fc25901` | `police-scotland` as an on-page canon route; canon **structural** validation; 8 visible surfaces scoped; `check-scam.js` inserts Police Scotland deterministically |
+| `5b9ea29fb` | One `render_canon_routes()` shared by `ACCURACY_BLOCK` and `JUDGE_SYSTEM`; no hand-typed numbers left in either |
+
+---
+
+## Canon changes worth knowing
+
+`content/sources.json` now has **17 routes** and is the single source of truth for every
+prompt, the on-page sidebar and the gate allowlist:
+
+- `police-scotland` is an **on-page** route (`101`, scotland.police.uk)
+- Report Fraud label scoped: *England, Wales and Northern Ireland*
+- Victim Support relabelled *Victim Support England and Wales Supportline* — its
+  `0808 168 9111` line covers England and Wales only
+- `advice.scot`, not `advicedirect.scot`
+
+`render_canon_routes()` in `content_gate.py` is the **only** place reporting routes are
+formatted for prompts. A canon edit changes the rendering and fails tests until every
+consumer is updated — pinned by four assertions including a mutation test.
+
+---
+
+## Canon rules that trip models up (all gate-enforced)
+
+- **Report Fraud** covers England, Wales and NI. Scotland → **Police Scotland on 101**.
+  Every named mention needs the Scottish route within a two-sentence window.
+- **Consumer advice is nation-specific**: Citizens Advice (England and Wales,
+  0808 223 1133), Advice Direct Scotland (0808 800 9060), Consumerline NI (0300 123 6262).
+  Never "UK-wide". Citing Citizens Advice *research* is not a route.
+- **Credit reference agencies**: Experian, Equifax, TransUnion are the three **main**
+  agencies; MoneyHelper also lists **Crediva**. Never "the three CRAs" / "all three" /
+  "the other two" as exhaustive. ClearScore is an app; CallCredit is the obsolete
+  TransUnion name.
+- **Victim Support** `0808 168 9111` = England and Wales only.
+- **National Debtline** phone/webchat = England and Wales. Use StepChange or MoneyHelper's
+  debt advice locator for a UK-safe route.
+- **Help to Claim** is delivered by Citizens Advice (England and Wales) and Citizens Advice
+  Scotland; NI administers Universal Credit separately via nidirect. It is **not** the
+  consumer helpline — do not substitute Consumerline there.
+- **Trading Standards referral is conditional** — "may refer or share relevant complaint
+  information", never "passes reports to".
+- Section 75: cash price **more than** £100 and no more than £30,000.
+- APP reimbursement: eligible Faster Payments/CHAPS from 7 Oct 2024, £85,000 cap,
+  up-to-£100 excess (not for vulnerable consumers), 13-month limit.
+
+---
+
+## Operator workflow (non-negotiable)
+
+Every content change goes into `docs/review/<name>.md` as a **self-contained** packet and
+waits for the operator's `<name>-c.md` fact-check reply before being applied. Never commit
+content on the strength of your own verification. Packets must embed the full prose — a
+pointer to a scratch file is not self-contained.
+
+Lessons that cost real rework this cycle:
+
+- **Read every changed field end to end.** Property checks (gate clean, valid HTML, no
+  markdown residue) passed semantically broken text at least four times — dangling
+  fragments, a lowercase sentence start after a full stop, a duplicated clause.
+- **Never claim a test result you have not reproduced from a clean checkout.** A 66/66 hub
+  result was working-copy-only; a clean `git archive` gave 56 PASS / 10 FAIL because the
+  test read gitignored `docs/review/`. CI was red while that number was cited as evidence.
+- **Check the link the text already carries before "fixing" an attribution.** An NCSC
+  citation looked unsupported against the wrong NCSC page; the sentence already linked the
+  right one and was accurate.
+- **A filename in an array is not enforcement.** Order claims need digests.
+- New guard regexes produce false positives at corpus scale — "the three-dot menu",
+  phrasal-verb "on", lowercase "report fraud", `from` in a citation. Always run a new guard
+  over the whole corpus and read the hits before trusting it.
+
+---
+
+## Still queued after this release
+
+- **Nine linked-guide consistency packets** — guides whose live text should match the new
+  hubs: `gumtree-scam-uk-guide`, `preloved-scam-uk`, `fake-online-pharmacy-uk-scam`,
+  `iva-scam-uk`, `ponzi-scheme-uk-warning`, `google-voice-verification-scam`,
+  `charity-donation-scam-checklist`, `viagogo-scam-uk`, `chargeback-scam-uk`.
+- **Quarterly fact-checker**: `python3 scripts/fact_reverify.py --limit 3` smoke test, then
+  a full corpus run. Spends the API key — operator's call.
+- **PageSpeed / Core Web Vitals** capture (quota-limited).
+- **UK scam statistics** refresh due **October 2026** (`content/uk-scam-statistics.json`).
+
+## Operator decisions outstanding
+
+- **Run the model-backed judge?** Nothing in this release has had one. Note the judge
+  prompt itself was excusing unscoped routes until `5b9ea29fb`, so running it on a sample
+  *after* the release is more informative than before.
+- **Restart content generation?** Both crons have `schedule:` commented out (the key
+  itself, not just the cron line), preserving `workflow_dispatch`. Paused at the operator's
+  request until audits came back clean; this release is what clean looks like.
+- **Re-submit to AdSense?** Deferred by the operator. Duplication blockers are resolved and
+  the corpus will be gate-clean.
+
+---
+
+## Practical gotchas
+
+- `docs/review/` is **gitignored** — packets and replies are local-only.
+- Never run two builds concurrently; `rmtree(dist/)` races corrupt output.
+- After a local build, `git checkout -- dist/assets/og/` restores the OG images — local
+  renders differ byte-wise from CI's and produce ~185 spurious modified files.
+- `AGENTS.md` and `CLAUDE.md` are byte-identical twins; change both and verify with
+  `cmp -s AGENTS.md CLAUDE.md`.
+- The permission classifier (`claude-sonnet-5[1m]`) was intermittently unavailable on
+  2026-07-29, blocking Bash in **auto** mode. **Manual mode bypasses it and worked
+  reliably**; Read/Edit/Write are unaffected either way.
+
+---
+
+## Current verified baseline (unchanged from 2026-07-25 unless noted)
+
+- 186 guide source records; 185 indexable guides after one documented consolidation; all
+  185 carry `sources_checked` and `quick_answer`.
+- 17 normalised categories. **3 hubs live; 10 more pending in `hubs-v10`.**
 - AI scam checker, Google CMP, consent-aware GA4 events and Resend double opt-in are live.
-- Original public research and its transparent method are live.
-- Search Console and Bing AI baseline snapshots are retained under `analytics/search-ai/`.
-- Commercial KPI/P&L ledgers and a non-confidential buyer data-room structure are present.
-- Review-PR pipeline is unblocked and runs Tue/Fri (reduced from daily on 2026-07-23). The queue has 23 pending topics — roughly 11 weeks at one per run.
-
-## Outstanding work — priority order
-
-### 1. Capture monetisation and conversion evidence
-
-- Check and record the current AdSense dashboard and Policy Centre decision. Repository status remains “unknown/in review”; do not claim approval or revenue without evidence. The 2026-07-24 audit found **no approval blockers** — verify site ownership via the ads.txt method (publisher ID already matches) and consider the spam-PBN disavow before applying.
-- Mark `newsletter_signup_confirmed` as a GA4 key event and use `scam_check_success` as the primary product-use event.
-- Record current Resend active subscribers, checker use, consented conversions, affiliate clicks and AdSense page views.
-- Close `analytics/commercial/monthly-kpis.csv` and `monthly-pnl.csv` every month from dated exports, statements and invoices. Blank means unknown; zero requires evidence.
-
-### 2. Establish the saleable asset perimeter
-
-- Record the exact legal owner/data controller and suitable contact or service address.
-- Create an IP ownership declaration and obtain contributor/contractor assignments where needed.
-- Run trademark clearance and decide whether to file a UK mark.
-- Document processor contracts and the lawful mechanism for any future newsletter/analytics data transfer.
-
-Use `docs/buyer-data-room/` as the working index. Keep credentials, personal data, invoices, tax records and unredacted contracts in a separately controlled deal room.
-
-### 3. Reduce key-person and transfer risk
-
-- Create a credential inventory without copying secrets into Git.
-- Confirm two independent administrators and recovery access for every material account.
-- Produce a current architecture diagram and monthly operating calendar.
-- Run and document a cold-backup restoration test.
-- Publish the Google OAuth consent app to production to remove testing-mode token churn.
-
-### 4. Complete the DMARC enforcement ramp
-
-- Review accumulated `dmarc@` aggregate reports and confirm Microsoft 365 plus Resend pass alignment.
-- If clean, ramp `p=quarantine; pct=25` → 50 → 100, then `p=reject; sp=reject`.
-- Recheck HSTS preload inclusion. DNSSEC remains optional because Dynadot DNS does not support it without a nameserver migration.
-
-Do not infer current DNS state from the repository; recheck live records before changing them. Exact staged records are in `docs/dns-hardening-checklist.md`.
-
-### 5. Earn authority and continue measurable research
-
-- Complete the Friends Against Scams organisation application.
-- Follow up Tier 2 outreach and record actual outcomes.
-- Start Featured.com/ResponseSource and a consistent expert-contribution cadence.
-- Publish the next recurring scam-trend report from retained, dated source snapshots and compare GSC/Bing citation effects against the July baseline.
-
-No earned editorial backlink is currently recorded in `docs/outreach-log.md`; do not infer a win from a sent pitch.
-
-### 6. Maintain the publishing pipeline
-
-- Review or close each `auto-content` PR within 24 hours; one open PR pauses both content crons.
-- Add an evidence-led queue tranche before the remaining 26 topics are exhausted.
-- Keep hand-written or substantively corrected guides behind the `docs/review/<slug>.md` → operator `-c.md` approval gate.
-- Run the quarterly full-corpus factual reverification workflow and resolve its `fact-audit` PR separately from daily content.
-- **Refresh `/research/uk-scam-statistics/` quarterly (next: October 2026)** — update `content/uk-scam-statistics.json` from re-verified primary sources (PSR dashboard, ONS bulletin; UK Finance each June, Fraudscape each March, GASA each November), then rebuild. Re-verify the Halifax→Lloyds transition wording and the 159 participant list at the same time.
-- When a guide's content changes, regenerate or recheck its `quick_answer` rather than carrying it forward (operator rule, 2026-07-25).
-
-## Smaller external-account checks
-
-- Change Semrush Position Tracking from Spain/Spanish to United Kingdom/English if still wrong.
-- Confirm X/Twitter API credentials exist in GitHub Secrets before relying on post-merge tweeting.
-- Recheck PageSpeed after the latest site-wide build.
-- Verify current affiliate-program applications; recommendations remain unpaid until documentary approval and tracking URLs exist.
-
-## Recent completed work
-
-- 2026-07-25: full-audit remediation shipped (`5b935f85e`) — 3 content fixes, quick answers ×185 with speakable schema, UK scam statistics research page, three guide expansions, NPA stems; all operator-approved and verified live.
-- PR #61: Hinge romance guide fact-checked, reconciled, merged and verified live; content backlog guard cleared.
-- Twelve held guides passed operator review and returned to index/search/sitemap discovery.
-- Consent-aware checker, newsletter and recommendation events shipped.
-- Confirmed newsletter signup now has a dedicated noindex, ad-free success page.
-- Original Bing/Search Console research report and transparent methodology published.
-- Commercial ledgers, acquisition brief and buyer data-room structure created.
-- Full production validation: canonical/index controls, local links, schema and Markdown residue checks pass.
-
-## Non-negotiable operating rules
-
-- `dist/` is committed and is exactly what Netlify serves. Rebuild before every source/content release; never hand-edit it.
-- Never run two `scripts/build.py` processes concurrently.
-- Use `sections` and `faq` in `content/posts.json`; the legacy `content` field does not render.
-- The builder renders only a narrow Markdown subset in guide bodies: backtick code spans and **internal root-relative** `[text](/path/)` links. External markdown links and `**bold**` render as literal characters. Check rendered output.
-- New redirects and function rewrites belong in generated `dist/_redirects`, not new `netlify.toml` redirect blocks.
-- Pushes to `main` deploy automatically. Netlify header changes require “Clear cache and deploy”.
-- `AGENTS.md` and `CLAUDE.md` must remain byte-for-byte identical.
-
-## Start commands
-
-```bash
-git fetch origin
-git status -sb
-git rev-list --left-right --count HEAD...origin/main
-python3 scripts/audit_corpus.py --no-write
-python3 scripts/build.py
-python3 scripts/validate_dist.py
-git diff --check
-cmp -s AGENTS.md CLAUDE.md
-```
-
-## Reference map
-
-- Master architecture/runbook/gotchas: `docs/project.md`
-- Agent instructions: `AGENTS.md` and `CLAUDE.md` (identical)
-- Daily publishing: `docs/daily-publish.md`
-- DNS ramp: `docs/dns-hardening-checklist.md`
-- Outreach: `docs/outreach-log.md`
-- Search/AI measurement: `docs/search-ai-measurement.md`
-- Commercial measurement: `analytics/commercial/README.md`
-- Buyer diligence: `docs/buyer-data-room/README.md`
+- `/research/uk-scam-statistics/` is live with 28 official records.
+- Review-PR pipeline runs Tue/Fri — **currently paused**, see decisions above.
