@@ -306,11 +306,23 @@ def run() -> int:
               bool(_cg.canon_fallback_drift()["phone_extra_in_fallback"]))
     finally:
         _cg._FALLBACK_PHONE_DIGITS.clear(); _cg._FALLBACK_PHONE_DIGITS.update(_saved)
+    try:
+        _cg._FALLBACK_PHONE_DIGITS.discard("03001232040")
+        check("a MISSING fallback number is detected",
+              bool(_cg.canon_fallback_drift()["phone_missing_from_fallback"]))
+    finally:
+        _cg._FALLBACK_PHONE_DIGITS.clear(); _cg._FALLBACK_PHONE_DIGITS.update(_saved)
     _savede = set(_cg._FALLBACK_REPORT_EMAILS)
     try:
         _cg._FALLBACK_REPORT_EMAILS.discard("report@phishing.gov.uk")
         check("a MISSING fallback email is detected",
               bool(_cg.canon_fallback_drift()["email_missing_from_fallback"]))
+    finally:
+        _cg._FALLBACK_REPORT_EMAILS.clear(); _cg._FALLBACK_REPORT_EMAILS.update(_savede)
+    try:
+        _cg._FALLBACK_REPORT_EMAILS.add("nobody@example.invalid")
+        check("an EXTRA fallback email is detected",
+              bool(_cg.canon_fallback_drift()["email_extra_in_fallback"]))
     finally:
         _cg._FALLBACK_REPORT_EMAILS.clear(); _cg._FALLBACK_REPORT_EMAILS.update(_savede)
 

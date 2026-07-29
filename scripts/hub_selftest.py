@@ -152,6 +152,22 @@ def run() -> int:
     check("a non-object root is rejected", rejects([]))
     check("a valid explicit ads_mode is accepted", not rejects(bad(lambda h: h.__setitem__("ads_mode", "npa"))))
 
+    # The generator's own fallback article must satisfy the gate it feeds. Watching
+    # the generator file in CI does not test the article it produces (operator
+    # review, 2026-07-29): it previously emitted three scotland_routing BLOCKs.
+    try:
+        sys.path.insert(0, str(ROOT / "scripts"))
+        import generate_content_claude as _G
+        from content_gate import run_gate as _rg
+        _fields = getattr(_G.Topic, "_fields", None) or list(
+            __import__("inspect").signature(_G.Topic).parameters)
+        _topic = _G.Topic(**{f: ("test-org-scam-uk" if "slug" in f else "Test Org") for f in _fields})
+        _iss = _rg(_G.fallback_post(_topic, "2026-01-01"), use_llm=False).issues
+        _b = [i["check"] for i in _iss if i["severity"] == "block"]
+        check("the generator's fallback article has zero deterministic BLOCKs", not _b, str(_b))
+    except Exception as exc:            # never let an import quirk mask a real failure
+        check("the generator fallback could be constructed and gated", False, f"{type(exc).__name__}: {exc}")
+
     # ── ad treatment ─────────────────────────────────────────────────────────
     EXPECTED = {
         "email": "none", "tech": "none",
@@ -193,13 +209,20 @@ def run() -> int:
     for slug in sorted(set(EXPECTED) & set(live)):
         got = B.hub_ads_mode(slug, live[slug])
         check(f"live ad mode for {slug} is {EXPECTED[slug]}", got == EXPECTED[slug], f"got {got}")
-    pending = sorted(set(EXPECTED) - set(live))
-    if pending:
-        print(f"NOTE  {len(pending)} expected categories are not live yet: {', '.join(pending)}")
-        print("      Their modes are covered by the committed fixtures above. This check becomes")
-        print("      a hard completeness assertion once all thirteen records are landed.")
-    else:
-        check("every expected category is live", True)
+    # Allow ONLY the exact legacy three-record set or the exact full thirteen.
+    # A plain "pending" NOTE was fail-open: deleting one of thirteen records
+    # printed a note and passed again (operator review, 2026-07-29).
+    LEGACY_ONLY = {"sms", "payment", "government"}
+    live_expected = set(EXPECTED) & set(live)
+    check("hub set is exactly the legacy three or the full thirteen",
+          live_expected in (LEGACY_ONLY, set(EXPECTED)),
+          f"got {sorted(live_expected)} — an intermediate subset is not a valid release state")
+    check("no unexpected hub key is present",
+          not (set(live) - set(EXPECTED)), f"unexpected: {sorted(set(live) - set(EXPECTED))}")
+    if live_expected == LEGACY_ONLY:
+        print("NOTE  the ten new hubs are not landed yet; their modes are covered by the committed")
+        print("      fixtures above. After the atomic release this branch should be deleted and the")
+        print("      thirteen-key assertion made unconditional.")
 
     sensitive = hub(sections=[["S", "<p>Sextortion and intimate image threats, and debt problems.</p>"]])
     check("a sensitive hub with no explicit mode is not 'default'",

@@ -342,13 +342,16 @@ Analyse the provided content and respond ONLY with a valid JSON object — no ma
   "green_flags": ["Reassuring sign 1"],
   "recommended_actions": ["Specific action 1", "Specific action 2", "Specific action 3"],
   "reporting_links": [
-    {"name": "Report Fraud (Police)", "url": "https://www.reportfraud.police.uk"},
+    {"name": "Report Fraud — England, Wales and Northern Ireland", "url": "https://www.reportfraud.police.uk"},
+    {"name": "Police Scotland on 101 — Scotland", "url": "https://www.scotland.police.uk/contact-us/non-emergencies/"},
     {"name": "Forward to 7726 (SMS spam)", "url": "https://www.ncsc.gov.uk/collection/phishing-scams/report-scam-text-messages"}
   ]
 }
 
 Rules:
-- The UK's national fraud reporting service is called "Report Fraud" (reportfraud.police.uk, 0300 123 2040). It replaced Action Fraud in December 2025 — never call it "Action Fraud" except as a parenthetical former name, and always link https://www.reportfraud.police.uk, never actionfraud.police.uk.
+- Police fraud reporting is NATION-SPECIFIC and both routes must be offered together. "Report Fraud" (reportfraud.police.uk, 0300 123 2040) covers England, Wales and Northern Ireland ONLY. A reader in Scotland, or reporting a crime that happened there, uses Police Scotland on 101 (scotland.police.uk). Never present Report Fraud as the UK-wide route, and never give it without the Scottish alternative in the same list.
+- Report Fraud replaced Action Fraud in December 2025 — never call it "Action Fraud" except as a parenthetical former name, and always link https://www.reportfraud.police.uk, never actionfraud.police.uk.
+- Consumer advice is nation-specific too: Citizens Advice covers England and Wales, Advice Direct Scotland covers Scotland, Consumerline covers Northern Ireland. Never present Citizens Advice as a UK-wide helpline.
 - red_flags and green_flags must be specific to the content provided, not generic.
 - recommended_actions must be concrete and actionable, not generic advice.
 - reporting_links should include only UK-relevant links appropriate to the scam type.
@@ -434,22 +437,47 @@ Rules:
     // predates the Dec 2025 Action Fraud → Report Fraud rebrand, so it still
     // emits actionfraud.police.uk links and "Action Fraud" naming. Rewrite both
     // deterministically rather than relying on the prompt rule alone.
+    // The label must also carry the GEOGRAPHY. "Report Fraud (Police)" reads as a
+    // UK-wide route and strands a Scottish reader on a self-contained action link
+    // (operator review, 2026-07-29).
+    const REPORT_FRAUD_LINK = {
+      url: "https://www.reportfraud.police.uk",
+      name: "Report Fraud — England, Wales and Northern Ireland",
+    };
+    const POLICE_SCOTLAND_LINK = {
+      url: "https://www.scotland.police.uk/contact-us/non-emergencies/",
+      name: "Police Scotland on 101 — Scotland",
+    };
     const canonicaliseReportFraud = (l) => {
       try {
         const host = new URL(l.url).hostname.toLowerCase();
         if (host === "actionfraud.police.uk" || host === "www.actionfraud.police.uk" ||
             host === "reportfraud.police.uk" || host === "www.reportfraud.police.uk") {
-          return { url: "https://www.reportfraud.police.uk", name: "Report Fraud (Police)" };
+          return { ...REPORT_FRAUD_LINK };
+        }
+        if (host === "scotland.police.uk" || host === "www.scotland.police.uk") {
+          return { ...POLICE_SCOTLAND_LINK };
         }
       } catch { /* leave non-URL values for the allowlist filter to drop */ }
       return l;
     };
-    const safeLinks = Array.isArray(parsed.reporting_links)
+    let safeLinks = Array.isArray(parsed.reporting_links)
       ? parsed.reporting_links
           .filter(l => l && typeof l.url === "string" && isAllowedReportUrl(l.url))
           .map(canonicaliseReportFraud)
           .map(l => ({ url: l.url, name: scrubContact(String(l.name || "")).slice(0, 120) }))
       : [];
+    // Never surface Report Fraud without the Scottish route beside it. Done
+    // deterministically so a prompt rule alone cannot be the only guarantee.
+    const hasHost = (h) => safeLinks.some(l => {
+      try { return new URL(l.url).hostname.toLowerCase().replace(/^www\./, "") === h; }
+      catch { return false; }
+    });
+    if (hasHost("reportfraud.police.uk") && !hasHost("scotland.police.uk")) {
+      const at = safeLinks.findIndex(l => l.url === REPORT_FRAUD_LINK.url);
+      safeLinks.splice(at + 1, 0, { ...POLICE_SCOTLAND_LINK });
+    }
+    safeLinks = safeLinks.slice(0, 6);
 
     const result = {
       verdict:             verdict,

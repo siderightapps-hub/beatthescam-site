@@ -14,8 +14,18 @@
       "report_url": "https://www.reportfraud.police.uk",
       "info_url": "https://www.reportfraud.police.uk/",
       "phone": "0300 123 2040",
-      "report_label": "Report Fraud (formerly Action Fraud)",
+      "report_label": "Report Fraud (formerly Action Fraud) — England, Wales and Northern Ireland",
       "on_page": true
+    },
+    {
+      "key": "police-scotland",
+      "name": "Police Scotland non-emergency reporting (Scotland)",
+      "report_url": "https://www.scotland.police.uk/contact-us/non-emergencies/",
+      "info_url": "https://www.scotland.police.uk/contact-us/non-emergencies/",
+      "phone": "101",
+      "report_label": "Police Scotland on 101 — Scotland",
+      "on_page": true,
+      "note": "Report Fraud covers England, Wales and Northern Ireland; Scotland reports through Police Scotland on 101. Added 2026-07-29 so the on-page sidebar and every canon-derived route carry the Scottish alternative."
     },
     {
       "key": "ncsc-sers",
@@ -105,7 +115,7 @@
     },
     {
       "key": "victim-support",
-      "name": "Victim Support Supportline",
+      "name": "Victim Support England and Wales Supportline",
       "info_url": "https://www.victimsupport.org.uk/more-us/contact-us/",
       "phone": "0808 168 9111",
       "on_page": false

@@ -100,7 +100,9 @@ You write practical, detailed scam-awareness guides for ordinary UK residents.
 Your writing style:
 - Plain English, no jargon
 - Specific and practical — not generic advice
-- UK-focused (Report Fraud, NCSC, Citizens Advice, UK banks, UK platforms)
+- UK-focused, with reporting routes SCOPED BY NATION (Report Fraud for England, Wales and Northern
+  Ireland; Police Scotland on 101 for Scotland; NCSC; and the consumer service for the reader's
+  nation), plus UK banks and UK platforms
 - Calm tone — not alarmist
 - Reference named companies, products, and organisations only when you are confident they are real and publicly verifiable
 
@@ -155,7 +157,9 @@ Rules:
 - Every section body must be 120+ words. Short sections will be rejected.
 - The warning-signs bullet list items must start with "- "
 - All content must be specific to {topic.keyword}, not generic scam advice
-- Keep the official reporting routes above (Report Fraud, NCSC, 7726, Citizens Advice) accurate and unchanged
+- Keep the official reporting routes above accurate and unchanged, INCLUDING their nation scope:
+  Report Fraud covers England, Wales and Northern Ireland, Police Scotland on 101 covers Scotland,
+  and the consumer service differs by nation
 - slug must be lowercase with hyphens only
 - Return ONLY the JSON object, nothing else"""
 
@@ -268,9 +272,11 @@ def normalise(data: Dict, topic: Topic, today: str, strict: bool = False) -> Dic
              f"Change passwords for any affected accounts. Enable two-factor authentication. "
              f"Document everything — screenshots, message text, dates — before reporting."],
             ["Reporting this scam in the UK",
-             f"Report to Report Fraud online at reportfraud.police.uk or by phone on 0300 123 2040. "
+             f"Report it to Report Fraud at reportfraud.police.uk or 0300 123 2040 in England, Wales "
+             f"or Northern Ireland, or to Police Scotland on 101 in Scotland. "
              f"If you received a suspicious email, forward it to report@phishing.gov.uk (the NCSC's Suspicious Email Reporting Service). "
-             f"If you received a suspicious text, forward it to 7726 — this is free on all UK networks and goes to your mobile operator. "
+             f"If you received a suspicious text, you can forward it to 7726 free of charge; it goes "
+             f"to your mobile operator. "
              f"For consumer advice, use the service for your nation: Citizens Advice in England "
              f"and Wales on 0808 223 1133, Advice Direct Scotland in Scotland on 0808 800 9060, "
              f"or Consumerline in Northern Ireland on 0300 123 6262. "
@@ -293,13 +299,16 @@ def normalise(data: Dict, topic: Topic, today: str, strict: bool = False) -> Dic
             ["What should I do if I already sent money?",
              f"Contact your bank immediately using the number on the back of your card. "
              f"Banks can sometimes recall bank transfers if reported quickly. "
-             f"Also report to Report Fraud at reportfraud.police.uk."],
+             f"Also report it to Report Fraud at reportfraud.police.uk in England, Wales or Northern "
+             f"Ireland, or to Police Scotland on 101 in Scotland."],
             [f"How do I tell a fake {ent} website from the real one?",
              f"Check the domain name carefully — scammers use lookalike domains with extra words or different endings. "
              f"Always access the site by typing the address directly, not via a link in a message."],
             ["Who do I report this to in the UK?",
-             f"Report to Report Fraud (0300 123 2040 or reportfraud.police.uk). "
-             f"Forward suspicious texts to 7726 and emails to report@phishing.gov.uk."],
+             f"Report it to Report Fraud (0300 123 2040 or reportfraud.police.uk) in England, Wales "
+             f"or Northern Ireland, or to Police Scotland on 101 in Scotland. "
+             f"You can forward suspicious texts to 7726 free of charge, and emails to "
+             f"report@phishing.gov.uk."],
         ]
 
     content = "\n\n".join(f"## {t}\n\n{b}" for t, b in sections)
