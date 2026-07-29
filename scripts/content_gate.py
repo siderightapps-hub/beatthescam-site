@@ -39,7 +39,6 @@ ACCURACY_BLOCK = """ACCURACY — THIS OVERRIDES EVERY STYLE AND SEO RULE BELOW. 
 - Before finalising, re-read every sentence that names a real company, person, or product alongside a date, number, deal, price, or feature. If you are not confident it is a true public fact, rewrite it as a general statement or delete it.
 - Do NOT state a phone number for any specific company (bank, courier, retailer, utility, etc.). The only phone numbers permitted anywhere are the official reporting and support routes in the verified canon, `content/sources.json` — the same list the gate enforces at publish time. Do not work from a memorised list: if a number is not in that canon, do not print it. For any organisation, tell readers to use the number on their card, bill, or the organisation's official website.
 - UK credit reference agencies: Experian, Equifax and TransUnion are the three MAIN agencies; MoneyHelper also lists Crediva as offering a free statutory report. Never write "the three CRAs", "all three" or "the other two" as if exhaustive. ClearScore is a free app and CallCredit is the obsolete name for TransUnion.
-- Consumer advice is nation-specific: Citizens Advice covers England and Wales (0808 223 1133), Advice Direct Scotland covers Scotland (0808 800 9060), Consumerline covers Northern Ireland (0300 123 6262). Never present Citizens Advice as a UK-wide helpline.
 """
 
 # ─── ALLOWLISTS / BLOCKLISTS ─────────────────────────────────────────────────
@@ -178,8 +177,44 @@ def _judge_canon_block(canon: Dict) -> str:
     return "\n".join(lines)
 
 
+def render_canon_routes(canon: Dict) -> str:
+    """The ONE rendering of nation-scoped reporting routes, derived from the canon.
+
+    Appended to ACCURACY_BLOCK and JUDGE_SYSTEM, and asserted by the self-test,
+    so a canon change propagates to every prompt instead of needing a
+    search-and-replace across Python and JavaScript string literals. Previously
+    the same routes were hand-typed in the generator prompt, ACCURACY_BLOCK,
+    JUDGE_SYSTEM, the fallback article and the sidebar, and they drifted
+    (operator reviews, 2026-07-28/29).
+    """
+    def _by_key(k):
+        return next((r for r in canon.get("official_routes", []) if r.get("key") == k), {})
+    rf, ps = _by_key("action-fraud"), _by_key("police-scotland")
+    ca, ads, cl = _by_key("citizens-advice"), _by_key("advice-direct-scotland"), _by_key("consumerline-ni")
+    lines = ["- REPORTING ROUTES ARE NATION-SPECIFIC and must always be given together:"]
+    if rf:
+        lines.append(f"  • Report Fraud ({rf.get('report_url','')}"
+                     f"{', ' + rf['phone'] if rf.get('phone') else ''}) covers England, Wales and "
+                     f"Northern Ireland ONLY.")
+    if ps:
+        lines.append(f"  • Police Scotland on {ps.get('phone','101')} "
+                     f"({ps.get('report_url','')}) is the route for Scotland.")
+    lines.append("  Never present Report Fraud as the UK-wide route, and never give it without the "
+                 "Scottish alternative in the same instruction.")
+    lines.append("- Consumer advice is nation-specific too:")
+    for r, where in ((ca, "England and Wales"), (ads, "Scotland"), (cl, "Northern Ireland")):
+        if r:
+            nm = str(r.get("name") or "").split("(")[0].strip()
+            lines.append(f"  • {nm}{' on ' + r['phone'] if r.get('phone') else ''} — {where}.")
+    lines.append("  Never present Citizens Advice as a UK-wide helpline.")
+    return "\n".join(lines)
+
+
 _CANON = _load_canon()
 _JUDGE_CANON_BLOCK = _judge_canon_block(_CANON)
+CANON_ROUTE_BLOCK = render_canon_routes(_CANON)
+# Append the rendered routes so the prompt and the canon cannot disagree.
+ACCURACY_BLOCK = ACCURACY_BLOCK.rstrip() + "\n" + CANON_ROUTE_BLOCK + "\n"
 ALLOWED_PHONE_DIGITS = _canon_phone_digits(_CANON)
 ALLOWED_REPORT_EMAILS = _canon_report_emails(_CANON)
 
@@ -1270,14 +1305,21 @@ cases") is fine; an unconditional absolute is not
 - a specific dated event, law, or regulatory action stated as fact
 - any organisation-specific phone number (banks, couriers, utilities) — these should not be hardcoded
 
-Do NOT flag: general scam-pattern description, the standard UK reporting routes (Report Fraud \
-0300 123 2040 for England, Wales and Northern Ireland; Police Scotland 101 for Scotland; the consumer service for the reader's nation — Citizens Advice 0808 223 1133 in England and Wales, Advice Direct Scotland 0808 800 9060, Consumerline 0300 123 6262; forward texts to 7726; report@phishing.gov.uk), \
+Do NOT flag: general scam-pattern description, the verified UK reporting routes listed under \
+VERIFIED ROUTES above (including forwarding texts to 7726 and report@phishing.gov.uk), \
 clearly directional language ("growing rapidly", "many victims"), or the site accurately \
 describing a SCAMMER's own false promise (e.g. "the scammer claims your funds are 100% safe").
+DO still flag an unscoped route: Report Fraud presented as the UK-wide service without the \
+Police Scotland alternative, or Citizens Advice presented as a UK-wide helpline, is an error \
+even though both bodies are in the canon.
 
 Respond with ONLY this JSON, no other text:
 {"verdict":"pass"|"fail","risk":"low"|"medium"|"high","issues":[{"claim":"<quote>","problem":"<short>","severity":"low"|"medium"|"high"}]}
 Set verdict "fail" if there is ANY high-severity issue."""
+# Same rendering as ACCURACY_BLOCK, so judge and generator cannot disagree.
+JUDGE_SYSTEM = JUDGE_SYSTEM.replace(
+    "VERIFIED ROUTES above",
+    "VERIFIED ROUTES above").rstrip() + "\n\nVERIFIED ROUTES (nation-scoped, from the verified canon):\n" + CANON_ROUTE_BLOCK + "\n"
 
 
 def judge_llm(post: Dict, client, model: str) -> List[Dict]:

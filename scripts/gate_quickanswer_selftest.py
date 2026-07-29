@@ -262,6 +262,35 @@ def run() -> int:
                                     "Scotland. Then report the loss to Report Fraud at "
                                     "reportfraud.police.uk, or Police Scotland on 101 in "
                                     "Scotland.</p>"]])))
+    # ONE rendering of the reporting routes, derived from the canon and shared by
+    # every prompt. The routes were previously hand-typed in five places and
+    # drifted (operator reviews, 2026-07-28/29).
+    from content_gate import (ACCURACY_BLOCK, JUDGE_SYSTEM, CANON_ROUTE_BLOCK,
+                              render_canon_routes, _CANON)
+    check("the generator prompt carries the canon-rendered routes",
+          CANON_ROUTE_BLOCK in ACCURACY_BLOCK)
+    check("the judge prompt carries the canon-rendered routes",
+          CANON_ROUTE_BLOCK in JUDGE_SYSTEM)
+    for needed in ("England, Wales and Northern Ireland", "Police Scotland", "Scotland",
+                   "Northern Ireland", "Never present Report Fraud as the UK-wide route",
+                   "Never present Citizens Advice as a UK-wide helpline"):
+        check(f"the rendered route block states {needed!r}", needed in CANON_ROUTE_BLOCK)
+    # No prompt may keep its own copy of a canon phone number.
+    import re as _re
+    for name, text in (("ACCURACY_BLOCK", ACCURACY_BLOCK), ("JUDGE_SYSTEM", JUDGE_SYSTEM)):
+        residue = _re.findall(r"0808\s*223\s*1133|0808\s*800\s*9060|0300\s*123\s*6262",
+                              text.replace(CANON_ROUTE_BLOCK, ""))
+        check(f"{name} has no hand-typed consumer number outside the rendered block",
+              not residue, str(residue))
+    # A canon change must reach the rendering, not just the allowlist.
+    import copy as _copy
+    _mut = _copy.deepcopy(_CANON)
+    for _r in _mut.get("official_routes", []):
+        if _r.get("key") == "police-scotland":
+            _r["phone"] = "999999"
+    check("editing the canon changes the rendered route block",
+          "999999" in render_canon_routes(_mut))
+
     # Citizens Advice covers ENGLAND AND WALES only. Naming it as a general UK
     # helpline strands Scottish and Northern Irish readers (operator review,
     # 2026-07-27). It is also a research publisher, so a CITATION must not flag.
