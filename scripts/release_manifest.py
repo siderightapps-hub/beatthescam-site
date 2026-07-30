@@ -52,7 +52,29 @@ from pathlib import Path
 from typing import Optional
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
-import corpus as corpus_mod  # noqa: E402  — the shared public/source corpus partition
+
+# LAZY. A code patch can leave scripts/corpus.py unimportable, and this module
+# is the only thing that can undo it — importing it at module scope meant
+# `--recover` could not even start after the exact failure the journal exists
+# for (operator review, 2026-07-30).
+_corpus_mod = None
+
+
+def _corpus():
+    global _corpus_mod
+    if _corpus_mod is None:
+        import corpus as _c
+        _corpus_mod = _c
+    return _corpus_mod
+
+
+class _CorpusProxy:
+    """Attribute access that imports on first use, so --recover never triggers it."""
+    def __getattr__(self, name):
+        return getattr(_corpus(), name)
+
+
+corpus_mod = _CorpusProxy()
 
 ROOT = Path(__file__).resolve().parents[1]
 REVIEW = ROOT / "docs" / "review"
@@ -403,16 +425,29 @@ def staged_corpus_module(staged: dict):
 
     text = staged.get("scripts/corpus.py")
     if text is None:
-        return corpus_mod
+        return _corpus()
+    # PRODUCTION-EQUIVALENT SEMANTICS. Importing the staged file as
+    # `staged_corpus` let a compile-valid patch behave differently under its real
+    # name `corpus` — it passed preflight, then raised on the live reload after
+    # every file had been replaced (operator review, 2026-07-30).
     with tempfile.TemporaryDirectory() as td:
-        path = Path(td) / "staged_corpus.py"
+        path = Path(td) / "corpus.py"
         path.write_text(text, encoding="utf-8")
-        spec = importlib.util.spec_from_file_location("staged_corpus", path)
+        spec = importlib.util.spec_from_file_location("corpus", path)
         module = importlib.util.module_from_spec(spec)
+        saved = sys.modules.get("corpus")
+        sys.modules["corpus"] = module
         try:
             spec.loader.exec_module(module)
         except Exception as exc:
-            raise ApplyError(f"the staged scripts/corpus.py does not import: {exc}")
+            raise ApplyError(
+                f"the staged scripts/corpus.py does not import under its production module "
+                f"name: {exc.__class__.__name__}: {exc}")
+        finally:
+            if saved is not None:
+                sys.modules["corpus"] = saved
+            else:
+                sys.modules.pop("corpus", None)
     return module
 
 
@@ -672,12 +707,21 @@ def code_baseline(overrides: dict | None = None) -> dict:
     blobs = {}
     missing = []
     for f in files:
-        if f in overrides:
-            blobs[f] = hashlib.sha256(overrides[f].encode("utf-8")).hexdigest()
-        elif (ROOT / f).exists():
-            blobs[f] = hashlib.sha256((ROOT / f).read_bytes()).hexdigest()
-        else:
+        path = ROOT / f
+        if not path.exists():
             missing.append(f)
+            continue
+        # MODE is part of the receipt. Hashing bytes only meant a tracked file
+        # could go 755 → 644 with identical content and both --apply and
+        # --verify still returned success, so the "indivisible code position"
+        # did not actually include the executable bit (operator review,
+        # 2026-07-30).
+        mode = stat.S_IMODE(path.stat().st_mode)
+        if f in overrides:
+            sha = hashlib.sha256(overrides[f].encode("utf-8")).hexdigest()
+        else:
+            sha = hashlib.sha256(path.read_bytes()).hexdigest()
+        blobs[f] = {"sha256": sha, "mode": oct(mode)}
     if missing:
         # Silently omitting a missing file produced a baseline that attested to
         # less than it claimed.
@@ -934,12 +978,21 @@ def _require_manifest() -> dict:
                     f"ERROR: stage {entry['id']!r} has no valid {key!r} (expected a 64-character "
                     f"SHA-256 hex digest). Regenerate the manifest."
                 )
+    # A recorded aggregate must equal the digest of its own per-file map. A
+    # syntactically valid 64-zero digest used to be accepted (operator review,
+    # 2026-07-30).
+    for key in ("code_baseline", "code_baseline_after"):
+        entry = manifest.get(key)
+        if not isinstance(entry, dict) or "files" not in entry or "digest" not in entry:
+            raise SystemExit(f"ERROR: the manifest has no usable {key!r} — regenerate it")
+        if digest(entry["files"]) != entry["digest"]:
+            raise SystemExit(
+                f"ERROR: {key}.digest does not match the digest of its own recorded file map. "
+                f"The manifest has been edited by hand."
+            )
     if manifest.get("digest_spec") != DIGEST_SPEC:
         raise SystemExit("ERROR: the manifest's digest_spec differs from this tool's — "
                          "its digests were computed a different way. Regenerate it.")
-    after = manifest.get("code_baseline_after")
-    if not isinstance(after, dict) or "digest" not in after:
-        raise SystemExit("ERROR: the manifest has no usable `code_baseline_after` — regenerate it")
     # Chain: each stage must start from the code the previous stage produced.
     ready = [e for e in manifest["stages"] if e.get("status") == "ready"]
     for prev, nxt in zip(ready, ready[1:]):
@@ -1078,6 +1131,11 @@ def _commit_transaction(payload: dict) -> dict:
                 tmp.chmod(mode)                  # carry the original mode across
             tmp.replace(path)
             written.append(name)
+        if _FAIL_AFTER is not None and int(_FAIL_AFTER) >= len(payload):
+            # A failure AFTER the final replacement — the loop-bounded injection
+            # could never reach this point, so the case labelled "on the LAST
+            # replacement" was really "before the last one".
+            raise OSError(f"injected failure after all {len(payload)} replacement(s)")
     except Exception as exc:
         _restore({k: v for k, v in snap.items() if k in written})
         _clear_temps()
@@ -1232,6 +1290,7 @@ def cmd_apply(applied_on: str, only: str | None) -> int:
 
     posts, hubs = load_posts(), load_hubs()
     staged_code: list = []
+    applied_stages: list = []
 
     for stage in STAGES:
         if only and stage["id"] != only:
@@ -1285,6 +1344,26 @@ def cmd_apply(applied_on: str, only: str | None) -> int:
                 f"       produced {_fmt(after)}\n"
                 f"       Nothing was written to disk."
             )
+        # POSTCONDITION: the CODE this stage produces. Only `code_expects` was
+        # checked, so a validly formatted, correctly chained but FALSE
+        # `code_produces` was accepted and the whole release written; the
+        # mismatch surfaced only on a later --verify (operator review,
+        # 2026-07-30).
+        cumulative: dict = {}
+        for files in staged_code:
+            cumulative.update(files)
+        for entry in report["packets"].values():
+            if entry.get("_staged_files"):
+                cumulative.update(entry["_staged_files"])
+        produced_code = code_baseline(cumulative)["digest"]
+        if produced_code != recorded["code_produces"]:
+            raise SystemExit(
+                f"ERROR: stage {stage['id']!r} did not produce its recorded CODE receipt.\n"
+                f"       expected {recorded['code_produces']}\n"
+                f"       produced {produced_code}\n"
+                f"       Nothing was written to disk."
+            )
+        applied_stages.append(recorded)
         for entry in report["packets"].values():
             if entry.get("_staged_files"):
                 staged_code.append(entry["_staged_files"])
@@ -1310,15 +1389,28 @@ def cmd_apply(applied_on: str, only: str | None) -> int:
     # The journal is still live: any failure here rolls the whole thing back.
     import importlib
     try:
-        importlib.reload(corpus_mod)
+        importlib.reload(_corpus())
         if _FAIL_VALIDATION:
             raise SystemExit("injected post-write validation failure")
         _check_graph(load_posts())
         for name, text in payload.items():
             if (ROOT / name).read_text(encoding="utf-8") != text:
                 raise SystemExit(f"{name} on disk does not match what was written")
+        # And the LIVE code receipt, from disk, before the journal is released.
+        live_after = code_baseline()["digest"]
+        if applied_stages and live_after != applied_stages[-1]["code_produces"]:
+            raise SystemExit(
+                f"live code receipt {live_after} does not match the recorded "
+                f"{applied_stages[-1]['code_produces']} for stage "
+                f"{applied_stages[-1]['id']!r}")
     except SystemExit as exc:
         _rollback_from_journal(f"post-write validation failed: {exc}")
+    except BaseException as exc:
+        # ANY exception, not just SystemExit. A RuntimeError from the reloaded
+        # module escaped uncaught, leaving every file mutated and the journal in
+        # place — recoverable in principle, but only if --recover could start.
+        _rollback_from_journal(
+            f"post-write validation raised {exc.__class__.__name__}: {exc}")
     _finalize_transaction()
     print(f"\nwrote {len(payload)} file(s) in one transaction")
     print("NOT built. Run the post-application suites, then ONE non-concurrent build.")

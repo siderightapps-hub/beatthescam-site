@@ -169,7 +169,7 @@ renders is not a duplicate *page*, so it no longer BLOCKs publication.
 - 13 hubs at zero BLOCK, with one disclosed `website` legislation FLAG; all 13 sourced
 - Internal guide links: 0 unresolved. Raw `**` / external markdown links / description
   ellipses: 0 / 0 / 0
-- Clean checkout: **152 gate + 101 hub + 53 corpus + 48 release-control + 50 node**, zero failures,
+- Clean checkout: **152 gate + 101 hub + 53 corpus + 61 release-control + 50 node = 417**, zero failures,
   with `docs/review/` genuinely absent. The fast path (`corpus_selftest.py --no-build`)
   plus canon sync. `release_selftest.py` runs 24 synthetic-fixture checks there and 26
   with the local packets. On the fully APPLIED state the four suites are **384** (build-backed) or **367** (fast).

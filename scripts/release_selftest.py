@@ -315,8 +315,22 @@ def main() -> int:
                                cwd=t, capture_output=True, text=True, env=e)
             return r.returncode, (r.stdout + r.stderr)
 
-        watched = ("content/posts.json", "content/category-hubs.json",
-                   "scripts/corpus.py", "scripts/build.py", "scripts/hub_selftest.py")
+        # The watched set is DERIVED from the transaction's own journal, so it
+        # cannot silently omit a file the release writes. A hard-coded five-path
+        # list omitted scripts/corpus_selftest.py, and disabling restoration for
+        # that file still passed every "every byte" assertion (operator review,
+        # 2026-07-30).
+        t_probe = fresh()
+        run_env(t_probe, {"RELEASE_SELFTEST_FAIL_AFTER": "0"}, "--apply", "--date", DATE)
+        jp = t_probe / ".release-journal.json"
+        watched = tuple(sorted(json.loads(jp.read_text())["writing"])) if jp.exists() else ()
+        if not watched:
+            _, probe_out = run_env(t_probe, {"RELEASE_SELFTEST_LEAVE_JOURNAL": "1"},
+                                   "--apply", "--date", DATE)
+            watched = tuple(sorted(json.loads(jp.read_text())["writing"])) if jp.exists() else ()
+        shutil.rmtree(t_probe, ignore_errors=True)
+        check("the watched set is derived from the transaction, not hard-coded",
+              len(watched) >= 2, f"watched={watched}")
 
         def snapshot(t):
             return {f: ((t / f).read_bytes(), (t / f).stat().st_mode)
@@ -337,7 +351,8 @@ def main() -> int:
         points = [("after the FIRST replacement", 1)]
         if n_writes >= 3:
             points.append(("mid-way through the replacements", n_writes // 2))
-        points.append(("on the LAST replacement", n_writes - 1))
+        points.append(("before the LAST replacement", n_writes - 1))
+        points.append(("after ALL replacements", n_writes))
 
         for label, fail_after in [(l, str(n)) for l, n in points]:
             t = fresh()
@@ -363,10 +378,57 @@ def main() -> int:
         rc, out = run_env(t, {"RELEASE_SELFTEST_FAIL_VALIDATION": "1"}, "--apply", "--date", DATE)
         after = snapshot(t)
         changed = sorted(f for f in before if before[f][0] != after.get(f, (None,))[0])
+        modes = sorted(f for f in before if before[f][1] != after.get(f, (None, None))[1])
         check("a POST-WRITE validation failure rolls everything back",
               rc != 0 and not changed, f"exit={rc}; changed: {changed}")
-        check("...and the journal is gone afterwards",
-              not (t / ".release-journal.json").exists())
+        check("...and restores every mode", not modes, f"modes changed: {modes}")
+        check("...and leaves no journal", not (t / ".release-journal.json").exists())
+        check("...and leaves no temp files", not list(t.rglob("*.release-tmp")))
+        shutil.rmtree(t, ignore_errors=True)
+
+        # ── A name-sensitive corpus.py failure ──────────────────────────────
+        # Compile-valid, passes the staged import under its production name only
+        # if that import really uses the production name. Proves automatic
+        # rollback AND that a fresh --recover process can still start.
+        t = fresh()
+        cp = t / "scripts" / "corpus.py"
+        cp.write_text(cp.read_text(encoding="utf-8")
+                      + '\nif __name__ == "corpus":\n'
+                        '    raise RuntimeError("name-sensitive failure fixture")\n',
+                      encoding="utf-8")
+        before = snapshot(t)          # AFTER injecting the fixture, not before
+        rc, out = run_env(t, {}, "--emit", "--date", DATE)
+        rc, out = run_env(t, {}, "--apply", "--date", DATE)
+        after = snapshot(t)
+        changed = sorted(f for f in before if before[f][0] != after.get(f, (None,))[0])
+        check("a name-sensitive corpus.py failure is caught BEFORE any write",
+              rc != 0 and not changed, f"exit={rc}; changed: {changed}")
+        check("...and --recover can still start afterwards",
+              run(t, "--recover")[0] == 0)
+        shutil.rmtree(t, ignore_errors=True)
+
+        # ── Pre-existing MODE drift must invalidate the baseline ────────────
+        t = fresh()
+        victim = t / "scripts" / "hub_selftest.py"
+        victim.chmod(0o644)
+        rc, out = run_env(t, {}, "--apply", "--date", DATE)
+        check("a mode change with identical bytes invalidates the code baseline",
+              rc != 0 and "release-critical code has changed" in out, out[-250:])
+        shutil.rmtree(t, ignore_errors=True)
+
+        # ── A false but well-formed final code receipt ──────────────────────
+        t = fresh()
+        mp = t / "docs" / "review" / "release-manifest.json"
+        m2 = json.loads(mp.read_text(encoding="utf-8"))
+        m2["stages"][-1]["code_produces"] = "0" * 64
+        m2["code_baseline_after"]["digest"] = "0" * 64
+        mp.write_text(json.dumps(m2, indent=2, ensure_ascii=False), encoding="utf-8")
+        before = snapshot(t)
+        rc, out = run_env(t, {}, "--apply", "--date", DATE)
+        after = snapshot(t)
+        changed = sorted(f for f in before if before[f][0] != after.get(f, (None,))[0])
+        check("a well-formed but FALSE final code receipt is rejected before any write",
+              rc != 0 and not changed, f"exit={rc}; changed: {changed}")
         shutil.rmtree(t, ignore_errors=True)
 
         # ── Modes survive a SUCCESSFUL release ──────────────────────────────
@@ -400,12 +462,13 @@ def main() -> int:
         run_env(t, {"RELEASE_SELFTEST_FAIL_AFTER": "0"}, "--apply", "--date", DATE)
         # Re-run with an interruption that leaves the journal in place.
         rc, out = run_env(t, {"RELEASE_SELFTEST_LEAVE_JOURNAL": "1"}, "--apply", "--date", DATE)
-        if (t / ".release-journal.json").exists():
-            rc, out = run(t, "--recover")
-            after = snapshot(t)
-            changed = sorted(f for f in before if before[f] != after.get(f))
-            check("--recover restores bytes and modes exactly", rc == 0 and not changed,
-                  f"changed: {changed}")
+        check("an interrupted run LEAVES its journal", (t / ".release-journal.json").exists())
+        rc, out = run(t, "--recover")
+        after = snapshot(t)
+        changed = sorted(f for f in before if before[f] != after.get(f))
+        check("--recover restores bytes and modes exactly", rc == 0 and not changed,
+              f"changed: {changed}")
+        check("--recover leaves no temp files", not list(t.rglob("*.release-tmp")))
         shutil.rmtree(t, ignore_errors=True)
 
         # ── A code_patch that disagrees with its final_state ────────────────
