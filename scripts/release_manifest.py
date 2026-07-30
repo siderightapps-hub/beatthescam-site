@@ -43,6 +43,9 @@ import argparse
 import copy
 import hashlib
 import json
+import os
+import re
+import stat
 import sys
 from datetime import date
 from pathlib import Path
@@ -68,6 +71,18 @@ DIGEST_SPEC = {
     "trailing_newline": False,
     "note": "Applies to record digests, corpus digests and hub digests alike.",
 }
+
+
+def _iso_date(value: str) -> date:
+    """Exactly YYYY-MM-DD.
+
+    `date.fromisoformat()` on Python 3.11+ also accepts basic form (20260730)
+    and ISO week dates (2026-W31-4), so it was not enforcing the documented
+    contract (operator review, 2026-07-30).
+    """
+    if not isinstance(value, str) or not re.fullmatch(r"\d{4}-\d{2}-\d{2}", value):
+        raise ValueError(f"{value!r} is not YYYY-MM-DD")
+    return date.fromisoformat(value)
 
 
 def digest(obj) -> str:
@@ -828,6 +843,7 @@ def build_manifest(applied_on: str) -> dict:
 
 
 def cmd_emit(applied_on: str) -> int:
+    _refuse_if_journal("--emit")
     manifest = build_manifest(applied_on)
     MANIFEST.parent.mkdir(parents=True, exist_ok=True)
     MANIFEST.write_text(json.dumps(manifest, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
@@ -907,18 +923,43 @@ def _require_manifest() -> dict:
                 raise SystemExit(
                     f"ERROR: stage {entry['id']!r} {key!r} must record exactly posts and hubs"
                 )
+        # Code receipts are REQUIRED, not optional. cmd_apply() treated a missing
+        # `code_expects` as "do not check code", so deleting one line from the
+        # manifest let a stage apply against changed release-critical files
+        # (operator review, 2026-07-30).
+        for key in ("code_expects", "code_produces"):
+            value = entry.get(key)
+            if not isinstance(value, str) or not re.fullmatch(r"[0-9a-f]{64}", value):
+                raise SystemExit(
+                    f"ERROR: stage {entry['id']!r} has no valid {key!r} (expected a 64-character "
+                    f"SHA-256 hex digest). Regenerate the manifest."
+                )
     if manifest.get("digest_spec") != DIGEST_SPEC:
         raise SystemExit("ERROR: the manifest's digest_spec differs from this tool's — "
                          "its digests were computed a different way. Regenerate it.")
     after = manifest.get("code_baseline_after")
     if not isinstance(after, dict) or "digest" not in after:
         raise SystemExit("ERROR: the manifest has no usable `code_baseline_after` — regenerate it")
+    # Chain: each stage must start from the code the previous stage produced.
+    ready = [e for e in manifest["stages"] if e.get("status") == "ready"]
+    for prev, nxt in zip(ready, ready[1:]):
+        if nxt["code_expects"] != prev["code_produces"]:
+            raise SystemExit(
+                f"ERROR: stage {nxt['id']!r} expects code {nxt['code_expects'][:16]}… but stage "
+                f"{prev['id']!r} produces {prev['code_produces'][:16]}… — the receipts do not chain."
+            )
+    if ready and ready[0]["code_expects"] != manifest.get("code_baseline", {}).get("digest"):
+        raise SystemExit("ERROR: the first ready stage does not start from the manifest's "
+                         "pre-release code baseline")
+    if ready and ready[-1]["code_produces"] != (manifest.get("code_baseline_after") or {}).get("digest"):
+        raise SystemExit("ERROR: the last ready stage does not end at `code_baseline_after`")
+
     try:
-        date.fromisoformat(manifest["generated_for_application_date"])
+        _iso_date(manifest["generated_for_application_date"])
     except (TypeError, ValueError):
         raise SystemExit(
             f"ERROR: manifest application date "
-            f"{manifest['generated_for_application_date']!r} is not an ISO date"
+            f"{manifest['generated_for_application_date']!r} is not YYYY-MM-DD"
         )
     return manifest
 
@@ -961,110 +1002,180 @@ def _check_graph(posts: list) -> None:
 
 
 JOURNAL = ROOT / ".release-journal.json"
+TMP_SUFFIX = ".release-tmp"
+
+# Deterministic failure injection for scripts/release_selftest.py. Making a
+# directory unwritable always failed on the FIRST temp-file creation, so tests
+# labelled "late failure" proved only that nothing had been written yet — they
+# exercised no rollback at all (operator review, 2026-07-30).
+_FAIL_AFTER = os.environ.get("RELEASE_SELFTEST_FAIL_AFTER")
+_FAIL_VALIDATION = os.environ.get("RELEASE_SELFTEST_FAIL_VALIDATION")
+# Simulates an interruption: everything is written, the journal survives.
+_LEAVE_JOURNAL = os.environ.get("RELEASE_SELFTEST_LEAVE_JOURNAL")
 
 
-def _commit_transaction(payload: dict) -> None:
-    """Write every file, or leave the tree exactly as it was.
+def _snapshot(names) -> dict:
+    """Existence, bytes and MODE for every path the transaction will touch.
 
-    Originals are snapshotted into a journal on disk BEFORE the first write, so
-    an interrupted or crashed run is recoverable rather than merely
-    rolled-back-if-Python-survives. `--recover` replays it.
+    Mode matters: replacing a file via a fresh temp file gives it the default
+    0644, so a successful release silently turned tracked `scripts/hub_selftest.py`
+    from 100755 into 100644 — an unreceipted repository change that also made
+    "leave the tree exactly as it was" false on rollback.
     """
-    originals = {name: (ROOT / name).read_text(encoding="utf-8")
-                 for name in payload if (ROOT / name).exists()}
+    snap = {}
+    for name in names:
+        path = ROOT / name
+        if path.exists():
+            snap[name] = {"exists": True,
+                          "text": path.read_text(encoding="utf-8"),
+                          "mode": stat.S_IMODE(path.stat().st_mode)}
+        else:
+            snap[name] = {"exists": False, "text": None, "mode": None}
+    return snap
+
+
+def _restore(snap: dict) -> None:
+    for name, entry in snap.items():
+        path = ROOT / name
+        if entry["exists"]:
+            path.write_text(entry["text"], encoding="utf-8")
+            if entry["mode"] is not None:
+                path.chmod(entry["mode"])
+        else:
+            path.unlink(missing_ok=True)
+
+
+def _clear_temps() -> None:
+    for path in ROOT.rglob("*" + TMP_SUFFIX):
+        path.unlink(missing_ok=True)
+
+
+def _commit_transaction(payload: dict) -> dict:
+    """Write every file, preserving modes, under a journal. Returns the snapshot.
+
+    The journal is NOT removed here. The caller must validate the written state
+    and then call `_finalize_transaction()`. Deleting it before post-write
+    validation meant a failing live graph check left the tree fully mutated with
+    no recovery available (operator review, 2026-07-30).
+    """
+    snap = _snapshot(payload)
     JOURNAL.write_text(json.dumps(
         {"note": "release_manifest.py transaction in progress — run --recover to undo",
-         "originals": originals, "writing": sorted(payload)},
+         "snapshot": snap, "writing": sorted(payload)},
         ensure_ascii=False), encoding="utf-8")
+
     written: list = []
     try:
-        for name, text in sorted(payload.items()):
+        for n, (name, text) in enumerate(sorted(payload.items())):
+            if _FAIL_AFTER is not None and n == int(_FAIL_AFTER):
+                raise OSError(f"injected failure after {n} replacement(s)")
             path = ROOT / name
             path.parent.mkdir(parents=True, exist_ok=True)
-            # Write to a sibling temp file and replace: a partial write of one
-            # file cannot leave that file truncated.
-            tmp = path.with_suffix(path.suffix + ".release-tmp")
+            tmp = path.with_name(path.name + TMP_SUFFIX)
             tmp.write_text(text, encoding="utf-8")
+            mode = snap[name]["mode"]
+            if mode is not None:
+                tmp.chmod(mode)                  # carry the original mode across
             tmp.replace(path)
             written.append(name)
     except Exception as exc:
-        for name in written:
-            if name in originals:
-                (ROOT / name).write_text(originals[name], encoding="utf-8")
-            else:
-                (ROOT / name).unlink(missing_ok=True)
+        _restore({k: v for k, v in snap.items() if k in written})
+        _clear_temps()
         JOURNAL.unlink(missing_ok=True)
         raise SystemExit(
-            f"ERROR: write failed on {exc}. All {len(written)} already-written file(s) were "
-            f"ROLLED BACK; the tree is unchanged."
+            f"ERROR: write failed ({exc}). All {len(written)} already-written file(s) were "
+            f"ROLLED BACK, including their modes; the tree is unchanged."
         )
+    return snap
+
+
+def _finalize_transaction() -> None:
+    _clear_temps()
+    if _LEAVE_JOURNAL:
+        raise SystemExit("ERROR: injected interruption — the journal was left in place. "
+                         "Run --recover.")
     JOURNAL.unlink(missing_ok=True)
+
+
+def _rollback_from_journal(reason: str) -> None:
+    if JOURNAL.exists():
+        data = json.loads(JOURNAL.read_text(encoding="utf-8"))
+        _restore(data.get("snapshot", {}))
+        _clear_temps()
+        JOURNAL.unlink(missing_ok=True)
+    raise SystemExit(f"ERROR: {reason}\nThe transaction was ROLLED BACK; the tree is unchanged.")
+
+
+def _refuse_if_journal(mode: str) -> None:
+    """An unresolved transaction must block everything except --recover.
+
+    A journal left by an interruption used to be ignored: `--verify` reported the
+    final state and exited 0, and a fresh `--apply` OVERWROTE the only snapshot
+    of the pre-transaction tree.
+    """
+    if JOURNAL.exists():
+        raise SystemExit(
+            f"ERROR: an unresolved transaction journal exists ({JOURNAL.name}).\n"
+            f"       A previous run was interrupted. Run --recover first; {mode} refuses to "
+            f"proceed while a journal could still be the only snapshot of the original tree."
+        )
 
 
 def cmd_recover() -> int:
     """Undo an interrupted transaction from its journal."""
     if not JOURNAL.exists():
+        _clear_temps()
         print("No transaction journal — nothing to recover.")
         return 0
     data = json.loads(JOURNAL.read_text(encoding="utf-8"))
-    for name, text in data.get("originals", {}).items():
-        (ROOT / name).write_text(text, encoding="utf-8")
-    for name in data.get("writing", []):
-        if name not in data.get("originals", {}):
-            (ROOT / name).unlink(missing_ok=True)
+    snap = data.get("snapshot", {})
+    _restore(snap)
+    _clear_temps()
     JOURNAL.unlink(missing_ok=True)
-    print(f"Recovered {len(data.get('originals', {}))} file(s) from the transaction journal.")
+    print(f"Recovered {len(snap)} file(s) from the transaction journal, including modes.")
     return 0
 
 
 def cmd_verify() -> int:
+    _refuse_if_journal("--verify")
     manifest = _require_manifest()
     live = _state(load_posts(), load_hubs())
-    print(f"live  {_fmt(live)}")
     live_code = code_baseline()["digest"]
-    # Every legitimate code state in this release: the pre-release baseline, the
-    # post-release baseline, and every cumulative per-stage state in between.
-    known_code = {manifest.get("code_baseline", {}).get("digest"): "PRE-release baseline",
-                  (manifest.get("code_baseline_after") or {}).get("digest"): "POST-release baseline"}
-    for entry in manifest["stages"]:
-        if entry.get("status") == "ready" and entry.get("code_produces"):
-            known_code.setdefault(entry["code_produces"], f"after stage {entry['id']!r}")
-    known_code.pop(None, None)
-    if live_code in known_code:
-        print(f"code  {known_code[live_code]}\n")
-    else:
-        print("code  DIFFERS from every state this release knows — re-run --emit\n")
-    drift = [] if live_code in known_code else ["code baseline"]
+    print(f"live  {_fmt(live)}  code {live_code[:16]}…\n")
+
+    # ONE INDIVISIBLE POSITION. Content and code used to be recognised
+    # separately, so a tree with after-nation content and after-hubs code exited
+    # 0, labelled the data "after nation", labelled the code "after hubs" and
+    # marked hubs as next (operator review, 2026-07-30). A mixed tuple is not a
+    # state this release knows.
+    def tup(posts_d, hubs_d, code_d):
+        return (posts_d, hubs_d, code_d)
+
+    known = {tup(manifest["baseline"]["posts"], manifest["baseline"]["hubs"],
+                 manifest.get("code_baseline", {}).get("digest")): "baseline (nothing applied)"}
     for entry in manifest["stages"]:
         if entry.get("status") != "ready":
             continue
-        for name, want in (entry.get("packet_digests") or {}).items():
-            try:
-                if _packet_identity(name) != want:
-                    drift.append(f"packet {name}")
-            except SystemExit:
-                drift.append(f"packet {name} (missing)")
+        known[tup(entry["produces"]["posts"], entry["produces"]["hubs"],
+                  entry["code_produces"])] = f"after stage '{entry['id']}'"
 
-    position, matched = None, None
-    if live == manifest["baseline"]:
-        position = "baseline (nothing applied)"
-    for s in manifest["stages"]:
-        if s["status"] == "ready" and live == s["produces"]:
-            position, matched = f"after stage '{s['id']}'", s
+    here = tup(live["posts"], live["hubs"], live_code)
+    position = known.get(here)
 
     if position is None:
         print("tree is at: AN UNRECOGNISED STATE — do not apply.")
-        print("            Both digests must match a recorded state. A partial application, an")
-        print("            edited packet or a different --date all produce an unknown state.")
-        for s in manifest["stages"]:
-            if s["status"] != "ready":
+        print("            posts, hubs AND code must all match one recorded stage.")
+        for entry in manifest["stages"]:
+            if entry.get("status") != "ready":
                 continue
-            same_posts = live["posts"] == s["produces"]["posts"]
-            same_hubs = live["hubs"] == s["produces"]["hubs"]
-            if same_posts != same_hubs:
-                print(f"            NOTE stage {s['id']!r}: "
-                      f"posts {'match' if same_posts else 'differ'}, "
-                      f"hubs {'match' if same_hubs else 'differ'} — a half-applied stage.")
+            parts = {"posts": live["posts"] == entry["produces"]["posts"],
+                     "hubs": live["hubs"] == entry["produces"]["hubs"],
+                     "code": live_code == entry["code_produces"]}
+            if any(parts.values()) and not all(parts.values()):
+                match = ", ".join(k for k, v in parts.items() if v)
+                differ = ", ".join(k for k, v in parts.items() if not v)
+                print(f"            NOTE stage {entry['id']!r}: {match} match, {differ} differ "
+                      f"— a MIXED position, not a valid release state.")
         return 1
 
     print(f"tree is at: {position}")
@@ -1075,27 +1186,38 @@ def cmd_verify() -> int:
         print(f"            {exc}")
         return 1
 
-    for s in manifest["stages"]:
-        mark = "ready" if s["status"] == "ready" else "UNAVAILABLE"
-        nxt = s["status"] == "ready" and live == s["expects"]
-        print(f"  [{'NEXT ' if nxt else '     '}] {s['id']:18} {mark}")
+    drift = []
+    for entry in manifest["stages"]:
+        if entry.get("status") != "ready":
+            continue
+        for name, want in (entry.get("packet_digests") or {}).items():
+            try:
+                if _packet_identity(name) != want:
+                    drift.append(f"packet {name}")
+            except SystemExit:
+                drift.append(f"packet {name} (missing)")
+
+    for entry in manifest["stages"]:
+        mark = "ready" if entry["status"] == "ready" else "UNAVAILABLE"
+        nxt = (entry["status"] == "ready"
+               and here == tup(entry["expects"]["posts"], entry["expects"]["hubs"],
+                               entry["code_expects"]))
+        print(f"  [{'NEXT ' if nxt else '     '}] {entry['id']:18} {mark}")
     if drift:
-        # Drift must FAIL verification, not merely warn. A green --verify beside a
-        # changed packet or a changed baseline is exactly the false assurance this
-        # tool exists to remove (operator review, 2026-07-30).
         print(f"\nDRIFT: {', '.join(sorted(set(drift)))} — re-run --emit before applying.")
         return 1
     return 0
 
 
 def cmd_apply(applied_on: str, only: str | None) -> int:
+    _refuse_if_journal("--apply")
     manifest = _require_manifest()
 
     try:
-        date.fromisoformat(applied_on)
+        _iso_date(applied_on)
     except (TypeError, ValueError):
-        raise SystemExit(f"ERROR: --date {applied_on!r} is not an ISO date (YYYY-MM-DD). It would "
-                         f"be written verbatim into every `updated` field.")
+        raise SystemExit(f"ERROR: --date {applied_on!r} is not YYYY-MM-DD. It would be written "
+                         f"verbatim into every `updated` field.")
 
     if manifest["generated_for_application_date"] != applied_on:
         raise SystemExit(
@@ -1185,13 +1307,19 @@ def cmd_apply(applied_on: str, only: str | None) -> int:
     _commit_transaction(payload)
 
     # Re-validate from what is now ON DISK, under the code that is now on disk.
+    # The journal is still live: any failure here rolls the whole thing back.
     import importlib
-    importlib.reload(corpus_mod)
     try:
+        importlib.reload(corpus_mod)
+        if _FAIL_VALIDATION:
+            raise SystemExit("injected post-write validation failure")
         _check_graph(load_posts())
+        for name, text in payload.items():
+            if (ROOT / name).read_text(encoding="utf-8") != text:
+                raise SystemExit(f"{name} on disk does not match what was written")
     except SystemExit as exc:
-        raise SystemExit(f"{exc}\n\nThe transaction completed but the written state is "
-                         f"invalid. Restore with: git checkout -- content scripts")
+        _rollback_from_journal(f"post-write validation failed: {exc}")
+    _finalize_transaction()
     print(f"\nwrote {len(payload)} file(s) in one transaction")
     print("NOT built. Run the post-application suites, then ONE non-concurrent build.")
     return 0
@@ -1212,9 +1340,9 @@ def main() -> int:
     args = ap.parse_args()
 
     try:
-        date.fromisoformat(args.date)
+        _iso_date(args.date)
     except (TypeError, ValueError):
-        raise SystemExit(f"ERROR: --date {args.date!r} is not an ISO date (YYYY-MM-DD).")
+        raise SystemExit(f"ERROR: --date {args.date!r} is not YYYY-MM-DD.")
 
     if args.emit:
         return cmd_emit(args.date)

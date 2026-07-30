@@ -92,13 +92,13 @@ python3 scripts/release_manifest.py --apply --date $(date +%F)
 
 Stages, in order, with the corpus digest each expects and produces:
 
-| Stage | Packets | Expects | Produces |
+| Stage | Packets | Expects (posts) | Produces (posts) |
 |---|---|---|---|
 | `final9` | `FINAL-9-guides-v4` | `496b0d63…` | `4b3090bd…` |
-| `scotland-shpock` | `scotland-routing-v14` + `shpock-scam-uk-v14` | `4b3090bd…` | `f76b69aa…` |
-| `nation` | `nation-consumer-routing-v8` | `f76b69aa…` | `e9a7c221…` |
-| `hubs` | `hubs-v14` + `legacy-hubs-v9` | `e9a7c221…` | `e9a7c221…` (hubs only) |
-| `consolidation` | `consolidation-metadata-v4` | `e9a7c221…` | `26d57904…` |
+| `scotland-shpock` | `scotland-routing-v14` + `shpock-scam-uk-v14` | `4b3090bd…` | `3db32055…` |
+| `nation` | `nation-consumer-routing-v8` | `3db32055…` | `39348cbf…` |
+| `hubs` | `hubs-v14` + `legacy-hubs-v9` | `39348cbf…` | `39348cbf…` |
+| `consolidation` | `consolidation-metadata-v4` | `39348cbf…` | `1d46369d…` |
 
 The applier asserts every `old` value before writing, checks each `sections`/`faq` index
 against its recorded heading, re-asserts overlap source rows after all full-record writes
@@ -162,10 +162,10 @@ renders is not a duplicate *page*, so it no longer BLOCKs publication.
 - 13 hubs at zero BLOCK, with one disclosed `website` legislation FLAG; all 13 sourced
 - Internal guide links: 0 unresolved. Raw `**` / external markdown links / description
   ellipses: 0 / 0 / 0
-- Clean checkout: **152 gate + 101 hub + 53 corpus + 24 release + 50 node = 380 checks**, zero failures,
+- Clean checkout: **152 gate + 101 hub + 53 corpus + 48 release-control + 50 node**, zero failures,
   with `docs/review/` genuinely absent. The fast path (`corpus_selftest.py --no-build`)
   plus canon sync. `release_selftest.py` runs 24 synthetic-fixture checks there and 26
-  with the local packets. On the fully APPLIED state the four suites are **384**.
+  with the local packets. On the fully APPLIED state the four suites are **384** (build-backed) or **367** (fast).
 
 "Zero BLOCK" means the deterministic gate is satisfied. The 28 FLAGs remain open editorial
 items and **no model-based LLM judge has run on any of this release**.

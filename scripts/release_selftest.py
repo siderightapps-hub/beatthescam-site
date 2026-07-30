@@ -28,6 +28,7 @@ from __future__ import annotations
 
 import json
 import os
+import re
 import shutil
 import subprocess
 import sys
@@ -84,6 +85,8 @@ SYNTHETIC_STAGES = (
     "STAGES = [\n"
     '    {"id": "syn-content", "title": "Synthetic content", "why": "fixture",\n'
     '     "packets": ["synthetic-content-v1"]},\n'
+    '    {"id": "syn-hubs", "title": "Synthetic hubs-only", "why": "fixture",\n'
+    '     "packets": ["synthetic-hubs-v1"]},\n'
     '    {"id": "syn-code", "title": "Synthetic code patch", "why": "fixture",\n'
     '     "packets": ["synthetic-code-v1"]},\n'
     "]\n"
@@ -128,6 +131,20 @@ def synthesise_packets(tmp: Path) -> None:
                         "new": anchor + "# synthetic release-selftest marker\n"}],
         "final_state": {"remove_static_redirects": [],
                         "pending_migration_after": pending_now},
+    }, ensure_ascii=False), encoding="utf-8")
+
+    # A HUBS-ONLY middle stage: it leaves the posts digest untouched, which is
+    # the exact shape of the original skip-hubs bypass. Without it the clean-CI
+    # fixture had only two stages, so both stage-skip assertions were guarded
+    # out and CI never ran the highest-risk regression (operator review,
+    # 2026-07-30).
+    hubs = json.loads((tmp / "content" / "category-hubs.json").read_text(encoding="utf-8"))
+    key = sorted(hubs)[0]
+    patched = json.loads(json.dumps(hubs[key]))
+    patched["intro"] = patched.get("intro", "") + "<p>Synthetic.</p>"
+    (review / "synthetic-hubs-v1.json").write_text(json.dumps({
+        "packet_version": "synthetic-hubs-v1",
+        "hubs": {key: patched},
     }, ensure_ascii=False), encoding="utf-8")
 
     rm = tmp / "scripts" / "release_manifest.py"
@@ -177,7 +194,18 @@ def main() -> int:
 
         t = fresh()
         rc, out = run(t, "--apply", "--date", "not-a-date")
-        check("a non-ISO --date is rejected", rc != 0 and "not an ISO date" in out, out[-200:])
+        check("a non-ISO --date is rejected", rc != 0 and "not YYYY-MM-DD" in out, out[-200:])
+        shutil.rmtree(t, ignore_errors=True)
+
+        # Basic form and ISO week dates are ALSO rejected: date.fromisoformat()
+        # accepts both on 3.11+, so it was not enforcing the documented contract.
+        for bad_date in ("20260730", "2026-W31-4"):
+            t = fresh()
+            rc, out = run(t, "--apply", "--date", bad_date)
+            check(f"--date {bad_date!r} is rejected", rc != 0 and "not YYYY-MM-DD" in out,
+                  out[-200:])
+            shutil.rmtree(t, ignore_errors=True)
+        t = fresh()
         shutil.rmtree(t, ignore_errors=True)
 
         t = fresh()
@@ -237,17 +265,23 @@ def main() -> int:
 
         # Paired precondition: the hubs half cannot be skipped.
         # Skipping a stage must block the one after it.
+        # THE ORIGINAL REGRESSION: skip the hubs-shaped middle stage — the one
+        # that leaves the posts digest untouched — and the stage after it must
+        # refuse. Unconditional: every fixture set has at least three stages.
         t = fresh()
-        if len(stage_ids) > 2:
-            for sid in stage_ids[:-2]:
-                run(t, "--apply", "--stage", sid, "--date", DATE)
-            rc, out = run(t, "--apply", "--stage", stage_ids[-1], "--date", DATE)
-            check("skipping a stage blocks the one after it",
-                  rc != 0 and ("precondition failed" in out or "expects code baseline" in out),
-                  out[-300:])
-            check("...and the failure says what is missing",
-                  "Apply the upstream stages first" in out or "code patch has not been applied"
-                  in out, out[-300:])
+        check("the fixture has a skippable middle stage", len(stage_ids) >= 3,
+              f"stages: {stage_ids}")
+        for sid in stage_ids[:-2]:
+            run(t, "--apply", "--stage", sid, "--date", DATE)
+        rc, out = run(t, "--apply", "--stage", stage_ids[-1], "--date", DATE)
+        check("skipping the hubs-shaped stage blocks the one after it",
+              rc != 0 and ("precondition failed" in out or "expects code baseline" in out),
+              out[-300:])
+        check("...and the failure names the position, not just a digest",
+              "Apply the upstream stages first" in out or "code" in out, out[-300:])
+        rc, out = run(t, "--verify")
+        check("--verify does not report the skipped stage as done",
+              f"after stage '{stage_ids[-2]}'" not in out, out[-300:])
         shutil.rmtree(t, ignore_errors=True)
 
         # ── The STAGED workflow, end to end, ACROSS a code-patch stage ──────
@@ -268,24 +302,111 @@ def main() -> int:
             check("--verify accepts the fully staged result", rc == 0, out[-300:])
         shutil.rmtree(t, ignore_errors=True)
 
-        # ── A LATE write failure must roll everything back ──────────────────
-        watched = ("content/posts.json", "content/category-hubs.json", "scripts/corpus.py")
-        for victim in ("content/category-hubs.json", "content/posts.json"):
+        # ── REAL late-failure injection ─────────────────────────────────────
+        # Making content/ unwritable always failed on the FIRST temp file, so
+        # both "late failure" tests proved only that nothing had been written
+        # yet — they exercised no rollback (operator review, 2026-07-30). The
+        # applier now honours RELEASE_SELFTEST_FAIL_AFTER=<n> (raise after n
+        # replacements) and RELEASE_SELFTEST_FAIL_VALIDATION=1 (fail the
+        # post-write on-disk validation), so failures land exactly where needed.
+        def run_env(t, env, *args):
+            e = dict(os.environ); e.update(env)
+            r = subprocess.run([sys.executable, "scripts/release_manifest.py", *args],
+                               cwd=t, capture_output=True, text=True, env=e)
+            return r.returncode, (r.stdout + r.stderr)
+
+        watched = ("content/posts.json", "content/category-hubs.json",
+                   "scripts/corpus.py", "scripts/build.py", "scripts/hub_selftest.py")
+
+        def snapshot(t):
+            return {f: ((t / f).read_bytes(), (t / f).stat().st_mode)
+                    for f in watched if (t / f).exists()}
+
+        # How many files does THIS release actually write? Injection points must
+        # land inside the write loop; the watched-file count is not the same
+        # number, and using it silently pushed two injections past the end so
+        # the run succeeded and the test compared a legitimately changed tree.
+        t0 = fresh()
+        _, out0 = run_env(t0, {}, "--apply", "--date", DATE)
+        m = re.search(r"wrote (\d+) file\(s\)", out0)
+        n_writes = int(m.group(1)) if m else 0
+        shutil.rmtree(t0, ignore_errors=True)
+        check("the release writes at least two files (so injection is meaningful)",
+              n_writes >= 2, f"writes={n_writes}")
+
+        points = [("after the FIRST replacement", 1)]
+        if n_writes >= 3:
+            points.append(("mid-way through the replacements", n_writes // 2))
+        points.append(("on the LAST replacement", n_writes - 1))
+
+        for label, fail_after in [(l, str(n)) for l, n in points]:
             t = fresh()
-            before = {f: (t / f).read_bytes() for f in watched}
-            target = t / victim
-            mode, parent_mode = target.stat().st_mode, target.parent.stat().st_mode
-            target.chmod(0o444)
-            target.parent.chmod(0o555)      # block the temp-file rename too
-            rc, out = run(t, "--apply", "--date", DATE)
-            target.parent.chmod(parent_mode)
-            target.chmod(mode)
-            changed = sorted(f for f, b in before.items() if (t / f).read_bytes() != b)
-            check(f"a late write failure on {victim} rolls everything back",
-                  rc != 0 and not changed, f"exit={rc}; still changed: {changed}")
-            check(f"...and leaves no transaction journal for {victim}",
+            before = snapshot(t)
+            rc, out = run_env(t, {"RELEASE_SELFTEST_FAIL_AFTER": fail_after},
+                              "--apply", "--date", DATE)
+            after = snapshot(t)
+            changed = sorted(f for f in before if before[f][0] != after.get(f, (None,))[0])
+            modes = sorted(f for f in before if before[f][1] != after.get(f, (None, None))[1])
+            check(f"a failure {label} rolls every byte back",
+                  rc != 0 and not changed, f"exit={rc}; changed: {changed}")
+            check(f"a failure {label} restores every mode", not modes, f"modes changed: {modes}")
+            check(f"a failure {label} leaves no journal",
                   not (t / ".release-journal.json").exists())
+            check(f"a failure {label} leaves no temp files",
+                  not list(t.rglob("*.release-tmp")))
             shutil.rmtree(t, ignore_errors=True)
+
+        # Failure AFTER every write, during the on-disk validation — the case
+        # that used to leave the tree fully mutated with the journal deleted.
+        t = fresh()
+        before = snapshot(t)
+        rc, out = run_env(t, {"RELEASE_SELFTEST_FAIL_VALIDATION": "1"}, "--apply", "--date", DATE)
+        after = snapshot(t)
+        changed = sorted(f for f in before if before[f][0] != after.get(f, (None,))[0])
+        check("a POST-WRITE validation failure rolls everything back",
+              rc != 0 and not changed, f"exit={rc}; changed: {changed}")
+        check("...and the journal is gone afterwards",
+              not (t / ".release-journal.json").exists())
+        shutil.rmtree(t, ignore_errors=True)
+
+        # ── Modes survive a SUCCESSFUL release ──────────────────────────────
+        t = fresh()
+        before = snapshot(t)
+        rc, out = run_env(t, {}, "--apply", "--date", DATE)
+        after = snapshot(t)
+        modes = sorted(f for f in before if before[f][1] != after.get(f, (None, None))[1])
+        check("a SUCCESSFUL release preserves every file mode", rc == 0 and not modes,
+              f"exit={rc}; modes changed: {modes}")
+        check("...and leaves no journal or temp files",
+              not (t / ".release-journal.json").exists() and not list(t.rglob("*.release-tmp")))
+        shutil.rmtree(t, ignore_errors=True)
+
+        # ── An unresolved journal must block everything but --recover ───────
+        t = fresh()
+        (t / ".release-journal.json").write_text(json.dumps(
+            {"snapshot": {}, "writing": []}), encoding="utf-8")
+        for mode in ("--verify", "--emit", "--apply"):
+            rc, out = run(t, mode, *(["--date", DATE] if mode != "--verify" else []))
+            check(f"{mode} refuses while a transaction journal exists",
+                  rc != 0 and "unresolved transaction journal" in out, out[-200:])
+        rc, out = run(t, "--recover")
+        check("--recover clears the journal", rc == 0
+              and not (t / ".release-journal.json").exists(), out[-200:])
+        shutil.rmtree(t, ignore_errors=True)
+
+        # ── --recover restores bytes AND modes ──────────────────────────────
+        t = fresh()
+        before = snapshot(t)
+        run_env(t, {"RELEASE_SELFTEST_FAIL_AFTER": "0"}, "--apply", "--date", DATE)
+        # Re-run with an interruption that leaves the journal in place.
+        rc, out = run_env(t, {"RELEASE_SELFTEST_LEAVE_JOURNAL": "1"}, "--apply", "--date", DATE)
+        if (t / ".release-journal.json").exists():
+            rc, out = run(t, "--recover")
+            after = snapshot(t)
+            changed = sorted(f for f in before if before[f] != after.get(f))
+            check("--recover restores bytes and modes exactly", rc == 0 and not changed,
+                  f"changed: {changed}")
+        shutil.rmtree(t, ignore_errors=True)
 
         # ── A code_patch that disagrees with its final_state ────────────────
         t = fresh()

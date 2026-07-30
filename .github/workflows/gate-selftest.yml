@@ -45,6 +45,12 @@ on:
       - 'content/posts.json'
       - 'content/sources.json'
       - 'content/category-hubs.json'
+      # Covered by the release code_baseline, so a change here invalidates it.
+      - 'content/site.json'
+      - 'content/affiliates.json'
+      - 'templates/base.html'
+      - 'assets/app.js'
+      - 'assets/styles.css'
       - 'netlify/functions/**'
       - '.github/workflows/gate-selftest.yml'
   pull_request:
