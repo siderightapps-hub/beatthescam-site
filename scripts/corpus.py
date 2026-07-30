@@ -220,28 +220,35 @@ def consolidation_map(posts: List[dict]) -> Dict[str, str]:
     }
 
 
-def legacy_static_consolidations(posts: List[dict],
-                                 static_redirects: Optional[Dict[str, str]] = None) -> Dict[str, str]:
-    """TRANSITIONAL. Slugs consolidated the old way: a source record still in
-    posts.json plus an entry in the static redirect map, and no
-    `consolidated_into` on the record.
+# TRANSITIONAL, and deliberately a closed set of exactly the slugs mid-migration.
+#
+# Before `consolidation-metadata-v1`, consolidation was declared by a static
+# ARTICLE_REDIRECTS entry beside a surviving source record. This set names the
+# records still in that state so the code half and the content half can be
+# reviewed apart without a window where an archive record renders.
+#
+# It is NOT a general rule. An earlier version bridged ANY source slug that
+# happened to collide with a static redirect, which silently retired a record
+# with no declaration anywhere — reproduced with `facebook-marketplace-scam-uk-
+# guide-2` (operator review, 2026-07-30). Outside this set, that collision is an
+# error.
+#
+# `validate_consolidation()` asserts BOTH halves of each pending migration, so
+# neither can land alone. When this is empty, delete it and
+# `pending_migrations()` — `corpus_selftest.py` asserts exactly that.
+PENDING_MIGRATION = frozenset({"hermes-parcel-scam-text-uk"})
 
-    This bridge exists so the code change and the posts.json metadata change can
-    be reviewed separately without leaving a window where an archive record
-    renders as a live page. `consolidation-metadata-v1` moves the last
-    declaration onto the record and deletes the static entry; after that this
-    returns {} and `corpus_selftest.py` asserts it.
 
-    A slug that declares the metadata AND appears in the static map is an error,
-    not a bridge — see validate_consolidation(). The bridge only covers records
-    that have not been migrated yet.
-    """
+def pending_migrations(posts: List[dict],
+                       static_redirects: Optional[Dict[str, str]] = None) -> Dict[str, str]:
+    """{slug: target} for records still declaring consolidation the old way."""
     static_redirects = _static(static_redirects)
     declared = _declared([p for p in posts if isinstance(p, dict) and isinstance(p.get("slug"), str)])
     return {
         p["slug"]: static_redirects[p["slug"]]
         for p in posts
         if isinstance(p, dict) and isinstance(p.get("slug"), str)
+        and p["slug"] in PENDING_MIGRATION
         and p["slug"] in static_redirects
         and p["slug"] not in declared
         and not str(static_redirects[p["slug"]]).startswith("__CAT__:")
@@ -331,6 +338,42 @@ def validate_consolidation(posts: List[dict],
                 f"static redirect map (to {static_redirects[slug]!r}) — remove the static entry"
             )
 
+    # A source record must never share its slug with a static redirect. The
+    # static map is for slugs with NO record; a collision means two places claim
+    # to decide the same URL, and the record would be silently retired with no
+    # declaration on it. Only slugs mid-migration are exempt, and each of those
+    # is separately asserted below.
+    for slug in sorted(all_slugs & set(static_redirects)):
+        if slug in PENDING_MIGRATION:
+            continue
+        problems.append(
+            f"{slug!r} has a source record AND a static redirect entry (to "
+            f"{static_redirects[slug]!r}). Declare the consolidation on the record with "
+            f"{CONSOLIDATED_INTO} and remove the static entry — a static entry is for slugs "
+            f"with no record."
+        )
+
+    # BOTH halves of each pending migration, so neither can land alone. The
+    # metadata-only half is caught by the collision rule above; this catches the
+    # code-only half, which used to republish the record with no redirect and no
+    # error at all (operator review, 2026-07-30).
+    for slug in sorted(PENDING_MIGRATION):
+        if slug not in all_slugs:
+            continue                       # record already gone; nothing to migrate
+        has_meta = slug in declared
+        has_static = slug in static_redirects
+        if has_meta and not has_static:
+            problems.append(
+                f"{slug!r} has completed its migration — remove it from "
+                f"corpus.PENDING_MIGRATION (and delete the set if it is now empty)."
+            )
+        elif not has_meta and not has_static:
+            problems.append(
+                f"{slug!r} is mid-migration but declares its consolidation NOWHERE: the "
+                f"static redirect entry was deleted without adding {CONSOLIDATED_INTO} to the "
+                f"record. The guide would republish with no redirect. Apply both halves."
+            )
+
     # An explicit cycle walk. The chain rule above already catches every cycle;
     # this states the property directly so a future relaxation of that rule
     # cannot reintroduce one silently.
@@ -362,7 +405,7 @@ def partition(posts: List[dict],
             f"content/posts.json consolidation is invalid ({len(problems)} problem(s)):\n{detail}"
         )
     retired = set(consolidation_map(posts)) | set(
-        legacy_static_consolidations(posts, static_redirects))
+        pending_migrations(posts, static_redirects))
     public = [p for p in posts if p["slug"] not in retired]
     consolidated = [p for p in posts if p["slug"] in retired]
     return public, consolidated
@@ -397,9 +440,9 @@ def _valid_fixture() -> List[dict]:
                 "date": "2026-01-01", "category": "sms", "keywords": [],
                 "sections": [["S", "body"]], "faq": [], **extra}
     return [
-        post("evri-delivery-scam-guide"),
-        post("hermes-parcel-scam-text-uk", consolidated_into="evri-delivery-scam-guide"),
-        post("another-guide"),
+        post("fixture-surviving-guide"),
+        post("fixture-archived-guide", consolidated_into="fixture-surviving-guide"),
+        post("fixture-other-guide"),
     ]
 
 
@@ -420,27 +463,27 @@ def negative_fixtures() -> List[tuple]:
         return [p for p in posts if p["slug"] != slug]
 
     out = []
-    d, s = m(lambda p: edit(p, "hermes-parcel-scam-text-uk", consolidated_into=""))
+    d, s = m(lambda p: edit(p, "fixture-archived-guide", consolidated_into=""))
     out.append(("an empty consolidation target is rejected", d, s))
-    d, s = m(lambda p: edit(p, "hermes-parcel-scam-text-uk",
-                            consolidated_into="hermes-parcel-scam-text-uk"))
+    d, s = m(lambda p: edit(p, "fixture-archived-guide",
+                            consolidated_into="fixture-archived-guide"))
     out.append(("a self-referencing target is rejected", d, s))
-    d, s = m(lambda p: edit(p, "hermes-parcel-scam-text-uk", consolidated_into="no-such-guide"))
+    d, s = m(lambda p: edit(p, "fixture-archived-guide", consolidated_into="no-such-guide"))
     out.append(("a target that is not a source record is rejected", d, s))
-    d, s = m(lambda p: drop(edit(p, "hermes-parcel-scam-text-uk",
-                                 consolidated_into="another-guide"), "another-guide"))
+    d, s = m(lambda p: drop(edit(p, "fixture-archived-guide",
+                                 consolidated_into="fixture-other-guide"), "fixture-other-guide"))
     out.append(("a target removed from the corpus is rejected", d, s))
-    d, s = m(lambda p: edit(p, "another-guide", consolidated_into="evri-delivery-scam-guide")
-             and edit(p, "hermes-parcel-scam-text-uk", consolidated_into="another-guide"))
+    d, s = m(lambda p: edit(p, "fixture-other-guide", consolidated_into="fixture-surviving-guide")
+             and edit(p, "fixture-archived-guide", consolidated_into="fixture-other-guide"))
     out.append(("a two-hop chain is rejected", d, s))
-    d, s = m(lambda p: edit(p, "evri-delivery-scam-guide",
-                            consolidated_into="hermes-parcel-scam-text-uk"))
+    d, s = m(lambda p: edit(p, "fixture-surviving-guide",
+                            consolidated_into="fixture-archived-guide"))
     out.append(("a two-node cycle is rejected", d, s))
     d, s = m(lambda p: p + [dict(p[1])])
     out.append(("a duplicate source slug is rejected", d, s))
-    d, s = m(lambda p: p, {"evri-delivery-scam-guide": "some-other-guide"})
+    d, s = m(lambda p: p, {"fixture-surviving-guide": "some-other-guide"})
     out.append(("a target that is itself statically redirected is rejected", d, s))
-    d, s = m(lambda p: p, {"hermes-parcel-scam-text-uk": "evri-delivery-scam-guide"})
+    d, s = m(lambda p: p, {"fixture-archived-guide": "fixture-surviving-guide"})
     out.append(("a slug in BOTH the metadata and the static map is rejected, "
                 "even when the targets agree", d, s))
     return out

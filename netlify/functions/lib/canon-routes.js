@@ -27,6 +27,28 @@ const POLICE_SCOTLAND_HOSTS = [
   "scotland.police.uk"
 ];
 
+// Every host serving an on_page canon route. check-scam.js unions these into
+// its security allow-list, so a required reporting route can never be filtered
+// out of a checker result — www.advice.scot was, silently, until 2026-07-30.
+const CANON_REQUIRED_HOSTS = [
+  "www.advice.scot",
+  "www.citizensadvice.org.uk",
+  "www.ncsc.gov.uk",
+  "www.nidirect.gov.uk",
+  "www.reportfraud.police.uk",
+  "www.scotland.police.uk"
+];
+
+// Every on_page canon report_url, so a test can assert each one survives.
+const CANON_ONPAGE_URLS = [
+  "https://www.advice.scot/",
+  "https://www.citizensadvice.org.uk/consumer/scams/reporting-a-scam/",
+  "https://www.ncsc.gov.uk/collection/phishing-scams",
+  "https://www.nidirect.gov.uk/contacts/consumerline",
+  "https://www.reportfraud.police.uk",
+  "https://www.scotland.police.uk/contact-us/non-emergencies/"
+];
+
 const NCSC_REPORT_EMAIL = "report@phishing.gov.uk";
 
 const SMS_SHORTCODE = "7726";
@@ -61,4 +83,6 @@ module.exports = {
   SMS_SHORTCODE,
   EXAMPLE_REPORTING_LINKS,
   PROMPT_ROUTE_RULES,
+  CANON_REQUIRED_HOSTS,
+  CANON_ONPAGE_URLS,
 };

@@ -369,7 +369,12 @@ def main() -> int:
     # Pass A — deterministic re-scan, every guide, regardless of publish date.
     det_findings: List[Tuple[str, Dict]] = []
     for p in posts:
-        result = run_gate(p, use_llm=False)
+        # is_draft=False: these are LIVE records, not drafts. A record that has
+        # been consolidated legitimately carries `consolidated_into`, which is a
+        # BLOCK only when a DRAFT asserts it about itself (operator review,
+        # 2026-07-30 — this caller reported a false consolidation_evasion BLOCK
+        # on the archived Hermes record).
+        result = run_gate(p, use_llm=False, is_draft=False)
         for i in result.issues:
             det_findings.append((p.get("slug", "?"), i))
 

@@ -52,7 +52,9 @@ public/source partition, the 301, internal-link canonicalisation, and exclusion 
 publication duplicate-content check. A consolidated record is not shipped, so it cannot be
 a duplicate page. Never re-add a second list of consolidated slugs, and never put a slug in
 both `corpus.ARTICLE_REDIRECTS` and `consolidated_into` — the validator rejects that even
-when the targets agree. A **draft** may not set the field; the gate BLOCKs it
+when the targets agree, and rejects a source record colliding with a static redirect at all
+unless its slug is in the closed, dated `corpus.PENDING_MIGRATION` set (whose own two-sided
+assertions mean neither half of a migration can land alone). A **draft** may not set the field; the gate BLOCKs it
 (`consolidation_evasion`), because otherwise one field would buy a way past a
 duplicate-content BLOCK.
 

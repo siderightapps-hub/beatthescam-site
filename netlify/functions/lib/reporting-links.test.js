@@ -13,23 +13,13 @@ const test = require("node:test");
 const assert = require("node:assert");
 
 const { buildReportingLinks, MAX_REPORTING_LINKS } = require("./reporting-links");
-const { REPORT_FRAUD_LINK, POLICE_SCOTLAND_LINK } = require("./canon-routes");
+const { REPORT_FRAUD_LINK, POLICE_SCOTLAND_LINK, CANON_REQUIRED_HOSTS, CANON_ONPAGE_URLS } =
+  require("./canon-routes");
 
-// Stand-ins for check-scam.js's own helpers. The allow-list and the scrubber
-// are tested where they live; here they only need to be faithful enough that
-// the pairing logic sees realistic input.
-const ALLOWED = [
-  "gov.uk", "police.uk", "fca.org.uk", "citizensadvice.org.uk", "which.co.uk",
-  "ofcom.org.uk", "ico.org.uk", "moneyhelper.org.uk", "victimsupport.org.uk",
-  "cifas.org.uk", "stepchange.org", "nationaldebtline.org",
-];
-const isAllowedReportUrl = (raw) => {
-  let u;
-  try { u = new URL(raw); } catch { return false; }
-  if (u.protocol !== "https:") return false;
-  const h = u.hostname.toLowerCase();
-  return ALLOWED.some(d => h === d || h.endsWith("." + d));
-};
+// The REAL allow-list the function uses, not a stand-in. A local copy would
+// pass even if check-scam.js had stopped unioning the canon hosts — which is
+// exactly the divergence these tests exist to prevent.
+const { ALLOWED_REPORT_DOMAINS: ALLOWED, isAllowedReportUrl } = require("./allowed-domains");
 const scrubContact = (s) => s;
 
 const FILLER = [
@@ -154,4 +144,33 @@ test("a scrubbed link label is truncated after scrubbing, not before", () => {
   const out = buildReportingLinks(raw, isAllowedReportUrl, redact);
   assert.ok(!/\d{7,}/.test(out[0].name));
   assert.ok(out[0].name.length <= 120);
+});
+
+// ── Every required canon route must survive the security filter ──────────────
+// www.advice.scot is an on_page consumer-advice route that the hand-maintained
+// allow-list omitted, so the checker discarded a valid Advice Direct Scotland
+// link (operator review, 2026-07-30). The allow-list may be broader than the
+// canon; it may never be narrower.
+
+test("every on-page canon URL survives the reporting-link filter", () => {
+  for (const url of CANON_ONPAGE_URLS) {
+    assert.ok(isAllowedReportUrl(url), `canon route filtered out: ${url}`);
+  }
+});
+
+test("the canon's required hosts are all in the allow-list", () => {
+  for (const host of CANON_REQUIRED_HOSTS) {
+    assert.ok(ALLOWED.some(d => host === d || host.endsWith("." + d)),
+      `required canon host missing from the allow-list: ${host}`);
+  }
+});
+
+test("a canon route link is forwarded, not dropped", () => {
+  for (const url of CANON_ONPAGE_URLS) {
+    const out = buildReportingLinks([{ name: "Official route", url }],
+                                    isAllowedReportUrl, scrubContact);
+    assert.ok(out.length >= 1, `dropped: ${url}`);
+    assert.ok(out.some(l => l.url === url || l.url === REPORT_FRAUD_LINK.url
+                            || l.url === POLICE_SCOTLAND_LINK.url), `lost: ${url}`);
+  }
 });

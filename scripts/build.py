@@ -147,6 +147,21 @@ def load_sources(root: Path) -> dict:
         raise SystemExit(f"ERROR: {exc}")
 
 
+# Inline canon accessors for list-shaped surfaces, where a prose component does
+# not fit but the URL, number, brand and nation must still come from the canon
+# rather than being typed again (operator review, 2026-07-30).
+def _r(sources: dict, key: str) -> dict:
+    return canon_mod.route(sources, key)
+
+
+def _b(sources: dict, key: str) -> str:
+    return canon_mod.brand(canon_mod.route(sources, key))
+
+
+def _n(sources: dict, key: str) -> str:
+    return canon_mod.route(sources, key)["nation"]
+
+
 def police_route_html(sources: dict, *, phone: bool = True, url: bool = True,
                       link: bool = True) -> str:
     """The nation-scoped police reporting route as linked HTML, from the canon.
@@ -1969,10 +1984,9 @@ def render_post(site, post, all_posts, affiliates=None, sources=None, link_map=N
         <div class="notice" style="margin-top:2rem">
           <strong>Think you&#8217;ve spotted a scam?</strong>
           Use the <a href="/check/">AI scam checker</a> for an automated second opinion, or report it to
-          <a href="https://www.reportfraud.police.uk" rel="noopener noreferrer" target="_blank">Report Fraud</a>
-          in England, Wales or Northern Ireland, or <a href="https://www.scotland.police.uk/contact-us/non-emergencies/" rel="noopener noreferrer" target="_blank">Police Scotland on 101</a> in Scotland.
+          {police_route_html(sources, phone=False, url=False)}.
         </div>
-        <p class="meta" style="margin-top:1.4rem">Reporting routes in this guide are checked against our verified canon of official UK sources &#8212; <a href="https://www.reportfraud.police.uk/" rel="noopener" target="_blank">Report Fraud</a> for England, Wales and Northern Ireland, Police Scotland on 101 for Scotland, the <a href="https://www.ncsc.gov.uk/" rel="noopener" target="_blank">National Cyber Security Centre</a>, and the consumer service for each nation &#8212; by an automated accuracy gate before publication. {review_note} Read about <a href="/methodology/">how Beat the Scam writes guides</a>.</p>
+        <p class="meta" style="margin-top:1.4rem">Reporting routes in this guide are checked against our verified canon of official UK sources &#8212; {police_route_html(sources, phone=False, url=False)}, the <a href="https://www.ncsc.gov.uk/" rel="noopener" target="_blank">National Cyber Security Centre</a>, and the consumer service for each nation &#8212; by an automated accuracy gate before publication. {review_note} Read about <a href="/methodology/">how Beat the Scam writes guides</a>.</p>
       </article>
       <aside class="sidebar">
         <section class="sidebar-card">
@@ -2104,9 +2118,7 @@ def render_check_page(site, sources):
         <div class="notice">
           <strong>This tool provides educational guidance only.</strong>
           It is not a definitive fraud verdict. If you have already sent money or shared personal details,
-          contact your bank immediately and report it to
-          <a href="https://www.reportfraud.police.uk" rel="noopener noreferrer" target="_blank">Report Fraud</a>
-          in England, Wales or Northern Ireland, or <a href="https://www.scotland.police.uk/contact-us/non-emergencies/" rel="noopener noreferrer" target="_blank">Police Scotland on 101</a> in Scotland.
+          contact your bank immediately and report it to <!--POLICE_ROUTE_PLAIN-->.
         </div>
       </div>
     </section>
@@ -2310,6 +2322,8 @@ def render_check_page(site, sources):
     # here so the checker page uses the SAME canon component as the Disclaimer,
     # the Terms and the methodology page (operator review, 2026-07-29).
     content = content.replace("<!--POLICE_ROUTE-->", police_route_html(sources))
+    content = content.replace("<!--POLICE_ROUTE_PLAIN-->",
+                              police_route_html(sources, phone=False, url=False))
     # The error-state route is assembled in JavaScript, so it is injected as an
     # HTML string inside a JS double-quoted literal: escape the quotes.
     content = content.replace(
@@ -3006,8 +3020,8 @@ def build_legal_bodies(site, sources):
     <h2>Sources we verify against</h2>
     <p>Verification draws on UK-specific public sources, including:</p>
     <ul>
-      <li><a href="https://www.reportfraud.police.uk/" rel="noopener noreferrer" target="_blank">Report Fraud</a> (formerly Action Fraud) &mdash; the police fraud reporting service for England, Wales and Northern Ireland</li>
-      <li><a href="https://www.scotland.police.uk/contact-us/non-emergencies/" rel="noopener noreferrer" target="_blank">Police Scotland on 101</a> &mdash; the police reporting route for Scotland</li>
+      <li><a href="{_r(sources, 'action-fraud')['info_url']}" rel="noopener noreferrer" target="_blank">{_b(sources, 'action-fraud')}</a> (formerly Action Fraud) &mdash; the police fraud reporting service for {_n(sources, 'action-fraud')}</li>
+      <li><a href="{_r(sources, 'police-scotland')['report_url']}" rel="noopener noreferrer" target="_blank">{_b(sources, 'police-scotland')} on {_r(sources, 'police-scotland')['phone']}</a> &mdash; the police reporting route for {_n(sources, 'police-scotland')}</li>
       <li><a href="https://www.ncsc.gov.uk/" rel="noopener noreferrer" target="_blank">National Cyber Security Centre (NCSC)</a> &mdash; for phishing reporting routes and current threat patterns</li>
       <li><a href="https://www.gov.uk/consumer-advice" rel="noopener noreferrer" target="_blank">GOV.UK consumer advice</a> &mdash; the consumer service for each UK nation: Citizens Advice in England and Wales, Advice Direct Scotland in Scotland, Consumerline in Northern Ireland</li>
       <li><a href="https://www.fca.org.uk/consumers/fca-firm-checker" rel="noopener noreferrer" target="_blank">FCA Firm Checker</a> &mdash; for investment and financial services scams</li>
@@ -3099,8 +3113,8 @@ def build_legal_bodies(site, sources):
 
     <h2>Report the incident</h2>
     <ul>
-      <li><strong>England, Wales or Northern Ireland:</strong> use <a href="https://www.reportfraud.police.uk/reporting-a-fraud/" rel="noopener noreferrer" target="_blank">Report Fraud</a> online or call 0300 123 2040.</li>
-      <li><strong>Scotland:</strong> report fraud and cybercrime to Police Scotland on 101. Call 999 if a crime is happening now or someone is in immediate danger.</li>
+      <li><strong>{_n(sources, 'action-fraud')}:</strong> use <a href="{_r(sources, 'action-fraud')['info_url']}" rel="noopener noreferrer" target="_blank">{_b(sources, 'action-fraud')}</a> online or call {_r(sources, 'action-fraud')['phone']}.</li>
+      <li><strong>{_n(sources, 'police-scotland')}:</strong> report fraud and cybercrime to {_b(sources, 'police-scotland')} on {_r(sources, 'police-scotland')['phone']}. Call 999 if a crime is happening now or someone is in immediate danger.</li>
       <li><strong>Suspicious SMS:</strong> forward it to 7726 free of charge. For other message types, use the relevant app or device reporting controls as well.</li>
       <li><strong>Phishing email:</strong> forward it to <a href="mailto:report@phishing.gov.uk">report@phishing.gov.uk</a>. The NCSC also accepts suspicious website reports.</li>
       <li><strong>Impersonated organisation:</strong> tell the bank, retailer, courier, platform or public body through contact details you find independently.</li>
@@ -3117,8 +3131,8 @@ def build_legal_bodies(site, sources):
       <li><a href="https://www.ncsc.gov.uk/section/respond-recover/phishing" rel="noopener noreferrer" target="_blank">National Cyber Security Centre — phishing response and recovery</a></li>
       <li><a href="https://www.psr.org.uk/news-and-updates/latest-news/news/groundbreaking-new-protections-for-victims-of-app-scams-start-today/" rel="noopener noreferrer" target="_blank">Payment Systems Regulator — APP reimbursement protections</a></li>
       <li><a href="https://www.moneyhelper.org.uk/en/everyday-money/credit/how-youre-protected-when-you-pay-by-card" rel="noopener noreferrer" target="_blank">MoneyHelper — Section 75 and chargeback</a></li>
-      <li><a href="https://www.reportfraud.police.uk/reporting-a-fraud/" rel="noopener noreferrer" target="_blank">Report Fraud — reporting routes for England, Wales and Northern Ireland</a></li>
-      <li><a href="https://www.scotland.police.uk/contact-us/non-emergencies/" rel="noopener noreferrer" target="_blank">Police Scotland on 101 — the reporting route for Scotland</a></li>
+      <li><a href="{_r(sources, 'action-fraud')['info_url']}" rel="noopener noreferrer" target="_blank">{_b(sources, 'action-fraud')} — reporting routes for {_n(sources, 'action-fraud')}</a></li>
+      <li><a href="{_r(sources, 'police-scotland')['report_url']}" rel="noopener noreferrer" target="_blank">{_b(sources, 'police-scotland')} on {_r(sources, 'police-scotland')['phone']} — the reporting route for {_n(sources, 'police-scotland')}</a></li>
       <li><a href="https://www.ofcom.org.uk/phones-and-broadband/scam-calls-and-messages/what-to-do-about-a-scam-call-text-or-message" rel="noopener noreferrer" target="_blank">Ofcom — reporting suspicious calls and messages</a></li>
       <li><a href="https://www.paypal.com/uk/legalhub/buyer-protection?locale.x=en_US" rel="noopener noreferrer" target="_blank">PayPal UK — Buyer Protection terms</a></li>
     </ul>
@@ -3749,6 +3763,20 @@ def build():
         post["category"] = normalize_category(post["category"])
 
     # Disambiguate slug collisions — preserve all posts, never silently drop.
+    # Validate the RAW records first. disambiguate_slugs() renames a duplicate
+    # to `<slug>-2`, so running it before the validator meant the duplicate-slug
+    # rule could never fire — the validator only ever saw a deduplicated list
+    # (operator review, 2026-07-30). Duplicate source slugs make "which record
+    # is consolidated?" order-dependent, so they must stop the build.
+    raw_problems = corpus_mod.validate_consolidation(raw_posts, ARTICLE_REDIRECTS)
+    if raw_problems:
+        for msg in raw_problems:
+            print(f"  posts.json: {msg}")
+        raise SystemExit(
+            f"ERROR: content/posts.json is invalid before normalisation "
+            f"({len(raw_problems)} problem(s))"
+        )
+
     all_posts = disambiguate_slugs(raw_posts)
 
     # Source records → the PUBLIC corpus. A record carrying `consolidated_into`
@@ -4062,8 +4090,9 @@ def build():
         f"Methodology: see {site['domain']}/methodology/\n\n"
         f"Corrections: see {site['domain']}/corrections/\n\n"
         f"/* SOURCES */\n"
-        f"Report Fraud (England, Wales and Northern Ireland) — https://www.reportfraud.police.uk/\n"
-        f"Police Scotland on 101 (Scotland) — https://www.scotland.police.uk/contact-us/non-emergencies/\n"
+        f"{_b(sources, 'action-fraud')} ({_n(sources, 'action-fraud')}) — {_r(sources, 'action-fraud')['info_url']}\n"
+        f"{_b(sources, 'police-scotland')} on {_r(sources, 'police-scotland')['phone']} "
+        f"({_n(sources, 'police-scotland')}) — {_r(sources, 'police-scotland')['report_url']}\n"
         f"NCSC — https://www.ncsc.gov.uk/\n"
         f"Consumer advice by nation (Citizens Advice in England and Wales, Advice Direct Scotland, "
         f"Consumerline in Northern Ireland) — https://www.gov.uk/consumer-advice\n"

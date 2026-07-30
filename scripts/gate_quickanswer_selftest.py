@@ -74,11 +74,15 @@ def _canon_negative_fixtures(check) -> None:
             except SystemExit:
                 return True
 
-    worst = fixtures[4]  # a missing required route — police-scotland
-    check("build.load_sources() rejects a canon the validator rejects",
-          _rejects(lambda r: _build.load_sources(r), worst[1]))
-    check("content_gate._load_canon() rejects the same canon",
-          _rejects(lambda r: _cg._load_canon(r / "content" / "sources.json"), worst[1]))
+    # EVERY fixture through BOTH consumers. Only one was, so "17 fixtures against
+    # both real consumers" was inaccurate (operator review, 2026-07-30).
+    build_rejected = sum(_rejects(lambda r: _build.load_sources(r), bad) for _, bad in fixtures)
+    gate_rejected = sum(_rejects(lambda r: _cg._load_canon(r / "content" / "sources.json"), bad)
+                        for _, bad in fixtures)
+    check(f"build.load_sources() rejects all {len(fixtures)} malformed canons",
+          build_rejected == len(fixtures), f"{build_rejected}/{len(fixtures)}")
+    check(f"content_gate._load_canon() rejects all {len(fixtures)} malformed canons",
+          gate_rejected == len(fixtures), f"{gate_rejected}/{len(fixtures)}")
     check("build.load_sources() rejects an unparseable canon",
           _rejects_raw(lambda r: _build.load_sources(r), "{not json"))
     check("content_gate._load_canon() rejects an unparseable canon",

@@ -6,7 +6,8 @@
 // content/sources.json by scripts/sync_canon_js.py and kept in sync by a
 // committed self-test, so the checker cannot drift from the canon that drives
 // the site, the gate and the generator (operator review, 2026-07-29).
-const { EXAMPLE_REPORTING_LINKS, PROMPT_ROUTE_RULES } = require("./lib/canon-routes");
+const { EXAMPLE_REPORTING_LINKS, PROMPT_ROUTE_RULES, CANON_REQUIRED_HOSTS } =
+  require("./lib/canon-routes");
 const { buildReportingLinks } = require("./lib/reporting-links");
 
 // ─── RATE LIMITING ───────────────────────────────────────────────────────────
@@ -161,43 +162,13 @@ function getAllowedOrigin(requestOrigin) {
 }
 
 // ─── ALLOWED REPORTING DOMAINS ───────────────────────────────────────────────
-// The checker renders model-produced reporting links as trusted guidance, so a
-// prompt-injected message could otherwise smuggle an attacker-controlled URL
-// into the UI. We only forward links whose host is (or is a subdomain of) an
-// official UK reporting/consumer-protection domain. Base domains cover their
-// subdomains: e.g. "police.uk" allows actionfraud./reportfraud./met.police.uk,
-// and "gov.uk" allows ncsc./nationalcrimeagency.gov.uk.
-const ALLOWED_REPORT_DOMAINS = [
-  "gov.uk",
-  "police.uk",
-  "fca.org.uk",
-  "citizensadvice.org.uk",
-  "which.co.uk",
-  "ofcom.org.uk",
-  "ico.org.uk",
-  "takefive-stopfraud.org.uk",
-  "moneyhelper.org.uk",
-  "victimsupport.org.uk",
-  "cifas.org.uk",
-  "financial-ombudsman.org.uk",
-  "pensions-ombudsman.org.uk",
-  "stepchange.org",
-  "nationaldebtline.org",
-];
-
-function isAllowedReportUrl(raw) {
-  let u;
-  try {
-    u = new URL(raw);
-  } catch {
-    return false;
-  }
-  if (u.protocol !== "https:") return false;
-  const host = u.hostname.toLowerCase();
-  return ALLOWED_REPORT_DOMAINS.some(
-    d => host === d || host.endsWith("." + d)
-  );
-}
+// Extracted to lib/allowed-domains.js so it can be unit-tested against the
+// canon. It unions CANON_REQUIRED_HOSTS — every host serving an on_page route
+// in content/sources.json — because www.advice.scot was a required
+// consumer-advice route missing from the hand-maintained list, so a valid
+// Advice Direct Scotland link was silently discarded from checker results
+// (operator review, 2026-07-30).
+const { ALLOWED_REPORT_DOMAINS, isAllowedReportUrl } = require("./lib/allowed-domains");
 
 // ─── SCRUB MODEL-AUTHORED FREE TEXT ──────────────────────────────────────────
 // The model's narrative fields (summary, flags, recommended_actions) are shown

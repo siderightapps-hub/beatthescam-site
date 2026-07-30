@@ -77,6 +77,11 @@ def render(canon: dict) -> str:
            f"UK-wide helpline."),
     ]
 
+    from urllib.parse import urlparse
+    onpage = [r for r in canon["official_routes"] if r.get("on_page") and r.get("report_url")]
+    onpage_urls = sorted(r["report_url"] for r in onpage)
+    required_hosts = sorted({(urlparse(u).hostname or "").lower() for u in onpage_urls})
+
     def js(value) -> str:
         return json.dumps(value, ensure_ascii=False, indent=2)
 
@@ -89,6 +94,12 @@ def render(canon: dict) -> str:
         + "// (actionfraud.police.uk, a bare host, a deep link) resolves to the approved label.\n"
         + f"const REPORT_FRAUD_HOSTS = {js(['actionfraud.police.uk', 'reportfraud.police.uk'])};\n\n"
         + f"const POLICE_SCOTLAND_HOSTS = {js(['scotland.police.uk'])};\n\n"
+        + "// Every host serving an on_page canon route. check-scam.js unions these into\n"
+        + "// its security allow-list, so a required reporting route can never be filtered\n"
+        + "// out of a checker result — www.advice.scot was, silently, until 2026-07-30.\n"
+        + f"const CANON_REQUIRED_HOSTS = {js(required_hosts)};\n\n"
+        + "// Every on_page canon report_url, so a test can assert each one survives.\n"
+        + f"const CANON_ONPAGE_URLS = {js(onpage_urls)};\n\n"
         + f"const NCSC_REPORT_EMAIL = {js(ncsc['email'])};\n\n"
         + f"const SMS_SHORTCODE = {js(sms['sms'])};\n\n"
         + f"const EXAMPLE_REPORTING_LINKS = {js(example_links)};\n\n"
@@ -96,7 +107,8 @@ def render(canon: dict) -> str:
         + "module.exports = {\n"
         + "  REPORT_FRAUD_LINK,\n  POLICE_SCOTLAND_LINK,\n  REPORT_FRAUD_HOSTS,\n"
         + "  POLICE_SCOTLAND_HOSTS,\n  NCSC_REPORT_EMAIL,\n  SMS_SHORTCODE,\n"
-        + "  EXAMPLE_REPORTING_LINKS,\n  PROMPT_ROUTE_RULES,\n};\n"
+        + "  EXAMPLE_REPORTING_LINKS,\n  PROMPT_ROUTE_RULES,\n  CANON_REQUIRED_HOSTS,\n"
+        + "  CANON_ONPAGE_URLS,\n};\n"
     )
 
 

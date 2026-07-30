@@ -47,6 +47,9 @@ import sys
 from datetime import date
 from pathlib import Path
 
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+import corpus as corpus_mod  # noqa: E402  — the shared public/source corpus partition
+
 ROOT = Path(__file__).resolve().parents[1]
 REVIEW = ROOT / "docs" / "review"
 POSTS = ROOT / "content" / "posts.json"
@@ -268,6 +271,17 @@ def apply_record_fields(posts: list, change: dict, precondition: dict) -> dict:
         raise ApplyError(
             f"{slug}: record digest is {digest(live)} but the packet expects {want}"
         )
+    # The fourth precondition, previously declared but never read: the packet is
+    # written against a specific static redirect, and applying it against a
+    # different one would move the record's 301 (operator review, 2026-07-30).
+    want_static = precondition.get("static_redirect_target")
+    if want_static is not None:
+        have = corpus_mod.ARTICLE_REDIRECTS.get(slug)
+        if have != want_static:
+            raise ApplyError(
+                f"{slug}: static redirect target is {have!r} but the packet expects "
+                f"{want_static!r}. The packet was written against a different redirect state."
+            )
     for target_slug, spec in change.items():
         rec = index.get(target_slug)
         if rec is None:
@@ -364,27 +378,27 @@ STAGES = [
     {
         "id": "scotland-shpock",
         "title": "Scotland routing + Yodel, with Shpock",
-        "packets": ["scotland-routing-v11", "shpock-scam-uk-v11"],
+        "packets": ["scotland-routing-v12", "shpock-scam-uk-v12"],
         "why": "Mandatory companions; neither releases alone. Source rows are re-asserted "
                "after all full-record writes so no overlap row is lost.",
     },
     {
         "id": "nation",
         "title": "Nation consumer routing",
-        "packets": ["nation-consumer-routing-v5"],
+        "packets": ["nation-consumer-routing-v6"],
         "why": "Depends on both upstream stages for its `old` values.",
     },
     {
         "id": "hubs",
         "title": "All thirteen category hubs",
-        "packets": ["hubs-v11", "legacy-hubs-v6"],
+        "packets": ["hubs-v12", "legacy-hubs-v7"],
         "why": "Landed together with the strict source/key enforcement, or the hub "
                "self-test suite is inconsistent with the content.",
     },
     {
         "id": "consolidation",
         "title": "Consolidation metadata",
-        "packets": ["consolidation-metadata-v1"],
+        "packets": ["consolidation-metadata-v2"],
         "why": "Moves the last consolidation declaration onto its own record. ATOMIC with "
                "deleting the matching static ARTICLE_REDIRECTS entry — leaving both is a "
                "validation error by design, so a half-applied patch fails loudly.",
@@ -447,6 +461,30 @@ FINAL9_DIGEST_KEYS = ["slug", "description", "hero", "quick_answer",
                       "sections", "faq", "sources_checked"]
 
 
+def code_baseline() -> dict:
+    """A digest over the release-critical code, plus the commit it was taken at.
+
+    `minimum_code_commit` in the packets is descriptive: nothing read it, so
+    updating the string protected nothing (operator review, 2026-07-30). This is
+    a checked precondition — `--apply` refuses to run against code that is not
+    the code the manifest was emitted from.
+    """
+    import subprocess
+    files = ["scripts/canon.py", "scripts/corpus.py", "scripts/content_gate.py",
+             "scripts/build.py", "scripts/release_manifest.py",
+             "scripts/hub_selftest.py", "scripts/corpus_selftest.py",
+             "scripts/gate_quickanswer_selftest.py"]
+    blobs = {f: hashlib.sha256((ROOT / f).read_bytes()).hexdigest() for f in files}
+    try:
+        head = subprocess.run(["git", "rev-parse", "HEAD"], cwd=ROOT, capture_output=True,
+                              text=True, check=True).stdout.strip()
+        dirty = bool(subprocess.run(["git", "status", "--porcelain", "--"] + files, cwd=ROOT,
+                                    capture_output=True, text=True, check=True).stdout.strip())
+    except Exception:
+        head, dirty = None, None
+    return {"files": blobs, "digest": digest(blobs), "head": head, "uncommitted_changes": dirty}
+
+
 def build_receipts() -> dict:
     """Per-packet receipts with EXPLICIT key lists and a reproducible property.
 
@@ -458,7 +496,7 @@ def build_receipts() -> dict:
     posts = load_posts()
     index = by_slug(posts)
     try:
-        stored = packet("scotland-routing-v11")["prerequisite_state"]["record_digests"]
+        stored = packet("scotland-routing-v12")["prerequisite_state"]["record_digests"]
         f9 = packet("FINAL-9-guides-v4")["guides"]
     except SystemExit:
         return receipts
@@ -490,11 +528,11 @@ def build_receipts() -> dict:
     # a placeholder `updated` into one hash and calling it proof of a future
     # applied state is the defect (`shpock-scam-uk-v10-c.md` §2).
     try:
-        record = packet("shpock-scam-uk-v11")["record"]
+        record = packet("shpock-scam-uk-v12")["record"]
     except SystemExit:
         record = None
     if record:
-        receipts["shpock-scam-uk-v11"] = {
+        receipts["shpock-scam-uk-v12"] = {
             "purpose": "Prove the approved reader record is the one applied.",
             "digest_keys": "the whole record",
             "stable_content_digest": stable_digest(record),
@@ -522,11 +560,9 @@ def build_manifest(applied_on: str) -> dict:
             "Record digests exclude `updated` (`stable`) so content identity can be proved across "
             "packet versions, and include it (`applied`) so the written state can be proved.",
         ],
-        "baseline": {
-            "posts": corpus_digest(posts),
-            "hubs": digest(hubs),
-            "source_records": len(posts),
-        },
+        "baseline": {"posts": corpus_digest(posts), "hubs": digest(hubs)},
+        "baseline_source_records": len(posts),
+        "code_baseline": code_baseline(),
         "receipts": build_receipts(),
         "stages": [],
     }
@@ -546,6 +582,9 @@ def build_manifest(applied_on: str) -> dict:
             **{k: stage[k] for k in ("id", "title", "why")},
             "status": "ready",
             "packets": list(stage["packets"]),
+            # Packet identity, verified before mutation. Without this an edited
+            # gitignored packet could be applied against a stale manifest.
+            "packet_digests": {n: digest(packet(n)) for n in stage["packets"]},
             "expects": {"posts": expects_posts, "hubs": expects_hubs},
             "produces": {"posts": corpus_digest(posts), "hubs": digest(hubs)},
             "applied": report["packets"],
@@ -572,60 +611,186 @@ def cmd_emit(applied_on: str) -> int:
     return 0
 
 
-def cmd_verify() -> int:
-    if not MANIFEST.exists():
-        print(f"ERROR: {MANIFEST.relative_to(ROOT)} not found — run --emit first", file=sys.stderr)
-        return 2
-    manifest = json.loads(MANIFEST.read_text(encoding="utf-8"))
-    live_posts, live_hubs = corpus_digest(load_posts()), digest(load_hubs())
-    print(f"live corpus  {live_posts}")
-    print(f"live hubs    {live_hubs}\n")
+def _state(posts: list, hubs: dict) -> dict:
+    """The FULL release state. Both corpora, always together.
 
-    position = None
-    if live_posts == manifest["baseline"]["posts"]:
+    Comparing only `posts` is what let an after-nation tree report as "after
+    hubs": the nation and hubs stages deliberately produce the same posts digest,
+    because hubs do not touch posts. The consolidation stage then applied
+    successfully with all ten new hub records still absent (operator review,
+    2026-07-30, reproduced in four separate replies).
+    """
+    return {"posts": corpus_digest(posts), "hubs": digest(hubs)}
+
+
+def _fmt(state: dict) -> str:
+    return f"posts {state['posts'][:16]}…  hubs {state['hubs'][:16]}…"
+
+
+def _require_manifest() -> dict:
+    """A stale or absent manifest must never downgrade application to unchecked
+    mode. `--apply` used to treat it as optional."""
+    if not MANIFEST.exists():
+        raise SystemExit(
+            f"ERROR: {MANIFEST.relative_to(ROOT)} not found. The manifest is the release "
+            f"receipt, not an optional convenience — run --emit first."
+        )
+    manifest = json.loads(MANIFEST.read_text(encoding="utf-8"))
+    for key in ("digest_spec", "baseline", "stages", "generated_for_application_date"):
+        if key not in manifest:
+            raise SystemExit(f"ERROR: {MANIFEST.relative_to(ROOT)} has no {key!r} — regenerate it")
+    return manifest
+
+
+def _packet_identity(name: str) -> str:
+    """Digest of the packet FILE as it will be applied."""
+    return digest(packet(name))
+
+
+def _check_packet_identity(stage_manifest: dict) -> None:
+    """A packet edited after the manifest was emitted is a different release.
+
+    The packets' own `payload_digest` / `stable_content_digests` are descriptive
+    only — the applier never read them, so a locally altered gitignored packet
+    could be applied against a stale manifest.
+    """
+    recorded = stage_manifest.get("packet_digests") or {}
+    if not recorded:
+        raise SystemExit(
+            f"ERROR: stage {stage_manifest['id']!r} records no packet digests — regenerate "
+            f"the manifest so packet identity can be verified before mutation."
+        )
+    for name, want in recorded.items():
+        got = _packet_identity(name)
+        if got != want:
+            raise SystemExit(
+                f"ERROR: packet {name!r} has changed since the manifest was emitted.\n"
+                f"       manifest: {want}\n       on disk:  {got}\n"
+                f"       Regenerate the manifest, or restore the reviewed packet."
+            )
+
+
+def _check_graph(posts: list) -> None:
+    """The consolidation graph must be valid before anything is written, and
+    before a state is reported as applied."""
+    try:
+        corpus_mod.partition(posts)
+    except corpus_mod.CorpusError as exc:
+        raise SystemExit(f"ERROR: the resulting corpus is invalid:\n{exc}")
+
+
+def cmd_verify() -> int:
+    manifest = _require_manifest()
+    live = _state(load_posts(), load_hubs())
+    print(f"live  {_fmt(live)}")
+    same_code = code_baseline()["digest"] == manifest.get("code_baseline", {}).get("digest")
+    print("code  " + ("matches the manifest baseline" if same_code else
+                      "DIFFERS from the manifest baseline — re-run --emit") + "\n")
+
+    position, matched = None, None
+    if live == manifest["baseline"]:
         position = "baseline (nothing applied)"
     for s in manifest["stages"]:
-        if s["status"] == "ready" and live_posts == s["produces"]["posts"]:
-            position = f"after stage '{s['id']}'"
-    print(f"tree is at: {position or 'AN UNRECOGNISED STATE — do not apply'}")
+        if s["status"] == "ready" and live == s["produces"]:
+            position, matched = f"after stage '{s['id']}'", s
+
     if position is None:
+        print("tree is at: AN UNRECOGNISED STATE — do not apply.")
+        print("            Both digests must match a recorded state. A partial application, an")
+        print("            edited packet or a different --date all produce an unknown state.")
+        for s in manifest["stages"]:
+            if s["status"] != "ready":
+                continue
+            same_posts = live["posts"] == s["produces"]["posts"]
+            same_hubs = live["hubs"] == s["produces"]["hubs"]
+            if same_posts != same_hubs:
+                print(f"            NOTE stage {s['id']!r}: "
+                      f"posts {'match' if same_posts else 'differ'}, "
+                      f"hubs {'match' if same_hubs else 'differ'} — a half-applied stage.")
+        return 1
+
+    print(f"tree is at: {position}")
+    try:
+        _check_graph(load_posts())
+        print("            consolidation graph: valid")
+    except SystemExit as exc:
+        print(f"            {exc}")
         return 1
 
     for s in manifest["stages"]:
         mark = "ready" if s["status"] == "ready" else "UNAVAILABLE"
-        matches = s["status"] == "ready" and live_posts == s["expects"]["posts"]
-        print(f"  [{'NEXT ' if matches else '     '}] {s['id']:18} {mark}")
+        nxt = s["status"] == "ready" and live == s["expects"]
+        print(f"  [{'NEXT ' if nxt else '     '}] {s['id']:18} {mark}")
     return 0
 
 
 def cmd_apply(applied_on: str, only: str | None) -> int:
+    manifest = _require_manifest()
+
+    if manifest["generated_for_application_date"] != applied_on:
+        raise SystemExit(
+            f"ERROR: the manifest was generated for {manifest['generated_for_application_date']} "
+            f"but --date is {applied_on}. Stage outputs include `updated`, so a different date "
+            f"is a different release. Re-run --emit with this date."
+        )
+
+    live_code = code_baseline()
+    if live_code["digest"] != manifest.get("code_baseline", {}).get("digest"):
+        raise SystemExit(
+            f"ERROR: the release-critical code has changed since the manifest was emitted.\n"
+            f"       manifest: {manifest.get('code_baseline', {}).get('digest')}\n"
+            f"       on disk:  {live_code['digest']}\n"
+            f"       Re-run --emit, or restore the reviewed code."
+        )
+
+    known = {s["id"] for s in manifest["stages"]}
+    if only and only not in known:
+        raise SystemExit(f"ERROR: unknown stage {only!r}. Known stages: {', '.join(sorted(known))}")
+
     posts, hubs = load_posts(), load_hubs()
-    manifest = json.loads(MANIFEST.read_text(encoding="utf-8")) if MANIFEST.exists() else None
 
     for stage in STAGES:
         if only and stage["id"] != only:
             continue
-        before = corpus_digest(posts)
-        if manifest:
-            expected = next((s for s in manifest["stages"] if s["id"] == stage["id"]), None)
-            if expected and expected["status"] == "ready" and expected["expects"]["posts"] != before:
-                print(f"ABORT: stage '{stage['id']}' expects corpus {expected['expects']['posts']}\n"
-                      f"       but the tree is at              {before}\n"
-                      f"       Apply the upstream stages first.", file=sys.stderr)
-                return 1
+        recorded = next((s for s in manifest["stages"] if s["id"] == stage["id"]), None)
+        if recorded is None or recorded["status"] != "ready":
+            raise SystemExit(
+                f"ERROR: stage {stage['id']!r} is not recorded as ready in the manifest"
+            )
+
+        # PRECONDITION: both corpora.
+        before = _state(posts, hubs)
+        if before != recorded["expects"]:
+            raise SystemExit(
+                f"ERROR: stage {stage['id']!r} precondition failed.\n"
+                f"       expects  {_fmt(recorded['expects'])}\n"
+                f"       tree is  {_fmt(before)}\n"
+                f"       Apply the upstream stages first — including any that touch only hubs."
+            )
+        _check_packet_identity(recorded)
+
         try:
             report = run_stage(stage, posts, hubs, applied_on)
         except ApplyError as exc:
-            print(f"ABORT in stage '{stage['id']}': {exc}", file=sys.stderr)
-            print("Nothing has been written to disk.", file=sys.stderr)
-            return 1
-        print(f"{stage['id']:18} {report['packets']}")
-        print(f"{'':18} produces {corpus_digest(posts)}")
+            raise SystemExit(f"ABORT in stage {stage['id']!r}: {exc}\nNothing was written to disk.")
 
+        # POSTCONDITION: both corpora, against what the manifest promised.
+        after = _state(posts, hubs)
+        if after != recorded["produces"]:
+            raise SystemExit(
+                f"ERROR: stage {stage['id']!r} did not produce its recorded output.\n"
+                f"       expected {_fmt(recorded['produces'])}\n"
+                f"       produced {_fmt(after)}\n"
+                f"       Nothing was written to disk."
+            )
+        print(f"{stage['id']:18} {report['packets']}")
+        print(f"{'':18} {_fmt(after)}  OK")
+
+    _check_graph(posts)
     write_posts(posts)
     write_hubs(hubs)
-    print(f"\nwrote content/posts.json and content/category-hubs.json")
-    print("NOT built. Run the self-tests, then ONE non-concurrent build.")
+    print("\nwrote content/posts.json and content/category-hubs.json")
+    print("NOT built. Run the five checks, then ONE non-concurrent build.")
     return 0
 
 

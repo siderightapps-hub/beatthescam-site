@@ -706,7 +706,7 @@ def check_similarity(post: Dict, corpus: Optional[List[Dict]] = None, *,
         is_public = any(p.get("slug") == slug for p in corpus)
         if in_corpus and not is_public:
             return []                       # a retained archive record: not a page
-        if post.get(corpus_mod.CONSOLIDATED_INTO):
+        if corpus_mod.CONSOLIDATED_INTO in post:
             return []                       # a draft claiming to be one (also BLOCKed)
     issues: List[Dict] = []
     for other in corpus:
@@ -1219,12 +1219,16 @@ def check_consolidation_evasion(post: Dict) -> List[Dict]:
     that legitimately carries the field is exempted by the corpus partition
     before it reaches here, so this fires only on a draft asserting it.
     """
-    if not post.get(corpus_mod.CONSOLIDATED_INTO):
+    # PRESENCE, not truthiness. `post.get(...)` returned falsy for "", None,
+    # False, [] and {} — so a draft could carry the field, pass the gate, and
+    # then be rejected (or not) much later by the build (operator review,
+    # 2026-07-30). The field must simply not be there.
+    if corpus_mod.CONSOLIDATED_INTO not in post:
         return []
     return [{
         "check": "consolidation_evasion",
         "severity": SEVERITY_BLOCK,
-        "span": str(post.get(corpus_mod.CONSOLIDATED_INTO)),
+        "span": repr(post.get(corpus_mod.CONSOLIDATED_INTO)),
         "detail": (f"the draft sets {corpus_mod.CONSOLIDATED_INTO!r}, which would remove it from "
                    f"the public corpus and from the duplicate-content check. Consolidation is an "
                    f"operator decision applied to an existing guide, not a property a new draft "

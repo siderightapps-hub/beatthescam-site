@@ -18,8 +18,17 @@ name: Gate self-test
 on:
   workflow_dispatch:
   push:
+    # Every file that can change what these suites assert. A consolidation-only
+    # change used to miss this workflow entirely — scripts/corpus.py,
+    # corpus_selftest.py, similarity_report.py, release_manifest.py and
+    # content/posts.json were all absent, so the six-minute job meant to enforce
+    # the feature could be bypassed by editing the feature (operator review,
+    # 2026-07-30). Deletion-only migration halves are caught by the self-test
+    # rather than the validator, which makes this filter load-bearing.
     paths: &selftest_paths
       - 'scripts/canon.py'
+      - 'scripts/corpus.py'
+      - 'scripts/corpus_selftest.py'
       - 'scripts/content_gate.py'
       - 'scripts/build.py'
       - 'scripts/gate_quickanswer_selftest.py'
@@ -27,7 +36,12 @@ on:
       - 'scripts/gate_selftest.py'
       - 'scripts/generate_content_claude.py'
       - 'scripts/search_console_articles.py'
+      - 'scripts/similarity_report.py'
+      - 'scripts/release_manifest.py'
+      - 'scripts/audit_corpus.py'
+      - 'scripts/fact_reverify.py'
       - 'scripts/sync_canon_js.py'
+      - 'content/posts.json'
       - 'content/sources.json'
       - 'content/category-hubs.json'
       - 'netlify/functions/**'

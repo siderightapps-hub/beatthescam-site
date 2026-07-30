@@ -80,7 +80,10 @@ def build_into(tmp: Path) -> Path:
 
 def run(with_build: bool = True) -> int:
     posts = live_posts()
-    consolidation = C.consolidation_map(posts) or C.legacy_static_consolidations(posts)
+    # UNION, not `or`. `a or b` ignored the legacy mapping the moment any
+    # metadata mapping existed, so a half-migrated corpus would have been tested
+    # against an incomplete map (operator review, 2026-07-30).
+    consolidation = {**C.pending_migrations(posts), **C.consolidation_map(posts)}
     declared_on_record = bool(C.consolidation_map(posts))
 
     print(f"consolidations: {consolidation}")
@@ -94,11 +97,43 @@ def run(with_build: bool = True) -> int:
           len(public) + len(consolidated) == len(posts))
     check(f"{len(posts)} source records become exactly {len(posts) - 1} public guides",
           len(public) == len(posts) - 1, f"got {len(public)}")
-    check("the consolidated record is the Hermes archive copy",
-          [p["slug"] for p in consolidated] == [HERMES],
-          str([p["slug"] for p in consolidated]))
-    check("the consolidation target is a public guide",
-          all(t in {p['slug'] for p in public} for t in consolidation.values()))
+    # ── GENERIC: every consolidation, whatever the corpus holds ─────────────
+    public_slugs = {p["slug"] for p in public}
+    check("public + consolidated is exactly the source corpus",
+          public_slugs | {p["slug"] for p in consolidated} == {p["slug"] for p in posts})
+    check("every consolidated record is retired by a declaration",
+          {p["slug"] for p in consolidated} == set(consolidation),
+          str(sorted({p["slug"] for p in consolidated} ^ set(consolidation))))
+    for slug, target in sorted(consolidation.items()):
+        check(f"{slug}: target {target!r} is a public guide", target in public_slugs)
+        check(f"{slug}: is itself not public", slug not in public_slugs)
+        check(f"{slug}: target is not itself consolidated", target not in consolidation)
+    check("public count = source count - consolidations",
+          len(public) == len(posts) - len(consolidation),
+          f"{len(public)} vs {len(posts)} - {len(consolidation)}")
+
+    # A SECOND simultaneous consolidation must behave identically — the rule is
+    # corpus state, not a named pair.
+    import copy as _copy
+    two = _copy.deepcopy(posts)
+    extra_target = next(p["slug"] for p in two
+                        if p["slug"] not in consolidation and p["slug"] != HERMES)
+    extra = next(p for p in two if p["slug"] not in consolidation
+                 and p["slug"] not in (HERMES, extra_target))
+    extra[C.CONSOLIDATED_INTO] = extra_target
+    two_public, two_cons = C.partition(two)
+    check("a SECOND simultaneous consolidation is retired too",
+          len(two_cons) == len(consolidated) + 1 and extra["slug"] in {p["slug"] for p in two_cons},
+          f"{[p['slug'] for p in two_cons]}")
+    check("a second consolidation reduces the public corpus by one",
+          len(two_public) == len(public) - 1, f"{len(two_public)} vs {len(public) - 1}")
+    check("a second consolidated record is excluded from similarity too",
+          not [i for i in check_similarity(extra, two) if i["severity"] == "block"])
+
+    # Hermes-specific migration assertions, kept deliberately as such.
+    check("the Hermes archive copy is among the consolidated records",
+          HERMES in {p["slug"] for p in consolidated})
+    check("Hermes points at Evri", consolidation.get(HERMES) == EVRI)
 
     # ── 5/6/7. Similarity: default excludes, diagnostic includes ────────────
     def sim_blocks(records, **kw):
@@ -114,16 +149,25 @@ def run(with_build: bool = True) -> int:
         {k: v for k, v in p.items() if k != C.CONSOLIDATED_INTO}
         for p in posts if p["slug"] == HERMES
     ]
-    # Also strip the transitional static bridge, so this measures the metadata.
+    # Un-retire it completely: no metadata, no static entry, not pending. That
+    # is a coherent "this is an ordinary public guide" state — anything less is
+    # now a validation error, which is the point of the two-sided rule.
     saved_static = dict(C.ARTICLE_REDIRECTS)
+    saved_pending = C.PENDING_MIGRATION
     try:
         C.ARTICLE_REDIRECTS.pop(HERMES, None)
+        C.PENDING_MIGRATION = frozenset()
+        check("with the consolidation fully removed the corpus is valid",
+              not C.validate_consolidation(without))
         recreated = sim_blocks(without)
         check("removing the consolidation recreates the BLOCK",
               recreated == sorted([EVRI, HERMES]), str(recreated))
+        check("...and the record becomes public again",
+              HERMES in {p["slug"] for p in C.public_posts(without)})
     finally:
         C.ARTICLE_REDIRECTS.clear()
         C.ARTICLE_REDIRECTS.update(saved_static)
+        C.PENDING_MIGRATION = saved_pending
 
     # A genuinely duplicated NEW draft must still be caught — the exclusion is
     # for archive records, not an amnesty on duplication.
@@ -206,15 +250,39 @@ def run(with_build: bool = True) -> int:
       break
 
     # ── The transitional bridge ─────────────────────────────────────────────
-    bridge = C.legacy_static_consolidations(posts)
+    pending = C.pending_migrations(posts)
     if declared_on_record:
-        check("the transitional static bridge is now unused — delete it", not bridge, str(bridge))
+        check("the transitional PENDING_MIGRATION set is now unused — delete it and "
+              "pending_migrations()", not pending and not C.PENDING_MIGRATION,
+              f"pending={pending} set={sorted(C.PENDING_MIGRATION)}")
     else:
-        check("the transitional static bridge is carrying exactly one record",
-              list(bridge) == [HERMES], str(bridge))
+        check("PENDING_MIGRATION is carrying exactly the unmigrated records",
+              set(pending) == set(C.PENDING_MIGRATION), str(pending))
         print("NOTE  consolidation is still declared in the static redirect map, not on the")
-        print("      record. `consolidation-metadata-v1` moves it and deletes the bridge; this")
-        print("      branch then flips and demands the removal.")
+        print("      record. `consolidation-metadata-v1` moves it, deletes the static entry and")
+        print("      empties PENDING_MIGRATION; this branch then flips and demands the removal.")
+
+    # BOTH halves of the migration must be enforced — the code-only half used to
+    # republish the record with no redirect and no error (operator review,
+    # 2026-07-30, consolidation-metadata-v1-c.md §1).
+    static_now = dict(C.ARTICLE_REDIRECTS)
+    static_gone = {k: v for k, v in static_now.items() if k != HERMES}
+    with_meta = copy.deepcopy(posts)
+    for p in with_meta:
+        if p["slug"] == HERMES:
+            p[C.CONSOLIDATED_INTO] = EVRI
+    check("metadata-only (static entry left behind) is REJECTED",
+          bool(C.validate_consolidation(with_meta, static_now)))
+    check("static-deletion-only (no metadata) is REJECTED",
+          bool(C.validate_consolidation(posts, static_gone)))
+    check("both halves together, with PENDING_MIGRATION still set, is REJECTED",
+          bool(C.validate_consolidation(with_meta, static_gone)))
+    # An unrelated source slug colliding with a static redirect is an error, not
+    # an implicit archive declaration — the open-bridge hole.
+    colliding = next(iter(set(C.ARTICLE_REDIRECTS) - set(C.PENDING_MIGRATION)))
+    synthetic = copy.deepcopy(posts) + [{**copy.deepcopy(posts[0]), "slug": colliding}]
+    check("an unrelated slug/static-redirect collision is REJECTED, not silently retired",
+          bool(C.validate_consolidation(synthetic, static_now)))
 
     print()
     if FAILURES:

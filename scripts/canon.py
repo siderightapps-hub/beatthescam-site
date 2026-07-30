@@ -47,31 +47,37 @@ class CanonError(Exception):
 #   consumer-advice  — the nation's consumer service
 REQUIRED_ROUTES: Dict[str, Dict[str, str]] = {
     "action-fraud": {
+        "brand": "Report Fraud",
         "nation": "England, Wales and Northern Ireland",
         "role": "police-report",
         "host": "www.reportfraud.police.uk",
     },
     "police-scotland": {
+        "brand": "Police Scotland",
         "nation": "Scotland",
         "role": "police-report",
         "host": "www.scotland.police.uk",
     },
     "ncsc-sers": {
+        "brand": "NCSC",
         "nation": "United Kingdom",
         "role": "phishing-report",
         "host": "www.ncsc.gov.uk",
     },
     "citizens-advice": {
+        "brand": "Citizens Advice",
         "nation": "England and Wales",
         "role": "consumer-advice",
         "host": "www.citizensadvice.org.uk",
     },
     "advice-direct-scotland": {
+        "brand": "Advice Direct Scotland",
         "nation": "Scotland",
         "role": "consumer-advice",
         "host": "www.advice.scot",
     },
     "consumerline-ni": {
+        "brand": "Consumerline",
         "nation": "Northern Ireland",
         "role": "consumer-advice",
         "host": "www.nidirect.gov.uk",
@@ -216,8 +222,13 @@ def validate_canon(canon) -> List[str]:
         # distinct from `name` (the full service name) and `report_label` (the
         # sidebar link text). Every generated sentence uses it, so it is canon
         # data rather than a string function guessing at parentheses.
-        if not isinstance(r.get("brand"), str) or not r["brand"].strip():
-            problems.append(f"required route {key!r} has no 'brand'")
+        if r.get("brand") != spec["brand"]:
+            # Exact, not merely non-empty. Renaming Report Fraud's brand back to
+            # the retired "Action Fraud" validated clean and propagated straight
+            # into generated prose (operator review, 2026-07-30).
+            problems.append(
+                f"required route {key!r} brand is {r.get('brand')!r}, expected {spec['brand']!r}"
+            )
 
     # Nation coverage, derived from route identities.
     for role, nations in (("police-report", POLICE_REPORT_NATIONS),
@@ -513,6 +524,8 @@ def negative_fixtures() -> List[tuple]:
          m(lambda c: _edit(c, "action-fraud", report_url="https://reportfraud.example.com"))),
         ("the RIGHT host on the WRONG required route is rejected",
          m(lambda c: _edit(c, "advice-direct-scotland", report_url="https://www.citizensadvice.org.uk/"))),
+        ("the retired 'Action Fraud' brand is rejected",
+         m(lambda c: _edit(c, "action-fraud", brand="Action Fraud"))),
         ("a required route demoted from on_page is rejected",
          m(lambda c: _edit(c, "police-scotland", on_page=False))),
         ("a required route with no phone is rejected",

@@ -16,9 +16,9 @@ now history — the release described below supersedes it.
 A large accuracy release is **fully prepared but not applied**. Nine commits of gate,
 build and CI hardening are on `main` — the ninth closed every integration blocker the
 operator raised in the five `-c.md` replies dated 2026-07-29. **Six** packets now sit in `docs/review/`
-awaiting the operator's replies — `scotland-routing-v11`, `shpock-scam-uk-v11`,
-`nation-consumer-routing-v5`, `hubs-v11`, `legacy-hubs-v6` and the new
-`consolidation-metadata-v1`; `FINAL-9-guides-v4` remains approved. Applying all seven
+awaiting the operator's replies — `scotland-routing-v12`, `shpock-scam-uk-v12`,
+`nation-consumer-routing-v6`, `hubs-v12`, `legacy-hubs-v7` and
+`consolidation-metadata-v2`; `FINAL-9-guides-v4` remains approved. Applying all seven
 takes the corpus to **zero deterministic BLOCKs at BOTH scopes** — 185 public guides and
 186 source records — from 176 today. Nothing has been written to
 `content/posts.json` or `content/category-hubs.json`.
@@ -51,12 +51,12 @@ in git history and will not appear on another machine.
 
 | Packet | Reader content | What changed since the reply |
 |---|---|---|
-| `scotland-routing-v11` | unchanged (147 fields, 202 source rows) | receipt key list made explicit incl. lookup-only `slug`; gate scopes separated |
-| `shpock-scam-uk-v11` | unchanged | cross-method digest "match" retracted; stable vs applied receipts split; stale HTTP block removed |
-| `nation-consumer-routing-v5` | **3 passages changed** | Timeshare FAQ 3 reworded; 2 Victim Support evidence rows added; Pandora/Ray-Ban referral sentences rewritten so the numbers stay and the citation is fixed |
-| `consolidation-metadata-v1` | one metadata field | `consolidated_into` on the Hermes record — consolidation now defines the public corpus |
-| `hubs-v11` | unchanged (10 records) | all ten integration amendments now landed in code, with per-item evidence |
-| `legacy-hubs-v6` | unchanged (3 patches) | volatile HTTP aggregate and the unprovable "unchanged from v4" claim removed |
+| `scotland-routing-v12` | unchanged (147 fields, 202 source rows) | receipt key list made explicit incl. lookup-only `slug`; gate scopes separated |
+| `shpock-scam-uk-v12` | unchanged | cross-method digest "match" retracted; stable vs applied receipts split; stale HTTP block removed |
+| `nation-consumer-routing-v6` | **3 passages changed** | Timeshare FAQ 3 reworded; 2 Victim Support evidence rows added; Pandora/Ray-Ban referral sentences rewritten so the numbers stay and the citation is fixed |
+| `consolidation-metadata-v2` | one metadata field | `consolidated_into` on the Hermes record — consolidation now defines the public corpus |
+| `hubs-v12` | unchanged (10 records) | all ten integration amendments now landed in code, with per-item evidence |
+| `legacy-hubs-v7` | **1 passage changed** | duplicate Evri/Hermes courier anchor merged into `Evri (formerly Hermes)` |
 
 `FINAL-9-guides-v4` (nine guides) is **APPROVED** and ready, but cannot ship alone — it
 overlaps the Scotland patch map.
@@ -95,10 +95,10 @@ Stages, in order, with the corpus digest each expects and produces:
 | Stage | Packets | Expects | Produces |
 |---|---|---|---|
 | `final9` | `FINAL-9-guides-v4` | `496b0d63…` | `4b3090bd…` |
-| `scotland-shpock` | `scotland-routing-v11` + `shpock-scam-uk-v11` | `4b3090bd…` | `f76b69aa…` |
-| `nation` | `nation-consumer-routing-v5` | `f76b69aa…` | `e9a7c221…` |
-| `hubs` | `hubs-v11` + `legacy-hubs-v6` | `e9a7c221…` | `e9a7c221…` (hubs only) |
-| `consolidation` | `consolidation-metadata-v1` | `e9a7c221…` | `26d57904…` |
+| `scotland-shpock` | `scotland-routing-v12` + `shpock-scam-uk-v12` | `4b3090bd…` | `f76b69aa…` |
+| `nation` | `nation-consumer-routing-v6` | `f76b69aa…` | `e9a7c221…` |
+| `hubs` | `hubs-v12` + `legacy-hubs-v7` | `e9a7c221…` | `e9a7c221…` (hubs only) |
+| `consolidation` | `consolidation-metadata-v2` | `e9a7c221…` | `26d57904…` |
 
 The applier asserts every `old` value before writing, checks each `sections`/`faq` index
 against its recorded heading, re-asserts overlap source rows after all full-record writes
@@ -118,8 +118,11 @@ thirteen records land:
 because a slug in both places is an error even when the targets agree:
 
 - delete the `hermes-parcel-scam-text-uk` entry from `corpus.ARTICLE_REDIRECTS`;
-- `corpus.legacy_static_consolidations()` then returns `{}` and its transitional bridge can
-  be deleted (`corpus_selftest.py` flips to demanding this).
+- empty `corpus.PENDING_MIGRATION` and delete it with `pending_migrations()`.
+
+All **three** parts are required: every partial combination is a validation error, including
+deleting the static entry alone, which used to republish the record with no redirect and no
+error at all.
 
 Then, from a clean checkout
 (`rm -rf /tmp/cc && mkdir /tmp/cc && git archive HEAD | tar -x -C /tmp/cc`):
@@ -131,6 +134,12 @@ python3 scripts/corpus_selftest.py          # includes a real build into a TEMP 
 python3 scripts/sync_canon_js.py --check
 node --test "netlify/functions/lib/*.test.js"
 ```
+
+`release_manifest.py --apply` now **requires** the manifest and compares the
+`{posts, hubs}` pair before *and* after every stage, verifies packet identity and a
+`code_baseline` digest over the release-critical scripts, and rejects an unknown
+`--stage`. Comparing only the posts digest let an after-nation tree report as "after
+hubs" and the consolidation stage apply with all ten hub records absent.
 
 Then **one non-concurrent build**, the render greps on `dist/` (`**`, `](`, `…`), and one
 commit carrying source, code, tests and regenerated `dist/` together.
@@ -155,8 +164,9 @@ renders is not a duplicate *page*, so it no longer BLOCKs publication.
 - 13 hubs at zero BLOCK, with one disclosed `website` legislation FLAG; all 13 sourced
 - Internal guide links: 0 unresolved. Raw `**` / external markdown links / description
   ellipses: 0 / 0 / 0
-- Clean checkout: **143 gate + 91 hub + 37 corpus + 47 node = 318 checks**, zero failures,
-  with `docs/review/` genuinely absent
+- Clean checkout: **144 gate + 97 hub + 52 corpus + 50 node = 343 checks**, zero failures,
+  with `docs/review/` genuinely absent. The fast path (`corpus_selftest.py --no-build`)
+  is 326; the build-backed corpus job adds the 17 rendering/redirect proofs.
 
 "Zero BLOCK" means the deterministic gate is satisfied. The 28 FLAGs remain open editorial
 items and **no model-based LLM judge has run on any of this release**.

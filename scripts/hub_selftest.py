@@ -240,6 +240,14 @@ def run() -> int:
               or B.police_route_html(_canon, phone=False, url=False) in _surfaces[_name])
     check("no surface relegates Scotland to a bare parenthetical",
           not any("(Police Scotland: " in b for b in _surfaces.values()))
+    # No route URL, number or geography may be typed into build.py again. Every
+    # one is now read from the canon — including the list-shaped surfaces
+    # (methodology and recovery source rows, humans.txt) that a prose component
+    # does not fit (operator review, 2026-07-30, hubs-v11-c.md §6).
+    _build_src = Path(B.__file__).read_text(encoding="utf-8")
+    for _needle in ("reportfraud.police.uk", "scotland.police.uk", "0300 123 2040",
+                    "0808 223 1133", "0808 800 9060", "0300 123 6262"):
+        check(f"build.py hand-types no {_needle!r}", _needle not in _build_src)
     check("no unsubstituted route placeholder ships",
           not any("<!--POLICE_ROUTE" in b for b in _surfaces.values()))
 
