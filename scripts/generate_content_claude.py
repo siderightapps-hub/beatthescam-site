@@ -13,9 +13,15 @@ import sys
 from dataclasses import dataclass
 from datetime import datetime, date
 from pathlib import Path
-from typing import Dict, List, Sequence
+from typing import TYPE_CHECKING, Dict, List, Sequence
 
-from anthropic import Anthropic
+# LAZY. This module holds pure, SDK-free code the offline self-tests import —
+# the prompt constants, build_prompt() and fallback_post() — and those tests run
+# in a stdlib-only CI job with no dependencies installed. A module-scope
+# `from anthropic import Anthropic` made importing any of it require the SDK,
+# which broke the offline job outright (CI, 2026-07-30).
+if TYPE_CHECKING:                       # for the type annotation only
+    from anthropic import Anthropic
 
 import canon as canon_mod
 from content_gate import run_gate, ACCURACY_BLOCK, quarantine_post, write_manifest
@@ -173,7 +179,7 @@ Rules:
 
 # ─── GENERATION ──────────────────────────────────────────────────────────────
 
-def claude_post(topic: Topic, today: str, model: str, client: Anthropic,
+def claude_post(topic: Topic, today: str, model: str, client: "Anthropic",
                 all_slugs: List[str]) -> Dict:
 
     response = client.messages.create(
@@ -367,6 +373,7 @@ def main() -> int:
         if not api_key:
             print("ERROR: ANTHROPIC_API_KEY not set", file=sys.stderr)
             return 1
+        from anthropic import Anthropic  # imported here: only this path needs the SDK
         client = Anthropic(api_key=api_key)
 
     added = 0
