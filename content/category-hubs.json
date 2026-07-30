@@ -2,11 +2,11 @@
   "sms": {
     "title": "Scam Text Messages UK: Spot, Check & Report",
     "description": "A scam text? Learn the UK smishing patterns — fake delivery, bank, HMRC and DVLA texts — how to check a suspicious message safely, and how to report it to 7726.",
-    "intro": "<p>Scam texts — known as <strong>smishing</strong> (SMS phishing) — are among the most frequently reported frauds in the UK — Ofcom's February 2026 research found 40% of UK mobile users had received at least one suspicious message in the previous three months. A message pretends to be a courier, your bank, HMRC, the DVLA or the NHS, and pushes you to tap a link, pay a small fee, or hand over a code. The golden rule never changes: <strong>never act on the link, phone number or payment details inside the message itself</strong> — open the official app or website yourself and check. This hub explains the texts doing the rounds in the UK, how to tell a fake from the real thing, and how to report one in under a minute.</p><p>Not sure about a message right now? Paste it into our free <a href='/check/'>AI scam checker</a> for an instant verdict.</p>",
+    "intro": "<p>Scam texts — known as <strong>smishing</strong> (SMS phishing) — are widely encountered in the UK. In a survey conducted for Ofcom in February 2026, 40% of UK mobile users said they had received at least one suspicious message in the previous three months. A message pretends to be a courier, your bank, HMRC, the DVLA or the NHS, and pushes you to tap a link, pay a small fee, or hand over a code. The golden rule never changes: <strong>never act on the link, phone number or payment details inside the message itself</strong> — open the official app or website yourself and check. This hub explains the texts doing the rounds in the UK, how to tell a fake from the real thing, and how to report one in under a minute.</p><p>Not sure about a message right now? Paste it into our free <a href='/check/'>AI scam checker</a> for an automated second opinion. It is not a verdict and does not replace checking through an official route yourself.</p>",
     "sections": [
       [
         "The most common UK scam texts",
-        "<p><strong>Fake delivery texts</strong> are the biggest category — a 'missed parcel', 'redelivery fee' or 'address problem' from a courier you may not even be expecting. See the guides for <a href='/guides/dpd-delivery-scam-text/'>DPD</a>, <a href='/guides/evri-delivery-scam-guide/'>Evri</a>, <a href='/guides/yodel-scam-text-messages/'>Yodel</a>, <a href='/guides/ups-delivery-scam-text-messages-uk/'>UPS</a>, <a href='/guides/royal-mail-text-scam-uk/'>Royal Mail</a> and <a href='/guides/hermes-parcel-scam-text-uk/'>Hermes</a>.</p><p><strong>Bank texts</strong> claim there's 'suspicious activity' or a 'new payee', or ask you to 'verify' your account — and a related worry is when your genuine <a href='/guides/bank-text-codes-not-arriving/'>bank verification codes stop arriving</a>. Bank-specific guides cover <a href='/guides/halifax-bank-scam-text-uk/'>Halifax</a>, <a href='/guides/lloyds-bank-scam-text/'>Lloyds</a>, <a href='/guides/natwest-fraud-text-message-scam-uk/'>NatWest</a> and <a href='/guides/barclays-bank-text-scam-uk/'>Barclays</a>.</p><p><strong>Government and council texts</strong> impersonate <a href='/guides/hmrc-tax-refund-text-scam-uk/'>HMRC</a> ('you're owed a tax refund'), the <a href='/guides/dvla-vehicle-tax-text-scam/'>DVLA</a> ('your vehicle tax failed'), the <a href='/guides/nhs-appointment-scam-text-uk/'>NHS</a> and <a href='/guides/council-tax-scam-text-uk/'>council tax</a> departments — all leaning on a believable official name plus a link or a threat.</p>"
+        "<p><strong>Fake delivery texts</strong> are a very common category — a 'missed parcel', 'redelivery fee' or 'address problem' from a courier you may not even be expecting. See the guides for <a href='/guides/dpd-delivery-scam-text/'>DPD</a>, <a href='/guides/evri-delivery-scam-guide/'>Evri (formerly Hermes)</a>, <a href='/guides/yodel-scam-text-messages/'>Yodel</a>, <a href='/guides/ups-delivery-scam-text-messages-uk/'>UPS</a> and <a href='/guides/royal-mail-text-scam-uk/'>Royal Mail</a>.</p><p><strong>Bank texts</strong> claim there's 'suspicious activity' or a 'new payee', or ask you to 'verify' your account — and a related worry is when your genuine <a href='/guides/bank-text-codes-not-arriving/'>bank verification codes stop arriving</a>. Bank-specific guides cover <a href='/guides/halifax-bank-scam-text-uk/'>Halifax</a>, <a href='/guides/lloyds-bank-scam-text/'>Lloyds</a>, <a href='/guides/natwest-fraud-text-message-scam-uk/'>NatWest</a> and <a href='/guides/barclays-bank-text-scam-uk/'>Barclays</a>.</p><p><strong>Government and council texts</strong> impersonate <a href='/guides/hmrc-tax-refund-text-scam-uk/'>HMRC</a> ('you're owed a tax refund'), the <a href='/guides/dvla-vehicle-tax-text-scam/'>DVLA</a> ('your vehicle tax failed'), the <a href='/guides/nhs-appointment-scam-text-uk/'>NHS</a> and <a href='/guides/council-tax-scam-text-uk/'>council tax</a> departments — all leaning on a believable official name plus a link or a threat.</p>"
       ],
       [
         "How to tell if a text is a scam",
@@ -14,7 +14,7 @@
       ],
       [
         "How to check a suspicious text safely",
-        "<p>Never tap the link. Verify the claim through a clean route you trust instead:</p><ul><li><strong>Go direct.</strong> Open the official app, or type the company's address into your browser yourself — never follow the link in the message.</li><li><strong>Use the number you already have.</strong> Call the number on the back of your bank card, or the contact details on the official website — not a number from the text.</li><li><strong>Check the order.</strong> For delivery texts, log into the retailer you actually bought from; if there's no matching parcel, it's a scam.</li><li><strong>Ask the checker.</strong> Paste the message into our free <a href='/check/'>AI scam checker</a> for an instant second opinion.</li></ul>"
+        "<p>Never tap the link. Verify the claim through a clean route you trust instead:</p><ul><li><strong>Go direct.</strong> Open the official app, or type the company's address into your browser yourself — never follow the link in the message.</li><li><strong>Use the number you already have.</strong> Call the number on the back of your bank card, or the contact details on the official website — not a number from the text.</li><li><strong>Check the order.</strong> For delivery texts, log into the retailer you actually bought from. No matching parcel is a strong warning rather than proof on its own — sender or courier information can be delayed or wrong — so check with the retailer and, if a delivery does exist, the courier's own official service.</li><li><strong>Ask the checker.</strong> Paste the message into our free <a href='/check/'>AI scam checker</a> for an instant second opinion.</li></ul>"
       ],
       [
         "What to do if you've already tapped a link or paid",
@@ -36,22 +36,69 @@
       ],
       [
         "I clicked a link in a scam text — what should I do?",
-        "If you only opened the link but entered nothing, close it and delete the message. If you entered any card, bank or login details, contact your bank immediately on the number on your card, change the affected passwords, and turn on two-step verification. Watch for a follow-up call claiming to be your bank — that's part of the scam. Report it to Report Fraud at reportfraud.police.uk or 0300 123 2040 in England, Wales or Northern Ireland, or to Police Scotland on 101 in Scotland."
+        "If you only opened the page, entered no information, downloaded, opened or installed nothing and granted no access, close it, report and delete the message, and remain alert for a follow-up. If you opened a file or attachment, installed software or a profile, granted a permission, allowed remote access, saw a security warning, or the device has since behaved oddly, treat it as a possible device compromise: disconnect it where appropriate, install pending updates, run the security checks your device or security software provides, remove anything you did not deliberately install, and change your passwords from a device you trust. If you allowed remote access, end the session first, remove or disable the remote-access software, secure your accounts from another trusted device, check your email forwarding and recovery settings, and get trusted technical help if access may persist. If you entered any card, bank or login details, contact your bank immediately on the number on your card, change the affected passwords, and turn on two-step verification. Watch for a follow-up call claiming to be your bank — that's part of the scam. Report it to Report Fraud at reportfraud.police.uk or 0300 123 2040 in England, Wales or Northern Ireland, or to Police Scotland on 101 in Scotland."
       ],
       [
         "How do I know if a text is really from my bank?",
         "A genuine bank text may use a named sender ID, but sender names and message threads can be spoofed, so neither is proof. Do not use an unexpected link to log in or verify an account. Open your banking app yourself or call the number on the back of your card to check."
       ]
-    ]
+    ],
+    "sources_checked": [
+      [
+        "Ofcom — Combatting mobile messaging scams: statement (February 2026 survey — 40% of UK mobile users received a suspicious message in the previous three months)",
+        "https://www.ofcom.org.uk/siteassets/resources/documents/consultations/category-3-4-weeks/consultation-combatting-mobile-messaging-scams/main-document/statement-combatting-mobile-messaging-scams.pdf"
+      ],
+      [
+        "Ofcom — What to do about a scam call, text or message (forward texts to 7726 free of charge)",
+        "https://www.ofcom.org.uk/phones-and-broadband/scam-calls-and-messages/what-to-do-about-a-scam-call-text-or-message"
+      ],
+      [
+        "Ofcom — New rules to thwart text message scammers (spoofed alphanumeric Sender IDs)",
+        "https://www.ofcom.org.uk/phones-and-broadband/scam-calls-and-messages/new-rules-to-thwart-text-message-scammers-and-protect-consumers-and-businesses"
+      ],
+      [
+        "Ofcom — Types of scam calls, texts and messages",
+        "https://www.ofcom.org.uk/phones-and-broadband/scam-calls-and-messages/types-of-scam-calls-texts-and-messages"
+      ],
+      [
+        "NCSC — Business communications: SMS and telephone best practice (\"the technology and systems that underpin mass communications cannot reliably tell the recipient who originated a phone call or SMS message\")",
+        "https://www.ncsc.gov.uk/guidance/business-communications-sms-and-telephone-best-practice"
+      ],
+      [
+        "HMRC — Check if a text message you've received from HMRC is genuine (some genuine texts include GOV.UK or webchat links; HMRC will not ask for personal or financial information by text)",
+        "https://www.gov.uk/guidance/check-if-a-text-message-youve-received-from-hmrc-is-genuine"
+      ],
+      [
+        "NCSC — Report a scam website",
+        "https://www.ncsc.gov.uk/collection/phishing-scams/report-scam-website"
+      ],
+      [
+        "Report Fraud — reporting a fraud, and who the service covers",
+        "https://www.reportfraud.police.uk/reporting-a-fraud/"
+      ],
+      [
+        "Police Scotland — contact us: non-emergencies on 101",
+        "https://www.scotland.police.uk/contact-us/non-emergencies/"
+      ],
+      [
+        "NCSC — Phishing: respond and recover",
+        "https://www.ncsc.gov.uk/section/respond-recover/phishing"
+      ],
+      [
+        "Evri — About us (Hermes UK rebranded as Evri in March 2022)",
+        "https://www.evri.com/about-us/"
+      ]
+    ],
+    "updated": "2026-07-30"
   },
   "payment": {
     "title": "Payment Scams UK: Bank Transfer & APP Fraud",
     "description": "Sent money to a scammer, or unsure about a payment request? Spot UK bank-transfer, APP, advance-fee and overpayment scams — how to check, stop and report them.",
-    "intro": "<p>Payment scams are the costliest fraud in the UK. Most are <strong>authorised push payment (APP) fraud</strong> — the scammer doesn't hack your account, they trick <em>you</em> into authorising the payment or sending a bank transfer yourself, often by posing as your bank, a seller, a builder, or even the police. The golden rule: <strong>never move money because a call, text or email told you to</strong> — verify any payment request through a separate, trusted channel first.</p><p>Got a payment request you're unsure about? Paste it into our free <a href='/check/'>AI scam checker</a> for an instant verdict.</p>",
+    "intro": "<p><strong>Authorised push payment (APP) fraud</strong> is a major form of UK payment scam — the scammer doesn't hack your account, they trick <em>you</em> into authorising the payment or sending a bank transfer yourself, often by posing as your bank, a seller, a builder, or even the police. The golden rule: <strong>never move money because a call, text or email told you to</strong> — verify any payment request through a separate, trusted channel first.</p><p>Got a payment request you're unsure about? Paste it into our free <a href='/check/'>AI scam checker</a> for an automated second opinion. It is not a verdict and does not replace checking through an official route yourself.</p>",
     "sections": [
       [
         "The most common UK payment scams",
-        "<p><strong>Bank transfer and 'safe account' scams</strong> are the big one — our <a href='/guides/bank-transfer-scam-uk/'>bank transfer and APP fraud guide</a> explains the pattern and recovery options. Other frequent tricks include <a href='/guides/advance-fee-scam-uk/'>advance-fee scams</a>, <a href='/guides/overpayment-scam-uk/'>overpayment scams</a>, <a href='/guides/invoice-fraud-uk-businesses/'>invoice fraud</a>, <a href='/guides/paypal-friends-family-scam-uk/'>PayPal 'friends and family' scams</a>, <a href='/guides/qr-code-scam-uk/'>QR-code (quishing) scams</a> and <a href='/guides/chargeback-scam-uk/'>chargeback fraud</a>.</p><p><strong>Fake banking-app messages</strong> impersonate the apps people trust — <a href='/guides/monzo-scam-transfer-uk/'>Monzo</a>, <a href='/guides/revolut-scam-uk/'>Revolut</a>, <a href='/guides/starling-bank-scam-uk/'>Starling</a>, <a href='/guides/wise-transfer-scam-uk/'>Wise</a> and <a href='/guides/apple-pay-scam-uk/'>Apple Pay</a> — to push you into sending money or sharing codes.</p>"
+        "<p><strong>Bank-transfer scams</strong> include 'safe account' fraud, in which a caller claims money must be moved to protect it — our <a href='/guides/bank-transfer-scam-uk/'>bank transfer and APP fraud guide</a> explains the pattern and recovery options. Other frequent tricks include <a href='/guides/advance-fee-scam-uk/'>advance-fee scams</a>, <a href='/guides/overpayment-scam-uk/'>overpayment scams</a>, <a href='/guides/invoice-fraud-uk-businesses/'>invoice fraud</a>, <a href='/guides/paypal-friends-family-scam-uk/'>PayPal 'friends and family' scams</a>, <a href='/guides/qr-code-scam-uk/'>QR-code (quishing) scams</a> and <a href='/guides/chargeback-scam-uk/'>chargeback fraud</a>.</p><p><strong>Fake banking-app messages</strong> impersonate the apps people trust — <a href='/guides/monzo-scam-transfer-uk/'>Monzo</a>, <a href='/guides/revolut-scam-uk/'>Revolut</a>, <a href='/guides/starling-bank-scam-uk/'>Starling</a>, <a href='/guides/wise-transfer-scam-uk/'>Wise</a> and <a href='/guides/apple-pay-scam-uk/'>Apple Pay</a> — to push you into sending money or sharing codes.</p>"
       ],
       [
         "How APP (authorised push payment) fraud works",
@@ -67,13 +114,13 @@
       ],
       [
         "How to report payment fraud in the UK",
-        "<p>Report to <strong>your bank first</strong> — they hold the reimbursement process and can try to stop the payment. Dial <strong>159</strong> yourself to reach your bank's fraud team, or use the number on your card. Your provider sets the price of a 159 call. Then report to <strong>Report Fraud</strong> at <a href='https://www.reportfraud.police.uk' rel='nofollow'>reportfraud.police.uk</a> or 0300 123 2040 (in Scotland, Police Scotland on 101). Forward any scam texts to 7726, and report phishing emails to report@phishing.gov.uk.</p>"
+        "<p>Report to <strong>your bank first</strong> — they hold the reimbursement process and can try to stop the payment. If your bank supports it, call <strong>159</strong> to be connected safely to your bank, or use the number on your card. Your provider sets the price of a 159 call. Then report to <strong>Report Fraud</strong> at <a href='https://www.reportfraud.police.uk' rel='nofollow'>reportfraud.police.uk</a> or 0300 123 2040 (in Scotland, Police Scotland on 101). Forward any scam texts to 7726, and report phishing emails to report@phishing.gov.uk.</p>"
       ]
     ],
     "faq": [
       [
         "What is APP fraud or a push payment scam?",
-        "Authorised push payment (APP) fraud is when a scammer tricks you into sending money yourself, by bank transfer, rather than stealing it. They impersonate your bank, a seller, a tradesperson or the police and invent an urgent reason to pay — often telling you to move money to a 'safe account'. Because you authorised the payment, it can be harder to reverse, which is why it's the costliest scam type in the UK."
+        "Authorised push payment (APP) fraud is when a scammer tricks you into sending money yourself, by bank transfer, rather than stealing it. They impersonate your bank, a seller, a tradesperson or the police and invent an urgent reason to pay — often telling you to move money to a 'safe account'. Because you authorised the payment, it can be harder to reverse. UK Finance recorded £576.4 million lost across 248,070 APP cases reported by its members in 2025 — a major high-loss category within payment fraud, measured on that dataset rather than across all UK crime."
       ],
       [
         "Can I get my money back if I was scammed into a bank transfer?",
@@ -81,22 +128,65 @@
       ],
       [
         "What is the 159 number?",
-        "159 is a secure service — backed by Stop Scams UK and the major banks — that connects you straight to your bank's fraud team, much like 101 for the police. If you get a call, text or email about a payment and you're unsure, hang up and dial 159 to check whether it's genuine before moving any money. Your phone provider sets the price of a 159 call, so it is not necessarily free and may not be included in your allowance."
+        "159 is a service backed by Stop Scams UK and participating banks and phone providers, much like 101 for the police. If you get a call, text or email about a payment and you're unsure, hang up and, if your bank supports it, call 159 to be connected safely to your bank before moving any money. If it does not connect, use the number on the back of your card or another official bank route you find independently. Your phone provider sets the price of a 159 call, so it is not necessarily free and may not be included in your allowance."
       ],
       [
         "Someone overpaid me and wants a refund — is it a scam?",
-        "Very likely. The overpayment scam works by 'paying' you too much (often with a fake transfer, cheque or reversed payment) and asking you to refund the difference before the original payment is shown to have failed. Never refund an overpayment until the money has genuinely and irreversibly cleared in your own account, and be wary of any buyer who overpays 'by mistake'."
+        "Treat it as likely fraud until your bank, payment provider or marketplace verifies the original payment and tells you how any reversal should be handled. The overpayment scam works by 'paying' you too much (often with a fake transfer, cheque or reversed payment) and asking you to refund the difference before the original payment is shown to have failed. Do not send a separate refund, and never return money to different details from the ones it arrived from. Check the transaction only in your provider's official app or service, and ask your bank, payment provider or the marketplace to verify it and, if it is not good, reverse the original payment through its own route. Do not release goods while the provider shows the payment as pending or disputed, and be wary of any buyer who overpays 'by mistake'."
       ]
-    ]
+    ],
+    "sources_checked": [
+      [
+        "Payment Systems Regulator — APP fraud reimbursement protections (7 October 2024, £85,000 cap, up-to-£100 excess, 13-month limit, five business days, 35-business-day stop clock)",
+        "https://www.psr.org.uk/information-for-consumers/app-fraud-reimbursement-protections/"
+      ],
+      [
+        "Pay.UK — Confirmation of Payee (account name checking before a payment)",
+        "https://www.wearepay.uk/what-we-do/overlay-services/confirmation-of-payee/"
+      ],
+      [
+        "Stop Scams UK — 159, the service and its participating firms",
+        "https://stopscamsuk.org.uk/campaign/get-help-now/"
+      ],
+      [
+        "Ofcom — How much does a phone call really cost (your provider sets the price of a 159 call)",
+        "https://www.ofcom.org.uk/phones-and-broadband/phone-numbers/how-much-does-a-phone-call-really-cost"
+      ],
+      [
+        "Ofcom — What to do about a scam call, text or message (forward texts to 7726 free of charge)",
+        "https://www.ofcom.org.uk/phones-and-broadband/scam-calls-and-messages/what-to-do-about-a-scam-call-text-or-message"
+      ],
+      [
+        "NCSC — Report a scam email (report@phishing.gov.uk)",
+        "https://www.ncsc.gov.uk/collection/phishing-scams/report-scam-email"
+      ],
+      [
+        "Report Fraud — reporting a fraud, and who the service covers",
+        "https://www.reportfraud.police.uk/reporting-a-fraud/"
+      ],
+      [
+        "Police Scotland — contact us: non-emergencies on 101",
+        "https://www.scotland.police.uk/contact-us/non-emergencies/"
+      ],
+      [
+        "UK Finance — Annual Fraud Report 2026 (APP losses and case volumes for 2025)",
+        "https://www.ukfinance.org.uk/news-and-insight/press-release/fraud-report-2026-press-release"
+      ],
+      [
+        "PayPal UK — Common scams and how to spot them (an overpayment-and-refund request is likely fraudulent)",
+        "https://www.paypal.com/uk/cshelp/article/what-are-common-scams-and-how-do-i-spot-them-help201"
+      ]
+    ],
+    "updated": "2026-07-30"
   },
   "government": {
     "title": "Government Scams UK: HMRC, DVLA, DWP & More",
     "description": "Scammers impersonate HMRC, the DVLA, DWP, the Home Office and TV Licensing. Spot fake UK government texts, emails and letters, and check and report them safely.",
-    "intro": "<p>Government impersonation scams use the names you can't ignore — <strong>HMRC, the DVLA, the DWP, the Home Office and TV Licensing</strong> — to make a fake message feel official. The lure is either a <strong>refund you're owed</strong> or a <strong>threat</strong>: a fine, arrest, a suspended benefit, or a visa or licence problem. Real government bodies contact you through official channels and your own accounts on gov.uk — so the safest move is always to <strong>check on gov.uk yourself</strong>, never through the link or number in the message.</p><p>Not sure about a 'government' message? Paste it into our free <a href='/check/'>AI scam checker</a> for an instant verdict.</p>",
+    "intro": "<p>Government impersonation scams use the names you can't ignore — <strong>HMRC, the DVLA, the DWP, the Home Office and TV Licensing</strong> — to make a fake message feel official. The lure is either a <strong>refund you're owed</strong> or a <strong>threat</strong>: a fine, arrest, a suspended benefit, or a visa or licence problem. Government departments do make genuine contact by text, email, phone and post, so the channel settles nothing — the safest move is always to <strong>verify an unexpected message independently</strong> through GOV.UK, your own account there, or a contact route you obtained from GOV.UK, never through the link or number in the message.</p><p>Not sure about a 'government' message? Paste it into our free <a href='/check/'>AI scam checker</a> for an automated second opinion. It is not a verdict and does not replace checking through an official route yourself.</p>",
     "sections": [
       [
         "The most common UK government scams",
-        "<p><strong>HMRC</strong> is the most impersonated — fake <a href='/guides/hmrc-tax-refund-text-scam-uk/'>tax-refund texts</a> and emails, plus threats of unpaid-tax 'arrest'. <strong>The DVLA</strong> is impersonated in fake <a href='/guides/dvla-email-scam-uk/'>car-tax renewal and refund emails</a>. Benefit and immigration scams impersonate the <strong>DWP</strong> (<a href='/guides/universal-credit-scam-uk/'>Universal Credit</a>) and the <strong>Home Office</strong> (<a href='/guides/ukvi-visa-scam-uk/'>UKVI visa</a> messages).</p><p>Others include fake <a href='/guides/passport-renewal-scam-uk/'>passport-renewal sites</a> (HMPO), <a href='/guides/tv-licence-scam-letter-uk/'>TV Licence demands</a>, <a href='/guides/court-summons-scam-email-uk/'>court-summons emails</a> (HMCTS), and <a href='/guides/council-tax-scam-text-uk/'>council-tax texts</a>.</p>"
+        "<p><strong>HMRC</strong> is frequently impersonated — fake <a href='/guides/hmrc-tax-refund-text-scam-uk/'>tax-refund texts</a> and emails, plus threats of unpaid-tax 'arrest'. <strong>The DVLA</strong> is impersonated in fake <a href='/guides/dvla-email-scam-uk/'>car-tax renewal and refund emails</a>. Benefit and immigration scams impersonate the <strong>DWP</strong> (<a href='/guides/universal-credit-scam-uk/'>Universal Credit</a>) and the <strong>Home Office</strong> (<a href='/guides/ukvi-visa-scam-uk/'>UKVI visa</a> messages).</p><p>Others include fake <a href='/guides/passport-renewal-scam-uk/'>passport-renewal sites</a> (HMPO), <a href='/guides/tv-licence-scam-letter-uk/'>TV Licence demands</a>, <a href='/guides/court-summons-scam-email-uk/'>court-summons emails</a> (HMCTS), and <a href='/guides/council-tax-scam-text-uk/'>council-tax texts</a>.</p>"
       ],
       [
         "How government impersonation scams work",
@@ -126,12 +216,1059 @@
       ],
       [
         "I clicked a fake HMRC or DVLA link — what should I do?",
-        "If you only opened it, close and delete the message. If you entered card or bank details, contact your bank immediately to block the card and report fraud, and change any passwords you entered. If you shared personal data like your National Insurance number, watch for identity fraud. Report it to Report Fraud at reportfraud.police.uk or 0300 123 2040 in England, Wales or Northern Ireland, or to Police Scotland on 101 in Scotland."
+        "If you only opened the page, entered no information, downloaded, opened or installed nothing and granted no access, close it, report and delete the message, and remain alert for a follow-up. If you opened a file or attachment, installed software or a profile, granted a permission, allowed remote access, saw a security warning, or the device has since behaved oddly, treat it as a possible device compromise: disconnect it where appropriate, install pending updates, run the security checks your device or security software provides, remove anything you did not deliberately install, and change your passwords from a device you trust. If you allowed remote access, end the session first, remove or disable the remote-access software, secure your accounts from another trusted device, check your email forwarding and recovery settings, and get trusted technical help if access may persist. If you entered card or bank details, contact your bank immediately to block the card and report fraud, and change any passwords you entered. If you shared personal data like your National Insurance number, watch for identity fraud. Report it to Report Fraud at reportfraud.police.uk or 0300 123 2040 in England, Wales or Northern Ireland, or to Police Scotland on 101 in Scotland."
       ],
       [
         "Where do I report government scam texts and emails?",
         "Forward scam texts free to 7726. Report scam emails to report@phishing.gov.uk (NCSC), and HMRC-branded ones to phishing@hmrc.gov.uk. If money or details were lost, report to Report Fraud at reportfraud.police.uk or 0300 123 2040 (Police Scotland on 101 in Scotland)."
       ]
-    ]
+    ],
+    "sources_checked": [
+      [
+        "HMRC — Check if a text message you've received from HMRC is genuine",
+        "https://www.gov.uk/guidance/check-if-a-text-message-youve-received-from-hmrc-is-genuine"
+      ],
+      [
+        "HMRC — Check if an email you've received from HMRC is genuine",
+        "https://www.gov.uk/guidance/check-if-an-email-youve-received-from-hmrc-is-genuine"
+      ],
+      [
+        "HMRC — Check a list of genuine HMRC contacts",
+        "https://www.gov.uk/government/collections/check-a-list-of-genuine-hmrc-contacts"
+      ],
+      [
+        "HMRC — Report suspicious HMRC emails, texts and phone calls (phishing@hmrc.gov.uk)",
+        "https://www.gov.uk/find-hmrc-contacts/report-suspicious-hmrc-emails-texts-social-media-accounts-and-phone-calls"
+      ],
+      [
+        "GOV.UK — Tax your vehicle (the official DVLA service to check against)",
+        "https://www.gov.uk/vehicle-tax"
+      ],
+      [
+        "Ofcom — What to do about a scam call, text or message (forward texts to 7726 free of charge)",
+        "https://www.ofcom.org.uk/phones-and-broadband/scam-calls-and-messages/what-to-do-about-a-scam-call-text-or-message"
+      ],
+      [
+        "NCSC — Report a scam email (report@phishing.gov.uk)",
+        "https://www.ncsc.gov.uk/collection/phishing-scams/report-scam-email"
+      ],
+      [
+        "NCSC — Report a scam website",
+        "https://www.ncsc.gov.uk/collection/phishing-scams/report-scam-website"
+      ],
+      [
+        "Report Fraud — reporting a fraud, and who the service covers",
+        "https://www.reportfraud.police.uk/reporting-a-fraud/"
+      ],
+      [
+        "Police Scotland — contact us: non-emergencies on 101",
+        "https://www.scotland.police.uk/contact-us/non-emergencies/"
+      ],
+      [
+        "NCSC — Phishing: respond and recover",
+        "https://www.ncsc.gov.uk/section/respond-recover/phishing"
+      ],
+      [
+        "HMRC — Scams warning as Self Assessment customers targeted (20 August 2025; scammers often impersonate HMRC, 170,000+ referrals in the preceding year)",
+        "https://www.gov.uk/government/news/scams-warning-as-self-assessment-customers-targeted"
+      ]
+    ],
+    "updated": "2026-07-30"
+  },
+  "email": {
+    "title": "Phishing Emails UK: Spot a Fake, Check It, Report It",
+    "description": "Fake bank, HMRC, PayPal, Netflix and Microsoft emails all run the same play. How to check a suspicious email safely and report phishing in the UK.",
+    "intro": "<p>Email is where scammers do their most patient work. An <strong>email can carry a pixel-perfect copy of a company's branding</strong>, a hidden link, an attachment and a reply address that looks right at a glance. Your inbox is also the master key to everything else you own — password resets for your bank, your shopping accounts and your social media all land there — so an email scam that succeeds rarely stops at one payment.</p><p>Many phishing emails are one of two things: a <strong>manufactured problem</strong> ('your payment failed', 'your account is suspended') or a <strong>manufactured windfall</strong> ('you're owed a refund', 'exclusive presale tickets'). Both exist to make you act inside the message instead of checking the account itself. Not sure about one? Paste it into our free <a href='/check/'>AI scam checker</a> for an automated second opinion — it is a fallible assessment, not a verdict, so check the claim independently as well by opening the official app or typing the company's address yourself.</p>",
+    "sections": [
+      [
+        "The most common UK phishing emails",
+        "<p><strong>Bank emails</strong> are the classic: an 'unusual activity' or 'account locked' warning with a button leading to a convincing sign-in page — see <a href='/guides/hsbc-phishing-email-scam-uk/'>fake HSBC 'verify your details' emails</a>, <a href='/guides/santander-email-scam-uk/'>Santander 'restore access' emails</a> and <a href='/guides/natwest-phishing-email-uk/'>NatWest 'unusual activity' emails</a>.</p><p><strong>Billing and subscription emails</strong> run the same play using services you really do pay for — a failed <a href='/guides/netflix-billing-email-scam-uk/'>Netflix payment</a>, a <a href='/guides/paypal-account-limited-email-scam-uk/'>limited PayPal account</a>, an <a href='/guides/amazon-order-scam-email-checklist/'>Amazon order or refund problem</a>, or a <a href='/guides/microsoft-account-suspended-email-scam-uk/'>Microsoft account facing suspension</a>.</p><p><strong>Official-looking emails</strong> borrow a public body's authority: a <a href='/guides/hmrc-tax-rebate-email-scam/'>tax rebate you can supposedly claim through a link</a>, a <a href='/guides/dvla-email-scam-uk/'>DVLA vehicle tax or fine notice</a>, a <a href='/guides/tv-licence-email-scam-uk/'>TV Licence payment failure</a>, or a <a href='/guides/companies-house-email-scam-uk/'>Companies House filing demand</a> aimed at company directors.</p><p>Three more break the mould entirely: <a href='/guides/ceo-fraud-email-scam-uk/'>CEO fraud</a>, where the sender appears to be your own boss; <a href='/guides/sextortion-email-scam-uk/'>sextortion emails</a> demanding cryptocurrency; and seasonal lures such as <a href='/guides/festival-lineup-email-scam-uk/'>fake festival presale emails</a> timed to a lineup announcement.</p>"
+      ],
+      [
+        "Which email have you actually got?",
+        "<p>The right response depends on what the message wants you to do. Find your situation below.</p><ul><li><strong>A payment or account problem at a company you really use.</strong> Your instinct is to fix it immediately, and that instinct is the product being sold. Don't use the email — open the app or type the address yourself and see whether the same message is waiting in your account, as our <a href='/guides/netflix-billing-email-scam-uk/'>Netflix billing</a> and <a href='/guides/paypal-account-limited-email-scam-uk/'>PayPal 'account limited'</a> guides show.</li><li><strong>A problem at a company you have no account with.</strong> Do not act through the message; report and delete it, while remaining alert to follow-up targeting.</li><li><strong>A request to move money, change an invoice's bank details or buy gift cards, apparently from a colleague or supplier.</strong> That is business email compromise — read the <a href='/guides/ceo-fraud-email-scam-uk/'>CEO fraud guide</a> before you touch the payment.</li><li><strong>A threat to publish webcam footage unless you pay in cryptocurrency.</strong> These go out in bulk to addresses harvested from old breaches, and such a demand is usually part of a bulk bluff; the <a href='/guides/sextortion-email-scam-uk/'>sextortion email guide</a> explains how to respond without paying or replying. If real intimate images of you do exist, treat it as a different problem and use the response set out further down this page.</li><li><strong>An offer you never asked for.</strong> Treat it as a likely phishing attempt; it may seek details, payment or malware installation — see the <a href='/guides/hmrc-tax-rebate-email-scam/'>HMRC rebate email</a> and <a href='/guides/festival-lineup-email-scam-uk/'>festival presale</a> patterns.</li><li><strong>You downloaded a file, opened an attachment, installed an app, granted a permission, or your device has since behaved oddly.</strong> That is a possible device compromise rather than a simple phishing email, and it needs its own steps — see the device branch below.</li><li><strong>Your own account sending mail you didn't write, or a login that no longer works.</strong> That is a compromise rather than phishing: work through <a href='/guides/email-account-takeover-scam-uk/'>how to recover a hijacked email account</a> straight away.</li></ul>"
+      ],
+      [
+        "How to check a suspicious email safely",
+        "<ul><li><strong>Never use the link, button or phone number in the email.</strong> Open the official app, or type the company's address into a new tab yourself, and look for the same problem inside the account.</li><li><strong>Treat the sender address as a clue, not an answer.</strong> Display names are trivially faked and reply addresses can be spoofed. A lookalike domain — micros0ft.com for microsoft.com — is a strong warning sign, but a convincing address is not evidence a message is genuine.</li><li><strong>Judge the request, not the channel.</strong> Banks, HMRC, TV Licensing and retailers all run genuine email campaigns, and some include links. No genuine bank employee will ask you to disclose or read out a full PIN, full password or one-time banking or security code. Enter a code only in the official app or site, for an action you initiated, understand and can match to the code message; never do it at an unexpected caller's direction — a criminal can talk you through a genuine app while dictating the action you are approving. For another support service, verify the request independently and follow the warning in the code message. Do not enter credentials into a page reached from an unexpected message.</li><li><strong>Don't open unexpected attachments,</strong> and distrust any deadline measured in hours — it exists to stop you checking.</li></ul>"
+      ],
+      [
+        "The expensive minority: invoice and CEO fraud",
+        "<p>Email is a rare starting point for authorised push payment fraud but a disproportionately costly one. UK Finance's Annual Fraud Report 2026 attributes around 1% of APP fraud cases to email and about 7% of the money lost — figures, periods and sources are in our <a href='/research/uk-scam-statistics/'>UK scam statistics dataset</a>. The emails that get through tend to be the ones aimed at businesses and at people in the middle of a large payment.</p><p>That is the shape of <a href='/guides/ceo-fraud-email-scam-uk/'>CEO fraud and its invoice-fraud cousin</a>: no malware and no fake login page, just a confidential, urgent request to pay a real-looking invoice into a new account. A genuine-looking internal address is not evidence the request is real — verify with the named person through a channel you already had, never the contact details in the email. A <a href='/guides/companies-house-email-scam-uk/'>Companies House email demanding payment or your company authentication code</a> deserves the same treatment: Companies House says it will not ask for a company authentication code by telephone or email, so start fresh at GOV.UK.</p>"
+      ],
+      [
+        "If you clicked, paid or replied",
+        "<ul><li><strong>Entered card or bank details?</strong> Contact your bank using the number on your card or statement or its official app. If your bank and phone provider participate, you can also dial 159; if it does not connect, use the number on your card. Your provider sets the price of the call. Ask for the card to be blocked.</li><li><strong>Disclosed a password, or typed one into a page you reached from the message?</strong> Change it through the service's official app or an address you type yourself, then change it anywhere else you reused it, and turn on two-step verification or a passkey. Then check for forwarding rules, filters and recovery addresses you did not set — attackers add them to keep reading your mail after the password changes, which is why the <a href='/guides/email-account-takeover-scam-uk/'>account takeover checklist</a> puts that step first.</li><li><strong>Downloaded a file, opened an attachment, installed an app or granted a permission?</strong> Opening a link is not always the end of it. If you downloaded or ran anything, allowed a browser or device permission, saw a security warning, or your device has since behaved unusually — unfamiliar apps or profiles, settings you did not change, sudden battery or data use — install the pending operating-system and app updates, run the security checks your device or security software provides, remove anything you did not deliberately install, revoke permissions you did not intend to grant, and change your passwords from a device you trust. If the odd behaviour continues, get help from a trusted support route such as the device manufacturer's own support channel.</li><li><strong>Sent money by bank transfer?</strong> Tell your bank immediately. Eligible domestic consumer payments by Faster Payments or CHAPS made on or after 7 October 2024 may fall within the mandatory APP reimbursement rules, subject to exclusions, an £85,000 cap, a 13-month outer reporting limit and a possible excess of up to £100 that cannot be applied to a consumer the firm assesses as vulnerable. Reimbursement is not guaranteed, and reporting quickly matters.</li><li><strong>Shared personal details?</strong> Watch for identity fraud, check your credit reports, and consider a Cifas Protective Registration at cifas.org.uk.</li><li><strong>Being threatened with real intimate images?</strong> Do not pay and do not reply. Keep the evidence — the message, the account name and any payment demand — and report an immediate threat to the police. Adults in the UK can get support from the Revenge Porn Helpline. StopNCII may help if you are currently 18 or over, were 18 or over when the image or video was created, are the person depicted, and still have the file; it creates a hash on your own device for use by participating platforms and does not upload the image. The <a href='/guides/sextortion-email-scam-uk/'>sextortion email guide</a> sets out the steps in order.</li><li>Keep the email as evidence, then work through the remaining payment, account and identity steps in our <a href='/recovery/'>scam recovery checklist</a>.</li></ul>"
+      ],
+      [
+        "How to report a scam email in the UK",
+        "<p>Forward suspicious emails to the National Cyber Security Centre at <strong>report@phishing.gov.uk</strong>. HMRC-branded phishing goes to <strong>phishing@hmrc.gov.uk</strong> and Companies House-branded phishing to <strong>phishing@companieshouse.gov.uk</strong>. Most large brands also run their own abuse mailbox or an in-product 'report phishing' option; take the current address from the security or help pages of their official website rather than from the email in front of you. If you have lost money or shared details, report it to <strong>Report Fraud</strong> at <a href='https://www.reportfraud.police.uk' rel='nofollow'>reportfraud.police.uk</a> or 0300 123 2040 in England, Wales or Northern Ireland, or to Police Scotland on 101 in Scotland. A suspicious website or link can be reported to the NCSC through its own suspicious-website reporting form, and a suspicious SMS text can be forwarded free to 7726.</p>"
+      ]
+    ],
+    "faq": [
+      [
+        "How can I tell a phishing email from a real one?",
+        "Judge what the message asks you to do, not how it looks. Branding is easy to copy and genuine organisations do send emails containing links. No genuine bank employee will ask you to disclose or read out a full PIN, full password or one-time banking or security code. Enter a code only in the official app or site, for an action you initiated, understand and can match to the code message; never do it at an unexpected caller's direction — a criminal can talk you through a genuine app while dictating the action you are approving. For another support service, verify the request independently and follow the warning in the code message. Do not enter credentials into a page reached from an unexpected message."
+      ],
+      [
+        "Does the sender's email address show whether a message is genuine?",
+        "No. Display names are easy to fake and reply addresses can be spoofed, so a convincing sender is not evidence the email is real. A lookalike domain — extra words, hyphens or a swapped character such as micros0ft.com — is a strong warning sign, but its absence tells you nothing either way. Check the claim inside your own account instead."
+      ],
+      [
+        "I clicked a link in a phishing email — what should I do?",
+        "If you only opened the page and entered nothing, that does not automatically mean the device is compromised: close it, report the suspicious website to the NCSC, run the security check your device or security software provides, and check for any unexpected download, app, profile, permission or security warning. If any occurred, or the device behaves unusually, follow the device-compromise steps below. If you entered card or bank details, contact your bank using the number on your card or statement or its official app. If your bank and phone provider participate, you can also dial 159; if it does not connect, use the number on your card. Your provider sets the price of the call. If you disclosed a password or typed one into that page, change it through the service's official app or an address you type yourself, then anywhere else you reused it, turn on two-step verification, and check your email for forwarding rules or filters you did not create. If you downloaded a file, opened an attachment, installed an app, granted a permission, saw a security warning or your device has since behaved oddly, treat it as a possible device compromise: update the device, run its security checks, remove anything you did not install, and seek trusted support if it continues."
+      ],
+      [
+        "Should I reply to a sextortion email or pay?",
+        "No. These are sent in bulk and the demand is usually part of a bulk bluff, often quoting a password taken from an old data breach to make it feel specific. Paying invites more demands and replying confirms your address is live. Change that password if you still use it and report the email. If real intimate images of you do exist, keep the evidence, still do not pay, report an immediate threat to the police, and get support from the Revenge Porn Helpline. StopNCII may help if you are currently 18 or over, were 18 or over when the image or video was created, are the person depicted, and still have the file."
+      ],
+      [
+        "Where do I report a scam email in the UK?",
+        "Forward it to the National Cyber Security Centre at report@phishing.gov.uk. Use phishing@hmrc.gov.uk for HMRC-branded messages and phishing@companieshouse.gov.uk for Companies House-branded ones. If money or personal details were lost, report it to Report Fraud at reportfraud.police.uk or 0300 123 2040 in England, Wales or Northern Ireland, or to Police Scotland on 101 in Scotland."
+      ]
+    ],
+    "sources_checked": [
+      [
+        "NCSC — Report a scam email (and suspicious websites)",
+        "https://www.ncsc.gov.uk/collection/phishing-scams/report-scam-email"
+      ],
+      [
+        "NCSC — Phishing attacks: dealing with suspicious emails and messages (infographic)",
+        "https://www.ncsc.gov.uk/files/Phishing-attacks-dealing-suspicious-emails-infographic.pdf"
+      ],
+      [
+        "Stop Scams UK — Get help now (159 participating banks and phone providers)",
+        "https://stopscamsuk.org.uk/campaign/get-help-now/"
+      ],
+      [
+        "Ofcom — How much does a phone call really cost?",
+        "https://www.ofcom.org.uk/phones-and-broadband/phone-numbers/how-much-does-a-phone-call-really-cost"
+      ],
+      [
+        "Companies House — Protecting your company from fraud and scams",
+        "https://www.gov.uk/guidance/protecting-your-company-from-fraud-and-scams"
+      ],
+      [
+        "Companies House — Reporting scams pretending to be from Companies House",
+        "https://www.gov.uk/guidance/reporting-scams-pretending-to-be-from-companies-house"
+      ],
+      [
+        "UK Finance — Annual Fraud Report 2026 (APP fraud by contact channel)",
+        "https://www.ukfinance.org.uk/news-and-insight/press-release/fraud-report-2026-press-release"
+      ],
+      [
+        "StopNCII — eligibility criteria for creating a case",
+        "https://stopncii.org/create-your-case/?lang=en-gb"
+      ],
+      [
+        "StopNCII — how it works: the hash is created on your device and the image is not uploaded",
+        "https://stopncii.org/how-it-works/"
+      ],
+      [
+        "Revenge Porn Helpline",
+        "https://revengepornhelpline.org.uk/"
+      ]
+    ],
+    "updated": "2026-07-30"
+  },
+  "travel": {
+    "title": "Travel Scams UK: Fake Holidays, Flights & Bookings",
+    "description": "Fake package holidays, flights, villas and transfers, plus timeshare and compensation cons. How to check ATOL, ABTA and a booking before you pay.",
+    "intro": "<p>Travel fraud has a cruel shape. The sums are large, they are often paid by bank transfer weeks or months ahead, and the loss surfaces at the worst possible moment — at the check-in desk, or on a doorstep in another country. Holiday, flight and accommodation payments usually fall inside the <strong>purchase scam</strong> category of authorised push payment fraud, and purchase scams accounted for <strong>71% of all APP fraud cases</strong> reported by UK Finance in its Annual Fraud Report 2026, with £118.1 million lost. That £118.1 million is the total for <strong>all</strong> purchase scams in UK Finance member data — every kind of goods-and-services-that-never-arrived fraud — and is not a travel-loss figure; the numbers and their sources are in our <a href='/research/uk-scam-statistics/'>UK scam statistics dataset</a>.</p><p>Many travel scams are one of three things: a <strong>trip that was never booked</strong>, a <strong>message about a booking you really do hold</strong>, or a <strong>contract you were pressured into signing</strong>. Work out which one you are looking at and the right checks follow. Unsure about an offer or a message? Paste it into our free <a href='/check/'>AI scam checker</a> for an automated second opinion — it is a fallible assessment, so verify the seller, the protection and the booking independently before you pay.</p>",
+    "sections": [
+      [
+        "Which travel scam are you looking at?",
+        "<ul><li><strong>A seller is offering you a trip.</strong> This is the fake-supply group, where the holiday, flight or property may not exist. Start with the <a href='/guides/package-holiday-scam-uk/'>package holiday scam guide</a> or, if it is the seller you cannot place, <a href='/guides/fake-travel-agent-scam-uk/'>how to verify a travel agent</a>. Flight-only deals are covered in the <a href='/guides/fake-airline-ticket-scam-uk/'>fake airline ticket guide</a>, independent rentals in <a href='/guides/holiday-let-scam-uk/'>holiday let scams</a>, and sailings in <a href='/guides/cruise-scam-uk/'>cruise scams</a>.</li><li><strong>You already have a booking and have been messaged about payment.</strong> That is impersonation of a real transaction — see <a href='/guides/booking-com-scam-uk/'>Booking.com payment messages</a>, or the <a href='/guides/tui-booking-scam-uk/'>TUI</a> and <a href='/guides/jet2-holiday-scam-uk/'>Jet2</a> guides if the approach came through social media or WhatsApp.</li><li><strong>You are being asked to sign or pay at a presentation.</strong> These are long-term contracts rather than one-off thefts: read <a href='/guides/holiday-club-scam-uk/'>holiday club scams</a> and <a href='/guides/timeshare-scam-uk/'>timeshare scams</a> first.</li><li><strong>Someone has contacted you about money you are owed from a past trip.</strong> Cold callers offering to recover flight or holiday compensation are covered in the <a href='/guides/holiday-compensation-scam-uk/'>fake claims handler guide</a>.</li><li><strong>You are paying for help with a visa.</strong> No adviser can guarantee an outcome — see <a href='/guides/visa-application-scam-uk/'>UK visa application scams</a>.</li><li><strong>You have just landed and need a car.</strong> Arrivals halls have their own version, from bogus transfer sites to touts. Use an official licensed taxi rank, or a transfer you pre-booked through a route you verified yourself, and never accept an unlicensed tout. In Great Britain a private-hire vehicle or minicab must be pre-booked rather than hailed: in England and Wales the booking must be through a licensed private-hire operator, while Scotland runs its own vehicle, driver and booking-office regime, where a booking may be made with a licensed owner-driver or through a booking office. Northern Ireland instead licenses taxis in classes A to D, and some classes may be hailed or taken from a rank in defined circumstances, so do not carry the Great Britain pre-booking rule across. Wherever you land, an <a href='/guides/airport-transfer-taxi-scam-uk/'>approach offering an unbooked ride</a> is a warning in itself.</li></ul>"
+      ],
+      [
+        "What ATOL and ABTA actually tell you",
+        "<p>These two names do most of the reassurance work in travel advertising, which is why they get borrowed.</p><ul><li><strong>ATOL is the CAA scheme connected to flight-inclusive travel.</strong> A qualifying flight-inclusive package sold by or through an ATOL holder should come with an ATOL Certificate as soon as you pay anything, including a deposit, and that certificate names the ATOL holder providing the protection. Some flight-only bookings made through an ATOL holder are protected too, while <a href='/guides/cruise-scam-uk/'>cruise-only bookings</a> generally are not.</li><li><strong>A travel agent does not need its own ATOL.</strong> It can sell a protected trip on another company's licence, so check the holder <em>named on the certificate</em> using the CAA's Check an ATOL service rather than only searching the shop front.</li><li><strong>A missing certificate is a serious warning sign, not a verdict.</strong> Ask who the ATOL holder is, confirm it with that holder using contact details you found independently, and ask the CAA for advice if the answer does not stack up.</li><li><strong>ABTA is not ATOL.</strong> Check any ABTA claim on ABTA's own member search: a logo on a website is a picture, not a membership, and a false claim to either scheme is itself reportable, as the <a href='/guides/fake-travel-agent-scam-uk/'>fake travel agent guide</a> explains.</li></ul>"
+      ],
+      [
+        "Warning signs — and two tests that do not settle it",
+        "<p>Across fake packages, flights, villas and agents the same signs recur: a price far below every other source for the same dates; payment pushed towards a bank transfer, especially into a personal account whose name does not match the business; a deal that exists only inside a social ad, a WhatsApp thread or a DM; a seller who will not produce an invoice, terms or verifiable supplier details; and pressure to pay before you can check anything. Event accommodation is a seasonal example: a listing selling <a href='/guides/glastonbury-accommodation-scam-uk/'>Glastonbury accommodation</a> before the Festival's own booking information is published is harder to corroborate, so check the address itself, the platform's own record of the listing and host, and the current information published by the Festival before any money moves.</p><p><strong>Two checks that settle less than people think.</strong> A booking confirmation or itinerary can be fabricated, so the document is not evidence in itself. More importantly, failing to find your booking in an airline's manage-my-booking page is <em>not</em> evidence that no ticket exists — agent, group, charter and partner bookings are not always visible there. Contact the airline directly, ask whether a valid reservation and e-ticket exist in your name, and preserve the answer; the <a href='/guides/fake-airline-ticket-scam-uk/'>fake airline ticket guide</a> walks through that conversation. Cheap checks worth doing: reverse image search the photographs and confirm the address exists, which can expose copied photographs or an implausible address in a <a href='/guides/holiday-let-scam-uk/'>fake independent holiday let</a> before money moves.</p>"
+      ],
+      [
+        "Messages about a booking you really do hold",
+        "<p>The hardest travel scams to spot arrive with your real reference number, the correct dates and the right property attached. A fraudulent message can appear inside a genuine thread when an account used to send it has been compromised, and other data exposures are possible, so appearing in the right thread is not authentication. <a href='/guides/booking-com-scam-uk/'>Booking.com payment messages</a> are the best-documented example: Booking.com says it will not ask travellers for card details by email, phone, text or WhatsApp, and warns against a bank-transfer request that differs from the payment-policy details in the booking.</p><p><a href='/guides/tui-booking-scam-uk/'>TUI</a> and <a href='/guides/jet2-holiday-scam-uk/'>Jet2</a> impersonations come from the other direction — an implausible flash sale or a prize for a competition you never entered, pushing you towards a payment outside the company's own checkout. Either way the check is identical: leave the message where it is, open the app or type the company's address yourself, use Manage My Booking, and compare what is being demanded with the payment policy in your original confirmation.</p>"
+      ],
+      [
+        "Contracts, memberships and 'money you're owed'",
+        "<p><a href='/guides/holiday-club-scam-uk/'>Holiday clubs</a> and <a href='/guides/timeshare-scam-uk/'>timeshares</a> are sold as long-term contracts rather than one-off purchases, and the documented risks sit in the paperwork: commitments that can run for years, ongoing management, membership or maintenance charges that can change, restrictive cancellation and resale terms, and high-pressure selling at a long presentation. Same-day pressure is a serious warning; a legitimate trader should let you read the terms and obtain independent advice. Take the full contract away, work out what it would commit you to and cost each year, and get independent advice before signing anything. A qualifying timeshare or long-term holiday product carries a 14-day withdrawal right under the 2010 Regulations, but that right attaches to those defined product types rather than to every holiday-club arrangement, so check whether it applies to the specific contract instead of assuming it is your exit.</p><p>Holders of those contracts — and travellers generally — are then targeted a second time. <a href='/guides/holiday-compensation-scam-uk/'>Fake claims handlers</a> cold-call about flight or holiday compensation you never claimed, and it works because the underlying compensation rules are real. Claim flight-delay compensation directly from the airline for free. If you consider paying a representative, verify the firm and the specific service through the regulator that actually covers it; do not treat an FCA Register entry as approval of an aviation claims service. Paying for help with a <a href='/guides/visa-application-scam-uk/'>UK visa application</a> calls for the same caution. Start at GOV.UK. A paid immigration adviser should be registered with the Immigration Advice Authority, authorised through an approved professional body, or otherwise lawfully exempt. Verify which route applies before paying or sharing documents.</p>"
+      ],
+      [
+        "How to pay safely, and what to do if you have already paid",
+        "<ul><li><strong>Pay by card through the company's own checkout.</strong> Refuse a request to transfer money to a personal account that does not independently match the business. A bank transfer does not provide card chargeback or Section 75 protection, although an eligible domestic consumer transfer may fall within the mandatory APP reimbursement rules.</li><li><strong>Know what card payment gives you.</strong> Where a credit agreement funded the trip, Section 75 may apply: it needs the required credit-to-supplier relationship and a cash price of more than £100 and no more than £30,000, counted per item or qualifying set, so paying on credit does not guarantee cover. Chargeback is separate — a card-scheme process with scheme-set deadlines rather than a statutory right.</li><li><strong>If you paid by transfer, tell your bank as soon as you can.</strong> Eligible domestic consumer payments by Faster Payments or CHAPS made on or after 7 October 2024 may fall within the mandatory APP reimbursement rules, subject to their exclusions, an £85,000 cap, a 13-month outer reporting limit and a possible excess of up to £100 that cannot be applied to a consumer the firm assesses as vulnerable. Reimbursement is not automatic, and speed matters.</li><li><strong>Treat a follow-up fee as unverified until you check it.</strong> Do not pay an unexpected follow-up “release”, “tax”, “admin” or “upgrade” fee until you have verified it with the airline, hotel, tour operator or platform through a channel you opened yourself. Repeated fees to unlock a booking or refund are a strong scam warning.</li><li><strong>Save the evidence before the listing disappears:</strong> advert, messages, confirmation, any ATOL certificate and the payment record. Then work through the account and identity steps in our <a href='/recovery/'>scam recovery checklist</a>.</li></ul><p><strong>Reporting.</strong> Tell the platform that carried the advert, and the airline, hotel or tour operator named on the confirmation so it can investigate misuse of its brand. Report a false or unverifiable ATOL claim to the CAA, and a false ABTA claim to ABTA. If you have lost money, report it to <strong>Report Fraud</strong> at <a href='https://www.reportfraud.police.uk' rel='nofollow'>reportfraud.police.uk</a> or 0300 123 2040 in England, Wales or Northern Ireland, or to Police Scotland on 101 in Scotland. Scam emails go to report@phishing.gov.uk, and a suspicious SMS text can be forwarded free to 7726.</p>"
+      ]
+    ],
+    "faq": [
+      [
+        "Does an ATOL Certificate mean my holiday is protected?",
+        "It is strong evidence, but read it rather than glance at it. A qualifying flight-inclusive package sold by or through an ATOL holder should generate a certificate as soon as you pay anything, including a deposit, and it names the ATOL holder providing the protection. Check that named holder on the CAA's Check an ATOL service, and make sure the trip, passengers and holder match what you booked."
+      ],
+      [
+        "The travel agent has no ATOL of its own — is that a scam?",
+        "Not by itself. An agent can sell a protected trip on another company's ATOL and does not need one, so the question is who the ATOL holder is. Ask, check that holder independently, and confirm the relationship using contact details you found yourself. A seller who will not name the holder is the real warning sign."
+      ],
+      [
+        "My booking doesn't show in the airline's manage-my-booking — has the agent stolen my money?",
+        "Not necessarily. Agent, group, charter and partner bookings are not always visible in an airline's online lookup, so a failed search is not evidence that no ticket exists. Contact the airline directly, ask whether a valid reservation and e-ticket exist in your name, and keep the response. If it confirms there is nothing, contact your bank promptly and report it."
+      ],
+      [
+        "A message about my hotel booking asked for card details — is it genuine?",
+        "Check it independently before doing anything, even if it quotes your real reference inside an existing thread: a fraudulent message can appear in a genuine thread if the account used to send it has been compromised, so the thread is not authentication. Booking.com says it will not ask travellers for card details by email, phone, text or WhatsApp. Open the app or type the site's address yourself and compare the request with the payment policy in your confirmation."
+      ],
+      [
+        "I paid a travel company by bank transfer and the holiday doesn't exist — can I get my money back?",
+        "Possibly, and speed matters. Tell your bank immediately and report it as fraud. Eligible domestic consumer payments by Faster Payments or CHAPS made on or after 7 October 2024 may fall within the mandatory APP reimbursement rules, subject to exclusions, an £85,000 cap, a 13-month outer reporting limit and a possible excess of up to £100 that cannot be applied to a consumer the firm assesses as vulnerable. Keep the advert, confirmation and payment record, and report it to Report Fraud in England, Wales or Northern Ireland, or to Police Scotland on 101 in Scotland."
+      ]
+    ],
+    "sources_checked": [
+      [
+        "CAA — ATOL Certificates (issued on first payment)",
+        "https://www.caa.co.uk/atol-protection/atol-compliance/complying-with-the-atol-standard-terms/atol-certificates/"
+      ],
+      [
+        "CAA — Travel trade: selling through agents",
+        "https://www.caa.co.uk/atol-protection/atol-compliance/requirements-legal-obligations/travel-trade-selling-through-agents/"
+      ],
+      [
+        "The Timeshare, Holiday Products, Resale and Exchange Contracts Regulations 2010",
+        "https://www.legislation.gov.uk/uksi/2010/2960/pdfs/uksi_20102960_en.pdf"
+      ],
+      [
+        "Immigration Advice Authority — About us",
+        "https://www.gov.uk/government/organisations/immigration-advice-authority/about"
+      ],
+      [
+        "FCA — Using claims management companies (aviation claims are not FCA-regulated)",
+        "https://www.fca.org.uk/consumers/using-claims-management-companies"
+      ],
+      [
+        "DfT — Statutory taxi and private hire vehicle standards (England and Wales)",
+        "https://www.gov.uk/government/publications/statutory-taxi-and-private-hire-vehicle-standards/statutory-taxi-and-private-hire-vehicle-standards"
+      ],
+      [
+        "Scottish Government — Taxi and private hire car licensing guidance, chapter 5: vehicles",
+        "https://www.gov.scot/publications/taxi-private-hire-car-licensing-best-practice-licensing-authorities-taxi-private-hire-car-operators-3rd-edition/pages/7/"
+      ],
+      [
+        "Scottish Government — Taxi and private hire car licensing guidance, chapter 7: licensing of booking offices",
+        "https://www.gov.scot/publications/taxi-private-hire-car-licensing-best-practice-licensing-authorities-taxi-private-hire-car-operators-3rd-edition/pages/9/"
+      ],
+      [
+        "Booking.com — Trust and safety for travellers",
+        "https://www.booking.com/trust-and-safety/travellers/.en-gb.html"
+      ],
+      [
+        "UK Finance — Annual Fraud Report 2026 (purchase scams)",
+        "https://www.ukfinance.org.uk/news-and-insight/press-release/fraud-report-2026-press-release"
+      ],
+      [
+        "nidirect — Taxis and their services (Northern Ireland class A–D licensing)",
+        "https://www.nidirect.gov.uk/articles/taxis-and-their-services"
+      ]
+    ],
+    "updated": "2026-07-30"
+  },
+  "marketplace": {
+    "title": "Marketplace Scams UK: Facebook, eBay, Vinted & More",
+    "description": "Buying or selling on Facebook Marketplace, eBay, Vinted, Gumtree or Depop? Spot fake sellers, fake buyers and off-platform payment cons, and report them.",
+    "intro": "<p><strong>A recurring marketplace scam pattern is an attempt to move a transaction away from whatever protected checkout or messaging flow the platform offers.</strong> On classified local sales, where cash on collection may be normal, the equivalent warning is pressure to pay a deposit or follow an unexpected payment or courier link before inspection. The move can be into a bank transfer, a WhatsApp thread, a 'friends and family' payment, or a link sent in chat. Where a platform runs its own checkout, that checkout is where buyer and seller protection lives, so a push to leave it is a strong warning where the platform offers an eligible protected checkout.</p><p>The scale is not marginal. Purchase scams — paying for goods that never arrive — made up <strong>71% of all authorised push payment fraud cases</strong> in UK Finance's Annual Fraud Report 2026, and online shopping was the most commonly reported scam type among victims in Citizens Advice's 2025 Scams Awareness survey, at 26%. Both figures, with publishers and periods, are in our <a href='/research/uk-scam-statistics/'>UK scam statistics dataset</a>. Unsure about a listing, a buyer or a 'payment confirmation'? Paste it into our free <a href='/check/'>AI scam checker</a> for an automated second opinion — it is a fallible assessment, so still check the account, the item and the payment state in the official app yourself.</p>",
+    "sections": [
+      [
+        "Buying or selling? Find your situation",
+        "<p>Marketplace fraud attacks buyers and sellers in completely different ways, so start with which side of the deal you are on.</p><ul><li><strong>Buying, and the seller wants a deposit or transfer before you have seen the item.</strong> This is the classic fake-seller pattern on local and classified listings: <a href='/guides/facebook-marketplace-scam-uk/'>Facebook Marketplace</a>, <a href='/guides/gumtree-scam-uk-guide/'>Gumtree</a>, <a href='/guides/preloved-scam-uk/'>Preloved</a> and <a href='/guides/shpock-scam-uk/'>Shpock</a> all see the same 'transfer to hold it' script, whatever protected checkout the platform may also offer.</li><li><strong>Buying on a platform with its own checkout, and the seller offers a discount to pay outside it.</strong> That is protection-stripping — see <a href='/guides/ebay-buyer-scam-uk/'>eBay scams</a>, <a href='/guides/vinted-scam-warning-uk/'>Vinted warning signs</a>, <a href='/guides/depop-scam-uk/'>Depop off-app payment cons</a> and <a href='/guides/etsy-scam-sellers-uk-guide/'>Etsy sellers who ask you to pay off-site</a>.</li><li><strong>Selling, and the buyer has produced a payment confirmation, an overpayment or a link to 'release' funds.</strong> Read <a href='/guides/facebook-marketplace-fake-buyer-scam-uk/'>Facebook Marketplace fake buyers</a> and <a href='/guides/vinted-buyer-scam-uk/'>Vinted buyer scams</a> before you post anything.</li><li><strong>You have had an email from the platform itself about a fee, a held payment or a listing about to be removed.</strong> That is platform-impersonation phishing, such as the <a href='/guides/ebay-listing-fee-scam-uk/'>fake eBay listing fee notice</a>.</li><li><strong>It is a car.</strong> Vehicles can involve especially large deposits or payments — see <a href='/guides/autotrader-car-scam-uk/'>Autotrader car scams</a>.</li><li><strong>It is somewhere to live or stay.</strong> Property listings attract deposit fraud: <a href='/guides/rightmove-rental-scam-uk/'>Rightmove rental scams</a> and <a href='/guides/airbnb-scam-uk-listings/'>fake or hijacked Airbnb listings</a>.</li></ul>"
+      ],
+      [
+        "What platform protection actually covers",
+        "<p>Marketplaces are not interchangeable, and the difference decides what happens when a deal goes wrong. Protection is conditional and transaction-specific everywhere: eligibility, evidence requirements and deadlines vary by platform and by deal.</p><ul><li><strong>Platforms with their own checkout</strong> — eBay, Vinted, Etsy, Depop, Airbnb — publish protection terms that apply to eligible purchases paid for through the platform itself. Pay outside it and you may fall outside the platform's protection altogether, which is exactly why an off-platform 'fee-free' discount is such a strong warning sign. Our <a href='/guides/etsy-scam-sellers-uk-guide/'>Etsy guide</a> and <a href='/guides/vinted-scam-warning-uk/'>Vinted guide</a> set out how each platform's cover works, and the <a href='/guides/ebay-buyer-scam-uk/'>eBay guide</a> explains why keeping messages as well as payment on the platform matters if you later need to evidence a dispute.</li><li><strong>Local classified listings</strong> — Facebook Marketplace's local ads, for example — introduce a buyer to a seller rather than processing the payment, so an ordinary local cash-on-collection deal should not be assumed to carry buyer protection at all.</li><li><strong>Gumtree now sits in between.</strong> Gumtree now offers Buy Now, secure payment and Buyer Protection through Mangopay for eligible delivery-enabled items up to £250; the button appears only on eligible ads. Ordinary local and in-person listings should still not be assumed to carry that protection. Check the exact ad and complete any protected checkout inside Gumtree. Our <a href='/guides/gumtree-scam-uk-guide/'>Gumtree guide</a> covers the deposit-before-viewing script that still dominates local deals.</li><li><strong>Preloved is different again.</strong> Preloved says it does not itself handle ordinary transaction payments, although some listings may offer an optional Trustap transaction. Verify that option from the listing or account you opened yourself and read the current Trustap terms; never trust a buyer-supplied “Preloved payment” link. Our <a href='/guides/preloved-scam-uk/'>Preloved guide</a> covers the rest of the classified-deal checks.</li><li><strong>Shpock needs its own line.</strong> Shpock's current help says its Buy Now feature and Wallet have been discontinued. For a new deal, do not assume that Shpock supplies an in-app payment or Buyer Protection step. Users may agree collection or arrange tracked delivery themselves, but Shpock says it has no courier service of its own. A supposed “Shpock courier”, or an unexpected courier or payment link, is a strong warning sign; our <a href='/guides/shpock-scam-uk/'>Shpock guide</a> covers the deposit-before-collection script.</li><li><strong>The payment type matters as much as the platform.</strong> A PayPal <a href='/guides/paypal-friends-family-scam-uk/'>'friends and family' payment</a> is not a purchase payment and does not attract purchase protection. Refuse a request to transfer money to a personal account that does not independently match the business or seller you verified. A bank transfer does not provide card chargeback, Section 75 or marketplace buyer protection, although an eligible domestic consumer transfer may fall within the mandatory APP reimbursement rules. Report a transfer you have come to doubt to your bank quickly.</li></ul>"
+      ],
+      [
+        "Selling: a payment confirmation is not a payment",
+        "<p>Every seller-side con attacks the same gap — between seeing evidence of a payment and having the money. A screenshot, an email that appears to come from a payment provider, or a 'funds held pending dispatch' notice can all be fabricated. Verify the status in your own bank or platform account, opened independently, and never from an email or a screenshot someone has sent you. Do not dispatch while the platform still shows the payment as pending. <a href='/guides/facebook-marketplace-fake-buyer-scam-uk/'>Facebook Marketplace fake buyers</a> and the <a href='/guides/overpayment-scam-uk/'>overpayment refund request</a> are common variants, and the overpayment version needs particular care: a credit you can see in an account can still be held, recalled, reversed or investigated, so do not send a separate 'refund' without first contacting your bank or the platform through a channel you opened yourself and confirming the position.</p><p>Watch too for the variant aimed at the <em>seller</em>: a link to 'confirm your card' or 'verify your account' to release funds. As the <a href='/guides/vinted-buyer-scam-uk/'>Vinted buyer scam guide</a> explains, a genuine sale is settled through the platform's own order and payment process, so check the order and payment state in the official app rather than acting on a link sent in chat, and treat any request to enter card details to 'release' money you are owed as a scam. Collection deals have their own version: a message from a courier you did not arrange, whatever brand it claims, is a warning sign rather than a delivery arrangement.</p>"
+      ],
+      [
+        "Collection day, cars and viewings",
+        "<p>Some marketplace losses happen face to face, or should have. Never pay for a <a href='/guides/autotrader-car-scam-uk/'>car you have not seen and inspected</a>, and be sceptical of any seller who cannot meet, wants a deposit to hold the vehicle, or claims the marketplace itself will hold your money in escrow — that last line recurs in these cons, so check any such scheme with the site itself before relying on it. For a long-term residential rental, view the property and verify the landlord or agent before sending a holding deposit or rent. For a short-stay platform such as Airbnb, prepayment may be normal, so keep the reservation and payment entirely inside the official platform. A landlord who is conveniently abroad and will post the keys after a transfer is the classic <a href='/guides/rightmove-rental-scam-uk/'>rental scam</a>, and a <a href='/guides/airbnb-scam-uk-listings/'>fake or hijacked Airbnb listing</a> works by moving you off the platform.</p><p>For an in-person handover, meet somewhere public and busy in daylight, take someone with you, inspect the item, and hand nothing over until the money has arrived — the advice in our <a href='/guides/gumtree-scam-uk-guide/'>Gumtree guide</a> and <a href='/guides/preloved-scam-uk/'>Preloved guide</a> applies to any classified deal. A live video call can help corroborate that the seller has the item in front of them, but it is not proof of ownership, identity or a safe transaction. Seasonal listings deserve extra care: bargain <a href='/guides/festival-camping-equipment-vinted-scam/'>festival tents and camping gear on Vinted</a> appear every summer from sellers who want to move the conversation to WhatsApp.</p>"
+      ],
+      [
+        "If you have already paid, or handed over the item",
+        "<ul><li><strong>Contact your bank or card issuer first,</strong> on the number on your card or statement, and report it as fraud. If you paid by card, ask about chargeback — a card-scheme process with scheme-set deadlines rather than a statutory right.</li><li><strong>Where a credit agreement funded the purchase, Section 75 may apply,</strong> subject to the required credit-to-supplier relationship and a cash price of more than £100 and no more than £30,000, counted per item or qualifying set. Marketplace purchases often involve intermediaries, so paying on credit does not guarantee cover.</li><li><strong>If you sent a bank transfer,</strong> eligible domestic consumer payments by Faster Payments or CHAPS made on or after 7 October 2024 may fall within the mandatory APP reimbursement rules, subject to exclusions, an £85,000 cap, a 13-month outer reporting limit and a possible excess of up to £100 that cannot be applied to a consumer the firm assesses as vulnerable. Reimbursement is not guaranteed — report quickly.</li><li><strong>Report inside the platform too,</strong> while the account still exists: the listing, profile and message thread are the evidence it needs. Then screenshot everything and work through the payment, account and identity steps in our <a href='/recovery/'>scam recovery checklist</a>.</li></ul>"
+      ],
+      [
+        "How to report a marketplace scam in the UK",
+        "<p>Use the platform's own reporting tools first — on the listing, the profile and the message thread — because that is what lets the platform investigate while the evidence still exists. It may restrict or remove the account as a result, but no report can guarantee that outcome, so protect your own position as well. Platform-branded phishing emails should be reported through the platform's current security or help route, which the platform publishes on its own site rather than in the email itself, and forwarded to the National Cyber Security Centre at <strong>report@phishing.gov.uk</strong>. If you have lost money or shared bank details, report it to <strong>Report Fraud</strong> at <a href='https://www.reportfraud.police.uk' rel='nofollow'>reportfraud.police.uk</a> or 0300 123 2040 in England, Wales or Northern Ireland, or to Police Scotland on 101 in Scotland. A suspicious SMS text can be forwarded free to 7726. For consumer-rights help, use the service for your nation: Citizens Advice in England and Wales on 0808 223 1133, Advice Direct Scotland in Scotland on 0808 800 9060, or Consumerline in Northern Ireland on 0300 123 6262.</p>"
+      ]
+    ],
+    "faq": [
+      [
+        "Is it safe to pay a Facebook Marketplace or Gumtree seller by bank transfer?",
+        "Treat a request to transfer money for an item you have not seen as a strong scam warning sign on a classified site. A bank transfer has no card chargeback and no marketplace buyer-protection process, though an eligible domestic consumer transfer may still fall within the mandatory APP reimbursement rules, subject to exclusions and limits. An ordinary local listing should not be assumed to carry buyer protection. View and collect in person, pay on collection, and walk away from any seller who insists on a deposit to 'hold' the item."
+      ],
+      [
+        "A buyer sent me a payment confirmation — can I post the item?",
+        "No. Screenshots and confirmation emails can be fabricated, and a 'funds held pending dispatch' notice is a known con. Check the payment status in your own bank or platform account, opened independently, rather than from anything the buyer sends, and do not dispatch while the platform shows the payment as pending. If the buyer says they have overpaid and wants the difference back, remember that a credit you can see can still be held, recalled, reversed or investigated: do not send a separate refund without first contacting your bank or the platform through a channel you opened yourself."
+      ],
+      [
+        "A seller offered a discount if I pay outside the app — what is the risk?",
+        "You may fall outside the platform's protection, which applies only to eligible purchases paid through its own checkout, and eligibility, evidence requirements and deadlines vary. Paying outside the app may remove platform protection regardless of why the discount is offered. Decline and keep an eligible transaction inside the platform; if the seller refuses, walk away. Keeping the conversation on the platform matters too, because the thread is the evidence if you later need to raise a dispute."
+      ],
+      [
+        "I have been scammed on a marketplace — can I get my money back?",
+        "It depends on how you paid. Contact your bank or card issuer immediately: card payments may allow a chargeback under card-scheme rules, and where a credit agreement funded the purchase Section 75 may apply if the required relationship exists and the cash price was more than £100 and no more than £30,000. For an eligible domestic consumer bank transfer by Faster Payments or CHAPS on or after 7 October 2024, the mandatory APP reimbursement rules may apply, subject to exclusions, an £85,000 cap and a 13-month outer reporting limit."
+      ],
+      [
+        "Where do I report a fake listing, buyer or seller?",
+        "Report it inside the platform first, using the report options on the listing, profile and messages: that lets the platform investigate and it may restrict or remove the account, though no report guarantees it. Report platform-branded phishing emails through the platform's current security or help route, and forward them to report@phishing.gov.uk. Report any financial loss to Report Fraud at reportfraud.police.uk or 0300 123 2040 in England, Wales or Northern Ireland, or to Police Scotland on 101 in Scotland."
+      ]
+    ],
+    "sources_checked": [
+      [
+        "GOV.UK — Consumer advice services for each UK nation",
+        "https://www.gov.uk/consumer-advice"
+      ],
+      [
+        "Gumtree — How payments work for items eligible for delivery",
+        "https://www.gumtree.com/info/safety/p/payments/how-payments-work-for-items-eligible-for-delivery-on-gumtree/"
+      ],
+      [
+        "Gumtree — Buyer Protection policy",
+        "https://www.gumtree.com/info/safety/p/trust-safety/buying/buyer-protection-policy/"
+      ],
+      [
+        "Preloved — Advice when buying second hand (Preloved does not handle payment processing)",
+        "https://www.preloved.co.uk/safesecondhand"
+      ],
+      [
+        "Preloved — Enable Trustap for your listing",
+        "https://www.preloved.co.uk/account/trustap/listing/create"
+      ],
+      [
+        "Preloved — Press release: Preloved in partnership with Trustap",
+        "https://www.preloved.co.uk/press/release/2766/preloved-in-partnership-with-trustap.html"
+      ],
+      [
+        "Shpock — Transferring remaining funds (Buy Now and Shpock Wallet discontinued)",
+        "https://www.shpock.com/en-gb/help/32780362257809"
+      ],
+      [
+        "Shpock — Fake payment links (no Shpock courier service)",
+        "https://www.shpock.com/en-gb/help/14819755647249"
+      ],
+      [
+        "UK Finance — Annual Fraud Report 2026 (purchase scams)",
+        "https://www.ukfinance.org.uk/news-and-insight/press-release/fraud-report-2026-press-release"
+      ],
+      [
+        "Citizens Advice / Savanta — Millions stung by scams, with online shopping the top trap",
+        "https://www.citizensadvice.org.uk/about-us/media-centre/press-releases/millions-stung-by-scams-with-online-shopping-the-top-trap-says-citizens/"
+      ]
+    ],
+    "updated": "2026-07-30"
+  },
+  "phone": {
+    "title": "Phone Scams UK: Spot a Fake Caller and Check Safely",
+    "description": "Vishing calls, fake bank fraud teams and spoofed caller ID: the UK phone scam patterns, how to verify a caller safely, and how to report a scam call.",
+    "intro": "<p>Phone scams — <strong>vishing</strong>, or voice phishing — put a convincing person or recording on the line and give you a reason to act before you think. The caller may claim to be your bank's fraud team, a broadband provider, HMRC, the police, or a salesperson with an offer that expires today. What they want is nearly always one of four things: a <strong>payment</strong>, a <strong>one-time passcode</strong>, your <strong>security details</strong>, or <strong>remote access</strong> to a device.</p><p>Genuine banks, telecoms firms and government departments do telephone people, so the channel settles nothing — <strong>the request is the discriminator</strong>. End the call on anything pushing you towards those four things, then ring back on a number you found yourself. Unsure about a call or voicemail? Describe it to our free <a href='/check/'>AI scam checker</a> for an automated second opinion. It is a fallible assessment, not a verdict, so still verify the caller independently.</p>",
+    "sections": [
+      [
+        "The main UK phone scam patterns",
+        "<p><strong>Fake bank fraud teams</strong> are a persistent pattern: your account is 'under attack', and the fix is often moving money or reading back a code. See <a href='/guides/hsbc-bank-scam-call-uk/'>fake HSBC fraud team calls</a> and <a href='/guides/santander-phone-scam-uk/'>Santander impersonation calls</a> — and the same script often arrives dressed as law enforcement in a <a href='/guides/police-impersonation-scam-call-uk/'>police impersonation call</a>.</p><p><strong>Telecoms calls</strong> claim a fault, a virus or a refund and end with a request for remote access: see <a href='/guides/bt-broadband-scam-calls-uk/'>fake BT technical support calls</a>, <a href='/guides/talktalk-scam-call-uk/'>TalkTalk support call scams</a> and <a href='/guides/virgin-media-scam-call-uk/'>Virgin Media 'virus on your connection' calls</a>.</p><p><strong>Official-sounding calls</strong> lean on a name you cannot ignore — a <a href='/guides/hmrc-phone-call-scam-uk/'>fake HMRC tax call</a> threatening arrest, an automated <a href='/guides/national-insurance-scam-call-uk/'>'your National Insurance number is suspended' robocall</a>, or a <a href='/guides/dvla-phone-scam-uk/'>DVLA call about failed vehicle tax</a>. Retail impersonation works identically in an <a href='/guides/amazon-phone-call-scam-uk/'>automated Amazon order call</a>.</p><p><strong>Cold-call sales approaches</strong> apply commercial rather than fearful pressure: <a href='/guides/solar-panel-cold-caller-scam-uk/'>free solar panels under a 'government grant'</a>, or an offer to unlock your pension early that our <a href='/guides/pension-liberation-scam-uk/'>pension liberation guide</a> shows can trigger a substantial HMRC charge on top of the loss.</p><p>Suspicious calls to mobiles appear to be becoming less common, while telecommunications-originated APP fraud remains disproportionately costly. Ofcom's February 2026 survey found 32% of mobile users had received a suspicious call on their mobile in the previous three months, down from 40% in 2022. Separately, UK Finance's Annual Fraud Report 2026 attributed 17% of APP cases and 28% of APP losses to telecommunications. APP here means authorised push payment — a transfer the victim was deceived into making. The two measures count different things: one is calls received by mobile users, the other is the contact channel recorded against APP cases and losses. Both are dated in our <a href='/research/uk-scam-statistics/'>UK scam statistics research</a>.</p>"
+      ],
+      [
+        "Caller ID is not evidence of identity",
+        "<p>Start from this: <strong>the number on your screen is not evidence of who is calling</strong>. Caller ID can be spoofed, including in some cases a genuine bank number — our <a href='/guides/number-spoofing-scam-uk/'>number spoofing guide</a> explains how it is done. Ofcom's Do Not Originate list helps providers identify and block calls from numbers an organisation does not use for outbound calls, which narrows the problem — but Ofcom notes that adding a number to the list is not a guarantee that all such calls will be blocked, and its advice remains to hang up and call the organisation back on a number from its official website. The reverse holds too: an unfamiliar number is not by itself a scam. Judge the call on what it asks you to do.</p><p>Do not press a number on an unexpected recorded call. A keypress can connect or advance the call; hang up and verify the claim independently.</p>"
+      ],
+      [
+        "Work out what kind of call you are dealing with",
+        "<p>Run an unexpected call through these questions in order. The first 'yes' tells you which situation you are in.</p><ul><li><strong>Asked to move, send or withdraw money?</strong> Treat it as an attempted authorised push payment scam; there is no such thing as a 'safe account'. The courier version asks you to hand cards, cash or valuables to someone at your door. City of London Police recorded more than £21 million lost to <em>courier fraud</em> specifically across 1,891 reports in 2025 in England, Wales and Northern Ireland, which excludes Scotland, with victims aged 76 to 96 accounting for around 62% of those reports. It is a figure for that one pattern and that one reporting area, not for phone fraud as a whole. See the <a href='/guides/police-impersonation-scam-call-uk/'>police impersonation guide</a>.</li><li><strong>Asked to read out a one-time passcode, PIN, password or full card number?</strong> A code can authorise a payment, a login, a password reset, a device registration or a change to your account, so reading one aloud can complete an action you never intended. No genuine bank employee will ask you to disclose or read out a full PIN, full password or one-time banking or security code. Enter a code only in the official app or site, for an action you initiated, understand and can match to the code message; never do it at an unexpected caller's direction — a criminal can talk you through a genuine app while dictating the action you are approving. For another support service, verify the request independently and follow the warning in the code message.</li><li><strong>Asked to install software or share your screen?</strong> That is the remote-access pattern: the tools are genuine, the request is what fails. See <a href='/guides/remote-access-scam-uk/'>what remote access can expose</a>.</li><li><strong>Asked to confirm personal details 'for security'?</strong> They may be assembling an identity-fraud profile rather than chasing an immediate payment.</li><li><strong>A recording with a threat and a keypress?</strong> A bulk campaign. Hang up without pressing anything.</li><li><strong>A sales pitch that expires today?</strong> The urgency is the product. Take the details, end the call, and research the company yourself.</li></ul>"
+      ],
+      [
+        "How to check a caller safely",
+        "<ul><li><strong>End the call, then verify independently.</strong> Hang up. Use a different phone where possible. If you must use the same landline, allow time for it to clear and first call someone you know on a number already saved. Then call the organisation on a number from its official site, statement or card. Ofcom's current scam-calls page says to hang up, take your time and call the organisation back using a number from its official website; it sets no fixed number of minutes to wait, so treat any specific delay you have read elsewhere as practice rather than regulator guidance.</li><li><strong>Dial 159 yourself after an unexpected call claiming to involve your bank or bank account.</strong> It is the route you reach by dialling 159 that cannot be spoofed, and 159 never calls you. Stop Scams UK says the service covers firms representing more than 99% of UK retail current accounts, which is not a guarantee for every handset or network. Your own provider sets the price of the call and it may not be included in your allowance, so check that if cost matters — and if it does not connect, use the number on your card.</li><li><strong>Use a number you already hold</strong> — the back of your card, a paper bill, or an address you typed in yourself. Never one the caller gave you, and never one from a pop-up or a search advert.</li><li><strong>Check the claim, not the caller.</strong> Sign in to your own account or app and see whether the problem actually exists.</li><li><strong>Ask the checker.</strong> Paste what the caller said into our free <a href='/check/'>AI scam checker</a> for a second opinion once you have verified independently.</li></ul>"
+      ],
+      [
+        "If you have already paid or shared details",
+        "<ul><li><strong>Contact your bank immediately</strong> on the number on your card, or by dialling 159. Act straight away rather than waiting to see what happens.</li><li>If you were talked into authorising a bank transfer yourself, ask about mandatory APP reimbursement. It covers eligible domestic consumer Faster Payments and CHAPS payments made from 7 October 2024, with an £85,000 cap, a possible excess of up to £100 that cannot be applied to a consumer the firm assesses as vulnerable, a 13-month claim limit and a set of exclusions — a route worth pursuing, not a guaranteed refund.</li><li>If you granted remote access, disconnect the device, remove the software, and change key passwords from a different trusted device — our <a href='/guides/remote-access-scam-uk/'>remote access scam guide</a> sets out the full clean-up.</li><li>If you shared personal details, watch for identity fraud and consider a Cifas Protective Registration at cifas.org.uk after checking the current fee.</li><li>Work through our <a href='/recovery/'>scam recovery checklist</a>, and be wary of any follow-up offer to 'get your money back' — recovery fraud targets people who have just been defrauded.</li></ul>"
+      ],
+      [
+        "How to report a scam call in the UK",
+        "<p>Report to <strong>your bank first</strong> if money or account details are involved — dial 159 or use the number on your card. Then report it to <strong>Report Fraud</strong> (formerly Action Fraud) at <a href='https://www.reportfraud.police.uk' rel='nofollow'>reportfraud.police.uk</a> or 0300 123 2040 in England, Wales or Northern Ireland, or Police Scotland on 101 in Scotland. Dial 999 if someone is on their way to your door to collect cards, cash or valuables. Tell the impersonated company too, through its official website or the number on your bill. If the same campaign reached you by text, a suspicious SMS text can be forwarded to 7726 free of charge. Reporting a suspicious <em>call</em> is a separate step: from a mobile, forward the caller's phone number to 7726, which Ofcom says is free of charge. For consumer-rights help, use the service for your nation: Citizens Advice in England and Wales on 0808 223 1133, Advice Direct Scotland in Scotland on 0808 800 9060, or Consumerline in Northern Ireland on 0300 123 6262.</p>"
+      ]
+    ],
+    "faq": [
+      [
+        "Can a scam caller really display my bank's real number?",
+        "Caller ID can be spoofed, including in some cases a genuine bank number, so treat the display as unreliable and judge the call on what it asks you to do. Ofcom's Do Not Originate list helps providers block calls from numbers an organisation never uses for outbound calls, but Ofcom notes that adding a number to the list is not a guarantee every such call is blocked. If money is involved, hang up and dial 159 yourself, or use the number on the back of your card."
+      ],
+      [
+        "What is 159 and when should I use it?",
+        "159 connects you to your bank when you dial it yourself, much as 101 works for the police, and it is that outbound route that cannot be spoofed — 159 never calls you. Stop Scams UK says participating firms represent more than 99% of UK retail current accounts, which is not a guarantee for every network or handset. Your provider sets the price of the call and it may not be included in your allowance; if it does not connect, use the number on your card."
+      ],
+      [
+        "How do I tell a genuine bank fraud call from a scam?",
+        "Banks do telephone customers about suspicious activity, so the call itself is not the signal — the requests are. A genuine bank will not ask you to move money to another account, read out a one-time passcode, disclose a full password or PIN, or install remote-access software. If any of those come up, end the call and ring back on the number from your card or by dialling 159."
+      ],
+      [
+        "I gave a caller my details or a security code — what should I do?",
+        "Contact your bank immediately on the number on your card or by dialling 159 and ask them to secure the account. Change passwords for any account you discussed, starting with email, and turn on two-step verification. If you installed anything at the caller's request, disconnect the device and remove the software. Then report it to Report Fraud at reportfraud.police.uk or 0300 123 2040 in England, Wales or Northern Ireland, or Police Scotland on 101 in Scotland."
+      ]
+    ],
+    "sources_checked": [
+      [
+        "GOV.UK — consumer advice services for England and Wales, Scotland and Northern Ireland",
+        "https://www.gov.uk/consumer-advice"
+      ],
+      [
+        "Ofcom — Combatting mobile messaging scams: statement (February 2026 survey; suspicious calls to mobiles fell from 40% in 2022 to 32% in 2026)",
+        "https://www.ofcom.org.uk/siteassets/resources/documents/consultations/category-3-4-weeks/consultation-combatting-mobile-messaging-scams/main-document/statement-combatting-mobile-messaging-scams.pdf"
+      ],
+      [
+        "Ofcom — Combatting mobile messaging scams (consultation and statement page)",
+        "https://www.ofcom.org.uk/phones-and-broadband/scam-calls-and-messages/consultation-combatting-mobile-messaging-scams"
+      ],
+      [
+        "UK Finance — Annual Fraud Report 2026 press release",
+        "https://www.ukfinance.org.uk/news-and-insight/press-release/fraud-report-2026-press-release"
+      ],
+      [
+        "Ofcom — types of scam calls, texts and messages (published 15 July 2026)",
+        "https://www.ofcom.org.uk/phones-and-broadband/scam-calls-and-messages/types-of-scam-calls-texts-and-messages"
+      ],
+      [
+        "Ofcom — what to do about a scam call, text or message (reporting to 7726)",
+        "https://www.ofcom.org.uk/phones-and-broadband/scam-calls-and-messages/what-to-do-about-a-scam-call-text-or-message"
+      ],
+      [
+        "Ofcom — nuisance calls and messages research summary, 2016 (historical source of the superseded five-minute callback advice)",
+        "https://www.ofcom.org.uk/siteassets/resources/documents/consumers/2016/nuisance-summary.pdf"
+      ],
+      [
+        "Ofcom — Do Not Originate list, including its blocking limitation",
+        "https://www.ofcom.org.uk/phones-and-broadband/scam-calls-and-messages/do-not-originate"
+      ],
+      [
+        "Ofcom — number spoofing",
+        "https://www.ofcom.org.uk/phones-and-broadband/scam-calls-and-messages/phone-spoof-scam"
+      ],
+      [
+        "Stop Scams UK — 159, the service and its participating firms",
+        "https://stopscamsuk.org.uk/campaign/get-help-now/"
+      ],
+      [
+        "Ofcom — how much does a phone call really cost",
+        "https://www.ofcom.org.uk/phones-and-broadband/phone-numbers/how-much-does-a-phone-call-really-cost"
+      ],
+      [
+        "City of London Police — courier fraud exceeded £21 million in 2025 across 1,891 reports",
+        "https://www.cityoflondon.police.uk/news/city-of-london/news/2026/june/over-70s-targeted-as-courier-fraud-exceeds-21-million-in-2025-with-london-and-home-counties-hit-hardest/"
+      ]
+    ],
+    "updated": "2026-07-30"
+  },
+  "website": {
+    "title": "Fake Website Scams UK: Check an Online Shop Before You Buy",
+    "description": "Fake shops, copycat brand sites and risky marketplace sellers: how to check whether a website is legitimate before you pay, and what to do if you already did.",
+    "intro": "<p>'Website scams' cover three genuinely different problems that get lumped together, and the right response depends on which one you have. Some sites are <strong>outright fakes</strong> — copycat shops built to take card details and deliver nothing. Some are <strong>real marketplaces with variable sellers</strong>, where the platform exists but a particular listing does not deserve your trust. And some are <strong>real businesses selling things they should not</strong>, which is a safety problem before it is a payment one.</p><p>Start with the basics: read the full web address slowly before you type anything into it, check the trader independently, and treat a padlock, a familiar logo and polished product photos as decoration rather than evidence. Once you have done that, our free <a href='/check/'>AI scam checker</a> can give you an automated second opinion on a site or the advert that sent you there — it is an extra step, not a verdict.</p>",
+    "sections": [
+      [
+        "Which of the three problems have you got?",
+        "<p>Identify the category before spending time on checks that will not help.</p><ul><li><strong>You arrived from a social advert or an unexpected message, and the discounts are sitewide.</strong> Treat it as a possible copycat shop until you have checked, then type the brand's own address yourself and compare. Our guides to <a href='/guides/fake-ugg-website-uk/'>fake UGG websites</a>, <a href='/guides/shein-fake-website-scam-uk/'>fake SHEIN pages</a>, <a href='/guides/asos-copycat-scam-uk/'>ASOS copycat stores</a>, <a href='/guides/fake-nike-website-uk/'>fake Nike shops</a>, <a href='/guides/fake-pandora-website-uk-scam/'>counterfeit Pandora sites</a> and <a href='/guides/fake-ray-ban-website-scam-uk/'>fake Ray-Ban stores</a> each set out what the brand itself publishes about its own domains and authorised retailers.</li><li><strong>The platform is one you have heard of, but the seller is unknown.</strong> That is marketplace risk, not a fabricated site. Our reviews of <a href='/guides/dhgate-scam-uk-review/'>DHgate seller and counterfeit risk</a>, <a href='/guides/aliexpress-scam-or-legit-uk-guide/'>AliExpress marketplace risk</a>, <a href='/guides/wish-scam-uk-review/'>buying safely on Wish</a> and <a href='/guides/is-temu-a-scam-uk/'>fake Temu offers</a> explain what each platform actually protects and where its deadlines bite.</li><li><strong>The site offers to supply a prescription-only medicine without a valid prescription or an appropriate prescribing consultation.</strong> Stop — the health risk outranks the fraud risk. Legitimate online prescribing can follow an appropriate consultation, so what should worry you is the absence of one. For a Great Britain pharmacy, do not rely on a logo image alone: check the displayed GPhC registration number directly in the live register and confirm that the pharmacy identity and address match. Current GPhC guidance says an online platform should prominently display that number and information explaining how to check its registration status. Northern Ireland works differently — the EU Distance Selling Logo is required on every page offering medicines for sale there, so its absence is material, although a copied image is not proof on its own. Check the pharmacy premises on the PSNI register and the seller on MHRA's register of authorised online sellers. GPhC is the General Pharmaceutical Council, and PSNI here is the Pharmaceutical Society of Northern Ireland, the pharmacy regulator rather than the police. The Medicines and Healthcare products Regulatory Agency published its register of authorised online sellers of medicines in Northern Ireland on 24 June 2026. Our <a href='/guides/fake-online-pharmacy-uk-scam/'>fake online pharmacy guide</a> works through the checks.</li><li><strong>You cannot place the site at all.</strong> Start from first principles with our checklist, <a href='/guides/is-this-website-a-scam/'>is this website a scam?</a></li></ul><p>Buying scams dominate by volume: UK Finance's Annual Fraud Report 2026 records purchase scams as 71% of all authorised push payment cases, with losses of £118.1 million, up 20% on 2024, and puts 66% of APP cases as starting online. The dated figures sit in our <a href='/research/uk-scam-statistics/'>UK scam statistics research</a>.</p>"
+      ],
+      [
+        "Checks that help you judge an unfamiliar shop",
+        "<ul><li><strong>Read the domain, not the brand name.</strong> Copycats add hyphens, extra words, digits or an unusual ending; a brand name sitting inside a longer address tells you nothing about who owns it.</li><li><strong>A padlock means an encrypted connection to that domain, not an honest trader.</strong> HTTPS authenticates and encrypts the connection to the domain you are on; it does not show that the trader is honest or that your order will ever be fulfilled.</li><li><strong>Look for the business behind the shop.</strong> UK distance sellers generally must give their identity, a geographic address and contact details, plus clear pricing, delivery, cancellation and returns information. Missing information is a warning sign rather than conclusive evidence of fraud. A site claiming to be a limited company should give a registered number you can look up on Companies House — sole traders will not have one, so apply that test only where incorporation is claimed.</li><li><strong>Search a distinctive product sentence in quotation marks,</strong> and search the domain alongside the words review, refund and delivery. You are looking for patterns — copied text, missing parcels, unanswered refunds — not a flawless record.</li><li><strong>Watch the checkout.</strong> A site that quietly moves you off card payment towards a bank transfer or a 'friends and family' payment is a serious warning sign, because it can remove or reduce the protection you would otherwise have had.</li></ul>"
+      ],
+      [
+        "Marketplaces are real; individual sellers are the variable",
+        "<p>DHgate, AliExpress, Wish and Temu are operating businesses rather than fabricated websites, and flatly calling them 'a scam' misreads the risk. What varies is the seller, the listing and the goods. One move should stop you on any of them: a seller who wants to take you off-platform. That can remove or reduce the platform's protection and substantially increase your risk, though on its own it does not establish that a crime has been committed. Keep payment and messages inside the platform, because a dispute process can only protect what it can see, and it applies only where its current eligibility, payment, evidence and deadline requirements are met — so open any dispute before the deadline shown on your own order rather than one quoted somewhere general.</p><p>Impersonation is a separate problem from the platform itself. Criminals send fake cashback texts, 'free gift' offers and lookalike pages using these brand names, so check any reward inside the official app rather than through a link you were sent.</p>"
+      ],
+      [
+        "What to do if you have already paid",
+        "<ul><li><strong>Contact your card issuer or bank promptly</strong> using the number on your card. The sooner a disputed payment is raised, the more options remain open.</li><li><strong>Ask about Section 75 if you paid by credit card.</strong> Section 75 of the Consumer Credit Act 1974 may apply where the cash price of a single item or qualifying set is more than £100 and no more than £30,000, and where the required debtor-creditor-supplier relationship exists. It is a claim to raise, not an automatic refund.</li><li><strong>Ask about chargeback for debit and other card payments.</strong> Chargeback is a card scheme process rather than a statutory right, and time limits apply, so raise it quickly.</li><li><strong>Keep everything</strong> — screenshots of the listing and checkout, order confirmations, the full web address, and any goods and packaging that did arrive.</li><li><strong>Do not order again to 'test' the site,</strong> and treat any unsolicited or unverifiable recovery approach as a recovery-scam warning. Verify it independently and never pay an unexpected upfront release or recovery fee. Our <a href='/recovery/'>scam recovery checklist</a> sets out the payment, account and identity steps in order.</li></ul>"
+      ],
+      [
+        "How to report a fake website in the UK",
+        "<p>Report a suspicious website through the National Cyber Security Centre's phishing and scam reporting routes, and send scam emails to <strong>report@phishing.gov.uk</strong>. If you have lost money or handed over details, report it to <strong>Report Fraud</strong> (formerly Action Fraud) at <a href='https://www.reportfraud.police.uk' rel='nofollow'>reportfraud.police.uk</a> or 0300 123 2040 in England, Wales or Northern Ireland, or Police Scotland on 101 in Scotland. Many brands run their own report-a-fake form for counterfeit sites and listings. For consumer-rights help, use the service for your nation: Citizens Advice in England and Wales on 0808 223 1133, Advice Direct Scotland in Scotland on 0808 800 9060, or Consumerline in Northern Ireland on 0300 123 6262. In England and Wales, Citizens Advice can also pass a trader on to Trading Standards. A medicine you think is fake or counterfeit can be reported to the MHRA through the Yellow Card Scheme on GOV.UK.</p>"
+      ]
+    ],
+    "faq": [
+      [
+        "How can I tell if a website is fake before I buy?",
+        "No single check settles it, so judge the pattern. Read the full domain slowly, look for a named business with a geographic address and clear pricing, delivery, cancellation and returns terms, search a distinctive product sentence in quotation marks to spot copied text, and search the domain with the words review and refund. A checkout that steers you away from card payment towards a bank transfer or a 'friends and family' payment is a serious warning sign, because it can remove or reduce your protection. Missing details are a warning rather than conclusive evidence, so if several checks fail, pause the purchase."
+      ],
+      [
+        "Does a padlock or https mean a website is safe?",
+        "No. HTTPS authenticates and encrypts the connection between your browser and that domain. It does not show who runs the site, whether the trader is honest, or whether your order will be fulfilled. Copycat shops routinely hold valid certificates, so treat the padlock as a minimum requirement rather than reassurance."
+      ],
+      [
+        "Is DHgate, Wish, AliExpress or Temu a scam?",
+        "These are operating marketplaces rather than fabricated websites, so the platform is real and the risk sits with individual sellers, listings and goods — counterfeits, no-shows and quality problems. Keep payment and messages on the platform, never accept an off-site bank transfer or 'friends and family' request, and open any dispute before the deadline shown on your own order, remembering that a dispute process applies only where its eligibility, payment, evidence and deadline requirements are met."
+      ],
+      [
+        "I paid a fake website by card — can I get my money back?",
+        "Possibly, and speed helps. Contact your card issuer or bank on the number on your card. For a credit card purchase, Section 75 of the Consumer Credit Act 1974 may apply where the cash price of a single item or qualifying set is more than £100 and no more than £30,000 and the required credit-to-supplier relationship exists. For debit and other card payments, ask about chargeback — a card scheme process rather than a statutory right, with its own time limits. Keep all your evidence."
+      ]
+    ],
+    "sources_checked": [
+      [
+        "GOV.UK — consumer advice services for England and Wales, Scotland and Northern Ireland",
+        "https://www.gov.uk/consumer-advice"
+      ],
+      [
+        "MHRA — register of authorised online sellers of medicines in Northern Ireland (published 24 June 2026)",
+        "https://www.gov.uk/government/publications/register-of-authorised-online-sellers-of-medicines-in-northern-ireland"
+      ],
+      [
+        "Pharmaceutical Society of Northern Ireland — search the register",
+        "https://registers.psni.org.uk/"
+      ],
+      [
+        "General Pharmaceutical Council — search our registers (Great Britain)",
+        "https://www.pharmacyregulation.org/registers"
+      ],
+      [
+        "GOV.UK — report a problem with a medicine or medical device, including one you think is fake or counterfeit",
+        "https://www.gov.uk/report-problem-medicine-medical-device"
+      ],
+      [
+        "Consumer Credit Act 1974, section 75",
+        "https://www.legislation.gov.uk/ukpga/1974/39/section/75"
+      ],
+      [
+        "UK Finance — Annual Fraud Report 2026 press release (purchase scam cases and losses)",
+        "https://www.ukfinance.org.uk/news-and-insight/press-release/fraud-report-2026-press-release"
+      ],
+      [
+        "NCSC — report a scam website",
+        "https://www.ncsc.gov.uk/collection/phishing-scams/report-scam-website"
+      ],
+      [
+        "GOV.UK — Online and distance selling for businesses (trader identity, address and pricing duties)",
+        "https://www.gov.uk/online-and-distance-selling-for-businesses"
+      ],
+      [
+        "GPhC — Guidance for registered pharmacies providing pharmacy services at a distance (February 2025)",
+        "https://assets.pharmacyregulation.org/files/2025-02/gphc-guidance-registered-pharmacies-providing-pharmacy-services-distance-february-2025.pdf"
+      ],
+      [
+        "GOV.UK — Register for the distance selling logo (required in Northern Ireland)",
+        "https://www.gov.uk/guidance/register-for-the-distance-selling-logo"
+      ]
+    ],
+    "updated": "2026-07-30"
+  },
+  "tech": {
+    "title": "Tech Support Scams UK: Remote Access and Fake Alerts",
+    "description": "Fake support calls, virus pop-ups and remote-access requests: how UK tech support scams work, how to shut one down, and what to do if you granted access.",
+    "intro": "<p>Tech scams may seek direct payment, remote control, credentials or access to accounts. A pop-up announces that your PC is infected. A caller reports a fault on your line. A sticker on a parking meter sends you to a payment page that is not the operator's. A voice on the phone sounds exactly like your daughter. In every version the criminal is borrowing something you already trust — a brand, a network name, a familiar voice.</p><p>Technology companies do contact their customers, so the channel settles nothing. <strong>The request is what gives it away</strong>: remote access to your device, a payment to fix a problem you never reported, a security code read aloud, or credentials typed into a page you did not navigate to yourself. Not sure about a pop-up, call or message? Paste it into our free <a href='/check/'>AI scam checker</a> for an automated second opinion. It is a fallible assessment, not a verdict, so still verify the contact independently.</p>",
+    "sections": [
+      [
+        "Four routes a tech scam takes",
+        "<p><strong>The unsolicited support call.</strong> A caller claims a virus, a fault or a refund and works towards remote access or a payment. Microsoft says it does not make unsolicited calls or send unsolicited messages to provide technical support, and that genuine Microsoft error and warning messages do not include telephone numbers — the basis of our <a href='/guides/microsoft-support-scam-uk-guide/'>Microsoft support scam guide</a>. HP says it does not provide unsolicited technical support, covered in our <a href='/guides/printer-support-scam-uk/'>printer support scam guide</a>. Broadband and phone providers are impersonated the same way, as our guide to <a href='/guides/isp-impersonation-scam-bt-sky-virgin-media/'>BT, Sky, Virgin Media and Openreach impersonation calls</a> explains. Do not stretch those company statements into a belief that no technology company ever telephones anyone — many do, for genuine reasons.</p><p><strong>The browser pop-up.</strong> A full-screen warning, often with an alarm sound and a number to ring, appears while you are browsing. Apple's guidance is to treat such browser alerts as fraudulent; our <a href='/guides/apple-tech-support-scam-uk/'>Apple tech support scam guide</a> covers what to do instead of calling. A number displayed in a warning is a number the attacker chose, so dialling it is not the same as contacting the company.</p><p><strong>The environmental trick.</strong> Here the attacker changes something in the world rather than contacting you: a code sticker placed over a genuine one, explained in our <a href='/guides/qr-code-scam-uk/'>QR code 'quishing' guide</a>, or a wireless network that copies a venue's name, covered in our <a href='/guides/fake-wifi-hotspot-scam-uk/'>fake Wi-Fi hotspot guide</a>.</p><p><strong>The attack on your identity rather than your device.</strong> Criminals take over your mobile number to intercept security codes — see <a href='/guides/sim-swap-fraud-uk/'>SIM swap fraud warning signs</a> — or use AI to imitate someone you know, in <a href='/guides/ai-voice-cloning-scam-uk/'>voice cloning scams</a> and in <a href='/guides/deepfake-video-scam-uk/'>sextortion using AI-generated images or video</a>. Cifas recorded a 38% rise in unauthorised SIM swaps in its Fraudscape 2026 report, which also logged a record 444,993 cases filed by its members during 2025; more dated figures are in our <a href='/research/uk-scam-statistics/'>UK scam statistics research</a>.</p>"
+      ],
+      [
+        "Remote access: genuine tools, unverified control",
+        "<p>AnyDesk, TeamViewer, Quick Assist and Chrome Remote Desktop are legitimate products, used every day by real IT departments and by trusted family, friends and workplace IT. Installing one is not inherently a scam. Remote-access tools are legitimate; the danger is granting control to a person or service you have not independently authenticated. An unsolicited call is a major warning, but so is a support number taken from a pop-up, message or search advert. Start from the vendor's official site or an existing trusted support channel.</p><p>The exposure is the whole point. Google says a person given Chrome Remote Desktop support access can have full access to apps, files, emails, documents and history. Microsoft's Quick Assist warning is specifically about someone claiming to be Microsoft Support: allow that helper in only if you started the contact with Microsoft Support yourself. TeamViewer says it does not provide remote-support services itself, so a caller presenting themselves as 'TeamViewer support' deserves immediate suspicion. Our <a href='/guides/remote-access-scam-uk/'>remote access scam guide</a> sets out what to do the moment you realise access has been granted.</p>"
+      ],
+      [
+        "Decision tree: is this contact genuine?",
+        "<ul><li><strong>Where did the number or link come from?</strong> A contact route you found on the vendor's official site, or an existing trusted support channel, is not the same as one supplied by a pop-up, a message or a search advert — even when you were the one who dialled. Treat anything that followed an unverified route as unauthenticated, including anything the helper appears to know about you.</li><li><strong>Is there a phone number in the warning?</strong> Microsoft says its genuine error and warning messages do not include telephone numbers, and Apple's guidance is to treat browser alerts claiming an infection as fraudulent. A pop-up that hands you a support number to ring is advertising at best.</li><li><strong>Does it require remote control before anything else?</strong> Pause there. Remote access can be reasonable once you have authenticated the helper through a route you chose and described the problem yourself; the safety issue is unverified control, not remote access as such.</li><li><strong>Is payment part of the fix?</strong> Be especially wary of gift cards, cryptocurrency, a bank transfer, or a 'refund' that requires you to sign in to online banking while the caller listens.</li><li><strong>Did the page arrive from a code, link or network you did not choose?</strong> Inspect the destination without opening it where your device offers a preview or long-press option — some devices show a preview, others open straight after a tap, and a shortened or redirected address is not conclusive either way. Confirm the exact network name with venue staff before connecting.</li><li><strong>Does it sound like someone you know, in an emergency, asking for money?</strong> A familiar voice is not sufficient evidence of identity on its own, especially when it is paired with an emergency and an urgent payment. End the call, ring the person back on the number you already have, and consider agreeing a family codeword in advance.</li></ul>"
+      ],
+      [
+        "How to shut it down, and what to do afterwards",
+        "<ul><li><strong>End the contact.</strong> Hang up, or close the tab; if a pop-up will not close, restart the device. You do not need to interact with the warning to be rid of it.</li><li><strong>If you granted access:</strong> end the session, disconnect the device from the network, remove or disable the remote-access application, update the operating system and security software, and run a security scan. A scan that finds nothing is reassuring but is not evidence that the device is clean.</li><li><strong>Secure the accounts, not just the device.</strong> From a different, trusted device, change your email password first — it is the reset route for everything else — then banking and shopping, and turn on two-step verification. Revoke unfamiliar sign-in sessions, app passwords and connected applications, and check your email forwarding, filter and account-recovery settings, because a rule or recovery address added during the session keeps working after a password change.</li><li><strong>Review bank and card activity from another trusted device,</strong> and if money or banking was involved contact your bank immediately on the number on your card or by dialling 159.</li><li><strong>If the helper had administrative access,</strong> installed software you cannot identify, disabled security controls, or if access seems to persist, seek trusted technical help and consider a full reset or rebuild rather than assuming the clean-up worked.</li><li><strong>If your phone lost signal without explanation,</strong> contact your mobile network from another device straight away. A sudden, total loss of service can indicate a SIM swap, though activation delays and network faults look similar.</li><li><strong>If you are being threatened with intimate images or video,</strong> including AI-generated material: stop replying, do not pay, keep the messages and any evidence, and report the account to the platform. Contact the police on 101 about a suspected offence, or 999 if the threat is immediate. Adults in the UK can contact the Revenge Porn Helpline on 0345 6000 459. StopNCII can be used by an adult who is depicted in an eligible image or video, was 18 or older when it was created, and still holds the file. It creates a hash on the person's device for use by participating platforms; it does not upload the image itself. If the image was taken when the person was under 18, use the child-protection routes signposted by police, Childline, CEOP or Report Remove rather than an adult service. Our <a href='/guides/deepfake-video-scam-uk/'>guide to AI-generated sextortion</a> walks through it.</li><li>Work through our <a href='/recovery/'>scam recovery checklist</a> for the full order of operations.</li></ul>"
+      ],
+      [
+        "How to report a tech scam in the UK",
+        "<p>Send suspicious emails to <strong>report@phishing.gov.uk</strong>, and a suspicious SMS text can be forwarded to 7726 free of charge. Report money lost or details shared to <strong>Report Fraud</strong> (formerly Action Fraud) at <a href='https://www.reportfraud.police.uk' rel='nofollow'>reportfraud.police.uk</a> or 0300 123 2040 in England, Wales or Northern Ireland, or Police Scotland on 101 in Scotland. Tell the impersonated company through its official website, and report a tampered physical code to whoever owns the site, such as the council or car park operator. For consumer-rights help, use the service for your nation: Citizens Advice in England and Wales on 0808 223 1133, Advice Direct Scotland in Scotland on 0808 800 9060, or Consumerline in Northern Ireland on 0300 123 6262.</p>"
+      ]
+    ],
+    "faq": [
+      [
+        "Does Microsoft or Apple ever ring you about a virus?",
+        "Microsoft says it does not make unsolicited calls or send unsolicited messages to provide technical support, and that its genuine error and warning messages do not include telephone numbers. Apple's guidance is to treat browser alerts claiming your device is infected as fraudulent. That does not mean no technology company ever telephones a customer, so judge any contact by what it asks for — remote access, a payment or a security code are the warning signs, whatever name is used. A number from a pop-up or search advert is no safer just because you dialled it, and an official app is no safer if an unexpected caller is directing what you approve in it."
+      ],
+      [
+        "Is AnyDesk, TeamViewer or Quick Assist a scam app?",
+        "No. They are legitimate remote-access tools, used routinely by genuine IT support teams and by trusted family, friends and workplace IT. The danger is granting control to a person or service you have not independently authenticated — which includes a helper reached on a number from a pop-up, message or search advert, not only an unsolicited caller. Microsoft's Quick Assist warning is specifically about someone claiming to be Microsoft Support: allow that helper in only if you started the contact with Microsoft Support yourself. TeamViewer says it does not provide remote-support services itself, so a caller presenting themselves as 'TeamViewer support' deserves immediate suspicion."
+      ],
+      [
+        "I let someone remote into my computer — what should I do now?",
+        "End the session and disconnect the device from the network, then remove or disable the remote-access application, update the operating system and security software, and run a security scan. From a different, trusted device, change your email password first, then banking and shopping, turn on two-step verification, revoke unfamiliar sign-in sessions, app passwords and connected applications, and check your email forwarding and account-recovery settings. Review bank and card activity from that trusted device, and contact your bank on the number on your card or by dialling 159 if money may be exposed. If the helper had administrative access, installed software you cannot identify, or access seems to persist, get trusted technical help and consider a full reset. Then report it to Report Fraud at reportfraud.police.uk or 0300 123 2040 in England, Wales or Northern Ireland, or Police Scotland on 101 in Scotland."
+      ],
+      [
+        "Can a QR code or public Wi-Fi really take my details?",
+        "Indirectly, yes. A code sticker placed over a genuine one can send you to a convincing but fraudulent payment page. An evil-twin hotspot copies a trusted network name: it can steer users towards phishing and expose unencrypted traffic or connection metadata, while HTTPS limits direct reading of protected page content. Inspect a code's destination without opening it where your device offers a preview or long-press option, ask venue staff to confirm the exact network name, prefer mobile data for sensitive tasks, and do not treat a VPN as protection from a fraudulent site."
+      ],
+      [
+        "A call sounded exactly like my son asking for money — was it real?",
+        "Treat it as unverified. AI can clone a recognisable voice from recordings of that person speaking, so a familiar voice is not sufficient evidence of identity on its own, particularly when the call combines an emergency with an urgent payment. Hang up and ring the person back on the number you already have saved, or check with another family member. Agreeing a private family codeword in advance gives you a quick way to confirm a genuine call later."
+      ]
+    ],
+    "sources_checked": [
+      [
+        "GOV.UK — consumer advice services for England and Wales, Scotland and Northern Ireland",
+        "https://www.gov.uk/consumer-advice"
+      ],
+      [
+        "StopNCII — eligibility criteria for creating a case",
+        "https://stopncii.org/create-your-case/?lang=en-gb"
+      ],
+      [
+        "StopNCII — how it works: the hash is generated on your device and the image is not uploaded",
+        "https://stopncii.org/how-it-works/"
+      ],
+      [
+        "StopNCII — frequently asked questions, including the route for content of someone under 18",
+        "https://stopncii.org/faqs/"
+      ],
+      [
+        "Revenge Porn Helpline",
+        "https://revengepornhelpline.org.uk/"
+      ],
+      [
+        "Microsoft — protect yourself from tech support scams",
+        "https://www.microsoft.com/en-us/wdsi/threats/support-scams"
+      ],
+      [
+        "Microsoft — solve PC problems remotely using Quick Assist",
+        "https://support.microsoft.com/en-us/windows/apps/solve-pc-problems-remotely-using-quick-assist"
+      ],
+      [
+        "Apple — recognise and avoid social engineering schemes, phishing and phony support calls",
+        "https://support.apple.com/en-gb/102568"
+      ],
+      [
+        "Google — share your computer with someone else (Chrome Remote Desktop access)",
+        "https://support.google.com/chrome/answer/1649523"
+      ],
+      [
+        "TeamViewer — TeamViewer and scamming",
+        "https://www.teamviewer.com/en-us/global/support/knowledge-base/teamviewer-remote/security/teamviewer-and-scamming/"
+      ],
+      [
+        "Cifas — Fraudscape",
+        "https://www.fraudscape.co.uk"
+      ],
+      [
+        "NCSC — phishing and scam reporting",
+        "https://www.ncsc.gov.uk/collection/phishing-scams"
+      ],
+      [
+        "HP — official global fraud alert: HP does not provide unsolicited technical support",
+        "https://www.hp.com/us-en/hpfraud-alert.html"
+      ]
+    ],
+    "updated": "2026-07-30"
+  },
+  "finance": {
+    "title": "Investment Scams UK: Spot Fake Firms, Bonds & Pensions",
+    "description": "Fake bonds, clone firms, boiler-room calls, pension cold calls and paid-for debt help all target your savings. How to check a firm, and how to report one.",
+    "intro": "<p>Finance scams go after money you have <strong>saved</strong>, or money you <strong>owe</strong>, rather than money you are spending. The approach is usually either an <strong>investment</strong> — a bond, shares, forex, land, a trading platform — or a <strong>way out of debt</strong>, and both borrow credibility from the regulated world: a real firm's name, a genuine reference number, a brochure that looks like it came from a bank. UK Finance's Annual Fraud Report 2026 recorded £221.5 million lost to investment fraud in 2025, up 40% on the year and the largest single share of authorised push payment losses, across 14,893 cases, up 26%. Both of those figures are UK Finance's investment-fraud category within the authorised push payment scams reported by its member banks: they are not a total for all finance fraud, all investment losses or all fraud reports. The wider picture, with every publisher named, is in our <a href='/research/uk-scam-statistics/'>UK scam statistics</a>.</p><p>Been approached about an investment or a debt solution? Paste it into our free <a href='/check/'>AI scam checker</a> for an automated second opinion. It is an automated second opinion, not a verdict, and it does not replace checking a firm or a seller for yourself.</p>",
+    "sections": [
+      [
+        "What makes a finance scam different",
+        "<ul><li><strong>The amounts are large.</strong> Not a £2.99 'redelivery fee' but a deposit, a transfer, or an entire pension pot — so the check you make before paying matters far more than the one afterwards.</li><li><strong>They borrow the regulator's authority.</strong> Fraudsters quote real firm names and genuine reference numbers, because they know a careful reader looks for exactly those things.</li><li><strong>The pressure can be slow or immediate.</strong> Some investment scams build trust over weeks, using fabricated dashboards or small early withdrawals. Others pressure you to invest immediately. Either pattern is dangerous when the offer is unsolicited or cannot be verified independently. Where an early payout is real, it can be funded from your own deposit, from later investors or from other victims; in other cases the profit exists only on a fabricated dashboard and no money was ever invested. Either way it is not a return.</li></ul>"
+      ],
+      [
+        "Which finance scam are you dealing with?",
+        "<p>Work from how the approach reached you and what it was selling.</p><ul><li><strong>An unsolicited offer of a fixed, high return,</strong> often called exclusive or a 'private placement' — see how <a href='/guides/bond-scam-uk/'>fake high-return bonds work</a>, and the FCA's own rule of thumb that the higher the advertised rate, the higher the risk.</li><li><strong>A cold call about shares,</strong> sometimes with a complimentary research report thrown in: the FCA calls this a boiler room, and our guide covers <a href='/guides/share-fraud-uk/'>spotting a boiler-room share cold call</a>.</li><li><strong>A firm whose contact details do not match the FCA Register,</strong> or which says the Register is out of date — the clone-firm trick, explained in <a href='/guides/clone-firm-investment-scam-uk/'>how clone firm investment scams work</a>.</li><li><strong>A platform promising guaranteed profits,</strong> usually reached through social media: read <a href='/guides/forex-trading-scam-uk/'>how to spot a fake forex broker</a>.</li><li><strong>Returns that depend on new people joining.</strong> Returns paid from later investors' money are a Ponzi pattern. A scheme that rewards you primarily for recruiting friends or relatives is a pyramid pattern. Both depend on a continuing flow of new money and collapse when it stops. If you are offered commission for introducing friends, read our <a href='/guides/ponzi-scheme-uk-warning/'>Ponzi scheme warning</a> first.</li><li><strong>Cheap plots of land said to be certain of planning permission</strong> — our guide to <a href='/guides/land-banking-scam-uk/'>land banking scams</a> explains why to check the council's planning portal, not the brochure.</li><li><strong>An unexpected call about your pension.</strong> Unsolicited live calls about pensions have been banned in the UK since 9 January 2019. The exception is narrow and has two limbs that both have to be met: the caller must be authorised by the FCA <em>or</em> be the trustee or manager of an occupational or personal pension scheme; <em>and</em> you must either have consented to calls from that caller, or have an existing relationship with them in which you would reasonably expect the call. A cold caller cannot demonstrate either on the spot, so hang up and check independently — our guide to <a href='/guides/pension-cold-call-scam-uk/'>pension cold calls</a> covers the ban and what to do if a transfer has already started.</li></ul>"
+      ],
+      [
+        "Checking a firm — and what the check cannot tell you",
+        "<ul><li><strong>Search for the firm yourself</strong> on the FCA Firm Checker and the Financial Services Register at <a href='https://register.fca.org.uk' rel='nofollow noopener'>register.fca.org.uk</a>, typing the address in rather than following a link you were sent.</li><li><strong>Confirm the exact firm, contact details and relevant permission.</strong> Correct authorisation can make regulatory complaint or compensation routes available, but the product and activity determine whether they apply.</li><li><strong>Absence from the Firm Checker is a warning sign, not proof.</strong> Some lawful activities are not regulated at all, so absence is decisive only where the service being offered is one that should be regulated. It is still reason enough to stop and take free, impartial guidance before paying anything.</li><li><strong>Being listed is not proof either.</strong> Clone firms impersonate authorised firms and reuse their genuine names and reference numbers, so check the <em>contact details</em> on the Register entry itself and call back only on the number shown there — never the details supplied by the approach. Any claim that the Register is 'out of date' is a warning sign in itself.</li><li><strong>Check the FCA Warning List,</strong> then ask precisely how the return is generated. A firm that cannot explain that in checkable terms has told you something important.</li></ul>"
+      ],
+      [
+        "When the offer is help rather than profit",
+        "<p>The same pattern runs in reverse for people who are struggling: instead of a return, you are promised relief. A cold approach offering to write off most of your debt through a vague 'government scheme' for an upfront fee is covered in our guide to <a href='/guides/debt-relief-scam-uk/'>fake debt help companies</a>, and the version that pushes one product hard is in <a href='/guides/iva-scam-uk/'>how to spot a fake IVA firm</a>.</p><p>An individual voluntary arrangement is a genuine, formal debt solution, and legitimate IVAs do involve nominee and supervisor fees. Under the IVA Protocol those fees are generally met from within the agreed monthly payments rather than demanded as a separate upfront charge to release the arrangement, so the existence of a fee is not itself the warning sign. What should stop you is an unsolicited, high-pressure approach from a lead generator; a promise that an IVA is guaranteed or suitable before anyone has assessed your circumstances; a separate payment demanded upfront; a caller who will not say which firm they actually work for; or a pitch that never explains the alternatives or the insolvency practitioner's role. IVAs are available in England, Wales and Northern Ireland; Scotland has different formal debt solutions, including protected trust deeds and the Debt Arrangement Scheme. Get jurisdiction-specific free debt advice before agreeing to any solution. Free, impartial debt advice is available through the debt-help route on GOV.UK and through MoneyHelper, and from free providers such as StepChange and National Debtline — compare the options there before agreeing to anything paid.</p><p>A third variant pays <em>you</em>. If a 'job' involves money arriving in your own account and being forwarded on for a cut, read <a href='/guides/money-mule-scam-uk/'>how money mule recruitment works</a>: the account can be frozen with your own money inside it.</p>"
+      ],
+      [
+        "If you have already paid",
+        "<ul><li><strong>Stop sending money,</strong> including any fee or tax described as needed to release your balance. An unexpected payment demanded before a displayed balance can be released is part of the scam, not a route out of it.</li><li><strong>Contact your bank straight away</strong> and say it was a scam. For eligible domestic consumer Faster Payments and CHAPS payments made since 7 October 2024, mandatory reimbursement may apply, subject to an £85,000 cap, a possible excess of up to £100 that cannot be applied to a consumer the firm assesses as vulnerable, and a limit of 13 months from the last relevant payment. Exclusions apply, so it is never a guaranteed refund.</li><li><strong>Keep everything</strong> — contracts, emails, chat logs, payment confirmations — and screenshot it before a platform can withdraw your access. Then work through our <a href='/recovery/'>scam recovery checklist</a>.</li><li><strong>Expect a second approach, and treat it as expected rather than as your mistake.</strong> Fraudsters deliberately re-target people known to have lost money, sometimes under a new name. A caller claiming to be the FCA, the police or a law firm offering to release your funds for a fee is described in our guide to <a href='/guides/recovery-room-scam-uk/'>recovery room scams</a>.</li></ul>"
+      ],
+      [
+        "How to report a finance scam in the UK",
+        "<p>Tell your bank first if money has moved — it holds the reimbursement process. Report a suspected unauthorised or clone firm to the <strong>FCA</strong> on 0800 111 6768. Report the fraud to <strong>Report Fraud</strong> (formerly Action Fraud) at <a href='https://www.reportfraud.police.uk' rel='nofollow'>reportfraud.police.uk</a> or 0300 123 2040 in England, Wales or Northern Ireland, or to Police Scotland on 101 in Scotland. Forward a suspicious email to <strong>report@phishing.gov.uk</strong>, and forward a suspicious text message to <strong>7726</strong> free of charge.</p>"
+      ]
+    ],
+    "faq": [
+      [
+        "Does FCA authorisation mean an investment is safe?",
+        "No. Authorisation means a firm may carry on a regulated activity; it says nothing about whether an investment is suitable or will hold its value. Correct authorisation can make regulatory complaint or compensation routes available, but the product and activity determine whether they apply. It also does not confirm who you are speaking to — clone firms impersonate authorised businesses and reuse their genuine names and reference numbers. Check the contact details on the Register entry itself and call back only on the number shown there."
+      ],
+      [
+        "Is a firm missing from the FCA Firm Checker definitely a scam?",
+        "Not automatically, but treat it as a serious warning sign and pay nothing while the question is open. Some lawful activities sit outside FCA regulation, so absence is decisive only where the service being offered is one that should be regulated, and a name can also be spelled differently. Look the firm up again under its exact registered name, check the FCA Warning List, and take free, impartial guidance before committing money."
+      ],
+      [
+        "I was cold-called about my pension. Is that allowed?",
+        "Unsolicited live calls about pensions have been banned in the UK since 9 January 2019. The exception is narrow and both limbs must be met: the caller has to be authorised by the FCA or be the trustee or manager of an occupational or personal pension scheme, and you have to have consented to calls from that caller or have an existing relationship with them in which you would reasonably expect the call. A cold caller cannot demonstrate either on the spot, so hang up, then contact your provider or MoneyHelper's free guidance yourself."
+      ],
+      [
+        "Can I get money back after an investment scam bank transfer?",
+        "Sometimes. Tell your bank immediately and say it was a scam. Mandatory reimbursement can apply to eligible domestic consumer Faster Payments and CHAPS payments made since 7 October 2024, subject to an £85,000 cap, a possible excess of up to £100 that cannot be applied to a consumer the firm assesses as vulnerable, and a 13-month limit from the last relevant payment. Exclusions apply, so it is not guaranteed."
+      ]
+    ],
+    "sources_checked": [
+      [
+        "FCA — Get-rich-quick, Ponzi and pyramid schemes",
+        "https://www.fca.org.uk/consumers/get-rich-quick-ponzi-and-pyramid-schemes"
+      ],
+      [
+        "FCA — Crypto and investment scams (pressure tactics, unregistered firms)",
+        "https://www.fca.org.uk/consumers/crypto-investment-scams"
+      ],
+      [
+        "FCA — Using the Financial Services Register and Firm Checker",
+        "https://www.fca.org.uk/consumers/using-financial-services-register"
+      ],
+      [
+        "Insolvency Service — IVA research (applies to England, Northern Ireland and Wales)",
+        "https://www.gov.uk/guidance/insolvency-service-research-into-individual-voluntary-arrangements-ivas"
+      ],
+      [
+        "GOV.UK — IVA Protocol: key facts (fees met from monthly payments, not upfront)",
+        "https://www.gov.uk/government/publications/individual-voluntary-arrangement-iva-protocol/key-facts-protocol-individual-voluntary-arrangements-iva"
+      ],
+      [
+        "nidirect — Individual voluntary arrangements (Northern Ireland)",
+        "https://www.nidirect.gov.uk/articles/individual-voluntary-arrangements-ivas"
+      ],
+      [
+        "mygov.scot — Trust deeds (Scotland)",
+        "https://www.mygov.scot/what-is-trust-deed"
+      ],
+      [
+        "mygov.scot — Debt Arrangement Scheme (Scotland)",
+        "https://www.mygov.scot/debt-arrangement-scheme"
+      ],
+      [
+        "Privacy and Electronic Communications (Amendment) (No. 2) Regulations 2018 — pension cold-calling ban",
+        "https://www.legislation.gov.uk/uksi/2018/1396/made"
+      ],
+      [
+        "Payment Systems Regulator — APP fraud reimbursement protections",
+        "https://www.psr.org.uk/information-for-consumers/app-fraud-reimbursement-protections/"
+      ],
+      [
+        "UK Finance — Annual Fraud Report 2026 (investment fraud £221.5m, 14,893 cases)",
+        "https://www.ukfinance.org.uk/news-and-insight/press-release/fraud-report-2026-press-release"
+      ]
+    ],
+    "updated": "2026-07-30"
+  },
+  "crypto": {
+    "title": "Crypto Scams UK: Fake Platforms, Wallets & Recovery",
+    "description": "Fake exchanges, wallet drainers, crypto ATM demands and 'recovery' offers. Why a confirmed crypto transfer cannot be reversed, and how to check before you send.",
+    "intro": "<p>Crypto scams are ordinary scams running on a payment rail with no undo button. <strong>A confirmed on-chain transfer has no cancellation or chargeback mechanism.</strong> An exchange may be able to stop a <em>pending</em> withdrawal or restrict an account it controls, but an exchange or wallet provider cannot unilaterally reverse a confirmed transfer to a self-hosted wallet. That single fact explains why criminals ask for crypto — and why almost all the protection in this category happens <em>before</em> you send.</p><p>Unsure about a platform, a message or a payment demand? Paste it into our free <a href='/check/'>AI scam checker</a> for an automated second opinion. It is an automated second opinion, not a verdict, and it does not replace checking a firm or a seller for yourself.</p>",
+    "sections": [
+      [
+        "Two very different things get called a 'crypto scam'",
+        "<p><strong>Crypto as the product.</strong> You are sold an investment — a platform, a trading bot, a coin — and the returns are fictional. An FCA consumer survey estimated that 1.5% of UK adults, around 800,000 people, had experienced a pensions-related or investments-related fraud or scam, including cryptocurrency, in the 12 months to May 2024; more context, with the publisher and period for every figure, is in our <a href='/research/uk-scam-statistics/'>UK scam statistics</a>.</p><p><strong>Crypto as the payment method.</strong> Here the story has nothing to do with investing: a tax bill, a fine, a 'safe account', a locked profile. Crypto is simply how the money leaves. Our guide to <a href='/guides/cryptocurrency-payment-scam-uk/'>unexpected demands to pay in cryptocurrency</a> covers that whole class, and the most aggressive version — a caller walking you to a machine to feed cash in — is in <a href='/guides/bitcoin-atm-scam-uk/'>why a caller sending you to a Bitcoin ATM is a scam</a>.</p>"
+      ],
+      [
+        "Which crypto scam is this?",
+        "<ul><li><strong>You were approached about a platform promising guaranteed or unusually high returns,</strong> perhaps with a celebrity endorsement: start with <a href='/guides/crypto-investment-scams-uk-protection/'>spotting a fake crypto investment platform</a>, or <a href='/guides/bitcoin-scam-uk/'>Bitcoin investment scams</a> specifically.</li><li><strong>You deposited on a site that looked like an exchange you know:</strong> see <a href='/guides/fake-crypto-exchange-uk/'>how cloned trading platforms work</a>. An early small withdrawal that succeeded is a trust-building tactic, not reassurance.</li><li><strong>You received a security message about an existing exchange account</strong> — a suspension, a hold, an unusual login: our guide to <a href='/guides/binance-impersonation-scam-uk/'>fake Binance messages</a> covers the official way to verify one.</li><li><strong>You were asked to connect a wallet and sign an 'approval' or a no-cost 'claim'.</strong> Connecting alone usually does not move assets, but it is not proof of safety. Read every approval, signature and transaction; do not accept an unlimited token approval or an unexplained message. Read <a href='/guides/nft-scam-uk/'>how wallet drainers and fake mint sites work</a>.</li><li><strong>You have already lost crypto and been told it has been found.</strong> An unsolicited or unverifiable claim that lost crypto has been found is a recovery-scam warning. Treat it as hostile until independently verified and never pay an upfront release or recovery fee. The pattern is explained in <a href='/guides/crypto-recovery-scam-uk/'>crypto recovery scams</a>.</li></ul>"
+      ],
+      [
+        "What FCA registration does and does not mean for crypto",
+        "<ul><li><strong>It is anti-money-laundering registration, not investment authorisation.</strong> An in-scope crypto exchange or custodian-wallet provider carrying on business in the UK must register with the FCA under the Money Laundering Regulations. That is AML and counter-terrorist-financing supervision, not approval of the product or evidence that Financial Ombudsman Service or FSCS protection applies. Separately, crypto promotions to UK consumers must follow the UK financial-promotions regime, including where the promoter is based overseas. Registration is also not an endorsement, and not a guarantee that the firm is currently compliant.</li><li><strong>Absence is a stop signal; presence is not proof of who you are talking to.</strong> If the firm cannot be found through the FCA's official checks, stop and do not pay. Absence does not by itself prove fraud, but the FCA says the firm is unlikely to have permission to offer the service it claims. Presence is not proof either, because clones reuse authorised firms' names and reference numbers. Verify the contact details on the Register entry itself at <a href='https://register.fca.org.uk' rel='nofollow noopener'>register.fca.org.uk</a> and call back only on the number shown there.</li><li><strong>Two different regimes, two different dates.</strong> The Money Laundering Regulations registration described above is the regime in force as checked in July 2026. A separate and much broader UK regulatory regime for cryptoassets is expected to take effect on 25 October 2027. They are not the same check, so read the date on any guidance you find about crypto protections.</li><li><strong>Crypto ATMs.</strong> As checked in July 2026, the FCA says there are no legally operated crypto ATMs in the UK — so a machine you are directed to is not a regulated route, whoever is on the phone.</li></ul>"
+      ],
+      [
+        "The checks that still work before you send",
+        "<ul><li><strong>Type the address yourself</strong> and compare it character by character with the one you know independently.</li><li><strong>Read every approval, signature and transaction request rather than clicking through it.</strong> Connecting a wallet usually does not itself move anything, but an approval or signature can authorise transfers or ongoing access to your assets long after you have closed the site — which is a different thing from a one-off payment.</li><li><strong>Never share a seed phrase or private key</strong> with anyone, including anyone offering to help you recover funds. No genuine service needs them.</li><li><strong>Be suspicious of any extra payment demanded to release a balance.</strong> Legitimate platforms can charge disclosed network or withdrawal fees, and genuine tax liabilities do exist. The scam pattern is narrower and recognisable: an unexpected fee or 'tax', asked for by a platform or a recovery agent you cannot independently verify, before a balance shown on a screen can be withdrawn.</li><li><strong>Treat an unsolicited approach as the warning sign in itself.</strong></li></ul>"
+      ],
+      [
+        "If you have already sent crypto",
+        "<ul><li><strong>Copy the transaction IDs and destination wallet addresses now.</strong> The on-chain record is one of the few pieces of evidence that survives a platform being switched off, and a reported address is still useful to investigators and exchanges.</li><li><strong>Contact the provider you actually used.</strong> A custodial exchange or app may be able to halt a pending withdrawal or restrict an account it controls; it cannot reverse a confirmed payment to a self-hosted wallet, and a non-custodial wallet service may have no account to act on at all.</li><li><strong>If a seed phrase or private key was exposed, treat the wallet itself as lost.</strong> Move any remaining assets to a new wallet with a new seed phrase generated on a device you trust, and never re-import the exposed phrase. Changing an exchange password cannot secure a compromised self-custody seed, because anyone holding the phrase can rebuild the wallet elsewhere.</li><li><strong>If you paid by card or bank transfer</strong> to buy the crypto or fund a fake platform, tell your bank straight away, then work through our <a href='/recovery/'>scam recovery checklist</a>.</li><li><strong>Expect a follow-up offer of help.</strong> An unsolicited or unverifiable claim that lost crypto has been found is a recovery-scam warning. Treat it as hostile until independently verified and never pay an upfront release or recovery fee. Recovery fraud deliberately targets people already known to have lost crypto: being approached twice reflects how these gangs share and resell victim lists, not anything you did wrong.</li></ul>"
+      ],
+      [
+        "How to report a crypto scam in the UK",
+        "<p>Report a suspected unauthorised or clone firm to the <strong>FCA</strong> on 0800 111 6768. Report the fraud — with the wallet address, transaction IDs and how you were contacted — to <strong>Report Fraud</strong> (formerly Action Fraud) at <a href='https://www.reportfraud.police.uk' rel='nofollow'>reportfraud.police.uk</a> or 0300 123 2040 in England, Wales or Northern Ireland, or to Police Scotland on 101 in Scotland. Report the account or platform to the exchange or marketplace too, forward a phishing email to <strong>report@phishing.gov.uk</strong>, and forward a suspicious text message to <strong>7726</strong> free of charge.</p>"
+      ]
+    ],
+    "faq": [
+      [
+        "Can a crypto payment be reversed or charged back?",
+        "No. A confirmed on-chain transfer has no cancellation or chargeback mechanism. An exchange or app may be able to stop a pending withdrawal or restrict an account it controls, but it cannot reverse a confirmed payment to a self-hosted wallet. If you bought the crypto with a card or bank transfer, report that leg to your bank immediately — the crypto transfer itself is not recallable."
+      ],
+      [
+        "Is a crypto firm registered with the FCA safe to use?",
+        "Registration is not approval. An in-scope crypto exchange or custodian-wallet provider carrying on business in the UK must register with the FCA under the Money Laundering Regulations. That is AML and counter-terrorist-financing supervision, not approval of the product or evidence that Financial Ombudsman Service or FSCS protection applies. Separately, crypto promotions to UK consumers must follow the UK financial-promotions regime, including where the promoter is based overseas. Registration is also not an endorsement, and not a guarantee of current compliance. It also does not confirm who you are dealing with, because clones reuse authorised firms' names and reference numbers. A separate, broader UK regime for cryptoassets is expected to take effect on 25 October 2027."
+      ],
+      [
+        "Are crypto ATMs legal in the UK?",
+        "As checked in July 2026, the FCA says there are no legally operated crypto ATMs in the UK. That matters most in the scam that sends you to one: no genuine bank, tax official or technical-support agent will ask you to withdraw cash and feed it into a machine. If someone is asking you to, end the call and contact the organisation on a number you find yourself."
+      ],
+      [
+        "Someone says they can recover my stolen crypto. Can they?",
+        "An unsolicited or unverifiable claim that lost crypto has been found is a recovery-scam warning. Treat it as hostile until independently verified and never pay an upfront release or recovery fee. The FCA has warned that fraudsters impersonate it in exactly this way. Legitimate platforms can charge disclosed network or withdrawal fees, so the warning sign is narrower: an unexpected payment demanded before a balance you have been shown can be released. Never hand over a private key or seed phrase — no genuine recovery process needs either. If you have already shared one, treat the wallet as lost and move any remaining assets to a new wallet with a new seed phrase generated on a device you trust. Changing an exchange password cannot secure a compromised self-custody seed, because anyone holding the phrase can rebuild the wallet elsewhere."
+      ]
+    ],
+    "sources_checked": [
+      [
+        "FCA — Cryptoasset firms: who needs to register",
+        "https://www.fca.org.uk/firms/cryptoassets/who-needs-register"
+      ],
+      [
+        "FCA — Cryptoassets: AML/CTF regime (registration is not an endorsement; no FOS or FSCS)",
+        "https://www.fca.org.uk/firms/financial-crime/money-laundering-terrorist-financing/cryptoassets-aml-ctf-regime"
+      ],
+      [
+        "FCA — Cryptoassets: the UK regulatory regime (FSMA permissions from 25 October 2027)",
+        "https://www.fca.org.uk/firms/cryptoassets"
+      ],
+      [
+        "FCA — Warning on illegal crypto ATMs operating in the UK",
+        "https://www.fca.org.uk/news/news-stories/warning-illegal-crypto-atms-operating-uk"
+      ],
+      [
+        "FCA — Crypto and investment scams",
+        "https://www.fca.org.uk/consumers/crypto-investment-scams"
+      ],
+      [
+        "FCA — Using the Financial Services Register and Firm Checker",
+        "https://www.fca.org.uk/consumers/using-financial-services-register"
+      ],
+      [
+        "FCA — Financial Lives 2024 survey (investment, pension and crypto fraud prevalence)",
+        "https://www.fca.org.uk/financial-lives/financial-lives-2024"
+      ],
+      [
+        "Payment Systems Regulator — APP fraud reimbursement protections",
+        "https://www.psr.org.uk/information-for-consumers/app-fraud-reimbursement-protections/"
+      ],
+      [
+        "NCSC — Report a scam email (report@phishing.gov.uk)",
+        "https://www.ncsc.gov.uk/collection/phishing-scams/report-scam-email"
+      ],
+      [
+        "ethereum.org — Security: token approvals, signatures and transaction finality",
+        "https://ethereum.org/en/security/"
+      ]
+    ],
+    "updated": "2026-07-30"
+  },
+  "fraud": {
+    "title": "Fraud & Impersonation Scams UK: Spot the Core Pattern",
+    "description": "Someone pretending to be your child, a charity, your solicitor, a recovery agent — or you. How UK impersonation fraud works, how to check, and what to do first.",
+    "intro": "<p>Impersonation fraud is one crime wearing many costumes. Whoever the caller claims to be, the shape is the same: <strong>contact you did not expect, a reason to act before you can check, and a request to move money, share a code or hand over details</strong>. The Crime Survey for England and Wales estimated 4.5 million fraud incidents affecting 3.8 million adults in the year ending March 2026. Fraud accounted for about 47% of the survey's 9.6 million headline-crime incidents; that is a survey comparison, not a share of police-recorded crime and not a UK-wide figure. Our <a href='/research/uk-scam-statistics/'>UK scam statistics</a> set out where those Office for National Statistics figures come from.</p><p>Got a message or call you are unsure about? Paste it into our free <a href='/check/'>AI scam checker</a> for an automated second opinion. It is an automated second opinion, not a verdict, and it does not replace checking a firm or a seller for yourself.</p>",
+    "sections": [
+      [
+        "Learn the pattern once and the costume stops mattering",
+        "<p>Memorising every scam is a losing game — the brands change weekly. Learning the structure underneath is not, which is why our guide to <a href='/guides/beatthescamcom-guide-spotting-and-avoiding-uk-consumer-scams/'>spotting and avoiding UK consumer scams</a> is the one to read if nothing below matches your situation exactly. The response that works everywhere is Take Five: <strong>stop</strong> before parting with money or information, <strong>challenge</strong> whether it could be fake, and <strong>protect</strong> yourself by verifying through contact details you found independently.</p><p>Two details do most of the work. First, some fraudsters are perfectly willing to hand you a number for a later callback — their own — so the safe test is not whether they let you call back. It is whether you can end the contact completely and then verify through a phone number, app or account you obtained independently. Second, no genuine bank employee will ask you to <em>disclose</em> or read out a full PIN, full password or one-time banking or security code. Enter a code only in the official app or site, for an action you initiated, understand and can match to the code message; never do it at an unexpected caller's direction — a criminal can talk you through a genuine app while dictating the action you are approving. For another support service, verify the request independently and follow the warning in the code message.</p>"
+      ],
+      [
+        "Who are they pretending to be?",
+        "<p>The fastest way into the right guide is to name the costume.</p><ul><li><strong>Your child or another relative, on a 'new number'.</strong> Read <a href='/guides/whatsapp-family-emergency-scam/'>the WhatsApp 'Hi Mum' scam</a> — then call the person on the number you already have saved.</li><li><strong>A charity with an urgent appeal.</strong> Where an appeal claims to represent a registered charity, verify its name and number on the appropriate register. In England and Wales, some small, excepted or exempt charities will not appear, so absence alone is not proof; verify the organisation and payment route independently. Our <a href='/guides/charity-donation-scam-checklist/'>guide to fake donation appeals</a> explains how to use the Charity Commission register for England and Wales, OSCR in Scotland and CCNI in Northern Ireland before giving.</li><li><strong>A stranger who wants you to 'prove you are real'.</strong> The classic personal Google Voice number-linking scam generally concerns an eligible US number. If a UK mobile receives a Google verification code, do not assume it proves a Voice-number link; it may relate to another Google account action. Read the code message and never share it. Where a number is linked, sharing the code can let someone use a service associated with your number: it does not transfer your mobile service. Our guide to <a href='/guides/google-voice-verification-scam/'>the Google Voice verification code scam</a> covers what to do if you have already read a code out.</li><li><strong>Your solicitor or conveyancer, mid-purchase.</strong> A late change of bank details is the whole scam — see <a href='/guides/conveyancing-fraud-uk/'>how to stop 'Friday afternoon fraud'</a>.</li><li><strong>A tradesperson at your door with leftover materials.</strong> Our guide to the <a href='/guides/driveway-cowboy-scam-uk/'>driveway cowboy scam</a> covers doorstep pressure and reporting a rogue trader.</li><li><strong>A recovery agent or 'bank recovery team'.</strong> See <a href='/guides/refund-recovery-scam-warning-signs/'>the warning signs of a fake 'get your money back' firm</a>.</li><li><strong>The owner of a property.</strong> Title fraud is covered in <a href='/guides/deed-fraud-uk-property-scam/'>protecting property from deed fraud</a>.</li><li><strong>You.</strong> When your own identity is the disguise, start with <a href='/guides/identity-theft-uk/'>the warning signs of identity theft</a>.</li></ul>"
+      ],
+      [
+        "When the person being impersonated is you",
+        "<p>Identity fraud is the quietest entry here, because the criminal arranges for the paperwork to go somewhere you do not control. People may discover identity fraud through a refused application, an unfamiliar debt or a credit search they do not recognise, sometimes months later. Cifas reported a record 444,993 cases filed to the National Fraud Database in 2025 in its Fraudscape 2026 report, with identity fraud accounting for more than 242,000 of them.</p><ul><li><strong>Check the reports held by all four agencies MoneyHelper lists</strong> — Experian, Equifax and TransUnion, the three main ones, plus the smaller Crediva — because lenders do not all report to the same agency and each offers a free statutory report.</li><li><strong>Dispute anything unfamiliar with the lender directly,</strong> not only with the agency showing it.</li><li><strong>Consider Cifas Protective Registration.</strong> The National Fraud Database is a Cifas service, and Protective Registration is the UK mechanism for flagging your details so organisations apply extra identity checks to applications in your name. It prompts those extra checks; it is not credit monitoring, so keep checking your own files too, then follow the account and password steps in our <a href='/recovery/'>scam recovery checklist</a>.</li></ul>"
+      ],
+      [
+        "Property fraud runs on a much longer clock",
+        "<p>Property fraud can run for months rather than minutes, and it splits in two. In the first, a criminal poses as an owner to sell or mortgage a property, and the risk is higher where a home is rented out, empty, mortgage-free or owned from abroad. In England and Wales, HM Land Registry's free Property Alert service emails you when certain applications or searches are received against a monitored title, and a title restriction can require a conveyancer to certify that an application really came from the owner — our guide to <a href='/guides/deed-fraud-uk-property-scam/'>deed fraud</a> walks through both. That HM Land Registry guidance covers England and Wales only: Scotland uses Registers of Scotland and Northern Ireland uses Land &amp; Property Services.</p><p>In the second, the transaction is genuine and the <em>email</em> is not, with completion money redirected by a late change of bank details. That is why <a href='/guides/conveyancing-fraud-uk/'>conveyancing fraud</a> is best defeated at the start: get the firm's details early and verify any change by a trusted phone number or in person, never by email alone.</p>"
+      ],
+      [
+        "After a loss, expect a second approach",
+        "<p>People who lose money to fraud may well be targeted again and are at increased risk — by the same group under a new name, or by an operation that bought their details. It is a deliberate business model, not a reflection on the person targeted, and the second approach is often more convincing because the caller already knows what happened. The warning signs are in <a href='/guides/refund-recovery-scam-warning-signs/'>our recovery-scam guide</a>.</p><p>Be precise about which bodies never charge. Your bank, the police, Report Fraud in England, Wales or Northern Ireland, Police Scotland on 101 in Scotland, and the Financial Ombudsman Service do not demand a fee, a tax or a 'release charge' to hand back money that is already yours. Solicitors and paid claims services are different: they may legitimately charge disclosed professional fees for work you have agreed to. So the warning sign is not the word 'fee' — it is an unexpected upfront payment demanded before you see any money.</p><p>If money has moved, contact your bank immediately and say it was a scam, then work through the payment, account and identity steps in our <a href='/recovery/'>scam recovery checklist</a>. Reporting promptly matters more than reporting perfectly.</p>"
+      ],
+      [
+        "How to report fraud in the UK",
+        "<p>Tell your bank first if money or card details are involved. Dial <strong>159</strong> yourself to reach a participating bank, or use the number on your card. Your provider sets the price of a 159 call, so check its current charges. Report the fraud to <strong>Report Fraud</strong> (formerly Action Fraud) at <a href='https://www.reportfraud.police.uk' rel='nofollow'>reportfraud.police.uk</a> or 0300 123 2040 in England, Wales or Northern Ireland, or to Police Scotland on 101 in Scotland. Forward a suspicious text message to <strong>7726</strong> free of charge, and a suspicious email to <strong>report@phishing.gov.uk</strong>. Report a fraudulent collection or appeal to Report Fraud in England, Wales or Northern Ireland, or Police Scotland on 101 in Scotland. If the concern involves an existing registered charity, also raise it with the relevant charity regulator. Report suspected property fraud in England and Wales to HM Land Registry at <strong>reportafraud@landregistry.gov.uk</strong>. For consumer-rights help, use the service for your nation: Citizens Advice in England and Wales on 0808 223 1133, Advice Direct Scotland in Scotland on 0808 800 9060, or Consumerline in Northern Ireland on 0300 123 6262. Each of those services is also the route into Trading Standards for a rogue trader.</p>"
+      ]
+    ],
+    "faq": [
+      [
+        "A family member is messaging from a new number asking for money. What should I do?",
+        "Do not send anything, and do not use the new number to decide. Call the person on the number you already have saved, or video call them through an account you know. A broken or lost phone is the standard excuse for avoiding a live call, because a call would expose the impersonation. If you have already paid, ring your bank using the number on your card and report it as a scam."
+      ],
+      [
+        "How do I check a charity appeal is genuine before I donate?",
+        "Ask for the charity's registration number and check it yourself. Where an appeal claims to represent a registered charity, verify its name and number on the appropriate register. In England and Wales, some small, excepted or exempt charities will not appear, so absence alone is not proof; verify the organisation and payment route independently. The registers are the Charity Commission for England and Wales, OSCR in Scotland and CCNI in Northern Ireland, depending on where the appeal says it is registered. Then donate through the charity's own website, typed in yourself, rather than through a link or a transfer to an individual. Pressure to give before a deadline is a warning sign."
+      ],
+      [
+        "Why does someone want me to read back a verification code?",
+        "Because the code is not for you. Sharing it completes a sign-up or login that the other person triggered against your telephone number. The classic personal Google Voice number-linking scam generally concerns an eligible US number. If a UK mobile receives a Google verification code, do not assume it proves a Voice-number link; it may relate to another Google account action. Read the code message and never share it. Where a number is linked, sharing the code can let someone use a service associated with your number, though it does not transfer your mobile service. Treat 'read me the code to prove you are real' as the scam itself. If the message was a Google Voice code, use Google's official process to disconnect or reclaim your telephone number from any Voice account you do not control. Change your Google password only if you also disclosed credentials or see signs that your own Google account was compromised. For any other account, change that account's password, turn on two-step verification and review recent security activity."
+      ],
+      [
+        "What is Cifas Protective Registration, and do I need it?",
+        "It is the UK mechanism for flagging your details in the National Fraud Database, a Cifas service, so organisations run extra identity checks before opening credit or accounts in your name. It is worth considering if your identity documents or personal data have been exposed. It is not credit monitoring, though, so also check your files with Experian, Equifax and TransUnion, and with Crediva, which MoneyHelper also lists as offering a free statutory report."
+      ]
+    ],
+    "sources_checked": [
+      [
+        "GOV.UK — Consumer advice: helplines for England and Wales, Scotland and Northern Ireland",
+        "https://www.gov.uk/consumer-advice"
+      ],
+      [
+        "GOV.UK — Raising money for charity: public guidance (reporting a fraudulent appeal)",
+        "https://www.gov.uk/guidance/raising-money-for-charity-public-guidance"
+      ],
+      [
+        "GOV.UK — Find charity information (small, excepted and exempt charities are not on the England and Wales register)",
+        "https://www.gov.uk/find-charity-information"
+      ],
+      [
+        "Google Voice Help — Disconnect or reclaim a number you did not link",
+        "https://support.google.com/voice/answer/9177797"
+      ],
+      [
+        "Google Voice Help — Verification codes and claiming a linked number",
+        "https://support.google.com/voice/answer/159519"
+      ],
+      [
+        "Google Voice Help — Google Voice availability (personal accounts, US only)",
+        "https://support.google.com/voice/answer/9774707"
+      ],
+      [
+        "Cifas — Protective Registration (National Fraud Database flag; not credit monitoring)",
+        "https://www.cifas.org.uk/services/identity-protection/protective-registration"
+      ],
+      [
+        "Cifas — Fraudscape 2026 (National Fraud Database filings, identity fraud)",
+        "https://www.cifas.org.uk/newsroom/fraudscape2026"
+      ],
+      [
+        "GOV.UK — Protect your land and property from fraud (England and Wales; reportafraud@landregistry.gov.uk)",
+        "https://www.gov.uk/protect-land-property-from-fraud"
+      ],
+      [
+        "GOV.UK — Property Alert (HM Land Registry, England and Wales)",
+        "https://www.gov.uk/guidance/property-alert"
+      ],
+      [
+        "ONS — Crime in England and Wales: year ending March 2026 (CSEW fraud estimates)",
+        "https://www.ons.gov.uk/peoplepopulationandcommunity/crimeandjustice/bulletins/crimeinenglandandwales/yearendingmarch2026"
+      ],
+      [
+        "Stop Scams UK — 159 (participating banks and providers; provider sets the call cost)",
+        "https://stopscamsuk.org.uk/campaign/get-help-now/"
+      ],
+      [
+        "Ofcom — What to do about a scam call, text or message (forward texts to 7726 free of charge)",
+        "https://www.ofcom.org.uk/phones-and-broadband/scam-calls-and-messages/what-to-do-about-a-scam-call-text-or-message"
+      ],
+      [
+        "NCSC — Report a scam email (report@phishing.gov.uk)",
+        "https://www.ncsc.gov.uk/collection/phishing-scams/report-scam-email"
+      ],
+      [
+        "ICO — Credit: your rights, the credit reference agencies and free statutory reports",
+        "https://ico.org.uk/for-the-public/credit/"
+      ],
+      [
+        "Registers of Scotland — search property information",
+        "https://www.ros.gov.uk/services/search-property-information"
+      ],
+      [
+        "nidirect — Searching the Land Registry (Northern Ireland)",
+        "https://www.nidirect.gov.uk/articles/searching-land-registry"
+      ],
+      [
+        "MoneyHelper — How to check your credit report for free (Experian, Equifax, TransUnion and Crediva)",
+        "https://www.moneyhelper.org.uk/en/everyday-money/credit/how-to-check-your-credit-report"
+      ]
+    ],
+    "updated": "2026-07-30"
+  },
+  "shopping": {
+    "title": "Shopping & Ticket Scams UK: Fake Sellers and Refunds",
+    "description": "Fake sellers, ticket resale traps and phishing 'payment failed' emails. Spot a bad listing, and see how the way you paid changes what you can do next.",
+    "intro": "<p>Purchase fraud is the volume end of UK scams. UK Finance's Annual Fraud Report 2026 recorded that purchase scams made up 71% of authorised push payment scam <em>cases</em> reported by its member banks in 2025, with £118.1 million lost, up 20% on the year — that is a share of one bank-reported dataset, not of all UK fraud, all reports or all crime. Separately, Crime Survey for England and Wales data for the year ending March 2025 found that, among fraud incidents involving an initial financial loss, victims were fully reimbursed in 85% of bank and credit account fraud incidents and 48% of consumer and retail fraud incidents. Those figures are published by the Office for National Statistics and cover England and Wales only. They are also two different survey categories with their own populations and definitions, so read them as separate measures rather than a ranking. What both point at is worth knowing before you pay: <strong>how you pay changes what you can do afterwards</strong>. Our <a href='/research/uk-scam-statistics/'>UK scam statistics</a> give the publisher, period and geography behind each figure.</p><p>Unsure about a seller, a listing or a 'payment failed' email? Paste it into our free <a href='/check/'>AI scam checker</a> for an automated second opinion. It is an automated second opinion, not a verdict, and it does not replace checking a firm or a seller for yourself.</p>",
+    "sections": [
+      [
+        "Three different problems get called a 'shopping scam'",
+        "<p>They need different responses, so separate them before you act.</p><ul><li><strong>The seller does not exist.</strong> The listing is bait, the payment is a bank transfer, and there was never any stock. This is outright fraud and the money is the priority.</li><li><strong>The platform is real but the outcome is bad.</strong> A ticket turns out to be invalid, a refund is refused, or the total you end up paying is not the price you thought you were paying. Our guide to <a href='/guides/viagogo-scam-uk/'>whether Viagogo is safe to buy tickets from</a> is the clearest example of this middle ground. Viagogo is a real secondary ticket marketplace. As of 23 June 2026, the CMA is investigating whether mandatory fees are clearly included in the total price presented at the start of the purchase process; it has not yet made a finding. Start from Viagogo's official app or type viagogo.com or viagogo.co.uk yourself. Follow only an official redirect, and remember that a genuine domain does not guarantee a particular listing or ticket. Separately, treat an off-platform bank-transfer request from anyone claiming to be a Viagogo seller as an impersonation or fraud warning; do not pay and report it to the platform.</li><li><strong>It is phishing wearing a shopping costume.</strong> Nothing is for sale; the message exists to harvest a login or card details, like the fake renewal notices in our guide to <a href='/guides/amazon-prime-scam-uk/'>spotting a fake Amazon Prime email</a>. Retailers do send genuine billing emails, which is exactly why the check is to open the app or type the address yourself and look in your own account.</li></ul>"
+      ],
+      [
+        "Tickets: where the fraud actually happens",
+        "<p>Live events concentrate every ingredient a fraudster wants — a fixed date, limited supply, and a buyer who has already decided to go.</p><ul><li><strong>A festival ticket offered on social media, bank transfer only.</strong> Read <a href='/guides/fake-festival-ticket-scam-uk/'>how to buy a festival ticket safely</a>. A screenshot or PDF of an e-ticket can be copied and sent to several buyers, and a barcode can be reissued or invalidated, so none of it is sufficient evidence that the seller holds a ticket they can transfer to you. Buy through the event's own outlet, or through a reseller you can look up on STAR's member list — membership is one useful input, not a guarantee about a particular ticket.</li><li><strong>Glastonbury specifically,</strong> where the registration-led system makes private resale unusually risky — see <a href='/guides/glastonbury-ticket-scam-uk/'>spotting a fake Glastonbury seller</a>.</li><li><strong>A sold-out gig on Facebook Marketplace or Instagram:</strong> our guide to <a href='/guides/concert-ticket-scam-uk/'>concert ticket scams</a> covers which resale routes verify that the seller actually holds the ticket.</li><li><strong>British Grand Prix or another motorsport event:</strong> see <a href='/guides/f1-british-gp-ticket-scam-uk/'>spotting a fake Silverstone seller</a>, including why being sent an image of a ticket is not the same as having one transferred to you.</li><li><strong>A resale seller offering a better price off-platform.</strong> That discount is the point of the approach — our <a href='/guides/stubhub-ticket-scam-uk/'>StubHub guide</a> explains why leaving the platform leaves its protections behind.</li></ul>"
+      ],
+      [
+        "How you pay decides what you can do next",
+        "<ul><li><strong>Credit card.</strong> Section 75 may apply to a qualifying credit purchase where the cash price of the item or qualifying set is more than £100 and no more than £30,000, provided the required relationship between the credit and the supplier exists. Where it applies, the lender can be jointly liable with the retailer.</li><li><strong>Debit card, or a credit purchase outside the Section 75 thresholds.</strong> Ask your bank about chargeback — a card-scheme process rather than a statutory right, with its own time limits and evidence requirements, so raise it quickly.</li><li><strong>Third-party Buy Now Pay Later.</strong> Qualifying deferred-payment-credit agreements from third-party lenders entered into on or after 15 July 2026 are FCA-regulated, subject to statutory exclusions including certain insurance-premium finance, employee borrowing and social-landlord arrangements. Lenders must be authorised or hold temporary permission, and customers gain complaint and Financial Ombudsman protections. Agreements entered before that date and credit offered directly by a retailer are not brought into this new regime.</li><li><strong>Bank transfer.</strong> The method fraudsters ask for, because you authorised it. Mandatory reimbursement can apply to eligible domestic consumer Faster Payments and CHAPS payments made since 7 October 2024, subject to an £85,000 cap, a possible excess of up to £100 that cannot be applied to a consumer the firm assesses as vulnerable, and a 13-month limit from the last relevant payment. Exclusions apply, so it is not a guaranteed refund.</li><li><strong>'Friends and family' transfers, gift cards and vouchers.</strong> These normally carry no platform purchase protection and no card-style chargeback right. Other statutory or bank remedies can still depend on the facts, so it is worth reporting it and asking. If a seller insists on one of these, do not pay, keep the evidence and report the account.</li></ul>"
+      ],
+      [
+        "Checks that take less than a minute",
+        "<ul><li><strong>Type the address yourself</strong> and read it character by character — lookalike domains with an extra word, a hyphen or a swapped letter are the standard trick.</li><li><strong>Keep the whole purchase on the platform</strong> you started on, payment and messages included.</li><li><strong>Check the total, not the headline price:</strong> fees and delivery charges change the answer.</li><li><strong>Do not rely on evidence that is easy to copy.</strong> A screenshot, PDF or barcode can be duplicated, reissued or invalidated, and ticket systems vary, so none of them establishes who holds a valid ticket now.</li><li><strong>Look at the account, not just the listing.</strong> Recent creation, no history and a rush to move you to a bank transfer are a pattern, not a coincidence.</li></ul>"
+      ],
+      [
+        "If you have already paid",
+        "<ul><li><strong>Contact your bank or card provider immediately</strong> and say it was a scam. Ask specifically about Section 75, chargeback or reimbursement depending on how you paid, since time limits apply to each.</li><li><strong>Stop all contact with the seller</strong> and send nothing further, whatever you are told about the first payment having failed.</li><li><strong>Keep the evidence</strong> — the listing, the profile, the messages, the payment confirmation and any 'ticket' you were sent. Screenshot it before the account disappears.</li><li><strong>Report the listing to the platform</strong> as well as the police: platforms can remove an account that is still taking payments from other people.</li><li><strong>Work through our <a href='/recovery/'>scam recovery checklist</a></strong> for the payment, account and identity steps, and be wary of anyone who then offers to recover your money for a fee.</li></ul>"
+      ],
+      [
+        "How to report a shopping or ticket scam in the UK",
+        "<p>Tell your bank or card provider first, then report the seller or listing to the platform it appeared on. Report the fraud to <strong>Report Fraud</strong> (formerly Action Fraud) at <a href='https://www.reportfraud.police.uk' rel='nofollow'>reportfraud.police.uk</a> or 0300 123 2040 in England, Wales or Northern Ireland, or to Police Scotland on 101 in Scotland. Forward a scam text message to <strong>7726</strong> free of charge, and a scam email to <strong>report@phishing.gov.uk</strong>. A problem with a real trader rather than a fraudster — faulty goods, a refused refund, misleading pricing — is a consumer-rights question rather than a fraud report. For consumer-rights help, use the service for your nation: Citizens Advice in England and Wales on 0808 223 1133, Advice Direct Scotland in Scotland on 0808 800 9060, or Consumerline in Northern Ireland on 0300 123 6262. Each of those services is also the route into Trading Standards.</p>"
+      ]
+    ],
+    "faq": [
+      [
+        "Is Viagogo a scam?",
+        "No. Viagogo is a real secondary ticket marketplace. As of 23 June 2026, the CMA is investigating whether mandatory fees are clearly included in the total price presented at the start of the purchase process; it has not yet made a finding. Buyer complaints also cover invalid or cancelled tickets and refund disputes that are hard to resolve after an event. Check the final total before entering payment details. Start from Viagogo's official app or type viagogo.com or viagogo.co.uk yourself. Follow only an official redirect, and remember that a genuine domain does not guarantee a particular listing or ticket. Separately, treat an off-platform bank-transfer request from anyone claiming to be a Viagogo seller as an impersonation or fraud warning: do not pay, and report it to the platform."
+      ],
+      [
+        "Can I get my money back after paying a fake seller by bank transfer?",
+        "Possibly, and speed is the main thing you control. Call your bank straight away and report it as a scam. Mandatory reimbursement can apply to eligible domestic consumer Faster Payments and CHAPS payments made since 7 October 2024, subject to an £85,000 cap, a possible excess of up to £100 that cannot be applied to a consumer the firm assesses as vulnerable, and a 13-month limit from the last relevant payment. Exclusions apply, so it is not guaranteed."
+      ],
+      [
+        "Does Section 75 cover tickets bought on a credit card?",
+        "It may. Section 75 can apply to a qualifying credit purchase where the cash price of the item or qualifying set is more than £100 and no more than £30,000, provided the required relationship between the credit and the supplier exists — which is why buying directly from the seller on a credit card is stronger than routing payment through a third party. Outside those thresholds, or on a debit card, ask about chargeback: a card-scheme process rather than a statutory right."
+      ],
+      [
+        "How can I tell a fake 'payment failed' retailer email from a real one?",
+        "Do not judge it from the message. Retailers do send genuine billing and renewal emails, so the tell is not the subject line — it is where the link goes. Open the retailer's app, or type the address in yourself, and look at your own account, orders and message centre. If there is no matching problem there, the email is phishing."
+      ]
+    ],
+    "sources_checked": [
+      [
+        "FCA — Regulating Buy Now Pay Later (deferred payment credit from 15 July 2026)",
+        "https://www.fca.org.uk/firms/regulating-buy-now-pay-later"
+      ],
+      [
+        "FCA — New protections confirmed for Buy Now Pay Later borrowers (Financial Ombudsman access)",
+        "https://www.fca.org.uk/news/press-releases/new-protections-confirmed-buy-now-pay-later-borrowers"
+      ],
+      [
+        "CMA — viagogo consumer protection enforcement case (viagogo.com and viagogo.co.uk; no finding made)",
+        "https://www.gov.uk/cma-cases/viagogo-consumer-protection-enforcement-case"
+      ],
+      [
+        "ONS — Nature of fraud and computer misuse in England and Wales, year ending March 2025 (CSEW reimbursement rates)",
+        "https://www.ons.gov.uk/peoplepopulationandcommunity/crimeandjustice/articles/natureoffraudandcomputermisuseinenglandandwales/yearendingmarch2025"
+      ],
+      [
+        "UK Finance — Annual Fraud Report 2026 (purchase scams 71% of APP cases, £118.1m)",
+        "https://www.ukfinance.org.uk/news-and-insight/press-release/fraud-report-2026-press-release"
+      ],
+      [
+        "Consumer Credit Act 1974, section 75 — legislation.gov.uk",
+        "https://www.legislation.gov.uk/ukpga/1974/39/section/75"
+      ],
+      [
+        "Payment Systems Regulator — APP fraud reimbursement protections",
+        "https://www.psr.org.uk/information-for-consumers/app-fraud-reimbursement-protections/"
+      ],
+      [
+        "GOV.UK — Consumer advice: helplines for England and Wales, Scotland and Northern Ireland",
+        "https://www.gov.uk/consumer-advice"
+      ],
+      [
+        "STAR — Society of Ticket Agents and Retailers (member list)",
+        "https://www.star.org.uk/"
+      ],
+      [
+        "Ofcom — What to do about a scam call, text or message (forward texts to 7726 free of charge)",
+        "https://www.ofcom.org.uk/phones-and-broadband/scam-calls-and-messages/what-to-do-about-a-scam-call-text-or-message"
+      ],
+      [
+        "NCSC — Report a scam email (report@phishing.gov.uk)",
+        "https://www.ncsc.gov.uk/collection/phishing-scams/report-scam-email"
+      ]
+    ],
+    "updated": "2026-07-30"
   }
 }

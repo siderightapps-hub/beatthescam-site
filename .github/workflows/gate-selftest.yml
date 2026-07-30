@@ -37,8 +37,6 @@ on:
       - 'scripts/generate_content_claude.py'
       - 'scripts/search_console_articles.py'
       - 'scripts/similarity_report.py'
-      - 'scripts/release_manifest.py'
-      - 'scripts/release_selftest.py'
       - 'scripts/audit_corpus.py'
       - 'scripts/fact_reverify.py'
       - 'scripts/sync_canon_js.py'
@@ -83,13 +81,6 @@ jobs:
       # The build-backed half runs in its own job below so this one stays fast.
       - name: Run corpus consolidation self-test (no build)
         run: python scripts/corpus_selftest.py --no-build
-
-      # Exercises release_manifest.py's own control paths in throwaway copies.
-      # CI watched the file but never ran it, so every control it advertises was
-      # verified only by hand — which is how a consolidation stage that could
-      # not be applied at all reached a "ready" manifest.
-      - name: Run release-manifest control self-test
-        run: python scripts/release_selftest.py
 
       # The Netlify Functions cannot import the Python canon, so they read a
       # GENERATED module. If content/sources.json moved and nobody re-rendered

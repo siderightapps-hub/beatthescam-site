@@ -277,7 +277,6 @@ def validate_category_hubs(hubs: dict) -> None:
     # (operator review, 2026-07-27).
     known = set(CATEGORY_LABELS) | set(CATEGORY_CANON.values())
     structural = []
-    unsourced_legacy = []
     if hubs is not None and not isinstance(hubs, dict):
         raise SystemExit(f"ERROR: category hub file must be an object keyed by category slug, "
                          f"got {type(hubs).__name__}")
@@ -334,12 +333,12 @@ def validate_category_hubs(hubs: dict) -> None:
             structural.append(f"{slug}: 'sources_checked' must be a non-empty list — this hub "
                               f"declares a review date, so the trust layer renders from it")
         else:
-            # `sms`, `payment` and `government` predate the trust layer and carry
-            # neither sources nor a review date. Making this a hard error today
-            # would break the build on live content, so it is a loud warning
-            # until they are sourced — at which point this branch should go
-            # (operator review, 2026-07-27).
-            unsourced_legacy.append(slug)
+            # Every hub is sourced as of the 2026-07-30 accuracy release, so an
+            # unsourced hub is now an error. The `unsourced_legacy` warning
+            # branch that used to sit here existed only for the three original
+            # hubs and was removed in the same patch that landed all thirteen.
+            structural.append(f"{slug}: 'sources_checked' must be a non-empty list — every hub "
+                              f"renders a trust layer")
         unknown = set(hub) - {"title", "description", "intro", "sections", "faq",
                               "sources_checked", "updated", "ads_mode"}
         if unknown:
@@ -357,9 +356,6 @@ def validate_category_hubs(hubs: dict) -> None:
         ads = hub.get("ads_mode")
         if ads is not None and ads not in ("none", "npa", "default"):
             structural.append(f"{slug}: 'ads_mode' must be none|npa|default, got {ads!r}")
-    for slug in unsourced_legacy:
-        print(f"  Category hub WARNING: {slug} has no 'sources_checked' and no review date — it "
-              f"predates the trust layer and renders no sources. Add both, then make this an error.")
     if structural:
         for msg in structural:
             print(f"  Category hub STRUCTURE: {msg}")
@@ -4211,14 +4207,20 @@ def build():
             full_lines.append(f'URL: {domain}/guides/{p["slug"]}/')
             full_lines.append(f'Category: {category_label(cat)} · Updated: {p.get("updated") or p.get("date")}')
             full_lines.append("")
-            desc = (p.get("description") or "").strip()
+            # Canonicalise internal paths here too. This file writes the RAW
+            # record text, so a consolidated slug survived here while the
+            # rendered HTML page correctly pointed at the replacement — the same
+            # content disagreeing across two surfaces, which is the class of bug
+            # this release exists to remove (found in the release build,
+            # 2026-07-30).
+            desc = canonicalize_internal_guide_paths((p.get("description") or "").strip())
             if desc:
                 full_lines.append(desc)
                 full_lines.append("")
             for heading, body in p.get("sections", []):
                 full_lines.append(f"### {heading}")
                 full_lines.append("")
-                full_lines.append(body.strip())
+                full_lines.append(canonicalize_internal_guide_paths(body.strip()))
                 full_lines.append("")
             faqs = p.get("faq") or []
             if faqs:
@@ -4227,7 +4229,7 @@ def build():
                 for q, a in faqs:
                     full_lines.append(f"**{q}**")
                     full_lines.append("")
-                    full_lines.append(a.strip())
+                    full_lines.append(canonicalize_internal_guide_paths(a.strip()))
                     full_lines.append("")
     write(DIST / "llms-full.txt", "\n".join(full_lines))
 

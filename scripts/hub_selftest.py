@@ -344,17 +344,13 @@ def run() -> int:
     # Allow ONLY the exact legacy three-record set or the exact full thirteen.
     # A plain "pending" NOTE was fail-open: deleting one of thirteen records
     # printed a note and passed again (operator review, 2026-07-29).
-    LEGACY_ONLY = {"sms", "payment", "government"}
     live_expected = set(EXPECTED) & set(live)
-    check("hub set is exactly the legacy three or the full thirteen",
-          live_expected in (LEGACY_ONLY, set(EXPECTED)),
-          f"got {sorted(live_expected)} — an intermediate subset is not a valid release state")
+    check("hub set is exactly the expected thirteen",
+          live_expected == set(EXPECTED),
+          f"got {sorted(live_expected)} — the legacy-three allowance was removed when all "
+          f"thirteen landed")
     check("no unexpected hub key is present",
           not (set(live) - set(EXPECTED)), f"unexpected: {sorted(set(live) - set(EXPECTED))}")
-    if live_expected == LEGACY_ONLY:
-        print("NOTE  the ten new hubs are not landed yet; their modes are covered by the committed")
-        print("      fixtures above. After the atomic release this branch should be deleted and the")
-        print("      thirteen-key assertion made unconditional.")
 
     sensitive = hub(sections=[["S", "<p>Sextortion and intimate image threats, and debt problems.</p>"]])
     check("a sensitive hub with no explicit mode is not 'default'",

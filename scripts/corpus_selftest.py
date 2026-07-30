@@ -220,8 +220,14 @@ def run(with_build: bool = True) -> int:
           llms = (dist / "llms.txt").read_text(encoding="utf-8")
           redirects = (dist / "_redirects").read_text(encoding="utf-8")
 
+          # llms-full.txt was NOT checked, and it was the one surface that
+          # still carried a consolidated slug: it writes raw record text, so it
+          # missed the canonicalisation the HTML pages get (release build,
+          # 2026-07-30).
+          llms_full = (dist / "llms-full.txt").read_text(encoding="utf-8")
           for label, blob in (("sitemap.xml", sitemap), ("rss.xml", rss),
-                              ("search.json", search), ("llms.txt", llms)):
+                              ("search.json", search), ("llms.txt", llms),
+                              ("llms-full.txt", llms_full)):
               for _slug in sorted(consolidation):
                   check(f"{_slug} has no {label} entry", _slug not in blob)
           for _target in sorted(set(consolidation.values())):
@@ -258,9 +264,12 @@ def run(with_build: bool = True) -> int:
     # ── The transitional bridge ─────────────────────────────────────────────
     pending = C.pending_migrations(posts)
     if declared_on_record:
-        check("the transitional PENDING_MIGRATION set is now unused — delete it and "
-              "pending_migrations()", not pending and not C.PENDING_MIGRATION,
-              f"pending={pending} set={sorted(C.PENDING_MIGRATION)}")
+        check("PENDING_MIGRATION is empty — every consolidation is on its record",
+              not pending and not C.PENDING_MIGRATION,
+              f"pending={pending} map={dict(C.PENDING_MIGRATION)}")
+        check("no source record is also a static redirect",
+              not ({p["slug"] for p in posts} & set(C.ARTICLE_REDIRECTS)),
+              str(sorted({p["slug"] for p in posts} & set(C.ARTICLE_REDIRECTS))))
     else:
         check("PENDING_MIGRATION is carrying exactly the unmigrated records",
               set(pending) == set(C.PENDING_MIGRATION), str(pending))
@@ -271,21 +280,16 @@ def run(with_build: bool = True) -> int:
         print("      record. `consolidation-metadata-v1` moves it, deletes the static entry and")
         print("      empties PENDING_MIGRATION; this branch then flips and demands the removal.")
 
-    # BOTH halves of the migration must be enforced — the code-only half used to
-    # republish the record with no redirect and no error (operator review,
-    # 2026-07-30, consolidation-metadata-v1-c.md §1).
+    # The migration is complete: there is no static entry to leave behind and
+    # PENDING_MIGRATION is empty, so the four half-applied states can no longer
+    # be constructed from the live data. What must still hold is that RE-ADDING
+    # a static entry for a record that declares its consolidation is rejected —
+    # the collision rule that made the migration two-sided in the first place.
     static_now = dict(C.ARTICLE_REDIRECTS)
-    static_gone = {k: v for k, v in static_now.items() if k != HERMES}
-    with_meta = copy.deepcopy(posts)
-    for p in with_meta:
-        if p["slug"] == HERMES:
-            p[C.CONSOLIDATED_INTO] = EVRI
-    check("metadata-only (static entry left behind) is REJECTED",
-          bool(C.validate_consolidation(with_meta, static_now)))
-    check("static-deletion-only (no metadata) is REJECTED",
-          bool(C.validate_consolidation(posts, static_gone)))
-    check("both halves together, with PENDING_MIGRATION still set, is REJECTED",
-          bool(C.validate_consolidation(with_meta, static_gone)))
+    for slug, target in sorted(consolidation.items()):
+        clashing = {**static_now, slug: target}
+        check(f"re-adding a static redirect for {slug} is REJECTED",
+              bool(C.validate_consolidation(posts, clashing)))
     # An unrelated source slug colliding with a static redirect is an error, not
     # an implicit archive declaration — the open-bridge hole.
     colliding = next(iter(set(C.ARTICLE_REDIRECTS) - set(C.PENDING_MIGRATION)))

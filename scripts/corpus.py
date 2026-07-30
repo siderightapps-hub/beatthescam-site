@@ -180,12 +180,6 @@ ARTICLE_REDIRECTS = {
     # covered in depth by the dedicated conveyancing-fraud-uk page (now
     # cross-linked from the survivor) — no unique content lost.
     "push-payment-fraud-uk":                       "bank-transfer-scam-uk",
-    # TRANSITIONAL — the last consolidation still declared here rather than on
-    # its own record. `consolidation-metadata-v1` moves it to
-    # "consolidated_into" on the Hermes record and deletes this line, in the
-    # same patch. Until then corpus.legacy_static_consolidations() bridges it,
-    # so no archive record can render while the two halves are reviewed apart.
-    "hermes-parcel-scam-text-uk":                  "evri-delivery-scam-guide",
 }
 
 
@@ -237,10 +231,11 @@ def consolidation_map(posts: List[dict]) -> Dict[str, str]:
 # happened to collide with a static redirect, which silently retired a record
 # with no declaration anywhere. Outside this map, that collision is an error.
 #
-# `consolidation-metadata-v2` empties this and deletes it together with
-# `pending_migrations()` and the union in `partition()`, in ONE reviewed
-# transaction — see `release_manifest.py`'s migration applier.
-PENDING_MIGRATION = {"hermes-parcel-scam-text-uk": "evri-delivery-scam-guide"}
+# EMPTIED by `consolidation-metadata-v5`. The map, `pending_migrations()` and
+# the union in `partition()` are deliberately RETAINED and inert, so the
+# reviewed migration mechanism stays available for the next consolidation
+# and no consumer calls a deleted symbol.
+PENDING_MIGRATION: Dict[str, str] = {}
 
 
 def pending_migrations(posts: List[dict],
@@ -388,8 +383,8 @@ def validate_consolidation(posts: List[dict],
             )
         if has_meta and not has_static:
             problems.append(
-                f"{slug!r} has completed its migration — remove it from "
-                f"corpus.PENDING_MIGRATION (and delete the set if it is now empty)."
+                f"{slug!r} has completed its migration — remove its entry from "
+                f"corpus.PENDING_MIGRATION (the map itself is kept, empty)."
             )
         elif not has_meta and not has_static:
             problems.append(
@@ -429,6 +424,8 @@ def partition(posts: List[dict],
         raise CorpusError(
             f"content/posts.json consolidation is invalid ({len(problems)} problem(s)):\n{detail}"
         )
+    # PENDING_MIGRATION is empty, so this union contributes nothing. It is kept
+    # so a future migration has the same reviewed mechanism available.
     retired = set(consolidation_map(posts)) | set(
         pending_migrations(posts, static_redirects, pending))
     public = [p for p in posts if p["slug"] not in retired]

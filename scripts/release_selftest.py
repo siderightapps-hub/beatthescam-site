@@ -23,6 +23,16 @@ cannot be built, that is a hard failure.
 Offline: no API key, no network, no build.
 
     python3 scripts/release_selftest.py
+
+RETIRED — ONE-OFF. This applied the 2026-07-30 accuracy release and is no longer
+run by CI. Its self-test is explicitly PRE-application and fails from the applied
+state by design, so leaving it in the workflow would have made CI permanently red
+after the release landed.
+
+The release's safety boundary is now Git plus the final CI suites plus the
+committed dist/ snapshot, supported by the validators in corpus.py and canon.py —
+not a bespoke local transaction engine. Kept for the audit trail: it records
+exactly how the release was applied and what each stage produced.
 """
 from __future__ import annotations
 

@@ -12,10 +12,11 @@ Methodology: see https://beatthescam.com/methodology/
 Corrections: see https://beatthescam.com/corrections/
 
 /* SOURCES */
-Report Fraud — https://www.reportfraud.police.uk/
+Report Fraud (England, Wales and Northern Ireland) — https://www.reportfraud.police.uk/
+Police Scotland on 101 (Scotland) — https://www.scotland.police.uk/contact-us/non-emergencies/
 NCSC — https://www.ncsc.gov.uk/
-Citizens Advice — https://www.citizensadvice.org.uk/consumer/scams/
+Consumer advice by nation (Citizens Advice in England and Wales, Advice Direct Scotland, Consumerline in Northern Ireland) — https://www.gov.uk/consumer-advice
 FCA Firm Checker — https://www.fca.org.uk/consumers/fca-firm-checker
 
 /* LAST UPDATE */
-2026-07-27
+2026-07-30

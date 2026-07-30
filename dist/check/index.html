@@ -161,8 +161,7 @@
         <div class="notice">
           <strong>This tool provides educational guidance only.</strong>
           It is not a definitive fraud verdict. If you have already sent money or shared personal details,
-          contact your bank immediately and report to
-          <a href="https://www.reportfraud.police.uk" rel="noopener noreferrer" target="_blank">Report Fraud</a>.
+          contact your bank immediately and report it to <a href="https://www.reportfraud.police.uk/" rel="noopener noreferrer" target="_blank">Report Fraud</a> for England, Wales and Northern Ireland, or <a href="https://www.scotland.police.uk/contact-us/non-emergencies/" rel="noopener noreferrer" target="_blank">Police Scotland on 101</a> for Scotland.
         </div>
       </div>
     </section>
@@ -193,7 +192,7 @@
         <p>Because scam tactics change constantly, treat the result as a guide, not a final verdict. The single safest habit is to verify through a channel you open yourself &mdash; the number on the back of your card, or an address you type into your browser &mdash; rather than any link, number, or detail supplied in the message itself.</p>
 
         <h2>If you have already responded</h2>
-        <p>If you have paid, shared bank or card details, or shared a one-time passcode, act straight away. Contact your bank on the number on the back of your card, report it to Report Fraud on <strong>0300 123 2040</strong> or at <a href="https://www.reportfraud.police.uk/" rel="noopener noreferrer" target="_blank">reportfraud.police.uk</a> (Police Scotland: <strong>101</strong>), and forward scam texts to <strong>7726</strong> and suspicious emails to <strong>report@phishing.gov.uk</strong>. For step-by-step help by scam type, browse our <a href="/guides/">scam guides</a>.</p>
+        <p>If you have paid, shared bank or card details, or shared a one-time passcode, act straight away. Contact your bank on the number on the back of your card, report it to <a href="https://www.reportfraud.police.uk/" rel="noopener noreferrer" target="_blank">Report Fraud</a> on <strong>0300 123 2040</strong> or at <a href="https://www.reportfraud.police.uk" rel="noopener noreferrer" target="_blank">reportfraud.police.uk</a> for England, Wales and Northern Ireland, or <a href="https://www.scotland.police.uk/contact-us/non-emergencies/" rel="noopener noreferrer" target="_blank">Police Scotland on 101</a> for Scotland, and forward scam texts to <strong>7726</strong> and suspicious emails to <strong>report@phishing.gov.uk</strong>. For step-by-step help by scam type, browse our <a href="/guides/">scam guides</a>.</p>
 
         <h2>Common questions</h2>
         <div class="faq">
@@ -347,8 +346,12 @@
 
       function renderError() {
         var p = el("p", {"class": "notice"}, "Sorry, the checker could not be reached right now. Please try again, or ");
-        var a = el("a", {"href": "https://www.reportfraud.police.uk", "rel": "noopener noreferrer", "target": "_blank"}, "report it to Report Fraud");
-        p.appendChild(a);
+        // Rendered from the canon, like every other route on this page.
+        var routes = document.createElement("span");
+        routes.innerHTML = "<a href=\"https://www.reportfraud.police.uk/\" rel=\"noopener noreferrer\" target=\"_blank\">Report Fraud</a> for England, Wales and Northern Ireland, or <a href=\"https://www.scotland.police.uk/contact-us/non-emergencies/\" rel=\"noopener noreferrer\" target=\"_blank\">Police Scotland on 101</a> for Scotland";
+        p.appendChild(document.createTextNode("report it to "));
+        p.appendChild(routes);
+        p.appendChild(document.createTextNode("."));
         resultContent.textContent = "";
         resultContent.appendChild(p);
         resultContent.hidden = false;
