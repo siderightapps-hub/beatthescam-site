@@ -16,9 +16,9 @@ now history — the release described below supersedes it.
 A large accuracy release is **fully prepared but not applied**. Nine commits of gate,
 build and CI hardening are on `main` — the ninth closed every integration blocker the
 operator raised in the five `-c.md` replies dated 2026-07-29. **Six** packets now sit in `docs/review/`
-awaiting the operator's replies — `scotland-routing-v14`, `shpock-scam-uk-v14`,
-`nation-consumer-routing-v8`, `hubs-v14`, `legacy-hubs-v9` and
-`consolidation-metadata-v4`; `FINAL-9-guides-v4` remains approved. Applying all seven
+awaiting the operator's replies — `scotland-routing-v15`, `shpock-scam-uk-v15`,
+`nation-consumer-routing-v9`, `hubs-v15`, `legacy-hubs-v10` and
+`consolidation-metadata-v5`; `FINAL-9-guides-v4` remains approved. Applying all seven
 takes the corpus to **zero deterministic BLOCKs at BOTH scopes** — 185 public guides and
 186 source records — from 176 today. Nothing has been written to
 `content/posts.json` or `content/category-hubs.json`.
@@ -51,12 +51,12 @@ in git history and will not appear on another machine.
 
 | Packet | Reader content | What changed since the reply |
 |---|---|---|
-| `scotland-routing-v14` | unchanged (147 fields, 202 source rows) | receipt key list made explicit incl. lookup-only `slug`; gate scopes separated |
-| `shpock-scam-uk-v14` | unchanged | cross-method digest "match" retracted; stable vs applied receipts split; stale HTTP block removed |
-| `nation-consumer-routing-v8` | **3 passages changed** | Timeshare FAQ 3 reworded; 2 Victim Support evidence rows added; Pandora/Ray-Ban referral sentences rewritten so the numbers stay and the citation is fixed |
-| `consolidation-metadata-v4` | one metadata field | `consolidated_into` on the Hermes record — consolidation now defines the public corpus |
-| `hubs-v14` | unchanged (10 records) | all ten integration amendments now landed in code, with per-item evidence |
-| `legacy-hubs-v9` | **1 passage changed** | duplicate Evri/Hermes courier anchor merged into `Evri (formerly Hermes)` |
+| `scotland-routing-v15` | unchanged (147 fields, 202 source rows) | receipt key list made explicit incl. lookup-only `slug`; gate scopes separated |
+| `shpock-scam-uk-v15` | unchanged | cross-method digest "match" retracted; stable vs applied receipts split; stale HTTP block removed |
+| `nation-consumer-routing-v9` | **3 passages changed** | Timeshare FAQ 3 reworded; 2 Victim Support evidence rows added; Pandora/Ray-Ban referral sentences rewritten so the numbers stay and the citation is fixed |
+| `consolidation-metadata-v5` | one metadata field | `consolidated_into` on the Hermes record — consolidation now defines the public corpus |
+| `hubs-v15` | unchanged (10 records) | all ten integration amendments now landed in code, with per-item evidence |
+| `legacy-hubs-v10` | **1 passage changed** | duplicate Evri/Hermes courier anchor merged into `Evri (formerly Hermes)` |
 
 `FINAL-9-guides-v4` (nine guides) is **APPROVED** and ready, but cannot ship alone — it
 overlaps the Scotland patch map.
@@ -64,6 +64,13 @@ overlaps the Scotland patch map.
 Each packet is a `.md` (human review) + `.json` (applyable payload) pair. Every `-c.md` in
 that folder is an operator reply; check its audit-date line before treating it as current.
 `release-manifest.json` is generated, not reviewed.
+
+### Packet versioning — read this before amending anything
+
+Packets are **reissued**, never amended in place. Editing a reviewed packet changes its
+identity, so the digest its `-c.md` reply cites stops being reproducible and the review trail
+no longer points at the file the applier will use. That happened once on 2026-07-30 (the v14
+round) and cost a reissue to repair. If a reply asks for changes, produce the next version.
 
 ### Resolved since the 2026-07-29 replies
 
@@ -95,10 +102,10 @@ Stages, in order, with the corpus digest each expects and produces:
 | Stage | Packets | Expects (posts) | Produces (posts) |
 |---|---|---|---|
 | `final9` | `FINAL-9-guides-v4` | `496b0d63…` | `4b3090bd…` |
-| `scotland-shpock` | `scotland-routing-v14` + `shpock-scam-uk-v14` | `4b3090bd…` | `3db32055…` |
-| `nation` | `nation-consumer-routing-v8` | `3db32055…` | `39348cbf…` |
-| `hubs` | `hubs-v14` + `legacy-hubs-v9` | `39348cbf…` | `39348cbf…` |
-| `consolidation` | `consolidation-metadata-v4` | `39348cbf…` | `1d46369d…` |
+| `scotland-shpock` | `scotland-routing-v15` + `shpock-scam-uk-v15` | `4b3090bd…` | `3db32055…` |
+| `nation` | `nation-consumer-routing-v9` | `3db32055…` | `39348cbf…` |
+| `hubs` | `hubs-v15` + `legacy-hubs-v10` | `39348cbf…` | `39348cbf…` |
+| `consolidation` | `consolidation-metadata-v5` | `39348cbf…` | `1d46369d…` |
 
 The applier asserts every `old` value before writing, checks each `sections`/`faq` index
 against its recorded heading, re-asserts overlap source rows after all full-record writes
@@ -126,8 +133,8 @@ node --test "netlify/functions/lib/*.test.js"
 it is a pre-application proof, not a fifth post-application suite. The four suites above plus
 canon sync are the post-application check.
 
-**Two stages carry a `code_patch`.** `hubs-v14` deletes the `unsourced_legacy` exemption and
-requires the exact thirteen keys; `consolidation-metadata-v4` removes the static Hermes
+**Two stages carry a `code_patch`.** `hubs-v15` deletes the `unsourced_legacy` exemption and
+requires the exact thirteen keys; `consolidation-metadata-v5` removes the static Hermes
 redirect and empties `PENDING_MIGRATION`. The applier executes them with the content in **one transaction**: every byte staged,
 originals journalled to disk, all files replaced, full rollback on any handled failure, and
 `--recover` for an interrupted run. It imports the *staged* `corpus.py` to derive the real

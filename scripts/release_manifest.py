@@ -524,27 +524,27 @@ STAGES = [
     {
         "id": "scotland-shpock",
         "title": "Scotland routing + Yodel, with Shpock",
-        "packets": ["scotland-routing-v14", "shpock-scam-uk-v14"],
+        "packets": ["scotland-routing-v15", "shpock-scam-uk-v15"],
         "why": "Mandatory companions; neither releases alone. Source rows are re-asserted "
                "after all full-record writes so no overlap row is lost.",
     },
     {
         "id": "nation",
         "title": "Nation consumer routing",
-        "packets": ["nation-consumer-routing-v8"],
+        "packets": ["nation-consumer-routing-v9"],
         "why": "Depends on both upstream stages for its `old` values.",
     },
     {
         "id": "hubs",
         "title": "All thirteen category hubs",
-        "packets": ["hubs-v14", "legacy-hubs-v9"],
+        "packets": ["hubs-v15", "legacy-hubs-v10"],
         "why": "Landed together with the strict source/key enforcement, or the hub "
                "self-test suite is inconsistent with the content.",
     },
     {
         "id": "consolidation",
         "title": "Consolidation metadata",
-        "packets": ["consolidation-metadata-v4"],
+        "packets": ["consolidation-metadata-v5"],
         "why": "Moves the last consolidation declaration onto its own record. ATOMIC with "
                "deleting the matching static ARTICLE_REDIRECTS entry — leaving both is a "
                "validation error by design, so a half-applied patch fails loudly.",
@@ -703,7 +703,7 @@ def build_receipts() -> dict:
     posts = load_posts()
     index = by_slug(posts)
     try:
-        stored = packet("scotland-routing-v14")["prerequisite_state"]["record_digests"]
+        stored = packet("scotland-routing-v15")["prerequisite_state"]["record_digests"]
         f9 = packet("FINAL-9-guides-v4")["guides"]
     except SystemExit:
         return receipts
@@ -735,11 +735,11 @@ def build_receipts() -> dict:
     # a placeholder `updated` into one hash and calling it proof of a future
     # applied state is the defect (`shpock-scam-uk-v10-c.md` §2).
     try:
-        record = packet("shpock-scam-uk-v14")["record"]
+        record = packet("shpock-scam-uk-v15")["record"]
     except SystemExit:
         record = None
     if record:
-        receipts["shpock-scam-uk-v14"] = {
+        receipts["shpock-scam-uk-v15"] = {
             "purpose": "Prove the approved reader record is the one applied.",
             "digest_keys": "the whole record",
             "stable_content_digest": stable_digest(record),
