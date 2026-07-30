@@ -28,7 +28,16 @@ pip install -r requirements-claude.txt    # one-time (build itself needs only st
 python3 scripts/build.py                  # rebuild the whole site into dist/ (run from repo root)
 ```
 
-**There is no unit-test suite or linter for the static build — the build is the verification step.** After changing `build.py`, mirror the CI sanity checks: `dist/index.html`, `dist/robots.txt`, `dist/_redirects` exist and `dist/guides/` has ≥50 subdirectories. Then run the rendering greps from invariant 6.
+**There is no linter, and the build is still the verification step for rendering.** After changing `build.py`, mirror the CI sanity checks: `dist/index.html`, `dist/robots.txt`, `dist/_redirects` exist and `dist/guides/` has ≥50 subdirectories. Then run the rendering greps from invariant 6.
+
+There *are* deterministic test suites, all offline and all wired into the **Gate self-test** Action on every push touching the gate, the build, the canon or the functions. Run all four before committing any change to those areas, and run them from a clean checkout (`git archive HEAD | tar -x -C /tmp/cc`) before claiming a result — a working-copy-only pass has been cited as CI evidence before and was wrong:
+
+```bash
+python3 scripts/gate_quickanswer_selftest.py      # gate, routing, canon validation, prompt derivation
+python3 scripts/hub_selftest.py                   # hub schema, ad modes, titles, rendered-page routing
+python3 scripts/sync_canon_js.py --check          # the functions' generated canon module is current
+node --test "netlify/functions/lib/*.test.js"     # checker reporting-link pairing
+```
 
 Content generation (all need `ANTHROPIC_API_KEY`; all write to `content/posts.json`, then you rebuild):
 
@@ -60,7 +69,13 @@ python3 scripts/fact_reverify.py --limit 3       # cheap smoke test of the quart
 
 ## Editorial accuracy layer (gate + canon + manifests)
 
-**`content/sources.json` is the verified canon** of official UK reporting routes — the single source of truth for the gate's allowed phone numbers/reporting emails AND build.py's on-page "Report this scam" block (`load_sources`/`report_block`). Never hardcode an org's number or reporting route anywhere else.
+**`content/sources.json` is the verified canon** of official UK reporting routes, and **`scripts/canon.py` is the one module that loads, validates and renders it.** Never hardcode an org's number or reporting route anywhere else, and never add a second copy "as a fallback" — two hand-maintained fallbacks drifted from the canon and were deleted for it.
+
+- **Loading fails closed everywhere.** `canon.load_canon()` raises on an absent, unparseable or structurally invalid canon; `build.load_sources()` and `content_gate._load_canon()` both delegate to it, so a missing deployment input stops the build *and* the publication gate instead of silently activating a stale route set.
+- **Validation is by identity, not substring.** Each required route (`action-fraud`, `police-scotland`, `ncsc-sers`, `citizens-advice`, `advice-direct-scotland`, `consumerline-ni`) is pinned to an exact `nation`, `role`, `brand` and official host. Negative fixtures live in `canon.negative_fixtures()` and run against both consumers.
+- **Every route sentence is rendered, not typed.** Prompts use `render_prompt_routes` / `reporting_section_instruction` / `route_scope_rule`; the site uses `build.police_route_html` / `consumer_route_html`; the generator's fallback article uses `police_report_sentence` / `consumer_advice_sentence`. A canon edit that does not reach a consumer fails a committed test.
+- **The Netlify Functions read a generated bridge.** `netlify/functions/lib/canon-routes.js` is rendered by `scripts/sync_canon_js.py` and drift-checked in CI — regenerate it whenever you touch the canon.
+- **`on_page` picks the route readers are sent to.** Advice Direct Scotland runs both advice.scot (`0808 800 9060`, on-page) and the separate consumeradvice.scot helpline (`0808 164 6000`, not on-page); GOV.UK prints a different one on each of two pages. Both are in the canon so neither reads as invented; prose names exactly one consumer service per nation.
 
 **Branding canon that models' training data gets wrong** (the generator prompt and gate already enforce these — keep any new prose consistent):
 - **"Report Fraud"** (reportfraud.police.uk, 0300 123 2040) is the current UK reporting service — **"Action Fraud" was rebranded Dec 2025** (full launch Jan 2026). Write "Report Fraud"; "Action Fraud" only as a parenthetical former name.

@@ -5,10 +5,14 @@ import io
 import json
 import re
 import shutil
+import sys
 from collections import defaultdict
 from datetime import datetime, timedelta, timezone
 from urllib.parse import urlparse
 from pathlib import Path
+
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+import canon as canon_mod  # noqa: E402  — the shared canon loader/validator/renderers
 
 ROOT = Path(__file__).resolve().parents[1]
 DIST = ROOT / "dist"
@@ -258,90 +262,75 @@ def load_affiliates(root: Path) -> list:
         return []
 
 
-def load_sources(root: Path) -> list:
-    """Verified canon of official UK reporting routes (content/sources.json) —
-    the single source of truth shared with scripts/content_gate.py. Returns the
-    list of official_routes. An ABSENT file returns [] and report_block() uses its
-    complete built-in route set; a PRESENT file that is unparseable or structurally
-    invalid stops the build."""
-    path = root / "content" / "sources.json"
-    if not path.exists():
-        return []
-    # FAIL CLOSED on a present-but-malformed canon. Swallowing the error and
-    # returning [] made report_block() fall back to hard-coded routes that omit
-    # Police Scotland, Advice Direct Scotland and Consumerline and call Citizens
-    # Advice a general UK route — publishing a geographically unsafe sidebar at
-    # exactly the moment the single source of truth had failed (operator review,
-    # 2026-07-28). The gate already fails closed here; the build now matches.
+def load_sources(root: Path) -> dict:
+    """The verified canon of official UK reporting routes (content/sources.json).
+
+    Delegates to the ONE shared validator in scripts/canon.py, which the
+    publication gate also calls. Absent, unparseable or structurally invalid all
+    stop the build: there is no second, unreviewed copy of the routes to fall
+    back to, because a hard-coded fallback published a geographically unsafe
+    sidebar at exactly the moment the single source of truth had failed
+    (operator reviews, 2026-07-28/29).
+
+    Returns the whole canon dict — callers that only want the route list use
+    `canon.routes_by_role()` or `sources["official_routes"]`.
+    """
     try:
-        canon = json.loads(path.read_text(encoding="utf-8"))
-    except Exception as exc:
-        raise SystemExit(f"ERROR: {path} exists but could not be parsed: {exc}")
-    # STRUCTURE, not just syntax. A parseable `{}` or `{"official_routes": []}`
-    # still returned [] and silently activated the hard-coded sidebar (operator
-    # review, 2026-07-29).
-    if not isinstance(canon, dict):
-        raise SystemExit(f"ERROR: {path} must be an object, got {type(canon).__name__}")
-    routes = canon.get("official_routes")
-    if not isinstance(routes, list) or not routes:
-        raise SystemExit(f"ERROR: {path}: 'official_routes' must be a non-empty list")
-    seen, problems = set(), []
-    on_page = [r for r in routes if isinstance(r, dict) and r.get("on_page")]
-    for n, r in enumerate(routes):
-        if not isinstance(r, dict):
-            problems.append(f"official_routes[{n}] is {type(r).__name__}, expected an object"); continue
-        key = r.get("key")
-        if not isinstance(key, str) or not key.strip():
-            problems.append(f"official_routes[{n}] has no 'key'")
-        elif key in seen:
-            problems.append(f"duplicate route key {key!r}")
-        else:
-            seen.add(key)
-        if r.get("on_page"):
-            for field in ("report_url", "report_label"):
-                if not isinstance(r.get(field), str) or not r[field].strip():
-                    problems.append(f"on-page route {key!r} has no {field!r}")
-            url = str(r.get("report_url") or "")
-            if url and not url.startswith("https://"):
-                problems.append(f"on-page route {key!r} report_url must be https, got {url!r}")
-    # Every nation must be reachable from the on-page set, or the sidebar is unsafe.
-    labels = " ".join(str(r.get("report_label") or "") for r in on_page)
-    for needed in ("England, Wales and Northern Ireland", "Scotland", "Northern Ireland"):
-        if needed not in labels:
-            problems.append(f"no on-page route label mentions {needed!r} — the sidebar would "
-                            f"strand readers in that nation")
-    if problems:
-        for msg in problems:
-            print(f"  sources.json STRUCTURE: {msg}")
-        raise SystemExit(f"ERROR: {path} is structurally invalid: {len(problems)} problem(s)")
-    return routes
+        return canon_mod.load_canon(root / "content" / "sources.json")
+    except canon_mod.CanonError as exc:
+        raise SystemExit(f"ERROR: {exc}")
 
 
-def report_block(sources: list) -> str:
+def police_route_html(sources: dict, *, phone: bool = True, url: bool = True,
+                      link: bool = True) -> str:
+    """The nation-scoped police reporting route as linked HTML, from the canon.
+
+    The ONE component every standalone surface uses — the checker page, the
+    Disclaimer, the Terms and the contact note. Each of those used to hand-write
+    its own version, and three of them drifted into naming Report Fraud with no
+    geography at all, or relegating Scotland to a bare `(Police Scotland: 101)`
+    parenthetical that is not a self-contained instruction (operator review,
+    2026-07-29, `hubs-v10-c.md` §4).
+    """
+    rf = canon_mod.route(sources, "action-fraud")
+    ps = canon_mod.route(sources, "police-scotland")
+
+    def a(href, text):
+        if not link:
+            return html.escape(text)
+        return (f'<a href="{html.escape(href)}" rel="noopener noreferrer" target="_blank">'
+                f'{html.escape(text)}</a>')
+
+    rf_bit = a(rf["info_url"], canon_mod.brand(rf))
+    if phone:
+        rf_bit += f' on <strong>{html.escape(rf["phone"])}</strong>'
+    if url:
+        host = urlparse(rf["report_url"]).hostname or ""
+        rf_bit += f' {"or at" if phone else "at"} {a(rf["report_url"], host.replace("www.", ""))}'
+    ps_bit = a(ps["report_url"], f'{canon_mod.brand(ps)} on {ps["phone"]}')
+    return (f'{rf_bit} for {html.escape(rf["nation"])}, or {ps_bit} for '
+            f'{html.escape(ps["nation"])}')
+
+
+def consumer_route_html(sources: dict) -> str:
+    """The three nation consumer services as linked HTML, from the canon."""
+    bits = []
+    for r in canon_mod.consumer_advice_routes(sources):
+        bits.append(f'<a href="{html.escape(r["info_url"])}" rel="noopener noreferrer" '
+                    f'target="_blank">{html.escape(canon_mod.brand(r))}</a> in '
+                    f'{html.escape(r["nation"])}')
+    return ", ".join(bits[:-1]) + f", or {bits[-1]}"
+
+
+def report_block(sources: dict) -> str:
     """Render the 'Report this scam' sidebar list from the verified canon
-    (on_page routes only). If the canon file is ABSENT, falls back to a complete
-    six-route set covering every nation, so a guide never ships without a
-    reporting route a Scottish or Northern Irish reader can use."""
-    routes = [r for r in (sources or []) if r.get("on_page") and r.get("report_url")]
+    (on_page routes only). No fallback: load_sources() has already guaranteed
+    every nation is covered, so an empty list here is a bug, not a degraded
+    mode to paper over."""
+    routes = [r for r in sources.get("official_routes", [])
+              if r.get("on_page") and r.get("report_url")]
     if not routes:
-        # Only reachable when content/sources.json is genuinely ABSENT — a
-        # malformed file now stops the build. Every nation is represented, and
-        # each label carries its own geography, because this list ships without
-        # the canon to correct it.
-        routes = [
-            {"report_url": "https://www.reportfraud.police.uk",
-             "report_label": "Report Fraud (formerly Action Fraud) — England, Wales and Northern Ireland"},
-            {"report_url": "https://www.scotland.police.uk/contact-us/non-emergencies/",
-             "report_label": "Police Scotland on 101 — Scotland"},
-            {"report_url": "https://www.ncsc.gov.uk/collection/phishing-scams",
-             "report_label": "NCSC — report phishing"},
-            {"report_url": "https://www.citizensadvice.org.uk/consumer/scams/reporting-a-scam/",
-             "report_label": "Citizens Advice — England and Wales"},
-            {"report_url": "https://www.advice.scot/",
-             "report_label": "Advice Direct Scotland — Scotland"},
-            {"report_url": "https://www.nidirect.gov.uk/contacts/consumerline",
-             "report_label": "Consumerline — Northern Ireland"},
-        ]
+        raise SystemExit("ERROR: the canon produced no on-page reporting routes")
     items = "".join(
         f'<li><a href="{html.escape(r["report_url"])}" rel="noopener noreferrer" target="_blank">'
         f'{html.escape(r.get("report_label") or r.get("name", "Report"))}</a></li>'
@@ -1815,7 +1804,15 @@ def render_category_page(site, category, posts, all_categories=None, hub=None):
     )
     return make_base(
         content,
-        title=seo_title(page_title, site["site_name"]),
+        # brand=False when a reviewed hub title is in play, exactly as guide
+        # pages do. With the ' | Beat the Scam' suffix enabled, all ten hub
+        # titles were truncated away from the H1 and the schema `name` —
+        # three of them into visibly broken endings such as "Travel Scams UK:
+        # Fake Holidays, Flights &" (operator review, 2026-07-29,
+        # `hubs-v10-c.md` §5). Every full hub title is already inside the
+        # 60-char budget, so the suffix bought nothing and cost the title.
+        # Plain category pages keep the brand suffix: their labels are short.
+        title=seo_title(page_title, site["site_name"], brand=not (hub and hub.get("title"))),
         description=seo_description(page_desc),
         canonical=canonical,
         schema=schema,
@@ -2182,7 +2179,7 @@ def render_post(site, post, all_posts, affiliates=None, sources=None, link_map=N
     )
 
 
-def render_check_page(site):
+def render_check_page(site, sources):
     content = '''
     <section class="hero">
       <div class="wrap">
@@ -2274,7 +2271,7 @@ def render_check_page(site):
         <p>Because scam tactics change constantly, treat the result as a guide, not a final verdict. The single safest habit is to verify through a channel you open yourself &mdash; the number on the back of your card, or an address you type into your browser &mdash; rather than any link, number, or detail supplied in the message itself.</p>
 
         <h2>If you have already responded</h2>
-        <p>If you have paid, shared bank or card details, or shared a one-time passcode, act straight away. Contact your bank on the number on the back of your card, report it to Report Fraud on <strong>0300 123 2040</strong> or at <a href="https://www.reportfraud.police.uk/" rel="noopener noreferrer" target="_blank">reportfraud.police.uk</a> (Police Scotland: <strong>101</strong>), and forward scam texts to <strong>7726</strong> and suspicious emails to <strong>report@phishing.gov.uk</strong>. For step-by-step help by scam type, browse our <a href="/guides/">scam guides</a>.</p>
+        <p>If you have paid, shared bank or card details, or shared a one-time passcode, act straight away. Contact your bank on the number on the back of your card, report it to <!--POLICE_ROUTE-->, and forward scam texts to <strong>7726</strong> and suspicious emails to <strong>report@phishing.gov.uk</strong>. For step-by-step help by scam type, browse our <a href="/guides/">scam guides</a>.</p>
 
         <h2>Common questions</h2>
         <div class="faq">
@@ -2428,12 +2425,12 @@ def render_check_page(site):
 
       function renderError() {
         var p = el("p", {"class": "notice"}, "Sorry, the checker could not be reached right now. Please try again, or ");
-        var a = el("a", {"href": "https://www.reportfraud.police.uk", "rel": "noopener noreferrer", "target": "_blank"}, "report it to Report Fraud");
-        p.appendChild(a);
-        p.appendChild(document.createTextNode(" in England, Wales or Northern Ireland, or "));
-        var a2 = el("a", {"href": "https://www.scotland.police.uk/contact-us/non-emergencies/", "rel": "noopener noreferrer", "target": "_blank"}, "Police Scotland on 101");
-        p.appendChild(a2);
-        p.appendChild(document.createTextNode(" in Scotland."));
+        // Rendered from the canon, like every other route on this page.
+        var routes = document.createElement("span");
+        routes.innerHTML = "<!--POLICE_ROUTE_JS-->";
+        p.appendChild(document.createTextNode("report it to "));
+        p.appendChild(routes);
+        p.appendChild(document.createTextNode("."));
         resultContent.textContent = "";
         resultContent.appendChild(p);
         resultContent.hidden = false;
@@ -2441,6 +2438,19 @@ def render_check_page(site):
     })();
     </script>
     '''
+
+    # The block above is a plain (non-f) triple-quoted string because it embeds
+    # JavaScript full of braces. The nation-scoped police route is substituted
+    # here so the checker page uses the SAME canon component as the Disclaimer,
+    # the Terms and the methodology page (operator review, 2026-07-29).
+    content = content.replace("<!--POLICE_ROUTE-->", police_route_html(sources))
+    # The error-state route is assembled in JavaScript, so it is injected as an
+    # HTML string inside a JS double-quoted literal: escape the quotes.
+    content = content.replace(
+        "<!--POLICE_ROUTE_JS-->",
+        police_route_html(sources, phone=False, url=False).replace('"', '\\"'),
+    )
+    assert "<!--POLICE_ROUTE" not in content
 
     schema = page_schema(
         site,
@@ -3077,7 +3087,7 @@ def render_author_page(site):
     )
 
 
-def build_legal_bodies(site):
+def build_legal_bodies(site, sources):
     about = f'''
     <p><strong>{html.escape(site["site_name"])}</strong> is a consumer-protection content site focused on helping UK residents recognise scam patterns before they send money, share credentials, or install malicious software.</p>
 
@@ -3115,7 +3125,7 @@ def build_legal_bodies(site):
     <p>This page explains, in detail, how {html.escape(site["site_name"])} researches, drafts, checks, and corrects its guides &mdash; so a reader, a journalist, an ad-network reviewer, or an AI system deciding whether to cite this site can see the actual process rather than take &#8220;fact-checked&#8221; on faith.</p>
 
     <h2>How content is researched and produced</h2>
-    <p>Each guide on this site is drafted using AI assistance against a strict editorial template that forbids inventing statistics, quotes, or specific unverifiable claims, and that standardises the official UK reporting routes, scoped by nation (Report Fraud for England, Wales and Northern Ireland; Police Scotland on 101 for Scotland; the NCSC; and Citizens Advice, Advice Direct Scotland or Consumerline depending on where the reader lives).</p>
+    <p>Each guide on this site is drafted using AI assistance against a strict editorial template that forbids inventing statistics, quotes, or specific unverifiable claims, and that standardises the official UK reporting routes, scoped by nation &#8212; {police_route_html(sources, phone=False, url=False)}; the NCSC; and {consumer_route_html(sources)}.</p>
     <p>The drafting step uses Anthropic&#8217;s Claude API. The model is given a structured prompt covering the scam type, target audience, and required sections (what the scam looks like, warning signs, step-by-step pattern, verification, recovery actions, reporting routes). It is explicitly instructed not to invent statistics, predict outcomes, generate fake quotes, or assert specific claims about named companies or people.</p>
 
     <h2>The accuracy gate</h2>
@@ -3141,7 +3151,7 @@ def build_legal_bodies(site):
 
     <h2>Editorial standards</h2>
     <p>Content is written to be understandable under pressure. That means short sections, clear headings, and advice that directs readers towards independent verification through official channels &mdash; never through links, numbers, or payment details supplied by a suspicious message.</p>
-    <p>Where the site recommends an official reporting route &mdash; such as Report Fraud, Police Scotland, the NCSC, or the consumer service for a reader's nation &mdash; it uses the official published channel and states which nations it covers. For organisation-specific contact details, always confirm the number or web address against the official website, or the details on your card, bill, or statement, rather than relying solely on any number reproduced in a guide.</p>
+    <p>Where the site recommends an official reporting route &mdash; the police reporting route for the reader's nation, the NCSC, or the consumer service where they live &mdash; it uses the official published channel and states which nations it covers. For organisation-specific contact details, always confirm the number or web address against the official website, or the details on your card, bill, or statement, rather than relying solely on any number reproduced in a guide.</p>
 
     <h2>Corrections</h2>
     <p>If a guide contains an error, email <a href="mailto:{site["editorial_email"]}">{site["editorial_email"]}</a> with the page URL, disputed wording and supporting source. Material factual changes are recorded in the public <a href="/corrections/">corrections log</a>; minor spelling and formatting edits are not normally logged.</p>
@@ -3159,7 +3169,7 @@ def build_legal_bodies(site):
     <h2>23 July 2026</h2>
     <p>Following a full corpus fact re-check against current primary sources:</p>
     <ul>
-      <li><strong>DPD text guide:</strong> the reporting section no longer directs readers to a DPD fraud-reporting route that DPD UK's phishing guidance does not offer; reporting now goes via 7726, Report Fraud and the NCSC, and the guide's sources now cite DPD UK rather than DPD Germany.</li>
+      <li><strong>DPD text guide:</strong> the reporting section no longer directs readers to a DPD fraud-reporting route that DPD UK's phishing guidance does not offer; reporting now goes via 7726, the NCSC, and the police reporting route for the reader's nation ({police_route_html(sources, phone=False, url=False)}), and the guide's sources now cite DPD UK rather than DPD Germany.</li>
       <li><strong>TV Licence email guide:</strong> sender-address guidance updated &mdash; TV Licensing warns that scammers can spoof its genuine addresses, and its current Themis Recoveries trial legitimately emails from mailing@themisglobal.co.uk about expired licences; a matching sender address is no longer presented as proof an email is genuine.</li>
       <li><strong>Microsoft account email guide:</strong> restored Microsoft's published phishing-forwarding mailbox for non-Outlook clients (phish@office365.microsoft.com, sent as an attachment so headers are preserved), which the guide previously said no longer existed; the Microsoft Defender portal's Submissions page is now described as an administrator route.</li>
       <li><strong>TalkTalk call guide:</strong> call-back guidance now uses TalkTalk's current published customer-service number (0345 172 0088, free from TalkTalk home phones) rather than the legacy 150 short code, which TalkTalk's current contact page no longer lists.</li>
@@ -3241,7 +3251,8 @@ def build_legal_bodies(site):
       <li><a href="https://www.ncsc.gov.uk/section/respond-recover/phishing" rel="noopener noreferrer" target="_blank">National Cyber Security Centre — phishing response and recovery</a></li>
       <li><a href="https://www.psr.org.uk/news-and-updates/latest-news/news/groundbreaking-new-protections-for-victims-of-app-scams-start-today/" rel="noopener noreferrer" target="_blank">Payment Systems Regulator — APP reimbursement protections</a></li>
       <li><a href="https://www.moneyhelper.org.uk/en/everyday-money/credit/how-youre-protected-when-you-pay-by-card" rel="noopener noreferrer" target="_blank">MoneyHelper — Section 75 and chargeback</a></li>
-      <li><a href="https://www.reportfraud.police.uk/reporting-a-fraud/" rel="noopener noreferrer" target="_blank">Report Fraud — reporting routes by nation</a></li>
+      <li><a href="https://www.reportfraud.police.uk/reporting-a-fraud/" rel="noopener noreferrer" target="_blank">Report Fraud — reporting routes for England, Wales and Northern Ireland</a></li>
+      <li><a href="https://www.scotland.police.uk/contact-us/non-emergencies/" rel="noopener noreferrer" target="_blank">Police Scotland on 101 — the reporting route for Scotland</a></li>
       <li><a href="https://www.ofcom.org.uk/phones-and-broadband/scam-calls-and-messages/what-to-do-about-a-scam-call-text-or-message" rel="noopener noreferrer" target="_blank">Ofcom — reporting suspicious calls and messages</a></li>
       <li><a href="https://www.paypal.com/uk/legalhub/buyer-protection?locale.x=en_US" rel="noopener noreferrer" target="_blank">PayPal UK — Buyer Protection terms</a></li>
     </ul>
@@ -3314,11 +3325,11 @@ def build_legal_bodies(site):
 
     <h2>Educational purpose &mdash; not professional advice</h2>
     <p>Everything published here is general educational information. It is <strong>not</strong> legal, financial, investment, tax, medical, cybersecurity, or regulatory advice, and reading it does not create an advisor&ndash;client relationship. See our full <a href="/disclaimer/">Disclaimer</a> for the detail.</p>
-    <p>Scam tactics change rapidly. No article can guarantee that a specific message, listing, website or interaction is safe or fraudulent. If anything you read here is material to your circumstances, verify it through official UK channels (Report Fraud or Police Scotland, the FCA Register, Companies House, the consumer service for your nation, your bank&#8217;s published fraud line) or seek qualified professional advice.</p>
+    <p>Scam tactics change rapidly. No article can guarantee that a specific message, listing, website or interaction is safe or fraudulent. If anything you read here is material to your circumstances, verify it through official UK channels &#8212; the police reporting route for your nation ({police_route_html(sources, phone=False, url=False)}), the FCA Register, Companies House, the consumer service for your nation, or your bank&#8217;s published fraud line &#8212; or seek qualified professional advice.</p>
 
     <h2>The AI scam checker</h2>
     <p>The AI scam checker is an educational tool that returns an automated plain-English assessment. Its output is <strong>not</strong> a definitive fraud determination and we make no warranty that it will identify every scam or that flagged messages are necessarily fraudulent.</p>
-    <p>Do not rely on the checker alone for high-stakes decisions. If you have already sent money, shared bank details, or shared one-time codes, contact your bank immediately and report the incident to Report Fraud (<a href="https://www.reportfraud.police.uk/" rel="noopener noreferrer" target="_blank">reportfraud.police.uk</a> or 0300 123 2040) in England, Wales or Northern Ireland, or to <a href="https://www.scotland.police.uk/contact-us/non-emergencies/" rel="noopener noreferrer" target="_blank">Police Scotland on 101</a> in Scotland.</p>
+    <p>Do not rely on the checker alone for high-stakes decisions. If you have already sent money, shared bank details, or shared one-time codes, contact your bank immediately and report the incident to {police_route_html(sources)}.</p>
 
     <h2>Your responsibilities</h2>
     <p>You agree to use the Site lawfully and reasonably. You must not:</p>
@@ -3366,7 +3377,7 @@ def build_legal_bodies(site):
       <div class="table-row"><strong>Legal &amp; copyright</strong><span><a href="mailto:{site["legal_email"]}">{site["legal_email"]}</a> &mdash; Terms, intellectual property, and reproduction requests.</span></div>
       <div class="table-row"><strong>Security disclosure</strong><span><a href="mailto:{site["security_email"]}">{site["security_email"]}</a> &mdash; see also our <a href="/.well-known/security.txt">security.txt</a>.</span></div>
     </div>
-    <p class="note" style="margin-top:1.5rem">To report a scam to UK authorities directly, use <a href="https://www.reportfraud.police.uk/" rel="noopener noreferrer" target="_blank">Report Fraud</a> in England, Wales or Northern Ireland, or <a href="https://www.scotland.police.uk/contact-us/non-emergencies/" rel="noopener noreferrer" target="_blank">Police Scotland on 101</a> in Scotland. Ofcom says suspicious SMS texts can be forwarded to <strong>7726</strong> free of charge; use the relevant app's own reporting tool for non-SMS messages.</p>
+    <p class="note" style="margin-top:1.5rem">To report a scam to UK authorities directly, use {police_route_html(sources, phone=False, url=False)}. Ofcom says suspicious SMS texts can be forwarded to <strong>7726</strong> free of charge; use the relevant app's own reporting tool for non-SMS messages.</p>
     '''
 
     disclaimer = f'''
@@ -3390,7 +3401,7 @@ def build_legal_bodies(site):
     <p>The Site links to third-party resources such as government sites, regulators, banks, and news outlets. Those sites operate under their own terms and privacy policies, and we have no control over and accept no responsibility for their content, accuracy, or availability.</p>
 
     <h2>If you think you have been scammed</h2>
-    <p>If you have already sent money, shared bank or card details, or shared one-time passcodes, act immediately: contact your bank using the number on the back of your card, and report it to <strong>Report Fraud</strong> on 0300 123 2040 or at <a href="https://www.reportfraud.police.uk/" rel="noopener noreferrer" target="_blank">reportfraud.police.uk</a> (in Scotland, contact <strong>Police Scotland on 101</strong>). You can forward scam texts to <strong>7726</strong> and suspicious emails to <strong>report@phishing.gov.uk</strong>.</p>
+    <p>If you have already sent money, shared bank or card details, or shared one-time passcodes, act immediately: contact your bank using the number on the back of your card, and report it to {police_route_html(sources)}. You can forward scam texts to <strong>7726</strong> and suspicious emails to <strong>report@phishing.gov.uk</strong>.</p>
 
     <h2>Liability</h2>
     <p>To the maximum extent permitted by law, Beat the Scam and SideRight Apps accept no liability for any loss or damage arising from your use of, or reliance on, the Site or the AI scam checker. Nothing here limits any liability that cannot lawfully be excluded &mdash; including for death or personal injury caused by negligence, or for fraud. The full limitation of liability is set out in our <a href="/terms/">Terms</a>.</p>
@@ -3997,7 +4008,7 @@ def build():
     else:
         print(f"  Generated {og_gen_count} per-post OG images in /assets/og/")
 
-    write(DIST / 'check/index.html', render_check_page(site))
+    write(DIST / 'check/index.html', render_check_page(site, sources))
     write(DIST / 'newsletter-confirmed/index.html', render_newsletter_confirmed_page(site))
 
     # Public research section. Reports are generated from retained, dated
@@ -4011,7 +4022,7 @@ def build():
         write(DIST / 'research' / stats_page['slug'] / 'index.html', render_stats_page(site, stats_page))
         write_stats_data(stats_page)
 
-    about, privacy, cookies, terms, contact, disclaimer, methodology, corrections, recovery = build_legal_bodies(site)
+    about, privacy, cookies, terms, contact, disclaimer, methodology, corrections, recovery = build_legal_bodies(site, sources)
     write(DIST / 'about/index.html',   render_simple_page(site, 'About',          'Beat the Scam is a free UK consumer protection site. Learn who runs it, how it is funded, and how the AI scam checker works.',        about,   'about'))
     write(DIST / 'privacy/index.html', render_simple_page(site, 'Privacy Policy', 'How Beat the Scam uses Google Analytics, Google AdSense, and the Anthropic Claude API. Understand your data choices and cookie consent options.',          privacy, 'privacy'))
     write(DIST / 'cookies/index.html', render_simple_page(site, 'Cookie Policy',  'How Beat the Scam uses cookies for analytics, advertising, and consent preferences. Learn what is stored and how to manage your cookie settings.',                   cookies, 'cookies'))

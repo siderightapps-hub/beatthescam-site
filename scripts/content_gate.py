@@ -21,9 +21,13 @@ from __future__ import annotations
 
 import json
 import re
+import sys
 from dataclasses import dataclass, field
 from pathlib import Path
 from typing import Dict, List, Optional
+
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+import canon as canon_mod  # noqa: E402  — the shared canon loader/validator/renderers
 
 # ─── SHARED ACCURACY CONTRACT ────────────────────────────────────────────────
 # Single source of truth for the anti-fabrication rules, imported by BOTH
@@ -48,107 +52,37 @@ ACCURACY_BLOCK = """ACCURACY — THIS OVERRIDES EVERY STYLE AND SEO RULE BELOW. 
 # content/sources.json (single source of truth, shared with build.py's on-page
 # reporting block). Everything else — bank fraud lines, courier numbers, utility
 # numbers — is blocked, because hardcoding an organisation's number is the
-# highest-consequence error on a scam-advice site. Loaded defensively: if the
-# canon is missing/malformed the gate falls back to the hardcoded set below so
-# it never breaks.
-# Keep in sync with content/sources.json — this set is used ONLY when the canon
-# fails to load, and any number in the canon but missing here would then be
-# false-BLOCKed (e.g. the Revenge Porn Helpline was added to the canon after
-# this fallback was first written and had drifted).
-# Emergency fallback only — the real allow-list loads from content/sources.json.
-# Advice Direct Scotland and Consumerline were missing, so a canon-load failure
-# would have produced a false BLOCK on correct three-nation routing.
-# Kept in lockstep with content/sources.json by canon_fallback_drift(), which
-# gate_quickanswer_selftest asserts is empty. Do not hand-edit one without the
-# other. Companies House, TalkTalk and Victim Support were missing.
-_FALLBACK_PHONE_DIGITS = {
-    "03001232040", "08082231133", "08088009060", "03001236262", "08082231144",
-    "08001116768", "03456000459", "7726", "159",
-    "0800111999", "105", "999", "112", "101",
-    "03031234500", "03451720088", "08081689111",
-}
-# Held equal to content/sources.json by canon_fallback_drift(), asserted by the
-# self-test in BOTH directions. Four addresses were missing.
-_FALLBACK_REPORT_EMAILS = {
-    "report@phishing.gov.uk", "phishing@hmrc.gov.uk", "branddefence@hmrc.gov.uk",
-    "phishing@companieshouse.gov.uk", "reportafraud@landregistry.gov.uk",
-}
+# highest-consequence error on a scam-advice site.
+#
+# There is no hardcoded fallback. Two successive reviews found the hand-
+# maintained copy drifted from the canon (14 numbers against 17; one reporting
+# email against five), and a fallback that only activates when the single source
+# of truth has failed is precisely the wrong moment to trust it. An absent or
+# invalid canon now stops the gate.
 
 
-def _load_canon() -> Dict:
-    """Load the verified canon. FAILS CLOSED on a malformed file.
+def _load_canon(path=None) -> Dict:
+    """Load and structurally validate the verified canon. FAILS CLOSED.
 
-    A hand-maintained fallback drifts: it held 14 numbers while the canon
-    produced 17, so a canon-load failure would have false-BLOCKed guides
-    correctly citing Companies House, TalkTalk or Victim Support (operator
-    review, 2026-07-27). The fallback is retained only for a genuinely ABSENT
-    file, and `check_canon_fallback_matches()` pins it to the canon so the two
-    cannot silently diverge again.
+    Delegates to the ONE shared validator in scripts/canon.py, which build.py
+    also calls, so the gate and the build cannot disagree about what a valid
+    canon is. Previously this function only *parsed* the file: a parseable `{}`
+    or a structurally incomplete object gave the gate empty route rendering and
+    an empty allow-list instead of stopping publication (operator review,
+    2026-07-29).
+
+    The hand-maintained phone/email fallback sets are gone. They were a second,
+    unreviewed copy of the canon — the exact thing content/sources.json exists
+    to prevent — and they let a missing deployment input pass unnoticed.
     """
-    path = Path(__file__).resolve().parents[1] / "content" / "sources.json"
-    if path.exists():
-        try:
-            return json.loads(path.read_text(encoding="utf-8"))
-        except Exception as exc:
-            raise SystemExit(f"ERROR: {path} exists but could not be parsed: {exc}")
     try:
-        return json.loads(path.read_text(encoding="utf-8"))
-    except Exception:
-        return {}
+        return canon_mod.load_canon(path)
+    except canon_mod.CanonError as exc:
+        raise SystemExit(f"ERROR: {exc}")
 
 
-def _canon_phone_digits(canon: Dict) -> set:
-    digits = set()
-    for r in canon.get("official_routes", []):
-        for field in ("phone", "sms", "phone_welsh"):
-            v = r.get(field)
-            if v:
-                d = re.sub(r"\D", "", str(v))
-                if d:
-                    digits.add(d)
-    # verified_org_contacts is a deliberately separate list from
-    # official_routes: a company's own support line is NOT a national
-    # reporting route and must never surface in build.py's "Report this scam"
-    # block, but a guide may legitimately name one when the org's own site
-    # publishes it. Entries carry source_url + checked_on so they can be
-    # re-verified quarterly rather than rotting silently.
-    for r in canon.get("verified_org_contacts", []):
-        v = r.get("phone")
-        if v:
-            d = re.sub(r"\D", "", str(v))
-            if d:
-                digits.add(d)
-    return digits or set(_FALLBACK_PHONE_DIGITS)
-
-
-def canon_fallback_drift() -> Dict[str, set]:
-    """SYMMETRIC difference between the canon and the emergency fallbacks.
-
-    A one-way subtraction only caught numbers MISSING from the fallback, so an
-    obsolete, mistyped or unauthorised EXTRA fallback entry passed while the
-    docstring and test both claimed "equality" (operator review, 2026-07-28).
-    Reporting emails were not compared at all: the canon holds five permitted
-    addresses and the fallback held one, so four correct guides could false-BLOCK
-    on a genuinely absent canon file.
-
-    All four sets empty == in sync.
-    """
-    canon = _load_canon()
-    cp, ce = _canon_phone_digits(canon), _canon_report_emails(canon)
-    return {
-        "phone_missing_from_fallback": cp - set(_FALLBACK_PHONE_DIGITS),
-        "phone_extra_in_fallback": set(_FALLBACK_PHONE_DIGITS) - cp,
-        "email_missing_from_fallback": ce - set(_FALLBACK_REPORT_EMAILS),
-        "email_extra_in_fallback": set(_FALLBACK_REPORT_EMAILS) - ce,
-    }
-
-
-def _canon_report_emails(canon: Dict) -> set:
-    emails = {e.strip().lower() for e in canon.get("report_emails", []) if e}
-    for r in canon.get("official_routes", []):
-        if r.get("email"):
-            emails.add(str(r["email"]).strip().lower())
-    return emails or set(_FALLBACK_REPORT_EMAILS)
+_canon_phone_digits = canon_mod.phone_digits
+_canon_report_emails = canon_mod.report_emails
 
 
 def _judge_canon_block(canon: Dict) -> str:
@@ -177,37 +111,14 @@ def _judge_canon_block(canon: Dict) -> str:
     return "\n".join(lines)
 
 
-def render_canon_routes(canon: Dict) -> str:
-    """The ONE rendering of nation-scoped reporting routes, derived from the canon.
-
-    Appended to ACCURACY_BLOCK and JUDGE_SYSTEM, and asserted by the self-test,
-    so a canon change propagates to every prompt instead of needing a
-    search-and-replace across Python and JavaScript string literals. Previously
-    the same routes were hand-typed in the generator prompt, ACCURACY_BLOCK,
-    JUDGE_SYSTEM, the fallback article and the sidebar, and they drifted
-    (operator reviews, 2026-07-28/29).
-    """
-    def _by_key(k):
-        return next((r for r in canon.get("official_routes", []) if r.get("key") == k), {})
-    rf, ps = _by_key("action-fraud"), _by_key("police-scotland")
-    ca, ads, cl = _by_key("citizens-advice"), _by_key("advice-direct-scotland"), _by_key("consumerline-ni")
-    lines = ["- REPORTING ROUTES ARE NATION-SPECIFIC and must always be given together:"]
-    if rf:
-        lines.append(f"  • Report Fraud ({rf.get('report_url','')}"
-                     f"{', ' + rf['phone'] if rf.get('phone') else ''}) covers England, Wales and "
-                     f"Northern Ireland ONLY.")
-    if ps:
-        lines.append(f"  • Police Scotland on {ps.get('phone','101')} "
-                     f"({ps.get('report_url','')}) is the route for Scotland.")
-    lines.append("  Never present Report Fraud as the UK-wide route, and never give it without the "
-                 "Scottish alternative in the same instruction.")
-    lines.append("- Consumer advice is nation-specific too:")
-    for r, where in ((ca, "England and Wales"), (ads, "Scotland"), (cl, "Northern Ireland")):
-        if r:
-            nm = str(r.get("name") or "").split("(")[0].strip()
-            lines.append(f"  • {nm}{' on ' + r['phone'] if r.get('phone') else ''} — {where}.")
-    lines.append("  Never present Citizens Advice as a UK-wide helpline.")
-    return "\n".join(lines)
+# The ONE rendering of nation-scoped reporting routes, derived from the canon
+# and shared with every other consumer (the generator prompt, the generator's
+# fallback article, the site's standalone surfaces and the scam checker) via
+# scripts/canon.py. Re-exported under the old name so existing callers and the
+# self-test's mutation assertion keep working. The nation strings are now read
+# from the route records rather than hand-typed here, so a canon re-scoping
+# propagates instead of silently disagreeing (operator review, 2026-07-29).
+render_canon_routes = canon_mod.render_prompt_routes
 
 
 _CANON = _load_canon()

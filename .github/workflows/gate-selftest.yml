@@ -19,6 +19,7 @@ on:
   workflow_dispatch:
   push:
     paths: &selftest_paths
+      - 'scripts/canon.py'
       - 'scripts/content_gate.py'
       - 'scripts/build.py'
       - 'scripts/gate_quickanswer_selftest.py'
@@ -26,8 +27,10 @@ on:
       - 'scripts/gate_selftest.py'
       - 'scripts/generate_content_claude.py'
       - 'scripts/search_console_articles.py'
+      - 'scripts/sync_canon_js.py'
       - 'content/sources.json'
       - 'content/category-hubs.json'
+      - 'netlify/functions/**'
       - '.github/workflows/gate-selftest.yml'
   pull_request:
     paths: *selftest_paths
@@ -54,6 +57,19 @@ jobs:
 
       - name: Run hub loading, schema and ad-mode self-test
         run: python scripts/hub_selftest.py
+
+      # The Netlify Functions cannot import the Python canon, so they read a
+      # GENERATED module. If content/sources.json moved and nobody re-rendered
+      # it, the scam checker would keep serving the old routes.
+      - name: Check the generated functions canon module is current
+        run: python scripts/sync_canon_js.py --check
+
+      # Pins the inseparable Report Fraud / Police Scotland pair at every input
+      # position. Uses the runner's preinstalled Node and the built-in
+      # node:test runner, so there is no action to pin and no dependency to
+      # install.
+      - name: Run Netlify Function unit tests
+        run: node --test "netlify/functions/lib/*.test.js"
 
   llm:
     name: Model-backed gate fixtures (manual, spends API credit)

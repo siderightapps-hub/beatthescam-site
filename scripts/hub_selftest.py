@@ -20,6 +20,7 @@ from __future__ import annotations
 import copy
 import json
 import sys
+from html import unescape as html_unescape
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
@@ -73,26 +74,32 @@ def run() -> int:
             ok = True
         check("a PRESENT but malformed hub file stops the build", ok)
 
-    # The BUILD must fail closed on a malformed reporting canon too. It used to
+    # The BUILD must fail closed on ANY unusable reporting canon. It used to
     # return [] and let report_block() ship a hard-coded sidebar that omitted
     # Police Scotland, Advice Direct Scotland and Consumerline (operator review,
-    # 2026-07-28).
-    with tempfile.TemporaryDirectory() as td:
-        root = Path(td)
-        (root / "content").mkdir()
-        check("an absent sources.json is tolerated by the build loader",
-              B.load_sources(root) == [])
-        (root / "content" / "sources.json").write_text("{not json", encoding="utf-8")
-        try:
-            B.load_sources(root)
-            ok = False
-        except SystemExit:
-            ok = True
-        check("a PRESENT but malformed sources.json stops the build", ok)
-    fallback = B.report_block([])
+    # 2026-07-28). An ABSENT canon used to be tolerated for the same reason, and
+    # that too now stops the build: a missing deployment input must not be
+    # papered over with a second, unreviewed copy of the routes (2026-07-29).
+    # Structural fixtures live in scripts/canon.py and run in the gate self-test.
+    for label, contents in (("an absent", None), ("a malformed", "{not json"),
+                            ("an empty-object", "{}")):
+        with tempfile.TemporaryDirectory() as td:
+            root = Path(td)
+            (root / "content").mkdir()
+            if contents is not None:
+                (root / "content" / "sources.json").write_text(contents, encoding="utf-8")
+            try:
+                B.load_sources(root)
+                ok = False
+            except SystemExit:
+                ok = True
+            check(f"{label} sources.json stops the build", ok)
+
+    # The sidebar renders every nation from the LIVE canon, with no fallback set.
+    sidebar = B.report_block(B.load_sources(ROOT))
     for needed in ("Police Scotland", "Advice Direct Scotland", "Consumerline",
                    "England and Wales", "formerly Action Fraud"):
-        check(f"the absent-canon sidebar names {needed}", needed in fallback)
+        check(f"the canon-rendered sidebar names {needed}", needed in sidebar)
 
     # ── schema validation ────────────────────────────────────────────────────
     good = {"payment": hub()}
@@ -167,6 +174,101 @@ def run() -> int:
         check("the generator's fallback article has zero deterministic BLOCKs", not _b, str(_b))
     except Exception as exc:            # never let an import quirk mask a real failure
         check("the generator fallback could be constructed and gated", False, f"{type(exc).__name__}: {exc}")
+
+    # ── STANDALONE SURFACES CARRY THE FULL NATION SCOPE ──────────────────────
+    # The checker page said "report it to Report Fraud ... (Police Scotland:
+    # 101)" — a bare parenthetical, not a self-contained instruction — and the
+    # Terms verification sentence and the Disclaimer action sentence named
+    # Report Fraud with no geography at all (operator review, 2026-07-29,
+    # `hubs-v10-c.md` §4). All of them now render from police_route_html().
+    _site_json = json.loads((ROOT / "content" / "site.json").read_text(encoding="utf-8"))
+    _canon = B.load_sources(ROOT)
+    _component = B.police_route_html(_canon)
+    _surfaces = {"check": B.render_check_page(_site_json, _canon)}
+    for _name, _body in zip(
+        ("about", "privacy", "cookies", "terms", "contact", "disclaimer",
+         "methodology", "corrections", "recovery"),
+        B.build_legal_bodies(_site_json, _canon),
+    ):
+        _surfaces[_name] = _body
+
+    # The property that matters is the one the gate already enforces on guides:
+    # no named Report Fraud mention without the Scottish route in the same
+    # window. Running the gate's own checks over the RENDERED surfaces tests
+    # that directly, instead of a brittle "every mention is literally the
+    # component" rule that a correctly-scoped source list would fail.
+    sys.path.insert(0, str(ROOT / "scripts"))
+    from content_gate import check_deterministic as _cd
+
+    def _text(body: str) -> str:
+        body = _re_pre.sub(" ", body)                     # drop <script>/<style>
+        return html_unescape(_re_tag.sub(" ", body))
+
+    import re as _re
+    _re_pre = _re.compile(r"<(script|style)\b.*?</\1>", _re.S | _re.I)
+    _re_tag = _re.compile(r"<[^>]+>")
+
+    _ROUTING_CHECKS = {"scotland_routing", "nation_consumer_routing"}
+    for _name in sorted(_surfaces):
+        _plain = _text(_surfaces[_name])
+        if "Report Fraud" not in _plain and "Citizens Advice" not in _plain:
+            continue
+        _issues = [i for i in _cd({"slug": f"page-{_name}", "title": _name,
+                                   "description": "", "hero": "",
+                                   "sections": [["Page", _plain]], "faq": []})
+                   if i["check"] in _ROUTING_CHECKS and i["severity"] == "block"]
+        check(f"{_name}: rendered page passes the gate's nation-routing checks",
+              not _issues, "; ".join(i["detail"][:120] for i in _issues))
+
+    # And the surfaces the review named specifically must use the component.
+    for _name in ("check", "terms", "disclaimer", "methodology"):
+        check(f"{_name}: renders the shared canon route component",
+              _component in _surfaces[_name]
+              or B.police_route_html(_canon, phone=False, url=False) in _surfaces[_name])
+    check("no surface relegates Scotland to a bare parenthetical",
+          not any("(Police Scotland: " in b for b in _surfaces.values()))
+    check("no unsubstituted route placeholder ships",
+          not any("<!--POLICE_ROUTE" in b for b in _surfaces.values()))
+
+    # ── <title> must equal the reviewed H1 and schema name ───────────────────
+    # render_category_page() called seo_title() with the ' | Beat the Scam'
+    # suffix enabled, so all ten proposed hub titles were truncated away from
+    # the approved H1 and schema `name` — three into visibly broken endings
+    # ("Travel Scams UK: Fake Holidays, Flights &"). Every full hub title fits
+    # the 60-char budget, so the suffix bought nothing (operator review,
+    # 2026-07-29, `hubs-v10-c.md` §5).
+    import re as _re
+
+    _site = json.loads((ROOT / "content" / "site.json").read_text(encoding="utf-8"))
+    _post = {"slug": "a-guide", "title": "A guide", "description": "D", "hero": "H",
+             "date": "2026-01-01", "category": "payment", "keywords": [], "sections": [],
+             "faq": []}
+
+    def _rendered_titles(hub_record, category="payment"):
+        page = B.render_category_page(_site, category, [_post], hub=hub_record)
+        title = _re.search(r"<title>(.*?)</title>", page, _re.S).group(1)
+        h1 = _re.search(r"<h1>(.*?)</h1>", page, _re.S).group(1)
+        name = _re.search(r'"name":\s*"([^"]*)"', page).group(1)
+        return html_unescape(title), html_unescape(h1), html_unescape(name)
+
+    LONG_HUB_TITLE = "Travel Scams UK: Fake Holidays, Flights & Bookings"
+    t, h1, name = _rendered_titles(hub(title=LONG_HUB_TITLE), "travel")
+    check("a hub <title> is the full reviewed title", t == LONG_HUB_TITLE, f"got {t!r}")
+    check("a hub <title> equals its H1", t == h1, f"{t!r} vs {h1!r}")
+    check("a hub <title> equals its schema name", t == name, f"{t!r} vs {name!r}")
+    check("a hub <title> is not truncated mid-phrase", not t.rstrip().endswith(("&", ":", ",")))
+    # A plain category page (no hub) keeps the brand suffix — its label is short.
+    t_plain, _, _ = _rendered_titles(None, "payment")
+    check("a plain category page still carries the brand suffix",
+          t_plain.endswith(f' | {_site["site_name"]}'), f"got {t_plain!r}")
+
+    # Every LIVE hub title must survive rendering intact.
+    for slug, record in sorted(live.items()):
+        want = record.get("title") or ""
+        t, h1, name = _rendered_titles(record, slug)
+        check(f"live hub {slug}: <title>, H1 and schema name all carry the reviewed title",
+              t == want == h1 == name, f"title={t!r} h1={h1!r} schema={name!r} want={want!r}")
+        check(f"live hub {slug}: title is within the 60-char budget", len(t) <= 60, f"{len(t)} chars")
 
     # ── ad treatment ─────────────────────────────────────────────────────────
     EXPECTED = {

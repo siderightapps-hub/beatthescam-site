@@ -34,6 +34,168 @@ def check(name: str, cond: bool, detail: str = "") -> None:
         FAILURES.append(name)
 
 
+def _canon_negative_fixtures(check) -> None:
+    """Run scripts/canon.py's malformed-canon fixtures against the validator AND
+    against both of its real consumers.
+
+    `hubs-v10-c.md` §1: the build validated structure while the gate only
+    parsed, so a parseable `{}` gave the gate empty route rendering and an empty
+    allow-list rather than stopping publication. The fix was one shared
+    validator; this is the test that the sharing is real, not just asserted in a
+    docstring. Every fixture is written to a temp file and pushed through
+    `build.load_sources()` and `content_gate._load_canon()` — the actual code
+    paths a publish and a build take.
+    """
+    import json as _json
+    import tempfile
+    import canon as canon_mod
+
+    # The validator itself.
+    check("the reference canon fixture is VALID", not canon_mod.validate_canon(canon_mod._valid_fixture()))
+    check("the live content/sources.json is VALID",
+          not canon_mod.validate_canon(_json.loads(canon_mod.CANON_PATH.read_text(encoding="utf-8"))))
+    fixtures = canon_mod.negative_fixtures()
+    for desc, bad in fixtures:
+        check(desc, bool(canon_mod.validate_canon(bad)))
+
+    # Both consumers, on the same fixtures. A fixture that the validator rejects
+    # but a consumer accepts means that consumer is not calling the validator.
+    import build as _build
+    import content_gate as _cg
+
+    def _rejects(writer, payload) -> bool:
+        with tempfile.TemporaryDirectory() as d:
+            root = Path(d)
+            (root / "content").mkdir()
+            (root / "content" / "sources.json").write_text(_json.dumps(payload), encoding="utf-8")
+            try:
+                writer(root)
+                return False
+            except SystemExit:
+                return True
+
+    worst = fixtures[4]  # a missing required route — police-scotland
+    check("build.load_sources() rejects a canon the validator rejects",
+          _rejects(lambda r: _build.load_sources(r), worst[1]))
+    check("content_gate._load_canon() rejects the same canon",
+          _rejects(lambda r: _cg._load_canon(r / "content" / "sources.json"), worst[1]))
+    check("build.load_sources() rejects an unparseable canon",
+          _rejects_raw(lambda r: _build.load_sources(r), "{not json"))
+    check("content_gate._load_canon() rejects an unparseable canon",
+          _rejects_raw(lambda r: _cg._load_canon(r / "content" / "sources.json"), "{not json"))
+    # An ABSENT canon is a missing deployment input, not a degraded mode.
+    check("build.load_sources() rejects an ABSENT canon", _rejects_absent(lambda r: _build.load_sources(r)))
+    check("content_gate._load_canon() rejects an ABSENT canon",
+          _rejects_absent(lambda r: _cg._load_canon(r / "content" / "sources.json")))
+    # And the sidebar has no second copy of the routes to fall back to.
+    check("report_block() has no hard-coded fallback route set",
+          "reportfraud.police.uk" not in
+          Path(_build.__file__).read_text(encoding="utf-8").split("def report_block")[1].split("\ndef ")[0])
+
+    # ── ONE CONSUMER SERVICE PER NATION IN PROSE ────────────────────────────
+    # Two GOV.UK pages print different Advice Direct Scotland numbers, and both
+    # are genuine: 0808 800 9060 is advice.scot, 0808 164 6000 is the separate
+    # consumeradvice.scot service the same charity runs (operator review,
+    # 2026-07-29; resolved against GOV.UK and gov.scot on 2026-07-30). The canon
+    # records BOTH so neither reads as invented, but prose must name exactly one
+    # per nation or the reader gets two Scottish helplines in one sentence.
+    _live_canon = canon_mod.load_canon()
+    _advice = canon_mod.consumer_advice_routes(_live_canon)
+    check("prose names exactly one consumer service per nation", len(_advice) == 3,
+          str([r["key"] for r in _advice]))
+    check("prose consumer nations are the three expected",
+          [r["nation"] for r in _advice] == list(canon_mod.CONSUMER_ADVICE_NATIONS),
+          str([r["nation"] for r in _advice]))
+    for _rendered in (canon_mod.consumer_advice_clause(_live_canon),
+                      canon_mod.render_prompt_routes(_live_canon),
+                      canon_mod.reporting_section_instruction(_live_canon)):
+        check("the second Advice Direct Scotland number stays out of rendered prose",
+              "0808 164 6000" not in _rendered)
+    # ...but the gate must still accept it, so a guide citing GOV.UK's
+    # consumer-protection-rights page is not blocked for an "invented" number.
+    check("the consumeradvice.scot number is in the gate's allow-list",
+          "08081646000" in canon_mod.phone_digits(_live_canon))
+
+    # ── EVERY CONSUMER DERIVES FROM THE CANON ───────────────────────────────
+    # `hubs-v10-c.md` §2: render_canon_routes() fixed ACCURACY_BLOCK and
+    # JUDGE_SYSTEM, but the generator still hand-typed the same routes in its
+    # system prompt, its section brief, its closing rules and three fallback
+    # passages, and the JavaScript checker kept its own copy entirely. The test
+    # below is the one that matters: MUTATE the canon and assert every consumer
+    # moves with it. A hand-typed copy anywhere fails here.
+    import generate_content_claude as _gen
+    import sync_canon_js as _sync
+
+    check("the generated functions canon module is in sync with content/sources.json",
+          _sync.TARGET.exists()
+          and _sync.render(canon_mod.load_canon()) == _sync.TARGET.read_text(encoding="utf-8"),
+          "run: python3 scripts/sync_canon_js.py")
+
+    mutated = _json.loads(canon_mod.CANON_PATH.read_text(encoding="utf-8"))
+    for _r in mutated["official_routes"]:
+        if _r["key"] == "police-scotland":
+            _r["phone"] = "1010"
+    check("the mutated canon fixture is still structurally valid",
+          not canon_mod.validate_canon(mutated))
+    for label, rendered in (
+        ("prompt route block", canon_mod.render_prompt_routes(mutated)),
+        ("generator section brief", canon_mod.reporting_section_instruction(mutated)),
+        ("generator scope rule", canon_mod.route_scope_rule(mutated)),
+        ("generator system-prompt preamble", canon_mod.nation_routes_inline(mutated)),
+        ("fallback article routing sentence", canon_mod.police_report_sentence(mutated)),
+        ("functions canon module", _sync.render(mutated)),
+    ):
+        check(f"a canon phone change propagates to the {label}", "1010" in rendered)
+
+    # The live generator's own strings must be the rendered ones, not lookalikes.
+    _live = canon_mod.load_canon()
+    check("SYSTEM_PROMPT embeds the rendered nation preamble",
+          canon_mod.nation_routes_inline(_live) in _gen.SYSTEM_PROMPT)
+    check("SYSTEM_PROMPT embeds the rendered route block via ACCURACY_BLOCK",
+          canon_mod.render_prompt_routes(_live) in _gen.SYSTEM_PROMPT)
+    _prompt = _gen.build_prompt(_gen.Topic("test scam uk", "TestCo", "sms"), ["a-slug"])
+    check("build_prompt embeds the rendered reporting-section brief",
+          canon_mod.reporting_section_instruction(_live) in _prompt)
+    check("build_prompt embeds the rendered scope rule",
+          canon_mod.route_scope_rule(_live) in _prompt)
+    _fb = _gen.fallback_post(_gen.Topic("test scam uk", "TestCo", "sms"), "2026-07-30")
+    _fb_text = " ".join(b for _, b in _fb["sections"]) + " " + " ".join(a for _, a in _fb["faq"])
+    check("the fallback article routes through the canon renderer",
+          canon_mod.police_report_sentence(_live) in _fb_text)
+    check("the fallback article scopes consumer advice by nation",
+          canon_mod.consumer_advice_sentence(_live) in _fb_text)
+    # The unsupported universal window (hubs-v10-c.md §6).
+    check("the fallback article makes no 24-hour payment-recall claim",
+          "24 hours" not in _fb_text and "24-hour" not in _fb_text)
+    check("the fallback article is clean through the deterministic gate",
+          not [i for i in check_deterministic(_fb) if i["severity"] == "block"])
+
+
+def _rejects_raw(writer, text: str) -> bool:
+    import tempfile
+    with tempfile.TemporaryDirectory() as d:
+        root = Path(d)
+        (root / "content").mkdir()
+        (root / "content" / "sources.json").write_text(text, encoding="utf-8")
+        try:
+            writer(root)
+            return False
+        except SystemExit:
+            return True
+
+
+def _rejects_absent(writer) -> bool:
+    import tempfile
+    with tempfile.TemporaryDirectory() as d:
+        root = Path(d)
+        (root / "content").mkdir()
+        try:
+            writer(root)
+            return False
+        except SystemExit:
+            return True
+
+
 def post(**over) -> dict:
     base = {
         "slug": "test-guide", "title": "Test guide", "description": "A test guide description.",
@@ -317,43 +479,13 @@ def run() -> int:
     check("pointing at the reader's own nation passes",
           not qa_blocks("Ask your nation's consumer service about the trader."))
 
-    # The emergency fallback allow-list drifted from the canon: 14 numbers against
-    # 17, so a canon-load failure would have false-BLOCKed guides citing Companies
-    # House, TalkTalk or Victim Support (operator review, 2026-07-27).
-    from content_gate import canon_fallback_drift
-    drift = canon_fallback_drift()
-    for key, extra in sorted(drift.items()):
-        check(f"canon/fallback in sync: {key}", not extra, str(sorted(extra)))
-    # A one-way subtraction let an unauthorised EXTRA fallback entry through while
-    # still reporting "equality" (operator review, 2026-07-28). Prove both
-    # directions are actually compared.
-    import content_gate as _cg
-    _saved = set(_cg._FALLBACK_PHONE_DIGITS)
-    try:
-        _cg._FALLBACK_PHONE_DIGITS.add("01234567890")
-        check("an EXTRA fallback number is detected",
-              bool(_cg.canon_fallback_drift()["phone_extra_in_fallback"]))
-    finally:
-        _cg._FALLBACK_PHONE_DIGITS.clear(); _cg._FALLBACK_PHONE_DIGITS.update(_saved)
-    try:
-        _cg._FALLBACK_PHONE_DIGITS.discard("03001232040")
-        check("a MISSING fallback number is detected",
-              bool(_cg.canon_fallback_drift()["phone_missing_from_fallback"]))
-    finally:
-        _cg._FALLBACK_PHONE_DIGITS.clear(); _cg._FALLBACK_PHONE_DIGITS.update(_saved)
-    _savede = set(_cg._FALLBACK_REPORT_EMAILS)
-    try:
-        _cg._FALLBACK_REPORT_EMAILS.discard("report@phishing.gov.uk")
-        check("a MISSING fallback email is detected",
-              bool(_cg.canon_fallback_drift()["email_missing_from_fallback"]))
-    finally:
-        _cg._FALLBACK_REPORT_EMAILS.clear(); _cg._FALLBACK_REPORT_EMAILS.update(_savede)
-    try:
-        _cg._FALLBACK_REPORT_EMAILS.add("nobody@example.invalid")
-        check("an EXTRA fallback email is detected",
-              bool(_cg.canon_fallback_drift()["email_extra_in_fallback"]))
-    finally:
-        _cg._FALLBACK_REPORT_EMAILS.clear(); _cg._FALLBACK_REPORT_EMAILS.update(_savede)
+    # ── CANON VALIDATION, SHARED BY THE GATE AND THE BUILD ──────────────────
+    # The hand-maintained phone/email fallbacks are gone (operator review,
+    # 2026-07-29): they were a second, unreviewed copy of the canon that drifted
+    # twice, and they only ever activated at the exact moment the single source
+    # of truth had failed. What is tested instead is that ONE validator rejects
+    # every malformed shape, and that BOTH consumers actually call it.
+    _canon_negative_fixtures(check)
 
     # Citation prose is not a consumer route.
     check("'Data from Citizens Advice shows...' is a citation, not a route",

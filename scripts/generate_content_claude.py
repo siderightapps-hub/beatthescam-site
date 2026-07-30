@@ -17,7 +17,17 @@ from typing import Dict, List, Sequence
 
 from anthropic import Anthropic
 
+import canon as canon_mod
 from content_gate import run_gate, ACCURACY_BLOCK, quarantine_post, write_manifest
+
+# Every reporting route this generator names — in the system prompt, in the
+# section brief, in the closing rules and in the offline fallback article — is
+# rendered from the validated canon. Hand-typing them here while ACCURACY_BLOCK
+# rendered its own copy let the two disagree about the same six routes
+# (operator review, 2026-07-29, `hubs-v10-c.md` §2).
+CANON = canon_mod.load_canon()
+_NCSC_EMAIL = canon_mod.route(CANON, "ncsc-sers")["email"]
+_SMS_SHORTCODE = canon_mod.route(CANON, "report-spam-sms")["sms"]
 
 DEFAULT_MODEL   = "claude-haiku-4-5-20251001"
 REQUIRED_FIELDS = ["title", "slug", "category", "excerpt", "description",
@@ -100,9 +110,8 @@ You write practical, detailed scam-awareness guides for ordinary UK residents.
 Your writing style:
 - Plain English, no jargon
 - Specific and practical — not generic advice
-- UK-focused, with reporting routes SCOPED BY NATION (Report Fraud for England, Wales and Northern
-  Ireland; Police Scotland on 101 for Scotland; NCSC; and the consumer service for the reader's
-  nation), plus UK banks and UK platforms
+- UK-focused, with reporting routes SCOPED BY NATION ({canon_mod.nation_routes_inline(CANON)}),
+  plus UK banks and UK platforms
 - Calm tone — not alarmist
 - Reference named companies, products, and organisations only when you are confident they are real and publicly verifiable
 
@@ -149,7 +158,7 @@ The six essentials to cover (in whatever order, under whatever natural headings 
 - How it works — from first contact through to the money or data loss (150-200 words)
 - How to verify whether it is genuine — verification steps specific to THIS exact scam. Where relevant, link to a related guide using one of these internal URLs: {related_str}
 - What to do if you have already interacted — recovery actions in order of urgency (120-160 words)
-- How to report it in the UK — specific routes with org names, taken from the verified canon in content/sources.json and SCOPED BY NATION: Report Fraud (0300 123 2040) for England, Wales and Northern Ireland and Police Scotland on 101 for Scotland; NCSC Suspicious Email Reporting Service (report@phishing.gov.uk); forward SMS to 7726; and the consumer service for the reader's nation — Citizens Advice (0808 223 1133) in England and Wales, Advice Direct Scotland (0808 800 9060) in Scotland, or Consumerline (0300 123 6262) in Northern Ireland. Never present Citizens Advice as a UK-wide helpline. (120-150 words)
+- {canon_mod.reporting_section_instruction(CANON)}
 
 FAQ requirements — write 3 to 5 FAQs that are the REAL questions someone would type about THIS specific scam, varied from guide to guide (do not force a fixed set). Phrase each the natural way a worried person would ask it; do NOT write "Is [X] a legitimate company?" when [X] is a scam type rather than an actual company. Good candidates: whether a specific message / website / caller is genuine, what to do if money or details were already shared, a detail unique to this scam, and how to report it.
 
@@ -157,9 +166,7 @@ Rules:
 - Every section body must be 120+ words. Short sections will be rejected.
 - The warning-signs bullet list items must start with "- "
 - All content must be specific to {topic.keyword}, not generic scam advice
-- Keep the official reporting routes above accurate and unchanged, INCLUDING their nation scope:
-  Report Fraud covers England, Wales and Northern Ireland, Police Scotland on 101 covers Scotland,
-  and the consumer service differs by nation
+- {canon_mod.route_scope_rule(CANON)}
 - slug must be lowercase with hyphens only
 - Return ONLY the JSON object, nothing else"""
 
@@ -272,15 +279,15 @@ def normalise(data: Dict, topic: Topic, today: str, strict: bool = False) -> Dic
              f"Change passwords for any affected accounts. Enable two-factor authentication. "
              f"Document everything — screenshots, message text, dates — before reporting."],
             ["Reporting this scam in the UK",
-             f"Report it to Report Fraud at reportfraud.police.uk or 0300 123 2040 in England, Wales "
-             f"or Northern Ireland, or to Police Scotland on 101 in Scotland. "
-             f"If you received a suspicious email, forward it to report@phishing.gov.uk (the NCSC's Suspicious Email Reporting Service). "
-             f"If you received a suspicious text, you can forward it to 7726 free of charge; it goes "
+             f"{canon_mod.police_report_sentence(CANON)} "
+             f"If you received a suspicious email, forward it to {_NCSC_EMAIL} (the NCSC's Suspicious Email Reporting Service). "
+             f"If you received a suspicious text, you can forward it to {_SMS_SHORTCODE} free of charge; it goes "
              f"to your mobile operator. "
-             f"For consumer advice, use the service for your nation: Citizens Advice in England "
-             f"and Wales on 0808 223 1133, Advice Direct Scotland in Scotland on 0808 800 9060, "
-             f"or Consumerline in Northern Ireland on 0300 123 6262. "
-             f"If money left your account, your bank's fraud team should be your first call — they can sometimes recall payments within 24 hours."],
+             f"For consumer advice, use the service for your nation: {canon_mod.consumer_advice_sentence(CANON)} "
+             # "recall payments within 24 hours" was an invented, universal-looking
+             # window with no qualified primary basis (operator review, 2026-07-29).
+             f"If money left your account, your bank's fraud team should be your first call — "
+             f"contact your bank immediately and ask whether it can stop or recall the payment."],
         ]
 
     # Validate FAQ
@@ -297,18 +304,16 @@ def normalise(data: Dict, topic: Topic, today: str, strict: bool = False) -> Dic
              f"No. {ent} does send legitimate communications. The key is to verify through official channels — "
              f"their website or official app — rather than trusting links or numbers in the message itself."],
             ["What should I do if I already sent money?",
-             f"Contact your bank immediately using the number on the back of your card. "
-             f"Banks can sometimes recall bank transfers if reported quickly. "
-             f"Also report it to Report Fraud at reportfraud.police.uk in England, Wales or Northern "
-             f"Ireland, or to Police Scotland on 101 in Scotland."],
+             f"Contact your bank immediately using the number on the back of your card and ask "
+             f"whether it can stop or recall the payment. "
+             f"Also report it to {canon_mod.police_report_clause(CANON, url=True, phone=False)}."],
             [f"How do I tell a fake {ent} website from the real one?",
              f"Check the domain name carefully — scammers use lookalike domains with extra words or different endings. "
              f"Always access the site by typing the address directly, not via a link in a message."],
             ["Who do I report this to in the UK?",
-             f"Report it to Report Fraud (0300 123 2040 or reportfraud.police.uk) in England, Wales "
-             f"or Northern Ireland, or to Police Scotland on 101 in Scotland. "
-             f"You can forward suspicious texts to 7726 free of charge, and emails to "
-             f"report@phishing.gov.uk."],
+             f"{canon_mod.police_report_sentence(CANON)} "
+             f"You can forward suspicious texts to {_SMS_SHORTCODE} free of charge, and emails to "
+             f"{_NCSC_EMAIL}."],
         ]
 
     content = "\n\n".join(f"## {t}\n\n{b}" for t, b in sections)
