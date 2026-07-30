@@ -2,6 +2,14 @@
 // Proxies scam checker requests to the Anthropic Claude API.
 // Set ANTHROPIC_API_KEY in your Netlify environment variables.
 
+// Reporting routes are NOT defined here. lib/canon-routes.js is generated from
+// content/sources.json by scripts/sync_canon_js.py and kept in sync by a
+// committed self-test, so the checker cannot drift from the canon that drives
+// the site, the gate and the generator (operator review, 2026-07-29).
+const { EXAMPLE_REPORTING_LINKS, PROMPT_ROUTE_RULES, CANON_REQUIRED_HOSTS } =
+  require("./lib/canon-routes");
+const { buildReportingLinks } = require("./lib/reporting-links");
+
 // ─── RATE LIMITING ───────────────────────────────────────────────────────────
 // In-memory store — resets on cold start. Good enough for basic abuse prevention
 // on a serverless function. Keyed by IP address.
@@ -154,43 +162,13 @@ function getAllowedOrigin(requestOrigin) {
 }
 
 // ─── ALLOWED REPORTING DOMAINS ───────────────────────────────────────────────
-// The checker renders model-produced reporting links as trusted guidance, so a
-// prompt-injected message could otherwise smuggle an attacker-controlled URL
-// into the UI. We only forward links whose host is (or is a subdomain of) an
-// official UK reporting/consumer-protection domain. Base domains cover their
-// subdomains: e.g. "police.uk" allows actionfraud./reportfraud./met.police.uk,
-// and "gov.uk" allows ncsc./nationalcrimeagency.gov.uk.
-const ALLOWED_REPORT_DOMAINS = [
-  "gov.uk",
-  "police.uk",
-  "fca.org.uk",
-  "citizensadvice.org.uk",
-  "which.co.uk",
-  "ofcom.org.uk",
-  "ico.org.uk",
-  "takefive-stopfraud.org.uk",
-  "moneyhelper.org.uk",
-  "victimsupport.org.uk",
-  "cifas.org.uk",
-  "financial-ombudsman.org.uk",
-  "pensions-ombudsman.org.uk",
-  "stepchange.org",
-  "nationaldebtline.org",
-];
-
-function isAllowedReportUrl(raw) {
-  let u;
-  try {
-    u = new URL(raw);
-  } catch {
-    return false;
-  }
-  if (u.protocol !== "https:") return false;
-  const host = u.hostname.toLowerCase();
-  return ALLOWED_REPORT_DOMAINS.some(
-    d => host === d || host.endsWith("." + d)
-  );
-}
+// Extracted to lib/allowed-domains.js so it can be unit-tested against the
+// canon. It unions CANON_REQUIRED_HOSTS — every host serving an on_page route
+// in content/sources.json — because www.advice.scot was a required
+// consumer-advice route missing from the hand-maintained list, so a valid
+// Advice Direct Scotland link was silently discarded from checker results
+// (operator review, 2026-07-30).
+const { ALLOWED_REPORT_DOMAINS, isAllowedReportUrl } = require("./lib/allowed-domains");
 
 // ─── SCRUB MODEL-AUTHORED FREE TEXT ──────────────────────────────────────────
 // The model's narrative fields (summary, flags, recommended_actions) are shown
@@ -341,14 +319,11 @@ Analyse the provided content and respond ONLY with a valid JSON object — no ma
   "red_flags": ["Specific red flag 1", "Specific red flag 2"],
   "green_flags": ["Reassuring sign 1"],
   "recommended_actions": ["Specific action 1", "Specific action 2", "Specific action 3"],
-  "reporting_links": [
-    {"name": "Report Fraud (Police)", "url": "https://www.reportfraud.police.uk"},
-    {"name": "Forward to 7726 (SMS spam)", "url": "https://www.ncsc.gov.uk/collection/phishing-scams/report-scam-text-messages"}
-  ]
+  "reporting_links": ${JSON.stringify(EXAMPLE_REPORTING_LINKS.map(l => ({ name: l.name, url: l.url })))}
 }
 
 Rules:
-- The UK's national fraud reporting service is called "Report Fraud" (reportfraud.police.uk, 0300 123 2040). It replaced Action Fraud in December 2025 — never call it "Action Fraud" except as a parenthetical former name, and always link https://www.reportfraud.police.uk, never actionfraud.police.uk.
+${PROMPT_ROUTE_RULES.map(r => "- " + r).join("\n")}
 - red_flags and green_flags must be specific to the content provided, not generic.
 - recommended_actions must be concrete and actionable, not generic advice.
 - reporting_links should include only UK-relevant links appropriate to the scam type.
@@ -425,31 +400,17 @@ Rules:
     // Sanitise reporting_links — forward only links to official UK reporting
     // domains (allowlisted), so a prompt-injected message cannot surface an
     // attacker-controlled URL as trusted reporting guidance. The link TEXT is
-    // free-form model output too, so scrub it the same as summary/red_flags/etc:
-    // otherwise a prompt-injected response could plant a fake phone number or
-    // "act now" instruction as the trusted anchor text of a legitimate gov.uk
-    // link. scrubContact runs before the length cap so a redaction match can't
-    // be truncated away by the slice.
-    // Canonicalise the fraud-reporting service link: the model's training data
-    // predates the Dec 2025 Action Fraud → Report Fraud rebrand, so it still
-    // emits actionfraud.police.uk links and "Action Fraud" naming. Rewrite both
-    // deterministically rather than relying on the prompt rule alone.
-    const canonicaliseReportFraud = (l) => {
-      try {
-        const host = new URL(l.url).hostname.toLowerCase();
-        if (host === "actionfraud.police.uk" || host === "www.actionfraud.police.uk" ||
-            host === "reportfraud.police.uk" || host === "www.reportfraud.police.uk") {
-          return { url: "https://www.reportfraud.police.uk", name: "Report Fraud (Police)" };
-        }
-      } catch { /* leave non-URL values for the allowlist filter to drop */ }
-      return l;
-    };
-    const safeLinks = Array.isArray(parsed.reporting_links)
-      ? parsed.reporting_links
-          .filter(l => l && typeof l.url === "string" && isAllowedReportUrl(l.url))
-          .map(canonicaliseReportFraud)
-          .map(l => ({ url: l.url, name: scrubContact(String(l.name || "")).slice(0, 120) }))
-      : [];
+    // free-form model output too, so it is scrubbed the same as
+    // summary/red_flags/etc: otherwise a prompt-injected response could plant a
+    // fake phone number or "act now" instruction as the trusted anchor text of a
+    // legitimate gov.uk link.
+    //
+    // Canonicalisation, deduplication, the inseparable Report Fraud / Police
+    // Scotland pair and the ONE final cap all live in lib/reporting-links.js so
+    // the pairing rule is unit-tested at every input position. The routes
+    // themselves come from lib/canon-routes.js, generated from
+    // content/sources.json — the checker no longer keeps its own copy.
+    const safeLinks = buildReportingLinks(parsed.reporting_links, isAllowedReportUrl, scrubContact);
 
     const result = {
       verdict:             verdict,
@@ -465,7 +426,10 @@ Rules:
                              ? parsed.green_flags.slice(0, 6).map(x => scrubContact(String(x)).slice(0, 300)) : [],
       recommended_actions: Array.isArray(parsed.recommended_actions)
                              ? parsed.recommended_actions.slice(0, 5).map(x => scrubContact(String(x)).slice(0, 300)) : [],
-      reporting_links:     safeLinks.slice(0, 5),
+      // Already capped inside buildReportingLinks(). A second slice here is
+      // what discarded the Scottish route when Report Fraud landed in the
+      // fifth position.
+      reporting_links:     safeLinks,
     };
 
     return {

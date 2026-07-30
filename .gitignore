@@ -35,3 +35,4 @@ content/quarantine/
 # -c.md fact-checks for the diversification batches). Regenerable from posts.json; never
 # site content, so kept out of the repo. Removed from tracking 2026-06-28.
 docs/review/
+.release-journal.json

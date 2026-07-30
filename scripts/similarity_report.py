@@ -36,26 +36,32 @@ def main() -> int:
     ap.add_argument("--json", dest="json_out", default=None, help="also write results as JSON")
     ap.add_argument("--shared", nargs=2, metavar=("SLUG_A", "SLUG_B"),
                      help="print the shared word sequences for one pair instead of the corpus report")
-    ap.add_argument("--include-redirected", action="store_true",
-                     help="also compare consolidated records that 301 instead of rendering")
+    ap.add_argument("--include-consolidated", "--include-redirected", action="store_true",
+                     dest="include_consolidated",
+                     help="DIAGNOSTIC: also compare consolidated archive records that 301 "
+                          "instead of rendering. Off by default — they are not pages, so they "
+                          "cannot be duplicate pages. (--include-redirected is the old name.)")
     args = ap.parse_args()
 
     posts = json.loads(Path(args.posts).read_text(encoding="utf-8"))
-    if not args.include_redirected:
-        # Consolidated records still live in posts.json but 301 instead of
-        # rendering, so their (by definition near-identical) source text is not
-        # a live duplicate-content problem. build.py is the authority on which
-        # slugs those are.
+    if not args.include_consolidated:
+        # The SAME partition the build and the publication gate use, so the
+        # three cannot disagree about what the public corpus is. This report
+        # already excluded redirected records while the gate did not, which is
+        # how the Hermes/Evri consolidation showed up as a 54% duplicate-content
+        # BLOCK in one tool and nothing in another (operator review, 2026-07-30).
+        from build import ARTICLE_REDIRECTS
+        import corpus as corpus_mod
         try:
-            from build import ARTICLE_REDIRECTS
-            skipped = [p["slug"] for p in posts if p["slug"] in ARTICLE_REDIRECTS]
-            posts = [p for p in posts if p["slug"] not in ARTICLE_REDIRECTS]
-            if skipped:
-                print(f"Excluding {len(skipped)} redirected (non-rendered) record(s): "
-                      f"{', '.join(skipped)}\n")
-        except Exception as e:  # noqa: BLE001 — report is still useful without it
-            print(f"warning: could not load ARTICLE_REDIRECTS ({e}); "
-                  f"redirected records are included\n", file=sys.stderr)
+            public, consolidated = corpus_mod.partition(posts, ARTICLE_REDIRECTS)
+        except corpus_mod.CorpusError as exc:
+            print(f"ERROR: {exc}", file=sys.stderr)
+            return 2
+        if consolidated:
+            print(f"Excluding {len(consolidated)} consolidated (non-rendered) record(s): "
+                  f"{', '.join(sorted(p['slug'] for p in consolidated))}")
+            print("Use --include-consolidated to compare them anyway.\n")
+        posts = public
     shingles = {p["slug"]: body_shingles(p) for p in posts}
 
     if args.shared:

@@ -42,7 +42,7 @@
 /categories/donation-scams    /categories/fraud/    301!
 /categories/donation-scams/*    /categories/fraud/:splat    301!
 
-# Article 301s (auto-generated from ARTICLE_REDIRECTS)
+# Article 301s (static map + every `consolidated_into` record)
 /guides/facebook-marketplace-scam-uk-guide-2    /guides/facebook-marketplace-scam-uk/    301!
 /guides/facebook-marketplace-scam-uk-guide-2/    /guides/facebook-marketplace-scam-uk/    301!
 /guides/fake-online-pharmacy-uk-scam-2    /guides/fake-online-pharmacy-uk-scam/    301!

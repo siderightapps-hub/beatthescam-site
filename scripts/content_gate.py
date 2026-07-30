@@ -21,9 +21,14 @@ from __future__ import annotations
 
 import json
 import re
+import sys
 from dataclasses import dataclass, field
 from pathlib import Path
 from typing import Dict, List, Optional
+
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+import canon as canon_mod   # noqa: E402  — the shared canon loader/validator/renderers
+import corpus as corpus_mod  # noqa: E402  — the shared public/source corpus partition
 
 # ─── SHARED ACCURACY CONTRACT ────────────────────────────────────────────────
 # Single source of truth for the anti-fabrication rules, imported by BOTH
@@ -37,7 +42,9 @@ ACCURACY_BLOCK = """ACCURACY — THIS OVERRIDES EVERY STYLE AND SEO RULE BELOW. 
 - Never present a named company as "legitimate", "genuine", or "trusted" unless it is a well-known real brand; do not invent example company names.
 - If you are not certain of the exact relationship, date, figure, or attribution, describe it in general terms WITHOUT naming a specific deal/number — or omit it. Inventing a product or vendor name, or pairing a real company with the wrong partner, tool, or capability, is forbidden.
 - Before finalising, re-read every sentence that names a real company, person, or product alongside a date, number, deal, price, or feature. If you are not confident it is a true public fact, rewrite it as a general statement or delete it.
-- Do NOT state a phone number for any specific company (bank, courier, retailer, utility, etc.). The ONLY phone numbers permitted anywhere are: Report Fraud 0300 123 2040, Citizens Advice 0808 223 1133, the FCA consumer helpline 0800 111 6768, 159 (to reach your bank), and 7726 (forward spam texts). For any organisation, tell readers to use the number on their card, bill, or the organisation's official website — never state or invent a company's own number."""
+- Do NOT state a phone number for any specific company (bank, courier, retailer, utility, etc.). The only phone numbers permitted anywhere are the official reporting and support routes in the verified canon, `content/sources.json` — the same list the gate enforces at publish time. Do not work from a memorised list: if a number is not in that canon, do not print it. For any organisation, tell readers to use the number on their card, bill, or the organisation's official website.
+- UK credit reference agencies: Experian, Equifax and TransUnion are the three MAIN agencies; MoneyHelper also lists Crediva as offering a free statutory report. Never write "the three CRAs", "all three" or "the other two" as if exhaustive. ClearScore is a free app and CallCredit is the obsolete name for TransUnion.
+"""
 
 # ─── ALLOWLISTS / BLOCKLISTS ─────────────────────────────────────────────────
 
@@ -46,58 +53,37 @@ ACCURACY_BLOCK = """ACCURACY — THIS OVERRIDES EVERY STYLE AND SEO RULE BELOW. 
 # content/sources.json (single source of truth, shared with build.py's on-page
 # reporting block). Everything else — bank fraud lines, courier numbers, utility
 # numbers — is blocked, because hardcoding an organisation's number is the
-# highest-consequence error on a scam-advice site. Loaded defensively: if the
-# canon is missing/malformed the gate falls back to the hardcoded set below so
-# it never breaks.
-# Keep in sync with content/sources.json — this set is used ONLY when the canon
-# fails to load, and any number in the canon but missing here would then be
-# false-BLOCKed (e.g. the Revenge Porn Helpline was added to the canon after
-# this fallback was first written and had drifted).
-_FALLBACK_PHONE_DIGITS = {
-    "03001232040", "08082231133", "08001116768", "03456000459", "7726", "159",
-    "0800111999", "105", "999", "112", "101",
-}
-_FALLBACK_REPORT_EMAILS = {"report@phishing.gov.uk"}
+# highest-consequence error on a scam-advice site.
+#
+# There is no hardcoded fallback. Two successive reviews found the hand-
+# maintained copy drifted from the canon (14 numbers against 17; one reporting
+# email against five), and a fallback that only activates when the single source
+# of truth has failed is precisely the wrong moment to trust it. An absent or
+# invalid canon now stops the gate.
 
 
-def _load_canon() -> Dict:
-    path = Path(__file__).resolve().parents[1] / "content" / "sources.json"
+def _load_canon(path=None) -> Dict:
+    """Load and structurally validate the verified canon. FAILS CLOSED.
+
+    Delegates to the ONE shared validator in scripts/canon.py, which build.py
+    also calls, so the gate and the build cannot disagree about what a valid
+    canon is. Previously this function only *parsed* the file: a parseable `{}`
+    or a structurally incomplete object gave the gate empty route rendering and
+    an empty allow-list instead of stopping publication (operator review,
+    2026-07-29).
+
+    The hand-maintained phone/email fallback sets are gone. They were a second,
+    unreviewed copy of the canon — the exact thing content/sources.json exists
+    to prevent — and they let a missing deployment input pass unnoticed.
+    """
     try:
-        return json.loads(path.read_text(encoding="utf-8"))
-    except Exception:
-        return {}
+        return canon_mod.load_canon(path)
+    except canon_mod.CanonError as exc:
+        raise SystemExit(f"ERROR: {exc}")
 
 
-def _canon_phone_digits(canon: Dict) -> set:
-    digits = set()
-    for r in canon.get("official_routes", []):
-        for field in ("phone", "sms", "phone_welsh"):
-            v = r.get(field)
-            if v:
-                d = re.sub(r"\D", "", str(v))
-                if d:
-                    digits.add(d)
-    # verified_org_contacts is a deliberately separate list from
-    # official_routes: a company's own support line is NOT a national
-    # reporting route and must never surface in build.py's "Report this scam"
-    # block, but a guide may legitimately name one when the org's own site
-    # publishes it. Entries carry source_url + checked_on so they can be
-    # re-verified quarterly rather than rotting silently.
-    for r in canon.get("verified_org_contacts", []):
-        v = r.get("phone")
-        if v:
-            d = re.sub(r"\D", "", str(v))
-            if d:
-                digits.add(d)
-    return digits or set(_FALLBACK_PHONE_DIGITS)
-
-
-def _canon_report_emails(canon: Dict) -> set:
-    emails = {e.strip().lower() for e in canon.get("report_emails", []) if e}
-    for r in canon.get("official_routes", []):
-        if r.get("email"):
-            emails.add(str(r["email"]).strip().lower())
-    return emails or set(_FALLBACK_REPORT_EMAILS)
+_canon_phone_digits = canon_mod.phone_digits
+_canon_report_emails = canon_mod.report_emails
 
 
 def _judge_canon_block(canon: Dict) -> str:
@@ -126,8 +112,21 @@ def _judge_canon_block(canon: Dict) -> str:
     return "\n".join(lines)
 
 
+# The ONE rendering of nation-scoped reporting routes, derived from the canon
+# and shared with every other consumer (the generator prompt, the generator's
+# fallback article, the site's standalone surfaces and the scam checker) via
+# scripts/canon.py. Re-exported under the old name so existing callers and the
+# self-test's mutation assertion keep working. The nation strings are now read
+# from the route records rather than hand-typed here, so a canon re-scoping
+# propagates instead of silently disagreeing (operator review, 2026-07-29).
+render_canon_routes = canon_mod.render_prompt_routes
+
+
 _CANON = _load_canon()
 _JUDGE_CANON_BLOCK = _judge_canon_block(_CANON)
+CANON_ROUTE_BLOCK = render_canon_routes(_CANON)
+# Append the rendered routes so the prompt and the canon cannot disagree.
+ACCURACY_BLOCK = ACCURACY_BLOCK.rstrip() + "\n" + CANON_ROUTE_BLOCK + "\n"
 ALLOWED_PHONE_DIGITS = _canon_phone_digits(_CANON)
 ALLOWED_REPORT_EMAILS = _canon_report_emails(_CANON)
 
@@ -413,8 +412,11 @@ def check_dated_events(post: Dict) -> List[Dict]:
 # Catches the exact recurring factual errors that audit found in the corpus.
 
 # ClearScore is a free credit-checking APP (it resells Equifax data); "CallCredit"
-# was renamed TransUnion in 2018. Neither is a UK credit reference agency — the
-# three CRAs are Experian, Equifax, TransUnion. Presenting ClearScore/CallCredit
+# was renamed TransUnion in 2018. Neither is a UK credit reference agency. The
+# three MAIN CRAs are Experian, Equifax and TransUnion; MoneyHelper also lists
+# Crediva as offering a free statutory report, so "the three CRAs" must not be
+# written as if exhaustive (operator review, 2026-07-27). Presenting
+# ClearScore/CallCredit
 # AS an agency (enumerated alongside BOTH Experian and Equifax, or right next to
 # "credit reference agenc[y]") is the misclassification to BLOCK. A correct,
 # standalone mention of ClearScore as a free app sits apart from the trio, so
@@ -449,8 +451,9 @@ def check_cra_misclassification(post: Dict) -> List[Dict]:
                 "check": "cra_misclassification",
                 "severity": SEVERITY_BLOCK,
                 "span": seg.strip()[:160],
-                "detail": (f"presents '{name}' as a UK credit reference agency. The three CRAs are "
-                           f"Experian, Equifax, and TransUnion — ClearScore is a free credit-checking "
+                "detail": (f"presents '{name}' as a UK credit reference agency. The three main CRAs "
+                           f"are Experian, Equifax and TransUnion, and MoneyHelper also lists Crediva "
+                           f"as offering a free statutory report — ClearScore is a free credit-checking "
                            f"app and CallCredit was renamed TransUnion in 2018. Use TransUnion."),
             })
     return issues
@@ -660,8 +663,9 @@ def body_shingles(post: Dict, k: int = SIMILARITY_SHINGLE_K) -> set:
     return {tuple(w[i:i + k]) for i in range(len(w) - k + 1)}
 
 
-def check_similarity(post: Dict, corpus: Optional[List[Dict]] = None) -> List[Dict]:
-    """Flag a draft that reuses another live guide's body copy.
+def check_similarity(post: Dict, corpus: Optional[List[Dict]] = None, *,
+                     include_consolidated: bool = False) -> List[Dict]:
+    """Flag a draft that reuses another PUBLIC guide's body copy.
 
     The 2026-07-25 audit found five published pairs above 0.30 Jaccard
     similarity on seven-word shingles (top pair 0.538, with an identical
@@ -669,9 +673,22 @@ def check_similarity(post: Dict, corpus: Optional[List[Dict]] = None) -> List[Di
     "cookie-cutter" risk on the site. The generation-time gate had no notion
     of the rest of the corpus, so nothing could catch it before publication.
 
-    Deliberately compares against ALL other guides, not just same-category
-    ones: the worst offenders (shopping brands, bank texts) sit inside one
-    category, but travel/marketplace overlaps cross categories.
+    Deliberately compares against ALL other PUBLIC guides, not just
+    same-category ones: the worst offenders (shopping brands, bank texts) sit
+    inside one category, but travel/marketplace overlaps cross categories.
+
+    CONSOLIDATED records are excluded. A record carrying `consolidated_into` is
+    retained archive data that never renders and 301s to its replacement, so it
+    is not a page anyone can land on and cannot be a duplicate of one. Comparing
+    it against the guide it was consolidated INTO reported the consolidation
+    itself as a 54% duplicate-content BLOCK — while this function's own remedy
+    text says "or consolidate the two guides" (operator review, 2026-07-30).
+    This is a corpus-state rule, not a named exception for one pair: every
+    non-rendered archive record is outside the AdSense duplicate-page question.
+
+    `include_consolidated=True` restores the full comparison for diagnostics —
+    `similarity_report.py --include-consolidated` uses it to show the archive
+    overlaps deliberately.
     """
     if not corpus:
         return []
@@ -679,6 +696,18 @@ def check_similarity(post: Dict, corpus: Optional[List[Dict]] = None) -> List[Di
     if len(mine) < 50:  # too short to judge meaningfully
         return []
     slug = post.get("slug")
+    if not include_consolidated:
+        # ONE partition decides BOTH sides of the comparison. Filtering only the
+        # corpus left the archive copy still reporting a BLOCK against the guide
+        # it had been consolidated into — the same finding, surviving in one
+        # direction. A record is a page, or it is not.
+        in_corpus = any(p.get("slug") == slug for p in corpus)
+        corpus = corpus_mod.public_posts(corpus)
+        is_public = any(p.get("slug") == slug for p in corpus)
+        if in_corpus and not is_public:
+            return []                       # a retained archive record: not a page
+        if corpus_mod.CONSOLIDATED_INTO in post:
+            return []                       # a draft claiming to be one (also BLOCKed)
     issues: List[Dict] = []
     for other in corpus:
         if other.get("slug") == slug:
@@ -724,12 +753,84 @@ _REPORT_FRAUD_NAMED_RE = re.compile(
 _REPORT_VERB_RE = re.compile(r"\breport(?:s|ed|ing)?\b|\btell\b|\bcontact\b", re.I)
 _SCOTLAND_ACTIONABLE_RE = re.compile(
     r"Police\s+Scotland[^.;]{0,40}\b101\b|\b101\b[^.;]{0,40}Police\s+Scotland", re.I)
+# Verbs that can actually GOVERN a reporting route. "call", "ring" and "dial"
+# were missing, so "Do not call Police Scotland on 101" read as a valid route
+# (operator review, 2026-07-27).
+_ROUTE_VERB_RE = re.compile(
+    r"\b(?:report(?:s|ed|ing)?|tell(?:s|ing)?|told|contact(?:s|ed|ing)?"
+    r"|call(?:s|ed|ing)?|ring(?:s|ing)?|rang|dial(?:s|led|ling|ed|ing)?"
+    r"|file(?:s|d|ing)?|submit(?:s|ted|ting)?|raise(?:s|d)?|raising)\b", re.I)
 _NEGATED_DIRECTIVE_RE = re.compile(
-    r"\b(?:do\s+not|don't|never|instead\s+of|rather\s+than|no\s+need\s+to)\b", re.I)
+    r"\b(?:do\s+not|don['’]t|does\s+not|doesn['’]t|never|instead\s+of"
+    r"|rather\s+than|no\s+need\s+to)\b", re.I)
+
+
+# A contrast marker between the verb and the route flips it into a non-route:
+# "Contact your bank, not Police Scotland on 101."
+_ROUTE_CONTRAST_RE = re.compile(r"\bnot\b|\brather\s+than\b|\binstead\s+of\b", re.I)
+# Verbs that make 101 a STATISTIC rather than a number to dial.
+_ROUTE_STATISTIC_RE = re.compile(
+    r"\b(?:recorded|received|logged|took|taken|handled|reported|registered|saw|counted)\b", re.I)
+
+
+def _route_is_actionable(sent: str, route_m) -> bool:
+    """True only if a positive route verb governs this Police Scotland + 101
+    match and nothing negates or contrasts it.
+
+    Rejects, in order (operator reviews, 2026-07-27):
+
+      "Police Scotland recorded 101 reports last month."
+          statistic — a counting verb sits inside the matched span.
+      "We reported yesterday that Police Scotland recorded 101 cases."
+          same, and the earlier `reported` is narrative, not a directive.
+      "Do not under any circumstances ever call Police Scotland on 101."
+          negated — the whole clause before the verb is scanned, not a fixed
+          character window, so distance does not defeat it.
+      "Contact your bank, not Police Scotland on 101."
+          post-verbal contrast: the verb governs the bank, not the route.
+
+    Accepts "Don't pay; report it to Report Fraud or Police Scotland on 101" —
+    a clause boundary ends the earlier negation's reach.
+    """
+    # 1. A counting verb inside the match means 101 is a quantity, not a number.
+    if _ROUTE_STATISTIC_RE.search(route_m.group(0)):
+        return False
+    lead = sent[:route_m.start()]
+    # 2. Work within the clause the route sits in.
+    # A colon INTRODUCES the routes rather than ending a clause — "file the loss
+    # through the national fraud route: … and Police Scotland on 101" is governed
+    # by "file", so treating ":" as a boundary lost the verb and false-flagged
+    # four correct guides.
+    boundary = max(lead.rfind(";"), lead.rfind(". "))
+    clause = lead[boundary + 1:] if boundary >= 0 else lead
+    verbs = list(_ROUTE_VERB_RE.finditer(clause))
+    if not verbs:
+        return False
+    verb = verbs[-1]
+    # 3. Nothing between the governing verb and the route may contrast it.
+    if _ROUTE_CONTRAST_RE.search(clause[verb.end():]):
+        return False
+    # 4. Nothing earlier may negate that verb. A comma ends a negation's scope,
+    #    so "Don't pay, end the contact, and report it to … Police Scotland on
+    #    101" stays a valid route while "Do not under any circumstances ever call
+    #    Police Scotland on 101" does not. The contrast rule above is what
+    #    catches "contact your bank, not Police Scotland" — hence the asymmetry.
+    before = clause[:verb.start()]
+    if "," in before:
+        before = before.rsplit(",", 1)[1]
+    return not _NEGATED_DIRECTIVE_RE.search(before)
 
 
 def _sentences(text: str) -> List[str]:
-    return [s for s in re.split(r"(?<=[.!?;])\s+", text or "") if s.strip()]
+    # Hub and guide bodies are HTML. Without normalising tags to whitespace,
+    # "…vulnerable consumers.</p><li>Report it to…" collapses to
+    # "consumers.Report it to…", which the splitter cannot see as two sentences —
+    # so a negation in one sentence leaked into the analysis of the next and
+    # false-flagged a correct route (operator review, 2026-07-27). A space keeps
+    # every character while restoring the boundary, and leaves dotted tokens like
+    # reportfraud.police.uk intact inside their sentence.
+    text = re.sub(r"<[^>]+>", " ", text or "")
+    return [s for s in re.split(r"(?<=[.!?;])\s+", text) if s.strip()]
 
 
 def _has_scottish_route(text: str) -> bool:
@@ -746,8 +847,7 @@ def _has_scottish_route(text: str) -> bool:
         # report it to..." are both correct directives, and a whole-sentence
         # negation test false-flagged them.
         route_m = _SCOTLAND_ACTIONABLE_RE.search(sent)
-        lead = sent[max(0, route_m.start() - 45):route_m.start()]
-        if _NEGATED_DIRECTIVE_RE.search(lead) and _REPORT_VERB_RE.search(lead):
+        if not _route_is_actionable(sent, route_m):
             continue
         # The route must be offered as an ALTERNATIVE to Report Fraud in the same
         # sentence. Without this, "Police Scotland recorded 101 reports last
@@ -824,46 +924,172 @@ def _field_routes_scotland(text: str) -> bool:
         "Report Fraud covers England, Wales and Northern Ireland. If you live in
          Scotland or the crime happened there, contact Police Scotland on 101."
 
-    — so a strict same-sentence rule would flag the approved copy. The allowance
-    is exactly one sentence and never crosses a field, so a route buried in a
-    later section or FAQ still fails.
+    — so a strict same-sentence rule would flag the approved copy. The window is
+    two sentences, because the approved GUIDE form puts the instruction first and
+    the route last:
+
+        "Report it to Report Fraud. Report Fraud covers England, Wales and
+         Northern Ireland. If you live in Scotland ... Police Scotland on 101."
+
+    The window never crosses a field, so a route buried in a later section or FAQ
+    still fails.
+
+    EVERY named mention must be served. An earlier version short-circuited on the
+    first canonical scope+route pair and returned True for the whole field, so a
+    later unpaired mention in the same field was never inspected —
+
+        "Report Fraud covers England, Wales and Northern Ireland. In Scotland,
+         contact Police Scotland on 101. Later, report the loss to Report Fraud."
+
+    — passed despite the third sentence stranding a Scottish reader (operator
+    review, 2026-07-27). The per-mention loop below already accepts the approved
+    two-sentence form via its own window, so that shortcut was redundant as well
+    as unsound; it is deliberately not reinstated.
     """
     sents = _sentences(text)
-
-    # The operator's APPROVED canonical block for guide/hub prose is two
-    # sentences: a Report Fraud scope statement followed by the Scottish route.
-    # When a field carries that block, every reader of the field gets correct
-    # routing wherever the block sits, so the field is served. Recognising the
-    # construction explicitly is more honest than widening the sentence window
-    # to whatever number happens to make the approved copy pass.
-    scope_re = re.compile(r"Report\s+Fraud\b[^.]{0,60}England[^.]{0,40}Wales", re.I)
-    for i, sent in enumerate(sents):
-        if not scope_re.search(sent):
-            continue
-        for nxt in sents[i + 1:i + 2]:
-            m = _SCOTLAND_ACTIONABLE_RE.search(nxt)
-            if m:
-                lead = nxt[max(0, m.start() - 45):m.start()]
-                if not (_NEGATED_DIRECTIVE_RE.search(lead) and _REPORT_VERB_RE.search(lead)):
-                    return True
 
     for i, sent in enumerate(sents):
         if not _REPORT_FRAUD_NAMED_RE.search(sent):
             continue
-        window = [sent] + (sents[i + 1:i + 2])
+        window = [sent] + (sents[i + 1:i + 3])
         served = False
         for w in window:
             m = _SCOTLAND_ACTIONABLE_RE.search(w)
-            if not m:
-                continue
-            lead = w[max(0, m.start() - 45):m.start()]
-            if _NEGATED_DIRECTIVE_RE.search(lead) and _REPORT_VERB_RE.search(lead):
+            if not m or not _route_is_actionable(w, m):
                 continue
             served = True
             break
         if not served:
             return False
     return True
+
+
+# Only a ROUTE counts. Citizens Advice is also a research publisher, and citing
+# "Citizens Advice's 2025 Scams Awareness survey" is not a consumer-advice
+# instruction — flagging that was a false positive on the marketplace hub.
+_CA_NAMED_RE = re.compile(
+    r"0808\s*223\s*1133"
+    # `from` must be ROUTE-SHAPED. Bare `from` turned "Data from Citizens Advice
+    # shows…" into a routing instruction (operator review, 2026-07-27).
+    r"|(?:contact|call|ring|phone|ask|speak\s+to|report\s+to|refer\s+to|take\s+it\s+to"
+    r"|take\s+the\s+\w+\s+to|(?:advice|help|support|guidance)\s+(?:is\s+)?(?:available\s+)?from"
+    r"|available\s+from|go\s+through|apply\s+via)"
+    r"\b[^.]{0,60}?\bCitizens\s+Advice(?![\u2019']s)"
+    r"|Citizens\s+Advice(?:\s+consumer)?\s+(?:helpline|consumer\s+service|adviser)", re.I)
+# The other two nations' consumer services, either named or by number.
+_CA_SCOPED_RE = re.compile(
+    r"England\s+and\s+Wales|Advice\s+Direct\s+Scotland|0808\s*800\s*9060"
+    r"|Consumerline|0300\s*123\s*6262|your\s+nation|each\s+nation", re.I)
+
+
+# "Three main agencies" is correct; "the three CRAs" written as EXHAUSTIVE is
+# not — MoneyHelper also lists Crediva as offering a free statutory report
+# (operator review, 2026-07-27). Deliberately narrow: it fires only on an
+# explicitly exhaustive construction near a credit-agency context.
+# Field-level gate: the text must be ABOUT credit reference agencies. Without it
+# "tap the three-dot menu ... choose Report" matched, because "the three" sat
+# within 60 characters of "report" — five false positives on UI instructions.
+_CRA_CONTEXT_RE = re.compile(
+    r"credit\s+reference|credit[- ]reference|credit\s+files?|credit\s+reports?"
+    r"|\bCRAs?\b|Experian|Equifax|TransUnion|Crediva", re.I)
+_CRA_EXHAUSTIVE_RE = re.compile(
+    r"\b(?:all\s+three|the\s+three|only\s+three|the\s+other\s+two|both\s+other"
+    r"|the\s+only(?:\s+\w+){0,3}?)\b"
+    r"[^.,;\u2014]{0,60}\b(?:credit\s+reference|credit[- ]reference|CRAs?|agenc\w+|credit\s+files?"
+    r"|credit\s+reports?|Experian|Equifax|TransUnion)\b"
+    r"|\b(?:credit\s+reference|credit[- ]reference)\s+agenc\w*[^.,;\u2014]{0,40}"
+    r"\b(?:all\s+three|the\s+three|only\s+three|the\s+other\s+two)\b", re.I)
+_CRA_MAIN_QUALIFIED_RE = re.compile(r"\bthree\s+main\b|\bmain\s+(?:three|agencies)\b|Crediva", re.I)
+
+
+# Clause boundaries for local qualification. A contrastive conjunction matters
+# most: "X are the three main agencies, BUT check all three" must not be excused
+# by the correct first half.
+_CLAUSE_SPLIT_RE = re.compile(r"[;,\u2014]|\s+(?:but|however|though|although|whereas)\s+", re.I)
+
+
+def _clause_around(sent: str, m) -> str:
+    """The clause of `sent` containing match `m`."""
+    starts = [0] + [b.end() for b in _CLAUSE_SPLIT_RE.finditer(sent)]
+    ends = [b.start() for b in _CLAUSE_SPLIT_RE.finditer(sent)] + [len(sent)]
+    for a, b in zip(starts, ends):
+        if a <= m.start() < b:
+            return sent[a:b]
+    return sent
+
+
+def check_cra_exhaustive(post: Dict) -> List[Dict]:
+    """Flag credit-agency advice written as if three agencies were all of them.
+
+    Experian, Equifax and TransUnion are the three MAIN agencies. A recovery
+    guide telling a reader to check "all three" or "the other two" leaves out an
+    agency that also holds a free statutory report.
+    """
+    issues: List[Dict] = []
+    for label, text in _route_fields(post):
+        if not text.strip() or not _CRA_CONTEXT_RE.search(text):
+            continue
+        # PER SENTENCE. A field-wide qualification check let a correct "three
+        # main agencies ... Crediva" sentence excuse a separate later "check all
+        # three UK credit reference agencies" in the same field, and only the
+        # FIRST match was ever examined (operator review, 2026-07-27).
+        for sent in _sentences(text):
+            for m in _CRA_EXHAUSTIVE_RE.finditer(sent):
+                # Qualification must be LOCAL to the matched claim. Suppressing the
+                # whole sentence let "…are the three main agencies, but check all
+                # three UK credit reference agencies" pass, and only the first
+                # match was examined (operator review, 2026-07-27).
+                if _CRA_MAIN_QUALIFIED_RE.search(_clause_around(sent, m)):
+                    continue
+                issues.append({
+                    "check": "cra_exhaustive",
+                    "severity": SEVERITY_BLOCK,
+                    "span": re.sub(r"\s+", " ", _clause_around(sent, m))[:160],
+                    "detail": ("presents the credit reference agencies as an exhaustive set of "
+                               "three. Experian, Equifax and TransUnion are the three MAIN agencies; "
+                               "MoneyHelper also lists Crediva as offering a free statutory report. "
+                               "Say \"the three main agencies\" or name all four."),
+                })
+    return issues
+
+
+def check_nation_consumer_routing(post: Dict) -> List[Dict]:
+    """Citizens Advice is the consumer service for ENGLAND AND WALES only.
+
+    Scotland uses Advice Direct Scotland (0808 800 9060) and Northern Ireland
+    uses Consumerline (0300 123 6262) — both added to the verified canon on
+    2026-07-27. Naming Citizens Advice as a general UK helpline strands Scottish
+    and Northern Irish readers exactly as an unqualified Report Fraud route
+    does, and 23 live guides did so (operator review, 2026-07-27).
+
+    Checked per field, like the Scotland reporting route: a scope note buried in
+    a later section does not help a reader who only sees the quick answer.
+    """
+    issues: List[Dict] = []
+    for label, text in _route_fields(post):
+        if not text.strip():
+            continue
+        # PER MENTION, scoped locally. A field-wide `_CA_SCOPED_RE.search(text)`
+        # let one correct three-nation sentence excuse a separate later "take the
+        # contract to Citizens Advice" in the same field (operator review,
+        # 2026-07-27) — the same suppression bug the Report Fraud matcher had.
+        sents = _sentences(text)
+        for n, sent in enumerate(sents):
+            if not _CA_NAMED_RE.search(sent):
+                continue
+            window = " ".join([sent] + sents[n + 1:n + 3])
+            if _CA_SCOPED_RE.search(window):
+                continue
+            issues.append({
+                "check": "nation_consumer_routing",
+                "severity": SEVERITY_BLOCK,
+                "span": re.sub(r"\s+", " ", sent)[:160],
+                "detail": (f"the {label} names Citizens Advice without scoping it. Citizens Advice "
+                           f"covers England and Wales; add Advice Direct Scotland on 0808 800 9060 "
+                           f"and Consumerline on 0300 123 6262, or point to the service for the "
+                           f"reader's nation."),
+            })
+    return issues
 
 
 def check_scotland_routing(post: Dict) -> List[Dict]:
@@ -980,7 +1206,37 @@ def check_canon_guards(post: Dict) -> List[Dict]:
     return issues
 
 
-def check_deterministic(post: Dict) -> List[Dict]:
+def check_consolidation_evasion(post: Dict) -> List[Dict]:
+    """A DRAFT may never declare itself consolidated.
+
+    `consolidated_into` removes a record from the public corpus and from the
+    similarity check. That is an editorial retirement decision, made by the
+    operator on an existing guide — never something a generated draft can
+    assert about itself. Without this, the cheapest way past a duplicate-content
+    BLOCK would be to add one field (operator review, 2026-07-30).
+
+    The gate only ever sees drafts and re-audited live records; a live record
+    that legitimately carries the field is exempted by the corpus partition
+    before it reaches here, so this fires only on a draft asserting it.
+    """
+    # PRESENCE, not truthiness. `post.get(...)` returned falsy for "", None,
+    # False, [] and {} — so a draft could carry the field, pass the gate, and
+    # then be rejected (or not) much later by the build (operator review,
+    # 2026-07-30). The field must simply not be there.
+    if corpus_mod.CONSOLIDATED_INTO not in post:
+        return []
+    return [{
+        "check": "consolidation_evasion",
+        "severity": SEVERITY_BLOCK,
+        "span": repr(post.get(corpus_mod.CONSOLIDATED_INTO)),
+        "detail": (f"the draft sets {corpus_mod.CONSOLIDATED_INTO!r}, which would remove it from "
+                   f"the public corpus and from the duplicate-content check. Consolidation is an "
+                   f"operator decision applied to an existing guide, not a property a new draft "
+                   f"may claim. Remove the field."),
+    }]
+
+
+def check_deterministic(post: Dict, *, is_draft: bool = True) -> List[Dict]:
     # Note: no deterministic domain/URL check — these guides intentionally
     # contain example scam/lookalike domains, so a domain allowlist is pure
     # noise here. Domain plausibility is left to the LLM judge.
@@ -989,8 +1245,14 @@ def check_deterministic(post: Dict) -> List[Dict]:
             + check_legislation(post) + check_dated_events(post)
             + check_cra_misclassification(post) + check_nfd_routing(post)
             + check_uk_advice_flags(post) + check_recurring_accuracy(post)
-            + check_scotland_routing(post) + check_canon_guards(post)
-            + check_text_wellformed(post))
+            + check_scotland_routing(post) + check_nation_consumer_routing(post)
+            + check_cra_exhaustive(post)
+            + check_canon_guards(post)
+            + check_text_wellformed(post)
+            # Corpus-state assertions a DRAFT may not make about itself. Corpus
+            # audits pass is_draft=False, because a live consolidated record
+            # legitimately carries the field.
+            + (check_consolidation_evasion(post) if is_draft else []))
 
 
 # ─── LLM JUDGE ───────────────────────────────────────────────────────────────
@@ -1015,14 +1277,21 @@ cases") is fine; an unconditional absolute is not
 - a specific dated event, law, or regulatory action stated as fact
 - any organisation-specific phone number (banks, couriers, utilities) — these should not be hardcoded
 
-Do NOT flag: general scam-pattern description, the standard UK reporting routes (Report Fraud \
-0300 123 2040, Citizens Advice 0808 223 1133, forward texts to 7726, report@phishing.gov.uk), \
+Do NOT flag: general scam-pattern description, the verified UK reporting routes listed under \
+VERIFIED ROUTES above (including forwarding texts to 7726 and report@phishing.gov.uk), \
 clearly directional language ("growing rapidly", "many victims"), or the site accurately \
 describing a SCAMMER's own false promise (e.g. "the scammer claims your funds are 100% safe").
+DO still flag an unscoped route: Report Fraud presented as the UK-wide service without the \
+Police Scotland alternative, or Citizens Advice presented as a UK-wide helpline, is an error \
+even though both bodies are in the canon.
 
 Respond with ONLY this JSON, no other text:
 {"verdict":"pass"|"fail","risk":"low"|"medium"|"high","issues":[{"claim":"<quote>","problem":"<short>","severity":"low"|"medium"|"high"}]}
 Set verdict "fail" if there is ANY high-severity issue."""
+# Same rendering as ACCURACY_BLOCK, so judge and generator cannot disagree.
+JUDGE_SYSTEM = JUDGE_SYSTEM.replace(
+    "VERIFIED ROUTES above",
+    "VERIFIED ROUTES above").rstrip() + "\n\nVERIFIED ROUTES (nation-scoped, from the verified canon):\n" + CANON_ROUTE_BLOCK + "\n"
 
 
 def judge_llm(post: Dict, client, model: str) -> List[Dict]:
@@ -1071,12 +1340,17 @@ def judge_llm(post: Dict, client, model: str) -> List[Dict]:
 # ─── ENTRY POINT ─────────────────────────────────────────────────────────────
 
 def run_gate(post: Dict, client=None, model: Optional[str] = None,
-             use_llm: bool = True, corpus: Optional[List[Dict]] = None) -> GateResult:
+             use_llm: bool = True, corpus: Optional[List[Dict]] = None,
+             is_draft: bool = True) -> GateResult:
     """Run the full gate on a post. PASS unless a blocking issue is found.
 
     Pass `corpus` (the existing posts.json list) to also check the draft for
-    body-copy duplication against already-published guides."""
-    issues = check_deterministic(post)
+    body-copy duplication against already-published guides. Consolidated
+    archive records are excluded from that comparison — see check_similarity().
+
+    `is_draft=False` for corpus audits of already-published records: a live
+    record may legitimately carry `consolidated_into`, a draft may not."""
+    issues = check_deterministic(post, is_draft=is_draft)
     issues += check_similarity(post, corpus)
     if use_llm and client is not None and model:
         issues += judge_llm(post, client, model)

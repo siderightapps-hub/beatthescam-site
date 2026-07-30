@@ -5,9 +5,15 @@ import io
 import json
 import re
 import shutil
+import sys
 from collections import defaultdict
 from datetime import datetime, timedelta, timezone
+from urllib.parse import urlparse
 from pathlib import Path
+
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+import canon as canon_mod   # noqa: E402  — the shared canon loader/validator/renderers
+import corpus as corpus_mod  # noqa: E402  — the shared public/source corpus partition
 
 ROOT = Path(__file__).resolve().parents[1]
 DIST = ROOT / "dist"
@@ -36,161 +42,26 @@ CATEGORY_CANON = {
     "donation scams":                 "fraud",
 }
 
-# Article-level 301 redirects. Used when an article is deleted but its URL
-# may have inbound links from Google's index, Search Console history, or
-# external sites. The value is either:
-#   - another article slug (the canonical replacement), or
-#   - "__CAT__:<category-slug>" to redirect to a category landing page.
-#
-# Populated as part of the AdSense "Low value content" remediation on
-# 2026-05-24: 51 short / duplicate articles were removed (the bimodal
-# distribution of 49 articles <300 words alongside 155 articles >800 words
-# was flagged by an AdSense reviewer). _redirects entries are emitted by
-# build() so the deleted URLs still resolve via 301.
-ARTICLE_REDIRECTS = {
-    # ── Slug-collision artifacts (the "-2" duplicates) ──────────────────
-    # Older builds auto-generated these "-2" URLs when two posts.json
-    # entries shared a base slug. Deduplicating posts.json on 2026-05-24
-    # stopped them being generated, so they 404'd — and Google had
-    # discovered/indexed several (showed up as "Not found (404)" in Search
-    # Console on 2026-05-28). Redirect each to its surviving canonical.
-    "facebook-marketplace-scam-uk-guide-2":       "facebook-marketplace-scam-uk",
-    "fake-online-pharmacy-uk-scam-2":             "fake-online-pharmacy-uk-scam",
-    "is-temu-a-scam-uk-2":                        "is-temu-a-scam-uk",
-    "concert-ticket-scam-uk-2":                   "concert-ticket-scam-uk",
-    "forex-trading-scam-uk-2":                    "forex-trading-scam-uk",
-    "evri-text-scam-uk-2":                        "evri-delivery-scam-guide",
-    # ── Thin/duplicate articles removed in the AdSense remediation ──────
-    "paypal-email-scam-signs":                    "__CAT__:payment",
-    "facebook-marketplace-scam-uk-guide":         "facebook-marketplace-scam-uk",
-    "facebook-marketplace-scam-signs":            "facebook-marketplace-scam-uk",
-    "hmrc-tax-refund-scam-checklist":             "__CAT__:government",
-    "gumtree-scam-uk":                            "__CAT__:marketplace",
-    "parking-fine-scam-text-messages-uk":         "parking-fine-scam-text-uk",
-    "bank-transfer-scam-warning-signs":           "__CAT__:payment",
-    "crypto-investment-scam-checklist":           "__CAT__:crypto",
-    # GSC 2026-06-04: flagged as Not found (404). The canonical live guide
-    # on this exact topic is crypto-investment-scams-uk-protection — article
-    # → article redirect preserves more SEO juice than article → category.
-    "crypto-investment-scam-uk-guide":            "crypto-investment-scams-uk-protection",
-    "phone-call-scam-red-flags":                  "__CAT__:phone",
-    "romance-scam-slow-burn-patterns":            "__CAT__:dating",
-    "job-scam-checklist-uk":                      "__CAT__:employment",
-    "puppy-sale-scam-checklist":                  "__CAT__:shopping",
-    "travel-booking-scam-checklist":              "__CAT__:travel",
-    "ticket-resale-scam-checklist":               "__CAT__:shopping",
-    "shein-scam-or-legit-uk":                     "__CAT__:website",
-    "ebay-scam-buyer-protection-uk":              "ebay-buyer-scam-uk",
-    "evri-text-scam-uk":                          "__CAT__:sms",
-    # royal-mail-text-scam-guide 404'd (no post at that slug); redirect to the live
-    # royal-mail-text-scam-uk so the "royal mail parcel scams" demand lands somewhere real.
-    "royal-mail-text-scam-guide":                 "royal-mail-text-scam-uk",
-    # dpd-delivery-scam-text, yodel-scam-text-messages and
-    # ups-delivery-scam-text-messages-uk were resurrected as full ~1,000-word
-    # guides on 2026-06-05 — they were the site's highest-demand URLs (DPD alone
-    # had 1,905 GSC impressions at pos 10.2) but the 2026-05-24 purge 301'd them
-    # to a thin category page. Redirects removed so build() serves the real
-    # guide pages again. See scripts/recover_courier_guides.py.
-    "paypal-email-scam-uk":                       "__CAT__:payment",
-    "invoice-scam-email-uk":                      "__CAT__:payment",
-    "refund-scam-uk":                             "__CAT__:payment",
-    "direct-debit-scam-uk":                       "__CAT__:payment",
-    "hmrc-tax-refund-scam-awareness":             "__CAT__:government",
-    "dvla-scam-email-awareness":                  "__CAT__:government",
-    "dvla-email-scam-car-tax":                     "dvla-email-scam-uk",
-    # ── Batch 14 consolidations (2026-07-03): near-duplicate topics merged
-    # into the stronger surviving page rather than shipping two near-
-    # identical guides. See docs/content-diversification-plan.md.
-    "bt-broadband-tech-support-scam-uk":          "bt-broadband-scam-calls-uk",
-    "linkedin-recruitment-scam-uk":               "linkedin-job-scam-guide-uk",
-    # ── Batch 16 consolidations (2026-07-05): near-duplicate topics merged
-    # into the stronger surviving page. See docs/content-diversification-plan.md.
-    # NB: solar-panel-scam-uk was deliberately NOT consolidated here — the
-    # 2026-06-15 audit already decided it and solar-panel-cold-caller-scam-uk
-    # target genuinely different vectors (online/advertised vs cold-call) and
-    # should stay separate, cross-linked pages.
-    "sky-broadband-scam-call-uk":                 "isp-impersonation-scam-bt-sky-virgin-media",
-    "tinder-investment-scam-uk":                  "pig-butchering-scam-uk",
-    # ── Batch 17 consolidations (2026-07-06): near-duplicate topics merged
-    # into the stronger surviving page. See docs/content-diversification-plan.md.
-    # Resolves the 3-way bank/police impersonation overlap flagged since batch 15
-    # (both redundant pages covered the same fake-authority-figure-phone-call
-    # pattern already covered in depth by the survivor).
-    "bank-impersonation-phone-scam-uk":                                        "police-impersonation-scam-call-uk",
-    "impersonation-scams-when-criminals-pretend-to-be-your-bank-or-the-police": "police-impersonation-scam-call-uk",
-    "fake-trading-platform-uk":                   "forex-trading-scam-uk",
-    "debt-management-scam-uk":                    "debt-relief-scam-uk",
-    "nhs-covid-scam-message":                     "__CAT__:government",
-    "forex-trading-scams-uk-protection-guide":    "__CAT__:crypto",
-    "trading-signal-scam-uk":                     "__CAT__:crypto",
-    "work-from-home-scams-uk":                    "__CAT__:employment",
-    "romance-scam-signs-uk-dating":               "__CAT__:dating",
-    "puppy-scam-uk":                              "__CAT__:marketplace",
-    "ticket-scam-uk":                             "__CAT__:marketplace",
-    "holiday-booking-scam-uk":                    "__CAT__:travel",
-    # 2nd purge-recovery batch (2026-06-07, see recover_purged_pages_2.py):
-    # amazon-scam-email-uk → redirected to its live twin (consolidates the demand);
-    # amazon-phone-call-scam-uk / chargeback / gumtree / google-voice resurrected as full guides.
-    "amazon-scam-email-uk":                       "amazon-order-scam-email-checklist",
-    "amazon-refund-scam-uk":                      "__CAT__:payment",
-    "google-voice-scam-uk":                       "__CAT__:tech",
-    "apple-id-scam-email-uk":                     "__CAT__:tech",
-    "whatsapp-family-scam-urgent-money-messages": "__CAT__:social",
-    "instagram-scam-message-uk":                  "__CAT__:social",
-    "snapchat-scam-account-awareness":            "__CAT__:social",
-    "energy-bill-scam-uk":                        "__CAT__:utility",
-    "credit-score-scam-uk":                       "__CAT__:finance",
-    # ── Cannibalisation cleanup (2026-06-15, external audit) ────────────────
-    # Near-duplicate guides competing for the same intent were consolidated to
-    # one canonical each. Survivors chosen by quality (freshness, clean slug,
-    # no data defects); unique advice from each loser was grafted into its
-    # survivor first, so these are article→article 301s (no content lost).
-    # NB: solar-panel-scam-uk and solar-panel-cold-caller-scam-uk were KEPT as
-    # separate guides — they target genuinely different vectors (general vs
-    # cold-call) and are now reciprocally cross-linked, not merged.
-    "concert-ticket-scam-uk-2026":                "concert-ticket-scam-uk",
-    "forex-trading-scam-uk-2026":                 "forex-trading-scam-uk",
-    "qr-code-payment-scam-guide":                 "qr-code-scam-uk",
-    "qr-code-scam-payment-uk":                    "qr-code-scam-uk",
-    "whatsapp-scam-family-message-uk":            "whatsapp-family-emergency-scam",
-    # 2026-07-10 (batch 19): Action Fraud's own taxonomy doesn't separate
-    # "mandate fraud" from "invoice fraud" by recurring-vs-one-off — it's the
-    # formal reporting name for the whole redirected-payment pattern (UK
-    # Finance/NCSC track "invoice and mandate" as one combined category too).
-    # invoice-fraud-uk-businesses already said as much in its own FAQ. The one
-    # genuinely new fact from the loser page (Direct Debit Guarantee vs the
-    # business-size-gated APP reimbursement rules) was grafted into the
-    # survivor first — this is an article -> article 301, no content lost.
-    "mandate-fraud-uk-businesses":                "invoice-fraud-uk-businesses",
-    # 2026-07-10 (final diversification batch): both near-duplicates found
-    # while scoping the last generic-template pages, confirmed independently
-    # against primary sources before merging.
-    # windows-tech-support-scam-uk described the identical scam as
-    # microsoft-support-scam-uk-guide (unsolicited call/pop-up -> fake virus
-    # alert -> AnyDesk/TeamViewer remote access -> fake fix fee), and cited
-    # "reportfraud.org.uk" as a reporting route — confirmed by direct DNS/HTTP
-    # check to be a parked domain (names.co.uk registrar parking page), not a
-    # real fraud-reporting service. No unique content to graft.
-    "windows-tech-support-scam-uk":                "microsoft-support-scam-uk-guide",
-    # push-payment-fraud-uk is "authorised push-payment (APP) fraud" — the
-    # exact term bank-transfer-scam-uk already opens by defining itself as,
-    # covering the same "safe account" con with 159 + PSR reimbursement-rule
-    # detail. The loser's solicitor/conveyancing-payment FAQ entry is already
-    # covered in depth by the dedicated conveyancing-fraud-uk page (now
-    # cross-linked from the survivor) — no unique content lost.
-    "push-payment-fraud-uk":                       "bank-transfer-scam-uk",
-    # 2026-07-18 editorial consolidation: Hermes rebranded to Evri in 2022 and
-    # the two live guides repeated the same parcel-text advice. Keep one current
-    # canonical guide and preserve the historic query with a permanent redirect.
-    "hermes-parcel-scam-text-uk":                  "evri-delivery-scam-guide",
-}
+# Article-level 301 redirects live in scripts/corpus.py, alongside the
+# consolidation metadata they partner with — one module owns "which slugs are
+# public and where the rest go". Re-exported here because build.py has always
+# been the name other scripts import it from.
+ARTICLE_REDIRECTS = corpus_mod.ARTICLE_REDIRECTS
 
-# These entries still exist in posts.json so their researched material can be
-# grafted into the survivor, but they must not build as live pages because the
-# forced ARTICLE_REDIRECTS rule above is their canonical outcome.
-CONSOLIDATED_LIVE_SLUGS = {
-    "hermes-parcel-scam-text-uk",
-}
+
+# ARTICLE_REDIRECTS above covers slugs with NO source record — deleted pages and
+# old slug-collision artifacts. A guide that still exists in posts.json but has
+# been consolidated into another declares that on the record itself:
+#
+#     "consolidated_into": "evri-delivery-scam-guide"
+#
+# scripts/corpus.py derives the whole consequence from that one field — the
+# public/source partition, the 301, internal-link canonicalisation, and
+# exclusion from the publication similarity check. It used to take two
+# hand-maintained lists here (CONSOLIDATED_LIVE_SLUGS plus a duplicate
+# ARTICLE_REDIRECTS entry) that agreed by accident, and a third opinion in
+# similarity_report.py that the gate did not share (operator review,
+# 2026-07-30).
 
 CATEGORY_LABELS = {
     "marketplace": "Marketplace Scams",
@@ -257,31 +128,106 @@ def load_affiliates(root: Path) -> list:
         return []
 
 
-def load_sources(root: Path) -> list:
-    """Verified canon of official UK reporting routes (content/sources.json) —
-    the single source of truth shared with scripts/content_gate.py. Returns the
-    list of official_routes (empty list if the file is missing/malformed, in
-    which case render_post falls back to its built-in routes)."""
-    path = root / "content" / "sources.json"
-    if not path.exists():
-        return []
+def load_sources(root: Path) -> dict:
+    """The verified canon of official UK reporting routes (content/sources.json).
+
+    Delegates to the ONE shared validator in scripts/canon.py, which the
+    publication gate also calls. Absent, unparseable or structurally invalid all
+    stop the build: there is no second, unreviewed copy of the routes to fall
+    back to, because a hard-coded fallback published a geographically unsafe
+    sidebar at exactly the moment the single source of truth had failed
+    (operator reviews, 2026-07-28/29).
+
+    Returns the whole canon dict — callers that only want the route list use
+    `canon.routes_by_role()` or `sources["official_routes"]`.
+    """
     try:
-        return json.loads(path.read_text(encoding="utf-8")).get("official_routes", [])
-    except Exception:
-        return []
+        return canon_mod.load_canon(root / "content" / "sources.json")
+    except canon_mod.CanonError as exc:
+        raise SystemExit(f"ERROR: {exc}")
 
 
-def report_block(sources: list) -> str:
+# Inline canon accessors for list-shaped surfaces, where a prose component does
+# not fit but the URL, number, brand and nation must still come from the canon
+# rather than being typed again (operator review, 2026-07-30).
+def _r(sources: dict, key: str) -> dict:
+    return canon_mod.route(sources, key)
+
+
+def _b(sources: dict, key: str) -> str:
+    return canon_mod.brand(canon_mod.route(sources, key))
+
+
+def _n(sources: dict, key: str) -> str:
+    return canon_mod.route(sources, key)["nation"]
+
+
+def _sms(sources: dict) -> str:
+    """The SMS spam shortcode, from the canon."""
+    return canon_mod.route(sources, "report-spam-sms")["sms"]
+
+
+def _email(sources: dict) -> str:
+    """The NCSC suspicious-email address, from the canon."""
+    return canon_mod.route(sources, "ncsc-sers")["email"]
+
+
+def _consumer_advice_url(sources: dict) -> str:
+    """GOV.UK's nation consumer-advice page — the canon's own cited source for
+    the three nation services."""
+    return canon_mod.route(sources, "citizens-advice")["source_url"]
+
+
+def police_route_html(sources: dict, *, phone: bool = True, url: bool = True,
+                      link: bool = True) -> str:
+    """The nation-scoped police reporting route as linked HTML, from the canon.
+
+    The ONE component every standalone surface uses — the checker page, the
+    Disclaimer, the Terms and the contact note. Each of those used to hand-write
+    its own version, and three of them drifted into naming Report Fraud with no
+    geography at all, or relegating Scotland to a bare `(Police Scotland: 101)`
+    parenthetical that is not a self-contained instruction (operator review,
+    2026-07-29, `hubs-v10-c.md` §4).
+    """
+    rf = canon_mod.route(sources, "action-fraud")
+    ps = canon_mod.route(sources, "police-scotland")
+
+    def a(href, text):
+        if not link:
+            return html.escape(text)
+        return (f'<a href="{html.escape(href)}" rel="noopener noreferrer" target="_blank">'
+                f'{html.escape(text)}</a>')
+
+    rf_bit = a(rf["info_url"], canon_mod.brand(rf))
+    if phone:
+        rf_bit += f' on <strong>{html.escape(rf["phone"])}</strong>'
+    if url:
+        host = urlparse(rf["report_url"]).hostname or ""
+        rf_bit += f' {"or at" if phone else "at"} {a(rf["report_url"], host.replace("www.", ""))}'
+    ps_bit = a(ps["report_url"], f'{canon_mod.brand(ps)} on {ps["phone"]}')
+    return (f'{rf_bit} for {html.escape(rf["nation"])}, or {ps_bit} for '
+            f'{html.escape(ps["nation"])}')
+
+
+def consumer_route_html(sources: dict) -> str:
+    """The three nation consumer services as linked HTML, from the canon."""
+    bits = []
+    for r in canon_mod.consumer_advice_routes(sources):
+        bits.append(f'<a href="{html.escape(r["info_url"])}" rel="noopener noreferrer" '
+                    f'target="_blank">{html.escape(canon_mod.brand(r))}</a> in '
+                    f'{html.escape(r["nation"])}')
+    return ", ".join(bits[:-1]) + f", or {bits[-1]}"
+
+
+def report_block(sources: dict) -> str:
     """Render the 'Report this scam' sidebar list from the verified canon
-    (on_page routes only). Falls back to the canonical three if the canon is
-    unavailable, so a guide never ships without reporting routes."""
-    routes = [r for r in (sources or []) if r.get("on_page") and r.get("report_url")]
+    (on_page routes only). No fallback: load_sources() has already guaranteed
+    every nation is covered, so an empty list here is a bug, not a degraded
+    mode to paper over."""
+    routes = [r for r in sources.get("official_routes", [])
+              if r.get("on_page") and r.get("report_url")]
     if not routes:
-        routes = [
-            {"report_url": "https://www.reportfraud.police.uk", "report_label": "Report Fraud (Action Fraud)"},
-            {"report_url": "https://www.ncsc.gov.uk/collection/phishing-scams", "report_label": "NCSC — report phishing"},
-            {"report_url": "https://www.citizensadvice.org.uk/consumer/scams/reporting-a-scam/", "report_label": "Citizens Advice"},
-        ]
+        raise SystemExit("ERROR: the canon produced no on-page reporting routes")
     items = "".join(
         f'<li><a href="{html.escape(r["report_url"])}" rel="noopener noreferrer" target="_blank">'
         f'{html.escape(r.get("report_label") or r.get("name", "Report"))}</a></li>'
@@ -297,10 +243,14 @@ def load_category_hubs(root: Path) -> dict:
     path = root / "content" / "category-hubs.json"
     if not path.exists():
         return {}
+    # FAIL CLOSED. Swallowing the error and returning {} meant a malformed hub
+    # file silently published every category as a plain page instead of stopping
+    # the build (operator review, 2026-07-27). Absent is a valid state; present
+    # but unreadable is not.
     try:
         return json.loads(path.read_text(encoding="utf-8"))
-    except Exception:
-        return {}
+    except Exception as exc:
+        raise SystemExit(f"ERROR: {path} exists but could not be read or parsed: {exc}")
 
 
 def validate_category_hubs(hubs: dict) -> None:
@@ -315,6 +265,101 @@ def validate_category_hubs(hubs: dict) -> None:
         from content_gate import check_deterministic, SEVERITY_BLOCK
     except ImportError:  # Support importing this file as scripts.build.
         from scripts.content_gate import check_deterministic, SEVERITY_BLOCK
+
+    # Structural validation first. content/category-hubs.json is keyed by canonical
+    # category slug at the TOP level. A packet shaped {"hubs": {...}} merges as one
+    # unknown key, the renderer skips it, and the build silently publishes nothing
+    # — the gate would pass vacuously because the wrapper has no prose to inspect
+    # (operator review, 2026-07-27). Fail loudly instead.
+    # This runs BEFORE dist/ is removed. A shape the validator waves through but
+    # the renderer cannot unpack — `["label"]` in sources_checked, say — would
+    # otherwise crash after the committed output tree had already been deleted
+    # (operator review, 2026-07-27).
+    known = set(CATEGORY_LABELS) | set(CATEGORY_CANON.values())
+    structural = []
+    if hubs is not None and not isinstance(hubs, dict):
+        raise SystemExit(f"ERROR: category hub file must be an object keyed by category slug, "
+                         f"got {type(hubs).__name__}")
+
+    def _pairs(slug, field, value, a_name, b_name, require_url=False):
+        if value is None:
+            return
+        if not isinstance(value, list):
+            structural.append(f"{slug}: {field!r} must be a list, got {type(value).__name__}")
+            return
+        for n, pair in enumerate(value):
+            if not (isinstance(pair, (list, tuple)) and len(pair) == 2):
+                structural.append(f"{slug}: {field}[{n}] must be a [{a_name}, {b_name}] pair")
+                continue
+            a, b = pair
+            if not isinstance(a, str) or not isinstance(b, str):
+                structural.append(f"{slug}: {field}[{n}] {a_name}/{b_name} must both be strings")
+                continue
+            if not a.strip():
+                structural.append(f"{slug}: {field}[{n}] {a_name} is empty")
+            if not require_url and not b.strip():
+                structural.append(f"{slug}: {field}[{n}] {b_name} is empty")
+            if require_url:
+                parsed = urlparse(b)
+                if parsed.scheme not in ("http", "https") or not parsed.netloc:
+                    structural.append(f"{slug}: {field}[{n}] {b_name} must be an http(s) URL "
+                                      f"with a host, got {b!r}")
+
+    for slug, hub in (hubs or {}).items():
+        if slug not in known:
+            structural.append(f"unknown category slug {slug!r} — hubs are keyed by canonical "
+                              f"category slug at the top level, with no wrapper object")
+            continue
+        if not isinstance(hub, dict):
+            structural.append(f"{slug}: record is {type(hub).__name__}, expected an object")
+            continue
+        for field in ("title", "description"):
+            if not isinstance(hub.get(field), str) or not hub.get(field, "").strip():
+                structural.append(f"{slug}: {field!r} must be a non-empty string")
+        if "intro" in hub and (not isinstance(hub.get("intro"), str) or not hub["intro"].strip()):
+            structural.append(f"{slug}: 'intro' must be a non-empty string")
+        sections = hub.get("sections")
+        if not isinstance(sections, list) or not sections:
+            structural.append(f"{slug}: 'sections' must be a non-empty list")
+        else:
+            _pairs(slug, "sections", sections, "heading", "body")
+        _pairs(slug, "faq", hub.get("faq"), "question", "answer")
+        srcs = hub.get("sources_checked")
+        if isinstance(srcs, list) and srcs:
+            _pairs(slug, "sources_checked", srcs, "label", "url", require_url=True)
+        elif hub.get("updated"):
+            # A hub carrying a review date is a reviewed hub: it renders a trust
+            # layer, so it must have sources to render. Required, not advisory.
+            structural.append(f"{slug}: 'sources_checked' must be a non-empty list — this hub "
+                              f"declares a review date, so the trust layer renders from it")
+        else:
+            # Every hub is sourced as of the 2026-07-30 accuracy release, so an
+            # unsourced hub is now an error. The `unsourced_legacy` warning
+            # branch that used to sit here existed only for the three original
+            # hubs and was removed in the same patch that landed all thirteen.
+            structural.append(f"{slug}: 'sources_checked' must be a non-empty list — every hub "
+                              f"renders a trust layer")
+        unknown = set(hub) - {"title", "description", "intro", "sections", "faq",
+                              "sources_checked", "updated", "ads_mode"}
+        if unknown:
+            structural.append(f"{slug}: unknown key(s) {sorted(unknown)} — a misspelling such as "
+                              f"'source_checked' would silently drop the trust layer")
+        updated = hub.get("updated")
+        if updated is not None:
+            if not isinstance(updated, str) or not re.fullmatch(r"\d{4}-\d{2}-\d{2}", updated):
+                structural.append(f"{slug}: 'updated' must be an ISO date (YYYY-MM-DD), got {updated!r}")
+            else:
+                try:
+                    datetime.strptime(updated, "%Y-%m-%d")
+                except ValueError:
+                    structural.append(f"{slug}: 'updated' is not a real date: {updated!r}")
+        ads = hub.get("ads_mode")
+        if ads is not None and ads not in ("none", "npa", "default"):
+            structural.append(f"{slug}: 'ads_mode' must be none|npa|default, got {ads!r}")
+    if structural:
+        for msg in structural:
+            print(f"  Category hub STRUCTURE: {msg}")
+        raise SystemExit(f"ERROR: category hub file is malformed: {len(structural)} problem(s)")
 
     blocking = []
     flagged = []
@@ -760,6 +805,44 @@ def post_ads_mode(post: dict) -> str:
     if _NO_ADS_RE.search(hay):
         return "none"
     return "npa" if _SENSITIVE_FINANCE_RE.search(hay) else "default"
+
+
+def hub_ads_mode(slug: str, hub: dict) -> str:
+    """Ad mode for a category hub page.
+
+    `render_category_page()` used to pass a flat "default" for every hub, so ten
+    long pages covering debt, lost money, identity theft, recovery, romance,
+    sextortion and intimate images would all have carried personalised-capable
+    Auto Ads — inconsistent with the site's per-page policy and the reason
+    `post_ads_mode()` exists (operator review, 2026-07-27).
+
+    Assesses the WHOLE hub, not just the category name: a hub's own prose is
+    what a reader and an ad network actually see, and `crypto` or `email` gives
+    away nothing about the sextortion and debt material inside.
+
+    An explicit `ads_mode` may only KEEP or INCREASE restriction
+    (default < npa < none). A less restrictive explicit value is ignored in
+    favour of the content-derived mode, so a record carrying sextortion or
+    intimate-image material cannot set "default" and bypass a derived "none".
+    """
+    explicit = str((hub or {}).get("ads_mode") or "").strip().lower()
+    if explicit and explicit not in ("none", "npa", "default"):
+        raise SystemExit(f"ERROR: hub {slug}: ads_mode must be none|npa|default, got {explicit!r}")
+    hay = " ".join([
+        slug, str(hub.get("title") or ""), str(hub.get("description") or ""),
+        str(hub.get("intro") or ""),
+        " ".join(f"{h} {b}" for h, b in (hub.get("sections") or [])),
+        " ".join(f"{q} {a}" for q, a in (hub.get("faq") or [])),
+    ]).replace("-", " ").replace("_", " ")
+    derived = "none" if _NO_ADS_RE.search(hay) else (
+        "npa" if _SENSITIVE_FINANCE_RE.search(hay) else "default")
+    if not explicit:
+        return derived
+    # An explicit value may only be EQUALLY or MORE restrictive. Returning it
+    # before scanning let a future record carrying sextortion or intimate-image
+    # material set "default" and bypass the safer derived "none".
+    rank = {"default": 0, "npa": 1, "none": 2}
+    return explicit if rank[explicit] >= rank[derived] else derived
 
 
 def make_base(content: str, *, title: str, description: str, canonical: str, schema: str, site: dict,
@@ -1576,13 +1659,21 @@ def render_category_page(site, category, posts, all_categories=None, hub=None):
             hub_trust_html = ('<section class="section"><div class="wrap">'
                               + "".join(bits) + '</div></section>')
 
+    # A hub's differentiated title/description must be the SAME string across the
+    # title element, the visible H1, the lead and the schema name — otherwise the
+    # carefully distinguished metadata contradicts the page a crawler renders
+    # (operator review, 2026-07-27). The short label stays in the breadcrumb,
+    # where a compact name is what a reader wants.
+    page_title = hub.get("title") if hub and hub.get("title") else label
+    page_desc  = hub.get("description") if hub and hub.get("description") else desc
+
     grid_heading = f"All {html.escape(label.lower())} guides" if hub else f"Latest {html.escape(label.lower())}"
     content = f'''
     <section class="hero">
       <div class="wrap">
         <div class="breadcrumbs"><a href="/">Home</a> / <a href="/categories/">Categories</a> / {html.escape(label)}</div>
-        <h1>{html.escape(label)}</h1>
-        <p class="lead">{html.escape(desc)}</p>
+        <h1>{html.escape(page_title)}</h1>
+        <p class="lead">{html.escape(page_desc)}</p>
       </div>
     </section>
     {hub_body_html}
@@ -1597,10 +1688,8 @@ def render_category_page(site, category, posts, all_categories=None, hub=None):
         ("Categories",    site["domain"] + "/categories/"),
         (label,           canonical),
     ]
-    page_title = hub.get("title") if hub and hub.get("title") else label
-    page_desc  = hub.get("description") if hub and hub.get("description") else desc
     schema = (
-        page_schema(site, label, page_desc, canonical,
+        page_schema(site, page_title, page_desc, canonical,
                     date_modified=(hub or {}).get('updated'))
         + itemlist_schema(item_pairs, list_name=label)
         + breadcrumb_schema(breadcrumbs)
@@ -1608,12 +1697,20 @@ def render_category_page(site, category, posts, all_categories=None, hub=None):
     )
     return make_base(
         content,
-        title=seo_title(page_title, site["site_name"]),
+        # brand=False when a reviewed hub title is in play, exactly as guide
+        # pages do. With the ' | Beat the Scam' suffix enabled, all ten hub
+        # titles were truncated away from the H1 and the schema `name` —
+        # three of them into visibly broken endings such as "Travel Scams UK:
+        # Fake Holidays, Flights &" (operator review, 2026-07-29,
+        # `hubs-v10-c.md` §5). Every full hub title is already inside the
+        # 60-char budget, so the suffix bought nothing and cost the title.
+        # Plain category pages keep the brand suffix: their labels are short.
+        title=seo_title(page_title, site["site_name"], brand=not (hub and hub.get("title"))),
         description=seo_description(page_desc),
         canonical=canonical,
         schema=schema,
         site=site,
-        ads_mode="default" if hub else "none",
+        ads_mode=hub_ads_mode(slug, hub) if hub else "none",
     )
 
 
@@ -1898,10 +1995,10 @@ def render_post(site, post, all_posts, affiliates=None, sources=None, link_map=N
         {sources_checked_block(post)}
         <div class="notice" style="margin-top:2rem">
           <strong>Think you&#8217;ve spotted a scam?</strong>
-          Use the <a href="/check/">AI scam checker</a> for an instant analysis, or report it to
-          <a href="https://www.reportfraud.police.uk" rel="noopener noreferrer" target="_blank">Report Fraud</a>.
+          Use the <a href="/check/">AI scam checker</a> for an automated second opinion, or report it to
+          {police_route_html(sources, phone=False, url=False)}.
         </div>
-        <p class="meta" style="margin-top:1.4rem">Reporting routes in this guide are checked against our verified canon of official UK sources &#8212; <a href="https://www.reportfraud.police.uk/" rel="noopener" target="_blank">Report Fraud</a>, the <a href="https://www.ncsc.gov.uk/" rel="noopener" target="_blank">National Cyber Security Centre</a>, and <a href="https://www.citizensadvice.org.uk/consumer/scams/" rel="noopener" target="_blank">Citizens Advice</a> &#8212; by an automated accuracy gate before publication. {review_note} Read about <a href="/methodology/">how Beat the Scam writes guides</a>.</p>
+        <p class="meta" style="margin-top:1.4rem">Reporting routes in this guide are checked against our verified canon of official UK sources &#8212; {police_route_html(sources, phone=False, url=False)}, the <a href="{_r(sources, 'ncsc-sers')['info_url']}" rel="noopener" target="_blank">National Cyber Security Centre</a>, and the consumer service for each nation &#8212; by an automated accuracy gate before publication. {review_note} Read about <a href="/methodology/">how Beat the Scam writes guides</a>.</p>
       </article>
       <aside class="sidebar">
         <section class="sidebar-card">
@@ -1974,7 +2071,7 @@ def render_post(site, post, all_posts, affiliates=None, sources=None, link_map=N
     )
 
 
-def render_check_page(site):
+def render_check_page(site, sources):
     content = '''
     <section class="hero">
       <div class="wrap">
@@ -2033,8 +2130,7 @@ def render_check_page(site):
         <div class="notice">
           <strong>This tool provides educational guidance only.</strong>
           It is not a definitive fraud verdict. If you have already sent money or shared personal details,
-          contact your bank immediately and report to
-          <a href="https://www.reportfraud.police.uk" rel="noopener noreferrer" target="_blank">Report Fraud</a>.
+          contact your bank immediately and report it to <!--POLICE_ROUTE_PLAIN-->.
         </div>
       </div>
     </section>
@@ -2065,7 +2161,7 @@ def render_check_page(site):
         <p>Because scam tactics change constantly, treat the result as a guide, not a final verdict. The single safest habit is to verify through a channel you open yourself &mdash; the number on the back of your card, or an address you type into your browser &mdash; rather than any link, number, or detail supplied in the message itself.</p>
 
         <h2>If you have already responded</h2>
-        <p>If you have paid, shared bank or card details, or shared a one-time passcode, act straight away. Contact your bank on the number on the back of your card, report it to Report Fraud on <strong>0300 123 2040</strong> or at <a href="https://www.reportfraud.police.uk/" rel="noopener noreferrer" target="_blank">reportfraud.police.uk</a> (Police Scotland: <strong>101</strong>), and forward scam texts to <strong>7726</strong> and suspicious emails to <strong>report@phishing.gov.uk</strong>. For step-by-step help by scam type, browse our <a href="/guides/">scam guides</a>.</p>
+        <p>If you have paid, shared bank or card details, or shared a one-time passcode, act straight away. Contact your bank on the number on the back of your card, report it to <!--POLICE_ROUTE-->, and forward scam texts to <strong><!--SMS_CODE--></strong> and suspicious emails to <strong><!--NCSC_EMAIL--></strong>. For step-by-step help by scam type, browse our <a href="/guides/">scam guides</a>.</p>
 
         <h2>Common questions</h2>
         <div class="faq">
@@ -2219,8 +2315,12 @@ def render_check_page(site):
 
       function renderError() {
         var p = el("p", {"class": "notice"}, "Sorry, the checker could not be reached right now. Please try again, or ");
-        var a = el("a", {"href": "https://www.reportfraud.police.uk", "rel": "noopener noreferrer", "target": "_blank"}, "report it to Report Fraud");
-        p.appendChild(a);
+        // Rendered from the canon, like every other route on this page.
+        var routes = document.createElement("span");
+        routes.innerHTML = "<!--POLICE_ROUTE_JS-->";
+        p.appendChild(document.createTextNode("report it to "));
+        p.appendChild(routes);
+        p.appendChild(document.createTextNode("."));
         resultContent.textContent = "";
         resultContent.appendChild(p);
         resultContent.hidden = false;
@@ -2228,6 +2328,23 @@ def render_check_page(site):
     })();
     </script>
     '''
+
+    # The block above is a plain (non-f) triple-quoted string because it embeds
+    # JavaScript full of braces. The nation-scoped police route is substituted
+    # here so the checker page uses the SAME canon component as the Disclaimer,
+    # the Terms and the methodology page (operator review, 2026-07-29).
+    content = content.replace("<!--POLICE_ROUTE-->", police_route_html(sources))
+    content = content.replace("<!--POLICE_ROUTE_PLAIN-->",
+                              police_route_html(sources, phone=False, url=False))
+    content = content.replace("<!--SMS_CODE-->", _sms(sources))
+    content = content.replace("<!--NCSC_EMAIL-->", _email(sources))
+    # The error-state route is assembled in JavaScript, so it is injected as an
+    # HTML string inside a JS double-quoted literal: escape the quotes.
+    content = content.replace(
+        "<!--POLICE_ROUTE_JS-->",
+        police_route_html(sources, phone=False, url=False).replace('"', '\\"'),
+    )
+    assert "<!--POLICE_ROUTE" not in content
 
     schema = page_schema(
         site,
@@ -2864,7 +2981,7 @@ def render_author_page(site):
     )
 
 
-def build_legal_bodies(site):
+def build_legal_bodies(site, sources):
     about = f'''
     <p><strong>{html.escape(site["site_name"])}</strong> is a consumer-protection content site focused on helping UK residents recognise scam patterns before they send money, share credentials, or install malicious software.</p>
 
@@ -2902,7 +3019,7 @@ def build_legal_bodies(site):
     <p>This page explains, in detail, how {html.escape(site["site_name"])} researches, drafts, checks, and corrects its guides &mdash; so a reader, a journalist, an ad-network reviewer, or an AI system deciding whether to cite this site can see the actual process rather than take &#8220;fact-checked&#8221; on faith.</p>
 
     <h2>How content is researched and produced</h2>
-    <p>Each guide on this site is drafted using AI assistance against a strict editorial template that forbids inventing statistics, quotes, or specific unverifiable claims, and that standardises the official UK reporting routes (Report Fraud, the NCSC, and Citizens Advice).</p>
+    <p>Each guide on this site is drafted using AI assistance against a strict editorial template that forbids inventing statistics, quotes, or specific unverifiable claims, and that standardises the official UK reporting routes, scoped by nation &#8212; {police_route_html(sources, phone=False, url=False)}; the NCSC; and {consumer_route_html(sources)}.</p>
     <p>The drafting step uses Anthropic&#8217;s Claude API. The model is given a structured prompt covering the scam type, target audience, and required sections (what the scam looks like, warning signs, step-by-step pattern, verification, recovery actions, reporting routes). It is explicitly instructed not to invent statistics, predict outcomes, generate fake quotes, or assert specific claims about named companies or people.</p>
 
     <h2>The accuracy gate</h2>
@@ -2917,9 +3034,10 @@ def build_legal_bodies(site):
     <h2>Sources we verify against</h2>
     <p>Verification draws on UK-specific public sources, including:</p>
     <ul>
-      <li><a href="https://www.reportfraud.police.uk/" rel="noopener noreferrer" target="_blank">Report Fraud</a> (formerly Action Fraud) &mdash; the UK&#8217;s national reporting centre for fraud and cybercrime</li>
-      <li><a href="https://www.ncsc.gov.uk/" rel="noopener noreferrer" target="_blank">National Cyber Security Centre (NCSC)</a> &mdash; for phishing reporting routes and current threat patterns</li>
-      <li><a href="https://www.citizensadvice.org.uk/" rel="noopener noreferrer" target="_blank">Citizens Advice</a> &mdash; consumer protection guidance and helpline routes</li>
+      <li><a href="{_r(sources, 'action-fraud')['info_url']}" rel="noopener noreferrer" target="_blank">{_b(sources, 'action-fraud')}</a> (formerly Action Fraud) &mdash; the police fraud reporting service for {_n(sources, 'action-fraud')}</li>
+      <li><a href="{_r(sources, 'police-scotland')['report_url']}" rel="noopener noreferrer" target="_blank">{_b(sources, 'police-scotland')} on {_r(sources, 'police-scotland')['phone']}</a> &mdash; the police reporting route for {_n(sources, 'police-scotland')}</li>
+      <li><a href="{_r(sources, 'ncsc-sers')['info_url']}" rel="noopener noreferrer" target="_blank">National Cyber Security Centre (NCSC)</a> &mdash; for phishing reporting routes and current threat patterns</li>
+      <li><a href="{_consumer_advice_url(sources)}" rel="noopener noreferrer" target="_blank">GOV.UK consumer advice</a> &mdash; the consumer service for each UK nation: Citizens Advice in England and Wales, Advice Direct Scotland in Scotland, Consumerline in Northern Ireland</li>
       <li><a href="https://www.fca.org.uk/consumers/fca-firm-checker" rel="noopener noreferrer" target="_blank">FCA Firm Checker</a> &mdash; for investment and financial services scams</li>
       <li><a href="https://takefive-stopfraud.org.uk/" rel="noopener noreferrer" target="_blank">Take Five</a> &mdash; UK banking sector consumer fraud campaign</li>
       <li>Government UK pages for HMRC, DVLA, TV Licensing, and other public bodies commonly impersonated</li>
@@ -2927,7 +3045,7 @@ def build_legal_bodies(site):
 
     <h2>Editorial standards</h2>
     <p>Content is written to be understandable under pressure. That means short sections, clear headings, and advice that directs readers towards independent verification through official channels &mdash; never through links, numbers, or payment details supplied by a suspicious message.</p>
-    <p>Where the site recommends a national reporting route &mdash; such as Report Fraud, the NCSC, or Citizens Advice &mdash; it uses the official published channel. For organisation-specific contact details, always confirm the number or web address against the official website, or the details on your card, bill, or statement, rather than relying solely on any number reproduced in a guide.</p>
+    <p>Where the site recommends an official reporting route &mdash; the police reporting route for the reader's nation, the NCSC, or the consumer service where they live &mdash; it uses the official published channel and states which nations it covers. For organisation-specific contact details, always confirm the number or web address against the official website, or the details on your card, bill, or statement, rather than relying solely on any number reproduced in a guide.</p>
 
     <h2>Corrections</h2>
     <p>If a guide contains an error, email <a href="mailto:{site["editorial_email"]}">{site["editorial_email"]}</a> with the page URL, disputed wording and supporting source. Material factual changes are recorded in the public <a href="/corrections/">corrections log</a>; minor spelling and formatting edits are not normally logged.</p>
@@ -2945,7 +3063,7 @@ def build_legal_bodies(site):
     <h2>23 July 2026</h2>
     <p>Following a full corpus fact re-check against current primary sources:</p>
     <ul>
-      <li><strong>DPD text guide:</strong> the reporting section no longer directs readers to a DPD fraud-reporting route that DPD UK's phishing guidance does not offer; reporting now goes via 7726, Report Fraud and the NCSC, and the guide's sources now cite DPD UK rather than DPD Germany.</li>
+      <li><strong>DPD text guide:</strong> the reporting section no longer directs readers to a DPD fraud-reporting route that DPD UK's phishing guidance does not offer; reporting now goes via {_sms(sources)}, the NCSC, and the police reporting route for the reader's nation ({police_route_html(sources, phone=False, url=False)}), and the guide's sources now cite DPD UK rather than DPD Germany.</li>
       <li><strong>TV Licence email guide:</strong> sender-address guidance updated &mdash; TV Licensing warns that scammers can spoof its genuine addresses, and its current Themis Recoveries trial legitimately emails from mailing@themisglobal.co.uk about expired licences; a matching sender address is no longer presented as proof an email is genuine.</li>
       <li><strong>Microsoft account email guide:</strong> restored Microsoft's published phishing-forwarding mailbox for non-Outlook clients (phish@office365.microsoft.com, sent as an attachment so headers are preserved), which the guide previously said no longer existed; the Microsoft Defender portal's Submissions page is now described as an administrator route.</li>
       <li><strong>TalkTalk call guide:</strong> call-back guidance now uses TalkTalk's current published customer-service number (0345 172 0088, free from TalkTalk home phones) rather than the legacy 150 short code, which TalkTalk's current contact page no longer lists.</li>
@@ -2986,13 +3104,13 @@ def build_legal_bodies(site):
 
     <h2>What to do first</h2>
     <div class="tablelike">
-      <div class="table-row"><strong>You only received the message</strong><span>Do not reply, click, or call a number in it. Forward a suspicious SMS to 7726 free of charge. For WhatsApp, iMessage, RCS and other app messages, also use the app or phone's built-in block and report controls.</span></div>
+      <div class="table-row"><strong>You only received the message</strong><span>Do not reply, click, or call a number in it. Forward a suspicious SMS to {_sms(sources)} free of charge. For WhatsApp, iMessage, RCS and other app messages, also use the app or phone's built-in block and report controls.</span></div>
       <div class="table-row"><strong>You opened a link</strong><span>If you did not enter information, download a file or install software, the NCSC says further action is unlikely to be needed, but watch for unusual account activity. If anything downloaded or installed, disconnect the device from the internet and run a full security scan.</span></div>
       <div class="table-row"><strong>You shared a password</strong><span>Use a clean device to change it immediately. Change every account where the password was reused, starting with the email account used for password resets. Sign out other sessions and turn on strong multi-factor authentication.</span></div>
       <div class="table-row"><strong>You shared card or bank details</strong><span>Contact the bank or card issuer immediately through its official app or the number printed on the card. Ask it to secure the account or card and identify any payment or account change you did not authorise.</span></div>
       <div class="table-row"><strong>You approved or sent a bank transfer</strong><span>Tell the sending bank immediately that the payment was induced by fraud and ask it to contact the receiving bank. Ask whether the APP reimbursement rules apply; do not describe an authorised scam payment merely as an unauthorised transaction.</span></div>
       <div class="table-row"><strong>You installed remote-access software</strong><span>Disconnect the device, end the remote session and contact the bank from a different trusted device. Remove the software, run a full scan, change exposed passwords, and do not use the affected device for banking until it is secure.</span></div>
-      <div class="table-row"><strong>You shared identity documents or personal data</strong><span>Secure the affected accounts, check all three UK credit-reference files for applications you do not recognise, and consider Cifas Protective Registration where identity misuse is a realistic risk.</span></div>
+      <div class="table-row"><strong>You shared identity documents or personal data</strong><span>Secure the affected accounts, check your credit-reference files for applications you do not recognise — Experian, Equifax and TransUnion are the three main agencies, and MoneyHelper also lists Crediva, and consider Cifas Protective Registration where identity misuse is a realistic risk.</span></div>
     </div>
 
     <h2>Which money-recovery route applies?</h2>
@@ -3009,10 +3127,10 @@ def build_legal_bodies(site):
 
     <h2>Report the incident</h2>
     <ul>
-      <li><strong>England, Wales or Northern Ireland:</strong> use <a href="https://www.reportfraud.police.uk/reporting-a-fraud/" rel="noopener noreferrer" target="_blank">Report Fraud</a> online or call 0300 123 2040.</li>
-      <li><strong>Scotland:</strong> report fraud and cybercrime to Police Scotland on 101. Call 999 if a crime is happening now or someone is in immediate danger.</li>
-      <li><strong>Suspicious SMS:</strong> forward it to 7726 free of charge. For other message types, use the relevant app or device reporting controls as well.</li>
-      <li><strong>Phishing email:</strong> forward it to <a href="mailto:report@phishing.gov.uk">report@phishing.gov.uk</a>. The NCSC also accepts suspicious website reports.</li>
+      <li><strong>{_n(sources, 'action-fraud')}:</strong> use <a href="{_r(sources, 'action-fraud')['info_url']}" rel="noopener noreferrer" target="_blank">{_b(sources, 'action-fraud')}</a> online or call {_r(sources, 'action-fraud')['phone']}.</li>
+      <li><strong>{_n(sources, 'police-scotland')}:</strong> report fraud and cybercrime to {_b(sources, 'police-scotland')} on {_r(sources, 'police-scotland')['phone']}. Call 999 if a crime is happening now or someone is in immediate danger.</li>
+      <li><strong>Suspicious SMS:</strong> forward it to {_sms(sources)} free of charge. For other message types, use the relevant app or device reporting controls as well.</li>
+      <li><strong>Phishing email:</strong> forward it to <a href="mailto:{_email(sources)}">{_email(sources)}</a>. The NCSC also accepts suspicious website reports.</li>
       <li><strong>Impersonated organisation:</strong> tell the bank, retailer, courier, platform or public body through contact details you find independently.</li>
     </ul>
 
@@ -3027,7 +3145,8 @@ def build_legal_bodies(site):
       <li><a href="https://www.ncsc.gov.uk/section/respond-recover/phishing" rel="noopener noreferrer" target="_blank">National Cyber Security Centre — phishing response and recovery</a></li>
       <li><a href="https://www.psr.org.uk/news-and-updates/latest-news/news/groundbreaking-new-protections-for-victims-of-app-scams-start-today/" rel="noopener noreferrer" target="_blank">Payment Systems Regulator — APP reimbursement protections</a></li>
       <li><a href="https://www.moneyhelper.org.uk/en/everyday-money/credit/how-youre-protected-when-you-pay-by-card" rel="noopener noreferrer" target="_blank">MoneyHelper — Section 75 and chargeback</a></li>
-      <li><a href="https://www.reportfraud.police.uk/reporting-a-fraud/" rel="noopener noreferrer" target="_blank">Report Fraud — reporting routes by nation</a></li>
+      <li><a href="{_r(sources, 'action-fraud')['info_url']}" rel="noopener noreferrer" target="_blank">{_b(sources, 'action-fraud')} — reporting routes for {_n(sources, 'action-fraud')}</a></li>
+      <li><a href="{_r(sources, 'police-scotland')['report_url']}" rel="noopener noreferrer" target="_blank">{_b(sources, 'police-scotland')} on {_r(sources, 'police-scotland')['phone']} — the reporting route for {_n(sources, 'police-scotland')}</a></li>
       <li><a href="https://www.ofcom.org.uk/phones-and-broadband/scam-calls-and-messages/what-to-do-about-a-scam-call-text-or-message" rel="noopener noreferrer" target="_blank">Ofcom — reporting suspicious calls and messages</a></li>
       <li><a href="https://www.paypal.com/uk/legalhub/buyer-protection?locale.x=en_US" rel="noopener noreferrer" target="_blank">PayPal UK — Buyer Protection terms</a></li>
     </ul>
@@ -3100,11 +3219,11 @@ def build_legal_bodies(site):
 
     <h2>Educational purpose &mdash; not professional advice</h2>
     <p>Everything published here is general educational information. It is <strong>not</strong> legal, financial, investment, tax, medical, cybersecurity, or regulatory advice, and reading it does not create an advisor&ndash;client relationship. See our full <a href="/disclaimer/">Disclaimer</a> for the detail.</p>
-    <p>Scam tactics change rapidly. No article can guarantee that a specific message, listing, website or interaction is safe or fraudulent. If anything you read here is material to your circumstances, verify it through official UK channels (Report Fraud, the FCA Register, Companies House, Citizens Advice, your bank&#8217;s published fraud line) or seek qualified professional advice.</p>
+    <p>Scam tactics change rapidly. No article can guarantee that a specific message, listing, website or interaction is safe or fraudulent. If anything you read here is material to your circumstances, verify it through official UK channels &#8212; the police reporting route for your nation ({police_route_html(sources, phone=False, url=False)}), the FCA Register, Companies House, the consumer service for your nation, or your bank&#8217;s published fraud line &#8212; or seek qualified professional advice.</p>
 
     <h2>The AI scam checker</h2>
     <p>The AI scam checker is an educational tool that returns an automated plain-English assessment. Its output is <strong>not</strong> a definitive fraud determination and we make no warranty that it will identify every scam or that flagged messages are necessarily fraudulent.</p>
-    <p>Do not rely on the checker alone for high-stakes decisions. If you have already sent money, shared bank details, or shared one-time codes, contact your bank immediately and report the incident to Report Fraud (<a href="https://www.reportfraud.police.uk/" rel="noopener noreferrer" target="_blank">reportfraud.police.uk</a> or 0300 123 2040).</p>
+    <p>Do not rely on the checker alone for high-stakes decisions. If you have already sent money, shared bank details, or shared one-time codes, contact your bank immediately and report the incident to {police_route_html(sources)}.</p>
 
     <h2>Your responsibilities</h2>
     <p>You agree to use the Site lawfully and reasonably. You must not:</p>
@@ -3152,7 +3271,7 @@ def build_legal_bodies(site):
       <div class="table-row"><strong>Legal &amp; copyright</strong><span><a href="mailto:{site["legal_email"]}">{site["legal_email"]}</a> &mdash; Terms, intellectual property, and reproduction requests.</span></div>
       <div class="table-row"><strong>Security disclosure</strong><span><a href="mailto:{site["security_email"]}">{site["security_email"]}</a> &mdash; see also our <a href="/.well-known/security.txt">security.txt</a>.</span></div>
     </div>
-    <p class="note" style="margin-top:1.5rem">To report a scam to UK authorities directly, use <a href="https://www.reportfraud.police.uk/" rel="noopener noreferrer" target="_blank">Report Fraud</a>. Ofcom says suspicious SMS texts can be forwarded to <strong>7726</strong> free of charge; use the relevant app's own reporting tool for non-SMS messages.</p>
+    <p class="note" style="margin-top:1.5rem">To report a scam to UK authorities directly, use {police_route_html(sources, phone=False, url=False)}. Ofcom says suspicious SMS texts can be forwarded to <strong>{_sms(sources)}</strong> free of charge; use the relevant app's own reporting tool for non-SMS messages.</p>
     '''
 
     disclaimer = f'''
@@ -3161,7 +3280,7 @@ def build_legal_bodies(site):
     <p>Everything published on <strong>{html.escape(site["site_name"])}</strong> &mdash; the guides, the AI scam checker, and any other material &mdash; is provided for <strong>general education and consumer awareness only</strong>. This page sets out the limits of that information. By using the Site you accept this disclaimer alongside our <a href="/terms/">Terms</a>.</p>
 
     <h2>Not professional advice</h2>
-    <p>The content here is <strong>not</strong> legal, financial, investment, tax, accounting, cybersecurity, or regulatory advice, and reading it does <strong>not</strong> create an advisor&ndash;client or other professional relationship. It cannot account for your individual circumstances. Before acting on anything that materially affects your money, identity, or legal position, seek advice from a suitably qualified professional or an official UK body &mdash; for example the <a href="https://www.fca.org.uk/" rel="noopener noreferrer" target="_blank">FCA</a>, <a href="https://www.citizensadvice.org.uk/" rel="noopener noreferrer" target="_blank">Citizens Advice</a>, or your bank&#8217;s published fraud line.</p>
+    <p>The content here is <strong>not</strong> legal, financial, investment, tax, accounting, cybersecurity, or regulatory advice, and reading it does <strong>not</strong> create an advisor&ndash;client or other professional relationship. It cannot account for your individual circumstances. Before acting on anything that materially affects your money, identity, or legal position, seek advice from a suitably qualified professional or an official UK body &mdash; for example the <a href="https://www.fca.org.uk/" rel="noopener noreferrer" target="_blank">FCA</a>, the <a href="{_consumer_advice_url(sources)}" rel="noopener noreferrer" target="_blank">consumer service for your nation</a>, or your bank&#8217;s published fraud line.</p>
 
     <h2>No guarantees about specific messages or websites</h2>
     <p>Scam tactics change constantly. No guide, and no result from the AI scam checker, can guarantee that a particular message, email, website, listing, phone call, or investment is either safe or fraudulent. A &#8220;probably legitimate&#8221; result is not a green light, and the absence of a warning is not a guarantee of safety. Always verify independently through an official channel you find yourself &mdash; never through a link, phone number, or payment detail supplied in the suspicious message.</p>
@@ -3176,7 +3295,7 @@ def build_legal_bodies(site):
     <p>The Site links to third-party resources such as government sites, regulators, banks, and news outlets. Those sites operate under their own terms and privacy policies, and we have no control over and accept no responsibility for their content, accuracy, or availability.</p>
 
     <h2>If you think you have been scammed</h2>
-    <p>If you have already sent money, shared bank or card details, or shared one-time passcodes, act immediately: contact your bank using the number on the back of your card, and report it to <strong>Report Fraud</strong> on 0300 123 2040 or at <a href="https://www.reportfraud.police.uk/" rel="noopener noreferrer" target="_blank">reportfraud.police.uk</a> (in Scotland, contact <strong>Police Scotland on 101</strong>). You can forward scam texts to <strong>7726</strong> and suspicious emails to <strong>report@phishing.gov.uk</strong>.</p>
+    <p>If you have already sent money, shared bank or card details, or shared one-time passcodes, act immediately: contact your bank using the number on the back of your card, and report it to {police_route_html(sources)}. You can forward scam texts to <strong>{_sms(sources)}</strong> and suspicious emails to <strong>{_email(sources)}</strong>.</p>
 
     <h2>Liability</h2>
     <p>To the maximum extent permitted by law, Beat the Scam and SideRight Apps accept no liability for any loss or damage arising from your use of, or reliance on, the Site or the AI scam checker. Nothing here limits any liability that cannot lawfully be excluded &mdash; including for death or personal injury caused by negligence, or for fraud. The full limitation of liability is set out in our <a href="/terms/">Terms</a>.</p>
@@ -3583,13 +3702,21 @@ def linkify_bare_paths(html_str: str, slug_titles: dict) -> str:
     return "".join(out)
 
 
+# Static redirects PLUS every consolidation declared on a record. build()
+# populates this from corpus.redirect_map() before rendering starts; it is the
+# single map the edge rules and the internal-link canonicaliser both read, so a
+# consolidated guide cannot be 301'd at the edge while internal links still
+# point at the dead slug.
+EFFECTIVE_REDIRECTS: dict = dict(ARTICLE_REDIRECTS)
+
+
 def canonicalize_internal_guide_paths(html_str: str) -> str:
     """Replace internal links to redirected guide slugs with final URLs.
 
     Edge redirects remain for external/history traffic, but internal navigation
     should not add a crawl hop after articles are consolidated.
     """
-    for old_slug, target in ARTICLE_REDIRECTS.items():
+    for old_slug, target in EFFECTIVE_REDIRECTS.items():
         if target.startswith("__CAT__:"):
             continue
         html_str = html_str.replace(
@@ -3650,29 +3777,44 @@ def build():
         post["category"] = normalize_category(post["category"])
 
     # Disambiguate slug collisions — preserve all posts, never silently drop.
+    # Validate the RAW records first. disambiguate_slugs() renames a duplicate
+    # to `<slug>-2`, so running it before the validator meant the duplicate-slug
+    # rule could never fire — the validator only ever saw a deduplicated list
+    # (operator review, 2026-07-30). Duplicate source slugs make "which record
+    # is consolidated?" order-dependent, so they must stop the build.
+    raw_problems = corpus_mod.validate_consolidation(raw_posts, ARTICLE_REDIRECTS)
+    if raw_problems:
+        for msg in raw_problems:
+            print(f"  posts.json: {msg}")
+        raise SystemExit(
+            f"ERROR: content/posts.json is invalid before normalisation "
+            f"({len(raw_problems)} problem(s))"
+        )
+
     all_posts = disambiguate_slugs(raw_posts)
 
-    # Explicitly consolidated entries are retained in source data but replaced
-    # at the edge by their declared permanent redirect.
-    consolidated = [p for p in all_posts if p["slug"] in CONSOLIDATED_LIVE_SLUGS]
-    posts_after_consolidation = [p for p in all_posts if p["slug"] not in CONSOLIDATED_LIVE_SLUGS]
-    for post in consolidated:
-        target = ARTICLE_REDIRECTS.get(post["slug"], "")
-        if not target or target.startswith("__CAT__:"):
-            raise SystemExit(f"ERROR: consolidated live slug {post['slug']} lacks an article redirect target")
-        if target not in {p["slug"] for p in posts_after_consolidation}:
-            raise SystemExit(f"ERROR: consolidation target {target} for {post['slug']} is not a live guide")
+    # Source records → the PUBLIC corpus. A record carrying `consolidated_into`
+    # is retained archive data: never rendered, 301'd at the edge, and outside
+    # the publication similarity check. scripts/corpus.py owns that partition
+    # and validates the whole graph — missing, self-referencing or unknown
+    # targets, chains, cycles, duplicate slugs, and any collision with the
+    # static redirect map all stop the build here rather than producing a
+    # half-published corpus.
+    global EFFECTIVE_REDIRECTS
+    try:
+        posts, consolidated = corpus_mod.partition(all_posts, ARTICLE_REDIRECTS)
+        EFFECTIVE_REDIRECTS = corpus_mod.redirect_map(all_posts, ARTICLE_REDIRECTS)
+    except corpus_mod.CorpusError as exc:
+        raise SystemExit(f"ERROR: {exc}")
 
-    posts = posts_after_consolidation
-
-    # A live guide must never share a slug with an ARTICLE_REDIRECTS key: the
-    # 301 is emitted with "301!" (forced), which overrides the static file at
-    # the edge, so the page would build fine yet be unreachable with no error
-    # anywhere. Fail the build loudly instead.
-    shadowed = set(ARTICLE_REDIRECTS) & {p["slug"] for p in posts}
+    # A live guide must never share a slug with a redirect key: the 301 is
+    # emitted with "301!" (forced), which overrides the static file at the edge,
+    # so the page would build fine yet be unreachable with no error anywhere.
+    # Fail the build loudly instead.
+    shadowed = set(EFFECTIVE_REDIRECTS) & {p["slug"] for p in posts}
     if shadowed:
         raise SystemExit(
-            f"ERROR: live guide slug(s) shadowed by a forced ARTICLE_REDIRECTS 301: "
+            f"ERROR: live guide slug(s) shadowed by a forced 301: "
             f"{sorted(shadowed)} — rename the guide slug or drop the redirect.")
 
     categories = defaultdict(list)
@@ -3783,7 +3925,7 @@ def build():
     else:
         print(f"  Generated {og_gen_count} per-post OG images in /assets/og/")
 
-    write(DIST / 'check/index.html', render_check_page(site))
+    write(DIST / 'check/index.html', render_check_page(site, sources))
     write(DIST / 'newsletter-confirmed/index.html', render_newsletter_confirmed_page(site))
 
     # Public research section. Reports are generated from retained, dated
@@ -3797,7 +3939,7 @@ def build():
         write(DIST / 'research' / stats_page['slug'] / 'index.html', render_stats_page(site, stats_page))
         write_stats_data(stats_page)
 
-    about, privacy, cookies, terms, contact, disclaimer, methodology, corrections, recovery = build_legal_bodies(site)
+    about, privacy, cookies, terms, contact, disclaimer, methodology, corrections, recovery = build_legal_bodies(site, sources)
     write(DIST / 'about/index.html',   render_simple_page(site, 'About',          'Beat the Scam is a free UK consumer protection site. Learn who runs it, how it is funded, and how the AI scam checker works.',        about,   'about'))
     write(DIST / 'privacy/index.html', render_simple_page(site, 'Privacy Policy', 'How Beat the Scam uses Google Analytics, Google AdSense, and the Anthropic Claude API. Understand your data choices and cookie consent options.',          privacy, 'privacy'))
     write(DIST / 'cookies/index.html', render_simple_page(site, 'Cookie Policy',  'How Beat the Scam uses cookies for analytics, advertising, and consent preferences. Learn what is stored and how to manage your cookie settings.',                   cookies, 'cookies'))
@@ -3934,8 +4076,14 @@ def build():
         )
 
     for cat, items in categories.items():
-        # Category lastmod = newest member's date (or build today if empty)
+        # Category lastmod = newest member's date (or build today if empty). For a
+        # hub category the page also carries hand-authored prose, so an editorial
+        # revision to the hub moves the page even when no member guide changed —
+        # take the later of the two (operator review, 2026-07-27).
         cat_lastmod = max((p.get("updated") or p.get("dateModified") or p["date"] for p in items), default=today)
+        hub_reviewed = str((category_hubs.get(cat) or {}).get("updated") or "").strip()
+        if hub_reviewed:
+            cat_lastmod = max(cat_lastmod, hub_reviewed)
         sitemap_lines.append(
             f'<url><loc>{site["domain"]}/categories/{slugify(cat)}/</loc>'
             f'<lastmod>{cat_lastmod}</lastmod><changefreq>weekly</changefreq></url>'
@@ -3956,9 +4104,12 @@ def build():
         f"Methodology: see {site['domain']}/methodology/\n\n"
         f"Corrections: see {site['domain']}/corrections/\n\n"
         f"/* SOURCES */\n"
-        f"Report Fraud — https://www.reportfraud.police.uk/\n"
-        f"NCSC — https://www.ncsc.gov.uk/\n"
-        f"Citizens Advice — https://www.citizensadvice.org.uk/consumer/scams/\n"
+        f"{_b(sources, 'action-fraud')} ({_n(sources, 'action-fraud')}) — {_r(sources, 'action-fraud')['info_url']}\n"
+        f"{_b(sources, 'police-scotland')} on {_r(sources, 'police-scotland')['phone']} "
+        f"({_n(sources, 'police-scotland')}) — {_r(sources, 'police-scotland')['report_url']}\n"
+        f"NCSC — {_r(sources, 'ncsc-sers')['info_url']}\n"
+        f"Consumer advice by nation (Citizens Advice in England and Wales, Advice Direct Scotland, "
+        f"Consumerline in Northern Ireland) — {_consumer_advice_url(sources)}\n"
         f"FCA Firm Checker — https://www.fca.org.uk/consumers/fca-firm-checker\n\n"
         f"/* LAST UPDATE */\n"
         f"{today}\n"
@@ -4056,14 +4207,20 @@ def build():
             full_lines.append(f'URL: {domain}/guides/{p["slug"]}/')
             full_lines.append(f'Category: {category_label(cat)} · Updated: {p.get("updated") or p.get("date")}')
             full_lines.append("")
-            desc = (p.get("description") or "").strip()
+            # Canonicalise internal paths here too. This file writes the RAW
+            # record text, so a consolidated slug survived here while the
+            # rendered HTML page correctly pointed at the replacement — the same
+            # content disagreeing across two surfaces, which is the class of bug
+            # this release exists to remove (found in the release build,
+            # 2026-07-30).
+            desc = canonicalize_internal_guide_paths((p.get("description") or "").strip())
             if desc:
                 full_lines.append(desc)
                 full_lines.append("")
             for heading, body in p.get("sections", []):
                 full_lines.append(f"### {heading}")
                 full_lines.append("")
-                full_lines.append(body.strip())
+                full_lines.append(canonicalize_internal_guide_paths(body.strip()))
                 full_lines.append("")
             faqs = p.get("faq") or []
             if faqs:
@@ -4072,7 +4229,7 @@ def build():
                 for q, a in faqs:
                     full_lines.append(f"**{q}**")
                     full_lines.append("")
-                    full_lines.append(a.strip())
+                    full_lines.append(canonicalize_internal_guide_paths(a.strip()))
                     full_lines.append("")
     write(DIST / "llms-full.txt", "\n".join(full_lines))
 
@@ -4132,8 +4289,8 @@ def build():
     # For each deleted slug, emit two rules (with + without trailing slash)
     # so Netlify catches both forms cleanly.
     redirect_lines.append("")
-    redirect_lines.append("# Article 301s (auto-generated from ARTICLE_REDIRECTS)")
-    for old_slug, target in ARTICLE_REDIRECTS.items():
+    redirect_lines.append("# Article 301s (static map + every `consolidated_into` record)")
+    for old_slug, target in EFFECTIVE_REDIRECTS.items():
         if target.startswith("__CAT__:"):
             destination = f"/categories/{target[len('__CAT__:'):]}/"
         else:

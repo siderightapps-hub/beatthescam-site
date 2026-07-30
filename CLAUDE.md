@@ -28,7 +28,56 @@ pip install -r requirements-claude.txt    # one-time (build itself needs only st
 python3 scripts/build.py                  # rebuild the whole site into dist/ (run from repo root)
 ```
 
-**There is no unit-test suite or linter for the static build — the build is the verification step.** After changing `build.py`, mirror the CI sanity checks: `dist/index.html`, `dist/robots.txt`, `dist/_redirects` exist and `dist/guides/` has ≥50 subdirectories. Then run the rendering greps from invariant 6.
+**There is no linter, and the build is still the verification step for rendering.** After changing `build.py`, mirror the CI sanity checks: `dist/index.html`, `dist/robots.txt`, `dist/_redirects` exist and `dist/guides/` has ≥50 subdirectories. Then run the rendering greps from invariant 6.
+
+There *are* deterministic test suites, all offline and all wired into the **Gate self-test** Action on every push touching the gate, the build, the canon or the functions. Run all four before committing any change to those areas, and run them from a clean checkout (`git archive HEAD | tar -x -C /tmp/cc`) before claiming a result — a working-copy-only pass has been cited as CI evidence before and was wrong:
+
+```bash
+python3 scripts/gate_quickanswer_selftest.py      # gate, routing, canon validation, prompt derivation
+python3 scripts/hub_selftest.py                   # hub schema, ad modes, titles, rendered-page routing
+python3 scripts/corpus_selftest.py --no-build     # consolidation graph, partition, similarity scope
+python3 scripts/sync_canon_js.py --check          # the functions' generated canon module is current
+node --test "netlify/functions/lib/*.test.js"     # checker reporting-link pairing
+
+# Full corpus proof: renders the site into a TEMP dir (~6 min; the committed dist/ is
+# never written) and asserts a consolidated record produces no page, no index entry and
+# no internal link, and 301s from both URL forms.
+python3 scripts/corpus_selftest.py
+```
+
+**What counts as a page:** `content/posts.json` holds **source records**, not pages. A guide
+consolidated into another declares it on its own record — `"consolidated_into":
+"<target-slug>"` — and `scripts/corpus.py` derives everything from that one field: the
+public/source partition, the 301, internal-link canonicalisation, and exclusion from the
+publication duplicate-content check. A consolidated record is not shipped, so it cannot be
+a duplicate page. Never re-add a second list of consolidated slugs, and never put a slug in
+both `corpus.ARTICLE_REDIRECTS` and `consolidated_into` — the validator rejects that even
+when the targets agree, and rejects a source record colliding with a static redirect at all
+unless its slug is in the closed, dated `corpus.PENDING_MIGRATION` map (whose own two-sided
+assertions mean neither half of a migration can land alone, and which pins the expected 301
+target). A **draft** may not set the field; the gate BLOCKs it
+(`consolidation_evasion`), because otherwise one field would buy a way past a
+duplicate-content BLOCK.
+
+**Applying a reviewed content packet.** Edit `content/posts.json` (and
+`content/category-hubs.json`) directly, then commit source, code, tests and the regenerated
+`dist/` **together, in one commit**, so `main` never holds an intermediate state.
+
+`scripts/release_manifest.py` and `scripts/release_selftest.py` are **RETIRED one-offs**
+that applied the 2026-07-30 accuracy release. They are out of CI and kept only as the audit
+trail — do not reach for them. The bespoke transaction engine grew to 2,800 lines to apply
+168 field edits and was retired in favour of ordinary Git diffs validated as one combined
+state.
+
+**When a change spans code and content, they must land in the same commit.** Two cases in
+this repo prove why: the hub validator's source requirement is only satisfiable once all
+thirteen sourced hubs exist, and a consolidation's `consolidated_into` field is only
+verifiable alongside the removal of its static redirect. Validators reject most partial
+states, but not all of them — a corpus with both code markers removed and no metadata is
+indistinguishable from an intentionally public guide. Only the combined state is provable.
+
+`docs/review/` is gitignored, so review packets and replies are local-only and never in git
+history.
 
 Content generation (all need `ANTHROPIC_API_KEY`; all write to `content/posts.json`, then you rebuild):
 
@@ -60,12 +109,18 @@ python3 scripts/fact_reverify.py --limit 3       # cheap smoke test of the quart
 
 ## Editorial accuracy layer (gate + canon + manifests)
 
-**`content/sources.json` is the verified canon** of official UK reporting routes — the single source of truth for the gate's allowed phone numbers/reporting emails AND build.py's on-page "Report this scam" block (`load_sources`/`report_block`). Never hardcode an org's number or reporting route anywhere else.
+**`content/sources.json` is the verified canon** of official UK reporting routes, and **`scripts/canon.py` is the one module that loads, validates and renders it.** Never hardcode an org's number or reporting route anywhere else, and never add a second copy "as a fallback" — two hand-maintained fallbacks drifted from the canon and were deleted for it.
+
+- **Loading fails closed everywhere.** `canon.load_canon()` raises on an absent, unparseable or structurally invalid canon; `build.load_sources()` and `content_gate._load_canon()` both delegate to it, so a missing deployment input stops the build *and* the publication gate instead of silently activating a stale route set.
+- **Validation is by identity, not substring.** Each required route (`action-fraud`, `police-scotland`, `ncsc-sers`, `citizens-advice`, `advice-direct-scotland`, `consumerline-ni`) is pinned to an exact `nation`, `role`, `brand` and official host. Negative fixtures live in `canon.negative_fixtures()` and run against both consumers.
+- **Every route sentence is rendered, not typed.** Prompts use `render_prompt_routes` / `reporting_section_instruction` / `route_scope_rule`; the site uses `build.police_route_html` / `consumer_route_html`; the generator's fallback article uses `police_report_sentence` / `consumer_advice_sentence`. A canon edit that does not reach a consumer fails a committed test.
+- **The Netlify Functions read a generated bridge.** `netlify/functions/lib/canon-routes.js` is rendered by `scripts/sync_canon_js.py` and drift-checked in CI — regenerate it whenever you touch the canon.
+- **`on_page` picks the route readers are sent to.** Advice Direct Scotland runs both advice.scot (`0808 800 9060`, on-page) and the separate consumeradvice.scot helpline (`0808 164 6000`, not on-page); GOV.UK prints a different one on each of two pages. Both are in the canon so neither reads as invented; prose names exactly one consumer service per nation.
 
 **Branding canon that models' training data gets wrong** (the generator prompt and gate already enforce these — keep any new prose consistent):
 - **"Report Fraud"** (reportfraud.police.uk, 0300 123 2040) is the current UK reporting service — **"Action Fraud" was rebranded Dec 2025** (full launch Jan 2026). Write "Report Fraud"; "Action Fraud" only as a parenthetical former name.
 - **"FCA Firm Checker"** (register.fca.org.uk) — the **"ScamSmart" branding is retired** (FLAG-tier in the gate).
-- UK credit reference agencies are **Experian, Equifax, TransUnion only** (ClearScore/CallCredit misclassification is BLOCK-tier).
+- UK credit reference agencies: **Experian, Equifax and TransUnion are the three main ones, and MoneyHelper also lists Crediva** as offering a free statutory report — say "the four agencies MoneyHelper lists" or "the three main agencies plus Crediva", never "the three CRAs" as if exhaustive. **ClearScore is a free app (it resells Equifax data) and CallCredit is the obsolete name for TransUnion** — presenting either as a current agency stays BLOCK-tier.
 - The **National Fraud Database is a Cifas service** — direct readers to Cifas Protective Registration, never route it via Report Fraud/Citizens Advice (BLOCK-tier). US-style "fraud alert on your credit file" is FLAG-tier (the UK mechanism is Cifas Protective Registration).
 - Blanket "HMRC never texts/emails/links you" is FLAG-tier (HMRC runs genuine SMS/email campaigns with gov.uk links).
 

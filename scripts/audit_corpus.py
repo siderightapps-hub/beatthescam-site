@@ -58,7 +58,12 @@ def main() -> int:
         return None
 
     for p in posts:
-        result = run_gate(p, use_llm=False)   # deterministic only
+        # is_draft=False: these are LIVE records, not drafts. A record that has
+        # been consolidated legitimately carries `consolidated_into`, which is a
+        # BLOCK only when a DRAFT asserts it about itself (operator review,
+        # 2026-07-30 — this caller reported a false consolidation_evasion BLOCK
+        # on the archived Hermes record).
+        result = run_gate(p, use_llm=False, is_draft=False)   # deterministic only
         prior = existing_manifest(p.get("slug", "")) or {}
         man = build_manifest(p, result, model=prior.get("model"), today=p.get("date"))
         man["claims"] += [c for c in prior.get("claims", []) if c.get("type") == "judge"]
@@ -83,7 +88,7 @@ def main() -> int:
         surface.setdefault("slug", f"category-{slug}")
         surface.setdefault("category", slug)
         surface.setdefault("keywords", [])
-        result = run_gate(surface, use_llm=False)
+        result = run_gate(surface, use_llm=False, is_draft=False)
         for issue in result.issues:
             by_type[issue.get("check")] += 1
             text = issue.get("span") or issue.get("detail", "")[:160]
