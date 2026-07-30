@@ -1,7 +1,8 @@
 # Start here next session
 
-> **Last updated:** 2026-07-29
-> **Repository state:** `main` at `5b9ea29fb`; working tree clean; **`dist/` deliberately stale — see the invariant-1 warning below.**
+> **Last updated:** 2026-07-30
+> **Repository state:** `main` at the canon-hardening commit; working tree clean;
+> **`dist/` deliberately stale — see the invariant-1 warning below.**
 
 This is the short operational front door. `docs/project.md` is the detailed source of
 truth; dated audit and diversification documents are historical records and should not be
@@ -12,11 +13,18 @@ now history — the release described below supersedes it.
 
 ## Where things stand in one paragraph
 
-A large accuracy release is **fully prepared but not applied**. Eight commits of gate,
-build and CI hardening are on `main`. Five content packets sit in `docs/review/` awaiting
-the operator's `-c.md` fact-check replies; a sixth (`FINAL-9-guides-v4`) is already
-approved. Applying all six takes the corpus from **176 deterministic BLOCKs to zero**.
-Nothing has been written to `content/posts.json` or `content/category-hubs.json`.
+A large accuracy release is **fully prepared but not applied**. Nine commits of gate,
+build and CI hardening are on `main` — the ninth closed every integration blocker the
+operator raised in the five `-c.md` replies dated 2026-07-29. Five **corrected** packets
+(`*-v11`, `nation-consumer-routing-v4`, `legacy-hubs-v6`) now sit in `docs/review/`
+awaiting the operator's replies; `FINAL-9-guides-v4` remains approved. Applying all six
+takes the **185 indexable guides** from 176 deterministic BLOCKs to **zero** (the 186
+source-record scope keeps 2 known Evri/Hermes similarity BLOCKs — see the end-state table). Nothing has been written to
+`content/posts.json` or `content/category-hubs.json`.
+
+**Application is now a tool, not a procedure.** `scripts/release_manifest.py` applies
+every packet in order and refuses each stage unless the live corpus digest equals that
+stage's recorded `expects`. Read its module docstring before doing anything by hand.
 
 ---
 
@@ -40,70 +48,109 @@ release and produces a confusing diff.
 All in `docs/review/`, which is **gitignored** — they exist on disk only, so they are not
 in git history and will not appear on another machine.
 
-| Packet | New prose since the last reply | Size |
+| Packet | Reader content | What changed since the reply |
 |---|---|---|
-| `scotland-routing-v10` | **5 fields** — Yodel description + four `/recovery/` anchors | 147 fields, 89 guides |
-| `nation-consumer-routing-v3` | **2 passages** — Facebook FAQ 1 recast, Holiday Club advice/review split | 21 fields, 14 guides |
-| `hubs-v10` | **none** — ten records unchanged | 10 new category hubs |
-| `legacy-hubs-v5` | **none** — three records unchanged from approved v4 | `sms`, `payment`, `government` |
-| `shpock-scam-uk-v10` | **none** — record approved since v5 | 1 guide |
+| `scotland-routing-v11` | unchanged (147 fields, 202 source rows) | receipt key list made explicit incl. lookup-only `slug`; gate scopes separated |
+| `shpock-scam-uk-v11` | unchanged | cross-method digest "match" retracted; stable vs applied receipts split; stale HTTP block removed |
+| `nation-consumer-routing-v4` | **3 passages changed** | Timeshare FAQ 3 reworded; 2 Victim Support evidence rows added; ADS numbers dropped from the two referral sentences |
+| `hubs-v11` | unchanged (10 records) | all ten integration amendments now landed in code, with per-item evidence |
+| `legacy-hubs-v6` | unchanged (3 patches) | volatile HTTP aggregate and the unprovable "unchanged from v4" claim removed |
 
 `FINAL-9-guides-v4` (nine guides) is **APPROVED** and ready, but cannot ship alone — it
 overlaps the Scotland patch map.
 
 Each packet is a `.md` (human review) + `.json` (applyable payload) pair. Every `-c.md` in
 that folder is an operator reply; check its audit-date line before treating it as current.
+`release-manifest.json` is generated, not reviewed.
 
----
+### The one open question for the operator
+
+`nation-consumer-routing-v4` §4: the Advice Direct Scotland "conflict" turned out not to
+be one. GOV.UK prints `0808 800 9060` (advice.scot) on `/consumer-advice` and
+`0808 164 6000` on `/consumer-protection-rights`; gov.scot confirms the second is the
+separate Scottish-Government-funded **consumeradvice.scot** service run by the same
+charity. Both are now in the canon. The operator's editorial instruction — drop the
+numbers from the two referral-specific sentences — was still followed, because the
+citation mismatch it was aimed at is real. **If the operator wants the numbers restored
+now that the canon resolves the ambiguity, that is a one-line change.**
 
 ## Release procedure — one atomic session
 
-Order matters and is **cryptographically enforced**, not merely documented.
+Order is **cryptographically enforced** by `scripts/release_manifest.py`, whose receipt is
+a SHA-256 digest over the **whole corpus** after each stage. A per-packet digest over the
+fields a packet touches cannot prove what happened to records it does not name — that was
+the defect in every v10 packet, and `nation-consumer-routing-v3`'s 14 hashes passed
+identically in five different corpus states.
 
-1. **Verify the FINAL-9 receipts**: `scotland-routing-v10.json` →
-   `prerequisite_state.record_digests`. Nine SHA-256 digests over canonical JSON of the
-   post-FINAL-9 records. Measured: **0/9 match before FINAL-9, 9/9 after**. Then apply
-   `FINAL-9-guides-v4`.
-2. Apply `scotland-routing-v10` **+** `shpock-scam-uk-v10` to one proposed corpus —
-   mandatory companions, neither releases alone. After all full-record replacements,
-   re-assert every overlap `sources_checked_add` URL: a later full-record write must not
-   drop the 11 rows across six job guides.
-3. **Verify the nation receipts**: `nation-consumer-routing-v3.json` — 14 digests over
-   `{quick_answer, sections, faq}` in the post-FINAL-9 + post-Scotland state. 7/14 match
-   early because those guides are untouched upstream; 14/14 after. Then apply it.
-4. Apply `hubs-v10` **+** `legacy-hubs-v5` — all thirteen hub records land together.
-5. **In the same patch as step 4** (splitting it breaks the suite):
-   - require a non-empty `sources_checked` for every hub unconditionally;
-   - delete the `unsourced_legacy` warning/exemption branch in `validate_category_hubs()`;
-   - flip `scripts/hub_selftest.py`'s `legacy_exempt` expectation to `rejects(unreviewed)`;
-   - make the hub self-test require the **exact thirteen keys**, dropping the legacy-three
-     allowance.
-6. Run both self-tests **from a clean checkout**
-   (`rm -rf /tmp/cc && mkdir /tmp/cc && git archive HEAD | tar -x -C /tmp/cc`), require
-   zero corpus BLOCKs, then **one non-concurrent build**.
-7. Re-run the render greps on `dist/` (`**`, `](`, `…`), then commit source, code, tests
-   and regenerated `dist/` **together**.
+```bash
+python3 scripts/release_manifest.py --verify              # where is the tree?
+python3 scripts/release_manifest.py --apply --date $(date +%F)
+```
 
-Application contracts require setting `updated` to the **actual application date**, not
-the `2026-07-27` placeholder carried in the payloads.
+Stages, in order, with the corpus digest each expects and produces:
 
----
+| Stage | Packets | Expects | Produces |
+|---|---|---|---|
+| `final9` | `FINAL-9-guides-v4` | `496b0d63…` | `4b3090bd…` |
+| `scotland-shpock` | `scotland-routing-v11` + `shpock-scam-uk-v11` | `4b3090bd…` | `f76b69aa…` |
+| `nation` | `nation-consumer-routing-v4` | `f76b69aa…` | `bec3410b…` |
+| `hubs` | `hubs-v11` + `legacy-hubs-v6` | `bec3410b…` | `bec3410b…` (hubs only) |
 
-## Verified end-state (measured 2026-07-29, published order)
+The applier asserts every `old` value before writing, checks each `sections`/`faq` index
+against its recorded heading, re-asserts overlap source rows after all full-record writes
+(11 rows across six job guides would otherwise be lost), and refuses to overwrite a hub
+that has acquired `sources_checked` since the patch was written.
 
-- **0 BLOCK** across 186 source records / 185 indexable guides
-- 28 review-tier FLAGs: 14 legislation, 11 scale-claim, 1 source, 1 dated-event, 1 hmrc-channel
-- Zero precondition failures; no overlap source rows lost
-- Every quick answer ≤60 words; zero bare `/recovery/` paths corpus-wide
-- 13 hubs at zero BLOCK, with one disclosed `website` legislation FLAG
-- Clean checkout: **103 gate checks + 66 hub checks**, zero failures
+**In the same patch as the `hubs` stage** — the hub self-test will now *insist*, because
+its legacy-exemption expectation is derived from the live hub count and flips the moment
+thirteen records land:
+
+- require a non-empty `sources_checked` for every hub unconditionally;
+- delete the `unsourced_legacy` branch in `validate_category_hubs()`;
+- require the **exact thirteen keys** in `hub_selftest.py`, dropping the legacy-three
+  allowance.
+
+Then, from a clean checkout
+(`rm -rf /tmp/cc && mkdir /tmp/cc && git archive HEAD | tar -x -C /tmp/cc`):
+
+```bash
+python3 scripts/gate_quickanswer_selftest.py
+python3 scripts/hub_selftest.py
+python3 scripts/sync_canon_js.py --check
+node --test "netlify/functions/lib/*.test.js"
+```
+
+Then **one non-concurrent build**, the render greps on `dist/` (`**`, `](`, `…`), and one
+commit carrying source, code, tests and regenerated `dist/` together.
+
+## Verified end-state (measured 2026-07-30 by dry-running the full order)
+
+Reported **by scope**, because the two corpora give different answers and combining them
+was a finding in three separate replies:
+
+| Scope | BLOCK | FLAG |
+|---|---|---|
+| 185 indexable guides | **0** | 27 — 14 legislation, 10 scale-claim, 1 source, 1 dated-event, 1 hmrc-channel |
+| 186 source records | 2 — the reciprocal Evri ↔ Hermes similarity pair | 28 — as above, plus 1 scale-claim |
+
+The 2 BLOCKs are the retained, redirected `hermes-parcel-scam-text-uk` source record
+sitting beside its Evri replacement. They are not a release blocker; they are what
+"186 source records" means.
+
+- Zero precondition failures; 202/202 Scotland source rows appended, 0 lost
+- Quick answers 185/185, all 45–60 words; `sources_checked` 185/185
+- 13 hubs at zero BLOCK, with one disclosed `website` legislation FLAG; all 13 sourced
+- Internal guide links: 0 unresolved. Raw `**` / external markdown links / description
+  ellipses: 0 / 0 / 0
+- Clean checkout: **143 gate + 91 hub + 47 node = 281 checks**, zero failures, with
+  `docs/review/` genuinely absent
 
 "Zero BLOCK" means the deterministic gate is satisfied. The 28 FLAGs remain open editorial
 items and **no model-based LLM judge has run on any of this release**.
 
 ---
 
-## The eight commits
+## The nine commits
 
 | Commit | Substance |
 |---|---|
@@ -115,19 +162,29 @@ items and **no model-based LLM judge has run on any of this release**.
 | `844c03c63` | `_load_canon()` and `load_sources()` fail closed; symmetric drift check; hub test independent of gitignored files |
 | `98fc25901` | `police-scotland` as an on-page canon route; canon **structural** validation; 8 visible surfaces scoped; `check-scam.js` inserts Police Scotland deterministically |
 | `5b9ea29fb` | One `render_canon_routes()` shared by `ACCURACY_BLOCK` and `JUDGE_SYSTEM`; no hand-typed numbers left in either |
+| **canon-hardening** | **`scripts/canon.py` — one validator for gate AND build, by route identity, 17 negative fixtures against both consumers; both hand-maintained fallbacks deleted; generator + checker routes derived from canon via a generated JS bridge; checker route pair hoisted and unit-tested at every position; standalone surfaces rendered from one component (which surfaced 3 more unpaired mentions); hub `<title>` = H1 = schema name; 24-hour recall claim removed; Advice Direct Scotland conflict resolved in canon** |
 
 ---
 
 ## Canon changes worth knowing
 
-`content/sources.json` now has **17 routes** and is the single source of truth for every
-prompt, the on-page sidebar and the gate allowlist:
+`content/sources.json` now has **18 routes**, carries `nation`/`role`/`brand` identity
+fields on the six required ones, and is loaded through **`scripts/canon.py`** — the single
+validator and renderer shared by the gate, the build, the generator and (via a generated
+JS bridge) the Netlify Functions:
 
 - `police-scotland` is an **on-page** route (`101`, scotland.police.uk)
 - Report Fraud label scoped: *England, Wales and Northern Ireland*
 - Victim Support relabelled *Victim Support England and Wales Supportline* — its
   `0808 168 9111` line covers England and Wales only
 - `advice.scot`, not `advicedirect.scot`
+- **Two** Advice Direct Scotland entries: `advice-direct-scotland` (`0808 800 9060`,
+  advice.scot, **on-page** — the one prose names) and
+  `advice-direct-scotland-consumeradvice` (`0808 164 6000`, consumeradvice.scot, not
+  on-page — recorded so the gate does not treat it as invented). GOV.UK prints a different
+  one on each of two pages; gov.scot confirms they are two services from one charity.
+- There is **no fallback route set** anywhere. An absent or invalid canon stops the build
+  and the gate.
 
 `render_canon_routes()` in `content_gate.py` is the **only** place reporting routes are
 formatted for prompts. A canon edit changes the rendering and fails tests until every

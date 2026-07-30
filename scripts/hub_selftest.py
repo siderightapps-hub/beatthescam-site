@@ -146,15 +146,28 @@ def run() -> int:
 
     check("validator rejects: empty FAQ answer",
           rejects(bad(lambda h: h["faq"].append(["Q?", "   "]))))
-    # After the legacy exemption is removed this must fail; while it stands, an
-    # unreviewed hub with no sources only warns. Pinned either way so the change
-    # of behaviour is deliberate and visible.
+    # The legacy `unsourced_legacy` exemption exists ONLY because the three
+    # original hubs shipped without sources. The moment all thirteen sourced
+    # records land, it must go, and an unsourced hub must be rejected outright.
+    #
+    # The expectation is DERIVED from the live hub count rather than hard-coded,
+    # so landing the thirteen automatically demands the code change instead of
+    # relying on someone remembering to flip a boolean. A note that says "flip
+    # this later" is not enforcement (operator review, 2026-07-29).
     unreviewed = {"payment": {k: v for k, v in hub().items()
                               if k not in ("updated", "sources_checked")}}
     legacy_exempt = not rejects(unreviewed)
-    check("a hub with neither 'updated' nor sources is currently EXEMPT (legacy branch present)",
-          legacy_exempt,
-          "the legacy branch appears to be gone — flip this expectation to rejects()")
+    exemption_still_allowed = len(live) == 3
+    if exemption_still_allowed:
+        check("a hub with neither 'updated' nor sources is EXEMPT while the legacy three stand",
+              legacy_exempt,
+              "the legacy branch appears to be gone — good, but the live file still has three "
+              "hubs; land all thirteen in the same patch")
+    else:
+        check("with all thirteen hubs landed, an unsourced hub is REJECTED",
+              not legacy_exempt,
+              "the `unsourced_legacy` exemption branch is still in validate_category_hubs(). "
+              "Delete it — the atomic release requires a non-empty sources_checked for every hub.")
     check("a wrapper object is rejected", rejects({"hubs": {"payment": hub()}}))
     check("a non-object root is rejected", rejects([]))
     check("a valid explicit ads_mode is accepted", not rejects(bad(lambda h: h.__setitem__("ads_mode", "npa"))))

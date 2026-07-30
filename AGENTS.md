@@ -39,6 +39,19 @@ python3 scripts/sync_canon_js.py --check          # the functions' generated can
 node --test "netlify/functions/lib/*.test.js"     # checker reporting-link pairing
 ```
 
+**Applying a reviewed content packet:** never by hand. `scripts/release_manifest.py`
+applies every packet in the release in order, asserts each `old` value before writing, and
+refuses a stage unless the live corpus digest equals that stage's recorded `expects` — the
+receipt is a SHA-256 over the *whole* corpus, because a digest over the fields a packet
+touches cannot prove what happened to records it does not name.
+
+```bash
+python3 scripts/release_manifest.py --verify              # where is the tree in the order?
+python3 scripts/release_manifest.py --apply --date $(date +%F)
+```
+
+`docs/review/` is gitignored, so the packets and the emitted manifest are local-only.
+
 Content generation (all need `ANTHROPIC_API_KEY`; all write to `content/posts.json`, then you rebuild):
 
 ```bash
