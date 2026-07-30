@@ -20,11 +20,11 @@ on:
   push:
     # Every file that can change what these suites assert. A consolidation-only
     # change used to miss this workflow entirely — scripts/corpus.py,
-    # corpus_selftest.py, similarity_report.py, release_manifest.py and
-    # content/posts.json were all absent, so the six-minute job meant to enforce
-    # the feature could be bypassed by editing the feature (operator review,
-    # 2026-07-30). Deletion-only migration halves are caught by the self-test
-    # rather than the validator, which makes this filter load-bearing.
+    # corpus_selftest.py, similarity_report.py and content/posts.json were all
+    # absent, so the six-minute job meant to enforce the feature could be
+    # bypassed by editing the feature (operator review, 2026-07-30). Some
+    # partial-migration states are caught by the corpus self-test rather than by
+    # the validator, which makes this filter load-bearing.
     paths: &selftest_paths
       - 'scripts/canon.py'
       - 'scripts/corpus.py'
@@ -43,7 +43,8 @@ on:
       - 'content/posts.json'
       - 'content/sources.json'
       - 'content/category-hubs.json'
-      # Covered by the release code_baseline, so a change here invalidates it.
+      # Render inputs: a change here alters the built site, so the suites and
+      # the committed dist/ must be re-proved.
       - 'content/site.json'
       - 'content/affiliates.json'
       - 'templates/base.html'

@@ -36,7 +36,6 @@ There *are* deterministic test suites, all offline and all wired into the **Gate
 python3 scripts/gate_quickanswer_selftest.py      # gate, routing, canon validation, prompt derivation
 python3 scripts/hub_selftest.py                   # hub schema, ad modes, titles, rendered-page routing
 python3 scripts/corpus_selftest.py --no-build     # consolidation graph, partition, similarity scope
-python3 scripts/release_selftest.py                # PRE-APPLICATION: run BEFORE --apply
 python3 scripts/sync_canon_js.py --check          # the functions' generated canon module is current
 node --test "netlify/functions/lib/*.test.js"     # checker reporting-link pairing
 
@@ -60,27 +59,25 @@ target). A **draft** may not set the field; the gate BLOCKs it
 (`consolidation_evasion`), because otherwise one field would buy a way past a
 duplicate-content BLOCK.
 
-**Applying a reviewed content packet:** never by hand. `scripts/release_manifest.py`
-applies every packet in the release in order, asserts each `old` value before writing, and
-refuses a stage unless the live corpus digest equals that stage's recorded `expects` — the
-receipt is a SHA-256 over the *whole* corpus, because a digest over the fields a packet
-touches cannot prove what happened to records it does not name.
+**Applying a reviewed content packet.** Edit `content/posts.json` (and
+`content/category-hubs.json`) directly, then commit source, code, tests and the regenerated
+`dist/` **together, in one commit**, so `main` never holds an intermediate state.
 
-```bash
-python3 scripts/release_manifest.py --verify              # where is the tree in the order?
-python3 scripts/release_manifest.py --apply --date $(date +%F)
-```
+`scripts/release_manifest.py` and `scripts/release_selftest.py` are **RETIRED one-offs**
+that applied the 2026-07-30 accuracy release. They are out of CI and kept only as the audit
+trail — do not reach for them. The bespoke transaction engine grew to 2,800 lines to apply
+168 field edits and was retired in favour of ordinary Git diffs validated as one combined
+state.
 
-A packet may also carry a **`code_patch`** — exact `{file, old, new}` edits applied in the
-same transaction as its content, because some migrations are not expressible as content
-alone. The applier asserts every `old`, compiles every patched `.py`, IMPORTS the staged module to
-derive the real post-patch state (the packet's declaration is a receipt to compare, not the
-authority), and commits everything in one transaction — originals journalled, all files
-replaced, full rollback on any handled failure, `--recover` after an interruption.
+**When a change spans code and content, they must land in the same commit.** Two cases in
+this repo prove why: the hub validator's source requirement is only satisfiable once all
+thirteen sourced hubs exist, and a consolidation's `consolidated_into` field is only
+verifiable alongside the removal of its static redirect. Validators reject most partial
+states, but not all of them — a corpus with both code markers removed and no metadata is
+indistinguishable from an intentionally public guide. Only the combined state is provable.
 
-`docs/review/` is gitignored, so the packets and the emitted manifest are local-only: commit
-`posts.json`, `category-hubs.json`, the reviewed code, the tests and the regenerated `dist/`
-together, and leave the packets out.
+`docs/review/` is gitignored, so review packets and replies are local-only and never in git
+history.
 
 Content generation (all need `ANTHROPIC_API_KEY`; all write to `content/posts.json`, then you rebuild):
 

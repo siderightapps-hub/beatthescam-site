@@ -1,31 +1,34 @@
 # Start here next session
 
 > **Last updated:** 2026-07-30
-> **Repository state:** `main` at the canon-hardening commit; working tree clean;
-> **`dist/` deliberately stale — see the invariant-1 warning below.**
+> **Repository state:** the accuracy release is **APPLIED** and `dist/` is current.
 
 This is the short operational front door. `docs/project.md` is the detailed source of
 truth; dated audit and diversification documents are historical records and should not be
-used as current punch lists. The 2026-07-25 session summary that used to head this file is
-now history — the release described below supersedes it.
+used as current punch lists.
 
 ---
 
 ## Where things stand in one paragraph
 
-A large accuracy release is **fully prepared but not applied**. Nine commits of gate,
-build and CI hardening are on `main` — the ninth closed every integration blocker the
-operator raised in the five `-c.md` replies dated 2026-07-29. **Six** packets now sit in `docs/review/`
-awaiting the operator's replies — `scotland-routing-v15`, `shpock-scam-uk-v15`,
-`nation-consumer-routing-v9`, `hubs-v15`, `legacy-hubs-v10` and
-`consolidation-metadata-v5`; `FINAL-9-guides-v4` remains approved. Applying all seven
-takes the corpus to **zero deterministic BLOCKs at BOTH scopes** — 185 public guides and
-186 source records — from 176 today. Nothing has been written to
-`content/posts.json` or `content/category-hubs.json`.
+The large accuracy release is **applied, built and committed** — content, the two dependent
+code changes, the tests and the regenerated `dist/` landed as one commit so `main` never
+held an intermediate state. Every named Report Fraud mention now carries the Scottish
+route, consumer advice is nation-specific throughout, all thirteen category hubs are
+sourced, and one consolidation (`hermes-parcel-scam-text-uk` → `evri-delivery-scam-guide`)
+is declared on its own record.
 
-**Application is now a tool, not a procedure.** `scripts/release_manifest.py` applies
-every packet in order and refuses each stage unless the live corpus digest equals that
-stage's recorded `expects`. Read its module docstring before doing anything by hand.
+| | |
+|---|---|
+| Source records / public guides | 186 / 185, one consolidation |
+| Deterministic audit (guides + hubs) | **0 BLOCK / 29 FLAG** |
+| Offline suites | 152 gate + 131 hub + 52 corpus + 50 Node = **385**, plus canon sync |
+
+**Application was a one-off.** `scripts/release_manifest.py` and
+`scripts/release_selftest.py` applied this release and are now **retired**: out of CI, kept
+only as the audit trail. Do not reach for them for ordinary work. The safety boundary is
+Git, the CI suites and the committed `dist/` snapshot, supported by the validators in
+`scripts/corpus.py` and `scripts/canon.py`.
 
 ---
 
@@ -44,140 +47,41 @@ release and produces a confusing diff.
 
 ---
 
-## The five packets awaiting operator review
+## The review trail
 
-All in `docs/review/`, which is **gitignored** — they exist on disk only, so they are not
-in git history and will not appear on another machine.
+Every content change went through `docs/review/<name>.md` and waited for the operator's
+`<name>-c.md` fact-check reply. That folder is **gitignored** — the packets and replies
+exist on the machine that produced them and are not in git history. Sixty-five replies
+across the cycle; reader content was approved in the final six consecutive rounds while
+release-control defects were worked out.
 
-| Packet | Reader content | What changed since the reply |
-|---|---|---|
-| `scotland-routing-v15` | unchanged (147 fields, 202 source rows) | receipt key list made explicit incl. lookup-only `slug`; gate scopes separated |
-| `shpock-scam-uk-v15` | unchanged | cross-method digest "match" retracted; stable vs applied receipts split; stale HTTP block removed |
-| `nation-consumer-routing-v9` | **3 passages changed** | Timeshare FAQ 3 reworded; 2 Victim Support evidence rows added; Pandora/Ray-Ban referral sentences rewritten so the numbers stay and the citation is fixed |
-| `consolidation-metadata-v5` | one metadata field | `consolidated_into` on the Hermes record — consolidation now defines the public corpus |
-| `hubs-v15` | unchanged (10 records) | all ten integration amendments now landed in code, with per-item evidence |
-| `legacy-hubs-v10` | **1 passage changed** | duplicate Evri/Hermes courier anchor merged into `Evri (formerly Hermes)` |
+**Lesson worth keeping: packets are reissued, never amended in place.** Editing a reviewed
+packet changes its identity, so the digest its reply cites stops being reproducible. That
+happened once and cost a full reissue to repair.
 
-`FINAL-9-guides-v4` (nine guides) is **APPROVED** and ready, but cannot ship alone — it
-overlaps the Scotland patch map.
+**Second lesson: the applier became the risk.** 2,800 lines of bespoke transaction
+machinery accumulated to apply 168 field edits. It was retired in favour of ordinary Git
+diffs validated as one combined state — which is what actually shipped.
 
-Each packet is a `.md` (human review) + `.json` (applyable payload) pair. Every `-c.md` in
-that folder is an operator reply; check its audit-date line before treating it as current.
-`release-manifest.json` is generated, not reviewed.
+## Verified end-state (as committed)
 
-### Packet versioning — read this before amending anything
+| Scope | Result |
+|---|---|
+| 185 public guides | 0 BLOCK / 27 FLAG |
+| 186 source records | 0 BLOCK / 28 FLAG |
+| 13 category hubs | 0 BLOCK / 1 FLAG (disclosed `website` legislation) |
+| Default `audit_corpus.py` (guides + hubs) | **0 BLOCK / 29 FLAG** |
 
-Packets are **reissued**, never amended in place. Editing a reviewed packet changes its
-identity, so the digest its `-c.md` reply cites stops being reproducible and the review trail
-no longer points at the file the applier will use. That happened once on 2026-07-30 (the v14
-round) and cost a reissue to repair. If a reply asks for changes, produce the next version.
+The 29 FLAGs are review-tier: 14 legislation, 11 scale-claim, 1 source, 1 dated-event,
+1 HMRC-channel, plus the hub legislation flag. They are recorded for human verification and
+**still open**. **No model-backed judge has run on any of this release.**
 
-### Resolved since the 2026-07-29 replies
-
-- **Advice Direct Scotland.** Not a conflict: `0808 800 9060` is advice.scot, `0808 164 6000`
-  is the separate Scottish-Government-funded consumeradvice.scot service run by the same
-  charity (gov.scot confirms). Both in the canon; only the `on_page` one reaches prose.
-  `nation-consumer-routing-v5` restores the numbers in the two referral sentences and fixes
-  the citation instead of dropping them.
-- **The 2 Evri/Hermes similarity BLOCKs.** Gone. Consolidation is now declared on the record
-  and defines the public corpus, so an archive record that never renders is outside the
-  duplicate-page question by construction. `--include-consolidated` still surfaces the 54%
-  pair on request.
-
-## Release procedure — one atomic session
-
-Order is **cryptographically enforced** by `scripts/release_manifest.py`, whose receipt is
-a SHA-256 digest over the **whole corpus** after each stage. A per-packet digest over the
-fields a packet touches cannot prove what happened to records it does not name — that was
-the defect in every v10 packet, and `nation-consumer-routing-v3`'s 14 hashes passed
-identically in five different corpus states.
-
-```bash
-python3 scripts/release_manifest.py --verify              # where is the tree?
-python3 scripts/release_manifest.py --apply --date $(date +%F)
-```
-
-Stages, in order, with the corpus digest each expects and produces:
-
-| Stage | Packets | Expects (posts) | Produces (posts) |
-|---|---|---|---|
-| `final9` | `FINAL-9-guides-v4` | `496b0d63…` | `4b3090bd…` |
-| `scotland-shpock` | `scotland-routing-v15` + `shpock-scam-uk-v15` | `4b3090bd…` | `3db32055…` |
-| `nation` | `nation-consumer-routing-v9` | `3db32055…` | `39348cbf…` |
-| `hubs` | `hubs-v15` + `legacy-hubs-v10` | `39348cbf…` | `39348cbf…` |
-| `consolidation` | `consolidation-metadata-v5` | `39348cbf…` | `1d46369d…` |
-
-The applier asserts every `old` value before writing, checks each `sections`/`faq` index
-against its recorded heading, re-asserts overlap source rows after all full-record writes
-(11 rows across six job guides would otherwise be lost), and refuses to overwrite a hub
-that has acquired `sources_checked` since the patch was written.
-
-The hub and consolidation code changes are **carried by their packets** as `code_patch`
-entries, so they are applied and receipted by the tool rather than done by hand.
-
-
-
-Then, from a clean checkout
-(`rm -rf /tmp/cc && mkdir /tmp/cc && git archive HEAD | tar -x -C /tmp/cc`):
-
-```bash
-python3 scripts/gate_quickanswer_selftest.py
-python3 scripts/hub_selftest.py
-python3 scripts/corpus_selftest.py          # includes a real build into a TEMP dir (~6 min)
-python3 scripts/release_selftest.py         # PRE-APPLICATION: run this BEFORE --apply
-python3 scripts/sync_canon_js.py --check
-node --test "netlify/functions/lib/*.test.js"
-```
-
-**Run `release_selftest.py` BEFORE applying** — it emits and applies from the baseline, so
-it is a pre-application proof, not a fifth post-application suite. The four suites above plus
-canon sync are the post-application check.
-
-**Two stages carry a `code_patch`.** `hubs-v15` deletes the `unsourced_legacy` exemption and
-requires the exact thirteen keys; `consolidation-metadata-v5` removes the static Hermes
-redirect and empties `PENDING_MIGRATION`. The applier executes them with the content in **one transaction**: every byte staged,
-originals journalled to disk, all files replaced, full rollback on any handled failure, and
-`--recover` for an interrupted run. It imports the *staged* `corpus.py` to derive the real
-post-patch maps rather than trusting the packet's declaration.
-
-`release_manifest.py --apply` now **requires** the manifest and compares the
-`{posts, hubs}` pair before *and* after every stage, verifies packet identity and a
-`code_baseline` digest over the release-critical scripts, and rejects an unknown
-`--stage`. Comparing only the posts digest let an after-nation tree report as "after
-hubs" and the consolidation stage apply with all ten hub records absent.
-
-Then **one non-concurrent build**, the render greps on `dist/` (`**`, `](`, `…`), and one
-commit carrying source, code, tests and regenerated `dist/` together.
-
-## Verified end-state (measured 2026-07-30 by dry-running the full order)
-
-Reported **by scope**, because the two corpora give different answers and combining them
-was a finding in three separate replies:
-
-| Scope | BLOCK | FLAG |
-|---|---|---|
-| 185 public guides | **0** | 27 — 14 legislation, 10 scale-claim, 1 source, 1 dated-event, 1 hmrc-channel |
-| 186 source records | **0** | 28 — as above, plus 1 scale-claim |
-| 186, `--include-consolidated` | 2 — the Evri ↔ Hermes pair, on request | 28 |
-
-The two scopes now agree. The Evri/Hermes similarity is still measurable — it is a real 54%
-overlap between a live guide and its own archive copy — but an archive record that never
-renders is not a duplicate *page*, so it no longer BLOCKs publication.
-
-- Zero precondition failures; 202/202 Scotland source rows appended, 0 lost
-- Quick answers 185/185, all 45–60 words; `sources_checked` 185/185
-- 13 hubs at zero BLOCK, with one disclosed `website` legislation FLAG; all 13 sourced
-- Internal guide links: 0 unresolved. Raw `**` / external markdown links / description
-  ellipses: 0 / 0 / 0
-- Clean checkout: **152 gate + 101 hub + 53 corpus + 61 release-control + 50 node = 417**, zero failures,
-  with `docs/review/` genuinely absent. The fast path (`corpus_selftest.py --no-build`)
-  plus canon sync. `release_selftest.py` runs 24 synthetic-fixture checks there and 26
-  with the local packets. On the fully APPLIED state the four suites are **384** (build-backed) or **367** (fast).
-
-"Zero BLOCK" means the deterministic gate is satisfied. The 28 FLAGs remain open editorial
-items and **no model-based LLM judge has run on any of this release**.
-
----
+The retired `hermes-parcel-scam-text-uk` slug is absent from every published and indexable
+surface — no page, and nothing in `sitemap.xml`, `rss.xml`, `search.json`, `llms.txt` or
+`llms-full.txt`; both URL forms 301 straight to Evri. It is deliberately still present in
+raw source (`content/posts.json` keeps the archive record), in `dist/_redirects` as the
+rule itself, in the July GSC research dataset as a historical measurement, and in the
+regression tests that assert all of the above.
 
 ## The nine commits
 
