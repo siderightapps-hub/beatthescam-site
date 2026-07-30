@@ -35,9 +35,26 @@ There *are* deterministic test suites, all offline and all wired into the **Gate
 ```bash
 python3 scripts/gate_quickanswer_selftest.py      # gate, routing, canon validation, prompt derivation
 python3 scripts/hub_selftest.py                   # hub schema, ad modes, titles, rendered-page routing
+python3 scripts/corpus_selftest.py --no-build     # consolidation graph, partition, similarity scope
 python3 scripts/sync_canon_js.py --check          # the functions' generated canon module is current
 node --test "netlify/functions/lib/*.test.js"     # checker reporting-link pairing
+
+# Full corpus proof: renders the site into a TEMP dir (~6 min; the committed dist/ is
+# never written) and asserts a consolidated record produces no page, no index entry and
+# no internal link, and 301s from both URL forms.
+python3 scripts/corpus_selftest.py
 ```
+
+**What counts as a page:** `content/posts.json` holds **source records**, not pages. A guide
+consolidated into another declares it on its own record — `"consolidated_into":
+"<target-slug>"` — and `scripts/corpus.py` derives everything from that one field: the
+public/source partition, the 301, internal-link canonicalisation, and exclusion from the
+publication duplicate-content check. A consolidated record is not shipped, so it cannot be
+a duplicate page. Never re-add a second list of consolidated slugs, and never put a slug in
+both `corpus.ARTICLE_REDIRECTS` and `consolidated_into` — the validator rejects that even
+when the targets agree. A **draft** may not set the field; the gate BLOCKs it
+(`consolidation_evasion`), because otherwise one field would buy a way past a
+duplicate-content BLOCK.
 
 **Applying a reviewed content packet:** never by hand. `scripts/release_manifest.py`
 applies every packet in the release in order, asserts each `old` value before writing, and

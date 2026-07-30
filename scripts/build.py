@@ -12,7 +12,8 @@ from urllib.parse import urlparse
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
-import canon as canon_mod  # noqa: E402  — the shared canon loader/validator/renderers
+import canon as canon_mod   # noqa: E402  — the shared canon loader/validator/renderers
+import corpus as corpus_mod  # noqa: E402  — the shared public/source corpus partition
 
 ROOT = Path(__file__).resolve().parents[1]
 DIST = ROOT / "dist"
@@ -41,161 +42,26 @@ CATEGORY_CANON = {
     "donation scams":                 "fraud",
 }
 
-# Article-level 301 redirects. Used when an article is deleted but its URL
-# may have inbound links from Google's index, Search Console history, or
-# external sites. The value is either:
-#   - another article slug (the canonical replacement), or
-#   - "__CAT__:<category-slug>" to redirect to a category landing page.
-#
-# Populated as part of the AdSense "Low value content" remediation on
-# 2026-05-24: 51 short / duplicate articles were removed (the bimodal
-# distribution of 49 articles <300 words alongside 155 articles >800 words
-# was flagged by an AdSense reviewer). _redirects entries are emitted by
-# build() so the deleted URLs still resolve via 301.
-ARTICLE_REDIRECTS = {
-    # ── Slug-collision artifacts (the "-2" duplicates) ──────────────────
-    # Older builds auto-generated these "-2" URLs when two posts.json
-    # entries shared a base slug. Deduplicating posts.json on 2026-05-24
-    # stopped them being generated, so they 404'd — and Google had
-    # discovered/indexed several (showed up as "Not found (404)" in Search
-    # Console on 2026-05-28). Redirect each to its surviving canonical.
-    "facebook-marketplace-scam-uk-guide-2":       "facebook-marketplace-scam-uk",
-    "fake-online-pharmacy-uk-scam-2":             "fake-online-pharmacy-uk-scam",
-    "is-temu-a-scam-uk-2":                        "is-temu-a-scam-uk",
-    "concert-ticket-scam-uk-2":                   "concert-ticket-scam-uk",
-    "forex-trading-scam-uk-2":                    "forex-trading-scam-uk",
-    "evri-text-scam-uk-2":                        "evri-delivery-scam-guide",
-    # ── Thin/duplicate articles removed in the AdSense remediation ──────
-    "paypal-email-scam-signs":                    "__CAT__:payment",
-    "facebook-marketplace-scam-uk-guide":         "facebook-marketplace-scam-uk",
-    "facebook-marketplace-scam-signs":            "facebook-marketplace-scam-uk",
-    "hmrc-tax-refund-scam-checklist":             "__CAT__:government",
-    "gumtree-scam-uk":                            "__CAT__:marketplace",
-    "parking-fine-scam-text-messages-uk":         "parking-fine-scam-text-uk",
-    "bank-transfer-scam-warning-signs":           "__CAT__:payment",
-    "crypto-investment-scam-checklist":           "__CAT__:crypto",
-    # GSC 2026-06-04: flagged as Not found (404). The canonical live guide
-    # on this exact topic is crypto-investment-scams-uk-protection — article
-    # → article redirect preserves more SEO juice than article → category.
-    "crypto-investment-scam-uk-guide":            "crypto-investment-scams-uk-protection",
-    "phone-call-scam-red-flags":                  "__CAT__:phone",
-    "romance-scam-slow-burn-patterns":            "__CAT__:dating",
-    "job-scam-checklist-uk":                      "__CAT__:employment",
-    "puppy-sale-scam-checklist":                  "__CAT__:shopping",
-    "travel-booking-scam-checklist":              "__CAT__:travel",
-    "ticket-resale-scam-checklist":               "__CAT__:shopping",
-    "shein-scam-or-legit-uk":                     "__CAT__:website",
-    "ebay-scam-buyer-protection-uk":              "ebay-buyer-scam-uk",
-    "evri-text-scam-uk":                          "__CAT__:sms",
-    # royal-mail-text-scam-guide 404'd (no post at that slug); redirect to the live
-    # royal-mail-text-scam-uk so the "royal mail parcel scams" demand lands somewhere real.
-    "royal-mail-text-scam-guide":                 "royal-mail-text-scam-uk",
-    # dpd-delivery-scam-text, yodel-scam-text-messages and
-    # ups-delivery-scam-text-messages-uk were resurrected as full ~1,000-word
-    # guides on 2026-06-05 — they were the site's highest-demand URLs (DPD alone
-    # had 1,905 GSC impressions at pos 10.2) but the 2026-05-24 purge 301'd them
-    # to a thin category page. Redirects removed so build() serves the real
-    # guide pages again. See scripts/recover_courier_guides.py.
-    "paypal-email-scam-uk":                       "__CAT__:payment",
-    "invoice-scam-email-uk":                      "__CAT__:payment",
-    "refund-scam-uk":                             "__CAT__:payment",
-    "direct-debit-scam-uk":                       "__CAT__:payment",
-    "hmrc-tax-refund-scam-awareness":             "__CAT__:government",
-    "dvla-scam-email-awareness":                  "__CAT__:government",
-    "dvla-email-scam-car-tax":                     "dvla-email-scam-uk",
-    # ── Batch 14 consolidations (2026-07-03): near-duplicate topics merged
-    # into the stronger surviving page rather than shipping two near-
-    # identical guides. See docs/content-diversification-plan.md.
-    "bt-broadband-tech-support-scam-uk":          "bt-broadband-scam-calls-uk",
-    "linkedin-recruitment-scam-uk":               "linkedin-job-scam-guide-uk",
-    # ── Batch 16 consolidations (2026-07-05): near-duplicate topics merged
-    # into the stronger surviving page. See docs/content-diversification-plan.md.
-    # NB: solar-panel-scam-uk was deliberately NOT consolidated here — the
-    # 2026-06-15 audit already decided it and solar-panel-cold-caller-scam-uk
-    # target genuinely different vectors (online/advertised vs cold-call) and
-    # should stay separate, cross-linked pages.
-    "sky-broadband-scam-call-uk":                 "isp-impersonation-scam-bt-sky-virgin-media",
-    "tinder-investment-scam-uk":                  "pig-butchering-scam-uk",
-    # ── Batch 17 consolidations (2026-07-06): near-duplicate topics merged
-    # into the stronger surviving page. See docs/content-diversification-plan.md.
-    # Resolves the 3-way bank/police impersonation overlap flagged since batch 15
-    # (both redundant pages covered the same fake-authority-figure-phone-call
-    # pattern already covered in depth by the survivor).
-    "bank-impersonation-phone-scam-uk":                                        "police-impersonation-scam-call-uk",
-    "impersonation-scams-when-criminals-pretend-to-be-your-bank-or-the-police": "police-impersonation-scam-call-uk",
-    "fake-trading-platform-uk":                   "forex-trading-scam-uk",
-    "debt-management-scam-uk":                    "debt-relief-scam-uk",
-    "nhs-covid-scam-message":                     "__CAT__:government",
-    "forex-trading-scams-uk-protection-guide":    "__CAT__:crypto",
-    "trading-signal-scam-uk":                     "__CAT__:crypto",
-    "work-from-home-scams-uk":                    "__CAT__:employment",
-    "romance-scam-signs-uk-dating":               "__CAT__:dating",
-    "puppy-scam-uk":                              "__CAT__:marketplace",
-    "ticket-scam-uk":                             "__CAT__:marketplace",
-    "holiday-booking-scam-uk":                    "__CAT__:travel",
-    # 2nd purge-recovery batch (2026-06-07, see recover_purged_pages_2.py):
-    # amazon-scam-email-uk → redirected to its live twin (consolidates the demand);
-    # amazon-phone-call-scam-uk / chargeback / gumtree / google-voice resurrected as full guides.
-    "amazon-scam-email-uk":                       "amazon-order-scam-email-checklist",
-    "amazon-refund-scam-uk":                      "__CAT__:payment",
-    "google-voice-scam-uk":                       "__CAT__:tech",
-    "apple-id-scam-email-uk":                     "__CAT__:tech",
-    "whatsapp-family-scam-urgent-money-messages": "__CAT__:social",
-    "instagram-scam-message-uk":                  "__CAT__:social",
-    "snapchat-scam-account-awareness":            "__CAT__:social",
-    "energy-bill-scam-uk":                        "__CAT__:utility",
-    "credit-score-scam-uk":                       "__CAT__:finance",
-    # ── Cannibalisation cleanup (2026-06-15, external audit) ────────────────
-    # Near-duplicate guides competing for the same intent were consolidated to
-    # one canonical each. Survivors chosen by quality (freshness, clean slug,
-    # no data defects); unique advice from each loser was grafted into its
-    # survivor first, so these are article→article 301s (no content lost).
-    # NB: solar-panel-scam-uk and solar-panel-cold-caller-scam-uk were KEPT as
-    # separate guides — they target genuinely different vectors (general vs
-    # cold-call) and are now reciprocally cross-linked, not merged.
-    "concert-ticket-scam-uk-2026":                "concert-ticket-scam-uk",
-    "forex-trading-scam-uk-2026":                 "forex-trading-scam-uk",
-    "qr-code-payment-scam-guide":                 "qr-code-scam-uk",
-    "qr-code-scam-payment-uk":                    "qr-code-scam-uk",
-    "whatsapp-scam-family-message-uk":            "whatsapp-family-emergency-scam",
-    # 2026-07-10 (batch 19): Action Fraud's own taxonomy doesn't separate
-    # "mandate fraud" from "invoice fraud" by recurring-vs-one-off — it's the
-    # formal reporting name for the whole redirected-payment pattern (UK
-    # Finance/NCSC track "invoice and mandate" as one combined category too).
-    # invoice-fraud-uk-businesses already said as much in its own FAQ. The one
-    # genuinely new fact from the loser page (Direct Debit Guarantee vs the
-    # business-size-gated APP reimbursement rules) was grafted into the
-    # survivor first — this is an article -> article 301, no content lost.
-    "mandate-fraud-uk-businesses":                "invoice-fraud-uk-businesses",
-    # 2026-07-10 (final diversification batch): both near-duplicates found
-    # while scoping the last generic-template pages, confirmed independently
-    # against primary sources before merging.
-    # windows-tech-support-scam-uk described the identical scam as
-    # microsoft-support-scam-uk-guide (unsolicited call/pop-up -> fake virus
-    # alert -> AnyDesk/TeamViewer remote access -> fake fix fee), and cited
-    # "reportfraud.org.uk" as a reporting route — confirmed by direct DNS/HTTP
-    # check to be a parked domain (names.co.uk registrar parking page), not a
-    # real fraud-reporting service. No unique content to graft.
-    "windows-tech-support-scam-uk":                "microsoft-support-scam-uk-guide",
-    # push-payment-fraud-uk is "authorised push-payment (APP) fraud" — the
-    # exact term bank-transfer-scam-uk already opens by defining itself as,
-    # covering the same "safe account" con with 159 + PSR reimbursement-rule
-    # detail. The loser's solicitor/conveyancing-payment FAQ entry is already
-    # covered in depth by the dedicated conveyancing-fraud-uk page (now
-    # cross-linked from the survivor) — no unique content lost.
-    "push-payment-fraud-uk":                       "bank-transfer-scam-uk",
-    # 2026-07-18 editorial consolidation: Hermes rebranded to Evri in 2022 and
-    # the two live guides repeated the same parcel-text advice. Keep one current
-    # canonical guide and preserve the historic query with a permanent redirect.
-    "hermes-parcel-scam-text-uk":                  "evri-delivery-scam-guide",
-}
+# Article-level 301 redirects live in scripts/corpus.py, alongside the
+# consolidation metadata they partner with — one module owns "which slugs are
+# public and where the rest go". Re-exported here because build.py has always
+# been the name other scripts import it from.
+ARTICLE_REDIRECTS = corpus_mod.ARTICLE_REDIRECTS
 
-# These entries still exist in posts.json so their researched material can be
-# grafted into the survivor, but they must not build as live pages because the
-# forced ARTICLE_REDIRECTS rule above is their canonical outcome.
-CONSOLIDATED_LIVE_SLUGS = {
-    "hermes-parcel-scam-text-uk",
-}
+
+# ARTICLE_REDIRECTS above covers slugs with NO source record — deleted pages and
+# old slug-collision artifacts. A guide that still exists in posts.json but has
+# been consolidated into another declares that on the record itself:
+#
+#     "consolidated_into": "evri-delivery-scam-guide"
+#
+# scripts/corpus.py derives the whole consequence from that one field — the
+# public/source partition, the 301, internal-link canonicalisation, and
+# exclusion from the publication similarity check. It used to take two
+# hand-maintained lists here (CONSOLIDATED_LIVE_SLUGS plus a duplicate
+# ARTICLE_REDIRECTS entry) that agreed by accident, and a third opinion in
+# similarity_report.py that the gate did not share (operator review,
+# 2026-07-30).
 
 CATEGORY_LABELS = {
     "marketplace": "Marketplace Scams",
@@ -3808,13 +3674,21 @@ def linkify_bare_paths(html_str: str, slug_titles: dict) -> str:
     return "".join(out)
 
 
+# Static redirects PLUS every consolidation declared on a record. build()
+# populates this from corpus.redirect_map() before rendering starts; it is the
+# single map the edge rules and the internal-link canonicaliser both read, so a
+# consolidated guide cannot be 301'd at the edge while internal links still
+# point at the dead slug.
+EFFECTIVE_REDIRECTS: dict = dict(ARTICLE_REDIRECTS)
+
+
 def canonicalize_internal_guide_paths(html_str: str) -> str:
     """Replace internal links to redirected guide slugs with final URLs.
 
     Edge redirects remain for external/history traffic, but internal navigation
     should not add a crawl hop after articles are consolidated.
     """
-    for old_slug, target in ARTICLE_REDIRECTS.items():
+    for old_slug, target in EFFECTIVE_REDIRECTS.items():
         if target.startswith("__CAT__:"):
             continue
         html_str = html_str.replace(
@@ -3877,27 +3751,28 @@ def build():
     # Disambiguate slug collisions — preserve all posts, never silently drop.
     all_posts = disambiguate_slugs(raw_posts)
 
-    # Explicitly consolidated entries are retained in source data but replaced
-    # at the edge by their declared permanent redirect.
-    consolidated = [p for p in all_posts if p["slug"] in CONSOLIDATED_LIVE_SLUGS]
-    posts_after_consolidation = [p for p in all_posts if p["slug"] not in CONSOLIDATED_LIVE_SLUGS]
-    for post in consolidated:
-        target = ARTICLE_REDIRECTS.get(post["slug"], "")
-        if not target or target.startswith("__CAT__:"):
-            raise SystemExit(f"ERROR: consolidated live slug {post['slug']} lacks an article redirect target")
-        if target not in {p["slug"] for p in posts_after_consolidation}:
-            raise SystemExit(f"ERROR: consolidation target {target} for {post['slug']} is not a live guide")
+    # Source records → the PUBLIC corpus. A record carrying `consolidated_into`
+    # is retained archive data: never rendered, 301'd at the edge, and outside
+    # the publication similarity check. scripts/corpus.py owns that partition
+    # and validates the whole graph — missing, self-referencing or unknown
+    # targets, chains, cycles, duplicate slugs, and any collision with the
+    # static redirect map all stop the build here rather than producing a
+    # half-published corpus.
+    global EFFECTIVE_REDIRECTS
+    try:
+        posts, consolidated = corpus_mod.partition(all_posts, ARTICLE_REDIRECTS)
+        EFFECTIVE_REDIRECTS = corpus_mod.redirect_map(all_posts, ARTICLE_REDIRECTS)
+    except corpus_mod.CorpusError as exc:
+        raise SystemExit(f"ERROR: {exc}")
 
-    posts = posts_after_consolidation
-
-    # A live guide must never share a slug with an ARTICLE_REDIRECTS key: the
-    # 301 is emitted with "301!" (forced), which overrides the static file at
-    # the edge, so the page would build fine yet be unreachable with no error
-    # anywhere. Fail the build loudly instead.
-    shadowed = set(ARTICLE_REDIRECTS) & {p["slug"] for p in posts}
+    # A live guide must never share a slug with a redirect key: the 301 is
+    # emitted with "301!" (forced), which overrides the static file at the edge,
+    # so the page would build fine yet be unreachable with no error anywhere.
+    # Fail the build loudly instead.
+    shadowed = set(EFFECTIVE_REDIRECTS) & {p["slug"] for p in posts}
     if shadowed:
         raise SystemExit(
-            f"ERROR: live guide slug(s) shadowed by a forced ARTICLE_REDIRECTS 301: "
+            f"ERROR: live guide slug(s) shadowed by a forced 301: "
             f"{sorted(shadowed)} — rename the guide slug or drop the redirect.")
 
     categories = defaultdict(list)
@@ -4365,8 +4240,8 @@ def build():
     # For each deleted slug, emit two rules (with + without trailing slash)
     # so Netlify catches both forms cleanly.
     redirect_lines.append("")
-    redirect_lines.append("# Article 301s (auto-generated from ARTICLE_REDIRECTS)")
-    for old_slug, target in ARTICLE_REDIRECTS.items():
+    redirect_lines.append("# Article 301s (static map + every `consolidated_into` record)")
+    for old_slug, target in EFFECTIVE_REDIRECTS.items():
         if target.startswith("__CAT__:"):
             destination = f"/categories/{target[len('__CAT__:'):]}/"
         else:

@@ -27,7 +27,8 @@ from pathlib import Path
 from typing import Dict, List, Optional
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
-import canon as canon_mod  # noqa: E402  — the shared canon loader/validator/renderers
+import canon as canon_mod   # noqa: E402  — the shared canon loader/validator/renderers
+import corpus as corpus_mod  # noqa: E402  — the shared public/source corpus partition
 
 # ─── SHARED ACCURACY CONTRACT ────────────────────────────────────────────────
 # Single source of truth for the anti-fabrication rules, imported by BOTH
@@ -662,8 +663,9 @@ def body_shingles(post: Dict, k: int = SIMILARITY_SHINGLE_K) -> set:
     return {tuple(w[i:i + k]) for i in range(len(w) - k + 1)}
 
 
-def check_similarity(post: Dict, corpus: Optional[List[Dict]] = None) -> List[Dict]:
-    """Flag a draft that reuses another live guide's body copy.
+def check_similarity(post: Dict, corpus: Optional[List[Dict]] = None, *,
+                     include_consolidated: bool = False) -> List[Dict]:
+    """Flag a draft that reuses another PUBLIC guide's body copy.
 
     The 2026-07-25 audit found five published pairs above 0.30 Jaccard
     similarity on seven-word shingles (top pair 0.538, with an identical
@@ -671,9 +673,22 @@ def check_similarity(post: Dict, corpus: Optional[List[Dict]] = None) -> List[Di
     "cookie-cutter" risk on the site. The generation-time gate had no notion
     of the rest of the corpus, so nothing could catch it before publication.
 
-    Deliberately compares against ALL other guides, not just same-category
-    ones: the worst offenders (shopping brands, bank texts) sit inside one
-    category, but travel/marketplace overlaps cross categories.
+    Deliberately compares against ALL other PUBLIC guides, not just
+    same-category ones: the worst offenders (shopping brands, bank texts) sit
+    inside one category, but travel/marketplace overlaps cross categories.
+
+    CONSOLIDATED records are excluded. A record carrying `consolidated_into` is
+    retained archive data that never renders and 301s to its replacement, so it
+    is not a page anyone can land on and cannot be a duplicate of one. Comparing
+    it against the guide it was consolidated INTO reported the consolidation
+    itself as a 54% duplicate-content BLOCK — while this function's own remedy
+    text says "or consolidate the two guides" (operator review, 2026-07-30).
+    This is a corpus-state rule, not a named exception for one pair: every
+    non-rendered archive record is outside the AdSense duplicate-page question.
+
+    `include_consolidated=True` restores the full comparison for diagnostics —
+    `similarity_report.py --include-consolidated` uses it to show the archive
+    overlaps deliberately.
     """
     if not corpus:
         return []
@@ -681,6 +696,18 @@ def check_similarity(post: Dict, corpus: Optional[List[Dict]] = None) -> List[Di
     if len(mine) < 50:  # too short to judge meaningfully
         return []
     slug = post.get("slug")
+    if not include_consolidated:
+        # ONE partition decides BOTH sides of the comparison. Filtering only the
+        # corpus left the archive copy still reporting a BLOCK against the guide
+        # it had been consolidated into — the same finding, surviving in one
+        # direction. A record is a page, or it is not.
+        in_corpus = any(p.get("slug") == slug for p in corpus)
+        corpus = corpus_mod.public_posts(corpus)
+        is_public = any(p.get("slug") == slug for p in corpus)
+        if in_corpus and not is_public:
+            return []                       # a retained archive record: not a page
+        if post.get(corpus_mod.CONSOLIDATED_INTO):
+            return []                       # a draft claiming to be one (also BLOCKed)
     issues: List[Dict] = []
     for other in corpus:
         if other.get("slug") == slug:
@@ -1179,7 +1206,33 @@ def check_canon_guards(post: Dict) -> List[Dict]:
     return issues
 
 
-def check_deterministic(post: Dict) -> List[Dict]:
+def check_consolidation_evasion(post: Dict) -> List[Dict]:
+    """A DRAFT may never declare itself consolidated.
+
+    `consolidated_into` removes a record from the public corpus and from the
+    similarity check. That is an editorial retirement decision, made by the
+    operator on an existing guide — never something a generated draft can
+    assert about itself. Without this, the cheapest way past a duplicate-content
+    BLOCK would be to add one field (operator review, 2026-07-30).
+
+    The gate only ever sees drafts and re-audited live records; a live record
+    that legitimately carries the field is exempted by the corpus partition
+    before it reaches here, so this fires only on a draft asserting it.
+    """
+    if not post.get(corpus_mod.CONSOLIDATED_INTO):
+        return []
+    return [{
+        "check": "consolidation_evasion",
+        "severity": SEVERITY_BLOCK,
+        "span": str(post.get(corpus_mod.CONSOLIDATED_INTO)),
+        "detail": (f"the draft sets {corpus_mod.CONSOLIDATED_INTO!r}, which would remove it from "
+                   f"the public corpus and from the duplicate-content check. Consolidation is an "
+                   f"operator decision applied to an existing guide, not a property a new draft "
+                   f"may claim. Remove the field."),
+    }]
+
+
+def check_deterministic(post: Dict, *, is_draft: bool = True) -> List[Dict]:
     # Note: no deterministic domain/URL check — these guides intentionally
     # contain example scam/lookalike domains, so a domain allowlist is pure
     # noise here. Domain plausibility is left to the LLM judge.
@@ -1191,7 +1244,11 @@ def check_deterministic(post: Dict) -> List[Dict]:
             + check_scotland_routing(post) + check_nation_consumer_routing(post)
             + check_cra_exhaustive(post)
             + check_canon_guards(post)
-            + check_text_wellformed(post))
+            + check_text_wellformed(post)
+            # Corpus-state assertions a DRAFT may not make about itself. Corpus
+            # audits pass is_draft=False, because a live consolidated record
+            # legitimately carries the field.
+            + (check_consolidation_evasion(post) if is_draft else []))
 
 
 # ─── LLM JUDGE ───────────────────────────────────────────────────────────────
@@ -1279,12 +1336,17 @@ def judge_llm(post: Dict, client, model: str) -> List[Dict]:
 # ─── ENTRY POINT ─────────────────────────────────────────────────────────────
 
 def run_gate(post: Dict, client=None, model: Optional[str] = None,
-             use_llm: bool = True, corpus: Optional[List[Dict]] = None) -> GateResult:
+             use_llm: bool = True, corpus: Optional[List[Dict]] = None,
+             is_draft: bool = True) -> GateResult:
     """Run the full gate on a post. PASS unless a blocking issue is found.
 
     Pass `corpus` (the existing posts.json list) to also check the draft for
-    body-copy duplication against already-published guides."""
-    issues = check_deterministic(post)
+    body-copy duplication against already-published guides. Consolidated
+    archive records are excluded from that comparison — see check_similarity().
+
+    `is_draft=False` for corpus audits of already-published records: a live
+    record may legitimately carry `consolidated_into`, a draft may not."""
+    issues = check_deterministic(post, is_draft=is_draft)
     issues += check_similarity(post, corpus)
     if use_llm and client is not None and model:
         issues += judge_llm(post, client, model)

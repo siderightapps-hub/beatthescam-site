@@ -246,6 +246,41 @@ def reassert_sources(posts: list, guides: dict) -> int:
     return restored
 
 
+def apply_record_fields(posts: list, change: dict, precondition: dict) -> dict:
+    """consolidation-metadata-v1: add named fields to existing records.
+
+    Deliberately NOT a date bump: no reader-visible text changes, and marking a
+    non-rendering archive record as editorially revised would be a false claim.
+    """
+    index = by_slug(posts)
+    stats = {"records": 0, "fields_added": 0}
+    slug = precondition.get("slug")
+    live = index.get(slug)
+    if live is None:
+        raise ApplyError(f"{slug}: no such live record")
+    if precondition.get("consolidated_into_absent") and "consolidated_into" in live:
+        raise ApplyError(
+            f"{slug} already carries 'consolidated_into' ({live['consolidated_into']!r}) — "
+            f"the packet was written against a corpus where it was absent"
+        )
+    want = precondition.get("record_digest_sha256")
+    if want and digest(live) != want:
+        raise ApplyError(
+            f"{slug}: record digest is {digest(live)} but the packet expects {want}"
+        )
+    for target_slug, spec in change.items():
+        rec = index.get(target_slug)
+        if rec is None:
+            raise ApplyError(f"{target_slug}: no such live record")
+        for key, value in (spec.get("add") or {}).items():
+            if key in rec:
+                raise ApplyError(f"{target_slug} already has {key!r}")
+            rec[key] = copy.deepcopy(value)
+            stats["fields_added"] += 1
+        stats["records"] += 1
+    return stats
+
+
 def apply_hub_records(hubs: dict, records: dict, applied_on: str) -> int:
     """hubs-v11: ten complete new hub records, written whole."""
     for key, record in records.items():
@@ -336,7 +371,7 @@ STAGES = [
     {
         "id": "nation",
         "title": "Nation consumer routing",
-        "packets": ["nation-consumer-routing-v4"],
+        "packets": ["nation-consumer-routing-v5"],
         "why": "Depends on both upstream stages for its `old` values.",
     },
     {
@@ -345,6 +380,14 @@ STAGES = [
         "packets": ["hubs-v11", "legacy-hubs-v6"],
         "why": "Landed together with the strict source/key enforcement, or the hub "
                "self-test suite is inconsistent with the content.",
+    },
+    {
+        "id": "consolidation",
+        "title": "Consolidation metadata",
+        "packets": ["consolidation-metadata-v1"],
+        "why": "Moves the last consolidation declaration onto its own record. ATOMIC with "
+               "deleting the matching static ARTICLE_REDIRECTS entry — leaving both is a "
+               "validation error by design, so a half-applied patch fails loudly.",
     },
 ]
 
@@ -363,6 +406,9 @@ def run_stage(stage: dict, posts: list, hubs: dict, applied_on: str) -> dict:
             entry.update(apply_field_mutations(posts, data["guides"], applied_on))
         if "record" in data:
             entry["records_replaced"] = apply_full_records(posts, [data["record"]], applied_on)
+        if data.get("payload_shape") == "record_field_add":
+            entry.update(apply_record_fields(posts, data["change"],
+                                             data["old_state_precondition"]))
         if "hubs" in data:
             # Two different payload shapes. hubs-v11 carries complete new
             # records; legacy-hubs-v6 carries PARTIAL patches into three

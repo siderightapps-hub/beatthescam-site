@@ -1,0 +1,231 @@
+#!/usr/bin/env python3
+"""
+corpus_selftest.py — proves consolidation defines the public corpus.
+
+A guide consolidated into another is retained in content/posts.json as archive
+data. It must not render, must 301, must not appear in any index, and must not
+take part in the publication duplicate-content check — it is not a page, so it
+cannot be a duplicate page.
+
+That used to be three separate opinions (`CONSOLIDATED_LIVE_SLUGS`, a duplicate
+`ARTICLE_REDIRECTS` entry, and a different rule inside similarity_report.py),
+and they disagreed: the gate reported the Hermes/Evri consolidation as a 54%
+duplicate-content BLOCK while the report excluded it (operator review,
+2026-07-30). This suite pins the whole property, end to end, against a REAL
+build.
+
+Offline: no API key, no network. The build-backed proofs run a REAL build into
+a temporary directory — the committed dist/ is never touched.
+
+    python3 scripts/corpus_selftest.py              # everything (~6 min: the build)
+    python3 scripts/corpus_selftest.py --no-build   # partition/similarity only (~1 min)
+
+The build takes about five and a half minutes for 185 posts. That is the site's
+normal build cost, not a hang.
+"""
+from __future__ import annotations
+
+import argparse
+import copy
+import json
+import sys
+import tempfile
+from pathlib import Path
+
+ROOT = Path(__file__).resolve().parent.parent
+sys.path.insert(0, str(ROOT / "scripts"))
+
+import corpus as C                                    # noqa: E402
+import build as B                                     # noqa: E402
+from content_gate import check_similarity             # noqa: E402
+
+FAILURES: list[str] = []
+
+# The one consolidation in the corpus today. Read from the data rather than
+# hard-coded, so this suite keeps working after the next one.
+HERMES = "hermes-parcel-scam-text-uk"
+EVRI = "evri-delivery-scam-guide"
+
+
+def check(name: str, cond: bool, detail: str = "") -> None:
+    print(f"{'PASS' if cond else 'FAIL'}  {name}" + (f" — {detail}" if detail and not cond else ""))
+    if not cond:
+        FAILURES.append(name)
+
+
+def live_posts() -> list:
+    return json.loads((ROOT / "content" / "posts.json").read_text(encoding="utf-8"))
+
+
+def build_into(tmp: Path) -> Path:
+    """Run the REAL build into a temp directory.
+
+    Every write in build.py goes through the module-global DIST, so patching it
+    redirects the whole build — including the rmtree — away from the committed
+    tree. Restored in a finally block.
+
+    Per-post OG image rendering is stubbed: 185 Pillow renders take six minutes
+    and this suite asserts nothing about them. Everything else — routing,
+    indexes, redirects, link canonicalisation — is the real thing.
+    """
+    original_dist, original_og = B.DIST, B.generate_og_image
+    try:
+        B.DIST = tmp / "dist"
+        B.generate_og_image = lambda out_path, *a, **k: out_path.write_bytes(b"")
+        B.build()
+        return B.DIST
+    finally:
+        B.DIST, B.generate_og_image = original_dist, original_og
+
+
+def run(with_build: bool = True) -> int:
+    posts = live_posts()
+    consolidation = C.consolidation_map(posts) or C.legacy_static_consolidations(posts)
+    declared_on_record = bool(C.consolidation_map(posts))
+
+    print(f"consolidations: {consolidation}")
+    print(f"declared on the record: {declared_on_record}"
+          + ("" if declared_on_record else "  (still on the transitional static bridge)"))
+    print()
+
+    # ── 1. 186 source records become exactly 185 public guides ──────────────
+    public, consolidated = C.partition(posts)
+    check("source records partition into public + consolidated",
+          len(public) + len(consolidated) == len(posts))
+    check(f"{len(posts)} source records become exactly {len(posts) - 1} public guides",
+          len(public) == len(posts) - 1, f"got {len(public)}")
+    check("the consolidated record is the Hermes archive copy",
+          [p["slug"] for p in consolidated] == [HERMES],
+          str([p["slug"] for p in consolidated]))
+    check("the consolidation target is a public guide",
+          all(t in {p['slug'] for p in public} for t in consolidation.values()))
+
+    # ── 5/6/7. Similarity: default excludes, diagnostic includes ────────────
+    def sim_blocks(records, **kw):
+        return sorted({p["slug"] for p in records
+                       for i in check_similarity(p, records, **kw) if i["severity"] == "block"})
+
+    check("default similarity has no Hermes/Evri BLOCK", sim_blocks(posts) == [],
+          str(sim_blocks(posts)))
+    diag = sim_blocks(posts, include_consolidated=True)
+    check("diagnostic similarity still finds the pair", diag == sorted([EVRI, HERMES]), str(diag))
+
+    without = [p for p in posts if p["slug"] != HERMES] + [
+        {k: v for k, v in p.items() if k != C.CONSOLIDATED_INTO}
+        for p in posts if p["slug"] == HERMES
+    ]
+    # Also strip the transitional static bridge, so this measures the metadata.
+    saved_static = dict(C.ARTICLE_REDIRECTS)
+    try:
+        C.ARTICLE_REDIRECTS.pop(HERMES, None)
+        recreated = sim_blocks(without)
+        check("removing the consolidation recreates the BLOCK",
+              recreated == sorted([EVRI, HERMES]), str(recreated))
+    finally:
+        C.ARTICLE_REDIRECTS.clear()
+        C.ARTICLE_REDIRECTS.update(saved_static)
+
+    # A genuinely duplicated NEW draft must still be caught — the exclusion is
+    # for archive records, not an amnesty on duplication.
+    evri = next(p for p in posts if p["slug"] == EVRI)
+    draft = {**copy.deepcopy(evri), "slug": "a-brand-new-draft"}
+    check("a duplicate NEW draft still BLOCKs",
+          any(i["severity"] == "block" for i in check_similarity(draft, posts)))
+
+    # ── 8. Invalid graphs stop the release ──────────────────────────────────
+    for desc, bad_posts, static in C.negative_fixtures():
+        check(desc, bool(C.validate_consolidation(bad_posts, static)))
+    check("a valid graph produces no problems",
+          not C.validate_consolidation(C._valid_fixture(), {}))
+    # ...and the build refuses one.
+    broken = copy.deepcopy(posts)
+    for p in broken:
+        if p["slug"] == HERMES:
+            p[C.CONSOLIDATED_INTO] = "no-such-guide"
+    try:
+        C.partition(broken)
+        stopped = False
+    except C.CorpusError:
+        stopped = True
+    check("an invalid consolidation target raises CorpusError", stopped)
+
+    # ── 2/3/4. A REAL build, into a temp tree ───────────────────────────────
+    if not with_build:
+        print("\nSKIPPED (--no-build): rendering, index, redirect and internal-link proofs.")
+    while with_build:
+      with tempfile.TemporaryDirectory() as td:
+          tmp = Path(td)
+          dist = build_into(tmp)
+          committed = ROOT / "dist"
+          check("the committed dist/ was not touched",
+                committed.exists() and not str(dist).startswith(str(committed)))
+
+          # `guides/page/N/` holds the pagination shells, not guides.
+          guides = {d.name for d in (dist / "guides").iterdir()
+                    if d.is_dir() and d.name != "page"}
+          check(f"exactly {len(public)} guide pages are rendered",
+                len(guides) == len(public), f"got {len(guides)}")
+          check("the archive record produces NO page", HERMES not in guides)
+          check("its consolidation target DOES produce a page", EVRI in guides)
+
+          sitemap = (dist / "sitemap.xml").read_text(encoding="utf-8")
+          rss = (dist / "rss.xml").read_text(encoding="utf-8")
+          search = (dist / "search.json").read_text(encoding="utf-8")
+          llms = (dist / "llms.txt").read_text(encoding="utf-8")
+          redirects = (dist / "_redirects").read_text(encoding="utf-8")
+
+          for label, blob in (("sitemap.xml", sitemap), ("rss.xml", rss),
+                              ("search.json", search), ("llms.txt", llms)):
+              check(f"the archive record has no {label} entry", HERMES not in blob)
+          check("its target IS in sitemap.xml", f"/guides/{EVRI}/" in sitemap)
+
+          # 3. Both URL forms 301 DIRECTLY to the final guide.
+          for form in (f"/guides/{HERMES}", f"/guides/{HERMES}/"):
+              line = next((l for l in redirects.splitlines()
+                           if l.split()[0:1] == [form]), None)
+              check(f"{form} emits a 301", line is not None)
+              if line:
+                  _, dest, code = line.split()
+                  check(f"{form} 301s directly to the target guide",
+                        dest == f"/guides/{EVRI}/", f"got {dest}")
+                  check(f"{form} uses a forced 301", code == "301!", f"got {code}")
+
+          # 4. No rendered page links to the dead slug — internal links are
+          #    canonicalised, so a reader never takes the redirect hop.
+          linking = sorted(
+              p.name for p in (dist / "guides").rglob("index.html")
+              if f"/guides/{HERMES}/" in p.read_text(encoding="utf-8")
+          )
+          check("no rendered guide links to the consolidated slug", not linking, str(linking[:5]))
+          hub_pages = sorted(
+              p.parent.name for p in (dist / "categories").rglob("index.html")
+              if f"/guides/{HERMES}/" in p.read_text(encoding="utf-8")
+          )
+          check("no rendered category/hub page links to it either", not hub_pages, str(hub_pages))
+
+      break
+
+    # ── The transitional bridge ─────────────────────────────────────────────
+    bridge = C.legacy_static_consolidations(posts)
+    if declared_on_record:
+        check("the transitional static bridge is now unused — delete it", not bridge, str(bridge))
+    else:
+        check("the transitional static bridge is carrying exactly one record",
+              list(bridge) == [HERMES], str(bridge))
+        print("NOTE  consolidation is still declared in the static redirect map, not on the")
+        print("      record. `consolidation-metadata-v1` moves it and deletes the bridge; this")
+        print("      branch then flips and demands the removal.")
+
+    print()
+    if FAILURES:
+        print(f"{len(FAILURES)} check(s) FAILED: {', '.join(FAILURES)}")
+        return 1
+    print("All corpus consolidation self-tests passed.")
+    return 0
+
+
+if __name__ == "__main__":
+    ap = argparse.ArgumentParser(description="Prove consolidation defines the public corpus")
+    ap.add_argument("--no-build", action="store_true",
+                    help="skip the build-backed rendering/redirect proofs (fast)")
+    raise SystemExit(run(with_build=not ap.parse_args().no_build))

@@ -58,6 +58,11 @@ jobs:
       - name: Run hub loading, schema and ad-mode self-test
         run: python scripts/hub_selftest.py
 
+      # Partition, similarity-exclusion and consolidation-graph validation.
+      # The build-backed half runs in its own job below so this one stays fast.
+      - name: Run corpus consolidation self-test (no build)
+        run: python scripts/corpus_selftest.py --no-build
+
       # The Netlify Functions cannot import the Python canon, so they read a
       # GENERATED module. If content/sources.json moved and nobody re-rendered
       # it, the scam checker would keep serving the old routes.
@@ -70,6 +75,30 @@ jobs:
       # install.
       - name: Run Netlify Function unit tests
         run: node --test "netlify/functions/lib/*.test.js"
+
+  corpus-build:
+    name: Corpus consolidation, proved against a real build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
+
+      - name: Setup Python
+        uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97 # v7.0.0
+        with:
+          python-version: '3.12'
+
+      # Renders the whole site into a TEMP directory and asserts that a
+      # consolidated record produces no page, no sitemap/RSS/search/llms.txt
+      # entry, 301s from both URL forms, and is not linked from any rendered
+      # page. Takes ~6 minutes because that is what a 185-post build costs, so
+      # it runs beside the fast job rather than inside it. The committed dist/
+      # is never written.
+      - name: Run corpus consolidation self-test (with build)
+        run: python scripts/corpus_selftest.py
+
+      - name: Fail if the committed dist/ was modified
+        run: git diff --exit-code -- dist
 
   llm:
     name: Model-backed gate fixtures (manual, spends API credit)
