@@ -36,7 +36,7 @@ There *are* deterministic test suites, all offline and all wired into the **Gate
 python3 scripts/gate_quickanswer_selftest.py      # gate, routing, canon validation, prompt derivation
 python3 scripts/hub_selftest.py                   # hub schema, ad modes, titles, rendered-page routing
 python3 scripts/corpus_selftest.py --no-build     # consolidation graph, partition, similarity scope
-python3 scripts/release_selftest.py                # release_manifest.py's own control paths
+python3 scripts/release_selftest.py                # PRE-APPLICATION: run BEFORE --apply
 python3 scripts/sync_canon_js.py --check          # the functions' generated canon module is current
 node --test "netlify/functions/lib/*.test.js"     # checker reporting-link pairing
 
@@ -73,8 +73,10 @@ python3 scripts/release_manifest.py --apply --date $(date +%F)
 
 A packet may also carry a **`code_patch`** — exact `{file, old, new}` edits applied in the
 same transaction as its content, because some migrations are not expressible as content
-alone. The applier asserts every `old`, compiles every patched `.py`, validates the FINAL
-graph against the maps the patch will leave behind, and writes both halves or neither.
+alone. The applier asserts every `old`, compiles every patched `.py`, IMPORTS the staged module to
+derive the real post-patch state (the packet's declaration is a receipt to compare, not the
+authority), and commits everything in one transaction — originals journalled, all files
+replaced, full rollback on any handled failure, `--recover` after an interruption.
 
 `docs/review/` is gitignored, so the packets and the emitted manifest are local-only: commit
 `posts.json`, `category-hubs.json`, the reviewed code, the tests and the regenerated `dist/`
