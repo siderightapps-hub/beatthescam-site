@@ -245,9 +245,18 @@ def run() -> int:
     # (methodology and recovery source rows, humans.txt) that a prose component
     # does not fit (operator review, 2026-07-30, hubs-v11-c.md §6).
     _build_src = Path(B.__file__).read_text(encoding="utf-8")
+    # Every value the canon owns. The earlier six covered only the police hosts
+    # and nation numbers, which is why "zero hand-typed route URLs" was an
+    # overstatement (operator review, 2026-07-30). These are the full set.
     for _needle in ("reportfraud.police.uk", "scotland.police.uk", "0300 123 2040",
-                    "0808 223 1133", "0808 800 9060", "0300 123 6262"):
+                    "0808 223 1133", "0808 800 9060", "0300 123 6262",
+                    "report@phishing.gov.uk", "gov.uk/consumer-advice", ">7726<"):
         check(f"build.py hand-types no {_needle!r}", _needle not in _build_src)
+    # `https://www.ncsc.gov.uk/` is the canon's info_url and must be derived; the
+    # DEEP link `.../section/respond-recover/phishing` is a guidance page cited
+    # as a source row, not a reporting route, so it is legitimately written out.
+    check("build.py hand-types no bare NCSC route URL",
+          '"https://www.ncsc.gov.uk/"' not in _build_src)
     check("no unsubstituted route placeholder ships",
           not any("<!--POLICE_ROUTE" in b for b in _surfaces.values()))
 

@@ -162,6 +162,22 @@ def _n(sources: dict, key: str) -> str:
     return canon_mod.route(sources, key)["nation"]
 
 
+def _sms(sources: dict) -> str:
+    """The SMS spam shortcode, from the canon."""
+    return canon_mod.route(sources, "report-spam-sms")["sms"]
+
+
+def _email(sources: dict) -> str:
+    """The NCSC suspicious-email address, from the canon."""
+    return canon_mod.route(sources, "ncsc-sers")["email"]
+
+
+def _consumer_advice_url(sources: dict) -> str:
+    """GOV.UK's nation consumer-advice page — the canon's own cited source for
+    the three nation services."""
+    return canon_mod.route(sources, "citizens-advice")["source_url"]
+
+
 def police_route_html(sources: dict, *, phone: bool = True, url: bool = True,
                       link: bool = True) -> str:
     """The nation-scoped police reporting route as linked HTML, from the canon.
@@ -1986,7 +2002,7 @@ def render_post(site, post, all_posts, affiliates=None, sources=None, link_map=N
           Use the <a href="/check/">AI scam checker</a> for an automated second opinion, or report it to
           {police_route_html(sources, phone=False, url=False)}.
         </div>
-        <p class="meta" style="margin-top:1.4rem">Reporting routes in this guide are checked against our verified canon of official UK sources &#8212; {police_route_html(sources, phone=False, url=False)}, the <a href="https://www.ncsc.gov.uk/" rel="noopener" target="_blank">National Cyber Security Centre</a>, and the consumer service for each nation &#8212; by an automated accuracy gate before publication. {review_note} Read about <a href="/methodology/">how Beat the Scam writes guides</a>.</p>
+        <p class="meta" style="margin-top:1.4rem">Reporting routes in this guide are checked against our verified canon of official UK sources &#8212; {police_route_html(sources, phone=False, url=False)}, the <a href="{_r(sources, 'ncsc-sers')['info_url']}" rel="noopener" target="_blank">National Cyber Security Centre</a>, and the consumer service for each nation &#8212; by an automated accuracy gate before publication. {review_note} Read about <a href="/methodology/">how Beat the Scam writes guides</a>.</p>
       </article>
       <aside class="sidebar">
         <section class="sidebar-card">
@@ -2149,7 +2165,7 @@ def render_check_page(site, sources):
         <p>Because scam tactics change constantly, treat the result as a guide, not a final verdict. The single safest habit is to verify through a channel you open yourself &mdash; the number on the back of your card, or an address you type into your browser &mdash; rather than any link, number, or detail supplied in the message itself.</p>
 
         <h2>If you have already responded</h2>
-        <p>If you have paid, shared bank or card details, or shared a one-time passcode, act straight away. Contact your bank on the number on the back of your card, report it to <!--POLICE_ROUTE-->, and forward scam texts to <strong>7726</strong> and suspicious emails to <strong>report@phishing.gov.uk</strong>. For step-by-step help by scam type, browse our <a href="/guides/">scam guides</a>.</p>
+        <p>If you have paid, shared bank or card details, or shared a one-time passcode, act straight away. Contact your bank on the number on the back of your card, report it to <!--POLICE_ROUTE-->, and forward scam texts to <strong><!--SMS_CODE--></strong> and suspicious emails to <strong><!--NCSC_EMAIL--></strong>. For step-by-step help by scam type, browse our <a href="/guides/">scam guides</a>.</p>
 
         <h2>Common questions</h2>
         <div class="faq">
@@ -2324,6 +2340,8 @@ def render_check_page(site, sources):
     content = content.replace("<!--POLICE_ROUTE-->", police_route_html(sources))
     content = content.replace("<!--POLICE_ROUTE_PLAIN-->",
                               police_route_html(sources, phone=False, url=False))
+    content = content.replace("<!--SMS_CODE-->", _sms(sources))
+    content = content.replace("<!--NCSC_EMAIL-->", _email(sources))
     # The error-state route is assembled in JavaScript, so it is injected as an
     # HTML string inside a JS double-quoted literal: escape the quotes.
     content = content.replace(
@@ -3022,8 +3040,8 @@ def build_legal_bodies(site, sources):
     <ul>
       <li><a href="{_r(sources, 'action-fraud')['info_url']}" rel="noopener noreferrer" target="_blank">{_b(sources, 'action-fraud')}</a> (formerly Action Fraud) &mdash; the police fraud reporting service for {_n(sources, 'action-fraud')}</li>
       <li><a href="{_r(sources, 'police-scotland')['report_url']}" rel="noopener noreferrer" target="_blank">{_b(sources, 'police-scotland')} on {_r(sources, 'police-scotland')['phone']}</a> &mdash; the police reporting route for {_n(sources, 'police-scotland')}</li>
-      <li><a href="https://www.ncsc.gov.uk/" rel="noopener noreferrer" target="_blank">National Cyber Security Centre (NCSC)</a> &mdash; for phishing reporting routes and current threat patterns</li>
-      <li><a href="https://www.gov.uk/consumer-advice" rel="noopener noreferrer" target="_blank">GOV.UK consumer advice</a> &mdash; the consumer service for each UK nation: Citizens Advice in England and Wales, Advice Direct Scotland in Scotland, Consumerline in Northern Ireland</li>
+      <li><a href="{_r(sources, 'ncsc-sers')['info_url']}" rel="noopener noreferrer" target="_blank">National Cyber Security Centre (NCSC)</a> &mdash; for phishing reporting routes and current threat patterns</li>
+      <li><a href="{_consumer_advice_url(sources)}" rel="noopener noreferrer" target="_blank">GOV.UK consumer advice</a> &mdash; the consumer service for each UK nation: Citizens Advice in England and Wales, Advice Direct Scotland in Scotland, Consumerline in Northern Ireland</li>
       <li><a href="https://www.fca.org.uk/consumers/fca-firm-checker" rel="noopener noreferrer" target="_blank">FCA Firm Checker</a> &mdash; for investment and financial services scams</li>
       <li><a href="https://takefive-stopfraud.org.uk/" rel="noopener noreferrer" target="_blank">Take Five</a> &mdash; UK banking sector consumer fraud campaign</li>
       <li>Government UK pages for HMRC, DVLA, TV Licensing, and other public bodies commonly impersonated</li>
@@ -3049,7 +3067,7 @@ def build_legal_bodies(site, sources):
     <h2>23 July 2026</h2>
     <p>Following a full corpus fact re-check against current primary sources:</p>
     <ul>
-      <li><strong>DPD text guide:</strong> the reporting section no longer directs readers to a DPD fraud-reporting route that DPD UK's phishing guidance does not offer; reporting now goes via 7726, the NCSC, and the police reporting route for the reader's nation ({police_route_html(sources, phone=False, url=False)}), and the guide's sources now cite DPD UK rather than DPD Germany.</li>
+      <li><strong>DPD text guide:</strong> the reporting section no longer directs readers to a DPD fraud-reporting route that DPD UK's phishing guidance does not offer; reporting now goes via {_sms(sources)}, the NCSC, and the police reporting route for the reader's nation ({police_route_html(sources, phone=False, url=False)}), and the guide's sources now cite DPD UK rather than DPD Germany.</li>
       <li><strong>TV Licence email guide:</strong> sender-address guidance updated &mdash; TV Licensing warns that scammers can spoof its genuine addresses, and its current Themis Recoveries trial legitimately emails from mailing@themisglobal.co.uk about expired licences; a matching sender address is no longer presented as proof an email is genuine.</li>
       <li><strong>Microsoft account email guide:</strong> restored Microsoft's published phishing-forwarding mailbox for non-Outlook clients (phish@office365.microsoft.com, sent as an attachment so headers are preserved), which the guide previously said no longer existed; the Microsoft Defender portal's Submissions page is now described as an administrator route.</li>
       <li><strong>TalkTalk call guide:</strong> call-back guidance now uses TalkTalk's current published customer-service number (0345 172 0088, free from TalkTalk home phones) rather than the legacy 150 short code, which TalkTalk's current contact page no longer lists.</li>
@@ -3090,7 +3108,7 @@ def build_legal_bodies(site, sources):
 
     <h2>What to do first</h2>
     <div class="tablelike">
-      <div class="table-row"><strong>You only received the message</strong><span>Do not reply, click, or call a number in it. Forward a suspicious SMS to 7726 free of charge. For WhatsApp, iMessage, RCS and other app messages, also use the app or phone's built-in block and report controls.</span></div>
+      <div class="table-row"><strong>You only received the message</strong><span>Do not reply, click, or call a number in it. Forward a suspicious SMS to {_sms(sources)} free of charge. For WhatsApp, iMessage, RCS and other app messages, also use the app or phone's built-in block and report controls.</span></div>
       <div class="table-row"><strong>You opened a link</strong><span>If you did not enter information, download a file or install software, the NCSC says further action is unlikely to be needed, but watch for unusual account activity. If anything downloaded or installed, disconnect the device from the internet and run a full security scan.</span></div>
       <div class="table-row"><strong>You shared a password</strong><span>Use a clean device to change it immediately. Change every account where the password was reused, starting with the email account used for password resets. Sign out other sessions and turn on strong multi-factor authentication.</span></div>
       <div class="table-row"><strong>You shared card or bank details</strong><span>Contact the bank or card issuer immediately through its official app or the number printed on the card. Ask it to secure the account or card and identify any payment or account change you did not authorise.</span></div>
@@ -3115,8 +3133,8 @@ def build_legal_bodies(site, sources):
     <ul>
       <li><strong>{_n(sources, 'action-fraud')}:</strong> use <a href="{_r(sources, 'action-fraud')['info_url']}" rel="noopener noreferrer" target="_blank">{_b(sources, 'action-fraud')}</a> online or call {_r(sources, 'action-fraud')['phone']}.</li>
       <li><strong>{_n(sources, 'police-scotland')}:</strong> report fraud and cybercrime to {_b(sources, 'police-scotland')} on {_r(sources, 'police-scotland')['phone']}. Call 999 if a crime is happening now or someone is in immediate danger.</li>
-      <li><strong>Suspicious SMS:</strong> forward it to 7726 free of charge. For other message types, use the relevant app or device reporting controls as well.</li>
-      <li><strong>Phishing email:</strong> forward it to <a href="mailto:report@phishing.gov.uk">report@phishing.gov.uk</a>. The NCSC also accepts suspicious website reports.</li>
+      <li><strong>Suspicious SMS:</strong> forward it to {_sms(sources)} free of charge. For other message types, use the relevant app or device reporting controls as well.</li>
+      <li><strong>Phishing email:</strong> forward it to <a href="mailto:{_email(sources)}">{_email(sources)}</a>. The NCSC also accepts suspicious website reports.</li>
       <li><strong>Impersonated organisation:</strong> tell the bank, retailer, courier, platform or public body through contact details you find independently.</li>
     </ul>
 
@@ -3257,7 +3275,7 @@ def build_legal_bodies(site, sources):
       <div class="table-row"><strong>Legal &amp; copyright</strong><span><a href="mailto:{site["legal_email"]}">{site["legal_email"]}</a> &mdash; Terms, intellectual property, and reproduction requests.</span></div>
       <div class="table-row"><strong>Security disclosure</strong><span><a href="mailto:{site["security_email"]}">{site["security_email"]}</a> &mdash; see also our <a href="/.well-known/security.txt">security.txt</a>.</span></div>
     </div>
-    <p class="note" style="margin-top:1.5rem">To report a scam to UK authorities directly, use {police_route_html(sources, phone=False, url=False)}. Ofcom says suspicious SMS texts can be forwarded to <strong>7726</strong> free of charge; use the relevant app's own reporting tool for non-SMS messages.</p>
+    <p class="note" style="margin-top:1.5rem">To report a scam to UK authorities directly, use {police_route_html(sources, phone=False, url=False)}. Ofcom says suspicious SMS texts can be forwarded to <strong>{_sms(sources)}</strong> free of charge; use the relevant app's own reporting tool for non-SMS messages.</p>
     '''
 
     disclaimer = f'''
@@ -3266,7 +3284,7 @@ def build_legal_bodies(site, sources):
     <p>Everything published on <strong>{html.escape(site["site_name"])}</strong> &mdash; the guides, the AI scam checker, and any other material &mdash; is provided for <strong>general education and consumer awareness only</strong>. This page sets out the limits of that information. By using the Site you accept this disclaimer alongside our <a href="/terms/">Terms</a>.</p>
 
     <h2>Not professional advice</h2>
-    <p>The content here is <strong>not</strong> legal, financial, investment, tax, accounting, cybersecurity, or regulatory advice, and reading it does <strong>not</strong> create an advisor&ndash;client or other professional relationship. It cannot account for your individual circumstances. Before acting on anything that materially affects your money, identity, or legal position, seek advice from a suitably qualified professional or an official UK body &mdash; for example the <a href="https://www.fca.org.uk/" rel="noopener noreferrer" target="_blank">FCA</a>, the <a href="https://www.gov.uk/consumer-advice" rel="noopener noreferrer" target="_blank">consumer service for your nation</a>, or your bank&#8217;s published fraud line.</p>
+    <p>The content here is <strong>not</strong> legal, financial, investment, tax, accounting, cybersecurity, or regulatory advice, and reading it does <strong>not</strong> create an advisor&ndash;client or other professional relationship. It cannot account for your individual circumstances. Before acting on anything that materially affects your money, identity, or legal position, seek advice from a suitably qualified professional or an official UK body &mdash; for example the <a href="https://www.fca.org.uk/" rel="noopener noreferrer" target="_blank">FCA</a>, the <a href="{_consumer_advice_url(sources)}" rel="noopener noreferrer" target="_blank">consumer service for your nation</a>, or your bank&#8217;s published fraud line.</p>
 
     <h2>No guarantees about specific messages or websites</h2>
     <p>Scam tactics change constantly. No guide, and no result from the AI scam checker, can guarantee that a particular message, email, website, listing, phone call, or investment is either safe or fraudulent. A &#8220;probably legitimate&#8221; result is not a green light, and the absence of a warning is not a guarantee of safety. Always verify independently through an official channel you find yourself &mdash; never through a link, phone number, or payment detail supplied in the suspicious message.</p>
@@ -3281,7 +3299,7 @@ def build_legal_bodies(site, sources):
     <p>The Site links to third-party resources such as government sites, regulators, banks, and news outlets. Those sites operate under their own terms and privacy policies, and we have no control over and accept no responsibility for their content, accuracy, or availability.</p>
 
     <h2>If you think you have been scammed</h2>
-    <p>If you have already sent money, shared bank or card details, or shared one-time passcodes, act immediately: contact your bank using the number on the back of your card, and report it to {police_route_html(sources)}. You can forward scam texts to <strong>7726</strong> and suspicious emails to <strong>report@phishing.gov.uk</strong>.</p>
+    <p>If you have already sent money, shared bank or card details, or shared one-time passcodes, act immediately: contact your bank using the number on the back of your card, and report it to {police_route_html(sources)}. You can forward scam texts to <strong>{_sms(sources)}</strong> and suspicious emails to <strong>{_email(sources)}</strong>.</p>
 
     <h2>Liability</h2>
     <p>To the maximum extent permitted by law, Beat the Scam and SideRight Apps accept no liability for any loss or damage arising from your use of, or reliance on, the Site or the AI scam checker. Nothing here limits any liability that cannot lawfully be excluded &mdash; including for death or personal injury caused by negligence, or for fraud. The full limitation of liability is set out in our <a href="/terms/">Terms</a>.</p>
@@ -4093,9 +4111,9 @@ def build():
         f"{_b(sources, 'action-fraud')} ({_n(sources, 'action-fraud')}) — {_r(sources, 'action-fraud')['info_url']}\n"
         f"{_b(sources, 'police-scotland')} on {_r(sources, 'police-scotland')['phone']} "
         f"({_n(sources, 'police-scotland')}) — {_r(sources, 'police-scotland')['report_url']}\n"
-        f"NCSC — https://www.ncsc.gov.uk/\n"
+        f"NCSC — {_r(sources, 'ncsc-sers')['info_url']}\n"
         f"Consumer advice by nation (Citizens Advice in England and Wales, Advice Direct Scotland, "
-        f"Consumerline in Northern Ireland) — https://www.gov.uk/consumer-advice\n"
+        f"Consumerline in Northern Ireland) — {_consumer_advice_url(sources)}\n"
         f"FCA Firm Checker — https://www.fca.org.uk/consumers/fca-firm-checker\n\n"
         f"/* LAST UPDATE */\n"
         f"{today}\n"

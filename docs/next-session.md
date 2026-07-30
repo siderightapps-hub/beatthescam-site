@@ -162,10 +162,10 @@ renders is not a duplicate *page*, so it no longer BLOCKs publication.
 - 13 hubs at zero BLOCK, with one disclosed `website` legislation FLAG; all 13 sourced
 - Internal guide links: 0 unresolved. Raw `**` / external markdown links / description
   ellipses: 0 / 0 / 0
-- Clean checkout: **152 gate + 97 hub + 53 corpus + 24 release + 50 node = 376 checks**, zero failures,
+- Clean checkout: **152 gate + 101 hub + 53 corpus + 24 release + 50 node = 380 checks**, zero failures,
   with `docs/review/` genuinely absent. The fast path (`corpus_selftest.py --no-build`)
   plus canon sync. `release_selftest.py` runs 24 synthetic-fixture checks there and 26
-  with the local packets. On the fully APPLIED state the four suites are **380**.
+  with the local packets. On the fully APPLIED state the four suites are **384**.
 
 "Zero BLOCK" means the deterministic gate is satisfied. The 28 FLAGs remain open editorial
 items and **no model-based LLM judge has run on any of this release**.

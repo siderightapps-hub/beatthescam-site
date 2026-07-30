@@ -622,11 +622,13 @@ def code_baseline(overrides: dict | None = None) -> dict:
     the code the manifest was emitted from.
     """
     import subprocess
-    # The COMPLETE release-critical state, not an applier core. The eight-file
-    # version omitted the audit callers, the canon JS generator and its runtime
-    # bridge, the checker and its tests, the CI workflow and the canon input
-    # itself — so editing allowed-domains.js still printed "code matches" and
-    # let a content stage apply (operator review, 2026-07-30).
+    # The release-critical state: the applier and everything that decides what
+    # gets published, PLUS the inputs that decide how it renders. The eight-file
+    # version omitted the audit callers, the canon JS bridge, the checker and
+    # its tests, the CI workflow and the canon itself; the twenty-file version
+    # still omitted the template, site/affiliate config and assets. Both gaps
+    # let a file change between --emit and --apply without invalidating the
+    # baseline (operator reviews, 2026-07-30).
     files = [
         "scripts/canon.py", "scripts/corpus.py", "scripts/content_gate.py",
         "scripts/build.py", "scripts/release_manifest.py",
@@ -640,7 +642,16 @@ def code_baseline(overrides: dict | None = None) -> dict:
         "netlify/functions/lib/reporting-links.js",
         "netlify/functions/lib/reporting-links.test.js",
         ".github/workflows/gate-selftest.yml",
+        # Canon input, plus the other inputs that change RENDERED output. The
+        # 20-file version was a release-CONTROL surface only, so a template or
+        # site-config edit between --emit and --apply was invisible to it
+        # (operator review, 2026-07-30).
         "content/sources.json",
+        "content/site.json",
+        "content/affiliates.json",
+        "templates/base.html",
+        "assets/app.js",
+        "assets/styles.css",
     ]
     overrides = overrides or {}
     blobs = {}
