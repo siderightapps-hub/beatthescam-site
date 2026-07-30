@@ -95,8 +95,9 @@ def run(with_build: bool = True) -> int:
     public, consolidated = C.partition(posts)
     check("source records partition into public + consolidated",
           len(public) + len(consolidated) == len(posts))
-    check(f"{len(posts)} source records become exactly {len(posts) - 1} public guides",
-          len(public) == len(posts) - 1, f"got {len(public)}")
+    check(f"{len(posts)} source records become exactly "
+          f"{len(posts) - len(consolidation)} public guides",
+          len(public) == len(posts) - len(consolidation), f"got {len(public)}")
     # ── GENERIC: every consolidation, whatever the corpus holds ─────────────
     public_slugs = {p["slug"] for p in public}
     check("public + consolidated is exactly the source corpus",
@@ -156,7 +157,7 @@ def run(with_build: bool = True) -> int:
     saved_pending = C.PENDING_MIGRATION
     try:
         C.ARTICLE_REDIRECTS.pop(HERMES, None)
-        C.PENDING_MIGRATION = frozenset()
+        C.PENDING_MIGRATION = {}
         check("with the consolidation fully removed the corpus is valid",
               not C.validate_consolidation(without))
         recreated = sim_blocks(without)
@@ -209,8 +210,9 @@ def run(with_build: bool = True) -> int:
                     if d.is_dir() and d.name != "page"}
           check(f"exactly {len(public)} guide pages are rendered",
                 len(guides) == len(public), f"got {len(guides)}")
-          check("the archive record produces NO page", HERMES not in guides)
-          check("its consolidation target DOES produce a page", EVRI in guides)
+          for _slug, _target in sorted(consolidation.items()):
+              check(f"{_slug} produces NO page", _slug not in guides)
+              check(f"its target {_target} DOES produce a page", _target in guides)
 
           sitemap = (dist / "sitemap.xml").read_text(encoding="utf-8")
           rss = (dist / "rss.xml").read_text(encoding="utf-8")
@@ -220,32 +222,36 @@ def run(with_build: bool = True) -> int:
 
           for label, blob in (("sitemap.xml", sitemap), ("rss.xml", rss),
                               ("search.json", search), ("llms.txt", llms)):
-              check(f"the archive record has no {label} entry", HERMES not in blob)
-          check("its target IS in sitemap.xml", f"/guides/{EVRI}/" in sitemap)
+              for _slug in sorted(consolidation):
+                  check(f"{_slug} has no {label} entry", _slug not in blob)
+          for _target in sorted(set(consolidation.values())):
+              check(f"the target {_target} IS in sitemap.xml", f"/guides/{_target}/" in sitemap)
 
-          # 3. Both URL forms 301 DIRECTLY to the final guide.
-          for form in (f"/guides/{HERMES}", f"/guides/{HERMES}/"):
+          # 3. Both URL forms 301 DIRECTLY to the final guide, for EVERY
+          #    consolidation the corpus declares — not just the named pair.
+          for _slug, _target in sorted(consolidation.items()):
+            for form in (f"/guides/{_slug}", f"/guides/{_slug}/"):
               line = next((l for l in redirects.splitlines()
                            if l.split()[0:1] == [form]), None)
               check(f"{form} emits a 301", line is not None)
               if line:
                   _, dest, code = line.split()
-                  check(f"{form} 301s directly to the target guide",
-                        dest == f"/guides/{EVRI}/", f"got {dest}")
+                  check(f"{form} 301s directly to {_target}",
+                        dest == f"/guides/{_target}/", f"got {dest}")
                   check(f"{form} uses a forced 301", code == "301!", f"got {code}")
 
           # 4. No rendered page links to the dead slug — internal links are
           #    canonicalised, so a reader never takes the redirect hop.
           linking = sorted(
               p.name for p in (dist / "guides").rglob("index.html")
-              if f"/guides/{HERMES}/" in p.read_text(encoding="utf-8")
+              if any(f"/guides/{_s}/" in p.read_text(encoding="utf-8") for _s in consolidation)
           )
-          check("no rendered guide links to the consolidated slug", not linking, str(linking[:5]))
+          check("no rendered guide links to any consolidated slug", not linking, str(linking[:5]))
           hub_pages = sorted(
               p.parent.name for p in (dist / "categories").rglob("index.html")
-              if f"/guides/{HERMES}/" in p.read_text(encoding="utf-8")
+              if any(f"/guides/{_s}/" in p.read_text(encoding="utf-8") for _s in consolidation)
           )
-          check("no rendered category/hub page links to it either", not hub_pages, str(hub_pages))
+          check("no rendered category/hub page links to one either", not hub_pages, str(hub_pages))
 
       break
 
@@ -258,6 +264,9 @@ def run(with_build: bool = True) -> int:
     else:
         check("PENDING_MIGRATION is carrying exactly the unmigrated records",
               set(pending) == set(C.PENDING_MIGRATION), str(pending))
+        check("every pending migration pins its target",
+              all(pending.get(k) == v for k, v in C.PENDING_MIGRATION.items()),
+              f"{pending} vs {dict(C.PENDING_MIGRATION)}")
         print("NOTE  consolidation is still declared in the static redirect map, not on the")
         print("      record. `consolidation-metadata-v1` moves it, deletes the static entry and")
         print("      empties PENDING_MIGRATION; this branch then flips and demands the removal.")

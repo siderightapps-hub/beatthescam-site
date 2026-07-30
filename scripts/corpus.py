@@ -220,35 +220,41 @@ def consolidation_map(posts: List[dict]) -> Dict[str, str]:
     }
 
 
-# TRANSITIONAL, and deliberately a closed set of exactly the slugs mid-migration.
+# TRANSITIONAL, and deliberately a closed MAP of exactly the slugs mid-migration
+# to the target each one must redirect to.
 #
-# Before `consolidation-metadata-v1`, consolidation was declared by a static
-# ARTICLE_REDIRECTS entry beside a surviving source record. This set names the
+# Before `consolidation-metadata-v2`, consolidation was declared by a static
+# ARTICLE_REDIRECTS entry beside a surviving source record. This map names the
 # records still in that state so the code half and the content half can be
 # reviewed apart without a window where an archive record renders.
 #
-# It is NOT a general rule. An earlier version bridged ANY source slug that
-# happened to collide with a static redirect, which silently retired a record
-# with no declaration anywhere — reproduced with `facebook-marketplace-scam-uk-
-# guide-2` (operator review, 2026-07-30). Outside this set, that collision is an
-# error.
+# It is a MAP, not a set, because a set only asserted that a static entry
+# EXISTED. Retargeting the pending entry to `no-such-guide` validated clean and
+# shipped a broken redirect; retargeting it to `__CAT__:sms` republished the
+# record entirely (operator review, 2026-07-30). The target is now pinned.
 #
-# `validate_consolidation()` asserts BOTH halves of each pending migration, so
-# neither can land alone. When this is empty, delete it and
-# `pending_migrations()` — `corpus_selftest.py` asserts exactly that.
-PENDING_MIGRATION = frozenset({"hermes-parcel-scam-text-uk"})
+# It is also NOT a general rule. An earlier version bridged ANY source slug that
+# happened to collide with a static redirect, which silently retired a record
+# with no declaration anywhere. Outside this map, that collision is an error.
+#
+# `consolidation-metadata-v2` empties this and deletes it together with
+# `pending_migrations()` and the union in `partition()`, in ONE reviewed
+# transaction — see `release_manifest.py`'s migration applier.
+PENDING_MIGRATION = {"hermes-parcel-scam-text-uk": "evri-delivery-scam-guide"}
 
 
 def pending_migrations(posts: List[dict],
-                       static_redirects: Optional[Dict[str, str]] = None) -> Dict[str, str]:
+                       static_redirects: Optional[Dict[str, str]] = None,
+                       pending: Optional[Dict[str, str]] = None) -> Dict[str, str]:
     """{slug: target} for records still declaring consolidation the old way."""
     static_redirects = _static(static_redirects)
+    pending = PENDING_MIGRATION if pending is None else pending
     declared = _declared([p for p in posts if isinstance(p, dict) and isinstance(p.get("slug"), str)])
     return {
         p["slug"]: static_redirects[p["slug"]]
         for p in posts
         if isinstance(p, dict) and isinstance(p.get("slug"), str)
-        and p["slug"] in PENDING_MIGRATION
+        and p["slug"] in pending
         and p["slug"] in static_redirects
         and p["slug"] not in declared
         and not str(static_redirects[p["slug"]]).startswith("__CAT__:")
@@ -270,13 +276,18 @@ def _declared(posts: List[dict]) -> Dict[str, object]:
 
 
 def validate_consolidation(posts: List[dict],
-                           static_redirects: Optional[Dict[str, str]] = None) -> List[str]:
+                           static_redirects: Optional[Dict[str, str]] = None,
+                           pending: Optional[Dict[str, str]] = None) -> List[str]:
     """Return a list of problems. Empty list == valid.
 
     Pure and side-effect free, so the same fixtures run against every consumer.
     """
     problems: List[str] = []
     static_redirects = _static(static_redirects)
+    # Explicit, so a migration transaction can validate the FINAL state (with the
+    # static entry removed and the map emptied) BEFORE writing anything — the
+    # applier cannot import a module version that does not exist on disk yet.
+    pending = PENDING_MIGRATION if pending is None else pending
 
     if not isinstance(posts, list) or not posts:
         return ["posts must be a non-empty list"]
@@ -344,7 +355,7 @@ def validate_consolidation(posts: List[dict],
     # declaration on it. Only slugs mid-migration are exempt, and each of those
     # is separately asserted below.
     for slug in sorted(all_slugs & set(static_redirects)):
-        if slug in PENDING_MIGRATION:
+        if slug in pending:
             continue
         problems.append(
             f"{slug!r} has a source record AND a static redirect entry (to "
@@ -357,11 +368,24 @@ def validate_consolidation(posts: List[dict],
     # metadata-only half is caught by the collision rule above; this catches the
     # code-only half, which used to republish the record with no redirect and no
     # error at all (operator review, 2026-07-30).
-    for slug in sorted(PENDING_MIGRATION):
+    for slug, want_target in sorted(pending.items()):
         if slug not in all_slugs:
             continue                       # record already gone; nothing to migrate
         has_meta = slug in declared
         has_static = slug in static_redirects
+        # PIN the target while the bridge exists. Checking only that a static
+        # entry exists let it be retargeted to a non-existent guide (broken
+        # redirect) or to a category (record republished) with zero problems.
+        if has_static and static_redirects[slug] != want_target:
+            problems.append(
+                f"{slug!r} is mid-migration and must redirect to {want_target!r}, but the static "
+                f"map says {static_redirects[slug]!r}"
+            )
+        if has_static and want_target not in all_slugs:
+            problems.append(
+                f"{slug!r} is mid-migration and its pinned target {want_target!r} is not a "
+                f"source record"
+            )
         if has_meta and not has_static:
             problems.append(
                 f"{slug!r} has completed its migration — remove it from "
@@ -392,39 +416,42 @@ def validate_consolidation(posts: List[dict],
 
 
 def partition(posts: List[dict],
-              static_redirects: Optional[Dict[str, str]] = None) -> Tuple[List[dict], List[dict]]:
+              static_redirects: Optional[Dict[str, str]] = None,
+              pending: Optional[Dict[str, str]] = None) -> Tuple[List[dict], List[dict]]:
     """(public, consolidated). Raises CorpusError if the graph is invalid.
 
     `public` is what gets rendered, indexed, listed, searched and similarity-
     checked. `consolidated` is retained source data that 301s.
     """
-    problems = validate_consolidation(posts, static_redirects)
+    problems = validate_consolidation(posts, static_redirects, pending)
     if problems:
         detail = "\n".join(f"  - {p}" for p in problems)
         raise CorpusError(
             f"content/posts.json consolidation is invalid ({len(problems)} problem(s)):\n{detail}"
         )
     retired = set(consolidation_map(posts)) | set(
-        pending_migrations(posts, static_redirects))
+        pending_migrations(posts, static_redirects, pending))
     public = [p for p in posts if p["slug"] not in retired]
     consolidated = [p for p in posts if p["slug"] in retired]
     return public, consolidated
 
 
 def public_posts(posts: List[dict],
-                 static_redirects: Optional[Dict[str, str]] = None) -> List[dict]:
-    return partition(posts, static_redirects)[0]
+                 static_redirects: Optional[Dict[str, str]] = None,
+                 pending: Optional[Dict[str, str]] = None) -> List[dict]:
+    return partition(posts, static_redirects, pending)[0]
 
 
 def redirect_map(posts: List[dict],
-                 static_redirects: Optional[Dict[str, str]] = None) -> Dict[str, str]:
+                 static_redirects: Optional[Dict[str, str]] = None,
+                 pending: Optional[Dict[str, str]] = None) -> Dict[str, str]:
     """The complete slug → target map the edge and the internal-link
     canonicaliser both use: historical static redirects plus every
     consolidation derived from the records.
 
     Validated first, so a broken graph cannot reach `_redirects`.
     """
-    partition(posts, static_redirects)          # raises on an invalid graph
+    partition(posts, static_redirects, pending)  # raises on an invalid graph
     merged = dict(_static(static_redirects))
     merged.update(consolidation_map(posts))     # metadata wins; collisions already rejected
     return merged

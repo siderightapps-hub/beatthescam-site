@@ -34,6 +34,38 @@ def check(name: str, cond: bool, detail: str = "") -> None:
         FAILURES.append(name)
 
 
+def _consolidation_evasion_fixtures(check) -> None:
+    """A DRAFT may never declare itself consolidated.
+
+    `consolidated_into` removes a record from the public corpus AND from the
+    duplicate-content check, so without this the cheapest route past a
+    similarity BLOCK would be to add one field. The check tests field PRESENCE,
+    not truthiness — `post.get(...)` returned falsy for "", None, False, [] and
+    {}, so five malformed values passed (operator review, 2026-07-30). There was
+    no direct fixture for any of this.
+    """
+    import corpus as corpus_mod
+
+    def draft(**extra):
+        return {"slug": "selftest-draft", "title": "Draft", "description": "d", "hero": "h",
+                "sections": [["Section", "body text " * 80]], "faq": [], **extra}
+
+    def blocks(post):
+        return any(i["check"] == "consolidation_evasion" and i["severity"] == "block"
+                   for i in check_deterministic(post, is_draft=True))
+
+    for value in ("evri-delivery-scam-guide", "", None, False, [], {}):
+        check(f"a draft setting consolidated_into={value!r} is BLOCKED",
+              blocks(draft(**{corpus_mod.CONSOLIDATED_INTO: value})))
+    check("a draft WITHOUT the field is clean",
+          not blocks(draft()))
+    # A LIVE record may legitimately carry it — corpus audits pass is_draft=False.
+    check("a live record carrying the field is NOT blocked",
+          not any(i["check"] == "consolidation_evasion" for i in check_deterministic(
+              draft(**{corpus_mod.CONSOLIDATED_INTO: "evri-delivery-scam-guide"}),
+              is_draft=False)))
+
+
 def _canon_negative_fixtures(check) -> None:
     """Run scripts/canon.py's malformed-canon fixtures against the validator AND
     against both of its real consumers.
@@ -490,6 +522,7 @@ def run() -> int:
     # of truth had failed. What is tested instead is that ONE validator rejects
     # every malformed shape, and that BOTH consumers actually call it.
     _canon_negative_fixtures(check)
+    _consolidation_evasion_fixtures(check)
 
     # Citation prose is not a consumer route.
     check("'Data from Citizens Advice shows...' is a citation, not a route",

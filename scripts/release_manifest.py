@@ -295,6 +295,72 @@ def apply_record_fields(posts: list, change: dict, precondition: dict) -> dict:
     return stats
 
 
+def apply_code_patch(patch: list, *, dry_run: bool) -> dict:
+    """Apply exact, reviewed source edits as part of a content stage.
+
+    WHY THIS EXISTS
+    ---------------
+    The consolidation migration is not expressible as a content change. It needs
+    `consolidated_into` on a record AND the removal of the static redirect AND
+    the emptying of the transitional map — and the tool enforces a code baseline,
+    so editing the code first invalidates the manifest, while editing it second
+    means the applier's own final graph check fails on the state it just wrote.
+    The release was therefore not executable in any order (operator review,
+    2026-07-30, reproduced end to end).
+
+    Each entry is `{file, old, new}` with `old` asserted exactly, so the patch is
+    reviewable in the packet the same way prose mutations are. `dry_run` computes
+    the resulting text without touching disk, so the whole transaction can be
+    validated before anything is written.
+    """
+    results: dict = {}
+    for n, entry in enumerate(patch):
+        path = ROOT / entry["file"]
+        if not path.exists():
+            raise ApplyError(f"{entry['file']}: no such file")
+        # Read the STAGED text if an earlier entry already edited this file.
+        # Re-reading from disk each time meant several patches to one file did
+        # not compose — only the last one survived, silently. The static-entry
+        # and PENDING_MIGRATION edits both target corpus.py.
+        text = results.get(entry["file"]) or path.read_text(encoding="utf-8")
+        old, new = entry["old"], entry["new"]
+        if text.count(old) != 1:
+            raise ApplyError(
+                f"{entry['file']}: patch[{n}] `old` text appears {text.count(old)} times, "
+                f"expected exactly once. The reviewed code state has moved, or an earlier "
+                f"entry in this patch already changed it."
+            )
+        results[entry["file"]] = text.replace(old, new, 1)
+
+    # An exact-match patch can still produce invalid code — clipping a
+    # continuation line off a multi-line statement leaves an IndentationError
+    # that nothing catches until the next import. Compile every patched Python
+    # file before it reaches disk.
+    for name, text in results.items():
+        if name.endswith(".py"):
+            try:
+                compile(text, name, "exec")
+            except SyntaxError as exc:
+                raise ApplyError(
+                    f"{name}: the patched source does not compile — {exc.msg} at line "
+                    f"{exc.lineno}. The patch's `old`/`new` text does not cover a whole statement."
+                )
+    if not dry_run:
+        for name, text in results.items():
+            (ROOT / name).write_text(text, encoding="utf-8")
+    return results
+
+
+def final_graph_inputs(patch: list, packet_data: dict) -> dict:
+    """What the consolidation graph looks like AFTER the patch, declared by the
+    packet rather than inferred by importing code that is not on disk yet."""
+    final = packet_data.get("final_state") or {}
+    return {
+        "remove_static": list(final.get("remove_static_redirects") or []),
+        "pending_after": dict(final.get("pending_migration_after") or {}),
+    }
+
+
 def apply_hub_records(hubs: dict, records: dict, applied_on: str) -> int:
     """hubs-v11: ten complete new hub records, written whole."""
     for key, record in records.items():
@@ -378,27 +444,27 @@ STAGES = [
     {
         "id": "scotland-shpock",
         "title": "Scotland routing + Yodel, with Shpock",
-        "packets": ["scotland-routing-v12", "shpock-scam-uk-v12"],
+        "packets": ["scotland-routing-v13", "shpock-scam-uk-v13"],
         "why": "Mandatory companions; neither releases alone. Source rows are re-asserted "
                "after all full-record writes so no overlap row is lost.",
     },
     {
         "id": "nation",
         "title": "Nation consumer routing",
-        "packets": ["nation-consumer-routing-v6"],
+        "packets": ["nation-consumer-routing-v7"],
         "why": "Depends on both upstream stages for its `old` values.",
     },
     {
         "id": "hubs",
         "title": "All thirteen category hubs",
-        "packets": ["hubs-v12", "legacy-hubs-v7"],
+        "packets": ["hubs-v13", "legacy-hubs-v8"],
         "why": "Landed together with the strict source/key enforcement, or the hub "
                "self-test suite is inconsistent with the content.",
     },
     {
         "id": "consolidation",
         "title": "Consolidation metadata",
-        "packets": ["consolidation-metadata-v2"],
+        "packets": ["consolidation-metadata-v3"],
         "why": "Moves the last consolidation declaration onto its own record. ATOMIC with "
                "deleting the matching static ARTICLE_REDIRECTS entry — leaving both is a "
                "validation error by design, so a half-applied patch fails loudly.",
@@ -423,6 +489,24 @@ def run_stage(stage: dict, posts: list, hubs: dict, applied_on: str) -> dict:
         if data.get("payload_shape") == "record_field_add":
             entry.update(apply_record_fields(posts, data["change"],
                                              data["old_state_precondition"]))
+        if data.get("code_patch"):
+            # Validate the FINAL graph — the corpus we just built, under the
+            # static map and pending map the patch will leave behind — BEFORE
+            # writing a byte. Then stage the patched text.
+            inputs = final_graph_inputs(data["code_patch"], data)
+            static_after = {k: v for k, v in corpus_mod.ARTICLE_REDIRECTS.items()
+                            if k not in inputs["remove_static"]}
+            problems = corpus_mod.validate_consolidation(
+                posts, static_after, inputs["pending_after"])
+            if problems:
+                raise ApplyError(
+                    "the FINAL graph (after the code patch) would be invalid:\n"
+                    + "\n".join(f"    - {x}" for x in problems))
+            apply_code_patch(data["code_patch"], dry_run=True)   # assert `old` texts
+            entry["code_patch_files"] = sorted({e["file"] for e in data["code_patch"]})
+            entry["_code_patch"] = data["code_patch"]
+            entry["_final_static_after"] = static_after
+            entry["_pending_after"] = inputs["pending_after"]
         if "hubs" in data:
             # Two different payload shapes. hubs-v11 carries complete new
             # records; legacy-hubs-v6 carries PARTIAL patches into three
@@ -461,7 +545,7 @@ FINAL9_DIGEST_KEYS = ["slug", "description", "hero", "quick_answer",
                       "sections", "faq", "sources_checked"]
 
 
-def code_baseline() -> dict:
+def code_baseline(overrides: dict | None = None) -> dict:
     """A digest over the release-critical code, plus the commit it was taken at.
 
     `minimum_code_commit` in the packets is descriptive: nothing read it, so
@@ -470,11 +554,33 @@ def code_baseline() -> dict:
     the code the manifest was emitted from.
     """
     import subprocess
-    files = ["scripts/canon.py", "scripts/corpus.py", "scripts/content_gate.py",
-             "scripts/build.py", "scripts/release_manifest.py",
-             "scripts/hub_selftest.py", "scripts/corpus_selftest.py",
-             "scripts/gate_quickanswer_selftest.py"]
-    blobs = {f: hashlib.sha256((ROOT / f).read_bytes()).hexdigest() for f in files}
+    # The COMPLETE release-critical state, not an applier core. The eight-file
+    # version omitted the audit callers, the canon JS generator and its runtime
+    # bridge, the checker and its tests, the CI workflow and the canon input
+    # itself — so editing allowed-domains.js still printed "code matches" and
+    # let a content stage apply (operator review, 2026-07-30).
+    files = [
+        "scripts/canon.py", "scripts/corpus.py", "scripts/content_gate.py",
+        "scripts/build.py", "scripts/release_manifest.py",
+        "scripts/hub_selftest.py", "scripts/corpus_selftest.py",
+        "scripts/gate_quickanswer_selftest.py", "scripts/release_selftest.py",
+        "scripts/audit_corpus.py", "scripts/fact_reverify.py",
+        "scripts/similarity_report.py", "scripts/sync_canon_js.py",
+        "netlify/functions/check-scam.js",
+        "netlify/functions/lib/allowed-domains.js",
+        "netlify/functions/lib/canon-routes.js",
+        "netlify/functions/lib/reporting-links.js",
+        "netlify/functions/lib/reporting-links.test.js",
+        ".github/workflows/gate-selftest.yml",
+        "content/sources.json",
+    ]
+    overrides = overrides or {}
+    blobs = {}
+    for f in files:
+        if f in overrides:
+            blobs[f] = hashlib.sha256(overrides[f].encode("utf-8")).hexdigest()
+        elif (ROOT / f).exists():
+            blobs[f] = hashlib.sha256((ROOT / f).read_bytes()).hexdigest()
     try:
         head = subprocess.run(["git", "rev-parse", "HEAD"], cwd=ROOT, capture_output=True,
                               text=True, check=True).stdout.strip()
@@ -496,7 +602,7 @@ def build_receipts() -> dict:
     posts = load_posts()
     index = by_slug(posts)
     try:
-        stored = packet("scotland-routing-v12")["prerequisite_state"]["record_digests"]
+        stored = packet("scotland-routing-v13")["prerequisite_state"]["record_digests"]
         f9 = packet("FINAL-9-guides-v4")["guides"]
     except SystemExit:
         return receipts
@@ -528,11 +634,11 @@ def build_receipts() -> dict:
     # a placeholder `updated` into one hash and calling it proof of a future
     # applied state is the defect (`shpock-scam-uk-v10-c.md` §2).
     try:
-        record = packet("shpock-scam-uk-v12")["record"]
+        record = packet("shpock-scam-uk-v13")["record"]
     except SystemExit:
         record = None
     if record:
-        receipts["shpock-scam-uk-v12"] = {
+        receipts["shpock-scam-uk-v13"] = {
             "purpose": "Prove the approved reader record is the one applied.",
             "digest_keys": "the whole record",
             "stable_content_digest": stable_digest(record),
@@ -563,18 +669,50 @@ def build_manifest(applied_on: str) -> dict:
         "baseline": {"posts": corpus_digest(posts), "hubs": digest(hubs)},
         "baseline_source_records": len(posts),
         "code_baseline": code_baseline(),
+        # Filled in below: the code state the release's own patches produce. A
+        # successful release CHANGES the code, so `--verify` afterwards must
+        # recognise the post-release baseline rather than reporting drift
+        # against the pre-release one.
+        "code_baseline_after": None,
         "receipts": build_receipts(),
         "stages": [],
     }
+
+    # The static/pending maps as each simulated stage leaves them. A stage
+    # carrying a code_patch changes what "valid" means for every stage after it.
+    stage_static: dict = dict(corpus_mod.ARTICLE_REDIRECTS)
+    stage_pending: dict = dict(corpus_mod.PENDING_MIGRATION)
+    patched_files: dict = {}
 
     for stage in STAGES:
         expects_posts, expects_hubs = corpus_digest(posts), digest(hubs)
         try:
             report = run_stage(stage, posts, hubs, applied_on)
+            for entry in report["packets"].values():
+                if entry.get("_code_patch"):
+                    patched_files.update(apply_code_patch(entry["_code_patch"], dry_run=True))
+                if entry.get("_final_static_after") is not None:
+                    stage_static = dict(entry["_final_static_after"])
+                    stage_pending = dict(entry.get("_pending_after") or {})
         except (ApplyError, SystemExit) as exc:
             manifest["stages"].append({
                 "id": stage["id"], "title": stage["title"], "why": stage["why"],
                 "status": "UNAVAILABLE", "reason": str(exc),
+                "expects": {"posts": expects_posts, "hubs": expects_hubs},
+            })
+            break
+        # Validate the graph AFTER each simulated stage. Without this, emit
+        # recorded the invalid metadata-plus-static final state as `status:
+        # ready` and the problem only surfaced at the very end of a real
+        # application (operator review, 2026-07-30). A manifest that cannot be
+        # applied must not be emitted as ready.
+        graph_problems = corpus_mod.validate_consolidation(
+            posts, stage_static or None, stage_pending)
+        if graph_problems:
+            manifest["stages"].append({
+                **{k: stage[k] for k in ("id", "title", "why")},
+                "status": "INVALID",
+                "reason": "the graph after this stage is invalid: " + "; ".join(graph_problems),
                 "expects": {"posts": expects_posts, "hubs": expects_hubs},
             })
             break
@@ -587,9 +725,11 @@ def build_manifest(applied_on: str) -> dict:
             "packet_digests": {n: digest(packet(n)) for n in stage["packets"]},
             "expects": {"posts": expects_posts, "hubs": expects_hubs},
             "produces": {"posts": corpus_digest(posts), "hubs": digest(hubs)},
-            "applied": report["packets"],
+            "applied": {n: {k: v for k, v in e.items() if not k.startswith("_")}
+                        for n, e in report["packets"].items()},
         })
 
+    manifest["code_baseline_after"] = code_baseline(patched_files)
     return manifest
 
 
@@ -636,9 +776,50 @@ def _require_manifest() -> dict:
             f"receipt, not an optional convenience — run --emit first."
         )
     manifest = json.loads(MANIFEST.read_text(encoding="utf-8"))
-    for key in ("digest_spec", "baseline", "stages", "generated_for_application_date"):
+    for key in ("digest_spec", "baseline", "stages", "generated_for_application_date",
+                "code_baseline"):
         if key not in manifest:
             raise SystemExit(f"ERROR: {MANIFEST.relative_to(ROOT)} has no {key!r} — regenerate it")
+
+    # STRICT schema. A bogus "ready" stage added to the manifest used to make
+    # `--apply --stage bogus` return success without executing anything, because
+    # the known-stage check read the MANIFEST rather than the executable STAGES
+    # (operator review, 2026-07-30).
+    recorded = [e["id"] for e in manifest["stages"]]
+    expected = [x["id"] for x in STAGES]
+    if recorded != expected[:len(recorded)]:
+        raise SystemExit(
+            f"ERROR: manifest stage order {recorded} is not a prefix of the executable order "
+            f"{expected}. Regenerate the manifest."
+        )
+    for entry in manifest["stages"]:
+        stage = next((x for x in STAGES if x["id"] == entry["id"]), None)
+        if stage is None:
+            raise SystemExit(f"ERROR: manifest records unknown stage {entry['id']!r}")
+        if entry.get("status") != "ready":
+            continue
+        if list(entry.get("packets") or []) != list(stage["packets"]):
+            raise SystemExit(
+                f"ERROR: stage {entry['id']!r} records packets {entry.get('packets')} but the "
+                f"executable stage applies {stage['packets']}"
+            )
+        if set(entry.get("packet_digests") or {}) != set(stage["packets"]):
+            raise SystemExit(
+                f"ERROR: stage {entry['id']!r} packet digests cover "
+                f"{sorted(entry.get('packet_digests') or {})}, expected {sorted(stage['packets'])}"
+            )
+        for key in ("expects", "produces"):
+            if set(entry.get(key) or {}) != {"posts", "hubs"}:
+                raise SystemExit(
+                    f"ERROR: stage {entry['id']!r} {key!r} must record exactly posts and hubs"
+                )
+    try:
+        date.fromisoformat(manifest["generated_for_application_date"])
+    except (TypeError, ValueError):
+        raise SystemExit(
+            f"ERROR: manifest application date "
+            f"{manifest['generated_for_application_date']!r} is not an ISO date"
+        )
     return manifest
 
 
@@ -683,9 +864,26 @@ def cmd_verify() -> int:
     manifest = _require_manifest()
     live = _state(load_posts(), load_hubs())
     print(f"live  {_fmt(live)}")
-    same_code = code_baseline()["digest"] == manifest.get("code_baseline", {}).get("digest")
-    print("code  " + ("matches the manifest baseline" if same_code else
-                      "DIFFERS from the manifest baseline — re-run --emit") + "\n")
+    live_code = code_baseline()["digest"]
+    before = manifest.get("code_baseline", {}).get("digest")
+    after = (manifest.get("code_baseline_after") or {}).get("digest")
+    if live_code == before:
+        print("code  matches the manifest's PRE-release baseline\n")
+    elif after and live_code == after:
+        print("code  matches the manifest's POST-release baseline "
+              "(the release's own code patches have been applied)\n")
+    else:
+        print("code  DIFFERS from both the pre- and post-release baselines — re-run --emit\n")
+    drift = [] if live_code in (before, after) else ["code baseline"]
+    for entry in manifest["stages"]:
+        if entry.get("status") != "ready":
+            continue
+        for name, want in (entry.get("packet_digests") or {}).items():
+            try:
+                if _packet_identity(name) != want:
+                    drift.append(f"packet {name}")
+            except SystemExit:
+                drift.append(f"packet {name} (missing)")
 
     position, matched = None, None
     if live == manifest["baseline"]:
@@ -721,11 +919,23 @@ def cmd_verify() -> int:
         mark = "ready" if s["status"] == "ready" else "UNAVAILABLE"
         nxt = s["status"] == "ready" and live == s["expects"]
         print(f"  [{'NEXT ' if nxt else '     '}] {s['id']:18} {mark}")
+    if drift:
+        # Drift must FAIL verification, not merely warn. A green --verify beside a
+        # changed packet or a changed baseline is exactly the false assurance this
+        # tool exists to remove (operator review, 2026-07-30).
+        print(f"\nDRIFT: {', '.join(sorted(set(drift)))} — re-run --emit before applying.")
+        return 1
     return 0
 
 
 def cmd_apply(applied_on: str, only: str | None) -> int:
     manifest = _require_manifest()
+
+    try:
+        date.fromisoformat(applied_on)
+    except (TypeError, ValueError):
+        raise SystemExit(f"ERROR: --date {applied_on!r} is not an ISO date (YYYY-MM-DD). It would "
+                         f"be written verbatim into every `updated` field.")
 
     if manifest["generated_for_application_date"] != applied_on:
         raise SystemExit(
@@ -748,6 +958,7 @@ def cmd_apply(applied_on: str, only: str | None) -> int:
         raise SystemExit(f"ERROR: unknown stage {only!r}. Known stages: {', '.join(sorted(known))}")
 
     posts, hubs = load_posts(), load_hubs()
+    code_patches: list = []
 
     for stage in STAGES:
         if only and stage["id"] != only:
@@ -783,9 +994,23 @@ def cmd_apply(applied_on: str, only: str | None) -> int:
                 f"       produced {_fmt(after)}\n"
                 f"       Nothing was written to disk."
             )
-        print(f"{stage['id']:18} {report['packets']}")
+        for entry in report["packets"].values():
+            if entry.get("_code_patch"):
+                code_patches.append(entry["_code_patch"])
+        print(f"{stage['id']:18} "
+              f"{ {n: {k: v for k, v in e.items() if not k.startswith('_')} for n, e in report['packets'].items()} }")
         print(f"{'':18} {_fmt(after)}  OK")
 
+    # Commit phase. The code patch is written FIRST, so `_check_graph` below runs
+    # against the same code the site will actually build with. Every `old` text
+    # was already asserted during the stage, and the final graph was validated
+    # against the post-patch maps before anything was written.
+    for entry in code_patches:
+        apply_code_patch(entry, dry_run=False)
+        print(f"{'':18} patched {sorted({e['file'] for e in entry})}")
+    if code_patches:
+        import importlib
+        importlib.reload(corpus_mod)
     _check_graph(posts)
     write_posts(posts)
     write_hubs(hubs)

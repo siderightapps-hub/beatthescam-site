@@ -16,9 +16,9 @@ now history — the release described below supersedes it.
 A large accuracy release is **fully prepared but not applied**. Nine commits of gate,
 build and CI hardening are on `main` — the ninth closed every integration blocker the
 operator raised in the five `-c.md` replies dated 2026-07-29. **Six** packets now sit in `docs/review/`
-awaiting the operator's replies — `scotland-routing-v12`, `shpock-scam-uk-v12`,
-`nation-consumer-routing-v6`, `hubs-v12`, `legacy-hubs-v7` and
-`consolidation-metadata-v2`; `FINAL-9-guides-v4` remains approved. Applying all seven
+awaiting the operator's replies — `scotland-routing-v13`, `shpock-scam-uk-v13`,
+`nation-consumer-routing-v7`, `hubs-v13`, `legacy-hubs-v8` and
+`consolidation-metadata-v3`; `FINAL-9-guides-v4` remains approved. Applying all seven
 takes the corpus to **zero deterministic BLOCKs at BOTH scopes** — 185 public guides and
 186 source records — from 176 today. Nothing has been written to
 `content/posts.json` or `content/category-hubs.json`.
@@ -51,12 +51,12 @@ in git history and will not appear on another machine.
 
 | Packet | Reader content | What changed since the reply |
 |---|---|---|
-| `scotland-routing-v12` | unchanged (147 fields, 202 source rows) | receipt key list made explicit incl. lookup-only `slug`; gate scopes separated |
-| `shpock-scam-uk-v12` | unchanged | cross-method digest "match" retracted; stable vs applied receipts split; stale HTTP block removed |
-| `nation-consumer-routing-v6` | **3 passages changed** | Timeshare FAQ 3 reworded; 2 Victim Support evidence rows added; Pandora/Ray-Ban referral sentences rewritten so the numbers stay and the citation is fixed |
-| `consolidation-metadata-v2` | one metadata field | `consolidated_into` on the Hermes record — consolidation now defines the public corpus |
-| `hubs-v12` | unchanged (10 records) | all ten integration amendments now landed in code, with per-item evidence |
-| `legacy-hubs-v7` | **1 passage changed** | duplicate Evri/Hermes courier anchor merged into `Evri (formerly Hermes)` |
+| `scotland-routing-v13` | unchanged (147 fields, 202 source rows) | receipt key list made explicit incl. lookup-only `slug`; gate scopes separated |
+| `shpock-scam-uk-v13` | unchanged | cross-method digest "match" retracted; stable vs applied receipts split; stale HTTP block removed |
+| `nation-consumer-routing-v7` | **3 passages changed** | Timeshare FAQ 3 reworded; 2 Victim Support evidence rows added; Pandora/Ray-Ban referral sentences rewritten so the numbers stay and the citation is fixed |
+| `consolidation-metadata-v3` | one metadata field | `consolidated_into` on the Hermes record — consolidation now defines the public corpus |
+| `hubs-v13` | unchanged (10 records) | all ten integration amendments now landed in code, with per-item evidence |
+| `legacy-hubs-v8` | **1 passage changed** | duplicate Evri/Hermes courier anchor merged into `Evri (formerly Hermes)` |
 
 `FINAL-9-guides-v4` (nine guides) is **APPROVED** and ready, but cannot ship alone — it
 overlaps the Scotland patch map.
@@ -95,34 +95,20 @@ Stages, in order, with the corpus digest each expects and produces:
 | Stage | Packets | Expects | Produces |
 |---|---|---|---|
 | `final9` | `FINAL-9-guides-v4` | `496b0d63…` | `4b3090bd…` |
-| `scotland-shpock` | `scotland-routing-v12` + `shpock-scam-uk-v12` | `4b3090bd…` | `f76b69aa…` |
-| `nation` | `nation-consumer-routing-v6` | `f76b69aa…` | `e9a7c221…` |
-| `hubs` | `hubs-v12` + `legacy-hubs-v7` | `e9a7c221…` | `e9a7c221…` (hubs only) |
-| `consolidation` | `consolidation-metadata-v2` | `e9a7c221…` | `26d57904…` |
+| `scotland-shpock` | `scotland-routing-v13` + `shpock-scam-uk-v13` | `4b3090bd…` | `f76b69aa…` |
+| `nation` | `nation-consumer-routing-v7` | `f76b69aa…` | `e9a7c221…` |
+| `hubs` | `hubs-v13` + `legacy-hubs-v8` | `e9a7c221…` | `e9a7c221…` (hubs only) |
+| `consolidation` | `consolidation-metadata-v3` | `e9a7c221…` | `26d57904…` |
 
 The applier asserts every `old` value before writing, checks each `sections`/`faq` index
 against its recorded heading, re-asserts overlap source rows after all full-record writes
 (11 rows across six job guides would otherwise be lost), and refuses to overwrite a hub
 that has acquired `sources_checked` since the patch was written.
 
-**In the same patch as the `hubs` stage** — the hub self-test will now *insist*, because
-its legacy-exemption expectation is derived from the live hub count and flips the moment
-thirteen records land:
+The hub and consolidation code changes are **carried by their packets** as `code_patch`
+entries, so they are applied and receipted by the tool rather than done by hand.
 
-- require a non-empty `sources_checked` for every hub unconditionally;
-- delete the `unsourced_legacy` branch in `validate_category_hubs()`;
-- require the **exact thirteen keys** in `hub_selftest.py`, dropping the legacy-three
-  allowance.
 
-**In the same patch as the `consolidation` stage** — the corpus validator will *insist*,
-because a slug in both places is an error even when the targets agree:
-
-- delete the `hermes-parcel-scam-text-uk` entry from `corpus.ARTICLE_REDIRECTS`;
-- empty `corpus.PENDING_MIGRATION` and delete it with `pending_migrations()`.
-
-All **three** parts are required: every partial combination is a validation error, including
-deleting the static entry alone, which used to republish the record with no redirect and no
-error at all.
 
 Then, from a clean checkout
 (`rm -rf /tmp/cc && mkdir /tmp/cc && git archive HEAD | tar -x -C /tmp/cc`):
@@ -131,9 +117,16 @@ Then, from a clean checkout
 python3 scripts/gate_quickanswer_selftest.py
 python3 scripts/hub_selftest.py
 python3 scripts/corpus_selftest.py          # includes a real build into a TEMP dir (~6 min)
+python3 scripts/release_selftest.py         # release_manifest.py's own control paths
 python3 scripts/sync_canon_js.py --check
 node --test "netlify/functions/lib/*.test.js"
 ```
+
+**Two stages carry a `code_patch`.** `hubs-v13` deletes the `unsourced_legacy` exemption and
+requires the exact thirteen keys; `consolidation-metadata-v3` removes the static Hermes
+redirect and empties `PENDING_MIGRATION`. The applier executes them with the content — a
+migration that needs both halves cannot be done by a JSON-only applier, and every ordering
+of "code first" or "content first" fails by construction.
 
 `release_manifest.py --apply` now **requires** the manifest and compares the
 `{posts, hubs}` pair before *and* after every stage, verifies packet identity and a
