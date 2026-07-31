@@ -182,6 +182,23 @@
       "source_url": "https://help-centre.talktalk.co.uk/Need_help_with_something_else/Something_else/How_to_contact_TalkTalk_Broadband",
       "checked_on": "2026-07-25",
       "note": "Main TalkTalk support line (account, billing, technical). Text Relay: 18001 0345 172 0088. Used by guides/talktalk-scam-call-uk to tell readers to hang up and call TalkTalk back on its published number."
+    },
+    {
+      "key": "hmrc-phishing",
+      "name": "HMRC phishing reporting",
+      "sms": "60599",
+      "email": "phishing@hmrc.gov.uk",
+      "source_url": "https://www.gov.uk/government/organisations/hm-revenue-customs/contact/reporting-fraudulent-emails",
+      "checked_on": "2026-07-31",
+      "note": "GOV.UK: \"Forward suspicious text messages to 60599\" and \"Forward suspicious emails to HMRC's phishing team: phishing@hmrc.gov.uk then delete them.\" This is HMRC's OWN reporting route, not a national one — 7726 remains the network shortcode for forwarding scam texts generally, and this never appears in the on-page 'Report this scam' block. Quoted from the primary page on 2026-07-31."
+    },
+    {
+      "key": "natwest-scam-texts",
+      "name": "NatWest scam-text reporting",
+      "sms": "88355",
+      "source_url": "https://www.natwest.com/fraud-and-security/fraud-guide/text-message-fraud.html",
+      "checked_on": "2026-07-31",
+      "note": "NatWest: \"Forward any suspicious texts to us at 88355… This is not a premium rate number. Standard network rates apply.\" The bank's OWN route, not a national one — 7726 remains the network shortcode. Surfaced by the new check_shortcodes() gate and verified against the primary page on 2026-07-31."
     }
   ]
 }

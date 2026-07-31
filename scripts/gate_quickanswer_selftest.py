@@ -34,6 +34,42 @@ def check(name: str, cond: bool, detail: str = "") -> None:
         FAILURES.append(name)
 
 
+def _shortcode_fixtures(check) -> None:
+    """A 5–6 digit SMS shortcode offered as a reporting route must be in the canon.
+
+    The phone regex only ever matched a hard-coded handful (7726, 159, 105, 101,
+    999, 112), so ANY other shortcode was invisible: "forward the text to 61234"
+    passed the gate clean and a fabricated reporting route could ship. Found while
+    adding HMRC's genuine 60599 to the canon (2026-07-31); the new check
+    immediately surfaced a real live one, NatWest's 88355, which verified against
+    the bank's own page.
+    """
+    import content_gate as cg
+    import canon as canon_mod
+
+    def draft(text):
+        return {"slug": "sc", "title": "T", "description": "d", "hero": "h",
+                "sections": [["S", text]], "faq": []}
+
+    codes = {r.get("sms") for g in ("official_routes", "verified_org_contacts")
+             for r in canon_mod.load_canon().get(g, []) if r.get("sms")}
+    check("the canon carries the verified shortcodes", {"7726", "60599", "88355"} <= codes,
+          str(sorted(codes)))
+    for code in sorted(codes):
+        check(f"canon shortcode {code} is accepted as a reporting route",
+              not cg.check_shortcodes(draft(f"Forward the suspicious text to {code}.")))
+    for code in ("61234", "88802", "70707"):
+        check(f"FABRICATED shortcode {code} is BLOCKED",
+              any(i["severity"] == "block" for i in
+                  cg.check_shortcodes(draft(f"Forward the suspicious text to {code}."))))
+    # Context-bound, so ordinary numbers in prose are not dragged in.
+    for benign in ("The scheme covered 12500 people in total.",
+                   "Losses reached 45000 across the period.",
+                   "Reference 90210 appears on the letter."):
+        check("a bare 5-digit number in prose is NOT flagged", not cg.check_shortcodes(draft(benign)),
+              benign)
+
+
 def _consolidation_evasion_fixtures(check) -> None:
     """A DRAFT may never declare itself consolidated.
 
@@ -523,6 +559,7 @@ def run() -> int:
     # every malformed shape, and that BOTH consumers actually call it.
     _canon_negative_fixtures(check)
     _consolidation_evasion_fixtures(check)
+    _shortcode_fixtures(check)
 
     # Citation prose is not a consumer route.
     check("'Data from Citizens Advice shows...' is a citation, not a route",

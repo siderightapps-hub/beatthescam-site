@@ -432,10 +432,15 @@ def phone_digits(canon: Dict) -> set:
                 if d:
                     digits.add(d)
     for r in canon.get("verified_org_contacts", []):
-        if r.get("phone"):
-            d = re.sub(r"\D", "", str(r["phone"]))
-            if d:
-                digits.add(d)
+        # `sms` as well as `phone`. official_routes read both; this list read
+        # only `phone`, so an organisation's published SMS shortcode could never
+        # be allowed however well verified it was — HMRC's 60599 is a documented
+        # GOV.UK route and the gate flagged it as invented (2026-07-31).
+        for field in ("phone", "sms"):
+            if r.get(field):
+                d = re.sub(r"\D", "", str(r[field]))
+                if d:
+                    digits.add(d)
     return digits
 
 

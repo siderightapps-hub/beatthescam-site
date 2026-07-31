@@ -231,6 +231,52 @@ def _norm_digits(s: str) -> str:
     return digits
 
 
+# SMS shortcodes are 5–6 digits and the phone regex above only knows a
+# hard-coded handful (7726, 159, 105, 101, 999, 112). Any other shortcode was
+# therefore INVISIBLE to the gate: "forward the text to 61234" passed clean, so
+# a fabricated reporting shortcode could ship (found while adding HMRC's genuine
+# 60599 to the canon, 2026-07-31).
+#
+# Matched only in a FORWARDING context — "forward/text/send … to <code>" — so an
+# ordinary 5-digit number in prose is not dragged in. The allow-list is derived
+# from the canon, not hard-coded, so adding a verified route is enough.
+_SHORTCODE_CONTEXT_RE = re.compile(
+    r"\b(?:forward(?:ing|s)?|text(?:ing|s)?|send(?:ing|s)?|report(?:ing|s)?)\b[^.]{0,60}?"
+    r"\bto\s+`?(\d{5,6})`?\b", re.I)
+
+
+def _canon_shortcodes() -> set:
+    codes = set()
+    for group in ("official_routes", "verified_org_contacts"):
+        for r in _CANON.get(group, []):
+            if r.get("sms"):
+                codes.add(re.sub(r"\D", "", str(r["sms"])))
+    return codes
+
+
+def check_shortcodes(post: Dict) -> List[Dict]:
+    """A 5–6 digit SMS shortcode offered as a reporting route must be in the canon."""
+    text = _post_text(post)
+    allowed = _canon_shortcodes()
+    issues: List[Dict] = []
+    seen = set()
+    for m in _SHORTCODE_CONTEXT_RE.finditer(text):
+        code = m.group(1)
+        if code in allowed or code in seen:
+            continue
+        seen.add(code)
+        issues.append({
+            "check": "shortcode",
+            "severity": SEVERITY_BLOCK,
+            "span": code,
+            "detail": (f"offers SMS shortcode '{code}' as a reporting route, but it is not in "
+                       f"content/sources.json. Verify it against the organisation's own "
+                       f"published page and add it to verified_org_contacts with source_url "
+                       f"and checked_on, or tell readers to use the route on the official site."),
+        })
+    return issues
+
+
 def check_phones(post: Dict) -> List[Dict]:
     text = _post_text(post)
     issues: List[Dict] = []
@@ -283,6 +329,17 @@ _ABSOLUTE_RES = [
     # "You're completely safe." must block exactly like "You are completely safe."
     re.compile(r"\byou(?:\s+are|['’]re)\s+(?:completely|totally|perfectly|fully|entirely|100%)\s+safe\b", re.I),
     re.compile(r"\byou(?:\s+have|['’]ve)\s+nothing\s+to\s+(?:worry\s+about|fear)\b", re.I),
+    # RISK-ELIMINATION guarantees. The existing patterns all reassure the reader
+    # directly ("you're completely safe"); this shape reassures them about an
+    # ACTION — "buying direct eliminates resale risk entirely" — and slipped
+    # through (LLM judge sample, 2026-07-31). Deliberately requires the word
+    # "risk": "leaving the platform removes the platform's own protection
+    # entirely" is a WARNING, not a safety guarantee, and must not match.
+    re.compile(r"\b(?:eliminat\w+|remov\w+|get(?:s|ting)?\s+rid\s+of)\b[^.]{0,40}?\brisk\b"
+               r"[^.]{0,30}?\b(?:entirely|completely|altogether|for\s+good)\b", re.I),
+    re.compile(r"\brisk\b[^.]{0,30}?\b(?:eliminated|removed)\s+(?:entirely|completely|altogether)\b", re.I),
+    re.compile(r"\b(?:zero|no)\s+risk\s+(?:at\s+all|whatsoever)\b", re.I),
+    re.compile(r"\b(?:completely|totally|entirely|100%)\s+risk[- ]free\b", re.I),
 ]
 
 
@@ -1241,7 +1298,7 @@ def check_deterministic(post: Dict, *, is_draft: bool = True) -> List[Dict]:
     # Note: no deterministic domain/URL check — these guides intentionally
     # contain example scam/lookalike domains, so a domain allowlist is pure
     # noise here. Domain plausibility is left to the LLM judge.
-    return (check_phones(post) + check_banned_entities(post)
+    return (check_phones(post) + check_shortcodes(post) + check_banned_entities(post)
             + check_absolutes(post) + check_sources(post)
             + check_legislation(post) + check_dated_events(post)
             + check_cra_misclassification(post) + check_nfd_routing(post)
