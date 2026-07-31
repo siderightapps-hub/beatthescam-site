@@ -32,20 +32,6 @@ Git, the CI suites and the committed `dist/` snapshot, supported by the validato
 
 ---
 
-## CRITICAL: `dist/` is stale right now (invariant-1 breach)
-
-Five commits changed `scripts/` and `content/` with **zero `dist/` files**. 185 committed
-pages still render the old `Report Fraud (Action Fraud)` sidebar, while
-`content/sources.json` now says `Report Fraud (formerly Action Fraud) — England, Wales and
-Northern Ireland` and adds a `police-scotland` on-page route.
-
-Nothing is broken live, because Netlify serves the stale committed `dist/`. But source and
-served output disagree. This was a deliberate deferral — the operator instructed *"do not
-build this incomplete packet"* — and the fix is the **single non-concurrent build at the
-end of the release** (step 6 below). Do not do a partial build to tidy up; it ships half a
-release and produces a confusing diff.
-
----
 
 ## The review trail
 
@@ -217,7 +203,7 @@ Lessons that cost real rework this cycle:
 
 - 186 guide source records; 185 indexable guides after one documented consolidation; all
   185 carry `sources_checked` and `quick_answer`.
-- 17 normalised categories. **3 hubs live; 10 more pending in `hubs-v10`.**
+- 17 normalised categories, **all 13 hubs live and sourced** (shipped in the 2026-07-30 release).
 - AI scam checker, Google CMP, consent-aware GA4 events and Resend double opt-in are live.
 - `/research/uk-scam-statistics/` is live with 28 official records.
 - Review-PR pipeline runs Tue/Fri — **currently paused**, see decisions above.

@@ -3179,7 +3179,7 @@ def build_legal_bodies(site, sources):
     '''
 
     # Bump PRIVACY_LAST_UPDATED when materially revising the Privacy Policy below.
-    PRIVACY_LAST_UPDATED = "13 July 2026"
+    PRIVACY_LAST_UPDATED = "31 July 2026"
     privacy = f'''
     <p class="note" style="color:#666;font-size:.95rem"><strong>Last updated:</strong> {PRIVACY_LAST_UPDATED}</p>
 
