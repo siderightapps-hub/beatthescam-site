@@ -349,6 +349,10 @@ def main() -> int:
     ap.add_argument("--model", default="claude-sonnet-5")
     ap.add_argument("--limit", type=int, default=None,
                      help="only process the first N guides (cheap smoke test)")
+    ap.add_argument("--slugs", default=None,
+                     help="comma-separated slugs, or @path/to/file with one slug per line. "
+                          "Targets a shortlist — e.g. the guides an LLM-judge pass could not "
+                          "settle — instead of the whole corpus.")
     ap.add_argument("--quarter", default=None, help="override quarter label, e.g. 2026-Q3")
     ap.add_argument("--attempts", type=int, default=3,
                      help="attempts per guide before recording it as unchecked (default 3)")
@@ -360,6 +364,29 @@ def main() -> int:
     load_env()
     posts_path = Path(args.posts)
     posts = json.loads(posts_path.read_text(encoding="utf-8"))
+
+    # PUBLIC records only. A consolidated archive record never renders and 301s
+    # to its replacement, so re-verifying it spends API credit on a page no
+    # reader can reach — and any drift found in it is unactionable.
+    sys.path.insert(0, str(Path(__file__).resolve().parent))
+    import corpus as corpus_mod
+    public = corpus_mod.public_posts(posts)
+    if len(public) != len(posts):
+        print(f"  excluding {len(posts) - len(public)} consolidated archive record(s)")
+    posts = public
+
+    if args.slugs:
+        wanted = args.slugs
+        if wanted.startswith("@"):
+            wanted = Path(wanted[1:]).read_text(encoding="utf-8")
+        wanted = {w.strip() for w in wanted.replace("\n", ",").split(",") if w.strip()}
+        have = {p["slug"] for p in posts}
+        missing = sorted(wanted - have)
+        if missing:
+            print(f"ERROR: no public guide for slug(s): {missing}", file=sys.stderr)
+            return 2
+        posts = [p for p in posts if p["slug"] in wanted]
+        print(f"  targeting {len(posts)} guide(s) from --slugs")
     if args.limit:
         posts = posts[: args.limit]
 
