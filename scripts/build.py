@@ -3999,7 +3999,18 @@ def build():
         </item>''')
     # lastBuildDate = newest item's date (content-derived, not the build clock,
     # so a no-op rebuild doesn't churn the feed's freshness signal).
-    last_build = datetime.strptime(rss_posts[0]["date"], "%Y-%m-%d").strftime("%a, %d %b %Y 00:00:00 +0000") if rss_posts else ""
+    # NEWEST CONTENT CHANGE, not newest publish date. `date` is when a guide was
+    # first published and never moves, so an editorial correction left the feed
+    # and every collection page claiming the site had not changed since the last
+    # NEW guide — 186 of 186 records carried an `updated` later than their
+    # `date`, which made the signal stale by construction (audit, 2026-07-31).
+    # Still content-derived, so a no-op rebuild does not churn freshness.
+    _newest_change = max(
+        [(p.get("updated") or p.get("dateModified") or p["date"]) for p in posts],
+        default="",
+    )
+    last_build = (datetime.strptime(_newest_change, "%Y-%m-%d")
+                  .strftime("%a, %d %b %Y 00:00:00 +0000")) if _newest_change else ""
     rss = (
         '<?xml version="1.0" encoding="UTF-8" ?>\n'
         '<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel>'
@@ -4015,6 +4026,13 @@ def build():
     # Sitemap — lastmod reflects actual content dates, not the build timestamp
     today = datetime.now(timezone.utc).strftime("%Y-%m-%d")
     newest_post_date = max((p["date"] for p in posts), default=today)
+    # Collection pages (the paginated /guides/ list, the feed) must move when a
+    # guide is CORRECTED, not only when a new one is published — see the
+    # lastBuildDate note above.
+    newest_change_date = max(
+        [(p.get("updated") or p.get("dateModified") or p["date"]) for p in posts],
+        default=newest_post_date,
+    )
 
     # Static pages change rarely — pin their sitemap lastmod to the date their
     # content last materially changed (bump STATIC_LASTMOD when you edit them),
@@ -4054,7 +4072,7 @@ def build():
     for page_num in range(2, total_pages + 1):
         sitemap_lines.append(
             f'<url><loc>{site["domain"]}/guides/page/{page_num}/</loc>'
-            f'<lastmod>{newest_post_date}</lastmod><changefreq>weekly</changefreq></url>'
+            f'<lastmod>{newest_change_date}</lastmod><changefreq>weekly</changefreq></url>'
         )
 
     for p in posts:
@@ -4267,7 +4285,51 @@ def build():
     # beyond the original /api/check-scam rule are not applied at the edge on
     # this site (same quirk as the category 301s). _redirects is the reliable
     # mechanism, and a 200 rewrite must precede any catch-all to win.
-    redirect_lines = [
+    # HOST CANONICALISATION — must come FIRST; Netlify takes the first match.
+    #
+    # beatthescam.co.uk is an ALIAS of this same Netlify site: it served the whole
+    # corpus at HTTP 200 with a byte-identical etag, so every page existed twice
+    # for Google and at least one .co.uk URL had already surfaced in search
+    # (audit, 2026-07-31). Because it is an alias, _redirects reaches it — the
+    # article 301s already fired there — so this is fixable in the build rather
+    # than in DNS.
+    #
+    # A full-URL source is what scopes a rule to one hostname; a path-only rule
+    # would loop on the canonical host. Both schemes and the www form are listed
+    # because a rule only matches the exact scheme+host it names.
+    redirect_lines = ["# Host canonicalisation (auto-generated from site.alternate_domains)"]
+    canonical = site["domain"].rstrip("/")
+    for alt in site.get("alternate_domains", []):
+        alt = alt.strip().replace("https://", "").replace("http://", "").strip("/")
+        if not alt:
+            continue
+        for host in (alt, f"www.{alt}"):
+            for scheme in ("http", "https"):
+                redirect_lines.append(
+                    f"{scheme}://{host}/*    {canonical}/:splat    301!")
+    redirect_lines.append("")
+
+    # /index.html NORMALISATION. Netlify serves both /path/ and /path/index.html
+    # as 200, so every directory page existed twice (audit, 2026-07-31). One rule
+    # per directory depth present in dist/ — `:a` matches exactly one path
+    # segment, so these cannot collapse a deeper URL onto a shallower one.
+    redirect_lines.append("# Index-file normalisation (auto-generated)")
+    redirect_lines.append("/index.html    /    301!")
+    # Depth is DERIVED from what was actually rendered, so a new deeper page
+    # (a nested research sub-page, say) is covered without editing this list.
+    # +1 of headroom, because a rule for a depth that has no pages is inert
+    # while a missing rule silently leaves a duplicate URL live.
+    _rendered_depths = [
+        len(f.relative_to(DIST).parts) - 1
+        for f in DIST.rglob("index.html")
+    ]
+    _MAX_DIR_DEPTH = (max(_rendered_depths) if _rendered_depths else 0) + 1
+    for depth in range(1, _MAX_DIR_DEPTH + 1):
+        params = "/".join(f":seg{i}" for i in range(depth))
+        redirect_lines.append(f"/{params}/index.html    /{params}/    301!")
+    redirect_lines.append("")
+
+    redirect_lines += [
         "# API function rewrites (auto-generated)",
         "/api/subscribe          /.netlify/functions/subscribe          200",
         "/api/confirm-subscribe  /.netlify/functions/confirm-subscribe  200",

@@ -1,3 +1,16 @@
+# Host canonicalisation (auto-generated from site.alternate_domains)
+http://beatthescam.co.uk/*    https://beatthescam.com/:splat    301!
+https://beatthescam.co.uk/*    https://beatthescam.com/:splat    301!
+http://www.beatthescam.co.uk/*    https://beatthescam.com/:splat    301!
+https://www.beatthescam.co.uk/*    https://beatthescam.com/:splat    301!
+
+# Index-file normalisation (auto-generated)
+/index.html    /    301!
+/:seg0/index.html    /:seg0/    301!
+/:seg0/:seg1/index.html    /:seg0/:seg1/    301!
+/:seg0/:seg1/:seg2/index.html    /:seg0/:seg1/:seg2/    301!
+/:seg0/:seg1/:seg2/:seg3/index.html    /:seg0/:seg1/:seg2/:seg3/    301!
+
 # API function rewrites (auto-generated)
 /api/subscribe          /.netlify/functions/subscribe          200
 /api/confirm-subscribe  /.netlify/functions/confirm-subscribe  200

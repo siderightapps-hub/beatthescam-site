@@ -87,6 +87,47 @@ def _shared_canon_block_fixtures(check) -> None:
           "0300 999 0001" in canon_mod.render_verified_facts(mutated))
 
 
+def _report_mailbox_fixtures(check) -> None:
+    """A mailbox the guide tells the reader to report TO must be in the canon.
+
+    _REPORT_EMAIL_RE only ever matched gov.uk / police.uk, so a reporting
+    address on any other domain was invisible to the gate. The Student Loans
+    Company's retired `phishing@slc.co.uk` shipped and stayed live through
+    every prior audit, and an invented address would have passed identically —
+    the same silent-by-construction gap as the SMS shortcode hole (audit,
+    2026-07-31).
+    """
+    import content_gate as cg
+
+    def draft(text):
+        return {"slug": "mb", "title": "T", "description": "d", "hero": "h",
+                "sections": [["S", text]], "faq": []}
+
+    for addr in ("totally-invented@notreal.example", "phishing@slc.co.uk"):
+        check(f"a non-canon reporting mailbox {addr} is flagged",
+              any(i["check"] == "report_mailbox"
+                  for i in cg.check_report_mailboxes(draft(f"Forward it to {addr}."))))
+
+    for addr in sorted({e for e in cg.ALLOWED_REPORT_EMAILS})[:4]:
+        check(f"canon mailbox {addr} is accepted",
+              not cg.check_report_mailboxes(draft(f"Report it to {addr}.")))
+
+    # Guides quote scammers' OWN addresses as examples. Flagging those would be
+    # wrong, and would train everyone to ignore the check.
+    for benign in ("The message came from security-alert@fake-bank.example, which is not real.",
+                   "A sender like no-reply@totally-fake.example is a red flag.",
+                   "Look at the address: billing@not-a-real-domain.example."):
+        check("a scammer address quoted as an EXAMPLE is not flagged",
+              not cg.check_report_mailboxes(draft(benign)), benign[:44])
+
+    # Severity: FLAG, not BLOCK. 33 live guides name an organisation's own
+    # reporting mailbox; blocking them would stop publication corpus-wide, and a
+    # check that halts everything gets switched off rather than actioned.
+    issues = cg.check_report_mailboxes(draft("Forward it to made-up@nowhere.example."))
+    check("non-canon reporting mailboxes FLAG rather than BLOCK",
+          issues and all(i["severity"] != cg.SEVERITY_BLOCK for i in issues))
+
+
 def _shortcode_fixtures(check) -> None:
     """A 5–6 digit SMS shortcode offered as a reporting route must be in the canon.
 
@@ -613,6 +654,7 @@ def run() -> int:
     _canon_negative_fixtures(check)
     _consolidation_evasion_fixtures(check)
     _shortcode_fixtures(check)
+    _report_mailbox_fixtures(check)
     _shared_canon_block_fixtures(check)
 
     # Citation prose is not a consumer route.
