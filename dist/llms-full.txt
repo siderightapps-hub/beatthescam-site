@@ -6538,7 +6538,7 @@ No. HMRC explicitly says it will never threaten arrest.
 ## HSBC Scam Call UK: Spot a Fake Fraud Team Call
 
 URL: https://beatthescam.com/guides/hsbc-bank-scam-call-uk/
-Category: Phone Scams · Updated: 2026-07-18
+Category: Phone Scams · Updated: 2026-07-31
 
 Got a call claiming to be HSBC's fraud team about suspicious activity on your account? How to spot an HSBC scam call, check safely, and report it.
 
@@ -6574,7 +6574,7 @@ Hanging up and calling HSBC back on a number you find yourself breaks the chain.
 If anything feels rushed or secretive, stop.
 
 - Hang up and call HSBC back using the number on your card, a genuine statement, or the HSBC app - never a number the caller gives you.
-- Wait a few minutes before calling back so the line clears, or use a different phone if you can.
+- Hang up properly and wait 15 seconds, check the line is fully disconnected, then wait another 15 seconds before dialling — or use a different phone, which removes the risk of the caller holding the line open entirely.
 - Never move money to a "safe", "holding", or "temporary" account - HSBC will not ask you to.
 - Never read out a one-time passcode, PIN, or full password to anyone.
 - Do not install remote-access or screen-sharing software during an unexpected call.
@@ -12123,13 +12123,13 @@ Report it to Report Fraud at `reportfraud.police.uk` or 0300 123 2040 (Police Sc
 ## Smart Meter Scam Calls UK: What Genuine Energy Contacts Look Like
 
 URL: https://beatthescam.com/guides/smart-meter-scam-call-uk/
-Category: Utility Scams · Updated: 2026-07-30
+Category: Utility Scams · Updated: 2026-07-31
 
 Cold callers pose as energy suppliers claiming your smart meter needs urgent replacement or a safety check. How to tell a genuine contact from a scam.
 
 ### Why smart meter calls make convincing scams
 
-The UK has been rolling out smart meters since 2011, and genuine installations are still taking place across the country. This is what makes smart meter impersonation calls so effective — callers sound plausible because the real programme exists, your supplier might legitimately be in touch about a meter, and energy topics carry an implied urgency around bills and safety.
+Great Britain has been rolling out smart meters since 2011, and genuine installations are still taking place there. Northern Ireland is different: no smart electricity meters have been installed yet, with the first installations planned for 2028 — so anyone in Northern Ireland told their smart meter needs replacing does not have one to replace. This is what makes smart meter impersonation calls so effective — callers sound plausible because the real programme exists, your supplier might legitimately be in touch about a meter, and energy topics carry an implied urgency around bills and safety.
 
 Scammers impersonate named UK suppliers — British Gas, EDF, Octopus Energy, OVO, Scottish Power, and others. They may have your postcode, surname, or partial account reference from a data breach, which they use to add credibility. The fact that they know some of your details does not mean they are from your actual supplier.
 
