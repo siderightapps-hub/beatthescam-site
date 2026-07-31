@@ -87,32 +87,6 @@ _canon_phone_digits = canon_mod.phone_digits
 _canon_report_emails = canon_mod.report_emails
 
 
-def _judge_canon_block(canon: Dict) -> str:
-    """Render the sources.json canon as a compact fact list for the LLM judge.
-
-    Without this, the judge has no way to know check_phones() has ALREADY
-    deterministically verified every phone number/route against this same
-    canon — it re-derives "is this real?" from its own training-data recall
-    on every call, which is what let it flip-flop across runs on whether 159
-    is a genuine number (2026-07-13, see memory llm-judge-run-to-run-
-    inconsistency). Giving it the canon stops it re-litigating settled facts."""
-    lines = []
-    for r in canon.get("official_routes", []):
-        parts = [r.get("name", "")]
-        if r.get("phone"):
-            parts.append(f"phone {r['phone']}")
-        if r.get("sms"):
-            parts.append(f"SMS shortcode {r['sms']}")
-        if r.get("email"):
-            parts.append(f"email {r['email']}")
-        if any(parts[1:]):
-            lines.append("- " + " — ".join(p for p in parts if p))
-    emails = [e for e in canon.get("report_emails", []) if e]
-    if emails:
-        lines.append("- Other verified official report emails: " + ", ".join(emails))
-    return "\n".join(lines)
-
-
 # The ONE rendering of nation-scoped reporting routes, derived from the canon
 # and shared with every other consumer (the generator prompt, the generator's
 # fallback article, the site's standalone surfaces and the scam checker) via
@@ -124,7 +98,10 @@ render_canon_routes = canon_mod.render_prompt_routes
 
 
 _CANON = _load_canon()
-_JUDGE_CANON_BLOCK = _judge_canon_block(_CANON)
+# Rendered by scripts/canon.py — the ONE renderer, shared with the quarterly
+# re-verification pass. It was local to this file until 2026-07-31, which is why
+# fact_reverify.py had no canon at all and re-litigated settled routes.
+_JUDGE_CANON_BLOCK = canon_mod.render_verified_facts(_CANON)
 CANON_ROUTE_BLOCK = render_canon_routes(_CANON)
 # Append the rendered routes so the prompt and the canon cannot disagree.
 ACCURACY_BLOCK = ACCURACY_BLOCK.rstrip() + "\n" + CANON_ROUTE_BLOCK + "\n"
@@ -1368,13 +1345,9 @@ def judge_llm(post: Dict, client, model: str) -> List[Dict]:
             "Return the JSON verdict.")
     system_prompt = JUDGE_SYSTEM
     if _JUDGE_CANON_BLOCK:
-        system_prompt += (
-            "\n\nThe following UK reporting routes, phone numbers, and email addresses have "
-            "already been independently verified against this site's canonical source list. "
-            "Treat them as accurate — do NOT flag them as fabricated, invented, or "
-            "unverifiable. Only flag one of these if the draft attributes it to the wrong "
-            "organisation or uses it in a clearly incorrect context:\n" + _JUDGE_CANON_BLOCK
-        )
+        # The renderer carries its own preamble — don't restate it here, or the
+        # two wordings drift apart the way hand-typed canon copies always have.
+        system_prompt += "\n\n" + _JUDGE_CANON_BLOCK
     # `temperature` is DEPRECATED on current models (Opus 5, Sonnet 5, Opus 4.8
     # all reject it with a 400) and accepted only by the pinned Haiku 4.5. Since
     # judge_llm fails CLOSED, a hard-coded temperature meant that pointing the

@@ -416,6 +416,111 @@ def render_prompt_routes(canon: Dict) -> str:
     return "\n".join(lines)
 
 
+def render_verified_facts(canon: Dict) -> str:
+    """Render the canon as a fact list for any MODEL-BACKED consumer.
+
+    THE one renderer for this. Both the publication gate's LLM judge and the
+    quarterly re-verification pass need to be told which routes are already
+    verified, or they re-derive "is this real?" from training-data recall and
+    re-litigate settled facts. Two separate failures traced to exactly that:
+
+      * The gate's judge flip-flopped across four runs on whether 159 is a
+        genuine number (2026-07-13) — fixed by giving it a canon block.
+      * The quarterly checker reported Advice Direct Scotland's 0808 800 9060
+        as outdated on FOUR guides at `confidence: high` (2026-07-31). It had
+        no canon at all: it found the OTHER genuine ADS number on a GOV.UK page
+        and inferred the first was stale.
+
+    So this renders three things the older gate-only version dropped, each of
+    which was load-bearing in that second failure:
+
+      * `verified_org_contacts` — organisation-specific routes were invisible.
+      * `source_url` + `checked_on` — so a route reads as verified-on-a-date
+        rather than as an unsourced assertion.
+      * `on_page` — the difference between "the route reader prose names" and
+        "a real number the checker must not treat as fabricated", plus an
+        explicit note that a second entry for one organisation does NOT mean
+        the first is superseded. That note is the ADS fix.
+    """
+    def _detail(r: Dict) -> str:
+        bits = []
+        if r.get("phone"):
+            bits.append(f"phone {r['phone']}")
+        if r.get("phone_welsh"):
+            bits.append(f"Welsh-language phone {r['phone_welsh']}")
+        if r.get("sms"):
+            bits.append(f"SMS shortcode {r['sms']}")
+        if r.get("email"):
+            bits.append(f"email {r['email']}")
+        return ", ".join(bits)
+
+    def _provenance(r: Dict) -> str:
+        if r.get("source_url") and r.get("checked_on"):
+            return f" [verified {r['checked_on']} against {r['source_url']}]"
+        if r.get("source_url"):
+            return f" [verified against {r['source_url']}]"
+        return ""
+
+    lines = [
+        "The routes below are ALREADY VERIFIED against this site's canonical source list "
+        "(content/sources.json), each against the organisation's own published page. Treat "
+        "every one as CURRENT and CORRECT. Do NOT report any of them as fabricated, "
+        "outdated, unverifiable or drifted. Flag one only if a guide attributes it to the "
+        "WRONG organisation or uses it in a clearly incorrect context.",
+        "",
+        "National reporting and advice routes:",
+    ]
+    for r in canon.get("official_routes", []):
+        detail = _detail(r)
+        if not detail:
+            continue
+        scope = []
+        if r.get("nation"):
+            scope.append(r["nation"])
+        if r.get("role"):
+            scope.append(r["role"])
+        scope_s = f" ({'; '.join(scope)})" if scope else ""
+        # PRESENCE, not truthiness. Most routes (999, 112, 7726, 159) simply omit
+        # on_page because the reader-facing/allow-listed distinction is meaningless
+        # for them; marking those "not the reader-facing route" is false. Only an
+        # EXPLICIT `on_page: false` carries the distinction.
+        marker = ("  <- genuine and allow-listed, but NOT the route reader prose names"
+                  if r.get("on_page") is False else "")
+        lines.append(f"- {r.get('name', r.get('key', ''))}{scope_s} — {detail}"
+                     f"{_provenance(r)}{marker}")
+
+    org = [r for r in canon.get("verified_org_contacts", []) if _detail(r)]
+    if org:
+        lines += ["", "Organisation-specific routes (the organisation's OWN route, not a "
+                      "national one; these never appear in the on-page reporting block):"]
+        for r in org:
+            lines.append(f"- {r.get('name', r.get('key', ''))} — {_detail(r)}{_provenance(r)}")
+
+    emails = [e for e in canon.get("report_emails", []) if e]
+    if emails:
+        lines += ["", "Other verified official report emails: " + ", ".join(sorted(emails))]
+
+    # The ADS fix, stated explicitly rather than left to be inferred.
+    dupes = {}
+    for r in canon.get("official_routes", []):
+        if r.get("role") and r.get("nation"):
+            dupes.setdefault((r["role"], r["nation"]), []).append(r)
+    multi = [v for v in dupes.values() if len(v) > 1]
+    if multi:
+        lines += ["", "IMPORTANT — some organisations run MORE THAN ONE genuine service, and "
+                      "different official pages publish different numbers for them:"]
+        for group in multi:
+            names = " and ".join(
+                f"{g.get('brand') or g.get('name')} on {g.get('phone') or g.get('sms')}"
+                for g in group)
+            lines.append(f"- {names} — ALL genuine and current.")
+        lines.append(
+            "Finding one of these numbers on an official page is NOT evidence that the other "
+            "is outdated or wrong. They are different services. Never report one as having "
+            "superseded the other, and never 'correct' a guide from one to the other.")
+    return "\n".join(lines)
+
+
 def phone_digits(canon: Dict) -> set:
     """Every phone number the gate will accept in prose, digits only.
 

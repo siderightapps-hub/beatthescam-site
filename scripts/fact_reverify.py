@@ -76,6 +76,26 @@ def current_quarter(today: Optional[date] = None) -> str:
 
 # ─── PASS B: LLM + WEB SEARCH ────────────────────────────────────────────────
 
+_CANON_BLOCK_CACHE = None
+
+
+def _canon_block() -> str:
+    """The verified-route block, rendered by scripts/canon.py.
+
+    Without this the checker had NO canon: on 2026-07-31 it reported Advice
+    Direct Scotland's 0808 800 9060 as outdated on four guides at
+    `confidence: high`, having found the organisation's OTHER genuine number on
+    a GOV.UK page. Fails closed like every other canon consumer — a missing or
+    invalid canon stops the run rather than quietly checking against nothing.
+    """
+    global _CANON_BLOCK_CACHE
+    if _CANON_BLOCK_CACHE is None:
+        sys.path.insert(0, str(Path(__file__).resolve().parent))
+        import canon as canon_mod
+        _CANON_BLOCK_CACHE = canon_mod.render_verified_facts(canon_mod.load_canon())
+    return _CANON_BLOCK_CACHE
+
+
 REVERIFY_SYSTEM = """You are a fact-checking editor doing a QUARTERLY re-verification pass on a \
 LIVE guide on a UK consumer-protection site (Beat The Scam). This guide was published in the past \
 and may now contain STALE facts: a compensation cap that changed, a mailbox that was retired, a \
@@ -84,6 +104,8 @@ deadline that was extended, a rebrand, a wrong court/legislation date. Today's d
 You have web search. Use it to verify checkable claims against CURRENT primary UK sources \
 (gov.uk, the regulator's own site, the named organisation's own site) — not secondary summaries \
 or forum posts.
+
+{canon_block}
 
 ALREADY-CANON facts you do NOT need to re-derive or flag (these are correct and already enforced \
 elsewhere on the site) — only flag a DEVIATION from these, never re-report them as a "finding":
@@ -190,7 +212,7 @@ def reverify_post_llm(post: Dict, client, model: str, today: str,
             resp = client.messages.create(
                 model=model,
                 max_tokens=2000,
-                system=REVERIFY_SYSTEM.format(today=today),
+                system=REVERIFY_SYSTEM.format(today=today, canon_block=_canon_block()),
                 messages=[{"role": "user", "content": build_reverify_prompt(post)}],
                 tools=[{"type": "web_search_20250305", "name": "web_search", "max_uses": 5}],
             )
