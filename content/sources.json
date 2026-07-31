@@ -327,6 +327,46 @@
       "source_url": "https://help.netflix.com/en/node/65674",
       "checked_on": "2026-07-31",
       "note": "Netflix takes forwarded suspicious emails AND texts at the same address. Verified against the organisation's own published page on 2026-07-31; re-verify quarterly."
+    },
+    {
+      "key": "slc-fcpu-alerts",
+      "name": "Student Loans Company phishing reporting",
+      "email": "fcpu_alerts@slc.co.uk",
+      "source_url": "https://www.gov.uk/guidance/phishing-scams-how-you-can-avoid-them",
+      "checked_on": "2026-07-31",
+      "note": "GOV.UK's student-finance phishing guidance: send a suspected scam email or text here. This REPLACED phishing@slc.co.uk, which the guides carried until 2026-07-31 and which no prior audit caught. SLC also lists furtherinfo@slc.co.uk for suspected vishing calls — a separate route, not an alternative to this one. Verified against the organisation's own published page on 2026-07-31; re-verify quarterly."
+    },
+    {
+      "key": "yodel-infosec",
+      "name": "Yodel suspicious-email reporting",
+      "email": "information.security@yodel.co.uk",
+      "source_url": "https://www.yodel.co.uk/privacy-cookies-policy/fraud",
+      "checked_on": "2026-07-31",
+      "note": "Yodel by InPost's fraud page. Distinct from the SENDING addresses it publishes (donotreply@ / noreply@yodel.co.uk), which the guides quote so readers recognise genuine mail and which are NOT reporting routes. Verified against the organisation's own published page on 2026-07-31; re-verify quarterly."
+    },
+    {
+      "key": "microsoft-phish",
+      "name": "Microsoft phishing reporting",
+      "email": "phish@office365.microsoft.com",
+      "source_url": "https://learn.microsoft.com/en-us/defender-office-365/submissions-report-messages-files-to-microsoft",
+      "checked_on": "2026-07-31",
+      "note": "For email clients other than Outlook. Microsoft requires the message as an ATTACHMENT in a NEW email — explicitly not forwarded — so the headers survive. In Outlook itself the Report button is the faster route. Verified against the organisation's own published page on 2026-07-31; re-verify quarterly."
+    },
+    {
+      "key": "depop-reportphishing",
+      "name": "Depop phishing reporting",
+      "email": "reportphishing@depop.com",
+      "source_url": "https://safety.depop.com/keeping-you-safe-on-depop/keeping-your-account-safe/",
+      "checked_on": "2026-07-31",
+      "note": "Depop asks for the email forwarded WITH the sender's information. Verified against the organisation's own published page on 2026-07-31; re-verify quarterly."
+    },
+    {
+      "key": "revolut-support",
+      "name": "Revolut support inbox (fallback reporting route)",
+      "email": "support@revolut.com",
+      "source_url": "https://www.revolut.com/contact-us/",
+      "checked_on": "2026-07-31",
+      "note": "A SUPPORT inbox, not a dedicated phishing address. Revolut directs fraud reports to in-app chat first and names this only for customers who cannot reach the app or chat — which is exactly how the guide uses it. Revolut offers no general phone support, so an inbound call claiming to be Revolut is itself a red flag. Verified against the organisation's own published page on 2026-07-31; re-verify quarterly."
     }
   ]
 }
