@@ -1,6 +1,9 @@
 {
   "site_name": "Beat the Scam",
   "domain": "https://beatthescam.com",
+  "alternate_domains": [
+    "beatthescam.co.uk"
+  ],
   "tagline": "Scam alerts, plain-English checks, and practical guides to help people verify suspicious emails, texts, websites, calls, and offers.",
   "adsense_client": "ca-pub-1606633100797174",
   "contact_email": "hello@beatthescam.com",
@@ -16,7 +19,6 @@
   "ga4_id": "G-JXNF856NBF",
   "google_site_verification": "",
   "bing_site_verification": "",
-
   "author_profile": {
     "name": "Alex Bacsa",
     "role": "Founder & Editor",

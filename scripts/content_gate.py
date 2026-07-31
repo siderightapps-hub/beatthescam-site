@@ -352,6 +352,56 @@ def check_absolutes(post: Dict) -> List[Dict]:
 _REPORT_EMAIL_RE = re.compile(r"\b[\w.+-]+@(?:[\w-]+\.)*(?:gov\.uk|police\.uk)\b", re.I)
 
 
+# Any email offered to the reader as somewhere to SEND a report.
+#
+# _REPORT_EMAIL_RE below matches only gov.uk / police.uk, so a reporting mailbox
+# on any other domain was invisible: `phishing@slc.co.uk` (retired by the
+# Student Loans Company) shipped and stayed live, and a wholly invented address
+# would have passed the same way. Same failure mode as the SMS shortcode hole —
+# a validator whose pattern is narrower than the class it polices, where the gap
+# is silent because non-matching input is never considered (audit, 2026-07-31).
+#
+# Scoped to a REPORTING INSTRUCTION, not any email in prose: guides quote
+# scammers' own addresses as examples, and those must not be flagged.
+# Verb forms are ENUMERATED, not `send\w*` — that wildcard also matches the NOUN
+# "sender", so "a sender like no-reply@fake.example is a red flag" read as a
+# reporting instruction. Caught by this check's own benign fixtures.
+_REPORT_INSTRUCTION_RE = re.compile(
+    r"\b(?:forward|forwards|forwarding|report|reports|reporting|"
+    r"email|emails|emailing|send|sends|sending|contact|contacts|contacting)\b"
+    r"[^.]{0,50}?(?:\bto\s+)?`?([\w.+-]+@[\w-]+(?:\.[\w-]+)+)`?", re.I)
+
+
+def check_report_mailboxes(post: Dict) -> List[Dict]:
+    """An email the guide tells the reader to report TO must be in the canon."""
+    text = _post_text(post)
+    allowed = {e.lower() for e in ALLOWED_REPORT_EMAILS}
+    for group in ("official_routes", "verified_org_contacts"):
+        for r in _CANON.get(group, []):
+            if r.get("email"):
+                allowed.add(str(r["email"]).lower())
+    issues: List[Dict] = []
+    seen = set()
+    for m in _REPORT_INSTRUCTION_RE.finditer(text):
+        addr = m.group(1).strip().rstrip(".,;:")
+        low = addr.lower()
+        if low in allowed or low in seen:
+            continue
+        seen.add(low)
+        issues.append({
+            "check": "report_mailbox",
+            "severity": SEVERITY_FLAG,
+            "span": addr,
+            "detail": (f"tells the reader to report to '{addr}', which is not in "
+                       f"content/sources.json. Verify it against the organisation's own "
+                       f"published page and add it to verified_org_contacts with source_url "
+                       f"and checked_on, or point readers at the route on the official site. "
+                       f"A retired or invented reporting mailbox sends a victim's evidence "
+                       f"nowhere, or to an attacker."),
+        })
+    return issues
+
+
 def check_sources(post: Dict) -> List[Dict]:
     text = _post_text(post)
     issues: List[Dict] = []
@@ -1275,7 +1325,8 @@ def check_deterministic(post: Dict, *, is_draft: bool = True) -> List[Dict]:
     # Note: no deterministic domain/URL check — these guides intentionally
     # contain example scam/lookalike domains, so a domain allowlist is pure
     # noise here. Domain plausibility is left to the LLM judge.
-    return (check_phones(post) + check_shortcodes(post) + check_banned_entities(post)
+    return (check_phones(post) + check_shortcodes(post) + check_report_mailboxes(post)
+            + check_banned_entities(post)
             + check_absolutes(post) + check_sources(post)
             + check_legislation(post) + check_dated_events(post)
             + check_cra_misclassification(post) + check_nfd_routing(post)
