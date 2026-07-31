@@ -21,6 +21,7 @@ from __future__ import annotations
 
 import json
 import re
+from datetime import date
 import sys
 from dataclasses import dataclass, field
 from pathlib import Path
@@ -1299,7 +1300,14 @@ def judge_llm(post: Dict, client, model: str) -> List[Dict]:
     (a post we cannot verify is treated as blocking, since the engine is
     autonomous)."""
     body = _post_text(post)
-    user = (f"Title: {post.get('title','')}\n\nReview this draft guide:\n\n{body}\n\n"
+    # Tell the judge TODAY'S DATE. Without it, it reads any date after its own
+    # training cutoff as "future-dated" and calls a correct, already-verified
+    # claim fabricated — four such findings in the 2026-07-31 sample, including
+    # a legitimate "as checked on" line (operator review follow-up).
+    user = (f"Today's date is {date.today().isoformat()}. Dates before today are in the PAST "
+            f"and may be genuine even if they are after your training cutoff — judge them on "
+            f"plausibility and attribution, not on whether you personally recall them.\n\n"
+            f"Title: {post.get('title','')}\n\nReview this draft guide:\n\n{body}\n\n"
             "Return the JSON verdict.")
     system_prompt = JUDGE_SYSTEM
     if _JUDGE_CANON_BLOCK:
@@ -1310,14 +1318,42 @@ def judge_llm(post: Dict, client, model: str) -> List[Dict]:
             "unverifiable. Only flag one of these if the draft attributes it to the wrong "
             "organisation or uses it in a clearly incorrect context:\n" + _JUDGE_CANON_BLOCK
         )
-    try:
-        resp = client.messages.create(
+    # `temperature` is DEPRECATED on current models (Opus 5, Sonnet 5, Opus 4.8
+    # all reject it with a 400) and accepted only by the pinned Haiku 4.5. Since
+    # judge_llm fails CLOSED, a hard-coded temperature meant that pointing the
+    # gate at any current model would BLOCK every draft with an unexplained
+    # "could not verify" — the publication pipeline would look like it was
+    # catching fabrications when it was really just erroring (found while
+    # running the judge on a sample, 2026-07-31).
+    #
+    # Try with it, then retry without on that specific rejection, so the same
+    # code works across model generations without a hard-coded model list.
+    # 1500 was enough for Haiku's terse verdicts (~220 output tokens) but any
+    # more thorough model runs past it, and a TRUNCATED verdict surfaces as a
+    # JSONDecodeError — which fails closed and reads like a caught fabrication.
+    # Half the guides in the 2026-07-31 sample failed this way before the limit
+    # was raised.
+    def _create(**extra):
+        return client.messages.create(
             model=model,
-            max_tokens=1500,
-            temperature=0,
+            max_tokens=8000,
             system=system_prompt,
             messages=[{"role": "user", "content": user}],
+            **extra,
         )
+
+    try:
+        try:
+            resp = _create(temperature=0)
+        except Exception as exc:                     # noqa: BLE001 — inspected below
+            if "temperature" not in str(exc).lower():
+                raise
+            resp = _create()
+        if getattr(resp, "stop_reason", None) == "max_tokens":
+            # Say WHY, instead of letting it look like malformed JSON.
+            raise ValueError(
+                "the judge's verdict was truncated at max_tokens — raise the limit rather "
+                "than treating this as a finding")
         raw = "".join(b.text for b in resp.content if getattr(b, "type", None) == "text").strip()
         raw = re.sub(r"^```(?:json)?\s*|\s*```$", "", raw, flags=re.IGNORECASE).strip()
         data = json.loads(raw)
