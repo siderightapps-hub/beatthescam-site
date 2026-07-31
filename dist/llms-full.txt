@@ -868,7 +868,7 @@ No. It means the address appeared in a known breach dataset. Treat exposed or re
 ## Festival Lineup Email Scam UK: Spot a Fake Presale
 
 URL: https://beatthescam.com/guides/festival-lineup-email-scam-uk/
-Category: Email Scams · Updated: 2026-07-18
+Category: Email Scams · Updated: 2026-07-31
 
 Got an email about a festival lineup announcement with a presale ticket link? How to spot a fake festival email scam and buy tickets safely.
 
@@ -1508,9 +1508,9 @@ A cover can be a general privacy measure, but it does not resolve account compro
 ## TV Licence Scam Email UK: How to Spot a Fake
 
 URL: https://beatthescam.com/guides/tv-licence-email-scam-uk/
-Category: Email Scams · Updated: 2026-07-30
+Category: Email Scams · Updated: 2026-07-31
 
-Genuine TV Licensing payment emails come from specific sender addresses. Here's how to check a TV Licence email is real before clicking any link.
+TV Licensing uses several genuine sender addresses, and scammers can spoof them — so check your licence at tvlicensing.co.uk rather than trusting the sender.
 
 ### What a fake TV Licensing email looks like
 
@@ -2471,9 +2471,9 @@ Report it through the relevant consumer advice service so it can be passed to Tr
 ## Google Voice Verification Code Scam UK: Don't Share That Code
 
 URL: https://beatthescam.com/guides/google-voice-verification-scam/
-Category: Fraud & Impersonation · Updated: 2026-07-30
+Category: Fraud & Impersonation · Updated: 2026-07-31
 
-Someone asks you to read back a Google verification code to 'prove you're real'? It's a scam to hijack your number. Here's how it works and what to do.
+Asked to read back a Google verification code to 'prove you're real'? It's a scam to take over an account in your name. Here's how it works and what to do.
 
 ### What is the Google Voice verification code scam?
 
@@ -2534,9 +2534,9 @@ Report the account to the marketplace or dating app it came from, and report the
 ## How to Spot and Avoid Scams in the UK: The Core Rules
 
 URL: https://beatthescam.com/guides/beatthescamcom-guide-spotting-and-avoiding-uk-consumer-scams/
-Category: Fraud & Impersonation · Updated: 2026-07-30
+Category: Fraud & Impersonation · Updated: 2026-07-31
 
-Every scam relies on the same handful of tricks. Learn the pattern once and you'll recognise it in a call, text, or email you've never seen before.
+Almost every scam relies on the same handful of tricks. Learn the pattern once and you'll recognise it in a call, text, or email you've never seen before.
 
 ### The pattern behind almost every scam
 
@@ -2744,7 +2744,7 @@ Forward scam emails to `report@phishing.gov.uk` and scam texts to 7726. If you l
 ## WhatsApp 'Hi Mum' Scam UK: Spot a Fake Family Text
 
 URL: https://beatthescam.com/guides/whatsapp-family-emergency-scam/
-Category: Fraud & Impersonation · Updated: 2026-07-30
+Category: Fraud & Impersonation · Updated: 2026-07-31
 
 Got a WhatsApp from 'your child' on a new number needing urgent money? Spot the 'Hi Mum' family impersonation scam, check safely, and get money back.
 
@@ -2972,7 +2972,7 @@ No. In a choice-based lettings scheme, “bidding” means expressing interest i
 ## Fake Court Summons Email UK: Check Before You Panic
 
 URL: https://beatthescam.com/guides/court-summons-scam-email-uk/
-Category: Government Impersonation · Updated: 2026-07-23
+Category: Government Impersonation · Updated: 2026-07-31
 
 An email claims you've an unpaid fine or court date and must act now? Check the HMCTS domain and verify through official court details.
 
@@ -3036,7 +3036,7 @@ Forward it to `report@phishing.gov.uk` (or 7726 if it arrived by text), and repo
 ## HMRC Self Assessment Scam UK: Fake Refund & Tax Bill Texts
 
 URL: https://beatthescam.com/guides/hmrc-self-assessment-scam-uk/
-Category: Government Impersonation · Updated: 2026-07-09
+Category: Government Impersonation · Updated: 2026-07-31
 
 Fake HMRC messages spike around Self Assessment deadlines, claiming a refund or overdue bill. HMRC never asks you to 'confirm' bank details by text.
 
@@ -3158,7 +3158,7 @@ Forward a scam text to 7726 or a scam email to `report@phishing.gov.uk`. If you'
 ## Student Finance Scam UK: Spot a Fake SLC Message
 
 URL: https://beatthescam.com/guides/student-finance-scam-uk/
-Category: Government Impersonation · Updated: 2026-07-10
+Category: Government Impersonation · Updated: 2026-07-31
 
 Fake Student Finance messages ask for personal, login or bank details. Check your online account directly and report suspicious contact.
 
@@ -3194,7 +3194,7 @@ Do not use the message link. Sign in through the relevant official service and c
 
 ### Reporting in the UK
 
-GOV.UK's student-finance phishing guidance asks anyone who gets a suspected scam email or text about student finance to forward it to `fcpu_alerts@slc.co.uk`. If you've already responded to a phishing message, SLC's account-security page also names `phishing@slc.co.uk` as a forwarding address, and `cfs@slc.co.uk` for general concerns about the safety of your account. Suspicious emails can also be forwarded to `report@phishing.gov.uk`, and texts to 7726. If money was lost or an account was compromised, report the crime to Report Fraud at `reportfraud.police.uk` or 0300 123 2040 in England, Wales or Northern Ireland; in Scotland, call Police Scotland on 101.
+GOV.UK's student-finance phishing guidance asks anyone who gets a suspected scam email or text about student finance to forward it to `fcpu_alerts@slc.co.uk`. If you've already responded to a phishing message, sign in to your student finance account yourself and change your password, then contact SLC using the number on that account rather than any number in the message. Suspicious emails can also be forwarded to `report@phishing.gov.uk`, and texts to 7726. If money was lost or an account was compromised, report the crime to Report Fraud at `reportfraud.police.uk` or 0300 123 2040 in England, Wales or Northern Ireland; in Scotland, call Police Scotland on 101.
 
 ### Frequently asked questions
 
@@ -6264,7 +6264,7 @@ Forward scam emails to `report@phishing.gov.uk` and scam texts to 7726. If you s
 ## Amazon Scam Phone Calls UK: How to Spot a Fake Amazon Call
 
 URL: https://beatthescam.com/guides/amazon-phone-call-scam-uk/
-Category: Phone Scams · Updated: 2026-07-30
+Category: Phone Scams · Updated: 2026-07-31
 
 Got an unexpected automated 'Amazon' call about an order or account? Treat it as unverified. Here is how to check it safely and stop a phone scam.
 
@@ -6885,7 +6885,7 @@ Call 101, or 999 if in immediate danger. You can also report it to Report Fraud 
 ## Santander Phone Scam UK: What the Callers Say and How to Hang Up Safely
 
 URL: https://beatthescam.com/guides/santander-phone-scam-uk/
-Category: Phone Scams · Updated: 2026-07-30
+Category: Phone Scams · Updated: 2026-07-31
 
 Callers posing as Santander's fraud team push you to confirm details, share codes or move money to a safe account. How to spot the scam and hang up.
 
@@ -6913,7 +6913,7 @@ If the person calling you is asking for any of the above, the call is fraudulent
 
 If a caller tells you that your money is at risk and instructs you to transfer it to a new account for safekeeping, hang up immediately. This is the defining feature of an authorised push payment (APP) fraud. Once money is transferred to the fraudster's account, recovery is not guaranteed even if you report it quickly.
 
-UK banks are required to reimburse victims of APP fraud under Payment Systems Regulator rules in many cases, but the reimbursement process can take weeks and disputes arise over whether the victim took reasonable care. The safest outcome is to never authorise the transfer in the first place. No bank — including Santander — will ever ask you to move your money somewhere else to protect it.
+UK banks are required to reimburse victims of APP fraud under Payment Systems Regulator rules in many cases. An eligible claim is normally decided within five business days, and a firm that needs longer can stop the clock while it investigates, up to a maximum of 35 business days. Reimbursement can be refused where the customer acted with gross negligence, which is a higher bar than simply failing to take reasonable care. The safest outcome is to never authorise the transfer in the first place. No bank — including Santander — will ever ask you to move your money somewhere else to protect it.
 
 ### What to do during and after the call
 
@@ -6933,7 +6933,7 @@ No. This is a recognised scam phrase. Santander does not conduct regulatory mobi
 
 **I approved a transaction during the call — can I get my money back?**
 
-Contact Santander immediately, before doing anything else. UK banks are required to reimburse victims of authorised push payment (APP) fraud in many cases under Payment Systems Regulator rules, but this is not automatic and depends on the circumstances of the transfer. Also call 159 to reach the banking fraud line and report it to Report Fraud at reportfraud.police.uk in England, Wales or Northern Ireland, or to Police Scotland on 101 in Scotland — the case reference helps when disputing the payment with your bank.
+Contact Santander immediately, before doing anything else. UK banks are required to reimburse victims of authorised push payment (APP) fraud in many cases under Payment Systems Regulator rules, but this is not automatic and depends on the circumstances of the transfer. An eligible claim is normally decided within five business days, extending to a maximum of 35 business days if the firm stops the clock to investigate. Also call 159 to reach the banking fraud line and report it to Report Fraud at reportfraud.police.uk in England, Wales or Northern Ireland, or to Police Scotland on 101 in Scotland — the case reference helps when disputing the payment with your bank.
 
 **How do I verify that someone calling me is really from Santander?**
 
@@ -8258,7 +8258,7 @@ Use Report Ad on the advert itself and report the Page separately. Report the sc
 ## Instagram Fake Giveaway Scam UK: How to Spot and Report It
 
 URL: https://beatthescam.com/guides/instagram-fake-giveaway-scam-uk/
-Category: Social Media Scams · Updated: 2026-07-30
+Category: Social Media Scams · Updated: 2026-07-31
 
 Instagram fake giveaway scams trick users into following fake accounts, sharing personal details, or sending money for 'entry fees'. We explain how to verify genuine giveaways, what to do if you've already engaged, and how to report the scam.
 
@@ -8305,7 +8305,7 @@ Change your Instagram password immediately from a device you trust — go to Set
 
 **I paid a 'shipping fee' for a fake giveaway prize. Can I get my money back?**
 
-Contact your bank immediately and explain that you've been scammed — how you paid matters. If you paid by bank (Faster Payments) transfer on or after 7 October 2024, banks must reimburse most victims of authorised push payment (APP) scams, subject to conditions and a cap, so ask your bank to treat it as an APP scam claim. If you paid by debit or credit card, chargeback covers card payments (not ordinary bank transfers) — ask your card provider whether chargeback or other protections apply. If you paid via gift card or cryptocurrency, recovery is extremely unlikely because these payments are irreversible, but still report it to Report Fraud on 0300 123 2040 in England, Wales or Northern Ireland, or to Police Scotland on 101 in Scotland, and tell your bank so they have a record. Do not send any more money to the scammer, even if they claim they need a 'processing fee' or 'tax' to release your prize — this is a common follow-up tactic.
+Contact your bank immediately and explain that you've been scammed — how you paid matters. If you paid by bank (Faster Payments) transfer on or after 7 October 2024, banks must reimburse most victims of authorised push payment (APP) scams, subject to conditions and a cap, so ask your bank to treat it as an APP scam claim. If you paid by debit or credit card, chargeback covers card payments (not ordinary bank transfers) — ask your card provider whether chargeback or other protections apply. If you paid via gift card or cryptocurrency, recovery is extremely unlikely because these payments are very difficult to reverse, but still report it to Report Fraud on 0300 123 2040 in England, Wales or Northern Ireland, or to Police Scotland on 101 in Scotland, and tell your bank so they have a record. Do not send any more money to the scammer, even if they claim they need a 'processing fee' or 'tax' to release your prize — this is a common follow-up tactic.
 
 **The fake account is still running the scam to other people. How do I report it?**
 
@@ -9455,7 +9455,7 @@ Forward the text to 7726. If you lost money or shared sensitive information, rep
 ## Council Tax Scam Texts: Spot a Fake Refund or Demand (UK)
 
 URL: https://beatthescam.com/guides/council-tax-scam-text-uk/
-Category: Text Message Scams · Updated: 2026-07-18
+Category: Text Message Scams · Updated: 2026-07-31
 
 A text offering a council tax refund or threatening arrears? Council tax is run by your local council. How to spot the scam and check safely.
 
@@ -9852,7 +9852,7 @@ Forward it to 7726. If the message mentions Evri, also use Evri's cyber-security
 ## Fake Halifax Text? Scam Checks, 159 and Safe Reporting
 
 URL: https://beatthescam.com/guides/halifax-bank-scam-text-uk/
-Category: Text Message Scams · Updated: 2026-07-30
+Category: Text Message Scams · Updated: 2026-07-31
 
 Received an unexpected Halifax fraud or payment text? Do not share a passcode or move money. Check it in the app, through the card number or via 159.
 
@@ -10410,7 +10410,7 @@ Forward suspicious texts referring to NatWest to 88355, which is NatWest's own r
 ## O2 Warning: How to Spot Fake 'Important' Texts and What to Do
 
 URL: https://beatthescam.com/guides/o2-scam-text-uk/
-Category: Text Message Scams · Updated: 2026-07-30
+Category: Text Message Scams · Updated: 2026-07-31
 
 Fake O2 texts claim your account needs urgent verification or a payment has failed, linking to bogus login pages. How to spot and report them.
 
@@ -10894,7 +10894,7 @@ For an SMS, forward the message to `7726`. For WhatsApp, Telegram or Signal, pre
 ## UPS Scam Text Messages: Spot a Fake UPS Delivery Text (UK)
 
 URL: https://beatthescam.com/guides/ups-delivery-scam-text-messages-uk/
-Category: Text Message Scams · Updated: 2026-07-30
+Category: Text Message Scams · Updated: 2026-07-31
 
 Fake UPS texts about a missed delivery or 'customs fee' are smishing scams. Here's how to spot a fake UPS text, verify a genuine one, and report it in the UK.
 
@@ -10921,7 +10921,7 @@ A UPS scam text is a phishing message that impersonates the courier UPS to steal
 
 ### How a genuine UPS charge or delivery actually works
 
-Real customs charges on parcels from outside the UK do exist, but legitimate UPS contacts you about them in a verifiable way and lets you check the charge against your specific tracking number on the official ups.com site. To verify any UPS message, don't use its link — find your tracking number in the retailer's dispatch email, then type ups.com into your browser or open the UPS app and enter the number yourself. If you have a UPS My Choice account, check there. A genuine process will match a parcel you're actually expecting and won't ask for your full card number, PIN, online banking password, or a security code by text. If anything doesn't line up, treat the message as a scam and check with the retailer you bought from.
+Real customs charges on parcels from outside the UK do exist, and UPS says some shipments genuinely require funds before or at delivery, so a request for money is not proof of fraud on its own. Legitimate UPS contacts you about them in a verifiable way and lets you check the charge against your specific tracking number on the official ups.com site. To verify any UPS message, don't use its link — find your tracking number in the retailer's dispatch email, then type ups.com into your browser or open the UPS app and enter the number yourself. If you have a UPS My Choice account, check there. A genuine process will match a parcel you're actually expecting and won't ask for your full card number, PIN, online banking password, or a security code by text. If anything doesn't line up, treat the message as a scam and check with the retailer you bought from.
 
 ### What to do if you paid a UPS 'customs' or 'delivery' fee
 
@@ -11582,7 +11582,7 @@ You still have consumer rights. If the agreement is a timeshare, qualifying long
 ## Holiday Compensation Scam UK: Fake Claims Handlers
 
 URL: https://beatthescam.com/guides/holiday-compensation-scam-uk/
-Category: Travel Scams · Updated: 2026-07-18
+Category: Travel Scams · Updated: 2026-07-31
 
 Cold-called about compensation you're owed for a delayed or cancelled trip? Check the firm is FCA-authorised before sharing any details.
 
@@ -11871,7 +11871,7 @@ Start with the platform that hosted the advert, then tell the airline, hotel or 
 ## Timeshare Scam UK: How to Spot and Avoid Holiday Property Traps
 
 URL: https://beatthescam.com/guides/timeshare-scam-uk/
-Category: Travel Scams · Updated: 2026-07-30
+Category: Travel Scams · Updated: 2026-07-31
 
 Timeshare scams promise cheap holidays and investment returns, then trap you in contracts with escalating fees. The warning signs and how to get help.
 
@@ -11888,7 +11888,7 @@ A timeshare scam is a scheme where fraudsters or aggressive sales operations sel
 - Difficulty finding independent reviews or the company's registration. Search the company name online with 'scam' or 'complaint'; check the FCA register if they claim to be regulated (most timeshare sellers are not).
 - Contracts written in small print or in a language you don't speak fluently. Scammers deliberately make terms hard to understand; never sign anything you cannot fully read and comprehend.
 - Promises of easy exit or resale. If a seller says 'you can sell it back to us anytime' or 'we'll find a buyer', get this in writing with specific terms; verbal promises are worthless.
-- Requests to pay by bank transfer, wire, or cryptocurrency. These methods are irreversible; legitimate companies accept credit cards, which offer buyer protection.
+- Requests to pay by bank transfer, wire, or cryptocurrency. Money sent this way is difficult to trace and rarely recovered; legitimate companies accept credit cards, which offer buyer protection.
 
 ### How the scam unfolds: from first contact to the contract
 
