@@ -1906,7 +1906,7 @@ def evidence_snapshot_block(post: dict) -> str:
             )
         parts.append(
             '<div class="evidence-table-wrap"><table class="evidence-table">'
-            '<thead><tr><th>Check</th><th>What it means</th><th>Official basis</th></tr></thead>'
+            '<thead><tr><th scope="col">Check</th><th scope="col">What it means</th><th scope="col">Official basis</th></tr></thead>'
             f'<tbody>{"".join(rows)}</tbody></table></div>'
         )
 
@@ -2650,7 +2650,7 @@ def render_research_report(site, report):
       <h2>What the snapshot shows</h2>
       <p>Between <strong>{html.escape(bing['start_date'])}</strong> and <strong>{html.escape(bing['end_date'])}</strong>, Bing recorded {bing['total_citations']:,} citations across {bing['cited_page_count']:,} Beat the Scam pages. Its export returned {bing['days_returned']} days and {bing['grounding_query_sample_count']:,} sampled grounding queries.</p>
       <p>Google&#8217;s separate final-data window runs from <strong>{html.escape(google['start_date'])}</strong> to <strong>{html.escape(google['end_date'])}</strong>: {google['impressions']:,} impressions, {google['clicks']:g} clicks, {google['ctr'] * 100:.2f}% CTR and an average position of {google['average_position']:.1f}. Source periods differ because the platforms expose complete data on different schedules.</p>
-      <div class="evidence-table-wrap"><table class="evidence-table"><thead><tr><th>Google signal</th><th>Current 28 days</th><th>Previous 28 days</th><th>Change</th></tr></thead><tbody>
+      <div class="evidence-table-wrap"><table class="evidence-table"><thead><tr><th scope="col">Google signal</th><th scope="col">Current 28 days</th><th scope="col">Previous 28 days</th><th scope="col">Change</th></tr></thead><tbody>
         <tr><th scope="row">Impressions</th><td>{google['impressions']:,}</td><td>{previous.get('impressions', 0):,}</td><td>{change(google['impressions'], previous.get('impressions', 0))}</td></tr>
         <tr><th scope="row">Clicks</th><td>{google['clicks']:g}</td><td>{previous.get('clicks', 0):g}</td><td>{change(google['clicks'], previous.get('clicks', 0))}</td></tr>
         <tr><th scope="row">CTR</th><td>{google['ctr'] * 100:.2f}%</td><td>{previous.get('ctr', 0) * 100:.2f}%</td><td>{(google['ctr'] - previous.get('ctr', 0)) * 100:+.2f} pp</td></tr>
@@ -2661,19 +2661,19 @@ def render_research_report(site, report):
       {_research_chart(bing['daily'])}
 
       <h2>Most-cited pages</h2>
-      <div class="evidence-table-wrap"><table class="evidence-table"><thead><tr><th>Page</th><th>Citations</th></tr></thead><tbody>{top_page_rows}</tbody></table></div>
+      <div class="evidence-table-wrap"><table class="evidence-table"><thead><tr><th scope="col">Page</th><th scope="col">Citations</th></tr></thead><tbody>{top_page_rows}</tbody></table></div>
 
       <h2>Sampled grounding queries</h2>
       <p>Bing describes these as a sample of the queries used to ground AI answers. Citation share is the share Bing reports for the site on that sampled query; it is not conventional search rank.</p>
-      <div class="evidence-table-wrap"><table class="evidence-table"><thead><tr><th>Grounding query</th><th>Intent</th><th>Citations</th><th>Citation share</th></tr></thead><tbody>{query_rows}</tbody></table></div>
+      <div class="evidence-table-wrap"><table class="evidence-table"><thead><tr><th scope="col">Grounding query</th><th scope="col">Intent</th><th scope="col">Citations</th><th scope="col">Citation share</th></tr></thead><tbody>{query_rows}</tbody></table></div>
 
       <h2>Google focus-page baseline</h2>
       <p>These are the pages named before the 18 July editorial release. They create a pre-change baseline for later seven- and 28-day comparisons.</p>
-      <div class="evidence-table-wrap"><table class="evidence-table"><thead><tr><th>Page</th><th>Impr. current</th><th>Impr. previous</th><th>Change</th><th>Clicks current</th><th>CTR current</th><th>CTR previous</th><th>Position current</th></tr></thead><tbody>{focus_rows}</tbody></table></div>
+      <div class="evidence-table-wrap"><table class="evidence-table"><thead><tr><th scope="col">Page</th><th scope="col">Impr. current</th><th scope="col">Impr. previous</th><th scope="col">Change</th><th scope="col">Clicks current</th><th scope="col">CTR current</th><th scope="col">CTR previous</th><th scope="col">Position current</th></tr></thead><tbody>{focus_rows}</tbody></table></div>
 
       <h2>Consolidation baseline</h2>
       <p>Redirect source and target URLs are combined so migration between them cannot be mistaken for a visibility gain or loss.</p>
-      <div class="evidence-table-wrap"><table class="evidence-table"><thead><tr><th>Source + target cluster</th><th>Impr. current</th><th>Impr. previous</th><th>Clicks current</th><th>Clicks previous</th><th>CTR current</th><th>CTR previous</th></tr></thead><tbody>{consolidation_rows}</tbody></table></div>
+      <div class="evidence-table-wrap"><table class="evidence-table"><thead><tr><th scope="col">Source + target cluster</th><th scope="col">Impr. current</th><th scope="col">Impr. previous</th><th scope="col">Clicks current</th><th scope="col">Clicks previous</th><th scope="col">CTR current</th><th scope="col">CTR previous</th></tr></thead><tbody>{consolidation_rows}</tbody></table></div>
 
       <h2>Download the data</h2>
       <div class="download-grid">
@@ -3139,7 +3139,7 @@ def build_legal_bodies(site, sources):
 
     <h2>Which money-recovery route applies?</h2>
     <div class="evidence-table-wrap"><table class="evidence-table">
-      <thead><tr><th>How you paid</th><th>What to ask for</th><th>Important limits</th></tr></thead>
+      <thead><tr><th scope="col">How you paid</th><th scope="col">What to ask for</th><th scope="col">Important limits</th></tr></thead>
       <tbody>
         <tr><th scope="row">UK bank transfer</th><td>Report an APP scam claim to the bank or payment firm immediately.</td><td>For eligible Faster Payments and CHAPS payments made on or after 7 October 2024, firms normally decide within five business days. They can stop the clock for information, but must reach an outcome within 35 business days. Scope, exclusions, vulnerability rules, a possible excess of up to £100 and the £85,000 reimbursement cap can affect a claim.</td></tr>
         <tr><th scope="row">Debit, credit or prepaid card</th><td>Ask the issuer to secure the card and whether chargeback fits the transaction.</td><td>Chargeback is a card-scheme process, not a statutory right. MoneyHelper says claims commonly need to be made within 120 days, with timing depending on the transaction, so contact the issuer promptly.</td></tr>

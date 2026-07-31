@@ -60,7 +60,7 @@
        value= attribute (not content=) — validators flag it; do not "fix" it
        or their crawler stops verifying the site. -->
   <meta name='impact-site-verification' value='e0dda02c-a1b6-4056-9f92-16f7c916bd4b'>
-  <link rel="stylesheet" href="/assets/styles.css?v=f6a127d54c">
+  <link rel="stylesheet" href="/assets/styles.css?v=9803fefa26">
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-JXNF856NBF"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
@@ -246,7 +246,11 @@
         <h2 id="nl-heading">Get scam alerts before they reach you</h2>
         <p>Plain-English warnings and new guides on the latest UK scams — the checks to run before you click, pay, or share. Free, and you can unsubscribe anytime.</p>
       </div>
-      <form class="newsletter-form" id="nl-form" novalidate>
+      <!-- method="post" is a PRIVACY control, not a nicety. With no method the
+           browser GETs the current URL on submit, so a JS failure put the
+           subscriber's email address into the page URL and their browser history
+           (audit, 2026-07-31). POST keeps it in the request body either way. -->
+      <form class="newsletter-form" id="nl-form" method="post" action="/api/subscribe" novalidate>
         <label class="sr-only" for="nl-email">Email address</label>
         <input class="newsletter-input" type="email" id="nl-email" name="email" placeholder="you@example.com" autocomplete="email" required>
         <button class="btn btn-primary newsletter-btn" type="submit" id="nl-submit">Subscribe</button>
@@ -260,6 +264,9 @@
           <span>I agree to receive emails from Beat the Scam and accept the <a href="/privacy/">Privacy Policy</a>.</span>
         </label>
         <p class="newsletter-msg" id="nl-msg" role="status" aria-live="polite"></p>
+        <noscript><p class="note">Signing up needs JavaScript. With it switched off, use the
+          contact page and we will add you manually — your address is never put in the page
+          address either way.</p></noscript>
       </form>
     </div>
   </section>
