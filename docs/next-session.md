@@ -203,7 +203,9 @@ Lessons that cost real rework this cycle:
 
 - 186 guide source records; 185 indexable guides after one documented consolidation; all
   185 carry `sources_checked` and `quick_answer`.
-- 17 normalised categories, **all 13 hubs live and sourced** (shipped in the 2026-07-30 release).
+- 17 normalised categories, **13 of which have a hub** — all thirteen live and sourced since the
+  2026-07-30 release. **Four categories still have no hub: `dating`, `employment`, `social`,
+  `utility`.** Do not read "all 13 hubs live" as "hubs are finished".
 - AI scam checker, Google CMP, consent-aware GA4 events and Resend double opt-in are live.
 - `/research/uk-scam-statistics/` is live with 28 official records.
 - Review-PR pipeline runs Tue/Fri — **currently paused**, see decisions above.
