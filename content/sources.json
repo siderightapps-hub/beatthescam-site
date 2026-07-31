@@ -199,6 +199,54 @@
       "source_url": "https://www.natwest.com/fraud-and-security/fraud-guide/text-message-fraud.html",
       "checked_on": "2026-07-31",
       "note": "NatWest: \"Forward any suspicious texts to us at 88355… This is not a premium rate number. Standard network rates apply.\" The bank's OWN route, not a national one — 7726 remains the network shortcode. Surfaced by the new check_shortcodes() gate and verified against the primary page on 2026-07-31."
+    },
+    {
+      "key": "hsbc-phishing",
+      "name": "HSBC UK phishing reporting",
+      "email": "phishing@hsbc.com",
+      "source_url": "https://www.hsbc.co.uk/help/security-centre/report-a-problem/",
+      "checked_on": "2026-07-31",
+      "note": "HSBC UK tells customers to forward a suspicious email or text to this address. Verified against the organisation's own published page on 2026-07-31; re-verify quarterly."
+    },
+    {
+      "key": "santander-phishing",
+      "name": "Santander UK phishing reporting",
+      "email": "phishing@santander.co.uk",
+      "source_url": "https://www.santander.co.uk/personal/support/fraud-and-security/how-to-report-fraud",
+      "checked_on": "2026-07-31",
+      "note": "Santander's own how-to-report-fraud page names this for suspicious EMAILS. Verified against the organisation's own published page on 2026-07-31; re-verify quarterly."
+    },
+    {
+      "key": "santander-smishing",
+      "name": "Santander UK smishing reporting",
+      "email": "smishing@santander.co.uk",
+      "source_url": "https://www.santander.co.uk/personal/support/fraud-and-security/how-to-report-fraud",
+      "checked_on": "2026-07-31",
+      "note": "Same page names a SEPARATE address for suspicious TEXTS, alongside 7726. Two addresses for one bank is deliberate, not a duplicate. Verified against the organisation's own published page on 2026-07-31; re-verify quarterly."
+    },
+    {
+      "key": "natwest-phishing",
+      "name": "NatWest phishing reporting",
+      "email": "phishing@natwest.com",
+      "source_url": "https://www.natwest.com/support-centre/help-with-your-card/fraud/how-do-i-report-a-phishing-email-or-scam-email.html",
+      "checked_on": "2026-07-31",
+      "note": "NatWest: forward a fraudulent or suspicious email here if you have not replied to it. Verified against the organisation's own published page on 2026-07-31; re-verify quarterly."
+    },
+    {
+      "key": "nationwide-phishing",
+      "name": "Nationwide phishing reporting",
+      "email": "phishing@nationwide.co.uk",
+      "source_url": "https://www.nationwide.co.uk/help/fraud-and-security/reporting-fraud-or-a-scam",
+      "checked_on": "2026-07-31",
+      "note": "Nationwide takes suspicious emails, texts and messages at this address. Verified against the organisation's own published page on 2026-07-31; re-verify quarterly."
+    },
+    {
+      "key": "tsb-emailscams",
+      "name": "TSB scam-email reporting",
+      "email": "emailscams@tsb.co.uk",
+      "source_url": "https://www.tsb.co.uk/fraud-prevention-centre/how-to-report-fraud.html",
+      "checked_on": "2026-07-31",
+      "note": "TSB takes forwarded scam emails AND screenshots of scam texts at this address. Verified against the organisation's own published page on 2026-07-31; re-verify quarterly."
     }
   ]
 }
