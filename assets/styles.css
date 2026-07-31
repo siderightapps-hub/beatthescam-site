@@ -110,6 +110,14 @@ p{margin:.75rem 0}
 .warning-list li:last-child,.list-clean li:last-child{border-bottom:none}
 .search-box{display:flex;align-items:center;gap:.75rem;padding:.95rem 1rem;border-radius:18px;background:#fff;border:1px solid var(--line);margin-top:.9rem}
 .search-box input{width:100%;border:none;outline:none;background:transparent;font-size:1rem}
+/* The rule above strips the browser's focus ring from the search inputs, and
+   nothing replaced it — a keyboard user could not see where they were
+   (WCAG 2.4.7; audit, 2026-07-31). :focus-visible restores an indicator for
+   keyboard/AT users without showing a ring on mouse click. */
+:focus-visible{outline:3px solid #2563eb;outline-offset:2px;border-radius:3px}
+.search-box:focus-within{outline:3px solid #2563eb;outline-offset:2px}
+.search-box input:focus-visible{outline:none}
+@media (prefers-contrast:more){:focus-visible{outline-width:4px}}
 .search-note{color:var(--muted);font-size:.95rem}
 .article-layout{display:grid;grid-template-columns:minmax(0,1fr) 330px;gap:1.2rem;padding:1rem 0 3rem;min-width:0}
 .article{padding:2rem 2rem 1.6rem;min-width:0}
@@ -369,3 +377,9 @@ p{margin:.75rem 0}
   width: 1px; height: 1px;
   overflow: hidden;
 }
+
+/* Long unbroken source URLs (an 80-char PDF link on the statistics page)
+   overflowed a 390px viewport horizontally. Wrap them rather than letting
+   the page scroll sideways (audit, 2026-07-31). */
+a[href],td,th,li,p{overflow-wrap:anywhere}
+.evidence-table-wrap,.stats-table-wrap{overflow-x:auto;-webkit-overflow-scrolling:touch}
