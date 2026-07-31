@@ -279,6 +279,54 @@
       "source_url": "https://support.apple.com/en-us/102568",
       "checked_on": "2026-07-31",
       "note": "Apple takes forwarded phishing emails, and a SCREENSHOT for suspicious texts. It asks for full header information (Forward As Attachment in macOS Mail). Verified against the organisation's own published page on 2026-07-31; re-verify quarterly."
+    },
+    {
+      "key": "ee-phishing",
+      "name": "EE phishing reporting",
+      "email": "phishing@ee.co.uk",
+      "source_url": "https://ee.co.uk/help/security/staying-safe-online/avoid-and-prevent-scams",
+      "checked_on": "2026-07-31",
+      "note": "EE's own avoid-and-prevent-scams page. It also tells customers to delete the message after reporting. Verified against the organisation's own published page on 2026-07-31; re-verify quarterly."
+    },
+    {
+      "key": "vodafone-phishing",
+      "name": "Vodafone UK phishing reporting",
+      "email": "phishing@vodafone.co.uk",
+      "source_url": "https://www.vodafone.co.uk/privacy/protecting-you/phishing",
+      "checked_on": "2026-07-31",
+      "note": "Vodafone's page obfuscates the address with Cloudflare email protection, so it was read by DECODING the published cfemail payload rather than copied from a search summary. Vodafone also lists an anti-fraud line, 0333 304 1665, for account fraud. Verified against the organisation's own published page on 2026-07-31; re-verify quarterly."
+    },
+    {
+      "key": "virginmedia-phishing",
+      "name": "Virgin Media phishing reporting",
+      "email": "phishing@virginmedia.com",
+      "source_url": "https://www.virginmedia.com/help/security",
+      "checked_on": "2026-07-31",
+      "note": "TWO ADDRESSES EXIST. virginmedia.com/help/security — the support page — names phishing@virginmedia.com as primary, which is what the guides use. Virgin Media O2's editorial pages also name phishing@virginmediao2.com after the merger. Both are the same company; finding the O2 one elsewhere is NOT evidence this is stale. Recorded so a future audit does not re-raise it, as happened with Advice Direct Scotland. Verified against the organisation's own published page on 2026-07-31; re-verify quarterly."
+    },
+    {
+      "key": "talktalk-phishing",
+      "name": "TalkTalk phishing reporting",
+      "email": "phishing@talktalk.co.uk",
+      "source_url": "https://help-centre.talktalk.co.uk/Broadband/Security/Phishing_emails_-_everything_you_need_to_know",
+      "checked_on": "2026-07-31",
+      "note": "TalkTalk's help centre. Distinct from the TalkTalk SUPPORT line already in this list under key `talktalk`. Verified against the organisation's own published page on 2026-07-31; re-verify quarterly."
+    },
+    {
+      "key": "britishgas-phishing",
+      "name": "British Gas phishing reporting",
+      "email": "phishing@britishgas.co.uk",
+      "source_url": "https://www.britishgas.co.uk/help-and-support/my-account/accessing-your-account",
+      "checked_on": "2026-07-31",
+      "note": "British Gas asks for the suspicious email ATTACHED to a new message, and a SCREENSHOT for suspicious texts. Verified against the organisation's own published page on 2026-07-31; re-verify quarterly."
+    },
+    {
+      "key": "netflix-phishing",
+      "name": "Netflix phishing reporting",
+      "email": "phishing@netflix.com",
+      "source_url": "https://help.netflix.com/en/node/65674",
+      "checked_on": "2026-07-31",
+      "note": "Netflix takes forwarded suspicious emails AND texts at the same address. Verified against the organisation's own published page on 2026-07-31; re-verify quarterly."
     }
   ]
 }
