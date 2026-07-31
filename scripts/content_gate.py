@@ -381,7 +381,14 @@ _REPORT_INSTRUCTION_RE = re.compile(
 _SENDER_CLAIM_RE = re.compile(
     r"\b(?:come|comes|came|sent|arrive|arrives)\s+from\b"
     r"|\breceive\s+(?:\w+\s+){0,3}(?:emails?|messages?|mail)\s+from\b"
-    r"|\bis\s+a\s+genuine\b|\bgenuine\s+\w+\s+address\b"
+    # An organisation NAMING its own sending addresses: "its identified senders
+    # are X", "TV Licensing identifies X and Y".
+    r"|\bsenders?\s+(?:are|is)\b|\bidentifie[sd]\b"
+    # Asking WHETHER an address is genuine is the opposite of instructing someone
+    # to use it. Allow a multi-word brand between the two words — "a genuine TV
+    # Licensing address" was missed by a single-\w+ pattern.
+    r"|\bis\s+a\s+genuine\b|\bgenuine\s+(?:\w+\s+){0,3}address\b"
+    r"|\bis\s+[\w.+-]+@[\w.-]+\s+(?:a\s+)?(?:genuine|legitimate|legit|real)\b"
     r"|\bsupport\s+inbox\s+is\b", re.I)
 
 

@@ -247,6 +247,38 @@
       "source_url": "https://www.tsb.co.uk/fraud-prevention-centre/how-to-report-fraud.html",
       "checked_on": "2026-07-31",
       "note": "TSB takes forwarded scam emails AND screenshots of scam texts at this address. Verified against the organisation's own published page on 2026-07-31; re-verify quarterly."
+    },
+    {
+      "key": "amazon-reportascam",
+      "name": "Amazon scam reporting",
+      "email": "reportascam@amazon.com",
+      "source_url": "https://www.amazon.co.uk/gp/help/customer/display.html?nodeId=GRGRY7AQ3LMPXVCV",
+      "checked_on": "2026-07-31",
+      "note": "Amazon's own 'Report a scam' help page. Amazon asks for the suspicious message as an ATTACHMENT so it can be traced, and does not reply personally. Verified against the organisation's own published page on 2026-07-31; re-verify quarterly."
+    },
+    {
+      "key": "royalmail-reportascam",
+      "name": "Royal Mail scam reporting",
+      "email": "reportascam@royalmail.com",
+      "source_url": "https://www.royalmail.com/help/scam-protection",
+      "checked_on": "2026-07-31",
+      "note": "Royal Mail takes forwarded suspicious emails here, and a SCREENSHOT for suspicious texts. For calls or websites it asks for the number or address in the body. Verified against the organisation's own published page on 2026-07-31; re-verify quarterly."
+    },
+    {
+      "key": "paypal-phishing",
+      "name": "PayPal phishing reporting",
+      "email": "phishing@paypal.com",
+      "source_url": "https://www.paypal.com/us/security/report-suspicious-messages",
+      "checked_on": "2026-07-31",
+      "note": "PayPal asks you to FORWARD the email, explicitly NOT as an attachment and without altering the subject line, so the source tracking data survives — the opposite of Amazon's and Apple's instructions, so the guides must not generalise. Verified against the organisation's own published page on 2026-07-31; re-verify quarterly."
+    },
+    {
+      "key": "apple-reportphishing",
+      "name": "Apple phishing reporting",
+      "email": "reportphishing@apple.com",
+      "source_url": "https://support.apple.com/en-us/102568",
+      "checked_on": "2026-07-31",
+      "note": "Apple takes forwarded phishing emails, and a SCREENSHOT for suspicious texts. It asks for full header information (Forward As Attachment in macOS Mail). Verified against the organisation's own published page on 2026-07-31; re-verify quarterly."
     }
   ]
 }
