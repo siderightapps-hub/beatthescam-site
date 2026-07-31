@@ -372,6 +372,26 @@ _REPORT_INSTRUCTION_RE = re.compile(
     r"[^.]{0,50}?(?:\bto\s+)?`?([\w.+-]+@[\w-]+(?:\.[\w-]+)+)`?", re.I)
 
 
+# A guide may quote an organisation's SENDING address so a reader can recognise
+# genuine mail ("its legitimate emails come from donotreply@yodel.co.uk"). That
+# is a claim about what real mail looks like, NOT a route to report to, and it
+# does not belong in verified_org_contacts. The instruction regex matched them
+# anyway because "emails" sits right beside the address — six of the first 32
+# flags were this class (operator review, 2026-07-31).
+_SENDER_CLAIM_RE = re.compile(
+    r"\b(?:come|comes|came|sent|arrive|arrives)\s+from\b"
+    r"|\breceive\s+(?:\w+\s+){0,3}(?:emails?|messages?|mail)\s+from\b"
+    # An organisation NAMING its own sending addresses: "its identified senders
+    # are X", "TV Licensing identifies X and Y".
+    r"|\bsenders?\s+(?:are|is)\b|\bidentifie[sd]\b"
+    # Asking WHETHER an address is genuine is the opposite of instructing someone
+    # to use it. Allow a multi-word brand between the two words — "a genuine TV
+    # Licensing address" was missed by a single-\w+ pattern.
+    r"|\bis\s+a\s+genuine\b|\bgenuine\s+(?:\w+\s+){0,3}address\b"
+    r"|\bis\s+[\w.+-]+@[\w.-]+\s+(?:a\s+)?(?:genuine|legitimate|legit|real)\b"
+    r"|\bsupport\s+inbox\s+is\b", re.I)
+
+
 def check_report_mailboxes(post: Dict) -> List[Dict]:
     """An email the guide tells the reader to report TO must be in the canon."""
     text = _post_text(post)
@@ -386,6 +406,11 @@ def check_report_mailboxes(post: Dict) -> List[Dict]:
         addr = m.group(1).strip().rstrip(".,;:")
         low = addr.lower()
         if low in allowed or low in seen:
+            continue
+        # Look at the clause around the address, not just the matched span: a
+        # sender claim is about where mail ORIGINATES, not where to send it.
+        window = text[max(0, m.start() - 120):m.end() + 60]
+        if _SENDER_CLAIM_RE.search(window):
             continue
         seen.add(low)
         issues.append({

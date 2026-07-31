@@ -199,6 +199,174 @@
       "source_url": "https://www.natwest.com/fraud-and-security/fraud-guide/text-message-fraud.html",
       "checked_on": "2026-07-31",
       "note": "NatWest: \"Forward any suspicious texts to us at 88355… This is not a premium rate number. Standard network rates apply.\" The bank's OWN route, not a national one — 7726 remains the network shortcode. Surfaced by the new check_shortcodes() gate and verified against the primary page on 2026-07-31."
+    },
+    {
+      "key": "hsbc-phishing",
+      "name": "HSBC UK phishing reporting",
+      "email": "phishing@hsbc.com",
+      "source_url": "https://www.hsbc.co.uk/help/security-centre/report-a-problem/",
+      "checked_on": "2026-07-31",
+      "note": "HSBC UK tells customers to forward a suspicious email or text to this address. Verified against the organisation's own published page on 2026-07-31; re-verify quarterly."
+    },
+    {
+      "key": "santander-phishing",
+      "name": "Santander UK phishing reporting",
+      "email": "phishing@santander.co.uk",
+      "source_url": "https://www.santander.co.uk/personal/support/fraud-and-security/how-to-report-fraud",
+      "checked_on": "2026-07-31",
+      "note": "Santander's own how-to-report-fraud page names this for suspicious EMAILS. Verified against the organisation's own published page on 2026-07-31; re-verify quarterly."
+    },
+    {
+      "key": "santander-smishing",
+      "name": "Santander UK smishing reporting",
+      "email": "smishing@santander.co.uk",
+      "source_url": "https://www.santander.co.uk/personal/support/fraud-and-security/how-to-report-fraud",
+      "checked_on": "2026-07-31",
+      "note": "Same page names a SEPARATE address for suspicious TEXTS, alongside 7726. Two addresses for one bank is deliberate, not a duplicate. Verified against the organisation's own published page on 2026-07-31; re-verify quarterly."
+    },
+    {
+      "key": "natwest-phishing",
+      "name": "NatWest phishing reporting",
+      "email": "phishing@natwest.com",
+      "source_url": "https://www.natwest.com/support-centre/help-with-your-card/fraud/how-do-i-report-a-phishing-email-or-scam-email.html",
+      "checked_on": "2026-07-31",
+      "note": "NatWest: forward a fraudulent or suspicious email here if you have not replied to it. Verified against the organisation's own published page on 2026-07-31; re-verify quarterly."
+    },
+    {
+      "key": "nationwide-phishing",
+      "name": "Nationwide phishing reporting",
+      "email": "phishing@nationwide.co.uk",
+      "source_url": "https://www.nationwide.co.uk/help/fraud-and-security/reporting-fraud-or-a-scam",
+      "checked_on": "2026-07-31",
+      "note": "Nationwide takes suspicious emails, texts and messages at this address. Verified against the organisation's own published page on 2026-07-31; re-verify quarterly."
+    },
+    {
+      "key": "tsb-emailscams",
+      "name": "TSB scam-email reporting",
+      "email": "emailscams@tsb.co.uk",
+      "source_url": "https://www.tsb.co.uk/fraud-prevention-centre/how-to-report-fraud.html",
+      "checked_on": "2026-07-31",
+      "note": "TSB takes forwarded scam emails AND screenshots of scam texts at this address. Verified against the organisation's own published page on 2026-07-31; re-verify quarterly."
+    },
+    {
+      "key": "amazon-reportascam",
+      "name": "Amazon scam reporting",
+      "email": "reportascam@amazon.com",
+      "source_url": "https://www.amazon.co.uk/gp/help/customer/display.html?nodeId=GRGRY7AQ3LMPXVCV",
+      "checked_on": "2026-07-31",
+      "note": "Amazon's own 'Report a scam' help page. Amazon asks for the suspicious message as an ATTACHMENT so it can be traced, and does not reply personally. Verified against the organisation's own published page on 2026-07-31; re-verify quarterly."
+    },
+    {
+      "key": "royalmail-reportascam",
+      "name": "Royal Mail scam reporting",
+      "email": "reportascam@royalmail.com",
+      "source_url": "https://www.royalmail.com/help/scam-protection",
+      "checked_on": "2026-07-31",
+      "note": "Royal Mail takes forwarded suspicious emails here, and a SCREENSHOT for suspicious texts. For calls or websites it asks for the number or address in the body. Verified against the organisation's own published page on 2026-07-31; re-verify quarterly."
+    },
+    {
+      "key": "paypal-phishing",
+      "name": "PayPal phishing reporting",
+      "email": "phishing@paypal.com",
+      "source_url": "https://www.paypal.com/us/security/report-suspicious-messages",
+      "checked_on": "2026-07-31",
+      "note": "PayPal asks you to FORWARD the email, explicitly NOT as an attachment and without altering the subject line, so the source tracking data survives — the opposite of Amazon's and Apple's instructions, so the guides must not generalise. Verified against the organisation's own published page on 2026-07-31; re-verify quarterly."
+    },
+    {
+      "key": "apple-reportphishing",
+      "name": "Apple phishing reporting",
+      "email": "reportphishing@apple.com",
+      "source_url": "https://support.apple.com/en-us/102568",
+      "checked_on": "2026-07-31",
+      "note": "Apple takes forwarded phishing emails, and a SCREENSHOT for suspicious texts. It asks for full header information (Forward As Attachment in macOS Mail). Verified against the organisation's own published page on 2026-07-31; re-verify quarterly."
+    },
+    {
+      "key": "ee-phishing",
+      "name": "EE phishing reporting",
+      "email": "phishing@ee.co.uk",
+      "source_url": "https://ee.co.uk/help/security/staying-safe-online/avoid-and-prevent-scams",
+      "checked_on": "2026-07-31",
+      "note": "EE's own avoid-and-prevent-scams page. It also tells customers to delete the message after reporting. Verified against the organisation's own published page on 2026-07-31; re-verify quarterly."
+    },
+    {
+      "key": "vodafone-phishing",
+      "name": "Vodafone UK phishing reporting",
+      "email": "phishing@vodafone.co.uk",
+      "source_url": "https://www.vodafone.co.uk/privacy/protecting-you/phishing",
+      "checked_on": "2026-07-31",
+      "note": "Vodafone's page obfuscates the address with Cloudflare email protection, so it was read by DECODING the published cfemail payload rather than copied from a search summary. Vodafone also lists an anti-fraud line, 0333 304 1665, for account fraud. Verified against the organisation's own published page on 2026-07-31; re-verify quarterly."
+    },
+    {
+      "key": "virginmedia-phishing",
+      "name": "Virgin Media phishing reporting",
+      "email": "phishing@virginmedia.com",
+      "source_url": "https://www.virginmedia.com/help/security",
+      "checked_on": "2026-07-31",
+      "note": "TWO ADDRESSES EXIST. virginmedia.com/help/security — the support page — names phishing@virginmedia.com as primary, which is what the guides use. Virgin Media O2's editorial pages also name phishing@virginmediao2.com after the merger. Both are the same company; finding the O2 one elsewhere is NOT evidence this is stale. Recorded so a future audit does not re-raise it, as happened with Advice Direct Scotland. Verified against the organisation's own published page on 2026-07-31; re-verify quarterly."
+    },
+    {
+      "key": "talktalk-phishing",
+      "name": "TalkTalk phishing reporting",
+      "email": "phishing@talktalk.co.uk",
+      "source_url": "https://help-centre.talktalk.co.uk/Broadband/Security/Phishing_emails_-_everything_you_need_to_know",
+      "checked_on": "2026-07-31",
+      "note": "TalkTalk's help centre. Distinct from the TalkTalk SUPPORT line already in this list under key `talktalk`. Verified against the organisation's own published page on 2026-07-31; re-verify quarterly."
+    },
+    {
+      "key": "britishgas-phishing",
+      "name": "British Gas phishing reporting",
+      "email": "phishing@britishgas.co.uk",
+      "source_url": "https://www.britishgas.co.uk/help-and-support/my-account/accessing-your-account",
+      "checked_on": "2026-07-31",
+      "note": "British Gas asks for the suspicious email ATTACHED to a new message, and a SCREENSHOT for suspicious texts. Verified against the organisation's own published page on 2026-07-31; re-verify quarterly."
+    },
+    {
+      "key": "netflix-phishing",
+      "name": "Netflix phishing reporting",
+      "email": "phishing@netflix.com",
+      "source_url": "https://help.netflix.com/en/node/65674",
+      "checked_on": "2026-07-31",
+      "note": "Netflix takes forwarded suspicious emails AND texts at the same address. Verified against the organisation's own published page on 2026-07-31; re-verify quarterly."
+    },
+    {
+      "key": "slc-fcpu-alerts",
+      "name": "Student Loans Company phishing reporting",
+      "email": "fcpu_alerts@slc.co.uk",
+      "source_url": "https://www.gov.uk/guidance/phishing-scams-how-you-can-avoid-them",
+      "checked_on": "2026-07-31",
+      "note": "GOV.UK's student-finance phishing guidance: send a suspected scam email or text here. This REPLACED phishing@slc.co.uk, which the guides carried until 2026-07-31 and which no prior audit caught. SLC also lists furtherinfo@slc.co.uk for suspected vishing calls — a separate route, not an alternative to this one. Verified against the organisation's own published page on 2026-07-31; re-verify quarterly."
+    },
+    {
+      "key": "yodel-infosec",
+      "name": "Yodel suspicious-email reporting",
+      "email": "information.security@yodel.co.uk",
+      "source_url": "https://www.yodel.co.uk/privacy-cookies-policy/fraud",
+      "checked_on": "2026-07-31",
+      "note": "Yodel by InPost's fraud page. Distinct from the SENDING addresses it publishes (donotreply@ / noreply@yodel.co.uk), which the guides quote so readers recognise genuine mail and which are NOT reporting routes. Verified against the organisation's own published page on 2026-07-31; re-verify quarterly."
+    },
+    {
+      "key": "microsoft-phish",
+      "name": "Microsoft phishing reporting",
+      "email": "phish@office365.microsoft.com",
+      "source_url": "https://learn.microsoft.com/en-us/defender-office-365/submissions-report-messages-files-to-microsoft",
+      "checked_on": "2026-07-31",
+      "note": "For email clients other than Outlook. Microsoft requires the message as an ATTACHMENT in a NEW email — explicitly not forwarded — so the headers survive. In Outlook itself the Report button is the faster route. Verified against the organisation's own published page on 2026-07-31; re-verify quarterly."
+    },
+    {
+      "key": "depop-reportphishing",
+      "name": "Depop phishing reporting",
+      "email": "reportphishing@depop.com",
+      "source_url": "https://safety.depop.com/keeping-you-safe-on-depop/keeping-your-account-safe/",
+      "checked_on": "2026-07-31",
+      "note": "Depop asks for the email forwarded WITH the sender's information. Verified against the organisation's own published page on 2026-07-31; re-verify quarterly."
+    },
+    {
+      "key": "revolut-support",
+      "name": "Revolut support inbox (fallback reporting route)",
+      "email": "support@revolut.com",
+      "source_url": "https://www.revolut.com/contact-us/",
+      "checked_on": "2026-07-31",
+      "note": "A SUPPORT inbox, not a dedicated phishing address. Revolut directs fraud reports to in-app chat first and names this only for customers who cannot reach the app or chat — which is exactly how the guide uses it. Revolut offers no general phone support, so an inbound call claiming to be Revolut is itself a red flag. Verified against the organisation's own published page on 2026-07-31; re-verify quarterly."
     }
   ]
 }
