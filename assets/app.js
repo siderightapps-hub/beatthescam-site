@@ -130,7 +130,11 @@
     }
   }
 
-  // AdSense installs window.__tcfapi via an async <script> tag (see base.html),
+  // AdSense's own tag installs window.__tcfapi and loads Google's certified
+  // consent message; there is NO separate tag in base.html and Google documents
+  // that none is needed. It follows that pages served WITHOUT the ad tag have no
+  // certified CMP, which is why the fallback below is the real consent surface
+  // there (verified live, 2026-07-31),
   // which can finish loading AFTER this deferred script runs — a single
   // "typeof === 'function'" check here would then never register the listener
   // below, so a CMP that shows up a moment later displays its own message on
