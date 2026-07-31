@@ -580,6 +580,21 @@ _FRAUD_ALERT_RE = re.compile(
 # so blanket "HMRC never texts/emails/links you" is inaccurate → FLAG (review).
 _HMRC_CHANNEL_RE = re.compile(
     r"HMRC[^.]{0,40}\bnever\b[^.]{0,40}\b(?:text|texts|sms|e-?mails?|links?)\b", re.I)
+# The check's own guidance is to say HMRC won't ask you to CONFIRM details or
+# 'CLAIM' a refund. Written that way the sentence still matches the pattern
+# above ("...never asks you to 'confirm' bank details by text"), so the correct
+# wording was flagged forever — noise that trains everyone to ignore the flag,
+# which is how the retired SLC mailbox survived. A match carrying one of these
+# qualifiers is the narrow form, not a blanket channel claim (audit, 2026-07-31).
+def _hmrc_blanket(text: str):
+    """True only for an UNQUALIFIED blanket channel claim."""
+    m = _HMRC_CHANNEL_RE.search(text)
+    return m and not _HMRC_QUALIFIED_RE.search(m.group(0))
+
+
+_HMRC_QUALIFIED_RE = re.compile(
+    r"\b(?:confirm|claim|verify|bank details|card details|security (?:details|information)|"
+    r"password|passcode|PIN|one-?time code)\b", re.I)
 
 # Other over-broad channel and reimbursement statements found in the 2026-07
 # category-hub audit. Genuine banks and public bodies sometimes send links, so
@@ -620,7 +635,7 @@ def check_uk_advice_flags(post: Dict) -> List[Dict]:
                        "span": re.sub(r"\s+", " ", _FRAUD_ALERT_RE.search(text).group(0))[:140],
                        "detail": ("uses US-style 'fraud alert on your credit file'. The UK mechanism is a "
                                   "Cifas Protective Registration (cifas.org.uk); free CRA monitoring is separate.")})
-    if _HMRC_CHANNEL_RE.search(text):
+    if _hmrc_blanket(text):
         issues.append({"check": "hmrc_channel", "severity": SEVERITY_FLAG,
                        "span": re.sub(r"\s+", " ", _HMRC_CHANNEL_RE.search(text).group(0))[:140],
                        "detail": ("blanket 'HMRC never texts/emails/links you' — HMRC runs genuine SMS/email "

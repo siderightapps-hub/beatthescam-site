@@ -5,7 +5,7 @@
     "description": "Got an unexpected automated 'Amazon' call about an order or account? Treat it as unverified. Here is how to check it safely and stop a phone scam.",
     "hero": "An unexpected call says there is a problem with your Amazon order or account — verify it in your account before doing anything.",
     "date": "2026-06-07",
-    "updated": "2026-07-30",
+    "updated": "2026-07-31",
     "category": "phone",
     "keywords": [
       "amazon scam calls uk",
@@ -77,7 +77,7 @@
         "https://www.scotland.police.uk/contact-us/non-emergencies/"
       ]
     ],
-    "quick_answer": "An unexpected automated call about a suspicious Amazon order or Prime renewal is a scam — Amazon will not ask for an OTP or confidential account information over the phone. Hang up without pressing anything and check Your Orders in the app or at amazon.co.uk. Report it to Report Fraud on 0300 123 2040, or Police Scotland on 101."
+    "quick_answer": "An unexpected call about an Amazon order or Prime renewal that asks for a one-time code or account details is a scam — Amazon will not ask for those over the phone. Hang up without pressing anything and check Your Orders in the app or at amazon.co.uk. Report it to Report Fraud, or Police Scotland on 101."
   },
   {
     "slug": "chargeback-scam-uk",
@@ -242,7 +242,7 @@
   {
     "slug": "google-voice-verification-scam",
     "title": "Google Voice Verification Code Scam UK: Don't Share That Code",
-    "description": "Someone asks you to read back a Google verification code to 'prove you're real'? It's a scam to hijack your number. Here's how it works and what to do.",
+    "description": "Asked to read back a Google verification code to 'prove you're real'? It's a scam to take over an account in your name. Here's how it works and what to do.",
     "hero": "A buyer or match asks you to read back a Google verification code — never do it. Here's the Google Voice scam explained.",
     "date": "2026-06-07",
     "category": "fraud",
@@ -316,13 +316,13 @@
         "https://www.scotland.police.uk/contact-us/non-emergencies/"
       ]
     ],
-    "updated": "2026-07-30",
+    "updated": "2026-07-31",
     "quick_answer": "Anyone asking you to read back a verification code to 'prove you're real' is a scammer — the code they triggered unlocks a sign-up or login tied to your number. Never share a one-time code with anyone. If you already did, change your Google password, turn on two-step verification, and report it to Report Fraud or Police Scotland on 101."
   },
   {
     "slug": "beatthescamcom-guide-spotting-and-avoiding-uk-consumer-scams",
     "title": "How to Spot and Avoid Scams in the UK: The Core Rules",
-    "description": "Every scam relies on the same handful of tricks. Learn the pattern once and you'll recognise it in a call, text, or email you've never seen before.",
+    "description": "Almost every scam relies on the same handful of tricks. Learn the pattern once and you'll recognise it in a call, text, or email you've never seen before.",
     "hero": "Learn the pattern behind scams once, and you'll recognise it whatever story it's wrapped in.",
     "date": "2026-06-07",
     "category": "fraud",
@@ -388,7 +388,7 @@
       ]
     ],
     "excerpt": "Almost every scam — whatever the channel or story — relies on the same pattern of urgency, pressure, and requests to move money or share codes. Here's the core framework for spotting and avoiding any of them.",
-    "updated": "2026-07-30",
+    "updated": "2026-07-31",
     "sources_checked": [
       [
         "Take Five to Stop Fraud — Stop. Challenge. Protect.",
@@ -661,7 +661,7 @@
       ],
       [
         "How a genuine UPS charge or delivery actually works",
-        "Real customs charges on parcels from outside the UK do exist, but legitimate UPS contacts you about them in a verifiable way and lets you check the charge against your specific tracking number on the official ups.com site. To verify any UPS message, don't use its link — find your tracking number in the retailer's dispatch email, then type ups.com into your browser or open the UPS app and enter the number yourself. If you have a UPS My Choice account, check there. A genuine process will match a parcel you're actually expecting and won't ask for your full card number, PIN, online banking password, or a security code by text. If anything doesn't line up, treat the message as a scam and check with the retailer you bought from."
+        "Real customs charges on parcels from outside the UK do exist, and UPS says some shipments genuinely require funds before or at delivery, so a request for money is not proof of fraud on its own. Legitimate UPS contacts you about them in a verifiable way and lets you check the charge against your specific tracking number on the official ups.com site. To verify any UPS message, don't use its link — find your tracking number in the retailer's dispatch email, then type ups.com into your browser or open the UPS app and enter the number yourself. If you have a UPS My Choice account, check there. A genuine process will match a parcel you're actually expecting and won't ask for your full card number, PIN, online banking password, or a security code by text. If anything doesn't line up, treat the message as a scam and check with the retailer you bought from."
       ],
       [
         "What to do if you paid a UPS 'customs' or 'delivery' fee",
@@ -705,7 +705,7 @@
       ]
     ],
     "quick_answer": "A 'UPS' text demanding a customs, import or redelivery fee through a link is almost always a scam — genuine charges are never collected via a random SMS link. Verify any charge by entering your tracking number at ups.com yourself, then forward the fake text free to `7726`.",
-    "updated": "2026-07-30"
+    "updated": "2026-07-31"
   },
   {
     "slug": "bank-text-codes-not-arriving",
@@ -1446,7 +1446,7 @@
       "report whatsapp scam uk",
       "friend in need scam"
     ],
-    "updated": "2026-07-30",
+    "updated": "2026-07-31",
     "sources_checked": [
       [
         "WhatsApp Help Center — About two-step verification",
@@ -1465,7 +1465,7 @@
         "https://www.scotland.police.uk/contact-us/non-emergencies/"
       ]
     ],
-    "quick_answer": "A WhatsApp from a 'new number' claiming to be your child and needing urgent money is the 'Hi Mum' impersonation scam. Never send anything until you've spoken to the real person on the number you already have saved. If you've paid, call your bank immediately and report it to Report Fraud or Police Scotland on 101."
+    "quick_answer": "A WhatsApp from a 'new number' claiming to be your child and needing urgent money matches the 'Hi Mum' impersonation pattern — treat it as unverified. Never send anything until you've spoken to the real person on the number you already have saved. If you've paid, call your bank immediately and report it."
   },
   {
     "title": "Vinted Scams UK: Warning Signs for Buyers and Sellers",
@@ -3263,7 +3263,7 @@
       "Halifax security alert text",
       "report Halifax scam text"
     ],
-    "updated": "2026-07-30",
+    "updated": "2026-07-31",
     "sources_checked": [
       [
         "Halifax — Latest scams and the Halifax-to-Lloyds brand change",
@@ -3328,7 +3328,7 @@
         "assessment": "Halifax says passcodes are private and it will not call to ask you to use one to stop fraud, issue a refund or secure an account."
       }
     ],
-    "quick_answer": "An unexpected Halifax text with a link, a passcode request, or 'safe account' instructions is a scam — Halifax says it will never ask you to share your Personal Security Number, PIN, or move money to another account. Don't tap the link; open the Halifax app or call the number on your card, and forward the text to `7726`."
+    "quick_answer": "A text asking you to share a passcode or move money to a 'safe account' is a scam whoever it appears to come from — Halifax says it will never ask for either. A link alone proves nothing. Open the Halifax app or call the number on your card, and forward the text to `7726`."
   },
   {
     "title": "DVLA Vehicle Tax Text: Is It Genuine or a Scam?",
@@ -3805,14 +3805,14 @@
       "council tax refund scam UK",
       "report council tax scam text"
     ],
-    "updated": "2026-07-18",
+    "updated": "2026-07-31",
     "sources_checked": [
       [
         "GOV.UK — Pay Council Tax arrears",
         "https://www.gov.uk/council-tax-arrears"
       ]
     ],
-    "quick_answer": "A text offering a council tax refund or demanding arrears through a link is a scam — council tax is run by your local council, and refunds are not claimed via text links. Find your council through gov.uk/find-local-council, check your account there, and forward the text to `7726`."
+    "quick_answer": "A council tax refund is never claimed through a link in an unexpected text. Some councils do text about arrears, so the link is the risk rather than the subject. Find your council through gov.uk/find-local-council, check your account there, and forward the text to `7726`."
   },
   {
     "title": "Parking Fine Scam Text UK: Spot a Fake PCN SMS",
@@ -4592,7 +4592,7 @@
     "slug": "tv-licence-email-scam-uk",
     "category": "email",
     "excerpt": "Scammers impersonate TV Licensing to trick UK residents into paying fake fines or revealing personal details via urgent email demands.",
-    "description": "Genuine TV Licensing payment emails come from specific sender addresses. Here's how to check a TV Licence email is real before clicking any link.",
+    "description": "TV Licensing uses several genuine sender addresses, and scammers can spoof them — so check your licence at tvlicensing.co.uk rather than trusting the sender.",
     "hero": "Criminals are sending convincing fake TV Licensing emails to UK households — here's how to spot them and protect yourself.",
     "date": "2026-04-27",
     "content": "## What is this scam?\n\nThe TV licence email scam targets UK residents with urgent-sounding messages pretending to come from TV Licensing (TVL), the authority responsible for collecting the annual television licence fee. Scammers send emails claiming you've failed to pay your licence fee, owe a fine, or need to renew immediately — often threatening enforcement action or account suspension. The emails include fake payment links directing you to fraudulent websites designed to look identical to the genuine TV Licensing site. Once you enter your details or make a payment, criminals steal your bank information, identity data, or money. This scam is particularly effective because TV Licensing is a real organisation that most UK households interact with, and genuine payment reminders are common, making fake ones harder to spot at first glance.\n\n## Warning signs to look for\n\n[\"- The email uses urgent language like 'immediate action required', 'your account will be suspended', or 'legal action will follow' — genuine TV Licensing communications are rarely this aggressive.\", \"- Links in the email go to suspicious URLs that don't match the real TV Licensing domain (tvlicensing.co.uk) — check the full address before clicking.\", \"- You're asked to pay by bank transfer, gift card, or crypto rather than through the official TV Licensing payment methods like Direct Debit or credit card.\", \"- The email comes from a generic address like 'support@tvlicense.com' instead of an official TV Licensing domain, or the sender's name seems odd.\", \"- The message contains spelling errors, poor grammar, or awkward phrasing that doesn't match official TVL communications.\", \"- You're asked to confirm personal details like your full bank account number, sort code, or National Insurance number — TV Licensing never requests this via email.\", \"- The email doesn't address you by name or references a vague 'account holder' instead of your specific details.\"]\n\n## How this scam works step by step\n\nThe scam typically begins when you receive an email claiming to be from TV Licensing, often appearing urgent and threatening. It states you've missed a payment, owe a penalty, or need to renew your licence immediately. The email includes a link marked 'Pay Now' or 'Renew Your Licence', which actually directs you to a fake website mimicking the real TV Licensing site. Once you click the link and land on the fraudulent page, you're prompted to enter your personal information — name, address, date of birth, email, and crucially, your bank details. Some versions ask you to log into your 'TV Licensing account' using fake login fields, capturing your credentials. When you attempt to make a payment or submit your information, the criminals capture all the data you've entered. They then use this information to make unauthorised payments from your bank account, apply for credit in your name, or sell your identity to other criminals. Some victims also report follow-up emails asking them to 'verify' or 'confirm' additional details, extending the scam's reach.\n\n## How to verify if it is genuine\n\nContact TV Licensing directly using the phone number or website from your own records — never use contact details from the suspicious email. The genuine TV Licensing phone number is 0300 555 0363, and their official website is tvlicensing.co.uk (not tvlicense.com, licensing.tv, or similar variations). Check your payment history by logging into the genuine TV Licensing website directly (type the address into your browser, don't click email links) to see if any payment is actually outstanding. Look for small details: genuine TV Licensing emails come from @tvlicensing.co.uk addresses, address you by name, and avoid threatening language. If you're unsure about a link, hover over it without clicking to see the actual destination URL. For more help assessing whether an email is legitimate, read our guide on /guides/is-this-website-a-scam/. You can also contact Citizens Advice if you're uncertain about what TV Licensing owes you.\n\n## What to do if you have already interacted\n\nIf you clicked a link but didn't enter any information, stop immediately and take no further action with that email. If you entered your bank details or made a payment, contact your bank right away — most banks have a fraud team available 24/7 — and explain that you may have been scammed. Ask your bank to freeze your account, cancel any pending transactions, and monitor for suspicious activity. If you provided your National Insurance number, date of birth, or full name and address, contact Experian (0344 481 8000) or another credit reference agency to request a free credit check and consider placing a fraud alert on your file. Report the scam to Action Fraud (0300 123 2040 or online at actionfraud.police.uk) and the NCSC by forwarding the email to report@phishing.gov.uk. Change your passwords for any online accounts that use a similar password to what you may have entered. If money was taken, your bank may help you recover it under the Contingent Reimbursement Model for Authorised Push Payment fraud. Keep all evidence of the scam, including screenshots and the email itself.\n\n## Reporting this scam in the UK\n\nReport the scam to Action Fraud, the UK's national fraud reporting service, either by calling 0300 123 2040 (Monday to Friday, 8am to 8pm) or by submitting a report online at actionfraud.police.uk. Forward the suspicious email to the National Cyber Security Centre (NCSC) Suspicious Email Reporting Service at report@phishing.gov.uk — this helps the NCSC take down fake websites and block malicious emails at source. If you received the scam via text message, forward it to 7726 (spells SPAM). You can also report the phishing email directly to TV Licensing themselves by forwarding it to their fraud team — you'll find their contact details on the genuine tvlicensing.co.uk website under 'Contact Us'. If you're struggling financially or have concerns about your actual TV licence obligations, contact the Citizens Advice consumer helpline on 0808 223 1133 (free, Monday to Friday, 9am to 5pm) for guidance. Reporting helps protect other UK households from the same scam and allows authorities to shut down the criminals' fake websites and email accounts faster.",
@@ -4658,7 +4658,7 @@
       "is confirmation@tvlicensing.co.uk legitimate",
       "tv licensing scam email"
     ],
-    "updated": "2026-07-30",
+    "updated": "2026-07-31",
     "sources_checked": [
       [
         "TV Licensing — Helping you avoid TV Licensing scams and how to report one",
@@ -7449,7 +7449,7 @@
     "category": "government",
     "excerpt": "Fake court summons emails use fear of legal trouble to push a click or payment. Here's how to verify genuine HMCTS contact and what to do if you've already responded.",
     "description": "An email claims you've an unpaid fine or court date and must act now? Check the HMCTS domain and verify through official court details.",
-    "hero": "Genuine HMCTS email is sent from an address ending in `@justice.gov.uk`. Check the real sender before acting.",
+    "hero": "A genuine HMCTS address can be spoofed, so the sender is not the test — verify any court claim through GOV.UK's court finder before acting.",
     "date": "2026-05-06",
     "content": "## What is this scam?\n\nThe court summons scam involves fraudsters sending emails that appear to come from HMCTS (His Majesty's Courts and Tribunals Service). The email claims you have an unpaid fine, missed court appearance, or a legal case against you — and demands you act immediately. Scammers use official-looking logos, court language, and urgent language ('Your case number is...', 'Fine of £...' or 'Arrest warrant pending') to create panic. They may claim you owe money for a traffic offence, council tax debt, or civil case. The real goal is to trick you into clicking a malicious link, downloading an infected attachment, or handing over personal and financial details. Some variants ask you to pay a fine via bank transfer or card, while others try to harvest your login credentials or install malware on your device.\n\n## Warning signs to look for\n\n- The email address doesn't match HMCTS official domains (real HMCTS emails come from @justice.gov.uk, never from Gmail, Yahoo, or generic domains).\n- You're asked to click a link to 'confirm details', 'pay online', or 'view your case' — HMCTS never asks this via email.\n- The message uses urgent language ('act within 24 hours' or 'arrest warrant') to panic you into acting without thinking.\n- The email address you received it on doesn't match any legal cases or courts you know about — scammers often send mass emails.\n- There are spelling mistakes, odd grammar, or awkward phrasing that wouldn't appear in official court correspondence.\n- You're asked to pay a fine via bank transfer, iTunes card, or cryptocurrency — real courts accept payments through official portals only.\n- The email has generic greetings like 'Dear Customer' instead of your actual name, or doesn't reference a specific case number or court.\n- Links in the email point to suspicious websites with misspelled domain names (e.g. 'hmcts-courts.co.uk' instead of the real gov.uk address).\n\n## How this scam works step by step\n\nThe scam typically starts with an email landing in your inbox that mimics HMCTS formatting and branding. The message claims you owe money, have missed a court date, or face legal action. To increase urgency, scammers often cite specific amounts or case numbers to sound credible. When you click the link in the email, you're taken to a fake website that looks almost identical to the real HMCTS portal. Here, you're asked to 'verify your identity' by entering your full name, date of birth, address, bank details, or login credentials. Some variants ask you to download a PDF 'court order' or 'fine notice' — this file contains malware that can steal passwords or lock your device. Once the scammer has your data, they can use it for identity theft, access your bank account, or sell your details to other criminals. If you're tricked into paying, the money goes straight to a fraudulent account and is almost impossible to recover.\n\n## How to verify if it is genuine\n\nIf you receive an email claiming to be from HMCTS, do not click any links or download attachments. Instead, open a new browser tab and go directly to the official HMCTS website (www.justice.gov.uk or www.gov.uk/courts). Check the email sender's address carefully — real HMCTS emails only come from @justice.gov.uk addresses, never from Gmail, Outlook, or other free email providers. If you think you might have a court case, you can search the HMCTS portal using your name and date of birth to verify any claims. Never call the number listed in a suspicious email — instead, find the official court contact details on the gov.uk website and call them directly. If you're unsure whether a fine or case is real, contact Citizens Advice (0808 223 1133) or your local court directly. For more guidance on spotting fake emails, see our guide on identifying fraudulent websites at /guides/is-this-website-a-scam/.\n\n## What to do if you have already interacted\n\nIf you've clicked a link or downloaded an attachment from the email, take action immediately. First, do not enter any personal, financial, or login information into the fake website. If you've already provided data, change your passwords immediately — especially for email, banking, and government accounts. Run a full antivirus scan on your device using reputable software (Windows Defender, Malwarebytes, or Norton) to check for installed malware. Contact your bank straight away if you've shared card details or bank account information — they can block fraudulent transactions and issue a new card if necessary. Check your credit report via TransUnion, Experian, or Equifax to spot any fraudulent accounts opened in your name. Report the scam to Action Fraud (0300 123 2040 or www.actionfraud.police.uk), the NCSC Suspicious Email Reporting Service (report@phishing.gov.uk), and forward the email to Citizens Advice. If money was sent, your bank may be able to recover it through the Contingent Reimbursement Model (CRM) scheme, but only if you report it quickly.\n\n## Reporting this scam in the UK\n\nReport fake HMCTS emails to multiple agencies to help protect others. Call Action Fraud on 0300 123 2040 or report online at www.actionfraud.police.uk — keep a record of your crime reference number. Send the fraudulent email to the NCSC Suspicious Email Reporting Service at report@phishing.gov.uk; they track phishing campaigns and can take action against fake websites. If you received the scam via SMS text message instead of email, forward it to 7726 (spells 'SPAM'). Contact Citizens Advice consumer helpline on 0808 223 1133 if you need support understanding what happened or claiming back money. Forward a copy of the email to HMCTS directly at abuse@justice.gov.uk so they're aware their name is being impersonated. Report the fake website URL to the Internet Watch Foundation if it's still active. The more reports received, the faster scammers' websites are taken down.",
     "sections": [
@@ -7513,7 +7513,7 @@
       "fake warrant email scam",
       "hmcts phishing report"
     ],
-    "updated": "2026-07-23",
+    "updated": "2026-07-31",
     "sources_checked": [
       [
         "GOV.UK — HMCTS warning on email scams",
@@ -11662,7 +11662,7 @@
       ],
       [
         "The \"safe account\" instruction — the single biggest red flag",
-        "If a caller tells you that your money is at risk and instructs you to transfer it to a new account for safekeeping, hang up immediately. This is the defining feature of an authorised push payment (APP) fraud. Once money is transferred to the fraudster's account, recovery is not guaranteed even if you report it quickly.\n\nUK banks are required to reimburse victims of APP fraud under Payment Systems Regulator rules in many cases, but the reimbursement process can take weeks and disputes arise over whether the victim took reasonable care. The safest outcome is to never authorise the transfer in the first place. No bank — including Santander — will ever ask you to move your money somewhere else to protect it."
+        "If a caller tells you that your money is at risk and instructs you to transfer it to a new account for safekeeping, hang up immediately. This is the defining feature of an authorised push payment (APP) fraud. Once money is transferred to the fraudster's account, recovery is not guaranteed even if you report it quickly.\n\nUK banks are required to reimburse victims of APP fraud under Payment Systems Regulator rules in many cases. An eligible claim is normally decided within five business days, and a firm that needs longer can stop the clock while it investigates, up to a maximum of 35 business days. Reimbursement can be refused where the customer acted with gross negligence, which is a higher bar than simply failing to take reasonable care. The safest outcome is to never authorise the transfer in the first place. No bank — including Santander — will ever ask you to move your money somewhere else to protect it."
       ],
       [
         "What to do during and after the call",
@@ -11680,7 +11680,7 @@
       ],
       [
         "I approved a transaction during the call — can I get my money back?",
-        "Contact Santander immediately, before doing anything else. UK banks are required to reimburse victims of authorised push payment (APP) fraud in many cases under Payment Systems Regulator rules, but this is not automatic and depends on the circumstances of the transfer. Also call 159 to reach the banking fraud line and report it to Report Fraud at reportfraud.police.uk in England, Wales or Northern Ireland, or to Police Scotland on 101 in Scotland — the case reference helps when disputing the payment with your bank."
+        "Contact Santander immediately, before doing anything else. UK banks are required to reimburse victims of authorised push payment (APP) fraud in many cases under Payment Systems Regulator rules, but this is not automatic and depends on the circumstances of the transfer. An eligible claim is normally decided within five business days, extending to a maximum of 35 business days if the firm stops the clock to investigate. Also call 159 to reach the banking fraud line and report it to Report Fraud at reportfraud.police.uk in England, Wales or Northern Ireland, or to Police Scotland on 101 in Scotland — the case reference helps when disputing the payment with your bank."
       ],
       [
         "How do I verify that someone calling me is really from Santander?",
@@ -11716,7 +11716,7 @@
         "https://www.scotland.police.uk/contact-us/non-emergencies/"
       ]
     ],
-    "updated": "2026-07-30",
+    "updated": "2026-07-31",
     "quick_answer": "A caller posing as Santander's fraud team who asks you to read back a One-Time Passcode, confirm security details or move money to a safe account is a fraudster — no bank asks for these. Hang up and call Santander back on the number from your card, or dial 159."
   },
   {
@@ -13059,7 +13059,7 @@
       "O2 phishing scam",
       "how to spot O2 text scam"
     ],
-    "updated": "2026-07-30",
+    "updated": "2026-07-31",
     "sources_checked": [
       [
         "O2 — How to prevent and report scam calls and messages",
@@ -13082,7 +13082,7 @@
         "https://www.scotland.police.uk/contact-us/non-emergencies/"
       ]
     ],
-    "quick_answer": "A text pressing you to verify your O2 account or fix a failed payment through a link is phishing — O2 says it will never ask for a one-time code, password, or security information by text. Ignore the link, log in directly at o2.co.uk, and forward the message free to `7726`."
+    "quick_answer": "O2 does send genuine billing and payment texts, so the subject is not the test — but any message asking for a one-time code, password or security information is phishing, because O2 says it will never ask for those by text. Ignore the link, log in directly at o2.co.uk, and forward the message free to `7726`."
   },
   {
     "title": "Vodafone Scam Text UK: Spot a Fake Vodafone SMS",
@@ -13717,7 +13717,7 @@
       "report festival email scam",
       "fake festival ticket presale link"
     ],
-    "updated": "2026-07-18",
+    "updated": "2026-07-31",
     "sources_checked": [
       [
         "Report Fraud — Ticket fraud",
@@ -13728,7 +13728,7 @@
         "https://www.star.org.uk/about/"
       ]
     ],
-    "quick_answer": "An unsolicited email offering exclusive or guaranteed presale tickets timed to a lineup announcement is a scam built to harvest card details or sell tickets that do not exist. Ignore the link, go to the festival's own website for its named authorised sellers, and forward the email to report@phishing.gov.uk."
+    "quick_answer": "An unsolicited email promising guaranteed or exclusive presale tickets around a lineup announcement is a strong warning sign — festivals sell presales through named authorised sellers, not through unexpected offers. Ignore the link, go to the festival's own website for its named authorised sellers, and forward the email to report@phishing.gov.uk."
   },
   {
     "title": "F1 British GP Ticket Scam UK: Spot a Fake Silverstone Seller",
@@ -14047,7 +14047,7 @@
     "category": "travel",
     "excerpt": "Scammers pose as holiday compensation claims handlers to extract upfront fees from UK travellers owed refunds.",
     "description": "Cold-called about compensation you're owed for a delayed or cancelled trip? Check the firm is FCA-authorised before sharing any details.",
-    "hero": "If someone contacts you out of the blue about holiday compensation you never claimed, it's almost certainly a scam.",
+    "hero": "Unsolicited contact about holiday compensation you never claimed is a warning sign, not proof — check the firm's authorisation before sharing anything.",
     "date": "2026-06-05",
     "content": "## What is this scam?\n\nThe holiday compensation scam targets UK holidaymakers who are owed money for cancelled trips, flight delays, or package holiday failures. Scammers contact victims posing as claims management companies, often using official-sounding names or mimicking real firms. They claim the victim qualifies for compensation under UK consumer rights or EU261 regulations (which still apply to many British travellers), then demand an upfront fee—typically £100 to £500—to process the claim. Some scammers claim they need the fee to cover administrative costs or legal fees. Once payment is sent via bank transfer or gift cards, the scammer disappears. Real compensation never materialises. The scam exploits genuine entitlements: UK Package Holiday Regulations and ATOL protection do provide real compensation rights, but legitimate claims handlers either work on no-win-no-fee basis or are authorised by the Financial Conduct Authority.\n\n## Warning signs to look for\n\n- You receive an unsolicited call, email, or text about holiday compensation you never requested or applied for.\n- The caller claims you're eligible for compensation but can't clearly explain what trip or incident it relates to.\n- They demand an upfront fee 'to process' your claim, especially via bank transfer, gift card, or cryptocurrency.\n- They pressure you to act quickly, claiming the offer expires soon or a deadline is approaching.\n- The company name sounds similar to real claims handlers but has a slightly different spelling or unusual domain name.\n- They cannot provide a registered office address, telephone number that connects to a real office, or details in the Claims Management Regulator database.\n- They ask for sensitive information like your full passport details, bank account numbers, or holiday booking references upfront.\n- The email address or phone number doesn't match the company's official website, or has generic domains like Gmail or Outlook.\n\n## How this scam works step by step\n\nThe scam typically begins with an unsolicited contact—a cold call, email, or text message—claiming the victim is eligible for holiday compensation. The scammer may reference a specific airline, hotel chain, or holiday period to sound credible, or simply ask broad questions about recent trips. Once they've established apparent eligibility, they explain that processing the claim requires an upfront fee, usually between £100 and £500, framed as 'administration costs' or 'legal fees.' They may offer payment options including bank transfer, debit card details, or gift cards. Some scammers create fake portals or send official-looking documents with logos stolen from real companies. After the victim pays, communication stops. The scammer never submits a claim and disappears with the money. Meanwhile, the victim may wait weeks expecting updates before realising they've been defrauded. In some cases, scammers also steal banking or passport details provided during the 'claim process,' leading to identity theft or fraudulent transactions on victims' accounts.\n\n## How to verify if it is genuine\n\nIf someone contacts you about holiday compensation, verify their legitimacy before paying anything. First, never rely on contact details they provide—instead, find the company's official number or website independently. Check the Claims Management Regulator database at claimsmanagementregulator.org.uk: legitimate claims handlers must be registered here. For real compensation claims, verify your original booking: check your email confirmations, credit card statements, and airline websites to confirm what you're actually entitled to claim. Contact your original airline, holiday company, or travel insurance provider directly using numbers from official websites—not details provided by the caller. Check the ATOL protection scheme at atol.org.uk if you booked a package holiday. Real organisations like the Civil Aviation Authority (CAA) never charge upfront fees for compensation advice. If you're unsure whether a website is genuine, visit /guides/is-this-website-a-scam/ for detailed verification steps. Be particularly cautious if the caller knows details about your trip—scammers often use information from data breaches or public sources to sound credible.\n\n## What to do if you have already interacted\n\nIf you've engaged with a holiday compensation scammer, take immediate action. First, stop all contact with them and do not send any money. If you have already paid via bank transfer, contact your bank immediately—explain it was a scam and request a recall of the payment. Banks can sometimes reverse transfers within hours, though success depends on timing and whether the scammer has already moved the money. Report the scam to Action Fraud (0300 123 2040) and provide all documentation: emails, call logs, payment confirmations, and the scammer's contact details and claimed company name. If you received a suspicious email, report it to the NCSC Suspicious Email Reporting Service at report@phishing.gov.uk. If contacted by SMS or text, forward the message to 7726. Check your credit reports through TransUnion or Equifax to monitor for fraudulent accounts opened in your name. If they obtained sensitive details like passport or bank information, consider Cifas Protective Registration on your file and informing your bank of potential identity theft risk. Do not engage further with the scammer, even to demand money back—this confirms your contact details are active.\n\n## Reporting this scam in the UK\n\nReport all holiday compensation scams to Action Fraud, the UK's national fraud reporting service, by calling 0300 123 2040 or visiting actionfraud.police.uk online. Provide as much detail as possible: the scammer's name, company name, phone number, email address, and payment details. If you paid via bank transfer, include the account details you transferred to. Report the email to the NCSC Suspicious Email Reporting Service at report@phishing.gov.uk—this helps track phishing campaigns. If you received a text or SMS, forward it to 7726 (Phishing), which alerts your mobile network operator. For additional consumer rights advice, contact Citizens Advice consumer helpline on 0808 223 1133 (free phone line). If the scammer falsely registered their company name to mimic a real organisation, report this to the Claims Management Regulator at claimsmanagementregulator.org.uk. If you suspect data breach involvement, notify the Information Commissioner's Office (ICO) at ico.org.uk. Keep all evidence—screenshots, call logs, emails, and payment records—as you may need these if pursuing a chargeback or refund through your bank. Share your experience with others and on consumer forums to help others avoid the same scam.",
     "sections": [
@@ -14111,7 +14111,7 @@
       "is this claims company legit",
       "holiday compensation uk"
     ],
-    "updated": "2026-07-18",
+    "updated": "2026-07-31",
     "sources_checked": [
       [
         "UK Civil Aviation Authority — Flight delays",
@@ -14122,7 +14122,7 @@
         "https://www.fca.org.uk/firms/claims-management-regulation"
       ]
     ],
-    "quick_answer": "A cold call or email offering to recover flight or holiday compensation you never claimed is almost certainly a scam, even though the underlying compensation rules are real. Check the firm on the Financial Services Register at register.fca.org.uk before sharing anything — and remember you can claim directly with the airline for free."
+    "quick_answer": "A cold call or email offering to recover compensation you never claimed is a warning sign, not proof: regulated claims firms may market lawfully, and not every travel service needs FCA permission. Check the firm on the Financial Services Register at register.fca.org.uk before sharing anything — and remember you can claim directly with the airline for free."
   },
   {
     "title": "Solar Panel Cold Caller Scam UK: Spot the Warning Signs",
@@ -15289,7 +15289,7 @@
       ],
       [
         "Reporting in the UK",
-        "GOV.UK's student-finance phishing guidance asks anyone who gets a suspected scam email or text about student finance to forward it to `fcpu_alerts@slc.co.uk`. If you've already responded to a phishing message, SLC's account-security page also names `phishing@slc.co.uk` as a forwarding address, and `cfs@slc.co.uk` for general concerns about the safety of your account. Suspicious emails can also be forwarded to `report@phishing.gov.uk`, and texts to 7726. If money was lost or an account was compromised, report the crime to Report Fraud at `reportfraud.police.uk` or 0300 123 2040 in England, Wales or Northern Ireland; in Scotland, call Police Scotland on 101."
+        "GOV.UK's student-finance phishing guidance asks anyone who gets a suspected scam email or text about student finance to forward it to `fcpu_alerts@slc.co.uk`. If you've already responded to a phishing message, sign in to your student finance account yourself and change your password, then contact SLC using the number on that account rather than any number in the message. Suspicious emails can also be forwarded to `report@phishing.gov.uk`, and texts to 7726. If money was lost or an account was compromised, report the crime to Report Fraud at `reportfraud.police.uk` or 0300 123 2040 in England, Wales or Northern Ireland; in Scotland, call Police Scotland on 101."
       ]
     ],
     "faq": [
@@ -15309,7 +15309,7 @@
       "Student Finance fraud",
       "Student Finance impersonation"
     ],
-    "updated": "2026-07-10",
+    "updated": "2026-07-31",
     "sources_checked": [
       [
         "GOV.UK — SLC phishing reminder to students",
@@ -15525,7 +15525,7 @@
       "HMRC 60599",
       "HMRC tax scam"
     ],
-    "updated": "2026-07-09",
+    "updated": "2026-07-31",
     "sources_checked": [
       [
         "GOV.UK — Check if a text message from HMRC is genuine",
@@ -15540,7 +15540,7 @@
         "https://www.litrg.org.uk/announcements/changes-hmrc-text-messages"
       ]
     ],
-    "quick_answer": "A message offering a Self Assessment refund or chasing an overdue bill through a link is a scam — HMRC sends genuine reminders but never asks you to click a link to confirm bank or card details. Check by logging in to your Government Gateway account via gov.uk, and forward scam texts to `60599` and emails to phishing@hmrc.gov.uk."
+    "quick_answer": "HMRC does send genuine Self Assessment reminders, and some carry gov.uk links, so the subject alone proves nothing — but it never asks you to confirm bank or card details or to 'claim' a refund through a link. Check by logging in to your Government Gateway account via gov.uk, and forward scam texts to `60599` and emails to phishing@hmrc.gov.uk."
   },
   {
     "title": "Companies House Scam Letter UK: Spot a Fake Fee Demand",
@@ -15763,7 +15763,7 @@
       ],
       [
         "Red flags that should stop you signing anything",
-        "- Unsolicited contact offering a 'free' holiday or voucher. Legitimate holiday companies do not cold-call or email random people with free offers; scammers use this to get you to an in-person sales pitch.\n- Pressure to sign or pay immediately. Genuine contracts allow time to read terms and seek legal advice; scammers create artificial urgency ('offer ends today', 'limited spaces') to prevent you thinking clearly.\n- Vague or verbal promises about resale value or investment returns. If the contract doesn't spell out exactly what you own, what it costs annually, and what you can do with it, walk away.\n- Extremely high upfront fees or 'membership' costs. Legitimate timeshare companies charge reasonable initial fees; scammers often demand thousands before you see any property or contract.\n- Difficulty finding independent reviews or the company's registration. Search the company name online with 'scam' or 'complaint'; check the FCA register if they claim to be regulated (most timeshare sellers are not).\n- Contracts written in small print or in a language you don't speak fluently. Scammers deliberately make terms hard to understand; never sign anything you cannot fully read and comprehend.\n- Promises of easy exit or resale. If a seller says 'you can sell it back to us anytime' or 'we'll find a buyer', get this in writing with specific terms; verbal promises are worthless.\n- Requests to pay by bank transfer, wire, or cryptocurrency. These methods are irreversible; legitimate companies accept credit cards, which offer buyer protection."
+        "- Unsolicited contact offering a 'free' holiday or voucher. Legitimate holiday companies do not cold-call or email random people with free offers; scammers use this to get you to an in-person sales pitch.\n- Pressure to sign or pay immediately. Genuine contracts allow time to read terms and seek legal advice; scammers create artificial urgency ('offer ends today', 'limited spaces') to prevent you thinking clearly.\n- Vague or verbal promises about resale value or investment returns. If the contract doesn't spell out exactly what you own, what it costs annually, and what you can do with it, walk away.\n- Extremely high upfront fees or 'membership' costs. Legitimate timeshare companies charge reasonable initial fees; scammers often demand thousands before you see any property or contract.\n- Difficulty finding independent reviews or the company's registration. Search the company name online with 'scam' or 'complaint'; check the FCA register if they claim to be regulated (most timeshare sellers are not).\n- Contracts written in small print or in a language you don't speak fluently. Scammers deliberately make terms hard to understand; never sign anything you cannot fully read and comprehend.\n- Promises of easy exit or resale. If a seller says 'you can sell it back to us anytime' or 'we'll find a buyer', get this in writing with specific terms; verbal promises are worthless.\n- Requests to pay by bank transfer, wire, or cryptocurrency. Money sent this way is difficult to trace and rarely recovered; legitimate companies accept credit cards, which offer buyer protection."
       ],
       [
         "How the scam unfolds: from first contact to the contract",
@@ -15811,7 +15811,7 @@
       "timeshare exit scam",
       "fake timeshare investment"
     ],
-    "updated": "2026-07-30",
+    "updated": "2026-07-31",
     "sources_checked": [
       [
         "legislation.gov.uk — The Timeshare, Holiday Products, Resale and Exchange Contracts Regulations 2010",
@@ -17082,7 +17082,7 @@
       ],
       [
         "I paid a 'shipping fee' for a fake giveaway prize. Can I get my money back?",
-        "Contact your bank immediately and explain that you've been scammed — how you paid matters. If you paid by bank (Faster Payments) transfer on or after 7 October 2024, banks must reimburse most victims of authorised push payment (APP) scams, subject to conditions and a cap, so ask your bank to treat it as an APP scam claim. If you paid by debit or credit card, chargeback covers card payments (not ordinary bank transfers) — ask your card provider whether chargeback or other protections apply. If you paid via gift card or cryptocurrency, recovery is extremely unlikely because these payments are irreversible, but still report it to Report Fraud on 0300 123 2040 in England, Wales or Northern Ireland, or to Police Scotland on 101 in Scotland, and tell your bank so they have a record. Do not send any more money to the scammer, even if they claim they need a 'processing fee' or 'tax' to release your prize — this is a common follow-up tactic."
+        "Contact your bank immediately and explain that you've been scammed — how you paid matters. If you paid by bank (Faster Payments) transfer on or after 7 October 2024, banks must reimburse most victims of authorised push payment (APP) scams, subject to conditions and a cap, so ask your bank to treat it as an APP scam claim. If you paid by debit or credit card, chargeback covers card payments (not ordinary bank transfers) — ask your card provider whether chargeback or other protections apply. If you paid via gift card or cryptocurrency, recovery is extremely unlikely because these payments are very difficult to reverse, but still report it to Report Fraud on 0300 123 2040 in England, Wales or Northern Ireland, or to Police Scotland on 101 in Scotland, and tell your bank so they have a record. Do not send any more money to the scammer, even if they claim they need a 'processing fee' or 'tax' to release your prize — this is a common follow-up tactic."
       ],
       [
         "The fake account is still running the scam to other people. How do I report it?",
@@ -17139,6 +17139,6 @@
       ]
     ],
     "quick_answer": "A giveaway that asks for an entry fee, shipping cost or your login details is fake — legitimate brands never charge winners to claim prizes. Don't rely on a blue tick: it can be legacy notability verification or a paid Meta Verified subscription, so confirm the account through the brand's own website and report the fake account to Instagram.",
-    "updated": "2026-07-30"
+    "updated": "2026-07-31"
   }
 ]
