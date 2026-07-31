@@ -76,6 +76,26 @@ def current_quarter(today: Optional[date] = None) -> str:
 
 # ─── PASS B: LLM + WEB SEARCH ────────────────────────────────────────────────
 
+_CANON_BLOCK_CACHE = None
+
+
+def _canon_block() -> str:
+    """The verified-route block, rendered by scripts/canon.py.
+
+    Without this the checker had NO canon: on 2026-07-31 it reported Advice
+    Direct Scotland's 0808 800 9060 as outdated on four guides at
+    `confidence: high`, having found the organisation's OTHER genuine number on
+    a GOV.UK page. Fails closed like every other canon consumer — a missing or
+    invalid canon stops the run rather than quietly checking against nothing.
+    """
+    global _CANON_BLOCK_CACHE
+    if _CANON_BLOCK_CACHE is None:
+        sys.path.insert(0, str(Path(__file__).resolve().parent))
+        import canon as canon_mod
+        _CANON_BLOCK_CACHE = canon_mod.render_verified_facts(canon_mod.load_canon())
+    return _CANON_BLOCK_CACHE
+
+
 REVERIFY_SYSTEM = """You are a fact-checking editor doing a QUARTERLY re-verification pass on a \
 LIVE guide on a UK consumer-protection site (Beat The Scam). This guide was published in the past \
 and may now contain STALE facts: a compensation cap that changed, a mailbox that was retired, a \
@@ -84,6 +104,8 @@ deadline that was extended, a rebrand, a wrong court/legislation date. Today's d
 You have web search. Use it to verify checkable claims against CURRENT primary UK sources \
 (gov.uk, the regulator's own site, the named organisation's own site) — not secondary summaries \
 or forum posts.
+
+{canon_block}
 
 ALREADY-CANON facts you do NOT need to re-derive or flag (these are correct and already enforced \
 elsewhere on the site) — only flag a DEVIATION from these, never re-report them as a "finding":
@@ -190,7 +212,7 @@ def reverify_post_llm(post: Dict, client, model: str, today: str,
             resp = client.messages.create(
                 model=model,
                 max_tokens=2000,
-                system=REVERIFY_SYSTEM.format(today=today),
+                system=REVERIFY_SYSTEM.format(today=today, canon_block=_canon_block()),
                 messages=[{"role": "user", "content": build_reverify_prompt(post)}],
                 tools=[{"type": "web_search_20250305", "name": "web_search", "max_uses": 5}],
             )
@@ -349,6 +371,10 @@ def main() -> int:
     ap.add_argument("--model", default="claude-sonnet-5")
     ap.add_argument("--limit", type=int, default=None,
                      help="only process the first N guides (cheap smoke test)")
+    ap.add_argument("--slugs", default=None,
+                     help="comma-separated slugs, or @path/to/file with one slug per line. "
+                          "Targets a shortlist — e.g. the guides an LLM-judge pass could not "
+                          "settle — instead of the whole corpus.")
     ap.add_argument("--quarter", default=None, help="override quarter label, e.g. 2026-Q3")
     ap.add_argument("--attempts", type=int, default=3,
                      help="attempts per guide before recording it as unchecked (default 3)")
@@ -360,6 +386,29 @@ def main() -> int:
     load_env()
     posts_path = Path(args.posts)
     posts = json.loads(posts_path.read_text(encoding="utf-8"))
+
+    # PUBLIC records only. A consolidated archive record never renders and 301s
+    # to its replacement, so re-verifying it spends API credit on a page no
+    # reader can reach — and any drift found in it is unactionable.
+    sys.path.insert(0, str(Path(__file__).resolve().parent))
+    import corpus as corpus_mod
+    public = corpus_mod.public_posts(posts)
+    if len(public) != len(posts):
+        print(f"  excluding {len(posts) - len(public)} consolidated archive record(s)")
+    posts = public
+
+    if args.slugs:
+        wanted = args.slugs
+        if wanted.startswith("@"):
+            wanted = Path(wanted[1:]).read_text(encoding="utf-8")
+        wanted = {w.strip() for w in wanted.replace("\n", ",").split(",") if w.strip()}
+        have = {p["slug"] for p in posts}
+        missing = sorted(wanted - have)
+        if missing:
+            print(f"ERROR: no public guide for slug(s): {missing}", file=sys.stderr)
+            return 2
+        posts = [p for p in posts if p["slug"] in wanted]
+        print(f"  targeting {len(posts)} guide(s) from --slugs")
     if args.limit:
         posts = posts[: args.limit]
 

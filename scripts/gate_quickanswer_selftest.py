@@ -34,6 +34,95 @@ def check(name: str, cond: bool, detail: str = "") -> None:
         FAILURES.append(name)
 
 
+def _shared_canon_block_fixtures(check) -> None:
+    """The verified-route block must reach BOTH model-backed consumers.
+
+    The gate's judge had a canon block since 2026-07-16; fact_reverify.py never
+    did, and on 2026-07-31 that produced four false "drift" findings at
+    `confidence: high` — all of them the Advice Direct Scotland pair, where the
+    checker found one genuine number on an official page and concluded the other
+    was stale. One renderer now feeds both, and a canon edit that fails to reach
+    either consumer fails here.
+    """
+    import json
+    import canon as canon_mod
+    import content_gate as cg
+    import fact_reverify as fr
+
+    canon = canon_mod.load_canon()
+    block = canon_mod.render_verified_facts(canon)
+
+    check("gate and re-verification share one rendered canon block",
+          cg._JUDGE_CANON_BLOCK == block == fr._canon_block())
+
+    prompt = fr.REVERIFY_SYSTEM.format(today="2026-01-01", canon_block=fr._canon_block())
+    check("the re-verification prompt actually embeds the block", block in prompt)
+
+    # Every canon phone/SMS reaches both consumers — the property that was false.
+    for r in canon["official_routes"] + canon.get("verified_org_contacts", []):
+        for field in ("phone", "sms"):
+            if r.get(field):
+                check(f"canon {field} {r[field]} reaches the re-verification prompt",
+                      r[field] in prompt, r.get("key", ""))
+
+    # The specific false-positive guard: both ADS numbers present, plus the note
+    # saying one does not supersede the other.
+    check("both Advice Direct Scotland numbers are in the block",
+          "0808 800 9060" in block and "0808 164 6000" in block)
+    check("the block says one genuine number does not supersede the other",
+          "NOT evidence that the other" in block)
+
+    # on_page must be read by PRESENCE: a route that omits it is not "not the
+    # reader-facing route", it simply does not carry the distinction.
+    edited = json.loads(json.dumps(canon))
+    for r in edited["official_routes"]:
+        r.pop("on_page", None)
+    check("a canon with no on_page fields marks nothing as non-reader-facing",
+          "NOT the route reader prose names" not in canon_mod.render_verified_facts(edited))
+
+    # A canon edit must propagate, not be shadowed by a hand-typed copy.
+    mutated = json.loads(json.dumps(canon))
+    mutated["official_routes"][0]["phone"] = "0300 999 0001"
+    check("a canon phone edit propagates into the rendered block",
+          "0300 999 0001" in canon_mod.render_verified_facts(mutated))
+
+
+def _shortcode_fixtures(check) -> None:
+    """A 5–6 digit SMS shortcode offered as a reporting route must be in the canon.
+
+    The phone regex only ever matched a hard-coded handful (7726, 159, 105, 101,
+    999, 112), so ANY other shortcode was invisible: "forward the text to 61234"
+    passed the gate clean and a fabricated reporting route could ship. Found while
+    adding HMRC's genuine 60599 to the canon (2026-07-31); the new check
+    immediately surfaced a real live one, NatWest's 88355, which verified against
+    the bank's own page.
+    """
+    import content_gate as cg
+    import canon as canon_mod
+
+    def draft(text):
+        return {"slug": "sc", "title": "T", "description": "d", "hero": "h",
+                "sections": [["S", text]], "faq": []}
+
+    codes = {r.get("sms") for g in ("official_routes", "verified_org_contacts")
+             for r in canon_mod.load_canon().get(g, []) if r.get("sms")}
+    check("the canon carries the verified shortcodes", {"7726", "60599", "88355"} <= codes,
+          str(sorted(codes)))
+    for code in sorted(codes):
+        check(f"canon shortcode {code} is accepted as a reporting route",
+              not cg.check_shortcodes(draft(f"Forward the suspicious text to {code}.")))
+    for code in ("61234", "88802", "70707"):
+        check(f"FABRICATED shortcode {code} is BLOCKED",
+              any(i["severity"] == "block" for i in
+                  cg.check_shortcodes(draft(f"Forward the suspicious text to {code}."))))
+    # Context-bound, so ordinary numbers in prose are not dragged in.
+    for benign in ("The scheme covered 12500 people in total.",
+                   "Losses reached 45000 across the period.",
+                   "Reference 90210 appears on the letter."):
+        check("a bare 5-digit number in prose is NOT flagged", not cg.check_shortcodes(draft(benign)),
+              benign)
+
+
 def _consolidation_evasion_fixtures(check) -> None:
     """A DRAFT may never declare itself consolidated.
 
@@ -523,6 +612,8 @@ def run() -> int:
     # every malformed shape, and that BOTH consumers actually call it.
     _canon_negative_fixtures(check)
     _consolidation_evasion_fixtures(check)
+    _shortcode_fixtures(check)
+    _shared_canon_block_fixtures(check)
 
     # Citation prose is not a consumer route.
     check("'Data from Citizens Advice shows...' is a citation, not a route",

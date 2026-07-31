@@ -21,6 +21,7 @@ from __future__ import annotations
 
 import json
 import re
+from datetime import date
 import sys
 from dataclasses import dataclass, field
 from pathlib import Path
@@ -86,32 +87,6 @@ _canon_phone_digits = canon_mod.phone_digits
 _canon_report_emails = canon_mod.report_emails
 
 
-def _judge_canon_block(canon: Dict) -> str:
-    """Render the sources.json canon as a compact fact list for the LLM judge.
-
-    Without this, the judge has no way to know check_phones() has ALREADY
-    deterministically verified every phone number/route against this same
-    canon — it re-derives "is this real?" from its own training-data recall
-    on every call, which is what let it flip-flop across runs on whether 159
-    is a genuine number (2026-07-13, see memory llm-judge-run-to-run-
-    inconsistency). Giving it the canon stops it re-litigating settled facts."""
-    lines = []
-    for r in canon.get("official_routes", []):
-        parts = [r.get("name", "")]
-        if r.get("phone"):
-            parts.append(f"phone {r['phone']}")
-        if r.get("sms"):
-            parts.append(f"SMS shortcode {r['sms']}")
-        if r.get("email"):
-            parts.append(f"email {r['email']}")
-        if any(parts[1:]):
-            lines.append("- " + " — ".join(p for p in parts if p))
-    emails = [e for e in canon.get("report_emails", []) if e]
-    if emails:
-        lines.append("- Other verified official report emails: " + ", ".join(emails))
-    return "\n".join(lines)
-
-
 # The ONE rendering of nation-scoped reporting routes, derived from the canon
 # and shared with every other consumer (the generator prompt, the generator's
 # fallback article, the site's standalone surfaces and the scam checker) via
@@ -123,7 +98,10 @@ render_canon_routes = canon_mod.render_prompt_routes
 
 
 _CANON = _load_canon()
-_JUDGE_CANON_BLOCK = _judge_canon_block(_CANON)
+# Rendered by scripts/canon.py — the ONE renderer, shared with the quarterly
+# re-verification pass. It was local to this file until 2026-07-31, which is why
+# fact_reverify.py had no canon at all and re-litigated settled routes.
+_JUDGE_CANON_BLOCK = canon_mod.render_verified_facts(_CANON)
 CANON_ROUTE_BLOCK = render_canon_routes(_CANON)
 # Append the rendered routes so the prompt and the canon cannot disagree.
 ACCURACY_BLOCK = ACCURACY_BLOCK.rstrip() + "\n" + CANON_ROUTE_BLOCK + "\n"
@@ -230,6 +208,52 @@ def _norm_digits(s: str) -> str:
     return digits
 
 
+# SMS shortcodes are 5–6 digits and the phone regex above only knows a
+# hard-coded handful (7726, 159, 105, 101, 999, 112). Any other shortcode was
+# therefore INVISIBLE to the gate: "forward the text to 61234" passed clean, so
+# a fabricated reporting shortcode could ship (found while adding HMRC's genuine
+# 60599 to the canon, 2026-07-31).
+#
+# Matched only in a FORWARDING context — "forward/text/send … to <code>" — so an
+# ordinary 5-digit number in prose is not dragged in. The allow-list is derived
+# from the canon, not hard-coded, so adding a verified route is enough.
+_SHORTCODE_CONTEXT_RE = re.compile(
+    r"\b(?:forward(?:ing|s)?|text(?:ing|s)?|send(?:ing|s)?|report(?:ing|s)?)\b[^.]{0,60}?"
+    r"\bto\s+`?(\d{5,6})`?\b", re.I)
+
+
+def _canon_shortcodes() -> set:
+    codes = set()
+    for group in ("official_routes", "verified_org_contacts"):
+        for r in _CANON.get(group, []):
+            if r.get("sms"):
+                codes.add(re.sub(r"\D", "", str(r["sms"])))
+    return codes
+
+
+def check_shortcodes(post: Dict) -> List[Dict]:
+    """A 5–6 digit SMS shortcode offered as a reporting route must be in the canon."""
+    text = _post_text(post)
+    allowed = _canon_shortcodes()
+    issues: List[Dict] = []
+    seen = set()
+    for m in _SHORTCODE_CONTEXT_RE.finditer(text):
+        code = m.group(1)
+        if code in allowed or code in seen:
+            continue
+        seen.add(code)
+        issues.append({
+            "check": "shortcode",
+            "severity": SEVERITY_BLOCK,
+            "span": code,
+            "detail": (f"offers SMS shortcode '{code}' as a reporting route, but it is not in "
+                       f"content/sources.json. Verify it against the organisation's own "
+                       f"published page and add it to verified_org_contacts with source_url "
+                       f"and checked_on, or tell readers to use the route on the official site."),
+        })
+    return issues
+
+
 def check_phones(post: Dict) -> List[Dict]:
     text = _post_text(post)
     issues: List[Dict] = []
@@ -282,6 +306,17 @@ _ABSOLUTE_RES = [
     # "You're completely safe." must block exactly like "You are completely safe."
     re.compile(r"\byou(?:\s+are|['’]re)\s+(?:completely|totally|perfectly|fully|entirely|100%)\s+safe\b", re.I),
     re.compile(r"\byou(?:\s+have|['’]ve)\s+nothing\s+to\s+(?:worry\s+about|fear)\b", re.I),
+    # RISK-ELIMINATION guarantees. The existing patterns all reassure the reader
+    # directly ("you're completely safe"); this shape reassures them about an
+    # ACTION — "buying direct eliminates resale risk entirely" — and slipped
+    # through (LLM judge sample, 2026-07-31). Deliberately requires the word
+    # "risk": "leaving the platform removes the platform's own protection
+    # entirely" is a WARNING, not a safety guarantee, and must not match.
+    re.compile(r"\b(?:eliminat\w+|remov\w+|get(?:s|ting)?\s+rid\s+of)\b[^.]{0,40}?\brisk\b"
+               r"[^.]{0,30}?\b(?:entirely|completely|altogether|for\s+good)\b", re.I),
+    re.compile(r"\brisk\b[^.]{0,30}?\b(?:eliminated|removed)\s+(?:entirely|completely|altogether)\b", re.I),
+    re.compile(r"\b(?:zero|no)\s+risk\s+(?:at\s+all|whatsoever)\b", re.I),
+    re.compile(r"\b(?:completely|totally|entirely|100%)\s+risk[- ]free\b", re.I),
 ]
 
 
@@ -1240,7 +1275,7 @@ def check_deterministic(post: Dict, *, is_draft: bool = True) -> List[Dict]:
     # Note: no deterministic domain/URL check — these guides intentionally
     # contain example scam/lookalike domains, so a domain allowlist is pure
     # noise here. Domain plausibility is left to the LLM judge.
-    return (check_phones(post) + check_banned_entities(post)
+    return (check_phones(post) + check_shortcodes(post) + check_banned_entities(post)
             + check_absolutes(post) + check_sources(post)
             + check_legislation(post) + check_dated_events(post)
             + check_cra_misclassification(post) + check_nfd_routing(post)
@@ -1299,25 +1334,56 @@ def judge_llm(post: Dict, client, model: str) -> List[Dict]:
     (a post we cannot verify is treated as blocking, since the engine is
     autonomous)."""
     body = _post_text(post)
-    user = (f"Title: {post.get('title','')}\n\nReview this draft guide:\n\n{body}\n\n"
+    # Tell the judge TODAY'S DATE. Without it, it reads any date after its own
+    # training cutoff as "future-dated" and calls a correct, already-verified
+    # claim fabricated — four such findings in the 2026-07-31 sample, including
+    # a legitimate "as checked on" line (operator review follow-up).
+    user = (f"Today's date is {date.today().isoformat()}. Dates before today are in the PAST "
+            f"and may be genuine even if they are after your training cutoff — judge them on "
+            f"plausibility and attribution, not on whether you personally recall them.\n\n"
+            f"Title: {post.get('title','')}\n\nReview this draft guide:\n\n{body}\n\n"
             "Return the JSON verdict.")
     system_prompt = JUDGE_SYSTEM
     if _JUDGE_CANON_BLOCK:
-        system_prompt += (
-            "\n\nThe following UK reporting routes, phone numbers, and email addresses have "
-            "already been independently verified against this site's canonical source list. "
-            "Treat them as accurate — do NOT flag them as fabricated, invented, or "
-            "unverifiable. Only flag one of these if the draft attributes it to the wrong "
-            "organisation or uses it in a clearly incorrect context:\n" + _JUDGE_CANON_BLOCK
-        )
-    try:
-        resp = client.messages.create(
+        # The renderer carries its own preamble — don't restate it here, or the
+        # two wordings drift apart the way hand-typed canon copies always have.
+        system_prompt += "\n\n" + _JUDGE_CANON_BLOCK
+    # `temperature` is DEPRECATED on current models (Opus 5, Sonnet 5, Opus 4.8
+    # all reject it with a 400) and accepted only by the pinned Haiku 4.5. Since
+    # judge_llm fails CLOSED, a hard-coded temperature meant that pointing the
+    # gate at any current model would BLOCK every draft with an unexplained
+    # "could not verify" — the publication pipeline would look like it was
+    # catching fabrications when it was really just erroring (found while
+    # running the judge on a sample, 2026-07-31).
+    #
+    # Try with it, then retry without on that specific rejection, so the same
+    # code works across model generations without a hard-coded model list.
+    # 1500 was enough for Haiku's terse verdicts (~220 output tokens) but any
+    # more thorough model runs past it, and a TRUNCATED verdict surfaces as a
+    # JSONDecodeError — which fails closed and reads like a caught fabrication.
+    # Half the guides in the 2026-07-31 sample failed this way before the limit
+    # was raised.
+    def _create(**extra):
+        return client.messages.create(
             model=model,
-            max_tokens=1500,
-            temperature=0,
+            max_tokens=8000,
             system=system_prompt,
             messages=[{"role": "user", "content": user}],
+            **extra,
         )
+
+    try:
+        try:
+            resp = _create(temperature=0)
+        except Exception as exc:                     # noqa: BLE001 — inspected below
+            if "temperature" not in str(exc).lower():
+                raise
+            resp = _create()
+        if getattr(resp, "stop_reason", None) == "max_tokens":
+            # Say WHY, instead of letting it look like malformed JSON.
+            raise ValueError(
+                "the judge's verdict was truncated at max_tokens — raise the limit rather "
+                "than treating this as a finding")
         raw = "".join(b.text for b in resp.content if getattr(b, "type", None) == "text").strip()
         raw = re.sub(r"^```(?:json)?\s*|\s*```$", "", raw, flags=re.IGNORECASE).strip()
         data = json.loads(raw)
