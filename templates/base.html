@@ -10,6 +10,11 @@
   <link rel="alternate" hreflang="x-default" href="{{canonical}}">
   <link rel="alternate" type="application/rss+xml" title="{{site_name}} — Latest Guides" href="/rss.xml">
   <meta name="robots" content="{{robots}}">
+  <!-- AdSense account verification. Site-level ownership, NOT an ad tag: it
+       belongs on every page, including the ones deliberately excluded from
+       Auto Ads, because it identifies the publisher rather than requesting an
+       ad (audit, 2026-07-31). The ad tag itself is per-page via {{ads_head}}. -->
+  <meta name="google-adsense-account" content="{{adsense_client}}">
   <meta name="theme-color" content="#0b1220">
   <meta name="format-detection" content="telephone=no">
   {{prev_next}}
