@@ -386,9 +386,20 @@ def validate_category_hubs(hubs: dict) -> None:
         raise SystemExit(f"ERROR: category hub accuracy gate failed: {details}")
 
 
+# Category match alone is 2; each keyword hit adds 1. 3 therefore means
+# "right category AND something specific in common".
+_AFFILIATE_MIN_SCORE = 3
+
+
 def affiliate_block(post: dict, affiliates: list) -> str:
     """Return an HTML affiliate card relevant to this post, or empty string."""
     if not affiliates:
+        return ""
+
+    # Pages that carry no ads carry no commercial card either. Suppressing the
+    # ad tag while still showing a product recommendation on a sextortion or
+    # deepfake guide is the same monetisation the exclusion exists to prevent.
+    if post_ads_mode(post) == "none":
         return ""
 
     cat      = post.get("category", "")
@@ -411,7 +422,12 @@ def affiliate_block(post: dict, affiliates: list) -> str:
             best_score   = score
             best_product = product
 
-    if not best_product or best_score == 0:
+    # A bare CATEGORY match scored 2 and was enough, so 134 of 185 guides drew a
+    # card on category alone with no keyword overlap at all — 170/185 carried one,
+    # including all three guides that deliberately run no ads. Requiring the
+    # category AND at least one keyword takes it to 33 (18%), which is a real
+    # relevance signal rather than a default (audit, 2026-07-31).
+    if not best_product or best_score < _AFFILIATE_MIN_SCORE:
         return ""
 
     p = best_product
@@ -759,6 +775,11 @@ _NO_ADS_TERMS = (
     "sextortion", "intimate image", "intimate-image", "revenge porn",
     "webcam blackmail", "explicit image", "explicit photo", "nude photo",
     "nude image", "deepfake",
+    # Prescription medicines and pharmacies are a restricted advertising
+    # category. Non-personalised ads only change targeting, not eligibility, so
+    # these run ad-free (audit, 2026-07-31).
+    "online pharmacy", "fake pharmacy", "prescription medicine",
+    "prescription medicines", "prescription drug", "prescription drugs",
 )
 _NO_ADS_RE = re.compile(
     r"\b(?:" + "|".join(re.escape(t) for t in _NO_ADS_TERMS) + r")", re.I)
@@ -856,6 +877,7 @@ def make_base(content: str, *, title: str, description: str, canonical: str, sch
         "{{description}}":       html.escape(description),
         "{{canonical}}":         canonical,
         "{{robots}}":            robots,
+        "{{adsense_client}}":    site["adsense_client"],
         "{{og_type}}":           og_type,
         "{{og_title}}":          html.escape(og_title or title),
         "{{og_image}}":          og_image_url,
@@ -1927,9 +1949,11 @@ def render_post(site, post, all_posts, affiliates=None, sources=None, link_map=N
 
     toc      = "".join(f'<li><a href="#{sid}">{html.escape(t)}</a></li>' for sid, t in section_ids)
     faq_html = "".join(f'<details><summary>{_inline(q)}</summary><p>{_inline(a)}</p></details>' for q, a in post['faq'])
-    # Keep the header reader-first on small screens. The full keyword set stays
-    # in metadata/search data; only three concise labels are shown visually.
-    badges   = "".join(f'<span class="badge">{html.escape(k)}</span>' for k in post['keywords'][:3])
+    # No visible keyword badges. Printing three exact-match search terms under
+    # every headline made 185 guides look machine-templated rather than written,
+    # which is the impression the corpus can least afford (audit, 2026-07-31).
+    # The keywords still drive search.json, related guides and the sitemap —
+    # they were never load-bearing for the reader.
     related  = "".join(
         f'<a href="/guides/{p["slug"]}/">{html.escape(p["title"])}<span class="meta">{html.escape(category_label(p["category"]))} &middot; {p["date"]}</span></a>'
         for p in related_posts(all_posts, post)
@@ -1977,7 +2001,7 @@ def render_post(site, post, all_posts, affiliates=None, sources=None, link_map=N
           &middot; <time itemprop="datePublished" datetime="{html.escape(published)}">Published {html.escape(published)}</time>{updated_html}
           &middot; {mins} min read
         </p>
-        <div class="badge-row">{badges}</div>{qa_html}
+        {qa_html}
         <div class="notice"><strong>Key rule:</strong> verify through an official route you opened yourself, not the link, number, app, or payment details supplied by the suspicious message.</div>
         <aside class="do-now" aria-label="What to do if you are being targeted right now">
           <p class="do-now-title">Being targeted right now? Do this</p>

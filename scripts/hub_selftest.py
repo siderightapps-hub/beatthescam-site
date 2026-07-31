@@ -304,7 +304,14 @@ def run() -> int:
     EXPECTED = {
         "email": "none", "tech": "none",
         "crypto": "npa", "finance": "npa", "fraud": "npa", "government": "npa",
-        "payment": "npa", "phone": "npa", "shopping": "npa", "website": "npa",
+        "payment": "npa", "phone": "npa", "shopping": "npa",
+        # "website" derives "none", not "npa": its prose carries a substantive
+        # section on checking pharmacy registration (GPhC, PSNI, MHRA) with eight
+        # pharmacy mentions. Medicines are a restricted advertising category, and
+        # non-personalised ads change targeting rather than eligibility, so the
+        # whole-hub assessment correctly escalates it (audit, 2026-07-31). This
+        # is MORE restrictive than before, which the override rules permit.
+        "website": "none",
         "marketplace": "default", "sms": "default", "travel": "default",
     }
     # SELF-CONTAINED. This previously read docs/review/hubs-v6.json — an ignored,
@@ -317,10 +324,15 @@ def run() -> int:
     SEXTORTION = "Threats to share intimate images or sextortion demands, and deepfake material."
     DEBT = "Debt, insolvency, an IVA, bailiffs and recovering money you have lost."
     BENIGN = "How to check a parcel delivery text before tapping a link."
+    # The website hub carries a substantive pharmacy-registration section, so its
+    # fixture must carry medicine prose too — feeding it DEBT made the fixture
+    # derive "npa" while the live record derived "none", and the two layers are
+    # meant to agree (audit, 2026-07-31).
+    MEDICINE = "Fake online pharmacy sites selling prescription medicines with no consultation."
     FIXTURE_PROSE = {
         "email": SEXTORTION, "tech": SEXTORTION,
         "crypto": DEBT, "finance": DEBT, "fraud": DEBT, "government": DEBT,
-        "payment": DEBT, "phone": DEBT, "shopping": DEBT, "website": DEBT,
+        "payment": DEBT, "phone": DEBT, "shopping": DEBT, "website": MEDICINE,
         "marketplace": BENIGN, "sms": BENIGN, "travel": BENIGN,
     }
     missing = sorted(set(EXPECTED) - set(FIXTURE_PROSE))
