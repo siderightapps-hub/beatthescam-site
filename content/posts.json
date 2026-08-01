@@ -2833,7 +2833,26 @@
         "https://www.royalmail.com/help/scam-protection"
       ]
     ],
-    "quick_answer": "A Royal Mail 'fee to pay' text isn't automatically fake — genuine customs fees can arrive by SMS — but never pay through the link. Type royalmail.com/pay-a-fee yourself and match the item to a real tracking number or grey Fee to Pay card first. Forward suspicious texts to `7726`."
+    "quick_answer": "A Royal Mail 'fee to pay' text isn't automatically fake — genuine customs fees can arrive by SMS — but never pay through the link. Type royalmail.com/pay-a-fee yourself and match the item to a real tracking number or grey Fee to Pay card first. Forward suspicious texts to `7726`.",
+    "figure": {
+      "title": "A delivery text wants a fee: three checks, in order",
+      "alt": "Decision ladder. One: does the message ask for a payment or card details through a link? Genuine couriers do not collect fees that way. Two: open tracking yourself from the retailer's order confirmation or the courier's own app, never the link. Three: if the parcel is real but a customs charge is due, the courier's own tracking page will show it.",
+      "caption": "Original diagram — the order matters more than the wording.",
+      "steps": [
+        {
+          "check": "Does it ask for a payment or card details through a link?",
+          "then": "Genuine couriers do not collect fees through a link in an unexpected text."
+        },
+        {
+          "check": "Open the tracking yourself — from the retailer's order confirmation, or the courier's own app.",
+          "then": "Typing the address yourself is what breaks the chain, not inspecting the link."
+        },
+        {
+          "check": "Expecting nothing from abroad? Then there is no customs charge to pay.",
+          "then": "Real charges appear on the courier's own tracking page against your tracking number."
+        }
+      ]
+    }
   },
   {
     "title": "HMRC Tax Refund Text Scam: Spot the Fake (UK)",
@@ -2906,7 +2925,7 @@
       "claim tax refund scam",
       "report HMRC scam text"
     ],
-    "updated": "2026-07-24",
+    "updated": "2026-08-01",
     "sources_checked": [
       [
         "GOV.UK — Check if a text message you've received from HMRC is genuine",
@@ -2917,7 +2936,26 @@
         "https://www.gov.uk/tax-overpayments-and-underpayments/if-youre-due-a-refund"
       ]
     ],
-    "quick_answer": "A text inviting you to claim a tax refund through a link is a scam — HMRC never asks for personal or financial information by text, and refunds aren't claimed via text links. Check any refund through GOV.UK, the HMRC app or your Personal Tax Account, and forward scam texts to `60599` or `7726`."
+    "quick_answer": "A text inviting you to claim a tax refund through a link is a scam — HMRC never asks for personal or financial information by text, and refunds aren't claimed via text links. Check any refund through GOV.UK, the HMRC app or your Personal Tax Account, and forward scam texts to `60599` or `7726`.",
+    "figure": {
+      "title": "A message claims you are owed a tax refund",
+      "alt": "Decision ladder. One: does it ask you to confirm bank or card details, or to claim through a link? HMRC does not ask for that. Two: the subject alone proves nothing, because HMRC does send genuine reminders and some carry gov.uk links. Three: sign in to your own Government Gateway account through gov.uk, typed yourself, and see whether anything is owed.",
+      "caption": "Original diagram — the request is the tell, not the topic.",
+      "steps": [
+        {
+          "check": "Does it ask you to confirm bank or card details, or to 'claim' through a link?",
+          "then": "HMRC does not ask for that, whatever the message looks like."
+        },
+        {
+          "check": "The subject alone proves nothing — HMRC does send genuine reminders, some with gov.uk links.",
+          "then": "Judging by topic is what the message is counting on."
+        },
+        {
+          "check": "Sign in to your Government Gateway account through gov.uk, typed yourself.",
+          "then": "A real refund is visible there. Forward scam texts free to 7726."
+        }
+      ]
+    }
   },
   {
     "title": "Barclays Scam Texts: How to Spot a Fake Barclays SMS (UK)",
@@ -5407,7 +5445,7 @@
       "fake invoice scam uk",
       "paid a fraudulent invoice uk"
     ],
-    "updated": "2026-07-30",
+    "updated": "2026-08-01",
     "sources_checked": [
       [
         "NCSC — Business payment fraud (Business Email Compromise)",
@@ -5430,7 +5468,26 @@
         "https://www.scotland.police.uk/contact-us/non-emergencies/"
       ]
     ],
-    "quick_answer": "A supplier email announcing changed bank details is the classic invoice-fraud setup and should never be actioned on its own. Verify the change by phone on a number you already hold — never one from the request — before paying, and use Confirmation of Payee where offered. Report incidents to Report Fraud or Police Scotland on 101."
+    "quick_answer": "A supplier email announcing changed bank details is the classic invoice-fraud setup and should never be actioned on its own. Verify the change by phone on a number you already hold — never one from the request — before paying, and use Confirmation of Payee where offered. Report incidents to Report Fraud or Police Scotland on 101.",
+    "figure": {
+      "title": "A supplier says their bank details have changed",
+      "alt": "Decision ladder. One: stop, and do not reply to the email or use any number in it. Two: call the supplier on a number you already hold from an earlier invoice or contract. Three: confirm the change with a named person you have dealt with before, and pay only after that call.",
+      "caption": "Original diagram — the number you already have is the whole control.",
+      "steps": [
+        {
+          "check": "Do not reply to the email, and do not use a phone number printed in it.",
+          "then": "Both are supplied by whoever sent the message."
+        },
+        {
+          "check": "Call the supplier on a number you already hold — an earlier invoice, a contract, your own records.",
+          "then": "A number you already had cannot have been chosen by an attacker."
+        },
+        {
+          "check": "Confirm the change with a named person you have dealt with before, then pay.",
+          "then": "Treat any pressure to pay before that call as the strongest signal of all."
+        }
+      ]
+    }
   },
   {
     "title": "Overpayment Scam UK: Do Not Send a Separate Refund",
@@ -7892,7 +7949,26 @@
         "https://www.scotland.police.uk/contact-us/non-emergencies/"
       ]
     ],
-    "quick_answer": "A recruiter who moves you off Indeed and demands an equipment or background-check payment is a serious scam warning. Verify the vacancy and employer independently. Agencies generally cannot charge for finding work, although a genuine criminal-record check can carry a published fee. Never pay a private account or recruiter link. Report it to Report Fraud or Police Scotland on 101."
+    "quick_answer": "A recruiter who moves you off Indeed and demands an equipment or background-check payment is a serious scam warning. Verify the vacancy and employer independently. Agencies generally cannot charge for finding work, although a genuine criminal-record check can carry a published fee. Never pay a private account or recruiter link. Report it to Report Fraud or Police Scotland on 101.",
+    "figure": {
+      "title": "A job offer arrives: what to check before you send anything",
+      "alt": "Decision ladder. One: is any payment expected from you, for training, equipment or a background check? A work-finding service cannot charge a jobseeker a fee. Two: were you offered the role without a real interview? Three: find the employer yourself and call the switchboard on its own website to confirm the role and the recruiter's name.",
+      "caption": "Original diagram — the fee question settles most job scams on its own.",
+      "steps": [
+        {
+          "check": "Is any payment expected from you — training, equipment, a uniform, a DBS check?",
+          "then": "Work-finding services cannot charge a jobseeker a fee, with narrow Schedule 3 exceptions."
+        },
+        {
+          "check": "Was the role offered without a real interview, or after one held entirely in chat?",
+          "then": "A warning sign rather than proof — it is a reason to run the next check."
+        },
+        {
+          "check": "Find the employer yourself and call the switchboard listed on its own site.",
+          "then": "Confirm both the role and the recruiter's name before sending documents."
+        }
+      ]
+    }
   },
   {
     "title": "Remote Work Scam UK: How to Spot a Fake Job Offer",
@@ -10635,7 +10711,26 @@
       ]
     ],
     "updated": "2026-08-01",
-    "quick_answer": "A cold call or unannounced visitor claiming your smart meter needs urgent paid replacement is a scam — real installations are booked in advance and suppliers do not charge for them. Verify any appointment by calling your supplier on the number from your bill before agreeing to anything or letting anyone in."
+    "quick_answer": "A cold call or unannounced visitor claiming your smart meter needs urgent paid replacement is a scam — real installations are booked in advance and suppliers do not charge for them. Verify any appointment by calling your supplier on the number from your bill before agreeing to anything or letting anyone in.",
+    "figure": {
+      "title": "Someone is at the door about your meter",
+      "alt": "Decision ladder. One: was the visit booked in advance? Genuine work is arranged, not announced on the doorstep. Two: do not let anyone in while you check; ask for identification through a closed door. Three: call your supplier on a number from your own bill to confirm the visit before opening the door.",
+      "caption": "Original diagram — nothing here requires you to open the door first.",
+      "steps": [
+        {
+          "check": "Was this visit booked in advance, by you or your supplier?",
+          "then": "Genuine meter work is arranged ahead. An unannounced visit with a deadline is not."
+        },
+        {
+          "check": "Ask for identification through a closed door, and keep it closed while you check.",
+          "then": "A genuine engineer expects this and will wait."
+        },
+        {
+          "check": "Call your supplier on the number from your own bill to confirm the visit.",
+          "then": "If you smell gas, call 0800 111 999 first — that comes before any scam concern."
+        }
+      ]
+    }
   },
   {
     "title": "Solar Panel Scam UK: Fake Online Deals & Grants",
@@ -11626,7 +11721,7 @@
       "report hsbc scam call",
       "hsbc verify account call scam"
     ],
-    "updated": "2026-07-31",
+    "updated": "2026-08-01",
     "sources_checked": [
       [
         "HSBC UK — Fraud guide",
@@ -11637,7 +11732,26 @@
         "https://stopscamsuk.org.uk/our-programmes/159-phone-number/"
       ]
     ],
-    "quick_answer": "A caller claiming to be HSBC's fraud team who asks you to move money to a safe account, read out a passcode or install remote-access software is a scammer — HSBC says it will never ask for any of these. Hang up and call HSBC back on the number from your card — ideally from a different phone."
+    "quick_answer": "A caller claiming to be HSBC's fraud team who asks you to move money to a safe account, read out a passcode or install remote-access software is a scammer — HSBC says it will never ask for any of these. Hang up and call HSBC back on the number from your card — ideally from a different phone.",
+    "figure": {
+      "title": "A caller says they are your bank: what settles it",
+      "alt": "Decision ladder. One: did they ask you to move money to a safe account, share a passcode, or install software? That is a scam whoever it appears to be. Two: hang up properly and wait fifteen seconds, check the line is disconnected, then wait another fifteen, or use a different phone. Three: call back on the number printed on your card, never one the caller gave you.",
+      "caption": "Original diagram — the wait exists because a caller can hold the line open.",
+      "steps": [
+        {
+          "check": "Were you asked to move money to a 'safe account', share a passcode, or install software?",
+          "then": "No UK bank asks for any of these. It is a scam whoever the caller appears to be."
+        },
+        {
+          "check": "Hang up properly, wait 15 seconds, check the line is disconnected, wait another 15.",
+          "then": "HSBC's own guidance. A different phone removes the risk of a held-open line entirely."
+        },
+        {
+          "check": "Call back on the number printed on your card — never one from the call or message.",
+          "then": "159 also connects you to many UK banks."
+        }
+      ]
+    }
   },
   {
     "title": "Santander Phone Scam UK: What the Callers Say and How to Hang Up Safely",

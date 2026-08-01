@@ -383,3 +383,11 @@ p{margin:.75rem 0}
    the page scroll sideways (audit, 2026-07-31). */
 a[href],td,th,li,p{overflow-wrap:anywhere}
 .evidence-table-wrap,.stats-table-wrap{overflow-x:auto;-webkit-overflow-scrolling:touch}
+
+/* Original decision figures. The --fig-* names map onto the site palette so a
+   retheme reaches them, and the SVG itself carries no colours of its own. */
+.guide-figure{--fig-bg:var(--panel-alt,#f6f8fb);--fig-line:var(--line,#c9d4e4);
+  --fig-text:var(--brand,#0f172a);--fig-muted:var(--muted,#475569);
+  --fig-accent:var(--accent,#2563eb);margin:1.4rem 0 1.6rem}
+.guide-figure svg{display:block}
+.guide-figure .fig-cap{font-size:.85rem;color:var(--muted);margin:.5rem 0 0}

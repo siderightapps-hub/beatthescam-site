@@ -5582,7 +5582,7 @@ No. A chargeback is a legitimate protection for when you're charged fraudulently
 ## Invoice Fraud UK: How to Verify a Payment Safely
 
 URL: https://beatthescam.com/guides/invoice-fraud-uk-businesses/
-Category: Payment Scams · Updated: 2026-07-30
+Category: Payment Scams · Updated: 2026-08-01
 
 A supplier email says their bank details have changed? Always verify by phone on a number you already have on file before you pay the invoice.
 
@@ -6461,7 +6461,7 @@ No. HMRC explicitly says it will never threaten arrest.
 ## HSBC Scam Call UK: Spot a Fake Fraud Team Call
 
 URL: https://beatthescam.com/guides/hsbc-bank-scam-call-uk/
-Category: Phone Scams · Updated: 2026-07-31
+Category: Phone Scams · Updated: 2026-08-01
 
 Got a call claiming to be HSBC's fraud team about suspicious activity on your account? How to spot an HSBC scam call, check safely, and report it.
 
@@ -9921,7 +9921,7 @@ A familiar sender name or message thread is not proof because SMS origin informa
 ## HMRC Tax Refund Text Scam: Spot the Fake (UK)
 
 URL: https://beatthescam.com/guides/hmrc-tax-refund-text-scam-uk/
-Category: Text Message Scams · Updated: 2026-07-24
+Category: Text Message Scams · Updated: 2026-08-01
 
 An HMRC text saying you're owed a tax refund — click to claim? Real refunds aren't claimed by text link. How to spot the scam and check safely on GOV.UK.
 

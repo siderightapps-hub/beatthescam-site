@@ -1806,6 +1806,102 @@ def related_posts(posts, current, count=4):
 
 
 _INLINE_CODE_RE = re.compile(r"`([^`]+)`")
+# ─── ORIGINAL FIGURES ─────────────────────────────────────────────────────────
+# Guides carried no inline imagery at all (audit, 2026-07-31), and the audit was
+# explicit that stock photography would not help — what earns its place is an
+# original decision aid.
+#
+# The figure is DATA, not markup. Guide prose is html-escaped by _inline() on
+# purpose, so an article cannot inject attributes or scripts; letting a record
+# carry raw SVG would hand back exactly that. Instead a record supplies a
+# structured `figure` object and this function renders it, the same separation
+# used for canon routes.
+#
+# SVG has no text wrapping, so lines are measured and split here into <tspan>s.
+_FIG_W = 640
+_FIG_CHAR = 7.4          # average advance width at 13px in the site's stack
+_FIG_PAD = 18
+
+
+def _fig_wrap(text: str, width_px: float) -> list:
+    """Greedy wrap on word boundaries, measured in approximate pixels."""
+    limit = max(8, int(width_px / _FIG_CHAR))
+    words, lines, cur = text.split(), [], ""
+    for w in words:
+        trial = (cur + " " + w).strip()
+        if len(trial) <= limit:
+            cur = trial
+        else:
+            if cur:
+                lines.append(cur)
+            cur = w
+    if cur:
+        lines.append(cur)
+    return lines
+
+
+def render_guide_figure(fig: dict) -> str:
+    """Render a guide's decision-ladder figure as accessible inline SVG."""
+    if not isinstance(fig, dict):
+        return ""
+    steps = [st for st in (fig.get("steps") or []) if isinstance(st, dict) and st.get("check")]
+    title = (fig.get("title") or "").strip()
+    alt = (fig.get("alt") or "").strip()
+    if not steps or not title or not alt:
+        return ""
+
+    rows, y = [], 52
+    for i, st in enumerate(steps, 1):
+        check_lines = _fig_wrap(st["check"], _FIG_W - 96)
+        then_lines = _fig_wrap((st.get("then") or "").strip(), _FIG_W - 96) if st.get("then") else []
+        h = 30 + 17 * len(check_lines) + (14 + 15 * len(then_lines) if then_lines else 0)
+        rows.append((i, y, h, check_lines, then_lines))
+        y += h + 14
+    total = y + 6
+
+    parts = []
+    for i, top, h, check_lines, then_lines in rows:
+        parts.append(
+            f'<rect x="1" y="{top}" width="{_FIG_W - 2}" height="{h}" rx="10" '
+            f'fill="var(--fig-bg,#f6f8fb)" stroke="var(--fig-line,#c9d4e4)"/>'
+        )
+        parts.append(
+            f'<circle cx="30" cy="{top + 22}" r="13" fill="var(--fig-accent,#2563eb)"/>'
+            f'<text x="30" y="{top + 27}" text-anchor="middle" font-size="13" font-weight="700" '
+            f'fill="#fff">{i}</text>'
+        )
+        ty = top + 20
+        for ln in check_lines:
+            parts.append(f'<text x="56" y="{ty}" font-size="13.5" font-weight="600" '
+                         f'fill="var(--fig-text,#0f172a)">{html.escape(ln)}</text>')
+            ty += 17
+        if then_lines:
+            ty += 4
+            for ln in then_lines:
+                parts.append(f'<text x="56" y="{ty}" font-size="12.5" '
+                             f'fill="var(--fig-muted,#475569)">{html.escape(ln)}</text>')
+                ty += 15
+        if i < len(rows):
+            parts.append(f'<path d="M30 {top + h} V {top + h + 14}" '
+                         f'stroke="var(--fig-line,#c9d4e4)" stroke-width="2"/>')
+
+    fid = "fig-" + re.sub(r"[^a-z0-9]+", "-", title.lower()).strip("-")[:40]
+    body = "".join(parts)
+    caption = (fig.get("caption") or "").strip()
+    cap_html = f'<figcaption class="fig-cap">{html.escape(caption)}</figcaption>' if caption else ""
+    return (
+        f'\n        <figure class="guide-figure">'
+        f'<svg viewBox="0 0 {_FIG_W} {total}" role="img" '
+        f'aria-labelledby="{fid}-t {fid}-d" preserveAspectRatio="xMinYMin meet" '
+        f'style="width:100%;height:auto;max-width:{_FIG_W}px">'
+        f'<title id="{fid}-t">{html.escape(title)}</title>'
+        f'<desc id="{fid}-d">{html.escape(alt)}</desc>'
+        f'<text x="0" y="22" font-size="15" font-weight="700" '
+        f'fill="var(--fig-text,#0f172a)">{html.escape(title)}</text>'
+        f'{body}</svg>{cap_html}</figure>'
+    )
+
+
 def _inline(text: str) -> str:
     """html-escape, then render `…` markdown code-spans as <code>…</code>.
     Used for example scam domains / messages and technical tokens (URLs, emails)
@@ -1984,6 +2080,8 @@ def render_post(site, post, all_posts, affiliates=None, sources=None, link_map=N
     if qa:
         qa_html = f'\n        <div class="quick-answer"><strong>Quick answer:</strong> {_inline(qa)}</div>'
 
+    figure_html = render_guide_figure(post.get("figure") or {})
+
     content = f'''
     <section class="hero">
       <div class="wrap">
@@ -2001,7 +2099,7 @@ def render_post(site, post, all_posts, affiliates=None, sources=None, link_map=N
           &middot; <time itemprop="datePublished" datetime="{html.escape(published)}">Published {html.escape(published)}</time>{updated_html}
           &middot; {mins} min read
         </p>
-        {qa_html}
+        {qa_html}{figure_html}
         <div class="notice"><strong>Key rule:</strong> verify through an official route you opened yourself, not the link, number, app, or payment details supplied by the suspicious message.</div>
         <aside class="do-now" aria-label="What to do if you are being targeted right now">
           <p class="do-now-title">Being targeted right now? Do this</p>
