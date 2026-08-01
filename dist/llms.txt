@@ -18,7 +18,7 @@
 - [Government Impersonation](https://beatthescam.com/categories/government/): 10 guide(s)
 - [Investment & Finance Scams](https://beatthescam.com/categories/finance/): 11 guide(s)
 - [Marketplace Scams](https://beatthescam.com/categories/marketplace/): 15 guide(s)
-- [Payment Scams](https://beatthescam.com/categories/payment/): 14 guide(s)
+- [Payment Scams](https://beatthescam.com/categories/payment/): 13 guide(s)
 - [Phone Scams](https://beatthescam.com/categories/phone/): 13 guide(s)
 - [Romance & Dating Scams](https://beatthescam.com/categories/dating/): 6 guide(s)
 - [Shopping Scams](https://beatthescam.com/categories/shopping/): 7 guide(s)
@@ -135,7 +135,6 @@
 - [Bank Transfer Scams UK: How to Spot a 'Safe Account' Con](https://beatthescam.com/guides/bank-transfer-scam-uk/): Asked to move money to a 'safe account', or to pay by bank transfer under pressure? How to spot a bank-transfer scam, check safely on 159, and claim it back.
 - [Chargeback Scam UK: How Chargeback Fraud Works and How to Avoid It](https://beatthescam.com/guides/chargeback-scam-uk/): Chargeback scams let a buyer keep the goods and claim their money back, leaving the seller out of pocket. How chargeback fraud works and how to avoid it.
 - [Invoice Fraud UK: How to Verify a Payment Safely](https://beatthescam.com/guides/invoice-fraud-uk-businesses/): A supplier email says their bank details have changed? Always verify by phone on a number you already have on file before you pay the invoice.
-- [Invoice Redirection Scam UK: Spot Fake Payment Requests](https://beatthescam.com/guides/invoice-redirection-scam-checklist/): A supplier email says their bank details have changed? Verify it by phone on a number you already have — never one from the email itself.
 - [Monzo Scam UK: Spot a Fake 'Suspicious Activity' Alert](https://beatthescam.com/guides/monzo-scam-transfer-uk/): Got a call, text, or in-app message claiming 'suspicious activity' on your Monzo account? How to spot a Monzo scam, check safely, and report it in the UK.
 - [Overpayment Scam UK: Do Not Send a Separate Refund](https://beatthescam.com/guides/overpayment-scam-uk/): A buyer claims to have paid too much and wants money sent elsewhere. Verify the payment in your own account and ask the provider to reverse it safely.
 - [PayPal Friends and Family Scam: Why Sellers Ask for It](https://beatthescam.com/guides/paypal-friends-family-scam-uk/): PayPal Friends and Family payments are not eligible for Buyer Protection. Use Goods and Services for an eligible purchase and report scam payments promptly.

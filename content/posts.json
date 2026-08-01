@@ -1186,7 +1186,7 @@
       "business email compromise uk",
       "payment diversion fraud"
     ],
-    "updated": "2026-07-30",
+    "updated": "2026-08-01",
     "sources_checked": [
       [
         "NCSC — Business payment fraud (Business Email Compromise)",
@@ -1201,7 +1201,8 @@
         "https://www.scotland.police.uk/contact-us/non-emergencies/"
       ]
     ],
-    "quick_answer": "An email saying a supplier's bank details have changed should never be acted on by email alone — this is invoice redirection (mandate) fraud. Call the supplier on a number you already hold, never one from the email, before changing anything. If you've already paid, contact your bank immediately and report it to Report Fraud or Police Scotland on 101."
+    "quick_answer": "An email saying a supplier's bank details have changed should never be acted on by email alone — this is invoice redirection (mandate) fraud. Call the supplier on a number you already hold, never one from the email, before changing anything. If you've already paid, contact your bank immediately and report it to Report Fraud or Police Scotland on 101.",
+    "consolidated_into": "invoice-fraud-uk-businesses"
   },
   {
     "title": "Recovery Scam UK: Spot a Fake 'Get Your Money Back' Firm",
