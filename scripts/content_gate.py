@@ -141,6 +141,34 @@ class GateResult:
 
 # ─── TEXT EXTRACTION ─────────────────────────────────────────────────────────
 
+def _figure_fields(post: Dict):
+    """Every reader-visible string inside a `figure` object, as (label, text).
+
+    Added 2026-08-01. The `figure` field shipped on 2026-08-01 rendering an
+    inline decision diagram whose title, alt text, caption and per-step
+    sentences are all on the page — and the alt text is what a screen-reader
+    user hears INSTEAD of the diagram, so it is the only version of that content
+    some readers get. Nothing in the gate read any of it: a figure could have
+    named an invented phone number, a retired brand, or routed a Cifas matter
+    via Report Fraud, and every suite would have stayed green.
+
+    `_post_text` already carried the rule this broke — "Any new reader-visible
+    field MUST be added here at the same time it is rendered". It was not. This
+    generator exists so the next renderer has one obvious place to hook into
+    rather than four field lists to remember."""
+    fig = post.get("figure")
+    if not isinstance(fig, dict):
+        return
+    yield "figure title", str(fig.get("title") or "")
+    yield "figure alt text", str(fig.get("alt") or "")
+    yield "figure caption", str(fig.get("caption") or "")
+    for i, step in enumerate(fig.get("steps") or [], 1):
+        if not isinstance(step, dict):
+            continue
+        yield f"figure step {i} check", str(step.get("check") or "")
+        yield f"figure step {i} outcome", str(step.get("then") or "")
+
+
 def _post_text(post: Dict) -> str:
     """All reader-visible text from a post — title, quick answer, section
     HEADINGS and bodies, faq, hero, description, and keywords. Headings/title/
@@ -170,6 +198,8 @@ def _post_text(post: Dict) -> str:
             parts.append(str(item[1]))
     parts.append(str(post.get("hero", "")))
     parts.append(str(post.get("description", "")))
+    for _, figure_text in _figure_fields(post):
+        parts.append(figure_text)
     kws = post.get("keywords") or []
     if isinstance(kws, (list, tuple)):
         parts.append(" ".join(str(k) for k in kws))
@@ -771,14 +801,24 @@ SIMILARITY_BLOCK_AT = 0.30
 
 
 def _body_words(post: Dict) -> List[str]:
-    """Rendered body words only (sections + faq), normalised for comparison.
-    Titles/descriptions/quick answers are excluded: they are already unique by
-    construction, and including them would mask body-level duplication."""
+    """Rendered body words only (sections + faq + figure), normalised for
+    comparison. Titles/descriptions/quick answers are excluded: they are already
+    unique by construction, and including them would mask body-level
+    duplication.
+
+    Figure text is INCLUDED (2026-08-01) precisely because it is not unique by
+    construction. A decision diagram is the easiest field on the page to
+    template — same three checks, brand name swapped — and doing that across the
+    corpus would reintroduce the cookie-cutter duplication this check was built
+    to catch, in the most visually prominent element on the page. Counting it
+    here means a templated figure raises the similarity it actually causes."""
     parts = []
     for h, b in post.get("sections") or []:
         parts.append(f"{h} {b}")
     for q, a in post.get("faq") or []:
         parts.append(f"{q} {a}")
+    for _, figure_text in _figure_fields(post):
+        parts.append(figure_text)
     text = re.sub(r"[^a-z0-9 ]", " ", " ".join(parts).lower())
     return re.sub(r"\s+", " ", text).split()
 
@@ -1006,8 +1046,10 @@ def check_text_wellformed(post: Dict) -> List[Dict]:
     Checking that the required token EXISTS is not the same as checking the
     sentence still reads."""
     issues: List[Dict] = []
-    for field in ("quick_answer", "description", "hero"):
-        text = str(post.get(field) or "").strip()
+    surfaces = [(f, str(post.get(f) or "")) for f in ("quick_answer", "description", "hero")]
+    surfaces += list(_figure_fields(post))
+    for field, text in surfaces:
+        text = text.strip()
         if not text:
             continue
         for rx, why in _MALFORMED_RES:
@@ -1036,6 +1078,7 @@ def _route_fields(post: Dict):
         yield f"section '{head}'", str(body)
     for q, a in (post.get("faq") or []):
         yield f"FAQ '{q[:40]}'", str(a)
+    yield from _figure_fields(post)
 
 
 def _field_routes_scotland(text: str) -> bool:
