@@ -19,6 +19,7 @@ from __future__ import annotations
 
 import copy
 import json
+import re
 import sys
 from html import unescape as html_unescape
 from pathlib import Path
@@ -392,6 +393,50 @@ def run() -> int:
     except SystemExit:
         ok = True
     check("an invalid explicit ads_mode stops the build", ok)
+
+    # ── Original guide figures ────────────────────────────────────────────
+    # A figure is DATA rendered by code, never markup from a record. Guide prose
+    # is html-escaped by _inline() so an article cannot inject attributes or
+    # scripts; letting a record carry raw SVG would hand that straight back.
+    # These pin that boundary, and pin the accessibility floor: a figure with no
+    # alt text is worse than no figure, because assistive tech announces an image
+    # and then has nothing to say about it (audit, 2026-07-31).
+    good = {"title": "T", "alt": "A description of the figure.",
+            "steps": [{"check": "First check", "then": "Why it matters"}]}
+    out = B.render_guide_figure(good)
+    check("a valid figure renders", bool(out))
+    check("a figure is exposed to assistive tech as an image",
+          'role="img"' in out and "<title" in out and "<desc" in out)
+    for name, bad in (("no alt", {**good, "alt": ""}),
+                      ("no title", {**good, "title": ""}),
+                      ("no steps", {**good, "steps": []}),
+                      ("a non-dict figure", "just a string")):
+        check(f"a figure with {name} renders NOTHING rather than a broken one",
+              B.render_guide_figure(bad) == "")
+    hostile = {"title": "<script>alert(1)</script>", "alt": "<img onerror=x>",
+               "caption": "</svg><script>x</script>",
+               "steps": [{"check": "<iframe src=evil>", "then": "\"><script>y</script>"}]}
+    hout = B.render_guide_figure(hostile)
+    # Assert the PROPERTY, not a substring. "onerror=" legitimately survives as
+    # inert text inside <desc> once the angle brackets are escaped; what must
+    # never appear is a real element or a real attribute. Testing for the
+    # substring failed on escaped text and would have been "fixed" by weakening
+    # the renderer.
+    for probe in ("<script", "<iframe", "<img"):
+        check(f"figure content cannot inject a real {probe} element", probe not in hout)
+    check("figure content cannot inject an event-handler attribute",
+          not re.search(r"<[a-z]+[^>]*\son[a-z]+=", hout))
+    check("hostile figure content is escaped rather than dropped",
+          "&lt;img onerror=x&gt;" in hout)
+
+    live_posts = json.loads((ROOT / "content" / "posts.json").read_text(encoding="utf-8"))
+    figs = [(pp["slug"], pp["figure"]) for pp in live_posts if pp.get("figure")]
+    check("the corpus carries at least one original figure", bool(figs), str(len(figs)))
+    for slug, f in figs:
+        check(f"{slug}: figure carries alt text", bool((f.get("alt") or "").strip()))
+        check(f"{slug}: figure renders", bool(B.render_guide_figure(f)))
+        check(f"{slug}: alt text is not just the title repeated",
+              (f.get("alt") or "").strip() != (f.get("title") or "").strip())
 
     print()
     if FAILURES:
