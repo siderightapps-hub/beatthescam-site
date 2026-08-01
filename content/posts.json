@@ -411,7 +411,7 @@
     "description": "Received a DPD delivery text? Check the parcel independently, distinguish a fake redelivery fee from genuine import charges, and report a scam safely.",
     "hero": "A DPD text is not proved genuine by its sender name. Match it to a real order and parcel number through DPD's official site or app before using any payment route.",
     "date": "2026-06-05",
-    "updated": "2026-07-30",
+    "updated": "2026-08-01",
     "category": "sms",
     "keywords": [
       "dpd scam text",
@@ -521,7 +521,26 @@
         "assessment": "This could be genuine for an international parcel, but only pay after the retailer's parcel number and the charge match DPD's official tracking or support route."
       }
     ],
-    "quick_answer": "A text charging a small fee to redeliver a DPD parcel is a scam — DPD does not charge consumers to reattempt a standard UK delivery, though it can send genuine secure payment links for import duties or taxes. Match any message to a real parcel number through the official DPD site or app, and forward scam texts to `7726`."
+    "quick_answer": "A text charging a small fee to redeliver a DPD parcel is a scam — DPD does not charge consumers to reattempt a standard UK delivery, though it can send genuine secure payment links for import duties or taxes. Match any message to a real parcel number through the official DPD site or app, and forward scam texts to `7726`.",
+    "figure": {
+      "title": "A DPD text asks for money: match three things first",
+      "alt": "Decision ladder. One: is the fee for reattempting an ordinary UK delivery? DPD does not charge consumers for that. Two: import duties are different — DPD can send a genuine secure payment link for those, so payment wording alone does not settle it. Three: match all three of order, parcel and status — are you expecting a DPD parcel, does the retailer's parcel number work when you type it into DPD's own site or app, and does that record show the same charge? If you cannot match all three, do not pay.",
+      "caption": "Original diagram — a genuine charge survives all three checks; an invented one fails at least one.",
+      "steps": [
+        {
+          "check": "Is the fee to reattempt an ordinary UK delivery?",
+          "then": "DPD does not charge a consumer for that, so a redelivery fee is the clearest single tell."
+        },
+        {
+          "check": "Duties are the exception — DPD can send a genuine secure link for import charges.",
+          "then": "So payment wording on its own does not settle it. That is why the next check exists."
+        },
+        {
+          "check": "Match all three: expected order, retailer's parcel number, and status on DPD's own site.",
+          "then": "Type the number in yourself. No match on any one of the three means no verified connection."
+        }
+      ]
+    }
   },
   {
     "slug": "yodel-scam-text-messages",
@@ -776,7 +795,7 @@
         "A familiar sender name or message thread is not proof because SMS origin information can be imitated. Do not use an unexpected link or share a code with a caller. Open the bank's app yourself or call the number on your card; forward a suspicious text to 7726."
       ]
     ],
-    "updated": "2026-07-30",
+    "updated": "2026-08-01",
     "sources_checked": [
       [
         "Halifax — Extra security checks for shopping and banking online",
@@ -825,7 +844,30 @@
         "basis": "NCSC SMS-security guidance and Halifax SIM-swap warning."
       }
     ],
-    "quick_answer": "A missing bank passcode is usually a delivery or account problem, not proof of fraud or a SIM swap. Check signal, blocked-message folders and that the bank holds your current mobile number, then request one fresh code. If it still fails, contact the bank through its official app or the number on your card."
+    "quick_answer": "A missing bank passcode is usually a delivery or account problem, not proof of fraud or a SIM swap. Check signal, blocked-message folders and that the bank holds your current mobile number, then request one fresh code. If it still fails, contact the bank through its official app or the number on your card.",
+    "figure": {
+      "title": "A bank code has not arrived: work down, not up",
+      "alt": "Decision ladder for a missing bank passcode. One: check signal and Airplane Mode, restart the phone, and look in blocked, filtered and junk message folders — and check the inbox is not full. Two: sign in through the bank's own app and confirm it holds your current mobile number. Three: request one fresh code and wait, because a new request can expire the older one. Four: treat it as urgent only if ordinary calls and texts have also stopped, or you see a SIM or number-port change you did not ask for.",
+      "caption": "Original diagram — a missing code is usually a delivery problem, so start there.",
+      "steps": [
+        {
+          "check": "Signal on, Airplane Mode off, phone restarted, blocked and junk folders checked?",
+          "then": "Most missing codes stop here. Also check the inbox has space to receive anything at all."
+        },
+        {
+          "check": "Sign in through the bank's own app: does it hold your current mobile number?",
+          "then": "A number changed after a new SIM or account update is the common cause."
+        },
+        {
+          "check": "Request one fresh code — not several.",
+          "then": "Older codes can expire when a replacement is issued, so repeated requests make it worse."
+        },
+        {
+          "check": "Have ordinary calls and texts stopped too, or was a SIM or number port changed?",
+          "then": "Those are the escalation prompts. A missing code on its own does not establish a SIM swap."
+        }
+      ]
+    }
   },
   {
     "slug": "is-this-website-a-scam",
@@ -1363,7 +1405,7 @@
       "Evri smishing",
       "report Evri scam text"
     ],
-    "updated": "2026-07-18",
+    "updated": "2026-08-01",
     "sources_checked": [
       [
         "Evri — How to spot and report fraud",
@@ -1374,7 +1416,26 @@
         "https://www.evri.com/about-us"
       ]
     ],
-    "quick_answer": "A text asking you to pay a small fee to reschedule an Evri delivery is a scam — Evri says its texts only ever send a tracking link and never ask for payment or an app install. Check parcels in the official Evri app or at evri.com typed in yourself, and forward the fake to `7726`."
+    "quick_answer": "A text asking you to pay a small fee to reschedule an Evri delivery is a scam — Evri says its texts only ever send a tracking link and never ask for payment or an app install. Check parcels in the official Evri app or at evri.com typed in yourself, and forward the fake to `7726`.",
+    "figure": {
+      "title": "An Evri text: the courier's own commitment settles it",
+      "alt": "Decision ladder. One: does it ask for payment, card or personal details, an app install, or a one-letter reply such as Y? Two: Evri says its texts will only ever send a tracking link, never ask you to reschedule or pay to do so, and never prompt an app install — so any of those requests contradicts the courier's own commitment. Three: check the parcel in the official Evri app, or at evri.com typed in yourself, or through the retailer's own tracking link.",
+      "caption": "Original diagram — Evri has published what its texts do, which makes the fake identifiable.",
+      "steps": [
+        {
+          "check": "Payment, card details, an app install, or a reply such as 'Y' to open a link?",
+          "then": "Each of those is a request the courier says it does not make by text."
+        },
+        {
+          "check": "Evri says its texts only ever send a tracking link.",
+          "then": "So the sender name is not the check. What the message asks you to do is."
+        },
+        {
+          "check": "Open the Evri app, or type evri.com yourself, or use the retailer's tracking link.",
+          "then": "Look for a tracking update — not a payment page, an app prompt, or a details form."
+        }
+      ]
+    }
   },
   {
     "title": "WhatsApp 'Hi Mum' Scam UK: Spot a Fake Family Text",
@@ -3028,14 +3089,33 @@
       "Barclays new payee text",
       "report Barclays scam text"
     ],
-    "updated": "2026-07-18",
+    "updated": "2026-08-01",
     "sources_checked": [
       [
         "Stop Scams UK — 159 phone number (participating banks)",
         "https://stopscamsuk.org.uk/our-programmes/159-phone-number/"
       ]
     ],
-    "quick_answer": "A Barclays text pushing you to tap a link to 'cancel a payee' or 'secure' your account is a smishing scam — never use a text link to log in, share a passcode or move money. Verify independently by calling 159 or checking the official Barclays app, and forward the fake text to `7726`."
+    "quick_answer": "A Barclays text pushing you to tap a link to 'cancel a payee' or 'secure' your account is a smishing scam — never use a text link to log in, share a passcode or move money. Verify independently by calling 159 or checking the official Barclays app, and forward the fake text to `7726`.",
+    "figure": {
+      "title": "A Barclays text wants you to act now: what settles it",
+      "alt": "Decision ladder. One: does it ask you to log in through its link, share a passcode, or move money to a safe account? A genuine security check needs none of those. Two: ignore the sender name and where the message sits in your thread — a fake can appear alongside real Barclays alerts. Three: check on a route you opened yourself: dial 159, open the Barclays app, or call the number on the back of your card.",
+      "caption": "Original diagram — the request decides it, not how official the message looks.",
+      "steps": [
+        {
+          "check": "Log in through this link, share a passcode, or move money to a 'safe account'?",
+          "then": "Any one of those settles it. A genuine security check does not need a text link to log you in."
+        },
+        {
+          "check": "Ignore the sender name and where the message sits in the thread.",
+          "then": "A fake can be grouped with genuine Barclays alerts, so its position proves nothing either way."
+        },
+        {
+          "check": "Check on a route you opened: dial 159, the Barclays app, or the number on your card.",
+          "then": "Stop Scams UK lists Barclays among the 159 participants. Do not use a number from the text."
+        }
+      ]
+    }
   },
   {
     "title": "Lloyds Scam Texts: How to Spot a Fake Lloyds SMS (UK)",
@@ -3108,7 +3188,7 @@
       "Lloyds new payee text",
       "report Lloyds scam text"
     ],
-    "updated": "2026-07-26",
+    "updated": "2026-08-01",
     "sources_checked": [
       [
         "Lloyds Bank — Scam messages",
@@ -3135,7 +3215,26 @@
         "https://www.ncsc.gov.uk/collection/phishing-scams/report-scam-text-message"
       ]
     ],
-    "quick_answer": "Lloyds may send links to its secure app or information pages, so a link alone does not prove a scam. Never use a message link to enter logon, banking or personal details or move money. Open the Lloyds app yourself, type `lloydsbank.com`, or dial `159`, and forward a suspicious text to `7726`."
+    "quick_answer": "Lloyds may send links to its secure app or information pages, so a link alone does not prove a scam. Never use a message link to enter logon, banking or personal details or move money. Open the Lloyds app yourself, type `lloydsbank.com`, or dial `159`, and forward a suspicious text to `7726`.",
+    "figure": {
+      "title": "A Lloyds text with a link: the link is not the test",
+      "alt": "Decision ladder. One: a link alone proves nothing, because Lloyds says it may send links to its secure app and to information pages. Two: what settles it is where the link goes and what it then asks for — Lloyds says it will never link directly to its Internet Banking log-on page, or to a page asking for your log-on, banking or personal details. Three: reach the bank on a route you chose instead: open the Lloyds app, type lloydsbank.com yourself, or dial 159.",
+      "caption": "Original diagram — Lloyds does send links, so the sharper test is what the page then asks for.",
+      "steps": [
+        {
+          "check": "A link on its own proves nothing.",
+          "then": "Lloyds says it may send links to its secure app and to pages with more information."
+        },
+        {
+          "check": "Does it lead to a log-on page, or ask for log-on, banking or personal details?",
+          "then": "Lloyds says it will never link directly to its Internet Banking log-on page. That is the test."
+        },
+        {
+          "check": "Reach the bank your way: the Lloyds app, lloydsbank.com typed yourself, or dial 159.",
+          "then": "Stop Scams UK says the route you reach by dialling 159 cannot be spoofed, and 159 never calls you."
+        }
+      ]
+    }
   },
   {
     "title": "NatWest Scam Texts: How to Spot a Fake NatWest SMS (UK)",
@@ -3208,7 +3307,7 @@
       "NatWest security alert text",
       "report NatWest scam text"
     ],
-    "updated": "2026-07-26",
+    "updated": "2026-08-01",
     "sources_checked": [
       [
         "NatWest — Text message fraud",
@@ -3227,7 +3326,26 @@
         "https://www.ncsc.gov.uk/collection/phishing-scams/report-scam-text-message"
       ]
     ],
-    "quick_answer": "A NatWest text telling you to tap a link or call a number to confirm a blocked payment is a scam — NatWest says it will never ask you to call a number in a text to confirm or cancel payments. Verify through the app, 159, or the number on your card, then forward the text to `7726` or `88355`."
+    "quick_answer": "A NatWest text telling you to tap a link or call a number to confirm a blocked payment is a scam — NatWest says it will never ask you to call a number in a text to confirm or cancel payments. Verify through the app, 159, or the number on your card, then forward the text to `7726` or `88355`.",
+    "figure": {
+      "title": "A NatWest text about a blocked payment",
+      "alt": "Decision ladder. One: does it give you a number to call to confirm or cancel a payment? NatWest says it will never ask you to call a number in a text message to do that. Two: does it ask for account details, a password, a card number or a one-time passcode, or tell you to move money to a safe account? Three: check the payment yourself in the official NatWest app, on 159, or on the number printed on the back of your card.",
+      "caption": "Original diagram — the number in the message is as fake as the message.",
+      "steps": [
+        {
+          "check": "Does it give you a number to call about a blocked or cancelled payment?",
+          "then": "NatWest says it will never ask you to call a number in a text to confirm or cancel payments."
+        },
+        {
+          "check": "Account details, password, card number, one-time passcode, or a 'safe account'?",
+          "then": "Any of these ends the question. A real one-time code may be triggered to make the fake page work."
+        },
+        {
+          "check": "Check the payment yourself: the NatWest app, 159, or the number on your card.",
+          "then": "NatWest's own guidance is to check transactions in the app or call the number on the card."
+        }
+      ]
+    }
   },
   {
     "title": "Fake Halifax Text? Scam Checks, 159 and Safe Reporting",
@@ -3302,7 +3420,7 @@
       "Halifax security alert text",
       "report Halifax scam text"
     ],
-    "updated": "2026-07-31",
+    "updated": "2026-08-01",
     "sources_checked": [
       [
         "Halifax — Latest scams and the Halifax-to-Lloyds brand change",
@@ -3367,7 +3485,26 @@
         "assessment": "Halifax says passcodes are private and it will not call to ask you to use one to stop fraud, issue a refund or secure an account."
       }
     ],
-    "quick_answer": "A text asking you to share a passcode or move money to a 'safe account' is a scam whoever it appears to come from — Halifax says it will never ask for either. A link alone proves nothing. Open the Halifax app or call the number on your card, and forward the text to `7726`."
+    "quick_answer": "A text asking you to share a passcode or move money to a 'safe account' is a scam whoever it appears to come from — Halifax says it will never ask for either. A link alone proves nothing. Open the Halifax app or call the number on your card, and forward the text to `7726`.",
+    "figure": {
+      "title": "A Halifax text during the move to Lloyds",
+      "alt": "Decision ladder. One: does it mention the change to Lloyds and ask you to log in, re-register or confirm details? Halifax says it will only contact customers about the transition by email, letter or a banking message — it will not call or text about it. Two: does it ask for your PIN, Personal Security Number, card details or a passcode, or tell you to move money to a safe account? Halifax says it never asks for any of those. Three: check on 159, in the official app, or on the number printed on your card.",
+      "caption": "Original diagram — the rebrand is the new hook, and Halifax has said it will not text about it.",
+      "steps": [
+        {
+          "check": "Does it mention the move to Lloyds and ask you to log in, re-register or confirm?",
+          "then": "Halifax says it will not call or text you about the transition, so a text that does is the tell."
+        },
+        {
+          "check": "PIN, Personal Security Number, card details, a passcode, or a 'safe account'?",
+          "then": "Halifax says it never asks for these. A passcode is like a PIN — it is not shared with anyone."
+        },
+        {
+          "check": "Check on 159, in the official app, or on the number printed on your card.",
+          "then": "Your sort code, account number, card and PIN carry on unchanged through the rebrand."
+        }
+      ]
+    }
   },
   {
     "title": "DVLA Vehicle Tax Text: Is It Genuine or a Scam?",
@@ -3450,7 +3587,7 @@
       "DVLA payment failed text",
       "report DVLA scam text"
     ],
-    "updated": "2026-07-30",
+    "updated": "2026-08-01",
     "sources_checked": [
       [
         "DVLA — Top tips for avoiding scams",
@@ -3519,7 +3656,26 @@
         "assessment": "DVLA says vehicle-tax refunds are automatic, not claimed from a text link."
       }
     ],
-    "quick_answer": "A message asking for bank or card details, confirmation of payment details, or a vehicle-tax refund through a link is a scam — DVLA issues refunds automatically and will not ask you to confirm payment details. Genuine reminders do exist, so check and tax your vehicle only through GOV.UK, and forward scam texts to `7726`."
+    "quick_answer": "A message asking for bank or card details, confirmation of payment details, or a vehicle-tax refund through a link is a scam — DVLA issues refunds automatically and will not ask you to confirm payment details. Genuine reminders do exist, so check and tax your vehicle only through GOV.UK, and forward scam texts to `7726`.",
+    "figure": {
+      "title": "A 'DVLA' text about tax: one red line",
+      "alt": "Decision ladder. One: does it ask for bank or card details, confirmation of payment details, or a vehicle tax refund through a link? That is DVLA's own red line. Two: a refund is nothing to claim — DVLA issues it automatically as a cheque to the address on the log book. Three: genuine reminders do exist, so check the vehicle at gov.uk slash check-vehicle-tax, typed in yourself, using only the registration number.",
+      "caption": "Original diagram — DVLA does contact people, so the request is the test, not the channel.",
+      "steps": [
+        {
+          "check": "Bank or card details, confirmation of payment details, or a refund through a link?",
+          "then": "That is DVLA's stated red line. It says it will not ask you to confirm payment details."
+        },
+        {
+          "check": "A refund needs nothing from you.",
+          "then": "DVLA issues it automatically as a cheque to the address on the log book once you tell it."
+        },
+        {
+          "check": "Check the vehicle yourself at gov.uk/check-vehicle-tax — registration number only.",
+          "then": "Genuine reminders do exist, so 'DVLA never texts' is not a safe rule. The request is the test."
+        }
+      ]
+    }
   },
   {
     "title": "TV Licensing Scam Text UK: Spot a Fake Licence SMS",
@@ -3631,7 +3787,26 @@
         "https://www.cifas.org.uk/pr"
       ]
     ],
-    "quick_answer": "TV Licensing sends some genuine payment and Direct Debit texts, including payment links for some plans, but says it never texts to say you are entitled to a refund or asks for bank details by text. Do not use the message to verify itself: type tvlicensing.co.uk independently, sign in, and forward suspicious texts to 7726."
+    "quick_answer": "TV Licensing sends some genuine payment and Direct Debit texts, including payment links for some plans, but says it never texts to say you are entitled to a refund or asks for bank details by text. Do not use the message to verify itself: type tvlicensing.co.uk independently, sign in, and forward suspicious texts to 7726.",
+    "figure": {
+      "title": "A TV Licensing text: which claim is it making?",
+      "alt": "Decision ladder. One: is it offering a refund? TV Licensing says it does not text to tell you that you are entitled to one, so that claim is the clearest tell. Two: a payment problem is different, because TV Licensing genuinely texts Direct Debit customers about those and genuinely sends renewal reminders — so that subject settles nothing. Three: sign in first. TV Licensing says its missed-payment route asks for card details only after you have signed in with your licence number, surname and postcode, and that it will not ask for personal details before you have signed in. Type tvlicensing.co.uk yourself.",
+      "caption": "Original diagram — refunds and payment problems are opposite cases, so separate them first.",
+      "steps": [
+        {
+          "check": "Is it offering you a refund?",
+          "then": "TV Licensing says it does not text to say you are entitled to one. That claim is the clearest tell."
+        },
+        {
+          "check": "A payment problem or renewal reminder settles nothing on its own.",
+          "then": "TV Licensing genuinely texts Direct Debit customers about payment problems and sends reminders."
+        },
+        {
+          "check": "Sign in first, and type tvlicensing.co.uk yourself rather than following the message.",
+          "then": "It says card details are asked for only after you sign in with licence number, surname and postcode."
+        }
+      ]
+    }
   },
   {
     "title": "Is This NHS Appointment Text Genuine? Checks and Scam Signs",
@@ -3702,7 +3877,7 @@
       "NHS smishing",
       "report NHS scam text"
     ],
-    "updated": "2026-07-30",
+    "updated": "2026-08-01",
     "sources_checked": [
       [
         "NHS England Digital — Notifications and messaging in the NHS App",
@@ -3771,7 +3946,26 @@
         "assessment": "The urgent fee and unverified route are strong scam signs. Check the appointment in the App or with the provider."
       }
     ],
-    "quick_answer": "An NHS-branded text asking you to pay or enter bank details to keep, rebook or receive an appointment is suspicious, not proof of a scam. Most NHS appointments are free, but NHS bodies can send genuine texts with links. Verify the request through the NHS App, your GP or hospital using independently found details, and forward scam texts to `7726`."
+    "quick_answer": "An NHS-branded text asking you to pay or enter bank details to keep, rebook or receive an appointment is suspicious, not proof of a scam. Most NHS appointments are free, but NHS bodies can send genuine texts with links. Verify the request through the NHS App, your GP or hospital using independently found details, and forward scam texts to `7726`.",
+    "figure": {
+      "title": "An NHS appointment text asking for money",
+      "alt": "Decision ladder. One: does it ask you to pay, or give bank or card details, to keep, rebook or receive an appointment? NHS services are free apart from limited charges sanctioned by Parliament. Two: where NHS charges do apply — prescription charges in England, and NHS dental charges — they are paid in person at the pharmacy or the practice, never through a link in an appointment text. Three: NHS bodies do send genuine texts, so check by opening the NHS App yourself, or contacting the named surgery or hospital on details you found independently.",
+      "caption": "Original diagram — a text is not automatically fake, so test the request, not the channel.",
+      "steps": [
+        {
+          "check": "Pay a fee, or give bank or card details, to keep, rebook or receive an appointment?",
+          "then": "NHS care is free apart from limited charges sanctioned by Parliament. Treat this as a scam until checked."
+        },
+        {
+          "check": "Where NHS charges do apply — prescriptions in England, NHS dental charges.",
+          "then": "They are paid in person at the pharmacy or the practice, not through an appointment text link."
+        },
+        {
+          "check": "Open the NHS App yourself, or ring the surgery or hospital on details you found.",
+          "then": "NHS bodies do text, and some trusts use their own portals, so verify the provider rather than the link."
+        }
+      ]
+    }
   },
   {
     "title": "Council Tax Scam Texts: Spot a Fake Refund or Demand (UK)",
@@ -3844,14 +4038,33 @@
       "council tax refund scam UK",
       "report council tax scam text"
     ],
-    "updated": "2026-07-31",
+    "updated": "2026-08-01",
     "sources_checked": [
       [
         "GOV.UK — Pay Council Tax arrears",
         "https://www.gov.uk/council-tax-arrears"
       ]
     ],
-    "quick_answer": "A council tax refund is never claimed through a link in an unexpected text. Some councils do text about arrears, so the link is the risk rather than the subject. Find your council through gov.uk/find-local-council, check your account there, and forward the text to `7726`."
+    "quick_answer": "A council tax refund is never claimed through a link in an unexpected text. Some councils do text about arrears, so the link is the risk rather than the subject. Find your council through gov.uk/find-local-council, check your account there, and forward the text to `7726`.",
+    "figure": {
+      "title": "A council tax text: find the council, then the answer",
+      "alt": "Decision ladder. One: is it offering a refund through a link, or demanding immediate payment to avoid court or bailiffs? Those are the two hooks. Two: some councils do text, so the subject is not the test — the link is. Find your own council through gov.uk slash find-local-council. Three: compare the claimed amount against your real bill or council account before paying or claiming anything.",
+      "caption": "Original diagram — council tax is your council's process, so check it there.",
+      "steps": [
+        {
+          "check": "A refund to claim through a link, or a pay-now threat of court or bailiffs?",
+          "then": "One hook is welcome news, the other is fear. Both want you off the council's own process."
+        },
+        {
+          "check": "Find your council yourself through gov.uk/find-local-council.",
+          "then": "Some councils do send genuine texts, so the subject is not the test — the link is."
+        },
+        {
+          "check": "Does the claimed amount match your real bill or online council account?",
+          "then": "GOV.UK says arrears go through reminder and final notices, not an instant demand from a link."
+        }
+      ]
+    }
   },
   {
     "title": "Parking Fine Scam Text UK: Spot a Fake PCN SMS",
@@ -3924,14 +4137,33 @@
       "report parking fine scam text",
       "fake parking ticket text"
     ],
-    "updated": "2026-07-18",
+    "updated": "2026-08-01",
     "sources_checked": [
       [
         "GOV.UK — Parking fines and penalty charge notices",
         "https://www.gov.uk/parking-tickets"
       ]
     ],
-    "quick_answer": "A text demanding you pay a parking fine through a link within 24 or 48 hours is a scam — and any 'DVLA parking fine' text is a giveaway, because DVLA is not the issuer. Check any alleged penalty at gov.uk/parking-tickets or with the real issuer, and forward the text to `7726`."
+    "quick_answer": "A text demanding you pay a parking fine through a link within 24 or 48 hours is a scam — and any 'DVLA parking fine' text is a giveaway, because DVLA is not the issuer. Check any alleged penalty at gov.uk/parking-tickets or with the real issuer, and forward the text to `7726`.",
+    "figure": {
+      "title": "A parking fine by text: who is supposed to be asking?",
+      "alt": "Decision ladder. One: does it say DVLA? GOV.UK's list of parking and traffic penalty issuers does not include DVLA, so a DVLA parking fine text is a strong red flag. Two: find the real issuer yourself through gov.uk slash parking-tickets, which covers council penalty charge notices, Dart Charge, Transport for London notices, fixed penalty notices and private operators. Three: a genuine notice comes with a reference, an official payment route and an appeal route — a text with a short deadline and a pay-now link has none of those.",
+      "caption": "Original diagram — the issuer is checkable, which is what the short deadline is meant to prevent.",
+      "steps": [
+        {
+          "check": "Does it claim to be a DVLA parking fine?",
+          "then": "GOV.UK's list of issuers does not include DVLA for parking fines. That alone is a strong red flag."
+        },
+        {
+          "check": "Find the real issuer yourself at gov.uk/parking-tickets.",
+          "then": "Council PCNs, Dart Charge, TfL notices, fixed penalty notices and private operators each have a route."
+        },
+        {
+          "check": "Does a genuine notice exist, with a reference, a payment route and an appeal route?",
+          "then": "A 24 or 48 hour deadline in a text exists to stop you looking. The real process gives you both."
+        }
+      ]
+    }
   },
   {
     "title": "Hermes Scam Texts: How to Spot a Fake Parcel Text (UK)",
@@ -4088,14 +4320,33 @@
       "report amazon scam text",
       "amazon failed delivery text"
     ],
-    "updated": "2026-07-18",
+    "updated": "2026-08-01",
     "sources_checked": [
       [
         "Amazon Customer Service — Report a scam",
         "https://www.amazon.com/gp/help/customer/display.html?nodeId=GRGRY7AQ3LMPXVCV"
       ]
     ],
-    "quick_answer": "An Amazon text asking you to pay a small redelivery fee or confirm your address, card, or login through a link is a smishing scam. Check the real status in Your Orders by opening the Amazon app or typing amazon.co.uk yourself, then forward the text to `7726` and report it to Amazon at reportascam@amazon.com."
+    "quick_answer": "An Amazon text asking you to pay a small redelivery fee or confirm your address, card, or login through a link is a smishing scam. Check the real status in Your Orders by opening the Amazon app or typing amazon.co.uk yourself, then forward the text to `7726` and report it to Amazon at reportascam@amazon.com.",
+    "figure": {
+      "title": "A delivery text about an Amazon parcel: check the order, not the text",
+      "alt": "Decision ladder. One: does it ask for a redelivery fee, or to confirm your address, card or Amazon login through a link? That is the scam pattern. Two: open the Amazon app, or type amazon.co.uk yourself, and read the real status in Your Orders. Three: if Your Orders shows no problem, the text has no connection to your parcel, whatever the sender name says.",
+      "caption": "Original diagram — Your Orders is the record; the text is only a claim about it.",
+      "steps": [
+        {
+          "check": "Does it want a fee, or your address, card or Amazon login, through a link?",
+          "then": "That is the pattern. The small amount is bait to capture the card, not the point of the scam."
+        },
+        {
+          "check": "Open the Amazon app, or type amazon.co.uk yourself, and read Your Orders.",
+          "then": "Going to the source yourself is the check. The link cannot tell you whether the link is honest."
+        },
+        {
+          "check": "Does Your Orders actually show a problem with a parcel you are expecting?",
+          "then": "If not, the message has no connection to your order, however convincing the sender name looks."
+        }
+      ]
+    }
   },
   {
     "title": "HMRC Tax Rebate Email Scam: Spot a Fake (UK)",
@@ -11609,7 +11860,7 @@
       "report nationwide scam text",
       "nationwide suspicious activity text"
     ],
-    "updated": "2026-07-26",
+    "updated": "2026-08-01",
     "sources_checked": [
       [
         "Nationwide — Fraud and security",
@@ -11648,7 +11899,26 @@
         "https://stopscamsuk.org.uk/our-programmes/159-phone-number/"
       ]
     ],
-    "quick_answer": "Treat a Nationwide text asking you to log in through its link as a scam. A message asking you to claim, confirm or release the 2026 Fairer Share payment is also fake because there was no claim process. Send suspicious messages to `phishing@nationwide.co.uk`, forward texts to `7726`, and use Call Checker if a caller follows up."
+    "quick_answer": "Treat a Nationwide text asking you to log in through its link as a scam. A message asking you to claim, confirm or release the 2026 Fairer Share payment is also fake because there was no claim process. Send suspicious messages to `phishing@nationwide.co.uk`, forward texts to `7726`, and use Call Checker if a caller follows up.",
+    "figure": {
+      "title": "A Nationwide text: use the check that comes before the payment",
+      "alt": "Decision ladder. One: if a payment is involved, run it past Nationwide's Scam Checker Service before you send it, not after — that conversation is the whole point of the service. Two: a message about the Fairer Share Payment asking you to claim, confirm details for, sign in for or release it is invented, because the payment is made automatically and there is no claim process. Three: if a caller follows the text, stay on the call and open Call Checker in the Nationwide app — it states either that you are speaking to a named colleague or that you are not on a call with the society.",
+      "caption": "Original diagram — Nationwide's two member-only tools answer what a text cannot.",
+      "steps": [
+        {
+          "check": "Is a payment involved? Run it past the Scam Checker Service before you send it.",
+          "then": "Talking to the society first is what an urgent text is designed to rush you past."
+        },
+        {
+          "check": "Fairer Share: does it ask you to claim, confirm, sign in for or release the payment?",
+          "then": "It is paid automatically into an open current account. There is nothing to apply for."
+        },
+        {
+          "check": "If a caller follows the text, open Call Checker in the app while still on the call.",
+          "then": "It names the colleague, or says you are not on a call with the society. 159 cannot answer that."
+        }
+      ]
+    }
   },
   {
     "title": "HSBC Scam Call UK: Spot a Fake Fraud Team Call",
@@ -13197,7 +13467,26 @@
         "https://www.scotland.police.uk/contact-us/non-emergencies/"
       ]
     ],
-    "quick_answer": "O2 does send genuine billing and payment texts, so the subject is not the test — but any message asking for a one-time code, password or security information is phishing, because O2 says it will never ask for those by text. Ignore the link, log in directly at o2.co.uk, and forward the message free to `7726`."
+    "quick_answer": "O2 does send genuine billing and payment texts, so the subject is not the test — but any message asking for a one-time code, password or security information is phishing, because O2 says it will never ask for those by text. Ignore the link, log in directly at o2.co.uk, and forward the message free to `7726`.",
+    "figure": {
+      "title": "An O2 text about your account: topic or request?",
+      "alt": "Decision ladder. One: does it ask for a one-time code, a password, or other security information? O2 says it will never call, text or email asking for any of those. Two: the topic is not the test, because O2 does send genuine billing, payment and usage texts — so a payment-problem message is not fake by subject alone. Three: check by typing o2.co.uk yourself or opening the official app, and never ring a number printed in the message: from your O2 phone dial 202 on Pay Monthly or 4445 on Pay As You Go.",
+      "caption": "Original diagram — O2 texts its customers, so judge the ask rather than the subject.",
+      "steps": [
+        {
+          "check": "Does it ask for a one-time code, a password, or other security information?",
+          "then": "O2 says it will never call, text or email you asking for any of these. That settles it."
+        },
+        {
+          "check": "The topic is not the test.",
+          "then": "O2 does send genuine billing and payment texts, so a payment problem is not fake by subject alone."
+        },
+        {
+          "check": "Type o2.co.uk yourself, or use the app — and never ring a number from the message.",
+          "then": "From your O2 phone, 202 is free on Pay Monthly and 4445 on Pay As You Go."
+        }
+      ]
+    }
   },
   {
     "title": "Vodafone Scam Text UK: Spot a Fake Vodafone SMS",
