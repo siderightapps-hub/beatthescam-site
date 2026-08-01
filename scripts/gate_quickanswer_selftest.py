@@ -23,7 +23,7 @@ import sys
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
-from content_gate import _post_text, check_deterministic, run_gate
+from content_gate import _post_text, body_shingles, check_deterministic, run_gate
 
 FAILURES: list[str] = []
 
@@ -732,6 +732,69 @@ def run() -> int:
     check("post-verbal contrast ('contact X, not Police Scotland') is not a route",
           hub_blocks(hub([["R", "<p>Report it to Report Fraud. Contact your bank, not Police "
                                 "Scotland on 101.</p>"]])))
+
+    # ── figure text is gated like any other reader-visible field ─────────────
+    # The `figure` field shipped on 2026-08-01 and NOTHING in the gate read it
+    # for a day: an inline diagram could have named an invented number and every
+    # suite stayed green. These fixtures assert the coverage by CONSEQUENCE —
+    # each one is a claim class that must BLOCK or FLAG — rather than asserting
+    # that some string reaches some extractor. A future field wired to the
+    # renderer but not to `_figure_fields` fails here.
+    def fig(**over) -> dict:
+        f = {"title": "Three checks, in order",
+             "alt": "Decision ladder. One: does it ask for payment through a link?",
+             "caption": "Original diagram.",
+             "steps": [{"check": "Does it ask for payment through a link?",
+                        "then": "Genuine couriers do not collect fees that way."}]}
+        f.update(over)
+        return post(figure=f)
+
+    check("a benign figure is clean",
+          not check_deterministic(fig()))
+    check("an invented phone number in figure ALT TEXT blocks",
+          issues_of(fig(alt="Call the fraud line on 0300 999 1234 to report it."), "phone"))
+    check("retired branding in a figure STEP is flagged",
+          issues_of(fig(steps=[{"check": "Is the firm listed?",
+                                "then": "Use the FCA ScamSmart register to check."}]),
+                    "retired_branding"))
+    check("routing the National Fraud Database via Report Fraud in a figure blocks",
+          issues_of(fig(steps=[{"check": "Is your identity at risk?",
+                                "then": "Report it to Report Fraud to add your name to the National "
+                                        "Fraud Database. Report Fraud covers England, Wales and "
+                                        "Northern Ireland. If you live in Scotland, report to Police "
+                                        "Scotland on 101."}]),
+                    "nfd_routing"))
+    check("Report Fraud in a figure with no Scottish route is caught",
+          issues_of(fig(alt="Report it to Report Fraud on 0300 123 2040."), "scotland_routing"))
+    check("a US-style fraud alert in a figure is caught",
+          issues_of(fig(steps=[{"check": "Has your identity been used?",
+                                "then": "Place a fraud alert on your credit file with the three CRAs."}]),
+                    "cra_exhaustive"))
+    check("a dangling conjunction in figure alt text is caught",
+          issues_of(fig(alt="Check the sender and."), "malformed_text"))
+
+    # Alt text is the ONLY version of the diagram a screen-reader user gets, so
+    # it is checked as prose, not treated as a metadata attribute.
+    check("figure alt text reaches _post_text",
+          "zzfiguremarker" in _post_text(fig(alt="Ladder. zzfiguremarker")))
+    check("figure step outcomes reach _post_text",
+          "zzstepmarker" in _post_text(fig(steps=[{"check": "C?", "then": "zzstepmarker"}])))
+
+    # Malformed figures must not crash the gate — a record that fails to render
+    # a figure still has to be publishable, or a bad optional field takes the
+    # whole guide down.
+    check("a non-dict figure does not crash the gate",
+          not check_deterministic(post(figure="not a dict")))
+    check("non-dict steps do not crash the gate",
+          not check_deterministic(post(figure={"title": "T", "alt": "A.", "steps": ["x", None]})))
+    check("an absent figure does not crash the gate",
+          not check_deterministic(post()))
+
+    # Similarity: a templated figure is the cookie-cutter risk at corpus scale,
+    # so figure words must COUNT toward the duplication measure rather than
+    # riding along untested.
+    check("figure text contributes to the similarity shingles",
+          len(body_shingles(fig())) > len(body_shingles(post())))
 
     # NB: a mention placed BEFORE the scope+route block is served, not stranded —
     # that is the approved guide form (instruction, scope, route) and the reader

@@ -11744,7 +11744,7 @@
         },
         {
           "check": "Hang up properly, wait 15 seconds, check the line is disconnected, wait another 15.",
-          "then": "HSBC's own guidance. A different phone removes the risk of a held-open line entirely."
+          "then": "HSBC's own guidance. A different phone side-steps the problem, because a scammer can only hold open the line they called you on."
         },
         {
           "check": "Call back on the number printed on your card — never one from the call or message.",
