@@ -224,12 +224,39 @@ def reverify_post_llm(post: Dict, client, model: str, today: str,
             return findings
         except Exception as e:  # noqa: BLE001 — must never abort the whole run
             last_err = e
+            if not _is_retryable(e):
+                break
             if attempt < attempts:
                 sleep_fn(min(2 ** attempt, 30))
     return [{"claim_text": None,
              "issue": f"re-verification failed after {attempts} attempts: "
                       f"{type(last_err).__name__}: {last_err}",
              "correct_value": None, "source_url": None, "confidence": "error"}]
+
+
+def _is_retryable(exc: Exception) -> bool:
+    """Only back off and retry for failures a retry can actually clear.
+
+    The 2026-07-31 whole-corpus run hit a configured spend cap 71 guides in.
+    Every one of those got the SAME 400 three times, because the loop retried
+    unconditionally: "You have reached your specified API usage limits." A
+    retry cannot clear that, so it burned three failed calls per guide where one
+    would have done — and against a request-count cap rather than a spend cap it
+    would have made the situation actively worse.
+
+    Rate limits (429) and server errors (5xx) are worth retrying; a 400/401/403
+    is a statement about the request or the account, not a transient fault.
+    """
+    status = getattr(exc, "status_code", None)
+    if status is None:
+        status = getattr(getattr(exc, "response", None), "status_code", None)
+    if isinstance(status, int):
+        if status == 429 or status >= 500:
+            return True
+        if 400 <= status < 500:
+            return False
+    # No status at all: a timeout or a dropped connection. Those are transient.
+    return True
 
 
 def find_affected_slugs(posts: List[Dict], claim_text: Optional[str], skip_slug: str) -> List[str]:
