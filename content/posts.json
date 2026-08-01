@@ -557,7 +557,7 @@
       ],
       [
         "Signs the text is not from the courier",
-        "- It asks for any payment to receive or redeliver a parcel.\n- It asks for bank details, card details, or your phone number.\n- The link is not on `inpost.co.uk` or `yodel.co.uk` — watch for added words, hyphens, or unusual endings.\n- It arrives from a random mobile or international number.\n- It pressures you with a deadline, a holding fee, or a threat to return the parcel.\n- You cannot match it to an order you actually placed.\n- It asks for a one-time passcode, password, or date of birth. Yodel's fraud page notes that genuine companies do not email asking for usernames, passwords, dates of birth, or card details."
+        "- It asks for any payment to receive or redeliver a parcel.\n- It asks for bank details, card details, or your phone number.\n- The link is not on `inpost.co.uk` or `yodel.co.uk` — watch for added words, hyphens, or unusual endings.\n- It arrives from a random mobile or international number.\n- It pressures you with a deadline, a holding fee, or a threat to return the parcel.\n- You cannot match it to an order you actually placed.\n- It asks for a one-time passcode, password, or date of birth. Yodel's fraud page notes that genuine companies do not email asking for usernames, passwords, dates of birth, or card details. These waves cluster around bank holidays, when a missed delivery is most believable; our [bank holiday parcel scam guide](/guides/bank-holiday-parcel-scam-wave-uk/) covers the timing."
       ],
       [
         "Checking a delivery now that tracking has moved",
@@ -625,7 +625,7 @@
       ]
     ],
     "quick_answer": "Yodel by InPost says it never asks for a redelivery fee or for your bank details by text, so a text demanding one is a scam. Genuine import charges arise elsewhere in a purchase, not by redelivery text. Yodel by InPost web accounts ended on 17 July 2026: check parcels in the InPost app or at inpost.co.uk, opened yourself.",
-    "updated": "2026-07-30"
+    "updated": "2026-08-01"
   },
   {
     "slug": "ups-delivery-scam-text-messages-uk",
@@ -1220,7 +1220,7 @@
       ],
       [
         "Why these scams work",
-        "Having already lost money makes the promise of getting it back feel like a lifeline. Fraudsters may also target you again, or sell your details to other criminals, so a second caller may already know exactly what happened to you. A confident, official-sounding caller with some of your case details can feel credible.\n\nThe rule that protects you: official recovery routes - your bank, the police, or the Financial Ombudsman - do not ask you to pay an upfront \"release fee\" to receive money that is supposedly already recovered. An unsolicited recovery offer that asks for payment before recovery is a scam sign."
+        "Having already lost money makes the promise of getting it back feel like a lifeline. Fraudsters may also target you again, or sell your details to other criminals, so a second caller may already know exactly what happened to you. A confident, official-sounding caller with some of your case details can feel credible.\n\nThe rule that protects you: official recovery routes - your bank, the police, or the Financial Ombudsman - do not ask you to pay an upfront \"release fee\" to receive money that is supposedly already recovered. An unsolicited recovery offer that asks for payment before recovery is a scam sign. Romance-fraud victims are approached a second time particularly often, which is why our [military romance scam guide](/guides/military-romance-scam-uk/) ends on the recovery approach."
       ],
       [
         "Signs a recovery offer is a scam",
@@ -1275,7 +1275,7 @@
       "report recovery scam uk",
       "upfront fee recovery fraud"
     ],
-    "updated": "2026-07-30",
+    "updated": "2026-08-01",
     "sources_checked": [
       [
         "FCA — Recovery room scams",
@@ -1396,7 +1396,7 @@
       ],
       [
         "Signs a \"new number\" message is a scam",
-        "- A family member or friend messages from an unknown or \"new\" number.\n- They say they have lost, broken, or been locked out of their phone.\n- There is an urgent money request: a bill, rent, travel, or being locked out of banking.\n- You are asked to pay a new account, or to act before a deadline today.\n- They make excuses not to take a phone or video call.\n- The account has no profile photo, or one that changed recently.\n- The story escalates, or a second \"relative\" messages to back it up."
+        "- A family member or friend messages from an unknown or \"new\" number.\n- They say they have lost, broken, or been locked out of their phone.\n- There is an urgent money request: a bill, rent, travel, or being locked out of banking.\n- You are asked to pay a new account, or to act before a deadline today.\n- They make excuses not to take a phone or video call.\n- The account has no profile photo, or one that changed recently.\n- The story escalates, or a second \"relative\" messages to back it up. Prize and giveaway approaches use the same urgency on other platforms — see our [Instagram fake giveaway scam guide](/guides/instagram-fake-giveaway-scam-uk/)."
       ],
       [
         "How the scam works, step by step",
@@ -1447,7 +1447,7 @@
       "report whatsapp scam uk",
       "friend in need scam"
     ],
-    "updated": "2026-07-31",
+    "updated": "2026-08-01",
     "sources_checked": [
       [
         "WhatsApp Help Center — About two-step verification",
@@ -1572,7 +1572,7 @@
       ],
       [
         "Signs a crypto investment is a scam",
-        "- It uses a celebrity endorsement or news-style advert you cannot verify independently.\n- It promises guaranteed, fixed, or unusually high returns.\n- The dashboard shows rising profits you can never actually withdraw.\n- You are asked to deposit more to \"unlock\" a withdrawal or pay a fake tax or fee.\n- The approach came through social media, a dating app, or an unsolicited message.\n- You are pressured to act quickly, or told spaces are limited.\n- A \"recovery\" service later offers to get your lost money back for a fee."
+        "- It uses a celebrity endorsement or news-style advert you cannot verify independently.\n- It promises guaranteed, fixed, or unusually high returns.\n- The dashboard shows rising profits you can never actually withdraw.\n- You are asked to deposit more to \"unlock\" a withdrawal or pay a fake tax or fee.\n- The approach came through social media, a dating app, or an unsolicited message.\n- You are pressured to act quickly, or told spaces are limited.\n- A \"recovery\" service later offers to get your lost money back for a fee. The giveaway variant promises to return more than you send; our [Twitter crypto giveaway scam guide](/guides/twitter-crypto-giveaway-scam-uk/) covers it."
       ],
       [
         "How the scam works",
@@ -1623,7 +1623,7 @@
       "report crypto investment scam",
       "crypto guaranteed returns scam"
     ],
-    "updated": "2026-07-26",
+    "updated": "2026-08-01",
     "sources_checked": [
       [
         "FCA — Warns consumers of risks in high-return cryptoasset investments",
@@ -1752,7 +1752,7 @@
     "sections": [
       [
         "Three high-risk decision points on Tinder",
-        "Three moments on Tinder carry most of the financial risk, and each has a clean decision attached to it.\n\n- A new match asks you to prove you are real by using a link they send you. Decision: never open it. A match cannot issue or complete Tinder verification for you.\n- A match wants your number in the first handful of exchanges. Decision: slow down. That is a red flag rather than conclusive proof of fraud, and Tinder's own safety tips say to keep conversations on Tinder while you are getting to know someone.\n- Weeks in, a warm and attentive person mentions a trading platform they use. Decision: treat that as fraud from its first mention, however long you have been talking. Tinder's safety tips put it plainly: do not let a match talk you into investing or opening an account with a service or website they share.\n\nNone of this requires you to be suspicious of people in general. Each one is a discrete choice with a right answer, which is why it is worth settling them in advance rather than mid-conversation with someone you are enjoying."
+        "Three moments on Tinder carry most of the financial risk, and each has a clean decision attached to it.\n\n- A new match asks you to prove you are real by using a link they send you. Decision: never open it. A match cannot issue or complete Tinder verification for you.\n- A match wants your number in the first handful of exchanges. Decision: slow down. That is a red flag rather than conclusive proof of fraud, and Tinder's own safety tips say to keep conversations on Tinder while you are getting to know someone.\n- Weeks in, a warm and attentive person mentions a trading platform they use. Decision: treat that as fraud from its first mention, however long you have been talking. Tinder's safety tips put it plainly: do not let a match talk you into investing or opening an account with a service or website they share.\n\nNone of this requires you to be suspicious of people in general. Each one is a discrete choice with a right answer, which is why it is worth settling them in advance rather than mid-conversation with someone you are enjoying. The same three decision points apply on other apps, and the verification-link version is documented on Bumble in our [Bumble romance scam guide](/guides/bumble-romance-scam-uk/)."
       ],
       [
         "What the Photo Verified badge actually proves",
@@ -1768,7 +1768,7 @@
       ],
       [
         "When Telegram and a trading app enter the conversation",
-        "The most expensive Tinder pattern is not the urgent-emergency story. It is the slow one, where there is no crisis, no request and nothing to refuse. Across several weeks a match becomes a fixture of your day, mentions in passing that an uncle or a mentor handles money for the family, and eventually shares an app or web platform with a tidy interface and a balance that ticks upward.\n\nA small opening deposit appears to grow. That screen is fabricated. Attempt a withdrawal and a charge appears: tax, a compliance fee, an account-upgrade minimum, an unlocking payment. Every one of those is another deposit into the same fraud, and paying one always reveals another.\n\nTwo details are specific to how this reaches you through Tinder. First, the chat usually leaves the app early, for WhatsApp or Telegram. Tinder holds the messages that remain in its own service and cannot review a conversation on another platform at all, so moving off-platform takes everything that follows out of Tinder's in-app moderation view unless you preserve it and supply it yourself.\n\nSecond, check the named platform on the FCA Firm Checker at `register.fca.org.uk` before any money moves, not afterwards. Look the firm up, read what it is actually authorised to do, and confirm that every contact detail you have been given matches the register. A fraudulent platform may be missing from the register altogether — but a scammer may equally impersonate an authorised firm or quote a genuine firm's real details, so a name that does appear is not a clean bill of health. Start the check from the FCA's own page, never from a link the match supplies. To pressure-test the site itself, our guide at /guides/is-this-website-a-scam/ walks through the checks."
+        "The most expensive Tinder pattern is not the urgent-emergency story. It is the slow one, where there is no crisis, no request and nothing to refuse. Across several weeks a match becomes a fixture of your day, mentions in passing that an uncle or a mentor handles money for the family, and eventually shares an app or web platform with a tidy interface and a balance that ticks upward.\n\nA small opening deposit appears to grow. That screen is fabricated. Attempt a withdrawal and a charge appears: tax, a compliance fee, an account-upgrade minimum, an unlocking payment. Every one of those is another deposit into the same fraud, and paying one always reveals another.\n\nTwo details are specific to how this reaches you through Tinder. First, the chat usually leaves the app early, for WhatsApp or Telegram. Tinder holds the messages that remain in its own service and cannot review a conversation on another platform at all, so moving off-platform takes everything that follows out of Tinder's in-app moderation view unless you preserve it and supply it yourself.\n\nSecond, check the named platform on the FCA Firm Checker at `register.fca.org.uk` before any money moves, not afterwards. Look the firm up, read what it is actually authorised to do, and confirm that every contact detail you have been given matches the register. A fraudulent platform may be missing from the register altogether — but a scammer may equally impersonate an authorised firm or quote a genuine firm's real details, so a name that does appear is not a clean bill of health. Start the check from the FCA's own page, never from a link the match supplies. To pressure-test the site itself, our guide at /guides/is-this-website-a-scam/ walks through the checks. The move onto a second platform is the constant across apps — the Facebook Dating version is covered in our [Facebook Dating scam guide](/guides/facebook-dating-scam-uk/)."
       ],
       [
         "Screenshot first, then unmatch, block and report",
@@ -1811,7 +1811,7 @@
       "romance scam UK",
       "report Tinder scam"
     ],
-    "updated": "2026-07-30",
+    "updated": "2026-08-01",
     "sources_checked": [
       [
         "Tinder press room — Face Check launches in the UK (26 March 2026)",
@@ -2344,7 +2344,7 @@
       ],
       [
         "Signs a job offer is a scam",
-        "- It arrives unsolicited for a job you never applied for.\n- The pay is high for little work, and there is no proper interview.\n- You are moved to WhatsApp or Telegram almost immediately.\n- You are asked to pay a fee to a recruiter or contact for training, equipment, a check, or \"onboarding\" - especially to a private account or through a link the recruiter sends.\n- It is a task or \"product boosting\" job where you must deposit money to earn or withdraw.\n- You are asked to take in, hold, convert or pass on somebody else's money using an account in your own name - a bank account, a payment account or a crypto wallet.\n- You are pushed for bank details or ID documents before you have verified the employer and reached a proper offer or checks stage."
+        "- It arrives unsolicited for a job you never applied for.\n- The pay is high for little work, and there is no proper interview.\n- You are moved to WhatsApp or Telegram almost immediately.\n- You are asked to pay a fee to a recruiter or contact for training, equipment, a check, or \"onboarding\" - especially to a private account or through a link the recruiter sends.\n- It is a task or \"product boosting\" job where you must deposit money to earn or withdraw.\n- You are asked to take in, hold, convert or pass on somebody else's money using an account in your own name - a bank account, a payment account or a crypto wallet.\n- You are pushed for bank details or ID documents before you have verified the employer and reached a proper offer or checks stage. Remote and work-from-home listings carry the highest concentration of these offers; our [remote work scam guide](/guides/remote-work-scam-uk-2026/) covers what to check before accepting."
       ],
       [
         "How the scam works",
@@ -2395,7 +2395,7 @@
       "report job scam uk",
       "recruitment scam warning signs"
     ],
-    "updated": "2026-07-30",
+    "updated": "2026-08-01",
     "sources_checked": [
       [
         "GOV.UK — Overview of the Conduct Regulations 2003 (employment agency fees)",
@@ -2771,7 +2771,7 @@
       ],
       [
         "Signs a Royal Mail text is a scam",
-        "- It asks for a redelivery or release fee that you cannot match to a real item, tracking number, barcode, or `Fee to Pay` card.\n- It links to a lookalike or shortened address instead of a Royal Mail route you reached yourself.\n- It asks for card details, bank details, or personal information on a copycat page.\n- It pressures you with a deadline before the item is returned to sender.\n- It claims a customs or postage fee but gives no verifiable item reference.\n- The wording, spelling, or layout looks odd, though a polished text can still be a scam.\n- It asks you to use a payment route outside Royal Mail's official `Fee to Pay` process."
+        "- It asks for a redelivery or release fee that you cannot match to a real item, tracking number, barcode, or `Fee to Pay` card.\n- It links to a lookalike or shortened address instead of a Royal Mail route you reached yourself.\n- It asks for card details, bank details, or personal information on a copycat page.\n- It pressures you with a deadline before the item is returned to sender.\n- It claims a customs or postage fee but gives no verifiable item reference.\n- The wording, spelling, or layout looks odd, though a polished text can still be a scam.\n- It asks you to use a payment route outside Royal Mail's official `Fee to Pay` process. Amazon-branded delivery texts use an identical fee pretext — see our [Amazon delivery scam text guide](/guides/amazon-delivery-scam-text-uk/)."
       ],
       [
         "How the Royal Mail fee scam works",
@@ -2822,7 +2822,7 @@
       "Royal Mail smishing",
       "report Royal Mail scam text"
     ],
-    "updated": "2026-07-18",
+    "updated": "2026-08-01",
     "sources_checked": [
       [
         "Royal Mail — Pay a fee",
@@ -3503,7 +3503,7 @@
       ],
       [
         "Signs a TV Licensing text is a scam",
-        "Warning signs include an unexpected refund claim, a request for bank details by text, or a site that asks for personal details before you have successfully signed in. A payment problem or link is not conclusive by itself; verify the same issue independently in your TV Licensing account.\n\nAlongside those, weigh the pressure tactics rather than the subject line:\n\n- It threatens a fine, court, or an \"enforcement officer\" unless you act today.\n- It pairs a generic greeting with a very short deadline.\n- It asks you to reply with your full card number, bank details, or account credentials.\n- The claim matches nothing you can find when you open your own account independently.\n- It arrives from an odd number - though a familiar sender name proves nothing either way, because sender IDs can be spoofed.\n\nAn unfamiliar, misspelled or lookalike address is a warning. TV Licensing currently lists `tvlicensing.co.uk`, `tvl.co.uk`, `spp.tvlicensing.co.uk` and `75plan.tvlicensing.co.uk` as genuine, but visible link text and sender details can be faked. Do not use the message to verify itself: type `tvlicensing.co.uk` independently and check your licence or payment plan there.\n\nTV Licensing's own scam guidance says a genuine Simple Payment Plan text may link to `tvl.co.uk/spppay`, so an address you do not recognise is a prompt to check independently rather than a verdict on its own."
+        "Warning signs include an unexpected refund claim, a request for bank details by text, or a site that asks for personal details before you have successfully signed in. A payment problem or link is not conclusive by itself; verify the same issue independently in your TV Licensing account.\n\nAlongside those, weigh the pressure tactics rather than the subject line:\n\n- It threatens a fine, court, or an \"enforcement officer\" unless you act today.\n- It pairs a generic greeting with a very short deadline.\n- It asks you to reply with your full card number, bank details, or account credentials.\n- The claim matches nothing you can find when you open your own account independently.\n- It arrives from an odd number - though a familiar sender name proves nothing either way, because sender IDs can be spoofed.\n\nAn unfamiliar, misspelled or lookalike address is a warning. TV Licensing currently lists `tvlicensing.co.uk`, `tvl.co.uk`, `spp.tvlicensing.co.uk` and `75plan.tvlicensing.co.uk` as genuine, but visible link text and sender details can be faked. Do not use the message to verify itself: type `tvlicensing.co.uk` independently and check your licence or payment plan there.\n\nTV Licensing's own scam guidance says a genuine Simple Payment Plan text may link to `tvl.co.uk/spppay`, so an address you do not recognise is a prompt to check independently rather than a verdict on its own. Parking-fine texts use the same small-sum, short-deadline framing — see our [parking fine scam text guide](/guides/parking-fine-scam-text-uk/)."
       ],
       [
         "How the scam works, step by step",
@@ -3554,7 +3554,7 @@
       "report tv licensing scam text",
       "tv licence direct debit scam"
     ],
-    "updated": "2026-07-30",
+    "updated": "2026-08-01",
     "sources_checked": [
       [
         "TV Licensing — Helping you avoid TV Licensing scams and how to report one",
@@ -5278,7 +5278,7 @@
       ],
       [
         "Warning signs",
-        "- An unsolicited prize, inheritance or loan you did not enter, expect or apply for.\n- A fee demanded before money can be released, especially by bank transfer, gift card or crypto.\n- Further fees appearing after the first payment.\n- A loan firm absent from the FCA Firm Checker or using details that do not match it.\n- Pressure to act before obtaining independent advice or written terms."
+        "- An unsolicited prize, inheritance or loan you did not enter, expect or apply for.\n- A fee demanded before money can be released, especially by bank transfer, gift card or crypto.\n- Further fees appearing after the first payment.\n- A loan firm absent from the FCA Firm Checker or using details that do not match it.\n- Pressure to act before obtaining independent advice or written terms. Wedding suppliers are a common setting for this, because deposits are large and expected — see our [wedding photographer scam guide](/guides/wedding-photographer-scam-uk/)."
       ],
       [
         "Verify independently",
@@ -5316,7 +5316,7 @@
       "bank transfer scam UK",
       "payment scam UK"
     ],
-    "updated": "2026-07-10",
+    "updated": "2026-08-01",
     "sources_checked": [
       [
         "FCA — Loan fee fraud",
@@ -5778,7 +5778,7 @@
       ],
       [
         "Signs of an eBay scam",
-        "- A buyer or seller asks to pay, get paid, or message outside eBay.\n- The payment method is bank transfer, gift card, PayPal friends and family, crypto, or another route not offered through eBay checkout.\n- A buyer overpays and asks you to refund the difference.\n- A payment screenshot does not match a real order or payment in your eBay account.\n- An \"eBay\" email asks for your password, full card number, bank details, or other confidential information.\n- The link in an email is not an eBay site, or it uses a lookalike address.\n- You are pressured to post an item before confirmed payment appears in the correct account.\n- The message looks polished but asks you to leave eBay's normal process."
+        "- A buyer or seller asks to pay, get paid, or message outside eBay.\n- The payment method is bank transfer, gift card, PayPal friends and family, crypto, or another route not offered through eBay checkout.\n- A buyer overpays and asks you to refund the difference.\n- A payment screenshot does not match a real order or payment in your eBay account.\n- An \"eBay\" email asks for your password, full card number, bank details, or other confidential information.\n- The link in an email is not an eBay site, or it uses a lookalike address.\n- You are pressured to post an item before confirmed payment appears in the correct account.\n- The message looks polished but asks you to leave eBay's normal process. In-app shop fronts carry their own version of this, with no marketplace protection behind it — see our [TikTok Shop scam guide](/guides/tiktok-shop-scam-uk/)."
       ],
       [
         "How the eBay scam works",
@@ -5829,7 +5829,7 @@
       "eBay overpayment scam",
       "report eBay scam"
     ],
-    "updated": "2026-07-18",
+    "updated": "2026-08-01",
     "sources_checked": [
       [
         "eBay UK — Recognising phishing phone calls and emails",
@@ -7031,7 +7031,7 @@
       ],
       [
         "Warning signs to look for",
-        "- The web address is close to, but not exactly, the real exchange's domain — check it character by character, not at a glance.\n- It promises guaranteed returns or bonus rates well above anything a genuine exchange advertises.\n- You found it through an unsolicited message, social media ad, or a \"personal account manager\" who contacted you first.\n- Customer support only exists through WhatsApp or Telegram, not the ticketing system or verified channels a genuine exchange publishes.\n- You're asked to send cryptocurrency directly to a personal wallet address rather than through the platform's normal deposit flow.\n- Under the FCA's rules for cryptoasset promotions aimed at UK consumers, firms must show prominent risk warnings and cannot use incentives such as \"refer a friend\" bonuses — a platform doing neither is a red flag."
+        "- The web address is close to, but not exactly, the real exchange's domain — check it character by character, not at a glance.\n- It promises guaranteed returns or bonus rates well above anything a genuine exchange advertises.\n- You found it through an unsolicited message, social media ad, or a \"personal account manager\" who contacted you first.\n- Customer support only exists through WhatsApp or Telegram, not the ticketing system or verified channels a genuine exchange publishes.\n- You're asked to send cryptocurrency directly to a personal wallet address rather than through the platform's normal deposit flow.\n- Under the FCA's rules for cryptoasset promotions aimed at UK consumers, firms must show prominent risk warnings and cannot use incentives such as \"refer a friend\" bonuses — a platform doing neither is a red flag. The introduction usually arrives in a messaging app rather than on the exchange itself — see our [WhatsApp investment scam guide](/guides/whatsapp-investment-scam-uk/)."
       ],
       [
         "How this scam works step by step",
@@ -7077,7 +7077,7 @@
       "crypto scam UK",
       "cryptocurrency scam UK"
     ],
-    "updated": "2026-07-30",
+    "updated": "2026-08-01",
     "sources_checked": [
       [
         "FCA — Cryptoasset firms marketing to UK consumers",
@@ -7284,7 +7284,7 @@
       ],
       [
         "Signs a Universal Credit message is a scam",
-        "- It offers a grant, bonus, or support payment that you must claim through a link.\n- A social-media \"agent\" offers to claim a grant or advance for you, especially for a cut.\n- It asks for your Universal Credit login, National Insurance number, bank details, or card details.\n- It asks you to pay a fee to make, speed up, or release a claim.\n- The link is not `gov.uk` or the official Universal Credit service reached from GOV.UK.\n- It pressures you to act before a deadline or says the offer is secret.\n- Someone asks for your ID and bank details to \"set up\" a claim for you."
+        "- It offers a grant, bonus, or support payment that you must claim through a link.\n- A social-media \"agent\" offers to claim a grant or advance for you, especially for a cut.\n- It asks for your Universal Credit login, National Insurance number, bank details, or card details.\n- It asks you to pay a fee to make, speed up, or release a claim.\n- The link is not `gov.uk` or the official Universal Credit service reached from GOV.UK.\n- It pressures you to act before a deadline or says the offer is secret.\n- Someone asks for your ID and bank details to \"set up\" a claim for you. Texts claiming a benefits overpayment or a fraud investigation use the same pressure; our [benefits fraud text scam guide](/guides/benefits-fraud-text-scam-uk/) covers that variant."
       ],
       [
         "How the Universal Credit scam works",
@@ -7335,7 +7335,7 @@
       "Universal Credit loan scam",
       "report Universal Credit scam"
     ],
-    "updated": "2026-07-30",
+    "updated": "2026-08-01",
     "sources_checked": [
       [
         "GOV.UK — Apply for a Universal Credit advance or hardship payment",
@@ -7372,7 +7372,7 @@
       ],
       [
         "Signs a TV Licence letter is a scam",
-        "- It demands immediate payment with a very short deadline and a prosecution threat.\n- It asks you to pay by an unusual method, such as a bank transfer to a personal account or gift cards.\n- The reference number or format does not match a genuine TV Licensing letter you may have seen before.\n- It asks for full bank details or personal information beyond what a real payment would need.\n- The letter arrived despite you already holding a valid licence.\n- Contact details differ from those published on tvlicensing.co.uk."
+        "- It demands immediate payment with a very short deadline and a prosecution threat.\n- It asks you to pay by an unusual method, such as a bank transfer to a personal account or gift cards.\n- The reference number or format does not match a genuine TV Licensing letter you may have seen before.\n- It asks for full bank details or personal information beyond what a real payment would need.\n- The letter arrived despite you already holding a valid licence.\n- Contact details differ from those published on tvlicensing.co.uk. Posted letters demanding a company filing fee work the same way — see our [Companies House scam letter guide](/guides/companies-house-scam-letter-uk/)."
       ],
       [
         "How the scam works",
@@ -7423,7 +7423,7 @@
       "fake bbc tv licence demand",
       "tv licence letter warning signs"
     ],
-    "updated": "2026-07-30",
+    "updated": "2026-08-01",
     "sources_checked": [
       [
         "TV Licensing — Helping you avoid TV Licensing scams",
@@ -7547,7 +7547,7 @@
       ],
       [
         "Signs a passport contact is a scam",
-        "- You're contacted about a fee or problem out of the blue, rather than checking your own application status yourself.\n- You're asked to pay via a link in a text or email, rather than through gov.uk directly.\n- The message pressures you to act immediately or risk missing your trip.\n- A website charges well above the standard gov.uk fee while implying it is the official fee, with no clear statement that it's an unaffiliated third-party service.\n- You're asked for more personal or financial detail than a passport renewal genuinely requires."
+        "- You're contacted about a fee or problem out of the blue, rather than checking your own application status yourself.\n- You're asked to pay via a link in a text or email, rather than through gov.uk directly.\n- The message pressures you to act immediately or risk missing your trip.\n- A website charges well above the standard gov.uk fee while implying it is the official fee, with no clear statement that it's an unaffiliated third-party service.\n- You're asked for more personal or financial detail than a passport renewal genuinely requires. The same copycat-fee pattern appears around tax deadlines; our [HMRC Self Assessment scam guide](/guides/hmrc-self-assessment-scam-uk/) covers those."
       ],
       [
         "How the scam works step by step",
@@ -7597,7 +7597,7 @@
       "gov.uk passport scam",
       "hmpo phishing"
     ],
-    "updated": "2026-07-30",
+    "updated": "2026-08-01",
     "sources_checked": [
       [
         "GOV.UK — Passport fees",
@@ -7634,7 +7634,7 @@
       ],
       [
         "Signs a UKVI message is a scam",
-        "- It demands an urgent payment through a link or over the phone to avoid your application being cancelled.\n- The web address is not a `.gov.uk` address (a lookalike such as `ukvi-payment-portal.example`).\n- It asks for passport, bank, or personal details through an unexpected email or call.\n- It gives an unusually short deadline to pay or respond.\n- It threatens immediate deportation or refusal without the normal formal process.\n- The sender address or phone number does not match official gov.uk contact details."
+        "- It demands an urgent payment through a link or over the phone to avoid your application being cancelled.\n- The web address is not a `.gov.uk` address (a lookalike such as `ukvi-payment-portal.example`).\n- It asks for passport, bank, or personal details through an unexpected email or call.\n- It gives an unusually short deadline to pay or respond.\n- It threatens immediate deportation or refusal without the normal formal process.\n- The sender address or phone number does not match official gov.uk contact details. Students face a parallel version aimed at loan payments — our [student finance scam guide](/guides/student-finance-scam-uk/) sets out the current reporting route."
       ],
       [
         "How the scam works",
@@ -7685,7 +7685,7 @@
       "report ukvi scam",
       "home office visa scam warning signs"
     ],
-    "updated": "2026-07-30",
+    "updated": "2026-08-01",
     "sources_checked": [
       [
         "GOV.UK — Fraud, tricks and scams: guidance",
@@ -7722,7 +7722,7 @@
       ],
       [
         "Signs an Indeed job is a scam",
-        "- A payment is demanded before you can start - to secure the role, release an offer, unlock tasks, or through a link the recruiter sends rather than an official published route.\n- You are moved off Indeed to WhatsApp, Telegram, or a personal email almost immediately.\n- The pay is unusually high for simple work, or you are \"hired\" without a real interview.\n- Passport images, bank details, or National Insurance details are requested with no explanation, through an unverified account or an insecure channel.\n- A supposed job asks you to receive, hold, convert or forward client money through your personal bank account, payment account or crypto wallet.\n- The job involves repetitive online \"tasks\" where you must pay money to unlock commission or withdrawals.\n- The company name, domain, email address, Companies House record, and careers page do not match.\n- The recruiter pressures you to act before you can verify the employer independently."
+        "- A payment is demanded before you can start - to secure the role, release an offer, unlock tasks, or through a link the recruiter sends rather than an official published route.\n- You are moved off Indeed to WhatsApp, Telegram, or a personal email almost immediately.\n- The pay is unusually high for simple work, or you are \"hired\" without a real interview.\n- Passport images, bank details, or National Insurance details are requested with no explanation, through an unverified account or an insecure channel.\n- A supposed job asks you to receive, hold, convert or forward client money through your personal bank account, payment account or crypto wallet.\n- The job involves repetitive online \"tasks\" where you must pay money to unlock commission or withdrawals.\n- The company name, domain, email address, Companies House record, and careers page do not match.\n- The recruiter pressures you to act before you can verify the employer independently. Data-entry listings are the most common shape this takes, and the equipment-fee version is set out in our [data entry job scam guide](/guides/data-entry-job-scam-uk/)."
       ],
       [
         "How the job scam works",
@@ -7773,7 +7773,7 @@
       "money mule job scam",
       "report Indeed job scam"
     ],
-    "updated": "2026-07-30",
+    "updated": "2026-08-01",
     "sources_checked": [
       [
         "GOV.UK — Overview of the Conduct Regulations 2003 (employment agency fees)",
@@ -8352,7 +8352,7 @@
       ],
       [
         "Signs a recruitment agency is a scam",
-        "- It asks you to pay upfront to secure the role, register, unlock onboarding, or release a job offer.\n- It says a check, certificate, equipment fee, or training fee must be paid to a personal or mismatched account.\n- It moves you off the job board to WhatsApp, Telegram, or a personal email almost immediately.\n- It asks for bank details, passport images, or ID documents with no explanation, through an unverified account or an insecure channel.\n- The pay is high for little work, or you are hired with no real interview.\n- A supposed job asks you to receive, hold, convert or forward client money through your personal bank account, payment account or crypto wallet.\n- The agency's name, domain, email, Companies House record, and website do not line up."
+        "- It asks you to pay upfront to secure the role, register, unlock onboarding, or release a job offer.\n- It says a check, certificate, equipment fee, or training fee must be paid to a personal or mismatched account.\n- It moves you off the job board to WhatsApp, Telegram, or a personal email almost immediately.\n- It asks for bank details, passport images, or ID documents with no explanation, through an unverified account or an insecure channel.\n- The pay is high for little work, or you are hired with no real interview.\n- A supposed job asks you to receive, hold, convert or forward client money through your personal bank account, payment account or crypto wallet.\n- The agency's name, domain, email, Companies House record, and website do not line up. A related version recruits you as a paid 'mystery shopper' and pays with a cheque that later bounces — see our [mystery shopper scam guide](/guides/mystery-shopper-scam-uk/)."
       ],
       [
         "How the scam works",
@@ -8403,7 +8403,7 @@
       "recruitment agency money mule",
       "report recruitment scam"
     ],
-    "updated": "2026-07-30",
+    "updated": "2026-08-01",
     "sources_checked": [
       [
         "GOV.UK — Overview of the Conduct Regulations 2003 (employment agency fees)",
@@ -8692,7 +8692,7 @@
       ],
       [
         "Why it's called \"pig butchering\" and why it works",
-        "The term is commonly used for scams where a target is gradually built up with trust and fake profits before the final loss. UK reporting guidance treats this as overlapping with romance fraud and cryptocurrency investment fraud: the emotional relationship creates the trust, and the fake investment platform extracts the money. Weeks of apparently genuine connection, with no red flags beyond never quite meeting in person, lowers your guard far more than a cold approach could."
+        "The term is commonly used for scams where a target is gradually built up with trust and fake profits before the final loss. UK reporting guidance treats this as overlapping with romance fraud and cryptocurrency investment fraud: the emotional relationship creates the trust, and the fake investment platform extracts the money. Weeks of apparently genuine connection, with no red flags beyond never quite meeting in person, lowers your guard far more than a cold approach could. The same slow-build pattern turns up on Hinge, where profile prompts give the approach extra material to work with — see our [Hinge romance scam guide](/guides/hinge-romance-scam-uk/)."
       ],
       [
         "Signs you may be targeted by a pig butchering scam",
@@ -8746,7 +8746,7 @@
       "pig butchering meaning",
       "romance investment scam uk"
     ],
-    "updated": "2026-07-30",
+    "updated": "2026-08-01",
     "sources_checked": [
       [
         "FCA — Almost 5,000 fake FCA scams reported in first 6 months of 2025",
@@ -10568,7 +10568,7 @@
       ],
       [
         "The doorstep check: three steps before you let anyone in",
-        "1. Ask for the engineer's ID card and check the name, photo, and company logo. Do not be rushed — take as long as you need. A genuine engineer will wait.\n\n2. Call your supplier directly using the number on your bill or your supplier's official website — not any number the engineer gives you. Ask whether an engineer is scheduled to visit your address today. If your supplier cannot confirm the appointment, do not let the person in.\n\n3. Check your own records: the letter, email, or text you received when the appointment was booked. If you have no record of any appointment having been made, treat the visit as suspicious. You are entitled to refuse entry and reschedule. A real engineer will understand; a fraudster will not."
+        "1. Ask for the engineer's ID card and check the name, photo, and company logo. Do not be rushed — take as long as you need. A genuine engineer will wait.\n\n2. Call your supplier directly using the number on your bill or your supplier's official website — not any number the engineer gives you. Ask whether an engineer is scheduled to visit your address today. If your supplier cannot confirm the appointment, do not let the person in.\n\n3. Check your own records: the letter, email, or text you received when the appointment was booked. If you have no record of any appointment having been made, treat the visit as suspicious. You are entitled to refuse entry and reschedule. A real engineer will understand; a fraudster will not. Callers claiming to be your energy supplier use the same approach by phone; our [British Gas scam call guide](/guides/british-gas-scam-call-uk/) covers how to verify one."
       ],
       [
         "If you have already given details or let someone in",
@@ -10634,7 +10634,7 @@
         "https://www.consumercouncil.org.uk/complaints"
       ]
     ],
-    "updated": "2026-07-31",
+    "updated": "2026-08-01",
     "quick_answer": "A cold call or unannounced visitor claiming your smart meter needs urgent paid replacement is a scam — real installations are booked in advance and suppliers do not charge for them. Verify any appointment by calling your supplier on the number from your bill before agreeing to anything or letting anyone in."
   },
   {
@@ -10657,7 +10657,7 @@
       ],
       [
         "Signs an online solar offer is a scam",
-        "- It claims to be a direct government grant covering free solar panels, with no specific scheme named or checkable.\n- You're asked to submit contact details on a lead-generation form before any genuine conversation about your property.\n- You're pushed to sign a finance or leasing agreement quickly, without time to get independent advice.\n- You're contacted later claiming an urgent, paid warranty renewal is needed.\n- The installer isn't MCS-certified, or won't confirm it when asked."
+        "- It claims to be a direct government grant covering free solar panels, with no specific scheme named or checkable.\n- You're asked to submit contact details on a lead-generation form before any genuine conversation about your property.\n- You're pushed to sign a finance or leasing agreement quickly, without time to get independent advice.\n- You're contacted later claiming an urgent, paid warranty renewal is needed.\n- The installer isn't MCS-certified, or won't confirm it when asked. Cold calls about your energy meter follow the same doorstep pattern — see our [smart meter scam call guide](/guides/smart-meter-scam-call-uk/)."
       ],
       [
         "How the scam works step by step",
@@ -10707,7 +10707,7 @@
       "eco4 scam",
       "solar panel warranty scam"
     ],
-    "updated": "2026-07-23",
+    "updated": "2026-08-01",
     "sources_checked": [
       [
         "GOV.UK — Apply for the Boiler Upgrade Scheme",
@@ -10844,7 +10844,7 @@
       ],
       [
         "Signs a forex platform is a scam",
-        "- It promises guaranteed, fixed, or unusually high returns — genuine trading returns are never guaranteed.\n- You're asked to deposit more money to 'unlock' a withdrawal or unfreeze your account.\n- Contact came from an unsolicited social media message or advert, not you approaching a firm yourself.\n- You're asked to install remote-access or screen-sharing software so someone can 'help' you trade.\n- You can't independently find the firm's contact details matching the FCA's own register."
+        "- It promises guaranteed, fixed, or unusually high returns — genuine trading returns are never guaranteed.\n- You're asked to deposit more money to 'unlock' a withdrawal or unfreeze your account.\n- Contact came from an unsolicited social media message or advert, not you approaching a firm yourself.\n- You're asked to install remote-access or screen-sharing software so someone can 'help' you trade.\n- You can't independently find the firm's contact details matching the FCA's own register. Recruitment for these schemes now runs largely through social feeds; our [Instagram investment scam guide](/guides/instagram-investment-scam-uk/) covers that route in."
       ],
       [
         "How the scam works step by step",
@@ -10894,7 +10894,7 @@
       "forex investment scam uk",
       "fca warning list"
     ],
-    "updated": "2026-07-30",
+    "updated": "2026-08-01",
     "sources_checked": [
       [
         "FCA — Clone firms and individuals",
@@ -11016,7 +11016,7 @@
       ],
       [
         "Signs a Revolut contact is a scam",
-        "- You're contacted out of the blue about \"suspicious activity\", rather than raising a concern yourself first.\n- You're asked to move money to a different account to \"keep it safe\".\n- You're asked to read out a one-time passcode or security code over a call or message.\n- The caller pressures you to act immediately, or tells you not to hang up and check.\n- You're told to say something different to Revolut support if they ask why you're sending money.\n- Contact arrives by phone call or SMS and has not been confirmed inside the Revolut app."
+        "- You're contacted out of the blue about \"suspicious activity\", rather than raising a concern yourself first.\n- You're asked to move money to a different account to \"keep it safe\".\n- You're asked to read out a one-time passcode or security code over a call or message.\n- The caller pressures you to act immediately, or tells you not to hang up and check.\n- You're told to say something different to Revolut support if they ask why you're sending money.\n- Contact arrives by phone call or SMS and has not been confirmed inside the Revolut app. Many of these start as an unsolicited message from an unknown number; our [WhatsApp stranger scam guide](/guides/whatsapp-stranger-scam-uk/) covers that opening move."
       ],
       [
         "How the scam works step by step",
@@ -11067,7 +11067,7 @@
       "revolut fraud report",
       "revolut impersonation scam"
     ],
-    "updated": "2026-07-30",
+    "updated": "2026-08-01",
     "sources_checked": [
       [
         "Revolut — How to know it's really Revolut calling",
@@ -11108,7 +11108,7 @@
       ],
       [
         "Signs a Starling message is a scam",
-        "- It claims suspicious activity or a compromised account and demands immediate action.\n- It asks you to \"verify\" through a link, or to confirm your PIN, password, or a one-time code.\n- You are told to move money to a new, \"safe\", or \"holding\" account.\n- A caller claims to be from Starling's fraud team and pressures you to stay on the line.\n- The link is not `starlingbank.com` or inside the genuine Starling app.\n- You are asked to install screen-sharing software during the call."
+        "- It claims suspicious activity or a compromised account and demands immediate action.\n- It asks you to \"verify\" through a link, or to confirm your PIN, password, or a one-time code.\n- You are told to move money to a new, \"safe\", or \"holding\" account.\n- A caller claims to be from Starling's fraud team and pressures you to stay on the line.\n- The link is not `starlingbank.com` or inside the genuine Starling app.\n- You are asked to install screen-sharing software during the call. TSB customers see the same approach by text, including screenshots sent to a reporting inbox — our [TSB scam text guide](/guides/tsb-bank-scam-text-messages-uk/) covers it."
       ],
       [
         "How the scam works",
@@ -11159,7 +11159,7 @@
       "report starling scam uk",
       "starling suspicious activity text"
     ],
-    "updated": "2026-07-26",
+    "updated": "2026-08-01",
     "sources_checked": [
       [
         "Starling Bank — Starling launches new in-app tool to combat bank impersonation",
@@ -11375,7 +11375,7 @@
       ],
       [
         "What TSB says a fraudster asks for",
-        "TSB frames these three on its fraud-prevention pages as warnings about telephone calls:\n\n- A caller asking for your PIN. TSB says it will never ask you for it.\n- A caller asking for your full password or memorable information.\n- A caller saying your money is not safe and telling you to move it into a \"safe\" bank account.\n\nThe scope of that source is calls, so it should not be quoted as a statement about texts. The substance still travels, though, because the underlying banking facts do not change with the channel: no genuine process needs your PIN or your full password, and no genuine instruction moves your money into another account for safekeeping. A text asking for those secrets, or pushing you towards a safe account, is fraudulent however convincing the sender name looks."
+        "TSB frames these three on its fraud-prevention pages as warnings about telephone calls:\n\n- A caller asking for your PIN. TSB says it will never ask you for it.\n- A caller asking for your full password or memorable information.\n- A caller saying your money is not safe and telling you to move it into a \"safe\" bank account.\n\nThe scope of that source is calls, so it should not be quoted as a statement about texts. The substance still travels, though, because the underlying banking facts do not change with the channel: no genuine process needs your PIN or your full password, and no genuine instruction moves your money into another account for safekeeping. A text asking for those secrets, or pushing you towards a safe account, is fraudulent however convincing the sender name looks. Nationwide members receive a members-only variant built around Fairer Share payments — our [Nationwide scam text guide](/guides/nationwide-scam-text-uk/) covers it."
       ],
       [
         "The Fraud Refund Guarantee ended in 2024 — what applies now",
@@ -11426,7 +11426,7 @@
       "report tsb scam text",
       "tsb suspicious activity text"
     ],
-    "updated": "2026-07-26",
+    "updated": "2026-08-01",
     "sources_checked": [
       [
         "TSB — How to recognise fraud (email identifiers, separate SMS advice, screenshots to emailscams@tsb.co.uk)",
@@ -12558,7 +12558,7 @@
       ],
       [
         "Signs a festival ticket seller is a scam",
-        "- You're pushed to pay by direct bank transfer rather than through the platform's own payment or transfer system.\n- The seller won't or can't prove the ticket is genuinely theirs to sell, beyond a screenshot.\n- The price is drastically below face value, paired with pressure to decide immediately.\n- The seller or site isn't listed with STAR (the Society of Ticket Agents and Retailers) and isn't the festival's own official outlet.\n- You're asked to move the conversation off the platform you found the listing on."
+        "- You're pushed to pay by direct bank transfer rather than through the platform's own payment or transfer system.\n- The seller won't or can't prove the ticket is genuinely theirs to sell, beyond a screenshot.\n- The price is drastically below face value, paired with pressure to decide immediately.\n- The seller or site isn't listed with STAR (the Society of Ticket Agents and Retailers) and isn't the festival's own official outlet.\n- You're asked to move the conversation off the platform you found the listing on. Many of these listings are bought as paid social ads rather than posted organically; our [Facebook ad scam guide](/guides/facebook-ad-scam-uk/) covers how to check an advertiser."
       ],
       [
         "How the scam works step by step",
@@ -12608,7 +12608,7 @@
       "festival ticket scam facebook",
       "section 75 ticket scam"
     ],
-    "updated": "2026-07-30",
+    "updated": "2026-08-01",
     "sources_checked": [
       [
         "STAR — About us (Society of Ticket Agents and Retailers)",
@@ -13016,7 +13016,7 @@
       ],
       [
         "What real O2 texts look like — and what O2 says it will never ask for",
-        "O2 does send genuine texts — data usage alerts, bill-ready notifications, and upgrade reminders — so the presence of a text from 'O2' is not suspicious by itself. What matters is what the message asks you to do.\n\nIf a text asks you to log in and verify your details via a link, do not use it — go directly to o2.co.uk yourself instead. O2's published commitment is specific: it says it will never call, text, or email you asking for a one-time code, password, or other security information. Be careful with broader assumptions — O2 does send genuine billing and payment texts, so a payment-problem message is not automatically fake. The test is not the topic but the action: log in directly at o2.co.uk or through the official app to check an account or billing issue. If the position is not clear there, contact O2 using contact details you found independently rather than replying to the message.\n\nGenuine O2 texts tend to come from a named sender rather than a random mobile number, but sender names can be spoofed — a message displaying as 'O2' is not proof on its own that it is genuine. Check any claimed account issue by logging in directly at o2.co.uk, independently of any text message, and if the position is not clear there, contact O2 through contact details you found independently."
+        "O2 does send genuine texts — data usage alerts, bill-ready notifications, and upgrade reminders — so the presence of a text from 'O2' is not suspicious by itself. What matters is what the message asks you to do.\n\nIf a text asks you to log in and verify your details via a link, do not use it — go directly to o2.co.uk yourself instead. O2's published commitment is specific: it says it will never call, text, or email you asking for a one-time code, password, or other security information. Be careful with broader assumptions — O2 does send genuine billing and payment texts, so a payment-problem message is not automatically fake. The test is not the topic but the action: log in directly at o2.co.uk or through the official app to check an account or billing issue. If the position is not clear there, contact O2 using contact details you found independently rather than replying to the message.\n\nGenuine O2 texts tend to come from a named sender rather than a random mobile number, but sender names can be spoofed — a message displaying as 'O2' is not proof on its own that it is genuine. Check any claimed account issue by logging in directly at o2.co.uk, independently of any text message, and if the position is not clear there, contact O2 through contact details you found independently. EE and Vodafone customers see near-identical messages — see our [EE scam text guide](/guides/ee-scam-text-uk/) and [Vodafone scam text guide](/guides/vodafone-scam-text-uk/)."
       ],
       [
         "Five seconds to check before you tap any link",
@@ -13060,7 +13060,7 @@
       "O2 phishing scam",
       "how to spot O2 text scam"
     ],
-    "updated": "2026-07-31",
+    "updated": "2026-08-01",
     "sources_checked": [
       [
         "O2 — How to prevent and report scam calls and messages",
@@ -14469,7 +14469,7 @@
       ],
       [
         "Pay with the protections understood",
-        "Section 75 may apply to a qualifying credit-card purchase where the cash price is more than £100 and not more than £30,000. A smaller deposit on the credit card can still cover the whole qualifying purchase, subject to the required debtor-creditor-supplier relationship.\n\nChargeback may be available for debit or credit card payments under card-scheme rules, usually with a time limit around 120 days. Neither route should be promised as automatic.\n\nWedding-insurance cover varies. Do not assume “supplier failure” is included; read the policy’s insured events, exclusions, excess and notification deadline."
+        "Section 75 may apply to a qualifying credit-card purchase where the cash price is more than £100 and not more than £30,000. A smaller deposit on the credit card can still cover the whole qualifying purchase, subject to the required debtor-creditor-supplier relationship.\n\nChargeback may be available for debit or credit card payments under card-scheme rules, usually with a time limit around 120 days. Neither route should be promised as automatic.\n\nWedding-insurance cover varies. Do not assume “supplier failure” is included; read the policy’s insured events, exclusions, excess and notification deadline. Venue deposits are the larger exposure and follow the same pattern; our [wedding venue deposit scam guide](/guides/wedding-venue-deposit-scam-uk/) covers the payment protection that applies."
       ],
       [
         "If the service was not provided",
@@ -14497,7 +14497,7 @@
       "photography deposit scam",
       "how to verify wedding photographer"
     ],
-    "updated": "2026-07-30",
+    "updated": "2026-08-01",
     "sources_checked": [
       [
         "Companies House — Service information",
