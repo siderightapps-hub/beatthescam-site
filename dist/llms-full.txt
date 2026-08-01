@@ -9213,7 +9213,7 @@ Report it to Report Fraud at `reportfraud.police.uk` or 0300 123 2040 (Police Sc
 ## Amazon Delivery Scam Text UK: Spot a Fake SMS
 
 URL: https://beatthescam.com/guides/amazon-delivery-scam-text-uk/
-Category: Text Message Scams · Updated: 2026-07-18
+Category: Text Message Scams · Updated: 2026-08-01
 
 Got an Amazon text about a failed delivery or a small redelivery fee? Spot a fake Amazon delivery SMS, check Your Orders, and report it in the UK.
 
@@ -9292,7 +9292,7 @@ Forward it to 7726, report it to Amazon at `reportascam@amazon.com`, and if you 
 ## Barclays Scam Texts: How to Spot a Fake Barclays SMS (UK)
 
 URL: https://beatthescam.com/guides/barclays-bank-text-scam-uk/
-Category: Text Message Scams · Updated: 2026-07-18
+Category: Text Message Scams · Updated: 2026-08-01
 
 A Barclays text about a new payee or blocked payment? How to tell a genuine Barclays SMS from a scam, check it safely on 159, and report it in the UK.
 
@@ -9378,7 +9378,7 @@ Forward the text to 7726. If you lost money or shared sensitive information, rep
 ## Council Tax Scam Texts: Spot a Fake Refund or Demand (UK)
 
 URL: https://beatthescam.com/guides/council-tax-scam-text-uk/
-Category: Text Message Scams · Updated: 2026-07-31
+Category: Text Message Scams · Updated: 2026-08-01
 
 A text offering a council tax refund or threatening arrears? Council tax is run by your local council. How to spot the scam and check safely.
 
@@ -9461,7 +9461,7 @@ Forward the text to 7726. If you lost money or shared sensitive details, report 
 ## DPD Scam Text or Genuine Message? Check a Fake Delivery Text
 
 URL: https://beatthescam.com/guides/dpd-delivery-scam-text/
-Category: Text Message Scams · Updated: 2026-07-30
+Category: Text Message Scams · Updated: 2026-08-01
 
 Received a DPD delivery text? Check the parcel independently, distinguish a fake redelivery fee from genuine import charges, and report a scam safely.
 
@@ -9531,7 +9531,7 @@ Forward the text free to 7726 so your mobile network can investigate the sender,
 ## DVLA Vehicle Tax Text: Is It Genuine or a Scam?
 
 URL: https://beatthescam.com/guides/dvla-vehicle-tax-text-scam/
-Category: Text Message Scams · Updated: 2026-07-30
+Category: Text Message Scams · Updated: 2026-08-01
 
 A DVLA text says vehicle tax failed or a refund is waiting? DVLA says it will not ask for bank or payment details this way. Check only through GOV.UK.
 
@@ -9693,7 +9693,7 @@ Forward it to 7726, and report it to Report Fraud at `reportfraud.police.uk` or 
 ## Evri Scam Texts: How to Spot a Fake Parcel Text (UK)
 
 URL: https://beatthescam.com/guides/evri-delivery-scam-guide/
-Category: Text Message Scams · Updated: 2026-07-18
+Category: Text Message Scams · Updated: 2026-08-01
 
 An Evri text about a missed delivery or a small fee? How to tell a genuine Evri message from a scam text, and how to track your parcel safely.
 
@@ -9775,7 +9775,7 @@ Forward it to 7726. If the message mentions Evri, also use Evri's cyber-security
 ## Fake Halifax Text? Scam Checks, 159 and Safe Reporting
 
 URL: https://beatthescam.com/guides/halifax-bank-scam-text-uk/
-Category: Text Message Scams · Updated: 2026-07-31
+Category: Text Message Scams · Updated: 2026-08-01
 
 Received an unexpected Halifax fraud or payment text? Do not share a passcode or move money. Check it in the app, through the card number or via 159.
 
@@ -9864,7 +9864,7 @@ Forward it to 7726. If you lost money or shared sensitive information, report it
 ## Halifax Text Not Arriving? Bank Verification Code Fixes
 
 URL: https://beatthescam.com/guides/bank-text-codes-not-arriving/
-Category: Text Message Scams · Updated: 2026-07-30
+Category: Text Message Scams · Updated: 2026-08-01
 
 Halifax or another bank verification text not arriving? Check the registered number, app, signal and message filters, then use a safe alternative route.
 
@@ -10001,7 +10001,7 @@ Forward the text to 60599. You can also forward it to 7726. Report scam emails c
 ## Is This NHS Appointment Text Genuine? Checks and Scam Signs
 
 URL: https://beatthescam.com/guides/nhs-appointment-scam-text-uk/
-Category: Text Message Scams · Updated: 2026-07-30
+Category: Text Message Scams · Updated: 2026-08-01
 
 The NHS does send appointment texts and NHS App fallback messages. Check the appointment independently and beware links asking for payment or details.
 
@@ -10083,7 +10083,7 @@ Forward it to 7726 for free. If you have a screenshot or email, send it to `repo
 ## Lloyds Scam Texts: How to Spot a Fake Lloyds SMS (UK)
 
 URL: https://beatthescam.com/guides/lloyds-bank-scam-text/
-Category: Text Message Scams · Updated: 2026-07-26
+Category: Text Message Scams · Updated: 2026-08-01
 
 Got a Lloyds text about a new payee or 'suspicious activity'? How to tell a genuine Lloyds SMS from a scam — and how to check it safely on 159.
 
@@ -10169,7 +10169,7 @@ Possibly. Eligible UK bank transfers over Faster Payments or CHAPS made on or af
 ## Nationwide Scam Text UK: Spot a Fake Building Society SMS
 
 URL: https://beatthescam.com/guides/nationwide-scam-text-uk/
-Category: Text Message Scams · Updated: 2026-07-26
+Category: Text Message Scams · Updated: 2026-08-01
 
 Got a Nationwide text about suspicious activity, a blocked account, or a payment to verify? How to spot a fake Nationwide SMS and report it in the UK.
 
@@ -10249,7 +10249,7 @@ Send it to `phishing@nationwide.co.uk` and forward it to `7726`. If a payment le
 ## NatWest Scam Texts: How to Spot a Fake NatWest SMS (UK)
 
 URL: https://beatthescam.com/guides/natwest-fraud-text-message-scam-uk/
-Category: Text Message Scams · Updated: 2026-07-26
+Category: Text Message Scams · Updated: 2026-08-01
 
 Got a NatWest 'fraud alert' text about a payment or new device? How to tell a genuine NatWest SMS from a scam — and how to check it safely on 159.
 
@@ -10477,7 +10477,7 @@ Forward it to 7726, and report it to Report Fraud at `reportfraud.police.uk` or 
 ## Parking Fine Scam Text UK: Spot a Fake PCN SMS
 
 URL: https://beatthescam.com/guides/parking-fine-scam-text-uk/
-Category: Text Message Scams · Updated: 2026-07-18
+Category: Text Message Scams · Updated: 2026-08-01
 
 Got a text about an unpaid parking fine or PCN with a pay-now link? How to spot a fake parking fine text, check the real issuer, and report it.
 
