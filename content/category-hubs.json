@@ -1270,5 +1270,377 @@
       ]
     ],
     "updated": "2026-07-30"
+  },
+  "dating": {
+    "title": "Romance & Dating Scams UK: Apps, Fake Profiles & Money",
+    "description": "Romance scams on Tinder, Bumble, Hinge and Facebook Dating. How verification badges are faked, when the conversation moves to investing, and how to report it.",
+    "intro": "<p>Romance fraud is patient. The opening is a normal match; the money comes weeks or months later, once the relationship feels real. That delay is the point — by the time a request arrives, refusing it feels like doubting someone you care about.</p><p><strong>Two signals matter more than any profile detail:</strong> being moved off the app to a private messenger, and any reason you cannot meet or video-call. Neither proves fraud on its own, but together they precede almost every case in this section.</p>",
+    "sections": [
+      [
+        "The apps, and what changes between them",
+        "<p>The pattern is shared, the mechanics are not. <a href='/guides/tinder-scam-uk/'>Tinder</a> and <a href='/guides/bumble-romance-scam-uk/'>Bumble</a> both run photo verification, and a message telling you to 'get verified first' through a link is a con rather than a platform feature. <a href='/guides/hinge-romance-scam-uk/'>Hinge</a> profiles carry prompts and answers, which gives an approach more material to mirror back at you. <a href='/guides/facebook-dating-scam-uk/'>Facebook Dating</a> sits inside an account that may already carry years of real-looking history.</p>"
+      ],
+      [
+        "When the conversation turns to money",
+        "<p>Requests rarely arrive as requests. They arrive as an emergency, an opportunity, or a test of trust. The investment version — a trading app or crypto platform introduced by someone you have been talking to for weeks — is covered in our <a href='/guides/pig-butchering-scam-uk/'>relationship investment scam guide</a>, and INTERPOL now discourages the older 'pig butchering' label because it describes victims in terms of livestock.</p><p>The impersonation version borrows a role that explains why meeting is impossible: our <a href='/guides/military-romance-scam-uk/'>military romance scam guide</a> covers deployment stories, and the fees that follow them for leave, transport or medical costs.</p>"
+      ],
+      [
+        "What a verification badge does and does not prove",
+        "<p>Photo verification checks that the person in the photos is the person holding the phone. It does not check who they are, where they are, or whether anything they have told you is true. A verified profile can still be run by someone using their own face and a false name.</p><p>Treat a badge as evidence about photos, not about identity. The checks that actually help are a live video call you propose at short notice, and a reverse image search on the pictures.</p>"
+      ],
+      [
+        "How to check safely, without accusing anyone",
+        "<p>Suggest a video call at a time you choose rather than one arranged days ahead. Keep the conversation inside the app until you have had one — moving to a private messenger removes the platform's ability to see reports or act on them.</p><p>Search a few phrases from the profile. Reused biographies are common, because the same text is worked across many accounts at once.</p><p>Do not send money, gift cards or crypto to someone you have not met, and do not receive and forward money on anyone's behalf, which can make you a money mule regardless of intent.</p>"
+      ],
+      [
+        "If you have already sent money",
+        "<p>Contact your bank straight away and say the payment may be authorised push payment fraud. UK reimbursement rules apply to many cases, and an eligible claim is normally decided within five business days, with a maximum 35-business-day stop-clock while a firm investigates.</p><p>Keep the profile, the chat and the payment references before you block anyone — screenshots first, then report and block. Expect a second approach later offering to recover the money for a fee; that is a separate scam.</p>"
+      ],
+      [
+        "How to report a romance scam in the UK",
+        "<p>Report the profile inside the app so the platform can act on the account, then report the fraud to Report Fraud at <code>reportfraud.police.uk</code> or 0300 123 2040 in England, Wales and Northern Ireland, or to Police Scotland on 101 in Scotland.</p><p>Forward scam texts free to 7726 and suspicious emails to <code>report@phishing.gov.uk</code>.</p>"
+      ]
+    ],
+    "faq": [
+      [
+        "Does a verified badge mean the person is genuine?",
+        "No. Photo verification confirms the person in the pictures is holding the phone. It says nothing about their name, location or intentions, and a verified account can still be operated under a false identity."
+      ],
+      [
+        "They will video call but only ever briefly, or the camera fails. Is that a red flag?",
+        "It is a reason to keep checking rather than a conclusion. Repeated technical failures around calls, especially when paired with pressure about money, are common in these cases. Propose a call at a time you choose and see what happens."
+      ],
+      [
+        "Can I get money back after a romance scam?",
+        "Often, but not always. Tell your bank it may be authorised push payment fraud. Eligible claims are normally decided within five business days, with a maximum 35-business-day stop-clock. Reimbursement can be refused where a customer acted with gross negligence."
+      ],
+      [
+        "Someone has offered to recover money I lost. Should I use them?",
+        "Treat it as a second scam until proven otherwise. Recovery approaches target people already known to have lost money, and legitimate recovery does not require an up-front fee to a cold caller."
+      ]
+    ],
+    "sources_checked": [
+      [
+        "Tinder — Safety tips (staying on the app, screening calls)",
+        "https://policies.tinder.com/community-resources/safety-tips/intl/en/"
+      ],
+      [
+        "Tinder Help — ID and Photo Verification",
+        "https://www.help.tinder.com/hc/en-us/articles/19868368795917-ID-Photo-Verification"
+      ],
+      [
+        "Tinder Safety Center — What to report",
+        "https://policies.tinder.com/web/safety-center/guide/reporting/in/en/"
+      ],
+      [
+        "Bumble Support — Our safety features",
+        "https://support.bumble.com/hc/en-us/articles/28537051467293-Our-safety-features"
+      ],
+      [
+        "FCA — Clone firms and individuals",
+        "https://www.fca.org.uk/consumers/clone-firms-individuals"
+      ],
+      [
+        "Payment Systems Regulator — APP fraud reimbursement protection",
+        "https://www.psr.org.uk/information-for-consumers/app-fraud-reimbursement-protection/"
+      ],
+      [
+        "Report Fraud — reporting a fraud, and who the service covers",
+        "https://www.reportfraud.police.uk/reporting-a-fraud/"
+      ],
+      [
+        "Police Scotland — contact us: non-emergencies on 101",
+        "https://www.scotland.police.uk/contact-us/non-emergencies/"
+      ]
+    ],
+    "updated": "2026-08-01"
+  },
+  "employment": {
+    "title": "Employment Scams UK: Fake Jobs, Fees & Mule Recruitment",
+    "description": "Fake recruiters on LinkedIn and Indeed, up-front fees, bounced cheques and reshipping work. What UK agencies may charge, and how to check an offer.",
+    "intro": "<p>A job scam does not need a convincing company &#8212; it needs a convincing reason to move fast. The offer arrives without an interview, or after one held entirely over chat, and the first real request is money, documents or your bank details.</p><p><strong>One rule settles most of it:</strong> in Great Britain, employment agencies and businesses may not charge you a fee for finding you work. If a &#8216;recruiter&#8217; wants payment for training, equipment, a DBS check or a placement, that is the end of the conversation.</p>",
+    "sections": [
+      [
+        "Where the approach comes from",
+        "<p>Most begin on a platform you already trust. Our <a href='/guides/linkedin-job-scam-guide-uk/'>LinkedIn job scam guide</a> covers recruiter impersonation, and our <a href='/guides/indeed-job-scam-uk/'>Indeed job scam guide</a> covers listings posted under a real employer&#8217;s name. A <a href='/guides/job-offer-scam-uk/'>cold &#8216;you&#8217;re hired&#8217; message</a> with no application behind it is the simplest version of all.</p><p>Agencies themselves are impersonated too &#8212; our <a href='/guides/recruitment-agency-scam-uk/'>recruitment agency scam guide</a> covers how to check one is real before sending documents.</p>"
+      ],
+      [
+        "The four shapes the money takes",
+        "<p><strong>An up-front fee</strong> for training, kit, a uniform or a background check. <strong>A cheque that clears and then bounces</strong>, after you have forwarded part of it &#8212; the <a href='/guides/mystery-shopper-scam-uk/'>mystery shopper scam</a> runs on exactly this. <strong>Equipment you pay for and never receive</strong>, common in <a href='/guides/data-entry-job-scam-uk/'>data entry job offers</a> and other <a href='/guides/remote-work-scam-uk-2026/'>remote work listings</a>. <strong>Your account used to move someone else&#8217;s money</strong>, which is money mule recruitment.</p><p>Our <a href='/guides/work-from-home-scam-uk/'>work from home scam guide</a> covers envelope-stuffing, kit fees and reshipping, where parcels bought with stolen cards are posted on from your address.</p>"
+      ],
+      [
+        "What a UK employer or agency may actually ask for",
+        "<p>An employer may ask for right-to-work documents and bank details once an offer is real and you have met or spoken to them properly. A criminal record check is requested through DBS in England and Wales, Disclosure Scotland, or AccessNI &#8212; and the employer arranges it rather than asking you to pay a &#8216;recruiter&#8217; for one.</p><p>Under the Conduct of Employment Agencies and Employment Businesses Regulations 2003, work-finding services cannot charge a jobseeker a fee, with narrow exceptions set out in Schedule 3 &#8212; specified performers and creative occupations, photographic and fashion models, and professional sports people. Great Britain and Northern Ireland have separate regulations.</p>"
+      ],
+      [
+        "How to check an offer before you send anything",
+        "<p>Find the company yourself rather than using contact details in the message, and call the switchboard listed on its own site to confirm the role and the recruiter&#8217;s name. Check the recruiter&#8217;s profile history rather than the profile alone &#8212; a brand-new account with a stock photo is worth pausing over.</p><p>Ask for the offer in writing, and read where it says payment is expected from you. Do not accept money into your account to pass on, whatever the explanation.</p>"
+      ],
+      [
+        "If you have paid or shared details",
+        "<p>Tell your bank immediately and say the payment may be authorised push payment fraud. If you sent identity documents, consider Cifas Protective Registration, which flags your details for extra checks before credit is granted in your name.</p><p>Check your credit report for applications you did not make &#8212; MoneyHelper lists the agencies offering a free statutory report.</p><p>If your account was used to receive and forward money, tell your bank even so; that conversation is far better had early.</p>"
+      ],
+      [
+        "How to report a job scam in the UK",
+        "<p>Report the listing or profile on the platform, then report the fraud to Report Fraud at <code>reportfraud.police.uk</code> or 0300 123 2040 in England, Wales and Northern Ireland, or Police Scotland on 101 in Scotland.</p><p>Problems with a named employment agency can also go to the Employment Agency Standards Inspectorate through GOV.UK. Forward scam texts free to 7726 and suspicious emails to <code>report@phishing.gov.uk</code>.</p>"
+      ]
+    ],
+    "faq": [
+      [
+        "Can a UK recruitment agency charge me to find work?",
+        "No, for work-finding services. The Conduct of Employment Agencies and Employment Businesses Regulations 2003 prohibit charging a jobseeker a fee to find them work, with narrow Schedule 3 exceptions covering specified performers and creative occupations, photographic and fashion models, and professional sports people. Great Britain and Northern Ireland have separate regulations."
+      ],
+      [
+        "The cheque cleared, so the job must be real?",
+        "Not necessarily. Funds appearing in your account is not the same as a cheque having cleared for good. A cheque can be returned unpaid weeks later, and anything you forwarded in the meantime comes out of your own money."
+      ],
+      [
+        "Is it illegal to receive money into my account for an employer?",
+        "It can make you a money mule, which is a criminal offence even where you believed the job was genuine. Legitimate employers pay you; they do not route other people's money through your account."
+      ],
+      [
+        "What should I do if I sent copies of my passport or driving licence?",
+        "Consider Cifas Protective Registration so lenders carry out extra checks in your name, and monitor your credit report. Report it to Report Fraud, or Police Scotland on 101 in Scotland."
+      ]
+    ],
+    "sources_checked": [
+      [
+        "GOV.UK — Employment agencies and businesses: what they can charge",
+        "https://www.gov.uk/employment-agencies-and-businesses/providing-nonwork-finding-services"
+      ],
+      [
+        "GOV.UK — Conduct Regulations 2003 guidance",
+        "https://www.gov.uk/government/publications/conduct-regulations-2003-guidance-for-agencies"
+      ],
+      [
+        "Great Britain — Conduct of Employment Agencies and Employment Businesses Regulations 2003",
+        "https://www.legislation.gov.uk/uksi/2003/3319/pdfs/uksi_20033319_en.pdf"
+      ],
+      [
+        "Northern Ireland — Conduct of Employment Agencies and Employment Businesses Regulations 2005",
+        "https://www.legislation.gov.uk/nisr/2005/395/pdfs/nisr_20050395_en.pdf"
+      ],
+      [
+        "nidirect — Employment agency rules",
+        "https://www.nidirect.gov.uk/articles/employment-agency-rules"
+      ],
+      [
+        "GOV.UK — DBS check requests: guidance for employers",
+        "https://www.gov.uk/guidance/dbs-check-requests-guidance-for-employers"
+      ],
+      [
+        "Disclosure Scotland — Disclosure levels",
+        "https://www.mygov.scot/disclosure-levels"
+      ],
+      [
+        "AccessNI — Using a criminal record check",
+        "https://www.nidirect.gov.uk/articles/using-criminal-record-check"
+      ],
+      [
+        "LinkedIn — Recognize and report scams",
+        "https://www.linkedin.com/help/linkedin/answer/a1336387"
+      ],
+      [
+        "MoneyHelper — How to check your credit report for free",
+        "https://www.moneyhelper.org.uk/en/everyday-money/credit/how-to-check-your-credit-report-for-free"
+      ],
+      [
+        "Report Fraud — reporting a fraud, and who the service covers",
+        "https://www.reportfraud.police.uk/reporting-a-fraud/"
+      ],
+      [
+        "Police Scotland — contact us: non-emergencies on 101",
+        "https://www.scotland.police.uk/contact-us/non-emergencies/"
+      ]
+    ],
+    "updated": "2026-08-01"
+  },
+  "social": {
+    "title": "Social Media Scams UK: Ads, Giveaways & DM Investments",
+    "description": "Fake giveaways, paid ads for shops that do not exist, and investment pitches by DM. How to check an advertiser, a seller or a trader before you pay.",
+    "intro": "<p>Social platforms compress the distance between a stranger and your money. An advert, a giveaway or a direct message can all reach you without you searching for anything, and each carries a different check.</p><p><strong>The useful question is not whether an account looks real, but what happens if you are wrong.</strong> Paying a stranger by bank transfer removes the protection a card or a marketplace would have given you.</p>",
+    "sections": [
+      [
+        "Adverts and shop fronts",
+        "<p>A paid advert is not a recommendation, and a shop front inside an app is not a marketplace guarantee. Our <a href='/guides/facebook-ad-scam-uk/'>Facebook ad scam guide</a> covers checking an advertiser in Meta&#8217;s Ad Library &#8212; how long the page has run ads, and under what names. Our <a href='/guides/tiktok-shop-scam-uk/'>TikTok Shop scam guide</a> covers sellers operating inside the app, where the protection that applies depends on how you paid rather than where you clicked.</p>"
+      ],
+      [
+        "Giveaways and prizes",
+        "<p>A prize that needs a payment is not a prize. Our <a href='/guides/instagram-fake-giveaway-scam-uk/'>Instagram fake giveaway guide</a> covers the copied-account version, where a real brand&#8217;s competition is mirrored by a near-identical handle that then asks for a delivery fee. Our <a href='/guides/twitter-crypto-giveaway-scam-uk/'>X crypto giveaway guide</a> covers the send-to-receive version, and why a checkmark no longer signals what it once did.</p>"
+      ],
+      [
+        "Investment pitches that arrive in a DM",
+        "<p>Recruitment for investment fraud has largely moved into feeds and inboxes. Our <a href='/guides/instagram-investment-scam-uk/'>Instagram investment scam guide</a> covers profiles built around lifestyle proof, and our <a href='/guides/whatsapp-investment-scam-uk/'>WhatsApp investment scam guide</a> covers the private group or &#8216;mentor&#8217; chat where screenshots of profits are shown to people who cannot verify them.</p><p>Before sending anything, check the firm on the FCA&#8217;s Financial Services Register, and check it is the firm you think it is rather than a clone using a real firm&#8217;s reference number.</p>"
+      ],
+      [
+        "Messages from people you do not know",
+        "<p>An unexpected message from an unknown number is the opening move for several of these. Our <a href='/guides/whatsapp-stranger-scam-uk/'>WhatsApp stranger scam guide</a> covers what the first few messages are testing for, and why replying at all has a cost.</p><p>Do not share a one-time code with anyone, whatever they say it is for. Codes sent to your phone are the last control standing between an attacker and your account.</p>"
+      ],
+      [
+        "How to pay, if you decide to",
+        "<p>Paying by card gives you routes a bank transfer does not. A bank transfer to a stranger is closest to handing over cash, and marking a payment as &#8216;friends and family&#8217; on a payment service removes the buyer protection that would otherwise apply.</p><p>If money has already gone, tell your bank it may be authorised push payment fraud; eligible claims are normally decided within five business days, with a maximum 35-business-day stop-clock.</p>"
+      ],
+      [
+        "How to report a social media scam in the UK",
+        "<p>Report the account, advert or listing inside the platform, then report the fraud to Report Fraud at <code>reportfraud.police.uk</code> or 0300 123 2040 in England, Wales and Northern Ireland, or Police Scotland on 101 in Scotland.</p><p>Forward scam texts free to 7726 and suspicious emails to <code>report@phishing.gov.uk</code>.</p>"
+      ]
+    ],
+    "faq": [
+      [
+        "Does a verified checkmark mean an account is trustworthy?",
+        "No. On several platforms a checkmark can now be bought as part of a subscription, so it indicates a paid account rather than a confirmed identity. Check the account's history and its posting record instead."
+      ],
+      [
+        "A brand's giveaway asked me for a delivery fee. Is that normal?",
+        "It is a strong warning sign. Genuine prize draws do not ask winners for a payment to release a prize. Check the brand's own verified account and website rather than replying to the message."
+      ],
+      [
+        "How do I check an investment account I found on social media?",
+        "Look the firm up on the FCA's Financial Services Register yourself, and contact it using details from the Register rather than from the profile. Clone firms reuse a real firm's reference number, so matching a number alone is not enough."
+      ],
+      [
+        "Is a Facebook or Instagram advert checked before it runs?",
+        "Not in a way you can rely on. Meta's Ad Library lets you see what a page has advertised and for how long, which is a more useful signal than the advert itself."
+      ]
+    ],
+    "sources_checked": [
+      [
+        "Meta Transparency Center — Ad Library tools",
+        "https://transparency.meta.com/researchtools/ad-library-tools"
+      ],
+      [
+        "X Help Center — About profile labels and checkmarks on X",
+        "https://help.x.com/en/rules-and-policies/profile-labels"
+      ],
+      [
+        "TikTok — Avoid fraudulent message attacks on TikTok",
+        "https://support.tiktok.com/en/safety-hc/account-and-user-safety/avoid-fraudulent-message-attacks"
+      ],
+      [
+        "WhatsApp Help Center — How to block and report someone",
+        "https://faq.whatsapp.com/1142481766359885/"
+      ],
+      [
+        "Meta — New WhatsApp tools and tips to beat messaging scams",
+        "https://about.fb.com/news/2025/08/new-whatsapp-tools-tips-beat-messaging-scams/"
+      ],
+      [
+        "FCA — FCA leads international crackdown on illegal finfluencers",
+        "https://www.fca.org.uk/news/press-releases/fca-leads-international-crackdown-illegal-finfluencers"
+      ],
+      [
+        "PayPal UK — The difference between friends and family and goods and services",
+        "https://www.paypal.com/uk/cshelp/article/whats-the-difference-between-friends-and-family-and-goods-and-services-payments-help256"
+      ],
+      [
+        "Payment Systems Regulator — APP fraud reimbursement protection",
+        "https://www.psr.org.uk/information-for-consumers/app-fraud-reimbursement-protection/"
+      ],
+      [
+        "Report Fraud — reporting a fraud, and who the service covers",
+        "https://www.reportfraud.police.uk/reporting-a-fraud/"
+      ],
+      [
+        "Police Scotland — contact us: non-emergencies on 101",
+        "https://www.scotland.police.uk/contact-us/non-emergencies/"
+      ]
+    ],
+    "updated": "2026-08-01"
+  },
+  "utility": {
+    "title": "Utility Scams UK: Energy Calls, Meters & Solar Offers",
+    "description": "Fake energy supplier calls, smart meter doorstep visits and solar grant offers. What a genuine energy contact looks like, and how to check an installer.",
+    "intro": "<p>Utility scams work because the subject is plausible. Meters really are replaced, energy schemes really exist, and a caller who knows your supplier is not necessarily who they say they are.</p><p><strong>The reliable move is always the same:</strong> end the contact and get back in touch using a number from your own bill or the supplier&#8217;s website. A caller who objects to that has told you what you need to know.</p>",
+    "sections": [
+      [
+        "Calls and doorstep visits",
+        "<p>Our <a href='/guides/british-gas-scam-call-uk/'>British Gas scam call guide</a> covers supplier impersonation by phone &#8212; the account &#8216;problem&#8217;, the refund that needs your card, and the pressure to act during the call. Our <a href='/guides/smart-meter-scam-call-uk/'>smart meter scam call guide</a> covers the doorstep version, including the &#8216;safety hazard&#8217; framing used to get someone inside.</p><p>Genuine engineers carry identification you can verify by calling the supplier on a number you found yourself, and a genuine visit is booked in advance rather than arriving unannounced with a deadline.</p>"
+      ],
+      [
+        "Where the smart meter rollout has actually reached",
+        "<p>Great Britain has been rolling out smart meters since 2011, and installations continue there. Northern Ireland is different: no smart electricity meters have been installed yet, with first installations planned for 2028 and completion by 2030.</p><p>That matters for spotting a scam. Anyone in Northern Ireland told their smart meter needs urgent replacement does not have one to replace.</p>"
+      ],
+      [
+        "Solar panels, grants and 'free' schemes",
+        "<p>Our <a href='/guides/solar-panel-scam-uk/'>solar panel scam guide</a> covers online offers built around grants and guaranteed savings. Real schemes exist &#8212; the Boiler Upgrade Scheme and the Smart Export Guarantee among them &#8212; which is precisely why invented ones are believable.</p><p>Check an installer on the MCS register before paying a deposit, and be wary of a quote that is only available today. A genuine scheme survives a night&#8217;s thought.</p>"
+      ],
+      [
+        "Never let a scam stop you reporting a real emergency",
+        "<p>If you smell gas or suspect a leak, call the National Gas Emergency Service on 0800 111 999 straight away. For a power cut, call 105. Both are free, and neither will ask you for payment or bank details.</p><p>These are separate from any scam concern. Deal with the safety issue first.</p>"
+      ],
+      [
+        "If you have paid or let someone in",
+        "<p>Contact your bank immediately and say the payment may be authorised push payment fraud. If someone entered your home, check what was taken or photographed and consider changing any documents or details they may have seen.</p><p>Contact your supplier through a number from your bill to confirm whether any visit or account change was genuine.</p>"
+      ],
+      [
+        "How to report a utility scam in the UK",
+        "<p>Report it to Report Fraud at <code>reportfraud.police.uk</code> or 0300 123 2040 in England, Wales and Northern Ireland, or Police Scotland on 101 in Scotland.</p><p>For consumer advice, Citizens Advice covers England and Wales, Advice Direct Scotland covers Scotland, and Consumerline covers Northern Ireland. Forward scam texts free to 7726 and suspicious emails to <code>report@phishing.gov.uk</code>.</p>"
+      ]
+    ],
+    "faq": [
+      [
+        "Does my energy supplier cold-call about a meter replacement?",
+        "Suppliers do contact customers about meter work, so a call on the subject is not proof of a scam. What settles it is calling back on a number from your own bill rather than one the caller gives you."
+      ],
+      [
+        "Are smart meters being installed in Northern Ireland?",
+        "Not yet. Great Britain has been rolling them out since 2011, but no smart electricity meters have been installed in Northern Ireland, with first installations planned for 2028 and completion by 2030."
+      ],
+      [
+        "How do I check a solar installer is genuine?",
+        "Look them up on the MCS register yourself, and confirm any grant scheme through GOV.UK rather than through the installer's own paperwork. Do not pay a deposit against a deadline set by the seller."
+      ],
+      [
+        "I smell gas but I think the call I had was a scam. What do I do first?",
+        "Deal with the gas. Call the National Gas Emergency Service on 0800 111 999 immediately. A scam concern does not change what a suspected gas leak needs."
+      ]
+    ],
+    "sources_checked": [
+      [
+        "National Gas — Emergency contacts",
+        "https://www.nationalgas.com/emergency-contacts"
+      ],
+      [
+        "Gas Safe Register — Check an engineer",
+        "https://www.gassaferegister.co.uk/find-an-engineer-or-check-the-register/check-an-engineer/"
+      ],
+      [
+        "Smart Energy GB — The Priority Services Register",
+        "https://www.smartenergygb.org/about-smart-meters/advice-for-those-worried-about-scams"
+      ],
+      [
+        "Department for the Economy — Design plan for the roll-out of smart electricity meters",
+        "https://www.economy-ni.gov.uk/consultations/design-plan-roll-out-smart-electricity-meters"
+      ],
+      [
+        "Utility Regulator — Policy decision on the Smart Meter Design Plan",
+        "https://www.uregni.gov.uk/news-centre/department-economys-policy-decision-smart-meter-design-plan-published"
+      ],
+      [
+        "GOV.UK — Apply for the Boiler Upgrade Scheme",
+        "https://www.gov.uk/apply-boiler-upgrade-scheme"
+      ],
+      [
+        "Ofgem — Smart Export Guarantee (SEG)",
+        "https://www.ofgem.gov.uk/environmental-and-social-schemes/smart-export-guarantee-seg"
+      ],
+      [
+        "MCS — Find an installer",
+        "https://mcscertified.com/installers/"
+      ],
+      [
+        "GOV.UK — Consumer advice services for England and Wales, Scotland and Northern Ireland",
+        "https://www.gov.uk/consumer-advice"
+      ],
+      [
+        "Report Fraud — reporting a fraud, and who the service covers",
+        "https://www.reportfraud.police.uk/reporting-a-fraud/"
+      ],
+      [
+        "Police Scotland — contact us: non-emergencies on 101",
+        "https://www.scotland.police.uk/contact-us/non-emergencies/"
+      ]
+    ],
+    "updated": "2026-08-01"
   }
 }
