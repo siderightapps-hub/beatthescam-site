@@ -147,11 +147,11 @@ def run() -> int:
     check("validator rejects: empty FAQ answer",
           rejects(bad(lambda h: h["faq"].append(["Q?", "   "]))))
     # The legacy `unsourced_legacy` exemption exists ONLY because the three
-    # original hubs shipped without sources. The moment all thirteen sourced
+    # original hubs shipped without sources. The moment the full sourced
     # records land, it must go, and an unsourced hub must be rejected outright.
     #
     # The expectation is DERIVED from the live hub count rather than hard-coded,
-    # so landing the thirteen automatically demands the code change instead of
+    # so landing them automatically demands the code change instead of
     # relying on someone remembering to flip a boolean. A note that says "flip
     # this later" is not enforcement (operator review, 2026-07-29).
     unreviewed = {"payment": {k: v for k, v in hub().items()
@@ -162,9 +162,9 @@ def run() -> int:
         check("a hub with neither 'updated' nor sources is EXEMPT while the legacy three stand",
               legacy_exempt,
               "the legacy branch appears to be gone — good, but the live file still has three "
-              "hubs; land all thirteen in the same patch")
+              "hubs; land the full set in the same patch")
     else:
-        check("with all thirteen hubs landed, an unsourced hub is REJECTED",
+        check("with the full hub set landed, an unsourced hub is REJECTED",
               not legacy_exempt,
               "the `unsourced_legacy` exemption branch is still in validate_category_hubs(). "
               "Delete it — the atomic release requires a non-empty sources_checked for every hub.")
@@ -313,6 +313,11 @@ def run() -> int:
         # is MORE restrictive than before, which the override rules permit.
         "website": "none",
         "marketplace": "default", "sms": "default", "travel": "default",
+        # The four hubs that completed the set on 2026-08-01. `dating` derives
+        # "npa" because romance-fraud terms are in the sensitive-finance list;
+        # the other three carry no such term and stay on default Auto Ads.
+        "dating": "npa", "employment": "default", "social": "default",
+        "utility": "default",
     }
     # SELF-CONTAINED. This previously read docs/review/hubs-v6.json — an ignored,
     # by then absent file — and then `continue`d past any category missing from
@@ -329,11 +334,14 @@ def run() -> int:
     # derive "npa" while the live record derived "none", and the two layers are
     # meant to agree (audit, 2026-07-31).
     MEDICINE = "Fake online pharmacy sites selling prescription medicines with no consultation."
+    ROMANCE = "Romance scam approaches on dating apps, and the money requests that follow."
     FIXTURE_PROSE = {
         "email": SEXTORTION, "tech": SEXTORTION,
         "crypto": DEBT, "finance": DEBT, "fraud": DEBT, "government": DEBT,
         "payment": DEBT, "phone": DEBT, "shopping": DEBT, "website": MEDICINE,
         "marketplace": BENIGN, "sms": BENIGN, "travel": BENIGN,
+        "dating": ROMANCE, "employment": BENIGN, "social": BENIGN,
+        "utility": BENIGN,
     }
     missing = sorted(set(EXPECTED) - set(FIXTURE_PROSE))
     check("every expected category has a committed fixture", not missing, str(missing))
@@ -357,10 +365,10 @@ def run() -> int:
     # A plain "pending" NOTE was fail-open: deleting one of thirteen records
     # printed a note and passed again (operator review, 2026-07-29).
     live_expected = set(EXPECTED) & set(live)
-    check("hub set is exactly the expected thirteen",
+    check("hub set is exactly the expected seventeen",
           live_expected == set(EXPECTED),
           f"got {sorted(live_expected)} — the legacy-three allowance was removed when all "
-          f"thirteen landed")
+          f"seventeen landed")
     check("no unexpected hub key is present",
           not (set(live) - set(EXPECTED)), f"unexpected: {sorted(set(live) - set(EXPECTED))}")
 
