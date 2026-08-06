@@ -72,6 +72,7 @@ def load_posts(path: str) -> List[Dict]:
 def save_posts(path: str, posts: List[Dict]) -> None:
     with open(path, "w", encoding="utf-8") as f:
         json.dump(posts, f, indent=2, ensure_ascii=False)
+        f.write("\n")
 
 
 def topic_exists(posts: Sequence[Dict], slug: str) -> bool:

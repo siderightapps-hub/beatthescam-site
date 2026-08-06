@@ -406,6 +406,7 @@ def main():
     # Save posts.json
     with open(POSTS_FILE, "w", encoding="utf-8") as f:
         json.dump(posts, f, ensure_ascii=False, indent=2)
+        f.write("\n")
 
     print(f"\n✅ Saved {generated} new article(s) to posts.json")
     print(f"   Total articles: {len(posts)}")
