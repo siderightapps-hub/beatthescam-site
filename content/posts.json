@@ -2153,7 +2153,7 @@
       ],
       [
         "If you've already shared details or paid",
-        "If you've paid money, contact your bank or card provider immediately and explain it was a scam — acting quickly gives the best chance of stopping or reversing the payment. If you shared ID documents, monitor your credit file with the UK credit reference agencies — Experian, Equifax and TransUnion, the three main agencies, plus Crediva — for signs of fraud, and consider a Cifas Protective Registration.\n\nIf you were asked to receive and forward money, stop immediately: this pattern is money-mule recruitment, and moving funds you know or suspect are criminal proceeds can carry legal risk even if you were misled into it."
+        "If you've paid money, contact your bank or card provider immediately and explain it was a scam — acting quickly gives the best chance of stopping or reversing the payment. If you shared ID documents, monitor your credit file with the UK credit reference agencies — Experian, Equifax and TransUnion, the three main agencies, plus Crediva — for signs of fraud, and consider a Cifas Protective Registration, which costs £30 and runs for two years — apply at cifas.org.uk/pr.\n\nIf you were asked to receive and forward money, stop immediately: this pattern is money-mule recruitment, and moving funds you know or suspect are criminal proceeds can carry legal risk even if you were misled into it."
       ],
       [
         "How to report a LinkedIn job scam (UK)",
@@ -2192,7 +2192,7 @@
       "fake job offer linkedin",
       "linkedin recruiter scam uk"
     ],
-    "updated": "2026-07-30",
+    "updated": "2026-08-06",
     "sources_checked": [
       [
         "LinkedIn — Recognize and report scams",
@@ -2209,6 +2209,10 @@
       [
         "MoneyHelper — How to check your credit report for free (Experian, Equifax, TransUnion and Crediva)",
         "https://www.moneyhelper.org.uk/en/everyday-money/credit/how-to-check-your-credit-report"
+      ],
+      [
+        "Cifas — Protective Registration",
+        "https://www.cifas.org.uk/pr"
       ]
     ],
     "quick_answer": "An unsolicited LinkedIn offer with high pay, a vague role and a quick push to WhatsApp is a classic fake-recruiter scam. Verify the role on the company's own careers page and call its switchboard before sharing documents, bank details or any payment. Report fake profiles within LinkedIn and losses to Report Fraud or Police Scotland on 101."
@@ -2782,7 +2786,7 @@
       ],
       [
         "I entered my card details on a Temu-looking site — what now?",
-        "Contact your bank using the number on your card and ask about disputing any payment. If you shared personal details, consider Cifas Protective Registration and monitor your credit reports."
+        "Contact your bank using the number on your card and ask about disputing any payment. If you shared personal details, consider Cifas Protective Registration (a paid service, £30 for two years, at cifas.org.uk/pr) and monitor your credit reports."
       ],
       [
         "How do I report a fake Temu offer?",
@@ -2799,7 +2803,7 @@
       "report temu scam uk",
       "temu free gift scam"
     ],
-    "updated": "2026-07-18",
+    "updated": "2026-08-06",
     "sources_checked": [
       [
         "Temu — Safety centre and suspicious-activity reporting",
@@ -2808,6 +2812,10 @@
       [
         "NCSC — Shopping and paying safely online",
         "https://www.ncsc.gov.uk/guidance/shopping-online-securely"
+      ],
+      [
+        "Cifas — Protective Registration",
+        "https://www.cifas.org.uk/pr"
       ]
     ],
     "quick_answer": "Temu itself is a genuine marketplace — the scams are criminals impersonating it with fake cashback texts, 'free gift' offers and lookalike sites. Never claim a reward through a link in an unsolicited message; check orders and rewards inside the official Temu app instead. Forward scam texts to `7726`."
@@ -2965,7 +2973,7 @@
       ],
       [
         "I clicked the link and entered my details - what now?",
-        "If you gave bank or card details, call your bank using the number on your card and ask them to secure the account. Then report the scam text to 60599 and, if useful, 7726. If you shared personal details, consider Cifas Protective Registration and monitor your credit reports."
+        "If you gave bank or card details, call your bank using the number on your card and ask them to secure the account. Then report the scam text to 60599 and, if useful, 7726. If you shared personal details, consider Cifas Protective Registration — £30 for two years, applied for at cifas.org.uk/pr — and monitor your credit reports."
       ],
       [
         "I gave my National Insurance number but not bank details - am I at risk?",
@@ -2986,7 +2994,7 @@
       "claim tax refund scam",
       "report HMRC scam text"
     ],
-    "updated": "2026-08-01",
+    "updated": "2026-08-06",
     "sources_checked": [
       [
         "GOV.UK — Check if a text message you've received from HMRC is genuine",
@@ -2995,6 +3003,10 @@
       [
         "GOV.UK — If your tax calculation letter (P800) says you're due a refund",
         "https://www.gov.uk/tax-overpayments-and-underpayments/if-youre-due-a-refund"
+      ],
+      [
+        "Cifas — Protective Registration",
+        "https://www.cifas.org.uk/pr"
       ]
     ],
     "quick_answer": "A text inviting you to claim a tax refund through a link is a scam — HMRC never asks for personal or financial information by text, and refunds aren't claimed via text links. Check any refund through GOV.UK, the HMRC app or your Personal Tax Account, and forward scam texts to `60599` or `7726`.",
@@ -3381,7 +3393,7 @@
       ],
       [
         "If you tapped the link, shared details or moved money",
-        "If you entered login details, card details, or a passcode, call 159 or the number on your card immediately and say you may have been phished. Ask Halifax to secure the account and check for activity you do not recognise. Change your Halifax password only through the official app or by typing the address yourself, and anywhere else you reused it. If you shared card details, ask for the card to be stopped and reissued.\n\nIf you sent money by UK bank transfer on or after 7 October 2024, mandatory APP fraud reimbursement rules may apply to Faster Payments and CHAPS transfers, subject to a 13-month claim window, a maximum claim of £85,000, and a possible excess of up to £100 - ask the bank to assess the claim. The [scam recovery checklist](/recovery/) covers the wider steps.\n\nIf you shared personal details such as your date of birth or address, be alert to identity-theft attempts and consider a Cifas Protective Registration. If you bank elsewhere, the same checks apply — see /guides/lloyds-bank-scam-text/."
+        "If you entered login details, card details, or a passcode, call 159 or the number on your card immediately and say you may have been phished. Ask Halifax to secure the account and check for activity you do not recognise. Change your Halifax password only through the official app or by typing the address yourself, and anywhere else you reused it. If you shared card details, ask for the card to be stopped and reissued.\n\nIf you sent money by UK bank transfer on or after 7 October 2024, mandatory APP fraud reimbursement rules may apply to Faster Payments and CHAPS transfers, subject to a 13-month claim window, a maximum claim of £85,000, and a possible excess of up to £100 - ask the bank to assess the claim. The [scam recovery checklist](/recovery/) covers the wider steps.\n\nIf you shared personal details such as your date of birth or address, be alert to identity-theft attempts and consider a Cifas Protective Registration, £30 for two years at cifas.org.uk/pr. If you bank elsewhere, the same checks apply — see /guides/lloyds-bank-scam-text/."
       ],
       [
         "How to report a Halifax scam text in the UK",
@@ -3420,7 +3432,7 @@
       "Halifax security alert text",
       "report Halifax scam text"
     ],
-    "updated": "2026-08-01",
+    "updated": "2026-08-06",
     "sources_checked": [
       [
         "Halifax — Latest scams and the Halifax-to-Lloyds brand change",
@@ -3449,6 +3461,10 @@
       [
         "Lloyds Banking Group — Halifax to rebrand to Lloyds (1 July 2026)",
         "https://www.lloydsbankinggroup.com/media/press-releases/2026/lloyds-banking-group/halifax-rebrand-to-lloyds.html"
+      ],
+      [
+        "Cifas — Protective Registration",
+        "https://www.cifas.org.uk/pr"
       ]
     ],
     "evidence": [
@@ -3540,7 +3556,7 @@
       ],
       [
         "If you paid or shared card details",
-        "Contact your bank or card issuer immediately using the number on the back of your card. Tell them it was a scam, ask them to stop the card if needed, and ask about disputing the transaction. A card payment may be recoverable through chargeback, depending on the circumstances and card scheme rules.\n\nThen take stock of what the fake page collected. Card details: watch statements for small \"test\" transactions. Name, address, date of birth or licence details: consider Cifas Protective Registration and monitor your credit reports with the agencies MoneyHelper lists — Experian, Equifax and TransUnion, the three main agencies, plus Crediva. Our [scam recovery checklist](/recovery/) walks through this in order."
+        "Contact your bank or card issuer immediately using the number on the back of your card. Tell them it was a scam, ask them to stop the card if needed, and ask about disputing the transaction. A card payment may be recoverable through chargeback, depending on the circumstances and card scheme rules.\n\nThen take stock of what the fake page collected. Card details: watch statements for small \"test\" transactions. Name, address, date of birth or licence details: consider Cifas Protective Registration, £30 for two years at cifas.org.uk/pr, and monitor your credit reports with the agencies MoneyHelper lists — Experian, Equifax and TransUnion, the three main agencies, plus Crediva. Our [scam recovery checklist](/recovery/) walks through this in order."
       ],
       [
         "How to report a DVLA text scam (UK)",
@@ -3587,7 +3603,7 @@
       "DVLA payment failed text",
       "report DVLA scam text"
     ],
-    "updated": "2026-08-01",
+    "updated": "2026-08-06",
     "sources_checked": [
       [
         "DVLA — Top tips for avoiding scams",
@@ -3620,6 +3636,10 @@
       [
         "MoneyHelper — How to check your credit report for free (Experian, Equifax, TransUnion and Crediva)",
         "https://www.moneyhelper.org.uk/en/everyday-money/credit/how-to-check-your-credit-report"
+      ],
+      [
+        "Cifas — Protective Registration",
+        "https://www.cifas.org.uk/pr"
       ]
     ],
     "evidence": [
@@ -3731,7 +3751,7 @@
       ],
       [
         "I entered my card details on a TV Licensing-looking site - what now?",
-        "Phone the card issuer straight away on the number printed on the card, have the card secured or replaced, and have recent spending reviewed for anything you did not authorise; ask the issuer which dispute route fits any transaction that was actually taken. Reset any password you typed in, and any password you reused elsewhere. If the page pushed a download, added an app or profile, or asked for remote access, follow the NCSC's current device-recovery advice. Consider Cifas Protective Registration only where the exposure puts your identity at heightened risk; check Cifas's current criteria. Our [scam recovery checklist](/recovery/) sets out the order."
+        "Phone the card issuer straight away on the number printed on the card, have the card secured or replaced, and have recent spending reviewed for anything you did not authorise; ask the issuer which dispute route fits any transaction that was actually taken. Reset any password you typed in, and any password you reused elsewhere. If the page pushed a download, added an app or profile, or asked for remote access, follow the NCSC's current device-recovery advice. Consider Cifas Protective Registration — £30 for two years — only where the exposure puts your identity at heightened risk; check Cifas's current criteria. Our [scam recovery checklist](/recovery/) sets out the order."
       ],
       [
         "How do I report a TV Licensing scam text?",
@@ -3748,7 +3768,7 @@
       "report tv licensing scam text",
       "tv licence direct debit scam"
     ],
-    "updated": "2026-08-01",
+    "updated": "2026-08-06",
     "sources_checked": [
       [
         "TV Licensing — Helping you avoid TV Licensing scams and how to report one",
@@ -3860,7 +3880,7 @@
       ],
       [
         "I clicked the link and entered my details - what now?",
-        "If you entered card or bank details, call your bank using the number on your card and ask them to stop the card and watch the account. If you shared personal information, consider Cifas Protective Registration. Then report the scam text to 7726 and to Report Fraud if money, sensitive details, or hacking were involved. Report Fraud covers England, Wales and Northern Ireland. If you live in Scotland or the crime happened there, contact Police Scotland on 101."
+        "If you entered card or bank details, call your bank using the number on your card and ask them to stop the card and watch the account. If you shared personal information, consider Cifas Protective Registration, which costs £30 and lasts two years (cifas.org.uk/pr). Then report the scam text to 7726 and to Report Fraud if money, sensitive details, or hacking were involved. Report Fraud covers England, Wales and Northern Ireland. If you live in Scotland or the crime happened there, contact Police Scotland on 101."
       ],
       [
         "How do I report an NHS scam text?",
@@ -3877,7 +3897,7 @@
       "NHS smishing",
       "report NHS scam text"
     ],
-    "updated": "2026-08-01",
+    "updated": "2026-08-06",
     "sources_checked": [
       [
         "NHS England Digital — Notifications and messaging in the NHS App",
@@ -3910,6 +3930,10 @@
       [
         "Police Scotland — contact us: non-emergencies on 101",
         "https://www.scotland.police.uk/contact-us/non-emergencies/"
+      ],
+      [
+        "Cifas — Protective Registration",
+        "https://www.cifas.org.uk/pr"
       ]
     ],
     "evidence": [
@@ -4120,7 +4144,7 @@
       ],
       [
         "I paid a parking fine through a link in a text - what now?",
-        "Contact your bank using the number on your card, ask them to secure the account, and ask about a chargeback. If you shared personal details, consider Cifas Protective Registration and monitor your credit reports."
+        "Contact your bank using the number on your card, ask them to secure the account, and ask about a chargeback. If you shared personal details, consider Cifas Protective Registration (£30 for two years, at cifas.org.uk/pr) and monitor your credit reports."
       ],
       [
         "How do I report a parking fine scam text?",
@@ -4137,11 +4161,15 @@
       "report parking fine scam text",
       "fake parking ticket text"
     ],
-    "updated": "2026-08-01",
+    "updated": "2026-08-06",
     "sources_checked": [
       [
         "GOV.UK — Parking fines and penalty charge notices",
         "https://www.gov.uk/parking-tickets"
+      ],
+      [
+        "Cifas — Protective Registration",
+        "https://www.cifas.org.uk/pr"
       ]
     ],
     "quick_answer": "A text demanding you pay a parking fine through a link within 24 or 48 hours is a scam — and any 'DVLA parking fine' text is a giveaway, because DVLA is not the issuer. Check any alleged penalty at gov.uk/parking-tickets or with the real issuer, and forward the text to `7726`.",
@@ -4398,7 +4426,7 @@
       ],
       [
         "I clicked the link and entered my details - what now?",
-        "If you gave bank or card details, call your bank using the number on your card and ask them to secure the account. If you shared personal information, consider Cifas Protective Registration and monitor your credit reports. Then forward the email to `phishing@hmrc.gov.uk`."
+        "If you gave bank or card details, call your bank using the number on your card and ask them to secure the account. If you shared personal information, consider Cifas Protective Registration (£30, covering two years, at cifas.org.uk/pr) and monitor your credit reports. Then forward the email to `phishing@hmrc.gov.uk`."
       ],
       [
         "Can I get my money back after an HMRC email scam?",
@@ -4419,7 +4447,7 @@
       "HMRC rebate phishing",
       "report HMRC rebate email"
     ],
-    "updated": "2026-07-18",
+    "updated": "2026-08-06",
     "sources_checked": [
       [
         "GOV.UK — Check if an email you've received from HMRC is genuine",
@@ -4428,6 +4456,10 @@
       [
         "GOV.UK — If your tax calculation letter (P800) says you're due a refund",
         "https://www.gov.uk/tax-overpayments-and-underpayments/if-youre-due-a-refund"
+      ],
+      [
+        "Cifas — Protective Registration",
+        "https://www.cifas.org.uk/pr"
       ]
     ],
     "quick_answer": "An unexpected email offering an HMRC tax rebate you can claim through a link is phishing — real refunds are handled through GOV.UK routes such as your Personal Tax Account, the HMRC app, or a P800 letter, not an email claim link. Don't click; forward the email to phishing@hmrc.gov.uk and delete it."
@@ -4744,7 +4776,7 @@
       ],
       [
         "I entered my card details on a DVLA-looking site - what now?",
-        "Contact your bank using the number on your card and ask them to secure the account or card. If you gave licence or personal details, consider Cifas Protective Registration and monitor your credit reports. Then forward the email to `report@phishing.gov.uk`."
+        "Contact your bank using the number on your card and ask them to secure the account or card. If you gave licence or personal details, consider Cifas Protective Registration, which costs £30 and covers two years (cifas.org.uk/pr), and monitor your credit reports. Then forward the email to `report@phishing.gov.uk`."
       ],
       [
         "How do I report a DVLA email scam?",
@@ -4761,11 +4793,15 @@
       "report dvla email scam",
       "dvla phishing email"
     ],
-    "updated": "2026-07-18",
+    "updated": "2026-08-06",
     "sources_checked": [
       [
         "GOV.UK — Scam email warning for DVLA customers",
         "https://www.gov.uk/government/news/scam-email-warning-for-dvla-customers"
+      ],
+      [
+        "Cifas — Protective Registration",
+        "https://www.cifas.org.uk/pr"
       ]
     ],
     "quick_answer": "A DVLA email asking you to pay vehicle tax, claim a refund, or confirm details through a link is phishing — the reliable test is going to GOV.UK yourself, not the email's branding. Check your tax at gov.uk/vehicle-tax, and forward the scam to the NCSC at report@phishing.gov.uk."
@@ -5341,7 +5377,7 @@
       ],
       [
         "What to do if you've already agreed to a transfer",
-        "Contact your original pension provider immediately and explain your concerns — some transfers can still be halted or reversed if caught early enough. Consider a Cifas Protective Registration at `cifas.org.uk` after checking the current fee, which prompts extra checks on your name across participating lenders. Do not make any further payments to the scheme, and be wary of anyone contacting you afterwards offering to recover your pension for a fee."
+        "Contact your original pension provider immediately and explain your concerns — some transfers can still be halted or reversed if caught early enough. Consider a Cifas Protective Registration at `cifas.org.uk/pr`, which costs £30 for two years and prompts extra checks on your name across participating lenders. Do not make any further payments to the scheme, and be wary of anyone contacting you afterwards offering to recover your pension for a fee."
       ],
       [
         "How to report a pension liberation scam in the UK",
@@ -5375,7 +5411,7 @@
       "pension scam UK",
       "phone scam UK"
     ],
-    "updated": "2026-07-23",
+    "updated": "2026-08-06",
     "sources_checked": [
       [
         "GOV.UK — Review of the Conditions for Transfers Regulations 2021",
@@ -5384,6 +5420,10 @@
       [
         "legislation.gov.uk — SI 2021/1237",
         "https://www.legislation.gov.uk/uksi/2021/1237/note/made"
+      ],
+      [
+        "Cifas — Protective Registration",
+        "https://www.cifas.org.uk/pr"
       ]
     ],
     "quick_answer": "An offer to release your pension before 55 through a 'loophole' is a scam that can also trigger an HMRC unauthorised-payment charge of up to 55% — on top of whatever the scheme takes. Get free Pension Wise guidance through MoneyHelper before any transfer, and check any firm on the FCA Firm Checker."
@@ -5420,7 +5460,7 @@
       ],
       [
         "If you've already shared details or paid",
-        "If you gave card or bank details, contact your bank or card issuer immediately using the number on your card, explain it was a scam, and ask about securing the account and a possible chargeback. If you sent money by UK bank transfer on or after 7 October 2024, mandatory APP fraud reimbursement rules may apply to Faster Payments and CHAPS transfers, subject to a 13-month claim window, a maximum claim of £85,000, and a possible excess of up to £100.\n\nIf you shared personal details such as your date of birth, address, or driving licence number, be alert to follow-up identity-theft attempts and consider a Cifas Protective Registration."
+        "If you gave card or bank details, contact your bank or card issuer immediately using the number on your card, explain it was a scam, and ask about securing the account and a possible chargeback. If you sent money by UK bank transfer on or after 7 October 2024, mandatory APP fraud reimbursement rules may apply to Faster Payments and CHAPS transfers, subject to a 13-month claim window, a maximum claim of £85,000, and a possible excess of up to £100.\n\nIf you shared personal details such as your date of birth, address, or driving licence number, be alert to follow-up identity-theft attempts and consider a Cifas Protective Registration, £30 for a two-year term, applied for at cifas.org.uk/pr."
       ],
       [
         "How to report a DVLA scam call (UK)",
@@ -5459,11 +5499,15 @@
       "dvla automated call scam",
       "report dvla scam call"
     ],
-    "updated": "2026-07-03",
+    "updated": "2026-08-06",
     "sources_checked": [
       [
         "GOV.UK — Scam email warning for DVLA customers",
         "https://www.gov.uk/government/news/scam-email-warning-for-dvla-customers"
+      ],
+      [
+        "Cifas — Protective Registration",
+        "https://www.cifas.org.uk/pr"
       ]
     ],
     "quick_answer": "An unexpected call — often an automated recording telling you to press 1 — about failed vehicle tax or a licence problem is a scam; DVLA says official DVLA information and services are accessed through GOV.UK. Hang up without pressing anything, and check your vehicle tax or licence status by typing gov.uk yourself."
@@ -5496,7 +5540,7 @@
       ],
       [
         "What to do if you've already given details",
-        "If you've shared your National Insurance number, date of birth, or address, treat your details as compromised — monitor your bank accounts and post for anything you don't recognise, and consider a Cifas Protective Registration at `cifas.org.uk` after checking the current fee, which prompts extra checks on your name across participating lenders. If you've shared bank details or made a payment, contact your bank immediately. You do not need to do anything about your actual National Insurance number itself, since it cannot be \"suspended\" and this part of the call was never true."
+        "If you've shared your National Insurance number, date of birth, or address, treat your details as compromised — monitor your bank accounts and post for anything you don't recognise, and consider a Cifas Protective Registration at `cifas.org.uk/pr`, which costs £30 for two years and prompts extra checks on your name across participating lenders. If you've shared bank details or made a payment, contact your bank immediately. You do not need to do anything about your actual National Insurance number itself, since it cannot be \"suspended\" and this part of the call was never true."
       ],
       [
         "How to report a National Insurance scam call in the UK",
@@ -5514,7 +5558,7 @@
       ],
       [
         "I gave my National Insurance number and date of birth on one of these calls — what should I do?",
-        "Treat your details as compromised: watch your bank accounts and post closely, and consider registering for a Cifas Protective Registration at cifas.org.uk. If you shared bank details or made any payment, contact your bank immediately. You don't need to take any action regarding your National Insurance number itself, since it can't actually be suspended."
+        "Treat your details as compromised: watch your bank accounts and post closely, and consider registering for a Cifas Protective Registration at cifas.org.uk/pr. If you shared bank details or made any payment, contact your bank immediately. You don't need to take any action regarding your National Insurance number itself, since it can't actually be suspended."
       ],
       [
         "How do I report this scam call?",
@@ -5530,7 +5574,7 @@
       "phone scam UK",
       "vishing UK"
     ],
-    "updated": "2026-07-30",
+    "updated": "2026-08-06",
     "sources_checked": [
       [
         "GOV.UK — Find a lost National Insurance number",
@@ -5543,6 +5587,10 @@
       [
         "Police Scotland — contact us: non-emergencies on 101",
         "https://www.scotland.police.uk/contact-us/non-emergencies/"
+      ],
+      [
+        "Cifas — Protective Registration",
+        "https://www.cifas.org.uk/pr"
       ]
     ],
     "quick_answer": "A call claiming your National Insurance number has been 'suspended' is false from the outset — an NI number stays with you for life and cannot be suspended. Hang up without pressing anything or confirming details, and report the call to Report Fraud or Police Scotland on 101."
@@ -6098,7 +6146,7 @@
       ],
       [
         "If you paid or shared details",
-        "If you paid through eBay, start with eBay's resolution process or Money Back Guarantee route from your account. If you paid by card, contact your card issuer and ask about disputing the transaction or chargeback.\n\nIf you entered bank, card, or eBay login details on a fake page, contact your bank using the number on your card and change your eBay password by going to eBay directly. If you reused the same password elsewhere, change it there too. Consider Cifas Protective Registration at `cifas.org.uk` if personal details were exposed."
+        "If you paid through eBay, start with eBay's resolution process or Money Back Guarantee route from your account. If you paid by card, contact your card issuer and ask about disputing the transaction or chargeback.\n\nIf you entered bank, card, or eBay login details on a fake page, contact your bank using the number on your card and change your eBay password by going to eBay directly. If you reused the same password elsewhere, change it there too. Consider Cifas Protective Registration at `cifas.org.uk/pr` — £30 for two years — if personal details were exposed."
       ],
       [
         "How to report an eBay scam (UK)",
@@ -6137,11 +6185,15 @@
       "eBay overpayment scam",
       "report eBay scam"
     ],
-    "updated": "2026-08-01",
+    "updated": "2026-08-06",
     "sources_checked": [
       [
         "eBay UK — Recognising phishing phone calls and emails",
         "https://www.ebay.co.uk/help/account/protecting-account/recognising-spoof-emails?id=4195"
+      ],
+      [
+        "Cifas — Protective Registration",
+        "https://www.cifas.org.uk/pr"
       ]
     ],
     "quick_answer": "Any eBay buyer, seller, or 'eBay' email trying to move payment or messages off the platform is a scam warning — payments completed outside eBay are not covered by the Money Back Guarantee. Keep the whole transaction inside eBay checkout and messages, and forward suspicious eBay emails as an attachment to spoof@ebay.co.uk."
@@ -6284,7 +6336,7 @@
       ],
       [
         "I confirmed my card details on a Vinted-looking page - what now?",
-        "Contact your bank using the number on your card, ask them to secure the account, and ask about disputing any transactions. If you shared personal details, consider Cifas Protective Registration and monitor your credit reports."
+        "Contact your bank using the number on your card, ask them to secure the account, and ask about disputing any transactions. If you shared personal details, consider Cifas Protective Registration — £30 for two years, applied for at cifas.org.uk/pr — and monitor your credit reports."
       ],
       [
         "How do I report a Vinted buyer scam?",
@@ -6301,11 +6353,15 @@
       "report vinted scam uk",
       "vinted pay off platform"
     ],
-    "updated": "2026-07-18",
+    "updated": "2026-08-06",
     "sources_checked": [
       [
         "Vinted — Getting paid for a completed sale",
         "https://www.vinted.com/help/4/235-getting-paid-for-a-completed-sale"
+      ],
+      [
+        "Cifas — Protective Registration",
+        "https://www.cifas.org.uk/pr"
       ]
     ],
     "quick_answer": "A Vinted buyer who wants to pay off-app, or a link asking you to 'confirm your card' to release funds, is a scam — genuine seller payments go through Vinted to your Vinted Balance after delivery. Post an item only once the sale shows in the Vinted app, and report the buyer to Vinted."
@@ -7626,7 +7682,7 @@
       ],
       [
         "I gave a scammer my Universal Credit login or details - what now?",
-        "Sign in to your account if you can and contact Universal Credit through the official GOV.UK routes. If you shared bank details, call your bank using the number on your card. If you shared ID, consider Cifas Protective Registration and monitor your credit reports."
+        "Sign in to your account if you can and contact Universal Credit through the official GOV.UK routes. If you shared bank details, call your bank using the number on your card. If you shared ID, consider Cifas Protective Registration — £30, valid two years, from cifas.org.uk/pr — and monitor your credit reports."
       ],
       [
         "How do I report a Universal Credit scam?",
@@ -7643,7 +7699,7 @@
       "Universal Credit loan scam",
       "report Universal Credit scam"
     ],
-    "updated": "2026-08-01",
+    "updated": "2026-08-06",
     "sources_checked": [
       [
         "GOV.UK — Apply for a Universal Credit advance or hardship payment",
@@ -7656,6 +7712,10 @@
       [
         "nidirect — Contact Universal Credit for help with your claim (Northern Ireland)",
         "https://www.nidirect.gov.uk/articles/contact-universal-credit-help-your-claim"
+      ],
+      [
+        "Cifas — Protective Registration",
+        "https://www.cifas.org.uk/pr"
       ]
     ],
     "quick_answer": "A message offering a DWP grant through a link, or an agent offering to claim for you, is a scam — GOV.UK says Universal Credit will not ask for bank details by text or email, and an advance is repayable, not free money. Manage your claim only through GOV.UK, and forward scam texts to `7726`."
@@ -7867,7 +7927,7 @@
       ],
       [
         "If you've already paid or shared details",
-        "If you paid a suspicious site or link by card, contact your bank or card provider about a chargeback or, where a credit-card purchase qualifies, a Section 75 claim. Stop any further contact with whoever asked for the payment. If you shared passport, ID, or bank details more widely than a genuine application requires, monitor your accounts and credit file, and consider Cifas Protective Registration."
+        "If you paid a suspicious site or link by card, contact your bank or card provider about a chargeback or, where a credit-card purchase qualifies, a Section 75 claim. Stop any further contact with whoever asked for the payment. If you shared passport, ID, or bank details more widely than a genuine application requires, monitor your accounts and credit file, and consider Cifas Protective Registration, which costs £30 for two years (cifas.org.uk/pr)."
       ],
       [
         "How to report a passport renewal scam (UK)",
@@ -7905,7 +7965,7 @@
       "gov.uk passport scam",
       "hmpo phishing"
     ],
-    "updated": "2026-08-01",
+    "updated": "2026-08-06",
     "sources_checked": [
       [
         "GOV.UK — Passport fees",
@@ -7918,6 +7978,10 @@
       [
         "Police Scotland — contact us: non-emergencies on 101",
         "https://www.scotland.police.uk/contact-us/non-emergencies/"
+      ],
+      [
+        "Cifas — Protective Registration",
+        "https://www.cifas.org.uk/pr"
       ]
     ],
     "quick_answer": "A text or email saying your passport application is on hold pending an extra fee is a scam or an overpriced middleman — check your own application through gov.uk, typing the address yourself. Never pay through a message link; forward scam texts to `7726` and report losses to Report Fraud or Police Scotland on 101."
@@ -7976,7 +8040,7 @@
       ],
       [
         "I've shared my passport or personal details with a scam UKVI contact — what now?",
-        "Consider Cifas Protective Registration and monitor your credit reports. Check your genuine application status through GOV.UK, and keep the scam message as evidence."
+        "Consider Cifas Protective Registration — £30 for two years, from cifas.org.uk/pr — and monitor your credit reports. Check your genuine application status through GOV.UK, and keep the scam message as evidence."
       ],
       [
         "How do I report a UKVI visa scam?",
@@ -7993,7 +8057,7 @@
       "report ukvi scam",
       "home office visa scam warning signs"
     ],
-    "updated": "2026-08-01",
+    "updated": "2026-08-06",
     "sources_checked": [
       [
         "GOV.UK — Fraud, tricks and scams: guidance",
@@ -8006,6 +8070,10 @@
       [
         "Police Scotland — contact us: non-emergencies on 101",
         "https://www.scotland.police.uk/contact-us/non-emergencies/"
+      ],
+      [
+        "Cifas — Protective Registration",
+        "https://www.cifas.org.uk/pr"
       ]
     ],
     "quick_answer": "An email or call demanding urgent payment to stop your visa application being cancelled is a scam — genuine UKVI fees are paid through GOV.UK services you reach yourself. Check your application by signing in via GOV.UK, forward the email to report@phishing.gov.uk, and report any loss to Report Fraud or Police Scotland on 101."
@@ -8253,7 +8321,7 @@
       ],
       [
         "If you've already paid or acted on a fake job offer",
-        "If you paid a fee by card, contact your bank or card provider about a chargeback. A Section 75 claim may apply where the credit-card cash price was more than £100 and no more than £30,000. If you sent a bank transfer, tell your bank the same day and ask about APP reimbursement: an eligible domestic consumer payment sent by Faster Payments or retail CHAPS on or after 7 October 2024 can be reimbursed up to £85,000, must be claimed within 13 months, is subject to exclusions, and may carry an excess of up to £100 that cannot be charged to a consumer the firm assesses as vulnerable — none of which makes a refund guaranteed.\n\nIf money passed through your account, stop, tell your bank immediately and follow the NCA's money-mule advice. If you only received or reposted parcels, stop accepting or forwarding them, preserve the records and get independent advice before handling anything else. If you shared bank or ID details, monitor your accounts and consider Cifas Protective Registration only where the exposure puts your identity at heightened risk; check Cifas's current criteria. Our [scam recovery checklist](/recovery/) sets out the order."
+        "If you paid a fee by card, contact your bank or card provider about a chargeback. A Section 75 claim may apply where the credit-card cash price was more than £100 and no more than £30,000. If you sent a bank transfer, tell your bank the same day and ask about APP reimbursement: an eligible domestic consumer payment sent by Faster Payments or retail CHAPS on or after 7 October 2024 can be reimbursed up to £85,000, must be claimed within 13 months, is subject to exclusions, and may carry an excess of up to £100 that cannot be charged to a consumer the firm assesses as vulnerable — none of which makes a refund guaranteed.\n\nIf money passed through your account, stop, tell your bank immediately and follow the NCA's money-mule advice. If you only received or reposted parcels, stop accepting or forwarding them, preserve the records and get independent advice before handling anything else. If you shared bank or ID details, monitor your accounts and consider Cifas Protective Registration, which costs £30 and runs for two years, only where the exposure puts your identity at heightened risk; check Cifas's current criteria. Our [scam recovery checklist](/recovery/) sets out the order."
       ],
       [
         "How to report a remote work scam (UK)",
@@ -8291,7 +8359,7 @@
       "is this remote job real",
       "remote job scam whatsapp"
     ],
-    "updated": "2026-07-30",
+    "updated": "2026-08-06",
     "sources_checked": [
       [
         "GOV.UK — Overview of the Conduct Regulations 2003 (employment agency fees)",
@@ -8691,7 +8759,7 @@
       ],
       [
         "If you paid or shared details",
-        "Tell your bank or card issuer the same day, using the number printed on your card, that the payment was obtained by fraud. Identity documents and financial information could be reused for identity fraud. Secure affected accounts and check the files held by Experian, Equifax and TransUnion. Consider Cifas Protective Registration only where the exposure puts your identity at heightened risk; check Cifas's current criteria. Our [scam recovery checklist](/recovery/) sets out the sequence."
+        "Tell your bank or card issuer the same day, using the number printed on your card, that the payment was obtained by fraud. Identity documents and financial information could be reused for identity fraud. Secure affected accounts and check the files held by Experian, Equifax and TransUnion. Consider Cifas Protective Registration, £30 for two years, only where the exposure puts your identity at heightened risk; check Cifas's current criteria. Our [scam recovery checklist](/recovery/) sets out the sequence."
       ],
       [
         "How to report a recruitment-agency scam (UK)",
@@ -8730,7 +8798,7 @@
       "recruitment agency money mule",
       "report recruitment scam"
     ],
-    "updated": "2026-08-01",
+    "updated": "2026-08-06",
     "sources_checked": [
       [
         "GOV.UK — Overview of the Conduct Regulations 2003 (employment agency fees)",
@@ -9532,7 +9600,7 @@
       ],
       [
         "If you entered personal details on a site you now doubt",
-        "A fashion checkout collects more than a card number: a name, a delivery address, a contact number, often a password for a new account. Rather than guessing what will be done with any of it, treat what you typed as exposed and close the openings you control.\n\n- Change the password anywhere you reused whatever you set on that site, starting with the email account attached to it.\n- If card details went in, ring your card issuer on the number printed on the card or shown in its own app, and ask about stopping the card and watching the account.\n- Keep the confirmation page and everything that arrives afterwards, and check any claim about the order by returning to the address you typed yourself.\n\nCifas Protective Registration is a narrower step, not a routine response to every suspicious checkout. It is a paid service running for two years that places a warning flag against your name and details so participating organisations carry out extra checks, and Cifas presents it as a measure for people at heightened risk of identity fraud. It is not insurance, and it does not guarantee every application in your name will be checked."
+        "A fashion checkout collects more than a card number: a name, a delivery address, a contact number, often a password for a new account. Rather than guessing what will be done with any of it, treat what you typed as exposed and close the openings you control.\n\n- Change the password anywhere you reused whatever you set on that site, starting with the email account attached to it.\n- If card details went in, ring your card issuer on the number printed on the card or shown in its own app, and ask about stopping the card and watching the account.\n- Keep the confirmation page and everything that arrives afterwards, and check any claim about the order by returning to the address you typed yourself.\n\nCifas Protective Registration, which costs £30 for two years, is a narrower step, not a routine response to every suspicious checkout. It is a paid service running for two years that places a warning flag against your name and details so participating organisations carry out extra checks, and Cifas presents it as a measure for people at heightened risk of identity fraud. It is not insurance, and it does not guarantee every application in your name will be checked."
       ],
       [
         "Legal rights may be hard to enforce against an untraceable seller",
@@ -9587,7 +9655,7 @@
       "counterfeit asos clothing uk",
       "asos lookalike domain scam"
     ],
-    "updated": "2026-07-26",
+    "updated": "2026-08-06",
     "sources_checked": [
       [
         "ASOS Customer Care (UK) — Can you help me with the ASOS website?",
@@ -10476,7 +10544,7 @@
       ],
       [
         "If you've already paid or shared documents",
-        "Contact your bank or card provider about a chargeback if you paid by card. If you shared passport or identity documents, monitor your accounts and credit file for signs of misuse, and consider Cifas Protective Registration."
+        "Contact your bank or card provider about a chargeback if you paid by card. If you shared passport or identity documents, monitor your accounts and credit file for signs of misuse, and consider Cifas Protective Registration, a paid service costing £30 for two years at cifas.org.uk/pr."
       ],
       [
         "How to report a UK visa application scam (UK)",
@@ -10514,7 +10582,7 @@
       "fake visa website uk",
       "visa application fee scam"
     ],
-    "updated": "2026-07-06",
+    "updated": "2026-08-06",
     "sources_checked": [
       [
         "GOV.UK — Immigration Advice Authority",
@@ -10523,6 +10591,10 @@
       [
         "Immigration Advice Authority — Adviser Finder",
         "https://portal.immigrationadviceauthority.gov.uk/s/adviser-finder"
+      ],
+      [
+        "Cifas — Protective Registration",
+        "https://www.cifas.org.uk/pr"
       ]
     ],
     "quick_answer": "No genuine adviser or website can guarantee a UK visa outcome — that promise alone marks the offer as a scam. Start from GOV.UK, and check any adviser is registered with the Immigration Advice Authority before paying, since giving immigration advice without registration is a criminal offence in the UK."
@@ -11737,7 +11809,7 @@
       ],
       [
         "If you already tapped through",
-        "Speed matters more than tidiness here. Ring TSB on the number on the back of your card, or 159, and say plainly that you entered details on a page you reached from an SMS — that gets the account flagged rather than merely watched. If a payment went out, say so in the same call: the 13-month reporting window is generous, but a Faster Payment raised within minutes stands the best chance of being stopped at the receiving end.\n\nThen work through the payment, account and identity steps in our [scam recovery checklist](/recovery/). Where identity details such as your date of birth or address history went across alongside banking credentials, Cifas Protective Registration adds an extra check to applications made in your name."
+        "Speed matters more than tidiness here. Ring TSB on the number on the back of your card, or 159, and say plainly that you entered details on a page you reached from an SMS — that gets the account flagged rather than merely watched. If a payment went out, say so in the same call: the 13-month reporting window is generous, but a Faster Payment raised within minutes stands the best chance of being stopped at the receiving end.\n\nThen work through the payment, account and identity steps in our [scam recovery checklist](/recovery/). Where identity details such as your date of birth or address history went across alongside banking credentials, Cifas Protective Registration adds an extra check to applications made in your name; it costs £30, runs for two years, and you apply at cifas.org.uk/pr."
       ]
     ],
     "faq": [
@@ -11772,7 +11844,7 @@
       "report tsb scam text",
       "tsb suspicious activity text"
     ],
-    "updated": "2026-08-01",
+    "updated": "2026-08-06",
     "sources_checked": [
       [
         "TSB — How to recognise fraud (email identifiers, separate SMS advice, screenshots to emailscams@tsb.co.uk)",
@@ -11789,6 +11861,10 @@
       [
         "Stop Scams UK — 159 phone number (participating firms include TSB)",
         "https://stopscamsuk.org.uk/our-programmes/159-phone-number/"
+      ],
+      [
+        "Cifas — Protective Registration",
+        "https://www.cifas.org.uk/pr"
       ]
     ],
     "quick_answer": "Treat an unexpected TSB text containing a link or requesting security details as unverified. Do not reply or tap it; open TSB's app, forward the text to `7726`, and email a screenshot to `emailscams@tsb.co.uk`. A text asking for your PIN or full security information, or telling you to move money to a \"safe account\", is fraudulent."
@@ -13542,7 +13618,7 @@
       ],
       [
         "I entered my details on a Vodafone-looking site - what now?",
-        "Contact Vodafone's fraud team first and say the account may be compromised — that is Vodafone's own published instruction where account security details have been given away — then update the affected details and your password through the official app or website, and change any other account that reused that password. If card details went in, contact the card issuer on the number on the card and ask which dispute route applies to any transaction that was made or appears. Consider Cifas Protective Registration only where the exposure puts your identity at heightened risk; check Cifas's current criteria. Our [scam recovery checklist](/recovery/) sets out the order to do these in."
+        "Contact Vodafone's fraud team first and say the account may be compromised — that is Vodafone's own published instruction where account security details have been given away — then update the affected details and your password through the official app or website, and change any other account that reused that password. If card details went in, contact the card issuer on the number on the card and ask which dispute route applies to any transaction that was made or appears. Consider Cifas Protective Registration (a paid service, £30 for two years) only where the exposure puts your identity at heightened risk; check Cifas's current criteria. Our [scam recovery checklist](/recovery/) sets out the order to do these in."
       ],
       [
         "How do I report a Vodafone scam text?",
@@ -13559,7 +13635,7 @@
       "report vodafone scam text",
       "vodafone phishing sms"
     ],
-    "updated": "2026-07-30",
+    "updated": "2026-08-06",
     "sources_checked": [
       [
         "Vodafone — How to identify and report phishing scams",
@@ -15193,7 +15269,7 @@
       ],
       [
         "How to check whether your identity has been compromised",
-        "You have a statutory right to a free copy of the basic report each UK credit reference agency holds on you.\n\n- Check your file with the agencies MoneyHelper lists — Experian, Equifax and TransUnion, the three main agencies, plus Crediva — since lenders don't all report to the same one.\n- Look specifically for credit searches, accounts, or agreements you don't recognise, not just a lower score.\n- If you've lost a passport, driving licence, or other ID document, or been told you were involved in a data breach, treat that as a reason to check now rather than waiting for a problem to surface.\n- Consider Cifas Protective Registration — for `£30` over 24 months, it flags your details so Cifas member organisations run extra checks before approving credit or accounts in your name. It can make your own genuine applications take slightly longer, which is the trade-off for the extra check."
+        "You have a statutory right to a free copy of the basic report each UK credit reference agency holds on you.\n\n- Check your file with the agencies MoneyHelper lists — Experian, Equifax and TransUnion, the three main agencies, plus Crediva — since lenders don't all report to the same one.\n- Look specifically for credit searches, accounts, or agreements you don't recognise, not just a lower score.\n- If you've lost a passport, driving licence, or other ID document, or been told you were involved in a data breach, treat that as a reason to check now rather than waiting for a problem to surface.\n- Consider Cifas Protective Registration at `cifas.org.uk/pr` — for `£30` over 24 months, it flags your details so Cifas member organisations run extra checks before approving credit or accounts in your name. It can make your own genuine applications take slightly longer, which is the trade-off for the extra check."
       ],
       [
         "If you think you're already a victim",
@@ -15235,7 +15311,7 @@
       "identity fraud reporting uk",
       "signs of identity theft uk"
     ],
-    "updated": "2026-07-30",
+    "updated": "2026-08-06",
     "sources_checked": [
       [
         "ICO — Personal data breaches: a guide",
@@ -15256,9 +15332,13 @@
       [
         "MoneyHelper — How to check your credit report for free (Experian, Equifax, TransUnion and Crediva)",
         "https://www.moneyhelper.org.uk/en/everyday-money/credit/how-to-check-your-credit-report"
+      ],
+      [
+        "Cifas — Protective Registration",
+        "https://www.cifas.org.uk/pr"
       ]
     ],
-    "quick_answer": "Identity fraud often surfaces late — through a refused application, an unfamiliar debt or a credit search you do not recognise. Check your free statutory credit reports with the four agencies MoneyHelper lists, dispute anything unfamiliar with the lender directly, and consider Cifas Protective Registration."
+    "quick_answer": "Identity fraud often surfaces late — through a refused application, an unfamiliar debt or a credit search you do not recognise. Check your free statutory credit reports with the four agencies MoneyHelper lists, dispute anything unfamiliar with the lender directly, and consider Cifas Protective Registration, which costs £30 for two years."
   },
   {
     "title": "Deed Fraud: Protect Property in England and Wales",
@@ -15835,7 +15915,7 @@
       ],
       [
         "If details were shared",
-        "Contact the bank immediately if bank or card details were disclosed or money was sent. Change any password entered on the fake page, including on other accounts where it was reused. If enough identity information was exposed to create a continuing risk, consider checking credit files and whether Cifas Protective Registration is appropriate."
+        "Contact the bank immediately if bank or card details were disclosed or money was sent. Change any password entered on the fake page, including on other accounts where it was reused. If enough identity information was exposed to create a continuing risk, consider checking credit files and whether Cifas Protective Registration is appropriate — it runs £30 for two years and is applied for at cifas.org.uk/pr."
       ],
       [
         "Reporting in the UK",
@@ -15859,11 +15939,15 @@
       "benefits scam text",
       "DWP impersonation scam"
     ],
-    "updated": "2026-07-10",
+    "updated": "2026-08-06",
     "sources_checked": [
       [
         "GOV.UK — Winter Fuel Payment",
         "https://www.gov.uk/winter-fuel-payment"
+      ],
+      [
+        "Cifas — Protective Registration",
+        "https://www.cifas.org.uk/pr"
       ]
     ],
     "quick_answer": "DWP does send some genuine reminder texts, but a message asking you to reply with bank details, enter them through a link, or apply for a payment via the text should be treated as a scam. Check by signing in to your benefit account directly, never through the message, and forward the text free to `7726`."
@@ -16078,7 +16162,7 @@
     "description": "Booking a cheap holiday, flight or villa from an agent you don't know? How to spot a fake travel agent, verify ABTA/ATOL, and protect your money.",
     "hero": "Scammers are impersonating legitimate travel agents and creating fake booking websites to steal your holiday money and personal information.",
     "date": "2026-06-28",
-    "updated": "2026-07-18",
+    "updated": "2026-08-06",
     "category": "travel",
     "keywords": [
       "fake travel agent scam UK",
@@ -16124,7 +16208,7 @@
       ],
       [
         "What should I do if I gave a fake travel agent my passport details?",
-        "Report the scam and watch for identity misuse. Consider Cifas Protective Registration and monitor your credit reports. If your physical passport was lost or stolen, cancel it through GOV.UK. If only the details were shared, do not assume HM Passport Office can \"check for attempted renewals\"; focus on reporting the fraud and protecting your identity."
+        "Report the scam and watch for identity misuse. Consider Cifas Protective Registration — it costs £30 and lasts two years, and you apply at cifas.org.uk/pr — and monitor your credit reports. If your physical passport was lost or stolen, cancel it through GOV.UK. If only the details were shared, do not assume HM Passport Office can \"check for attempted renewals\"; focus on reporting the fraud and protecting your identity."
       ],
       [
         "Can I trust travel deals advertised on social media?",
@@ -16147,6 +16231,10 @@
       [
         "GOV.UK — Cancel a lost or stolen passport",
         "https://www.gov.uk/report-a-lost-or-stolen-passport"
+      ],
+      [
+        "Cifas — Protective Registration",
+        "https://www.cifas.org.uk/pr"
       ]
     ],
     "quick_answer": "A cheap holiday from an agent you can't verify may not exist at all — fake travel agents take payment and deliver nothing, or a reference no airline or hotel recognises. Check ABTA claims on ABTA's member search and ATOL claims on the CAA's Check an ATOL service, and never pay into a private individual's bank account."
@@ -17210,7 +17298,7 @@
       ],
       [
         "What to do immediately if you have already sent money or shared details",
-        "Act quickly — speed materially affects whether the money comes back.\n\nContact your bank or payment provider straight away. Call the number on the back of your card, use your banking app, or, if your bank supports it, call 159 to be connected safely to your bank — it is the outbound route you dial that cannot be spoofed. Ask them to attempt a recall of the payment.\n\nIf you paid by bank transfer, you may be entitled to be reimbursed. Since 7 October 2024, UK payment firms have operated under mandatory reimbursement rules for authorised push payment (APP) fraud, which includes romance scams where you were deceived into authorising the payment yourself. The rules cover eligible Faster Payments and CHAPS transfers between UK accounts. Report the claim promptly and no later than 13 months after the final payment. Your bank should normally reimburse an eligible claim within five business days, up to a maximum of £85,000. Your firm may apply an excess of up to £100, and some may choose to waive it; neither the excess nor the gross-negligence exception can be applied if the firm assesses you as a vulnerable consumer. Limited exclusions apply, so cooperate with reasonable questions from your bank. You do not need to prove the scammer's identity or catch them. If your bank refuses, make a formal complaint and ask for its final response in writing; you can then take the complaint to the Financial Ombudsman Service, which is free.\n\nDifferent payment methods take different routes. If you paid by debit or credit card, contact the card issuer immediately and ask whether it can attempt a chargeback under the card-scheme rules. Section 75 of the Consumer Credit Act is not general scam reimbursement: it may apply only to a qualifying credit-card purchase costing more than £100 and no more than £30,000 where the supplier breached the contract or misrepresented what was being supplied. Money transfer services such as Western Union or MoneyGram should be contacted immediately to try to halt a transfer still in transit. PayPal payments you sent deliberately should be reported through PayPal's scam reporting route, not as an unauthorised transaction — an unauthorised claim means someone used your account without permission, and reporting it that way will be investigated and rejected on the facts, costing you time.\n\nReport the scam to Report Fraud (formerly Action Fraud) on 0300 123 2040 or at reportfraud.police.uk. In Scotland, report to Police Scotland on 101 instead — Report Fraud does not cover Scotland. Ask for a crime reference number and keep it; your bank or a later dispute process may ask for it.\n\nIf you shared personal information such as your name, address, date of birth, or identity document details, apply for Cifas Protective Registration. This places a flag against your name in the National Fraud Database, so lenders carry out extra checks before opening credit in your name. It is a paid service and it will slow down your own credit applications — that is the point of it. Then check your credit file with the UK credit reference agencies MoneyHelper lists: Experian, Equifax and TransUnion, the three main agencies, plus Crediva. Each is required to provide statutory access to your file, and checking each of them matters because lenders do not all report to the same agency.\n\nDo not send any more money, whatever they say — including if they now claim they can release your earlier payments once you cover one final fee. That follow-up demand is a standard part of the script, not a change in the situation."
+        "Act quickly — speed materially affects whether the money comes back.\n\nContact your bank or payment provider straight away. Call the number on the back of your card, use your banking app, or, if your bank supports it, call 159 to be connected safely to your bank — it is the outbound route you dial that cannot be spoofed. Ask them to attempt a recall of the payment.\n\nIf you paid by bank transfer, you may be entitled to be reimbursed. Since 7 October 2024, UK payment firms have operated under mandatory reimbursement rules for authorised push payment (APP) fraud, which includes romance scams where you were deceived into authorising the payment yourself. The rules cover eligible Faster Payments and CHAPS transfers between UK accounts. Report the claim promptly and no later than 13 months after the final payment. Your bank should normally reimburse an eligible claim within five business days, up to a maximum of £85,000. Your firm may apply an excess of up to £100, and some may choose to waive it; neither the excess nor the gross-negligence exception can be applied if the firm assesses you as a vulnerable consumer. Limited exclusions apply, so cooperate with reasonable questions from your bank. You do not need to prove the scammer's identity or catch them. If your bank refuses, make a formal complaint and ask for its final response in writing; you can then take the complaint to the Financial Ombudsman Service, which is free.\n\nDifferent payment methods take different routes. If you paid by debit or credit card, contact the card issuer immediately and ask whether it can attempt a chargeback under the card-scheme rules. Section 75 of the Consumer Credit Act is not general scam reimbursement: it may apply only to a qualifying credit-card purchase costing more than £100 and no more than £30,000 where the supplier breached the contract or misrepresented what was being supplied. Money transfer services such as Western Union or MoneyGram should be contacted immediately to try to halt a transfer still in transit. PayPal payments you sent deliberately should be reported through PayPal's scam reporting route, not as an unauthorised transaction — an unauthorised claim means someone used your account without permission, and reporting it that way will be investigated and rejected on the facts, costing you time.\n\nReport the scam to Report Fraud (formerly Action Fraud) on 0300 123 2040 or at reportfraud.police.uk. In Scotland, report to Police Scotland on 101 instead — Report Fraud does not cover Scotland. Ask for a crime reference number and keep it; your bank or a later dispute process may ask for it.\n\nIf you shared personal information such as your name, address, date of birth, or identity document details, apply for Cifas Protective Registration — £30 for two years, at cifas.org.uk/pr. This places a flag against your name in the National Fraud Database, so lenders carry out extra checks before opening credit in your name. It is a paid service and it will slow down your own credit applications — that is the point of it. Then check your credit file with the UK credit reference agencies MoneyHelper lists: Experian, Equifax and TransUnion, the three main agencies, plus Crediva. Each is required to provide statutory access to your file, and checking each of them matters because lenders do not all report to the same agency.\n\nDo not send any more money, whatever they say — including if they now claim they can release your earlier payments once you cover one final fee. That follow-up demand is a standard part of the script, not a change in the situation."
       ],
       [
         "Reporting the scam in the UK",
@@ -17306,10 +17394,14 @@
       [
         "Victim Support NI — about us",
         "https://www.victimsupportni.com/about-us/"
+      ],
+      [
+        "Cifas — Protective Registration",
+        "https://www.cifas.org.uk/pr"
       ]
     ],
     "quick_answer": "Facebook dating scammers build an emotional connection over weeks, then invent an emergency that needs your money — a money request alone is reason to stop and treat the contact as high risk. If you already sent money, contact your bank immediately — use 159 if supported — and report it to Report Fraud or Police Scotland on 101.",
-    "updated": "2026-07-30"
+    "updated": "2026-08-06"
   },
   {
     "title": "WhatsApp Stranger Scam UK: How to Spot and Stop It",
@@ -17339,7 +17431,7 @@
       ],
       [
         "What to do if you replied, paid or shared information",
-        "Preserve evidence first. Take screenshots of the number, profile, messages, links, payment details and any transaction references. Then use WhatsApp’s in-app Report and Block controls. Blocking stops that account messaging or calling you through WhatsApp, but it does not recover money or secure other accounts.\n\nIf you sent money, contact the bank or payment provider immediately through its official app or the number on your card. Ask it to attempt a recall and open a scam claim. Speed matters, but withdrawal of the money is not the only question.\n\nFor eligible Faster Payments or CHAPS transfers between UK accounts, the mandatory APP fraud reimbursement rules may apply when a criminal deceived you into authorising the payment. Report promptly and no later than 13 months after the final payment. An eligible claim should normally be reimbursed within five business days, up to £85,000. A firm may apply an excess of up to £100, although it may waive it; the excess cannot be applied to a vulnerable consumer. If the firm needs more information it can pause the five-day clock, but it must normally reach an outcome within 35 business days. If the claim is refused, make a formal complaint and ask for the final response in writing before taking it to the Financial Ombudsman Service.\n\nOther payment methods have different rules. Contact the card issuer, e-money firm, money-transfer service, cryptocurrency platform or PayPal through its own scam-reporting route. A payment you deliberately sent because you were deceived is not the same as an unauthorised transaction made by someone who accessed your account.\n\nIf you shared bank information, tell your bank what was exposed and follow its instructions. If you shared a password, change it on the affected account and anywhere else it was reused, starting with your email account, and enable two-step verification. Do not change every password or freeze an account indiscriminately; respond to the information or access that was actually compromised.\n\nIf identity information or a copy of an identity document was exposed, consider Cifas Protective Registration. It is a paid service that places a warning flag against your details in the National Fraud Database so participating organisations carry out extra identity checks. It can slow genuine applications and does not cover card transactions. Check your credit files with the agencies MoneyHelper lists — Experian, Equifax and TransUnion, the three main agencies, plus Crediva — because lenders do not all report to the same agency.\n\nIf you shared a WhatsApp device-linking code or scanned a QR code, review Linked Devices in WhatsApp and remove anything you do not recognise. Turn on WhatsApp two-step verification and follow WhatsApp’s official account-recovery guidance if you have lost access.\n\nIf you only opened a link and did not enter information, download a file or install software, NCSC guidance says further action is unlikely to be needed, although you should watch for unusual account activity. If you installed software, granted remote access or the phone is behaving unexpectedly, follow the NCSC’s infected-device guidance. Do not rely on a phone antivirus scan as proof that the device is clean; mobile recovery differs by platform and a reset or expert help may be necessary."
+        "Preserve evidence first. Take screenshots of the number, profile, messages, links, payment details and any transaction references. Then use WhatsApp’s in-app Report and Block controls. Blocking stops that account messaging or calling you through WhatsApp, but it does not recover money or secure other accounts.\n\nIf you sent money, contact the bank or payment provider immediately through its official app or the number on your card. Ask it to attempt a recall and open a scam claim. Speed matters, but withdrawal of the money is not the only question.\n\nFor eligible Faster Payments or CHAPS transfers between UK accounts, the mandatory APP fraud reimbursement rules may apply when a criminal deceived you into authorising the payment. Report promptly and no later than 13 months after the final payment. An eligible claim should normally be reimbursed within five business days, up to £85,000. A firm may apply an excess of up to £100, although it may waive it; the excess cannot be applied to a vulnerable consumer. If the firm needs more information it can pause the five-day clock, but it must normally reach an outcome within 35 business days. If the claim is refused, make a formal complaint and ask for the final response in writing before taking it to the Financial Ombudsman Service.\n\nOther payment methods have different rules. Contact the card issuer, e-money firm, money-transfer service, cryptocurrency platform or PayPal through its own scam-reporting route. A payment you deliberately sent because you were deceived is not the same as an unauthorised transaction made by someone who accessed your account.\n\nIf you shared bank information, tell your bank what was exposed and follow its instructions. If you shared a password, change it on the affected account and anywhere else it was reused, starting with your email account, and enable two-step verification. Do not change every password or freeze an account indiscriminately; respond to the information or access that was actually compromised.\n\nIf identity information or a copy of an identity document was exposed, consider Cifas Protective Registration, which costs £30 and covers two years. It is a paid service that places a warning flag against your details in the National Fraud Database so participating organisations carry out extra identity checks. It can slow genuine applications and does not cover card transactions. Check your credit files with the agencies MoneyHelper lists — Experian, Equifax and TransUnion, the three main agencies, plus Crediva — because lenders do not all report to the same agency.\n\nIf you shared a WhatsApp device-linking code or scanned a QR code, review Linked Devices in WhatsApp and remove anything you do not recognise. Turn on WhatsApp two-step verification and follow WhatsApp’s official account-recovery guidance if you have lost access.\n\nIf you only opened a link and did not enter information, download a file or install software, NCSC guidance says further action is unlikely to be needed, although you should watch for unusual account activity. If you installed software, granted remote access or the phone is behaving unexpectedly, follow the NCSC’s infected-device guidance. Do not rely on a phone antivirus scan as proof that the device is clean; mobile recovery differs by platform and a reset or expert help may be necessary."
       ],
       [
         "How to report a WhatsApp scam in the UK",
@@ -17438,7 +17530,7 @@
       ]
     ],
     "quick_answer": "An unexpected WhatsApp message — even one claiming to be a relative on a new number — should be verified through a route you already trust before you reply, pay or share anything. Never hand over a six-digit WhatsApp code, device-linking code or bank one-time code, and use the in-app Report and Block controls once you have saved the evidence.",
-    "updated": "2026-07-30"
+    "updated": "2026-08-06"
   },
   {
     "title": "Instagram Fake Giveaway Scam UK: How to Spot and Report It",
@@ -17468,7 +17560,7 @@
       ],
       [
         "What to do immediately if you've already engaged",
-        "If you've clicked a suspicious link or entered your Instagram login details, change your Instagram password right now using a device you trust. Go to Instagram Settings > Security > Password and create a new, strong password that you haven't used elsewhere. If you've already lost access to your account, use Instagram's account recovery process: go to the login page, tap 'Need more help?', and follow the prompts to regain control. If you've paid money via bank transfer, contact your bank immediately and explain you've been scammed. For eligible bank (Faster Payments) transfers made on or after 7 October 2024, banks must reimburse most victims of authorised push payment (APP) scams, subject to conditions and a cap — ask your bank to treat it as an APP scam claim and to try to recall the payment. If you paid via gift card or cryptocurrency, unfortunately the money is almost impossible to recover, but report it anyway (see below). If you've shared personal details like your address or phone number, monitor your credit report for signs of identity theft and consider Cifas Protective Registration if your identity is at heightened risk. If the scammer has taken over your account and is using it to run the same scam to your followers, change your password, enable two-factor authentication (Settings > Security > Two-Factor Authentication), and notify your followers via other channels that your account has been compromised. Do not click any links the scammer posts."
+        "If you've clicked a suspicious link or entered your Instagram login details, change your Instagram password right now using a device you trust. Go to Instagram Settings > Security > Password and create a new, strong password that you haven't used elsewhere. If you've already lost access to your account, use Instagram's account recovery process: go to the login page, tap 'Need more help?', and follow the prompts to regain control. If you've paid money via bank transfer, contact your bank immediately and explain you've been scammed. For eligible bank (Faster Payments) transfers made on or after 7 October 2024, banks must reimburse most victims of authorised push payment (APP) scams, subject to conditions and a cap — ask your bank to treat it as an APP scam claim and to try to recall the payment. If you paid via gift card or cryptocurrency, unfortunately the money is almost impossible to recover, but report it anyway (see below). If you've shared personal details like your address or phone number, monitor your credit report for signs of identity theft and consider Cifas Protective Registration if your identity is at heightened risk — it costs £30 for two years and you apply at cifas.org.uk/pr. If the scammer has taken over your account and is using it to run the same scam to your followers, change your password, enable two-factor authentication (Settings > Security > Two-Factor Authentication), and notify your followers via other channels that your account has been compromised. Do not click any links the scammer posts."
       ],
       [
         "How to report an Instagram fake giveaway scam in the UK",
@@ -17540,10 +17632,14 @@
       [
         "GOV.UK — Consumer advice services for England and Wales, Scotland and Northern Ireland",
         "https://www.gov.uk/consumer-advice"
+      ],
+      [
+        "Cifas — Protective Registration",
+        "https://www.cifas.org.uk/pr"
       ]
     ],
     "quick_answer": "A giveaway that asks for an entry fee, shipping cost or your login details is fake — legitimate brands never charge winners to claim prizes. Don't rely on a blue tick: it can be legacy notability verification or a paid Meta Verified subscription, so confirm the account through the brand's own website and report the fake account to Instagram.",
-    "updated": "2026-07-31"
+    "updated": "2026-08-06"
   },
   {
     "title": "YouTube Crypto Scam UK: How to Spot Fake Investment Channels",
