@@ -1,0 +1,15 @@
+{
+  "slug": "youtube-crypto-scam-uk",
+  "title": "YouTube Crypto Scam UK: How to Spot Fake Investment Channels",
+  "date": "2026-08-06",
+  "model": "claude-haiku-4-5-20251001",
+  "gate_passed": true,
+  "claims": [
+    {
+      "type": "scale_claim",
+      "severity": "flag",
+      "text": "thousands",
+      "detail": "unsourced scale claim in the hero. Either attribute it to a published figure (the site's own /research/uk-scam-statistics/ dataset names its publishers) or describe the harm without quantifying it."
+    }
+  ]
+}

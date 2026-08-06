@@ -1,5 +1,12 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Beat the Scam</title><link>https://beatthescam.com</link><description>Scam alerts, plain-English checks, and practical guides to help people verify suspicious emails, texts, websites, calls, and offers.</description><lastBuildDate>Sat, 01 Aug 2026 00:00:00 +0000</lastBuildDate><atom:link href="https://beatthescam.com/rss.xml" rel="self" type="application/rss+xml" />
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Beat the Scam</title><link>https://beatthescam.com</link><description>Scam alerts, plain-English checks, and practical guides to help people verify suspicious emails, texts, websites, calls, and offers.</description><lastBuildDate>Thu, 06 Aug 2026 00:00:00 +0000</lastBuildDate><atom:link href="https://beatthescam.com/rss.xml" rel="self" type="application/rss+xml" />
+        <item>
+          <title>YouTube Crypto Scam UK: How to Spot Fake Investment Channels</title>
+          <link>https://beatthescam.com/guides/youtube-crypto-scam-uk/</link>
+          <guid isPermaLink="true">https://beatthescam.com/guides/youtube-crypto-scam-uk/</guid>
+          <pubDate>Thu, 06 Aug 2026 00:00:00 +0000</pubDate>
+          <description>YouTube crypto scams use impersonated channels, live streams, and comments to lure viewers into fraudulent investment platforms. Scammers pose as well-known crypto personalities or YouTube creators, promising quick returns and using urgency tactics to pressure you into depositing money.</description>
+        </item>
         <item>
           <title>Instagram Fake Giveaway Scam UK: How to Spot and Report It</title>
           <link>https://beatthescam.com/guides/instagram-fake-giveaway-scam-uk/</link>
@@ -202,11 +209,4 @@
           <guid isPermaLink="true">https://beatthescam.com/guides/gumtree-scam-uk-guide/</guid>
           <pubDate>Sun, 07 Jun 2026 00:00:00 +0000</pubDate>
           <description>Gumtree is legitimate, but scammers use it. Here are the most common Gumtree scams targeting UK buyers and sellers, the warning signs, and how to stay safe.</description>
-        </item>
-        <item>
-          <title>Google Voice Verification Code Scam UK: Don&#x27;t Share That Code</title>
-          <link>https://beatthescam.com/guides/google-voice-verification-scam/</link>
-          <guid isPermaLink="true">https://beatthescam.com/guides/google-voice-verification-scam/</guid>
-          <pubDate>Sun, 07 Jun 2026 00:00:00 +0000</pubDate>
-          <description>Asked to read back a Google verification code to &#x27;prove you&#x27;re real&#x27;? It&#x27;s a scam to take over an account in your name. Here&#x27;s how it works and what to do.</description>
         </item></channel></rss>
