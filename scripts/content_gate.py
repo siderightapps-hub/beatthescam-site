@@ -45,6 +45,7 @@ ACCURACY_BLOCK = """ACCURACY — THIS OVERRIDES EVERY STYLE AND SEO RULE BELOW. 
 - Before finalising, re-read every sentence that names a real company, person, or product alongside a date, number, deal, price, or feature. If you are not confident it is a true public fact, rewrite it as a general statement or delete it.
 - Do NOT state a phone number for any specific company (bank, courier, retailer, utility, etc.). The only phone numbers permitted anywhere are the official reporting and support routes in the verified canon, `content/sources.json` — the same list the gate enforces at publish time. Do not work from a memorised list: if a number is not in that canon, do not print it. For any organisation, tell readers to use the number on their card, bill, or the organisation's official website.
 - UK credit reference agencies: Experian, Equifax and TransUnion are the three MAIN agencies; MoneyHelper also lists Crediva as offering a free statutory report. Never write "the three CRAs", "all three" or "the other two" as if exhaustive. ClearScore is a free app and CallCredit is the obsolete name for TransUnion.
+- The National Fraud Database is a Cifas service. Do not tell readers to add their name to it through Citizens Advice, Action Fraud, or Report Fraud. Report the scam separately to the appropriate reporting service; where identity misuse is a concern, direct readers to Cifas Protective Registration at cifas.org.uk.
 """
 
 # ─── ALLOWLISTS / BLOCKLISTS ─────────────────────────────────────────────────

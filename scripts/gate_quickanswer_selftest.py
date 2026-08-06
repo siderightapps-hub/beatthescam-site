@@ -319,6 +319,8 @@ def _canon_negative_fixtures(check) -> None:
           canon_mod.nation_routes_inline(_live) in _gen.SYSTEM_PROMPT)
     check("SYSTEM_PROMPT embeds the rendered route block via ACCURACY_BLOCK",
           canon_mod.render_prompt_routes(_live) in _gen.SYSTEM_PROMPT)
+    check("SYSTEM_PROMPT embeds the Cifas/National Fraud Database rule",
+          "National Fraud Database is a Cifas service" in _gen.SYSTEM_PROMPT)
     _prompt = _gen.build_prompt(_gen.Topic("test scam uk", "TestCo", "sms"), ["a-slug"])
     check("build_prompt embeds the rendered reporting-section brief",
           canon_mod.reporting_section_instruction(_live) in _prompt)
@@ -603,6 +605,9 @@ def run() -> int:
                    "Northern Ireland", "Never present Report Fraud as the UK-wide route",
                    "Never present Citizens Advice as a UK-wide helpline"):
         check(f"the rendered route block states {needed!r}", needed in CANON_ROUTE_BLOCK)
+    check("the generator accuracy block states the Cifas/National Fraud Database rule",
+          "National Fraud Database is a Cifas service" in ACCURACY_BLOCK and
+          "Cifas Protective Registration" in ACCURACY_BLOCK)
     # No prompt may keep its own copy of a canon phone number.
     import re as _re
     for name, text in (("ACCURACY_BLOCK", ACCURACY_BLOCK), ("JUDGE_SYSTEM", JUDGE_SYSTEM)):
