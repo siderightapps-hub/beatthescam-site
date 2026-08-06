@@ -3557,13 +3557,50 @@ _CANONICAL_KEYWORD_OWNERS = {
     "remote access scam uk": "remote-access-scam-uk",
 }
 
+# Names of EXTERNAL official bodies, registers, tools and services must never
+# become internal-link anchors. The rationale differs from the stop-list above:
+# these phrases are not too generic, they are too SPECIFIC — each names a real
+# thing that lives at an official domain, so hyperlinking it to a guide of ours
+# tells the reader "this is the register/service" and then sends them somewhere
+# else. Two shipped that way before this guard existed (operator review,
+# 2026-08-06): "FCA Warning List" pointed at forex-trading-scam-uk on
+# share-fraud-uk, and "Cifas Protective Registration" pointed at
+# identity-theft-uk on thirty pages — the latter directly undercutting the canon
+# rule that identity-misuse advice must route readers to cifas.org.uk.
+#
+# These stay legitimate KEYWORDS (people search them, and the search index and
+# schema still use them); they are only barred from claiming anchor text. Match
+# is on the whole normalised phrase, so topic phrases that merely contain a body
+# name — "companies house scam letter", "hmrc tax refund scam" — are unaffected.
+# Entries are listed whether or not a post currently uses them: the point is to
+# stop the next keyword addition from re-creating the bug.
+_OFFICIAL_SERVICE_PHRASES = frozenset({
+    # FCA registers and tools
+    "fca warning list", "warning list", "fca firm checker", "firm checker",
+    "financial services register", "fca register", "fca consumer helpline",
+    # Cifas / the National Fraud Database
+    "cifas protective registration", "protective registration",
+    "national fraud database",
+    # Reporting and consumer-advice services in content/sources.json
+    "action fraud", "report fraud", "police scotland", "citizens advice",
+    "citizens advice consumer helpline", "advice direct scotland",
+    "consumerline", "suspicious email reporting service",
+    "suspicious website reporting service",
+    # Other bodies whose bare name reads as a link to that body
+    "companies house", "land registry", "hm land registry",
+    "financial ombudsman", "financial ombudsman service",
+    "trading standards", "payment systems regulator", "money helper",
+    "moneyhelper", "credit reference agency", "credit reference agencies",
+})
+
 
 def build_internal_link_map(posts):
     """Build a phrase → guide-URL map from each post's keywords.
 
-    Filters keywords to phrases that are 2+ words long, lowercase and not
-    stop-listed. A duplicated phrase is excluded unless it has an explicit
-    editorial owner in _CANONICAL_KEYWORD_OWNERS.
+    Filters keywords to phrases that are 2+ words long, lowercase, not
+    stop-listed and not the name of an external official body or service
+    (_OFFICIAL_SERVICE_PHRASES). A duplicated phrase is excluded unless it has
+    an explicit editorial owner in _CANONICAL_KEYWORD_OWNERS.
     """
     phrase_posts = defaultdict(list)
     for post in posts:
@@ -3575,6 +3612,8 @@ def build_internal_link_map(posts):
             if not phrase or len(phrase.split()) < 2:
                 continue
             if phrase in _INTERNAL_LINK_STOPWORDS:
+                continue
+            if phrase in _OFFICIAL_SERVICE_PHRASES:
                 continue
             if slug not in phrase_posts[phrase]:
                 phrase_posts[phrase].append(slug)

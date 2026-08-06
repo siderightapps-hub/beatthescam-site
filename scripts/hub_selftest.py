@@ -430,6 +430,37 @@ def run() -> int:
           "&lt;img onerror=x&gt;" in hout)
 
     live_posts = json.loads((ROOT / "content" / "posts.json").read_text(encoding="utf-8"))
+
+    # ── internal auto-links never claim an official body's name ──────────────
+    # A keyword becomes a site-wide anchor trigger, so a keyword naming an
+    # EXTERNAL register or service made that phrase link to a guide of ours
+    # instead. Both offenders shipped: "FCA Warning List" → forex-trading-scam-uk
+    # on share-fraud-uk, and "Cifas Protective Registration" → identity-theft-uk
+    # on thirty pages, against the canon rule routing identity misuse to
+    # cifas.org.uk (operator review, 2026-08-06).
+    live_map = B.build_internal_link_map(live_posts)
+    leaked = sorted(p for p in live_map if p in B._OFFICIAL_SERVICE_PHRASES)
+    check("no official body/service name is an internal-link anchor",
+          not leaked, ", ".join(f"{p} -> {live_map[p]}" for p in leaked))
+    for phrase in ("fca warning list", "cifas protective registration"):
+        check(f"the regressed phrase {phrase!r} is not auto-linked",
+              phrase not in live_map)
+
+    # The filter must key on the WHOLE phrase. Barring every keyword that merely
+    # contains a body name would silently drop ~80 legitimate topic links.
+    synth = [
+        {"slug": "a-guide", "keywords": ["fca warning list", "cifas protective registration",
+                                         "companies house scam letter"]},
+        {"slug": "b-guide", "keywords": ["a distinctive topic phrase"]},
+    ]
+    smap = B.build_internal_link_map(synth)
+    check("an official-service keyword yields no anchor",
+          "fca warning list" not in smap and "cifas protective registration" not in smap)
+    check("a topic phrase merely CONTAINING a body name still links",
+          smap.get("companies house scam letter") == "/guides/a-guide/")
+    check("an ordinary multi-word keyword still links",
+          smap.get("a distinctive topic phrase") == "/guides/b-guide/")
+
     figs = [(pp["slug"], pp["figure"]) for pp in live_posts if pp.get("figure")]
     check("the corpus carries at least one original figure", bool(figs), str(len(figs)))
     for slug, f in figs:
