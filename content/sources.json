@@ -1,5 +1,5 @@
 {
-  "_note": "VERIFIED CANON of official UK reporting / consumer-protection routes. Single source of truth for: (1) the accuracy gate's allowed phone numbers (content_gate.py derives ALLOWED_PHONE_DIGITS from the phone/sms fields in official_routes AND the phone field in verified_org_contacts), (2) the gate's reporting-email validation (check_sources), and (3) build.py's on-page 'Report this scam' block. NEVER hardcode an org number or reporting route anywhere else. Verify any change against the official source before committing. Phones are normalised to digits-only by the gate. verified_org_contacts is SEPARATE from official_routes: it holds a company's own published support/fraud line, verified against that company's own site, so a guide can name it without the gate treating it as invented. These are NOT national reporting routes and are never rendered in build.py's 'Report this scam' block. Every entry needs source_url + checked_on and must be re-verified quarterly — commercial numbers change far more often than official ones. Prefer telling readers to use the number on their bill/card/official site; only add an entry when naming the number genuinely helps.",
+  "_note": "VERIFIED CANON of official UK reporting / consumer-protection routes. Single source of truth for: (1) the accuracy gate's allowed phone numbers (content_gate.py derives ALLOWED_PHONE_DIGITS from the phone/sms fields in official_routes AND the phone field in verified_org_contacts), (2) the gate's reporting-email validation (check_sources), and (3) build.py's on-page 'Report this scam' block. NEVER hardcode an org number or reporting route anywhere else. Verify any change against the official source before committing. Phones are normalised to digits-only by the gate. verified_org_contacts is SEPARATE from official_routes: it holds a company's own published support/fraud line, verified against that company's own site, so a guide can name it without the gate treating it as invented. These are NOT national reporting routes and are never rendered in build.py's 'Report this scam' block. An entry need not be a phone number — cifas-protective-registration is a URL-only entry, recorded here precisely BECAUSE the official-host allow-list does not apply to this list. Most entries are additive and safe to drop; the few a consumer actually renders from are pinned by host in canon.REQUIRED_CONTACTS, and dropping or repointing one of those is a validation failure. Every entry needs source_url + checked_on and must be re-verified quarterly — commercial numbers change far more often than official ones. Prefer telling readers to use the number on their bill/card/official site; only add an entry when naming the number genuinely helps.",
   "report_emails": [
     "report@phishing.gov.uk",
     "phishing@hmrc.gov.uk",
@@ -175,6 +175,14 @@
     }
   ],
   "verified_org_contacts": [
+    {
+      "key": "cifas-protective-registration",
+      "name": "Cifas Protective Registration",
+      "source_url": "https://www.cifas.org.uk/pr",
+      "checked_on": "2026-08-06",
+      "fee": "£30 for two years",
+      "note": "NOT a reporting route and deliberately NOT in official_routes — it is a paid identity-protection product, so it must never enter the on-page 'Report this scam' sidebar or the checker's CANON_REQUIRED_HOSTS. Recorded here, where the official-host allow-list does not apply, so cifas.org.uk need not be added to OFFICIAL_HOST_SUFFIXES (reserved for government, police and the statutory-adjacent charities GOV.UK names). Pinned by host in canon.REQUIRED_CONTACTS because content_gate.py renders its identity-misuse routing messages and its generator-prompt rule from this entry — before 2026-08-06 it hardcoded cifas.org.uk in five places. The National Fraud Database is a Cifas service: identity-misuse advice routes here, never via Report Fraud or Citizens Advice (BLOCK-tier), and the US 'credit freeze' / 'fraud alert on your credit file' have no UK equivalent (FLAG-tier). `fee` is recorded so the figure has an owner and a date — nothing else re-checks it, and 30 guides now state it in prose. Re-verify quarterly."
+    },
     {
       "key": "talktalk",
       "name": "TalkTalk customer support",

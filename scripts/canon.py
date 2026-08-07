@@ -89,10 +89,41 @@ REQUIRED_ROUTES: Dict[str, Dict[str, str]] = {
 POLICE_REPORT_NATIONS = ("England, Wales and Northern Ireland", "Scotland")
 CONSUMER_ADVICE_NATIONS = ("England and Wales", "Scotland", "Northern Ireland")
 
+# Contacts in verified_org_contacts that a CONSUMER DEPENDS ON, pinned by host
+# the same way REQUIRED_ROUTES pins the reporting routes.
+#
+# verified_org_contacts is otherwise an open, additive list — dropping one entry
+# only loses a number a guide could have named. These are different: the
+# publication gate renders its identity-misuse routing messages and its
+# generator-prompt rule from them, so an entry going missing or changing host
+# would silently take a BLOCK-tier remediation with it. Pinning them here makes
+# that a validation failure instead.
+#
+# Cifas Protective Registration is deliberately NOT in official_routes: it is a
+# paid identity-protection product, not a place to report a scam, so it must
+# never enter the on-page "Report this scam" sidebar or CANON_REQUIRED_HOSTS.
+# Recording it here also keeps cifas.org.uk out of OFFICIAL_HOST_SUFFIXES, which
+# is reserved for government, police and the statutory-adjacent charities GOV.UK
+# itself names.
+REQUIRED_CONTACTS: Dict[str, Dict[str, str]] = {
+    "cifas-protective-registration": {
+        "name": "Cifas Protective Registration",
+        "host": "www.cifas.org.uk",
+    },
+}
+
 # Hosts an official_routes URL may point at. Base domains cover subdomains.
-# verified_org_contacts is deliberately NOT covered: it holds commercial
-# support lines published by the company itself and is never rendered as an
-# official reporting route.
+# Government, police, and the statutory-adjacent charities GOV.UK itself names —
+# deliberately narrow, because this list is what stops an invented domain being
+# presented to readers as an official route.
+#
+# verified_org_contacts is deliberately NOT covered: it holds routes an
+# organisation publishes on its own site — a support line, a phishing mailbox,
+# or a product page such as Cifas Protective Registration — none of which is a
+# national reporting route or is ever rendered in the on-page reporting block.
+# That exemption is why cifas.org.uk does not need to be added here. Entries a
+# consumer actually renders from are constrained instead by an exact host pin in
+# REQUIRED_CONTACTS.
 OFFICIAL_HOST_SUFFIXES = (
     "gov.uk",
     "gov.scot",
@@ -159,6 +190,7 @@ def validate_canon(canon) -> List[str]:
     if not isinstance(contacts, list):
         problems.append("'verified_org_contacts' must be a list when present")
         contacts = []
+    seen_contacts: Dict[str, dict] = {}
     for n, c in enumerate(contacts):
         if not isinstance(c, dict):
             problems.append(f"verified_org_contacts[{n}] is {type(c).__name__}, expected an object")
@@ -166,6 +198,28 @@ def validate_canon(canon) -> List[str]:
         for field in ("key", "name", "source_url", "checked_on"):
             if not isinstance(c.get(field), str) or not c[field].strip():
                 problems.append(f"verified_org_contacts[{n}] has no {field!r}")
+        key = c.get("key")
+        if isinstance(key, str) and key.strip():
+            if key in seen_contacts:
+                problems.append(f"duplicate verified_org_contacts key {key!r}")
+            else:
+                seen_contacts[key] = c
+
+    # Required contacts: pinned by exact host, because a gate check renders from
+    # them. Unlike the rest of the list these cannot be dropped or repointed.
+    for key, spec in REQUIRED_CONTACTS.items():
+        c = seen_contacts.get(key)
+        if c is None:
+            problems.append(f"required contact {key!r} is missing from verified_org_contacts")
+            continue
+        # official=False: these are an organisation's own site, deliberately not
+        # in OFFICIAL_HOST_SUFFIXES. The host pin below is what constrains them.
+        host = _check_url(c.get("source_url"), f"required contact {key!r} source_url",
+                          problems, official=False)
+        if host is not None and host != spec["host"]:
+            problems.append(
+                f"required contact {key!r} source_url host is {host!r}, expected {spec['host']!r}"
+            )
 
     seen: Dict[str, dict] = {}
     for n, r in enumerate(routes):
@@ -277,6 +331,43 @@ def route(canon: Dict, key: str) -> Dict:
         if r.get("key") == key:
             return r
     return {}
+
+
+def contact(canon: Dict, key: str) -> Dict:
+    """One verified_org_contacts entry by key. Raises if absent.
+
+    The contacts list is validated but, unlike official_routes, mostly optional;
+    this accessor exists so a consumer that DEPENDS on an entry fails loudly
+    rather than reading None out of a dict.
+    """
+    for c in canon.get("verified_org_contacts", []):
+        if c.get("key") == key:
+            return c
+    raise CanonError(f"verified_org_contacts has no entry keyed {key!r}")
+
+
+def protective_registration_url(canon: Dict) -> str:
+    """The Cifas Protective Registration application URL, from the canon."""
+    return contact(canon, "cifas-protective-registration")["source_url"]
+
+
+def protective_registration_display(canon: Dict) -> str:
+    """The same URL as readers should see it inline — host (minus www) + path.
+
+    Guides name this mid-sentence, where build.py renders it as PLAIN TEXT:
+    linkify_bare_paths only matches leading-slash internal paths, so a bare
+    external URL is never an anchor. Keeping it short enough to retype is the
+    point. The clickable route is the guide's `sources_checked` entry.
+    """
+    parsed = urlparse(protective_registration_url(canon))
+    host = (parsed.hostname or "").replace("www.", "")
+    return host + parsed.path.rstrip("/")
+
+
+def protective_registration_clause(canon: Dict) -> str:
+    """`a Cifas Protective Registration (cifas.org.uk/pr)` — for gate messages."""
+    c = contact(canon, "cifas-protective-registration")
+    return f"a {c['name']} ({protective_registration_display(canon)})"
 
 
 def routes_by_role(canon: Dict, role: str, *, on_page_only: bool = False) -> List[Dict]:
@@ -592,6 +683,13 @@ def _valid_fixture() -> Dict:
              "report_label": "Consumerline (Northern Ireland)",
              "nation": "Northern Ireland", "role": "consumer-advice", "on_page": True},
         ],
+        # Required by REQUIRED_CONTACTS: the gate renders its identity-misuse
+        # routing messages from this entry, so the fixture must carry it or the
+        # "minimal canon that MUST validate" would no longer validate.
+        "verified_org_contacts": [
+            {"key": "cifas-protective-registration", "name": "Cifas Protective Registration",
+             "source_url": "https://www.cifas.org.uk/pr", "checked_on": "2026-08-06"},
+        ],
     }
 
 
@@ -604,6 +702,20 @@ def _edit(canon: Dict, key: str, **fields) -> Dict:
     for r in canon["official_routes"]:
         if r.get("key") == key:
             r.update(fields)
+    return canon
+
+
+def _drop_contact(canon: Dict, key: str) -> Dict:
+    canon["verified_org_contacts"] = [
+        c for c in canon.get("verified_org_contacts", []) if c.get("key") != key
+    ]
+    return canon
+
+
+def _edit_contact(canon: Dict, key: str, **fields) -> Dict:
+    for c in canon.get("verified_org_contacts", []):
+        if c.get("key") == key:
+            c.update(fields)
     return canon
 
 
@@ -645,4 +757,22 @@ def negative_fixtures() -> List[tuple]:
         ("one fabricated label naming every nation does NOT satisfy coverage",
          m(lambda c: _edit(_drop(c, "advice-direct-scotland"), "citizens-advice",
                            report_label="Citizens Advice — England, Wales, Scotland and Northern Ireland"))),
+        # Required contacts. The gate renders BLOCK-tier remediation text and a
+        # generator-prompt rule from these, so losing one must fail validation
+        # rather than quietly emptying a routing message.
+        ("a missing required contact is rejected",
+         m(lambda c: _drop_contact(c, "cifas-protective-registration"))),
+        ("an absent verified_org_contacts list is rejected",
+         m(lambda c: {k: v for k, v in c.items() if k != "verified_org_contacts"})),
+        ("a required contact repointed to another host is rejected",
+         m(lambda c: _edit_contact(c, "cifas-protective-registration",
+                                   source_url="https://www.cifas.example.com/pr"))),
+        ("a non-https required-contact source_url is rejected",
+         m(lambda c: _edit_contact(c, "cifas-protective-registration",
+                                   source_url="http://www.cifas.org.uk/pr"))),
+        ("a required contact with no checked_on is rejected",
+         m(lambda c: _edit_contact(c, "cifas-protective-registration", checked_on=""))),
+        ("a duplicate verified_org_contacts key is rejected",
+         m(lambda c: {**c, "verified_org_contacts":
+                      c["verified_org_contacts"] + [dict(c["verified_org_contacts"][0])]})),
     ]

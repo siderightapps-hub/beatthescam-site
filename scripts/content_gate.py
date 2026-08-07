@@ -45,7 +45,7 @@ ACCURACY_BLOCK = """ACCURACY — THIS OVERRIDES EVERY STYLE AND SEO RULE BELOW. 
 - Before finalising, re-read every sentence that names a real company, person, or product alongside a date, number, deal, price, or feature. If you are not confident it is a true public fact, rewrite it as a general statement or delete it.
 - Do NOT state a phone number for any specific company (bank, courier, retailer, utility, etc.). The only phone numbers permitted anywhere are the official reporting and support routes in the verified canon, `content/sources.json` — the same list the gate enforces at publish time. Do not work from a memorised list: if a number is not in that canon, do not print it. For any organisation, tell readers to use the number on their card, bill, or the organisation's official website.
 - UK credit reference agencies: Experian, Equifax and TransUnion are the three MAIN agencies; MoneyHelper also lists Crediva as offering a free statutory report. Never write "the three CRAs", "all three" or "the other two" as if exhaustive. ClearScore is a free app and CallCredit is the obsolete name for TransUnion.
-- The National Fraud Database is a Cifas service. Do not tell readers to add their name to it through Citizens Advice, Action Fraud, or Report Fraud. Report the scam separately to the appropriate reporting service; where identity misuse is a concern, direct readers to Cifas Protective Registration at cifas.org.uk.
+- The National Fraud Database is a Cifas service. Do not tell readers to add their name to it through Citizens Advice, Action Fraud, or Report Fraud. Report the scam separately to the appropriate reporting service; where identity misuse is a concern, direct readers to Cifas Protective Registration at {{CIFAS_PR}}.
 """
 
 # ─── ALLOWLISTS / BLOCKLISTS ─────────────────────────────────────────────────
@@ -104,6 +104,25 @@ _CANON = _load_canon()
 # fact_reverify.py had no canon at all and re-litigated settled routes.
 _JUDGE_CANON_BLOCK = canon_mod.render_verified_facts(_CANON)
 CANON_ROUTE_BLOCK = render_canon_routes(_CANON)
+
+# Cifas Protective Registration, rendered from the canon rather than typed.
+# Until 2026-08-06 the domain was hardcoded in five places here — one prompt
+# rule and three BLOCK/FLAG remediation strings — which is exactly the second
+# hand-maintained copy that content/sources.json exists to prevent. The entry
+# lives in verified_org_contacts (not official_routes) because Protective
+# Registration is a paid product, not a reporting route; canon.REQUIRED_CONTACTS
+# pins it by host so it cannot go missing under these consumers.
+_PR_DISPLAY = canon_mod.protective_registration_display(_CANON)
+_PR_CLAUSE = canon_mod.protective_registration_clause(_CANON)
+
+# Substitute the canon-derived route into the prompt rule. Fail closed: if the
+# token is ever edited out of ACCURACY_BLOCK, the rule would silently ship
+# without a destination and every generated guide would inherit the gap.
+if "{{CIFAS_PR}}" not in ACCURACY_BLOCK:
+    raise SystemExit("ERROR: ACCURACY_BLOCK lost its {{CIFAS_PR}} token — "
+                     "the Cifas routing rule would ship with no destination")
+ACCURACY_BLOCK = ACCURACY_BLOCK.replace("{{CIFAS_PR}}", _PR_DISPLAY)
+
 # Append the rendered routes so the prompt and the canon cannot disagree.
 ACCURACY_BLOCK = ACCURACY_BLOCK.rstrip() + "\n" + CANON_ROUTE_BLOCK + "\n"
 ALLOWED_PHONE_DIGITS = _canon_phone_digits(_CANON)
@@ -601,8 +620,9 @@ def check_cra_misclassification(post: Dict) -> List[Dict]:
 
 
 # The National Fraud Database is a Cifas service; consumers join via a Cifas
-# Protective Registration (cifas.org.uk), NOT "through Citizens Advice" or "via
-# Action Fraud" / "via Report Fraud". Routing it through those bodies is the wrong-routing error. BLOCK.
+# Protective Registration (URL rendered from the canon — see _PR_CLAUSE), NOT
+# "through Citizens Advice" or "via Action Fraud" / "via Report Fraud". Routing
+# it through those bodies is the wrong-routing error. BLOCK.
 # The gap pattern may cross ONE sentence boundary ("…the National Fraud
 # Database. You do this through Citizens Advice.") — two short sentences is
 # exactly how a model phrases the wrong routing, and "[^.]{0,60}" alone stops
@@ -620,9 +640,8 @@ def check_nfd_routing(post: Dict) -> List[Dict]:
             "check": "nfd_routing",
             "severity": SEVERITY_BLOCK,
             "span": re.sub(r"\s+", " ", m.group(0))[:160],
-            "detail": ("routes the National Fraud Database through Citizens Advice / Report Fraud / Action Fraud. "
-                       "It is a Cifas service — direct readers to a Cifas Protective Registration "
-                       "(cifas.org.uk)."),
+            "detail": (f"routes the National Fraud Database through Citizens Advice / Report Fraud / Action Fraud. "
+                       f"It is a Cifas service — direct readers to {_PR_CLAUSE}."),
         }]
     return []
 
@@ -689,8 +708,8 @@ def check_uk_advice_flags(post: Dict) -> List[Dict]:
     if _FRAUD_ALERT_RE.search(text):
         issues.append({"check": "fraud_alert", "severity": SEVERITY_FLAG,
                        "span": re.sub(r"\s+", " ", _FRAUD_ALERT_RE.search(text).group(0))[:140],
-                       "detail": ("uses US-style 'fraud alert on your credit file'. The UK mechanism is a "
-                                  "Cifas Protective Registration (cifas.org.uk); free CRA monitoring is separate.")})
+                       "detail": (f"uses US-style 'fraud alert on your credit file'. The UK mechanism is "
+                                  f"{_PR_CLAUSE}; free CRA monitoring is separate.")})
     if _hmrc_blanket(text):
         issues.append({"check": "hmrc_channel", "severity": SEVERITY_FLAG,
                        "span": re.sub(r"\s+", " ", _HMRC_CHANNEL_RE.search(text).group(0))[:140],
@@ -785,8 +804,8 @@ def check_recurring_accuracy(post: Dict) -> List[Dict]:
          "attributes 7726 to the NCSC. 7726 is the free spam-reporting shortcode run by the mobile "
          "networks; the NCSC runs report@phishing.gov.uk for suspicious EMAILS.")
     flag(_CREDIT_FREEZE_RE, "credit_freeze",
-         "uses the US 'credit freeze' — there is no UK credit freeze. The UK mechanism is a Cifas "
-         "Protective Registration (cifas.org.uk).")
+         f"uses the US 'credit freeze' — there is no UK credit freeze. The UK mechanism is "
+         f"{_PR_CLAUSE}.")
     flag(_THREAT_DISMISS_RE, "threat_dismissal",
          "teaches that the absence of proof means a threat is fake/a bluff. Reassure that most are "
          "bulk bluffs WITHOUT guaranteeing safety; never imply a victim's real threat is fake.")
