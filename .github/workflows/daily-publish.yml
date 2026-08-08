@@ -15,7 +15,7 @@ on:
         description: "Max thin guides to rewrite per run"
         required: false
         default: "10"
-  # schedule:   # PAUSED 2026-07-26 — see note below; uncomment with the cron to resume
+  schedule:
     # Tue/Fri at 05:07 UTC (06:07 BST) — reduced from daily on 2026-07-23
     # to slow the publish cadence. GitHub cron is best-effort and can be
     # delayed by hours. Generation runs through scripts/content_gate.py
@@ -29,14 +29,27 @@ on:
     # curated before it carries advertising. Auto-tweet now lives in
     # tweet-on-publish.yml, which fires only after the PR is merged to main.
     #
-    # ── PAUSED 2026-07-26 (operator instruction) ─────────────────────────────
-    # Automatic content generation is paused until the operator's editorial
-    # audits come back completely clean. Rationale: every auto-published guide
-    # adds fresh surface to fact-check while the 2026-07-25 audit remediation
-    # is still in progress, and unreviewed generation competes with that work.
-    # The workflow itself is unchanged and still runnable on demand via
-    # workflow_dispatch. To resume, uncomment the cron line below.
-    # - cron: '7 5 * * 2,5'
+    # ── PAUSED 2026-07-26, RESUMED 2026-08-08 (operator instruction) ─────────
+    # Was paused because every auto-published guide added fresh surface to
+    # fact-check while the 2026-07-25 audit remediation was in progress.
+    #
+    # Resumed after the 2026-08-08 verification run (workflow_dispatch, PR #95,
+    # closed unmerged) was reviewed and its defects fixed at the generator and
+    # gate rather than in the article: literal **bold** and external markdown
+    # links are now BLOCK-tier, the Cifas "note on your credit file"
+    # mischaracterisation is FLAG-tier, and the generator emits quick_answer,
+    # sources_checked and updated as required fields (#97).
+    #
+    # STILL UNGUARDED — these reach PR review, not the gate: brand-specific
+    # verification advice (e.g. claims about a platform's badge or exact support
+    # username), routing a phishing WEBSITE to the NCSC email service rather
+    # than its scam-website form, and OMITTING the mandatory APP reimbursement
+    # framing from recovery advice. The last is prompt-only by design — flagging
+    # an absent framing would fire on every guide that does not discuss
+    # payments. Review each auto-content PR on those three before merging.
+    #
+    # To pause again: comment out the `schedule:` key and the cron line below.
+    - cron: '7 5 * * 2,5'
 
 permissions:
   contents: write
