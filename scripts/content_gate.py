@@ -751,6 +751,20 @@ _SHORTCODE_NCSC_RE = re.compile(
 # "credit freeze" is a US mechanism with no UK equivalent (use a Cifas Protective
 # Registration). Imprecise rather than dangerous → FLAG.
 _CREDIT_FREEZE_RE = re.compile(r"credit\s+freeze|freez(?:e|ing)\s+your\s+credit", re.I)
+# Cifas Protective Registration places a warning flag in the Cifas National Fraud
+# Database. It does NOT annotate your credit file, and it is not credit
+# insurance. Added 2026-08-08: the 2026-08-08 pipeline draft shipped "register
+# with Cifas Protective Registration ... to add a note to your credit file" and
+# passed the gate clean, because _FRAUD_ALERT_RE requires the literal words
+# "fraud alert" and this phrasing never uses them. Same US-shaped error, one
+# phrasing over. Deliberately does NOT require a Cifas mention in the span: the
+# UK has no consumer mechanism that annotates a credit file, so the claim is
+# wrong on its own. FLAG, matching its _FRAUD_ALERT_RE / _CREDIT_FREEZE_RE
+# siblings.
+_CREDIT_FILE_NOTE_RE = re.compile(
+    r"\b(?:add|adds|adding|place|places|placing|put|puts|putting|register|registering)\b"
+    r"[^.]{0,40}\b(?:note|marker|flag|alert|warning)\b"
+    r"[^.]{0,40}\bcredit\s+(?:file|report|record)\b", re.I)
 # Dangerous threat-dismissal heuristic: teaching a victim that the ABSENCE of
 # proof means a threat is fake can make them ignore a real one. The LLM judge
 # BLOCKs the worst "no footage exists" absolutes; this is a deterministic
@@ -787,6 +801,11 @@ def check_recurring_accuracy(post: Dict) -> List[Dict]:
     flag(_CREDIT_FREEZE_RE, "credit_freeze",
          "uses the US 'credit freeze' — there is no UK credit freeze. The UK mechanism is a Cifas "
          "Protective Registration (cifas.org.uk).")
+    flag(_CREDIT_FILE_NOTE_RE, "credit_file_annotation",
+         "describes adding a note/marker/flag to a credit file. No UK consumer mechanism does that: "
+         "Cifas Protective Registration places a warning flag in the Cifas National Fraud Database "
+         "(cifas.org.uk, £30 for two years), which is separate from your credit file and is not "
+         "credit insurance. Say what Protective Registration actually does.")
     flag(_THREAT_DISMISS_RE, "threat_dismissal",
          "teaches that the absence of proof means a threat is fake/a bluff. Reassure that most are "
          "bulk bluffs WITHOUT guaranteeing safety; never imply a victim's real threat is fake.")
@@ -1060,6 +1079,61 @@ def check_text_wellformed(post: Dict) -> List[Dict]:
                                "span": re.sub(r"\s+", " ", text[max(0, m.start() - 60):m.end() + 30]),
                                "detail": f"{field} is malformed — {why}. Reader-visible text must be "
                                          f"syntactically complete."})
+                break
+    return issues
+
+
+# build.py renders only a narrow Markdown subset — backtick code spans, bare
+# `/guides/slug/` auto-linking, and internal root-relative [text](/path/) links
+# (6c881a5f7, 2026-07-18). Everything else survives into the page as literal
+# characters: `**bold**` shows its asterisks and an EXTERNAL markdown link shows
+# its brackets and URL. Both have shipped live before — 41 bold spots and 6
+# broken bracket links found by hand in the 2026-07-10 sweep, which is why
+# docs/project.md gotcha 34 makes the post-build greps a standing manual step.
+#
+# Added 2026-08-08: the 2026-08-08 pipeline draft emitted eight `**bold**`
+# bullets and the gate passed it clean, because nothing in the gate looked at
+# rendering at all. This moves gotcha 34's greps into the gate, where they run
+# BEFORE publication rather than after. BLOCK, not FLAG: build.py cannot render
+# either form, so there is no context in which it is correct.
+_UNRENDERABLE_MARKUP_RES = (
+    (re.compile(r"\*\*[^*\n]+\*\*"),
+     "literal **bold** markdown — build.py has no bold renderer, so the asterisks reach "
+     "the page. Use plain, emphasis-free prose."),
+    (re.compile(r"\[[^\]\n]+\]\(\s*(?!/)[^)\n]+\)"),
+     "a markdown link whose target is not root-relative — build.py renders only internal "
+     "[text](/path/) links, so the brackets and URL reach the page. External references "
+     "belong in sources_checked."),
+)
+
+
+def _reader_visible_fields(post: Dict):
+    """(label, text) for every field whose characters reach the rendered page."""
+    for f in ("title", "description", "hero", "quick_answer"):
+        yield f, str(post.get(f) or "")
+    yield "intro", str(post.get("intro") or "")
+    for idx, item in enumerate(post.get("sections", []) or []):
+        if isinstance(item, (list, tuple)) and len(item) >= 2:
+            yield f"sections[{idx}] heading", str(item[0])
+            yield f"sections[{idx}] body", str(item[1])
+    for idx, item in enumerate(post.get("faq", []) or []):
+        if isinstance(item, (list, tuple)) and len(item) >= 2:
+            yield f"faq[{idx}] question", str(item[0])
+            yield f"faq[{idx}] answer", str(item[1])
+
+
+def check_unrenderable_markup(post: Dict) -> List[Dict]:
+    """BLOCK markup build.py cannot render, before it reaches a live page."""
+    issues: List[Dict] = []
+    for field, text in _reader_visible_fields(post):
+        if not text:
+            continue
+        for rx, why in _UNRENDERABLE_MARKUP_RES:
+            m = rx.search(text)
+            if m:
+                issues.append({"check": "unrenderable_markup", "severity": SEVERITY_BLOCK,
+                               "span": re.sub(r"\s+", " ", m.group(0))[:140],
+                               "detail": f"{field} contains {why}"})
                 break
     return issues
 
@@ -1419,6 +1493,7 @@ def check_deterministic(post: Dict, *, is_draft: bool = True) -> List[Dict]:
             + check_cra_exhaustive(post)
             + check_canon_guards(post)
             + check_text_wellformed(post)
+            + check_unrenderable_markup(post)
             # Corpus-state assertions a DRAFT may not make about itself. Corpus
             # audits pass is_draft=False, because a live consolidated record
             # legitimately carries the field.

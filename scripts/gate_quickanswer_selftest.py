@@ -801,6 +801,56 @@ def run() -> int:
     check("figure text contributes to the similarity shingles",
           len(body_shingles(fig())) > len(body_shingles(post())))
 
+    # ── unrenderable markup (added 2026-08-08) ───────────────────────────────
+    # The 2026-08-08 pipeline draft emitted eight **bold** bullets and the gate
+    # passed it clean, because nothing in the gate looked at rendering at all.
+    # build.py has no bold renderer, so the asterisks reached the page. BLOCK:
+    # there is no context in which build.py renders these correctly.
+    bold = post(sections=[["A heading", "- **Urgent language and threats.** More body text here."]])
+    check("literal **bold** in a section body is BLOCKED",
+          any(i["severity"] == "block" for i in issues_of(bold, "unrenderable_markup")))
+    check("literal **bold** in an faq answer is BLOCKED",
+          any(i["severity"] == "block"
+              for i in issues_of(post(faq=[["Q?", "An **emphatic** answer."]]), "unrenderable_markup")))
+    check("literal **bold** in quick_answer is BLOCKED",
+          bool(issues_of(post(quick_answer="A **bold** verdict."), "unrenderable_markup")))
+    check("an EXTERNAL markdown link is BLOCKED",
+          bool(issues_of(post(sections=[["H", "See [the FCA](https://www.fca.org.uk/) for more."]]),
+                         "unrenderable_markup")))
+    # build.py DOES render internal root-relative links (6c881a5f7) — flagging
+    # them would forbid the one markdown link form that actually works.
+    check("an INTERNAL root-relative markdown link is allowed",
+          not issues_of(post(sections=[["H", "See [our guide](/guides/some-slug/) for more."]]),
+                        "unrenderable_markup"))
+    check("ordinary prose is not flagged as unrenderable",
+          not issues_of(post(), "unrenderable_markup"))
+    # A lone pair of asterisks around nothing is not emphasis; keep the guard
+    # from firing on maths or footnote markers.
+    check("a bare '**' with no enclosed text is not flagged",
+          not issues_of(post(sections=[["H", "Rated ** out of five in the review."]]),
+                        "unrenderable_markup"))
+
+    # ── credit-file annotation (added 2026-08-08) ────────────────────────────
+    # _FRAUD_ALERT_RE requires the literal words "fraud alert"; the 2026-08-08
+    # draft said "...Protective Registration ... to add a note to your credit
+    # file" and matched nothing. Cifas PR flags the National Fraud Database, not
+    # your credit file.
+    check("'add a note to your credit file' is FLAGGED",
+          bool(issues_of(post(sections=[["H", "Register with Cifas Protective Registration at "
+                                              "cifas.org.uk to add a note to your credit file."]]),
+                         "credit_file_annotation")))
+    check("'place a marker on your credit report' is FLAGGED",
+          bool(issues_of(post(sections=[["H", "They will place a marker on your credit report."]]),
+                         "credit_file_annotation")))
+    check("a correct Cifas description is NOT flagged",
+          not issues_of(post(sections=[["H", "Cifas Protective Registration places a warning flag in "
+                                             "the National Fraud Database for two years."]]),
+                        "credit_file_annotation"))
+    check("ordinary credit-file mentions are not flagged",
+          not issues_of(post(sections=[["H", "Check your credit file with Experian, Equifax, "
+                                             "TransUnion or Crediva."]]),
+                        "credit_file_annotation"))
+
     # NB: a mention placed BEFORE the scope+route block is served, not stranded —
     # that is the approved guide form (instruction, scope, route) and the reader
     # reaches the route by reading on. Only a mention with no route within the
