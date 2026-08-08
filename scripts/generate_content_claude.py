@@ -35,9 +35,45 @@ CANON = canon_mod.load_canon()
 _NCSC_EMAIL = canon_mod.route(CANON, "ncsc-sers")["email"]
 _SMS_SHORTCODE = canon_mod.route(CANON, "report-spam-sms")["sms"]
 
+# Roles whose routes a guide's reporting section actually sends readers to, and
+# which therefore belong in sources_checked.
+_SOURCE_ROLES = ("police-report", "consumer-advice")
+
+
+def canon_sources_checked() -> List[List[str]]:
+    """[[label, url], ...] for sources_checked, rendered from the canon.
+
+    sources_checked is the only post field that produces a real external anchor
+    on the page, so it must never contain a URL the model invented — the model
+    has no internet and cannot verify one. Every entry here comes from
+    content/sources.json and is emitted only when the canon carries BOTH a
+    verified report_label and an info_url, so a canon entry that is incomplete
+    is skipped rather than half-rendered (advice-direct-scotland-consumeradvice
+    has an info_url but no label, and is correctly left out).
+
+    Added 2026-08-08: the generator never wrote this field, so the 2026-08-08
+    draft was the only guide in the corpus without it (187/187 had one).
+    """
+    out: List[List[str]] = []
+    for route in CANON.get("official_routes", []):
+        if route.get("role") not in _SOURCE_ROLES:
+            continue
+        label, url = route.get("report_label"), route.get("info_url")
+        if label and url:
+            out.append([label, url])
+    if not out:                                     # canon shape changed underneath us
+        raise SystemExit("ERROR: canon produced no sources_checked entries")
+    return out
+
 DEFAULT_MODEL   = "claude-haiku-4-5-20251001"
 REQUIRED_FIELDS = ["title", "slug", "category", "excerpt", "description",
-                   "hero", "date", "content", "sections", "faq", "keywords"]
+                   "hero", "date", "content", "sections", "faq", "keywords",
+                   # Added 2026-08-08. The 2026-08-08 pipeline draft shipped with
+                   # no quick_answer and no sources_checked while all 187 live
+                   # guides had both, because neither was ever required here and
+                   # nothing downstream noticed. Listing them makes a regression
+                   # fail loudly at generation instead of silently at review.
+                   "quick_answer", "sources_checked", "updated"]
 
 
 # ─── DATA CLASSES ────────────────────────────────────────────────────────────
@@ -140,11 +176,12 @@ Category: {topic.category}
 Return a single JSON object with exactly these fields:
 
 {{
-  "title": "SEO-optimised title (include UK, include the main keyword)",
+  "title": "SEO-optimised title, MAX 60 CHARACTERS (include UK, include the main keyword). Over 60 renders truncated in search results.",
   "slug": "lowercase-hyphenated-slug",
   "category": "{topic.category}",
   "excerpt": "One sentence (max 160 chars) summarising the guide for search results.",
-  "description": "Two sentences expanding on the excerpt. Practical and specific.",
+  "description": "Two sentences expanding on the excerpt, 130 to 160 CHARACTERS TOTAL. Practical and specific. Under 130 gets auto-padded; over 160 is truncated by search engines.",
+  "quick_answer": "35 to 60 WORDS, verdict first. Answer the searcher's question in the opening clause, then the one or two actions that matter most. This is rendered in a highlighted box and is the passage voice assistants read aloud, so it must stand alone without the rest of the article.",
   "hero": "One punchy lead sentence for the article header.",
   "keywords": ["keyword 1", "keyword 2", "keyword 3", "keyword 4", "keyword 5"],
   "sections": [
@@ -161,7 +198,7 @@ Section requirements — COVER ALL SIX essentials below, but DO NOT reuse a fixe
 
 The six essentials to cover (in whatever order, under whatever natural headings fit best):
 - What the scam is — the specific pattern, explained clearly (120-180 words)
-- The warning signs — 6-8 specific red flags as a bullet list (every item starts with "- "), 1-2 sentences each
+- The warning signs — 6-8 specific red flags as a bullet list (every item starts with "- "), 1-2 sentences each. Write each flag as plain prose: NO **bold**, NO __underline__, NO markdown emphasis of any kind (see the formatting rule below)
 - How it works — from first contact through to the money or data loss (150-200 words)
 - How to verify whether it is genuine — verification steps specific to THIS exact scam. Where relevant, link to a related guide using one of these internal URLs: {related_str}
 - What to do if you have already interacted — recovery actions in order of urgency (120-160 words)
@@ -172,6 +209,8 @@ FAQ requirements — write 3 to 5 FAQs that are the REAL questions someone would
 Rules:
 - Every section body must be 120+ words. Short sections will be rejected.
 - The warning-signs bullet list items must start with "- "
+- FORMATTING: write plain prose with NO markdown emphasis anywhere — no **bold**, no __underline__, no *italics*. The renderer supports none of them, so the asterisks and underscores reach the published page as literal characters. Do not use markdown links to external sites either; the brackets and URL would render literally. Emphasise with sentence structure and word choice instead. This is enforced: a draft containing them is BLOCKED before publication.
+- RECOVERY ADVICE: whenever you tell a reader what to do about money already sent, do not stop at "the bank may be able to recall it". Since 7 October 2024, reimbursement for authorised push payment fraud is MANDATORY under Payment Systems Regulator rules for Faster Payments and CHAPS, subject to a cap, a possible excess, a claim deadline, and exceptions. Tell them to raise a reimbursement claim with their bank, not merely to ask for a recall. Do not state the cap, excess or deadline figures yourself — you cannot verify current values; describe the right and let the reader get the figures from their bank.
 - All content must be specific to {topic.keyword}, not generic scam advice
 - {canon_mod.route_scope_rule(CANON)}
 - slug must be lowercase with hyphens only
@@ -226,6 +265,11 @@ def normalise(data: Dict, topic: Topic, today: str, strict: bool = False) -> Dic
     slug        = slugify(clean(data.get("slug")) or kw)
     excerpt     = clean(data.get("excerpt"))      or f"A practical UK guide to {kw}."
     description = clean(data.get("description"))  or excerpt
+    # Rendered in a highlighted box AND targeted by speakable structured data —
+    # the single most extractable passage on the page (operator rule 2026-07-25).
+    # Falling back to the hero keeps the field populated rather than absent; the
+    # gate inspects it either way.
+    quick_answer = clean(data.get("quick_answer")) or clean(data.get("hero")) or excerpt
     hero        = clean(data.get("hero"))         or description
     category    = clean(data.get("category"))     or cat
     keywords    = [clean(k) for k in (data.get("keywords") or []) if clean(str(k))]
@@ -326,6 +370,13 @@ def normalise(data: Dict, topic: Topic, today: str, strict: bool = False) -> Dic
     content = "\n\n".join(f"## {t}\n\n{b}" for t, b in sections)
 
     post = {
+        "quick_answer":    quick_answer,
+        # Canon-derived, never model-authored: the model has no internet, so any
+        # URL it produced would be a guess. canon_sources_checked() returns only
+        # routes that carry a verified source_label AND info_url in
+        # content/sources.json, so every anchor here is one the canon vouches for.
+        "sources_checked": canon_sources_checked(),
+        "updated":         today,
         "title":       title,
         "slug":        slug,
         "category":    category,

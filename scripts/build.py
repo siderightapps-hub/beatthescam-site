@@ -3544,10 +3544,21 @@ _INTERNAL_LINK_EXCLUDED_RE = re.compile(
 )
 
 # Phrases too generic to auto-link — would over-fire across the site.
+#
+# build_internal_link_map promotes any 2+-word keyword owned by exactly ONE
+# guide into a site-wide link phrase. That rule assumes a uniquely-held keyword
+# identifies its owner, which fails for generic phrases: one guide claims the
+# phrase and then captures every OTHER article that happens to use it.
+# "verification code scam" was added 2026-08-08 after the 2026-08-08 pipeline
+# draft — an article about Snapchat — had the words "verification code scam" in
+# its FAQ auto-linked to the unrelated Google Voice guide, purely because that
+# guide lists the phrase in its keywords (content/posts.json). No live page
+# carried the bad link, so this is preventive.
 _INTERNAL_LINK_STOPWORDS = {
     "uk bank", "text message", "text messages", "phone scam",
     "email scam", "text scam", "scam email", "scam text",
     "bank scam", "uk", "scam", "phone", "text",
+    "verification code scam",
 }
 
 # Ambiguous phrases are not auto-linked unless editorially assigned here. This

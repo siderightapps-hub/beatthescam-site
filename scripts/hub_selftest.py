@@ -469,6 +469,28 @@ def run() -> int:
         check(f"{slug}: alt text is not just the title repeated",
               (f.get("alt") or "").strip() != (f.get("title") or "").strip())
 
+    # ── internal-link map: generic phrases must not be auto-linked ───────────
+    # build_internal_link_map promotes any 2+-word keyword owned by exactly ONE
+    # guide into a site-wide link phrase. For a GENERIC phrase that rule lets one
+    # guide capture every other article using the words. Added 2026-08-08 after
+    # the 2026-08-08 pipeline draft — an article about Snapchat — had
+    # "verification code scam" in its FAQ auto-linked to the unrelated Google
+    # Voice guide, purely because that guide lists the phrase in its keywords.
+    posts_all = json.loads(Path("content/posts.json").read_text(encoding="utf-8"))
+    live_posts = [p for p in posts_all if not p.get("consolidated_into")]
+    lmap = B.build_internal_link_map(live_posts)
+    check("the generic phrase 'verification code scam' is not auto-linked",
+          "verification code scam" not in lmap,
+          f"maps to {lmap.get('verification code scam')!r}")
+    # The stop-list is only load-bearing if it is actually consulted; a rename or
+    # refactor that drops the filter would otherwise pass silently.
+    check("every stop-listed phrase is absent from the link map",
+          not [p for p in B._INTERNAL_LINK_STOPWORDS if p in lmap],
+          f"leaked: {[p for p in B._INTERNAL_LINK_STOPWORDS if p in lmap]}")
+    # Guard the fix's blast radius: the map must still do its job.
+    check("the link map is still populated after stop-listing",
+          len(lmap) > 1000, f"only {len(lmap)} phrases")
+
     print()
     if FAILURES:
         print(f"{len(FAILURES)} check(s) FAILED: {', '.join(FAILURES)}")
