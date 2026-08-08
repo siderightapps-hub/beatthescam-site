@@ -851,6 +851,42 @@ def run() -> int:
                                              "TransUnion or Crediva."]]),
                         "credit_file_annotation"))
 
+    # ── NCSC route scope (added 2026-08-08) ──────────────────────────────────
+    # The NCSC runs three routes: EMAIL -> the SERS mailbox, WEBSITE -> the
+    # separate scam-website form, TEXT -> 7726 (the mobile networks, already
+    # guarded by _SHORTCODE_NCSC_RE). The 2026-08-08 draft sent a phishing LINK
+    # to the SERS mailbox; the NCSC's own scam-website page never mentions it.
+    def ncsc(body):
+        return issues_of(post(sections=[["H", body]]), "ncsc_route_scope")
+
+    check("the real 2026-08-08 sentence is FLAGGED",
+          bool(ncsc("If the scam involved a phishing link (a fake login page), report it to the "
+                    "National Cyber Security Centre (NCSC) Suspicious Email Reporting Service at "
+                    "report@phishing.gov.uk.")),
+          "the service's own name contains 'Email', which must not mask the misroute")
+    check("a website routed to the SERS mailbox is FLAGGED",
+          bool(ncsc("Report the fake website to report@phishing.gov.uk.")))
+    check("a URL routed to the SERS mailbox is FLAGGED",
+          bool(ncsc("Copy the URL and send it to report@phishing.gov.uk.")))
+    # The mailbox is correct for emails and appears on 113 live guides — a guard
+    # that fires on those would be worse than no guard at all.
+    check("forwarding EMAILS to the mailbox is NOT flagged",
+          not ncsc("Forward suspicious emails to report@phishing.gov.uk and then delete them."))
+    check("a link INSIDE an email is NOT flagged",
+          not ncsc("If you clicked a link in an email, forward that email to report@phishing.gov.uk."))
+    check("naming the mailbox with no subject noun is NOT flagged",
+          not ncsc("The NCSC runs report@phishing.gov.uk for phishing reports."))
+    check("a website named in a PRIOR sentence is NOT flagged",
+          not ncsc("Never enter details on a copycat website. Forward the suspicious email to "
+                   "report@phishing.gov.uk."),
+          "the clause window must stop at the sentence boundary")
+    # The mailbox must come from the canon, not a literal in the gate.
+    from content_gate import _sers_email, _CANON
+    check("the SERS mailbox is read from the canon",
+          _sers_email() == "report@phishing.gov.uk", f"got {_sers_email()!r}")
+    check("the canon carries a distinct website-reporting route",
+          any(r.get("key") == "ncsc-scam-website" for r in _CANON.get("official_routes", [])))
+
     # NB: a mention placed BEFORE the scope+route block is served, not stranded —
     # that is the approved guide form (instruction, scope, route) and the reader
     # reaches the route by reading on. Only a mention with no route within the
