@@ -491,6 +491,35 @@ def run() -> int:
     check("the link map is still populated after stop-listing",
           len(lmap) > 1000, f"only {len(lmap)} phrases")
 
+    # ── generic-phrase ownership, reviewed 2026-08-08 ────────────────────────
+    # A phrase naming a whole scam FAMILY must not be owned by one narrow member
+    # of that family. Where the corpus HAS a general guide the phrase is
+    # editorially assigned; where it does not, the phrase is stop-listed. The
+    # blanket stop-list assertion above already covers the four stop-listed
+    # phrases, so this pins the assignment and, just as importantly, the seven
+    # phrases that were reviewed and found CORRECT — so a later over-zealous
+    # stop-list cannot silently delete working links.
+    check("'job scam uk' is owned by the general job guide, not advance-fee",
+          lmap.get("job scam uk") == "/guides/job-offer-scam-uk/",
+          f"maps to {lmap.get('job scam uk')!r}")
+    for phrase, expected in [
+        ("fraud recovery scam", "/guides/refund-recovery-scam-warning-signs/"),
+        ("recovery scam uk", "/guides/refund-recovery-scam-warning-signs/"),
+        ("recovery scam warning signs", "/guides/refund-recovery-scam-warning-signs/"),
+        ("report recovery scam uk", "/guides/refund-recovery-scam-warning-signs/"),
+        ("report job scam uk", "/guides/job-offer-scam-uk/"),
+        ("romance investment scam uk", "/guides/pig-butchering-scam-uk/"),
+        ("website scam checker", "/guides/is-this-website-a-scam/"),
+    ]:
+        check(f"{phrase!r} still auto-links to its correct owner",
+              lmap.get(phrase) == expected, f"maps to {lmap.get(phrase)!r}")
+    # Every editorially-assigned owner must be a live slug. build_internal_link_map
+    # raises on a dead owner, so reaching here at all proves it — but assert the
+    # map actually contains each assignment, which a typo'd key would not.
+    check("every _CANONICAL_KEYWORD_OWNERS entry reached the link map",
+          all(lmap.get(p) == f"/guides/{s}/" for p, s in B._CANONICAL_KEYWORD_OWNERS.items()),
+          f"{[p for p, s in B._CANONICAL_KEYWORD_OWNERS.items() if lmap.get(p) != f'/guides/{s}/']}")
+
     print()
     if FAILURES:
         print(f"{len(FAILURES)} check(s) FAILED: {', '.join(FAILURES)}")
