@@ -1,5 +1,12 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Beat the Scam</title><link>https://beatthescam.com</link><description>Scam alerts, plain-English checks, and practical guides to help people verify suspicious emails, texts, websites, calls, and offers.</description><lastBuildDate>Thu, 06 Aug 2026 00:00:00 +0000</lastBuildDate><atom:link href="https://beatthescam.com/rss.xml" rel="self" type="application/rss+xml" />
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Beat the Scam</title><link>https://beatthescam.com</link><description>Scam alerts, plain-English checks, and practical guides to help people verify suspicious emails, texts, websites, calls, and offers.</description><lastBuildDate>Sat, 08 Aug 2026 00:00:00 +0000</lastBuildDate><atom:link href="https://beatthescam.com/rss.xml" rel="self" type="application/rss+xml" />
+        <item>
+          <title>Snapchat Scam UK: How to Spot Fake Messages and Protect Your Account</title>
+          <link>https://beatthescam.com/guides/snapchat-scam-uk/</link>
+          <guid isPermaLink="true">https://beatthescam.com/guides/snapchat-scam-uk/</guid>
+          <pubDate>Sat, 08 Aug 2026 00:00:00 +0000</pubDate>
+          <description>Snapchat scams in the UK range from fake support messages claiming your account is locked, to romance and investment schemes run through the app itself. This guide explains the most common tactics, how to verify genuine Snapchat contact, and what to do if you&#x27;ve already been targeted.</description>
+        </item>
         <item>
           <title>YouTube Crypto Scam UK: How to Spot Fake Investment Channels</title>
           <link>https://beatthescam.com/guides/youtube-crypto-scam-uk/</link>
@@ -202,11 +209,4 @@
           <guid isPermaLink="true">https://beatthescam.com/guides/chargeback-scam-uk/</guid>
           <pubDate>Sun, 07 Jun 2026 00:00:00 +0000</pubDate>
           <description>Chargeback scams let a buyer keep the goods and claim their money back, leaving the seller out of pocket. How chargeback fraud works and how to avoid it.</description>
-        </item>
-        <item>
-          <title>Gumtree Scams UK: How to Spot and Avoid Fake Listings and Buyers</title>
-          <link>https://beatthescam.com/guides/gumtree-scam-uk-guide/</link>
-          <guid isPermaLink="true">https://beatthescam.com/guides/gumtree-scam-uk-guide/</guid>
-          <pubDate>Sun, 07 Jun 2026 00:00:00 +0000</pubDate>
-          <description>Gumtree is legitimate, but scammers use it. Here are the most common Gumtree scams targeting UK buyers and sellers, the warning signs, and how to stay safe.</description>
         </item></channel></rss>
