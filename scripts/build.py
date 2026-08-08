@@ -3559,6 +3559,26 @@ _INTERNAL_LINK_STOPWORDS = {
     "email scam", "text scam", "scam email", "scam text",
     "bank scam", "uk", "scam", "phone", "text",
     "verification code scam",
+    # Reviewed 2026-08-08, second pass. Each of these named a whole scam FAMILY
+    # while being owned by one narrow member of it, so any article using the
+    # words was captured by that member. Unlike "job scam uk" they get no
+    # canonical owner, because the corpus has no general guide for the family:
+    #   "refund scam"                   spans overpayment-scam-uk,
+    #                                   refund-recovery-scam-warning-signs and
+    #                                   hmrc-tax-refund-text-scam-uk; it was
+    #                                   owned by overpayment-scam-uk.
+    #   "report romance scam uk"        five romance guides, all specific
+    #   "romance scam warning signs uk" (Bumble, Hinge, Facebook Dating,
+    #                                   military, pig-butchering); both were
+    #                                   owned by military-romance-scam-uk.
+    #   "investment scam warning"       six investment guides, all specific;
+    #                                   owned by ponzi-scheme-uk-warning.
+    # If a general guide is written for any of these families later, move the
+    # phrase into _CANONICAL_KEYWORD_OWNERS rather than deleting it from here.
+    "refund scam",
+    "report romance scam uk",
+    "romance scam warning signs uk",
+    "investment scam warning",
 }
 
 # Ambiguous phrases are not auto-linked unless editorially assigned here. This
@@ -3566,6 +3586,13 @@ _INTERNAL_LINK_STOPWORDS = {
 # receives every link for a shared keyword.
 _CANONICAL_KEYWORD_OWNERS = {
     "remote access scam uk": "remote-access-scam-uk",
+    # "job scam uk" was owned by advance-fee-scam-uk purely because that guide
+    # happened to be the only one listing it as a keyword — a different scam
+    # type entirely. Six job-scam guides exist; job-offer-scam-uk is the general
+    # one (the rest are platform-specific: LinkedIn, Indeed, recruitment agency,
+    # work-from-home, data-entry), and it already owns "report job scam uk", so
+    # assigning it here keeps the pair consistent. Reviewed 2026-08-08.
+    "job scam uk": "job-offer-scam-uk",
 }
 
 # Names of EXTERNAL official bodies, registers, tools and services must never
