@@ -70,7 +70,7 @@ def main() -> int:
         if not args.no_write:
             mdir.mkdir(parents=True, exist_ok=True)
             mp = mdir / f"{p.get('slug', 'unknown')}.json"
-            mp.write_text(json.dumps(man, indent=2, ensure_ascii=False), encoding="utf-8")
+            mp.write_text(json.dumps(man, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
             written += 1
         for c in man["claims"]:
             by_type[c["type"]] += 1

@@ -1575,6 +1575,7 @@ def quarantine_post(post: Dict, result: GateResult, today: str,
     path = d / f"{today}-{post.get('slug', 'unknown')}.json"
     with open(path, "w", encoding="utf-8") as f:
         json.dump(rec, f, indent=2, ensure_ascii=False)
+        f.write("\n")
     return str(path)
 
 
@@ -1616,4 +1617,5 @@ def write_manifest(post: Dict, result: GateResult, model: Optional[str] = None,
     path = d / f"{post.get('slug', 'unknown')}.json"
     with open(path, "w", encoding="utf-8") as f:
         json.dump(build_manifest(post, result, model, today), f, indent=2, ensure_ascii=False)
+        f.write("\n")
     return str(path)
