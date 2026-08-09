@@ -73,6 +73,10 @@ SUBTLE = {
 
 # (3) Clean — directional language, no specific invented claims, only national
 #     numbers, points readers to official sources. Must PASS (no over-blocking).
+#     Says "Report Fraud", not "Action Fraud": the service was rebranded in Dec
+#     2025 and the judge correctly treats the retired name as an identity error.
+#     This fixture still said "Action Fraud", which is a second reason it had
+#     been failing the no-over-blocking assertion on main — found 2026-08-08.
 CLEAN = {
     "slug": "selftest-clean", "title": "Delivery Text Scam UK",
     "hero": "x", "description": "y",
@@ -82,9 +86,15 @@ CLEAN = {
          "website that harvests your card details. Reports of delivery-themed smishing have "
          "grown rapidly across the UK. The message creates urgency with a small 'redelivery "
          "fee' so you act before checking. Never pay or enter card details via a link in a text."],
+        # The Scottish route is REQUIRED here, not decoration: naming Report Fraud
+        # as if it covered the whole UK is block-tier (check_scotland_routing,
+        # added by the 2026-07-30 accuracy release). This fixture predated that
+        # rule and was silently failing the "no over-blocking" assertion on main
+        # ever since — found 2026-08-08.
         ["What to do if you have already interacted",
          "Contact your bank straight away using the number on the back of your card. Report "
-         "the scam to Action Fraud on 0300 123 2040 and forward the text to 7726. If you "
+         "the scam to Report Fraud on 0300 123 2040 if you are in England, Wales or Northern "
+         "Ireland, or to Police Scotland on 101 in Scotland. Forward the text to 7726. If you "
          "shared card details, ask your bank to block the card and watch for transactions."],
     ],
     "faq": [["Is every delivery text a scam?",
@@ -124,15 +134,75 @@ FLAGS = {
         ["What is this scam?",
          "Under the Consumer Rights Act 2015 you are legally entitled to a refund. "
          "The FCA banned this firm from trading in 2024 after an investigation."],
+        # Scottish route present so the FLAG-tier classes under test are isolated
+        # from the block-tier scotland_routing rule (see the CLEAN note above).
         ["How to report",
          "Report it by emailing abuse@madeup-reports.gov.uk, or to Action Fraud "
-         "on 0300 123 2040."],
+         "on 0300 123 2040 in England, Wales and Northern Ireland, or to Police "
+         "Scotland on 101 in Scotland."],
         ["Over-broad channel claims",
          "Banks never send links in text messages. Forward texts to 7726 because it works on "
          "all UK mobile networks. Forward RCS and iMessage chats to 7726 too. UK banks must "
          "reimburse most APP fraud victims within five days."],
     ],
     "faq": [],
+}
+
+# (6) JUDGE-ONLY classes from the 2026-08-08 operator review. Neither is
+#     reachable by a regex: PLATFORM_VERIFY asserts how a third party's badge and
+#     support handle work (product behaviour that changes without notice), and
+#     APP_OMISSION is an OMISSION — a pattern detecting it by absence would fire
+#     on every guide that legitimately says nothing about payments.
+#
+#     The judge already RAN on the draft these came from — the manifest records
+#     claude-haiku-4-5-20251001 — and recorded zero claims, so this fixture is
+#     the regression test for instructions added after a check executed and
+#     missed. Deliberately carries no deterministic triggers: only the national
+#     Report Fraud number and canon routes, so anything caught here is the judge.
+#
+#     Expected FLAG, not BLOCK. Both are editorial accuracy problems for a human
+#     reviewer, and the judge's verdicts are known to vary run to run — blocking
+#     the pipeline on a model's opinion about these would be the wrong trade.
+PLATFORM_VERIFY = {
+    "slug": "selftest-platform-verify", "title": "Social Platform Support Scam UK",
+    "hero": "x", "description": "y",
+    "sections": [
+        ["How to check whether support is genuine",
+         "The official support account is verified with a blue badge and has the exact username "
+         "'support'. Any variation — with hyphens, underscores, or numbers — is a scam. If you "
+         "receive a message claiming to be from support, compare the username character by "
+         "character against that one and trust the badge if it matches."],
+        ["Where to report it",
+         "Report the scam to Report Fraud on 0300 123 2040 in England, Wales and Northern "
+         "Ireland, or to Police Scotland on 101 in Scotland."],
+    ],
+    "faq": [["Can I trust the badge?",
+             "Yes — a badge on the support account proves the account is authentic."]],
+}
+
+# (7) APP_OMISSION — finding 4 on its own, deliberately free of the absolute
+#     language that makes PLATFORM_VERIFY block. Recovery advice that stops at
+#     "may be able to recall" and never names the mandatory reimbursement right.
+#     Everything else is correct: nation-scoped routes, no invented figures. So
+#     the ONLY thing to object to is the omission, and it must be a FLAG — the
+#     guide is publishable-with-review, not fabricated.
+APP_OMISSION = {
+    "slug": "selftest-app-omission", "title": "Bank Transfer Scam UK",
+    "hero": "x", "description": "y",
+    "sections": [
+        ["How the scam works",
+         "Criminals persuade you to move money to an account they control, usually by posing as "
+         "someone you trust and creating time pressure. The transfer looks ordinary to your bank "
+         "because you authorised it yourself, which is what makes this pattern so effective."],
+        ["What to do if you have already sent money",
+         "Contact your bank immediately using the number on the back of your card. They may be "
+         "able to recall the payment if it has not yet been withdrawn from the receiving account. "
+         "Report the scam to Report Fraud on 0300 123 2040 in England, Wales and Northern "
+         "Ireland, or to Police Scotland on 101 in Scotland."],
+    ],
+    "faq": [["Will I get my money back?",
+             "Ask your bank as soon as you realise. The sooner you report it, the more likely the "
+             "funds are still recoverable from the receiving account."]],
 }
 
 EXPECT = [
@@ -156,14 +226,30 @@ EXPECT = [
      lambda r: any(i["check"] == "7726_scope" for i in r.issues)),
     ("7726 message-format scope is RECORDED as a flag",  "FLAGS",
      lambda r: any(i["check"] == "7726_format_scope" for i in r.issues)),
-    ("APP reimbursement scope is RECORDED as a flag",    "FLAGS",
+    # NB: app_reimbursement_scope is BLOCK-tier by design (an over-broad
+    # reimbursement promise is dangerous, not merely imprecise). It is asserted
+    # present, and excluded from the flag-tier regression guard below.
+    ("APP reimbursement scope is RECORDED",              "FLAGS",
      lambda r: any(i["check"] == "app_reimbursement_scope" for i in r.issues)),
     # Regression guard: no DETERMINISTIC flag-tier class may ever emit a block —
     # a refactor promoting legislation/dated_event/source to block-tier would
     # otherwise still show a green self-test. The judge is excluded because it
     # may legitimately block this fixture's invented dated event.
     ("no deterministic flag class BLOCKS publication",  "FLAGS",
-     lambda r: not any(i["severity"] == "block" and i["check"] != "judge" for i in r.issues)),
+     lambda r: not any(i["severity"] == "block"
+                       and i["check"] not in ("judge", "app_reimbursement_scope")
+                       for i in r.issues)),
+    # Judge-only classes (2026-08-08 operator review findings 1 and 4).
+    ("the JUDGE objects to platform-verification claims",
+     "PLATFORM_VERIFY", lambda r: any(i["check"] == "judge" for i in r.issues)),
+    ("...and nothing DETERMINISTIC fires on it (proving it was the judge)",
+     "PLATFORM_VERIFY", lambda r: not any(i["check"] != "judge" for i in r.issues)),
+    ("the JUDGE objects to recovery advice omitting the APP right",
+     "APP_OMISSION", lambda r: any(i["check"] == "judge" for i in r.issues)),
+    ("...and nothing DETERMINISTIC fires on it (proving it was the judge)",
+     "APP_OMISSION", lambda r: not any(i["check"] != "judge" for i in r.issues)),
+    ("...as a FLAG, not a BLOCK — an omission is reviewable, not fabricated",
+     "APP_OMISSION", lambda r: r.passed),
 ]
 
 
@@ -184,10 +270,12 @@ def main() -> int:
     print(f"Running gate self-test with model: {args.model}\n")
     results = {}
     for name, post in [("FABRICATED", FABRICATED), ("SUBTLE", SUBTLE),
-                       ("ABSOLUTE", ABSOLUTE), ("CLEAN", CLEAN), ("FLAGS", FLAGS)]:
+                       ("ABSOLUTE", ABSOLUTE), ("CLEAN", CLEAN), ("FLAGS", FLAGS),
+                       ("PLATFORM_VERIFY", PLATFORM_VERIFY),
+                       ("APP_OMISSION", APP_OMISSION)]:
         results[name] = run_gate(post, client=client, model=args.model, use_llm=True)
 
-    for name in ("FABRICATED", "SUBTLE", "ABSOLUTE", "CLEAN", "FLAGS"):
+    for name in ("FABRICATED", "SUBTLE", "ABSOLUTE", "CLEAN", "FLAGS", "PLATFORM_VERIFY", "APP_OMISSION"):
         r = results[name]
         print(f"── {name}: {r.summary()}")
         for i in r.issues:

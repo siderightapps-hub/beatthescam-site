@@ -887,6 +887,41 @@ def run() -> int:
     check("the canon carries a distinct website-reporting route",
           any(r.get("key") == "ncsc-scam-website" for r in _CANON.get("official_routes", [])))
 
+    # ── judge instructions for the two non-deterministic findings ────────────
+    # Operator findings 1 and 4 cannot be reached by a regex: one is a claim
+    # about a third party's product behaviour, the other is an OMISSION that a
+    # pattern would have to detect by absence, firing on every guide that
+    # legitimately says nothing about payments. Both are therefore judge-side.
+    # The judge DID run on the 2026-08-08 draft (manifest records
+    # claude-haiku-4-5-20251001) and recorded zero claims, so these instructions
+    # are the fix for a check that executed and missed, not a new check.
+    # Model behaviour can't be asserted offline; what CAN be asserted is that the
+    # instructions survive refactoring, which is what silently lost coverage
+    # before (quick_answer went unextracted for two days in 2026-07).
+    from content_gate import JUDGE_SYSTEM
+    for name, needle in [
+        ("platform-verification claims are in the judge prompt", "badge / tick / checkmark proves identity"),
+        ("the 'any variation is a scam' form is named", '"any variation is a scam"'),
+        ("the APP omission case is in the judge prompt", "mandatory under Payment Systems Regulator rules"),
+        ("the omission check is scoped to money the reader sent", "THEMSELVES AUTHORISED AND SENT"),
+        # Scoping added after a live run flagged a CARD-DETAILS guide, where APP
+        # reimbursement is the wrong protection entirely.
+        ("card-detail and chargeback cases are excluded", "chargeback or Section"),
+        # The omission section broadened the judge's whole remit on its first
+        # version — it began raising "should also clarify" nitpicks on a clean
+        # guide and failing it. This pins the containment wording.
+        ("the omission check cannot spread to other missing content", 'could begin with the words "the guide should also"'),
+        ("a no-high-severity verdict must be a pass", "A guide with no high-severity issue is a passing guide"),
+        ("the recall-vs-reimbursement distinction is spelled out", "a recall is a courtesy"),
+        ("the judge is told NOT to state cap/excess figures", "cannot verify"),
+        ("both classes are pinned to medium severity", 'use "medium", never "high"'),
+    ]:
+        check(name, needle in JUDGE_SYSTEM, f"missing from JUDGE_SYSTEM: {needle!r}")
+    # The canon block must still reach the judge — a model-backed check with no
+    # canon re-litigates settled routes, which cost two prior debugging sessions.
+    check("the judge prompt still carries the verified-route canon block",
+          "VERIFIED ROUTES" in JUDGE_SYSTEM and "reportfraud.police.uk" in JUDGE_SYSTEM.lower())
+
     # NB: a mention placed BEFORE the scope+route block is served, not stranded —
     # that is the approved guide form (instruction, scope, route) and the reader
     # reaches the route by reading on. Only a mention with no route within the
