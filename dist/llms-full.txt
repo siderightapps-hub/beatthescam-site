@@ -6,7 +6,7 @@
 ## Binance Impersonation Scam UK: Spot a Fake Message
 
 URL: https://beatthescam.com/guides/binance-impersonation-scam-uk/
-Category: Crypto Scams · Updated: 2026-07-30
+Category: Crypto Scams · Updated: 2026-08-09
 
 Fake Binance emails and texts claim your account is suspended, to steal your login. Binance's own Verify tool confirms if a message is genuine.
 
@@ -43,7 +43,7 @@ Report it to Report Fraud at `reportfraud.police.uk` or 0300 123 2040 if you're 
 
 **Is Binance itself safe, or should I stop using it?**
 
-Binance is a real cryptocurrency exchange, but crypto is high risk and that does not make any message using Binance branding genuine. In the UK, Binance is not FCA-authorised, and Binance announced in October 2023 that it had stopped accepting new UK users, so check the FCA's consumer warnings before relying on it. Access your account only by typing binance.com directly or via the official app, never through a link in an email, text, or DM, and keep two-factor authentication switched on.
+Binance is a real cryptocurrency exchange, but crypto is high risk and that does not make any message using Binance branding genuine. In the UK, the FCA's consumer warning, last updated in June 2023, says Binance Markets Limited is not permitted to undertake any regulated activity here and no other Binance Group entity holds any form of UK authorisation, registration or licence to conduct regulated activity. Check the FCA warning before relying on the platform. Access your account only by typing binance.com directly or via the official app, never through a link in an email, text, or DM, and keep two-factor authentication switched on.
 
 **How can I check whether a Binance email is genuine?**
 
@@ -7084,7 +7084,7 @@ Tell Virgin Media through the number on your bill or `virginmedia.com`. If you l
 ## Bumble Romance Scams UK: Spot a Fake Profile or Con
 
 URL: https://beatthescam.com/guides/bumble-romance-scam-uk/
-Category: Romance & Dating Scams · Updated: 2026-07-30
+Category: Romance & Dating Scams · Updated: 2026-08-09
 
 A Bumble match who moves fast, avoids video calls, then needs money or pushes 'crypto'? How to spot a romance scam and protect yourself — without the shame.
 
@@ -7153,7 +7153,7 @@ Speed matters more than anything else now, and self-blame is the thing that slow
 
 - Telephone your bank immediately. Where a transfer left a UK account through Faster Payments or CHAPS on or after 7 October 2024, reimbursement may be available under the current rules: the maximum is £85,000, firms may apply an excess of up to £100, and a claim must be raised within 13 months. Each claim turns on its own facts, so no outcome is promised.
 - Cryptocurrency, vouchers and gift cards are far harder to unwind, which makes saving wallet addresses, transaction IDs and voucher serial numbers urgent rather than optional.
-- Ask Cifas about Protective Registration if identity documents or personal details were shared.
+- If identity documents or personal details were shared and that exposure puts you at heightened risk of identity fraud, consider Cifas Protective Registration — applications are online at `cifas.org.uk/pr`. It costs £30 for two years and places a warning flag against your name and other personal details in the National Fraud Database, prompting organisations that use Cifas data to make extra identity checks when those details are used in applications. It does not affect your credit score, but not every application will be checked.
 - File with Report Fraud (`reportfraud.police.uk`, 0300 123 2040) if you are in England, Wales or Northern Ireland. In Scotland, report it to Police Scotland on 101.
 - Tell one person you trust today. Isolation is part of the method, and it also makes every practical step harder to face alone.
 
@@ -7511,7 +7511,7 @@ Report it to Report Fraud at `reportfraud.police.uk` or 0300 123 2040 (Police Sc
 ## Tinder Scams UK: How to Spot a Fake Profile or Romance Con
 
 URL: https://beatthescam.com/guides/tinder-scam-uk/
-Category: Romance & Dating Scams · Updated: 2026-08-01
+Category: Romance & Dating Scams · Updated: 2026-08-09
 
 A Tinder match who moves fast, won't video-call, then needs money or pushes 'crypto'? How to spot a romance scam and protect yourself — without the shame.
 
@@ -7582,7 +7582,7 @@ Work in this order.
 
 - Ring your bank today and use the phrase authorised push payment fraud. Money sent by Faster Payments or CHAPS from a UK account on or after 7 October 2024 may be reimbursable under the rules currently in force, to a maximum of £85,000, with a possible excess of up to £100 and a 13-month window to claim. Every case is assessed individually, so treat this as a claim worth making rather than a refund to expect.
 - Card payments run on a separate track: ask your issuer about disputing the transaction.
-- Ask Cifas about Protective Registration if you handed over identity documents or personal details.
+- If you handed over identity documents or personal details and are at heightened risk of identity fraud, consider Cifas Protective Registration — apply online at `cifas.org.uk/pr`. It costs £30 for two years and places a warning flag against your name and other personal details in the National Fraud Database, prompting organisations that use Cifas data to make extra identity checks when those details are used in applications. It does not affect your credit score, but not every application will be checked.
 - Report it to Report Fraud at `reportfraud.police.uk` or on 0300 123 2040 in England, Wales and Northern Ireland. In Scotland, call Police Scotland on 101.
 
 Our [scam recovery checklist](/recovery/) sets out the full sequence, including what to preserve as evidence and who to tell in what order.

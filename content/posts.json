@@ -1837,7 +1837,7 @@
       ],
       [
         "If you have already paid",
-        "Being targeted says nothing bad about your judgement. These are staffed, scripted operations run at industrial scale, working through many people at once with material that has been tested on other targets before it reached you.\n\nWork in this order.\n\n- Ring your bank today and use the phrase authorised push payment fraud. Money sent by Faster Payments or CHAPS from a UK account on or after 7 October 2024 may be reimbursable under the rules currently in force, to a maximum of £85,000, with a possible excess of up to £100 and a 13-month window to claim. Every case is assessed individually, so treat this as a claim worth making rather than a refund to expect.\n- Card payments run on a separate track: ask your issuer about disputing the transaction.\n- Ask Cifas about Protective Registration if you handed over identity documents or personal details.\n- Report it to Report Fraud at `reportfraud.police.uk` or on 0300 123 2040 in England, Wales and Northern Ireland. In Scotland, call Police Scotland on 101.\n\nOur [scam recovery checklist](/recovery/) sets out the full sequence, including what to preserve as evidence and who to tell in what order."
+        "Being targeted says nothing bad about your judgement. These are staffed, scripted operations run at industrial scale, working through many people at once with material that has been tested on other targets before it reached you.\n\nWork in this order.\n\n- Ring your bank today and use the phrase authorised push payment fraud. Money sent by Faster Payments or CHAPS from a UK account on or after 7 October 2024 may be reimbursable under the rules currently in force, to a maximum of £85,000, with a possible excess of up to £100 and a 13-month window to claim. Every case is assessed individually, so treat this as a claim worth making rather than a refund to expect.\n- Card payments run on a separate track: ask your issuer about disputing the transaction.\n- If you handed over identity documents or personal details and are at heightened risk of identity fraud, consider Cifas Protective Registration — apply online at `cifas.org.uk/pr`. It costs £30 for two years and places a warning flag against your name and other personal details in the National Fraud Database, prompting organisations that use Cifas data to make extra identity checks when those details are used in applications. It does not affect your credit score, but not every application will be checked.\n- Report it to Report Fraud at `reportfraud.police.uk` or on 0300 123 2040 in England, Wales and Northern Ireland. In Scotland, call Police Scotland on 101.\n\nOur [scam recovery checklist](/recovery/) sets out the full sequence, including what to preserve as evidence and who to tell in what order."
       ]
     ],
     "faq": [
@@ -1872,7 +1872,7 @@
       "romance scam UK",
       "report Tinder scam"
     ],
-    "updated": "2026-08-01",
+    "updated": "2026-08-09",
     "sources_checked": [
       [
         "Tinder press room — Face Check launches in the UK (26 March 2026)",
@@ -1917,6 +1917,10 @@
       [
         "Payment Systems Regulator — APP fraud reimbursement protections",
         "https://www.psr.org.uk/information-for-consumers/app-fraud-reimbursement-protections/"
+      ],
+      [
+        "Cifas — Protective Registration",
+        "https://www.cifas.org.uk/pr"
       ]
     ],
     "quick_answer": "Tinder requires Face Check for new UK users from 26 March 2026, but a Photo Verified badge shows only that a live face matched the profile photos—not that every claim is honest. Keep early conversations in Tinder, never use a verification link sent by a match, and treat requests for money or investment pitches as scams."
@@ -7338,7 +7342,7 @@
     "faq": [
       [
         "Is Binance itself safe, or should I stop using it?",
-        "Binance is a real cryptocurrency exchange, but crypto is high risk and that does not make any message using Binance branding genuine. In the UK, Binance is not FCA-authorised, and Binance announced in October 2023 that it had stopped accepting new UK users, so check the FCA's consumer warnings before relying on it. Access your account only by typing binance.com directly or via the official app, never through a link in an email, text, or DM, and keep two-factor authentication switched on."
+        "Binance is a real cryptocurrency exchange, but crypto is high risk and that does not make any message using Binance branding genuine. In the UK, the FCA's consumer warning, last updated in June 2023, says Binance Markets Limited is not permitted to undertake any regulated activity here and no other Binance Group entity holds any form of UK authorisation, registration or licence to conduct regulated activity. Check the FCA warning before relying on the platform. Access your account only by typing binance.com directly or via the official app, never through a link in an email, text, or DM, and keep two-factor authentication switched on."
       ],
       [
         "How can I check whether a Binance email is genuine?",
@@ -7362,7 +7366,7 @@
       "crypto scam UK",
       "cryptocurrency scam UK"
     ],
-    "updated": "2026-07-30",
+    "updated": "2026-08-09",
     "sources_checked": [
       [
         "Binance — official verification tool",
@@ -7375,6 +7379,10 @@
       [
         "Police Scotland — contact us: non-emergencies on 101",
         "https://www.scotland.police.uk/contact-us/non-emergencies/"
+      ],
+      [
+        "FCA — Consumer warning on Binance Markets Limited and the Binance Group",
+        "https://www.fca.org.uk/news/news-stories/consumer-warning-binance-markets-limited-and-binance-group"
       ]
     ],
     "quick_answer": "A message warning your Binance account faces suspension unless you click a link is phishing designed to steal your login. Type binance.com yourself or use the official app, and check the message with Binance Verify. If you entered details, change your password from another device, enable two-factor authentication, and tell Report Fraud or Police Scotland on 101."
@@ -8951,7 +8959,7 @@
       ],
       [
         "Money has gone: the first 24 hours",
-        "Speed matters more than anything else now, and self-blame is the thing that slows people down most.\n\n- Telephone your bank immediately. Where a transfer left a UK account through Faster Payments or CHAPS on or after 7 October 2024, reimbursement may be available under the current rules: the maximum is £85,000, firms may apply an excess of up to £100, and a claim must be raised within 13 months. Each claim turns on its own facts, so no outcome is promised.\n- Cryptocurrency, vouchers and gift cards are far harder to unwind, which makes saving wallet addresses, transaction IDs and voucher serial numbers urgent rather than optional.\n- Ask Cifas about Protective Registration if identity documents or personal details were shared.\n- File with Report Fraud (`reportfraud.police.uk`, 0300 123 2040) if you are in England, Wales or Northern Ireland. In Scotland, report it to Police Scotland on 101.\n- Tell one person you trust today. Isolation is part of the method, and it also makes every practical step harder to face alone.\n\nOur [scam recovery checklist](/recovery/) sets out the order to work through. For free, confidential support outside your own circle, contact Victim Support in England and Wales on 0808 168 9111, Victim Support Scotland through `victimsupport.scot`, or Victim Support NI through `victimsupportni.com`."
+        "Speed matters more than anything else now, and self-blame is the thing that slows people down most.\n\n- Telephone your bank immediately. Where a transfer left a UK account through Faster Payments or CHAPS on or after 7 October 2024, reimbursement may be available under the current rules: the maximum is £85,000, firms may apply an excess of up to £100, and a claim must be raised within 13 months. Each claim turns on its own facts, so no outcome is promised.\n- Cryptocurrency, vouchers and gift cards are far harder to unwind, which makes saving wallet addresses, transaction IDs and voucher serial numbers urgent rather than optional.\n- If identity documents or personal details were shared and that exposure puts you at heightened risk of identity fraud, consider Cifas Protective Registration — applications are online at `cifas.org.uk/pr`. It costs £30 for two years and places a warning flag against your name and other personal details in the National Fraud Database, prompting organisations that use Cifas data to make extra identity checks when those details are used in applications. It does not affect your credit score, but not every application will be checked.\n- File with Report Fraud (`reportfraud.police.uk`, 0300 123 2040) if you are in England, Wales or Northern Ireland. In Scotland, report it to Police Scotland on 101.\n- Tell one person you trust today. Isolation is part of the method, and it also makes every practical step harder to face alone.\n\nOur [scam recovery checklist](/recovery/) sets out the order to work through. For free, confidential support outside your own circle, contact Victim Support in England and Wales on 0808 168 9111, Victim Support Scotland through `victimsupport.scot`, or Victim Support NI through `victimsupportni.com`."
       ]
     ],
     "faq": [
@@ -8986,7 +8994,7 @@
       "romance scam UK",
       "report Bumble scam"
     ],
-    "updated": "2026-07-30",
+    "updated": "2026-08-09",
     "sources_checked": [
       [
         "Bumble Support — Our safety features",
@@ -9067,6 +9075,10 @@
       [
         "Victim Support NI — contact us",
         "https://www.victimsupportni.com/about-us/contact-us/"
+      ],
+      [
+        "Cifas — Protective Registration",
+        "https://www.cifas.org.uk/pr"
       ]
     ],
     "quick_answer": "On Bumble, who sends the first message depends on the match and any Opening Move, so starting the chat proves nothing about the person replying. Keep the conversation in Bumble, use its Photo Verification request and in-app voice or video calls, never send money or follow investment advice, and report suspicious behaviour before unmatching."
