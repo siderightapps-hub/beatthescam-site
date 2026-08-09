@@ -43,7 +43,20 @@
       "info_url": "https://www.ncsc.gov.uk/",
       "email": "report@phishing.gov.uk",
       "report_label": "NCSC — report phishing",
-      "on_page": true
+      "on_page": true,
+      "note": "SERS is the route for suspicious EMAILS. A suspicious WEBSITE or link goes to the separate ncsc-scam-website form below — the NCSC's own scam-website page does not mention this mailbox at all. Verified against the NCSC's own published pages on 2026-08-08."
+    },
+    {
+      "key": "ncsc-scam-website",
+      "name": "NCSC report a suspicious website",
+      "brand": "NCSC",
+      "nation": "United Kingdom",
+      "role": "website-report",
+      "report_url": "https://www.ncsc.gov.uk/section/about-this-website/report-scam-website",
+      "info_url": "https://www.ncsc.gov.uk/collection/phishing-scams/report-scam-website",
+      "report_label": "NCSC — report a suspicious website",
+      "on_page": false,
+      "note": "The submission form for suspicious websites and links, distinct from the Suspicious Email Reporting Service mailbox. report_url is the live form ('Report a suspicious website'); info_url is the guidance page ('Report a scam website'). Both verified against the NCSC's own published pages on 2026-08-08. Texts are a third route again — those go to 7726, run by the mobile networks."
     },
     {
       "key": "citizens-advice",

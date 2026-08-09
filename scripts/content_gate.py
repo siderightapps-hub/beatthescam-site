@@ -1138,6 +1138,65 @@ def check_unrenderable_markup(post: Dict) -> List[Dict]:
     return issues
 
 
+# The NCSC runs THREE separate routes, and sending a reader to the wrong one
+# sends their evidence somewhere that cannot act on it:
+#   suspicious EMAIL   → the Suspicious Email Reporting Service mailbox
+#   suspicious WEBSITE → the separate scam-website submission form
+#   suspicious TEXT    → 7726, which is run by the mobile networks, not the NCSC
+# The third is already guarded by _SHORTCODE_NCSC_RE. This guards the first two.
+#
+# Added 2026-08-08: the 2026-08-08 pipeline draft told readers to report a
+# phishing LINK ("a fake login page") to the SERS mailbox. The NCSC's own
+# scam-website page does not mention that mailbox anywhere. FLAG, matching
+# shortcode_attribution — the same class of misrouting.
+_WEBSITE_SUBJECT_RE = re.compile(
+    r"\b(?:websites?|web\s?pages?|webpages?|links?|urls?|login\s+pages?)\b", re.I)
+_EMAIL_SUBJECT_RE = re.compile(r"\be-?mails?\b", re.I)
+# The service's own NAME contains "Email", which would otherwise read as the
+# subject of the sentence and mask every single misroute. Strip it first.
+_SERS_NAME_RE = re.compile(r"suspicious\s+e-?mail\s+reporting\s+service|\bSERS\b", re.I)
+
+
+def _sers_email() -> str:
+    """The SERS mailbox, from the canon — never hardcoded here."""
+    for r in _CANON.get("official_routes", []):
+        if r.get("key") == "ncsc-sers":
+            return str(r.get("email") or "")
+    return ""
+
+
+def check_ncsc_route_scope(post: Dict) -> List[Dict]:
+    """FLAG a website/link routed to the NCSC's EMAIL mailbox."""
+    addr = _sers_email()
+    if not addr:
+        return []
+    text = _post_text(post)
+    issues: List[Dict] = []
+    for m in re.finditer(re.escape(addr), text, re.I):
+        # Bound the window at the previous sentence break. ". " (period then
+        # space) is a safe boundary here precisely because URLs and the address
+        # itself never contain one.
+        before = text[max(0, m.start() - 220):m.start()]
+        cut = before.rfind(". ")
+        clause = (before[cut + 2:] if cut != -1 else before) + text[m.end():m.end() + 100].split(". ")[0]
+        stripped = _SERS_NAME_RE.sub(" ", clause)
+        if not _WEBSITE_SUBJECT_RE.search(stripped):
+            continue                       # not about a website — correct usage
+        if _EMAIL_SUBJECT_RE.search(stripped):
+            continue                       # names an email too ("a link in an email")
+        issues.append({
+            "check": "ncsc_route_scope", "severity": SEVERITY_FLAG,
+            "span": re.sub(r"\s+", " ", clause)[:140],
+            "detail": (f"routes a suspicious WEBSITE or link to '{addr}', which is the NCSC's "
+                       f"Suspicious Email Reporting Service — the mailbox for suspicious EMAILS. "
+                       f"The NCSC's own scam-website page does not mention it. Send websites and "
+                       f"links to the ncsc-scam-website route in content/sources.json instead; "
+                       f"texts go to 7726, run by the mobile networks."),
+        })
+        break
+    return issues
+
+
 def _route_fields(post: Dict):
     """Every reader-visible field that can carry a reporting route, as
     (label, text) pairs. Category hubs put their routes in `intro`, section
@@ -1494,6 +1553,7 @@ def check_deterministic(post: Dict, *, is_draft: bool = True) -> List[Dict]:
             + check_canon_guards(post)
             + check_text_wellformed(post)
             + check_unrenderable_markup(post)
+            + check_ncsc_route_scope(post)
             # Corpus-state assertions a DRAFT may not make about itself. Corpus
             # audits pass is_draft=False, because a live consolidated record
             # legitimately carries the field.
