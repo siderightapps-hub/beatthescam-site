@@ -71,6 +71,18 @@ SUBTLE = {
     "faq": [["How do I report it?", "Report to Action Fraud on 0300 123 2040; forward scam texts to 7726."]],
 }
 
+_CLEAN_RECOVERY = (
+    "Contact your bank straight away using the number on the back of your card. Report "
+    "the scam to Report Fraud on 0300 123 2040 if you are in England, Wales or Northern "
+    "Ireland, or to Police Scotland on 101 in Scotland. Forward the text to 7726. If you "
+    "shared card details, ask your bank to block the card and watch for transactions."
+)
+_FLAGS_REPORT = (
+    "Report it by emailing abuse@madeup-reports.gov.uk, or to Action Fraud "
+    "on 0300 123 2040 in England, Wales and Northern Ireland, or to Police "
+    "Scotland on 101 in Scotland."
+)
+
 # (3) Clean — directional language, no specific invented claims, only national
 #     numbers, points readers to official sources. Must PASS (no over-blocking).
 #     Says "Report Fraud", not "Action Fraud": the service was rebranded in Dec
@@ -91,11 +103,7 @@ CLEAN = {
         # added by the 2026-07-30 accuracy release). This fixture predated that
         # rule and was silently failing the "no over-blocking" assertion on main
         # ever since — found 2026-08-08.
-        ["What to do if you have already interacted",
-         "Contact your bank straight away using the number on the back of your card. Report "
-         "the scam to Report Fraud on 0300 123 2040 if you are in England, Wales or Northern "
-         "Ireland, or to Police Scotland on 101 in Scotland. Forward the text to 7726. If you "
-         "shared card details, ask your bank to block the card and watch for transactions."],
+        ["What to do if you have already interacted", _CLEAN_RECOVERY],
     ],
     "faq": [["Is every delivery text a scam?",
              "No — but treat any link asking for payment or card details as suspicious. Check "
@@ -136,10 +144,7 @@ FLAGS = {
          "The FCA banned this firm from trading in 2024 after an investigation."],
         # Scottish route present so the FLAG-tier classes under test are isolated
         # from the block-tier scotland_routing rule (see the CLEAN note above).
-        ["How to report",
-         "Report it by emailing abuse@madeup-reports.gov.uk, or to Action Fraud "
-         "on 0300 123 2040 in England, Wales and Northern Ireland, or to Police "
-         "Scotland on 101 in Scotland."],
+        ["How to report", _FLAGS_REPORT],
         ["Over-broad channel claims",
          "Banks never send links in text messages. Forward texts to 7726 because it works on "
          "all UK mobile networks. Forward RCS and iMessage chats to 7726 too. UK banks must "
@@ -163,18 +168,27 @@ FLAGS = {
 #     Expected FLAG, not BLOCK. Both are editorial accuracy problems for a human
 #     reviewer, and the judge's verdicts are known to vary run to run — blocking
 #     the pipeline on a model's opinion about these would be the wrong trade.
+# Bodies are bound to names rather than written inline. Implicitly concatenated
+# string literals sitting directly inside a list literal are what
+# py/implicit-string-concatenation-in-list reports ("maybe missing a comma?"),
+# and a fixture list of [heading, body] pairs is precisely that shape.
+_PV_VERIFY = (
+    "The official support account is verified with a blue badge and has the exact username "
+    "'support'. Any variation — with hyphens, underscores, or numbers — is a scam. If you "
+    "receive a message claiming to be from support, compare the username character by "
+    "character against that one and trust the badge if it matches."
+)
+_PV_REPORT = (
+    "Report the scam to Report Fraud on 0300 123 2040 in England, Wales and Northern "
+    "Ireland, or to Police Scotland on 101 in Scotland."
+)
+
 PLATFORM_VERIFY = {
     "slug": "selftest-platform-verify", "title": "Social Platform Support Scam UK",
     "hero": "x", "description": "y",
     "sections": [
-        ["How to check whether support is genuine",
-         "The official support account is verified with a blue badge and has the exact username "
-         "'support'. Any variation — with hyphens, underscores, or numbers — is a scam. If you "
-         "receive a message claiming to be from support, compare the username character by "
-         "character against that one and trust the badge if it matches."],
-        ["Where to report it",
-         "Report the scam to Report Fraud on 0300 123 2040 in England, Wales and Northern "
-         "Ireland, or to Police Scotland on 101 in Scotland."],
+        ["How to check whether support is genuine", _PV_VERIFY],
+        ["Where to report it", _PV_REPORT],
     ],
     "faq": [["Can I trust the badge?",
              "Yes — a badge on the support account proves the account is authentic."]],
@@ -186,23 +200,31 @@ PLATFORM_VERIFY = {
 #     Everything else is correct: nation-scoped routes, no invented figures. So
 #     the ONLY thing to object to is the omission, and it must be a FLAG — the
 #     guide is publishable-with-review, not fabricated.
+_APP_HOW = (
+    "Criminals persuade you to move money to an account they control, usually by posing as "
+    "someone you trust and creating time pressure. The transfer looks ordinary to your bank "
+    "because you authorised it yourself, which is what makes this pattern so effective."
+)
+# The omission under test: stops at "recall", never names the reimbursement right.
+_APP_RECOVERY = (
+    "Contact your bank immediately using the number on the back of your card. They may be "
+    "able to recall the payment if it has not yet been withdrawn from the receiving account. "
+    "Report the scam to Report Fraud on 0300 123 2040 in England, Wales and Northern "
+    "Ireland, or to Police Scotland on 101 in Scotland."
+)
+_APP_FAQ = (
+    "Ask your bank as soon as you realise. The sooner you report it, the more likely the "
+    "funds are still recoverable from the receiving account."
+)
+
 APP_OMISSION = {
     "slug": "selftest-app-omission", "title": "Bank Transfer Scam UK",
     "hero": "x", "description": "y",
     "sections": [
-        ["How the scam works",
-         "Criminals persuade you to move money to an account they control, usually by posing as "
-         "someone you trust and creating time pressure. The transfer looks ordinary to your bank "
-         "because you authorised it yourself, which is what makes this pattern so effective."],
-        ["What to do if you have already sent money",
-         "Contact your bank immediately using the number on the back of your card. They may be "
-         "able to recall the payment if it has not yet been withdrawn from the receiving account. "
-         "Report the scam to Report Fraud on 0300 123 2040 in England, Wales and Northern "
-         "Ireland, or to Police Scotland on 101 in Scotland."],
+        ["How the scam works", _APP_HOW],
+        ["What to do if you have already sent money", _APP_RECOVERY],
     ],
-    "faq": [["Will I get my money back?",
-             "Ask your bank as soon as you realise. The sooner you report it, the more likely the "
-             "funds are still recoverable from the receiving account."]],
+    "faq": [["Will I get my money back?", _APP_FAQ]],
 }
 
 EXPECT = [

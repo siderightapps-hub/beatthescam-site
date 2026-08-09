@@ -919,8 +919,15 @@ def run() -> int:
         check(name, needle in JUDGE_SYSTEM, f"missing from JUDGE_SYSTEM: {needle!r}")
     # The canon block must still reach the judge — a model-backed check with no
     # canon re-litigates settled routes, which cost two prior debugging sessions.
+    # Asserted on route BRANDS, not hostnames: a `"host.tld" in text` test is the
+    # exact shape of py/incomplete-url-substring-sanitization, and CodeQL cannot
+    # tell a prompt assertion from a URL allow-list check. Brands are also the
+    # better assertion — they are what the judge actually reasons about.
+    _brands = {r.get("brand") for r in _CANON.get("official_routes", []) if r.get("brand")}
     check("the judge prompt still carries the verified-route canon block",
-          "VERIFIED ROUTES" in JUDGE_SYSTEM and "reportfraud.police.uk" in JUDGE_SYSTEM.lower())
+          "VERIFIED ROUTES" in JUDGE_SYSTEM
+          and {"Report Fraud", "Police Scotland"} <= _brands
+          and all(b in JUDGE_SYSTEM for b in ("Report Fraud", "Police Scotland")))
 
     # NB: a mention placed BEFORE the scope+route block is served, not stranded —
     # that is the approved guide form (instruction, scope, route) and the reader
