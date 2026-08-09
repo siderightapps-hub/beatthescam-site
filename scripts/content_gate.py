@@ -1581,6 +1581,11 @@ cases") is fine; an unconditional absolute is not
 - naming a specific company as "legitimate"/"genuine"/"trusted" (could be invented or defunct)
 - a specific dated event, law, or regulatory action stated as fact
 - any organisation-specific phone number (banks, couriers, utilities) — these should not be hardcoded
+- how a named platform's VERIFICATION works: that its support account uses one exact username, \
+that a badge / tick / checkmark proves identity or authenticity, that a badge colour means something \
+specific, or that "any variation is a scam". Platforms rename and re-tier these without notice and \
+no two work alike, so a reader who trusts the description trusts the wrong account. The safe advice \
+is to reach support from inside the app or the platform's official help centre. Severity "medium"
 
 Do NOT flag: general scam-pattern description, the verified UK reporting routes listed under \
 VERIFIED ROUTES above (including forwarding texts to 7726 and report@phishing.gov.uk), \
@@ -1590,13 +1595,42 @@ DO still flag an unscoped route: Report Fraud presented as the UK-wide service w
 Police Scotland alternative, or Citizens Advice presented as a UK-wide helpline, is an error \
 even though both bodies are in the canon.
 
+OMISSION — ONE case, and one only. This is the single exception to the rule that you do not report \
+missing content. Nothing else in the guide is ever a finding for being absent, incomplete, \
+unclarified, or ordered differently than you would order it: not a reporting route you would have \
+scoped differently, not a caveat you would have added, not an explanation you think a reader would \
+benefit from. If your finding could begin with the words "the guide should also", "should clarify", \
+or "omits", and it is not the payment case below, it is NOT a finding — discard it.
+The one case: if the guide tells a reader what to do after they THEMSELVES AUTHORISED AND SENT a payment — a bank \
+transfer or faster payment they made — and never mentions that reimbursement for authorised push \
+payment (APP) fraud has been mandatory under Payment Systems Regulator rules since 7 October 2024, \
+flag it with severity "medium" and set "class":"app_omission". "Your bank may be able to recall the \
+payment" standing alone IS the failure case: a recall is a courtesy that depends on the money still \
+being there, whereas reimbursement is a right.
+This applies ONLY to payments the reader authorised and sent. Do NOT raise it for a guide about \
+stolen or shared CARD DETAILS, an unauthorised transaction, a card payment, a chargeback or Section \
+75 claim, cash, gift cards, or cryptocurrency bought and sent on the reader's own initiative — those \
+are different protections and APP reimbursement is not the right answer. Do NOT flag a guide that \
+never discusses the reader sending money. Do NOT require the cap, excess, deadline or exception \
+figures — the drafting model cannot verify those and should not state them.
+
+Severity discipline for the two classes above (platform verification, APP omission): use "medium", \
+never "high", and set the "class" field so they can be told apart. They are editorial accuracy \
+problems for a human reviewer, not fabrications, and neither may set verdict "fail" on its own.
+
 Respond with ONLY this JSON, no other text:
-{"verdict":"pass"|"fail","risk":"low"|"medium"|"high","issues":[{"claim":"<quote>","problem":"<short>","severity":"low"|"medium"|"high"}]}
-Set verdict "fail" if there is ANY high-severity issue."""
+{"verdict":"pass"|"fail","risk":"low"|"medium"|"high","issues":[{"claim":"<quote>","problem":"<short>","severity":"low"|"medium"|"high","class":"platform_verification"|"app_omission"|null}]}
+Set verdict "fail" ONLY when at least one issue has severity "high". If every issue you found is \
+"low" or "medium", the verdict is "pass" — those are recorded for a human reviewer and must not stop \
+publication. A guide with no high-severity issue is a passing guide."""
 # Same rendering as ACCURACY_BLOCK, so judge and generator cannot disagree.
 JUDGE_SYSTEM = JUDGE_SYSTEM.replace(
     "VERIFIED ROUTES above",
     "VERIFIED ROUTES above").rstrip() + "\n\nVERIFIED ROUTES (nation-scoped, from the verified canon):\n" + CANON_ROUTE_BLOCK + "\n"
+
+
+# Judge classes that may never block publication — see the cap in judge_llm().
+_JUDGE_FLAG_ONLY_CLASSES = frozenset({"platform_verification", "app_omission"})
 
 
 def judge_llm(post: Dict, client, model: str) -> List[Dict]:
@@ -1664,8 +1698,26 @@ def judge_llm(post: Dict, client, model: str) -> List[Dict]:
     issues: List[Dict] = []
     for it in (data.get("issues") or []):
         sev = SEVERITY_BLOCK if it.get("severity") == "high" else SEVERITY_FLAG
+        # Severity cap, enforced HERE rather than trusted to the prompt. Both of
+        # these classes were added 2026-08-08 with an explicit "use medium, never
+        # high" instruction, and on the very first run the judge returned "high"
+        # for both anyway — it reasoned they were serious, which is a defensible
+        # editorial view but not its call to make. A model's opinion about
+        # completeness or a third party's UI must not halt the publication
+        # pipeline; both are for a human reviewer. Judge verdicts also vary run
+        # to run (2026-07-16), so a prompt-only cap is not a cap at all.
+        if it.get("class") in _JUDGE_FLAG_ONLY_CLASSES:
+            sev = SEVERITY_FLAG
         issues.append({"check": "judge", "severity": sev,
                        "detail": f"{it.get('problem','issue')}: \"{str(it.get('claim',''))[:140]}\""})
+    # ...and the same cap has to survive the verdict-level fallback below, or it
+    # is no cap at all: a judge that rates an app_omission "high" also returns
+    # verdict "fail", which would re-add a block for the very issue just capped.
+    raw_issues = data.get("issues") or []
+    only_capped = bool(raw_issues) and all(
+        i.get("class") in _JUDGE_FLAG_ONLY_CLASSES for i in raw_issues)
+    if only_capped:
+        return issues
     if data.get("verdict") == "fail" or data.get("risk") == "high":
         if not any(i["severity"] == SEVERITY_BLOCK for i in issues):
             issues.append({"check": "judge", "severity": SEVERITY_BLOCK,
