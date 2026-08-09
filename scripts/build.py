@@ -2171,7 +2171,7 @@ def render_post(site, post, all_posts, affiliates=None, sources=None, link_map=N
     # not just the article — so every guide picked up an identical, unrelated
     # auto-link (e.g. the newsletter band's "the latest UK scams" text).
     content = canonicalize_internal_guide_paths(content)
-    content = linkify_bare_paths(content, slug_titles or {})
+    content = linkify_bare_paths(content, slug_titles or {}, current_slug=post['slug'])
     content = apply_internal_links(content, post['slug'], link_map or {})
     content = linkify_phones(content)
     # Optional blocks can leave indentation-only lines in the article template.
@@ -3579,6 +3579,17 @@ _INTERNAL_LINK_STOPWORDS = {
     "report romance scam uk",
     "romance scam warning signs uk",
     "investment scam warning",
+    # Reviewed 2026-08-09, third pass — same family-vs-member failure:
+    #   "tech support scam"   names the whole family; the guides are all
+    #                         brand/channel-specific (Microsoft, Apple,
+    #                         printer, remote access) and the phrase was owned
+    #                         by printer-support-scam-uk, the narrowest one.
+    #   "hmrc email scam"     the email guides are specific (tax-rebate email,
+    #                         self-assessment) and the phrase was owned by
+    #                         hmrc-phone-call-scam-uk — a different channel
+    #                         from the one the phrase names.
+    "tech support scam",
+    "hmrc email scam",
 }
 
 # Ambiguous phrases are not auto-linked unless editorially assigned here. This
@@ -3593,6 +3604,14 @@ _CANONICAL_KEYWORD_OWNERS = {
     # work-from-home, data-entry), and it already owns "report job scam uk", so
     # assigning it here keeps the pair consistent. Reviewed 2026-08-08.
     "job scam uk": "job-offer-scam-uk",
+    # "clone firm scam" was owned by forex-trading-scam-uk only because that
+    # guide happened to list it; the corpus has a dedicated guide for exactly
+    # this scam. Reviewed 2026-08-09.
+    "clone firm scam": "clone-firm-investment-scam-uk",
+    # "fake job offer" was owned by advance-fee-scam-uk — a different scam
+    # type. job-offer-scam-uk is the general job-scam guide and already owns
+    # "job scam uk" / "report job scam uk", so this keeps the set consistent.
+    "fake job offer": "job-offer-scam-uk",
 }
 
 # Names of EXTERNAL official bodies, registers, tools and services must never
@@ -3629,6 +3648,12 @@ _OFFICIAL_SERVICE_PHRASES = frozenset({
     "financial ombudsman", "financial ombudsman service",
     "trading standards", "payment systems regulator", "money helper",
     "moneyhelper", "credit reference agency", "credit reference agencies",
+    # Official schemes and services readers can use directly: Confirmation of
+    # Payee is Pay.UK's account-name-checking scheme, Pension Wise is the
+    # government's free MoneyHelper guidance service. Both were auto-linking to
+    # guides of ours (invoice-fraud-uk-businesses, pension-liberation-scam-uk)
+    # as if the guide were the service (audit, 2026-08-09).
+    "confirmation of payee", "pension wise",
 })
 
 
@@ -3865,12 +3890,20 @@ _BARE_PATH_EXCLUDED_RE = re.compile(
 )
 
 
-def linkify_bare_paths(html_str: str, slug_titles: dict) -> str:
+def linkify_bare_paths(html_str: str, slug_titles: dict, current_slug: str = None) -> str:
     """Convert AI-generated bare '/guides/xyz/' text into proper anchor tags.
 
     Skips inside <head>, <script>, <style>, existing <a>, <code>, <pre> — same
     zones as apply_internal_links to avoid double-wrapping or touching
     metadata/structured-data blocks.
+
+    A path pointing at the CURRENT page renders as plain title text, never an
+    anchor. No body names its own slug directly, but consolidation creates the
+    case indirectly: canonicalize_internal_guide_paths() runs first, so a body
+    reference to a slug consolidated INTO this page arrives here already
+    rewritten to the page's own URL (evri-delivery-scam-guide and
+    microsoft-support-scam-uk-guide both shipped a self-link that way —
+    audit, 2026-08-09).
     """
     if not html_str:
         return html_str
@@ -3896,6 +3929,8 @@ def linkify_bare_paths(html_str: str, slug_titles: dict) -> str:
                 path = m.group(1)
                 slug = path.strip("/").split("/")[-1]
                 link_text = slug_titles.get(slug) or slug.replace("-", " ")
+                if current_slug and slug == current_slug:
+                    return html.escape(link_text)
                 return f'<a href="{path}">{html.escape(link_text)}</a>'
             out.append(_BARE_PATH_RE.sub(replace_match, text))
     return "".join(out)
@@ -3909,18 +3944,32 @@ def linkify_bare_paths(html_str: str, slug_titles: dict) -> str:
 EFFECTIVE_REDIRECTS: dict = dict(ARTICLE_REDIRECTS)
 
 
+# Two bare guide paths joined only by a connective ("A and B", "A, or B",
+# "A, B"). Canonicalisation can rewrite both sides to the SAME path — a body
+# that cited a guide and its later consolidation target ends up saying
+# "/guides/x/ and /guides/x/", which linkify_bare_paths then renders as two
+# adjacent identical links (apple-tech-support-scam-uk shipped that way —
+# audit, 2026-08-09). The backreference makes this collapse ONLY exact
+# duplicates; distinct paths are untouched.
+_DUPLICATE_ADJACENT_GUIDE_PATH_RE = re.compile(
+    r"(/guides/[a-z0-9-]+/)(?:\s*(?:,\s*)?(?:and|or|&amp;|&)\s+|\s*,\s+)(?=\1)"
+)
+
+
 def canonicalize_internal_guide_paths(html_str: str) -> str:
     """Replace internal links to redirected guide slugs with final URLs.
 
     Edge redirects remain for external/history traffic, but internal navigation
-    should not add a crawl hop after articles are consolidated.
+    should not add a crawl hop after articles are consolidated. Where the
+    rewrite leaves two identical bare paths separated only by a connective,
+    the duplicate reference is collapsed to one.
     """
     for old_slug, target in EFFECTIVE_REDIRECTS.items():
         if target.startswith("__CAT__:"):
             continue
         html_str = html_str.replace(
             f"/guides/{old_slug}/", f"/guides/{target}/")
-    return html_str
+    return _DUPLICATE_ADJACENT_GUIDE_PATH_RE.sub("", html_str)
 
 
 # ─── PHONE LINKIFY ─────────────────────────────────────────────────────────

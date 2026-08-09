@@ -13,8 +13,12 @@
   <!-- AdSense account verification. Site-level ownership, NOT an ad tag: it
        belongs on every page, including the ones deliberately excluded from
        Auto Ads, because it identifies the publisher rather than requesting an
-       ad (audit, 2026-07-31). The ad tag itself is per-page via <script>(adsbygoogle=window.adsbygoogle||[]).requestNonPersonalizedAds=1;</script>
-  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1606633100797174" crossorigin="anonymous"></script>. -->
+       ad (audit, 2026-07-31). The ad tag itself is emitted per page by
+       make_base()/_ads_head(). Never write a template token inside a comment:
+       make_base() substitutes every token wherever it appears, so a token here
+       injects the real snippet into the comment — and on ad-free pages that
+       snippet is itself a comment, whose closing marker ended this one early
+       and leaked stray text into the rendered page (audit, 2026-08-09). -->
   <meta name="google-adsense-account" content="ca-pub-1606633100797174">
   <meta name="theme-color" content="#0b1220">
   <meta name="format-detection" content="telephone=no">
