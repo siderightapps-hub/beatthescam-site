@@ -442,7 +442,11 @@ def run() -> int:
     leaked = sorted(p for p in live_map if p in B._OFFICIAL_SERVICE_PHRASES)
     check("no official body/service name is an internal-link anchor",
           not leaked, ", ".join(f"{p} -> {live_map[p]}" for p in leaked))
-    for phrase in ("fca warning list", "cifas protective registration"):
+    for phrase in ("fca warning list", "cifas protective registration",
+                   # Both shipped as anchors to guides of ours — Confirmation
+                   # of Payee to invoice-fraud-uk-businesses, Pension Wise to
+                   # pension-liberation-scam-uk (audit, 2026-08-09).
+                   "confirmation of payee", "pension wise"):
         check(f"the regressed phrase {phrase!r} is not auto-linked",
               phrase not in live_map)
 
@@ -482,6 +486,11 @@ def run() -> int:
     check("the generic phrase 'verification code scam' is not auto-linked",
           "verification code scam" not in lmap,
           f"maps to {lmap.get('verification code scam')!r}")
+    for phrase in ("tech support scam", "hmrc email scam"):
+        # Family phrases owned by one narrow member (printer-support-scam-uk,
+        # hmrc-phone-call-scam-uk) — reviewed and stop-listed 2026-08-09.
+        check(f"the family phrase {phrase!r} is not auto-linked",
+              phrase not in lmap, f"maps to {lmap.get(phrase)!r}")
     # The stop-list is only load-bearing if it is actually consulted; a rename or
     # refactor that drops the filter would otherwise pass silently.
     check("every stop-listed phrase is absent from the link map",
@@ -510,6 +519,10 @@ def run() -> int:
         ("report job scam uk", "/guides/job-offer-scam-uk/"),
         ("romance investment scam uk", "/guides/pig-butchering-scam-uk/"),
         ("website scam checker", "/guides/is-this-website-a-scam/"),
+        # Reviewed 2026-08-09: both were owned by an unrelated guide that
+        # merely listed the keyword (forex-trading-scam-uk, advance-fee-scam-uk).
+        ("clone firm scam", "/guides/clone-firm-investment-scam-uk/"),
+        ("fake job offer", "/guides/job-offer-scam-uk/"),
     ]:
         check(f"{phrase!r} still auto-links to its correct owner",
               lmap.get(phrase) == expected, f"maps to {lmap.get(phrase)!r}")
@@ -519,6 +532,69 @@ def run() -> int:
     check("every _CANONICAL_KEYWORD_OWNERS entry reached the link map",
           all(lmap.get(p) == f"/guides/{s}/" for p, s in B._CANONICAL_KEYWORD_OWNERS.items()),
           f"{[p for p, s in B._CANONICAL_KEYWORD_OWNERS.items() if lmap.get(p) != f'/guides/{s}/']}")
+
+    # ── consolidation must not create self-links or duplicate links ──────────
+    # canonicalize_internal_guide_paths() rewrites a body reference to a retired
+    # slug into the consolidation target's URL. Two live pages then linked to
+    # themselves (evri-delivery-scam-guide, microsoft-support-scam-uk-guide) and
+    # apple-tech-support-scam-uk cited a guide AND its consolidation source in
+    # one sentence, rendering two adjacent identical links (audit, 2026-08-09).
+    saved_redirects = dict(B.EFFECTIVE_REDIRECTS)
+    B.EFFECTIVE_REDIRECTS.clear()
+    B.EFFECTIVE_REDIRECTS["old-guide"] = "new-guide"
+    try:
+        titles = {"new-guide": "New Guide Title", "b-guide": "B Title"}
+        canon = B.canonicalize_internal_guide_paths(
+            "Our /guides/old-guide/ guide covers this.")
+        out = B.linkify_bare_paths(canon, titles, current_slug="new-guide")
+        check("a canonicalised self-reference renders as plain text, not an anchor",
+              "<a" not in out and "New Guide Title" in out, out)
+        out = B.linkify_bare_paths("See /guides/new-guide/ now.", titles,
+                                   current_slug="b-guide")
+        check("a bare path to ANOTHER guide still linkifies",
+              '<a href="/guides/new-guide/">New Guide Title</a>' in out, out)
+        canon = B.canonicalize_internal_guide_paths(
+            "Our /guides/old-guide/ and /guides/new-guide/ guides cover it.")
+        check("duplicate adjacent paths created by canonicalisation collapse to one",
+              canon == "Our /guides/new-guide/ guides cover it.", canon)
+        canon = B.canonicalize_internal_guide_paths(
+            "See /guides/a-guide/ and /guides/b-guide/ for more.")
+        check("distinct adjacent paths are NOT collapsed",
+              canon == "See /guides/a-guide/ and /guides/b-guide/ for more.", canon)
+    finally:
+        B.EFFECTIVE_REDIRECTS.clear()
+        B.EFFECTIVE_REDIRECTS.update(saved_redirects)
+
+    # ── the ad tag is emitted exactly once, on the pages that should have it ──
+    # The template's explanatory comment used to contain a literal {{ads_head}}
+    # token; make_base() substitutes tokens wherever they appear, so every page
+    # carried the real snippet inside the comment — and on ad-free pages that
+    # snippet is itself a comment, whose closing marker ended the outer comment
+    # early and leaked stray ". -->" text into the rendered page (audit,
+    # 2026-08-09). Pin the template to ONE token and check the rendered output.
+    check("the template contains exactly one ads_head token",
+          B.BASE.count("{{ads_head}}") == 1, str(B.BASE.count("{{ads_head}}")))
+    test_site = {"adsense_client": "ca-pub-selftest", "site_name": "S",
+                 "tagline": "T", "ga4_id": "G-SELFTEST", "twitter": "",
+                 "site_path": ""}
+    for mode, want_tags in (("default", 1), ("npa", 1), ("none", 0)):
+        page = B.make_base("<p>body</p>", title="t", description="d",
+                           canonical="https://example.com/", schema="",
+                           site=test_site, og_image="/assets/og-image-v2.png",
+                           ads_mode=mode)
+        check(f"ads_mode={mode!r}: the AdSense ad tag appears exactly {want_tags} time(s)",
+              page.count("adsbygoogle.js") == want_tags,
+              f"found {page.count('adsbygoogle.js')}")
+        check(f"ads_mode={mode!r}: comment markers stay balanced and unnested",
+              all(seg.count("<!--") == 0 for seg in
+                  re.findall(r"<!--(.*?)-->", page, re.DOTALL)))
+    page = B.make_base("<p>body</p>", title="t", description="d",
+                       canonical="https://example.com/", schema="",
+                       site=test_site, og_image="/assets/og-image-v2.png",
+                       ads_mode="none")
+    check("an ad-free page carries the disabled marker exactly once",
+          page.count("Ads intentionally disabled") == 1,
+          str(page.count("Ads intentionally disabled")))
 
     print()
     if FAILURES:

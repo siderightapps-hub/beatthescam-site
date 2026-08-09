@@ -6633,7 +6633,7 @@ Treat the number on your screen as unreliable evidence on its own.
 - Wait at least five minutes before calling back, or use a different phone, so you are not accidentally reconnected to the scammer.
 - Remember that banks and government bodies will not ask you to move money to a "safe account" or share a one-time code.
 
-Our /guides/police-impersonation-scam-call-uk/ and /guides/police-impersonation-scam-call-uk/ guides cover the scams that most often use spoofing in detail.
+Our /guides/police-impersonation-scam-call-uk/ guides cover the scams that most often use spoofing in detail.
 
 ### If you have already responded to a spoofed call
 
@@ -8762,7 +8762,7 @@ Treat any unsolicited "your device has a problem, call this number" message as a
 - Never share your Apple ID password or a verification code with anyone who contacts you.
 - If you need genuine support, contact Apple only through apple.com or the Apple Support app.
 
-Our /guides/microsoft-support-scam-uk-guide/ and /guides/microsoft-support-scam-uk-guide/ guides cover the same pattern targeting other devices.
+Our /guides/microsoft-support-scam-uk-guide/ guides cover the same pattern targeting other devices.
 
 ### If you responded or granted access
 
