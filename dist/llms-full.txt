@@ -3036,7 +3036,7 @@ Forward it to `report@phishing.gov.uk` (or 7726 if it arrived by text), and repo
 ## HMRC Self Assessment Scam UK: Fake Refund & Tax Bill Texts
 
 URL: https://beatthescam.com/guides/hmrc-self-assessment-scam-uk/
-Category: Government Impersonation · Updated: 2026-07-31
+Category: Government Impersonation · Updated: 2026-08-10
 
 Fake HMRC messages spike around Self Assessment deadlines, claiming a refund or overdue bill. HMRC never asks you to 'confirm' bank details by text.
 
@@ -8181,17 +8181,17 @@ Use Report Ad on the advert itself and report the Page separately. Report the sc
 ## Instagram Fake Giveaway Scam UK: How to Spot and Report It
 
 URL: https://beatthescam.com/guides/instagram-fake-giveaway-scam-uk/
-Category: Social Media Scams · Updated: 2026-08-06
+Category: Social Media Scams · Updated: 2026-08-10
 
-Instagram fake giveaway scams trick users into following fake accounts, sharing personal details, or sending money for 'entry fees'. We explain how to verify genuine giveaways, what to do if you've already engaged, and how to report the scam.
+Instagram fake giveaway scams trick users into sharing personal details or paying 'entry fees'. How to spot one, verify a real giveaway, and report it.
 
 ### What is an Instagram fake giveaway scam?
 
-An Instagram fake giveaway scam is when a fraudster creates a fake account impersonating a real brand, celebrity, or influencer, then posts a fake giveaway to trick people into engaging. The scammer might claim you've won a prize (iPhone, holiday, cash) and ask you to click a link, follow the account, share personal details, or pay an 'entry fee' or 'shipping cost' to claim it. The account looks convincing — it may copy the real brand's profile picture, bio, and posting style — but it is controlled entirely by the scammer. A blue tick is not proof a giveaway is genuine: some ticks are older notability-based verifications, and others simply mean the account pays for a Meta Verified subscription with an identity check — so a Meta Verified tick can be bought, and some legitimate brands go without one. Once you engage, you either lose money, have your account compromised, or your personal data is sold to other criminals. Real brands rarely run giveaways via Instagram DMs or ask winners to pay upfront.
+An Instagram fake giveaway scam is when a fraudster creates a fake account impersonating a real brand, celebrity, or influencer, then posts a fake giveaway to trick people into engaging. The scammer might claim you've won a prize (iPhone, holiday, cash) and ask you to click a link, follow the account, share personal details, or pay an 'entry fee' or 'shipping cost' to claim it. The account looks convincing — it may copy the real brand's profile picture, bio, and posting style — but it is controlled entirely by the scammer. A blue tick is not proof a giveaway is genuine: Instagram says it identifies an account verified under either its earlier requirements or Meta Verified, a paid subscription with eligibility and identity-verification steps. The badge is not an endorsement of a post, verified accounts can still be hijacked, and some legitimate brands are unverified. Once you engage, you either lose money, have your account compromised, or your personal data is sold to other criminals. Real brands rarely run giveaways via Instagram DMs or ask winners to pay upfront.
 
 ### Red flags that an Instagram giveaway is fake
 
-- The account is not the brand's genuine profile. Don't rely on the blue tick either way — a tick can be a paid Meta Verified subscription rather than an old-style notability verification (scammers can buy one, and some real brands don't have it), so confirm the account by finding the brand's official profile through their own website.
+- The account is not the brand's genuine profile. Don't rely on the blue tick either way — Instagram says it identifies an account verified under its earlier requirements or through Meta Verified; it does not endorse a giveaway. Verified accounts can still be compromised, and some real brands are unverified, so find the brand's official profile through its own website.
 - The account has very few followers or was created recently. Scammers often set up new accounts; check the 'About' section or look at when the account was created if possible.
 - The giveaway asks you to pay money upfront — for 'shipping', 'processing', 'entry fee', or 'tax'. Legitimate giveaways never charge winners to claim prizes.
 - The post asks you to click a link outside Instagram or visit a suspicious website. Real brands run giveaways within Instagram or direct you to their official website only.
@@ -8206,7 +8206,7 @@ The scam typically starts when you see a post from what looks like a real brand 
 
 ### How to verify if an Instagram giveaway is genuine
 
-Before engaging with any giveaway, take these steps to confirm it's real. First, don't treat the blue tick as proof — a tick may be an older notability-based verification or just a paid Meta Verified subscription with an identity check, which scammers can also buy, and some genuine brands go without one, so a tick is not a green light and a missing tick is not proof of a scam. Second, visit the brand's official website or their official Instagram account directly (search for them fresh, don't click links from the giveaway post) and check their recent posts — do they mention this giveaway? Real brands promote genuine giveaways on their own official accounts and website. Third, look at the account's history: how long has it existed, how many followers does it have, and what kind of posts does it usually make? A brand-new account with 50 followers claiming to give away iPhones is almost certainly fake. Fourth, check the giveaway terms: does it ask for payment, sensitive personal data, or your Instagram login details? Legitimate giveaways never do. Fifth, if you're unsure, contact the brand directly using the contact details on their official website — not via the suspicious account — and ask if they're running this giveaway. Finally, be wary of giveaways that ask you to click external links; real brands usually run giveaways entirely within Instagram or direct you to their official domain only.
+Before engaging with any giveaway, take these steps to confirm it's real. First, don't treat the blue tick as proof. Instagram says it identifies an account verified under its earlier requirements or through Meta Verified; it does not endorse what the account posts. A verified account can still be compromised, and some genuine brands are unverified, so a tick is not a green light and a missing tick is not proof of a scam. Second, visit the brand's official website or their official Instagram account directly (search for them fresh, don't click links from the giveaway post) and check their recent posts — do they mention this giveaway? Real brands promote genuine giveaways on their own official accounts and website. Third, look at the account's history: how long has it existed, how many followers does it have, and what kind of posts does it usually make? A brand-new account with 50 followers claiming to give away iPhones is almost certainly fake. Fourth, check the giveaway terms: does it ask for payment, sensitive personal data, or your Instagram login details? Legitimate giveaways never do. Fifth, if you're unsure, contact the brand directly using the contact details on their official website — not via the suspicious account — and ask if they're running this giveaway. Finally, be wary of giveaways that ask you to click external links; real brands usually run giveaways entirely within Instagram or direct you to their official domain only.
 
 ### What to do immediately if you've already engaged
 
@@ -8220,7 +8220,7 @@ Report the scam through multiple channels to maximise the chance of action. Firs
 
 **Does a blue verification tick mean an Instagram giveaway is genuine?**
 
-No. A blue tick can be an older notability-based verification or simply a paid Meta Verified subscription with an identity check — scammers can buy Meta Verified, and some genuine brands don't have a tick — so a tick is not an endorsement of any giveaway and a missing tick doesn't by itself prove a scam. The reliable check is to find the brand's real profile another way: visit their official website and follow the Instagram link they publish there, then compare the username character by character. Treat any giveaway you reached from a random post or DM with caution, however professional the account looks.
+No. Instagram says a blue tick identifies an account verified under its earlier requirements or through Meta Verified; it is not an endorsement of any post or giveaway. A verified account can still be hijacked, and some genuine brands are unverified, so a missing tick does not by itself prove a scam either. The reliable check is to find the brand's real profile another way: visit their official website and follow the Instagram link they publish there, then compare the username character by character. Treat any giveaway you reached from a random post or DM with caution, however professional the account looks.
 
 **I clicked a link from a fake giveaway and entered my Instagram password. What should I do?**
 
@@ -11034,7 +11034,7 @@ For an SMS, forward the message to `7726`. For WhatsApp, Telegram or Signal, pre
 ## Yodel Scam Text Messages: How to Spot a Fake Yodel Text (UK)
 
 URL: https://beatthescam.com/guides/yodel-scam-text-messages/
-Category: Text Message Scams · Updated: 2026-08-01
+Category: Text Message Scams · Updated: 2026-08-10
 
 Fake Yodel missed-parcel and redelivery-fee texts are smishing scams. Learn how to check a Yodel by InPost delivery, spot a fake and report it.
 
@@ -11173,7 +11173,7 @@ No. Local designs vary and some vehicles have exemptions. Verify through the rel
 ## Booking.com Scam UK: Spot a Fake Payment Message
 
 URL: https://beatthescam.com/guides/booking-com-scam-uk/
-Category: Travel Scams · Updated: 2026-07-10
+Category: Travel Scams · Updated: 2026-08-10
 
 A message uses real booking details and demands payment or card information. Compare it with the confirmation and contact Booking.com directly.
 
