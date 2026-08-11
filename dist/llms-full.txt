@@ -946,7 +946,7 @@ Forward scam emails to `report@phishing.gov.uk` and scam texts to 7726. If you l
 ## HMRC Tax Rebate Email Scam: Spot a Fake (UK)
 
 URL: https://beatthescam.com/guides/hmrc-tax-rebate-email-scam/
-Category: Email Scams · Updated: 2026-08-06
+Category: Email Scams · Updated: 2026-08-10
 
 An HMRC email saying you're owed a tax rebate, with a link to claim? Real rebates aren't claimed through an email link — how to spot the scam and check safely.
 
@@ -988,7 +988,7 @@ Do not click links or open attachments in an unexpected rebate email.
 - Contact HMRC only through details published on GOV.UK.
 - Hover over links without clicking, but do not rely on that alone; fake emails can be polished.
 
-If you are unsure whether a linked page is a copycat of GOV.UK, our guide on /guides/is-this-website-a-scam/ walks through the checks, and our /guides/hmrc-tax-refund-text-scam-uk/ guide covers the same scam by text.
+If you are unsure whether a linked page is a copycat of GOV.UK, our guide on /guides/is-this-website-a-scam/ walks through the checks. The same rebate pressure also reaches people by text and by phone — our /guides/hmrc-tax-refund-text-scam-uk/ guide covers the text version, and our /guides/hmrc-phone-call-scam-uk/ guide covers a call.
 
 ### If you clicked or shared details
 
@@ -1341,7 +1341,7 @@ Forward it to `phishing@paypal.com`. If you have lost money, also report it to R
 ## Santander Email Scam: How to Spot a Fake Bank Email (UK)
 
 URL: https://beatthescam.com/guides/santander-email-scam-uk/
-Category: Email Scams · Updated: 2026-07-26
+Category: Email Scams · Updated: 2026-08-10
 
 A Santander email about a locked account or 'verify now'? How to spot a fake Santander email, check it safely, and report phishing in the UK.
 
@@ -1349,7 +1349,7 @@ A Santander email about a locked account or 'verify now'? How to spot a fake San
 
 A Santander email scam is a phishing message dressed as bank correspondence. Its job is to move you onto a copycat sign-in page, where whatever you type — Santander credentials, card numbers, a one-time passcode, or personal details — is collected by criminals. A typical example arrives from a display name such as "Santander Security", carries a subject like `Your account has been temporarily locked`, and ends in a large "Restore access" button.
 
-The excuse varies: a locked account, a held payment, an unrecognised device, an overdue security check. The mechanism does not. This guide covers the warning signs, the safe way to check, and where to report the message in the UK.
+The excuse varies: a locked account, a held payment, an unrecognised device, an overdue security check. The mechanism does not. This guide covers the warning signs, the safe way to check, and where to report the message in the UK. Santander's name is used the same way on the phone — our /guides/santander-phone-scam-uk/ guide covers what those callers say and how to hang up safely.
 
 ### Why these emails fool people
 
@@ -3286,7 +3286,7 @@ Report it to TV Licensing through tvlicensing.co.uk. If you lost money or shared
 ## UKVI Visa Scam UK: Spot a Fake Home Office Email
 
 URL: https://beatthescam.com/guides/ukvi-visa-scam-uk/
-Category: Government Impersonation · Updated: 2026-08-06
+Category: Government Impersonation · Updated: 2026-08-10
 
 Got an email claiming to be from UKVI about your visa or immigration application, demanding urgent payment? How to spot a fake UKVI scam and report it.
 
@@ -3294,7 +3294,7 @@ Got an email claiming to be from UKVI about your visa or immigration application
 
 A UKVI scam impersonates UK Visas and Immigration or the Home Office by email, phone, or text, claiming a problem with your visa or immigration application and demanding urgent payment or personal details. An example of the style is: `UKVI: Your visa application is incomplete. Pay an outstanding fee of £250 within 24 hours or your application will be cancelled: ukvi-payment-portal.example`.
 
-The pressure of a visa or immigration status being at risk makes this an especially effective and distressing scam. This guide shows the warning signs, how to check safely, and what to do if you have already responded.
+The pressure of a visa or immigration status being at risk makes this an especially effective and distressing scam. This guide shows the warning signs, how to check safely, and what to do if you have already responded. This is a different scam from a paid 'consultant' or website that promises to guarantee your visa outcome — our /guides/visa-application-scam-uk/ guide covers that version.
 
 ### Why these scams are convincing
 
@@ -5437,7 +5437,7 @@ Forward scam texts to 7726 and scam emails to `report@phishing.gov.uk`. You can 
 ## Bank Transfer Scams UK: How to Spot a 'Safe Account' Con
 
 URL: https://beatthescam.com/guides/bank-transfer-scam-uk/
-Category: Payment Scams · Updated: 2026-07-18
+Category: Payment Scams · Updated: 2026-08-10
 
 Asked to move money to a 'safe account', or to pay by bank transfer under pressure? How to spot a bank-transfer scam, check safely on 159, and claim it back.
 
@@ -6412,7 +6412,7 @@ If you lost money or shared sensitive information, report it to Report Fraud at 
 ## HMRC Phone Call Scam UK: Spot a Fake Tax Call
 
 URL: https://beatthescam.com/guides/hmrc-phone-call-scam-uk/
-Category: Phone Scams · Updated: 2026-07-10
+Category: Phone Scams · Updated: 2026-08-10
 
 A fake HMRC call threatens arrest or urgent legal action. HMRC may phone or use voice prompts, but it says it will never threaten arrest.
 
@@ -6434,7 +6434,7 @@ There is no confirmed rule that every genuine automated HMRC message includes a 
 
 ### Check the call safely
 
-Hang up. Do not call a number supplied by the caller and do not rely on caller ID. Use GOV.UK's current lists of genuine HMRC contacts and the official HMRC contact page. If you have an online tax account, type the address yourself or use the official HMRC app to review it.
+Hang up. Do not call a number supplied by the caller and do not rely on caller ID. Use GOV.UK's current lists of genuine HMRC contacts and the official HMRC contact page. If you have an online tax account, type the address yourself or use the official HMRC app to review it. HMRC-branded scams also arrive by email and by text with the same rebate or refund pressure — our /guides/hmrc-tax-rebate-email-scam/ guide covers the email version, and our /guides/hmrc-tax-refund-text-scam-uk/ guide covers the text version.
 
 ### If money or details were given
 
@@ -6808,7 +6808,7 @@ Call 101, or 999 if in immediate danger. You can also report it to Report Fraud 
 ## Santander Phone Scam UK: What the Callers Say and How to Hang Up Safely
 
 URL: https://beatthescam.com/guides/santander-phone-scam-uk/
-Category: Phone Scams · Updated: 2026-07-31
+Category: Phone Scams · Updated: 2026-08-10
 
 Callers posing as Santander's fraud team push you to confirm details, share codes or move money to a safe account. How to spot the scam and hang up.
 
@@ -6830,7 +6830,7 @@ An incoming call may be genuine, but caller ID cannot authenticate it. Treat an 
 
 Santander will never: ask for your full PIN, full online banking password, or full passcode; ask you to read a One-Time Passcode that has just arrived on your phone; ask you to move money to a "safe account" (no bank ever does this); ask you to install remote access software on your computer or phone; or advise you to give a false reason when withdrawing cash at a branch counter.
 
-If the person calling you is asking for any of the above, the call is fraudulent, regardless of how professional they sound or what number appears on your screen.
+If the person calling you is asking for any of the above, the call is fraudulent, regardless of how professional they sound or what number appears on your screen. The same impersonation happens by email too, using near-identical pressure — our /guides/santander-email-scam-uk/ guide covers the phishing version.
 
 ### The "safe account" instruction — the single biggest red flag
 
@@ -9762,7 +9762,7 @@ Forward it to 7726, and report it to Report Fraud at `reportfraud.police.uk` or 
 ## Evri Scam Texts: How to Spot a Fake Parcel Text (UK)
 
 URL: https://beatthescam.com/guides/evri-delivery-scam-guide/
-Category: Text Message Scams · Updated: 2026-08-01
+Category: Text Message Scams · Updated: 2026-08-10
 
 An Evri text about a missed delivery or a small fee? How to tell a genuine Evri message from a scam text, and how to track your parcel safely.
 
@@ -9774,7 +9774,7 @@ The hook is a small, believable fee - usually a redelivery, release, or address-
 
 ### Why Evri texts are easy to fake
 
-Evri launched in March 2022 after Hermes UK rebranded, and scammers still use both the old and new names. Our /guides/evri-delivery-scam-guide/ guide covers the same scam under the old brand.
+Evri launched in March 2022 after Hermes UK rebranded, and scammers still send fake parcel texts under both the old and new names. This guide covers the scam whichever brand name the text uses.
 
 Evri says it may contact customers by email or text to say a parcel is in its network, and that a genuine text may include a tracking link to `Evri.com`. Evri also says its text messages will only come from `Evri`, will only ever send a tracking link, will never ask you to reschedule a delivery or ask for payment to do so, and will never prompt you to install an app.
 
@@ -9990,7 +9990,7 @@ A familiar sender name or message thread is not proof because SMS origin informa
 ## HMRC Tax Refund Text Scam: Spot the Fake (UK)
 
 URL: https://beatthescam.com/guides/hmrc-tax-refund-text-scam-uk/
-Category: Text Message Scams · Updated: 2026-08-06
+Category: Text Message Scams · Updated: 2026-08-10
 
 An HMRC text saying you're owed a tax refund — click to claim? Real refunds aren't claimed by text link. How to spot the scam and check safely on GOV.UK.
 
@@ -10033,7 +10033,7 @@ Do not tap the link or call a number from the text.
 - Follow the instructions on a tax calculation letter you received by post.
 - If you recently requested a Self Assessment refund, check whether the text only confirms processing and timing, without links or requests for details.
 
-A genuine HMRC text should not ask for personal or financial information or include a refund-claim link. If you are not sure, check GOV.UK's list of genuine HMRC contacts and contact HMRC only through numbers or services published on GOV.UK. When you are unsure whether a linked site is a copycat of GOV.UK, our guide on /guides/is-this-website-a-scam/ walks through the checks.
+A genuine HMRC text should not ask for personal or financial information or include a refund-claim link. If you are not sure, check GOV.UK's list of genuine HMRC contacts and contact HMRC only through numbers or services published on GOV.UK. When you are unsure whether a linked site is a copycat of GOV.UK, our guide on /guides/is-this-website-a-scam/ walks through the checks. This scam also arrives by email, with the same refund pressure — our /guides/hmrc-tax-rebate-email-scam/ guide covers that version.
 
 ### If you clicked or shared details
 
@@ -11988,13 +11988,13 @@ Forward a scam text to 7726 or a scam email to `report@phishing.gov.uk`, report 
 ## UK Visa Application Scam: Fake Consultants & Sites
 
 URL: https://beatthescam.com/guides/visa-application-scam-uk/
-Category: Travel Scams · Updated: 2026-08-06
+Category: Travel Scams · Updated: 2026-08-10
 
 A consultant or website guarantees your UK visa for a fee? No genuine adviser can promise that. Check IAA registration before you pay anything.
 
 ### What a UK visa application scam looks like
 
-This scam is a website or 'consultant', often found via a search ad or unsolicited contact, offering to guarantee your UK visa outcome or handle your application for a fee. An example of the style: `We have special access to speed up your visa application — guaranteed approval for a one-off fee.` No genuine adviser or service can guarantee a visa decision.
+This scam is a website or 'consultant', often found via a search ad or unsolicited contact, offering to guarantee your UK visa outcome or handle your application for a fee. An example of the style: `We have special access to speed up your visa application — guaranteed approval for a one-off fee.` No genuine adviser or service can guarantee a visa decision. This is different from a fake email claiming to be UKVI or the Home Office itself — see our /guides/ukvi-visa-scam-uk/ guide for that version.
 
 ### Why these scams are convincing
 
