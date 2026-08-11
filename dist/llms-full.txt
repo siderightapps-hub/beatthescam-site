@@ -8292,6 +8292,65 @@ Stop sending anything further, and report the profile to Instagram (three-dot me
 
 Report the account in-app (Report → Fraud or Scam) and to Report Fraud at `reportfraud.police.uk` or 0300 123 2040 (Police Scotland on 101 in Scotland). Report an unauthorised firm or individual to the FCA on 0800 111 6768.
 
+## Snapchat Scam UK: Fake Messages & Impersonation
+
+URL: https://beatthescam.com/guides/snapchat-scam-uk/
+Category: Social Media Scams · Updated: 2026-08-11
+
+Snapchat scams range from fake support messages asking you to verify your account to romance fraud and money-flipping schemes. This guide explains the warning signs and what to do if you've been targeted.
+
+### What Snapchat scams look like
+
+Snapchat scams fall into several patterns. The most common is a fake support message claiming your account has been locked, suspended, or flagged for unusual activity, asking you to click a link and re-enter your password or payment details. Another variant involves someone impersonating a friend, family member, or romantic interest to build trust before asking for money or personal information. A third type is the money-flipping or investment scam, where someone promises to multiply your money if you send them cash first. Some scammers also use Snapchat to distribute links to fake login pages or malware. All of these rely on the speed and ephemeral nature of Snapchat messages — they disappear after viewing, making it harder for you to check them later or report them to someone else. The scammers count on you acting quickly without thinking, especially if the message creates a sense of urgency or fear about your account.
+
+### Warning signs of a Snapchat scam
+
+- The message claims your account is locked, suspended, or at risk and demands immediate action. Snapchat does not lock accounts via direct message and does not ask you to verify your password this way.
+- A link is included that does not go to the official Snapchat app or website. Hover over or long-press the link to see the real URL before clicking; scam links often mimic Snapchat's domain but are slightly different.
+- The sender claims to be Snapchat support but is messaging you from a regular Snapchat account, not an official support channel. Snapchat support is accessed through the app's settings, not via chat.
+- Someone you know suddenly asks for money, gift cards, or personal details like your date of birth or bank details. Scammers often hack or impersonate real accounts; if the request feels out of character, contact your friend through another method to check.
+- The message promises to multiply your money, offer a job, or provide exclusive access to something valuable in exchange for an upfront payment. These are classic money-flipping and advance-fee scams.
+- You are asked to keep the conversation secret or not tell anyone. Legitimate companies never ask you to hide communication from others.
+- The sender's username is very similar to a real contact's but with a slight misspelling or extra character. Scammers create lookalike accounts to deceive you.
+
+### How the scam unfolds
+
+A Snapchat scam typically begins with a message that appears urgent. If it is a fake support message, it claims your account needs immediate verification and includes a link. You click the link, which takes you to a page that looks like Snapchat's login screen but is actually controlled by the scammer. You enter your username and password, and the scammer now has access to your account. They may change your password, lock you out, steal your contacts, or use your account to scam your friends. If the scam is impersonation, the scammer may have hacked a real account or created a fake one mimicking someone you know. They build rapport over several messages, sometimes using stolen photos or information to seem credible. Once trust is established, they ask for money — often for an emergency, a business opportunity, or to help them travel. You send money via bank transfer, gift card, or cryptocurrency. The scammer disappears, and you realise the person was not who they claimed. In money-flipping scams, the scammer asks for an initial payment to 'unlock' a larger sum, which never materialises. Throughout, the ephemeral nature of Snapchat means messages vanish, making it harder to gather evidence or warn others.
+
+### How to check if a message is really from Snapchat
+
+Snapchat support does not contact you via direct message on the app. If you receive a message claiming to be from Snapchat support, it is a scam. To verify account issues, open Snapchat, go to your profile icon, tap Settings, and look for Help or Support. From there, you can contact Snapchat's official support team through the app itself. Any legitimate notification about your account will also appear in your account settings, not just in a chat message. If someone claims to be a friend or contact, verify their identity by contacting them through another method — call them, text them, or message them on a different platform. Ask them a personal question only they would know. If the person on Snapchat cannot answer, it is an impersonator. For links, do not click them. Instead, long-press or hover over the link to see the full URL. Snapchat's official domain is snapchat.com. If the URL contains a different domain or a misspelled version of Snapchat, it is fake. When in doubt, do not click, do not enter your password, and do not send money. Report the message to Snapchat by tapping the message, selecting the menu icon, and choosing Report.
+
+### What to do if you have already been scammed
+
+If you have clicked a link and entered your Snapchat password, change your password immediately using a device that is not the one you used to click the link. Go to Snapchat's official website or app, log in if you can, and update your password to something strong and unique. If you cannot log in because the scammer has changed your password, use Snapchat's account recovery option on the login screen. If you have sent money via bank transfer, contact your bank right away and explain that you have been the victim of fraud. Your bank may be able to recall the payment or freeze the recipient's account. You can also raise a reimbursement claim under the Payment Systems Regulator's rules for authorised push payment fraud; ask your bank for the current claim deadline, cap, and any excess that may apply. If you have sent money via gift card or cryptocurrency, the chances of recovery are much lower, but report it to the platform or service you used. If you have shared personal information like your date of birth, address, or bank details, monitor your credit file for signs of identity fraud. You can check your credit report for free through Experian, Equifax, or TransUnion. If you spot fraudulent accounts or credit applications in your name, contact Cifas for Protective Registration at cifas.org.uk to help prevent further misuse.
+
+### How to report a Snapchat scam in the UK
+
+Report the scam to Snapchat first. In the app, tap and hold the message, select the menu icon, and choose Report. Provide as much detail as you can about what happened. Next, report it to the police and fraud authorities. In England, Wales, and Northern Ireland, use Report Fraud at https://www.reportfraud.police.uk or call 0300 123 2040. In Scotland, contact Police Scotland on 101 or visit https://www.scotland.police.uk/contact-us/non-emergencies/. If the scam involved a phishing link or fake login page, you can also report it to the National Cyber Security Centre's Suspicious Email Reporting Service at report@phishing.gov.uk. If you received a scam SMS or text message as part of the scam, forward it to 7726 (spells SPAM). For consumer advice and support, contact Citizens Advice on 0808 223 1133 if you are in England or Wales, Advice Direct Scotland on 0808 800 9060 if you are in Scotland, or Consumerline on 0300 123 6262 if you are in Northern Ireland. Keep records of all messages, screenshots, and transaction details to share with the authorities.
+
+### Frequently asked questions
+
+**Is a message asking me to verify my Snapchat account real?**
+
+No. Snapchat does not ask you to verify your account via direct message. If you receive such a message, it is a scam. Snapchat only contacts you about account issues through your account settings within the app or via email to the address registered to your account. Do not click any links in the message, and report it to Snapchat immediately.
+
+**Someone I know on Snapchat asked me for money. Is it them?**
+
+It may not be. Scammers often hack real accounts or create fake ones that look very similar to real contacts. Contact your friend using a different method — call them, text them, or message them on another platform — and ask if they sent the message. If they did not, block the account and report it to Snapchat. Do not send money until you have verified the person's identity.
+
+**I clicked a link in a Snapchat message and entered my password. What should I do?**
+
+Change your Snapchat password immediately from a different device. Go to Snapchat's official website or app and update your password to something strong and unique. If you cannot log in, use Snapchat's account recovery option. Monitor your account for suspicious activity, and consider enabling two-factor authentication if Snapchat offers it. If the scammer has already accessed your account, they may have changed your password or contacted your friends; inform your contacts that your account may have been compromised.
+
+**I sent money to someone on Snapchat who turned out to be a scammer. Can I get it back?**
+
+Contact your bank immediately and report the fraud. If you sent the money via bank transfer, your bank may be able to recall it or freeze the recipient's account. You can also raise a reimbursement claim under the Payment Systems Regulator's rules for authorised push payment fraud; ask your bank for the current claim deadline, cap, and any excess. If you sent money via gift card or cryptocurrency, recovery is much less likely, but report it to the platform or service you used and to the police.
+
+**How do I know if a Snapchat link is safe?**
+
+Do not click it. Instead, long-press or hover over the link to see the full URL. Snapchat's official domain is snapchat.com. If the URL contains a different domain, a misspelled version of Snapchat, or looks suspicious in any way, it is fake. Legitimate Snapchat messages do not include links asking you to log in or verify your account. When in doubt, ignore the link and contact Snapchat through the official app settings instead.
+
 ## TikTok Shop Scams UK: Spot Fake Sellers & Bad Deals
 
 URL: https://beatthescam.com/guides/tiktok-shop-scam-uk/

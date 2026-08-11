@@ -1,0 +1,15 @@
+{
+  "slug": "snapchat-scam-uk",
+  "title": "Snapchat Scam UK: Fake Messages & Impersonation",
+  "date": "2026-08-11",
+  "model": "claude-haiku-4-5-20251001",
+  "gate_passed": true,
+  "claims": [
+    {
+      "type": "ncsc_route_scope",
+      "severity": "flag",
+      "text": "If the scam involved a phishing link or fake login page, you can also report it to the National Cyber Security Centre's Suspicious Email Rep",
+      "detail": "routes a suspicious WEBSITE or link to 'report@phishing.gov.uk', which is the NCSC's Suspicious Email Reporting Service — the mailbox for suspicious EMAILS. The NCSC's own scam-website page does not mention it. Send websites and links to the ncsc-scam-website route in content/sources.json instead; texts go to 7726, run by the mobile networks."
+    }
+  ]
+}
