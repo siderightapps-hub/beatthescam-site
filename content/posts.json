@@ -121,7 +121,7 @@
       ],
       [
         "Legitimate chargebacks vs abuse — and how to report",
-        "Not every chargeback is a scam: if you genuinely didn't receive goods, or your card was used without permission, a chargeback is your right under card scheme rules, and the Section 75 protection on UK credit-card purchases over £100 is a separate, legitimate safeguard. Chargeback fraud is the deliberate misuse of that process to steal. If you're hit, respond to the dispute promptly with your evidence through your payment provider, and report the fraud to Report Fraud at reportfraud.police.uk or 0300 123 2040 (Police Scotland on 101 in Scotland). Report the buyer to the marketplace too, so they can act on the account."
+        "Not every chargeback is a scam: if you genuinely didn't receive goods, or your card was used without permission, a chargeback is your right under card scheme rules, and Section 75 — which may apply to a qualifying UK credit-card purchase where the cash price is more than £100 and no more than £30,000 — is a separate, legitimate safeguard. Chargeback fraud is the deliberate misuse of that process to steal. If you're hit, respond to the dispute promptly with your evidence through your payment provider, and report the fraud to Report Fraud at reportfraud.police.uk or 0300 123 2040 (Police Scotland on 101 in Scotland). Report the buyer to the marketplace too, so they can act on the account."
       ]
     ],
     "faq": [
@@ -148,6 +148,10 @@
         "https://www.ukfinance.org.uk/our-expertise/cards/chargeback-and-section-75"
       ],
       [
+        "Consumer Credit Act 1974, section 75 — legislation.gov.uk",
+        "https://www.legislation.gov.uk/ukpga/1974/39/section/75"
+      ],
+      [
         "Report Fraud — reporting a fraud, and who the service covers",
         "https://www.reportfraud.police.uk/reporting-a-fraud/"
       ],
@@ -157,7 +161,7 @@
       ]
     ],
     "quick_answer": "A chargeback scam is 'friendly fraud': a buyer pays, receives the goods, then disputes the payment to keep the item and the money. Protect yourself with tracked, signed-for delivery, on-platform payment and records, and never accept PayPal 'friends and family' for a sale. Fight any dispute with evidence and report it to Report Fraud or Police Scotland on 101.",
-    "updated": "2026-07-30"
+    "updated": "2026-08-11"
   },
   {
     "slug": "gumtree-scam-uk-guide",
@@ -197,11 +201,11 @@
       ],
       [
         "How to buy and sell safely on Gumtree",
-        "- Deal locally and in person where you can: see the item, the car, or the property before any money changes hands.\n- For higher-value items meet in a safe public place, and for vehicles never pay before viewing and checking the V5C and history.\n- As a seller, take cash on collection or wait for a bank transfer to actually appear in your account — never trust an emailed or screenshot 'confirmation', and never refund an 'overpayment'.\n- Decline buyer-arranged couriers for valuable items unless payment has genuinely cleared first.\n- Keep all messages on Gumtree, and never pay a deposit for something you can't view.\n- Trust your instincts — if you're being rushed or pushed off-platform, walk away."
+        "- Deal locally and in person where you can: see the item, the car, or the property before any money changes hands.\n- For higher-value items meet in a safe public place, and for vehicles never pay before viewing and checking the V5C and history.\n- For items eligible for delivery, Gumtree now offers a Buy Now secure payment option, processed by Mangopay, with Buyer Protection for eligible items up to £250 — the button appears only on eligible ads, so complete any protected checkout inside Gumtree itself and never follow a payment link sent in chat or by email.\n- As a seller, take cash on collection or wait for a bank transfer to actually appear in your account — never trust an emailed or screenshot 'confirmation', and never refund an 'overpayment'.\n- Decline buyer-arranged couriers for valuable items unless payment has genuinely cleared first.\n- Keep all messages on Gumtree, and never pay a deposit for something you can't view.\n- Trust your instincts — if you're being rushed or pushed off-platform, walk away."
       ],
       [
         "How to report a Gumtree scam in the UK",
-        "Report the listing or user to Gumtree through the 'Report' link on the advert or profile so they can remove it. If you've lost money or shared details, report it to Report Fraud at reportfraud.police.uk or 0300 123 2040 (in Scotland, Police Scotland on 101). If you paid by bank transfer, contact your bank straight away. If you sent the money by UK bank transfer on or after 7 October 2024, mandatory APP fraud reimbursement rules may apply to Faster Payments and CHAPS transfers, subject to a 13-month claim window, a maximum claim of £85,000, and a possible excess of up to £100 — ask your bank to assess the claim. Forward any scam texts to 7726, and keep screenshots of the listing and conversation as evidence."
+        "Report the listing or user to Gumtree through the 'Report' link on the advert or profile so they can remove it. If you've lost money or shared details, report it to Report Fraud at reportfraud.police.uk or 0300 123 2040 (in Scotland, Police Scotland on 101). If you paid by bank transfer, contact your bank straight away. If you sent the money by UK bank transfer on or after 7 October 2024, mandatory APP fraud reimbursement rules may apply to Faster Payments and CHAPS transfers, subject to a 13-month claim window, a maximum claim of £85,000, and a possible excess of up to £100 that cannot be applied to a consumer the firm assesses as vulnerable — ask your bank to assess the claim. Forward any scam texts to 7726, and keep screenshots of the listing and conversation as evidence."
       ]
     ],
     "faq": [
@@ -228,6 +232,18 @@
         "https://www.gumtree.com/info/safety/safety-advice/"
       ],
       [
+        "Gumtree — How payments work for items eligible for delivery on Gumtree",
+        "https://www.gumtree.com/info/safety/p/payments/how-payments-work-for-items-eligible-for-delivery-on-gumtree/"
+      ],
+      [
+        "Gumtree — Buyer Protection policy",
+        "https://www.gumtree.com/info/safety/p/trust-safety/buying/buyer-protection-policy/"
+      ],
+      [
+        "Payment Systems Regulator — APP fraud reimbursement protections",
+        "https://www.psr.org.uk/information-for-consumers/app-fraud-reimbursement-protections/"
+      ],
+      [
         "Report Fraud — reporting a fraud, and who the service covers",
         "https://www.reportfraud.police.uk/reporting-a-fraud/"
       ],
@@ -237,7 +253,7 @@
       ]
     ],
     "quick_answer": "Gumtree itself is legitimate, but scammers post fake listings and pose as buyers. Never pay a deposit by bank transfer before viewing, and never hand over an item on the strength of an emailed 'payment confirmation' — wait for money to show in your account. Report scam adverts to Gumtree and losses to Report Fraud or Police Scotland on 101.",
-    "updated": "2026-07-30"
+    "updated": "2026-08-11"
   },
   {
     "slug": "google-voice-verification-scam",
@@ -1082,7 +1098,7 @@
       ],
       [
         "Why these scams are convincing",
-        "Emotional appeals around disasters, illness, or vulnerable people override the caution people would normally apply, and a scammer can copy a real charity's name, logo, and branding closely. Urgency — \"donate before midnight\" — pushes people to give without checking.\n\nThe fact that protects you: registered charities can be checked independently, but the correct register depends on where the charity is registered. England and Wales use the Charity Commission register, Scotland uses OSCR, and Northern Ireland uses CCNI. If an appeal gives a registration number, verify that the name, number, and cause match before giving."
+        "Emotional appeals around disasters, illness, or vulnerable people override the caution people would normally apply, and a scammer can copy a real charity's name, logo, and branding closely. Urgency — \"donate before midnight\" — pushes people to give without checking.\n\nThe fact that protects you: registered charities can be checked independently, but the correct register depends on where the charity is registered. England and Wales use the Charity Commission register, Scotland uses OSCR, and Northern Ireland uses CCNI. If an appeal gives a registration number, verify that the name, number, and cause match before giving. In England and Wales, some genuine charities do not appear on the register at all — charities with an income below £5,000 and excepted or exempt charities do not have to register — so absence from the register alone is not proof of a scam: treat it as a reason to verify the organisation and the payment route independently before giving anything."
       ],
       [
         "Signs a charity appeal is a scam",
@@ -1137,7 +1153,7 @@
       "report charity scam uk",
       "disaster appeal scam"
     ],
-    "updated": "2026-07-30",
+    "updated": "2026-08-11",
     "sources_checked": [
       [
         "GOV.UK — Search the charity register (Charity Commission, England & Wales)",
@@ -10014,7 +10030,7 @@
       ],
       [
         "How to find genuine debt advice",
-        "Free, regulated debt advice is available before you commit to an IVA or any other solution.\n\n- Contact a free debt-advice organisation such as StepChange, or National Debtline if you are in England or Wales, before agreeing to anything.\n- Use MoneyHelper's debt advice locator to find free, impartial help.\n- Ask about all your debt options, not just an IVA, and understand the pros and cons of each.\n- Ask for the name of the licensed insolvency practitioner who would run your IVA and check them on the Insolvency Service's register of insolvency practitioners. IVAs are administered by licensed insolvency practitioners rather than FCA-authorised IVA firms, so a genuine IVA provider may not appear on the FCA register at all. A separate firm that gives you debt advice must generally be FCA-authorised; a lead generator that only takes basic information and provides factual information may not be authorised, but it must not give debt advice.\n- Never pay a large upfront fee before receiving genuine advice.\n\nIf you are unsure whether a linked site is genuine, our guide on /guides/is-this-website-a-scam/ helps, and our /guides/debt-relief-scam-uk/ guide covers the wider upfront-fee debt-help pattern."
+        "Free, regulated debt advice is available before you commit to an IVA or any other solution — and check the solution fits where you live: IVAs are available in England, Wales and Northern Ireland, while Scotland has its own formal debt solutions, including protected trust deeds and the Debt Arrangement Scheme.\n\n- Contact a free debt-advice organisation such as StepChange, or National Debtline if you are in England or Wales, before agreeing to anything.\n- Use MoneyHelper's debt advice locator to find free, impartial help.\n- Ask about all your debt options, not just an IVA, and understand the pros and cons of each.\n- Ask for the name of the licensed insolvency practitioner who would run your IVA and check them on the Insolvency Service's register of insolvency practitioners. IVAs are administered by licensed insolvency practitioners rather than FCA-authorised IVA firms, so a genuine IVA provider may not appear on the FCA register at all. A separate firm that gives you debt advice must generally be FCA-authorised; a lead generator that only takes basic information and provides factual information may not be authorised, but it must not give debt advice.\n- Never pay a large upfront fee before receiving genuine advice. Genuine IVAs do involve fees for the insolvency practitioner's work, and under the consumer IVA Protocol these are normally included in the monthly payments rather than charged upfront — so the warning sign is a separate upfront fee demanded before proper advice, not the existence of a fee itself.\n\nIf you are unsure whether a linked site is genuine, our guide on /guides/is-this-website-a-scam/ helps, and our /guides/debt-relief-scam-uk/ guide covers the wider upfront-fee debt-help pattern."
       ],
       [
         "If you have already paid a fee or signed up",
@@ -10057,7 +10073,7 @@
       "report iva scam uk",
       "fake debt solution company"
     ],
-    "updated": "2026-07-30",
+    "updated": "2026-08-11",
     "sources_checked": [
       [
         "MoneyHelper — Debt advice locator",
@@ -10066,6 +10082,18 @@
       [
         "GOV.UK — Get help with debt",
         "https://www.gov.uk/debt-advice"
+      ],
+      [
+        "Insolvency Service — research into Individual Voluntary Arrangements (IVAs available in England, Wales and Northern Ireland)",
+        "https://www.gov.uk/guidance/insolvency-service-research-into-individual-voluntary-arrangements-ivas"
+      ],
+      [
+        "GOV.UK — IVA Protocol: key facts (practitioner fees included in monthly payments, not upfront)",
+        "https://www.gov.uk/government/publications/individual-voluntary-arrangement-iva-protocol/key-facts-protocol-individual-voluntary-arrangements-iva"
+      ],
+      [
+        "mygov.scot — Trust deeds (Scotland's formal debt solutions)",
+        "https://www.mygov.scot/what-is-trust-deed"
       ]
     ],
     "quick_answer": "An IVA is a real debt solution, but a firm that pushes you into one quickly or demands a large upfront fee before proper advice is a scam warning sign. Get free debt advice from StepChange or MoneyHelper's debt advice locator first, and check the named insolvency practitioner on the Insolvency Service's register."
@@ -10809,7 +10837,7 @@
       ],
       [
         "The fees: what you actually pay versus the listed price",
-        "The advertised price and the final payable total can differ because compulsory fees and delivery charges may apply. Check the total, currency and delivery terms before entering payment details.\n\nThe CMA’s enforcement action required clearer pricing and seller information. That does not make every listing good value or every ticket valid, so compare the final total with the face value and any official resale option."
+        "The advertised price and the final payable total can differ because compulsory fees and delivery charges may apply. Check the total, currency and delivery terms before entering payment details.\n\nThe CMA’s enforcement action required clearer pricing and seller information. That does not make every listing good value or every ticket valid, so compare the final total with the face value and any official resale option. Pricing is under live scrutiny again: the CMA opened a new consumer protection investigation into Viagogo on 17 November 2025, examining whether mandatory fees are included in the total price shown at the start of the purchase process. As of the CMA's 23 June 2026 case update the investigation is ongoing and no finding has been made, so it should not be assumed that Viagogo has infringed consumer protection law."
       ],
       [
         "Are Viagogo tickets valid? What can go wrong",
@@ -10839,7 +10867,7 @@
       ],
       [
         "What did the CMA do about Viagogo?",
-        "In 2018, the UK Competition and Markets Authority secured a court order against Viagogo after the company refused to offer undertakings voluntarily — unlike StubHub, GetMeIn, and Seatwave, which offered undertakings at an earlier stage. The court order required Viagogo to show full prices upfront and provide clearer seller information. The CMA then monitored compliance before suspending further proceedings. The CMA case is publicly documented on gov.uk."
+        "In 2018, the UK Competition and Markets Authority secured a court order against Viagogo after the company refused to offer undertakings voluntarily — unlike StubHub, GetMeIn, and Seatwave, which offered undertakings at an earlier stage. The court order required Viagogo to show full prices upfront and provide clearer seller information. The CMA then monitored compliance before suspending further proceedings. The CMA case is publicly documented on gov.uk. Separately, on 17 November 2025 the CMA opened a new investigation into whether Viagogo's mandatory fees are included in the total price shown at the start of the purchase process; that investigation is ongoing and no finding has been made."
       ],
       [
         "Is there a safer alternative to Viagogo for resale tickets?",
@@ -10861,6 +10889,10 @@
         "https://www.gov.uk/government/news/cma-secures-court-order-against-viagogo"
       ],
       [
+        "CMA — viagogo consumer protection enforcement case (opened 17 November 2025; no finding made)",
+        "https://www.gov.uk/cma-cases/viagogo-consumer-protection-enforcement-case"
+      ],
+      [
         "Viagogo UK Support — What is the viagogo Guarantee?",
         "https://support.viagogo.co.uk/articles/61000310201-what-is-the-viagogo-guarantee"
       ],
@@ -10874,7 +10906,7 @@
       ]
     ],
     "quick_answer": "Viagogo is a real resale marketplace, not a scam company, but added fees, refund problems and invalid tickets are genuine risks. Check the final total before paying and confirm the URL is exactly viagogo.com — and any 'Viagogo' seller asking for payment off-platform by bank transfer is committing outright fraud.",
-    "updated": "2026-07-31"
+    "updated": "2026-08-11"
   },
   {
     "title": "British Gas Scam Call UK: Spot a Fake Contact",
