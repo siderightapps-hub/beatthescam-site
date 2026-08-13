@@ -1,0 +1,117 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-08-13T00:00:00+01:00",
+  "title": "Design System: Beat The Scam",
+  "extensions": {
+    "colorMeta": {
+      "background": { "role": "neutral", "displayName": "Cool Paper", "canonical": "#f3f6fb", "tonalRamp": ["#102033", "#24374c", "#3e556d", "#5b748d", "#829cb5", "#aec4d7", "#d9e5ee", "#f3f6fb"] },
+      "panel": { "role": "neutral", "displayName": "White Briefing Panel", "canonical": "#ffffff", "tonalRamp": ["#1a2430", "#374553", "#596977", "#7d8c99", "#a6b2bd", "#ccd4da", "#e8ecef", "#ffffff"] },
+      "panel-alt": { "role": "neutral", "displayName": "Pale Blue Wash", "canonical": "#eff4fb", "tonalRamp": ["#132033", "#2b3d55", "#475d78", "#6b829d", "#96abc2", "#c2d2e0", "#dee8f0", "#eff4fb"] },
+      "text": { "role": "neutral", "displayName": "Ink", "canonical": "#102033", "tonalRamp": ["#102033", "#24374c", "#3c5269", "#587088", "#7c94aa", "#a8b8c7", "#d3dde4", "#f1f5f8"] },
+      "muted": { "role": "neutral", "displayName": "Quiet Slate", "canonical": "#5b6878", "tonalRamp": ["#1d2630", "#35404d", "#4b5867", "#5b6878", "#7c8895", "#a4adb5", "#ced4d9", "#f0f2f4"] },
+      "line": { "role": "neutral", "displayName": "Soft Rule", "canonical": "#dbe5ef", "tonalRamp": ["#263442", "#415568", "#60798e", "#86a0b5", "#b0c2d0", "#dbe5ef", "#e9eff5", "#f8fbfd"] },
+      "brand": { "role": "primary", "displayName": "Authority Navy", "canonical": "#0b1220", "tonalRamp": ["#0b1220", "#15233a", "#213958", "#315278", "#51749a", "#83a0bd", "#bccddd", "#edf3f8"] },
+      "accent": { "role": "primary", "displayName": "Verification Blue", "canonical": "#1d4ed8", "tonalRamp": ["#10235b", "#18358a", "#1d4ed8", "#3970eb", "#6695f3", "#9fc0f9", "#cde0fc", "#eef5ff"] },
+      "danger": { "role": "secondary", "displayName": "Protective Red", "canonical": "#b91c1c", "tonalRamp": ["#4d1010", "#781414", "#b91c1c", "#d74747", "#e97b7b", "#f3adad", "#f9d6d6", "#fff1f2"] },
+      "success": { "role": "secondary", "displayName": "Safe Green", "canonical": "#15803d", "tonalRamp": ["#0c3d22", "#0f5b2d", "#15803d", "#2ca55b", "#62c985", "#9be2b0", "#d0f0d9", "#f0fdf4"] }
+    },
+    "typographyMeta": {
+      "display": { "displayName": "Direct Display", "purpose": "Hero promises and prominent research headings." },
+      "headline": { "displayName": "Section Headline", "purpose": "Section-level wayfinding." },
+      "title": { "displayName": "Panel Title", "purpose": "Cards, panels and local decisions." },
+      "body": { "displayName": "Plain Reading", "purpose": "Explanatory copy and long-form guides." },
+      "label": { "displayName": "Briefing Label", "purpose": "Kickers and compact categorisation." }
+    },
+    "shadows": [
+      { "name": "ambient-panel-lift", "value": "0 16px 50px rgba(11,18,32,.08)", "purpose": "Gentle separation for white panels, cards, articles and table-like containers." }
+    ],
+    "motion": [
+      { "name": "smooth-scroll", "value": "smooth", "purpose": "Document navigation only; no decorative motion system is implemented." },
+      { "name": "checker-spin", "value": "spin .8s linear infinite", "purpose": "Loading feedback in the scam checker." }
+    ],
+    "breakpoints": [
+      { "name": "content-stack", "value": "1100px" },
+      { "name": "newsletter-stack", "value": "860px" },
+      { "name": "navigation-mobile", "value": "760px" }
+    ]
+  },
+  "components": [
+    {
+      "name": "Primary Button",
+      "kind": "button",
+      "refersTo": "button-primary",
+      "description": "The primary verification or forward action.",
+      "html": "<button class=\"ds-btn-primary\">Check a message</button>",
+      "css": ".ds-btn-primary { min-height: 46px; padding: 0 1rem; border: 1px solid transparent; border-radius: 999px; background: #1d4ed8; color: #fff; font: 800 1rem Inter, system-ui, sans-serif; cursor: pointer; } .ds-btn-primary:hover { filter: brightness(1.05); } .ds-btn-primary:focus-visible { outline: 3px solid #2563eb; outline-offset: 2px; } .ds-btn-primary:active { filter: brightness(.96); }"
+    },
+    {
+      "name": "Secondary Button",
+      "kind": "button",
+      "refersTo": "button-secondary",
+      "description": "A lower-priority route that remains easy to find.",
+      "html": "<button class=\"ds-btn-secondary\">Browse guides</button>",
+      "css": ".ds-btn-secondary { min-height: 46px; padding: 0 1rem; border: 1px solid #dbe5ef; border-radius: 999px; background: #fff; color: #0b1220; font: 800 1rem Inter, system-ui, sans-serif; cursor: pointer; } .ds-btn-secondary:hover { background: #eff4fb; } .ds-btn-secondary:focus-visible { outline: 3px solid #2563eb; outline-offset: 2px; } .ds-btn-secondary:active { background: #e8f0ff; }"
+    },
+    {
+      "name": "Navigation CTA",
+      "kind": "nav",
+      "refersTo": "button-primary",
+      "description": "The persistent utility action in the site navigation.",
+      "html": "<nav class=\"ds-nav\"><a href=\"#\">Guides</a><a href=\"#\" class=\"ds-nav-cta\">Check a message</a></nav>",
+      "css": ".ds-nav { display: flex; align-items: center; gap: 1rem; font: 700 1rem Inter, system-ui, sans-serif; } .ds-nav a { color: #102033; text-decoration: none; } .ds-nav a:hover { text-decoration: underline; } .ds-nav a:focus-visible { outline: 3px solid #2563eb; outline-offset: 2px; border-radius: 3px; } .ds-nav .ds-nav-cta { margin-left: auto; padding: .55rem 1rem; border-radius: 999px; background: #1d4ed8; color: #fff; font-weight: 800; } .ds-nav .ds-nav-cta:hover { filter: brightness(1.05); text-decoration: none; }"
+    },
+    {
+      "name": "Search Field",
+      "kind": "input",
+      "refersTo": "input-search",
+      "description": "A quiet search control for finding scam topics.",
+      "html": "<label class=\"ds-search\"><span class=\"ds-sr-only\">Search guides</span><input placeholder=\"Search guides and scam types\"><button>Search</button></label>",
+      "css": ".ds-search { display: flex; gap: .75rem; align-items: center; padding: .95rem 1rem; border: 1px solid #dbe5ef; border-radius: 18px; background: #fff; font-family: Inter, system-ui, sans-serif; } .ds-search:focus-within { outline: 3px solid #2563eb; outline-offset: 2px; } .ds-search input { min-width: 0; flex: 1; border: 0; outline: 0; color: #102033; font: 400 1rem Inter, system-ui, sans-serif; } .ds-search button { min-height: 40px; padding: 0 .9rem; border: 0; border-radius: 999px; background: #0b1220; color: #fff; font: 800 .9rem Inter, system-ui, sans-serif; cursor: pointer; } .ds-search button:hover { background: #152033; } .ds-sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0,0,0,0); }"
+    },
+    {
+      "name": "Briefing Card",
+      "kind": "card",
+      "refersTo": "card",
+      "description": "The recurring editorial container for a focused unit of information.",
+      "html": "<article class=\"ds-card\"><h3>Practical checks</h3><p>Fast steps readers can use before they click, pay or share information.</p></article>",
+      "css": ".ds-card { padding: 1.25rem; border: 1px solid #dbe5ef; border-radius: 26px; box-shadow: 0 16px 50px rgba(11,18,32,.08); background: #fff; color: #102033; font-family: Inter, system-ui, sans-serif; } .ds-card h3 { margin: .15rem 0 .5rem; color: #0b1220; font-size: 1.15rem; line-height: 1.08; letter-spacing: -.035em; } .ds-card p { margin: 0; color: #5b6878; line-height: 1.65; } .ds-card:hover { border-color: #c2d2e3; }"
+    },
+    {
+      "name": "Category Chip",
+      "kind": "chip",
+      "refersTo": "badge",
+      "description": "A compact classification marker for scan-friendly context.",
+      "html": "<span class=\"ds-chip\">Payment scams</span>",
+      "css": ".ds-chip { display: inline-flex; align-items: center; padding: .36rem .7rem; border: 1px solid #cfe0ff; border-radius: 999px; background: #e8f0ff; color: #163373; font: 700 .88rem Inter, system-ui, sans-serif; }"
+    },
+    {
+      "name": "Safety Notice",
+      "kind": "custom",
+      "refersTo": "notice",
+      "description": "A contained warning that identifies a real risk without panic styling.",
+      "html": "<aside class=\"ds-notice\"><strong>Take care</strong><p>Do not use a contact route supplied by the suspicious message.</p></aside>",
+      "css": ".ds-notice { padding: 1rem 1.1rem; border-left: 4px solid #b91c1c; border-radius: 16px; background: #fff1f2; color: #102033; font-family: Inter, system-ui, sans-serif; } .ds-notice strong { color: #b91c1c; } .ds-notice p { margin: .4rem 0 0; }"
+    },
+    {
+      "name": "Checker Verdict",
+      "kind": "custom",
+      "refersTo": "verdict-scam",
+      "description": "The checker outcome, designed to make a conclusion and its next steps legible.",
+      "html": "<div class=\"ds-verdict\"><strong>Likely scam</strong><p>Pause and verify through an official route.</p></div>",
+      "css": ".ds-verdict { padding: .9rem 1.1rem; border: 1px solid #fca5a5; border-radius: 16px; background: #fff1f2; color: #991b1b; font-family: Inter, system-ui, sans-serif; } .ds-verdict strong { font-size: 1.05rem; } .ds-verdict p { margin: .35rem 0 0; line-height: 1.55; }"
+    }
+  ],
+  "narrative": {
+    "northStar": "The UK Consumer Safety Briefing",
+    "overview": "Beat The Scam feels like a calm, well-prepared briefing rather than an alarm. It pairs dark navy areas of authority with airy blue-grey reading surfaces, letting readers orient themselves before they act. The system is intentionally familiar and plain-spoken: it needs to support people making safety decisions under pressure, not reward prolonged attention.\n\nThe interface uses generous rounded containers, clear structural borders and soft ambient lift to make complex information approachable. Strong blue is reserved for actions and links; danger red marks genuine warnings rather than adding drama. Type is compactly confident, with large, direct headings and comfortably readable body copy.",
+    "keyCharacteristics": ["Calm, protective authority rather than fear-based urgency.", "High-clarity editorial structure for stressed, mobile-first readers.", "Softly lifted white panels against a cool paper background.", "One decisive action colour, used with restraint."],
+    "rules": [
+      { "name": "The Signal-Meaning Rule", "body": "Blue asks the reader to act; red warns of harm; green confirms safety or completion. Do not use these colours decoratively or interchange their meanings.", "section": "colors" },
+      { "name": "The Plain-Reading Rule", "body": "Keep type functional: use hierarchy to clarify a decision or sequence, never to turn safety information into spectacle.", "section": "typography" },
+      { "name": "The One-Clear-Route Rule", "body": "Every dense panel should make its primary action or verification route visually obvious before adding secondary options.", "section": "layout" },
+      { "name": "The Ambient-Reassurance Rule", "body": "Shadows should suggest a stable surface resting above the page, never a floating control demanding attention.", "section": "elevation" }
+    ],
+    "dos": ["Do preserve the cool-paper background, white briefing panels and ambient lift as the baseline reading environment.", "Do use Authority Navy to establish trust-bearing regions and Verification Blue for the clearest available next action.", "Do keep headings short, direct and visibly distinct from explanatory copy.", "Do maintain visible keyboard focus and mobile-first linear fallbacks for all grid-based sections.", "Do reserve semantic warning, recovery and success colours for their established reader-safety meanings."],
+    "donts": ["Don't use panic styling, flashing urgency, aggressive contrast or decorative warning red to manufacture attention.", "Don't introduce a second competing action colour or treat blue, red and green as interchangeable decoration.", "Don't replace the rounded, softly bordered panel language with hard-edged dashboard chrome.", "Don't hide essential verification routes behind hover-only, icon-only or colour-only cues.", "Don't let dense card grids survive unchanged on narrow screens; they must collapse to the single reading flow."]
+  }
+}

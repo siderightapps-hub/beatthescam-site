@@ -1211,130 +1211,74 @@ def render_card(post):
 # ─── PAGE RENDERERS ────────────────────────────────────────────────────────
 
 def render_home(site, posts, categories, research_reports=None):
-    post_count = len(posts)
-    cat_count  = len(categories)
+    featured = "".join(render_card(p) for p in posts[:3])
 
-    featured = "".join(render_card(p) for p in posts[:6])
-
-    category_cards = []
-    for cat, items in sorted(categories.items(), key=lambda x: len(x[1]), reverse=True)[:8]:
-        label = category_label(cat)
-        desc  = category_description(cat)
-        category_cards.append(f'''
-        <article class="card category-card">
-          <h3><a href="/categories/{slugify(cat)}/">{html.escape(label)}</a></h3>
-          <p>{html.escape(desc)}</p>
-        </article>
-        '''.strip())
-
-    latest_links = "".join(
-        f'<li><a href="/guides/{p["slug"]}/">{html.escape(p["title"])}</a></li>'
-        for p in posts[:5]
-    )
-
-    faq_pairs = [
-        ("Does Beat the Scam verify messages for me?",
-         "The site provides educational checklists and examples so readers can verify suspicious messages themselves through official channels. The AI scam checker can give you an instant verdict on a specific message."),
-        ("Can social media ads or polished emails still be scams?",
-         "Yes. Presentation quality is not proof of legitimacy. Verification path matters more than appearance."),
-        ("What should I do first if I already paid a scammer?",
-         "Contact your bank or card issuer immediately, preserve evidence, secure compromised accounts, and stop further payments while you verify the situation.")
+    channel_categories = [
+        ("sms", "Text messages"),
+        ("email", "Emails"),
+        ("phone", "Phone calls"),
+        ("website", "Websites"),
+        ("payment", "Payment requests"),
     ]
-    faq_html = "".join(
-        f'<details><summary>{html.escape(q)}</summary><p>{html.escape(a)}</p></details>'
-        for q, a in faq_pairs
+    channel_links = "".join(
+        f'<a href="/categories/{slugify(category)}/">{html.escape(label)}</a>'
+        for category, label in channel_categories
+        if category in categories
     )
-
-    research_html = ""
-    if research_reports:
-        latest = research_reports[0]
-        bing = latest["bing_ai"]
-        google = latest["google_search"]
-        research_html = f'''
-    <section class="section" aria-labelledby="latest-research-heading">
-      <div class="wrap">
-        <div class="callout research-promo">
-          <div>
-            <div class="kicker">Original data · {html.escape(latest["published"])}</div>
-            <h2 id="latest-research-heading">Latest visibility research</h2>
-            <p>Our transparent monthly snapshot tracks how UK scam guidance appears in Google Search and in Bing-powered AI answers. The data, method and limitations are published for scrutiny.</p>
-            <div class="hero-actions">
-              <a class="btn btn-primary" href="/research/{html.escape(latest['slug'])}/">Read the latest report</a>
-              <a class="btn btn-secondary" href="/research/methodology/">See the research method</a>
-            </div>
-          </div>
-          <div class="research-promo-metrics" aria-label="Latest research headline figures">
-            <div><strong>{bing['total_citations']:,}</strong><span>Bing AI citations</span></div>
-            <div><strong>{google['impressions']:,}</strong><span>Google impressions</span></div>
-            <div><strong>{bing['cited_page_count']:,}</strong><span>pages cited by Bing AI</span></div>
-          </div>
-        </div>
-      </div>
-    </section>
-        '''
 
     content = f'''
     <section class="hero">
       <div class="wrap hero-grid">
         <div class="hero-panel">
-          <div class="kicker">UK Consumer Protection</div>
-          <h1>Check scams. Protect your money.</h1>
-          <p class="lead">Beat the Scam helps you review suspicious texts, emails, websites, calls, job offers, crypto pitches, and payment requests before money or data is lost.</p>
-          <div class="hero-actions">
-            <a class="btn btn-primary" href="/check/">Check a message</a>
-            <a class="btn btn-recovery" href="/recovery/">Recover after a scam</a>
-            <a class="btn btn-secondary" href="/guides/">Browse guides</a>
+          <h1>What happened?</h1>
+          <p class="lead">Choose the next safe step: check a suspicious message, or start recovery steps if you paid or shared details.</p>
+          <div class="triage-actions">
+            <a class="triage-choice triage-check" href="/check/"><span>I have a suspicious message</span><strong>Check a message</strong></a>
+            <a class="triage-choice triage-recovery" href="/recovery/"><span>I paid or shared details</span><strong>Start recovery steps</strong></a>
           </div>
-          <div class="hero-points">
-            <div class="hero-point"><strong>{post_count}</strong><span>guides published</span></div>
-            <div class="hero-point"><strong>{cat_count}</strong><span>scam categories</span></div>
-            <div class="hero-point"><strong>Free</strong><span>no account needed</span></div>
-          </div>
+          <p class="hero-browse"><a href="/guides/">Not sure? Browse scam types</a></p>
+          <p class="hero-reassurance">Free UK guidance. No account needed.</p>
+          <p class="hero-trust">Independent educational guidance · <a href="/methodology/">How we fact-check</a> · <a href="/disclaimer/">Not a substitute for your bank, card provider or the police</a></p>
         </div>
         <div class="hero-side">
+          <section class="callout">
+            <h2 class="hero-side-heading">Verify independently</h2>
+            <p>Find the organisation&#8217;s contact details yourself. Do not use the link, phone number, QR code or payment details in the message.</p>
+          </section>
           <section class="search-panel" id="search-start">
-            <h3>Search scam topics</h3>
-            <p class="search-note">Try terms like &#8220;Royal Mail text&#8221;, &#8220;job scam&#8221;, &#8220;bank transfer&#8221;, or &#8220;crypto withdrawal fee&#8221;.</p>
+            <h2 class="hero-side-heading">Look up a scam</h2>
+            <p class="search-note">Search a company name, wording or scam type. To check one message, choose &#8220;Check a message&#8221; above.</p>
             <form class="search-box" action="/guides/" method="get">
-              <input type="search" name="q" aria-label="Search scam guides" placeholder="Search guides and scam types">
+              <input type="search" name="q" aria-label="Search scam guides by name, wording or type" placeholder="e.g. ‘Royal Mail text’">
               <button class="btn btn-dark" type="submit">Search</button>
             </form>
           </section>
-          <section class="feature-panel">
-            <h3>Latest scam alerts</h3>
-            <ul class="list-clean">{latest_links}</ul>
-          </section>
-          <section class="callout">
-            <h3>Quick verification rule</h3>
-            <p>Never rely on the link, phone number, QR code, or payment details supplied by the suspicious message itself. Open the official route yourself.</p>
-          </section>
         </div>
       </div>
     </section>
-
-    <section class="section">
-      <div class="wrap">
-        <div class="stat-strip">
-          <div class="metric-card"><strong>Practical checks</strong><span>Fast steps you can use before clicking a link, paying a fee, or sharing personal information.</span></div>
-          <div class="metric-card"><strong>UK-focused advice</strong><span>Guides written for common scams targeting UK consumers, delivery services, marketplaces, and payment methods.</span></div>
-          <div class="metric-card"><strong>Plain-English alerts</strong><span>No jargon, no panic language, and no assumptions that every suspicious message is genuine.</span></div>
-          <div class="metric-card"><strong>AI scam checker</strong><span>Paste a suspicious message and get an instant analysis powered by Claude AI &#8212; free, no account needed.</span></div>
-        </div>
-      </div>
-    </section>
-
-    {research_html}
 
     <section class="section">
       <div class="wrap">
         <div class="section-head">
           <div>
-            <h2>Scam categories</h2>
-            <p>Find guides by scam type. Each category covers warning signs, verification steps, and what to do if you&#8217;ve already interacted.</p>
+            <h2>How did they contact you?</h2>
+            <p>Choose a contact method or payment request. Each guide has warning signs, safe checks and next steps.</p>
           </div>
           <a href="/categories/">View all categories</a>
         </div>
-        <div class="category-grid">{"".join(category_cards)}</div>
+        <nav class="home-channel-list" aria-label="Scam categories">{channel_links}</nav>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="wrap">
+        <h2>Four checks before you act</h2>
+        <div class="home-checklist">
+          <div class="item"><span class="icon-dot"></span><div><strong>Pause</strong><p>Scammers use urgency and secrecy. Take a moment before you act.</p></div></div>
+          <div class="item"><span class="icon-dot"></span><div><strong>Use an official route</strong><p>Open the official site or app yourself. Call published numbers, not the ones in the message.</p></div></div>
+          <div class="item"><span class="icon-dot"></span><div><strong>Keep codes and payment details private</strong><p>A security code can authorise an action. Treat it like a password.</p></div></div>
+          <div class="item"><span class="icon-dot"></span><div><strong>Stop before sending money</strong><p>Check bank transfer and crypto payments especially carefully.</p></div></div>
+        </div>
       </div>
     </section>
 
@@ -1342,8 +1286,8 @@ def render_home(site, posts, categories, research_reports=None):
       <div class="wrap">
         <div class="section-head">
           <div>
-            <h2>Latest guides</h2>
-            <p>Practical guides for the most commonly reported scams affecting UK consumers.</p>
+            <h2>Recent scam examples</h2>
+            <p>Use these when a pattern looks familiar.</p>
           </div>
           <a href="/guides/">Browse all guides</a>
         </div>
@@ -1351,59 +1295,9 @@ def render_home(site, posts, categories, research_reports=None):
       </div>
     </section>
 
-    <section class="section">
-      <div class="wrap">
-        <div class="checker-promo">
-          <div class="checker-promo-text">
-            <h2>Not sure about a message?</h2>
-            <p>Paste a suspicious text, email, URL, or job offer into the free AI scam checker and get an instant plain-English verdict &#8212; powered by Claude AI.</p>
-            <a class="btn btn-primary" href="/check/">Check a suspicious message &#8594;</a>
-          </div>
-          <div class="checker-promo-examples">
-            <p class="note"><strong>Works with:</strong></p>
-            <ul class="list-clean">
-              <li>Suspicious texts and SMS</li>
-              <li>Unexpected emails</li>
-              <li>Unfamiliar website URLs</li>
-              <li>Unusual payment requests</li>
-              <li>Job offers that seem too good</li>
-            </ul>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section class="section">
-      <div class="wrap grid-2">
-        <section>
-          <h2>How to spot a scam quickly</h2>
-          <div class="home-checklist">
-            <div class="item"><span class="icon-dot"></span><div><strong>Slow the interaction down</strong><p>Urgency and secrecy are common scam tools. Speed benefits the fraudster, not you.</p></div></div>
-            <div class="item"><span class="icon-dot"></span><div><strong>Verify through a clean route</strong><p>Open the official site or app yourself. Call published numbers, not the ones in the message.</p></div></div>
-            <div class="item"><span class="icon-dot"></span><div><strong>Protect one-time codes and payment details</strong><p>Security codes authorise actions. Treat them like passwords.</p></div></div>
-            <div class="item"><span class="icon-dot"></span><div><strong>Pause before irreversible payments</strong><p>Bank transfer and crypto payments need stronger checks than card payments.</p></div></div>
-          </div>
-        </section>
-        <section class="faq-panel">
-          <h2>Common questions</h2>
-          {faq_html}
-        </section>
-      </div>
-    </section>
-
-    <section class="section">
-      <div class="wrap">
-        <div class="section-head"><div><h2>About the site</h2></div></div>
-        <div class="trust-grid">
-          <article class="trust-card"><h3>Plain-English guidance</h3><p>Every guide is written to be understandable under pressure &#8212; short sections, clear headings, and practical next steps.</p></article>
-          <article class="trust-card"><h3>UK-specific content</h3><p>Guides focus on scams reported in the UK: HMRC impersonation, delivery fraud, bank transfer pressure, and UK marketplace platforms.</p></article>
-          <article class="trust-card"><h3>No scare tactics</h3><p>The site does not assume every suspicious message is a scam. It helps you verify systematically using official channels.</p></article>
-        </div>
-      </div>
-    </section>
     '''
 
-    schema = website_schema(site) + org_schema(site) + faq_schema(faq_pairs)
+    schema = website_schema(site) + org_schema(site)
     return make_base(
         content,
         title=f'{site["site_name"]} | Scam Alerts, Checks & Protection Guides',

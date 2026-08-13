@@ -1,7 +1,7 @@
 # Start here next session
 
-> **Last updated:** 2026-07-30
-> **Repository state:** the accuracy release is **APPLIED** and `dist/` is current.
+> **Last updated:** 2026-08-13
+> **Repository state:** the accuracy release, its two follow-on growth-audit content phases and a homepage interface refresh are **APPLIED**; `dist/` is current and the homepage passes its final accessibility, responsive and implementation audit.
 
 This is the short operational front door. `docs/project.md` is the detailed source of
 truth; dated audit and diversification documents are historical records and should not be
@@ -14,13 +14,17 @@ used as current punch lists.
 The large accuracy release is **applied, built and committed** — content, the two dependent
 code changes, the tests and the regenerated `dist/` landed as one commit so `main` never
 held an intermediate state. Every named Report Fraud mention now carries the Scottish
-route, consumer advice is nation-specific throughout, all thirteen category hubs are
-sourced, and one consolidation (`hermes-parcel-scam-text-uk` → `evri-delivery-scam-guide`)
-is declared on its own record.
+route, consumer advice is nation-specific throughout, all seventeen category hubs are
+sourced, and two consolidations are declared on their own records. The 11 August follow-on
+work strengthened the priority-guide link graph and aligned five guides with their verified
+category hubs; both changes were independently fact-checked before application. The homepage
+now begins with a two-route safety triage (check a suspicious message or begin recovery), then
+progresses through contact method, safe checks and recent examples. Its durable product and
+design references are `PRODUCT.md` and `DESIGN.md` at the repository root.
 
 | | |
 |---|---|
-| Source records / public guides | 186 / 185, one consolidation |
+| Source records / public guides | 187 / 185, two consolidations |
 | Deterministic audit (guides + hubs) | **0 BLOCK / 29 FLAG** |
 | Offline suites | 152 gate + 131 hub + 52 corpus + 50 Node = **385**, plus canon sync |
 
@@ -49,7 +53,7 @@ happened once and cost a full reissue to repair.
 machinery accumulated to apply 168 field edits. It was retired in favour of ordinary Git
 diffs validated as one combined state — which is what actually shipped.
 
-## Verified end-state (as committed)
+## Verified accuracy-release end-state (2026-07-30, historical baseline)
 
 | Scope | Result |
 |---|---|
@@ -161,16 +165,30 @@ Lessons that cost real rework this cycle:
 
 ---
 
-## Still queued after this release
+## Current growth and operations queue
 
-- **Nine linked-guide consistency packets** — guides whose live text should match the new
-  hubs: `gumtree-scam-uk-guide`, `preloved-scam-uk`, `fake-online-pharmacy-uk-scam`,
-  `iva-scam-uk`, `ponzi-scheme-uk-warning`, `google-voice-verification-scam`,
-  `charity-donation-scam-checklist`, `viagogo-scam-uk`, `chargeback-scam-uk`.
-- **Quarterly fact-checker**: `python3 scripts/fact_reverify.py --limit 3` smoke test, then
-  a full corpus run. Spends the API key — operator's call.
-- **PageSpeed / Core Web Vitals** capture (quota-limited).
-- **UK scam statistics** refresh due **October 2026** (`content/uk-scam-statistics.json`).
+- **Indexing monitoring:** Search Console validation is already running for the eight legacy
+  redirect-error URLs. Their current redirect chains were checked on 11 August and end in
+  `200` pages; do not submit a second validation. Recheck the validation result in about a
+  week. Continue to monitor the 21 `Crawled - currently not indexed` and 49 `Discovered -
+  currently not indexed` URLs as a group, not by repeatedly requesting indexing.
+- **Category hubs:** there are no missing hub records: `content/category-hubs.json` contains
+  all 17 normalised categories. The next hub work is a quality/traffic review using current
+  Search Console and Bing data, not bulk creation of more hubs.
+- **Authority and KPI evidence:** refresh the Search Console Links and Bing inbound-link
+  exports; add dated GA4, AdSense, Resend and affiliate snapshots to the buyer data room;
+  then run a small, relevant outreach batch against the UK scam-statistics resource. The
+  10 August Ahrefs Basic screenshot is a baseline only: Health Score 100, DR 2, 222
+  referring domains, about 2K visitors and no measured organic traffic/keywords.
+- **First Search Console opportunity:** monitor `/guides/bank-text-codes-not-arriving/`.
+  In the current three-month view, `halifax text messages not arriving` has 1,237 impressions
+  at average position 3.3 but zero clicks. A live SERP check found Halifax's own help and
+  status pages plus People-also-ask/AI surfaces ahead of general guidance, while the Beat The
+  Scam title already matches the query. Do not rewrite the page or create a competing guide
+  without a material new user need; compare again after a clean 28-day window.
+- **Quarterly fact-checker:** run `python3 scripts/fact_reverify.py --limit 3` smoke test,
+  then a full corpus run. This spends API credit and needs the operator's approval.
+- **UK scam statistics:** refresh is due **October 2026** (`content/uk-scam-statistics.json`).
 
 ## Operator decisions outstanding
 
@@ -180,8 +198,9 @@ Lessons that cost real rework this cycle:
 - **Restart content generation?** Both crons have `schedule:` commented out (the key
   itself, not just the cron line), preserving `workflow_dispatch`. Paused at the operator's
   request until audits came back clean; this release is what clean looks like.
-- **Re-submit to AdSense?** Deferred by the operator. Duplication blockers are resolved and
-  the corpus will be gate-clean.
+- **Re-submit to AdSense?** Do not resubmit. On 11 August the AdSense site review was already
+  active ("Getting ready"), with payment profile, ads settings, ads.txt and certified CMP
+  confirmed and no current Policy Centre restriction. Wait for Google's decision.
 
 ---
 
@@ -201,11 +220,10 @@ Lessons that cost real rework this cycle:
 
 ## Current verified baseline (unchanged from 2026-07-25 unless noted)
 
-- 186 guide source records; 185 indexable guides after one documented consolidation; all
+- 187 guide source records; 185 indexable guides after two documented consolidations; all
   185 carry `sources_checked` and `quick_answer`.
-- 17 normalised categories, **13 of which have a hub** — all thirteen live and sourced since the
-  2026-07-30 release. **Four categories still have no hub: `dating`, `employment`, `social`,
-  `utility`.** Do not read "all 13 hubs live" as "hubs are finished".
+- 17 normalised categories and **17 authored, sourced hub records**. This means the category
+  layer exists everywhere; it does not mean every hub has equal search demand or outreach value.
 - AI scam checker, Google CMP, consent-aware GA4 events and Resend double opt-in are live.
 - `/research/uk-scam-statistics/` is live with 28 official records.
 - Review-PR pipeline runs Tue/Fri — **currently paused**, see decisions above.

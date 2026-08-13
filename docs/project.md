@@ -8,9 +8,9 @@
 > 3. Potential buyers / acquirers — full due-diligence briefing on the asset.
 > 4. Contractors, future editors, security reviewers — onboarding pack.
 >
-> **Last updated:** 2026-07-25
-> **Domain age:** ~5 months (registered February 2026)
-> **Site state:** 186 guide source records and 185 indexable guides after one documented consolidation, 17 normalised categories, 228 generated HTML files and 226 indexable canonical pages as validated on 2026-07-25. All 185 rendered guides carry `sources_checked` and a `quick_answer` box (with speakable schema); an original UK Scam Statistics dataset is live at `/research/uk-scam-statistics/` (quarterly refresh, next October 2026). The AI checker, consent-aware conversion events and Resend double-opt-in newsletter are live. Original research, Search Console/Bing AI snapshots, commercial ledgers and a buyer data-room structure are present. No `auto-content` PR is open after reviewed Hinge guide PR #61 merged. **Technical build is mature and stable; the open work is commercial evidence, external-account status, authority growth, sale-readiness documentation and the DMARC enforcement ramp.** Video production was discontinued 2026-06-15; see `docs/video-pipeline.md`.
+> **Last updated:** 2026-08-13
+> **Domain age:** ~6 months (registered February 2026)
+> **Site state:** 187 guide source records and 185 indexable guides after two documented consolidations, 17 normalised categories with 17 authored hub records, and 228 generated HTML files / 226 indexable canonical pages on the last full generated-site validation. All 185 rendered guides carry `sources_checked` and a `quick_answer` box (with speakable schema); an original UK Scam Statistics dataset is live at `/research/uk-scam-statistics/` (quarterly refresh, next October 2026). The AI checker, consent-aware conversion events and Resend double-opt-in newsletter are live. The 11 August growth-audit follow-on work improved priority-guide linking and applied five independently fact-checked guide/hub consistency corrections; the 13 August homepage refresh introduced a safety-first triage flow and a documented visual system. **Technical build is mature and stable; the open work is commercial evidence, external-account outcomes, authority growth, sale-readiness evidence, fact re-verification and the DMARC enforcement ramp.** Video production was discontinued 2026-06-15; see `docs/video-pipeline.md`.
 > **Maintainer:** Alex — SideRight Apps (GitHub: `siderightapps-hub`)
 
 ---
@@ -58,7 +58,7 @@
 
 A free, UK-focused consumer-protection publication that:
 
-1. Publishes plain-English **scam awareness guides** (184 source records and 183 indexable guides after one documented consolidation).
+1. Publishes plain-English **scam awareness guides** (187 source records and 185 indexable guides after two documented consolidations).
 2. Offers a **free AI-powered Scam Checker** at `/check/` where users paste suspicious messages and receive a verdict, confidence score, red flags, green flags, recommended actions, and reporting links.
 3. Routes users to legitimate UK reporting bodies (Report Fraud / `reportfraud.police.uk`, NCSC, FCA Firm Checker, Take Five, Citizens Advice).
 4. Is being prepared to monetise through Google AdSense, affiliate partnerships and future newsletter/sponsorship channels; no revenue should be claimed until supported by platform statements or receipts.
@@ -112,7 +112,7 @@ A free, UK-focused consumer-protection publication that:
 |---|---|---|
 | Site generation | **Custom Python static site generator** (`scripts/build.py`) | NOT Next.js, NOT Hugo, NOT Jekyll. Bespoke Python that reads `content/posts.json` + `content/site.json` and renders into `dist/` using `templates/base.html`. |
 | Templating | Single `templates/base.html` shell with `{{placeholder}}` substitution | Simple, fast, no framework dependency. |
-| Source of truth (content) | `content/posts.json` | 186 source records; 185 indexable guides after one documented consolidation (grows via the gated Tue/Fri cron). |
+| Source of truth (content) | `content/posts.json` | 187 source records; 185 indexable guides after two documented consolidations. Scheduled generation is currently paused; workflows remain available for operator-triggered, human-reviewed publication. |
 | Hosting / CDN | **Netlify** (Personal plan — $9/month, 1000 build credits) | Auto-deploys on push to `main`. |
 | Serverless functions | **Netlify Functions** (5: `check-scam`, `subscribe`, `confirm-subscribe`, `unsubscribe`, `csp-report`) | AI checker proxy + double opt-in newsletter (subscribe/confirm/unsubscribe) + CSP violation collector. Functions now carry a `package.json` (`@netlify/blobs`). |
 | AI for scam checker | **Anthropic Claude — `claude-haiku-4-5-20251001`** | Returns structured JSON verdict. Durable per-IP rate limit + daily spend cap (`DAILY_CALL_CAP=2000`/UTC-day) via Netlify Blobs. |
@@ -151,7 +151,7 @@ beatthescam-site/
 │   ├── fact_reverify.py               # Quarterly corpus-wide re-verification (deterministic re-scan + web-search LLM pass) — never edits posts.json
 │   └── ...                            # + 13 more: auth_google.py, check_twitter_auth.py, generate_trending_topics.py, generate_video.py, get_youtube_refresh_token.py, gsc_report.py, merge_new_posts.py, add_bank_codes_post.py, recover_courier_guides.py, recover_purged_pages_2.py, upload_to_youtube.py (see `ls scripts/` for the full current list)
 ├── content/
-│   ├── posts.json                     # All 186 guide source records (source of truth)
+│   ├── posts.json                     # All 187 guide source records (source of truth)
 │   ├── uk-scam-statistics.json        # Curated UK scam statistics dataset → /research/uk-scam-statistics/ (quarterly refresh)
 │   ├── site.json                      # Site config (domain, AdSense ID, GA4 ID, etc.)
 │   ├── affiliates.json                # Affiliate products config
@@ -547,6 +547,8 @@ Semrush exposes a Looker Studio connector under the Site Audit "Export" menu. No
 - **Re-check cadence:** spot-check the homepage + a fresh guide on PageSpeed monthly, and after any material template or third-party script change. URL pattern: `https://pagespeed.web.dev/analysis?url=<encoded-url>`.
 - **API rate-limit gotcha:** the public PageSpeed Insights API (`googleapis.com/pagespeedonline/v5/runPagespeed`) is aggressively rate-limited per IP for anonymous callers — Three sequential calls from a single IP returned HTTP 429. For automated re-checks, get a free API key at <https://console.cloud.google.com/apis> (PageSpeed Insights API) and pass it as `&key=...`. Manual checks via `pagespeed.web.dev/analysis` UI have no such limit.
 
+- **Manual mobile capture, 11 August 2026 (with live ads/CMP):** homepage 96 (LCP 2.6s, TBT 80ms, CLS 0); sampled guide 89 (LCP 2.9s, TBT 230ms, CLS 0); category hub 88 (LCP 3.1s, TBT 230ms, CLS 0); `/check/` 96 (LCP 2.6s, TBT 90ms, CLS 0); research page 96 (LCP 2.7s, TBT 10ms, CLS 0). No CrUX field data was available. The guide/category TBT variance is chiefly third-party ads/CMP; all sampled pages had zero CLS. No code change is currently justified from this capture alone.
+
 ---
 
 ## 10. Monetisation — AdSense, Affiliates, Sponsorships
@@ -557,7 +559,7 @@ Repository evidence reviewed 2026-07-19. External dashboard states remain unknow
 
 | Channel | Last repository-supported state | Evidence needed next |
 |---|---|---|
-| **Google AdSense** | Last recorded as in review since ~2026-04-21 | Current AdSense home/Policy Centre decision and first statement if approved |
+| **Google AdSense** | Review active on 11 August 2026 ("Getting ready"); payment profile, ad settings, ads.txt and certified CMP confirmed; no current Policy Centre restriction | Wait for Google's decision; retain dated decision/statement evidence if approved |
 | **Experian IdentityPlus (via Awin)** | Initial application rejected; reapply window opened 2026-06-12 | Current application/programme decision and approved tracking terms |
 | **Norton 360 (via Impact/CJ)** | Impact account verified; programme/CJ outcome not recorded | Current programme decisions and approved tracking terms |
 | **Which? Legal (direct outreach)** | Draft outreach exists; no approval recorded | Written partner response and commercial terms |
@@ -573,7 +575,7 @@ Repository evidence reviewed 2026-07-19. External dashboard states remain unknow
 - [x] Cookie Policy page live (`/cookies/`)
 - [x] `ads.txt` served and Authorised at `/ads.txt`
 - [x] `robots.txt` does not block `Mediapartners-Google` or `AdsBot-Google`
-- [x] Original, regularly-published content (183 indexable guides, gated daily publishing pipeline)
+- [x] Original, human-review-gated content (185 indexable guides; scheduled generation currently paused)
 - [x] Working HTTPS with valid certificate
 - [x] Site has clear navigation and footer
 
@@ -639,7 +641,7 @@ multiplex_unit:       <add after creation>
 
 ### Current state
 
-- **Published guides:** 183 indexable guides across 17 normalised categories (184 source records before consolidation)
+- **Published guides:** 185 indexable guides across 17 normalised categories (187 source records, two declared consolidations)
 - **Queue:** 26 remaining topics in `content/daily-publish-queue.csv` (~26 publishing days at 1/day)
 - **Avg article length:** 900–1,200 words (post-rewrite of 20 thin guides)
 - **Structure per article:** 6 sections × 120–180 words + 4 FAQs + sidebar (Fast checks, Related guides, Report this scam, Checker CTA, Affiliate card) + FAQ schema
@@ -774,6 +776,30 @@ This site is engineered for three search modes simultaneously:
 - Not indexed: 42 (28 "discovered – currently not indexed", 10 404s now redirected, 3 page-with-redirect now resolved, 1 crawled-not-indexed)
 - Core Web Vitals: no CrUX data yet (insufficient traffic)
 
+### Current indexing and discovery snapshot (11 August 2026)
+
+The older performance snapshots above remain historical context. The current Google Search
+Console property showed 172 indexed and 142 non-indexed URLs. The non-indexed groups were:
+50 `Page with redirect` (expected legacy redirects), 21 `Crawled - currently not indexed`,
+49 `Discovered - currently not indexed`, 10 `Not found (404)` already in validation, eight
+legacy `Redirect error` URLs, one `Blocked by robots.txt`, two canonical-selection cases and
+one historical `5xx` report.
+
+The eight redirect-error examples were manually checked on 11 August: each current chain
+ends at an HTTP 200 page, including the old Gumtree, chargeback, Google Voice, Yodel,
+romance, ticket-resale and website-category URLs. Search Console validation for that group
+was already started; wait for it to finish rather than submitting another validation. The
+current `refund-scam-uk` response is a 301 to `/categories/payment/`, so its old 5xx report
+is also treated as historical until Search Console re-crawls it.
+
+The current three-month Web Performance view (10 May–9 August, last data update 12 August)
+reported 29 clicks, 6,334 impressions, 0.5% CTR and average position 20.9. The clearest
+single opportunity is `/guides/bank-text-codes-not-arriving/`: the query `halifax text
+messages not arriving` had 1,237 impressions, average position 3.3 and zero clicks. The
+live SERP is dominated by Halifax's own help and status pages plus People-also-ask/AI
+surfaces, while the existing title already matches the query. Monitor a clean 28-day window;
+do not rewrite this page or create a competing guide merely to repeat the query.
+
 ### Structural SEO foundations (✅ already in place)
 
 - Canonical URLs on every page
@@ -816,7 +842,13 @@ Near-miss query strategy:
 
 ### Category hub strategy
 
-The 17 categories normalised in `CATEGORY_CANON` give us 17 potential head-term ranking pages. **Top 3 categories by article count should be built out first** as 600–800 word hubs:
+The 17 categories normalised in `CATEGORY_CANON` now have 17 authored hub records. The next
+step is not further bulk hub creation: use current Search Console impressions, Bing citations
+and guide counts to improve the hubs with the strongest real demand. Prioritise the largest
+clusters first (SMS, email, marketplace, travel, payment and phone), while retaining the
+smaller dating, employment, social and utility hubs as clear navigation and task pages.
+
+Each hub should remain a useful head-term page with:
 - Clear scope statement
 - 3–4 paragraphs on common patterns
 - Full link list to every guide in category
@@ -960,11 +992,24 @@ Per Google's [AI optimization guide](https://developers.google.com/search/docs/f
 
 ### Domain Authority improvement plan
 
-DA isn't a Google metric but is a useful proxy. Realistic 12-month target: **DA 25–35** from current ~5–10. Path:
+DA isn't a Google metric but is a useful proxy. The owner-provided Ahrefs Basic screenshot
+from 10 August 2026 records Health Score 100, DR 2, 222 referring domains, about 2K visitors
+and no measured organic traffic or keywords. Treat this as a dated third-party baseline, not
+as Google traffic evidence. The priority is the quality and relevance of earned referring
+domains, referral sessions and citations—not a target DR alone. Path:
 - 50+ referring domains from contextual links
 - 5+ links from DA 50+ sources (Which?, MoneySavingExpert, a regional newspaper)
 - Steady internal-link expansion via category hubs
 - Continued original content (>200 guides by month 12)
+
+### Search Console link baseline (12 August 2026)
+
+Search Console currently reports 112 external links. Its top linking site is
+`beatthescam.co.uk`, accounting for those 112 links in the report, so this is not evidence of
+a diversified earned-link profile. The top linked destination pages are the shopping,
+email, privacy, crypto and cookies pages. Record a dated Links export before updating this
+baseline, and focus outreach on one original research asset rather than trying to inflate a
+raw referring-domain count.
 
 ### Disavow Policy ✅ Live since 2026-05-30
 
@@ -1269,8 +1314,9 @@ A short credits file at `/humans.txt`. Useful for buyers / future contractors. O
 
 ### Daily (automated)
 
-- ✅ 05:07 UTC — Daily AI publish workflow: generates from the queue, runs `content_gate.py`, builds, then **opens a review PR** (label `auto-content`) instead of publishing directly — nothing goes live until the operator merges it.
-- ✅ 05:23 UTC — Search Console article generator: same gate → build → **review PR** flow (fails loudly on a dead GSC token, doesn't silently no-op).
+- ⏸️ The Tue/Fri scheduled publish and Search Console workflows are currently paused; the
+  `schedule:` keys are commented out. They remain available through `workflow_dispatch` and
+  must still open a human-review PR (`auto-content`) rather than publishing directly.
 - ✅ Tweet on publish — handled by a separate workflow, `tweet-on-publish.yml`, triggered by the post-merge push to `main` (not by either daily cron itself); tweets only the slug(s) added in that push.
 
 ### Weekly (automated)
@@ -1282,7 +1328,13 @@ A short credits file at `/humans.txt`. Useful for buyers / future contractors. O
 - Reply to any contact-form / `hello@` emails
 - Reddit / Quora — 3–5 contributions per week
 - Outreach — 5–10 link-insertion / guest-post emails per week
-- Search Console — glance at queries, look for new near-miss opportunities
+- Search Console — glance at queries, look for new near-miss opportunities and check the
+  already-running redirect-error validation; do not repeatedly request indexing or restart
+  validation while Google is processing it.
+- Record one dated KPI snapshot: GSC clicks/impressions/CTR/position, GA4 users and
+  `scam_check_success`, Bing citations, new referring domains/referral sessions, and any
+  AdSense, Resend or affiliate movement. Store the underlying export or screenshot with the
+  buyer-data-room evidence rather than copying unsupported totals into narrative documents.
 
 ### Monthly
 
@@ -1436,6 +1488,11 @@ Decisions reached in prior sessions that future Claude sessions should preserve,
 
 ## 21. Outstanding Roadmap
 
+### Recently completed (2026-08-13 — homepage safety-triage and interface-system refresh)
+
+- **Homepage flow refreshed:** the primary landing route now distinguishes a suspicious message from a payment/details incident before presenting browse, verification and search routes. The follow-on sequence is contact method, four safe checks and recent examples, preserving a calm UK consumer-safety briefing tone.
+- **Interface system documented and verified:** `PRODUCT.md`, `DESIGN.md` and `.impeccable/` record the product, visual tokens and interface intent. The homepage passed a final 20/20 technical audit: logical H1→H2→H3 structure, visible keyboard focus, reduced-motion behaviour, responsive mobile navigation and no implementation-detector findings.
+
 ### Recently completed (2026-07-24/25 — second full audit + remediation shipped at `5b935f85e`)
 
 - **Fresh 15-agent full audit** (all 186 guides live fact-checked + technical SEO + AdSense + AI visibility, ignoring prior audits per operator instruction): corpus 184/186 clean (3 findings in 2 guides — both fixed), AdSense PASS_WITH_FIXES with zero blockers, no HIGH technical-SEO issues, AI visibility already top-tier. The "4 thin guides" and "4 cannibalisation groups" flags both proved non-issues on deterministic re-measurement/GSC data (see Section 20 gotcha 38).
@@ -1540,13 +1597,13 @@ Superseded by [`docs/next-session.md`](next-session.md), which is updated far mo
 
 ## 22. Asset Valuation & Acquisition Brief
 
-> Last reconciled: 2026-07-19. Maintained for potential buyer/acquirer briefings. Evidence index: [`docs/buyer-data-room/`](buyer-data-room/README.md).
+> Last reconciled: 2026-08-12. Maintained for potential buyer/acquirer briefings. Evidence index: [`docs/buyer-data-room/`](buyer-data-room/README.md).
 
 ### Current asset perimeter
 
-- Domain: `beatthescam.com`, registered February 2026 (approximately five months old at this review).
+- Domain: `beatthescam.com`, registered February 2026 (approximately six months old at this review).
 - Repository and generated site, including the static-site generator and Netlify Functions.
-- 184 guide records in `content/posts.json`; 183 indexable guides after one documented Hermes-to-Evri consolidation.
+- 187 guide records in `content/posts.json`; 185 indexable guides after two documented consolidations.
 - AI scam checker with durable rate limits, daily cap and UK reporting-link allow-list.
 - Human-review-gated content pipeline, source canon, claim manifests, correction log and quarterly reverification workflow.
 - Public research section, transparent methodology and retained Search Console/Bing AI snapshots.
