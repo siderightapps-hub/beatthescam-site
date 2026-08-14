@@ -59,6 +59,14 @@ body{
   color:var(--text);
   background:linear-gradient(180deg,var(--bg-raised) 0%, var(--bg) 30%, var(--bg) 100%);
   line-height:1.65;
+  /* The consent bar is position:fixed, so while it is on screen it covers the
+     last ~110px (desktop) / ~165px (mobile) of the page — including the footer's
+     Trust & legal links and the Cookie settings button that reopens it. app.js
+     measures the visible bar and sets --consent-offset so the page can still be
+     scrolled clear of it; the property is removed on dismissal. Padding at the
+     end of the document extends the scroll range without moving any content
+     above it, so appearing at the 2s fallback timeout costs no layout shift. */
+  padding-bottom:var(--consent-offset,0);
 }
 a{color:var(--accent);text-decoration:none}
 a:hover{text-decoration:underline}
@@ -243,13 +251,12 @@ p{margin:.75rem 0}
   .cookie-banner{left:.75rem;right:.75rem;bottom:.75rem;width:auto;transform:none;display:grid;grid-template-columns:minmax(0,1fr) auto;gap:.75rem;align-items:end;padding:.85rem .9rem}
   .cookie-banner p{font-size:.85rem;line-height:1.4}
   .cookie-actions{flex-wrap:nowrap;gap:.45rem}
-  .cookie-actions .btn{min-height:42px;padding:0 .8rem}
+  .cookie-actions .btn{min-height:46px;padding:0 .8rem}
 }
 
 .category-card p{margin-bottom:0}
 .link-button{appearance:none;border:none;background:none;padding:0;color:var(--accent);font:inherit;font-weight:700;cursor:pointer}
 .link-button:hover{text-decoration:underline}
-.cookie-status{display:none}
 
 .category-card .eyebrow{display:none !important}
 

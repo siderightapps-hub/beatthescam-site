@@ -14,7 +14,6 @@
   const accept = document.getElementById('cookieAccept');
   const reject = document.getElementById('cookieReject');
   const openSettings = document.getElementById('openCookieSettings');
-  const status = document.getElementById('cookieStatus');
 
   function safeGet(key){
     try { return window.localStorage.getItem(key); } catch (err) { return null; }
@@ -22,17 +21,6 @@
 
   function safeSet(key, value){
     try { window.localStorage.setItem(key, value); return true; } catch (err) { return false; }
-  }
-
-  function updateStatus(mode){
-    if(!status) return;
-    if(mode === 'accepted'){
-      status.textContent = 'Non-essential cookies are enabled.';
-    } else if(mode === 'rejected'){
-      status.textContent = 'Non-essential cookies are disabled.';
-    } else {
-      status.textContent = 'No choice saved yet.';
-    }
   }
 
   function consentAccepted(){
@@ -91,13 +79,31 @@
     }
   }
 
-  function hideBanner(){ if(banner){ banner.hidden = true; banner.setAttribute('aria-hidden','true'); } }
-  function showBanner(){ if(banner){ banner.hidden = false; banner.setAttribute('aria-hidden','false'); } }
+  // The banner is position:fixed, so while it shows it sits over the end of the
+  // page — the footer's Trust & legal links and the Cookie settings button that
+  // reopens it. Reserve exactly the height it occupies (bar + its bottom inset)
+  // as body padding so that content stays reachable, and release it on dismissal.
+  function syncConsentOffset(){
+    const root = document.documentElement;
+    if(!banner || banner.hidden){
+      root.style.removeProperty('--consent-offset');
+      return;
+    }
+    const box = banner.getBoundingClientRect();
+    const inset = Math.max(0, window.innerHeight - box.bottom);
+    root.style.setProperty('--consent-offset', Math.ceil(box.height + inset * 2) + 'px');
+  }
+
+  function hideBanner(){ if(banner){ banner.hidden = true; banner.setAttribute('aria-hidden','true'); syncConsentOffset(); } }
+  function showBanner(){ if(banner){ banner.hidden = false; banner.setAttribute('aria-hidden','false'); syncConsentOffset(); } }
+
+  // The bar reflows between the one-line desktop layout and the stacked mobile
+  // grid, so the reserved space has to be re-measured, not cached.
+  window.addEventListener('resize', syncConsentOffset);
 
   function setPreference(mode){
     safeSet(storageKey, mode);
     applyConsent(mode);
-    updateStatus(mode);
     hideBanner();
   }
 
@@ -122,10 +128,8 @@
     var current = safeGet(storageKey);
     if(current === 'accepted' || current === 'rejected'){
       applyConsent(current);
-      updateStatus(current);
       hideBanner();
     } else {
-      updateStatus(null);
       showBanner();
     }
   }

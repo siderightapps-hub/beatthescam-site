@@ -1,16 +1,17 @@
 (function(){const navToggle=document.querySelector('.nav-toggle');const nav=document.getElementById('site-nav');if(navToggle&&nav){navToggle.addEventListener('click',function(){const expanded=navToggle.getAttribute('aria-expanded')==='true';navToggle.setAttribute('aria-expanded',String(!expanded));nav.classList.toggle('is-open');});}
-const storageKey='bts_cookie_pref_v1';const banner=document.getElementById('cookieBanner');const accept=document.getElementById('cookieAccept');const reject=document.getElementById('cookieReject');const openSettings=document.getElementById('openCookieSettings');const status=document.getElementById('cookieStatus');function safeGet(key){try{return window.localStorage.getItem(key);}catch(err){return null;}}
+const storageKey='bts_cookie_pref_v1';const banner=document.getElementById('cookieBanner');const accept=document.getElementById('cookieAccept');const reject=document.getElementById('cookieReject');const openSettings=document.getElementById('openCookieSettings');function safeGet(key){try{return window.localStorage.getItem(key);}catch(err){return null;}}
 function safeSet(key,value){try{window.localStorage.setItem(key,value);return true;}catch(err){return false;}}
-function updateStatus(mode){if(!status)return;if(mode==='accepted'){status.textContent='Non-essential cookies are enabled.';}else if(mode==='rejected'){status.textContent='Non-essential cookies are disabled.';}else{status.textContent='No choice saved yet.';}}
 function consentAccepted(){if(safeGet(storageKey)==='accepted')return true;var dl=window.dataLayer||[];for(var i=dl.length-1;i>=0;i--){var item=dl[i];if(item&&item[0]==='consent'&&item[1]==='update'&&item[2]&&typeof item[2].analytics_storage==='string'){return item[2].analytics_storage==='granted';}}
 return false;}
 function trackEvent(name,params){if(typeof gtag!=='function'||!consentAccepted())return false;gtag('event',name,params||{});return true;}
 window.btsTrackEvent=trackEvent;var gdprApplies=null;function applyConsent(mode){const granted=mode==='accepted';const adGranted=granted&&gdprApplies===false;if(typeof gtag==='function'){gtag('consent','update',{ad_storage:adGranted?'granted':'denied',ad_user_data:adGranted?'granted':'denied',ad_personalization:adGranted?'granted':'denied',analytics_storage:granted?'granted':'denied'});}}
-function hideBanner(){if(banner){banner.hidden=true;banner.setAttribute('aria-hidden','true');}}
-function showBanner(){if(banner){banner.hidden=false;banner.setAttribute('aria-hidden','false');}}
-function setPreference(mode){safeSet(storageKey,mode);applyConsent(mode);updateStatus(mode);hideBanner();}
+function syncConsentOffset(){const root=document.documentElement;if(!banner||banner.hidden){root.style.removeProperty('--consent-offset');return;}
+const box=banner.getBoundingClientRect();const inset=Math.max(0,window.innerHeight-box.bottom);root.style.setProperty('--consent-offset',Math.ceil(box.height+inset*2)+'px');}
+function hideBanner(){if(banner){banner.hidden=true;banner.setAttribute('aria-hidden','true');syncConsentOffset();}}
+function showBanner(){if(banner){banner.hidden=false;banner.setAttribute('aria-hidden','false');syncConsentOffset();}}
+window.addEventListener('resize',syncConsentOffset);function setPreference(mode){safeSet(storageKey,mode);applyConsent(mode);hideBanner();}
 var cmpTookOver=false;function deferToCmp(){if(cmpTookOver)return;cmpTookOver=true;hideBanner();}
-function showFallbackBanner(){if(cmpTookOver)return;var current=safeGet(storageKey);if(current==='accepted'||current==='rejected'){applyConsent(current);updateStatus(current);hideBanner();}else{updateStatus(null);showBanner();}}
+function showFallbackBanner(){if(cmpTookOver)return;var current=safeGet(storageKey);if(current==='accepted'||current==='rejected'){applyConsent(current);hideBanner();}else{showBanner();}}
 function registerTcfListener(){try{window.__tcfapi('addEventListener',2,function(tcData,success){if(!success||!tcData)return;if(typeof tcData.gdprApplies==='boolean'){var wasUnknown=(gdprApplies===null);gdprApplies=tcData.gdprApplies;if(wasUnknown&&gdprApplies===false&&!cmpTookOver){var stored=safeGet(storageKey);if(stored==='accepted'){applyConsent(stored);}}}
 if(tcData.eventStatus==='cmpuishown'||tcData.eventStatus==='useractioncomplete'||(tcData.gdprApplies===true&&tcData.tcString)){deferToCmp();}});}catch(e){}}
 (function pollForTcf(attemptsLeft){if(typeof window.__tcfapi==='function'){registerTcfListener();return;}
