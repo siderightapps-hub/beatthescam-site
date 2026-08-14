@@ -1,0 +1,15 @@
+{
+  "slug": "beatthescamcom-impersonation-scams-fake-consumer-protection-sites",
+  "title": "beatthescam.com Impersonation Scams: Fake Consumer Protection Sites",
+  "date": "2026-08-14",
+  "model": "claude-haiku-4-5-20251001",
+  "gate_passed": true,
+  "claims": [
+    {
+      "type": "judge",
+      "severity": "flag",
+      "text": "This omits mandatory APP reimbursement rights under PSR rules (7 October 2024 onwards). A reader who made an authorised bank transfer is entitled to reimburseme",
+      "detail": "This omits mandatory APP reimbursement rights under PSR rules (7 October 2024 onwards). A reader who made an authorised bank transfer is entitled to reimbursement, not merely 'possible' recovery dependent on speed. The guide should clarify that reimbursement is a right, not a courtesy.: \"If you paid by bank transfer, recovery is less likely but still possible if reported quickly.\""
+    }
+  ]
+}

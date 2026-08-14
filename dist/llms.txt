@@ -14,7 +14,7 @@
 - [Crypto Scams](https://beatthescam.com/categories/crypto/): 8 guide(s)
 - [Email Scams](https://beatthescam.com/categories/email/): 15 guide(s)
 - [Employment Scams](https://beatthescam.com/categories/employment/): 8 guide(s)
-- [Fraud & Impersonation](https://beatthescam.com/categories/fraud/): 9 guide(s)
+- [Fraud & Impersonation](https://beatthescam.com/categories/fraud/): 10 guide(s)
 - [Government Impersonation](https://beatthescam.com/categories/government/): 10 guide(s)
 - [Investment & Finance Scams](https://beatthescam.com/categories/finance/): 11 guide(s)
 - [Marketplace Scams](https://beatthescam.com/categories/marketplace/): 15 guide(s)
@@ -73,6 +73,7 @@
 
 ### Fraud & Impersonation
 
+- [beatthescam.com Impersonation Scams: Fake Consumer Protection Sites](https://beatthescam.com/guides/beatthescamcom-impersonation-scams-fake-consumer-protection-sites/): Learn how scammers impersonate consumer protection websites to steal money and personal data. This guide helps you spot fake beatthescam.com clones and stay safe.
 - [Charity Scam UK: Spot a Fake Donation Appeal](https://beatthescam.com/guides/charity-donation-scam-checklist/): Asked to donate to a charity appeal by phone, text, or social media? How to spot a fake charity scam, check it's genuine, and give safely in the UK.
 - [Conveyancing Fraud UK: Stop “Friday Afternoon Fraud”](https://beatthescam.com/guides/conveyancing-fraud-uk/): Criminals alter conveyancing emails and redirect completion money. Establish bank details early and verify any change through a trusted channel.
 - [Deed Fraud: Protect Property in England and Wales](https://beatthescam.com/guides/deed-fraud-uk-property-scam/): Criminals may impersonate an owner to sell or mortgage a property. HM Land Registry offers alerts and title restrictions in England and Wales.
