@@ -110,7 +110,13 @@
     focusBeforeBanner = null;
   }
 
-  function showBanner(){
+  // moveFocus is opt-in, and only the "Cookie settings" button passes it.
+  // The 2s fallback timer must NOT move focus: a reader tabbing toward "Check
+  // a message", or typing into the search field, would be relocated mid-action
+  // by something they never asked for (WCAG 3.2.5 Change on Request). On that
+  // path the bar is announced instead — it carries aria-live and sits at tab
+  // stop 2, so it is reachable immediately without seizing anything.
+  function showBanner(opts){
     if(!banner) return;
     if(banner.hidden){
       focusBeforeBanner = document.activeElement;
@@ -118,10 +124,11 @@
       banner.setAttribute('aria-hidden','false');
       syncConsentOffset();
     }
-    // Focus moves in even when the bar was already on screen, so "Cookie
-    // settings" always lands the reader on the choice. Reject first: it is the
-    // privacy-preserving option and must never be the harder one to reach.
-    if(reject){ try { reject.focus(); } catch (err) { /* not focusable yet */ } }
+    // Reject first: it is the privacy-preserving option and must never be the
+    // harder of the two to reach.
+    if(opts && opts.moveFocus && reject){
+      try { reject.focus(); } catch (err) { /* not focusable yet */ }
+    }
   }
 
   // The bar reflows between the one-line desktop layout and the stacked mobile
@@ -234,8 +241,8 @@
       if(cmpTookOver && window.googlefc && typeof window.googlefc.showRevocationMessage === 'function'){
         window.googlefc.showRevocationMessage();
       } else {
-        showBanner();
-        banner && banner.scrollIntoView({behavior:'smooth', block:'nearest'});
+        // The reader asked for this one, so moving focus into it is correct.
+        showBanner({moveFocus:true});
       }
     });
   }

@@ -62,7 +62,7 @@
        value= attribute (not content=) — validators flag it; do not "fix" it
        or their crawler stops verifying the site. -->
   <meta name='impact-site-verification' value='e0dda02c-a1b6-4056-9f92-16f7c916bd4b'>
-  <link rel="stylesheet" href="/assets/styles.css?v=8557c22fbf">
+  <link rel="stylesheet" href="/assets/styles.css?v=2255175e6b">
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-JXNF856NBF"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
@@ -96,9 +96,12 @@
   <!-- Consent sits second in the document, immediately after the skip link.
        It used to be the last element before </body>, which made Reject and
        Accept tab stops 62 and 63 of 63 — a keyboard user traversed the whole
-       page and footer to decline. app.js moves focus here when it appears and
-       restores focus on dismissal. -->
-  <div class="cookie-banner" id="cookieBanner" hidden role="dialog" aria-labelledby="cookieHeading">
+       page and footer to decline.
+       region + aria-live, not dialog: when the 2s fallback timer reveals this
+       unprompted it is announced, never focused, so a reader mid-action is not
+       relocated. Focus only moves here when they click "Cookie settings", and
+       is restored to wherever they were on dismissal. -->
+  <div class="cookie-banner" id="cookieBanner" hidden role="region" aria-labelledby="cookieHeading" aria-live="polite">
     <div class="cookie-copy">
       <strong id="cookieHeading">Cookies &amp; privacy</strong>
       <p>Allow optional analytics and advertising cookies? They help us understand performance and support the site.</p>
@@ -273,6 +276,6 @@
       <p>© 2026 Beat the Scam. Consumer protection guides for UK residents. Educational content only — not legal or financial advice.</p>
     </div>
   </footer>
-  <script src="/assets/app.js?v=cfdd08979d" defer></script>
+  <script src="/assets/app.js?v=d49c59f3f1" defer></script>
 </body>
 </html>
