@@ -19,11 +19,16 @@ Offline: no API key, no network.
 """
 from __future__ import annotations
 
+import json as _json
 import sys
 from pathlib import Path
 
+ROOT_DIR = Path(__file__).resolve().parent.parent
+
 sys.path.insert(0, str(Path(__file__).resolve().parent))
-from content_gate import _post_text, body_shingles, check_deterministic, run_gate
+import corpus as _corpus_mod
+from content_gate import (_post_text, body_shingles, check_deterministic,
+                          check_quick_answer_present, run_gate)
 
 FAILURES: list[str] = []
 
@@ -365,9 +370,21 @@ def _rejects_absent(writer) -> bool:
 
 
 def post(**over) -> dict:
+    # The base is a VALID guide, so that any test asserting "clean" means clean.
+    # `quick_answer` is part of that validity since 2026-08-14 — it is required on
+    # every non-hub, non-consolidated guide, so a base without one would make four
+    # pre-existing "not check_deterministic(...)" assertions fail for a reason
+    # having nothing to do with what they test. Deliberately route-free and
+    # number-free: this text is inspected by every other check in the suite.
     base = {
         "slug": "test-guide", "title": "Test guide", "description": "A test guide description.",
         "hero": "A hero line.", "keywords": ["test"],
+        # No "link"/"website"/"url": _WEBSITE_SUBJECT_RE would match it, and the
+        # NCSC clause window can reach back across field boundaries in _post_text,
+        # which made the "no subject noun" case flag on text from THIS field.
+        "quick_answer": ("Treat an unexpected message asking for payment or personal details as a "
+                         "scam until you have checked it yourself. Open the app or type the "
+                         "address in by hand instead."),
         "sections": [["A heading", "Some ordinary body text about a scam."]],
         "faq": [["A question?", "An answer."]],
     }
@@ -536,7 +553,11 @@ def run() -> int:
     def hub(sections, faq=None, intro="<p>Intro.</p>"):
         return {"slug": "t", "title": "T" * 40, "description": "D" * 140,
                 "intro": intro, "sections": sections, "faq": faq or [["Q?", "A."]]}
-    def hub_blocks(h): return not run_gate(h, use_llm=False).passed
+    # is_hub=True mirrors how build.py and audit_corpus.py actually gate a hub.
+    # Without it this helper ran hubs down the GUIDE path, which is both less
+    # faithful and (since the quick-answer requirement) wrong: every hub here
+    # would block for want of a field hubs do not have.
+    def hub_blocks(h): return not run_gate(h, use_llm=False, is_hub=True).passed
     SCOPE = ("Report Fraud covers England, Wales and Northern Ireland. If you live in Scotland "
              "or the crime happened there, contact Police Scotland on 101.")
 
@@ -928,6 +949,103 @@ def run() -> int:
           "VERIFIED ROUTES" in JUDGE_SYSTEM
           and {"Report Fraud", "Police Scotland"} <= _brands
           and all(b in JUDGE_SYSTEM for b in ("Report Fraud", "Police Scotland")))
+
+    # ── quick answer PRESENCE (added 2026-08-14) ─────────────────────────────
+    # Everything above tests the CONTENT of the field. Nothing tested that it
+    # exists. Every reader of the field in the gate is `post.get("quick_answer",
+    # "")` or `... or ""`, so an absent field looked exactly like an empty one:
+    # each check found no text, objected to nothing, and passed. The 2026-08-14
+    # Search Console draft therefore passed the gate clean with no quick answer
+    # at all, and would have shipped the only one of 185 public guides with no
+    # answer box and no speakable schema (operator review, 2026-08-14).
+    QA_CHECK = "quick_answer_missing"
+    _valid_qa = ("Yes, clone sites of consumer-protection brands exist. Check the address bar "
+                 "reads exactly beatthescam.com before entering anything, and treat any upfront "
+                 "fee to recover money or release a report as a scam.")
+
+    # The base fixture is a valid guide, so every exemption case below must strip
+    # the field explicitly — otherwise it passes because the answer is present,
+    # proving nothing about the exemption it claims to test.
+    def _noqa(**over) -> dict:
+        p = post(**over)
+        p.pop("quick_answer", None)
+        return p
+
+    # (1) MISSING — the case that actually shipped.
+    _absent = _noqa()
+    check("a guide with NO quick_answer is BLOCKED",
+          any(i["severity"] == "block" for i in issues_of(_absent, QA_CHECK)),
+          str([i["check"] for i in check_deterministic(_absent)]))
+    check("...and it fails the gate end to end, not just the unit check",
+          not run_gate(_absent, use_llm=False).passed)
+    check("...and the detail names the two surfaces that silently vanish",
+          all(s in issues_of(_absent, QA_CHECK)[0]["detail"] for s in ("answer box", "speakable")))
+
+    # (2) BLANK — renders identically to missing, so it must be treated identically.
+    check("an EMPTY quick_answer is BLOCKED",
+          bool(issues_of(post(quick_answer=""), QA_CHECK)))
+    check("a WHITESPACE-ONLY quick_answer is BLOCKED",
+          bool(issues_of(post(quick_answer="   \n  "), QA_CHECK)))
+    check("a NON-STRING quick_answer is BLOCKED",
+          bool(issues_of(post(quick_answer=["a list"]), QA_CHECK)),
+          "a non-string cannot render either")
+
+    # (3) VALID — the guard must not fire on a real answer.
+    check("a valid quick_answer is NOT blocked",
+          not issues_of(post(quick_answer=_valid_qa), QA_CHECK))
+    check("...and that guide passes the gate outright",
+          run_gate(post(quick_answer=_valid_qa), use_llm=False).passed)
+    # Deliberately NOT a length rule: the 35-60-word house standard is a drafting
+    # instruction, and enforcing it here would block generate_content_claude's own
+    # fallback article — the safety net used when drafting fails.
+    check("a SHORT quick_answer is not blocked (presence, not length)",
+          not issues_of(post(quick_answer="Hang up and call your bank."), QA_CHECK))
+
+    # (4) HUB — hubs have no quick_answer by schema and render no answer box, so
+    # the requirement must not reach them. Without the exemption this is not a
+    # subtle false positive: it fails EVERY build, on every hub, every time.
+    check("a category hub is EXEMPT from the quick-answer requirement",
+          not check_quick_answer_present(hub([["S", "<p>x</p>"]]), is_hub=True))
+    check("...and the real category-hubs.json passes with is_hub=True",
+          not [s for s, h in (_json.loads((ROOT_DIR / "content" / "category-hubs.json")
+                                          .read_text(encoding="utf-8")) or {}).items()
+               if check_quick_answer_present(dict(h, slug=f"category-{s}"), is_hub=True)])
+    # The flag is the ONLY thing that exempts a hub — a guide cannot inherit the
+    # exemption by looking hub-shaped.
+    check("the same record WITHOUT is_hub is blocked (the flag is the exemption)",
+          bool(check_quick_answer_present(hub([["S", "<p>x</p>"]]))))
+
+    # (5) CONSOLIDATED — a consolidated record renders no page, so it has no
+    # answer box to be missing. Live corpus audits (is_draft=False) see these.
+    _cons = _noqa(slug="old-guide", consolidated_into="new-guide")
+    check("a CONSOLIDATED record is EXEMPT from the quick-answer requirement",
+          not check_quick_answer_present(_cons))
+    check("...and it stays exempt through a corpus audit (is_draft=False)",
+          not [i for i in check_deterministic(_cons, is_draft=False) if i["check"] == QA_CHECK])
+    # The exemption test is consolidation_map's — a NON-EMPTY string target —
+    # not mere presence of the key. A record whose target is "" is still PUBLIC
+    # as far as corpus.py is concerned, so exempting it on presence would let a
+    # live guide dodge the answer-box requirement with an empty string.
+    check("consolidated_into='' does NOT exempt (it is still a public record)",
+          bool(check_quick_answer_present(_noqa(slug="s", consolidated_into=""))))
+    check("consolidated_into=None does NOT exempt",
+          bool(check_quick_answer_present(_noqa(slug="s", consolidated_into=None))))
+    check("consolidated_into='   ' does NOT exempt",
+          bool(check_quick_answer_present(_noqa(slug="s", consolidated_into="   "))))
+    # A DRAFT may not buy the exemption by declaring itself consolidated: that is
+    # already consolidation_evasion (BLOCK), so the draft fails either way.
+    check("a draft cannot use consolidated_into to dodge the requirement",
+          not run_gate(_cons, use_llm=False, is_draft=True).passed,
+          "consolidation_evasion must still block it")
+
+    # No false positives at corpus scale: every live public guide already
+    # satisfies this, which is what makes it safe to turn on as a BLOCK.
+    _corpus_posts = _json.loads((ROOT_DIR / "content" / "posts.json").read_text(encoding="utf-8"))
+    _consolidated_slugs = set(_corpus_mod.consolidation_map(_corpus_posts))
+    _public_posts = [p for p in _corpus_posts if p.get("slug") not in _consolidated_slugs]
+    _no_qa = [p.get("slug") for p in _public_posts if check_quick_answer_present(p)]
+    check(f"all {len(_public_posts)} public guides in the live corpus satisfy the check",
+          not _no_qa, f"missing: {_no_qa[:5]}")
 
     # NB: a mention placed BEFORE the scope+route block is served, not stranded —
     # that is the approved guide form (instruction, scope, route) and the reader

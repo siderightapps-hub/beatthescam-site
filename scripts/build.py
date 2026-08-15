@@ -368,7 +368,10 @@ def validate_category_hubs(hubs: dict) -> None:
         surface.setdefault("slug", f"category-{slug}")
         surface.setdefault("category", slug)
         surface.setdefault("keywords", [])
-        for issue in check_deterministic(surface):
+        # is_hub=True: a hub has no `quick_answer` by schema (the key set above
+        # excludes it) and renders no answer box, so the guide-only requirement
+        # would be a guaranteed false BLOCK here.
+        for issue in check_deterministic(surface, is_hub=True):
             row = (slug, issue)
             if issue.get("severity") == SEVERITY_BLOCK:
                 blocking.append(row)

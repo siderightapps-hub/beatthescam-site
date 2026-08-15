@@ -40,6 +40,9 @@ def load_env() -> None:
 #     defunct entity) AND the judge (invented stat, fake quote) should object.
 FABRICATED = {
     "slug": "selftest-fabricated", "title": "Test Bank Scam UK",
+    "quick_answer": (
+        'Treat any call claiming to be from your bank as unverified until you hang up and dial the number printed on your own card. Genuine staff do not rush you into moving money to a new account.'
+    ),
     "hero": "x", "description": "y",
     "sections": [
         ["What is this scam?",
@@ -58,6 +61,9 @@ FABRICATED = {
 #     regulatory event. This is the decisive test that the judge is working.
 SUBTLE = {
     "slug": "selftest-subtle", "title": "Investment Recovery Scam UK",
+    "quick_answer": (
+        'Recovery fraud targets people who have already lost money, by promising to get it back for an upfront fee. Treat any unsolicited offer to recover your losses as a scam and pay nothing in advance.'
+    ),
     "hero": "x", "description": "y",
     "sections": [
         ["What is this scam?",
@@ -91,6 +97,9 @@ _FLAGS_REPORT = (
 #     been failing the no-over-blocking assertion on main — found 2026-08-08.
 CLEAN = {
     "slug": "selftest-clean", "title": "Delivery Text Scam UK",
+    "quick_answer": (
+        "A missed-delivery text asking for a small redelivery fee is a common UK smishing pattern. Do not pay through the message. Check the order in the courier's own app, reaching it yourself rather than through the text."
+    ),
     "hero": "x", "description": "y",
     "sections": [
         ["What is this scam?",
@@ -117,6 +126,9 @@ CLEAN = {
 #     made-up rate. The hedged sentence must NOT trip the absolute check.
 ABSOLUTE = {
     "slug": "selftest-absolute", "title": "Sextortion Email Scam UK",
+    "quick_answer": (
+        'Sextortion emails demand payment over a claimed webcam recording. Do not reply and do not pay. Keep the email as evidence and change the password on any account it names.'
+    ),
     "hero": "x", "description": "y",
     "sections": [
         ["What is this scam?",
@@ -137,6 +149,9 @@ ABSOLUTE = {
 #     verify them) but must NOT block publication.
 FLAGS = {
     "slug": "selftest-flags", "title": "Consumer Rights Refund Scam UK",
+    "quick_answer": (
+        'A caller offering to process a refund you did not request is usually after your card details. Check any refund claim directly with the company, using contact details you have found for yourself.'
+    ),
     "hero": "x", "description": "y",
     "sections": [
         ["What is this scam?",
@@ -185,6 +200,9 @@ _PV_REPORT = (
 
 PLATFORM_VERIFY = {
     "slug": "selftest-platform-verify", "title": "Social Platform Support Scam UK",
+    "quick_answer": (
+        "Fake support accounts copy the real one's name and picture to intercept complaints. Approach support through the app's own help menu rather than replying to anyone who contacts you first."
+    ),
     "hero": "x", "description": "y",
     "sections": [
         ["How to check whether support is genuine", _PV_VERIFY],
@@ -219,6 +237,9 @@ _APP_FAQ = (
 
 APP_OMISSION = {
     "slug": "selftest-app-omission", "title": "Bank Transfer Scam UK",
+    "quick_answer": (
+        'Someone posing as a trusted contact persuades you to transfer money to an account they control. Stop, verify the request through a channel you already trust, and contact your bank straight away if you have already sent it.'
+    ),
     "hero": "x", "description": "y",
     "sections": [
         ["How the scam works", _APP_HOW],
