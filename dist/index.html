@@ -62,7 +62,7 @@
        value= attribute (not content=) — validators flag it; do not "fix" it
        or their crawler stops verifying the site. -->
   <meta name='impact-site-verification' value='e0dda02c-a1b6-4056-9f92-16f7c916bd4b'>
-  <link rel="stylesheet" href="/assets/styles.css?v=2b4e995242">
+  <link rel="stylesheet" href="/assets/styles.css?v=bad2663153">
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-JXNF856NBF"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
@@ -93,14 +93,31 @@
 </head>
 <body>
   <a class="skip-link" href="#main">Skip to content</a>
+  <!-- Consent sits second in the document, immediately after the skip link.
+       It used to be the last element before </body>, which made Reject and
+       Accept tab stops 62 and 63 of 63 — a keyboard user traversed the whole
+       page and footer to decline.
+       region + aria-live, not dialog: when the 2s fallback timer reveals this
+       unprompted it is announced, never focused, so a reader mid-action is not
+       relocated. Focus only moves here when they click "Cookie settings", and
+       is restored to wherever they were on dismissal. -->
+  <div class="cookie-banner" id="cookieBanner" hidden role="region" aria-labelledby="cookieHeading" aria-live="polite">
+    <div class="cookie-copy">
+      <strong id="cookieHeading">Cookies &amp; privacy</strong>
+      <p>Allow optional analytics and advertising cookies? They help us understand performance and support the site.</p>
+    </div>
+    <div class="cookie-actions">
+      <button class="btn btn-consent" id="cookieReject" type="button">Reject</button>
+      <button class="btn btn-consent" id="cookieAccept" type="button">Accept</button>
+    </div>
+  </div>
   <header class="site-header">
     <div class="wrap header-inner">
       <div class="brand-wrap">
         <a href="/" class="brand">Beat the Scam</a>
         <span class="brand-sub">Scam checks, alerts, and consumer protection guides</span>
       </div>
-      <button class="nav-toggle" aria-expanded="false" aria-controls="site-nav">Menu</button>
-      <nav class="nav" id="site-nav">
+      <nav class="nav" id="site-nav" aria-label="Main">
         <a href="/">Home</a>
         <a href="/guides/">Guides</a>
         <a href="/categories/">Categories</a>
@@ -108,8 +125,11 @@
         <a href="/recovery/">Recovery</a>
         <a href="/about/">About</a>
         <a href="/contact/">Contact</a>
-        <a class="nav-cta" href="/check/">Check a message</a>
       </nav>
+      <div class="header-actions">
+        <a class="nav-cta" href="/check/">Check a message</a>
+        <button class="nav-toggle" aria-expanded="false" aria-controls="site-nav">Menu</button>
+      </div>
     </div>
   </header>
   <main id="main">
@@ -123,6 +143,13 @@
             <a class="triage-choice triage-check" href="/check/"><span>I have a suspicious message</span><strong>Check a message</strong></a>
             <a class="triage-choice triage-recovery" href="/recovery/"><span>I paid or shared details</span><strong>Start recovery steps</strong></a>
           </div>
+          <p class="checker-preview">Paste it and get one of four plain-English verdicts in seconds. Nothing you paste is stored by Beat the Scam.</p>
+          <ul class="verdict-strip" aria-label="The four verdicts the checker can return">
+            <li class="verdict-chip verdict-scam">Likely a scam</li>
+            <li class="verdict-chip verdict-warn">Possibly a scam</li>
+            <li class="verdict-chip verdict-ok">Probably legitimate</li>
+            <li class="verdict-chip verdict-unclear">Unclear</li>
+          </ul>
           <p class="hero-browse"><a href="/guides/">Not sure? Browse scam types</a></p>
           <p class="hero-reassurance">Free UK guidance. No account needed.</p>
           <p class="hero-trust">Independent educational guidance · <a href="/methodology/">How we fact-check</a> · <a href="/disclaimer/">Not a substitute for your bank, card provider or the police</a></p>
@@ -178,21 +205,21 @@
           </div>
           <a href="/guides/">Browse all guides</a>
         </div>
-        <div class="grid-3"><article class="card guide-card" data-searchable="beatthescam.com impersonation scams: fake consumer protection sites learn how scammers impersonate consumer protection websites to steal money and personal data. this guide helps you spot fake beatthescam.com clones and stay safe. fraud beatthescam.com scam fake consumer protection website phishing scam uk website impersonation consumer fraud">
-      <div class="eyebrow">Fraud &amp; Impersonation</div>
-      <h3><a href="/guides/beatthescamcom-impersonation-scams-fake-consumer-protection-sites/">beatthescam.com Impersonation Scams: Fake Consumer Protection Sites</a></h3>
-      <p>Learn how scammers impersonate consumer protection websites to steal money and personal data. This guide helps you spot fake beatthescam.com clones and stay safe.</p>
-      <p class="meta">Published 2026-08-14</p>
-    </article><article class="card guide-card" data-searchable="youtube crypto scam uk: how to spot fake investment channels youtube crypto scams use hijacked channels, deepfakes and fake investment sites. learn safer checks, uk reporting routes and what to do after paying. social youtube crypto scam uk fake crypto investment channels youtube live stream scam crypto impersonation scam youtube channel impersonation">
-      <div class="eyebrow">Social Media Scams</div>
-      <h3><a href="/guides/youtube-crypto-scam-uk/">YouTube Crypto Scam UK: How to Spot Fake Investment Channels</a></h3>
-      <p>YouTube crypto scams use hijacked channels, deepfakes and fake investment sites. Learn safer checks, UK reporting routes and what to do after paying.</p>
-      <p class="meta">Published 2026-08-06</p>
-    </article><article class="card guide-card" data-searchable="instagram fake giveaway scam uk: how to spot and report it instagram fake giveaway scams trick users into sharing personal details or paying &#x27;entry fees&#x27;. how to spot one, verify a real giveaway, and report it. social instagram fake giveaway scam uk instagram giveaway scam fake instagram giveaway instagram scam how to report instagram impersonation scam">
-      <div class="eyebrow">Social Media Scams</div>
-      <h3><a href="/guides/instagram-fake-giveaway-scam-uk/">Instagram Fake Giveaway Scam UK: How to Spot and Report It</a></h3>
-      <p>Instagram fake giveaway scams trick users into sharing personal details or paying &#x27;entry fees&#x27;. How to spot one, verify a real giveaway, and report it.</p>
-      <p class="meta">Updated 2026-08-10</p>
+        <div class="grid-3"><article class="card guide-card" data-searchable="chargeback scam uk: how chargeback fraud works and how to avoid it chargeback scams let a buyer keep the goods and claim their money back, leaving the seller out of pocket. how chargeback fraud works and how to avoid it. payment chargeback scam chargeback scammer chargeback fraud uk friendly fraud chargeback scams fraudulent chargebacks paypal chargeback scam chargeback scam selling chargeback abuse how to avoid chargeback fraud">
+      <div class="eyebrow">Payment Scams</div>
+      <h3><a href="/guides/chargeback-scam-uk/">Chargeback Scam UK: How Chargeback Fraud Works and How to Avoid It</a></h3>
+      <p>Chargeback scams let a buyer keep the goods and claim their money back, leaving the seller out of pocket. How chargeback fraud works and how to avoid it.</p>
+      <p class="meta">Updated 2026-08-11</p>
+    </article><article class="card guide-card" data-searchable="gumtree scams uk: how to spot and avoid fake listings and buyers gumtree is legitimate, but scammers use it. here are the most common gumtree scams targeting uk buyers and sellers, the warning signs, and how to stay safe. marketplace gumtree scams scams on gumtree gumtree scam gumtree scammers gumtree buyer scam gumtree seller scam gumtree fake listing is gumtree safe gumtree overpayment scam gumtree courier scam">
+      <div class="eyebrow">Marketplace Scams</div>
+      <h3><a href="/guides/gumtree-scam-uk-guide/">Gumtree Scams UK: How to Spot and Avoid Fake Listings and Buyers</a></h3>
+      <p>Gumtree is legitimate, but scammers use it. Here are the most common Gumtree scams targeting UK buyers and sellers, the warning signs, and how to stay safe.</p>
+      <p class="meta">Updated 2026-08-11</p>
+    </article><article class="card guide-card" data-searchable="is viagogo safe to buy tickets in the uk? what you need to know viagogo is a real resale marketplace, not a scam company, but hidden fees and refund problems are common. what uk buyers should know before paying. shopping viagogo scam uk fake viagogo tickets viagogo ticket fraud viagogo impersonation scam buying tickets safely online shopping scam uk fake online shop uk">
+      <div class="eyebrow">Shopping Scams</div>
+      <h3><a href="/guides/viagogo-scam-uk/">Is Viagogo Safe to Buy Tickets in the UK? What You Need to Know</a></h3>
+      <p>Viagogo is a real resale marketplace, not a scam company, but hidden fees and refund problems are common. What UK buyers should know before paying.</p>
+      <p class="meta">Updated 2026-08-11</p>
     </article></div>
       </div>
     </section>
@@ -250,9 +277,9 @@
 <li><a href="/categories/phone/">Phone Scams</a></li>
 <li><a href="/categories/website/">Website Scams</a></li>
 <li><a href="/categories/finance/">Investment &amp; Finance Scams</a></li>
-<li><a href="/categories/fraud/">Fraud &amp; Impersonation</a></li>
 <li><a href="/categories/government/">Government Impersonation</a></li>
 <li><a href="/categories/tech/">Tech Support Scams</a></li>
+<li><a href="/categories/fraud/">Fraud &amp; Impersonation</a></li>
 <li><a href="/categories/social/">Social Media Scams</a></li>
 <li><a href="/categories/employment/">Employment Scams</a></li>
 <li><a href="/categories/crypto/">Crypto Scams</a></li>
@@ -280,17 +307,6 @@
       <p>© 2026 Beat the Scam. Consumer protection guides for UK residents. Educational content only — not legal or financial advice.</p>
     </div>
   </footer>
-  <div class="cookie-banner" id="cookieBanner" hidden aria-live="polite">
-    <div class="cookie-copy">
-      <strong>Cookies & privacy</strong>
-      <p>Allow optional analytics and advertising cookies? They help us understand performance and support the site.</p>
-      <p class="cookie-status" id="cookieStatus">No choice saved yet.</p>
-    </div>
-    <div class="cookie-actions">
-      <button class="btn btn-secondary" id="cookieReject" type="button">Reject</button>
-      <button class="btn btn-primary" id="cookieAccept" type="button">Accept</button>
-    </div>
-  </div>
-  <script src="/assets/app.js?v=59ecb206a0" defer></script>
+  <script src="/assets/app.js?v=9aca54eeb2" defer></script>
 </body>
 </html>

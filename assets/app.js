@@ -2,10 +2,44 @@
   const navToggle = document.querySelector('.nav-toggle');
   const nav = document.getElementById('site-nav');
   if(navToggle && nav){
+    // #site-nav sits BEFORE .nav-toggle in the document, because the checker
+    // CTA has to live outside the element that collapses. That means the panel
+    // precedes its own trigger in sequential focus order: without moving focus
+    // on open, Tab from the toggle goes forward into <main> and the reader has
+    // to Shift-Tab backwards past the CTA to reach the links they just opened.
+    function setNav(open){
+      navToggle.setAttribute('aria-expanded', String(open));
+      nav.classList.toggle('is-open', open);
+      if(open){
+        const first = nav.querySelector('a[href]');
+        if(first){ try { first.focus(); } catch (err) { /* not focusable */ } }
+      }
+    }
+    function closeNav(restoreFocus){
+      if(!nav.classList.contains('is-open')) return;
+      setNav(false);
+      if(restoreFocus){ try { navToggle.focus(); } catch (err) { /* gone */ } }
+    }
+
     navToggle.addEventListener('click', function(){
       const expanded = navToggle.getAttribute('aria-expanded') === 'true';
-      navToggle.setAttribute('aria-expanded', String(!expanded));
-      nav.classList.toggle('is-open');
+      if(expanded){ closeNav(true); } else { setNav(true); }
+    });
+
+    // Escape closes and hands focus back to the button that opened it.
+    document.addEventListener('keydown', function(e){
+      if(e.key === 'Escape' || e.key === 'Esc'){ closeNav(true); }
+    });
+
+    // A click or a tab-out beyond the header dismisses the panel, but must not
+    // steal focus back to the toggle — the reader has deliberately moved on.
+    document.addEventListener('click', function(e){
+      if(nav.contains(e.target) || navToggle.contains(e.target)) return;
+      closeNav(false);
+    });
+    document.addEventListener('focusin', function(e){
+      if(nav.contains(e.target) || navToggle.contains(e.target)) return;
+      closeNav(false);
     });
   }
 
@@ -14,7 +48,6 @@
   const accept = document.getElementById('cookieAccept');
   const reject = document.getElementById('cookieReject');
   const openSettings = document.getElementById('openCookieSettings');
-  const status = document.getElementById('cookieStatus');
 
   function safeGet(key){
     try { return window.localStorage.getItem(key); } catch (err) { return null; }
@@ -22,17 +55,6 @@
 
   function safeSet(key, value){
     try { window.localStorage.setItem(key, value); return true; } catch (err) { return false; }
-  }
-
-  function updateStatus(mode){
-    if(!status) return;
-    if(mode === 'accepted'){
-      status.textContent = 'Non-essential cookies are enabled.';
-    } else if(mode === 'rejected'){
-      status.textContent = 'Non-essential cookies are disabled.';
-    } else {
-      status.textContent = 'No choice saved yet.';
-    }
   }
 
   function consentAccepted(){
@@ -91,13 +113,65 @@
     }
   }
 
-  function hideBanner(){ if(banner){ banner.hidden = true; banner.setAttribute('aria-hidden','true'); } }
-  function showBanner(){ if(banner){ banner.hidden = false; banner.setAttribute('aria-hidden','false'); } }
+  // The banner is position:fixed, so while it shows it sits over the end of the
+  // page — the footer's Trust & legal links and the Cookie settings button that
+  // reopens it. Reserve exactly the height it occupies (bar + its bottom inset)
+  // as body padding so that content stays reachable, and release it on dismissal.
+  function syncConsentOffset(){
+    const root = document.documentElement;
+    if(!banner || banner.hidden){
+      root.style.removeProperty('--consent-offset');
+      return;
+    }
+    const box = banner.getBoundingClientRect();
+    const inset = Math.max(0, window.innerHeight - box.bottom);
+    root.style.setProperty('--consent-offset', Math.ceil(box.height + inset * 2) + 'px');
+  }
+
+  // Where focus was before the bar took it, so dismissing returns the reader
+  // to what they were doing rather than dropping them at the top of the page.
+  var focusBeforeBanner = null;
+
+  function hideBanner(){
+    if(!banner) return;
+    var hadFocus = banner.contains(document.activeElement);
+    banner.hidden = true;
+    banner.setAttribute('aria-hidden','true');
+    syncConsentOffset();
+    if(hadFocus && focusBeforeBanner && document.contains(focusBeforeBanner)){
+      try { focusBeforeBanner.focus(); } catch (err) { /* element went away */ }
+    }
+    focusBeforeBanner = null;
+  }
+
+  // moveFocus is opt-in, and only the "Cookie settings" button passes it.
+  // The 2s fallback timer must NOT move focus: a reader tabbing toward "Check
+  // a message", or typing into the search field, would be relocated mid-action
+  // by something they never asked for (WCAG 3.2.5 Change on Request). On that
+  // path the bar is announced instead — it carries aria-live and sits at tab
+  // stop 2, so it is reachable immediately without seizing anything.
+  function showBanner(opts){
+    if(!banner) return;
+    if(banner.hidden){
+      focusBeforeBanner = document.activeElement;
+      banner.hidden = false;
+      banner.setAttribute('aria-hidden','false');
+      syncConsentOffset();
+    }
+    // Reject first: it is the privacy-preserving option and must never be the
+    // harder of the two to reach.
+    if(opts && opts.moveFocus && reject){
+      try { reject.focus(); } catch (err) { /* not focusable yet */ }
+    }
+  }
+
+  // The bar reflows between the one-line desktop layout and the stacked mobile
+  // grid, so the reserved space has to be re-measured, not cached.
+  window.addEventListener('resize', syncConsentOffset);
 
   function setPreference(mode){
     safeSet(storageKey, mode);
     applyConsent(mode);
-    updateStatus(mode);
     hideBanner();
   }
 
@@ -122,10 +196,8 @@
     var current = safeGet(storageKey);
     if(current === 'accepted' || current === 'rejected'){
       applyConsent(current);
-      updateStatus(current);
       hideBanner();
     } else {
-      updateStatus(null);
       showBanner();
     }
   }
@@ -203,8 +275,8 @@
       if(cmpTookOver && window.googlefc && typeof window.googlefc.showRevocationMessage === 'function'){
         window.googlefc.showRevocationMessage();
       } else {
-        showBanner();
-        banner && banner.scrollIntoView({behavior:'smooth', block:'nearest'});
+        // The reader asked for this one, so moving focus into it is correct.
+        showBanner({moveFocus:true});
       }
     });
   }

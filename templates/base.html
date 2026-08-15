@@ -93,14 +93,31 @@
 </head>
 <body>
   <a class="skip-link" href="#main">Skip to content</a>
+  <!-- Consent sits second in the document, immediately after the skip link.
+       It used to be the last element before </body>, which made Reject and
+       Accept tab stops 62 and 63 of 63 — a keyboard user traversed the whole
+       page and footer to decline.
+       region + aria-live, not dialog: when the 2s fallback timer reveals this
+       unprompted it is announced, never focused, so a reader mid-action is not
+       relocated. Focus only moves here when they click "Cookie settings", and
+       is restored to wherever they were on dismissal. -->
+  <div class="cookie-banner" id="cookieBanner" hidden role="region" aria-labelledby="cookieHeading" aria-live="polite">
+    <div class="cookie-copy">
+      <strong id="cookieHeading">Cookies &amp; privacy</strong>
+      <p>Allow optional analytics and advertising cookies? They help us understand performance and support the site.</p>
+    </div>
+    <div class="cookie-actions">
+      <button class="btn btn-consent" id="cookieReject" type="button">Reject</button>
+      <button class="btn btn-consent" id="cookieAccept" type="button">Accept</button>
+    </div>
+  </div>
   <header class="site-header">
     <div class="wrap header-inner">
       <div class="brand-wrap">
         <a href="{{asset_prefix}}/" class="brand">{{site_name}}</a>
         <span class="brand-sub">Scam checks, alerts, and consumer protection guides</span>
       </div>
-      <button class="nav-toggle" aria-expanded="false" aria-controls="site-nav">Menu</button>
-      <nav class="nav" id="site-nav">
+      <nav class="nav" id="site-nav" aria-label="Main">
         <a href="{{asset_prefix}}/">Home</a>
         <a href="{{asset_prefix}}/guides/">Guides</a>
         <a href="{{asset_prefix}}/categories/">Categories</a>
@@ -108,8 +125,11 @@
         <a href="{{asset_prefix}}/recovery/">Recovery</a>
         <a href="{{asset_prefix}}/about/">About</a>
         <a href="{{asset_prefix}}/contact/">Contact</a>
-        <a class="nav-cta" href="{{asset_prefix}}/check/">Check a message</a>
       </nav>
+      <div class="header-actions">
+        <a class="nav-cta" href="{{asset_prefix}}/check/">Check a message</a>
+        <button class="nav-toggle" aria-expanded="false" aria-controls="site-nav">Menu</button>
+      </div>
     </div>
   </header>
   <main id="main">
@@ -180,17 +200,6 @@
       <p>© {{year}} {{site_name}}. Consumer protection guides for UK residents. Educational content only — not legal or financial advice.</p>
     </div>
   </footer>
-  <div class="cookie-banner" id="cookieBanner" hidden aria-live="polite">
-    <div class="cookie-copy">
-      <strong>Cookies & privacy</strong>
-      <p>Allow optional analytics and advertising cookies? They help us understand performance and support the site.</p>
-      <p class="cookie-status" id="cookieStatus">No choice saved yet.</p>
-    </div>
-    <div class="cookie-actions">
-      <button class="btn btn-secondary" id="cookieReject" type="button">Reject</button>
-      <button class="btn btn-primary" id="cookieAccept" type="button">Accept</button>
-    </div>
-  </div>
   <script src="{{asset_prefix}}/assets/app.js?v={{js_ver}}" defer></script>
 </body>
 </html>

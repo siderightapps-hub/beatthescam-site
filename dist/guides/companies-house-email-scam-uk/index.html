@@ -65,7 +65,7 @@
        value= attribute (not content=) — validators flag it; do not "fix" it
        or their crawler stops verifying the site. -->
   <meta name='impact-site-verification' value='e0dda02c-a1b6-4056-9f92-16f7c916bd4b'>
-  <link rel="stylesheet" href="/assets/styles.css?v=2b4e995242">
+  <link rel="stylesheet" href="/assets/styles.css?v=bad2663153">
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-JXNF856NBF"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
@@ -96,14 +96,31 @@
 </head>
 <body>
   <a class="skip-link" href="#main">Skip to content</a>
+  <!-- Consent sits second in the document, immediately after the skip link.
+       It used to be the last element before </body>, which made Reject and
+       Accept tab stops 62 and 63 of 63 — a keyboard user traversed the whole
+       page and footer to decline.
+       region + aria-live, not dialog: when the 2s fallback timer reveals this
+       unprompted it is announced, never focused, so a reader mid-action is not
+       relocated. Focus only moves here when they click "Cookie settings", and
+       is restored to wherever they were on dismissal. -->
+  <div class="cookie-banner" id="cookieBanner" hidden role="region" aria-labelledby="cookieHeading" aria-live="polite">
+    <div class="cookie-copy">
+      <strong id="cookieHeading">Cookies &amp; privacy</strong>
+      <p>Allow optional analytics and advertising cookies? They help us understand performance and support the site.</p>
+    </div>
+    <div class="cookie-actions">
+      <button class="btn btn-consent" id="cookieReject" type="button">Reject</button>
+      <button class="btn btn-consent" id="cookieAccept" type="button">Accept</button>
+    </div>
+  </div>
   <header class="site-header">
     <div class="wrap header-inner">
       <div class="brand-wrap">
         <a href="/" class="brand">Beat the Scam</a>
         <span class="brand-sub">Scam checks, alerts, and consumer protection guides</span>
       </div>
-      <button class="nav-toggle" aria-expanded="false" aria-controls="site-nav">Menu</button>
-      <nav class="nav" id="site-nav">
+      <nav class="nav" id="site-nav" aria-label="Main">
         <a href="/">Home</a>
         <a href="/guides/">Guides</a>
         <a href="/categories/">Categories</a>
@@ -111,8 +128,11 @@
         <a href="/recovery/">Recovery</a>
         <a href="/about/">About</a>
         <a href="/contact/">Contact</a>
-        <a class="nav-cta" href="/check/">Check a message</a>
       </nav>
+      <div class="header-actions">
+        <a class="nav-cta" href="/check/">Check a message</a>
+        <button class="nav-toggle" aria-expanded="false" aria-controls="site-nav">Menu</button>
+      </div>
     </div>
   </header>
   <main id="main">
@@ -240,9 +260,9 @@
 <li><a href="/categories/phone/">Phone Scams</a></li>
 <li><a href="/categories/website/">Website Scams</a></li>
 <li><a href="/categories/finance/">Investment &amp; Finance Scams</a></li>
-<li><a href="/categories/fraud/">Fraud &amp; Impersonation</a></li>
 <li><a href="/categories/government/">Government Impersonation</a></li>
 <li><a href="/categories/tech/">Tech Support Scams</a></li>
+<li><a href="/categories/fraud/">Fraud &amp; Impersonation</a></li>
 <li><a href="/categories/social/">Social Media Scams</a></li>
 <li><a href="/categories/employment/">Employment Scams</a></li>
 <li><a href="/categories/crypto/">Crypto Scams</a></li>
@@ -270,17 +290,6 @@
       <p>© 2026 Beat the Scam. Consumer protection guides for UK residents. Educational content only — not legal or financial advice.</p>
     </div>
   </footer>
-  <div class="cookie-banner" id="cookieBanner" hidden aria-live="polite">
-    <div class="cookie-copy">
-      <strong>Cookies & privacy</strong>
-      <p>Allow optional analytics and advertising cookies? They help us understand performance and support the site.</p>
-      <p class="cookie-status" id="cookieStatus">No choice saved yet.</p>
-    </div>
-    <div class="cookie-actions">
-      <button class="btn btn-secondary" id="cookieReject" type="button">Reject</button>
-      <button class="btn btn-primary" id="cookieAccept" type="button">Accept</button>
-    </div>
-  </div>
-  <script src="/assets/app.js?v=59ecb206a0" defer></script>
+  <script src="/assets/app.js?v=9aca54eeb2" defer></script>
 </body>
 </html>

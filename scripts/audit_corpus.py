@@ -88,7 +88,9 @@ def main() -> int:
         surface.setdefault("slug", f"category-{slug}")
         surface.setdefault("category", slug)
         surface.setdefault("keywords", [])
-        result = run_gate(surface, use_llm=False, is_draft=False)
+        # is_hub=True for the same reason as build.py's hub preflight: a hub has
+        # no `quick_answer` and renders no answer box.
+        result = run_gate(surface, use_llm=False, is_draft=False, is_hub=True)
         for issue in result.issues:
             by_type[issue.get("check")] += 1
             text = issue.get("span") or issue.get("detail", "")[:160]

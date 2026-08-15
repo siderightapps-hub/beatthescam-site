@@ -368,7 +368,10 @@ def validate_category_hubs(hubs: dict) -> None:
         surface.setdefault("slug", f"category-{slug}")
         surface.setdefault("category", slug)
         surface.setdefault("keywords", [])
-        for issue in check_deterministic(surface):
+        # is_hub=True: a hub has no `quick_answer` by schema (the key set above
+        # excludes it) and renders no answer box, so the guide-only requirement
+        # would be a guaranteed false BLOCK here.
+        for issue in check_deterministic(surface, is_hub=True):
             row = (slug, issue)
             if issue.get("severity") == SEVERITY_BLOCK:
                 blocking.append(row)
@@ -1210,8 +1213,48 @@ def render_card(post):
 
 # ─── PAGE RENDERERS ────────────────────────────────────────────────────────
 
+def _card_recency(post):
+    """Sort key matching what render_card actually PRINTS.
+
+    render_card shows `updated` when it differs from `date`, but the corpus is
+    ordered by `date` alone — so a guide published in June and revised in
+    August rendered below one published in July, and the homepage's three
+    "recent" cards read 2026-08-06, 2026-08-10, 2026-08-06. Ordering on the
+    later of the two makes the visible dates monotonic.
+    """
+    return max(str(post.get("updated") or ""), str(post.get("date") or ""))
+
+
+def _featured_posts(posts, limit=3):
+    """Newest guide from each of the most recent distinct categories.
+
+    Straight recency (posts[:limit]) is hostage to the publish cron: the Tue/Fri
+    schedule clusters categories, so all three cards regularly carried the same
+    eyebrow chip while sms/email/marketplace — the three largest categories —
+    went unrepresented. "Use these when a pattern looks familiar" only works if
+    the sample spans patterns. Falls back to filling from the remainder if
+    there are fewer distinct categories than slots.
+    """
+    ordered = sorted(posts, key=_card_recency, reverse=True)
+    picked, seen = [], set()
+    for post in ordered:
+        category = post.get("category")
+        if category in seen:
+            continue
+        seen.add(category)
+        picked.append(post)
+        if len(picked) == limit:
+            return picked
+    for post in ordered:
+        if post not in picked:
+            picked.append(post)
+            if len(picked) == limit:
+                break
+    return picked
+
+
 def render_home(site, posts, categories, research_reports=None):
-    featured = "".join(render_card(p) for p in posts[:3])
+    featured = "".join(render_card(p) for p in _featured_posts(posts))
 
     channel_categories = [
         ("sms", "Text messages"),
@@ -1236,6 +1279,13 @@ def render_home(site, posts, categories, research_reports=None):
             <a class="triage-choice triage-check" href="/check/"><span>I have a suspicious message</span><strong>Check a message</strong></a>
             <a class="triage-choice triage-recovery" href="/recovery/"><span>I paid or shared details</span><strong>Start recovery steps</strong></a>
           </div>
+          <p class="checker-preview">Paste it and get one of four plain-English verdicts in seconds. Nothing you paste is stored by Beat the Scam.</p>
+          <ul class="verdict-strip" aria-label="The four verdicts the checker can return">
+            <li class="verdict-chip verdict-scam">Likely a scam</li>
+            <li class="verdict-chip verdict-warn">Possibly a scam</li>
+            <li class="verdict-chip verdict-ok">Probably legitimate</li>
+            <li class="verdict-chip verdict-unclear">Unclear</li>
+          </ul>
           <p class="hero-browse"><a href="/guides/">Not sure? Browse scam types</a></p>
           <p class="hero-reassurance">Free UK guidance. No account needed.</p>
           <p class="hero-trust">Independent educational guidance · <a href="/methodology/">How we fact-check</a> · <a href="/disclaimer/">Not a substitute for your bank, card provider or the police</a></p>

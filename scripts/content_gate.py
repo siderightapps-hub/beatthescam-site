@@ -1538,7 +1538,74 @@ def check_consolidation_evasion(post: Dict) -> List[Dict]:
     }]
 
 
-def check_deterministic(post: Dict, *, is_draft: bool = True) -> List[Dict]:
+def check_quick_answer_present(post: Dict, *, is_hub: bool = False) -> List[Dict]:
+    """BLOCK a guide with no usable `quick_answer`.
+
+    The field feeds TWO rendered surfaces — the highlighted answer box and the
+    `speakable` structured data — so an absent one silently costs the guide both,
+    with nothing in the output to show it is missing.
+
+    Every quick-answer check already in this gate reads the field as
+    `post.get("quick_answer", "")` or `... or ""`, which makes an ABSENT field
+    indistinguishable from an empty one: each check finds no text, finds nothing
+    wrong with no text, and passes. The gate therefore validated the content of
+    the field but never its existence, and a draft omitting it passed clean — as
+    the 2026-08-14 Search Console draft did (operator review, 2026-08-14). It
+    would have been the only one of 185 public guides without an answer box.
+
+    Presence AND non-blankness, because both fail identically at render time; a
+    non-string is caught for the same reason. Deliberately NOT a length check —
+    the 35–60-word house rule is a drafting instruction in
+    `generate_content_claude.py`, and enforcing it here would block the
+    generator's own short fallback article, which is the safety net used when
+    drafting fails.
+
+    Two exemptions:
+
+    - HUBS never have the field. `validate_category_hubs()` restricts hub keys to
+      a set that does not include it, and hubs open with `intro` instead, so this
+      would be a guaranteed false BLOCK that fails the build on every run. Hub
+      callers pass `is_hub=True`.
+    - CONSOLIDATED records render no page at all, so they have no answer box to
+      be missing.
+
+    The consolidated test is `consolidation_map`'s, called on this one record so
+    the rule is not restated here: a non-empty string target. That is a different
+    test from `check_consolidation_evasion`'s deliberately, and the difference is
+    load-bearing — that check asks "did a draft assert this field at all", so
+    mere presence is right there, whereas this one asks "is this record
+    published", and a record whose target is `""` IS published (`corpus.py`
+    rejects it separately as malformed). Using presence here would exempt a
+    live guide from the answer-box requirement via an empty string.
+    """
+    if is_hub:
+        return []
+    probe = dict(post)
+    probe.setdefault("slug", "")           # consolidation_map indexes by slug
+    if corpus_mod.consolidation_map([probe]):
+        return []
+    qa = post.get("quick_answer")
+    if isinstance(qa, str) and qa.strip():
+        return []
+    if "quick_answer" not in post:
+        why = "has no 'quick_answer' field"
+    elif not isinstance(qa, str):
+        why = f"'quick_answer' is {type(qa).__name__}, not a string"
+    else:
+        why = "'quick_answer' is blank"
+    return [{
+        "check": "quick_answer_missing",
+        "severity": SEVERITY_BLOCK,
+        "span": repr(qa)[:140],
+        "detail": (f"the guide {why}. It renders the highlighted answer box and the speakable "
+                   f"structured data, so without it the page ships with neither. Add a "
+                   f"verdict-first answer of 35 to 60 words that stands alone without the rest "
+                   f"of the article."),
+    }]
+
+
+def check_deterministic(post: Dict, *, is_draft: bool = True,
+                        is_hub: bool = False) -> List[Dict]:
     # Note: no deterministic domain/URL check — these guides intentionally
     # contain example scam/lookalike domains, so a domain allowlist is pure
     # noise here. Domain plausibility is left to the LLM judge.
@@ -1554,6 +1621,7 @@ def check_deterministic(post: Dict, *, is_draft: bool = True) -> List[Dict]:
             + check_text_wellformed(post)
             + check_unrenderable_markup(post)
             + check_ncsc_route_scope(post)
+            + check_quick_answer_present(post, is_hub=is_hub)
             # Corpus-state assertions a DRAFT may not make about itself. Corpus
             # audits pass is_draft=False, because a live consolidated record
             # legitimately carries the field.
@@ -1729,7 +1797,7 @@ def judge_llm(post: Dict, client, model: str) -> List[Dict]:
 
 def run_gate(post: Dict, client=None, model: Optional[str] = None,
              use_llm: bool = True, corpus: Optional[List[Dict]] = None,
-             is_draft: bool = True) -> GateResult:
+             is_draft: bool = True, is_hub: bool = False) -> GateResult:
     """Run the full gate on a post. PASS unless a blocking issue is found.
 
     Pass `corpus` (the existing posts.json list) to also check the draft for
@@ -1737,8 +1805,11 @@ def run_gate(post: Dict, client=None, model: Optional[str] = None,
     archive records are excluded from that comparison — see check_similarity().
 
     `is_draft=False` for corpus audits of already-published records: a live
-    record may legitimately carry `consolidated_into`, a draft may not."""
-    issues = check_deterministic(post, is_draft=is_draft)
+    record may legitimately carry `consolidated_into`, a draft may not.
+
+    `is_hub=True` for category hubs, which are a different surface with a
+    different schema — see check_quick_answer_present()."""
+    issues = check_deterministic(post, is_draft=is_draft, is_hub=is_hub)
     issues += check_similarity(post, corpus)
     if use_llm and client is not None and model:
         issues += judge_llm(post, client, model)
