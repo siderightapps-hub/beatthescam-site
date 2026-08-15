@@ -2,7 +2,7 @@
   {
     "slug": "beatthescamcom-impersonation-scams-fake-consumer-protection-sites",
     "title": "beatthescam.com Impersonation Scams: Fake Consumer Protection Sites",
-    "description": "Learn how scammers impersonate consumer protection websites to steal money and personal data. This guide helps you spot fake beatthescam.com clones and stay safe.",
+    "description": "Learn how scammers impersonate consumer protection websites to steal money and data. This guide helps you spot fake beatthescam.com clones and stay safe.",
     "hero": "Scammers are cloning consumer protection websites to trick you into paying fake fees or handing over sensitive information.",
     "date": "2026-08-14",
     "category": "fraud",
@@ -40,13 +40,13 @@
       ],
       [
         "Protect yourself from these scams in future",
-        "- Always type website addresses directly into your browser rather than clicking links in emails or ads\n- Check the full URL carefully — scammers often use URLs that are very similar to the real site but with small differences\n- Be suspicious of any website asking for payment to access consumer protection advice or scam recovery services — legitimate organisations do not charge for this\n- Never enter your full bank details, card number, or passwords on any website unless you initiated the contact and are certain it is genuine\n- If you receive an email claiming to be from a consumer protection organisation, verify it by visiting the official website directly (not by clicking the email link) and checking their contact details\n- Use your browser's security features: most modern browsers warn you if a site is known to be fraudulent or unsafe\n- Report suspicious websites to the real organisation so they can take action against the fake version"
+        "- Always type website addresses directly into your browser rather than clicking links in emails or ads\n- Check the full URL carefully — scammers often use URLs that are very similar to the real site but with small differences\n- Be suspicious of any site that demands an upfront fee to recover money you have lost or to release a 'fraud report'. Beat The Scam's guides are free. Some genuine services do charge a published fee — Cifas Protective Registration costs £30 for two years, for example — but a legitimate one does not pressure you to pay immediately on a page you reached from an ad or an email\n- Never enter your full bank details, card number, or passwords on any website unless you initiated the contact and are certain it is genuine\n- If you receive an email claiming to be from a consumer protection organisation, verify it by visiting the official website directly (not by clicking the email link) and checking their contact details\n- Use your browser's security features: most modern browsers warn you if a site is known to be fraudulent or unsafe\n- Report suspicious websites to the real organisation so they can take action against the fake version"
       ]
     ],
     "faq": [
       [
         "How can I tell if a website claiming to be a consumer protection site is actually fake?",
-        "Check the exact URL in your address bar — scammers use URLs that look similar but have small differences (extra words, hyphens, or different extensions). Legitimate consumer protection sites never charge fees for advice or reports. If a site asks for payment, bank details, or passwords, it is almost certainly a scam. Visit the real organisation's website directly by typing the address yourself, rather than clicking a link, to verify whether a site is genuine."
+        "Check the exact URL in your address bar — scammers use URLs that look similar but have small differences (extra words, hyphens, or different extensions). Beat The Scam's guides are free, so a site charging to read them is not us. Some genuine services do charge a published fee, such as Cifas Protective Registration at £30 for two years, but a scam site pressures you to pay immediately for a 'recovery service' or a 'fraud report'. If a site asks for your card number, full bank details or passwords, treat it as a scam. Visit the real organisation's website directly by typing the address yourself, rather than clicking a link, to verify whether a site is genuine."
       ],
       [
         "I paid money to a fake consumer protection website — what should I do?",
@@ -58,9 +58,24 @@
       ],
       [
         "Can I get my money back if I've paid a fake consumer protection site?",
-        "It depends on how you paid and how quickly you report it. If you paid by card, your card issuer may be able to dispute the charge and recover your money — contact them immediately. If you paid by bank transfer, recovery is less likely but still possible if reported quickly. Report the fraud to the police and your bank as soon as possible to maximise your chances of recovery."
+        "It depends on how you paid and how quickly you report it. If you paid by card, ask your card issuer about disputing the charge — contact them immediately. If you paid by UK bank transfer, contact your bank straight away and use the phrase authorised push payment fraud. An eligible Faster Payments or CHAPS payment sent on or after 7 October 2024 may be covered by the mandatory APP reimbursement rules, subject to a 13-month claim window, a maximum claim of £85,000, and a possible excess of up to £100 that cannot be applied to a consumer the firm assesses as vulnerable. Ask your bank to assess the claim rather than assuming the money is gone."
       ]
-    ]
+    ],
+    "sources_checked": [
+      [
+        "NCSC — Report a scam website",
+        "https://www.ncsc.gov.uk/collection/phishing-scams/report-scam-website"
+      ],
+      [
+        "Payment Systems Regulator — APP fraud reimbursement protections",
+        "https://www.psr.org.uk/information-for-consumers/app-fraud-reimbursement-protections/"
+      ],
+      [
+        "Cifas — Protective Registration",
+        "https://www.cifas.org.uk/pr"
+      ]
+    ],
+    "quick_answer": "Yes, fake versions of consumer protection sites exist, including clones of beatthescam.com. Check the address bar reads exactly beatthescam.com before entering anything. Treat any site demanding an upfront fee to recover your money or release a fraud report as a scam, and never enter card details or passwords there."
   },
   {
     "slug": "amazon-phone-call-scam-uk",
