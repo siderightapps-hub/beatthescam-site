@@ -304,7 +304,12 @@ p{margin:.75rem 0}
 .footer-grid li{margin:.45rem 0}
 .footer-meta{padding:1rem 0 2.2rem;color:var(--muted)}
 .site-footer{margin-top:2rem;background:var(--panel);border-top:1px solid var(--line)}
-.cookie-banner{position:fixed;left:50%;bottom:1rem;z-index:80;width:min(calc(100% - 2rem), 920px);transform:translateX(-50%);background:var(--brand);color:var(--on-dark);border-radius:18px;box-shadow:var(--shadow-overlay);display:flex;gap:1.25rem;align-items:center;justify-content:space-between;padding:.8rem 1rem}
+/* The bar used var(--brand), and the hero panel's gradient terminates at
+   var(--brand) too — 1.00:1 between the two surfaces, so on a phone the bar
+   read as the hero growing a cookie question rather than as a dismissible
+   overlay sitting on top of it. --brand-2 lifts the fill, and the edge does the
+   real separating work at 4.11:1 against the page behind it. */
+.cookie-banner{position:fixed;left:50%;bottom:1rem;z-index:80;width:min(calc(100% - 2rem), 920px);transform:translateX(-50%);background:var(--brand-2);color:var(--on-dark);border:1px solid var(--line-control-on-dark);border-radius:18px;box-shadow:var(--shadow-overlay);display:flex;gap:1.25rem;align-items:center;justify-content:space-between;padding:.8rem 1rem}
 .cookie-copy{min-width:0}
 /* block, or the heading overflows its flex container by ~46px */
 .cookie-copy strong{display:block;font-size:.95rem}
@@ -391,6 +396,23 @@ p{margin:.75rem 0}
   .cookie-banner p{font-size:.85rem;line-height:1.4}
   .cookie-actions{flex-wrap:nowrap;gap:.45rem}
   .cookie-actions .btn{min-height:46px;padding:0 .8rem}
+}
+/* Short phones. At 375x667 the consent bar was 150px — 24% of the viewport —
+   and it lands over the hero's reassurance layer: the browse link, "Free UK
+   guidance. No account needed." and the whole independence line. The copy is
+   compliance-adjacent so it is not being cut; this tightens the frame around it
+   instead. Height, not width, is the trigger: a tall phone has room for it. */
+@media (max-width:760px) and (max-height:700px){
+  .cookie-banner{padding:.6rem .7rem;gap:.5rem}
+  /* Both on DESIGN.md's .82rem label step rather than inventing two more sizes
+     — the heading keeps its hierarchy on weight instead. Most of the height
+     saving comes from the padding and leading anyway. */
+  .cookie-copy strong{font-size:.82rem}
+  .cookie-banner p{font-size:.82rem;line-height:1.32;margin-top:.1rem}
+  .cookie-actions{gap:.4rem}
+  /* min-height stays at the system's 46px: an earlier pass raised these from
+     42px for exactly that reason, and 2px is not worth re-opening it. */
+  .cookie-actions .btn{padding:0 .7rem;font-size:.82rem}
 }
 /* Phone-width header: the brand, the checker CTA and the Menu button now share
    one row, and at 375px they need ~333px of the 343px available. Without this
