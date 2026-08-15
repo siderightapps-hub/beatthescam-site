@@ -1279,8 +1279,63 @@ def _featured_posts(posts, limit=3):
     return picked
 
 
-def render_home(site, posts, categories, research_reports=None):
+def _headline_stats(stats_page, limit=2):
+    """Compact headline figures for the homepage, read from the research dataset.
+
+    Takes the first section that carries stats — "Headline figures" — and
+    trims each value and metric at the first parenthesis, because the dataset
+    stores its full derivation inline ("Almost £1.3 billion (components: …)")
+    and the homepage shows only the figure while linking to the page that
+    carries the workings. Nothing is hardcoded, so the quarterly refresh flows
+    straight through and the homepage cannot drift from the dataset.
+    """
+    if not stats_page:
+        return []
+    for section in stats_page.get("sections", []):
+        stats = section.get("stats") or []
+        if not stats:
+            continue
+        out = []
+        for stat in stats[:limit]:
+            value = str(stat.get("value", "")).split(" (")[0].strip()
+            metric = str(stat.get("metric", "")).split(" (")[0].strip()
+            if value and metric:
+                out.append((value, metric, str(stat.get("period", "")).strip(),
+                            str(stat.get("publisher", "")).strip()))
+        return out
+    return []
+
+
+def render_home(site, posts, categories, stats_page=None):
     featured = "".join(render_card(p) for p in _featured_posts(posts))
+
+    # Evidence, not decoration: the site publishes an original UK fraud dataset
+    # and the homepage previously cited none of it. Renders nothing at all if
+    # the dataset is absent or shaped unexpectedly.
+    stats_section = ""
+    headline = _headline_stats(stats_page)
+    if headline:
+        cards = "".join(
+            f'<div class="metric-card"><strong>{html.escape(value)}</strong>'
+            f'<span>{html.escape(metric)}</span>'
+            f'<span class="meta">{html.escape(period)} &middot; {html.escape(publisher)}</span></div>'
+            for value, metric, period, publisher in headline
+        )
+        stats_url = f'/research/{stats_page["slug"]}/'
+        stats_section = f'''
+    <section class="section">
+      <div class="wrap">
+        <div class="section-head">
+          <div>
+            <h2>The scale of UK fraud</h2>
+            <p>Our own dataset, refreshed quarterly. Every figure is dated and linked to the body that published it.</p>
+          </div>
+          <a href="{stats_url}">See the full dataset</a>
+        </div>
+        <div class="grid-2">{cards}</div>
+      </div>
+    </section>
+    '''
 
     channel_categories = [
         ("sms", "Text messages"),
@@ -1372,7 +1427,7 @@ def render_home(site, posts, categories, research_reports=None):
         <div class="grid-3">{featured}</div>
       </div>
     </section>
-
+{stats_section}
     '''
 
     schema = website_schema(site) + org_schema(site)
@@ -4107,7 +4162,7 @@ def build():
             if src.is_file():
                 shutil.copy2(src, DIST / src.name)
 
-    write(DIST / 'index.html',       render_home(site, posts, categories, research_reports))
+    write(DIST / 'index.html',       render_home(site, posts, categories, stats_page))
     write(DIST / 'categories/index.html', render_categories_index(site, categories))
     for cat, items in categories.items():
         write(DIST / 'categories' / slugify(cat) / 'index.html', render_category_page(site, cat, items, categories, hub=category_hubs.get(cat)))

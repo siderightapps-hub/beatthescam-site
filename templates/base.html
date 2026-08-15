@@ -200,6 +200,15 @@
       <p>© {{year}} {{site_name}}. Consumer protection guides for UK residents. Educational content only — not legal or financial advice.</p>
     </div>
   </footer>
+  <!-- Mobile-only standing routes. The sticky header can only fit one action at
+       phone widths, and it was the checker — so a reader who had already paid
+       had no route to recovery once the hero scrolled away, on any page. Hidden
+       until the reader is past the header, and suppressed entirely while the
+       consent bar is up so two fixed bars never stack. -->
+  <div class="mobile-actions" id="mobileActions">
+    <a class="ma-check" href="{{asset_prefix}}/check/">Check a message</a>
+    <a class="ma-recovery" href="{{asset_prefix}}/recovery/">Start recovery</a>
+  </div>
   <script src="{{asset_prefix}}/assets/app.js?v={{js_ver}}" defer></script>
 </body>
 </html>

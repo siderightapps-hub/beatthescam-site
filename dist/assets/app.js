@@ -7,13 +7,17 @@ function consentAccepted(){if(safeGet(storageKey)==='accepted')return true;var d
 return false;}
 function trackEvent(name,params){if(typeof gtag!=='function'||!consentAccepted())return false;gtag('event',name,params||{});return true;}
 window.btsTrackEvent=trackEvent;var gdprApplies=null;function applyConsent(mode){const granted=mode==='accepted';const adGranted=granted&&gdprApplies===false;if(typeof gtag==='function'){gtag('consent','update',{ad_storage:adGranted?'granted':'denied',ad_user_data:adGranted?'granted':'denied',ad_personalization:adGranted?'granted':'denied',analytics_storage:granted?'granted':'denied'});}}
-function syncConsentOffset(){const root=document.documentElement;if(!banner||banner.hidden){root.style.removeProperty('--consent-offset');return;}
-const box=banner.getBoundingClientRect();const inset=Math.max(0,window.innerHeight-box.bottom);root.style.setProperty('--consent-offset',Math.ceil(box.height+inset*2)+'px');}
-var focusBeforeBanner=null;function hideBanner(){if(!banner)return;var hadFocus=banner.contains(document.activeElement);banner.hidden=true;banner.setAttribute('aria-hidden','true');syncConsentOffset();if(hadFocus&&focusBeforeBanner&&document.contains(focusBeforeBanner)){try{focusBeforeBanner.focus();}catch(err){}}
+function syncConsentOffset(){const root=document.documentElement;const actions=document.getElementById('mobileActions');let visible=null;if(banner&&!banner.hidden){visible=banner;}else if(actions&&actions.classList.contains('is-visible')&&getComputedStyle(actions).display!=='none'){visible=actions;}
+if(!visible){root.style.removeProperty('--consent-offset');return;}
+const inset=parseFloat(getComputedStyle(visible).bottom)||0;root.style.setProperty('--consent-offset',Math.ceil(visible.offsetHeight+inset*2)+'px');}
+var focusBeforeBanner=null;var consentChanged=null;function hideBanner(){if(!banner)return;var hadFocus=banner.contains(document.activeElement);banner.hidden=true;banner.setAttribute('aria-hidden','true');if(consentChanged)consentChanged();syncConsentOffset();if(hadFocus&&focusBeforeBanner&&document.contains(focusBeforeBanner)){try{focusBeforeBanner.focus();}catch(err){}}
 focusBeforeBanner=null;}
-function showBanner(opts){if(!banner)return;if(banner.hidden){focusBeforeBanner=document.activeElement;banner.hidden=false;banner.setAttribute('aria-hidden','false');syncConsentOffset();}
+function showBanner(opts){if(!banner)return;if(banner.hidden){focusBeforeBanner=document.activeElement;banner.hidden=false;banner.setAttribute('aria-hidden','false');if(consentChanged)consentChanged();syncConsentOffset();}
 if(opts&&opts.moveFocus&&reject){try{reject.focus();}catch(err){}}}
-window.addEventListener('resize',syncConsentOffset);function setPreference(mode){safeSet(storageKey,mode);applyConsent(mode);hideBanner();}
+window.addEventListener('resize',syncConsentOffset);(function(){const actions=document.getElementById('mobileActions');if(!actions)return;const check=actions.querySelector('.ma-check');const recovery=actions.querySelector('.ma-recovery');const path=window.location.pathname;if(check&&path.indexOf('/check')===0){check.remove();actions.classList.add('is-single');}
+else if(recovery&&path.indexOf('/recovery')===0){recovery.remove();actions.classList.add('is-single');}
+const REVEAL_AT=420;let shown=false;function update(){const consentUp=banner&&!banner.hidden;const want=!consentUp&&window.scrollY>REVEAL_AT;if(want===shown)return;shown=want;actions.classList.toggle('is-visible',want);syncConsentOffset();}
+window.addEventListener('scroll',update,{passive:true});window.addEventListener('resize',update);consentChanged=update;update();})();function setPreference(mode){safeSet(storageKey,mode);applyConsent(mode);hideBanner();}
 var cmpTookOver=false;function deferToCmp(){if(cmpTookOver)return;cmpTookOver=true;hideBanner();}
 function showFallbackBanner(){if(cmpTookOver)return;var current=safeGet(storageKey);if(current==='accepted'||current==='rejected'){applyConsent(current);hideBanner();}else{showBanner();}}
 function registerTcfListener(){try{window.__tcfapi('addEventListener',2,function(tcData,success){if(!success||!tcData)return;if(typeof tcData.gdprApplies==='boolean'){var wasUnknown=(gdprApplies===null);gdprApplies=tcData.gdprApplies;if(wasUnknown&&gdprApplies===false&&!cmpTookOver){var stored=safeGet(storageKey);if(stored==='accepted'){applyConsent(stored);}}}

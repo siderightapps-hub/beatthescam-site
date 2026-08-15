@@ -62,7 +62,7 @@
        value= attribute (not content=) — validators flag it; do not "fix" it
        or their crawler stops verifying the site. -->
   <meta name='impact-site-verification' value='e0dda02c-a1b6-4056-9f92-16f7c916bd4b'>
-  <link rel="stylesheet" href="/assets/styles.css?v=0cd9f2a0d8">
+  <link rel="stylesheet" href="/assets/styles.css?v=db40df5991">
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-JXNF856NBF"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
@@ -224,6 +224,19 @@
       </div>
     </section>
 
+    <section class="section">
+      <div class="wrap">
+        <div class="section-head">
+          <div>
+            <h2>The scale of UK fraud</h2>
+            <p>Our own dataset, refreshed quarterly. Every figure is dated and linked to the body that published it.</p>
+          </div>
+          <a href="/research/uk-scam-statistics/">See the full dataset</a>
+        </div>
+        <div class="grid-2"><div class="metric-card"><strong>Almost £1.3 billion</strong><span>Total UK payment fraud losses</span><span class="meta">Calendar year 2025 &middot; UK Finance — Annual Fraud Report 2026</span></div><div class="metric-card"><strong>4.06 million cases</strong><span>Total confirmed payment fraud cases</span><span class="meta">Calendar year 2025 &middot; UK Finance — Annual Fraud Report 2026</span></div></div>
+      </div>
+    </section>
+
 
   </main>
   <section class="newsletter-band" aria-labelledby="nl-heading">
@@ -307,6 +320,15 @@
       <p>© 2026 Beat the Scam. Consumer protection guides for UK residents. Educational content only — not legal or financial advice.</p>
     </div>
   </footer>
-  <script src="/assets/app.js?v=9aca54eeb2" defer></script>
+  <!-- Mobile-only standing routes. The sticky header can only fit one action at
+       phone widths, and it was the checker — so a reader who had already paid
+       had no route to recovery once the hero scrolled away, on any page. Hidden
+       until the reader is past the header, and suppressed entirely while the
+       consent bar is up so two fixed bars never stack. -->
+  <div class="mobile-actions" id="mobileActions">
+    <a class="ma-check" href="/check/">Check a message</a>
+    <a class="ma-recovery" href="/recovery/">Start recovery</a>
+  </div>
+  <script src="/assets/app.js?v=392f54a7b2" defer></script>
 </body>
 </html>

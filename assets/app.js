@@ -117,26 +117,44 @@
   // page — the footer's Trust & legal links and the Cookie settings button that
   // reopens it. Reserve exactly the height it occupies (bar + its bottom inset)
   // as body padding so that content stays reachable, and release it on dismissal.
+  // Two fixed bars can occupy the bottom: the consent bar and the mobile action
+  // bar. They are mutually exclusive by design (consent suppresses the actions),
+  // so the reserved space is whichever one is actually on screen.
   function syncConsentOffset(){
     const root = document.documentElement;
-    if(!banner || banner.hidden){
+    const actions = document.getElementById('mobileActions');
+    let visible = null;
+    if(banner && !banner.hidden){
+      visible = banner;
+    } else if(actions && actions.classList.contains('is-visible') &&
+              getComputedStyle(actions).display !== 'none'){
+      visible = actions;
+    }
+    if(!visible){
       root.style.removeProperty('--consent-offset');
       return;
     }
-    const box = banner.getBoundingClientRect();
-    const inset = Math.max(0, window.innerHeight - box.bottom);
-    root.style.setProperty('--consent-offset', Math.ceil(box.height + inset * 2) + 'px');
+    // offsetHeight and the computed `bottom`, not getBoundingClientRect: the
+    // action bar slides in on a transform, and a rect read mid-transition
+    // reports the off-screen position and under-reserves the space.
+    const inset = parseFloat(getComputedStyle(visible).bottom) || 0;
+    root.style.setProperty('--consent-offset',
+      Math.ceil(visible.offsetHeight + inset * 2) + 'px');
   }
 
   // Where focus was before the bar took it, so dismissing returns the reader
   // to what they were doing rather than dropping them at the top of the page.
   var focusBeforeBanner = null;
+  // Set by the mobile action bar below, so consent showing or being dismissed
+  // re-evaluates whether the action bar should be on screen.
+  var consentChanged = null;
 
   function hideBanner(){
     if(!banner) return;
     var hadFocus = banner.contains(document.activeElement);
     banner.hidden = true;
     banner.setAttribute('aria-hidden','true');
+    if(consentChanged) consentChanged();
     syncConsentOffset();
     if(hadFocus && focusBeforeBanner && document.contains(focusBeforeBanner)){
       try { focusBeforeBanner.focus(); } catch (err) { /* element went away */ }
@@ -156,6 +174,7 @@
       focusBeforeBanner = document.activeElement;
       banner.hidden = false;
       banner.setAttribute('aria-hidden','false');
+      if(consentChanged) consentChanged();
       syncConsentOffset();
     }
     // Reject first: it is the privacy-preserving option and must never be the
@@ -168,6 +187,36 @@
   // The bar reflows between the one-line desktop layout and the stacked mobile
   // grid, so the reserved space has to be re-measured, not cached.
   window.addEventListener('resize', syncConsentOffset);
+
+  // ─── Mobile standing routes ────────────────────────────────────────────────
+  (function(){
+    const actions = document.getElementById('mobileActions');
+    if(!actions) return;
+    const check = actions.querySelector('.ma-check');
+    const recovery = actions.querySelector('.ma-recovery');
+    // Drop whichever route the reader is already on, and let the other fill the
+    // bar rather than offering someone on /check/ a button back to /check/.
+    const path = window.location.pathname;
+    if(check && path.indexOf('/check') === 0){ check.remove(); actions.classList.add('is-single'); }
+    else if(recovery && path.indexOf('/recovery') === 0){ recovery.remove(); actions.classList.add('is-single'); }
+
+    // Below the header the reader has no standing route; above it they still
+    // have the header CTA and, on the homepage, the hero tiles themselves.
+    const REVEAL_AT = 420;
+    let shown = false;
+    function update(){
+      const consentUp = banner && !banner.hidden;
+      const want = !consentUp && window.scrollY > REVEAL_AT;
+      if(want === shown) return;
+      shown = want;
+      actions.classList.toggle('is-visible', want);
+      syncConsentOffset();
+    }
+    window.addEventListener('scroll', update, {passive:true});
+    window.addEventListener('resize', update);
+    consentChanged = update;
+    update();
+  })();
 
   function setPreference(mode){
     safeSet(storageKey, mode);

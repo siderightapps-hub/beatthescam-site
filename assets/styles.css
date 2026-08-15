@@ -58,6 +58,10 @@
   --affiliate-accent:#c4b5fd;
   --affiliate-ink:#5b21b6;
   --shadow:0 16px 50px rgba(11,18,32,.08);
+  /* Floating bottom bars need to read as above the page, not resting on it, so
+     they cannot use the ambient --shadow. One token for both of them (consent
+     and the mobile action bar) rather than two hand-rolled values. */
+  --shadow-overlay:0 20px 60px rgba(0,0,0,.25);
   --radius:26px;
   --max:1180px;
 }
@@ -300,7 +304,7 @@ p{margin:.75rem 0}
 .footer-grid li{margin:.45rem 0}
 .footer-meta{padding:1rem 0 2.2rem;color:var(--muted)}
 .site-footer{margin-top:2rem;background:var(--panel);border-top:1px solid var(--line)}
-.cookie-banner{position:fixed;left:50%;bottom:1rem;z-index:80;width:min(calc(100% - 2rem), 920px);transform:translateX(-50%);background:var(--brand);color:var(--on-dark);border-radius:18px;box-shadow:0 20px 60px rgba(0,0,0,.25);display:flex;gap:1.25rem;align-items:center;justify-content:space-between;padding:.8rem 1rem}
+.cookie-banner{position:fixed;left:50%;bottom:1rem;z-index:80;width:min(calc(100% - 2rem), 920px);transform:translateX(-50%);background:var(--brand);color:var(--on-dark);border-radius:18px;box-shadow:var(--shadow-overlay);display:flex;gap:1.25rem;align-items:center;justify-content:space-between;padding:.8rem 1rem}
 .cookie-copy{min-width:0}
 /* block, or the heading overflows its flex container by ~46px */
 .cookie-copy strong{display:block;font-size:.95rem}
@@ -315,6 +319,29 @@ p{margin:.75rem 0}
 .cookie-banner .btn-consent{background:transparent;color:var(--on-dark);border-color:rgba(255,255,255,.72)}
 .cookie-banner .btn-consent:hover{background:rgba(255,255,255,.12);text-decoration:none}
 .center{display:flex;justify-content:center}
+/* Desktop keeps both routes in the header and the hero, so this is phone-only.
+   visibility (not just transform) so the links leave the focus order and the
+   accessibility tree while the bar is off-screen. */
+.mobile-actions{display:none}
+@media (max-width:760px){
+  .mobile-actions{
+    position:fixed;left:.75rem;right:.75rem;bottom:.75rem;z-index:70;
+    display:grid;grid-template-columns:1fr 1fr;gap:.5rem;padding:.5rem;
+    background:rgba(11,18,32,.94);border:1px solid rgba(255,255,255,.16);
+    border-radius:18px;box-shadow:var(--shadow-overlay);
+    backdrop-filter:blur(10px);
+    visibility:hidden;transform:translateY(140%);
+    transition:transform .22s ease,visibility .22s ease;
+  }
+  .mobile-actions.is-visible{visibility:visible;transform:translateY(0)}
+  .mobile-actions.is-single{grid-template-columns:1fr}
+  .mobile-actions a{display:flex;align-items:center;justify-content:center;text-align:center;min-height:46px;padding:0 .7rem;border-radius:999px;font-weight:800;font-size:.82rem;border:1px solid transparent}
+  .mobile-actions a:hover{text-decoration:none}
+  .mobile-actions .ma-check{background:var(--accent);color:var(--on-dark);border-color:rgba(255,255,255,.45)}
+  .mobile-actions .ma-recovery{background:rgba(252,211,77,.35);border-color:rgba(252,211,77,.62);color:var(--recovery-on-dark)}
+  .mobile-actions a:focus-visible{outline-color:var(--on-dark)}
+}
+@media (prefers-reduced-motion:reduce){.mobile-actions{transition:none}}
 @media (max-width:1100px){
   /* .footer-grid is deliberately NOT here: it was collapsing to a single
      992px-wide column at 1024px with room for three, purely because it shared
