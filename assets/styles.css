@@ -129,10 +129,24 @@ img{max-width:100%;display:block}
    Amber becomes an outline: a 4.57:1 edge and 15.1:1 text keep it perfectly
    legible while returning it to secondary weight. */
 .triage-check{background:var(--accent);border-color:rgba(255,255,255,.45);color:var(--on-dark)}
-.triage-recovery{background:rgba(252,211,77,.12);border-color:rgba(252,211,77,.55);color:var(--recovery-on-dark)}
+/* .35 alpha measures ~2.5:1 against the panel under the tile, against blue's
+   2.70:1 — present as a real surface, still legibly the second route. The
+   previous .12 overshot to 1.32:1, which was quieter than blue had been when
+   blue was judged too weak to be primary. */
+.triage-recovery{background:rgba(252,211,77,.35);border-color:rgba(252,211,77,.62);color:var(--recovery-on-dark)}
 .triage-choice:hover{transform:translateY(-1px);text-decoration:none}
 .triage-check:hover{background:var(--focus)}
-.triage-recovery:hover{background:rgba(252,211,77,.2)}
+.triage-recovery:hover{background:rgba(252,211,77,.46)}
+/* The four answers the checker can return, in the checker's own semantic
+   colours. This is the one place Protective Red, Recovery Amber and Safe Green
+   appear on the homepage, and they appear meaning exactly what DESIGN.md says
+   they mean. It also tells a reader what clicking the blue tile will get them. */
+/* .82rem is DESIGN.md's documented label step — both of these sit on the ramp
+   rather than adding two more one-off sizes to a stylesheet that already
+   carries 36 of them. */
+.checker-preview{margin:.9rem 0 .5rem;color:rgba(255,255,255,.82);font-size:.82rem;line-height:1.5}
+.verdict-strip{display:flex;flex-wrap:wrap;gap:.4rem;list-style:none;padding:0;margin:0}
+.verdict-chip{padding:.3rem .62rem;border-radius:999px;font-size:.82rem;font-weight:800;line-height:1.25}
 .hero-browse{margin:1rem 0 0;font-weight:700}
 .hero-browse a{color:var(--on-dark);text-decoration:underline;text-underline-offset:.18em}
 .hero-reassurance{margin:.35rem 0 0;color:rgba(255,255,255,.72);font-size:.9rem}
@@ -149,7 +163,10 @@ p{margin:.75rem 0}
 .section{padding:1rem 0 3.1rem}
 /* baseline, not end: bottom-alignment pinned the "View all" link to the last
    line of the description, up to ~1040px from the heading it belongs to. */
-.section-head{display:flex;align-items:baseline;justify-content:space-between;gap:1rem;margin-bottom:1rem}
+/* nowrap squeezed the "View all …" link to 58px at 375px, breaking it mid-word
+   across three lines. The link never wraps; the row does. */
+.section-head{display:flex;flex-wrap:wrap;align-items:baseline;justify-content:space-between;gap:1rem;margin-bottom:1rem}
+.section-head > a{white-space:nowrap;flex:0 0 auto}
 .section-head p{max-width:65ch;color:var(--muted)}
 .grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem}
 .grid-2{display:grid;grid-template-columns:repeat(2,1fr);gap:1rem}
@@ -290,7 +307,10 @@ p{margin:.75rem 0}
 .cookie-banner .btn-consent:hover{background:rgba(255,255,255,.12);text-decoration:none}
 .center{display:flex;justify-content:center}
 @media (max-width:1100px){
-  .hero-grid,.article-layout,.stat-strip,.grid-2,.trust-grid,.footer-grid{grid-template-columns:1fr}
+  /* .footer-grid is deliberately NOT here: it was collapsing to a single
+     992px-wide column at 1024px with room for three, purely because it shared
+     the hero's breakpoint. It gets its own at 760px below. */
+  .hero-grid,.article-layout,.stat-strip,.grid-2,.trust-grid{grid-template-columns:1fr}
   /* Card grids get a two-column stage here instead of collapsing straight to
      one. At 1024px the old rule inflated every card to ~1000px wide to hold
      two lines of text. */
@@ -314,7 +334,7 @@ p{margin:.75rem 0}
   .home-channel-list a{min-height:50px}
   /* Card grids and the checklist finish collapsing to one column here, having
      spent 760-1100px at two. */
-  .grid-3,.category-grid,.home-checklist{grid-template-columns:1fr}
+  .grid-3,.category-grid,.home-checklist,.footer-grid{grid-template-columns:1fr}
   /* Keep the checker reachable: the nav folds away at 1100px but the CTA now
      lives outside it, so it only needs to shrink to sit beside the Menu
      button on a narrow header. */

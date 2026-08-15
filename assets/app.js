@@ -2,10 +2,44 @@
   const navToggle = document.querySelector('.nav-toggle');
   const nav = document.getElementById('site-nav');
   if(navToggle && nav){
+    // #site-nav sits BEFORE .nav-toggle in the document, because the checker
+    // CTA has to live outside the element that collapses. That means the panel
+    // precedes its own trigger in sequential focus order: without moving focus
+    // on open, Tab from the toggle goes forward into <main> and the reader has
+    // to Shift-Tab backwards past the CTA to reach the links they just opened.
+    function setNav(open){
+      navToggle.setAttribute('aria-expanded', String(open));
+      nav.classList.toggle('is-open', open);
+      if(open){
+        const first = nav.querySelector('a[href]');
+        if(first){ try { first.focus(); } catch (err) { /* not focusable */ } }
+      }
+    }
+    function closeNav(restoreFocus){
+      if(!nav.classList.contains('is-open')) return;
+      setNav(false);
+      if(restoreFocus){ try { navToggle.focus(); } catch (err) { /* gone */ } }
+    }
+
     navToggle.addEventListener('click', function(){
       const expanded = navToggle.getAttribute('aria-expanded') === 'true';
-      navToggle.setAttribute('aria-expanded', String(!expanded));
-      nav.classList.toggle('is-open');
+      if(expanded){ closeNav(true); } else { setNav(true); }
+    });
+
+    // Escape closes and hands focus back to the button that opened it.
+    document.addEventListener('keydown', function(e){
+      if(e.key === 'Escape' || e.key === 'Esc'){ closeNav(true); }
+    });
+
+    // A click or a tab-out beyond the header dismisses the panel, but must not
+    // steal focus back to the toggle — the reader has deliberately moved on.
+    document.addEventListener('click', function(e){
+      if(nav.contains(e.target) || navToggle.contains(e.target)) return;
+      closeNav(false);
+    });
+    document.addEventListener('focusin', function(e){
+      if(nav.contains(e.target) || navToggle.contains(e.target)) return;
+      closeNav(false);
     });
   }
 
