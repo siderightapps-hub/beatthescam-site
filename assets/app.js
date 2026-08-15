@@ -94,8 +94,35 @@
     root.style.setProperty('--consent-offset', Math.ceil(box.height + inset * 2) + 'px');
   }
 
-  function hideBanner(){ if(banner){ banner.hidden = true; banner.setAttribute('aria-hidden','true'); syncConsentOffset(); } }
-  function showBanner(){ if(banner){ banner.hidden = false; banner.setAttribute('aria-hidden','false'); syncConsentOffset(); } }
+  // Where focus was before the bar took it, so dismissing returns the reader
+  // to what they were doing rather than dropping them at the top of the page.
+  var focusBeforeBanner = null;
+
+  function hideBanner(){
+    if(!banner) return;
+    var hadFocus = banner.contains(document.activeElement);
+    banner.hidden = true;
+    banner.setAttribute('aria-hidden','true');
+    syncConsentOffset();
+    if(hadFocus && focusBeforeBanner && document.contains(focusBeforeBanner)){
+      try { focusBeforeBanner.focus(); } catch (err) { /* element went away */ }
+    }
+    focusBeforeBanner = null;
+  }
+
+  function showBanner(){
+    if(!banner) return;
+    if(banner.hidden){
+      focusBeforeBanner = document.activeElement;
+      banner.hidden = false;
+      banner.setAttribute('aria-hidden','false');
+      syncConsentOffset();
+    }
+    // Focus moves in even when the bar was already on screen, so "Cookie
+    // settings" always lands the reader on the choice. Reject first: it is the
+    // privacy-preserving option and must never be the harder one to reach.
+    if(reject){ try { reject.focus(); } catch (err) { /* not focusable yet */ } }
+  }
 
   // The bar reflows between the one-line desktop layout and the stacked mobile
   // grid, so the reserved space has to be re-measured, not cached.

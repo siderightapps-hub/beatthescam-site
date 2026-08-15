@@ -7,8 +7,10 @@ function trackEvent(name,params){if(typeof gtag!=='function'||!consentAccepted()
 window.btsTrackEvent=trackEvent;var gdprApplies=null;function applyConsent(mode){const granted=mode==='accepted';const adGranted=granted&&gdprApplies===false;if(typeof gtag==='function'){gtag('consent','update',{ad_storage:adGranted?'granted':'denied',ad_user_data:adGranted?'granted':'denied',ad_personalization:adGranted?'granted':'denied',analytics_storage:granted?'granted':'denied'});}}
 function syncConsentOffset(){const root=document.documentElement;if(!banner||banner.hidden){root.style.removeProperty('--consent-offset');return;}
 const box=banner.getBoundingClientRect();const inset=Math.max(0,window.innerHeight-box.bottom);root.style.setProperty('--consent-offset',Math.ceil(box.height+inset*2)+'px');}
-function hideBanner(){if(banner){banner.hidden=true;banner.setAttribute('aria-hidden','true');syncConsentOffset();}}
-function showBanner(){if(banner){banner.hidden=false;banner.setAttribute('aria-hidden','false');syncConsentOffset();}}
+var focusBeforeBanner=null;function hideBanner(){if(!banner)return;var hadFocus=banner.contains(document.activeElement);banner.hidden=true;banner.setAttribute('aria-hidden','true');syncConsentOffset();if(hadFocus&&focusBeforeBanner&&document.contains(focusBeforeBanner)){try{focusBeforeBanner.focus();}catch(err){}}
+focusBeforeBanner=null;}
+function showBanner(){if(!banner)return;if(banner.hidden){focusBeforeBanner=document.activeElement;banner.hidden=false;banner.setAttribute('aria-hidden','false');syncConsentOffset();}
+if(reject){try{reject.focus();}catch(err){}}}
 window.addEventListener('resize',syncConsentOffset);function setPreference(mode){safeSet(storageKey,mode);applyConsent(mode);hideBanner();}
 var cmpTookOver=false;function deferToCmp(){if(cmpTookOver)return;cmpTookOver=true;hideBanner();}
 function showFallbackBanner(){if(cmpTookOver)return;var current=safeGet(storageKey);if(current==='accepted'||current==='rejected'){applyConsent(current);hideBanner();}else{showBanner();}}

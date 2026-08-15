@@ -124,7 +124,9 @@ h3{font-size:1.15rem;margin:0 0 .5rem}
 p{margin:.75rem 0}
 .lead{font-size:1.08rem;color:var(--text-subtle)}
 .section{padding:1rem 0 3.1rem}
-.section-head{display:flex;align-items:end;justify-content:space-between;gap:1rem;margin-bottom:1rem}
+/* baseline, not end: bottom-alignment pinned the "View all" link to the last
+   line of the description, up to ~1040px from the heading it belongs to. */
+.section-head{display:flex;align-items:baseline;justify-content:space-between;gap:1rem;margin-bottom:1rem}
 .section-head p{max-width:65ch;color:var(--muted)}
 .grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem}
 .grid-2{display:grid;grid-template-columns:repeat(2,1fr);gap:1rem}
@@ -140,7 +142,13 @@ p{margin:.75rem 0}
 .btn-recovery:hover{background:var(--recovery-hover);text-decoration:none}
 .card h3 a,.guide-card h3 a,.category-card h3 a{color:var(--brand)}
 .guide-card{display:flex;flex-direction:column;gap:.6rem;padding:1.2rem}
-.eyebrow{display:inline-flex;align-items:center;gap:.45rem;font-size:.78rem;font-weight:900;text-transform:uppercase;letter-spacing:.08em;color:var(--danger)}
+/* Category labels are classification, not alarm. They previously used
+   var(--danger), which spent Protective Red on taxonomy on the site's
+   highest-traffic pages and blunted the colour everywhere it does mean harm
+   (checker verdicts, real risk callouts). DESIGN.md's Signal-Meaning Rule
+   assigns classification to the pale-blue chip, which is what .badge already
+   is — this is that treatment. */
+.eyebrow{display:inline-flex;align-items:center;gap:.45rem;padding:.26rem .6rem;border-radius:999px;background:var(--accent-soft);color:var(--accent-ink);border:1px solid var(--accent-line);font-size:.72rem;font-weight:800;text-transform:uppercase;letter-spacing:.07em}
 .meta{font-size:.95rem;color:var(--muted)}
 .badge-row{display:flex;gap:.55rem;flex-wrap:wrap}
 .badge{padding:.36rem .7rem;border-radius:999px;background:var(--accent-soft);color:var(--accent-ink);border:1px solid var(--accent-line);font-size:.88rem;font-weight:700}
@@ -164,8 +172,12 @@ p{margin:.75rem 0}
 .warning-list,.list-clean{list-style:none;padding:0;margin:0}
 .warning-list li,.list-clean li{padding:.7rem 0;border-bottom:1px solid var(--line)}
 .warning-list li:last-child,.list-clean li:last-child{border-bottom:none}
-.search-box{display:flex;align-items:center;gap:.75rem;padding:.95rem 1rem;border-radius:18px;background:var(--panel);border:1px solid var(--line);margin-top:.9rem}
-.search-box input{width:100%;min-width:0;border:none;outline:none;background:transparent;font-size:1rem}
+/* The field used to be a 21px input floating in a 78px padded box, so the top
+   and bottom thirds of what reads as a text input were inert on touch. The
+   padding moved onto the input via align-self:stretch, so the visible box and
+   the tap target are the same thing. */
+.search-box{display:flex;align-items:center;gap:.75rem;padding:.5rem .5rem .5rem 1rem;border-radius:18px;background:var(--panel);border:1px solid var(--line);margin-top:.9rem}
+.search-box input{width:100%;min-width:0;align-self:stretch;min-height:46px;border:none;outline:none;background:transparent;font-size:1rem}
 /* The rule above strips the browser's focus ring from the search inputs, and
    nothing replaced it — a keyboard user could not see where they were
    (WCAG 2.4.7; audit, 2026-07-31). :focus-visible restores an indicator for
@@ -174,6 +186,21 @@ p{margin:.75rem 0}
 .search-box:focus-within{outline:3px solid var(--focus);outline-offset:2px}
 .search-box input:focus-visible{outline:none}
 @media (prefers-contrast:more){:focus-visible{outline-width:4px}}
+/* The blue focus ring is invisible on the blue primary CTA (var(--focus) vs
+   var(--accent) measures 1.30:1, against a 3:1 floor for focus indicators —
+   WCAG 2.4.11) and only 2.4:1 on the lighter part of the hero gradient. Every
+   control sitting on a dark surface switches the ring to white instead, which
+   clears both the navy and the amber recovery tile. The ring sits at
+   outline-offset, i.e. outside the control, so it is read against the panel. */
+.hero-panel a:focus-visible,.hero-panel .btn:focus-visible,.triage-choice:focus-visible,.callout a:focus-visible,.callout .btn:focus-visible,.cookie-banner .btn:focus-visible{outline-color:var(--on-dark)}
+/* Windows High Contrast strips backgrounds and shadows, and this system leans
+   on an ambient shadow plus a 1.18:1 hairline to separate panels from the page.
+   Without this block the cards, checklist and channel tiles have no boundary. */
+@media (forced-colors:active){
+  .card,.guide-card,.category-card,.metric-card,.sidebar-card,.info-card,.search-panel,.hero-panel,.callout,.cookie-banner,.home-checklist .item,.home-channel-list a,.faq-panel,.trust-card{border:1px solid CanvasText}
+  .icon-dot,.eyebrow,.badge{border:1px solid CanvasText}
+  :focus-visible{outline-color:Highlight}
+}
 .search-note{color:var(--muted);font-size:.95rem}
 .article-layout{display:grid;grid-template-columns:minmax(0,1fr) 330px;gap:1.2rem;padding:1rem 0 3rem;min-width:0}
 .article{padding:2rem 2rem 1.6rem;min-width:0}
@@ -208,10 +235,16 @@ p{margin:.75rem 0}
 .tablelike{display:grid;gap:.85rem}
 .table-row{display:grid;grid-template-columns:.62fr 1.38fr;gap:1rem;padding:1rem 1.1rem}
 .note{font-size:.95rem;color:var(--muted)}
-.home-checklist{display:grid;gap:.9rem}
-.home-checklist .item{display:grid;grid-template-columns:auto 1fr;gap:.8rem;align-items:start;padding:.9rem 1rem;background:var(--panel);border:1px solid var(--line);border-radius:18px}
+/* Two columns so four one-line facts stop occupying four full-width bands,
+   and a reading measure so the copy is not stranded across ~1100px of white. */
+.home-checklist{display:grid;gap:.9rem;grid-template-columns:repeat(2,minmax(0,1fr));counter-reset:homecheck}
+.home-checklist .item{display:grid;grid-template-columns:auto 1fr;gap:.8rem;align-items:start;padding:.9rem 1rem;background:var(--panel);border:1px solid var(--line);border-radius:18px;counter-increment:homecheck}
 .home-checklist .item strong{color:var(--brand)}
-.icon-dot{width:14px;height:14px;border-radius:999px;background:var(--danger);margin-top:.35rem}
+.home-checklist .item p{max-width:52ch;margin:.2rem 0 0}
+/* Numbered, not red dots: these four checks are a sequence to work through,
+   and Protective Red belongs to genuine warnings (see .eyebrow above). */
+.icon-dot{display:flex;align-items:center;justify-content:center;width:26px;height:26px;border-radius:999px;background:var(--accent-soft);color:var(--accent-ink);border:1px solid var(--accent-line);font-size:.85rem;font-weight:800;line-height:1}
+.icon-dot:before{content:counter(homecheck)}
 .trust-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem}
 .footer-grid{display:grid;grid-template-columns:1.3fr .85fr .85fr;gap:1.2rem;padding:2.3rem 0 1rem}
 .footer-grid ul{padding:0;margin:0;list-style:none}
@@ -220,20 +253,31 @@ p{margin:.75rem 0}
 .site-footer{margin-top:2rem;background:var(--panel);border-top:1px solid var(--line)}
 .cookie-banner{position:fixed;left:50%;bottom:1rem;z-index:80;width:min(calc(100% - 2rem), 920px);transform:translateX(-50%);background:var(--brand);color:var(--on-dark);border-radius:18px;box-shadow:0 20px 60px rgba(0,0,0,.25);display:flex;gap:1.25rem;align-items:center;justify-content:space-between;padding:.8rem 1rem}
 .cookie-copy{min-width:0}
-.cookie-copy strong{font-size:.95rem}
+/* block, or the heading overflows its flex container by ~46px */
+.cookie-copy strong{display:block;font-size:.95rem}
 .cookie-banner p{margin:.15rem 0 0;color:rgba(255,255,255,.85);font-size:.9rem;line-height:1.45}
 .cookie-actions{display:flex;gap:.55rem;flex-wrap:nowrap;flex-shrink:0}
-.cookie-banner .btn-secondary{background:transparent;color:var(--on-dark);border-color:rgba(255,255,255,.25)}
+/* Reject and Accept are deliberately identical. Accept previously took
+   var(--accent) — the Verification Blue DESIGN.md reserves for the clearest
+   safety action — which both borrowed the safety signal for a data prompt and
+   gave the two choices unequal weight (a UK ICO equal-prominence problem, not
+   only a visual one). The old Reject border was rgba(255,255,255,.25) at
+   2.21:1, under WCAG 1.4.11's 3:1 for non-text UI; .72 clears it. */
+.cookie-banner .btn-consent{background:transparent;color:var(--on-dark);border-color:rgba(255,255,255,.72)}
+.cookie-banner .btn-consent:hover{background:rgba(255,255,255,.12);text-decoration:none}
 .center{display:flex;justify-content:center}
 @media (max-width:1100px){
-  .hero-grid,.article-layout,.stat-strip,.category-grid,.grid-3,.grid-2,.trust-grid,.footer-grid{grid-template-columns:1fr}
+  .hero-grid,.article-layout,.stat-strip,.grid-2,.trust-grid,.footer-grid{grid-template-columns:1fr}
+  /* Card grids get a two-column stage here instead of collapsing straight to
+     one. At 1024px the old rule inflated every card to ~1000px wide to hold
+     two lines of text. */
+  .grid-3,.category-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
   .home-channel-list{grid-template-columns:repeat(3,minmax(0,1fr))}
   .sidebar{position:static}
   .nav-toggle{display:inline-flex}
   .nav{display:none;position:absolute;left:1rem;right:1rem;top:70px;background:var(--panel);padding:1rem;border:1px solid var(--line);border-radius:18px;box-shadow:var(--shadow);flex-direction:column;align-items:flex-start}
   .nav.is-open{display:flex}
   .header-inner{min-height:70px}
-  .nav-cta{margin-left:0;margin-top:.25rem;width:100%;text-align:center}
 }
 @media (max-width:760px){
   .brand-sub{display:none}
@@ -245,6 +289,13 @@ p{margin:.75rem 0}
   .hero-reassurance{font-size:.84rem}
   .home-channel-list{grid-template-columns:1fr}
   .home-channel-list a{min-height:50px}
+  /* Card grids and the checklist finish collapsing to one column here, having
+     spent 760-1100px at two. */
+  .grid-3,.category-grid,.home-checklist{grid-template-columns:1fr}
+  /* Keep the checker reachable: the nav folds away at 1100px but the CTA now
+     lives outside it, so it only needs to shrink to sit beside the Menu
+     button on a narrow header. */
+  .nav-cta{padding:0 .75rem;font-size:.85rem;white-space:nowrap}
   .article{padding:1.3rem}
   .message-examples{grid-template-columns:1fr}
   .table-row{grid-template-columns:1fr}
@@ -252,6 +303,15 @@ p{margin:.75rem 0}
   .cookie-banner p{font-size:.85rem;line-height:1.4}
   .cookie-actions{flex-wrap:nowrap;gap:.45rem}
   .cookie-actions .btn{min-height:46px;padding:0 .8rem}
+}
+/* Phone-width header: the brand, the checker CTA and the Menu button now share
+   one row, and at 375px they need ~333px of the 343px available. Without this
+   the wordmark wraps to two lines. */
+@media (max-width:430px){
+  .brand{font-size:1.15rem;white-space:nowrap}
+  .nav-cta{padding:0 .6rem;font-size:.8rem}
+  .nav-toggle{padding:.55rem .7rem}
+  .header-actions{gap:.4rem}
 }
 
 .category-card p{margin-bottom:0}
@@ -330,14 +390,21 @@ p{margin:.75rem 0}
 .affiliate-card .btn-secondary{border-color:var(--affiliate-accent);color:var(--affiliate-ink)}
 .affiliate-card .btn-secondary:hover{background:var(--affiliate-surface-hover)}
 
-/* Highlighted nav CTA — Check a message button */
+/* Highlighted nav CTA — Check a message button.
+   It sits in .header-actions rather than inside .nav, because .nav is the
+   element that collapses into the Menu panel at 1100px. Inside the nav, the
+   single route to the checker disappeared on every screen under 1100px and
+   did not come back until the footer. */
+.header-actions{display:flex;align-items:center;gap:.6rem;margin-left:auto}
 .nav-cta{
   background: var(--accent);
   color: var(--on-dark) !important;
-  padding: .55rem 1rem;
+  display: inline-flex;
+  align-items: center;
+  min-height: 46px;
+  padding: 0 1rem;
   border-radius: 999px;
   font-weight: 800;
-  margin-left: auto;
 }
 .nav-cta:hover{
   filter: brightness(1.05);
