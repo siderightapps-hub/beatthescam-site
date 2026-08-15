@@ -171,7 +171,9 @@ p{margin:.75rem 0}
 .grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem}
 .grid-2{display:grid;grid-template-columns:repeat(2,1fr);gap:1rem}
 .category-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1rem}
-.home-channel-list{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:.65rem}
+/* <ul>/<li> so the set announces as "list, 5 items"; the markers are removed
+   because the tiles already read as a group visually. */
+.home-channel-list{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:.65rem;list-style:none;padding:0;margin:0}
 .home-channel-list a{display:flex;align-items:center;min-height:58px;padding:.8rem 1rem;border:1px solid var(--line);border-radius:16px;background:var(--panel);box-shadow:var(--shadow);color:var(--brand);font-weight:800;line-height:1.25}
 .home-channel-list a:hover{border-color:var(--line-action);text-decoration:none;transform:translateY(-1px)}
 .btn{display:inline-flex;align-items:center;justify-content:center;min-height:46px;padding:0 1rem;border-radius:999px;font-weight:800;border:1px solid transparent;cursor:pointer}
@@ -182,6 +184,10 @@ p{margin:.75rem 0}
 .btn-recovery:hover{background:var(--recovery-hover);text-decoration:none}
 .card h3 a,.guide-card h3 a,.category-card h3 a{color:var(--brand)}
 .guide-card{display:flex;flex-direction:column;gap:.6rem;padding:1.2rem}
+/* Card titles wrap to 2-3 lines, so the global 1.08 heading leading both read
+   as cramped and left the link's hit area at 42.4px — a 1.6px miss on the 44px
+   touch target. 1.3 fixes the leading and clears the target in one move. */
+.guide-card h3{line-height:1.3}
 /* Category labels are classification, not alarm. They previously used
    var(--danger), which spent Protective Red on taxonomy on the site's
    highest-traffic pages and blunted the colour everywhere it does mean harm
@@ -277,7 +283,10 @@ p{margin:.75rem 0}
 .note{font-size:.95rem;color:var(--muted)}
 /* Two columns so four one-line facts stop occupying four full-width bands,
    and a reading measure so the copy is not stranded across ~1100px of white. */
-.home-checklist{display:grid;gap:.9rem;grid-template-columns:repeat(2,minmax(0,1fr));counter-reset:homecheck}
+/* <ol>/<li> so the four checks announce as an ordered list of 4. The native
+   marker is suppressed because .icon-dot already renders the number as a chip;
+   the CSS counter stays so that chip keeps its own numbering. */
+.home-checklist{display:grid;gap:.9rem;grid-template-columns:repeat(2,minmax(0,1fr));counter-reset:homecheck;list-style:none;padding:0;margin:0}
 .home-checklist .item{display:grid;grid-template-columns:auto 1fr;gap:.8rem;align-items:start;padding:.9rem 1rem;background:var(--panel);border:1px solid var(--line);border-radius:18px;counter-increment:homecheck}
 .home-checklist .item strong{color:var(--brand)}
 .home-checklist .item p{max-width:52ch;margin:.2rem 0 0}
@@ -316,6 +325,15 @@ p{margin:.75rem 0}
      two lines of text. */
   .grid-3,.category-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
   .home-channel-list{grid-template-columns:repeat(3,minmax(0,1fr))}
+  /* Below this width the hero rail stacks under the hero panel, and two dark
+     surfaces in a row produced 526px of unbroken navy — the advisory read as
+     more hero rather than as a separate instruction. It becomes the pale blue
+     wash DESIGN.md assigns to "supporting information and tonal separation",
+     which both breaks the run and makes it legibly its own thing.
+     The white focus ring goes back to blue with it, or it would vanish. */
+  .callout{background:var(--accent-soft);color:var(--accent-ink);border-color:var(--accent-line)}
+  .callout h3,.callout p,.callout a,.callout .hero-side-heading{color:var(--accent-ink)}
+  .callout a:focus-visible,.callout .btn:focus-visible{outline-color:var(--focus)}
   .sidebar{position:static}
   .nav-toggle{display:inline-flex}
   .nav{display:none;position:absolute;left:1rem;right:1rem;top:70px;background:var(--panel);padding:1rem;border:1px solid var(--line);border-radius:18px;box-shadow:var(--shadow);flex-direction:column;align-items:flex-start}
@@ -510,7 +528,11 @@ p{margin:.75rem 0}
   line-height: 1.45;
   color: rgba(255,255,255,.72);
 }
-.newsletter-consent input{ margin-top: .15rem; flex: 0 0 auto; }
+/* WCAG 2.2 SC 2.5.8 wants a 24x24 target. The native box was 13x13 inside a
+   19px-tall label, so neither the control nor its label cleared it. */
+.newsletter-consent input{ width:24px; height:24px; margin:0; flex: 0 0 auto; }
+.newsletter-consent > *{ min-height:24px; display:flex; align-items:center; }
+.newsletter-consent > span{ align-items:flex-start; }
 .newsletter-consent a{color:var(--on-dark);text-decoration:underline}
 .newsletter-msg{
   grid-column: 1 / -1;

@@ -1194,12 +1194,38 @@ def howto_schema(site, post, url):
 
 # ─── COMPONENTS ────────────────────────────────────────────────────────────
 
+_MONTHS = ("January", "February", "March", "April", "May", "June",
+           "July", "August", "September", "October", "November", "December")
+
+
+def human_date(iso: str) -> str:
+    """2026-08-06 -> '6 August 2026'.
+
+    ISO dates read as machine output to a UK consumer audience. The machine
+    form is preserved in the <time datetime> attribute and in schema.org, so
+    nothing that parses these loses anything. Returns the input unchanged if it
+    is not a plain YYYY-MM-DD, so a malformed record degrades to the old
+    behaviour rather than breaking the build.
+    """
+    parts = str(iso or "").split("-")
+    if len(parts) != 3:
+        return str(iso or "")
+    try:
+        year, month, day = int(parts[0]), int(parts[1]), int(parts[2])
+    except ValueError:
+        return str(iso or "")
+    if not 1 <= month <= 12:
+        return str(iso or "")
+    return f"{day} {_MONTHS[month - 1]} {year}"
+
+
 def render_card(post):
     label = category_label(post["category"])
     updated = post.get("updated") or post.get("dateModified")
-    date_label = (f'Updated {html.escape(updated)}'
-                  if updated and updated != post["date"]
-                  else f'Published {html.escape(post["date"])}')
+    stamp = updated if (updated and updated != post["date"]) else post["date"]
+    verb = "Updated" if (updated and updated != post["date"]) else "Published"
+    date_label = (f'{verb} <time datetime="{html.escape(stamp)}">'
+                  f'{html.escape(human_date(stamp))}</time>')
     searchable = (post["title"] + " " + post["description"] + " " + post["category"] + " " + " ".join(post["keywords"])).lower()
     return f'''
     <article class="card guide-card" data-searchable="{html.escape(searchable)}">
@@ -1263,8 +1289,10 @@ def render_home(site, posts, categories, research_reports=None):
         ("website", "Websites"),
         ("payment", "Payment requests"),
     ]
+    # <li> wrappers so the set is announced as a list with a count, rather than
+    # five loose links a screen-reader user has to enumerate themselves.
     channel_links = "".join(
-        f'<a href="/categories/{slugify(category)}/">{html.escape(label)}</a>'
+        f'<li><a href="/categories/{slugify(category)}/">{html.escape(label)}</a></li>'
         for category, label in channel_categories
         if category in categories
     )
@@ -1316,19 +1344,19 @@ def render_home(site, posts, categories, research_reports=None):
           </div>
           <a href="/categories/">View all categories</a>
         </div>
-        <nav class="home-channel-list" aria-label="Scam categories">{channel_links}</nav>
+        <nav aria-label="Scam categories"><ul class="home-channel-list">{channel_links}</ul></nav>
       </div>
     </section>
 
     <section class="section">
       <div class="wrap">
         <h2>Four checks before you act</h2>
-        <div class="home-checklist">
-          <div class="item"><span class="icon-dot"></span><div><strong>Pause</strong><p>Scammers use urgency and secrecy. Take a moment before you act.</p></div></div>
-          <div class="item"><span class="icon-dot"></span><div><strong>Use an official route</strong><p>Open the official site or app yourself. Call published numbers, not the ones in the message.</p></div></div>
-          <div class="item"><span class="icon-dot"></span><div><strong>Keep codes and payment details private</strong><p>A security code can authorise an action. Treat it like a password.</p></div></div>
-          <div class="item"><span class="icon-dot"></span><div><strong>Stop before sending money</strong><p>Check bank transfer and crypto payments especially carefully.</p></div></div>
-        </div>
+        <ol class="home-checklist">
+          <li class="item"><span class="icon-dot"></span><div><strong>Pause</strong><p>Scammers use urgency and secrecy. Take a moment before you act.</p></div></li>
+          <li class="item"><span class="icon-dot"></span><div><strong>Use an official route</strong><p>Open the official site or app yourself. Call published numbers, not the ones in the message.</p></div></li>
+          <li class="item"><span class="icon-dot"></span><div><strong>Keep codes and payment details private</strong><p>A security code can authorise an action. Treat it like a password.</p></div></li>
+          <li class="item"><span class="icon-dot"></span><div><strong>Stop before sending money</strong><p>Check bank transfer and crypto payments especially carefully.</p></div></li>
+        </ol>
       </div>
     </section>
 
