@@ -70,12 +70,43 @@ release.** They were triaged on 2026-08-15 — the current 30 are not 30 problem
 | `scale_claim` | 11 | **One house-style decision, not eleven.** All sit in the `hero` field and all have the same shape — "can cost you thousands", "steal thousands from". These are loss-magnitude claims, not victim counts, and the site's own dataset supports them (£1.3bn across 4.06m cases, UK Finance 2026). Accept as hedged framing, or require a cited figure. |
 | `legislation` | 15 | **Mechanical checks against a pinned canon.** 11 are "the Consumer Credit Act 1974" — Section 75, whose bounds are already pinned (cash price over £100, not more than £30,000). 2 are "the Online Safety Act 2023" (correct: Royal Assent 26 Oct 2023). 1 "the Consumer Rights Act" (2015, unqualified but not wrong). 1 is the `website` hub. Read each clause against the rule. |
 | `report_mailbox` / `source` | 3 | **Genuine external verification.** `spoof@ebay.co.uk` ×2 and `companies.house@notifications.service.gov.uk`. All three are already hedged in prose — the Companies House one exemplary, scoping itself to one dated notice and explicitly denying it is universal or authentication. Confirm the addresses are current. |
-| `ncsc_route_scope` | 1 | **The one that looks like a real defect.** `invoice-redirection-scam-checklist` attributes `gov.uk/report-cyber` to the NCSC. That URL is not in `content/sources.json`, which carries NCSC phishing-report and website-report only; `gov.uk/report-cyber` is historically the Report Fraud cyber route. Entity misattribution is BLOCK-tier — check this first. |
-| phantom | 1 | `hermes-parcel-scam-text-uk` carries a `scale_claim` flag but declares `consolidated_into: evri-delivery-scam-guide`, so it renders no page. Not reader-facing. |
+| `ncsc_route_scope` | ~~1~~ 0 | **RESOLVED 2026-08-15 — and it was never reader-facing.** See the correction below. |
+| phantom | 2 | `hermes-parcel-scam-text-uk` (`consolidated_into: evri-delivery-scam-guide`) and `invoice-redirection-scam-checklist` (`consolidated_into: invoice-fraud-uk-businesses`) both carry flags on records that render no page and 301 away. **`audit_corpus.py` audits all 188 source records, not the 186 public ones**, so check `consolidated_into` before treating any flag as reader-facing. |
 
 Re-run the triage with `python3 scripts/audit_corpus.py --no-write` — **always `--no-write`**,
 or it rewrites every manifest and churns ~107 of them with the post's date rather than the
 audit date.
+
+### The `ncsc_route_scope` flag: what it actually was (2026-08-15)
+
+Worth reading before trusting any future triage of this list, because the first two readings
+of this one flag were both wrong.
+
+1. **First reading — "`gov.uk/report-cyber` is misattributed to the NCSC."** Wrong. GOV.UK's
+   content API gives `primary publishing organisation: National Cyber Security Centre` for
+   `/guidance/where-to-report-a-cyber-incident`, which is where `gov.uk/report-cyber` 301s.
+   The attribution was sound. The URL is genuinely outside the canon, which is why the guard
+   fired, but the guard's *finding* was not misattribution.
+2. **Second reading — after that sentence was rewritten, the flag did not clear.** The guard's
+   window had simply moved to the sentence below: *"If the request arrived by a suspicious
+   **link** or attachment, forward it to the NCSC at `report@phishing.gov.uk`."* That is a
+   real canon violation — `ncsc-sers` takes suspicious **emails**; a link or website goes to
+   the separate `ncsc-scam-website` form. Narrowing it to "arrived as a suspicious email"
+   cleared the flag.
+3. **Third fact, which supersedes both.** `invoice-redirection-scam-checklist` declares
+   `consolidated_into: invoice-fraud-uk-businesses`. It renders no page and 301s away, and
+   the build confirmed it: the content edit produced **zero** rendered output change (the only
+   two `dist/` files touched were `security.txt` and `humans.txt`, both rolling dates). The
+   live target has always been correctly scoped — *"In Scotland, report to Police Scotland on
+   101. If a phishing email was involved, forward it to `report@phishing.gov.uk`."*
+
+**The fix was applied anyway, as source hygiene.** It clears a flag that would otherwise
+reappear in every audit and cost the next reader the same three investigations. But no
+reader-facing text changed, and the corpus never had this defect on a public page.
+
+**Lesson for the next triage: check `consolidated_into` first.** Two of the thirty flags sit
+on records no reader can reach, and the one flag singled out as the probable real defect was
+one of them.
 
 The retired `hermes-parcel-scam-text-uk` slug is absent from every published and indexable
 surface — no page, and nothing in `sitemap.xml`, `rss.xml`, `search.json`, `llms.txt` or

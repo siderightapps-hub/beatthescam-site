@@ -1288,7 +1288,7 @@
       ],
       [
         "How to report an invoice redirection scam (UK)",
-        "Report it to Report Fraud at `reportfraud.police.uk` or on 0300 123 2040 if you are in England, Wales, or Northern Ireland — this is the same route for individuals and businesses. In Scotland, report to Police Scotland on 101, or use `gov.uk/report-cyber` for the National Cyber Security Centre's guidance on next steps.\n\nIf the request arrived by a suspicious link or attachment, forward it to the NCSC at `report@phishing.gov.uk`."
+        "Report it to Report Fraud at `reportfraud.police.uk` or on 0300 123 2040 if you are in England, Wales, or Northern Ireland — this is the same route for individuals and businesses. In Scotland, report to Police Scotland on 101 — the same route applies to individuals and businesses.\n\nIf the request arrived as a suspicious email, forward it to the NCSC at `report@phishing.gov.uk`."
       ]
     ],
     "faq": [
@@ -1322,7 +1322,7 @@
       "business email compromise uk",
       "payment diversion fraud"
     ],
-    "updated": "2026-08-01",
+    "updated": "2026-08-15",
     "sources_checked": [
       [
         "NCSC — Business payment fraud (Business Email Compromise)",
