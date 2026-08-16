@@ -154,6 +154,8 @@
     var hadFocus = banner.contains(document.activeElement);
     banner.hidden = true;
     banner.setAttribute('aria-hidden','true');
+    var live = document.getElementById('liveStatus');
+    if(live){ live.textContent = ''; }
     if(consentChanged) consentChanged();
     syncConsentOffset();
     if(hadFocus && focusBeforeBanner && document.contains(focusBeforeBanner)){
@@ -174,6 +176,12 @@
       focusBeforeBanner = document.activeElement;
       banner.hidden = false;
       banner.setAttribute('aria-hidden','false');
+      // Announce through the always-present live region. Writing into an
+      // element that was already in the accessibility tree is what screen
+      // readers reliably treat as an update; revealing a region that carries
+      // aria-live itself often announces nothing.
+      var live = document.getElementById('liveStatus');
+      if(live){ live.textContent = 'Cookies and privacy choice available at the end of the page.'; }
       if(consentChanged) consentChanged();
       syncConsentOffset();
     }

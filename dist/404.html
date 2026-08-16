@@ -62,7 +62,7 @@
        value= attribute (not content=) — validators flag it; do not "fix" it
        or their crawler stops verifying the site. -->
   <meta name='impact-site-verification' value='e0dda02c-a1b6-4056-9f92-16f7c916bd4b'>
-  <link rel="stylesheet" href="/assets/styles.css?v=3aa9c95608">
+  <link rel="stylesheet" href="/assets/styles.css?v=b48988b9be">
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-JXNF856NBF"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
@@ -97,11 +97,15 @@
        It used to be the last element before </body>, which made Reject and
        Accept tab stops 62 and 63 of 63 — a keyboard user traversed the whole
        page and footer to decline.
-       region + aria-live, not dialog: when the 2s fallback timer reveals this
-       unprompted it is announced, never focused, so a reader mid-action is not
-       relocated. Focus only moves here when they click "Cookie settings", and
-       is restored to wherever they were on dismissal. -->
-  <div class="cookie-banner" id="cookieBanner" hidden role="region" aria-labelledby="cookieHeading" aria-live="polite">
+       role=region, and the announcement comes from #liveStatus below rather
+       than from aria-live on this element. A live region that is REVEALED
+       (toggling `hidden`) rather than mutated is a known ARIA blind spot —
+       several screen readers do not treat it as an update, and the deliberate
+       decision not to move focus on the timer path (WCAG 3.2.5) depends
+       entirely on that announcement actually happening. Focus only moves here
+       when the reader clicks "Cookie settings", and is restored on dismissal. -->
+  <p id="liveStatus" class="sr-only" role="status" aria-live="polite"></p>
+  <div class="cookie-banner" id="cookieBanner" hidden role="region" aria-labelledby="cookieHeading">
     <div class="cookie-copy">
       <strong id="cookieHeading">Cookies &amp; privacy</strong>
       <p>Allow optional analytics and advertising cookies? They help us understand performance and support the site.</p>
@@ -225,6 +229,6 @@
     <a class="ma-check" href="/check/">Check a message</a>
     <a class="ma-recovery" href="/recovery/">Start recovery</a>
   </div>
-  <script src="/assets/app.js?v=392f54a7b2" defer></script>
+  <script src="/assets/app.js?v=42a1710ff5" defer></script>
 </body>
 </html>

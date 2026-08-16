@@ -62,7 +62,7 @@
        value= attribute (not content=) — validators flag it; do not "fix" it
        or their crawler stops verifying the site. -->
   <meta name='impact-site-verification' value='e0dda02c-a1b6-4056-9f92-16f7c916bd4b'>
-  <link rel="stylesheet" href="/assets/styles.css?v=3aa9c95608">
+  <link rel="stylesheet" href="/assets/styles.css?v=b48988b9be">
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-JXNF856NBF"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
@@ -97,11 +97,15 @@
        It used to be the last element before </body>, which made Reject and
        Accept tab stops 62 and 63 of 63 — a keyboard user traversed the whole
        page and footer to decline.
-       region + aria-live, not dialog: when the 2s fallback timer reveals this
-       unprompted it is announced, never focused, so a reader mid-action is not
-       relocated. Focus only moves here when they click "Cookie settings", and
-       is restored to wherever they were on dismissal. -->
-  <div class="cookie-banner" id="cookieBanner" hidden role="region" aria-labelledby="cookieHeading" aria-live="polite">
+       role=region, and the announcement comes from #liveStatus below rather
+       than from aria-live on this element. A live region that is REVEALED
+       (toggling `hidden`) rather than mutated is a known ARIA blind spot —
+       several screen readers do not treat it as an update, and the deliberate
+       decision not to move focus on the timer path (WCAG 3.2.5) depends
+       entirely on that announcement actually happening. Focus only moves here
+       when the reader clicks "Cookie settings", and is restored on dismissal. -->
+  <p id="liveStatus" class="sr-only" role="status" aria-live="polite"></p>
+  <div class="cookie-banner" id="cookieBanner" hidden role="region" aria-labelledby="cookieHeading">
     <div class="cookie-copy">
       <strong id="cookieHeading">Cookies &amp; privacy</strong>
       <p>Allow optional analytics and advertising cookies? They help us understand performance and support the site.</p>
@@ -139,17 +143,28 @@
         <div class="hero-panel">
           <h1>What happened?</h1>
           <p class="lead">Choose the next safe step: check a suspicious message, or start recovery steps if you paid or shared details.</p>
+          <!-- Each route owns its support copy, inside its own column. The
+               checker's explanation and verdict chips used to sit loose below
+               the whole grid: 15px under the RECOVERY tile and 96px from the
+               check tile they describe once the grid stacked on a phone, so
+               proximity attached "get one of four verdicts" to "Start recovery
+               steps" — a wrong promise to the reader who has already paid. -->
           <div class="triage-actions">
-            <a class="triage-choice triage-check" href="/check/"><span>I have a suspicious message</span><strong>Check a message</strong></a>
-            <a class="triage-choice triage-recovery" href="/recovery/"><span>I paid or shared details</span><strong>Start recovery steps</strong></a>
+            <div class="triage-col">
+              <a class="triage-choice triage-check" href="/check/"><span>I have a suspicious message</span><strong>Check a message</strong></a>
+              <p class="triage-support">Paste it and get one of four plain-English verdicts in seconds. Nothing you paste is stored by Beat the Scam.</p>
+              <ul class="verdict-strip" aria-label="The four verdicts the checker can return">
+                <li class="verdict-chip verdict-scam">Likely a scam</li>
+                <li class="verdict-chip verdict-warn">Possibly a scam</li>
+                <li class="verdict-chip verdict-ok">Probably legitimate</li>
+                <li class="verdict-chip verdict-unclear">Unclear</li>
+              </ul>
+            </div>
+            <div class="triage-col">
+              <a class="triage-choice triage-recovery" href="/recovery/"><span>I paid or shared details</span><strong>Start recovery steps</strong></a>
+              <p class="triage-support">The steps in order — bank, accounts, reporting. Do not wait for a police report before contacting your bank.</p>
+            </div>
           </div>
-          <p class="checker-preview">Paste it and get one of four plain-English verdicts in seconds. Nothing you paste is stored by Beat the Scam.</p>
-          <ul class="verdict-strip" aria-label="The four verdicts the checker can return">
-            <li class="verdict-chip verdict-scam">Likely a scam</li>
-            <li class="verdict-chip verdict-warn">Possibly a scam</li>
-            <li class="verdict-chip verdict-ok">Probably legitimate</li>
-            <li class="verdict-chip verdict-unclear">Unclear</li>
-          </ul>
           <p class="hero-browse"><a href="/guides/">Not sure? Browse scam types</a></p>
           <p class="hero-reassurance">Free UK guidance. No account needed.</p>
           <p class="hero-trust">Independent educational guidance · <a href="/methodology/">How we fact-check</a> · <a href="/disclaimer/">Not a substitute for your bank, card provider or the police</a></p>
@@ -329,6 +344,6 @@
     <a class="ma-check" href="/check/">Check a message</a>
     <a class="ma-recovery" href="/recovery/">Start recovery</a>
   </div>
-  <script src="/assets/app.js?v=392f54a7b2" defer></script>
+  <script src="/assets/app.js?v=42a1710ff5" defer></script>
 </body>
 </html>

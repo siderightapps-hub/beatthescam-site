@@ -1358,17 +1358,28 @@ def render_home(site, posts, categories, stats_page=None):
         <div class="hero-panel">
           <h1>What happened?</h1>
           <p class="lead">Choose the next safe step: check a suspicious message, or start recovery steps if you paid or shared details.</p>
+          <!-- Each route owns its support copy, inside its own column. The
+               checker's explanation and verdict chips used to sit loose below
+               the whole grid: 15px under the RECOVERY tile and 96px from the
+               check tile they describe once the grid stacked on a phone, so
+               proximity attached "get one of four verdicts" to "Start recovery
+               steps" — a wrong promise to the reader who has already paid. -->
           <div class="triage-actions">
-            <a class="triage-choice triage-check" href="/check/"><span>I have a suspicious message</span><strong>Check a message</strong></a>
-            <a class="triage-choice triage-recovery" href="/recovery/"><span>I paid or shared details</span><strong>Start recovery steps</strong></a>
+            <div class="triage-col">
+              <a class="triage-choice triage-check" href="/check/"><span>I have a suspicious message</span><strong>Check a message</strong></a>
+              <p class="triage-support">Paste it and get one of four plain-English verdicts in seconds. Nothing you paste is stored by Beat the Scam.</p>
+              <ul class="verdict-strip" aria-label="The four verdicts the checker can return">
+                <li class="verdict-chip verdict-scam">Likely a scam</li>
+                <li class="verdict-chip verdict-warn">Possibly a scam</li>
+                <li class="verdict-chip verdict-ok">Probably legitimate</li>
+                <li class="verdict-chip verdict-unclear">Unclear</li>
+              </ul>
+            </div>
+            <div class="triage-col">
+              <a class="triage-choice triage-recovery" href="/recovery/"><span>I paid or shared details</span><strong>Start recovery steps</strong></a>
+              <p class="triage-support">The steps in order — bank, accounts, reporting. Do not wait for a police report before contacting your bank.</p>
+            </div>
           </div>
-          <p class="checker-preview">Paste it and get one of four plain-English verdicts in seconds. Nothing you paste is stored by Beat the Scam.</p>
-          <ul class="verdict-strip" aria-label="The four verdicts the checker can return">
-            <li class="verdict-chip verdict-scam">Likely a scam</li>
-            <li class="verdict-chip verdict-warn">Possibly a scam</li>
-            <li class="verdict-chip verdict-ok">Probably legitimate</li>
-            <li class="verdict-chip verdict-unclear">Unclear</li>
-          </ul>
           <p class="hero-browse"><a href="/guides/">Not sure? Browse scam types</a></p>
           <p class="hero-reassurance">Free UK guidance. No account needed.</p>
           <p class="hero-trust">Independent educational guidance · <a href="/methodology/">How we fact-check</a> · <a href="/disclaimer/">Not a substitute for your bank, card provider or the police</a></p>

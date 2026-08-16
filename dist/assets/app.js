@@ -10,9 +10,11 @@ window.btsTrackEvent=trackEvent;var gdprApplies=null;function applyConsent(mode)
 function syncConsentOffset(){const root=document.documentElement;const actions=document.getElementById('mobileActions');let visible=null;if(banner&&!banner.hidden){visible=banner;}else if(actions&&actions.classList.contains('is-visible')&&getComputedStyle(actions).display!=='none'){visible=actions;}
 if(!visible){root.style.removeProperty('--consent-offset');return;}
 const inset=parseFloat(getComputedStyle(visible).bottom)||0;root.style.setProperty('--consent-offset',Math.ceil(visible.offsetHeight+inset*2)+'px');}
-var focusBeforeBanner=null;var consentChanged=null;function hideBanner(){if(!banner)return;var hadFocus=banner.contains(document.activeElement);banner.hidden=true;banner.setAttribute('aria-hidden','true');if(consentChanged)consentChanged();syncConsentOffset();if(hadFocus&&focusBeforeBanner&&document.contains(focusBeforeBanner)){try{focusBeforeBanner.focus();}catch(err){}}
+var focusBeforeBanner=null;var consentChanged=null;function hideBanner(){if(!banner)return;var hadFocus=banner.contains(document.activeElement);banner.hidden=true;banner.setAttribute('aria-hidden','true');var live=document.getElementById('liveStatus');if(live){live.textContent='';}
+if(consentChanged)consentChanged();syncConsentOffset();if(hadFocus&&focusBeforeBanner&&document.contains(focusBeforeBanner)){try{focusBeforeBanner.focus();}catch(err){}}
 focusBeforeBanner=null;}
-function showBanner(opts){if(!banner)return;if(banner.hidden){focusBeforeBanner=document.activeElement;banner.hidden=false;banner.setAttribute('aria-hidden','false');if(consentChanged)consentChanged();syncConsentOffset();}
+function showBanner(opts){if(!banner)return;if(banner.hidden){focusBeforeBanner=document.activeElement;banner.hidden=false;banner.setAttribute('aria-hidden','false');var live=document.getElementById('liveStatus');if(live){live.textContent='Cookies and privacy choice available at the end of the page.';}
+if(consentChanged)consentChanged();syncConsentOffset();}
 if(opts&&opts.moveFocus&&reject){try{reject.focus();}catch(err){}}}
 window.addEventListener('resize',syncConsentOffset);(function(){const actions=document.getElementById('mobileActions');if(!actions)return;const check=actions.querySelector('.ma-check');const recovery=actions.querySelector('.ma-recovery');const path=window.location.pathname;if(check&&path.indexOf('/check')===0){check.remove();actions.classList.add('is-single');}
 else if(recovery&&path.indexOf('/recovery')===0){recovery.remove();actions.classList.add('is-single');}
