@@ -1,7 +1,7 @@
 # Start here next session
 
-> **Last updated:** 2026-08-13
-> **Repository state:** the accuracy release, its two follow-on growth-audit content phases and a homepage interface refresh are **APPLIED**; `dist/` is current and the homepage passes its final accessibility, responsive and implementation audit.
+> **Last updated:** 2026-08-15
+> **Repository state:** the accuracy release, its two follow-on growth-audit content phases, PR #106 and a six-commit homepage design cycle are **APPLIED and LIVE**; `dist/` is current and byte-identical to a fresh build of `main`.
 
 This is the short operational front door. `docs/project.md` is the detailed source of
 truth; dated audit and diversification documents are historical records and should not be
@@ -24,8 +24,8 @@ design references are `PRODUCT.md` and `DESIGN.md` at the repository root.
 
 | | |
 |---|---|
-| Source records / public guides | 187 / 185, two consolidations |
-| Deterministic audit (guides + hubs) | **0 BLOCK / 29 FLAG** |
+| Source records / public guides | 188 / 186, two consolidations |
+| Deterministic audit (guides + hubs) | **0 BLOCK / 30 FLAG** (triaged 2026-08-15, below) |
 | Offline suites | 152 gate + 131 hub + 52 corpus + 50 Node = **385**, plus canon sync |
 
 **Application was a one-off.** `scripts/release_manifest.py` and
@@ -62,9 +62,20 @@ diffs validated as one combined state — which is what actually shipped.
 | 13 category hubs | 0 BLOCK / 1 FLAG (disclosed `website` legislation) |
 | Default `audit_corpus.py` (guides + hubs) | **0 BLOCK / 29 FLAG** |
 
-The 29 FLAGs are review-tier: 14 legislation, 11 scale-claim, 1 source, 1 dated-event,
-1 HMRC-channel, plus the hub legislation flag. They are recorded for human verification and
-**still open**. **No model-backed judge has run on any of this release.**
+The FLAGs are review-tier and **still open**. **No model-backed judge has run on any of this
+release.** They were triaged on 2026-08-15 — the current 30 are not 30 problems:
+
+| Group | Count | What it actually needs |
+|---|---|---|
+| `scale_claim` | 11 | **One house-style decision, not eleven.** All sit in the `hero` field and all have the same shape — "can cost you thousands", "steal thousands from". These are loss-magnitude claims, not victim counts, and the site's own dataset supports them (£1.3bn across 4.06m cases, UK Finance 2026). Accept as hedged framing, or require a cited figure. |
+| `legislation` | 15 | **Mechanical checks against a pinned canon.** 11 are "the Consumer Credit Act 1974" — Section 75, whose bounds are already pinned (cash price over £100, not more than £30,000). 2 are "the Online Safety Act 2023" (correct: Royal Assent 26 Oct 2023). 1 "the Consumer Rights Act" (2015, unqualified but not wrong). 1 is the `website` hub. Read each clause against the rule. |
+| `report_mailbox` / `source` | 3 | **Genuine external verification.** `spoof@ebay.co.uk` ×2 and `companies.house@notifications.service.gov.uk`. All three are already hedged in prose — the Companies House one exemplary, scoping itself to one dated notice and explicitly denying it is universal or authentication. Confirm the addresses are current. |
+| `ncsc_route_scope` | 1 | **The one that looks like a real defect.** `invoice-redirection-scam-checklist` attributes `gov.uk/report-cyber` to the NCSC. That URL is not in `content/sources.json`, which carries NCSC phishing-report and website-report only; `gov.uk/report-cyber` is historically the Report Fraud cyber route. Entity misattribution is BLOCK-tier — check this first. |
+| phantom | 1 | `hermes-parcel-scam-text-uk` carries a `scale_claim` flag but declares `consolidated_into: evri-delivery-scam-guide`, so it renders no page. Not reader-facing. |
+
+Re-run the triage with `python3 scripts/audit_corpus.py --no-write` — **always `--no-write`**,
+or it rewrites every manifest and churns ~107 of them with the post's date rather than the
+audit date.
 
 The retired `hermes-parcel-scam-text-uk` slug is absent from every published and indexable
 surface — no page, and nothing in `sitemap.xml`, `rss.xml`, `search.json`, `llms.txt` or
@@ -168,9 +179,15 @@ Lessons that cost real rework this cycle:
 ## Current growth and operations queue
 
 - **Indexing monitoring:** Search Console validation is already running for the eight legacy
-  redirect-error URLs. Their current redirect chains were checked on 11 August and end in
-  `200` pages; do not submit a second validation. Recheck the validation result in about a
-  week. Continue to monitor the 21 `Crawled - currently not indexed` and 49 `Discovered -
+  redirect-error URLs. Do not submit a second validation. Re-verified 2026-08-15: seven
+  representative legacy URLs (gumtree, romance slow-burn, romance-scams and ticket-scams
+  categories, concert-ticket-2, hmrc-tax-refund-checklist, refund-scam) each resolve in a
+  **single 301 hop to a 200**, no chains and no loops — the condition the validation tests
+  still holds. **The validation state itself is UI-only:** the Search Console API exposes
+  Search Analytics, URL Inspection, Sitemaps and Sites, and none of them return the
+  "Validation started / passed / failed" state, so that has to be read in the Search Console
+  interface. `scripts/gsc_report.py` is analytics-only and its OAuth token refreshed cleanly
+  on 2026-08-15. Continue to monitor the 21 `Crawled - currently not indexed` and 49 `Discovered -
   currently not indexed` URLs as a group, not by repeatedly requesting indexing.
 - **Category hubs:** there are no missing hub records: `content/category-hubs.json` contains
   all 17 normalised categories. The next hub work is a quality/traffic review using current
@@ -195,9 +212,13 @@ Lessons that cost real rework this cycle:
 - **Run the model-backed judge?** Nothing in this release has had one. Note the judge
   prompt itself was excusing unscoped routes until `5b9ea29fb`, so running it on a sample
   *after* the release is more informative than before.
-- **Restart content generation?** Both crons have `schedule:` commented out (the key
-  itself, not just the cron line), preserving `workflow_dispatch`. Paused at the operator's
-  request until audits came back clean; this release is what clean looks like.
+- ~~**Restart content generation?**~~ **RESOLVED — the crons are running.** This entry said
+  both had `schedule:` commented out; that is no longer true and had gone stale by at least
+  two days. Verified 2026-08-15: both `daily-publish.yml` and `daily-search-console.yml`
+  carry an active `schedule:`, and the search-console cron generated PR #106 on 2026-08-14,
+  merged 2026-08-15. **Do not "restart" them.** The live obligation is the backlog guard:
+  both crons skip generation while any `auto-content` PR is open, so a review PR left open
+  stalls the pipeline and the queue re-picks the same topics. Next run Tue 2026-08-18.
 - **Re-submit to AdSense?** Do not resubmit. On 11 August the AdSense site review was already
   active ("Getting ready"), with payment profile, ads settings, ads.txt and certified CMP
   confirmed and no current Policy Centre restriction. Wait for Google's decision.
@@ -220,10 +241,35 @@ Lessons that cost real rework this cycle:
 
 ## Current verified baseline (unchanged from 2026-07-25 unless noted)
 
-- 187 guide source records; 185 indexable guides after two documented consolidations; all
-  185 carry `sources_checked` and `quick_answer`.
+- 188 guide source records; 186 indexable guides after two documented consolidations; all
+  carry `sources_checked` and `quick_answer`.
 - 17 normalised categories and **17 authored, sourced hub records**. This means the category
   layer exists everywhere; it does not mean every hub has equal search demand or outreach value.
 - AI scam checker, Google CMP, consent-aware GA4 events and Resend double opt-in are live.
 - `/research/uk-scam-statistics/` is live with 28 official records.
-- Review-PR pipeline runs Tue/Fri — **currently paused**, see decisions above.
+- Review-PR pipeline runs Tue/Fri and is **live**, not paused. Next run Tue 2026-08-18.
+
+## Homepage design cycle (2026-08-15)
+
+Six commits, all live, driven by three `/impeccable critique` runs that scored the homepage
+26 → 28 → 31 out of 40. Fourteen of the fifteen priority issues they raised are shipped.
+
+| Commit | Substance |
+|---|---|
+| `1b7d7501b` | Consent bar no longer covers the end of the page; dead `#cookieStatus` removed |
+| `8a1657e61` | Protective Red off taxonomy onto the pale-blue chip; white focus ring on dark surfaces; first `forced-colors` block; checker CTA lifted out of the collapsing nav; two-column card stage 760–1100px |
+| `c630e0348` | Consent bar stops seizing focus on the unrequested timer (WCAG 3.2.5); `--line-control` pair for form-control boundaries |
+| `3e14df67e` | Checker verdict strip on the homepage — the first appearance of red/amber/green on a page that had 401 blue instances and none of them; category-diverse featured guides; mobile menu focus order |
+| `b17f14ce6` | `<ol>`/`<ul>` semantics on the checklist and channel nav; human-readable dates in `<time>`; 24×24 consent target; callout switches to the pale wash below 1100px |
+| `4f4c12c71` | Consent bar reads as a layer rather than more hero (was 1.00:1 against it); 150px → 131px on short phones; `.impeccable/` gitignored |
+
+**Still open from that cycle:** the "Verify independently" hero callout has no destination.
+There is nothing honest to link to — `content/sources.json` carries reporting and
+consumer-advice routes only, and the corpus has no general verification guide. A packet is
+drafted at `docs/review/verify-organisation-genuine-uk.md` awaiting a `-c.md` reply. Note
+the packet's own last question: there is a real argument the callout should stay link-free,
+since its instruction is to stop following links other people supply.
+
+`DESIGN.md`'s layout section was corrected in `b17f14ce6` — it had claimed the nav folds at
+760px when it folds at 1100px, and the CSS is right (the full link set plus the checker
+action needs ~1089px against the 992px available at 1024).
