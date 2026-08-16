@@ -154,7 +154,7 @@ The palette is a cool, dependable briefing palette: near-black navy carries auth
 
 - **Display:** Used for the hero promise and prominent research headings; large, heavy, tightly tracked and short-line.
 - **Headline:** Used for section-level wayfinding; large enough to reset the reader's attention without competing with the hero.
-- **Title:** Used for cards, panels and local decisions; firm and compact.
+- **Title:** Used for cards, panels and local decisions; firm and compact. A panel heading takes this step even when it is semantically an `h2` — the hero rail's "Verify independently" and "Look up a scam" are top-level sections of the page but subordinate objects on it, so the same heading level deliberately carries two sizes. The one rule that must hold: a heading level never renders **smaller** than the level beneath it, or a reader navigating by heading gets a different map from one scanning by size.
 - **Body:** Used for explanatory copy and guides; relaxed leading supports scanning and longer reading.
 - **Label:** Used for kickers and compact control language; bold, uppercase and letter-spaced only where categorisation helps orientation.
 
