@@ -250,9 +250,22 @@ Lessons that cost real rework this cycle:
   merged 2026-08-15. **Do not "restart" them.** The live obligation is the backlog guard:
   both crons skip generation while any `auto-content` PR is open, so a review PR left open
   stalls the pipeline and the queue re-picks the same topics. Next run Tue 2026-08-18.
-- **Re-submit to AdSense?** Do not resubmit. On 11 August the AdSense site review was already
-  active ("Getting ready"), with payment profile, ads settings, ads.txt and certified CMP
-  confirmed and no current Policy Centre restriction. Wait for Google's decision.
+- **Re-submit to AdSense?** **UPDATED 2026-08-16 — the review concluded, and it was a
+  rejection**, not the pending "Getting ready" state this entry described as of 11 August.
+  Operator-supplied dashboard screenshot: "We found some policy violations" → "Low value
+  content" → "Your site doesn't yet meet the criteria of use in the Google publisher
+  network," linking Google's minimum-content-requirements/thin-content/quality-guidelines
+  pages (no page-level detail given). Full writeup: `docs/project.md` Section 20 gotcha 40.
+  Do not tick "I confirm that I have fixed the issues" and resubmit without a concrete,
+  evidenced change — a blind resubmit against an unspecific policy flag isn't a fix.
+  **GSC pull done same-day: 90-day trailing totals are 14 clicks / 2,886 impressions /
+  0.49% CTR / avg position 37.0** — the corpus is essentially invisible in search, not
+  ranking anywhere near page 1 for its own target queries. That's almost certainly the
+  real driver of "low value content," not a specific on-page defect (the July
+  diversification project already de-templated all 186 guides, and the readiness
+  checklist still holds). Fix path is growing real rankings/CTR (near-miss queries,
+  title/meta tuning, backlinks), not further content rewrites. Full detail:
+  `docs/project.md` Section 20 gotcha 40.
 
 ---
 
