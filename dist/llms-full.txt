@@ -9851,7 +9851,7 @@ An Evri text about a missed delivery or a small fee? How to tell a genuine Evri 
 
 An Evri parcel scam text is a smishing message that imitates the courier so you tap a link and hand over card or personal details. An example of the style is: `Evri: We missed you. Reschedule delivery and pay the £1.79 fee: evri-reschedule.example`.
 
-The hook is a small, believable fee - usually a redelivery, release, or address-check fee - because the amount looks too minor to question. The link opens a fake courier page that captures whatever you type. This guide shows how to spot the fake, track your parcel safely, and report it.
+The hook is a small, believable fee - usually a redelivery, release, or address-check fee - because the amount looks too minor to question. The link opens a fake courier page that captures whatever you type. This guide shows how to spot the fake, track your parcel safely, and report it. The same fee trick also targets other couriers - our /guides/dpd-delivery-scam-text/ guide covers the DPD version.
 
 ### Why Evri texts are easy to fake
 
@@ -10973,7 +10973,7 @@ Fake UPS texts about a missed delivery or 'customs fee' are smishing scams. Here
 
 ### What is the UPS scam text?
 
-A UPS scam text is a phishing message that impersonates the courier UPS to steal money and personal details. It usually claims a parcel is being held and that you must pay a fee — frequently framed as a 'customs charge', 'import duty', or 'brokerage fee' — or that a delivery was missed and needs rescheduling through a link. UPS handles a large share of international shipments into the UK, and genuine customs charges can apply to parcels from outside the UK, which is exactly why the 'pay this customs fee' version of the scam is so convincing. Scammers send these texts in bulk; they're betting that enough recipients are expecting something from abroad to make the customs story believable. Tap the link and you land on a fake UPS page built to capture whatever you type.
+A UPS scam text is a phishing message that impersonates the courier UPS to steal money and personal details. It usually claims a parcel is being held and that you must pay a fee — frequently framed as a 'customs charge', 'import duty', or 'brokerage fee' — or that a delivery was missed and needs rescheduling through a link. UPS handles a large share of international shipments into the UK, and genuine customs charges can apply to parcels from outside the UK, which is exactly why the 'pay this customs fee' version of the scam is so convincing. Scammers send these texts in bulk; they're betting that enough recipients are expecting something from abroad to make the customs story believable. Tap the link and you land on a fake UPS page built to capture whatever you type. The same customs-fee and redelivery-fee trick also targets other couriers; our /guides/dpd-delivery-scam-text/ guide covers the DPD version.
 
 ### How the UPS text scam works, step by step
 
@@ -11126,6 +11126,8 @@ Yodel now operates as Yodel by InPost, and the customer-facing tools moved durin
 That transition is exactly the kind of moment smishing gangs wait for. When people are unsure which app, brand, or web address is now correct, a text saying "your Yodel parcel needs attention" is harder to dismiss. InPost also warns that during the move you may receive updates from both Yodel by InPost and InPost, so two genuine senders is now normal — which removes the easy assumption that anything unexpected must be fake.
 
 The practical rule has not changed, though: judge a delivery message by whether you can match it to a real parcel through a route you opened yourself, never by the branding or the link inside it.
+
+The same redelivery-fee trick also targets other couriers - our /guides/dpd-delivery-scam-text/ guide covers the DPD version if a similar text named a different company.
 
 ### What a fake Yodel text is trying to get
 
