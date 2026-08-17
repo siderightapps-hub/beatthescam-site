@@ -8617,18 +8617,18 @@ Fake celebrity accounts on X promise to double any cryptocurrency you send. A bl
 
 ### What the X crypto giveaway scam looks like
 
-This scam is an account on X, built to closely resemble a celebrity, entrepreneur, or well-known company, posting that it's running a cryptocurrency giveaway — send an amount of Bitcoin or another cryptocurrency and receive double back. An example of the style: `To celebrate this milestone, I'm giving back to the community — send 0.1 BTC to the address below and receive 0.2 BTC instantly.` No such giveaway exists; any cryptocurrency sent goes straight to the scammer and cannot be recovered.
+This scam is an account on X, built to closely resemble a celebrity, entrepreneur, or well-known company, posting that it's running a cryptocurrency giveaway: send an amount of Bitcoin or another cryptocurrency and receive double back. An example of the style: `To celebrate this milestone, I'm giving back to the community — send 0.1 BTC to the address below and receive 0.2 BTC instantly.` No such giveaway exists; any cryptocurrency sent goes straight to the scammer and cannot be recovered.
 
 ### Why the blue checkmark no longer proves anything
 
-Since X introduced paid X Premium subscriptions, a blue checkmark means the account has an active Premium subscription and meets X's eligibility criteria; X says it does not mean the account has been identity verified. X does have two other, separate marks — gold for verified organisations and grey for government and multilateral accounts — but no checkmark colour alone should be treated as proof of identity.
+Since X introduced paid X Premium subscriptions, a blue checkmark means the account has an active Premium subscription and meets X's eligibility criteria; X says it does not mean the account has been identity verified. X does have two other, separate marks (gold for verified organisations and grey for government and multilateral accounts), but no checkmark colour alone should be treated as proof of identity.
 
 ### Warning signs to look for
 
 - The account promises to "double", "match", or otherwise multiply any cryptocurrency you send it — no genuine celebrity or company giveaway works this way.
 - The account was created recently, or has far fewer followers than the real person or organisation it's impersonating would have.
 - The username is close to, but not exactly, the genuine account's handle — a small addition, underscore, or altered letter.
-- A blue checkmark is present — treat this as insufficient on its own, since it is not proof of identity verification.
+- A blue checkmark is present, which on its own is not proof of identity verification.
 - The post pressures you to act within a short time window ("first 500 people only") to stop you checking further.
 - Replies underneath the post are themselves fake accounts, posted to make the giveaway look more convincing.
 
@@ -8642,7 +8642,7 @@ Check the account's join date and full posting history directly on its profile �
 
 ### What to do if you've already sent cryptocurrency
 
-Stop sending anything further immediately, even if a reply claims a small extra payment will release your "winnings" — that follow-up request is a second scam. Cryptocurrency sent to a scam wallet typically cannot be recovered once confirmed, but report the wallet address anyway, since it can still help investigators trace the network. Report the fake account to X directly using its in-app report function.
+Stop sending anything further immediately, even if a reply claims a small extra payment will release your "winnings": that follow-up request is a second scam. Cryptocurrency sent to a scam wallet typically cannot be recovered once confirmed, but report the wallet address anyway, since it can still help investigators trace the network. Report the fake account to X directly using its in-app report function.
 
 ### How to report an X crypto giveaway scam in the UK
 
@@ -8656,11 +8656,11 @@ No. X says the blue checkmark means an account has an active X Premium subscript
 
 **Are the gold and grey checkmarks on X more trustworthy?**
 
-They cover different things — gold marks verified organisations and grey marks government or multilateral accounts. Still, no single checkmark colour should be relied on alone: check the exact handle, account history, and the person's or organisation's official website links instead.
+They cover different things: gold marks verified organisations and grey marks government or multilateral accounts. Still, no single checkmark colour should be relied on alone: check the exact handle, account history, and the person's or organisation's official website links instead.
 
 **I've already sent crypto to a fake giveaway account — can I get it back?**
 
-It's very difficult, since cryptocurrency sent to a scammer's wallet usually can't be reversed once confirmed. Report the wallet address to Report Fraud regardless — it still helps investigators — and don't send anything further, even if promised it will release a payout. Report Fraud covers England, Wales and Northern Ireland; if you are in Scotland, report to Police Scotland on 101.
+It's very difficult, since cryptocurrency sent to a scammer's wallet usually can't be reversed once confirmed. Report the wallet address to Report Fraud regardless, since it still helps investigators, and don't send anything further, even if promised it will release a payout. Report Fraud covers England, Wales and Northern Ireland; if you are in Scotland, report to Police Scotland on 101.
 
 **How do I report a crypto giveaway scam account on X?**
 
