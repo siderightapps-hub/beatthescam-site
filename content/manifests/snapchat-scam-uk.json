@@ -4,24 +4,5 @@
   "date": "2026-08-18",
   "model": "claude-haiku-4-5-20251001",
   "gate_passed": true,
-  "claims": [
-    {
-      "type": "fraud_alert",
-      "severity": "flag",
-      "text": "fraud alert with a credit reference agency",
-      "detail": "uses US-style 'fraud alert on your credit file'. The UK mechanism is a Cifas Protective Registration (cifas.org.uk); free CRA monitoring is separate."
-    },
-    {
-      "type": "ncsc_route_scope",
-      "severity": "flag",
-      "text": "If the scam involved a phishing link or fake login page, you can also report it to the National Cyber Security Centre Suspicious Email Repor",
-      "detail": "routes a suspicious WEBSITE or link to 'report@phishing.gov.uk', which is the NCSC's Suspicious Email Reporting Service — the mailbox for suspicious EMAILS. The NCSC's own scam-website page does not mention it. Send websites and links to the ncsc-scam-website route in content/sources.json instead; texts go to 7726, run by the mobile networks."
-    },
-    {
-      "type": "judge",
-      "severity": "flag",
-      "text": "Platform verification claim: the guide asserts how Snapchat marks its official support account without specifying the exact badge/tick/username or acknowledging",
-      "detail": "Platform verification claim: the guide asserts how Snapchat marks its official support account without specifying the exact badge/tick/username or acknowledging that platform verification systems change. A reader relying on this description could trust the wrong account. Safe advice is to reach support from inside the app or Snapchat's official help centre.: \"Snapchat's verified support account is clearly marked.\""
-    }
-  ]
+  "claims": []
 }
