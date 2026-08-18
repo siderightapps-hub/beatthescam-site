@@ -1,5 +1,12 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Beat the Scam</title><link>https://beatthescam.com</link><description>Scam alerts, plain-English checks, and practical guides to help people verify suspicious emails, texts, websites, calls, and offers.</description><lastBuildDate>Fri, 14 Aug 2026 00:00:00 +0000</lastBuildDate><atom:link href="https://beatthescam.com/rss.xml" rel="self" type="application/rss+xml" />
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Beat the Scam</title><link>https://beatthescam.com</link><description>Scam alerts, plain-English checks, and practical guides to help people verify suspicious emails, texts, websites, calls, and offers.</description><lastBuildDate>Tue, 18 Aug 2026 00:00:00 +0000</lastBuildDate><atom:link href="https://beatthescam.com/rss.xml" rel="self" type="application/rss+xml" />
+        <item>
+          <title>Snapchat Scam UK: Fake Messages &amp; Impersonation</title>
+          <link>https://beatthescam.com/guides/snapchat-scam-uk/</link>
+          <guid isPermaLink="true">https://beatthescam.com/guides/snapchat-scam-uk/</guid>
+          <pubDate>Tue, 18 Aug 2026 00:00:00 +0000</pubDate>
+          <description>Snapchat scams range from fake account verification requests to romance fraud and money-flipping schemes. Scammers exploit the app&#x27;s disappearing messages and young user base to avoid detection.</description>
+        </item>
         <item>
           <title>beatthescam.com Impersonation Scams: Fake Consumer Protection Sites</title>
           <link>https://beatthescam.com/guides/beatthescamcom-impersonation-scams-fake-consumer-protection-sites/</link>
@@ -202,11 +209,4 @@
           <guid isPermaLink="true">https://beatthescam.com/guides/amazon-phone-call-scam-uk/</guid>
           <pubDate>Sun, 07 Jun 2026 00:00:00 +0000</pubDate>
           <description>Got an unexpected automated &#x27;Amazon&#x27; call about an order or account? Treat it as unverified. Here is how to check it safely and stop a phone scam.</description>
-        </item>
-        <item>
-          <title>Chargeback Scam UK: How Chargeback Fraud Works and How to Avoid It</title>
-          <link>https://beatthescam.com/guides/chargeback-scam-uk/</link>
-          <guid isPermaLink="true">https://beatthescam.com/guides/chargeback-scam-uk/</guid>
-          <pubDate>Sun, 07 Jun 2026 00:00:00 +0000</pubDate>
-          <description>Chargeback scams let a buyer keep the goods and claim their money back, leaving the seller out of pocket. How chargeback fraud works and how to avoid it.</description>
         </item></channel></rss>
