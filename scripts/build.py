@@ -2669,7 +2669,7 @@ def render_research_index(site, reports, stats_page=None):
         ''')
     description = "Original, downloadable datasets tracking how Beat the Scam guidance appears in Google Search and Bing-powered AI answers, with a transparent method."
     content = f'''
-    <section class="hero research-hero">
+    <section class="hero research-hero" aria-label="Research and visibility datasets">
       <div class="wrap">
         <div class="breadcrumbs"><a href="/">Home</a> / Research</div>
         <div class="kicker">Open methods · Downloadable data</div>
@@ -2679,7 +2679,7 @@ def render_research_index(site, reports, stats_page=None):
         <div class="hero-actions"><a class="btn btn-secondary" href="/research/methodology/">Read the research method</a></div>
       </div>
     </section>
-    <section class="section"><div class="wrap research-list">{''.join(cards)}</div></section>
+    <section class="section" aria-label="Research reports"><div class="wrap research-list">{''.join(cards)}</div></section>
     '''
     schema = page_schema(site, "Research and visibility datasets", description, site["domain"] + "/research/")
     schema += itemlist_schema(
