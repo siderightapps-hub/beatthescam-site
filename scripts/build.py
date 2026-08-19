@@ -3019,14 +3019,14 @@ def write_research_data(report):
 
 def render_simple_page(site, title, description, body, slug):
     content = f'''
-    <section class="hero">
+    <section class="hero" aria-label="{html.escape(title)}">
       <div class="wrap">
         <div class="breadcrumbs"><a href="/">Home</a> / {html.escape(title)}</div>
         <h1>{html.escape(title)}</h1>
         <p class="lead">{html.escape(description)}</p>
       </div>
     </section>
-    <section class="section"><div class="wrap"><article class="article">{body}</article></div></section>
+    <section class="section" aria-label="{html.escape(title)}"><div class="wrap"><article class="article">{body}</article></div></section>
     '''
     # Legal / trust pages (about, privacy, cookies, terms, contact, disclaimer)
     # carry no ads — they are not content surfaces and AdSense guidance is to keep
@@ -3276,18 +3276,19 @@ def build_legal_bodies(site, sources):
     <p>If you have paid a scammer, entered banking details, shared a password, installed software, or lost control of an account, start with the row that matches what happened. Do not wait for a police report before contacting a bank or securing an account.</p>
 
     <h2>What to do first</h2>
-    <div class="tablelike">
-      <div class="table-row"><strong>You only received the message</strong><span>Do not reply, click, or call a number in it. Forward a suspicious SMS to {_sms(sources)} free of charge. For WhatsApp, iMessage, RCS and other app messages, also use the app or phone's built-in block and report controls.</span></div>
-      <div class="table-row"><strong>You opened a link</strong><span>If you did not enter information, download a file or install software, the NCSC says further action is unlikely to be needed, but watch for unusual account activity. If anything downloaded or installed, disconnect the device from the internet and run a full security scan.</span></div>
-      <div class="table-row"><strong>You shared a password</strong><span>Use a clean device to change it immediately. Change every account where the password was reused, starting with the email account used for password resets. Sign out other sessions and turn on strong multi-factor authentication.</span></div>
-      <div class="table-row"><strong>You shared card or bank details</strong><span>Contact the bank or card issuer immediately through its official app or the number printed on the card. Ask it to secure the account or card and identify any payment or account change you did not authorise.</span></div>
-      <div class="table-row"><strong>You approved or sent a bank transfer</strong><span>Tell the sending bank immediately that the payment was induced by fraud and ask it to contact the receiving bank. Ask whether the APP reimbursement rules apply; do not describe an authorised scam payment merely as an unauthorised transaction.</span></div>
-      <div class="table-row"><strong>You installed remote-access software</strong><span>Disconnect the device, end the remote session and contact the bank from a different trusted device. Remove the software, run a full scan, change exposed passwords, and do not use the affected device for banking until it is secure.</span></div>
-      <div class="table-row"><strong>You shared identity documents or personal data</strong><span>Secure the affected accounts, check your credit-reference files for applications you do not recognise — Experian, Equifax and TransUnion are the three main agencies, and MoneyHelper also lists Crediva, and consider Cifas Protective Registration where identity misuse is a realistic risk.</span></div>
-    </div>
+    <dl class="tablelike">
+      <div class="table-row"><dt><strong>You only received the message</strong></dt><dd>Do not reply, click, or call a number in it. Forward a suspicious SMS to {_sms(sources)} free of charge. For WhatsApp, iMessage, RCS and other app messages, also use the app or phone's built-in block and report controls.</dd></div>
+      <div class="table-row"><dt><strong>You opened a link</strong></dt><dd>If you did not enter information, download a file or install software, the NCSC says further action is unlikely to be needed, but watch for unusual account activity. If anything downloaded or installed, disconnect the device from the internet and run a full security scan.</dd></div>
+      <div class="table-row"><dt><strong>You shared a password</strong></dt><dd>Use a clean device to change it immediately. Change every account where the password was reused, starting with the email account used for password resets. Sign out other sessions and turn on strong multi-factor authentication.</dd></div>
+      <div class="table-row"><dt><strong>You shared card or bank details</strong></dt><dd>Contact the bank or card issuer immediately through its official app or the number printed on the card. Ask it to secure the account or card and identify any payment or account change you did not authorise.</dd></div>
+      <div class="table-row"><dt><strong>You approved or sent a bank transfer</strong></dt><dd>Tell the sending bank immediately that the payment was induced by fraud and ask it to contact the receiving bank. Ask whether the APP reimbursement rules apply; do not describe an authorised scam payment merely as an unauthorised transaction.</dd></div>
+      <div class="table-row"><dt><strong>You installed remote-access software</strong></dt><dd>Disconnect the device, end the remote session and contact the bank from a different trusted device. Remove the software, run a full scan, change exposed passwords, and do not use the affected device for banking until it is secure.</dd></div>
+      <div class="table-row"><dt><strong>You shared identity documents or personal data</strong></dt><dd>Secure the affected accounts, check your credit-reference files for applications you do not recognise — Experian, Equifax and TransUnion are the three main agencies, and MoneyHelper also lists Crediva, and consider Cifas Protective Registration where identity misuse is a realistic risk.</dd></div>
+    </dl>
 
     <h2>Which money-recovery route applies?</h2>
     <div class="evidence-table-wrap"><table class="evidence-table">
+      <caption class="sr-only">Which money-recovery route applies?</caption>
       <thead><tr><th scope="col">How you paid</th><th scope="col">What to ask for</th><th scope="col">Important limits</th></tr></thead>
       <tbody>
         <tr><th scope="row">UK bank transfer</th><td>Report an APP scam claim to the bank or payment firm immediately.</td><td>For eligible Faster Payments and CHAPS payments made on or after 7 October 2024, firms normally decide within five business days. They can stop the clock for information, but must reach an outcome within 35 business days. Scope, exclusions, vulnerability rules, a possible excess of up to £100 and the £85,000 reimbursement cap can affect a claim.</td></tr>

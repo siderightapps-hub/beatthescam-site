@@ -312,6 +312,7 @@ p{margin:.75rem 0}
 .breadcrumbs a{color:var(--muted)}
 .tablelike{display:grid;gap:.85rem}
 .table-row{display:grid;grid-template-columns:.62fr 1.38fr;gap:1rem;padding:1rem 1.1rem}
+.table-row dt,.table-row dd{margin:0}
 .note{font-size:.95rem;color:var(--muted)}
 /* Two columns so four one-line facts stop occupying four full-width bands,
    and a reading measure so the copy is not stranded across ~1100px of white. */
