@@ -2259,23 +2259,24 @@ def render_check_page(site, sources):
               </select>
             </div>
             <label for="scamInput" class="checker-label">Paste the message, URL, or describe the call</label>
-            <p class="checker-safety" role="note"><strong>Keep yourself safe:</strong> never paste passwords, PINs, full card numbers, or one-time security codes &mdash; a scam check never needs them.</p>
+            <p class="checker-safety" role="note" id="checkerSafety"><strong>Keep yourself safe:</strong> never paste passwords, PINs, full card numbers, or one-time security codes &mdash; a scam check never needs them.</p>
             <textarea
               id="scamInput"
               class="checker-textarea"
               placeholder="e.g. Your Royal Mail parcel is on hold. Pay 1.45 to release it: rm-parcel-uk.com/pay"
               rows="7"
               maxlength="3000"
+              aria-describedby="checkerSafety"
             ></textarea>
             <div class="checker-footer-row">
-              <span class="checker-char-count" id="charCount">0 / 3000</span>
+              <span class="checker-char-count" id="charCount" aria-live="polite">0 / 3000</span>
               <button id="checkBtn" class="btn btn-primary checker-submit">Analyse message</button>
             </div>
             <p class="note" style="margin-top:.75rem">Your message is sent to Claude AI for analysis and is not stored by Beat the Scam.</p>
           </div>
         </div>
 
-        <div class="checker-result-col" id="resultCol" hidden>
+        <div class="checker-result-col" id="resultCol" role="status" aria-live="polite" tabindex="-1" hidden>
           <div class="card checker-result" id="checkerResult">
             <div id="resultLoading" class="checker-loading" hidden>
               <div class="checker-spinner"></div>
@@ -2361,6 +2362,7 @@ def render_check_page(site, sources):
         resultCol.hidden = false;
         loadingEl.hidden = false;
         resultContent.hidden = true;
+        resultCol.focus();
 
         fetch("/api/check-scam", {
           method: "POST",
@@ -2436,25 +2438,25 @@ def render_check_page(site, sources):
         if (data.summary) frag.appendChild(el("p", {"style": "margin:.75rem 0"}, data.summary));
 
         if (data.red_flags && data.red_flags.length) {
-          frag.appendChild(el("h3", null, "Red flags identified"));
+          frag.appendChild(el("h2", null, "Red flags identified"));
           var ul = el("ul");
           data.red_flags.forEach(function(f){ ul.appendChild(el("li", null, f)); });
           frag.appendChild(ul);
         }
         if (data.green_flags && data.green_flags.length) {
-          frag.appendChild(el("h3", null, "Reassuring signs"));
+          frag.appendChild(el("h2", null, "Reassuring signs"));
           var ul2 = el("ul");
           data.green_flags.forEach(function(f){ ul2.appendChild(el("li", null, f)); });
           frag.appendChild(ul2);
         }
         if (data.recommended_actions && data.recommended_actions.length) {
-          frag.appendChild(el("h3", null, "Recommended actions"));
+          frag.appendChild(el("h2", null, "Recommended actions"));
           var ol = el("ol");
           data.recommended_actions.forEach(function(a){ ol.appendChild(el("li", null, a)); });
           frag.appendChild(ol);
         }
         if (data.reporting_links && data.reporting_links.length) {
-          frag.appendChild(el("h3", null, "Reporting links"));
+          frag.appendChild(el("h2", null, "Reporting links"));
           var ul3 = el("ul");
           data.reporting_links.forEach(function(l) {
             var href = String(l.url || "");
