@@ -1323,7 +1323,7 @@ def render_home(site, posts, categories, stats_page=None):
         )
         stats_url = f'/research/{stats_page["slug"]}/'
         stats_section = f'''
-    <section class="section">
+    <section class="section" aria-label="The scale of UK fraud">
       <div class="wrap">
         <div class="section-head">
           <div>
@@ -1353,7 +1353,7 @@ def render_home(site, posts, categories, stats_page=None):
     )
 
     content = f'''
-    <section class="hero">
+    <section class="hero" aria-label="What happened?">
       <div class="wrap hero-grid">
         <div class="hero-panel">
           <h1>What happened?</h1>
@@ -1385,11 +1385,11 @@ def render_home(site, posts, categories, stats_page=None):
           <p class="hero-trust">Independent educational guidance · <a href="/methodology/">How we fact-check</a> · <a href="/disclaimer/">Not a substitute for your bank, card provider or the police</a></p>
         </div>
         <div class="hero-side">
-          <section class="callout">
+          <section class="callout" aria-label="Verify independently">
             <h2 class="hero-side-heading">Verify independently</h2>
             <p>Find the organisation&#8217;s contact details yourself. Do not use the link, phone number, QR code or payment details in the message.</p>
           </section>
-          <section class="search-panel" id="search-start">
+          <section class="search-panel" id="search-start" aria-label="Look up a scam">
             <h2 class="hero-side-heading">Look up a scam</h2>
             <p class="search-note">Search a company name, wording or scam type. To check one message, choose &#8220;Check a message&#8221; above.</p>
             <form class="search-box" action="/guides/" method="get">
@@ -1401,7 +1401,7 @@ def render_home(site, posts, categories, stats_page=None):
       </div>
     </section>
 
-    <section class="section">
+    <section class="section" aria-label="How did they contact you?">
       <div class="wrap">
         <div class="section-head">
           <div>
@@ -1414,7 +1414,7 @@ def render_home(site, posts, categories, stats_page=None):
       </div>
     </section>
 
-    <section class="section">
+    <section class="section" aria-label="Four checks before you act">
       <div class="wrap">
         <h2>Four checks before you act</h2>
         <ol class="home-checklist">
@@ -1426,7 +1426,7 @@ def render_home(site, posts, categories, stats_page=None):
       </div>
     </section>
 
-    <section class="section">
+    <section class="section" aria-label="Recent scam examples">
       <div class="wrap">
         <div class="section-head">
           <div>
