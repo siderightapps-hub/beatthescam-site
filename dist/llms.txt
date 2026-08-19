@@ -22,7 +22,7 @@
 - [Phone Scams](https://beatthescam.com/categories/phone/): 13 guide(s)
 - [Romance & Dating Scams](https://beatthescam.com/categories/dating/): 6 guide(s)
 - [Shopping Scams](https://beatthescam.com/categories/shopping/): 7 guide(s)
-- [Social Media Scams](https://beatthescam.com/categories/social/): 8 guide(s)
+- [Social Media Scams](https://beatthescam.com/categories/social/): 9 guide(s)
 - [Tech Support Scams](https://beatthescam.com/categories/tech/): 10 guide(s)
 - [Text Message Scams](https://beatthescam.com/categories/sms/): 23 guide(s)
 - [Travel Scams](https://beatthescam.com/categories/travel/): 14 guide(s)
@@ -185,6 +185,7 @@
 - [Facebook Ad Scam UK: Check the Ad Library First](https://beatthescam.com/guides/facebook-ad-scam-uk/): Fake investment and counterfeit-goods ads run on Facebook using copied branding. Meta's own Ad Library shows what's really running.
 - [Instagram Fake Giveaway Scam UK: How to Spot and Report It](https://beatthescam.com/guides/instagram-fake-giveaway-scam-uk/): Instagram fake giveaway scams trick users into sharing personal details or paying 'entry fees'. How to spot one, verify a real giveaway, and report it.
 - [Instagram Investment Scam UK: Fake Trader Profiles](https://beatthescam.com/guides/instagram-investment-scam-uk/): Fake 'trader' profiles DM UK Instagram users promising guaranteed crypto or forex returns, backed by edited screenshots. Here's how to check first.
+- [Snapchat Scam UK: Fake Messages & Impersonation](https://beatthescam.com/guides/snapchat-scam-uk/): Snapchat scams range from fake account-verification messages to romance fraud and money-flipping schemes. How to spot them and report them in the UK.
 - [TikTok Shop Scams UK: Spot Fake Sellers & Bad Deals](https://beatthescam.com/guides/tiktok-shop-scam-uk/): A TikTok Shop deal that's too good, or a seller wanting PayPal 'friends and family'? How to spot a TikTok Shop scam and keep your money protected.
 - [WhatsApp Investment Scam UK: The Private-Chat Con](https://beatthescam.com/guides/whatsapp-investment-scam-uk/): Unlike a public Instagram pitch, a WhatsApp investment scam builds a personal 'relationship' privately over days. Here's how to spot it.
 - [WhatsApp Stranger Scam UK: How to Spot and Stop It](https://beatthescam.com/guides/whatsapp-stranger-scam-uk/): A stranger messaged you on WhatsApp? Learn the warning signs, how to verify who they are, protect your accounts, recover money and report the scam.
