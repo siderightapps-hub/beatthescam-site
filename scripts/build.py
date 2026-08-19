@@ -1493,6 +1493,7 @@ def render_guides_index_page(site, page_posts, page_num: int, total_pages: int, 
         '<div class="search-box" style="max-width:720px">'
         '<input id="pageSearch" type="search" placeholder="Search all guides" aria-label="Search all guides">'
         '</div>'
+        '<p id="searchStatus" class="sr-only" role="status" aria-live="polite"></p>'
     ) if page_num == 1 else ""
 
     # H2 between H1 and the card grid keeps heading hierarchy correct
@@ -1502,7 +1503,7 @@ def render_guides_index_page(site, page_posts, page_num: int, total_pages: int, 
     grid_heading = ("Latest guides" if page_num == 1
                     else f"Older guides — page {page_num}")
     content = f'''
-    <section class="hero">
+    <section class="hero" aria-label="{html.escape(h1)}">
       <div class="wrap">
         <div class="breadcrumbs"><a href="/">Home</a> / Guides{page_label}</div>
         <h1>{html.escape(h1)}</h1>
@@ -1510,7 +1511,7 @@ def render_guides_index_page(site, page_posts, page_num: int, total_pages: int, 
         {search_box}
       </div>
     </section>
-    <section class="section">
+    <section class="section" aria-label="{html.escape(grid_heading)}">
       <div class="wrap">
         <h2>{html.escape(grid_heading)}</h2>
         <div class="grid-3" id="guideGrid">{cards}</div>
@@ -1533,8 +1534,10 @@ def render_guides_index_page(site, page_posts, page_num: int, total_pages: int, 
         var grid = document.getElementById('guideGrid');
         var results = document.getElementById('searchResults');
         var empty = document.getElementById('searchEmpty');
+        var status = document.getElementById('searchStatus');
         var pager = document.querySelector('.pagination');
         var indexPromise = null;
+        var statusTimer = null;
         function loadIndex() {
           if (!indexPromise) {
             indexPromise = fetch('/search.json')
@@ -1564,7 +1567,8 @@ def render_guides_index_page(site, page_posts, page_num: int, total_pages: int, 
         }
         function run(value) {
           var q = (value || '').toLowerCase().trim();
-          if (!q) { showSearch(false); empty.hidden = true; return; }
+          clearTimeout(statusTimer);
+          if (!q) { showSearch(false); empty.hidden = true; status.textContent = ''; return; }
           loadIndex().then(function(items) {
             var hits = items.filter(function(it) {
               var hay = (it.title + ' ' + it.description + ' ' + it.category + ' ' +
@@ -1574,6 +1578,13 @@ def render_guides_index_page(site, page_posts, page_num: int, total_pages: int, 
             render(hits);
             showSearch(true);
             empty.hidden = hits.length > 0;
+            // Debounced so screen readers get one summary per pause in typing,
+            // not a running commentary on every keystroke.
+            statusTimer = setTimeout(function() {
+              status.textContent = hits.length
+                ? hits.length + (hits.length === 1 ? ' guide found.' : ' guides found.')
+                : 'No guides found.';
+            }, 500);
           });
         }
         input.addEventListener('input', function(e) { run(e.target.value); });

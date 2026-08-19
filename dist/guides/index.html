@@ -138,15 +138,15 @@
   </header>
   <main id="main">
 
-    <section class="hero">
+    <section class="hero" aria-label="Scam guides">
       <div class="wrap">
         <div class="breadcrumbs"><a href="/">Home</a> / Guides</div>
         <h1>Scam guides</h1>
         <p class="lead">Browse all published guides by scam type, payment method, platform, or impersonation pattern.</p>
-        <div class="search-box" style="max-width:720px"><input id="pageSearch" type="search" placeholder="Search all guides" aria-label="Search all guides"></div>
+        <div class="search-box" style="max-width:720px"><input id="pageSearch" type="search" placeholder="Search all guides" aria-label="Search all guides"></div><p id="searchStatus" class="sr-only" role="status" aria-live="polite"></p>
       </div>
     </section>
-    <section class="section">
+    <section class="section" aria-label="Latest guides">
       <div class="wrap">
         <h2>Latest guides</h2>
         <div class="grid-3" id="guideGrid"><article class="card guide-card" data-searchable="snapchat scam uk: fake messages &amp; impersonation snapchat scams range from fake account-verification messages to romance fraud and money-flipping schemes. how to spot them and report them in the uk. social snapchat scam uk fake snapchat verification snapchat impersonation snapchat romance scam snapchat money scam">
@@ -313,8 +313,10 @@
         var grid = document.getElementById('guideGrid');
         var results = document.getElementById('searchResults');
         var empty = document.getElementById('searchEmpty');
+        var status = document.getElementById('searchStatus');
         var pager = document.querySelector('.pagination');
         var indexPromise = null;
+        var statusTimer = null;
         function loadIndex() {
           if (!indexPromise) {
             indexPromise = fetch('/search.json')
@@ -344,7 +346,8 @@
         }
         function run(value) {
           var q = (value || '').toLowerCase().trim();
-          if (!q) { showSearch(false); empty.hidden = true; return; }
+          clearTimeout(statusTimer);
+          if (!q) { showSearch(false); empty.hidden = true; status.textContent = ''; return; }
           loadIndex().then(function(items) {
             var hits = items.filter(function(it) {
               var hay = (it.title + ' ' + it.description + ' ' + it.category + ' ' +
@@ -354,6 +357,13 @@
             render(hits);
             showSearch(true);
             empty.hidden = hits.length > 0;
+            // Debounced so screen readers get one summary per pause in typing,
+            // not a running commentary on every keystroke.
+            statusTimer = setTimeout(function() {
+              status.textContent = hits.length
+                ? hits.length + (hits.length === 1 ? ' guide found.' : ' guides found.')
+                : 'No guides found.';
+            }, 500);
           });
         }
         input.addEventListener('input', function(e) { run(e.target.value); });
