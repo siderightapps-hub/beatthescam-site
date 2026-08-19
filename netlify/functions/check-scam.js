@@ -72,30 +72,9 @@ function blobStore(name) {
   catch { return null; }
 }
 
-// Atomic read-modify-write on a Blobs key via compare-and-set (etag), so
-// concurrent invocations can't clobber each other's increments and slip past a
-// limit. Retries a few times under contention; on the final attempt falls back
-// to an unconditional write so progress is still recorded. `mutate(cur)` returns
-// the next value. Returns the stored value, or null if the store is unusable.
-async function atomicUpdate(store, key, init, mutate) {
-  for (let attempt = 0; attempt < 5; attempt++) {
-    let cur = null, etag = null;
-    try {
-      const meta = await store.getWithMetadata(key, { type: "json" });
-      if (meta) { cur = meta.data; etag = meta.etag; }
-    } catch { /* treat as absent and try to create */ }
-    const next = mutate(cur || init());
-    const opts = etag ? { onlyIfMatch: etag } : { onlyIfNew: true };
-    try {
-      const res = await store.setJSON(key, next, opts);
-      if (!res || res.modified !== false) return next;   // wrote successfully
-      // res.modified === false → a racer wrote first; loop and retry with fresh etag
-    } catch (e) {
-      if (attempt === 4) { try { await store.setJSON(key, next); return next; } catch { return null; } }
-    }
-  }
-  return null;
-}
+// Compare-and-set counter writes live in one tested module — see
+// lib/atomic-store.js. This was a duplicated copy until 2026-08-19.
+const { atomicUpdate } = require("./lib/atomic-store");
 
 // Durable per-IP limiter. Returns true (limited) / false (ok), or null when the
 // store is unavailable so the caller can fall back to the in-memory limiter.

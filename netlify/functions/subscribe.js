@@ -68,28 +68,9 @@ function emailKey(email) {
   return "em:" + crypto.createHash("sha256").update(RL_SALT + "|" + email).digest("hex").slice(0, 32);
 }
 
-// Atomic read-modify-write on a Blobs key via compare-and-set (etag), so
-// concurrent invocations can't clobber each other's counters. Retries under
-// contention; on the last attempt writes unconditionally. Returns the stored
-// value, or null if the store is unusable.
-async function atomicUpdate(store, key, init, mutate) {
-  for (let attempt = 0; attempt < 5; attempt++) {
-    let cur = null, etag = null;
-    try {
-      const meta = await store.getWithMetadata(key, { type: "json" });
-      if (meta) { cur = meta.data; etag = meta.etag; }
-    } catch { /* treat as absent */ }
-    const next = mutate(cur || init());
-    const opts = etag ? { onlyIfMatch: etag } : { onlyIfNew: true };
-    try {
-      const res = await store.setJSON(key, next, opts);
-      if (!res || res.modified !== false) return next;
-    } catch (e) {
-      if (attempt === 4) { try { await store.setJSON(key, next); return next; } catch { return null; } }
-    }
-  }
-  return null;
-}
+// Compare-and-set counter writes live in one tested module — see
+// lib/atomic-store.js. This was a duplicated copy until 2026-08-19.
+const { atomicUpdate } = require("./lib/atomic-store");
 
 // True once this address has already received its daily quota of confirmation
 // emails. Increments the per-address counter as part of the check. Fails OPEN
