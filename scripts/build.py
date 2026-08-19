@@ -3159,20 +3159,20 @@ def build_legal_bodies(site, sources):
     <p><strong>{html.escape(site["site_name"])}</strong> is a consumer-protection content site focused on helping UK residents recognise scam patterns before they send money, share credentials, or install malicious software.</p>
 
     <div class="author-card" style="margin:1.5rem 0;padding:1.2rem;border:1px solid var(--line);border-radius:14px;background:#fafafa">
-      <p style="margin:0 0 .35rem 0"><strong>Who runs this site</strong></p>
+      <h2 style="margin:0 0 .35rem 0;font-size:1rem">Who runs this site</h2>
       <p style="margin:0 0 .5rem 0;font-size:.95rem;color:#555">{html.escape(site["site_name"])} is founded and edited by <a href="/author/"><strong>{html.escape(site["author"])}</strong></a>, an independent UK-based publisher who also runs <a href="https://cloudfintech.ai" rel="noopener noreferrer" target="_blank">CloudFintech</a> (fintech &amp; banking technology), <a href="https://tuningdigital.com" rel="noopener noreferrer" target="_blank">Tuning Digital</a> (AI &amp; SaaS productivity tools), and <a href="https://salestap.com" rel="noopener noreferrer" target="_blank">SalesTap</a> (B2B sales). He uses AI tooling to surface scam patterns and translate official UK guidance into plain-English checks.</p>
       <p style="margin:0;font-size:.95rem;color:#555">He is not a journalist, lawyer, regulator, banker, or accredited consumer-affairs professional. This is an educational publication that prefers primary official sources for reporting routes, legal and regulatory claims, while clearly labelling relevant secondary sources.</p>
     </div>
 
     <p>The editorial model is simple: fast checks, plain-English explanations, and practical actions. The site is not a law firm, bank, or regulator. It is a free educational publication designed to reduce avoidable losses.</p>
 
-    <div class="tablelike">
-      <div class="table-row"><strong>Editorial focus</strong><span>Scam alerts, payment risk, impersonation patterns, delivery fraud, marketplace abuse, crypto scams, and recovery scams.</span></div>
-      <div class="table-row"><strong>Audience</strong><span>UK residents who have received a suspicious message, are considering an unfamiliar purchase, or want to understand current fraud tactics.</span></div>
-      <div class="table-row"><strong>How guides are written</strong><span>Each guide targets a specific scam type and explains what to verify, what to avoid, and what to do if you have already interacted.</span></div>
-      <div class="table-row"><strong>AI scam checker</strong><span>A free tool that analyses suspicious messages and gives a plain-English verdict with recommended actions.</span></div>
-      <div class="table-row"><strong>Commercial model</strong><span>Advertising-supported using Google AdSense, with scope for consumer-safety partnerships.</span></div>
-    </div>
+    <dl class="tablelike">
+      <div class="table-row"><dt><strong>Editorial focus</strong></dt><dd>Scam alerts, payment risk, impersonation patterns, delivery fraud, marketplace abuse, crypto scams, and recovery scams.</dd></div>
+      <div class="table-row"><dt><strong>Audience</strong></dt><dd>UK residents who have received a suspicious message, are considering an unfamiliar purchase, or want to understand current fraud tactics.</dd></div>
+      <div class="table-row"><dt><strong>How guides are written</strong></dt><dd>Each guide targets a specific scam type and explains what to verify, what to avoid, and what to do if you have already interacted.</dd></div>
+      <div class="table-row"><dt><strong>AI scam checker</strong></dt><dd>A free tool that analyses suspicious messages and gives a plain-English verdict with recommended actions.</dd></div>
+      <div class="table-row"><dt><strong>Commercial model</strong></dt><dd>Advertising-supported using Google AdSense, with scope for consumer-safety partnerships.</dd></div>
+    </dl>
 
     <h2>How guides are fact-checked</h2>
     <p>Guides use AI-assisted drafting and a deterministic accuracy gate, followed by editorial review. The gate catches defined error classes; it is not a substitute for checking each material claim against a current source. Existing guides are re-audited in scheduled corpus sweeps, and pages that need substantive work are removed from discovery and advertising until reviewed. See the full <a href="/methodology/">editorial methodology</a> and public <a href="/corrections/">corrections log</a>.</p>
