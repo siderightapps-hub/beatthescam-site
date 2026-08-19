@@ -66,15 +66,50 @@ test("updates an existing key with onlyIfMatch on its etag", async () => {
     "an update must be conditional on the etag that was read");
 });
 
-test("a losing racer retries against the winner's value, so no increment is lost", async () => {
-  // Two invocations both read count:9 against a cap of 10. Without CAS both
-  // write count:10 and the second call slips past the limit.
+test("a competing write between our read and our set loses the CAS, and the retry builds on the winner", async () => {
+  // The scenario the whole helper exists for: two invocations both read
+  // count:9 against a cap of 10. Without CAS both write 10 and the second
+  // caller slips past the limit.
+  //
+  // The race has to happen INSIDE one atomicUpdate call to prove anything.
+  // Two sequential calls never collide, never see modified:false, and never
+  // enter the retry path — so they cannot show that a retry reads the
+  // competitor's value (operator review, 2026-08-19).
   const store = fakeStore({ value: { count: 9 }, etag: "e1" });
-  const first = await atomicUpdate(store, "k", zero, inc);   // wins, count -> 10
-  assert.deepStrictEqual(first, { count: 10 });
-  const second = await atomicUpdate(store, "k", zero, inc);  // must see 10, not 9
-  assert.deepStrictEqual(second, { count: 11 },
-    "the second writer must re-read after losing, not overwrite with a stale value");
+  let raced = false;
+  const realGet = store.getWithMetadata.bind(store);
+  store.getWithMetadata = async (key, opts) => {
+    const meta = await realGet(key, opts);          // we read {count:9}, etag e1
+    if (!raced) {
+      raced = true;
+      // A competing invocation commits AFTER our read and BEFORE our set,
+      // taking 9 -> 10 and rotating the etag. Our etag is now stale.
+      await store.setJSON(key, { count: 10 }, undefined);
+    }
+    return meta;
+  };
+
+  const out = await atomicUpdate(store, "k", zero, inc);
+
+  assert.deepStrictEqual(out, { count: 11 },
+    "the retry must increment the winner's 10, not re-write 10 from its own stale 9");
+
+  const sets = store.calls.filter((c) => c.op === "set");
+  assert.strictEqual(sets.length, 3, "racer's write, our losing write, our winning write");
+
+  // Our first attempt: conditional on the etag we read, carrying the stale 9+1.
+  assert.deepStrictEqual(sets[1].opts, { onlyIfMatch: "e1" });
+  assert.strictEqual(sets[1].next.count, 10);
+  assert.strictEqual(await store.setJSON("probe", {}, { onlyIfMatch: "e1" })
+    .then((r) => r.modified), false, "e1 is genuinely stale, so that attempt did lose");
+
+  // The retry: re-read gave the winner's value and its NEW etag.
+  assert.deepStrictEqual(sets[2].opts, { onlyIfMatch: "e2" },
+    "the retry must send the etag from the re-read, not the stale one");
+  assert.strictEqual(sets[2].next.count, 11);
+
+  assert.strictEqual(store.calls.filter((c) => c.op === "get").length, 2,
+    "losing the CAS must force a fresh read rather than a blind rewrite");
 });
 
 test("retries while setJSON keeps reporting modified:false, then succeeds", async () => {
