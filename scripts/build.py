@@ -1636,14 +1636,14 @@ def render_categories_index(site, categories):
         </article>
         '''.strip())
     content = f'''
-    <section class="hero">
+    <section class="hero" aria-label="Scam categories">
       <div class="wrap">
         <div class="breadcrumbs"><a href="/">Home</a> / Categories</div>
         <h1>Scam categories</h1>
         <p class="lead">Browse guides by scam type. Each category covers a specific pattern &#8212; from SMS phishing to marketplace fraud to government impersonation.</p>
       </div>
     </section>
-    <section class="section"><div class="wrap"><div class="category-grid">{"".join(items)}</div></div></section>
+    <section class="section" aria-label="All categories"><div class="wrap"><h2>All categories</h2><div class="category-grid">{"".join(items)}</div></div></section>
     '''
     cat_items = [
         (category_label(cat), site["domain"] + f"/categories/{slugify(cat)}/")
