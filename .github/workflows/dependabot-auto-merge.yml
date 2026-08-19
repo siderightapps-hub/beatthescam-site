@@ -23,17 +23,52 @@ jobs:
         with:
           github-token: "${{ secrets.GITHUB_TOKEN }}"
 
-      # gh pr checks --watch polls until every check on the PR has finished
-      # and exits non-zero if any failed — that's the actual CI gate. Native
-      # `gh pr merge --auto` only waits for checks that branch protection
-      # marks "required", and main has none, so it would merge immediately
-      # without this step.
+      # Do NOT use `gh pr checks --watch` here. It waits for EVERY check on the
+      # PR to finish, and this job's own check run is one of them — pending for
+      # exactly as long as this step runs. It waited on itself until the job
+      # timed out, so no Dependabot PR was ever actually auto-merged; the green
+      # ticks on earlier PRs were the `if:` below SKIPPING this step, not a
+      # successful merge (operator review, 2026-08-19, found on PR #107).
+      #
+      # Native `gh pr merge --auto` is not the fix either: it only waits for
+      # checks that branch protection marks "required", and main has none, so it
+      # would merge immediately. So: poll, and exclude our own check from the
+      # "has everything finished?" test.
       - name: Wait for checks, then merge patch/minor bumps
         if: |
           steps.metadata.outputs.update-type == 'version-update:semver-patch' ||
           steps.metadata.outputs.update-type == 'version-update:semver-minor'
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          REPO: ${{ github.repository }}
+          PR: ${{ github.event.pull_request.number }}
+          SELF: ${{ github.job }}
         run: |
-          gh pr checks "${{ github.event.pull_request.number }}" --repo "${{ github.repository }}" --watch --interval 15
-          gh pr merge --repo "${{ github.repository }}" --squash "${{ github.event.pull_request.number }}"
+          set -euo pipefail
+          deadline=$(( SECONDS + 1800 ))
+          while :; do
+            all=$(gh pr checks "$PR" --repo "$REPO" --json name,bucket 2>/dev/null || echo '[]')
+            others=$(jq -c --arg self "$SELF" '[.[] | select(.name != $self)]' <<< "$all")
+
+            failed=$(jq -r '[.[] | select(.bucket == "fail")] | length' <<< "$others")
+            if [ "$failed" -gt 0 ]; then
+              jq -r '.[] | select(.bucket == "fail") | "  failed: \(.name)"' <<< "$others"
+              echo "::error::CI failed on this PR - not merging."
+              exit 1
+            fi
+
+            total=$(jq -r 'length' <<< "$others")
+            pending=$(jq -r '[.[] | select(.bucket == "pending")] | length' <<< "$others")
+            if [ "$total" -gt 0 ] && [ "$pending" -eq 0 ]; then
+              echo "All $total sibling checks finished, none failed. Merging."
+              break
+            fi
+            echo "waiting: $pending of $total sibling checks still pending"
+
+            if [ "$SECONDS" -ge "$deadline" ]; then
+              echo "::error::Timed out after 30 minutes waiting for checks."
+              exit 1
+            fi
+            sleep 15
+          done
+          gh pr merge --repo "$REPO" --squash "$PR"

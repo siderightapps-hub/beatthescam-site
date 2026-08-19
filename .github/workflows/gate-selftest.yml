@@ -51,6 +51,13 @@ on:
       - 'assets/app.js'
       - 'assets/styles.css'
       - 'netlify/functions/**'
+      # The functions' only runtime dependency. A @netlify/blobs bump changes
+      # what they bundle — including the compare-and-set contract behind every
+      # durable rate limit — but the lockfile was absent here, so PR #107
+      # (10.7.12 -> 10.7.13) reached review with no functions-level CI at all
+      # (operator review, 2026-08-19).
+      - 'package.json'
+      - 'package-lock.json'
       - '.github/workflows/gate-selftest.yml'
   pull_request:
     paths: *selftest_paths
