@@ -1,0 +1,12 @@
+{
+  "name": "beatthescam-e2e",
+  "private": true,
+  "description": "Playwright end-to-end tests for the two dynamic surfaces (AI scam checker, newsletter double opt-in). Hermetic: serves the committed dist/ and runs the real Netlify Function handlers in-process with stubbed upstreams — no network, no real API keys, no real emails. Deliberately separate from the root package.json, which exists solely so Netlify bundles @netlify/blobs.",
+  "scripts": {
+    "test": "playwright test",
+    "test:headed": "playwright test --headed"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.55.0"
+  }
+}

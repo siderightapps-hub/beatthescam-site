@@ -45,3 +45,7 @@ docs/review/
 .impeccable/
 
 .release-journal.json
+
+# Playwright E2E output (tests/e2e) — reports and traces are regenerable
+tests/e2e/test-results/
+tests/e2e/playwright-report/
