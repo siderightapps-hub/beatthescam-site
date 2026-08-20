@@ -440,10 +440,11 @@ def affiliate_block(post: dict, affiliates: list) -> str:
     # would misrepresent unpaid links as paid — an ASA and trust problem on a
     # scam-awareness site. When real affiliate deals + tracking URLs are signed,
     # flip the label back to "Sponsored" and rel to "sponsored noopener...".
+    heading_id = f'affiliate-heading-{html.escape(p["id"])}'
     return f'''
-    <section class="sidebar-card affiliate-card">
+    <section class="sidebar-card affiliate-card" aria-labelledby="{heading_id}">
       <p class="note" style="margin:0 0 .4rem;font-size:.8rem;text-transform:uppercase;letter-spacing:.06em;font-weight:800;color:var(--muted)">Recommended</p>
-      <h3 style="margin:.15rem 0 .4rem">{html.escape(p["name"])}</h3>
+      <h3 id="{heading_id}" style="margin:.15rem 0 .4rem">{html.escape(p["name"])}</h3>
       <p class="note">{html.escape(p["tagline"])}</p>
       <a class="btn btn-secondary" href="{html.escape(p["href"])}" rel="nofollow noopener noreferrer" target="_blank" data-affiliate-id="{html.escape(p["id"])}" data-affiliate-name="{html.escape(p["name"])}" data-commercial-status="unpaid-editorial" style="width:100%;margin-top:.6rem;text-align:center">{html.escape(p["cta"])}</a>
       <p class="note" style="margin:.5rem 0 0;font-size:.72rem;color:var(--muted)">Unpaid editorial pick — we receive no commission.</p>
@@ -2134,7 +2135,14 @@ def render_post(site, post, all_posts, affiliates=None, sources=None, link_map=N
     content = f'''
     <section class="hero">
       <div class="wrap">
-        <div class="breadcrumbs"><a href="/">Home</a> / <a href="/guides/">Guides</a> / <a href="/categories/{cat_slug}/">{html.escape(label)}</a> / <span class="bc-title">{html.escape(post["title"])}</span></div>
+        <nav class="breadcrumbs" aria-label="Breadcrumb">
+          <ol>
+            <li><a href="/">Home</a></li>
+            <li><a href="/guides/">Guides</a></li>
+            <li><a href="/categories/{cat_slug}/">{html.escape(label)}</a></li>
+            <li class="bc-title" aria-current="page">{html.escape(post["title"])}</li>
+          </ol>
+        </nav>
       </div>
     </section>
     <section class="wrap article-layout">
@@ -2159,7 +2167,7 @@ def render_post(site, post, all_posts, affiliates=None, sources=None, link_map=N
           </ol>
         </aside>
         {evidence_snapshot_block(post)}
-        <div class="toc"><strong>On this page</strong><ol>{toc}</ol></div>
+        <div class="toc"><h2>On this page</h2><ol>{toc}</ol></div>
         {"".join(section_parts)}
         <h2>Frequently asked questions</h2>
         <div class="faq">{faq_html}</div>
@@ -2171,9 +2179,9 @@ def render_post(site, post, all_posts, affiliates=None, sources=None, link_map=N
         </div>
         <p class="meta" style="margin-top:1.4rem">Reporting routes in this guide are checked against our verified canon of official UK sources &#8212; {police_route_html(sources, phone=False, url=False)}, the <a href="{_r(sources, 'ncsc-sers')['info_url']}" rel="noopener" target="_blank">National Cyber Security Centre</a>, and the consumer service for each nation &#8212; by an automated accuracy gate before publication. {review_note} Read about <a href="/methodology/">how Beat the Scam writes guides</a>.</p>
       </article>
-      <aside class="sidebar">
-        <section class="sidebar-card">
-          <h3>Fast checks</h3>
+      <aside class="sidebar" aria-label="More resources">
+        <section class="sidebar-card" aria-labelledby="sidebar-fast-checks-heading">
+          <h3 id="sidebar-fast-checks-heading">Fast checks</h3>
           <ul class="warning-list">
             <li>Pause before sending money or credentials</li>
             <li>Verify with an official site, app, or number</li>
@@ -2181,16 +2189,16 @@ def render_post(site, post, all_posts, affiliates=None, sources=None, link_map=N
             <li>Be sceptical of bank transfer pressure</li>
           </ul>
         </section>
-        <section class="sidebar-card">
-          <h3>Related guides</h3>
+        <section class="sidebar-card" aria-labelledby="sidebar-related-heading">
+          <h3 id="sidebar-related-heading">Related guides</h3>
           <div class="related-links">{related}</div>
         </section>
-        <section class="sidebar-card">
-          <h3>Report this scam</h3>
+        <section class="sidebar-card" aria-labelledby="sidebar-report-heading">
+          <h3 id="sidebar-report-heading">Report this scam</h3>
           {report_block(sources)}
         </section>
-        <section class="sidebar-card">
-          <h3>Not sure?</h3>
+        <section class="sidebar-card" aria-labelledby="sidebar-notsure-heading">
+          <h3 id="sidebar-notsure-heading">Not sure?</h3>
           <p class="note">Paste the suspicious message into the free AI checker for an instant plain-English verdict.</p>
           <a class="btn btn-primary" href="/check/" style="width:100%;margin-top:.5rem;text-align:center">Check a message</a>
         </section>
@@ -3588,7 +3596,7 @@ _INTERNAL_LINK_EXCLUDED_RE = re.compile(
     r'|<style\b[^>]*>.*?</style>'        # inline styles
     r'|<noscript\b[^>]*>.*?</noscript>'  # noscript blocks
     r'|<a\s[^>]*>.*?</a>'               # existing anchor tags (prevent double-wrapping)
-    r'|<span[^>]*class="bc-title"[^>]*>.*?</span>'  # breadcrumb title text
+    r'|<li[^>]*class="bc-title"[^>]*>.*?</li>'  # breadcrumb title text
     r'|<h[1-6][^>]*>.*?</h[1-6]>'       # headings
     r'|<code[^>]*>.*?</code>'            # inline code
     r'|<pre[^>]*>.*?</pre>',             # code blocks

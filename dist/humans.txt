@@ -19,4 +19,4 @@ Consumer advice by nation (Citizens Advice in England and Wales, Advice Direct S
 FCA Firm Checker — https://www.fca.org.uk/consumers/fca-firm-checker
 
 /* LAST UPDATE */
-2026-08-19
+2026-08-20

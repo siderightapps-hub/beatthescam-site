@@ -310,6 +310,8 @@ p{margin:.75rem 0}
 .related-links a:last-child{border-bottom:none}
 .breadcrumbs{font-size:.92rem;color:var(--muted);margin-bottom:.8rem}
 .breadcrumbs a{color:var(--muted)}
+.breadcrumbs ol{list-style:none;display:flex;flex-wrap:wrap;margin:0;padding:0}
+.breadcrumbs li:not(:last-child):after{content:" / "}
 .tablelike{display:grid;gap:.85rem}
 .table-row{display:grid;grid-template-columns:.62fr 1.38fr;gap:1rem;padding:1rem 1.1rem}
 .table-row dt,.table-row dd{margin:0}
