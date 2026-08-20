@@ -282,6 +282,14 @@ p{margin:.75rem 0}
 .search-note{color:var(--muted);font-size:.95rem;max-width:65ch}
 .article-layout{display:grid;grid-template-columns:minmax(0,1fr) 330px;gap:1.2rem;padding:1rem 0 3rem;min-width:0}
 .article{padding:2rem 2rem 1.6rem;min-width:0}
+/* In-prose links fall through to the bare `a{}` default, which relies on
+   color alone (WCAG 1.4.1) — #1d4ed8 measures ~1.4:1 against body text, well
+   under the ~3:1 G183 wants when there's no other visual cue. Underline
+   rather than darken the color: correct regardless of which surrounding
+   text shade a link sits near, and leaves --accent untouched everywhere
+   else (nav/CTAs/cards already use weight or their own permanent underline
+   instead of color alone, so they don't need this). */
+.article a:not(.btn){text-decoration:underline;text-underline-offset:.15em}
 .article h1{font-size:clamp(2rem,3.2vw,3rem);margin:.35rem 0 .8rem}
 .article p,.article li{font-size:1.03rem}
 .article ul,.article ol{padding-left:1.15rem}
