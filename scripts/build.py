@@ -3446,13 +3446,13 @@ def build_legal_bodies(site, sources):
 
     contact = f'''
     <p>For editorial contact or corrections, email <a href="mailto:{site["editorial_email"]}">{site["editorial_email"]}</a>. For partnership enquiries, email <a href="mailto:{site["contact_email"]}">{site["contact_email"]}</a>. For privacy, legal, or security matters, please use the dedicated addresses below.</p>
-    <div class="tablelike">
-      <div class="table-row"><strong>Editorial &amp; corrections</strong><span><a href="mailto:{site["editorial_email"]}">{site["editorial_email"]}</a> &mdash; send the page URL and the correction you want reviewed.</span></div>
-      <div class="table-row"><strong>Advertising or partnerships</strong><span><a href="mailto:{site["contact_email"]}">{site["contact_email"]}</a> &mdash; include the business name, proposal, and relevant website.</span></div>
-      <div class="table-row"><strong>Privacy &amp; data protection</strong><span><a href="mailto:{site["privacy_email"]}">{site["privacy_email"]}</a> &mdash; reference &#8220;Privacy request&#8221; in the subject line.</span></div>
-      <div class="table-row"><strong>Legal &amp; copyright</strong><span><a href="mailto:{site["legal_email"]}">{site["legal_email"]}</a> &mdash; Terms, intellectual property, and reproduction requests.</span></div>
-      <div class="table-row"><strong>Security disclosure</strong><span><a href="mailto:{site["security_email"]}">{site["security_email"]}</a> &mdash; see also our <a href="/.well-known/security.txt">security.txt</a>.</span></div>
-    </div>
+    <dl class="tablelike">
+      <div class="table-row"><dt><strong>Editorial &amp; corrections</strong></dt><dd><a href="mailto:{site["editorial_email"]}">{site["editorial_email"]}</a> &mdash; send the page URL and the correction you want reviewed.</dd></div>
+      <div class="table-row"><dt><strong>Advertising or partnerships</strong></dt><dd><a href="mailto:{site["contact_email"]}">{site["contact_email"]}</a> &mdash; include the business name, proposal, and relevant website.</dd></div>
+      <div class="table-row"><dt><strong>Privacy &amp; data protection</strong></dt><dd><a href="mailto:{site["privacy_email"]}">{site["privacy_email"]}</a> &mdash; reference &#8220;Privacy request&#8221; in the subject line.</dd></div>
+      <div class="table-row"><dt><strong>Legal &amp; copyright</strong></dt><dd><a href="mailto:{site["legal_email"]}">{site["legal_email"]}</a> &mdash; Terms, intellectual property, and reproduction requests.</dd></div>
+      <div class="table-row"><dt><strong>Security disclosure</strong></dt><dd><a href="mailto:{site["security_email"]}">{site["security_email"]}</a> &mdash; see also our <a href="/.well-known/security.txt">security.txt</a>.</dd></div>
+    </dl>
     <p class="note" style="margin-top:1.5rem">To report a scam to UK authorities directly, use {police_route_html(sources, phone=False, url=False)}. Ofcom says suspicious SMS texts can be forwarded to <strong>{_sms(sources)}</strong> free of charge; use the relevant app's own reporting tool for non-SMS messages.</p>
     '''
 
