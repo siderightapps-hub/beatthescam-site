@@ -2704,12 +2704,12 @@ def render_research_methodology(site):
     title = "Search and AI visibility research methodology"
     description = "How Beat the Scam collects, normalises, publishes and interprets Google Search Console and Bing AI Performance visibility data."
     content = f'''
-    <section class="hero"><div class="wrap">
+    <section class="hero" aria-label="{title}"><div class="wrap">
       <div class="breadcrumbs"><a href="/">Home</a> / <a href="/research/">Research</a> / Methodology</div>
       <h1>{title}</h1>
       <p class="lead">A repeatable method for measuring search discovery, AI citations, consolidation effects and click-through rate without overstating what the data can prove.</p>
     </div></section>
-    <section class="section"><div class="wrap"><article class="article">
+    <section class="section" aria-label="{title}"><div class="wrap"><article class="article">
       <h2>What we measure</h2>
       <p><strong>Google Search Console:</strong> final web-search clicks, impressions, CTR and average position for the latest complete 28-day period, compared with the immediately preceding equal period. Page and query views are retained internally; the public dataset includes site totals and named focus pages.</p>
       <p><strong>Bing AI Performance:</strong> total citations, daily cited-page counts, cited URLs and the grounding-query sample supplied by Bing Webmaster Tools. The public report uses the dashboard&#8217;s 30-day exports; a three-month export is retained internally for longer comparisons.</p>
@@ -2788,7 +2788,7 @@ def render_research_report(site, report):
     method_items = "".join(f"<li>{html.escape(item)}</li>" for item in report["method"])
     limitation_items = "".join(f"<li>{html.escape(item)}</li>" for item in report["limitations"])
     content = f'''
-    <section class="hero research-hero"><div class="wrap">
+    <section class="hero research-hero" aria-label="{html.escape(report['title'])}"><div class="wrap">
       <div class="breadcrumbs"><a href="/">Home</a> / <a href="/research/">Research</a> / {html.escape(report['title'])}</div>
       <div class="kicker">Monthly dataset · {html.escape(report['published'])}</div>
       <h1>{html.escape(report['title'])}</h1>
@@ -2805,7 +2805,7 @@ def render_research_report(site, report):
       </div>
     </div></section>
 
-    <section class="section"><div class="wrap"><article class="article research-article">
+    <section class="section" aria-label="{html.escape(report['title'])}"><div class="wrap"><article class="article research-article">
       <h2>What the snapshot shows</h2>
       <p>Between <strong>{html.escape(bing['start_date'])}</strong> and <strong>{html.escape(bing['end_date'])}</strong>, Bing recorded {bing['total_citations']:,} citations across {bing['cited_page_count']:,} Beat the Scam pages. Its export returned {bing['days_returned']} days and {bing['grounding_query_sample_count']:,} sampled grounding queries.</p>
       <p>Google&#8217;s separate final-data window runs from <strong>{html.escape(google['start_date'])}</strong> to <strong>{html.escape(google['end_date'])}</strong>: {google['impressions']:,} impressions, {google['clicks']:g} clicks, {google['ctr'] * 100:.2f}% CTR and an average position of {google['average_position']:.1f}. Source periods differ because the platforms expose complete data on different schedules.</p>
@@ -2914,11 +2914,11 @@ def render_stats_page(site, data):
             </article>''')
         intro = f'<p>{html.escape(sec["intro"])}</p>' if sec.get("intro") else ""
         sid = slugify(sec["heading"])
-        section_parts.append(f'<h2 id="{sid}">{html.escape(sec["heading"])}</h2>{intro}{"".join(rows)}')
+        section_parts.append(f'<section aria-labelledby="{sid}"><h2 id="{sid}">{html.escape(sec["heading"])}</h2>{intro}{"".join(rows)}</section>')
 
     gaps_html = "".join(f'<li>{html.escape(g)}</li>' for g in data["gaps"])
     content = f'''
-    <section class="hero research-hero">
+    <section class="hero research-hero" aria-label="{html.escape(data["title"])}">
       <div class="wrap">
         <div class="breadcrumbs"><a href="/">Home</a> / <a href="/research/">Research</a> / UK Scam Statistics</div>
         <div class="kicker">Original data · Updated {html.escape(data["updated"])}</div>
@@ -2929,18 +2929,24 @@ def render_stats_page(site, data):
     </section>
     <section class="section"><div class="wrap">
       {"".join(section_parts)}
-      <h2 id="data-gaps">Known data gaps</h2>
-      <p>Honest limits of the current official data — recorded so a missing figure is not mistaken for a missing problem.</p>
-      <ul>{gaps_html}</ul>
-      <h2 id="downloads">Download the dataset</h2>
-      <div class="cards download-grid">
-        <a class="card" href="/research/data/{slug}.csv" download><strong>Full dataset</strong><span>CSV · every figure with period, publisher, publication date and source URL</span></a>
-        <a class="card" href="/research/data/{slug}.json" download><strong>Structured data</strong><span>JSON · the same records grouped by section, plus gap notes</span></a>
-      </div>
-      <h2 id="method">Method and update cadence</h2>
-      <p>{html.escape(data["methodology_note"])}</p>
-      <p>{html.escape(data["cadence_note"])} Next scheduled refresh: {html.escape(data.get("next_update", "quarterly"))}.</p>
-      <p class="meta">Cite as: {html.escape(site["site_name"])}, &#8220;{html.escape(data["title"])}&#8221;, {html.escape(data["updated"])}, {html.escape(url)}. Licensed CC BY 4.0 &#8212; reuse with attribution.</p>
+      <section aria-labelledby="data-gaps">
+        <h2 id="data-gaps">Known data gaps</h2>
+        <p>Honest limits of the current official data — recorded so a missing figure is not mistaken for a missing problem.</p>
+        <ul>{gaps_html}</ul>
+      </section>
+      <section aria-labelledby="downloads">
+        <h2 id="downloads">Download the dataset</h2>
+        <div class="cards download-grid">
+          <a class="card" href="/research/data/{slug}.csv" download><strong>Full dataset</strong><span>CSV · every figure with period, publisher, publication date and source URL</span></a>
+          <a class="card" href="/research/data/{slug}.json" download><strong>Structured data</strong><span>JSON · the same records grouped by section, plus gap notes</span></a>
+        </div>
+      </section>
+      <section aria-labelledby="method">
+        <h2 id="method">Method and update cadence</h2>
+        <p>{html.escape(data["methodology_note"])}</p>
+        <p>{html.escape(data["cadence_note"])} Next scheduled refresh: {html.escape(data.get("next_update", "quarterly"))}.</p>
+        <p class="meta">Cite as: {html.escape(site["site_name"])}, &#8220;{html.escape(data["title"])}&#8221;, {html.escape(data["updated"])}, {html.escape(url)}. Licensed CC BY 4.0 &#8212; reuse with attribution.</p>
+      </section>
     </div></section>
     '''
     breadcrumbs = [
