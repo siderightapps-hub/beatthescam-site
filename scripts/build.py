@@ -1684,7 +1684,7 @@ def render_category_page(site, category, posts, all_categories=None, hub=None):
                 f'<li><a href="/categories/{slugify(c)}/">{html.escape(category_label(c))}</a> <span class="meta">({len(items)} guides)</span></li>'
                 for c, items in siblings
             )
-            related_cats_html = f'<section class="section"><div class="wrap"><h2>Browse other scam categories</h2><ul class="list-clean">{links}</ul></div></section>'
+            related_cats_html = f'<section class="section" aria-labelledby="related-cats-heading"><div class="wrap"><h2 id="related-cats-heading">Browse other scam categories</h2><ul class="list-clean">{links}</ul></div></section>'
 
     # Optional pillar hub content (intro + sections above the guide grid; FAQ
     # below it). Bodies are trusted HTML with hand-picked internal links to the
@@ -1694,7 +1694,7 @@ def render_category_page(site, category, posts, all_categories=None, hub=None):
     if hub:
         intro = canonicalize_internal_guide_paths(hub.get("intro", ""))
         secs = "".join(
-            f'<section class="section"><div class="wrap"><h2>{html.escape(h)}</h2>{canonicalize_internal_guide_paths(b)}</div></section>'
+            f'<section class="section" aria-labelledby="{slugify(h)}-heading"><div class="wrap"><h2 id="{slugify(h)}-heading">{html.escape(h)}</h2>{canonicalize_internal_guide_paths(b)}</div></section>'
             for h, b in hub.get("sections", [])
         )
         hub_body_html = (f'<section class="section"><div class="wrap">{intro}</div></section>' if intro else "") + secs
@@ -1704,7 +1704,7 @@ def render_category_page(site, category, posts, all_categories=None, hub=None):
                 f'<details><summary>{html.escape(q)}</summary><p>{html.escape(a)}</p></details>'
                 for q, a in hub_faq_pairs
             )
-            hub_faq_html = f'<section class="section"><div class="wrap"><h2>Common questions</h2><div class="faq-panel">{items}</div></div></section>'
+            hub_faq_html = f'<section class="section" aria-labelledby="hub-faq-heading"><div class="wrap"><h2 id="hub-faq-heading">Common questions</h2><div class="faq-panel">{items}</div></div></section>'
 
     # Trust layer for hubs (operator review 2026-07-27): ten long YMYL pages
     # carrying platform policies, reporting routes, legislation and statistics
@@ -1715,12 +1715,14 @@ def render_category_page(site, category, posts, all_categories=None, hub=None):
         hub_sources = [(l, u) for l, u in (hub.get("sources_checked") or []) if l and u]
         reviewed = str(hub.get("updated") or "").strip()
         bits = []
+        section_attrs = ""
         if hub_sources:
             lis = "".join(
                 f'<li><a href="{html.escape(u)}" rel="noopener noreferrer" target="_blank">'
                 f'{html.escape(l)}</a></li>' for l, u in hub_sources
             )
-            bits.append(f'<h2>Sources checked</h2><ul class="sources-checked">{lis}</ul>')
+            bits.append(f'<h2 id="hub-sources-heading">Sources checked</h2><ul class="sources-checked">{lis}</ul>')
+            section_attrs = ' aria-labelledby="hub-sources-heading"'
         if reviewed:
             bits.append(
                 f'<p class="meta">Last reviewed <time itemprop="dateModified" '
@@ -1728,7 +1730,7 @@ def render_category_page(site, category, posts, all_categories=None, hub=None):
                 f'Reporting routes are checked against our verified canon of official UK sources. '
                 f'Read about <a href="/methodology/">how Beat the Scam writes guides</a>.</p>')
         if bits:
-            hub_trust_html = ('<section class="section"><div class="wrap">'
+            hub_trust_html = (f'<section class="section"{section_attrs}><div class="wrap">'
                               + "".join(bits) + '</div></section>')
 
     # A hub's differentiated title/description must be the SAME string across the
@@ -1749,7 +1751,7 @@ def render_category_page(site, category, posts, all_categories=None, hub=None):
       </div>
     </section>
     {hub_body_html}
-    <section class="section"><div class="wrap"><h2>{grid_heading}</h2><div class="grid-3">{"".join(render_card(p) for p in posts)}</div></div></section>
+    <section class="section" aria-labelledby="grid-heading"><div class="wrap"><h2 id="grid-heading">{grid_heading}</h2><div class="grid-3">{"".join(render_card(p) for p in posts)}</div></div></section>
     {hub_faq_html}{hub_trust_html}
     {related_cats_html}
     '''
