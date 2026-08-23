@@ -2554,7 +2554,7 @@ def render_newsletter_confirmed_page(site):
     because visitors who decline analytics are intentionally not measured in GA4.
     """
     content = '''
-    <section class="hero" id="newsletter-confirmed" data-newsletter-confirmed="true">
+    <section class="hero" id="newsletter-confirmed" data-newsletter-confirmed="true" aria-label="You're on the list">
       <div class="wrap" style="max-width:760px">
         <div class="breadcrumbs"><a href="/">Home</a> / Newsletter confirmed</div>
         <h1>You&#8217;re on the list</h1>
@@ -4274,7 +4274,7 @@ def build():
         write(DIST / 'author/index.html', author_html)
 
     not_found_html = make_base(
-        '<section class="hero"><div class="wrap"><h1>Page not found</h1><p class="lead">The page may have moved or the address may be incorrect.</p><div class="hero-actions"><a class="btn btn-primary" href="/">Home</a><a class="btn btn-secondary" href="/guides/">Guides</a></div></div></section>',
+        '<section class="hero" aria-label="Page not found"><div class="wrap"><h1>Page not found</h1><p class="lead">The page may have moved or the address may be incorrect.</p><div class="hero-actions"><a class="btn btn-primary" href="/">Home</a><a class="btn btn-secondary" href="/guides/">Guides</a></div></div></section>',
         title=f'404 | {site["site_name"]}',
         description='Page not found.',
         canonical=site['domain'] + '/404.html',
