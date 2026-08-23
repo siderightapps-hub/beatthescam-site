@@ -164,7 +164,7 @@ function page(title, bodyHtml) {
     + `<meta name="viewport" content="width=device-width,initial-scale=1">`
     + `<meta name="robots" content="noindex"><title>${title} — Beat the Scam</title></head>`
     + `<body style="font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;max-width:560px;margin:56px auto;padding:0 20px;color:#102033;line-height:1.6;">`
-    + `<h1 style="font-size:22px;margin:0 0 16px;">Beat the Scam</h1>${bodyHtml}`
+    + `<h1 style="font-size:22px;margin:0 0 16px;">${title}</h1>${bodyHtml}`
     + `<p style="font-size:14px;margin-top:28px;"><a href="https://beatthescam.com/" style="color:#1d4ed8;">Return to the site</a></p>`
     + `</body></html>`;
 }
