@@ -3138,14 +3138,14 @@ def render_author_page(site):
     ) if image else ""
 
     content = f'''
-    <section class="hero">
+    <section class="hero" aria-label="{html.escape(name)}">
       <div class="wrap">
         <div class="breadcrumbs"><a href="/">Home</a> / Author</div>
         <h1>{html.escape(name)}</h1>
         <p class="lead">{html.escape(role)} &middot; {html.escape(site["site_name"])}{(" &middot; Based in " + html.escape(based_in)) if based_in else ""}</p>
       </div>
     </section>
-    <section class="section">
+    <section class="section" aria-label="{html.escape(name)}">
       <div class="wrap" style="display:flex;gap:2rem;align-items:flex-start;flex-wrap:wrap">
         <div style="flex:0 0 160px">{image_html}</div>
         <article class="article" style="flex:1;min-width:280px">
