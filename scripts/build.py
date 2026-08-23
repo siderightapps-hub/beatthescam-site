@@ -2760,18 +2760,18 @@ def render_research_report(site, report):
     def change(current, old):
         return "n/a" if not old else f"{((current - old) / old * 100):+.1f}%"
     top_page_rows = "".join(
-        f'<tr><td><a href="{html.escape(row["page"])}">{html.escape(row["page"].replace(site["domain"], ""))}</a></td><td>{row["citations"]:,}</td></tr>'
+        f'<tr><th scope="row"><a href="{html.escape(row["page"])}">{html.escape(row["page"].replace(site["domain"], ""))}</a></th><td>{row["citations"]:,}</td></tr>'
         for row in bing["top_pages"][:15]
     )
     query_rows = "".join(
-        f'<tr><td>{html.escape(row["grounding_query"])}</td><td>{html.escape(row.get("intent", ""))}</td><td>{row["citations"]:,}</td><td>{html.escape(row.get("citation_share", ""))}</td></tr>'
+        f'<tr><th scope="row">{html.escape(row["grounding_query"])}</th><td>{html.escape(row.get("intent", ""))}</td><td>{row["citations"]:,}</td><td>{html.escape(row.get("citation_share", ""))}</td></tr>'
         for row in bing["top_grounding_queries"][:15]
     )
     focus_rows = []
     for url, metrics in google["focus_pages"].items():
         old = previous_focus.get(url, {})
         focus_rows.append(
-            f'<tr><td>{html.escape(url.replace(site["domain"], ""))}</td>'
+            f'<tr><th scope="row">{html.escape(url.replace(site["domain"], ""))}</th>'
             f'<td>{metrics.get("impressions", 0):g}</td><td>{old.get("impressions", 0):g}</td>'
             f'<td>{change(metrics.get("impressions", 0), old.get("impressions", 0))}</td>'
             f'<td>{metrics.get("clicks", 0):g}</td><td>{metrics.get("ctr", 0) * 100:.2f}%</td>'
@@ -2779,7 +2779,7 @@ def render_research_report(site, report):
         )
     focus_rows = "".join(focus_rows)
     consolidation_rows = "".join(
-        f'<tr><td>{html.escape(item["from"].replace(site["domain"], ""))}<br>+ {html.escape(item["to"].replace(site["domain"], ""))}</td>'
+        f'<tr><th scope="row">{html.escape(item["from"].replace(site["domain"], ""))}<br>+ {html.escape(item["to"].replace(site["domain"], ""))}</th>'
         f'<td>{item["combined_current"]["impressions"]:g}</td><td>{item["combined_previous"]["impressions"]:g}</td>'
         f'<td>{item["combined_current"]["clicks"]:g}</td><td>{item["combined_previous"]["clicks"]:g}</td>'
         f'<td>{item["combined_current"]["ctr"] * 100:.2f}%</td><td>{item["combined_previous"]["ctr"] * 100:.2f}%</td></tr>'
