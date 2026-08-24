@@ -49,8 +49,8 @@ function isRateLimited(ip) {
 // so the per-IP limit and a global daily spend ceiling actually hold. Every
 // Blobs call is guarded: if the store is unavailable the checker still works
 // (per-IP falls back to the in-memory limiter; the spend cap fails open).
-let getStore = null;
-try { ({ getStore } = require("@netlify/blobs")); } catch { /* dep/runtime absent — degrade gracefully */ }
+let getStore = null, connectLambda = null;
+try { ({ getStore, connectLambda } = require("@netlify/blobs")); } catch { /* dep/runtime absent — degrade gracefully */ }
 
 const crypto = require("crypto");
 
@@ -164,10 +164,20 @@ function scrubContact(s) {
     // Emails: keep official *.gov.uk reporting addresses, redact everything else.
     .replace(/\b[\w.+-]+@[\w.-]+\.[a-z]{2,}\b/gi,
       m => /@([\w-]+\.)*gov\.uk$/i.test(m) ? m : "[contact removed — verify via an official source]")
-    // Clickable-looking links (scheme / www. / host-with-path). Bare brand
-    // mentions like "gov.uk" with no path stay as plain text.
+    // Clickable-looking links (scheme / www. / host-with-path).
     .replace(/\b(?:https?:\/\/|www\.)\S+/gi, "[link removed — verify via an official source]")
     .replace(/\b[\w-]+(?:\.[\w-]+)+\/\S+/gi, "[link removed — verify via an official source]")
+    // Bare host-like mentions with no scheme/www/path (e.g. "visit
+    // evil-fraudhelp.example") matched neither rule above and survived as
+    // plain, non-clickable — but still trusted-looking — narrative text. Redact
+    // any domain-shaped token unless it resolves to a known official host
+    // (the same allow-list that gates structured reporting links), so a
+    // genuine "gov.uk" / "reportfraud.police.uk" mention stays readable.
+    .replace(/\b(?:[a-z0-9](?:[a-z0-9-]{0,61}[a-z0-9])?\.)+[a-z]{2,}\b/gi, (m) => {
+      const host = m.toLowerCase();
+      return ALLOWED_REPORT_DOMAINS.some(d => host === d || host.endsWith("." + d))
+        ? m : "[link removed — verify via an official source]";
+    })
     // Dialable phone numbers (UK 0…, international +…, or "44…" written
     // without the + — an injection can drop the prefix to dodge the scrub).
     // Short safety codes are ≤4 digits and never start 0/+/44, so they
@@ -181,6 +191,11 @@ function scrubContact(s) {
 
 // ─── HANDLER ─────────────────────────────────────────────────────────────────
 exports.handler = async function(event) {
+  // Lambda compatibility mode does not auto-inject the Blobs environment —
+  // without this, getStore() throws on every call and every durable cap
+  // below silently fails open. Must run before any blobStore() call.
+  if (connectLambda) { try { connectLambda(event); } catch { /* degrade gracefully */ } }
+
   const requestOrigin = event.headers["origin"] || event.headers["Origin"] || "";
   const allowedOrigin = getAllowedOrigin(requestOrigin);
 

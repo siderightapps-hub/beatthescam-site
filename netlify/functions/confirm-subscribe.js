@@ -35,8 +35,8 @@ const SITE          = "https://beatthescam.com";
 // re-clicked after the user has since unsubscribed — is then refused, so it
 // can't silently resurrect a cancelled subscription. Fails OPEN if Blobs is
 // down (availability) — the token's signature + expiry still gate it.
-let getStore = null;
-try { ({ getStore } = require("@netlify/blobs")); } catch { /* dep/runtime absent — degrade gracefully */ }
+let getStore = null, connectLambda = null;
+try { ({ getStore, connectLambda } = require("@netlify/blobs")); } catch { /* dep/runtime absent — degrade gracefully */ }
 
 function blobStore(name) {
   if (!getStore) return null;
@@ -382,6 +382,11 @@ function redirectResponse(location) {
 
 // ─── HANDLER ──────────────────────────────────────────────────────────────────
 exports.handler = async function(event) {
+  // Lambda compatibility mode does not auto-inject the Blobs environment —
+  // without this, getStore() throws on every call and the single-use token
+  // guard below silently fails open. Must run before any blobStore() call.
+  if (connectLambda) { try { connectLambda(event); } catch { /* degrade gracefully */ } }
+
   const clientIp =
     event.headers["x-nf-client-connection-ip"] ||
     event.headers["x-forwarded-for"]?.split(",")[0].trim() ||

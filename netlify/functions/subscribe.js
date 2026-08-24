@@ -47,8 +47,8 @@ function isRateLimited(ip) {
 // Blobs call degrades gracefully — if the store is unavailable, the in-memory
 // per-IP limiter still applies.
 const crypto = require("crypto");
-let getStore = null;
-try { ({ getStore } = require("@netlify/blobs")); } catch { /* dep/runtime absent — degrade gracefully */ }
+let getStore = null, connectLambda = null;
+try { ({ getStore, connectLambda } = require("@netlify/blobs")); } catch { /* dep/runtime absent — degrade gracefully */ }
 
 const ADDRESS_DAILY_MAX = 5;     // max confirmation emails to one address per 24h window
                                  // (fixed window anchored at the first send, not rolling)
@@ -230,6 +230,11 @@ Educational content only — not legal or financial advice.`;
 
 // ─── HANDLER ─────────────────────────────────────────────────────────────────
 exports.handler = async function(event) {
+  // Lambda compatibility mode does not auto-inject the Blobs environment —
+  // without this, getStore() throws on every call and every durable cap
+  // below silently fails open. Must run before any blobStore() call.
+  if (connectLambda) { try { connectLambda(event); } catch { /* degrade gracefully */ } }
+
   const requestOrigin = event.headers["origin"] || event.headers["Origin"] || "";
   const allowedOrigin = getAllowedOrigin(requestOrigin);
 
@@ -349,6 +354,11 @@ exports.handler = async function(event) {
     };
   }
   if (await overDailySendCap()) {
+    // The address counter above already incremented for this request even
+    // though no email is going out — release it, or a handful of requests
+    // during a global-cap event can silently exhaust one victim's address
+    // quota with zero mail sent (operator review, 2026-08-24).
+    await releaseAddressQuota(email);
     return {
       statusCode: 503,
       headers: { ...corsHeaders, "Retry-After": "3600", "Content-Type": "application/json" },
