@@ -90,7 +90,14 @@ def send_email(md: str):
     }).encode("utf-8")
     req = urllib.request.Request("https://api.resend.com/emails", data=body, method="POST",
                                  headers={"Content-Type": "application/json",
-                                          "Authorization": f"Bearer {api_key}"})
+                                          "Authorization": f"Bearer {api_key}",
+                                          # urllib's default "Python-urllib/x.y" User-Agent gets
+                                          # fingerprinted and blocked by Cloudflare (error 1010) in
+                                          # front of api.resend.com — found 2026-08-27 on the first
+                                          # live send. The other scripts here that call external
+                                          # APIs (submit_indexnow.py, newsjacking_scan.py) already
+                                          # set a real one for the same reason.
+                                          "User-Agent": "BeatTheScam-AuditDigest/1.0"})
     try:
         with urllib.request.urlopen(req, timeout=20) as r:
             print(f"  digest emailed to {to} (HTTP {r.status})")
