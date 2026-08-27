@@ -112,7 +112,7 @@ A free, UK-focused consumer-protection publication that:
 |---|---|---|
 | Site generation | **Custom Python static site generator** (`scripts/build.py`) | NOT Next.js, NOT Hugo, NOT Jekyll. Bespoke Python that reads `content/posts.json` + `content/site.json` and renders into `dist/` using `templates/base.html`. |
 | Templating | Single `templates/base.html` shell with `{{placeholder}}` substitution | Simple, fast, no framework dependency. |
-| Source of truth (content) | `content/posts.json` | 187 source records; 185 indexable guides after two documented consolidations. Scheduled generation is currently paused; workflows remain available for operator-triggered, human-reviewed publication. |
+| Source of truth (content) | `content/posts.json` | 189 source records (2026-08-27); indexable guide count grows via the two Tue/Fri crons, each gated by human review before anything reaches `main` — check `content/posts.json` for the current total rather than trusting a number here. |
 | Hosting / CDN | **Netlify** (Personal plan — $9/month, 1000 build credits) | Auto-deploys on push to `main`. |
 | Serverless functions | **Netlify Functions** (5: `check-scam`, `subscribe`, `confirm-subscribe`, `unsubscribe`, `csp-report`) | AI checker proxy + double opt-in newsletter (subscribe/confirm/unsubscribe) + CSP violation collector. Functions now carry a `package.json` (`@netlify/blobs`). |
 | AI for scam checker | **Anthropic Claude — `claude-haiku-4-5-20251001`** | Returns structured JSON verdict. Durable per-IP rate limit + daily spend cap (`DAILY_CALL_CAP=2000`/UTC-day) via Netlify Blobs. |
@@ -575,7 +575,7 @@ Repository evidence reviewed 2026-07-19. External dashboard states remain unknow
 - [x] Cookie Policy page live (`/cookies/`)
 - [x] `ads.txt` served and Authorised at `/ads.txt`
 - [x] `robots.txt` does not block `Mediapartners-Google` or `AdsBot-Google`
-- [x] Original, human-review-gated content (185 indexable guides; scheduled generation currently paused)
+- [x] Original, human-review-gated content, growing via the Tue/Fri scheduled crons
 - [x] Working HTTPS with valid certificate
 - [x] Site has clear navigation and footer
 
@@ -1314,14 +1314,25 @@ A short credits file at `/humans.txt`. Useful for buyers / future contractors. O
 
 ### Daily (automated)
 
-- ⏸️ The Tue/Fri scheduled publish and Search Console workflows are currently paused; the
-  `schedule:` keys are commented out. They remain available through `workflow_dispatch` and
-  must still open a human-review PR (`auto-content`) rather than publishing directly.
+- ✅ The Tue/Fri scheduled publish (`daily-publish.yml`, 05:07 UTC) and Search Console
+  (`daily-search-console.yml`, 05:23 UTC) workflows are **live** — both carry active
+  `schedule:` cron blocks and ran successfully as recently as 2026-08-25. (Corrected
+  2026-08-27: this section previously said they were paused with `schedule:` commented
+  out, which had gone stale — verify against the workflow YAML, not this prose, if in
+  doubt.) Each still opens a human-review PR (`auto-content`) rather than publishing
+  directly, and the backlog guard skips generation while one is open.
 - ✅ Tweet on publish — handled by a separate workflow, `tweet-on-publish.yml`, triggered by the post-merge push to `main` (not by either daily cron itself); tweets only the slug(s) added in that push.
 
 ### Weekly (automated)
 
-- ✅ Monday 06:00 UTC — Weekly editorial audit digest (`.github/workflows/weekly-audit.yml`) emails flag-tier claims from recent guides for human review.
+- ⚠️ Monday 06:00 UTC — Weekly editorial audit digest (`.github/workflows/weekly-audit.yml`)
+  is meant to email flag-tier claims from recent guides for human review, but as of
+  2026-08-27 `RESEND_API_KEY` was never added as a **GitHub Actions** secret (Resend keys
+  only exist in Netlify's env, a separate secret store), so every run has silently fallen
+  back to writing a Step Summary nobody reads instead of sending an email — confirmed in
+  the 2026-08-24 run log (`email skipped — RESEND_API_KEY set: False`). This is the
+  pipeline's human safety net for accuracy flags; until the secret is added it requires
+  proactively opening the Actions tab, not just an inbox check.
 
 ### Weekly (manual)
 
