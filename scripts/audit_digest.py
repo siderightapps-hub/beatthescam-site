@@ -18,6 +18,7 @@ import datetime
 import json
 import os
 import sys
+import urllib.error
 import urllib.request
 from pathlib import Path
 
@@ -94,6 +95,15 @@ def send_email(md: str):
         with urllib.request.urlopen(req, timeout=20) as r:
             print(f"  digest emailed to {to} (HTTP {r.status})")
             return True
+    except urllib.error.HTTPError as e:
+        # Resend's response body names the actual cause (invalid key, a
+        # sending-scope-restricted key, an unverified domain, …) — the bare
+        # "HTTP Error 403: Forbidden" str(e) gives none of that (found
+        # 2026-08-27: first live send attempt after RESEND_API_KEY was added
+        # to GitHub Actions secrets failed 403 with no way to diagnose why).
+        detail = e.read().decode("utf-8", "replace")[:500]
+        print(f"  [warn] digest email failed: HTTP {e.code} {e.reason} — {detail}")
+        return False
     except Exception as e:
         print(f"  [warn] digest email failed: {e}")
         return False
