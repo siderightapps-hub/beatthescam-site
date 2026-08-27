@@ -10,7 +10,7 @@ Last reviewed: 2026-07-19
 | Privacy/newsletter | Double opt-in and unsubscribe implemented | Record lawful purchaser transfer assessment, processor contracts and retention/suppression handling |
 | Advertising/affiliate disclosure | Current recommendations are unpaid and labelled as such | Update labels, link attributes and terms in the same release if paid tracking goes live |
 | Editorial accuracy | Gate, source canon, manifests, corrections and recurring reverification exist | Preserve audit outputs and correction log; retain operator approvals for bespoke releases |
-| Security | Hardened functions and headers; DMARC enforcement ramp remains open | Retain security scan evidence; complete safe DMARC ramp after report review |
+| Security | Hardened functions and headers; DMARC is at 100% quarantine with subdomain reject, pending only the evidence-gated apex `p=reject` move | Retain security scan evidence; review DMARC reports before the final apex-policy change |
 | Key-person risk | Operational knowledge remains concentrated with founder | Complete runbook, second-admin coverage, backup restore test and transfer rehearsal |
 | Revenue/traffic concentration | Not yet measurable as a commercial history | Build at least 6–12 months of monthly evidence and report concentration by source/page/partner |
 

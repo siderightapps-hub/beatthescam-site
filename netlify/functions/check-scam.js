@@ -106,21 +106,22 @@ async function durableRateLimited(ip) {
 }
 
 // Global daily spend cap. Checks-and-increments today's call counter; returns
-// true once the cap is reached (caller should refuse). Fails OPEN on store
-// errors — the per-IP limit still applies, so availability wins over a perfect cap.
+// true once the cap is reached (caller should refuse). This must fail CLOSED:
+// a per-instance in-memory IP limit cannot bound a distributed caller during a
+// Blobs outage, so failing open would remove the only global cost control.
 async function overDailyCap() {
   const store = blobStore("checker-spend");
-  if (!store) return false;
+  if (!store) return true;
   try {
     // calls:YYYY-MM-DD keyed on the UTC date: the cap resets at midnight UTC
     // (01:00/02:00 UK time), so a UK "day" deliberately spans two counters.
     const key = `calls:${new Date().toISOString().slice(0, 10)}`;
     const next = await atomicUpdate(store, key, () => ({ count: 0 }), (c) => { c.count++; return c; });
-    if (next === null) return false;            // store failed — fail open (availability > perfect cap)
+    if (next === null) return true;
     return next.count > DAILY_CALL_CAP;
   } catch (err) {
-    console.error("Blobs spend-cap error (failing open):", err);
-    return false;
+    console.error("Blobs spend-cap error (refusing checker request):", err);
+    return true;
   }
 }
 

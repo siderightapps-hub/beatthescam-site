@@ -5,7 +5,7 @@ Verdict audit (2026-06-22). These are **manual dashboard tasks** — none of thi
 lives in the repo. Status reflects the live state confirmed by `dig` on
 2026-06-22.
 
-> **Documentation review 2026-07-19:** no later DMARC-policy or HSTS-preload outcome is recorded in the repository. Treat the values below as the last verified snapshot and recheck live DNS plus the accumulated `dmarc@` reports before changing enforcement.
+> **Live DNS check 2026-08-27:** public DNS now returns `p=quarantine; pct=100; sp=reject` and HSTS preload reports `preloaded`. The only remaining DMARC change is the apex-domain move from quarantine to reject, and it remains conditional on reviewing the accumulated `dmarc@` reports.
 
 ## Where everything is managed
 
@@ -23,7 +23,7 @@ lives in the repo. Status reflects the live state confirmed by `dig` on
 
 ## 1. DMARC — staged `p=none` → `quarantine` → `reject`
 
-Current: `_dmarc.beatthescam.com TXT "v=DMARC1; p=none; rua=mailto:dmarc@beatthescam.com; fo=1"` (monitor only, reporting ON since 2026-06-22 — see Step 1).
+Current: `_dmarc.beatthescam.com TXT "v=DMARC1; p=quarantine; pct=100; sp=reject; rua=mailto:dmarc@beatthescam.com; fo=1"` (enforcement is complete for subdomains and at 100% quarantine for the apex domain).
 Two senders must stay aligned before enforcing: **Microsoft 365** (apex) and
 **Resend** (newsletter from `updates.`).
 
@@ -31,12 +31,12 @@ Two senders must stay aligned before enforcing: **Microsoft 365** (apex) and
   ```
   _dmarc.beatthescam.com  TXT  "v=DMARC1; p=none; rua=mailto:dmarc@beatthescam.com; fo=1"
   ```
-- **Step 2 — after ~1–2 weeks, once reports show BOTH M365 and Resend passing:**
+- **Step 2 — ✅ COMPLETE (verified live 2026-08-27):**
   ```
-  "v=DMARC1; p=quarantine; pct=25; rua=mailto:dmarc@beatthescam.com"
+  "v=DMARC1; p=quarantine; pct=100; sp=reject; rua=mailto:dmarc@beatthescam.com; fo=1"
   ```
-  then ramp `pct` 25 → 50 → 100.
-- **Step 3 — enforce:**
+  The staged quarantine ramp reached 100%. Preserve this record until the report-review evidence for the final move is recorded.
+- **Step 3 — remaining action, after reports show BOTH M365 and Resend passing:**
   ```
   "v=DMARC1; p=reject; sp=reject; rua=mailto:dmarc@beatthescam.com"
   ```
@@ -85,11 +85,11 @@ provider (e.g. Cloudflare) and re-creating every record there. **Priority: low /
 optional** — weigh the migration effort against the benefit; defer unless DNS is
 being moved for another reason.
 
-## 5. HSTS preload — ✅ SUBMITTED 2026-06-22 (pending inclusion)
+## 5. HSTS preload — ✅ COMPLETE (verified 2026-08-27)
 
 `netlify.toml` serves `Strict-Transport-Security: max-age=63072000;
-includeSubDomains; preload` (confirmed live). Submitted at https://hstspreload.org
-— status "pending inclusion". ⚠️ Preload + `includeSubDomains` covers ALL
+includeSubDomains; preload`; the HSTS preload API reports `preloaded` for
+`beatthescam.com` (verified 2026-08-27). ⚠️ Preload + `includeSubDomains` covers ALL
 subdomains, so every current/future subdomain (incl. any Resend tracking
 subdomain) MUST serve valid HTTPS or it becomes unreachable. Re-check status over
 the next few weeks.
@@ -102,18 +102,19 @@ without TLS — leave Opportunistic unless you have a specific compliance reason
 
 ---
 
-## Status snapshot (updated 2026-06-25)
+## Status snapshot (updated 2026-08-27)
 
 - ✅ M365 DKIM — **COMPLETE.** 2048-bit; selector 1 malformed CNAME corrected
   2026-06-25 (3rd-audit finding) — both selectors now sign.
 - ✅ Resend DKIM — **CLOSED.** Stays 1024-bit; Resend offers no 2048 option
   (vendor limit); 1024 passes DMARC — no further action.
 - ✅ CAA records — live.
-- ✅ HSTS preload — submitted, pending inclusion (re-check status).
-- 🧪 DMARC — **in testing** at `p=none` with reporting on. Step 2→3
-  (quarantine → reject) still pending: confirm `dmarc@` reports show BOTH M365 and
-  Resend passing, then ramp `pct` 25→50→100, then `p=reject`.
+- ✅ HSTS preload — active; the domain is preloaded.
+- 🧪 DMARC — **at `p=quarantine; pct=100; sp=reject`**. The remaining
+  apex-domain change is `p=reject`, after confirming `dmarc@` reports show BOTH
+  M365 and Resend passing.
 - ⬜ DNSSEC — blocked on Dynadot (needs third-party NS); optional, deferred.
 
-**Remaining DNS actions:** only the **DMARC enforcement ramp** (after the testing
-window) and **optional DNSSEC**. DKIM (both senders) and CAA/HSTS are done.
+**Remaining DNS actions:** only the final **DMARC apex-policy move to `reject`**
+(after reviewing the reports) and optional DNSSEC. DKIM (both senders), CAA and
+HSTS preload are done.

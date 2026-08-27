@@ -10,7 +10,7 @@
 >
 > **Last updated:** 2026-08-13
 > **Domain age:** ~6 months (registered February 2026)
-> **Site state:** 187 guide source records and 185 indexable guides after two documented consolidations, 17 normalised categories with 17 authored hub records, and 228 generated HTML files / 226 indexable canonical pages on the last full generated-site validation. All 185 rendered guides carry `sources_checked` and a `quick_answer` box (with speakable schema); an original UK Scam Statistics dataset is live at `/research/uk-scam-statistics/` (quarterly refresh, next October 2026). The AI checker, consent-aware conversion events and Resend double-opt-in newsletter are live. The 11 August growth-audit follow-on work improved priority-guide linking and applied five independently fact-checked guide/hub consistency corrections; the 13 August homepage refresh introduced a safety-first triage flow and a documented visual system. **Technical build is mature and stable; the open work is commercial evidence, external-account outcomes, authority growth, sale-readiness evidence, fact re-verification and the DMARC enforcement ramp.** Video production was discontinued 2026-06-15; see `docs/video-pipeline.md`.
+> **Site state:** 187 guide source records and 185 indexable guides after two documented consolidations, 17 normalised categories with 17 authored hub records, and 228 generated HTML files / 226 indexable canonical pages on the last full generated-site validation. All 185 rendered guides carry `sources_checked` and a `quick_answer` box (with speakable schema); an original UK Scam Statistics dataset is live at `/research/uk-scam-statistics/` (quarterly refresh, next October 2026). The AI checker, consent-aware conversion events and Resend double-opt-in newsletter are live. The 11 August growth-audit follow-on work improved priority-guide linking and applied five independently fact-checked guide/hub consistency corrections; the 13 August homepage refresh introduced a safety-first triage flow and a documented visual system. **Technical build is mature and stable; the open work is commercial evidence, external-account outcomes, authority growth, sale-readiness evidence, fact re-verification and the evidence-gated final DMARC policy move.** Video production was discontinued 2026-06-15; see `docs/video-pipeline.md`.
 > **Maintainer:** Alex — SideRight Apps (GitHub: `siderightapps-hub`)
 
 ---
@@ -465,7 +465,7 @@ This is the **complete inventory of every external account** the site depends on
 | Registration date | February 2026 |
 | DNS provider | **Dynadot DNS** (nameservers `ns1.dyna-ns.net` / `ns2.dyna-ns.net`); apex A record → Netlify `75.2.60.5`. NOT Netlify DNS. |
 | SSL | Let's Encrypt via Netlify managed HTTPS |
-| HSTS | `max-age=63072000; includeSubDomains; preload` — **submitted to HSTS preload list 2026-06-22 (pending inclusion)** |
+| HSTS | `max-age=63072000; includeSubDomains; preload` — **active on the HSTS preload list (verified 2026-08-27)** |
 | TLS rating | **SSL Labs A+** (TLS 1.3, modern cipher suites) |
 
 ### Email authentication & DNS hardening (status 2026-06-22)
@@ -477,7 +477,7 @@ Full operator runbook: [`docs/dns-hardening-checklist.md`](dns-hardening-checkli
 | SPF | ✅ strong | `v=spf1 include:spf.protection.outlook.com -all` (apex on Microsoft 365) |
 | DKIM (M365, apex mail) | ✅ 2048-bit, both selectors | `selector1/2._domainkey` CNAMEs; rotated to 2048 (Defender, 2026-06-22); **selector 1 malformed-CNAME corrected 2026-06-25** (3rd-audit finding) — both selectors now sign |
 | DKIM (Resend, newsletter) | ✅ 1024-bit (Resend max) | `resend._domainkey.updates`; **Resend offers no 2048 option (confirmed 2026-06-25) — closed, not pending**; 1024 passes DMARC |
-| DMARC | ⚠️ `p=none` + reporting | `rua=mailto:dmarc@beatthescam.com` (alias of `privacy@`). Ramp to quarantine→reject is the next step, after ~1–2 wks of clean reports showing BOTH M365 and Resend pass |
+| DMARC | ⚠️ `p=quarantine; pct=100; sp=reject` | `rua=mailto:dmarc@beatthescam.com` (alias of `privacy@`). The only remaining step is `p=reject`, after reviewing reports that show BOTH M365 and Resend pass |
 | CAA | ✅ live | `0 issue/issuewild "letsencrypt.org"` + `0 iodef "mailto:dmarc@beatthescam.com"` |
 | DNSSEC | ❌ not enabled | Blocked: Dynadot only offers DNSSEC with third-party nameservers. Deferred unless DNS is moved. |
 
@@ -1150,7 +1150,7 @@ The site has an active Google disavow file. Background and the rules for future 
 - **Executive Verdict (external) round 1:** 2026-06-19 → 06-21 (gate hardening, editorial-accuracy layer, E-tier checker/newsletter/consent)
 - **Executive Verdict (external) round 2:** 2026-06-22 — content accuracy (charity/DWP), editorial-honesty wording, function-response security headers, expiring confirm tokens, checker-logging privacy fix, supply-chain (lockfile + Dependabot + CodeQL), AdSense per-page ad policy, privacy-policy precision, DNS/email hardening (DMARC reporting, CAA, HSTS preload, M365 DKIM 2048). All A–E remediated & live; DNS ramp items tracked in `dns-hardening-checklist.md`.
 - **Executive Verdict (external) round 3:** 2026-06-24 → 06-25 — function hardening (non-allow-listed `Origin` → 403; salted-hash per-IP keys + atomic compare-and-set Blobs counters; single-use confirm tokens; durable per-address + global newsletter abuse caps; 16KB body cap before parse; 20s `AbortController` upstream timeout → 504; `no-store` on every response); CSP `frame-ancestors 'none'` + `X-XSS-Protection: 0`; all GitHub Actions SHA-pinned; content gate now BLOCKs ClearScore/CallCredit-as-CRA + National-Fraud-Database→Cifas and FLAGs US-style fraud-alert/HMRC-channel absolutes; corpus content sweep (ClearScore→TransUnion, US-style "fraud alert"→Cifas Protective Registration, ~67 guides); new `/disclaimer/` page; `/check/` de-thinned (~900 words, still ad-free); 16 dead internal links repointed; honesty/consent/affiliate/freshness fixes. Live on origin/main 2026-06-25.
-- **Status:** All code/content audit items remediated or verified; DNS/email-auth nearly complete — DKIM (M365 both selectors + Resend) and CAA/HSTS done; only the **DMARC enforcement ramp** (in testing at `p=none`) and optional **DNSSEC** remain. Resend DKIM stays 1024-bit (Resend offers no 2048 — closed). See `dns-hardening-checklist.md`.
+- **Status:** All code/content audit items remediated or verified; DNS/email-auth nearly complete — DKIM (M365 both selectors + Resend), CAA and HSTS preload are done; only the evidence-gated **DMARC apex-policy move to `p=reject`** (currently `p=quarantine; pct=100; sp=reject`) and optional **DNSSEC** remain. Resend DKIM stays 1024-bit (Resend offers no 2048 — closed). See `dns-hardening-checklist.md`.
 
 ### Live scan results
 
@@ -1542,7 +1542,7 @@ A fresh external "Executive Verdict" audit surfaced further items; all code/cont
 - [x] **Function/security hardening.** Checker no longer logs raw model output; confirm/unsubscribe HTML pages get full security headers; confirm tokens now expire (signed 7-day) + reactivate-on-duplicate.
 - [x] **Supply chain.** `package-lock.json`, upper-bounded `requirements-claude.txt`, Dependabot (npm+pip+actions) + CodeQL (JS+Python).
 - [x] **AdSense + privacy.** `/check/` excluded from Auto Ads; non-personalised ads on debt/insolvency/recovery pages; privacy policy discloses cookies/web beacons/IP/identifiers + the NPA treatment.
-- [~] **DNS/email (tranche F, nearly done).** Done: DMARC reporting (`p=none`+rua), CAA, HSTS preload submitted, M365 DKIM→2048 (**both selectors — selector 1 fixed 2026-06-25**), Resend DKIM **closed at 1024** (Resend offers no 2048). Pending: DMARC quarantine→reject ramp (in testing now), DNSSEC (blocked on Dynadot; optional). Full status: `dns-hardening-checklist.md`.
+- [~] **DNS/email (tranche F, nearly done).** Done: DMARC quarantine at 100% with subdomain reject, CAA, HSTS preload active, M365 DKIM→2048 (**both selectors — selector 1 fixed 2026-06-25**), Resend DKIM **closed at 1024** (Resend offers no 2048). Pending: the evidence-gated apex-domain `p=reject` move, DNSSEC (blocked on Dynadot; optional). Full status: `dns-hardening-checklist.md`.
 
 ### Recently completed (2026-06-19 → 06-21 — Executive Verdict remediation round 1, closed)
 

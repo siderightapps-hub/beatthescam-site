@@ -22,6 +22,7 @@ from datetime import datetime, date, timedelta
 from pathlib import Path
 
 from content_gate import run_gate, ACCURACY_BLOCK, quarantine_post, write_manifest
+from generate_content_claude import Topic, normalise as normalise_generated_post
 
 ROOT       = Path(__file__).resolve().parents[1]
 POSTS_FILE = ROOT / "content" / "posts.json"
@@ -207,6 +208,29 @@ def find_content_gaps(queries: list, posts: list) -> list:
     return gaps
 
 # ── Article generation ────────────────────────────────────────────────────────
+def normalise_search_console_post(data: dict, query: str, category: str, today: str) -> dict:
+    """Apply the canonical generated-guide schema to a Search Console draft.
+
+    This pipeline used to assemble its own partial post object. That silently
+    diverged after the shared schema gained ``quick_answer``, ``sources_checked``
+    and ``updated``: the publication gate correctly quarantined every draft.
+    Reusing the canonical normaliser keeps both automated writers on one schema
+    and keeps source links canon-derived rather than model-authored.
+    """
+    normalised_input = dict(data)
+    # Preserve the existing pipeline's title-derived URL contract. The shared
+    # normaliser otherwise falls back to the Search Console query when a model
+    # response does not include a slug (this prompt intentionally does not ask
+    # it to).
+    normalised_input["slug"] = slugify(str(normalised_input.get("title") or query))
+    return normalise_generated_post(
+        normalised_input,
+        Topic(keyword=query, entity=query, category=category),
+        today,
+        strict=True,
+    )
+
+
 def generate_article(query: dict, api_key: str):
     """Generate a complete article for a query gap using Claude API."""
     try:
@@ -236,6 +260,7 @@ OUTPUT FORMAT — respond with a single valid JSON object only, no other text:
 {{
   "title": "Specific UK-focused title including the scam type (max 80 chars)",
   "description": "2-sentence description explaining what this guide covers and who it helps (max 160 chars)",
+  "quick_answer": "35 to 60 words, verdict first, followed by the most important safe action",
   "hero": "1-sentence hook describing the scam threat (max 120 chars)",
   "keywords": ["keyword1", "keyword2", "keyword3", "keyword4", "keyword5", "keyword6"],
   "sections": [
@@ -281,18 +306,10 @@ OUTPUT FORMAT — respond with a single valid JSON object only, no other text:
             return None
         data["sections"] = [list(s) for s in sections]
 
-        # Build the full post object
-        post = {
-            "slug":        slugify(data["title"]),
-            "title":       data["title"],
-            "description": data["description"],
-            "hero":        data["hero"],
-            "date":        today,
-            "category":    category,
-            "keywords":    data["keywords"],
-            "sections":    data["sections"],
-            "faq":         data["faq"],
-        }
+        # Both automated writers must emit the same complete schema. In
+        # particular, sources_checked is canon-derived (not a model guess) and
+        # quick_answer/updated feed reader-visible trust surfaces.
+        post = normalise_search_console_post(data, q, category, today)
 
         # Model-derived text is collapsed to one line before logging: the
         # workflow scrapes this stdout for a column-0 "NEW_ARTICLE_SLUGS="

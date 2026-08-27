@@ -92,6 +92,29 @@ def _shared_canon_block_fixtures(check) -> None:
           "0300 999 0001" in canon_mod.render_verified_facts(mutated))
 
 
+def _search_console_schema_fixture(check) -> None:
+    """Both automated article paths must produce a gate-complete post."""
+    from search_console_articles import normalise_search_console_post
+
+    body = "Useful, specific UK scam guidance. " * 35
+    draft = {
+        "title": "Example Search Console Scam Guide UK",
+        "description": "A practical explanation of an example scam and the safe checks to make before acting in the UK.",
+        "hero": "Treat an unexpected request as suspicious until you verify it independently.",
+        "quick_answer": "This example is suspicious until you verify it independently. Do not use the link or number in the message; open the organisation's official website or app yourself and check there before you pay, reply, or share details.",
+        "keywords": ["example scam uk"],
+        "sections": [[f"Section {n}", body] for n in range(1, 5)],
+        "faq": [["Is this example safe?", "Verify it through an official route you opened yourself."] for _ in range(3)],
+    }
+    post = normalise_search_console_post(draft, "example scam", "fraud", "2026-08-27")
+    check("Search Console generator emits a complete canonical post schema",
+          {"quick_answer", "sources_checked", "updated"} <= set(post))
+    check("Search Console generator passes the quick-answer publication guard",
+          not check_quick_answer_present(post))
+    check("Search Console generator passes the deterministic publication gate",
+          run_gate(post, use_llm=False).passed)
+
+
 def _report_mailbox_fixtures(check) -> None:
     """A mailbox the guide tells the reader to report TO must be in the canon.
 
@@ -682,6 +705,7 @@ def run() -> int:
     _shortcode_fixtures(check)
     _report_mailbox_fixtures(check)
     _shared_canon_block_fixtures(check)
+    _search_console_schema_fixture(check)
 
     # Citation prose is not a consumer route.
     check("'Data from Citizens Advice shows...' is a citation, not a route",
