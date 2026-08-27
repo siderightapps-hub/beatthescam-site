@@ -21,7 +21,15 @@ jobs:
       - name: Checkout deployed revision
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
-          fetch-depth: 2
+          # Full history, not the last 2 commits: a squash-merge can leave
+          # github.event.before unreachable in a shallow clone, which failed
+          # this job silently on every squash-merged push (found 2026-08-27 —
+          # runs on 2026-08-20 and 2026-08-23 both errored "Before-ref is
+          # unavailable" with no alerting). Full fetch makes the before-ref
+          # reachable in every case except a genuine force-push, which
+          # submit_indexnow.py now degrades out of gracefully instead of
+          # failing the job.
+          fetch-depth: 0
 
       - name: Setup Python
         uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97 # v7.0.0

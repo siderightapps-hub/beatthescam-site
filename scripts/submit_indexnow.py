@@ -150,9 +150,17 @@ def main() -> int:
     if args.all:
         urls = all_sitemap_urls()
     elif args.before:
+        # GitHub sends the all-zero SHA for "before" on a push that creates a
+        # branch (no prior commit exists) — not an error, just nothing to diff.
+        if set(args.before) <= {"0"}:
+            print("No prior commit (branch creation) — nothing to diff, skipping")
+            return 0
         if git("cat-file", "-e", f"{args.before}^{{commit}}").returncode != 0:
-            print(f"Before-ref is unavailable: {args.before}", file=sys.stderr)
-            return 2
+            # A genuinely unreachable ref (rewritten history, force-push) — degrade to
+            # notifying nothing rather than failing the whole job silently on every
+            # push until someone happens to check the Actions tab (found 2026-08-27).
+            print(f"Before-ref is unavailable: {args.before} — skipping this delta", file=sys.stderr)
+            return 0
         urls = changed_urls(args.before)
     else:
         parser.error("provide --before or --all")
