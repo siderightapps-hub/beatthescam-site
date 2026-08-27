@@ -1,7 +1,7 @@
 # Master Documentation — Summary
 
 > Created: 2026-05-20
-> Last reviewed: 2026-07-19
+> Last reviewed: 2026-08-12
 > Companion summary to `project.md` and `project-template.md`.
 
 ---
@@ -152,7 +152,7 @@ The brief asked to "add any other information that I may have missed." Items add
 
 ## Recommended next actions
 
-[`next-session.md`](next-session.md) is the sole current punch list. At the 2026-07-19 documentation review, its priorities are: capture monetisation/conversion evidence; establish the saleable asset perimeter; reduce key-person and transfer risk; complete the evidence-gated DMARC ramp; earn authority and continue measurable research; and keep the human-review publishing queue healthy.
+[`next-session.md`](next-session.md) is the sole current punch list. At the 2026-08-12 documentation review, its priorities are: wait for the active AdSense decision; monitor the already-started Search Console redirect validation; capture dated KPI and commercial evidence; earn relevant authority around the original research; run the fact-reverification workflow before relying on it; and keep any future publication human-reviewed.
 
 Do not copy that checklist into another document. Durable facts and dated history belong in `project.md`; workstream methods belong in their runbooks; completed audits and the diversification plan remain historical evidence.
 
@@ -183,6 +183,7 @@ Copy `project-template.md` to the new project's repo as `PROJECT.md` (or `CLAUDE
 
 ## Document versioning
 
+- **v1.6 — 2026-08-12** — Reconciled the current operational documents after the growth-audit follow-on work: 187 source records / 185 public guides / two consolidations, all 17 category hubs present, PageSpeed and external-account snapshots recorded, and the current authority/KPI/indexing queue clarified.
 - **v1.5 — 2026-07-19** — Refreshed the operational-document index, added the Search/AI measurement and buyer data-room workstreams, clarified historical audit status, and documented the exact `AGENTS.md`/`CLAUDE.md` mirror policy for Codex and Claude sessions.
 - **v1.4 — 2026-06-04** — Technical-build closeout. Added [`next-session.md`](next-session.md) as the fast-start front door for resuming work. `project.md` updates: top header + new "Recently completed (2026-06-04 session)" block (Terms rewrite, named author E-E-A-T, security.txt, GSC URL triage, AdSense preconnect, Lighthouse baseline), Section 9 gains PageSpeed Insights subsection with baseline numbers + API rate-limit gotcha, Section 18 `security.txt` flipped Live, Section 21 "This week / next session" refocused on the two primary growth items (cross-platform analytics review + backlinks push). README's "What was produced" table now includes all 6 docs with relative links + flags next-session.md as the front door.
 - **v1.3 — 2026-05-30** — Three-front session: Instagram channel activated (`@beatthescamuk`), full Semrush remediation pass (Site Health 96% → 98%, AI Search 88% → 99%, 454 issue-instances cleared), Google disavow file uploaded for 66 toxic domains. project.md gains Section 14 Disavow Policy subsection + Section 9 Semrush subsection.

@@ -71,9 +71,9 @@ beatthescam.com · hello@beatthescam.com
 Hi Damien,
 
 I read your piece on the HMRC Winter Fuel Payment messages and how to tell a
-genuine one from a scam — the point that real HMRC texts never include a link and
-push you to navigate to GOV.UK yourself is exactly the rule people forget under
-pressure.
+genuine one from a scam. The safest rule is not to rely on the presence or absence
+of a link: HMRC does run genuine text campaigns, so readers should open GOV.UK or
+their official account independently rather than using an unexpected message link.
 
 I run Beat the Scam, a free, independent UK consumer-protection site. We've got a
 detailed walkthrough of the HMRC tax-refund text scam specifically — the exact
@@ -143,7 +143,7 @@ Hi Helen,
 I'm a regular reader of your Crane on the Case column — the reader-recovery cases
 are a great reminder of how often these come down to one missed red flag.
 
-I run Beat the Scam, a free, independent UK consumer-protection site with 180+
+I run Beat the Scam, a free, independent UK consumer-protection site with 185
 plain-English scam guides and a free AI scam checker. I cover UK scams full-time,
 so I can give a quick, current read on the patterns I'm seeing reported — e.g. the
 shift from courier delivery texts to the "safe account" follow-up call, and which

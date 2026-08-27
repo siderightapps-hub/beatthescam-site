@@ -20,6 +20,25 @@
           "to": "https://beatthescam.com/guides/evri-delivery-scam-guide/"
         }
       ]
+    },
+    {
+      "id": "2026-08-11-priority-guide-linking-and-hub-alignment",
+      "date": "2026-08-11",
+      "description": "Independently fact-checked priority-guide contextual-link improvements and five guide/category-hub consistency corrections. Track as one combined intervention; do not attribute any movement to a single edit without page/query evidence.",
+      "measurement_windows_days": [7, 28],
+      "focus_urls": [
+        "https://beatthescam.com/guides/evri-delivery-scam-guide/",
+        "https://beatthescam.com/guides/bank-transfer-scam-uk/",
+        "https://beatthescam.com/guides/hmrc-tax-rebate-email-scam/",
+        "https://beatthescam.com/guides/santander-email-scam-uk/",
+        "https://beatthescam.com/guides/visa-application-scam-uk/",
+        "https://beatthescam.com/guides/gumtree-scam-uk-guide/",
+        "https://beatthescam.com/guides/iva-scam-uk/",
+        "https://beatthescam.com/guides/charity-donation-scam-checklist/",
+        "https://beatthescam.com/guides/viagogo-scam-uk/",
+        "https://beatthescam.com/guides/chargeback-scam-uk/"
+      ],
+      "consolidations": []
     }
   ]
 }

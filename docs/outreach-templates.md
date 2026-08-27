@@ -2,8 +2,9 @@
 
 Paste-and-personalise copy for the backlinks/outreach push. Pair with
 [`outreach-log.md`](outreach-log.md) (tracking) and `project.md` §14 (strategy).
-**Targeting principle:** point links at the SMS/courier cluster, anchored with real
-near-miss queries ("fake DPD text", "bank text not arriving").
+**Targeting principle:** lead with the original UK Scam Statistics research/data resource
+when it is relevant; otherwise use a single guide or hub that directly completes the
+recipient's article. Avoid generic anchor-text requests and do not imply an endorsement.
 
 Sign-off used throughout:
 > Alex Bacsa — Founder & Editor, Beat the Scam — beatthescam.com · hello@beatthescam.com
@@ -38,6 +39,37 @@ Alex Bacsa
 Founder & Editor, Beat the Scam
 beatthescam.com · hello@beatthescam.com
 ```
+
+---
+
+## Research-resource email (Tier 1/3 — journalists, libraries, councils and digital-safety organisations)
+
+**Subject:** UK scam statistics dataset available for public-interest reporting
+
+```
+Hi [name],
+
+I run Beat the Scam, an independent UK consumer-protection publication. We've
+published a free UK Scam Statistics resource that brings together the underlying
+primary-source releases from bodies including the PSR, ONS, FCA, Cifas and Ofcom.
+It includes a methodology note and downloadable CSV/JSON so readers can trace the
+source and geography of each figure:
+https://beatthescam.com/research/uk-scam-statistics/
+
+I thought it might be useful for [your article/resource/project] as a source or
+further-reading resource. There is no obligation to mention it; if you spot an
+error or a more useful source we should include, I'd genuinely welcome the
+correction.
+
+Best,
+Alex Bacsa
+Founder & Editor, Beat the Scam
+beatthescam.com · hello@beatthescam.com
+```
+
+Before sending: verify the recipient's current editorial/resource route, select only one
+statistic from its primary source, and remove any claim the recipient cannot independently
+check. Do not send the same wording twice.
 
 ---
 

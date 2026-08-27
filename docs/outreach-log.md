@@ -1,15 +1,30 @@
 # Outreach & Backlink Log
 
-> **Status reviewed 2026-07-19:** no later responses or earned editorial links have been recorded since the entries below. Update this file from mailbox/platform evidence before claiming an outreach win.
+> **Status reviewed 2026-08-12:** no later responses or earned editorial links have been recorded since the entries below. Update this file from mailbox/platform evidence before claiming an outreach win.
 
 > Tracks link-building / digital-PR outreach over time. Update **Status** as you go
 > (☐ todo · ⏳ sent/pending · ✅ live · ✖ declined). Consistency beats volume — work
 > the weekly cadence below, don't binge once.
 
-**Targeting principle:** point every link at the **SMS/courier cluster** — the
-resurrected DPD/Yodel/UPS guides, the bank-text pages, and `/categories/sms/` —
-anchored with real near-miss queries ("fake DPD text", "DPD scam text", "bank
-text not arriving"). See `docs/next-session.md` and `docs/project.md` §14.
+**Targeting principle:** lead with an original, useful asset where possible—currently the
+UK Scam Statistics research page and its downloadable data—then use a tightly matched guide
+or hub only when it genuinely extends the recipient's article. The SMS/courier cluster remains
+a useful secondary angle, but do not manufacture a generic link request. See
+`docs/next-session.md` and `docs/project.md` §14.
+
+## Current next actions (do before opening new cold-email targets)
+
+1. Complete the Friends Against Scams organisation form already requested on 10 June; this is
+   a credible trust/relationship step, not a guaranteed link.
+2. Capture a dated Search Console Links export, Bing inbound-link export and GA4 referral
+   snapshot. Record any new verified referring domain here before treating Ahrefs counts as
+   an outreach result.
+3. Send a small, personalised research-resource batch only after rechecking the recipient's
+   public route and the particular statistic cited. Offer the UK Scam Statistics page as a
+   source or downloadable dataset, not as a condition for a link.
+4. Do not follow up on the June pitches without a timely, new angle. Do not pay for links or
+   guest posts, and do not claim a partnership, approval or placement until written evidence
+   is retained.
 
 Brand facts for any profile/citation (keep these identical everywhere — NAP consistency):
 
