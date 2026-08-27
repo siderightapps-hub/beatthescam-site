@@ -62,6 +62,13 @@ const DAILY_CALL_CAP = 2000; // max Anthropic checker calls per UTC day (abuse /
 // required site-wide), so the salt is always a real secret and never the public
 // literal — without failing closed and taking the checker offline if it's unset.
 const RL_SALT = process.env.RATE_LIMIT_SALT || process.env.UNSUBSCRIBE_SECRET || "bts-checker-rl-v1";
+if (!process.env.RATE_LIMIT_SALT && !process.env.UNSUBSCRIBE_SECRET) {
+  // Neither secret is set — the salt fell back to a literal visible in source,
+  // silently weakening the "salted hash, never raw IP" privacy guarantee for
+  // the rate-limit store. Not fatal (availability wins), but the operator
+  // should notice and set RATE_LIMIT_SALT or UNSUBSCRIBE_SECRET.
+  console.warn("check-scam: RL_SALT fell back to the hardcoded literal — set RATE_LIMIT_SALT or UNSUBSCRIBE_SECRET.");
+}
 function rlKey(ip) {
   return "ip:" + crypto.createHash("sha256").update(RL_SALT + "|" + ip).digest("hex").slice(0, 32);
 }
@@ -147,47 +154,12 @@ function getAllowedOrigin(requestOrigin) {
 // consumer-advice route missing from the hand-maintained list, so a valid
 // Advice Direct Scotland link was silently discarded from checker results
 // (operator review, 2026-07-30).
-const { ALLOWED_REPORT_DOMAINS, isAllowedReportUrl } = require("./lib/allowed-domains");
+const { isAllowedReportUrl } = require("./lib/allowed-domains");
 
 // ─── SCRUB MODEL-AUTHORED FREE TEXT ──────────────────────────────────────────
-// The model's narrative fields (summary, flags, recommended_actions) are shown
-// to the user as guidance. A prompt-injected message could try to plant an
-// attacker-controlled phone number, link, or email there (reporting_links are
-// separately host-allowlisted, but the free text is not). We redact contact
-// details a victim might act on, while preserving the genuine UK reporting
-// shortcodes (999/101/159/7726…) and official gov.uk reporting addresses.
-const SAFE_SHORTCODES = new Set(["999", "112", "101", "105", "111", "159", "7726"]);
-
-function scrubContact(s) {
-  if (typeof s !== "string") return "";
-  return s
-    // Emails: keep official *.gov.uk reporting addresses, redact everything else.
-    .replace(/\b[\w.+-]+@[\w.-]+\.[a-z]{2,}\b/gi,
-      m => /@([\w-]+\.)*gov\.uk$/i.test(m) ? m : "[contact removed — verify via an official source]")
-    // Clickable-looking links (scheme / www. / host-with-path).
-    .replace(/\b(?:https?:\/\/|www\.)\S+/gi, "[link removed — verify via an official source]")
-    .replace(/\b[\w-]+(?:\.[\w-]+)+\/\S+/gi, "[link removed — verify via an official source]")
-    // Bare host-like mentions with no scheme/www/path (e.g. "visit
-    // evil-fraudhelp.example") matched neither rule above and survived as
-    // plain, non-clickable — but still trusted-looking — narrative text. Redact
-    // any domain-shaped token unless it resolves to a known official host
-    // (the same allow-list that gates structured reporting links), so a
-    // genuine "gov.uk" / "reportfraud.police.uk" mention stays readable.
-    .replace(/\b(?:[a-z0-9](?:[a-z0-9-]{0,61}[a-z0-9])?\.)+[a-z]{2,}\b/gi, (m) => {
-      const host = m.toLowerCase();
-      return ALLOWED_REPORT_DOMAINS.some(d => host === d || host.endsWith("." + d))
-        ? m : "[link removed — verify via an official source]";
-    })
-    // Dialable phone numbers (UK 0…, international +…, or "44…" written
-    // without the + — an injection can drop the prefix to dodge the scrub).
-    // Short safety codes are ≤4 digits and never start 0/+/44, so they
-    // survive; full numbers are redacted.
-    .replace(/\+\d[\d\s().-]{6,}\d|\b0\d[\d\s().-]{5,12}\d|\b44[\d\s().-]{8,}\d/g, (m) => {
-      const digits = m.replace(/\D/g, "");
-      return (digits.length < 7 || SAFE_SHORTCODES.has(digits))
-        ? m : "[number removed — use the number on your card or the official website]";
-    });
-}
+// Extracted to lib/scrub-contact.js so it can be unit-tested — see that file
+// for what it does and why (operator review, 2026-08-27 security audit).
+const { scrubContact } = require("./lib/scrub-contact");
 
 // ─── HANDLER ─────────────────────────────────────────────────────────────────
 exports.handler = async function(event) {
