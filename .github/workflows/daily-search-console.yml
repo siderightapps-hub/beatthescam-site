@@ -109,7 +109,7 @@ jobs:
             set -e
             echo "$OUTPUT"
             if [ "$CODE" -ne 0 ]; then
-              echo "::error::Search Console article generator failed (exit $CODE) — check the GOOGLE_SEARCH_CONSOLE_TOKEN secret hasn't expired (rotates ~weekly)."
+              echo "::error::Search Console article generator failed (exit $CODE) — check whether GOOGLE_SEARCH_CONSOLE_TOKEN was revoked, expired through inactivity, or is misconfigured."
               exit "$CODE"
             fi
             # The scraped output includes model-influenced text (titles, raw

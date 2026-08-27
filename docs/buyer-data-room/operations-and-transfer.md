@@ -9,7 +9,7 @@ Last reviewed: 2026-07-19
 - [ ] Confirm two independent administrators and 2FA recovery for every material account.
 - [ ] Produce a current architecture diagram and monthly operating calendar.
 - [ ] Run and document a cold-backup restoration test.
-- [ ] Publish the Google OAuth consent app to production to remove testing-mode token churn.
+- [x] Google OAuth consent app is in production (verified 2026-08-27); the local token refreshed successfully and the scheduled Search Console workflow last completed successfully on 2026-08-25.
 
 ## Transfer sequence
 
