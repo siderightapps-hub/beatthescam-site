@@ -264,7 +264,7 @@ The daily pipeline is optimised to **only push to GitHub when content has actual
 
 | Secret | Purpose | Last rotated |
 |---|---|---|
-| `ANTHROPIC_API_KEY` | Used by `daily-publish.yml` for Claude content generation | 2026-04-28 |
+| `ANTHROPIC_API_KEY` | Used by `daily-publish.yml` for Claude content generation | 2026-08-27 |
 | `TWITTER_API_KEY` | Auto-tweet new articles via `tweet_new_articles.py` | (confirm) |
 | `TWITTER_API_KEY_SECRET` | Twitter OAuth | (confirm) |
 | `TWITTER_ACCESS_TOKEN` | Twitter OAuth | (confirm) |
@@ -298,7 +298,7 @@ worktree-env() { cp ~/Projects/websites/beatthescam-site/.env .env; }
 
 | Variable | Purpose | Last rotated |
 |---|---|---|
-| `ANTHROPIC_API_KEY` | Used by `check-scam.js` (checker) and the content-generation scripts. The checker also enforces a durable per-IP rate limit + daily spend cap (`DAILY_CALL_CAP=2000`/UTC-day) via **Netlify Blobs** (auto-provisioned — no extra secret). | 2026-04-28 |
+| `ANTHROPIC_API_KEY` | Used by `check-scam.js` (checker) and the content-generation scripts. The checker also enforces a durable per-IP rate limit + daily spend cap (`DAILY_CALL_CAP=2000`/UTC-day) via **Netlify Blobs** (auto-provisioned — no extra secret). | 2026-08-27 |
 | `RESEND_API_KEY` | Newsletter (now **double opt-in**): `subscribe.js` sends the confirmation email; `confirm-subscribe.js` adds the Resend Audience contact + sends the welcome email after the link is clicked. | 2026-06-09 (added) |
 | `RESEND_AUDIENCE_ID` | Target Resend Audience (used by `confirm-subscribe.js` to add the contact, `unsubscribe.js` to suppress it). All three of `RESEND_API_KEY`/`RESEND_AUDIENCE_ID`/`UNSUBSCRIBE_SECRET` are now required for signup — missing any returns `500 "Service not configured"`. Get the ID from Resend → Audiences → the `</>` snippet (NOT the domain ID). | 2026-06-09 (added) |
 | `UNSUBSCRIBE_SECRET` | Root secret for newsletter tokens. As of **2026-06-25 the tokens are opaque/encrypted (AES-256-GCM)** — the email (+ 7-day expiry for confirm) is sealed under an **HKDF-derived key**, domain-separated per purpose (confirm vs unsubscribe, so the two aren't interchangeable), so a captured URL no longer leaks the address (the prior HMAC format embedded a reversible `base64url(email)`). Both functions **dual-parse** the legacy HMAC formats so links already sent keep working. Any long random string — `openssl rand -hex 32`. **REQUIRED for signup (fails closed):** unset → `subscribe.js` returns `500` rather than minting a token. **Do NOT rotate casually** — it invalidates EVERY live confirm/unsubscribe link (new *and* legacy). | 2026-06-09 (added); AES-GCM 2026-06-25 |
@@ -306,6 +306,10 @@ worktree-env() { cp ~/Projects/websites/beatthescam-site/.env .env; }
 ### Key rotation policy
 
 - All keys were rotated on **2026-04-28** after a suspected exposure incident.
+- `ANTHROPIC_API_KEY` was rotated again on **2026-08-27** as routine 90-day-policy maintenance
+  (a hands-off-readiness audit found it ~38 days overdue — the policy existed but nothing
+  tracked or enforced it; still no automated reminder, so the next rotation is still on the
+  operator to remember, target **~2026-11-25**).
 - **Cadence going forward:** rotate every 90 days minimum; immediate rotation on any suspected exposure.
 
 ### Key rotation history
@@ -314,6 +318,7 @@ worktree-env() { cp ~/Projects/websites/beatthescam-site/.env .env; }
 |---|---|---|---|
 | 2026-04-28 | `ANTHROPIC_API_KEY` (both GitHub Secrets + Netlify env) | Suspected exposure | Rotated both copies; verified all dependent workflows |
 | 2026-05-18/19 | `ELEVENLABS_API_KEY` (local `.env`) | Earlier key `sk_be296…` leaked in chat output when a `sed` redaction failed against a malformed file. | User revoked the key in the ElevenLabs dashboard mid-session and created a replacement with restricted scope (TTS / Voices / Models / User only). |
+| 2026-08-27 | `ANTHROPIC_API_KEY` (both GitHub Secrets + Netlify env) | Routine 90-day policy (found overdue by audit) | Created one new dated key, wired into both stores, verified via a live `/api/check-scam` call (`200`) and the model-backed job in `gate-selftest.yml` (both surfaces confirmed on the new key before either old key was revoked); both prior keys (one with an Oct-14 expiry, one with none) then revoked in the Anthropic Console. Netlify required an explicit "Clear cache and deploy" after the env var edit — the running function kept using the old key until that redeploy, causing a brief `502` window on the checker between revoking the old keys and the redeploy landing. |
 
 **Lesson logged:** when running redaction commands against `.env` files, verify the file content is well-formed first (no stray BOMs, no CRLF artifacts). A failed redact that prints the raw file to stdout has the same effect as no redact at all.
 
