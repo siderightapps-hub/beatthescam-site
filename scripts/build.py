@@ -3243,11 +3243,16 @@ def build_legal_bodies(site, sources):
     '''
 
     corrections = f'''
-    <p class="note" style="color:#666;font-size:.95rem"><strong>Last updated:</strong> 23 July 2026</p>
+    <p class="note" style="color:#666;font-size:.95rem"><strong>Last updated:</strong> 25 September 2026</p>
     <p>This log records material factual corrections to published Beat the Scam guides. It does not list spelling, formatting, accessibility, or purely stylistic changes.</p>
 
     <h2>How to request a correction</h2>
     <p>Email <a href="mailto:{site["editorial_email"]}">{site["editorial_email"]}</a> with the page URL, the wording you believe is wrong, and a primary or authoritative source where possible. We assess the claim, update the guide when warranted, and record a material change below.</p>
+
+    <h2>25 September 2026</h2>
+    <ul>
+      <li><strong><a href="/guides/beatthescamcom-impersonation-scams-fake-consumer-protection-sites/">Scam-help website guide:</a></strong> an earlier version asserted that BeatTheScam.com had been cloned and used named domains as examples of fake sites without adequate evidence. The guide now states the correction, removes those examples and explains how to verify a scam-help service independently.</li>
+    </ul>
 
     <h2>23 July 2026</h2>
     <p>Following a full corpus fact re-check against current primary sources:</p>
@@ -4365,7 +4370,7 @@ def build():
         '/check/':       STATIC_LASTMOD,
         '/about/':       RECENT_LASTMOD,
         '/methodology/': RECENT_LASTMOD,
-        '/corrections/': RECENT_LASTMOD,
+        '/corrections/': '2026-09-25',
         '/recovery/':    RECENT_LASTMOD,
         '/research/':    max((r['published'] for r in research_reports), default=RECENT_LASTMOD),
         '/research/methodology/': RECENT_LASTMOD,
