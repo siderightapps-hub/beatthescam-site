@@ -112,12 +112,12 @@ A free, UK-focused consumer-protection publication that:
 |---|---|---|
 | Site generation | **Custom Python static site generator** (`scripts/build.py`) | NOT Next.js, NOT Hugo, NOT Jekyll. Bespoke Python that reads `content/posts.json` + `content/site.json` and renders into `dist/` using `templates/base.html`. |
 | Templating | Single `templates/base.html` shell with `{{placeholder}}` substitution | Simple, fast, no framework dependency. |
-| Source of truth (content) | `content/posts.json` | 189 source records (2026-08-27); indexable guide count grows via the two Tue/Fri crons, each gated by human review before anything reaches `main` — check `content/posts.json` for the current total rather than trusting a number here. |
+| Source of truth (content) | `content/posts.json` | 189 source records (2026-08-27); automatic growth is intentionally paused under WP3A (Section 5) — check `content/posts.json` for the current total rather than trusting a number here. |
 | Hosting / CDN | **Netlify** (Personal plan — $9/month, 1000 build credits) | Auto-deploys on push to `main`. |
 | Serverless functions | **Netlify Functions** (5: `check-scam`, `subscribe`, `confirm-subscribe`, `unsubscribe`, `csp-report`) | AI checker proxy + double opt-in newsletter (subscribe/confirm/unsubscribe) + CSP violation collector. Functions now carry a `package.json` (`@netlify/blobs`). |
 | AI for scam checker | **Anthropic Claude — `claude-haiku-4-5-20251001`** | Returns structured JSON verdict. Durable per-IP rate limit + daily spend cap (`DAILY_CALL_CAP=2000`/UTC-day) via Netlify Blobs. |
 | AI for content generation | **Anthropic Claude — `claude-haiku-4-5-20251001`** | Generates 6 sections × 120–180 words + 4 FAQs per guide, gated by `scripts/content_gate.py` before publish. |
-| Content automation | **GitHub Actions** (`.github/workflows/daily-publish.yml`) | Tue/Fri at 05:07 UTC (daily until 2026-07-23), batch of 1, gated by the accuracy gate. |
+| Content automation | **GitHub Actions** (`.github/workflows/daily-publish.yml`) | WP3A release: automatic schedule removed; approved manual dispatch only (Section 5). |
 | Analytics | **Google Analytics 4** | ID `G-JXNF856NBF`. Consent via Google Consent Mode driven by the certified CMP. |
 | Ads | **Google AdSense** | Publisher ID `ca-pub-1606633100797174`. UK/EEA consent via Google's certified CMP (Privacy & messaging). |
 | Email distribution | **Resend** (live, double opt-in) | Audiences + transactional confirm/welcome/unsubscribe emails via `subscribe.js`/`confirm-subscribe.js`/`unsubscribe.js`. |
@@ -231,26 +231,52 @@ Developer pushes to main  →  GitHub webhook  →  Netlify pulls repo  →  Ser
                                               ↳  Bundles netlify/functions/* into Lambda
 ```
 
-### Pipeline flow (Tue/Fri)
+### WP3A containment — automatic generation intentionally paused (2026-10-02)
 
-**Human-review gate (2026-06-25):** the cron no longer pushes straight to `main`. It opens a pull request instead — nothing publishes, gets ads, or is tweeted until the operator merges it.
+**Approved containment-only release.** The released workflows remove automatic
+generation and social publishing triggers,
+while retaining manual `workflow_dispatch`. Neither generation nor promotion may
+be dispatched without explicit operator approval while WP3/WP4 remediation remains
+incomplete. No manual run is authorised by WP3A.
 
-```
-05:07 UTC (Tue/Fri)  →  GitHub Actions starts daily-publish.yml
-            →  Calls Claude API → generates 1 guide → content_gate.py (deterministic + LLM judge); FAIL → quarantine; PASS → write content/manifests/<slug>.json → updates posts.json
-            →  Runs python scripts/build.py → rebuilds dist/
-            →  Verifies dist/index.html, dist/robots.txt, dist/_redirects, 50+ guide directories exist
-            →  git checkout -b auto/daily-publish-<date>-<run_id>
-            →  git commit && git push origin <branch>
-            →  gh pr create --base main --label auto-content
-            →  Operator reviews and merges the PR
-            →  Netlify auto-deploys from the merge
-            →  (separately) tweet-on-publish.yml fires on that merge push and tweets the added slug(s) — diff-based, ≤3-slug cap, deduped via tweeted_posts.json
-```
+- `daily-publish.yml`: remove the Tue/Fri 05:07 UTC schedule; retain all manual inputs.
+- `daily-search-console.yml`: remove the Tue/Fri 05:23 UTC schedule; retain all manual inputs.
+- `tweet-on-publish.yml`: replace the push trigger with manual dispatch and a required
+  `before` commit SHA for the approved publication window ending at the selected `main` revision; other refs fail.
+- All three reject any non-`workflow_dispatch` event with an error before checkout.
+  Restoring a trigger alone must fail visibly, not silently generate or publish.
 
-There is no rebase-retry loop anymore: each cron run branches fresh off `main` and pushes a brand-new branch, so there is nothing to conflict with on push.
+WP2 found unsupported article premises and inadequate claim-to-source evidence.
+The current drafting API failure is **not** the containment mechanism. Repairing
+API access must not restart generation. Existing scripts, gates, review-PR creation,
+backlog guards and concurrency controls remain intact for future controlled testing.
+A future approved manual generation run can still create a branch and `auto-content`
+review PR; only an approved human merge should release its committed `dist/`.
 
-**Operator review reminder (local, outside this repo):** a Claude Code scheduled task `content-pr-review-reminder` on the operator's Mac runs **Tue/Fri at 10:04 local** and reports any open `auto-content` PR (read-only — it never merges or comments). It was updated in step with the 2026-07-23 cadence change; if the generation schedule changes again, update that task too (`~/.claude/scheduled-tasks/content-pr-review-reminder/SKILL.md`).
+Normal Netlify deployment from `main`, IndexNow, CodeQL, deterministic tests,
+Dependabot, weekly editorial audit and quarterly factual re-verification remain
+operational. Fact re-verification creates report-only `fact-audit` PRs, not guides.
+Netlify can still deploy a human content release; this pause is not a global release
+lock or a protection against a privileged actor editing workflows or dispatching them.
+
+Before schedules return: complete and independently review WP3 corrections; implement
+and review WP4's fail-closed evidence-first gate (premise evidence before drafting,
+exact claim/source support, all rendered fields covered, content-bound review records,
+strict judge failures); distinguish generation errors from genuine no-work results;
+pass relevant clean-checkout tests and an explicitly approved controlled manual test;
+then obtain separate operator approval for scheduling and social promotion. Passing
+existing tests or fixing the API alone is insufficient. AdSense readiness is unestablished.
+
+The evidence and local validation report is
+`docs/review/recovery-audit-2026-09-25/wp3a-containment-and-p0-verification.md`
+(local-only: `docs/review/` is gitignored). Older schedule/resumption descriptions
+elsewhere in this document are historical and do not override this pause.
+
+**External reminder:** the documented Claude Code `content-pr-review-reminder` task
+is read-only (verified from its local SKILL.md); it neither creates nor merges content.
+Its Tue/Fri timing and old prose do not authorise generation. It remains unchanged.
+Unknown dashboard hooks or external automation credentials are not disproved by a
+repository audit; confirm these before claiming account-wide containment.
 
 ### Credit usage discipline
 
@@ -657,7 +683,7 @@ multiplex_unit:       <add after creation>
 | Item | Value |
 |---|---|
 | Workflow file | `.github/workflows/daily-publish.yml` |
-| Schedule | Tue/Fri at **05:07 UTC** (06:07 BST; daily until 2026-07-23) — moved off popular minute/hour slots to reduce GitHub-Actions scheduling delay. Cron is best-effort, not on-time. |
+| Schedule | WP3A release: no automatic schedule; explicit approval required for manual dispatch. See Section 5. |
 | Batch size | **1 guide per run** (was 5 until 2026-05-22; reduced to keep velocity sane and avoid burying posts) |
 | Queue file | `content/daily-publish-queue.csv` |
 | Model | `claude-haiku-4-5-20251001` |

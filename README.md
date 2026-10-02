@@ -44,5 +44,5 @@ beatthescam-site/
 ├── assets/                  # CSS, JS (+ legacy video/audio assets)
 ├── netlify/                 # serverless functions (scam-checker)
 ├── dist/                    # built site (committed, served by Netlify)
-└── .github/workflows/       # daily-publish + Search Console crons
+└── .github/workflows/       # manual content workflows + security/audit automation
 ```

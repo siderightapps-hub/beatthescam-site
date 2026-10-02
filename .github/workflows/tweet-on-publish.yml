@@ -1,29 +1,21 @@
 name: Tweet on publish
 
-# Fires AFTER a daily-publish (or search-console) review PR is merged to main —
-# i.e. once a human has approved the content. This is where auto-tweeting lives
-# now that the content crons open PRs instead of committing to main, so nothing
-# is promoted before editorial review.
+# WP3A containment (2026-10-02): no automatic social publication on merge.
+# Retained for explicitly approved manual promotion only. The before revision
+# supplies the old push window; the selected main revision supplies its end.
 on:
-  push:
-    branches: [main]
-    paths:
-      - 'content/posts.json'
+  workflow_dispatch:
+    inputs:
+      before:
+        description: "Full commit SHA before the approved publication window"
+        required: true
+        type: string
 
 permissions:
   contents: write
 
-# Own lock, NOT the shared "content-pipeline" group: GitHub cancels a group's
-# previously-QUEUED run whenever a new one is queued (even with
-# cancel-in-progress: false), so sharing a group with the daily-publish /
-# daily-search-console crons let a busy merge day silently drop a queued tweet
-# run (or a queued cron run). The same queued-cancellation rule applies WITHIN
-# this group too: three merges in quick succession can cancel the middle run,
-# and since each run diffs only its own push window (before..after), the
-# cancelled window's slugs are never tweeted (and never recorded in
-# tweeted_posts.json). Accepted at the current 1–3 merges/day; the push step
-# below retries + JSON-merges content/tweeted_posts.json against a moved
-# origin/main, so the records that ARE written survive concurrent pushes.
+# Separate from content-pipeline. Retain the existing serialisation, three-slug
+# cap, dedupe and recording logic for approved manual publication windows.
 concurrency:
   group: tweet-on-publish
   cancel-in-progress: false
@@ -32,6 +24,20 @@ jobs:
   tweet:
     runs-on: ubuntu-latest
     steps:
+      - name: Reject automatic invocation (WP3A containment)
+        env:
+          EVENT_NAME: ${{ github.event_name }}
+          WORKFLOW_REF: ${{ github.ref }}
+        run: |
+          if [ "$EVENT_NAME" != "workflow_dispatch" ]; then
+            echo "::error::Automatic social publication is paused under WP3A; explicit approval and manual dispatch are required."
+            exit 1
+          fi
+          if [ "$WORKFLOW_REF" != "refs/heads/main" ]; then
+            echo "::error::Social publication is restricted to main, as before containment."
+            exit 1
+          fi
+
       - name: Checkout
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
@@ -42,17 +48,15 @@ jobs:
         with:
           python-version: '3.12'
 
-      - name: Determine newly published slugs (added in this push only)
+      - name: Determine newly published slugs (approved revision window)
         id: slugs
         env:
-          BEFORE: ${{ github.event.before }}
+          BEFORE: ${{ inputs.before }}
         run: |
-          # If the before-ref is the zero SHA or unreachable (force-push, first
-          # commit), we cannot compute a diff — skip rather than guess.
-          if [ -z "$BEFORE" ] || [ "$BEFORE" = "0000000000000000000000000000000000000000" ] || ! git cat-file -e "${BEFORE}^{commit}" 2>/dev/null; then
-            echo "No usable before-ref; skipping."
-            echo "new_slugs=" >> $GITHUB_OUTPUT
-            exit 0
+          # Fail visibly on an invalid manual window; never guess its start.
+          if ! [[ "$BEFORE" =~ ^[0-9a-fA-F]{40}$ ]] || ! git cat-file -e "${BEFORE}^{commit}" 2>/dev/null || ! git merge-base --is-ancestor "$BEFORE" HEAD; then
+            echo "::error::The before input must be a full commit SHA that is an ancestor of the selected revision."
+            exit 1
           fi
           ADDED=$(python - <<'PY'
           import json, os, subprocess

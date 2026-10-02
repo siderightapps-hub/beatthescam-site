@@ -1,7 +1,21 @@
 # Start here next session
 
-> **Last updated:** 2026-08-15
-> **Repository state:** the accuracy release, its two follow-on growth-audit content phases, PR #106 and a six-commit homepage design cycle are **APPLIED and LIVE**; `dist/` is current and byte-identical to a fresh build of `main`.
+> **Last updated:** 2026-10-02
+> **Historical August baseline:** the accuracy release, its two follow-on growth-audit content phases, PR #106 and a six-commit homepage design cycle are **APPLIED and LIVE**; `dist/` is current and byte-identical to a fresh build of `main`.
+
+## WP3A stop state — 2026-10-02
+
+Automatic generation and social publishing are intentionally paused by the approved
+containment release. Both generation workflows retain `workflow_dispatch`; tweeting is manual-only.
+No generation or promotion dispatch is authorised while WP3/WP4 work is incomplete
+without explicit operator approval. The drafting API failure is not containment.
+
+See `docs/project.md`, Section 5, for controls and resumption requirements, and
+`docs/review/recovery-audit-2026-09-25/wp3a-containment-and-p0-verification.md` for
+the local evidence report. The containment-only commit/push is authorised; article
+edits and generation remain outside this release. Security, tests, fact re-verification, IndexNow and normal Netlify
+releases remain enabled. AdSense readiness is unestablished; do not resubmit.
+The August status and queue below are historical wherever they conflict with this pause.
 
 This is the short operational front door. `docs/project.md` is the detailed source of
 truth; dated audit and diversification documents are historical records and should not be
@@ -243,13 +257,10 @@ Lessons that cost real rework this cycle:
 - **Run the model-backed judge?** Nothing in this release has had one. Note the judge
   prompt itself was excusing unscoped routes until `5b9ea29fb`, so running it on a sample
   *after* the release is more informative than before.
-- ~~**Restart content generation?**~~ **RESOLVED — the crons are running.** This entry said
-  both had `schedule:` commented out; that is no longer true and had gone stale by at least
-  two days. Verified 2026-08-15: both `daily-publish.yml` and `daily-search-console.yml`
-  carry an active `schedule:`, and the search-console cron generated PR #106 on 2026-08-14,
-  merged 2026-08-15. **Do not "restart" them.** The live obligation is the backlog guard:
-  both crons skip generation while any `auto-content` PR is open, so a review PR left open
-  stalls the pipeline and the queue re-picks the same topics. Next run Tue 2026-08-18.
+- **Generation restart: NOT APPROVED.** The WP3A release removes automatic triggers.
+  Manual dispatch is retained but
+  requires separate explicit approval. Complete the evidence-first gate and independent
+  WP3/WP4 review before considering schedules. See Section 5 of `docs/project.md`.
 - **Re-submit to AdSense?** **UPDATED 2026-08-16 — the review concluded, and it was a
   rejection**, not the pending "Getting ready" state this entry described as of 11 August.
   Operator-supplied dashboard screenshot: "We found some policy violations" → "Low value

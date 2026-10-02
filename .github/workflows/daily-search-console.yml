@@ -11,24 +11,10 @@ on:
         description: "Days of Search Console data to analyse"
         required: false
         default: "28"
-  schedule:
-    # Tue/Fri at 05:23 UTC (06:23 BST) — reduced from daily on 2026-07-23,
-    # matching daily-publish.yml. Queued behind daily-publish via the concurrency
-    # group. The generator runs every draft through scripts/content_gate.py.
-    #
-    # HUMAN-REVIEW GATE (2026-06-25): like daily-publish.yml, this no longer
-    # commits to main — it opens a review PR. Nothing is published, monetised, or
-    # tweeted until a human merges. Auto-tweet lives in tweet-on-publish.yml.
-    #
-    # ── PAUSED 2026-07-26, RESUMED 2026-08-08 (operator instruction) ─────────
-    # Paused alongside daily-publish.yml; resumed with it after the 2026-08-08
-    # review defects were fixed at the generator and gate (#97). This workflow
-    # shares generate_content_claude.py's writer and content_gate.py's checks,
-    # so it inherits those fixes — and the same unguarded classes listed in
-    # daily-publish.yml. Review each auto-content PR on those before merging.
-    #
-    # To pause again: comment out the `schedule:` key and the cron line below.
-    - cron: '23 5 * * 2,5'
+  # WP3A containment (2026-10-02): automatic generation is intentionally paused.
+  # Manual dispatch is retained for explicitly approved future testing only.
+  # Do not restore schedules until the evidence-first gate and WP3/WP4 review
+  # are complete. API failure is not containment. See docs/project.md, section 5.
 
 permissions:
   contents: write
@@ -51,6 +37,15 @@ jobs:
       SC_DAYS:  ${{ github.event.inputs.days    || '28'    }}
 
     steps:
+      - name: Reject automatic invocation (WP3A containment)
+        env:
+          EVENT_NAME: ${{ github.event_name }}
+        run: |
+          if [ "$EVENT_NAME" != "workflow_dispatch" ]; then
+            echo "::error::Automatic content generation is paused under WP3A; explicit approval and manual dispatch are required."
+            exit 1
+          fi
+
       - name: Checkout
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
@@ -209,7 +204,7 @@ jobs:
           - [ ] Brand/domain claims are not false absolutes ("always/never")
           - [ ] Flag-tier notes in \`content/manifests/\` reviewed
 
-          On merge, \`tweet-on-publish.yml\` will tweet the new guide(s).
+          Automatic tweeting is paused under WP3A; promotion requires separate approval and manual dispatch.
 
           Any gate-quarantined draft(s) from this run are attached to the workflow run as a \`quarantined-drafts-${{ github.run_id }}\` artifact (never committed) — check the [run summary](${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}) if a topic seems to be missing.
           EOF

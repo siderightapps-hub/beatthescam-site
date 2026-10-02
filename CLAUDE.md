@@ -132,10 +132,23 @@ python3 scripts/fact_reverify.py --limit 3       # cheap smoke test of the quart
 
 ## Publishing pipeline (human-review gated)
 
-Two scheduled crons, Tue/Fri since 2026-07-23 (`.github/workflows/daily-publish.yml` 05:07 UTC, `daily-search-console.yml` 05:23 UTC): call Claude → run the gate → append to `posts.json` → `build.py` → **open a review PR** (label `auto-content`) — nothing publishes, gets ads, or is tweeted until the operator merges. Serialized via the shared `concurrency: content-pipeline` group.
+**WP3A containment (2026-10-02): automatic generation and social publishing are
+intentionally paused by the approved containment release.**
+`daily-publish.yml` and `daily-search-console.yml` retain manual `workflow_dispatch`
+without schedules; `tweet-on-publish.yml` is manual-only with a required `before`
+commit SHA. All three fail on non-manual events before checkout. Do not dispatch
+any of them without explicit operator approval while WP3/WP4 remediation is incomplete.
+The drafting API failure is not containment. See `docs/project.md` Section 5 for the
+resumption requirements; fixing the API or passing existing tests is not clearance.
 
-- **Backlog guard:** both crons skip generation while any `auto-content` PR is open — the queue's "published" marks only reach `main` on merge, so a stale queue re-picks the same topics. Merge or close review PRs same-day.
-- **Auto-tweet** is `tweet-on-publish.yml`: fires on push to `main` touching `posts.json`, tweets only the slugs added in that push (≤3-slug cap + `tweeted_posts.json` dedupe).
+- Future approved generation runs still call Claude → gate → posts → build →
+  **review PR** (`auto-content`), serialised by `content-pipeline`. Human merge releases
+  committed `dist/`; normal Netlify deployment remains operational.
+- **Backlog guard remains:** both generators skip while any `auto-content` PR is open.
+- **Social promotion:** no automatic tweet on merge; a separately approved manual
+  publication window retains the ≤3-slug cap and `tweeted_posts.json` dedupe.
+- CodeQL, tests, dependency updates, weekly audit, quarterly fact re-verification and
+  IndexNow remain enabled. Do not re-enable generation to exercise these controls.
 - **Known flake:** if a cron fails at `gh pr create` ("Actions not permitted to create PRs"), the repo setting "Allow GitHub Actions to create and approve pull requests" has reverted — re-enable it (Settings → Actions → General, or the `gh api` PUT).
 - Slug step-outputs are charset-validated and passed to `run:` scripts via `env:`, never inline `${{ }}` (shell-injection guard) — keep it that way.
 
