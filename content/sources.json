@@ -18,7 +18,9 @@
       "info_url": "https://www.reportfraud.police.uk/",
       "phone": "0300 123 2040",
       "report_label": "Report Fraud (formerly Action Fraud) — England, Wales and Northern Ireland",
-      "on_page": true
+      "on_page": true,
+      "source_url": "https://www.reportfraud.police.uk/reporting-a-fraud/",
+      "checked_on": "2026-10-05"
     },
     {
       "key": "police-scotland",
@@ -60,7 +62,7 @@
     },
     {
       "key": "citizens-advice",
-      "name": "Citizens Advice consumer helpline (England and Wales)",
+      "name": "Citizens Advice consumer service",
       "brand": "Citizens Advice",
       "nation": "England and Wales",
       "role": "consumer-advice",
@@ -71,7 +73,47 @@
       "on_page": true,
       "phone_welsh": "0808 223 1144",
       "source_url": "https://www.gov.uk/consumer-advice",
-      "checked_on": "2026-07-27"
+      "checked_on": "2026-07-27",
+      "owner_id": "citizens-advice",
+      "actions": {
+        "consumer-advice-english": {
+          "schema_version": "restricted-actions/v2",
+          "action_type": "call",
+          "purpose": "consumer-advice",
+          "mode": "support",
+          "jurisdictions": [
+            "England",
+            "Wales"
+          ],
+          "condition_ids": [],
+          "eligibility_ids": [
+            "consumer-seeking-advice"
+          ],
+          "qualifier_ids": [
+            "free-uk-phone-call",
+            "weekday-0900-1700-excluding-bank-holidays"
+          ],
+          "limitation_ids": [
+            "support-only"
+          ],
+          "instruction": {
+            "kind": "fixed-destination",
+            "template_id": "call-consumer-advice-english",
+            "recipient_relation": "service-operator",
+            "channels": [
+              {
+                "field": "phone",
+                "kind": "phone",
+                "numbering_context": "GB"
+              }
+            ]
+          },
+          "companions": [],
+          "status": "active",
+          "source_url": "https://www.citizensadvice.org.uk/about-us/information/contact-the-consumer-service/",
+          "checked_on": "2026-10-14"
+        }
+      }
     },
     {
       "key": "fca-firm-checker",
@@ -139,10 +181,52 @@
     },
     {
       "key": "victim-support",
-      "name": "Victim Support England and Wales Supportline",
+      "name": "Victim Support Supportline",
       "info_url": "https://www.victimsupport.org.uk/more-us/contact-us/",
       "phone": "0808 168 9111",
-      "on_page": false
+      "on_page": false,
+      "owner_id": "victim-support",
+      "brand": "Victim Support",
+      "actions": {
+        "supportline": {
+          "schema_version": "restricted-actions/v2",
+          "action_type": "call",
+          "purpose": "victim-support",
+          "mode": "support",
+          "jurisdictions": [
+            "England",
+            "Wales"
+          ],
+          "condition_ids": [],
+          "eligibility_ids": [
+            "person-affected-by-crime"
+          ],
+          "qualifier_ids": [
+            "free-uk-phone-call",
+            "support-24-hours-every-day",
+            "no-police-report-needed"
+          ],
+          "limitation_ids": [
+            "support-only"
+          ],
+          "instruction": {
+            "kind": "fixed-destination",
+            "template_id": "call-victim-support",
+            "recipient_relation": "service-operator",
+            "channels": [
+              {
+                "field": "phone",
+                "kind": "phone",
+                "numbering_context": "GB"
+              }
+            ]
+          },
+          "companions": [],
+          "status": "active",
+          "source_url": "https://www.victimsupport.org.uk/more-us/contact-us/",
+          "checked_on": "2026-10-14"
+        }
+      }
     },
     {
       "key": "advice-direct-scotland",
@@ -185,6 +269,50 @@
       "on_page": true,
       "source_url": "https://www.gov.uk/consumer-advice",
       "checked_on": "2026-07-27"
+    },
+    {
+      "key": "universal-credit-gb",
+      "name": "Universal Credit claim support (Great Britain)",
+      "brand": "Universal Credit",
+      "nation": "England, Scotland and Wales",
+      "on_page": false,
+      "info_url": "https://www.gov.uk/universal-credit/contact-universal-credit",
+      "note": "Contact options for problems with the reader’s own claim or account. Not a third-party benefit-fraud allegation form. Northern Ireland has a separate contact route.",
+      "source_url": "https://www.gov.uk/universal-credit/contact-universal-credit",
+      "checked_on": "2026-10-05"
+    },
+    {
+      "key": "universal-credit-ni",
+      "name": "Universal Credit claim support (Northern Ireland)",
+      "brand": "Universal Credit",
+      "nation": "Northern Ireland",
+      "on_page": false,
+      "info_url": "https://www.nidirect.gov.uk/articles/contact-universal-credit-help-your-claim",
+      "note": "Northern Ireland account, Jobs & Benefits office and Service Centre contact options for the reader’s own claim.",
+      "source_url": "https://www.nidirect.gov.uk/articles/contact-universal-credit-help-your-claim",
+      "checked_on": "2026-10-05"
+    },
+    {
+      "key": "mhra-online-seller",
+      "name": "MHRA suspicious online medicine seller reporting",
+      "brand": "MHRA",
+      "nation": "United Kingdom",
+      "on_page": false,
+      "report_url": "https://report-or-check-suspicious-activity.mhra.gov.uk/report/suspect-seller",
+      "note": "Suspected illegal online medicine or medical-device sales. Separate from product-safety reporting through Yellow Card.",
+      "source_url": "https://www.gov.uk/report-suspicious-online-medicine-seller",
+      "checked_on": "2026-10-05"
+    },
+    {
+      "key": "mhra-yellow-card",
+      "name": "MHRA Yellow Card scheme",
+      "brand": "MHRA",
+      "nation": "United Kingdom",
+      "on_page": false,
+      "report_url": "https://yellowcard.mhra.gov.uk/",
+      "note": "For suspected medicine safety/quality problems, including fake or falsified medicines. Before giving medical-device incident instructions, consult nation-specific guidance at https://www.gov.uk/report-problem-medicine-medical-device. Not medical advice or a seller-refund service.",
+      "source_url": "https://yellowcard.mhra.gov.uk/what-to-report",
+      "checked_on": "2026-10-05"
     }
   ],
   "verified_org_contacts": [
@@ -265,9 +393,10 @@
       "key": "amazon-reportascam",
       "name": "Amazon scam reporting",
       "email": "reportascam@amazon.com",
-      "source_url": "https://www.amazon.co.uk/gp/help/customer/display.html?nodeId=GRGRY7AQ3LMPXVCV",
-      "checked_on": "2026-07-31",
-      "note": "Amazon's own 'Report a scam' help page. Amazon asks for the suspicious message as an ATTACHMENT so it can be traced, and does not reply personally. Verified against the organisation's own published page on 2026-07-31; re-verify quarterly."
+      "source_url": "https://trustworthyshopping.aboutamazon.com/en-uk/focus-areas/how-amazon-protects-customers-from-scams",
+      "checked_on": "2026-10-05",
+      "note": "UK suspicious-communication reporting URL verified from Amazon’s UK scam-prevention page. Retain the existing reportascam@amazon.com mailbox and attachment instructions. Direct portal submission was not tested.",
+      "report_url": "https://www.amazon.co.uk/reportascam"
     },
     {
       "key": "royalmail-reportascam",
@@ -380,6 +509,1201 @@
       "source_url": "https://www.revolut.com/contact-us/",
       "checked_on": "2026-07-31",
       "note": "A SUPPORT inbox, not a dedicated phishing address. Revolut directs fraud reports to in-app chat first and names this only for customers who cannot reach the app or chat — which is exactly how the guide uses it. Revolut offers no general phone support, so an inbound call claiming to be Revolut is itself a red flag. Verified against the organisation's own published page on 2026-07-31; re-verify quarterly."
+    },
+    {
+      "key": "ups-fraud",
+      "name": "UPS UK suspicious-communication reporting",
+      "brand": "UPS",
+      "nation": "United Kingdom",
+      "on_page": false,
+      "info_url": "https://www.ups.com/gb/en/support/shipping-support/legal-terms-conditions/fight-fraud",
+      "note": "Exact UK fraud-guidance gateway; select Email UPS. Do not treat the corporate homepage as report intake. No query URL is authorised.",
+      "source_url": "https://www.ups.com/gb/en/support/shipping-support/legal-terms-conditions/fight-fraud",
+      "checked_on": "2026-10-05"
+    },
+    {
+      "key": "microsoft-support-scam",
+      "name": "Microsoft support-scam reporting",
+      "brand": "Microsoft",
+      "nation": "Global; United Kingdom included",
+      "on_page": false,
+      "report_url": "https://reportfraud.microsoft.com/",
+      "info_url": "https://www.microsoft.com/en-us/concern/scam",
+      "note": "Support scams. The info_url is a verified legacy entry alias redirecting to report_url, not a separate service. Distinct from the Microsoft phishing mailbox.",
+      "source_url": "https://support.microsoft.com/en-us/office/protect-yourself-from-tech-support-scams",
+      "checked_on": "2026-10-05"
+    },
+    {
+      "key": "hmrc-phone-scam",
+      "name": "HMRC suspicious-phone-call reporting",
+      "brand": "HMRC",
+      "nation": "United Kingdom",
+      "on_page": false,
+      "report_url": "https://www.tax.service.gov.uk/submissions/new-form/report-a-suspicious-hmrc-phone-call",
+      "note": "Suspicious HMRC phone calls. Official entry URL redirects to authentication; do not pin a session or continue query URL.",
+      "source_url": "https://www.gov.uk/find-hmrc-contacts/report-suspicious-hmrc-emails-texts-social-media-accounts-and-phone-calls",
+      "checked_on": "2026-10-05"
+    },
+    {
+      "key": "ebay-phishing",
+      "name": "eBay UK phishing reporting",
+      "brand": "eBay",
+      "nation": "United Kingdom",
+      "on_page": false,
+      "email": "spoof@ebay.co.uk",
+      "note": "Suspicious eBay emails as attachments; suspicious call details also accepted. Not a general transaction-dispute mailbox.",
+      "source_url": "https://www.ebay.co.uk/help/account/protecting-account/recognising-spoof-emails?id=4195",
+      "checked_on": "2026-10-05"
+    },
+    {
+      "key": "depop-support",
+      "name": "Depop Community Support",
+      "brand": "Depop",
+      "nation": "Global platform; United Kingdom included",
+      "on_page": false,
+      "report_url": "https://depophelp.zendesk.com/hc/en-gb/requests/new",
+      "note": "General support for Depop transaction or account issues. Distinct from reportphishing@depop.com; preserve that existing record.",
+      "source_url": "https://depophelp.zendesk.com/hc/en-gb/articles/360001772568-Buying-safely-on-Depop",
+      "checked_on": "2026-10-05"
+    },
+    {
+      "key": "pandora-brand-protection",
+      "name": "Pandora Brand Protection",
+      "brand": "Pandora",
+      "nation": "Global; United Kingdom included",
+      "on_page": false,
+      "email": "brandprotection@pandora.net",
+      "note": "Suspected counterfeit Pandora sellers/websites. Submit links/details in English; include available product/purchase evidence. Not a refund service.",
+      "source_url": "https://pandoragroup.com/about-us/contact",
+      "checked_on": "2026-10-05"
+    },
+    {
+      "key": "hmrc-branddefence",
+      "name": "HMRC social-media impersonation reporting",
+      "brand": "HMRC",
+      "nation": "United Kingdom",
+      "on_page": false,
+      "email": "branddefence@hmrc.gov.uk",
+      "note": "Suspicious social-media accounts impersonating HMRC. This mailbox already exists in report_emails; add ownership without duplicating that list entry or replacing HMRC phishing/SMS contacts.",
+      "source_url": "https://www.gov.uk/find-hmrc-contacts/report-suspicious-hmrc-emails-texts-social-media-accounts-and-phone-calls",
+      "checked_on": "2026-10-05"
+    },
+    {
+      "key": "shein-uk-scam-notification",
+      "name": "SHEIN UK scam-incident notification through Customer Service",
+      "brand": "SHEIN",
+      "nation": "United Kingdom",
+      "on_page": false,
+      "report_url": "https://www.shein.co.uk/contact-us.html",
+      "note": "UK Customer Service gateway: select Customer Service to notify SHEIN of a scam involving SHEIN impersonation or a fake SHEIN site, whether or not money was lost. This record admits scam notification only, not a general crime-reporting, authentication, takedown or guaranteed refund service. Sign-in may be requested. The FAQ establishes purpose; its footer links this exact UK contact gateway. No homepage, overseas site, phone, mailbox, session URL or FAQ query URL is admitted.",
+      "source_url": "https://www.shein.co.uk/faq/detail?id=77660",
+      "checked_on": "2026-10-09"
+    },
+    {
+      "key": "o2-pay-monthly",
+      "owner_id": "o2",
+      "brand": "O2",
+      "name": "O2 Pay Monthly customer service",
+      "phone": "202",
+      "source_url": "https://www.o2.co.uk/contactus",
+      "checked_on": "2026-10-14",
+      "actions": {
+        "customer-support": {
+          "schema_version": "restricted-actions/v2",
+          "action_type": "call",
+          "purpose": "account-support",
+          "mode": "support",
+          "jurisdictions": [
+            "England",
+            "Wales",
+            "Scotland",
+            "Northern Ireland"
+          ],
+          "condition_ids": [],
+          "eligibility_ids": [
+            "o2-pay-monthly-origin"
+          ],
+          "qualifier_ids": [
+            "free-from-required-o2-phone",
+            "o2-personal-support-hours"
+          ],
+          "limitation_ids": [
+            "support-only"
+          ],
+          "instruction": {
+            "kind": "fixed-destination",
+            "template_id": "call-o2-personal-support",
+            "recipient_relation": "service-operator",
+            "channels": [
+              {
+                "field": "phone",
+                "kind": "voice-shortcode",
+                "numbering_context": "GB",
+                "dialling_network_id": "o2-uk"
+              }
+            ]
+          },
+          "companions": [],
+          "status": "active"
+        }
+      }
+    },
+    {
+      "key": "o2-payg",
+      "owner_id": "o2",
+      "brand": "O2",
+      "name": "O2 Pay As You Go customer service",
+      "phone": "4445",
+      "source_url": "https://www.o2.co.uk/contactus",
+      "checked_on": "2026-10-14",
+      "actions": {
+        "customer-support": {
+          "schema_version": "restricted-actions/v2",
+          "action_type": "call",
+          "purpose": "account-support",
+          "mode": "support",
+          "jurisdictions": [
+            "England",
+            "Wales",
+            "Scotland",
+            "Northern Ireland"
+          ],
+          "condition_ids": [],
+          "eligibility_ids": [
+            "o2-payg-origin"
+          ],
+          "qualifier_ids": [
+            "free-from-required-o2-phone",
+            "o2-personal-support-hours"
+          ],
+          "limitation_ids": [
+            "support-only"
+          ],
+          "instruction": {
+            "kind": "fixed-destination",
+            "template_id": "call-o2-personal-support",
+            "recipient_relation": "service-operator",
+            "channels": [
+              {
+                "field": "phone",
+                "kind": "voice-shortcode",
+                "numbering_context": "GB",
+                "dialling_network_id": "o2-uk"
+              }
+            ]
+          },
+          "companions": [],
+          "status": "active"
+        }
+      }
+    },
+    {
+      "key": "own-bank",
+      "owner_id": "own-bank",
+      "brand": "Your own bank",
+      "name": "Your own bank",
+      "source_url": "https://stopthinkfraud.campaign.gov.uk/recovery-from-fraud/recovering-losses/what-to-do-if-youve-lost-money/",
+      "checked_on": "2026-10-14",
+      "actions": {
+        "number-on-bank-card": {
+          "schema_version": "restricted-actions/v2",
+          "action_type": "contact",
+          "purpose": "payment-recovery",
+          "mode": "support",
+          "jurisdictions": [
+            "England",
+            "Wales",
+            "Scotland",
+            "Northern Ireland"
+          ],
+          "condition_ids": [
+            "suspected-authorised-bank-transfer-to-fraudster"
+          ],
+          "eligibility_ids": [
+            "sender-own-account"
+          ],
+          "qualifier_ids": [],
+          "limitation_ids": [
+            "no-money-recovery-guarantee"
+          ],
+          "instruction": {
+            "kind": "reader-held-channel",
+            "role": "own-bank",
+            "method_id": "number-on-bank-card",
+            "recipient_relation": "sending-bank-of-affected-transfer"
+          },
+          "companions": [],
+          "status": "active"
+        },
+        "existing-bank-app": {
+          "schema_version": "restricted-actions/v2",
+          "action_type": "contact",
+          "purpose": "payment-recovery",
+          "mode": "support",
+          "jurisdictions": [
+            "England",
+            "Wales",
+            "Scotland",
+            "Northern Ireland"
+          ],
+          "condition_ids": [
+            "suspected-authorised-bank-transfer-to-fraudster",
+            "banking-device-safe"
+          ],
+          "eligibility_ids": [
+            "sender-own-account"
+          ],
+          "qualifier_ids": [],
+          "limitation_ids": [
+            "no-money-recovery-guarantee"
+          ],
+          "instruction": {
+            "kind": "reader-held-channel",
+            "role": "own-bank",
+            "method_id": "existing-bank-app",
+            "recipient_relation": "sending-bank-of-affected-transfer"
+          },
+          "companions": [],
+          "status": "active"
+        }
+      }
     }
-  ]
+  ],
+  "verified_number_sources": [
+    {
+      "key": "starling-number-source",
+      "name": "Starling fraud number source",
+      "brand": "Starling",
+      "navigation_url": "https://www.starlingbank.com/",
+      "source_url": "https://www.starlingbank.com/mobile-banking-security/fraud/",
+      "checked_on": "2026-10-09",
+      "nation": "UK",
+      "purpose": "fraud-phone-lookup",
+      "note": "The exact homepage is an independent navigation starting point for finding the fraud contact number published in Starling guidance. Only number-lookup instructions; not an online report destination, arbitrary paths or subdomains.",
+      "requires_named_owner": false
+    },
+    {
+      "key": "companies-house-number-source",
+      "name": "Companies House letter reporting number source",
+      "brand": "Companies House",
+      "navigation_url": "https://www.gov.uk/",
+      "source_url": "https://www.gov.uk/guidance/reporting-scams-pretending-to-be-from-companies-house",
+      "checked_on": "2026-10-09",
+      "nation": "UK",
+      "purpose": "fraud-phone-lookup",
+      "note": "The exact GOV.UK homepage is an independent navigation starting point for finding the suspicious-letter phone number in Companies House guidance. Only number lookup associated with Companies House; not GOV.UK reporting intake or permission for arbitrary paths or services.",
+      "requires_named_owner": true
+    }
+  ],
+  "contract_evidence": {
+    "version": "bts-independent-contract-records/v1",
+    "review_package": "WP3D9E",
+    "review_date": "2026-10-14",
+    "authority": "Audit provenance only. Not a signed contracts-role evidence packet, contextual approval, release approval or eligibility grant. Existing external signature verification remains required.",
+    "implementation_allowlist": [
+      "citizens-advice:consumer-advice-english",
+      "victim-support:supportline",
+      "o2-pay-monthly:customer-support",
+      "o2-payg:customer-support",
+      "own-bank:number-on-bank-card",
+      "own-bank:existing-bank-app"
+    ],
+    "review_documents": {
+      "wp3d9e-independent-targeted-evidence-review.md": "030ae52f4ae8c3e711ee316d009ad45f4649f0b5280a5c5bc3b7e5c9cf4f8224",
+      "wp3d9e-evidence/independent-targeted-dispositions.json": "47a3efdf7d58f968699c952325d03af0a42b290002e4575faf9f28044b6ef949",
+      "wp3d9e-evidence/sources.json": "c519299960f3045832bd6bbe54692ba6a26db961ced0afea02c4f19be8734b3f",
+      "wp3d9d-evidence/independent-dispositions.json": "e12837a573d844b896c1ce75119edea73dab806b36cfbdd860650dc4ecc7ae80"
+    },
+    "sources": {
+      "bank-gov": {
+        "url": "https://stopthinkfraud.campaign.gov.uk/recovery-from-fraud/recovering-losses/what-to-do-if-youve-lost-money/",
+        "owner": "UK Government, Stop! Think Fraud campaign",
+        "title": "What to do if you’ve lost money - Stop! Think Fraud",
+        "retrieval_date": "2026-10-14",
+        "exact_proposition_supported": "Already authorised transfer from reader’s own account to suspected fraudster: contact own bank immediately; bank tries recovery; use trusted number on bank card/statement or 159. Other payment branches separately identify card issuers and providers.",
+        "explicit_vs_inferred": "Explicit primary-source support for the stated proposition only. No acceptance of the propositions disclaimed in support_boundary.",
+        "support_boundary": "Select only card for the sending account and initial contact. No refund entitlement, specific claim payload, payment-rail/date eligibility or unrelated card issuer. Adjacent chargeback amount claim is not adopted.",
+        "currentness": "No substantive update date shown. Adjacent chargeback amount wording is not adopted or cleared."
+      },
+      "ca-english": {
+        "url": "https://www.ceredigion.gov.uk/business/trading-standards/cold-calling-doorstep-crime/",
+        "owner": "Ceredigion County Council, Trading Standards",
+        "title": "Cold Calling / Doorstep Crime - Ceredigion County Council",
+        "retrieval_date": "2026-10-14",
+        "exact_proposition_supported": "Council explicitly labels 0808 223 1133 English and 0808 223 1144 Welsh; Trading Standards consumer route via Citizens Advice is distinguished from police crime contact.",
+        "explicit_vs_inferred": "Explicit primary-source support for the stated proposition only. No acceptance of the propositions disclaimed in support_boundary.",
+        "support_boundary": "Council is a primary local authority corroborating language and role; owner controls current opening hours.",
+        "currentness": "No substantive update date shown."
+      },
+      "ca-owner": {
+        "url": "https://www.citizensadvice.org.uk/about-us/information/contact-the-consumer-service/",
+        "owner": "Citizens Advice",
+        "title": "Contact the consumer service - Citizens Advice",
+        "retrieval_date": "2026-10-14",
+        "exact_proposition_supported": "Consumer advice by phone at 0808 223 1133; free from mobiles/landlines; Monday–Friday 09:00–17:00 excluding bank holidays; adviser role, information-sharing with Trading Standards/trusted organisations and opt-out; callers give only facts known.",
+        "explicit_vs_inferred": "Explicit primary-source support for the stated proposition only. No acceptance of the propositions disclaimed in support_boundary.",
+        "support_boundary": "Owner page alone is not used to infer all nation/language boundaries. No complaint representation, litigation or mandatory dossier is promised.",
+        "currentness": "No substantive update date shown."
+      },
+      "consumer": {
+        "url": "https://www.gov.uk/consumer-advice",
+        "owner": "GOV.UK",
+        "title": "Consumer advice - GOV.UK",
+        "retrieval_date": "2026-10-14",
+        "exact_proposition_supported": "England/Wales consumer route is Citizens Advice on 0808 223 1133; Welsh line is separate; distinct Scotland/NI services.",
+        "explicit_vs_inferred": "Explicit primary-source support for the stated proposition only. No acceptance of the propositions disclaimed in support_boundary.",
+        "support_boundary": "Nation scope applies to this consumer service, not the whole Citizens Advice organisation or UK availability of unrelated services.",
+        "currentness": "No substantive update date shown."
+      },
+      "fca-payments": {
+        "url": "https://www.fca.org.uk/consumers/fraudulent-payments",
+        "owner": "Financial Conduct Authority",
+        "title": "Fraudulent payments | FCA",
+        "retrieval_date": "2026-10-14",
+        "exact_proposition_supported": "Current FCA page distinguishes authorised transfer, unauthorised payment and card-payment cases; paid scammer requires immediate bank/provider contact using card/statement details; recovery depends on eligibility and may be refused.",
+        "explicit_vs_inferred": "Explicit primary-source support for the stated proposition only. No acceptance of the propositions disclaimed in support_boundary.",
+        "support_boundary": "Corroborates C09 contact and both bank cases’ no-guarantee scope. Does not establish app method; reimbursement conditions are not imported into first contact. Police/consumer routes elsewhere on page are outside this clearance.",
+        "currentness": "First published 2016-04-16; last updated 2026-05-15."
+      },
+      "o2": {
+        "url": "https://www.o2.co.uk/contactus",
+        "owner": "O2 / Telefónica UK Limited",
+        "title": "How to contact our helpful customer support team",
+        "retrieval_date": "2026-10-14",
+        "exact_proposition_supported": "O2/Telefónica UK customer service: call 202 from own O2 Pay Monthly phone or 4445 from own PAYG phone, free; UK calling covered; general hours Mon–Fri 08:00–21:00, Sat 08:00–20:00, Sun 08:00–18:00; PM Platinum Mon–Fri 08:00–20:00, weekend 09:00–18:00.",
+        "explicit_vs_inferred": "Explicit primary-source support for the stated proposition only. No acceptance of the propositions disclaimed in support_boundary.",
+        "support_boundary": "Only the explicitly labelled personal customer-service operation is cleared. No SMS, MVNO/business, roaming expansion, top-up 24-hour service or specialist retention/upgrade hours. Support-only describes this customer-service operation, not a claim that O2 never cooperates with police.",
+        "currentness": "No substantive update date shown."
+      },
+      "ofcom": {
+        "url": "https://www.ofcom.org.uk/phones-and-broadband/scam-calls-and-messages/what-to-do-about-a-scam-call-text-or-message",
+        "owner": "Ofcom",
+        "title": "What to do about a scam call, text or message",
+        "retrieval_date": "2026-10-14",
+        "exact_proposition_supported": "Suspicious mobile caller: copy recent-call number and compose/send SMS to 7726, free to provider; shared information or sent money: contact bank/card provider immediately via card, website or app; after link/install compromise avoid banking apps until safe.",
+        "explicit_vs_inferred": "Explicit primary-source support for the stated proposition only. No acceptance of the propositions disclaimed in support_boundary.",
+        "support_boundary": "Provider universality and required prefix are not established for caller SMS. Bank-app option applies to money-sent subset, with safe-device restriction; no bank-specific screen or new download. CA hours here are not adopted.",
+        "currentness": "Published 2026-07-15; updated 2026-08-24. Its CA hours conflict with CA owner and are not used."
+      },
+      "psr-consumer": {
+        "url": "https://www.psr.org.uk/our-work/app-scams/if-youve-fallen-victim-to-a-scam/",
+        "owner": "Payment Systems Regulator",
+        "title": "If you've fallen victim to a scam | Payment Systems Regulator",
+        "retrieval_date": "2026-10-14",
+        "exact_proposition_supported": "APP-scam consumer should contact bank immediately; bank obtains relevant information and considers reimbursement; refusal is possible.",
+        "explicit_vs_inferred": "Explicit primary-source support for the stated proposition only. No acceptance of the propositions disclaimed in support_boundary.",
+        "support_boundary": "Older future-tense commencement and Action Fraud branding disclosed. Not used alone for current procedure, app contact, or to impose reimbursement scheme conditions on initial contact.",
+        "currentness": "No substantive update date shown; old Action Fraud label remains. Do not borrow reimbursement eligibility for the broader initial-contact action."
+      },
+      "victim": {
+        "url": "https://www.victimsupport.org.uk/more-us/contact-us/",
+        "owner": "Victim Support",
+        "title": "Contact us - Victim Support",
+        "retrieval_date": "2026-10-14",
+        "exact_proposition_supported": "Victim Support owns free 0808 168 9111 Supportline, available 24/7 for people affected by crime in England/Wales; independent of police, no police report prerequisite; information/support and local referral.",
+        "explicit_vs_inferred": "Explicit primary-source support for the stated proposition only. No acceptance of the propositions disclaimed in support_boundary.",
+        "support_boundary": "Availability is opening, not a promise of immediate answer, legal advice or continuing counselling. UK mobile/landline callers are a subset of the unqualified free-call statement.",
+        "currentness": "CMS stamp 2025-03-28; current direct body re-read."
+      },
+      "victim-supportline-current": {
+        "url": "https://www.victimsupport.org.uk/help-and-support/get-help/supportline/",
+        "owner": "Victim Support",
+        "title": "Supportline - Victim Support",
+        "retrieval_date": "2026-10-14",
+        "exact_proposition_supported": "Same free phone and 24/7 every-day scope, England/Wales, independent of police and no report prerequisite; initial support, possible local referral with consent, no ongoing counselling/legal advice; busy-call constraints.",
+        "explicit_vs_inferred": "Explicit primary-source support for the stated proposition only. No acceptance of the propositions disclaimed in support_boundary.",
+        "support_boundary": "No wait-time guarantee or compulsory local referral is encoded. Detail corroborates the independently complete contact page.",
+        "currentness": "CMS stamp 2026-05-08."
+      }
+    },
+    "contracts": {
+      "citizens-advice:consumer-advice-english": {
+        "case_id": "C02",
+        "grade": "B",
+        "disposition": "A. CONFIRMED FULL CLEARANCE",
+        "review_date": "2026-10-14",
+        "source_ids": [
+          "ca-owner",
+          "consumer",
+          "ca-english"
+        ],
+        "supported_fields": {
+          "owner_service": {
+            "proposition": "Citizens Advice / Citizens Advice consumer service",
+            "source_ids": [
+              "ca-owner"
+            ],
+            "status": "PASS: explicit within the bounded operation; no material inference",
+            "evidence_date": "2026-10-14"
+          },
+          "action_method": {
+            "proposition": "call / call-consumer-advice-english",
+            "source_ids": [
+              "ca-owner",
+              "ca-english"
+            ],
+            "status": "PASS: explicit within the bounded operation; no material inference",
+            "evidence_date": "2026-10-14"
+          },
+          "destination_resolution": {
+            "proposition": "fixed-destination; {\"phone\": \"0808 223 1133\"}",
+            "source_ids": [
+              "ca-owner"
+            ],
+            "status": "PASS: explicit within the bounded operation; no material inference",
+            "evidence_date": "2026-10-14"
+          },
+          "recipient": {
+            "proposition": "service-operator",
+            "source_ids": [
+              "ca-owner"
+            ],
+            "status": "PASS: explicit within the bounded operation; no material inference",
+            "evidence_date": "2026-10-14"
+          },
+          "payload_object": {
+            "proposition": "No submission object. Advisers may request facts; source says callers need provide only what they know, so no required data packet invented.",
+            "source_ids": [
+              "ca-owner"
+            ],
+            "status": "PASS: explicit within the bounded operation; no material inference",
+            "evidence_date": "2026-10-14"
+          },
+          "trigger_condition": {
+            "proposition": "No additional event predicate; the specified service purpose applies.",
+            "source_ids": [
+              "ca-owner"
+            ],
+            "status": "PASS: explicit within the bounded operation; no material inference",
+            "evidence_date": "2026-10-14"
+          },
+          "audience_eligibility": {
+            "proposition": "consumer-seeking-advice England and Wales; people seeking consumer advice; ordinary English voice line only.",
+            "source_ids": [
+              "ca-owner"
+            ],
+            "status": "PASS: explicit within the bounded operation; no material inference",
+            "evidence_date": "2026-10-14"
+          },
+          "jurisdiction": {
+            "proposition": "England, Wales",
+            "source_ids": [
+              "consumer"
+            ],
+            "status": "PASS: explicit within the bounded operation; no material inference",
+            "evidence_date": "2026-10-14"
+          },
+          "limitations": {
+            "proposition": "Support-only concerns consumer advice, not police crime intake; no promise to make complaints, litigate or guarantee Trading Standards referral.",
+            "source_ids": [
+              "ca-owner",
+              "ca-english"
+            ],
+            "status": "PASS: explicit within the bounded operation; no material inference",
+            "evidence_date": "2026-10-14"
+          },
+          "visible_qualifiers": {
+            "proposition": "Calls from UK mobiles and landlines are free.; Open Monday to Friday, 09:00–17:00, excluding bank holidays.",
+            "source_ids": [
+              "ca-owner"
+            ],
+            "status": "PASS: explicit within the bounded operation; no material inference",
+            "evidence_date": "2026-10-14"
+          },
+          "sharing_delegation": {
+            "proposition": "Direct Citizens Advice service. Owner discloses onward sharing with Trading Standards/trusted organisations and an opt-out. No delegated endpoint or guaranteed referral is claimed.",
+            "source_ids": [
+              "ca-owner"
+            ],
+            "status": "PASS: explicit within the bounded operation; no material inference",
+            "evidence_date": "2026-10-14"
+          },
+          "payment_account_recipient": {
+            "proposition": "Not applicable: this action is not a payment-recovery contact contract.",
+            "source_ids": [],
+            "status": "PASS: explicit within the bounded operation; no material inference",
+            "evidence_date": "2026-10-14"
+          },
+          "source_currentness": {
+            "source_ids": [
+              "ca-owner",
+              "consumer",
+              "ca-english"
+            ],
+            "status": "Fresh primary body review; currentness caveats in sources.json",
+            "evidence_date": "2026-10-14"
+          }
+        },
+        "scope": "England and Wales; people seeking consumer advice; ordinary English voice line only.",
+        "payload_object": "No submission object. Advisers may request facts; source says callers need provide only what they know, so no required data packet invented.",
+        "sharing_delegation": "Direct Citizens Advice service. Owner discloses onward sharing with Trading Standards/trusted organisations and an opt-out. No delegated endpoint or guaranteed referral is claimed.",
+        "reviewer_notes": "CONFIRM FULL CLEARANCE. Owner gives endpoint, advice role, cost and hours; GOV.UK supplies England/Wales; council explicitly identifies the English line and distinct police route. These statements describe the same service and leave no material inference. Full refers only to this English consumer-phone action.",
+        "resolved_action_sha256": "9648e05e138e6a0e67e84275c98ec1c8a4ced0f74f6ce2bbdb42704b2c2b20ba"
+      },
+      "victim-support:supportline": {
+        "case_id": "C03",
+        "grade": "A",
+        "disposition": "A. CONFIRMED FULL CLEARANCE",
+        "review_date": "2026-10-14",
+        "source_ids": [
+          "victim",
+          "victim-supportline-current"
+        ],
+        "supported_fields": {
+          "owner_service": {
+            "proposition": "Victim Support / Victim Support Supportline",
+            "source_ids": [
+              "victim"
+            ],
+            "status": "PASS: explicit within the bounded operation; no material inference",
+            "evidence_date": "2026-10-14"
+          },
+          "action_method": {
+            "proposition": "call / call-victim-support",
+            "source_ids": [
+              "victim"
+            ],
+            "status": "PASS: explicit within the bounded operation; no material inference",
+            "evidence_date": "2026-10-14"
+          },
+          "destination_resolution": {
+            "proposition": "fixed-destination; {\"phone\": \"0808 168 9111\"}",
+            "source_ids": [
+              "victim"
+            ],
+            "status": "PASS: explicit within the bounded operation; no material inference",
+            "evidence_date": "2026-10-14"
+          },
+          "recipient": {
+            "proposition": "service-operator",
+            "source_ids": [
+              "victim"
+            ],
+            "status": "PASS: explicit within the bounded operation; no material inference",
+            "evidence_date": "2026-10-14"
+          },
+          "payload_object": {
+            "proposition": "No evidence submission or required police reference.",
+            "source_ids": [
+              "victim"
+            ],
+            "status": "PASS: explicit within the bounded operation; no material inference",
+            "evidence_date": "2026-10-14"
+          },
+          "trigger_condition": {
+            "proposition": "No additional event predicate; the specified service purpose applies.",
+            "source_ids": [
+              "victim"
+            ],
+            "status": "PASS: explicit within the bounded operation; no material inference",
+            "evidence_date": "2026-10-14"
+          },
+          "audience_eligibility": {
+            "proposition": "person-affected-by-crime People affected by crime in England and Wales; initial phone support, not ongoing casework/counselling/legal advice.",
+            "source_ids": [
+              "victim"
+            ],
+            "status": "PASS: explicit within the bounded operation; no material inference",
+            "evidence_date": "2026-10-14"
+          },
+          "jurisdiction": {
+            "proposition": "England, Wales",
+            "source_ids": [
+              "victim"
+            ],
+            "status": "PASS: explicit within the bounded operation; no material inference",
+            "evidence_date": "2026-10-14"
+          },
+          "limitations": {
+            "proposition": "Support-only, free UK call, 24-hour availability and no police-report prerequisite. Availability describes opening, not immediate answer or guaranteed counselling.",
+            "source_ids": [
+              "victim"
+            ],
+            "status": "PASS: explicit within the bounded operation; no material inference",
+            "evidence_date": "2026-10-14"
+          },
+          "visible_qualifiers": {
+            "proposition": "Calls from UK mobiles and landlines are free.; Support is available 24 hours a day, every day.; You do not need to have reported the crime to the police to receive support.",
+            "source_ids": [
+              "victim"
+            ],
+            "status": "PASS: explicit within the bounded operation; no material inference",
+            "evidence_date": "2026-10-14"
+          },
+          "sharing_delegation": {
+            "proposition": "Direct Victim Support Supportline, independent of police. Local referral may occur with consent; no separate provider or police intake is asserted.",
+            "source_ids": [
+              "victim"
+            ],
+            "status": "PASS: explicit within the bounded operation; no material inference",
+            "evidence_date": "2026-10-14"
+          },
+          "payment_account_recipient": {
+            "proposition": "Not applicable: this action is not a payment-recovery contact contract.",
+            "source_ids": [],
+            "status": "PASS: explicit within the bounded operation; no material inference",
+            "evidence_date": "2026-10-14"
+          },
+          "source_currentness": {
+            "source_ids": [
+              "victim",
+              "victim-supportline-current"
+            ],
+            "status": "Fresh primary body review; currentness caveats in sources.json",
+            "evidence_date": "2026-10-14"
+          }
+        },
+        "scope": "People affected by crime in England and Wales; initial phone support, not ongoing casework/counselling/legal advice.",
+        "payload_object": "No evidence submission or required police reference.",
+        "sharing_delegation": "Direct Victim Support Supportline, independent of police. Local referral may occur with consent; no separate provider or police intake is asserted.",
+        "reviewer_notes": "CONFIRM FULL CLEARANCE. Contact page alone explicitly identifies the complete bounded Supportline operation, free phone, 24/7, England/Wales and no police prerequisite. Detail corroborates initial support, not ongoing counselling/legal work; no immediate-answer promise. Attempt to downgrade A found no material inferred field.",
+        "resolved_action_sha256": "ed611f1a396fe3572e29112467c6f15f9a133f5f3b7e9032fd081d295469f480"
+      },
+      "o2-pay-monthly:customer-support": {
+        "case_id": "C07",
+        "grade": "A",
+        "disposition": "B. CONFIRMED NARROWER CLEARANCE",
+        "review_date": "2026-10-14",
+        "source_ids": [
+          "o2"
+        ],
+        "supported_fields": {
+          "owner_service": {
+            "proposition": "O2 / O2 Pay Monthly customer service",
+            "source_ids": [
+              "o2"
+            ],
+            "status": "PASS: explicit within the bounded operation; no material inference",
+            "evidence_date": "2026-10-14"
+          },
+          "action_method": {
+            "proposition": "call / call-o2-personal-support",
+            "source_ids": [
+              "o2"
+            ],
+            "status": "PASS: explicit within the bounded operation; no material inference",
+            "evidence_date": "2026-10-14"
+          },
+          "destination_resolution": {
+            "proposition": "fixed-destination; {\"phone\": \"202\"}",
+            "source_ids": [
+              "o2"
+            ],
+            "status": "PASS: explicit within the bounded operation; no material inference",
+            "evidence_date": "2026-10-14"
+          },
+          "recipient": {
+            "proposition": "service-operator",
+            "source_ids": [
+              "o2"
+            ],
+            "status": "PASS: explicit within the bounded operation; no material inference",
+            "evidence_date": "2026-10-14"
+          },
+          "payload_object": {
+            "proposition": "Voice customer-support call; no SMS and no pre-specified report object.",
+            "source_ids": [
+              "o2"
+            ],
+            "status": "PASS: explicit within the bounded operation; no material inference",
+            "evidence_date": "2026-10-14"
+          },
+          "trigger_condition": {
+            "proposition": "No additional event predicate; the specified service purpose applies.",
+            "source_ids": [
+              "o2"
+            ],
+            "status": "PASS: explicit within the bounded operation; no material inference",
+            "evidence_date": "2026-10-14"
+          },
+          "audience_eligibility": {
+            "proposition": "o2-pay-monthly-origin Personal O2 Pay Monthly customer, using own eligible O2 mobile in UK; no business/MVNO/roaming generalisation.",
+            "source_ids": [
+              "o2"
+            ],
+            "status": "PASS: explicit within the bounded operation; no material inference",
+            "evidence_date": "2026-10-14"
+          },
+          "jurisdiction": {
+            "proposition": "England, Wales, Scotland, Northern Ireland",
+            "source_ids": [
+              "o2"
+            ],
+            "status": "PASS: explicit within the bounded operation; no material inference",
+            "evidence_date": "2026-10-14"
+          },
+          "limitations": {
+            "proposition": "Free only from required O2 phone; general customer-service hours and Pay Monthly Platinum hours; customer support, not police crime intake.",
+            "source_ids": [
+              "o2"
+            ],
+            "status": "PASS: explicit within the bounded operation; no material inference",
+            "evidence_date": "2026-10-14"
+          },
+          "visible_qualifiers": {
+            "proposition": "The call is free from the required O2 phone.; Customer service: Monday to Friday 08:00–21:00; Saturday 08:00–20:00; Sunday 08:00–18:00.; For Pay Monthly Platinum customers: Monday to Friday 08:00–20:00; Saturday and Sunday 09:00–18:00.",
+            "source_ids": [
+              "o2"
+            ],
+            "status": "PASS: explicit within the bounded operation; no material inference",
+            "evidence_date": "2026-10-14"
+          },
+          "sharing_delegation": {
+            "proposition": "O2 customer-service channel owned by O2 / Telefónica UK Limited as identified on owner page. No third-party delegated operator asserted.",
+            "source_ids": [
+              "o2"
+            ],
+            "status": "PASS: explicit within the bounded operation; no material inference",
+            "evidence_date": "2026-10-14"
+          },
+          "payment_account_recipient": {
+            "proposition": "Not applicable: this action is not a payment-recovery contact contract.",
+            "source_ids": [],
+            "status": "PASS: explicit within the bounded operation; no material inference",
+            "evidence_date": "2026-10-14"
+          },
+          "source_currentness": {
+            "source_ids": [
+              "o2"
+            ],
+            "status": "Fresh primary body review; currentness caveats in sources.json",
+            "evidence_date": "2026-10-14"
+          }
+        },
+        "scope": "Personal O2 Pay Monthly customer, using own eligible O2 mobile in UK; no business/MVNO/roaming generalisation.",
+        "payload_object": "Voice customer-support call; no SMS and no pre-specified report object.",
+        "sharing_delegation": "O2 customer-service channel owned by O2 / Telefónica UK Limited as identified on owner page. No third-party delegated operator asserted.",
+        "reviewer_notes": "CONFIRM NARROWER CLEARANCE. One current O2 owner page explicitly supplies Pay Monthly-origin 202 voice service, UK access, free call, general and Platinum hours and customer-service purpose. Support-only restates that labelled operation; it is not a claim about O2 police cooperation or investigations. No business, other-network, roaming or specialist-service expansion. A survives.",
+        "resolved_action_sha256": "173a2571666ad1c67eea099a1ed9bd9b2a86d6e30526c572ebbd3f66f43857db"
+      },
+      "o2-payg:customer-support": {
+        "case_id": "C08",
+        "grade": "A",
+        "disposition": "B. CONFIRMED NARROWER CLEARANCE",
+        "review_date": "2026-10-14",
+        "source_ids": [
+          "o2"
+        ],
+        "supported_fields": {
+          "owner_service": {
+            "proposition": "O2 / O2 Pay As You Go customer service",
+            "source_ids": [
+              "o2"
+            ],
+            "status": "PASS: explicit within the bounded operation; no material inference",
+            "evidence_date": "2026-10-14"
+          },
+          "action_method": {
+            "proposition": "call / call-o2-personal-support",
+            "source_ids": [
+              "o2"
+            ],
+            "status": "PASS: explicit within the bounded operation; no material inference",
+            "evidence_date": "2026-10-14"
+          },
+          "destination_resolution": {
+            "proposition": "fixed-destination; {\"phone\": \"4445\"}",
+            "source_ids": [
+              "o2"
+            ],
+            "status": "PASS: explicit within the bounded operation; no material inference",
+            "evidence_date": "2026-10-14"
+          },
+          "recipient": {
+            "proposition": "service-operator",
+            "source_ids": [
+              "o2"
+            ],
+            "status": "PASS: explicit within the bounded operation; no material inference",
+            "evidence_date": "2026-10-14"
+          },
+          "payload_object": {
+            "proposition": "Voice customer-support call; not a forwarded text.",
+            "source_ids": [
+              "o2"
+            ],
+            "status": "PASS: explicit within the bounded operation; no material inference",
+            "evidence_date": "2026-10-14"
+          },
+          "trigger_condition": {
+            "proposition": "No additional event predicate; the specified service purpose applies.",
+            "source_ids": [
+              "o2"
+            ],
+            "status": "PASS: explicit within the bounded operation; no material inference",
+            "evidence_date": "2026-10-14"
+          },
+          "audience_eligibility": {
+            "proposition": "o2-payg-origin Personal O2 Pay As You Go customer, using own eligible O2 mobile in UK; no other network or plan.",
+            "source_ids": [
+              "o2"
+            ],
+            "status": "PASS: explicit within the bounded operation; no material inference",
+            "evidence_date": "2026-10-14"
+          },
+          "jurisdiction": {
+            "proposition": "England, Wales, Scotland, Northern Ireland",
+            "source_ids": [
+              "o2"
+            ],
+            "status": "PASS: explicit within the bounded operation; no material inference",
+            "evidence_date": "2026-10-14"
+          },
+          "limitations": {
+            "proposition": "Free only from required phone; PAYG general hours; support-only. No Platinum, top-up or retention hours substituted.",
+            "source_ids": [
+              "o2"
+            ],
+            "status": "PASS: explicit within the bounded operation; no material inference",
+            "evidence_date": "2026-10-14"
+          },
+          "visible_qualifiers": {
+            "proposition": "The call is free from the required O2 phone.; Customer service: Monday to Friday 08:00–21:00; Saturday 08:00–20:00; Sunday 08:00–18:00.",
+            "source_ids": [
+              "o2"
+            ],
+            "status": "PASS: explicit within the bounded operation; no material inference",
+            "evidence_date": "2026-10-14"
+          },
+          "sharing_delegation": {
+            "proposition": "O2 customer-service channel owned by O2 / Telefónica UK Limited as identified on owner page. No third-party delegated operator asserted.",
+            "source_ids": [
+              "o2"
+            ],
+            "status": "PASS: explicit within the bounded operation; no material inference",
+            "evidence_date": "2026-10-14"
+          },
+          "payment_account_recipient": {
+            "proposition": "Not applicable: this action is not a payment-recovery contact contract.",
+            "source_ids": [],
+            "status": "PASS: explicit within the bounded operation; no material inference",
+            "evidence_date": "2026-10-14"
+          },
+          "source_currentness": {
+            "source_ids": [
+              "o2"
+            ],
+            "status": "Fresh primary body review; currentness caveats in sources.json",
+            "evidence_date": "2026-10-14"
+          }
+        },
+        "scope": "Personal O2 Pay As You Go customer, using own eligible O2 mobile in UK; no other network or plan.",
+        "payload_object": "Voice customer-support call; not a forwarded text.",
+        "sharing_delegation": "O2 customer-service channel owned by O2 / Telefónica UK Limited as identified on owner page. No third-party delegated operator asserted.",
+        "reviewer_notes": "CONFIRM NARROWER CLEARANCE. Same owner page explicitly establishes PAYG-origin 4445 voice customer service, UK access, free calls and general hours. No borrowed Platinum/top-up/retention hours. Support-only describes the customer-service operation. A survives independently of C07.",
+        "resolved_action_sha256": "fb8f479eae0e01c882865e797531947e2e8478822f709fa6b3a88ce7bcdc7aca"
+      },
+      "own-bank:number-on-bank-card": {
+        "case_id": "C09",
+        "grade": "B",
+        "disposition": "B. CONFIRMED NARROWER CLEARANCE",
+        "review_date": "2026-10-14",
+        "source_ids": [
+          "bank-gov",
+          "fca-payments",
+          "psr-consumer"
+        ],
+        "supported_fields": {
+          "owner_service": {
+            "proposition": "Your own bank / Your own bank",
+            "source_ids": [
+              "bank-gov"
+            ],
+            "status": "PASS: explicit within the bounded operation; no material inference",
+            "evidence_date": "2026-10-14"
+          },
+          "action_method": {
+            "proposition": "contact / number-on-bank-card",
+            "source_ids": [
+              "bank-gov",
+              "fca-payments"
+            ],
+            "status": "PASS: explicit within the bounded operation; no material inference",
+            "evidence_date": "2026-10-14"
+          },
+          "destination_resolution": {
+            "proposition": "reader-held-channel; number-on-bank-card for the sending account’s bank",
+            "source_ids": [
+              "bank-gov",
+              "fca-payments"
+            ],
+            "status": "PASS: explicit within the bounded operation; no material inference",
+            "evidence_date": "2026-10-14"
+          },
+          "recipient": {
+            "proposition": "sending-bank-of-affected-transfer",
+            "source_ids": [
+              "bank-gov"
+            ],
+            "status": "PASS: explicit within the bounded operation; no material inference",
+            "evidence_date": "2026-10-14"
+          },
+          "payload_object": {
+            "proposition": "Affected transfer/account is the subject. Bank may collect recipient-account details during contact; this is not a complete reimbursement claim or a file submission.",
+            "source_ids": [
+              "bank-gov"
+            ],
+            "status": "PASS: explicit within the bounded operation; no material inference",
+            "evidence_date": "2026-10-14"
+          },
+          "trigger_condition": {
+            "proposition": "suspected-authorised-bank-transfer-to-fraudster",
+            "source_ids": [
+              "bank-gov"
+            ],
+            "status": "PASS: explicit within the bounded operation; no material inference",
+            "evidence_date": "2026-10-14"
+          },
+          "audience_eligibility": {
+            "proposition": "sender-own-account UK reader’s own account; already authorised bank transfer suspected to have reached fraudster; first contact for recovery only.",
+            "source_ids": [
+              "bank-gov"
+            ],
+            "status": "PASS: explicit within the bounded operation; no material inference",
+            "evidence_date": "2026-10-14"
+          },
+          "jurisdiction": {
+            "proposition": "England, Wales, Scotland, Northern Ireland",
+            "source_ids": [
+              "bank-gov",
+              "fca-payments"
+            ],
+            "status": "PASS: explicit within the bounded operation; no material inference",
+            "evidence_date": "2026-10-14"
+          },
+          "limitations": {
+            "proposition": "Getting money back is not guaranteed. No reimbursement scheme entitlement, deadline or amount promise.",
+            "source_ids": [
+              "bank-gov",
+              "fca-payments"
+            ],
+            "status": "PASS: explicit within the bounded operation; no material inference",
+            "evidence_date": "2026-10-14"
+          },
+          "visible_qualifiers": {
+            "proposition": "None; displayed conditions and limitations are separate fields.",
+            "source_ids": [],
+            "status": "PASS: explicit within the bounded operation; no material inference",
+            "evidence_date": "2026-10-14"
+          },
+          "sharing_delegation": {
+            "proposition": "Relative role, not a fixed owner: the bank that sent this transfer from the reader’s own account. No receiving bank, unrelated card issuer or arbitrary payment provider.",
+            "source_ids": [
+              "bank-gov"
+            ],
+            "status": "PASS: explicit within the bounded operation; no material inference",
+            "evidence_date": "2026-10-14"
+          },
+          "payment_account_recipient": {
+            "proposition": "Already-authorised transfer from the reader’s own account to an account suspected to belong to a fraudster; contact its sending bank, not the receiving bank.",
+            "source_ids": [
+              "bank-gov",
+              "fca-payments"
+            ],
+            "status": "PASS: explicit within the bounded operation; no material inference",
+            "evidence_date": "2026-10-14"
+          },
+          "source_currentness": {
+            "source_ids": [
+              "bank-gov",
+              "fca-payments",
+              "psr-consumer"
+            ],
+            "status": "Fresh primary body review; currentness caveats in sources.json",
+            "evidence_date": "2026-10-14"
+          }
+        },
+        "scope": "UK reader’s own account; already authorised bank transfer suspected to have reached fraudster; first contact for recovery only.",
+        "payload_object": "Affected transfer/account is the subject. Bank may collect recipient-account details during contact; this is not a complete reimbursement claim or a file submission.",
+        "sharing_delegation": "Relative role, not a fixed owner: the bank that sent this transfer from the reader’s own account. No receiving bank, unrelated card issuer or arbitrary payment provider.",
+        "reviewer_notes": "CONFIRM NARROWER CLEARANCE. Government explicitly binds an already authorised transfer from the reader’s own account to the reader’s bank, urgency and card contact. Current FCA corroborates this payment branch and non-guaranteed recovery. Card is a contact source for the sending bank, not evidence of a card payment or an unrelated card issuer.",
+        "resolved_action_sha256": "ba621154fc6d5397006dea40eebb23a4aec9c36b02f1732d80da61efcb71406b"
+      },
+      "own-bank:existing-bank-app": {
+        "case_id": "M10",
+        "grade": "B",
+        "disposition": "B. CONFIRMED NARROWER CLEARANCE",
+        "review_date": "2026-10-14",
+        "source_ids": [
+          "bank-gov",
+          "ofcom",
+          "fca-payments",
+          "psr-consumer"
+        ],
+        "supported_fields": {
+          "owner_service": {
+            "proposition": "Your own bank / Your own bank",
+            "source_ids": [
+              "bank-gov"
+            ],
+            "status": "PASS: explicit within the bounded operation; no material inference",
+            "evidence_date": "2026-10-14"
+          },
+          "action_method": {
+            "proposition": "contact / existing-bank-app",
+            "source_ids": [
+              "ofcom"
+            ],
+            "status": "PASS: explicit within the bounded operation; no material inference",
+            "evidence_date": "2026-10-14"
+          },
+          "destination_resolution": {
+            "proposition": "reader-held-channel; existing-bank-app for the sending account’s bank",
+            "source_ids": [
+              "ofcom",
+              "bank-gov"
+            ],
+            "status": "PASS: explicit within the bounded operation; no material inference",
+            "evidence_date": "2026-10-14"
+          },
+          "recipient": {
+            "proposition": "sending-bank-of-affected-transfer",
+            "source_ids": [
+              "bank-gov"
+            ],
+            "status": "PASS: explicit within the bounded operation; no material inference",
+            "evidence_date": "2026-10-14"
+          },
+          "payload_object": {
+            "proposition": "First contact concerning affected transfer; no new app download, payment payload or bank-specific form invented.",
+            "source_ids": [
+              "bank-gov"
+            ],
+            "status": "PASS: explicit within the bounded operation; no material inference",
+            "evidence_date": "2026-10-14"
+          },
+          "trigger_condition": {
+            "proposition": "suspected-authorised-bank-transfer-to-fraudster, banking-device-safe",
+            "source_ids": [
+              "bank-gov",
+              "ofcom"
+            ],
+            "status": "PASS: explicit within the bounded operation; no material inference",
+            "evidence_date": "2026-10-14"
+          },
+          "audience_eligibility": {
+            "proposition": "sender-own-account Same own-account authorised-transfer case as C09; reader already uses that sending account’s bank app; device safe for banking.",
+            "source_ids": [
+              "bank-gov",
+              "ofcom"
+            ],
+            "status": "PASS: explicit within the bounded operation; no material inference",
+            "evidence_date": "2026-10-14"
+          },
+          "jurisdiction": {
+            "proposition": "England, Wales, Scotland, Northern Ireland",
+            "source_ids": [
+              "bank-gov",
+              "ofcom",
+              "fca-payments"
+            ],
+            "status": "PASS: explicit within the bounded operation; no material inference",
+            "evidence_date": "2026-10-14"
+          },
+          "limitations": {
+            "proposition": "No money-recovery guarantee. Conditional use never certifies that a device is safe or promises every bank app has the same reporting screen.",
+            "source_ids": [
+              "fca-payments"
+            ],
+            "status": "PASS: explicit within the bounded operation; no material inference",
+            "evidence_date": "2026-10-14"
+          },
+          "visible_qualifiers": {
+            "proposition": "None; displayed conditions and limitations are separate fields.",
+            "source_ids": [],
+            "status": "PASS: explicit within the bounded operation; no material inference",
+            "evidence_date": "2026-10-14"
+          },
+          "sharing_delegation": {
+            "proposition": "Same sending-bank relationship as C09, contacted through the already-used app for that sending account. No delegated app provider asserted.",
+            "source_ids": [
+              "bank-gov"
+            ],
+            "status": "PASS: explicit within the bounded operation; no material inference",
+            "evidence_date": "2026-10-14"
+          },
+          "payment_account_recipient": {
+            "proposition": "Already-authorised transfer from the reader’s own account to an account suspected to belong to a fraudster; contact its sending bank, not the receiving bank.",
+            "source_ids": [
+              "bank-gov",
+              "ofcom"
+            ],
+            "status": "PASS: explicit within the bounded operation; no material inference",
+            "evidence_date": "2026-10-14"
+          },
+          "source_currentness": {
+            "source_ids": [
+              "bank-gov",
+              "ofcom",
+              "fca-payments",
+              "psr-consumer"
+            ],
+            "status": "Fresh primary body review; currentness caveats in sources.json",
+            "evidence_date": "2026-10-14"
+          }
+        },
+        "scope": "Same own-account authorised-transfer case as C09; reader already uses that sending account’s bank app; device safe for banking.",
+        "payload_object": "First contact concerning affected transfer; no new app download, payment payload or bank-specific form invented.",
+        "sharing_delegation": "Same sending-bank relationship as C09, contacted through the already-used app for that sending account. No delegated app provider asserted.",
+        "reviewer_notes": "CONFIRM NARROWER CLEARANCE. Separate app contract for C09’s already-sent own-account authorised transfer. Government fixes sending-bank relationship; Ofcom explicitly offers bank app after money sent and excludes unsafe-device banking. Existing account app is a bounded selection of that option, not a new download or universal bank-specific reporting screen. FCA supports no-guarantee limitation, not the app method.",
+        "resolved_action_sha256": "a7f48bfdf701e0df3ad05af8467475fa8f9747aea7391abc845b2b06924fd227"
+      }
+    },
+    "held_cases": {
+      "C01": {
+        "source_bundle": "ncsc-sers",
+        "grade": "C",
+        "disposition": "C. REMAINS INELIGIBLE — EVIDENCE INCOMPLETE",
+        "unresolved_fields": [
+          "Explicit service-owner/authoritative support for the rendered claim that this channel does not investigate financial losses; current crime-report exclusion is not equivalent."
+        ]
+      },
+      "C04": {
+        "source_bundle": "hmrc-phishing",
+        "grade": "C",
+        "disposition": "C. REMAINS INELIGIBLE — EVIDENCE INCOMPLETE",
+        "unresolved_fields": [
+          "Explicit support for mandatory evidence-only financial-loss-investigation exclusion"
+        ]
+      },
+      "C05": {
+        "source_bundle": "ee-phishing",
+        "grade": "C",
+        "disposition": "C. REMAINS INELIGIBLE — EVIDENCE INCOMPLETE",
+        "unresolved_fields": [
+          "Explicit support for mandatory evidence-only financial-loss-investigation exclusion"
+        ]
+      },
+      "C06": {
+        "source_bundle": "talktalk-phishing",
+        "grade": "C",
+        "disposition": "C. REMAINS INELIGIBLE — EVIDENCE INCOMPLETE",
+        "unresolved_fields": [
+          "Explicit support for mandatory evidence-only financial-loss-investigation exclusion"
+        ]
+      },
+      "M05": {
+        "source_bundle": "report-spam-sms",
+        "grade": "C",
+        "disposition": "D. REMAINS INELIGIBLE — MODEL GAP",
+        "unresolved_fields": [
+          "Exact participating-provider scope for caller reporting",
+          "Provider-specific formatting reconciliation",
+          "Closed representation for provider eligibility and required prefix",
+          "Complete limitation evidence for a final provider contract"
+        ]
+      },
+      "M04": {
+        "source_bundle": "natwest-phishing",
+        "grade": "C",
+        "disposition": "D. REMAINS INELIGIBLE — MODEL GAP",
+        "unresolved_fields": [
+          "Represent independent suspected-account-access escalation/exclusion",
+          "Represent prohibition on extra queries/personal-account details",
+          "Exact complete audience/brand and loss-remit evidence for final contract"
+        ]
+      }
+    },
+    "historical_inventory": "WP3D9D 72-bundle dispositions unchanged; targeted contract definitions are a separate counting unit."
+  }
 }

@@ -22,7 +22,7 @@ from datetime import datetime, date, timedelta
 from pathlib import Path
 
 from content_gate import run_gate, ACCURACY_BLOCK, quarantine_post, write_manifest
-from generate_content_claude import Topic, normalise as normalise_generated_post
+from generate_content_claude import Topic, normalise as normalise_generated_post, save_posts
 
 ROOT       = Path(__file__).resolve().parents[1]
 POSTS_FILE = ROOT / "content" / "posts.json"
@@ -217,18 +217,7 @@ def normalise_search_console_post(data: dict, query: str, category: str, today: 
     Reusing the canonical normaliser keeps both automated writers on one schema
     and keeps source links canon-derived rather than model-authored.
     """
-    normalised_input = dict(data)
-    # Preserve the existing pipeline's title-derived URL contract. The shared
-    # normaliser otherwise falls back to the Search Console query when a model
-    # response does not include a slug (this prompt intentionally does not ask
-    # it to).
-    normalised_input["slug"] = slugify(str(normalised_input.get("title") or query))
-    return normalise_generated_post(
-        normalised_input,
-        Topic(keyword=query, entity=query, category=category),
-        today,
-        strict=True,
-    )
+    return normalise_generated_post(data, Topic(query, query, category), today, strict=True)
 
 
 def generate_article(query: dict, api_key: str):
@@ -247,83 +236,11 @@ def generate_article(query: dict, api_key: str):
     print(f"\n✍️  Generating article for: '{q}'")
     print(f"   Category: {category} | Impressions: {query['impressions']} | Position: {query['position']}")
 
-    prompt = f"""You are writing a scam awareness guide for beatthescam.com, a UK consumer protection website.
-
-Write a complete guide about: "{q}"
-
-{ACCURACY_BLOCK}
-- Write ONLY about verified, documented UK scams. All content must be UK-specific (use £ not $, UK reporting routes, UK organisations).
-
-STRUCTURE — do NOT reuse a fixed template across guides. Give each section a NATURAL, SCAM-SPECIFIC heading (not generic ones like "What is this scam?" or "How it works — step by step"), and order the sections the way someone searching for THIS specific scam would actually read them — lead with whatever matters most for the query. Vary the number and order of sections from guide to guide (5 to 8). Across the guide, cover ALL of these essentials under whatever natural headings fit best: what the scam is; how it works step by step (bullet list, "- " prefix); the warning signs (6+ bullets, "- " prefix); what to do if you have received or already interacted with it (bullet list); how to verify it is genuine or protect yourself; and how to report it in the UK. Write the FAQ as 3 to 5 REAL questions someone would Google about THIS specific scam — vary them between guides, phrase them naturally, and never write "Is [X] a legitimate company?" when [X] is a scam type rather than an actual company.
-
-OUTPUT FORMAT — respond with a single valid JSON object only, no other text:
-{{
-  "title": "Specific UK-focused title including the scam type (max 80 chars)",
-  "description": "2-sentence description explaining what this guide covers and who it helps (max 160 chars)",
-  "quick_answer": "35 to 60 words, verdict first, followed by the most important safe action",
-  "hero": "1-sentence hook describing the scam threat (max 120 chars)",
-  "keywords": ["keyword1", "keyword2", "keyword3", "keyword4", "keyword5", "keyword6"],
-  "sections": [
-    ["<your natural, scam-specific heading>", "<120-180 words, OR a bullet list with each item starting with '- '>"],
-    ["<next heading — vary order and count (5 to 8 sections) per the STRUCTURE rules above>", "..."]
-  ],
-  "faq": [
-    ["<a real, naturally-phrased question someone would Google about THIS scam>", "Clear, specific answer (60-100 words)"],
-    ["<another real, varied question — 3 to 5 total>", "Clear, specific answer (60-100 words)"]
-  ]
-}}"""
-
+    from generate_content_claude import claude_post
     try:
-        response = client.messages.create(
-            model="claude-haiku-4-5-20251001",
-            max_tokens=3000,
-            temperature=0,   # factual reference content — minimise creative drift
-            messages=[{"role": "user", "content": prompt}],
-        )
-        raw = response.content[0].text.strip()
-
-        # Strip markdown fences if present (bare ``` and any case, matching
-        # generate_content_claude.extract_json)
-        raw = re.sub(r"^```(?:json)?\s*|\s*```$", "", raw, flags=re.IGNORECASE).strip()
-
-        data = json.loads(raw)
-
-        # Validate required fields
-        required = ["title", "description", "hero", "keywords", "sections", "faq"]
-        for field in required:
-            if field not in data:
-                print(f"❌ Missing field in response: {field}")
-                return None
-
-        # Shape-check as well as count: build.py hard-unpacks each section as a
-        # [heading, body] string pair, so a dict-shaped or 3-element section
-        # would crash the rebuild step later in the cron.
-        sections = [s for s in data["sections"]
-                    if isinstance(s, (list, tuple)) and len(s) == 2
-                    and all(isinstance(x, str) and x.strip() for x in s)]
-        if len(sections) < 4:
-            print(f"❌ Too few usable sections: {len(sections)}")
-            return None
-        data["sections"] = [list(s) for s in sections]
-
-        # Both automated writers must emit the same complete schema. In
-        # particular, sources_checked is canon-derived (not a model guess) and
-        # quick_answer/updated feed reader-visible trust surfaces.
-        post = normalise_search_console_post(data, q, category, today)
-
-        # Model-derived text is collapsed to one line before logging: the
-        # workflow scrapes this stdout for a column-0 "NEW_ARTICLE_SLUGS="
-        # marker, so a newline inside model output must never start a log line.
-        print(f"   ✅ Generated: {' '.join(post['title'].split())[:60]}")
-        print(f"   Slug: {post['slug']}")
-        return post
-
-    except json.JSONDecodeError as e:
-        print(f"❌ JSON parse error: {e}")
-        print(f"   Raw response: {' '.join(raw.split())[:200]}")
-        return None
-    except Exception as e:
-        print(f"❌ Generation error: {e}")
+        return claude_post(Topic(q, q, category), today, "claude-haiku-4-5-20251001", client, [])
+    except Exception as exc:
+        print(f"Generation held: {type(exc).__name__}")
         return None
 
 # ── Main ──────────────────────────────────────────────────────────────────────
@@ -421,9 +338,7 @@ def main():
         return
 
     # Save posts.json
-    with open(POSTS_FILE, "w", encoding="utf-8") as f:
-        json.dump(posts, f, ensure_ascii=False, indent=2)
-        f.write("\n")
+    save_posts(POSTS_FILE, posts)
 
     print(f"\n✅ Saved {generated} new article(s) to posts.json")
     print(f"   Total articles: {len(posts)}")

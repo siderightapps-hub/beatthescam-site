@@ -1,5 +1,6 @@
 # Upper bounds cap surprise major upgrades; Dependabot (.github/dependabot.yml)
 # proposes bumps within range. Pinned 2026-06-22 (supply-chain audit fix).
+-r requirements-reporting.txt
 anthropic>=2.1.0,<3.0.0
 Pillow>=13.0.0,<14.0.0
 

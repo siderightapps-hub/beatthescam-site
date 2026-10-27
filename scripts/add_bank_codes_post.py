@@ -112,6 +112,7 @@ NEW_POST = {
 
 
 def main() -> int:
+    raise SystemExit('Retired direct content writer: use the authenticated restricted-action review and save_posts workflow')
     if not POSTS_FILE.exists():
         print(f"❌ {POSTS_FILE} not found. Run this script from your repo root.")
         return 1

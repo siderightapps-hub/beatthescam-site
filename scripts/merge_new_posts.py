@@ -54,9 +54,8 @@ def main() -> int:
         return 0
 
     merged = base + additions
-    with base_path.open("w") as f:
-        json.dump(merged, f, indent=2, ensure_ascii=False)
-        f.write("\n")
+    from generate_content_claude import save_posts
+    save_posts(str(base_path), merged)
 
     slugs = [p["slug"] for p in additions]
     print(f"merge_new_posts: added {len(additions)} entry/entries: {slugs}")

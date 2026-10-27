@@ -102,10 +102,35 @@ def load_posts(path: str) -> List[Dict]:
     if not os.path.exists(path):
         return []
     with open(path, "r", encoding="utf-8") as f:
-        return json.load(f)
+        return json.load(f, object_pairs_hook=canon_mod.structured.unique_object)
 
 
-def save_posts(path: str, posts: List[Dict]) -> None:
+def save_posts(path: str, posts: List[Dict], *, reporting_canon=None,
+               reporting_reviews=None, quarantine_dir=None, today=None) -> None:
+    """Persist only after repeat approval validation; never downgrade a record.
+
+    New/changed records need a signed external whole-page review, loaded by the
+    gate from the operator store or supplied as a signed packet. Frozen legacy
+    records remain byte-compatible. Model fields and raw contexts grant nothing.
+    """
+    import reporting_structured as structured
+    reviews = reporting_reviews or {}
+    existing = load_posts(path)
+    structured_slugs = {p['slug'] for p in existing if 'reporting_routes' in p}
+    if structured_slugs - {p.get('slug') for p in posts if 'reporting_routes' in p}:
+        raise structured.ReportingError('writer cannot remove or downgrade a structured record')
+    for post in posts:
+        from reporting_publication import required
+        if not required(post):
+            continue
+        result = run_gate(post, use_llm=False, is_draft=False,
+                          reporting_mode=structured.STRUCTURED_REQUIRED,
+                          reporting_canon=reporting_canon,
+                          reporting_review=reviews.get(post.get('slug')))
+        if not result.passed:
+            if quarantine_dir is not None:
+                quarantine_post(post, result, today or date.today().isoformat(), qdir=quarantine_dir)
+            raise structured.ReportingError('writer rejected structured draft: ' + result.summary())
     with open(path, "w", encoding="utf-8") as f:
         json.dump(posts, f, indent=2, ensure_ascii=False)
         f.write("\n")
@@ -137,11 +162,11 @@ def extract_json(text: str) -> Dict:
     text = re.sub(r"\s*```$", "", text)
     text = text.strip()
     try:
-        return json.loads(text)
+        return json.loads(text, object_pairs_hook=canon_mod.structured.unique_object)
     except json.JSONDecodeError:
         match = re.search(r"\{.*\}", text, re.DOTALL)
         if match:
-            return json.loads(match.group(0))
+            return json.loads(match.group(0), object_pairs_hook=canon_mod.structured.unique_object)
         raise ValueError("No valid JSON in Claude response")
 
 
@@ -219,15 +244,34 @@ Rules:
 
 # ─── GENERATION ──────────────────────────────────────────────────────────────
 
+def restricted_prompt(topic, today, contract):
+    """Future model interface contains IDs and scope, never destination values."""
+    return json.dumps({"topic": topic.keyword, "entity": topic.entity, "category": topic.category,
+        "date": today, "fields": ["slug", "title", "description", "hero", "date", "category",
+        "keywords", "quick_answer", "sections", "faq", "reporting_routes"],
+        "narrative": "Explain mechanisms, warning signs and factual context. Use explanatory string pairs for sections and FAQs. Actions are complete eligible route-ID selections only. Conditions, eligibility, recipients, payloads, resolution methods and qualifiers in the contract are read-only descriptors, never output fields. No evidence notes or approval fields.",
+        "action_contract": contract}, ensure_ascii=False)
+
+
 def claude_post(topic: Topic, today: str, model: str, client: "Anthropic",
                 all_slugs: List[str]) -> Dict:
 
+    import reporting_structured as structured
+    import reporting_eligibility as eligibility
+    import reporting_trust as trust
+    catalog = canon_mod.reporting_catalog(CANON)
+    # Containment stays stricter than contract eligibility: drafting still waits
+    # for publication endorsements and separate operator authorization.
+    allowed = eligibility.publication_endorsed_ids(CANON) if trust.environment() == 'production' else ()
+    if not allowed:
+        raise ValueError('No verified restricted actions are available; generation remains held')
+    contract = structured.generator_contract(catalog, allowed)
     response = client.messages.create(
         model=model,
         max_tokens=3000,
         temperature=0,   # factual reference content — minimise creative drift
-        system=SYSTEM_PROMPT,
-        messages=[{"role": "user", "content": build_prompt(topic, all_slugs)}],
+        system="Write a UK scam-awareness guide in plain English. All narrative must be explanatory. Return JSON only. Do not author destinations, operational instructions, policy metadata or approvals.",
+        messages=[{"role": "user", "content": restricted_prompt(topic, today, contract)}],
     )
 
     raw = "".join(b.text for b in response.content if getattr(b, "type", None) == "text")
@@ -257,6 +301,12 @@ def normalise(data: Dict, topic: Topic, today: str, strict: bool = False) -> Dic
 
     strict=True (claude mode) raises instead of substituting the templated
     sections, reserving the template purely for --mode template."""
+    if strict or 'reporting_routes' in data:
+        # Preserve every field, including unknown/malformed authority fields,
+        # for the structured validator. Legacy defaults/coercions would erase
+        # the mode marker and could turn rejection into legacy publication.
+        from copy import deepcopy
+        return deepcopy(data)
     kw  = topic.keyword
     ent = topic.entity
     cat = topic.category
@@ -453,7 +503,7 @@ def main() -> int:
 
         # ── Accuracy gate: PASS → publish, FAIL → quarantine (never published).
         result = None
-        if args.mode == "claude" and not args.no_gate:
+        if 'reporting_routes' in post or (args.mode == "claude" and not args.no_gate):
             result = run_gate(post, client=client, model=args.model,
                               use_llm=not args.gate_no_llm, corpus=posts)
             if not result.passed:

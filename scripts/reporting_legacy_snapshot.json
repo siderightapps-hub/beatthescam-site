@@ -1,0 +1,855 @@
+{
+  "version": "wp3c9b-frozen-legacy/v1",
+  "candidate_sha256": "74cab4031dc7fe645eae69846689b04e9601c29137e2cfb87e5299a131254d22",
+  "pages": {
+    "guide:beatthescamcom-impersonation-scams-fake-consumer-protection-sites": [
+      "4064f09f85c6b10a894bf5896090f9e1e855db4fcbfa0dc9ac2b4d3861bd8f77"
+    ],
+    "guide:amazon-phone-call-scam-uk": [
+      "52864e58cf9fe44db8f0a3f10edf06354be33b53f2b1eb14f27e47f2f345c561"
+    ],
+    "guide:chargeback-scam-uk": [
+      "5c51859c6fc0cca666c9aa8c2173256c1b23263dc68b29c0219dcd79c5c23e76"
+    ],
+    "guide:gumtree-scam-uk-guide": [
+      "95958a6119e10c123b5faa5409dd55194a9f290f7c877b7ec11636c0bed28e3d"
+    ],
+    "guide:google-voice-verification-scam": [
+      "32ab582e7c13e986beb7e04dad944c08f2431c4af5867e9ac9eb2c6ca5c7b201"
+    ],
+    "guide:beatthescamcom-guide-spotting-and-avoiding-uk-consumer-scams": [
+      "94b89803942e89236a39469b7cc0d06bcde529c35cab840f6fa6558cf6e1f1b9"
+    ],
+    "guide:dpd-delivery-scam-text": [
+      "170f197ef3aa04c0e87b5ffbd4a663accdd180c1cf436e0981b85b68db565572"
+    ],
+    "guide:yodel-scam-text-messages": [
+      "967ffd4441f04476742ddb933c4959ee7453da1a49cc237fabc8c6cd4317ea6d"
+    ],
+    "guide:ups-delivery-scam-text-messages-uk": [
+      "ac02df9bb5e09e1f482357c4d68e21584cf7279b19283dcd9cb6f2c2046a674f"
+    ],
+    "guide:bank-text-codes-not-arriving": [
+      "bc23ed88ff2838e56cc7b66249605c748aceadc8b3bc92972979da1d0aa5276a"
+    ],
+    "guide:is-this-website-a-scam": [
+      "dfa0059bc70044ecc39f0c266cb0cd0585cb0903529555aadbf1595085668342"
+    ],
+    "guide:amazon-order-scam-email-checklist": [
+      "01117735a05a58c563fbb4b00caa15d62d13880e13b4b6ee07306a26d806a05a"
+    ],
+    "guide:charity-donation-scam-checklist": [
+      "bcb1d932c7833408abc0e833d46d2d6c39dd878b82cae19f894014128dd7f09a"
+    ],
+    "guide:invoice-redirection-scam-checklist": [
+      "3c80cad92a1916db7b8230961a8a3b67d02b31931c99b8c8d8715f46c8b76a65"
+    ],
+    "guide:refund-recovery-scam-warning-signs": [
+      "d6f261c4a8950dbd0d053cf75569bc831464d967160a43fca9e622735ceb3bef"
+    ],
+    "guide:evri-delivery-scam-guide": [
+      "527b99a3fa67ad96d065d702126a45beb54a39ddc4db6ccea54cc1e24a3f9f18"
+    ],
+    "guide:whatsapp-family-emergency-scam": [
+      "e8e5b1f36934695ce1f36e5239e83da1d34ae92fa9ad0c6d23ef37223dcf4d3e"
+    ],
+    "guide:vinted-scam-warning-uk": [
+      "998f090d4bd0421724a5bcc1c0bac9afbf40942e528060d379d4d3f5bcdbc6a7"
+    ],
+    "guide:crypto-investment-scams-uk-protection": [
+      "d80f6cfe788c28b2379f7fc5ea973485b79174c18079cb1a0f23e3beab640292"
+    ],
+    "guide:bank-transfer-scam-uk": [
+      "4b953cfba0b347db3761c0a31a209788b1d40af3d8c4b57f39f5cd000d595bed"
+    ],
+    "guide:tinder-scam-uk": [
+      "842f90b678cc0b9292fb2a5ffdaa178ceeb1c0b00de175b39fa4c3d00436b831"
+    ],
+    "guide:debt-relief-scam-uk": [
+      "8f1b6da816d264ace99202e173aab7955c66c5cf69b7b0363f578a525847bcc6"
+    ],
+    "guide:bitcoin-scam-uk": [
+      "e0b3d518949f0dcd8d2e01c6eb80dd9d05c378439b6d542605d566734d7f14f3"
+    ],
+    "guide:linkedin-job-scam-guide-uk": [
+      "0588c47553918d02a1f0a800b933a433a5e8fcefee710849d9db5bd0f87abf87"
+    ],
+    "guide:microsoft-support-scam-uk-guide": [
+      "ab95b3e786930e144a955a3c9f232c17eeac420c465bfbc2706fb55063ee1951"
+    ],
+    "guide:facebook-marketplace-scam-uk": [
+      "b856b69ad40a9ed8c84e930cf8d27a2fa3173b7e4cece044e1378f65da1de47f"
+    ],
+    "guide:job-offer-scam-uk": [
+      "b12728f48b5e31592237281aec38ddae4b740e66ee5608f46a5eff1523ed2687"
+    ],
+    "guide:work-from-home-scam-uk": [
+      "6d13ca5086983ddf8b6b10b2d0cbe816304beb46bd44e7db2d1a26832cfaa3c0"
+    ],
+    "guide:is-temu-a-scam-uk": [
+      "7ef8b27535a02bc61ab0f615157216a073786108f97e2dc466926b475628a778"
+    ],
+    "guide:royal-mail-text-scam-uk": [
+      "576bf2630706b4ebd37d35a5c8b5a4d97067b55a393d9c4f3bcc4f567aca0c5b"
+    ],
+    "guide:hmrc-tax-refund-text-scam-uk": [
+      "0def8b70ca5f86829ffd26e5b0bf28bc2935c4cc291c7344d08495b4f920da49"
+    ],
+    "guide:barclays-bank-text-scam-uk": [
+      "85a86f119272c7ebe1127627b7110f7d4de35da7e3bcdef97793f55749486d2d"
+    ],
+    "guide:lloyds-bank-scam-text": [
+      "e2ce0eae8928bffbdd93850901ffe6a19a918dd2d9650392e277845815f090ca"
+    ],
+    "guide:natwest-fraud-text-message-scam-uk": [
+      "8473c1a8e2d0ef992cbe05932c2ac15b978059db33f46460d0f1f6bd5e9f3f3e"
+    ],
+    "guide:halifax-bank-scam-text-uk": [
+      "f7cc7efa9a83503dbe8569ed962e35b817eeb9dcfc3f2caa12efeef68b23ea86"
+    ],
+    "guide:dvla-vehicle-tax-text-scam": [
+      "cb0fd42b7b9b4d73fcf2546ba7af817c4ec59b2f0a89e44ddda5c799e8499deb"
+    ],
+    "guide:tv-licensing-scam-text-message-uk": [
+      "564f1d791cf8ca9167675e4ea4fc4d548048732510cece9618795d15f5fe77e6"
+    ],
+    "guide:nhs-appointment-scam-text-uk": [
+      "802dc73a28c5a2fb7adf464e5971b64a311e09e031a165c9a829a9250e5a0c89"
+    ],
+    "guide:council-tax-scam-text-uk": [
+      "a3463bdc692b5656e0f7b36539de71ba41a00517f85b9c4516da996305ecbf09"
+    ],
+    "guide:parking-fine-scam-text-uk": [
+      "95593eb79469aab7f3dfa5b4b8ba25d1369376565c833057b4f75909e2bb3d5c"
+    ],
+    "guide:hermes-parcel-scam-text-uk": [
+      "b584db26d00dffa5ee7e4838d4733703313583a98d34c004164d18b51879e5aa"
+    ],
+    "guide:amazon-delivery-scam-text-uk": [
+      "e2ea06f3e052c4062410033b6e0016baac54ffac93cfe760917d7ad135f0d6d1"
+    ],
+    "guide:hmrc-tax-rebate-email-scam": [
+      "f37df7ce88b9dbced0c8528ce2366ee254beb6db758e3d75acab2d23595550b3"
+    ],
+    "guide:netflix-billing-email-scam-uk": [
+      "18d1bc8b1d0d0842a30f76f6b9c0decb64ac794b9dd9869b794e618950fecd25"
+    ],
+    "guide:hsbc-phishing-email-scam-uk": [
+      "89fa423e2014832654802a4511256955bd965f696a325bd627769176475db098"
+    ],
+    "guide:santander-email-scam-uk": [
+      "f7905f1b0018872745ef5683bbcd8f9d990e6e8bf519fe3fecf30a0560de0426"
+    ],
+    "guide:dvla-email-scam-uk": [
+      "f7ce0cc227c4af18769013b26a182bf62910651a9aa44f15a377af7ff98ad6b4"
+    ],
+    "guide:companies-house-email-scam-uk": [
+      "47e1e4ea4474ae29fd4de0bdc64b30fd994d6f47a071d22b26c7715083a6b16a"
+    ],
+    "guide:tv-licence-email-scam-uk": [
+      "8e5b68d3cbf2181c5e9164b54ea6396342c889d27780bda5cc7a6aa1ae477c15"
+    ],
+    "guide:natwest-phishing-email-uk": [
+      "09523798f36647af3874f9fcdb78241bcaf7fce85349d38ce8d8767653c904ec"
+    ],
+    "guide:hmrc-phone-call-scam-uk": [
+      "00e151c4cf1fe9dc62fc06f849029553480061a9d0e4fc430222eabf6bf8035b"
+    ],
+    "guide:bt-broadband-scam-calls-uk": [
+      "fba7069e1e935ed9234bedc6e91e4f86ad17fc6660b343835de967734ae3a7c2"
+    ],
+    "guide:police-impersonation-scam-call-uk": [
+      "96221924ff7a8d3e2d638c6d3f65fc9a5632ba386de827450017988e5ccaf409"
+    ],
+    "guide:pension-liberation-scam-uk": [
+      "e74bcd7d61333b1bcce9b519c51f3e01f2b13aadcaa6b58eb650a3a9a8efe628"
+    ],
+    "guide:dvla-phone-scam-uk": [
+      "9a3b1098cd483f7758ad6397136b8cd9c468b661bab27e0233133633334e51ec"
+    ],
+    "guide:national-insurance-scam-call-uk": [
+      "981cfb2236789772de02475036757652c93d55aa0f8479b9cf0cd2d26b45e3de"
+    ],
+    "guide:advance-fee-scam-uk": [
+      "3e380df8ee7c2ac28eb1ab3ab11a0f7ebc3e0d9e803f92bef257088fe5847da7"
+    ],
+    "guide:invoice-fraud-uk-businesses": [
+      "d905f7db462d24142b74f6c7965b2f34b8df2f6a348e3f47dd86a16c27c8c8e7"
+    ],
+    "guide:overpayment-scam-uk": [
+      "618ba4027cc42d43bfb8cc75798ed98e5a49375d717581a2534e0dcc46155a34"
+    ],
+    "guide:cryptocurrency-payment-scam-uk": [
+      "3fcab3d1d2e308dad2ed3925c2c1d759c950b011e3d0fcddc220a5696246dc0d"
+    ],
+    "guide:apple-pay-scam-uk": [
+      "8c164174e4362c649a361f3c9931914abaa2f60ac55a94ed368a9f39cc83f6b4"
+    ],
+    "guide:monzo-scam-transfer-uk": [
+      "64cdfa12c1d2495efe1a4a452693ed16648154a160ad696d840d18882a3f5939"
+    ],
+    "guide:ebay-buyer-scam-uk": [
+      "7693659caf3718ce7800881749c19c624554b7f4004c046a122b9a5a0bf6a6b6"
+    ],
+    "guide:facebook-marketplace-fake-buyer-scam-uk": [
+      "cf4c969e9e4d2c7a1fa01ca9ec08bb1ae2f4e8fa769d6abf4f7c8bb7475a59de"
+    ],
+    "guide:vinted-buyer-scam-uk": [
+      "bb9769920651f6bcd86078cf600b082bb6cefeae39dfa414dd4e8e6ff6260fc2"
+    ],
+    "guide:depop-scam-uk": [
+      "c79cb4ad3290afaf45d71df352d5d59ca4085a559d430c686c8f6255b192f5d3"
+    ],
+    "guide:autotrader-car-scam-uk": [
+      "0c1b08aa5b8a070b3a71d41693ade064830493fd8c84f4435b23e8448f5d2a43"
+    ],
+    "guide:rightmove-rental-scam-uk": [
+      "bac081b3a39f7be08c591fe6f81fa530376101f5513b1bbe6b610be27149ce98"
+    ],
+    "guide:airbnb-scam-uk-listings": [
+      "3fe98cb004e690c289a601655ebf22315d2a370199a543bb3dec9dfdc528d867"
+    ],
+    "guide:preloved-scam-uk": [
+      "5d1d1f45927a2bc5d67337595e2eff862e897331314a549a4c28ccfce4bbe566"
+    ],
+    "guide:instagram-investment-scam-uk": [
+      "3310c69a900fbb23b42fba4811486ff8570cccffa7a2c76e2532d115ace48123"
+    ],
+    "guide:whatsapp-investment-scam-uk": [
+      "aa3586e5f6e29226ef59a873afda0c422feeb4710bd3f90eb159d28cafd979a7"
+    ],
+    "guide:tiktok-shop-scam-uk": [
+      "1867444a2d1b14d1bdb89c80a32617891f02df834109577025f4ba1e7a8e6be0"
+    ],
+    "guide:facebook-ad-scam-uk": [
+      "5280c6364d84dcf297c55c8f347a141467277234fb10d131c869cc60035c0783"
+    ],
+    "guide:twitter-crypto-giveaway-scam-uk": [
+      "887f0a80b8790540efbabd2d75bfa5ad6849684f0c36c86eb59ade0c1ce3247d"
+    ],
+    "guide:bitcoin-atm-scam-uk": [
+      "3449a3db8f52d3898c293dc883a24dd864edcf78b58875efd35d72afdb13e2e3"
+    ],
+    "guide:binance-impersonation-scam-uk": [
+      "543fa5df6860032c7237c5da6632a044687bf3fb7fa2cdb2f7044479b9ff43a7"
+    ],
+    "guide:fake-crypto-exchange-uk": [
+      "658bf38cea26f0e6351555947f6256ac6a4c289b41979a9e2955cfff46ed0734"
+    ],
+    "guide:crypto-recovery-scam-uk": [
+      "992e26c1ae559b812728d9e26bbff4f5ff9049037f9ed0cd1f365b3169230cd5"
+    ],
+    "guide:nft-scam-uk": [
+      "e0e9f3bf59fe3ca72e6fced3b7e128637d6276d2e83727c55e7707069c5a4f27"
+    ],
+    "guide:universal-credit-scam-uk": [
+      "3c59651bcbfbaa6cbab237e76efabe4f6d6dbbeb0ba1adeecfa367aa6a9dae00"
+    ],
+    "guide:tv-licence-scam-letter-uk": [
+      "46d74a4b348372ebd28e2415960225ac7d9d9031dc7fd3f0e01f71faa24ae609"
+    ],
+    "guide:court-summons-scam-email-uk": [
+      "d032212aaaec84871d7a540e2ae6cebd4725422a374e44c3e695d9b6d617d8cc"
+    ],
+    "guide:passport-renewal-scam-uk": [
+      "168a0610ffa2242fe7e34baef85777f7890ceedaeb206102a648d1ff9038c46c"
+    ],
+    "guide:ukvi-visa-scam-uk": [
+      "62745642f1120855d1dc27871a7f2a98e5703f0452690950d5bc264ee9f32b14"
+    ],
+    "guide:indeed-job-scam-uk": [
+      "2c47a240ee8d7d512acfe3fd54ade81c3e119c1a5269aeee6a8e0c6613f2a10d"
+    ],
+    "guide:remote-work-scam-uk-2026": [
+      "cc32c4d2aa60cf1e8a87aa3036469b6ee9f38f8ab311c4929e8122f138558a99"
+    ],
+    "guide:mystery-shopper-scam-uk": [
+      "7b6da793d7ed4383b9fe5b9685a0d0ae37421047b44d58a0223e0afb090a72b8"
+    ],
+    "guide:data-entry-job-scam-uk": [
+      "eef25c7526de00318926d7c6bc23ebcebf9bccad48240bbd7bc92ad678d30fd9"
+    ],
+    "guide:recruitment-agency-scam-uk": [
+      "c647db5287dbde0ca80aecbe73ce305c2cca52c480de922ba642f3fefbc0e958"
+    ],
+    "guide:bumble-romance-scam-uk": [
+      "530ed2a24fbaa1fff46c9e6a7a185f0820b26b4913c9f340664e771a55dff986"
+    ],
+    "guide:pig-butchering-scam-uk": [
+      "4d8f86e4d2e4b3fd25acb1c1c1549a93047be9c06b3ea633f151abbda82874b4"
+    ],
+    "guide:military-romance-scam-uk": [
+      "4279eb5da8ec846e9aa58caf04283a14b0620cd53995742c15064a35ab23d536"
+    ],
+    "guide:apple-tech-support-scam-uk": [
+      "69855d7067ba08b215d465763395628c48665a3e5dbb8799c9f60da09f161169"
+    ],
+    "guide:remote-access-scam-uk": [
+      "3685581a4638db8beeea56bc8323612b83fb523d30eb6fc5b21ac7cbf2b915b8"
+    ],
+    "guide:fake-nike-website-uk": [
+      "feeaf29c7285b29e22fb22ebf5f63ac4fcd6a116f93e497833f4bf0b7a0ef8bb"
+    ],
+    "guide:asos-copycat-scam-uk": [
+      "8845d0c77c768549d0a742e54a18e0ab5c9ce3d71b93e1f33ba4c2f829e0c96a"
+    ],
+    "guide:fake-ugg-website-uk": [
+      "7c1aa08a87271d636ba3c7898e874a693ab09e26033bb84709dec56ac1c17cab"
+    ],
+    "guide:dhgate-scam-uk-review": [
+      "c8ba200ed564ae104d32f7d3432282fb8755980b50261fd6ceb798ee72aad2c5"
+    ],
+    "guide:wish-scam-uk-review": [
+      "f5eb7f91fbcd3c57e0dc54ee1610be44c1dc566e23116da6dc8dc4c2d8e8abeb"
+    ],
+    "guide:iva-scam-uk": [
+      "54b773a88533275a822e28421bee05a0a25e0dcb3ff450246eab9795e7a536e7"
+    ],
+    "guide:clone-firm-investment-scam-uk": [
+      "cb39152994a95c1fbeac3e09d19a56ccb71c430c792b315ff73f0cf03f8ae585"
+    ],
+    "guide:bond-scam-uk": [
+      "66a65ed39c369329bf293e18f20cbfafe6bed4a81842f1310536fa83b3b0a9e7"
+    ],
+    "guide:land-banking-scam-uk": [
+      "9390898c9aacb88e3b0f493c1e66d1b2cc2180c34d246f5f8412d168b345e451"
+    ],
+    "guide:package-holiday-scam-uk": [
+      "ca31e5cf59045f568410a45bff9075047b2c508b1ce24fac8bd4b0d632b1155d"
+    ],
+    "guide:fake-airline-ticket-scam-uk": [
+      "c93e39551b4d34974d4ed3eb60439cd65eb9a7661c8fd2f213da315f9ff33bf1"
+    ],
+    "guide:visa-application-scam-uk": [
+      "3414c2bb96d7f442717c435d62c1814a217846a8e54479f87c1629bcb0cc41b5"
+    ],
+    "guide:holiday-let-scam-uk": [
+      "39265e430701bc931e086379940e86b57061454c44ed7aceeeb25bd33275150b"
+    ],
+    "guide:glastonbury-ticket-scam-uk": [
+      "b3efb4bbb5e945dc72bd889230d73464f77e1add2b44a679328c53d3a5240266"
+    ],
+    "guide:viagogo-scam-uk": [
+      "4ed8eca477ab3acfefd1f2fc4f4868adac706e9a01128b03154b37fccf545339"
+    ],
+    "guide:british-gas-scam-call-uk": [
+      "23c71f98c50d6874d58bea857e327d792fe77e63c1f6dc28dbdc904139999ae8"
+    ],
+    "guide:smart-meter-scam-call-uk": [
+      "ffec1f863a1789b168eeaa9d5d447d0009d61ffc0189a3250d1ed0066dae1fb2"
+    ],
+    "guide:solar-panel-scam-uk": [
+      "5b77ac62067efb057cb470b2fe53382df61cea2536a0091b77471704cae4606a"
+    ],
+    "guide:fake-online-pharmacy-uk-scam": [
+      "01c0719ce9b6ca9107fbaa7ff55f8389d494650471fa1af32d54f47d28052966"
+    ],
+    "guide:forex-trading-scam-uk": [
+      "74aa43e657d61877dd153563c674982fec7c288ecc8799d8fb89f27e760f1b4e"
+    ],
+    "guide:concert-ticket-scam-uk": [
+      "eff66a2e9eb7b922fae37bb05c2452bd7ae1d5bcdce5322f41f29ec454ea745b"
+    ],
+    "guide:revolut-scam-uk": [
+      "7601b9e5d813496fbf97e884a7bc196c77cdfa0217287c4c5ba6eb1346f135a1"
+    ],
+    "guide:starling-bank-scam-uk": [
+      "2c158da93d6150b3f0be3524ebfcef5d4c90a206483fda1fbafdbb8d8931f49d"
+    ],
+    "guide:wise-transfer-scam-uk": [
+      "7d3588ba2987ee95879e28def124bdba6b868ae3f6d9d1c951e5520561f427fb"
+    ],
+    "guide:etsy-scam-sellers-uk-guide": [
+      "3ede1d23248750dc48874e911484ac8767df17cdbe895fd17c03662376409d2f"
+    ],
+    "guide:tsb-bank-scam-text-messages-uk": [
+      "7e5d1757f23650ff25e91f953a9ad3882a34567f65f3a79023aeb71d2b8f09e2"
+    ],
+    "guide:nationwide-scam-text-uk": [
+      "083de1050d67ba80a223e809e77ed540f8e5a814e07d944817ba736cd3b16ecd"
+    ],
+    "guide:hsbc-bank-scam-call-uk": [
+      "688c5b3f1acb54285ec53ada39738883fc09cddd82078fbaf7e81c5179097a4d"
+    ],
+    "guide:santander-phone-scam-uk": [
+      "781a3bd859d9db4596aceaf54c5feb3d363d2b2aa3e80803070d3b02258d8fb1"
+    ],
+    "guide:ai-voice-cloning-scam-uk": [
+      "df24859f3d70f6a2ee7d8f049102acd41a8d71afa9bc352d1dbf630df2490bbf"
+    ],
+    "guide:deepfake-video-scam-uk": [
+      "d72f1a020b3ca5b4606f20b0aff6ad6b8619576b67acd7773b2b1c942c049413"
+    ],
+    "guide:qr-code-scam-uk": [
+      "dd2a7ade544ad7d8785b157ed18f18644acf094e3eccd38468d41a0636e9b90f"
+    ],
+    "guide:sim-swap-fraud-uk": [
+      "6da62e82c29869f46e53c610caed3cabd9d3132f4cee85821031d4269889d341"
+    ],
+    "guide:number-spoofing-scam-uk": [
+      "5ffd5c60d747575212cc98485856785fefaab6bb00e3014bb6b66fb03cf7c983"
+    ],
+    "guide:shein-fake-website-scam-uk": [
+      "668fcc85c0b997e19eaa5db8bff4abd1b5a911a9330596144487d56af1aae564"
+    ],
+    "guide:fake-ray-ban-website-scam-uk": [
+      "6e3f0d980f34126e9210737a4878013231d5356f28ca9b95f006157b54ed0eac"
+    ],
+    "guide:fake-pandora-website-uk-scam": [
+      "c8736d33039cc4e1742efc99bdcb2e81723e4bb53c50fab9df14daea3c157bd4"
+    ],
+    "guide:stubhub-ticket-scam-uk": [
+      "293bac6c5c8b890454118738ce39f1ebea2d29fb8af252ce1f69590eeeb72d27"
+    ],
+    "guide:fake-festival-ticket-scam-uk": [
+      "19b97d278b151ef1453182154e3f50af0a52e6d19178f524eadb1eb63f3c4574"
+    ],
+    "guide:amazon-prime-scam-uk": [
+      "146afbc5221ad54ca0c817a139cbacd3463ef2208f13a14b03f576fcf98c0009"
+    ],
+    "guide:ebay-listing-fee-scam-uk": [
+      "443145a01e691f8a66d36f905eab7aec1122d8752cb1a12b45656698bebe4225"
+    ],
+    "guide:shpock-scam-uk": [
+      "521d7cb91565a76ba879326252946ca75fa38306052ac0185d847f2a59fa59b0"
+    ],
+    "guide:virgin-media-scam-call-uk": [
+      "692f618bbe28ea0943cd0c4e0630dbe50150221929f8f646cfa377f6f6d85e37"
+    ],
+    "guide:o2-scam-text-uk": [
+      "64833ceb4a7079240c140cc1a1ca5d4c5b4ae5e59c1892e282a2e97894895e47"
+    ],
+    "guide:vodafone-scam-text-uk": [
+      "4b71766909d7cbf7445fb2e40d7ad113a9f1eed3b0c8bc790af07f8889d0be7e"
+    ],
+    "guide:ee-scam-text-uk": [
+      "877129bd47a3fde3cd2eeeece24d5bc680b0bd6b45b6c7acbae68f07182755f7"
+    ],
+    "guide:talktalk-scam-call-uk": [
+      "e4d3d960b8902728152128bd3ced2e0526327c0208b62dbde556bb4a1a5d6bf2"
+    ],
+    "guide:money-mule-scam-uk": [
+      "5f7862fe8aea2058f523154699658815ac56125b8eab714792a6b34a972d9227"
+    ],
+    "guide:pension-cold-call-scam-uk": [
+      "a3cd85792c85f27c36c60d021ca7c88c81427c7f7c77221aa6859a449454f1a8"
+    ],
+    "guide:glastonbury-accommodation-scam-uk": [
+      "6beac37a152d8e363832b0776a1b6acc267c1756a4ce3fc631b3433e8b21d3e2"
+    ],
+    "guide:festival-camping-equipment-vinted-scam": [
+      "1ac9e3e2574fd8cb0c8fa7593881fc6faac2a8dcd323537cda6d8b1d40066545"
+    ],
+    "guide:festival-lineup-email-scam-uk": [
+      "a422bbbf3191a8275f96b0355d22d53979d622cd96d1761acc54d89b4619f940"
+    ],
+    "guide:f1-british-gp-ticket-scam-uk": [
+      "c334fc707ec50ee33fa09df61eb0f43d79be76b564738061c1212f5ee16007db"
+    ],
+    "guide:airport-transfer-taxi-scam-uk": [
+      "a2e3b0001db1634541fafffdbd99ab68a10a2bb0aefa57f60653b0742ae52492"
+    ],
+    "guide:tui-booking-scam-uk": [
+      "0906e517efad4c6730495f81ec6558855fe6af9f47318774087b059bbd7c48c1"
+    ],
+    "guide:jet2-holiday-scam-uk": [
+      "a4e96402aa720a4d3992fc355712076a92de0e903ed36e51ff33bc57fea2303b"
+    ],
+    "guide:holiday-compensation-scam-uk": [
+      "b6c6a3ff1e45d9a3a5fc58801f234cbe8afdfde79e684dacb3c71e8087cedb51"
+    ],
+    "guide:solar-panel-cold-caller-scam-uk": [
+      "6679d3a8ea3bbedb9c39cadecfc001efc3afcec9063176dd084776d37741986b"
+    ],
+    "guide:driveway-cowboy-scam-uk": [
+      "28f6cbbc412d9b791067804a78ad8ef811c96a3c8827226c064d778ccaac36e5"
+    ],
+    "guide:bank-holiday-parcel-scam-wave-uk": [
+      "31c69bd794feeff57a60163ae11819911c723bcad53f64a29a6bcac62eb60736"
+    ],
+    "guide:wedding-venue-deposit-scam-uk": [
+      "e0a78ad26cfbb4f07b992cf41c16d17731738cbf2b738395954699ed54d9d0d6"
+    ],
+    "guide:wedding-photographer-scam-uk": [
+      "8f053dd23e40b9a57686e031ea497bf07717367e0a80b8b21b3caf511177d3b6"
+    ],
+    "guide:recovery-room-scam-uk": [
+      "98ebdc5446fb71cc91351f67b0395b47799ead6c8746194cab8dd3f3950ab7b9"
+    ],
+    "guide:share-fraud-uk": [
+      "0a510e104b17a9705c7b3d0e01d06b6d90f05e2f68d44415f5790626fbe525e9"
+    ],
+    "guide:ponzi-scheme-uk-warning": [
+      "e81c6cacd6995585ae5ce5078066a2d9757203762b950cd7b8848af3b8bad355"
+    ],
+    "guide:identity-theft-uk": [
+      "e03b67c48fd248fa24d850024f842d328d665d5e29df6772a82303301fc94305"
+    ],
+    "guide:deed-fraud-uk-property-scam": [
+      "356b8ec1267304fbd0e12e8dfea0b717aa4ab5e1aa21f06d5339331ba0c2c14d"
+    ],
+    "guide:conveyancing-fraud-uk": [
+      "95e96fbeed1cedea13d985f52a2242b55bd0acec61e9f0e3e157d37871393c39"
+    ],
+    "guide:ceo-fraud-email-scam-uk": [
+      "de2ddc699817e97608e08ef406ce3f4375e518ba2535caa9aac0a68289b71f18"
+    ],
+    "guide:sextortion-email-scam-uk": [
+      "73b4cbf93d46a98aa6b9906c543b18199fc85ea793f56aad356da903fdb06be2"
+    ],
+    "guide:email-account-takeover-scam-uk": [
+      "18d12841eb233fad4ab8206d8257d817acd6e1b07e69775568a2f765e28fb8d5"
+    ],
+    "guide:student-finance-scam-uk": [
+      "4e35ed049d6f3dfe318bebf1c07b2a8056c3f5cc58ce06e4bdae3d6428545ced"
+    ],
+    "guide:council-housing-scam-uk": [
+      "ed4a0cff46ffc9921df22e63bfc1c877cfef10fe1f89c60b541fb28677355f82"
+    ],
+    "guide:benefits-fraud-text-scam-uk": [
+      "3375486465e23b1319c2655ca1899d3cc3fddf4303f2ebb95cde23468f51efd6"
+    ],
+    "guide:hmrc-self-assessment-scam-uk": [
+      "79db1280a34f43acdd78fbcd69af0c7806db014f868ec3deb7c11e6717d2ddbd"
+    ],
+    "guide:companies-house-scam-letter-uk": [
+      "1bcd83c3064f959f9238cee4030d0fda76f380da5828292d9afd4678cba97a4f"
+    ],
+    "guide:booking-com-scam-uk": [
+      "a6974196b1ecc4977cc60901e4d7f280d556b2dfe4a5cb3476e8b71a4b16e650"
+    ],
+    "guide:fake-travel-agent-scam-uk": [
+      "e31f6b116bd673213b3bb6daea2af21097ce06a7a5e5df265cc12b3b8393a3df"
+    ],
+    "guide:timeshare-scam-uk": [
+      "2d14683f27e3ada8040d41edaef8bb7b102affa89c97933da7659b93d59722dc"
+    ],
+    "guide:holiday-club-scam-uk": [
+      "93cf494c28fff668083d571da708caf33fe4eee8a7a1a11de8ff7eec5131a079"
+    ],
+    "guide:cruise-scam-uk": [
+      "7dc156d3d99e2bc9dd65fc2d081d1e6e7da8f773221dd4b4657e8b3164a75b01"
+    ],
+    "guide:paypal-friends-family-scam-uk": [
+      "a23b552d44a14e5aadeb51547142cfaaa997ebbb8062e6c9808e4e919aa2b93e"
+    ],
+    "guide:printer-support-scam-uk": [
+      "22f826fdbd6b1a37a794f92ce1a4b20e5ccc5eee7344ba326a34648483b1da0a"
+    ],
+    "guide:isp-impersonation-scam-bt-sky-virgin-media": [
+      "be9eb80fd12b43ea6948c690be57aee5d9df5d33d7d727ff140b933d04d91a08"
+    ],
+    "guide:microsoft-account-suspended-email-scam-uk": [
+      "804c250ccfff0a1bba2e50980c971ab46bf6b3fba24b41786595f09c9126b8e5"
+    ],
+    "guide:aliexpress-scam-or-legit-uk-guide": [
+      "4314486a218fa1bc26596e7e45aafa986175a7bd82bf1209301254cd337b006a"
+    ],
+    "guide:paypal-account-limited-email-scam-uk": [
+      "1f9a741ad08d884cf4f66fbdb6ad253fd78c6d58ac41e2eec74cdf6d386eac87"
+    ],
+    "guide:fake-wifi-hotspot-scam-uk": [
+      "fb925b56917ca3d21eae165e275c67610e747f7b830d4af6d73be4ec8c8008c1"
+    ],
+    "guide:hinge-romance-scam-uk": [
+      "be61a49c4291d3f7814f81b4365235f4f5332fffa1966e2dcd97f9b179cd8fab"
+    ],
+    "guide:facebook-dating-scam-uk": [
+      "af179f25579b3142b14d8a8c9aa95a68799a7f15d426bed94c14b4b417e0f36a"
+    ],
+    "guide:whatsapp-stranger-scam-uk": [
+      "7b08148d4da9abaf02ae7a789334a067ee0fe83436010cd41e9aac3c43bb4132"
+    ],
+    "guide:instagram-fake-giveaway-scam-uk": [
+      "54e4e5395e7a2225f12c13ead8a4915b2f2a47f2a15fbaa87ebe622f351112d5"
+    ],
+    "guide:youtube-crypto-scam-uk": [
+      "d67326377432757f985806ad8f4efeba7887595e0f3e9d1fc7a4970209bd0bc7"
+    ],
+    "guide:snapchat-scam-uk": [
+      "758a53331387b8fe345410c5309d7836e091804aafbbbdd22479cd2cc16bd730"
+    ],
+    "hub:sms": [
+      "249a41531dddfaf575e4bca24f5eee1fd9488276f8d946a1e5f5f37b5b7492fb"
+    ],
+    "hub:payment": [
+      "efb2791c15154e95d874d8893ed75d5892393739034a7d996523abadd0d032f2"
+    ],
+    "hub:government": [
+      "f2e676fa77510e5e93ec230c8669473d8d781441215091ff0c219527375879ba"
+    ],
+    "hub:email": [
+      "7b6ada845055e7f88cfa66bb3c60fae8cea43eb7920eb1e4adcbd686958976db"
+    ],
+    "hub:travel": [
+      "375beaadb3f0b3a426cb0c920a0ce97779dc9c6d81d68817a0fee85b9013a246"
+    ],
+    "hub:marketplace": [
+      "55580ea2ebc1ca72259942771372d13c28a061d2ba9ddbb57ba4d26625fc5ffe"
+    ],
+    "hub:phone": [
+      "40d64ce8bfe00207552453673041f975db832914532f9a5846b0d117bb0c19e6"
+    ],
+    "hub:website": [
+      "4167bd315882abbe2ed6352da96cf7ee5d3c73c62afff91890a00eaaf6dc157a"
+    ],
+    "hub:tech": [
+      "c0f57a081353016554a2bd9d109fa189a79f72398d0639169d4f6d6a2a5ef39f"
+    ],
+    "hub:finance": [
+      "2b866e9d2205da3ae375fd885bfd31d966929b5484c5c5b4e4560f84178e293b"
+    ],
+    "hub:crypto": [
+      "18888d1ddd2bd7312f0d20155e0e4886c5742c8a4b0c47b491ab981b0dd0a458"
+    ],
+    "hub:fraud": [
+      "2a6dd9ab3dcd70c5d9fca248d690b61e0d51c44950f40938bde3b3fe2e4440f6"
+    ],
+    "hub:shopping": [
+      "0568026c6405fc0b9a64f80979d4e4b56c1adc51c6fcb8d450563198289868b8"
+    ],
+    "hub:dating": [
+      "0a574146c5177e0b98b1a279e922b13c30ada52f5b1947e758755fecb7dea97a"
+    ],
+    "hub:employment": [
+      "e8816e6b48ce75f2ea8e085a97bb2dbc58581b1f563ae9a303595c8bc4c7a7f0"
+    ],
+    "hub:social": [
+      "5d83963089d8bd732e05299c2b51a48ec6265545c676c958c3bb84911a724352"
+    ],
+    "hub:utility": [
+      "8b8f6331df1241ae9d1f3da1a4a1bc366bbc63c9abc8166f31599dfa7232a026"
+    ]
+  },
+  "internal_paths": [
+    "/",
+    "/about/",
+    "/author/",
+    "/categories/",
+    "/categories/crypto/",
+    "/categories/dating/",
+    "/categories/email/",
+    "/categories/employment/",
+    "/categories/finance/",
+    "/categories/fraud/",
+    "/categories/government/",
+    "/categories/marketplace/",
+    "/categories/payment/",
+    "/categories/phone/",
+    "/categories/shopping/",
+    "/categories/sms/",
+    "/categories/social/",
+    "/categories/tech/",
+    "/categories/travel/",
+    "/categories/utility/",
+    "/categories/website/",
+    "/check/",
+    "/contact/",
+    "/cookies/",
+    "/corrections/",
+    "/disclaimer/",
+    "/guides/",
+    "/guides/advance-fee-scam-uk/",
+    "/guides/ai-voice-cloning-scam-uk/",
+    "/guides/airbnb-scam-uk-listings/",
+    "/guides/airport-transfer-taxi-scam-uk/",
+    "/guides/aliexpress-scam-or-legit-uk-guide/",
+    "/guides/amazon-delivery-scam-text-uk/",
+    "/guides/amazon-order-scam-email-checklist/",
+    "/guides/amazon-phone-call-scam-uk/",
+    "/guides/amazon-prime-scam-uk/",
+    "/guides/apple-pay-scam-uk/",
+    "/guides/apple-tech-support-scam-uk/",
+    "/guides/asos-copycat-scam-uk/",
+    "/guides/autotrader-car-scam-uk/",
+    "/guides/bank-holiday-parcel-scam-wave-uk/",
+    "/guides/bank-text-codes-not-arriving/",
+    "/guides/bank-transfer-scam-uk/",
+    "/guides/barclays-bank-text-scam-uk/",
+    "/guides/beatthescamcom-guide-spotting-and-avoiding-uk-consumer-scams/",
+    "/guides/beatthescamcom-impersonation-scams-fake-consumer-protection-sites/",
+    "/guides/benefits-fraud-text-scam-uk/",
+    "/guides/binance-impersonation-scam-uk/",
+    "/guides/bitcoin-atm-scam-uk/",
+    "/guides/bitcoin-scam-uk/",
+    "/guides/bond-scam-uk/",
+    "/guides/booking-com-scam-uk/",
+    "/guides/british-gas-scam-call-uk/",
+    "/guides/bt-broadband-scam-calls-uk/",
+    "/guides/bumble-romance-scam-uk/",
+    "/guides/ceo-fraud-email-scam-uk/",
+    "/guides/chargeback-scam-uk/",
+    "/guides/charity-donation-scam-checklist/",
+    "/guides/clone-firm-investment-scam-uk/",
+    "/guides/companies-house-email-scam-uk/",
+    "/guides/companies-house-scam-letter-uk/",
+    "/guides/concert-ticket-scam-uk/",
+    "/guides/conveyancing-fraud-uk/",
+    "/guides/council-housing-scam-uk/",
+    "/guides/council-tax-scam-text-uk/",
+    "/guides/court-summons-scam-email-uk/",
+    "/guides/cruise-scam-uk/",
+    "/guides/crypto-investment-scams-uk-protection/",
+    "/guides/crypto-recovery-scam-uk/",
+    "/guides/cryptocurrency-payment-scam-uk/",
+    "/guides/data-entry-job-scam-uk/",
+    "/guides/debt-relief-scam-uk/",
+    "/guides/deed-fraud-uk-property-scam/",
+    "/guides/deepfake-video-scam-uk/",
+    "/guides/depop-scam-uk/",
+    "/guides/dhgate-scam-uk-review/",
+    "/guides/dpd-delivery-scam-text/",
+    "/guides/driveway-cowboy-scam-uk/",
+    "/guides/dvla-email-scam-uk/",
+    "/guides/dvla-phone-scam-uk/",
+    "/guides/dvla-vehicle-tax-text-scam/",
+    "/guides/ebay-buyer-scam-uk/",
+    "/guides/ebay-listing-fee-scam-uk/",
+    "/guides/ee-scam-text-uk/",
+    "/guides/email-account-takeover-scam-uk/",
+    "/guides/etsy-scam-sellers-uk-guide/",
+    "/guides/evri-delivery-scam-guide/",
+    "/guides/f1-british-gp-ticket-scam-uk/",
+    "/guides/facebook-ad-scam-uk/",
+    "/guides/facebook-dating-scam-uk/",
+    "/guides/facebook-marketplace-fake-buyer-scam-uk/",
+    "/guides/facebook-marketplace-scam-uk/",
+    "/guides/fake-airline-ticket-scam-uk/",
+    "/guides/fake-crypto-exchange-uk/",
+    "/guides/fake-festival-ticket-scam-uk/",
+    "/guides/fake-nike-website-uk/",
+    "/guides/fake-online-pharmacy-uk-scam/",
+    "/guides/fake-pandora-website-uk-scam/",
+    "/guides/fake-ray-ban-website-scam-uk/",
+    "/guides/fake-travel-agent-scam-uk/",
+    "/guides/fake-ugg-website-uk/",
+    "/guides/fake-wifi-hotspot-scam-uk/",
+    "/guides/festival-camping-equipment-vinted-scam/",
+    "/guides/festival-lineup-email-scam-uk/",
+    "/guides/forex-trading-scam-uk/",
+    "/guides/glastonbury-accommodation-scam-uk/",
+    "/guides/glastonbury-ticket-scam-uk/",
+    "/guides/google-voice-verification-scam/",
+    "/guides/gumtree-scam-uk-guide/",
+    "/guides/halifax-bank-scam-text-uk/",
+    "/guides/hinge-romance-scam-uk/",
+    "/guides/hmrc-phone-call-scam-uk/",
+    "/guides/hmrc-self-assessment-scam-uk/",
+    "/guides/hmrc-tax-rebate-email-scam/",
+    "/guides/hmrc-tax-refund-text-scam-uk/",
+    "/guides/holiday-club-scam-uk/",
+    "/guides/holiday-compensation-scam-uk/",
+    "/guides/holiday-let-scam-uk/",
+    "/guides/hsbc-bank-scam-call-uk/",
+    "/guides/hsbc-phishing-email-scam-uk/",
+    "/guides/identity-theft-uk/",
+    "/guides/indeed-job-scam-uk/",
+    "/guides/instagram-fake-giveaway-scam-uk/",
+    "/guides/instagram-investment-scam-uk/",
+    "/guides/invoice-fraud-uk-businesses/",
+    "/guides/is-temu-a-scam-uk/",
+    "/guides/is-this-website-a-scam/",
+    "/guides/isp-impersonation-scam-bt-sky-virgin-media/",
+    "/guides/iva-scam-uk/",
+    "/guides/jet2-holiday-scam-uk/",
+    "/guides/job-offer-scam-uk/",
+    "/guides/land-banking-scam-uk/",
+    "/guides/linkedin-job-scam-guide-uk/",
+    "/guides/lloyds-bank-scam-text/",
+    "/guides/microsoft-account-suspended-email-scam-uk/",
+    "/guides/microsoft-support-scam-uk-guide/",
+    "/guides/military-romance-scam-uk/",
+    "/guides/money-mule-scam-uk/",
+    "/guides/monzo-scam-transfer-uk/",
+    "/guides/mystery-shopper-scam-uk/",
+    "/guides/national-insurance-scam-call-uk/",
+    "/guides/nationwide-scam-text-uk/",
+    "/guides/natwest-fraud-text-message-scam-uk/",
+    "/guides/natwest-phishing-email-uk/",
+    "/guides/netflix-billing-email-scam-uk/",
+    "/guides/nft-scam-uk/",
+    "/guides/nhs-appointment-scam-text-uk/",
+    "/guides/number-spoofing-scam-uk/",
+    "/guides/o2-scam-text-uk/",
+    "/guides/overpayment-scam-uk/",
+    "/guides/package-holiday-scam-uk/",
+    "/guides/page/2/",
+    "/guides/page/3/",
+    "/guides/page/4/",
+    "/guides/page/5/",
+    "/guides/page/6/",
+    "/guides/page/7/",
+    "/guides/parking-fine-scam-text-uk/",
+    "/guides/passport-renewal-scam-uk/",
+    "/guides/paypal-account-limited-email-scam-uk/",
+    "/guides/paypal-friends-family-scam-uk/",
+    "/guides/pension-cold-call-scam-uk/",
+    "/guides/pension-liberation-scam-uk/",
+    "/guides/pig-butchering-scam-uk/",
+    "/guides/police-impersonation-scam-call-uk/",
+    "/guides/ponzi-scheme-uk-warning/",
+    "/guides/preloved-scam-uk/",
+    "/guides/printer-support-scam-uk/",
+    "/guides/qr-code-scam-uk/",
+    "/guides/recovery-room-scam-uk/",
+    "/guides/recruitment-agency-scam-uk/",
+    "/guides/refund-recovery-scam-warning-signs/",
+    "/guides/remote-access-scam-uk/",
+    "/guides/remote-work-scam-uk-2026/",
+    "/guides/revolut-scam-uk/",
+    "/guides/rightmove-rental-scam-uk/",
+    "/guides/royal-mail-text-scam-uk/",
+    "/guides/santander-email-scam-uk/",
+    "/guides/santander-phone-scam-uk/",
+    "/guides/sextortion-email-scam-uk/",
+    "/guides/share-fraud-uk/",
+    "/guides/shein-fake-website-scam-uk/",
+    "/guides/shpock-scam-uk/",
+    "/guides/sim-swap-fraud-uk/",
+    "/guides/smart-meter-scam-call-uk/",
+    "/guides/snapchat-scam-uk/",
+    "/guides/solar-panel-cold-caller-scam-uk/",
+    "/guides/solar-panel-scam-uk/",
+    "/guides/starling-bank-scam-uk/",
+    "/guides/stubhub-ticket-scam-uk/",
+    "/guides/student-finance-scam-uk/",
+    "/guides/talktalk-scam-call-uk/",
+    "/guides/tiktok-shop-scam-uk/",
+    "/guides/timeshare-scam-uk/",
+    "/guides/tinder-scam-uk/",
+    "/guides/tsb-bank-scam-text-messages-uk/",
+    "/guides/tui-booking-scam-uk/",
+    "/guides/tv-licence-email-scam-uk/",
+    "/guides/tv-licence-scam-letter-uk/",
+    "/guides/tv-licensing-scam-text-message-uk/",
+    "/guides/twitter-crypto-giveaway-scam-uk/",
+    "/guides/ukvi-visa-scam-uk/",
+    "/guides/universal-credit-scam-uk/",
+    "/guides/ups-delivery-scam-text-messages-uk/",
+    "/guides/viagogo-scam-uk/",
+    "/guides/vinted-buyer-scam-uk/",
+    "/guides/vinted-scam-warning-uk/",
+    "/guides/virgin-media-scam-call-uk/",
+    "/guides/visa-application-scam-uk/",
+    "/guides/vodafone-scam-text-uk/",
+    "/guides/wedding-photographer-scam-uk/",
+    "/guides/wedding-venue-deposit-scam-uk/",
+    "/guides/whatsapp-family-emergency-scam/",
+    "/guides/whatsapp-investment-scam-uk/",
+    "/guides/whatsapp-stranger-scam-uk/",
+    "/guides/wise-transfer-scam-uk/",
+    "/guides/wish-scam-uk-review/",
+    "/guides/work-from-home-scam-uk/",
+    "/guides/yodel-scam-text-messages/",
+    "/guides/youtube-crypto-scam-uk/",
+    "/methodology/",
+    "/newsletter-confirmed/",
+    "/privacy/",
+    "/recovery/",
+    "/research/",
+    "/research/methodology/",
+    "/research/uk-scam-search-ai-trends-2026-07/",
+    "/research/uk-scam-statistics/",
+    "/terms/"
+  ]
+}

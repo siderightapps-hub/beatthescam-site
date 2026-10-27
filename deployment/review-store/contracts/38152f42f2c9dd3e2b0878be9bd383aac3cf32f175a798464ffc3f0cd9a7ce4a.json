@@ -1,0 +1,22 @@
+{
+  "body": {
+    "version": "beatthescam-contract-evidence-v3",
+    "environment": "production",
+    "site": "beatthescam.com",
+    "decision_id": "931e35e84d51a009a027ccc75e2021e4",
+    "issued_at": "2026-10-26T10:33:39.190772+00:00",
+    "expires_at": "2026-11-02T10:33:39.190772+00:00",
+    "reviewer": "bts-owner-contracts-2026-10-15",
+    "claims": {
+      "route_id": "citizens-advice:consumer-advice-english",
+      "canon_sha256": "0319177c15f62e63de8b56a76d411b26855ba19ec87d3e95371a6b9b5d9a0a24",
+      "contract_sha256": "9648e05e138e6a0e67e84275c98ec1c8a4ced0f74f6ce2bbdb42704b2c2b20ba",
+      "schema_version": "restricted-actions/v2",
+      "contract_model_sha256": "3c7909967cce32904ed71db36139cbe0a54e064e0daa2e1b90021c9afb5e76fb",
+      "source_url": "https://www.citizensadvice.org.uk/about-us/information/contact-the-consumer-service/",
+      "checked_on": "2026-10-14",
+      "evidence_state": "verified-by-contract-reviewer"
+    }
+  },
+  "signature": "-----BEGIN SSH SIGNATURE-----\nU1NIU0lHAAAAAQAAADMAAAALc3NoLWVkMjU1MTkAAAAge2PaLrwzLg+K7OVpPW5fnk7hvG\ns4hA8OIH8A8Qq5Zc0AAAArYmVhdHRoZXNjYW0tY29udHJhY3QtZXZpZGVuY2UtdjM6cHJv\nZHVjdGlvbgAAAAAAAAAGc2hhNTEyAAAAUwAAAAtzc2gtZWQyNTUxOQAAAEArKYHv8qYyPf\nwnFPS7Jv4VP1i0LEYTKSaQODSYnmyL9MDsN4+zwqwfabZRRyRODBb0apSKm+PdkjAmKDyN\nsJ4L\n-----END SSH SIGNATURE-----\n"
+}

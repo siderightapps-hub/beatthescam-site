@@ -14,6 +14,9 @@ from pathlib import Path
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 import canon as canon_mod   # noqa: E402  — the shared canon loader/validator/renderers
 import corpus as corpus_mod  # noqa: E402  — the shared public/source corpus partition
+from reporting_syntax import (INTERNAL_MARKDOWN_LINK_RE, inline_html, schema_plain,
+    normalize_bullet_body, parse_numbered_steps, howto_step_text)
+from reporting_output import ArticleText, ArticleHTML
 
 ROOT = Path(__file__).resolve().parents[1]
 DIST = ROOT / "dist"
@@ -63,25 +66,8 @@ ARTICLE_REDIRECTS = corpus_mod.ARTICLE_REDIRECTS
 # similarity_report.py that the gate did not share (operator review,
 # 2026-07-30).
 
-CATEGORY_LABELS = {
-    "marketplace": "Marketplace Scams",
-    "sms":         "Text Message Scams",
-    "payment":     "Payment Scams",
-    "crypto":      "Crypto Scams",
-    "tech":        "Tech Support Scams",
-    "website":     "Website Scams",
-    "government":  "Government Impersonation",
-    "employment":  "Employment Scams",
-    "social":      "Social Media Scams",
-    "dating":      "Romance & Dating Scams",
-    "email":       "Email Scams",
-    "phone":       "Phone Scams",
-    "travel":      "Travel Scams",
-    "shopping":    "Shopping Scams",
-    "finance":     "Investment & Finance Scams",
-    "fraud":       "Fraud & Impersonation",
-    "utility":     "Utility Scams",
-}
+from reporting_taxonomy import CATEGORY_LABELS, resolve as category_taxonomy
+
 
 CATEGORY_DESCRIPTIONS = {
     "marketplace": "Guides covering Facebook Marketplace, Gumtree, Vinted, and eBay scams targeting UK buyers and sellers. Spot payment fraud, advance fees, and collection scams.",
@@ -108,10 +94,10 @@ def normalize_category(cat: str) -> str:
     return CATEGORY_CANON.get(cat.strip().lower(), cat.strip().lower())
 
 def category_label(cat: str) -> str:
-    return CATEGORY_LABELS.get(cat, cat.replace("-", " ").title())
+    return category_taxonomy(cat).project()
 
 def category_description(cat: str) -> str:
-    return CATEGORY_DESCRIPTIONS.get(cat, f"Guides covering common {cat.replace('-', ' ')} patterns and how to protect yourself.")
+    return CATEGORY_DESCRIPTIONS[category_taxonomy(cat).identifier]
 
 
 
@@ -253,7 +239,7 @@ def load_category_hubs(root: Path) -> dict:
         raise SystemExit(f"ERROR: {path} exists but could not be read or parsed: {exc}")
 
 
-def validate_category_hubs(hubs: dict) -> None:
+def validate_category_hubs(hubs: dict, *, reporting_sources=None, reporting_reviews=None) -> None:
     """Run the deterministic editorial gate over every hand-authored hub.
 
     Generated guides are gated before they reach posts.json. Category hubs are
@@ -323,7 +309,8 @@ def validate_category_hubs(hubs: dict) -> None:
             structural.append(f"{slug}: 'sections' must be a non-empty list")
         else:
             _pairs(slug, "sections", sections, "heading", "body")
-        _pairs(slug, "faq", hub.get("faq"), "question", "answer")
+        _pairs(slug, "faq", [x for x in hub.get("faq", []) if not isinstance(x, dict)]
+               if isinstance(hub.get("faq"), list) and 'reporting_routes' in hub else hub.get("faq"), "question", "answer")
         srcs = hub.get("sources_checked")
         if isinstance(srcs, list) and srcs:
             _pairs(slug, "sources_checked", srcs, "label", "url", require_url=True)
@@ -340,7 +327,7 @@ def validate_category_hubs(hubs: dict) -> None:
             structural.append(f"{slug}: 'sources_checked' must be a non-empty list — every hub "
                               f"renders a trust layer")
         unknown = set(hub) - {"title", "description", "intro", "sections", "faq",
-                              "sources_checked", "updated", "ads_mode"}
+                              "sources_checked", "updated", "ads_mode", "reporting_routes"}
         if unknown:
             structural.append(f"{slug}: unknown key(s) {sorted(unknown)} — a misspelling such as "
                               f"'source_checked' would silently drop the trust layer")
@@ -365,13 +352,25 @@ def validate_category_hubs(hubs: dict) -> None:
     flagged = []
     for slug, hub in (hubs or {}).items():
         surface = dict(hub or {})
-        surface.setdefault("slug", f"category-{slug}")
-        surface.setdefault("category", slug)
-        surface.setdefault("keywords", [])
+        from reporting_publication import required, review as authenticated_review
+        restricted = required(hub, 'hub:' + slug)
+        approved = (reporting_reviews or {}).get(slug)
+        if restricted:
+            try:
+                approved = authenticated_review(hub, reporting_sources or load_sources(ROOT), approved, page_id='hub:' + slug)
+            except (ValueError, OSError, TypeError, KeyError) as exc:
+                raise SystemExit('Category hub restricted review: ' + str(exc))
+        if not restricted:
+            surface.setdefault("slug", f"category-{slug}")
+            surface.setdefault("category", slug)
+            surface.setdefault("keywords", [])
         # is_hub=True: a hub has no `quick_answer` by schema (the key set above
         # excludes it) and renders no answer box, so the guide-only requirement
         # would be a guaranteed false BLOCK here.
-        for issue in check_deterministic(surface, is_hub=True):
+        for issue in check_deterministic(surface, is_hub=True,
+                reporting_canon=reporting_sources,
+                reporting_review=approved,
+                reporting_page_id='hub:' + slug):
             row = (slug, issue)
             if issue.get("severity") == SEVERITY_BLOCK:
                 blocking.append(row)
@@ -454,7 +453,7 @@ def affiliate_block(post: dict, affiliates: list) -> str:
 # ─── HELPERS ──────────────────────────────────────────────────────────────────
 
 def read_json(path: Path):
-    return json.loads(path.read_text(encoding="utf-8"))
+    return json.loads(path.read_text(encoding="utf-8"), object_pairs_hook=canon_mod.structured.unique_object)
 
 def write(path: Path, text: str):
     path.parent.mkdir(parents=True, exist_ok=True)
@@ -588,6 +587,10 @@ def pick_description(post: dict, max_len: int = 160, min_len: int = 130) -> str:
     """
     desc = (post.get("description") or "").strip()
     hero = (post.get("hero") or "").strip()
+    if "reporting_routes" in post:
+        # Structured prose retains its reviewed field identity. Legacy SEO
+        # padding merges unrelated fields and cannot inherit a fact approval.
+        return seo_description(_schema_plain(desc), max_len)
 
     # Helper: extract section 1 first sentence
     def section1_first_sentence() -> str:
@@ -649,24 +652,11 @@ def _normalize_bullet_body(para) -> str:
          -> parsed with ast.literal_eval and joined with newlines.
     Output is always a string.
     """
-    if isinstance(para, list):
-        return "\n".join(str(x) for x in para)
-    if not isinstance(para, str):
-        return str(para)
-    s = para.strip()
-    if (s.startswith("['") or s.startswith('["')) and s.endswith("]"):
-        try:
-            import ast
-            parsed = ast.literal_eval(s)
-            if isinstance(parsed, list):
-                return "\n".join(str(item) for item in parsed)
-        except (ValueError, SyntaxError):
-            pass
-    return para
+    return normalize_bullet_body(para)
 
 def reading_time(post: dict) -> int:
     words = sum(len((t + " " + b).split()) for t, b in post.get("sections", []))
-    words += sum(len((q + " " + a).split()) for q, a in post.get("faq", []))
+    words += sum(len((item[0] + " " + item[1]).split()) for item in post.get("faq", []) if isinstance(item, (list, tuple)))
     return max(1, round(words / 200))
 
 def topic_signature(post: dict) -> str:
@@ -857,7 +847,7 @@ def hub_ads_mode(slug: str, hub: dict) -> str:
         slug, str(hub.get("title") or ""), str(hub.get("description") or ""),
         str(hub.get("intro") or ""),
         " ".join(f"{h} {b}" for h, b in (hub.get("sections") or [])),
-        " ".join(f"{q} {a}" for q, a in (hub.get("faq") or [])),
+        " ".join(f"{q} {a}" for q, a in canon_mod.structured.narrative_faq(hub)),
     ]).replace("-", " ").replace("_", " ")
     derived = "none" if _NO_ADS_RE.search(hay) else (
         "npa" if _SENSITIVE_FINANCE_RE.search(hay) else "default")
@@ -988,7 +978,7 @@ def page_schema(site, title, description, url, date_modified=None):
 # accepted, so article data cannot inject attributes, scripts, or an
 # unreviewed external destination. Used by _inline() when rendering and by
 # _schema_plain() when flattening the same text for structured data.
-_INTERNAL_MARKDOWN_LINK_RE = re.compile(r"\[([^\]\n]+)\]\((/[a-z0-9/_-]+/?)\)", re.I)
+_INTERNAL_MARKDOWN_LINK_RE = INTERNAL_MARKDOWN_LINK_RE
 
 
 def _schema_plain(text: str) -> str:
@@ -997,8 +987,7 @@ def _schema_plain(text: str) -> str:
     [label](/path/) renders as an anchor whose visible text is the label — so
     the schema must carry the label, not the raw markup. Google requires
     FAQPage content to match the visible answer."""
-    text = str(text).strip().replace("`", "")
-    return _INTERNAL_MARKDOWN_LINK_RE.sub(lambda m: m.group(1), text)
+    return schema_plain(text)
 
 
 def faq_schema(pairs):
@@ -1076,7 +1065,7 @@ def article_schema(site, post, url, og_image_url=None):
 def speakable_schema(url, post):
     """WebPage speakable markup pointing voice/AI assistants at the Quick
     answer box. Emitted only for guides that carry a quick_answer field."""
-    if not (post.get("quick_answer") or "").strip():
+    if not post.get("quick_answer"):
         return ""
     return json_ld({
         "@context": "https://schema.org",
@@ -1122,37 +1111,6 @@ def itemlist_schema(items, list_name=None):
     return json_ld(data)
 
 
-_STEP_RE      = re.compile(r"\bStep\s+\d+\s*[:.\)\-–]\s*", re.IGNORECASE)
-_PAREN_NUM_RE = re.compile(r"\((\d+)\)\s+")
-
-
-def parse_numbered_steps(text: str):
-    """Extract a list of step strings from a paragraph that contains
-    explicit numbered markers like 'Step 1:' or '(1)'. Returns [] if
-    fewer than 3 distinct steps are detectable."""
-    text = (text or "").strip()
-    if not text:
-        return []
-    # "Step N:" pattern
-    if _STEP_RE.search(text):
-        parts = _STEP_RE.split(text)
-        steps = [p.strip().rstrip(".") for p in parts if p.strip()]
-        if len(steps) >= 3:
-            return steps
-    # "(N)" pattern
-    if _PAREN_NUM_RE.search(text):
-        parts = _PAREN_NUM_RE.split(text)
-        # split returns [pre, num, body, num, body, ...] -> take every other from index 2
-        steps = []
-        for i in range(2, len(parts), 2):
-            piece = parts[i].strip().rstrip(";.")
-            if piece:
-                steps.append(piece)
-        if len(steps) >= 3:
-            return steps
-    return []
-
-
 def howto_schema(site, post, url):
     """Emit a HowTo schema when a section contains numbered user-action steps.
 
@@ -1185,7 +1143,7 @@ def howto_schema(site, post, url):
                     "@type": "HowToStep",
                     "position": i + 1,
                     "name": f"Step {i + 1}",
-                    "text": str(s).replace("`", "")[:500],
+                    "text": howto_step_text(s),
                 }
                 for i, s in enumerate(steps[:8])
             ],
@@ -1667,14 +1625,24 @@ def render_categories_index(site, categories):
     )
 
 
-def render_category_page(site, category, posts, all_categories=None, hub=None):
+def render_category_page(site, category, posts, all_categories=None, hub=None, *,
+                         reporting_sources=None, reporting_review=None):
     label = category_label(category)
     desc  = category_description(category)
     slug  = slugify(category)
+    from reporting_publication import required, review as authenticated_review
+    structured_hub = bool(hub and required(hub, 'hub:' + slug))
+    if structured_hub:
+        reporting_sources = load_sources(ROOT) if reporting_sources is None else reporting_sources
+        reporting_review = authenticated_review(hub, reporting_sources, reporting_review, page_id='hub:' + slug)
+        if hub.get('category', category) != category:
+            raise ValueError('taxonomy: hub category differs from signed page identity')
+        if not hub.get('title') or not hub.get('description'):
+            raise ValueError('structured hub requires explicit reviewed title and description')
 
     # Related categories — up to 6 sibling categories, sorted by post count
     related_cats_html = ""
-    if all_categories:
+    if all_categories and not structured_hub:
         siblings = [
             (cat, items) for cat, items in sorted(all_categories.items(), key=lambda x: len(x[1]), reverse=True)
             if cat != category
@@ -1692,18 +1660,31 @@ def render_category_page(site, category, posts, all_categories=None, hub=None):
     hub_body_html = hub_faq_html = ""
     hub_faq_pairs = []
     if hub:
-        intro = canonicalize_internal_guide_paths(hub.get("intro", ""))
+        action_html = ""
+        if structured_hub:
+            action_html = structured_reporting_block(hub, reporting_sources, reporting_review,
+                                                     page_id='hub:' + slug)
+        intro = (_render_section_body(hub.get("intro", "")) if structured_hub
+                 else canonicalize_internal_guide_paths(hub.get("intro", "")))
         secs = "".join(
-            f'<section class="section" aria-labelledby="{slugify(h)}-heading"><div class="wrap"><h2 id="{slugify(h)}-heading">{html.escape(h)}</h2>{canonicalize_internal_guide_paths(b)}</div></section>'
+            f'<section class="section" aria-labelledby="{slugify(h)}-heading"><div class="wrap"><h2 id="{slugify(h)}-heading">{html.escape(h)}</h2>{_render_section_body(b) if structured_hub else canonicalize_internal_guide_paths(b)}</div></section>'
             for h, b in hub.get("sections", [])
         )
-        hub_body_html = (f'<section class="section"><div class="wrap">{intro}</div></section>' if intro else "") + secs
-        hub_faq_pairs = [(q, a) for q, a in hub.get("faq", []) if q and a]
-        if hub_faq_pairs:
+        hub_body_html = (f'<section class="section"><div class="wrap">{intro}</div></section>' if intro else "")
+        if action_html:
+            hub_body_html += f'<div class="wrap">{action_html}</div>'
+        hub_body_html += secs
+        if structured_hub:
+            from reporting_action_render import faq_projection
+            items, hub_faq_pairs, _ = faq_projection(hub.get('faq', []), hub['reporting_routes'],
+                canon_mod.reporting_catalog(reporting_sources))
+        else:
+            hub_faq_pairs = [(q, a) for q, a in hub.get("faq", []) if q and a]
             items = "".join(
                 f'<details><summary>{html.escape(q)}</summary><p>{html.escape(a)}</p></details>'
                 for q, a in hub_faq_pairs
             )
+        if hub_faq_pairs:
             hub_faq_html = f'<section class="section" aria-labelledby="hub-faq-heading"><div class="wrap"><h2 id="hub-faq-heading">Common questions</h2><div class="faq-panel">{items}</div></div></section>'
 
     # Trust layer for hubs (operator review 2026-07-27): ten long YMYL pages
@@ -1717,10 +1698,12 @@ def render_category_page(site, category, posts, all_categories=None, hub=None):
         bits = []
         section_attrs = ""
         if hub_sources:
-            lis = "".join(
+            lis = ("".join('<li>' + canon_mod.structured.render_citation(
+                canon_mod.structured.Citation(l, u)) + '</li>' for l, u in hub_sources)
+                if structured_hub else "".join(
                 f'<li><a href="{html.escape(u)}" rel="noopener noreferrer" target="_blank">'
                 f'{html.escape(l)}</a></li>' for l, u in hub_sources
-            )
+            ))
             bits.append(f'<h2 id="hub-sources-heading">Sources checked</h2><ul class="sources-checked">{lis}</ul>')
             section_attrs = ' aria-labelledby="hub-sources-heading"'
         if reviewed:
@@ -1742,6 +1725,10 @@ def render_category_page(site, category, posts, all_categories=None, hub=None):
     page_desc  = hub.get("description") if hub and hub.get("description") else desc
 
     grid_heading = f"All {html.escape(label.lower())} guides" if hub else f"Latest {html.escape(label.lower())}"
+    # Other source records are outside this hub's contextual prose approval.
+    # Until teaser approvals exist, structured pages expose only fixed navigation.
+    cards = ('<a href="/guides/">Browse all guides</a>' if structured_hub else
+             ''.join(render_card(p) for p in posts))
     content = f'''
     <section class="hero">
       <div class="wrap">
@@ -1751,12 +1738,13 @@ def render_category_page(site, category, posts, all_categories=None, hub=None):
       </div>
     </section>
     {hub_body_html}
-    <section class="section" aria-labelledby="grid-heading"><div class="wrap"><h2 id="grid-heading">{grid_heading}</h2><div class="grid-3">{"".join(render_card(p) for p in posts)}</div></div></section>
+    <section class="section" aria-labelledby="grid-heading"><div class="wrap"><h2 id="grid-heading">{grid_heading}</h2><div class="grid-3">{cards}</div></div></section>
     {hub_faq_html}{hub_trust_html}
     {related_cats_html}
     '''
     canonical = site['domain'] + f'/categories/{slug}/'
-    item_pairs  = [(p["title"], site["domain"] + f"/guides/{p['slug']}/") for p in posts]
+    item_pairs  = ([] if structured_hub else
+                   [(p["title"], site["domain"] + f"/guides/{p['slug']}/") for p in posts])
     breadcrumbs = [
         ("Home",          site["domain"] + "/"),
         ("Categories",    site["domain"] + "/categories/"),
@@ -1769,6 +1757,21 @@ def render_category_page(site, category, posts, all_categories=None, hub=None):
         + breadcrumb_schema(breadcrumbs)
         + (faq_schema(hub_faq_pairs) if hub_faq_pairs else "")
     )
+    if hub and 'reporting_routes' in hub:
+        nodes = [category_taxonomy(category), ArticleHTML('intro', intro),
+                 ArticleText('title', seo_title(page_title, site['site_name'], brand=False)),
+                 ArticleText('description', seo_description(page_desc))]
+        for index, (heading, body) in enumerate(hub.get('sections', [])):
+            nodes.extend([ArticleText(f'sections/{index}/0', heading),
+                          ArticleHTML(f'sections/{index}/1', _render_section_body(body))])
+        for index, pair in enumerate(hub.get('faq', [])):
+            if isinstance(pair, dict):
+                continue
+            for side, value in enumerate(pair):
+                nodes.append(ArticleText(f'faq/{index}/{side}', _schema_plain(value)))
+        from reporting_output import CanonRoutes
+        nodes.append(CanonRoutes(tuple(hub['reporting_routes'])))
+        validate_structured_output(hub, reporting_sources, reporting_review, nodes, page_id='hub:' + slug)
     return make_base(
         content,
         # brand=False when a reviewed hub title is in play, exactly as guide
@@ -1959,14 +1962,7 @@ def _inline(text: str) -> str:
     Used for example scam domains / messages and technical tokens (URLs, emails)
     so they read as literal, non-clickable strings. Phones are left un-backticked
     in content so linkify_phones can still wrap them in tel: anchors."""
-    escaped = html.escape(text)
-    escaped = _INLINE_CODE_RE.sub(lambda m: f"<code>{m.group(1)}</code>", escaped)
-    # Content data can use a deliberately narrow Markdown subset for internal
-    # links. Only root-relative, slug-safe paths are accepted, so an article
-    # cannot inject attributes, scripts, or an unreviewed external destination.
-    return _INTERNAL_MARKDOWN_LINK_RE.sub(
-        lambda m: f'<a href="{m.group(2)}">{m.group(1)}</a>', escaped
-    )
+    return inline_html(text)
 
 
 def _render_section_body(para) -> str:
@@ -2014,10 +2010,12 @@ def sources_checked_block(post: dict) -> str:
     items = post.get("sources_checked") or []
     if not items:
         return ""
-    lis = "".join(
+    lis = ("".join('<li>' + canon_mod.structured.render_citation(
+        canon_mod.structured.Citation(label, url)) + '</li>' for label, url in items)
+        if 'reporting_routes' in post else "".join(
         f'<li><a href="{html.escape(url)}" rel="noopener noreferrer" target="_blank">{html.escape(label)}</a></li>'
         for label, url in items
-    )
+    ))
     return f'<h2>Sources checked</h2><ul class="sources-checked">{lis}</ul>'
 
 
@@ -2075,7 +2073,36 @@ def evidence_snapshot_block(post: dict) -> str:
     return "".join(parts)
 
 
-def render_post(site, post, all_posts, affiliates=None, sources=None, link_map=None, slug_titles=None):
+def structured_reporting_block(post, sources=None, review=None, *, page_id=None):
+    """Revalidate at the rendering boundary; gate success is never assumed."""
+    sources = load_sources(ROOT) if sources is None else sources
+    catalog = canon_mod.reporting_catalog(sources,
+        expected_digest=review.canon_sha256 if isinstance(review, canon_mod.structured.ReviewContext) else None)
+    canon_mod.structured.validate_page(post, catalog, review, page_id=page_id)
+    return canon_mod.structured.render_block(catalog, post["reporting_routes"])
+
+
+def validate_structured_output(post, sources, review, nodes, *, page_id=None):
+    """Validate actual article fragments after conversion, before page assembly.
+
+    The canon block and bibliography have separate constructors/validation;
+    article data cannot supply HTML that claims either provenance. Site chrome,
+    navigation and catalogue output never enter this unrestricted-text list.
+    """
+    sources = load_sources(ROOT) if sources is None else sources
+    catalog = canon_mod.reporting_catalog(sources)
+    canon_mod.structured.validate_page(post, catalog, review, page_id=page_id)
+    return canon_mod.structured.validate_effective(nodes, catalog, review)
+
+
+def render_post(site, post, all_posts, affiliates=None, sources=None, link_map=None, slug_titles=None, *,
+                reporting_review=None):
+    from reporting_publication import required, review as authenticated_review
+    structured_post = required(post)
+    if structured_post:
+        sources = load_sources(ROOT) if sources is None else sources
+        reporting_review = authenticated_review(post, sources, reporting_review)
+    action_html = structured_reporting_block(post, sources, reporting_review) if structured_post else ""
     url   = site['domain'] + f'/guides/{post["slug"]}/'
     label = category_label(post["category"])
     mins  = reading_time(post)
@@ -2096,16 +2123,25 @@ def render_post(site, post, all_posts, affiliates=None, sources=None, link_map=N
         section_parts.append(f'<h2 id="{sid}">{html.escape(title)}</h2>{_render_section_body(para)}')
 
     toc      = "".join(f'<li><a href="#{sid}">{html.escape(t)}</a></li>' for sid, t in section_ids)
-    faq_html = "".join(f'<details><summary>{_inline(q)}</summary><p>{_inline(a)}</p></details>' for q, a in post['faq'])
+    action_nodes = []
+    if structured_post:
+        from reporting_action_render import faq_projection, components, placement
+        action_catalog = canon_mod.reporting_catalog(sources)
+        faq_html, faq_pairs, faq_nodes = faq_projection(post['faq'], post['reporting_routes'], action_catalog)
+        action_nodes.extend(components(action_catalog, post['reporting_routes']))
+        action_nodes.extend(faq_nodes)
+    else:
+        faq_pairs = post['faq']
+        faq_html = "".join(f'<details><summary>{_inline(q)}</summary><p>{_inline(a)}</p></details>' for q, a in post['faq'])
     # No visible keyword badges. Printing three exact-match search terms under
     # every headline made 185 guides look machine-templated rather than written,
     # which is the impression the corpus can least afford (audit, 2026-07-31).
     # The keywords still drive search.json, related guides and the sitemap —
     # they were never load-bearing for the reader.
-    related  = "".join(
+    related  = ('<a href="/guides/">Browse all guides</a>' if structured_post else "".join(
         f'<a href="/guides/{p["slug"]}/">{html.escape(p["title"])}<span class="meta">{html.escape(category_label(p["category"]))} &middot; {p["date"]}</span></a>'
         for p in related_posts(all_posts, post)
-    )
+    ))
 
     # Named byline backed by a real Person — Alex Bacsa, founder & editor.
     # Cross-publication identity (CloudFintech, TuningDigital, SalesTap) is
@@ -2127,13 +2163,37 @@ def render_post(site, post, all_posts, affiliates=None, sources=None, link_map=N
     # Page-specific 2–3 sentence direct answer, rendered above the generic Key
     # rule so AI assistants and skimming readers get the guide's core verdict
     # first. Optional per post; paired with speakable_schema() below.
-    qa = (post.get("quick_answer") or "").strip()
+    qa_value = post.get("quick_answer") or ""
+    qa = qa_value.strip() if isinstance(qa_value, str) else ""
     qa_html = ""
-    if qa:
+    if structured_post and isinstance(qa_value, dict):
+        selected = placement(qa_value, post['reporting_routes'], action_catalog)
+        action_nodes.extend(selected)
+        qa_html = '<div class="quick-answer"><strong>Quick answer:</strong>' + ''.join(n.html() for n in selected) + '</div>'
+    elif qa:
         qa_html = f'\n        <div class="quick-answer"><strong>Quick answer:</strong> {_inline(qa)}</div>'
 
     figure_html = render_guide_figure(post.get("figure") or {})
 
+    if structured_post:
+        route_reference = ('<a href="#reporting-routes">the reporting and support routes above</a>'
+                           if action_html else '<a href="/recovery/">the appropriate recovery service</a>')
+        route_note = (f'{review_note} '
+                      f'Read about <a href="/methodology/">how Beat the Scam writes guides</a>.')
+        sidebar_routes = '<p>See reporting and support options on this page.</p>'
+    else:
+        route_reference = police_route_html(sources, phone=False, url=False)
+        route_note = (f'Reporting routes in this guide are checked against our verified canon of official UK sources &#8212; {police_route_html(sources, phone=False, url=False)}, the <a href="{_r(sources, "ncsc-sers")["info_url"]}" rel="noopener" target="_blank">National Cyber Security Centre</a>, and the consumer service for each nation &#8212; by an automated accuracy gate before publication. {review_note} Read about <a href="/methodology/">how Beat the Scam writes guides</a>.')
+        sidebar_routes = report_block(sources)
+
+    reporting_notice = f'or report it to\n          {route_reference}.'
+    if structured_post:
+        reporting_notice = 'and see reporting and support options on this page.'
+
+    safety_chrome = '        <div class="notice"><strong>Key rule:</strong> verify through an official route you opened yourself, not the link, number, app, or payment details supplied by the suspicious message.</div>\n        <aside class="do-now" aria-label="What to do if you are being targeted right now">\n          <p class="do-now-title">Being targeted right now? Do this</p>\n          <ol>\n            <li><strong>Stop.</strong> Don&#8217;t pay, transfer money, or share passwords, PINs, or one-time codes.</li>\n            <li><strong>Contact your bank</strong> on the number on the back of your card if your money or details may be at risk.</li>\n            <li><strong>Use the right recovery route.</strong> Follow the <a href="/recovery/">payment, account and identity checklist</a>; reporting differs in Scotland.</li>\n          </ol>\n        </aside>\n'
+    if structured_post:
+        safety_chrome = '<div class="notice"><strong>Pause.</strong> Do not pay or share passwords, PINs or one-time codes.</div>'
+    safety_chrome = safety_chrome.lstrip().rstrip('\n')
     content = f'''
     <section class="hero">
       <div class="wrap">
@@ -2158,16 +2218,8 @@ def render_post(site, post, all_posts, affiliates=None, sources=None, link_map=N
           &middot; <time itemprop="datePublished" datetime="{html.escape(published)}">Published {html.escape(published)}</time>{updated_html}
           &middot; {mins} min read
         </p>
-        {qa_html}{figure_html}
-        <div class="notice"><strong>Key rule:</strong> verify through an official route you opened yourself, not the link, number, app, or payment details supplied by the suspicious message.</div>
-        <aside class="do-now" aria-label="What to do if you are being targeted right now">
-          <p class="do-now-title">Being targeted right now? Do this</p>
-          <ol>
-            <li><strong>Stop.</strong> Don&#8217;t pay, transfer money, or share passwords, PINs, or one-time codes.</li>
-            <li><strong>Contact your bank</strong> on the number on the back of your card if your money or details may be at risk.</li>
-            <li><strong>Use the right recovery route.</strong> Follow the <a href="/recovery/">payment, account and identity checklist</a>; reporting differs in Scotland.</li>
-          </ol>
-        </aside>
+        {qa_html}{action_html}{figure_html}
+        {safety_chrome}
         {evidence_snapshot_block(post)}
         <div class="toc"><h2>On this page</h2><ol>{toc}</ol></div>
         {"".join(section_parts)}
@@ -2176,17 +2228,16 @@ def render_post(site, post, all_posts, affiliates=None, sources=None, link_map=N
         {sources_checked_block(post)}
         <div class="notice" style="margin-top:2rem">
           <strong>Think you&#8217;ve spotted a scam?</strong>
-          Use the <a href="/check/">AI scam checker</a> for an automated second opinion, or report it to
-          {police_route_html(sources, phone=False, url=False)}.
+          Use the <a href="/check/">AI scam checker</a> for an automated second opinion, {reporting_notice}
         </div>
-        <p class="meta" style="margin-top:1.4rem">Reporting routes in this guide are checked against our verified canon of official UK sources &#8212; {police_route_html(sources, phone=False, url=False)}, the <a href="{_r(sources, 'ncsc-sers')['info_url']}" rel="noopener" target="_blank">National Cyber Security Centre</a>, and the consumer service for each nation &#8212; by an automated accuracy gate before publication. {review_note} Read about <a href="/methodology/">how Beat the Scam writes guides</a>.</p>
+        <p class="meta" style="margin-top:1.4rem">{route_note}</p>
       </article>
       <aside class="sidebar" aria-label="More resources">
         <section class="sidebar-card" aria-labelledby="sidebar-fast-checks-heading">
           <h3 id="sidebar-fast-checks-heading">Fast checks</h3>
           <ul class="warning-list">
             <li>Pause before sending money or credentials</li>
-            <li>Verify with an official site, app, or number</li>
+            <li>{'A familiar brand does not establish authenticity' if structured_post else 'Verify with an official site, app, or number'}</li>
             <li>Never share one-time passcodes</li>
             <li>Be sceptical of bank transfer pressure</li>
           </ul>
@@ -2196,15 +2247,15 @@ def render_post(site, post, all_posts, affiliates=None, sources=None, link_map=N
           <div class="related-links">{related}</div>
         </section>
         <section class="sidebar-card" aria-labelledby="sidebar-report-heading">
-          <h3 id="sidebar-report-heading">Report this scam</h3>
-          {report_block(sources)}
+          <h3 id="sidebar-report-heading">{'Reporting and support' if structured_post else 'Report this scam'}</h3>
+          {sidebar_routes}
         </section>
         <section class="sidebar-card" aria-labelledby="sidebar-notsure-heading">
           <h3 id="sidebar-notsure-heading">Not sure?</h3>
           <p class="note">Paste the suspicious message into the free AI checker for an instant plain-English verdict.</p>
           <a class="btn btn-primary" href="/check/" style="width:100%;margin-top:.5rem;text-align:center">Check a message</a>
         </section>
-        {affiliate_block(post, affiliates or [])}
+        {'' if structured_post else affiliate_block(post, affiliates or [])}
       </aside>
     </section>
     '''
@@ -2218,9 +2269,9 @@ def render_post(site, post, all_posts, affiliates=None, sources=None, link_map=N
     og_image_url = abs_url(site, f"/assets/og/{post['slug']}.png")
     schema = (
         article_schema(site, post, url, og_image_url=og_image_url)
-        + faq_schema(post['faq'])
+        + faq_schema(faq_pairs)
         + breadcrumb_schema(breadcrumbs)
-        + howto_schema(site, post, url)
+        + ("" if structured_post else howto_schema(site, post, url))
         + speakable_schema(url, post)
     )
 
@@ -2229,10 +2280,43 @@ def render_post(site, post, all_posts, affiliates=None, sources=None, link_map=N
     # full page (as before) let a keyword match inside that boilerplate copy —
     # not just the article — so every guide picked up an identical, unrelated
     # auto-link (e.g. the newsletter band's "the latest UK scams" text).
-    content = canonicalize_internal_guide_paths(content)
-    content = linkify_bare_paths(content, slug_titles or {}, current_slug=post['slug'])
-    content = apply_internal_links(content, post['slug'], link_map or {})
-    content = linkify_phones(content)
+    if not structured_post:
+        content = canonicalize_internal_guide_paths(content)
+        content = linkify_bare_paths(content, slug_titles or {}, current_slug=post['slug'])
+        content = apply_internal_links(content, post['slug'], link_map or {})
+        content = linkify_phones(content)
+    else:
+        # These are the actual renderer functions used above. Keep field paths
+        # so reviewed numeric facts cannot exempt another field by string alone.
+        nodes = [category_taxonomy(post['category']),
+                 ArticleText('title', seo_title(post['title'], site['site_name'], brand=False)),
+                 ArticleText('description', pick_description(post)),
+                 ArticleHTML('quick_answer', _inline(qa))]
+        # Keep original field identity through renderer-owned wrappers. Generated
+        # row counters and publication dates are metadata, not article prose.
+        for field in ('evidence', 'message_examples'):
+            for index, item in enumerate(post.get(field, [])):
+                for key, value in item.items():
+                    transform = _inline if key in ('finding', 'basis', 'assessment') else html.escape
+                    nodes.append(ArticleHTML(f'{field}/{index}/{key}', transform(value)))
+        for path, value in canon_mod.structured.prose_fields({'figure': post.get('figure', {})}):
+            nodes.append(ArticleText(path, ' '.join(value.split())))
+        for index, (_, body) in enumerate(post['sections']):
+            for step, value in enumerate(parse_numbered_steps(_normalize_bullet_body(body))[:8]):
+                nodes.append(ArticleText(f'sections/{index}/1/howto/{step}', howto_step_text(value),
+                    projection='schema', source_paths=(f'sections/{index}/1',)))
+        for index, (heading, body) in enumerate(post['sections']):
+            nodes.extend([ArticleText(f'sections/{index}/0', heading),
+                          ArticleHTML(f'sections/{index}/1', _render_section_body(body))])
+        for index, item in enumerate(post['faq']):
+            if isinstance(item, dict):
+                continue
+            for side, value in enumerate(item):
+                nodes.extend([ArticleHTML(f'faq/{index}/{side}', _inline(value)),
+                              ArticleText(f'faq/{index}/{side}', _schema_plain(value), projection='schema')])
+        from reporting_output import CanonRoutes
+        nodes.extend(CanonRoutes(tuple(post['reporting_routes'])) for _ in [0])
+        validate_structured_output(post, sources, reporting_review, nodes)
     # Optional blocks can leave indentation-only lines in the article template.
     # Keep generated HTML clean so repository whitespace checks remain useful.
     content = "\n".join(line.rstrip() for line in content.splitlines())
@@ -3243,11 +3327,38 @@ def build_legal_bodies(site, sources):
     '''
 
     corrections = f'''
-    <p class="note" style="color:#666;font-size:.95rem"><strong>Last updated:</strong> 25 September 2026</p>
+    <p class="note" style="color:#666;font-size:.95rem"><strong>Last updated:</strong> 9 October 2026</p>
     <p>This log records material factual corrections to published Beat the Scam guides. It does not list spelling, formatting, accessibility, or purely stylistic changes.</p>
 
     <h2>How to request a correction</h2>
     <p>Email <a href="mailto:{site["editorial_email"]}">{site["editorial_email"]}</a> with the page URL, the wording you believe is wrong, and a primary or authoritative source where possible. We assess the claim, update the guide when warranted, and record a material change below.</p>
+
+    <h2>9 October 2026</h2>
+    <ul>
+      <li><strong><a href="/guides/national-insurance-scam-call-uk/">National Insurance guide:</a></strong> We have replaced a general GOV.UK reporting reference with HMRC's exact suspicious-phone-call service, limited to calls that mention HMRC.</li>
+      <li><strong><a href="/guides/fake-ugg-website-uk/">UGG guide:</a></strong> We have removed advice in the reporting section and FAQ to notify UGG about a fake shop because the inspected UK sources did not establish a specific reporting route. The guide retains national reporting, consumer-advice and evidence-preservation steps.</li>
+      <li><strong><a href="/guides/shein-fake-website-scam-uk/">SHEIN guide:</a></strong> We have specified the UK Customer Service gateway for notifying SHEIN of a scam, supported by its UK scam guidance. This does not replace bank or police reporting and does not guarantee a refund.</li>
+      <li><strong><a href="/guides/fake-nike-website-uk/">Nike FAQ:</a></strong> We have removed the remaining advice to report counterfeit shops through Nike's general contact route. Primary evidence did not establish that reporting purpose; the FAQ now states that limitation and points to the consumer-service and reporting advice already in the guide.</li>
+      <li><strong><a href="/guides/ups-delivery-scam-text-messages-uk/">UPS FAQ:</a></strong> We have replaced the homepage reporting reference with the exact UK fraud guidance page and its Email UPS option for suspicious texts.</li>
+    </ul>
+    <h2>8 October 2026</h2>
+    <ul>
+      <li><strong><a href="/guides/universal-credit-scam-uk/">Universal Credit guide:</a></strong> We have clarified that the contact advice concerns misuse of the reader's own claim or account, and distinguished Great Britain from Northern Ireland.</li>
+      <li><strong><a href="/guides/tv-licence-scam-letter-uk/">TV Licensing letter guide:</a></strong> We have replaced an unsupported promise of a letter-specific reporting route through the homepage with independent licence checks and official scam guidance.</li>
+      <li><strong><a href="/guides/fake-online-pharmacy-uk-scam/">Online pharmacy guide:</a></strong> We have separated reports about suspected illegal sellers from medicine-safety reports, and directed readers with medical-device problems to nation-specific guidance.</li>
+      <li><strong><a href="/guides/ebay-listing-fee-scam-uk/">eBay listing fee guide:</a></strong> We have specified that suspicious emails should be forwarded as attachments.</li>
+      <li><strong><a href="/guides/fake-nike-website-uk/">Nike guide:</a></strong> We have removed an instruction to report counterfeit sellers through Nike's general contact route because current primary evidence did not establish that use. Independent retailer checks and evidence-preservation advice remain.</li>
+      <li><strong>Reporting destination precision:</strong> We have replaced broad website references with verified service destinations in the <a href="/guides/ups-delivery-scam-text-messages-uk/">UPS</a>, <a href="/guides/hmrc-phone-call-scam-uk/">HMRC phone call</a> and <a href="/guides/fake-pandora-website-uk-scam/">Pandora</a> guides, and linked the <a href="/categories/website/">website hub's</a> counterfeit-medicine advice directly to Yellow Card. The UPS advice no longer promises action against fake sites.</li>
+    </ul>
+
+    <h2>5 October 2026</h2>
+    <ul>
+      <li><strong><a href="/guides/facebook-dating-scam-uk/">Facebook Dating guide:</a></strong> An earlier version recommended taking screenshots before blocking and keeping everything as evidence without the necessary safeguards for sexual imagery, children and uncertain ages. We have replaced that advice with safe identifying notes, prompt reporting and police guidance on existing files, and clarified the age limits of image-removal services.</li>
+      <li><strong><a href="/guides/sextortion-email-scam-uk/">Sextortion email guide:</a></strong> An earlier version did not repeat the limits on forwarding emails in its reporting summary and did not fully distinguish safe text records from sensitive imagery. We have qualified that advice, clarified age limits for image-removal services, and directed readers to police for handling existing sensitive files.</li>
+      <li><strong><a href="/guides/viagogo-scam-uk/">Viagogo guide:</a></strong> An earlier version named two lookalike domains as fraudulent without sufficient evidence, incorrectly said Viagogo used only viagogo.com, and treated every off-platform payment request as proven fraud. We have removed those accusations and replaced the rules with independent verification and qualified payment-risk advice.</li>
+      <li><strong><a href="/guides/tinder-scam-uk/">Tinder guide:</a></strong> An earlier version used two real-looking website names without evidence and overstated how common or costly particular scams were on Tinder. We have removed those examples and claims, clarified the limits of verification and reporting features, and added safeguards to the evidence-handling advice.</li>
+      <li><strong><a href="/guides/deepfake-video-scam-uk/">Deepfake guide:</a></strong> An earlier version told readers to keep any material sent to them without the necessary limits for sexual imagery, children and uncertain ages. We have replaced that advice with safer ways to record identifying details and guidance to report promptly and follow police instructions for sensitive material. We have also clarified that image-removal services have age and eligibility limits.</li>
+    </ul>
 
     <h2>25 September 2026</h2>
     <ul>
@@ -4092,10 +4203,19 @@ def build():
     sources    = load_sources(ROOT)
     category_hubs = load_category_hubs(ROOT)
     validate_category_hubs(category_hubs)
+    # Authenticate every new/changed record before deleting output. Drafts
+    # cannot choose legacy mode; the checked-in exact snapshot fixes that policy.
+    # Missing external approval configuration fails closed.
+    for post in raw_posts:
+        from reporting_publication import required, review as authenticated_review
+        if required(post):
+            reviewed = authenticated_review(post, sources)
+            structured_reporting_block(post, sources, reviewed)
 
     # Normalise category names
     for post in raw_posts:
-        post["category"] = normalize_category(post["category"])
+        if 'reporting_routes' not in post:
+            post["category"] = normalize_category(post["category"])
 
     # Disambiguate slug collisions — preserve all posts, never silently drop.
     # Validate the RAW records first. disambiguate_slugs() renames a duplicate
@@ -4370,7 +4490,7 @@ def build():
         '/check/':       STATIC_LASTMOD,
         '/about/':       RECENT_LASTMOD,
         '/methodology/': RECENT_LASTMOD,
-        '/corrections/': '2026-09-25',
+        '/corrections/': '2026-10-09',
         '/recovery/':    RECENT_LASTMOD,
         '/research/':    max((r['published'] for r in research_reports), default=RECENT_LASTMOD),
         '/research/methodology/': RECENT_LASTMOD,
@@ -4562,6 +4682,11 @@ def build():
                 full_lines.append(canonicalize_internal_guide_paths(body.strip()))
                 full_lines.append("")
             faqs = p.get("faq") or []
+            if 'reporting_routes' in p:
+                from reporting_action_render import faq_projection
+                catalog = canon_mod.reporting_catalog(sources)
+                _, faqs, _ = faq_projection(faqs, p['reporting_routes'], catalog)
+                full_lines.extend([canon_mod.structured.render_plain(catalog, p['reporting_routes']), ''])
             if faqs:
                 full_lines.append("### Frequently asked questions")
                 full_lines.append("")

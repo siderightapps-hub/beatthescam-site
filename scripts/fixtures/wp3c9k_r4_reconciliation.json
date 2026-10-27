@@ -1,0 +1,199 @@
+{
+  "schema": "wp3c9k-r4-hold-regressions/v1",
+  "scope": "Diagnostic preservation and fail-closed checks only; no structured semantic resolution or production approval",
+  "source_dependencies": {
+    "content/posts.json": "c8f522a63499d7b4225e9d3fcea69396b81d49135bbc3ebcefa21bfebe7f189e",
+    "content/category-hubs.json": "973088ed2efd3574434fe3c9e1d7e80df7529ce18939e55766a329c9271bb484",
+    "content/sources.json": "ed9c5a4355c24be151e06cf038ed9423e3858173a130a19e43e559583579f8d2"
+  },
+  "semantic_cases": [
+    {
+      "id": "M08",
+      "page_id": "hub:tech",
+      "output_path": "dist/categories/tech/index.html",
+      "source_sha256": "c0f57a081353016554a2bd9d109fa189a79f72398d0639169d4f6d6a2a5ef39f",
+      "required_change": "Deepfake guide-card summary replaces general evidence-preservation advice with safe details, avoiding sexual-image copying and asking police about files.",
+      "expected_action_authority": null,
+      "status": "HOLD: no authoritative structured action selection; legacy prose is not a contract"
+    },
+    {
+      "id": "M09",
+      "page_id": "hub:website",
+      "output_path": "dist/categories/website/index.html",
+      "source_sha256": "4167bd315882abbe2ed6352da96cf7ee5d3c73c62afff91890a00eaaf6dc157a",
+      "required_change": "Hub reporting link becomes the direct Yellow Card destination; an explicit correction/evidence entry and update/card dates also change.",
+      "expected_action_authority": null,
+      "status": "HOLD: no authoritative structured action selection; legacy prose is not a contract"
+    },
+    {
+      "id": "M10",
+      "page_id": "guide:deepfake-video-scam-uk",
+      "output_path": "dist/guides/deepfake-video-scam-uk/index.html",
+      "source_sha256": "d72f1a020b3ca5b4606f20b0aff6ad6b8619576b67acd7773b2b1c942c049413",
+      "required_change": "Evidence handling, police reporting, under-18 uncertainty, image-removal eligibility and legal jurisdiction qualifiers change.",
+      "expected_action_authority": null,
+      "status": "HOLD: no authoritative structured action selection; legacy prose is not a contract"
+    },
+    {
+      "id": "M11",
+      "page_id": "guide:ebay-listing-fee-scam-uk",
+      "output_path": "dist/guides/ebay-listing-fee-scam-uk/index.html",
+      "source_sha256": "443145a01e691f8a66d36f905eab7aec1122d8752cb1a12b45656698bebe4225",
+      "required_change": "The reporting instruction specifies forwarding as an attachment instead of general email forwarding.",
+      "expected_action_authority": null,
+      "status": "HOLD: no authoritative structured action selection; legacy prose is not a contract"
+    },
+    {
+      "id": "M12",
+      "page_id": "guide:facebook-dating-scam-uk",
+      "output_path": "dist/guides/facebook-dating-scam-uk/index.html",
+      "source_sha256": "af179f25579b3142b14d8a8c9aa95a68799a7f15d426bed94c14b4b417e0f36a",
+      "required_change": "Screenshot/keep-everything instructions become safe evidence identifiers, no sexual-image copying and prompt police reporting; age/removal qualifiers change.",
+      "expected_action_authority": null,
+      "status": "HOLD: no authoritative structured action selection; legacy prose is not a contract"
+    },
+    {
+      "id": "M13",
+      "page_id": "guide:fake-nike-website-uk",
+      "output_path": "dist/guides/fake-nike-website-uk/index.html",
+      "source_sha256": "feeaf29c7285b29e22fb22ebf5f63ac4fcd6a116f93e497833f4bf0b7a0ef8bb",
+      "required_change": "Removes an unsupported general customer-service contact as a counterfeit/scam reporting destination.",
+      "expected_action_authority": null,
+      "status": "HOLD: no authoritative structured action selection; legacy prose is not a contract"
+    },
+    {
+      "id": "M14",
+      "page_id": "guide:fake-online-pharmacy-uk-scam",
+      "output_path": "dist/guides/fake-online-pharmacy-uk-scam/index.html",
+      "source_sha256": "01c0719ce9b6ca9107fbaa7ff55f8389d494650471fa1af32d54f47d28052966",
+      "required_change": "Separates MHRA suspect-seller reporting from medicines/devices Yellow Card routes and nation-specific scope.",
+      "expected_action_authority": null,
+      "status": "HOLD: no authoritative structured action selection; legacy prose is not a contract"
+    },
+    {
+      "id": "M15",
+      "page_id": "guide:fake-pandora-website-uk-scam",
+      "output_path": "dist/guides/fake-pandora-website-uk-scam/index.html",
+      "source_sha256": "c8736d33039cc4e1742efc99bdcb2e81723e4bb53c50fab9df14daea3c157bd4",
+      "required_change": "Replaces generic brand-site reporting with the named brand-protection mailbox and required English-language details/link.",
+      "expected_action_authority": null,
+      "status": "HOLD: no authoritative structured action selection; legacy prose is not a contract"
+    },
+    {
+      "id": "M16",
+      "page_id": "guide:fake-ugg-website-uk",
+      "output_path": "dist/guides/fake-ugg-website-uk/index.html",
+      "source_sha256": "7c1aa08a87271d636ba3c7898e874a693ab09e26033bb84709dec56ac1c17cab",
+      "required_change": "Removes an unsupported customer-service reporting route and adjusts the action guidance.",
+      "expected_action_authority": null,
+      "status": "HOLD: no authoritative structured action selection; legacy prose is not a contract"
+    },
+    {
+      "id": "M17",
+      "page_id": "guide:hmrc-phone-call-scam-uk",
+      "output_path": "dist/guides/hmrc-phone-call-scam-uk/index.html",
+      "source_sha256": "00e151c4cf1fe9dc62fc06f849029553480061a9d0e4fc430222eabf6bf8035b",
+      "required_change": "General GOV.UK reporting becomes the specific HMRC suspicious-call reporting service URL.",
+      "expected_action_authority": null,
+      "status": "HOLD: no authoritative structured action selection; legacy prose is not a contract"
+    },
+    {
+      "id": "M18",
+      "page_id": "guide:national-insurance-scam-call-uk",
+      "output_path": "dist/guides/national-insurance-scam-call-uk/index.html",
+      "source_sha256": "981cfb2236789772de02475036757652c93d55aa0f8479b9cf0cd2d26b45e3de",
+      "required_change": "Adds the HMRC relationship condition and specific service URL rather than generic National Insurance reporting advice.",
+      "expected_action_authority": null,
+      "status": "HOLD: no authoritative structured action selection; legacy prose is not a contract"
+    },
+    {
+      "id": "M19",
+      "page_id": "guide:sextortion-email-scam-uk",
+      "output_path": "dist/guides/sextortion-email-scam-uk/index.html",
+      "source_sha256": "73b4cbf93d46a98aa6b9906c543b18199fc85ea793f56aad356da903fdb06be2",
+      "required_change": "General forward-to-NCSC advice becomes ordinary-phishing-only, excludes sexual imagery/attachments and distinguishes real/AI intimate threats for police.",
+      "expected_action_authority": null,
+      "status": "HOLD: no authoritative structured action selection; legacy prose is not a contract"
+    },
+    {
+      "id": "M20",
+      "page_id": "guide:shein-fake-website-scam-uk",
+      "output_path": "dist/guides/shein-fake-website-scam-uk/index.html",
+      "source_sha256": "668fcc85c0b997e19eaa5db8bff4abd1b5a911a9330596144487d56af1aae564",
+      "required_change": "Selects the official Customer Service contact path, clarifies no-loss eligibility and that it does not replace bank/police or guarantee reimbursement.",
+      "expected_action_authority": null,
+      "status": "HOLD: no authoritative structured action selection; legacy prose is not a contract"
+    },
+    {
+      "id": "M21",
+      "page_id": "guide:tinder-scam-uk",
+      "output_path": "dist/guides/tinder-scam-uk/index.html",
+      "source_sha256": "842f90b678cc0b9292fb2a5ffdaa178ceeb1c0b00de175b39fa4c3d00436b831",
+      "required_change": "Changes safe evidence handling, verification/domain qualifiers and absolute fraud claims; ordinary-image checks exclude intimate imagery.",
+      "expected_action_authority": null,
+      "status": "HOLD: no authoritative structured action selection; legacy prose is not a contract"
+    },
+    {
+      "id": "M22",
+      "page_id": "guide:tv-licence-scam-letter-uk",
+      "output_path": "dist/guides/tv-licence-scam-letter-uk/index.html",
+      "source_sha256": "46d74a4b348372ebd28e2415960225ac7d9d9031dc7fd3f0e01f71faa24ae609",
+      "required_change": "Replaces a purported general reporting intake with scam guidance FAQ288 and independent licence/account verification.",
+      "expected_action_authority": null,
+      "status": "HOLD: no authoritative structured action selection; legacy prose is not a contract"
+    },
+    {
+      "id": "M23",
+      "page_id": "guide:universal-credit-scam-uk",
+      "output_path": "dist/guides/universal-credit-scam-uk/index.html",
+      "source_sha256": "3c59651bcbfbaa6cbab237e76efabe4f6d6dbbeb0ba1adeecfa367aa6a9dae00",
+      "required_change": "Replaces generic GOV.UK/helpline guidance with distinct Great Britain and Northern Ireland contact routes.",
+      "expected_action_authority": null,
+      "status": "HOLD: no authoritative structured action selection; legacy prose is not a contract"
+    },
+    {
+      "id": "M24",
+      "page_id": "guide:ups-delivery-scam-text-messages-uk",
+      "output_path": "dist/guides/ups-delivery-scam-text-messages-uk/index.html",
+      "source_sha256": "ac02df9bb5e09e1f482357c4d68e21584cf7279b19283dcd9cb6f2c2046a674f",
+      "required_change": "Selects the UK Email UPS contact option and removes unsupported promises about taking down fake sites.",
+      "expected_action_authority": null,
+      "status": "HOLD: no authoritative structured action selection; legacy prose is not a contract"
+    },
+    {
+      "id": "M25",
+      "page_id": "guide:viagogo-scam-uk",
+      "output_path": "dist/guides/viagogo-scam-uk/index.html",
+      "source_sha256": "4ed8eca477ab3acfefd1f2fc4f4868adac706e9a01128b03154b37fccf545339",
+      "required_change": "Changes the exact-domain and off-platform-fraud assertions to qualified domain, payment and ticket-term checks.",
+      "expected_action_authority": null,
+      "status": "HOLD: no authoritative structured action selection; legacy prose is not a contract"
+    }
+  ],
+  "factual_cases": [
+    {
+      "id": "M01",
+      "slug": "tinder-scam-uk",
+      "description": "Check Tinder verification badges, unexpected safety-check links and investment requests. Learn how to report a concern and act if you have paid money.",
+      "source_description_sha256": "49d2c256d6a0eeeb41523fd1e924df29d504220b57a90262c2ff2e208290f8b7",
+      "disposition": "SOURCE CORRECT / RENDER STALE"
+    },
+    {
+      "id": "M06",
+      "slug": "viagogo-scam-uk",
+      "description": "Buying Viagogo tickets in the UK? Check the total price, entry restrictions and payment route, and understand the limits of refunds and card protection.",
+      "source_description_sha256": "337fdeead36b17b63588375c4a056bd23dcd450e8e23d5bf345f599bdfd461fe",
+      "disposition": "SOURCE CORRECT / RENDER STALE"
+    }
+  ],
+  "approved_phone": {
+    "page_id": "hub:phone",
+    "source_sha256": "5b4c9b905bbabb41f47c3b5de4613cd3b74648fe846caf325e3d7afad5b9604b",
+    "action_plan_sha256": "5e521502fef77b664b7d62d3a70ec52ba8c2ca0c8c323b4e104541867fc4d621",
+    "route_ids": [
+      "own-bank:number-on-bank-card",
+      "citizens-advice:consumer-advice-english"
+    ],
+    "authority": "Owner-approved R10B plan applied by R11; source identity only, no publication grant"
+  }
+}

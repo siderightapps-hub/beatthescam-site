@@ -802,7 +802,7 @@
       ],
       [
         "How to report a UPS scam text in the UK",
-        "Forward the text free to 7726 so your mobile network can investigate and block the sender, then delete it. If you've lost money or shared details, report it to Report Fraud at reportfraud.police.uk or 0300 123 2040 (in Scotland, Police Scotland on 101). Phishing links can be reported to the National Cyber Security Centre, and you can alert UPS through the fraud or security section of ups.com so they can act on the fake sites. A quick report helps networks and investigators disrupt the campaign behind the message."
+        "Forward the text free to 7726 so your mobile network can investigate and block the sender, then delete it. If you've lost money or shared details, report it to Report Fraud at reportfraud.police.uk or 0300 123 2040 (in Scotland, Police Scotland on 101). Phishing links can be reported to the National Cyber Security Centre, and you can report suspicious UPS texts using the Email UPS option on its UK fraud page at `https://www.ups.com/gb/en/support/shipping-support/legal-terms-conditions/fight-fraud`. A quick report helps networks and investigators disrupt the campaign behind the message."
       ]
     ],
     "faq": [
@@ -820,7 +820,7 @@
       ],
       [
         "Where can I report a fake UPS text in the UK?",
-        "Forward the message free to 7726 so your network can investigate the sender, then delete it. If money or personal details were lost, report to Report Fraud at reportfraud.police.uk or 0300 123 2040 (Police Scotland on 101 in Scotland). You can also report the phishing page to the NCSC and notify UPS through ups.com."
+        "Forward the message free to 7726 so your network can investigate the sender, then delete it. If money or personal details were lost, report to Report Fraud at reportfraud.police.uk or 0300 123 2040 (Police Scotland on 101 in Scotland). You can also report the phishing page to the NCSC. Report suspicious UPS texts using the Email UPS option on its UK fraud page at `https://www.ups.com/gb/en/support/shipping-support/legal-terms-conditions/fight-fraud`."
       ]
     ],
     "sources_checked": [
@@ -838,7 +838,7 @@
       ]
     ],
     "quick_answer": "A 'UPS' text demanding a customs, import or redelivery fee through a link is almost always a scam — genuine charges are never collected via a random SMS link. Verify any charge by entering your tracking number at ups.com yourself, then forward the fake text free to `7726`.",
-    "updated": "2026-07-31"
+    "updated": "2026-10-09"
   },
   {
     "slug": "bank-text-codes-not-arriving",
@@ -1928,60 +1928,64 @@
     "slug": "tinder-scam-uk",
     "category": "dating",
     "excerpt": "Learn how Tinder scammers operate in the UK, spot fake profiles, and protect your money and personal data.",
-    "description": "A Tinder match who moves fast, won't video-call, then needs money or pushes 'crypto'? How to spot a romance scam and protect yourself — without the shame.",
-    "hero": "Tinder scams can cost you thousands — here's how to spot them before you lose money.",
+    "description": "Check Tinder verification badges, unexpected safety-check links and investment requests. Learn how to report a concern and act if you have paid money.",
+    "hero": "A verification badge is not a guarantee of safety. Keep early conversations in Tinder and pause before following a match’s payment or investment instructions.",
     "date": "2026-04-21",
     "content": "## What is this scam?\n\nA Tinder scam is when someone creates a fake profile on the dating app to deceive you into sending money, revealing personal information, or downloading malware. The scammer may pose as an attractive person interested in dating you, but their real goal is financial gain or identity theft. These scammers are often based outside the UK and operate in organized gangs. They target vulnerable users by creating convincing profiles with stolen photos, building emotional connections, and then introducing a crisis or opportunity that requires money. Unlike genuine Tinder matches, scammers will typically avoid meeting in person, make excuses when video calls are suggested, and move quickly to off-app communication platforms like WhatsApp or Telegram. The Financial Conduct Authority and City of London Police have confirmed that romance and dating scams cost UK victims over £106 million in the 2024/25 financial year — a figure that has risen 18% year-on-year. The average loss per victim is £11,222, with 9,449 cases reported. Over 85% of cases begin online, particularly through social media and dating platforms.\n\n## Warning signs to look for\n\n['- Profile uses only professional photos or stock images that look unusually polished — run a reverse image search on Google Images to check if the photos appear elsewhere online.', \"- They claim to work abroad (often in construction, military, or oil rigs) or have recently moved away, explaining why they can't meet in person.\", \"- They resist video calls or voice calls, making excuses like 'my camera is broken' or 'I'm in a remote location with no internet'.\", '- They move conversations off Tinder very quickly to WhatsApp, Telegram, or other platforms where fewer safeguards exist.', '- They express romantic feelings or use terms of endearment within days of matching, or their messages contain spelling errors and awkward phrasing typical of non-native English speakers.', '- They introduce a financial request after 1-4 weeks of chatting — usually claiming an emergency, business opportunity, or investment with guaranteed returns.', '- Their stories keep changing or have inconsistencies when you ask follow-up questions about their background.', '- They ask for money via cryptocurrency, gift cards, bank transfer, or wire transfer — methods that cannot be reversed.']\n\n## How this scam works step by step\n\nThe scammer starts by creating a Tinder profile using stolen photos, often of an attractive person. They match with you and begin casual conversation to build trust. Over several days or weeks, they chat regularly, compliment you, and create a sense of connection — this is called 'grooming.' Once they believe you're emotionally invested, they introduce a problem or opportunity: they claim to be stuck abroad without access to funds, need money for an emergency, or have discovered a lucrative investment. They may send forged documents or screenshots to make their story seem real. When you express reluctance, they may pressure you or introduce a supposed third party (like a lawyer or business associate) to convince you further. If you agree to send money, they direct you to transfer via bank transfer, cryptocurrency wallet, or gift cards purchased from supermarkets. Once the money is sent, you'll receive apologies and promises to repay you, but the scammer will disappear or keep making excuses and requests for more funds. If you've shared personal information like your date of birth, address, or ID photos, scammers may use this for identity theft or blackmail.\n\n## How to verify if it is genuine\n\nDo a reverse image search on every photo in their profile. Open Google Images, click the camera icon, and upload or paste the URL of their profile photo. If the same images appear on other dating apps, modelling websites, or stock photo sites under different names, it's almost certainly a scam. Ask them to video call immediately — genuine users will usually agree within the first week. If they refuse or keep cancelling, that's a major red flag. Check their Tinder profile for inconsistencies: does their bio mention living in the UK, but their photos show tropical locations? Do they claim to be a specific age but their photos look significantly older or younger? Search their name and photos on Facebook, LinkedIn, and Instagram — a real person will usually have some online presence. If they claim to work in a high-paying field, verify their employer. Ask specific questions about their claimed location or job to catch inconsistencies. For investment opportunities, visit our guide on /guides/is-this-website-a-scam/ to check if any linked website is legitimate. Never send money before meeting in person and always trust your gut — if something feels rushed or odd, it probably is.\n\n## What to do if you have already interacted\n\nStop all contact immediately and block the account on Tinder. Do not send any more money, even if they claim to be trapped, in debt, or facing legal action — this is the scammer's primary goal. If you've already sent money, contact your bank or payment provider (PayPal, Wise, etc.) within 24 hours to report the fraud and request a reversal. Most UK banks can recover funds if you act quickly, especially for bank transfers made within the last few days. If you've shared personal information like your date of birth, address, or passport details, monitor your credit report using Experian, Equifax, or TransUnion for free. If you've sent photos of your ID or face, watch for signs of identity theft such as accounts opened in your name or unexpected credit checks. If the scammer has threatened to release intimate photos or has obtained explicit images, report this immediately to the NCSC at report@phishing.gov.uk and to Action Fraud, as this may constitute blackmail. Document everything — save all messages, profile screenshots, payment receipts, and bank statements. Do not delete these; you'll need them for reporting and potential recovery efforts.\n\n## Reporting this scam in the UK\n\nReport the fake Tinder profile directly through the app by tapping the three-dot menu on their profile and selecting 'Report.' Explain that it's a scam profile. Next, report the incident to Action Fraud, the UK's national fraud reporting service, by calling 0300 123 2040 or visiting actionfraud.police.uk. Provide your case reference number when contacting your bank. If you received suspicious messages or links, forward them to the NCSC Suspicious Email Reporting Service at report@phishing.gov.uk. If the scammer sent you SMS messages, forward them to 7726 (works with most UK networks). Contact your bank's fraud department on the phone number on the back of your card — do not use numbers from emails or websites. If you're elderly or vulnerable, also contact Citizens Advice consumer helpline on 0808 223 1133 for additional support. Report the scam to Tinder's support team via their in-app help centre or at support.tinder.com. Keep all evidence and the Action Fraud reference number safe; you may need it for your bank's investigation and for future disputes.",
     "sections": [
       [
+        "Correction",
+        "An earlier version used two real-looking website names without evidence and overstated how common or costly particular scams were on Tinder. We have removed those examples and claims, clarified the limits of verification and reporting features, and added safeguards to the evidence-handling advice."
+      ],
+      [
         "Three high-risk decision points on Tinder",
-        "Three moments on Tinder carry most of the financial risk, and each has a clean decision attached to it.\n\n- A new match asks you to prove you are real by using a link they send you. Decision: never open it. A match cannot issue or complete Tinder verification for you.\n- A match wants your number in the first handful of exchanges. Decision: slow down. That is a red flag rather than conclusive proof of fraud, and Tinder's own safety tips say to keep conversations on Tinder while you are getting to know someone.\n- Weeks in, a warm and attentive person mentions a trading platform they use. Decision: treat that as fraud from its first mention, however long you have been talking. Tinder's safety tips put it plainly: do not let a match talk you into investing or opening an account with a service or website they share.\n\nNone of this requires you to be suspicious of people in general. Each one is a discrete choice with a right answer, which is why it is worth settling them in advance rather than mid-conversation with someone you are enjoying. The same three decision points apply on other apps, and the verification-link version is documented on Bumble in our [Bumble romance scam guide](/guides/bumble-romance-scam-uk/)."
+        "Use these three checks before following a match’s instructions.\n\nIf a match sends a verification link, do not use it; open Tinder independently and check the app or Help Centre instead.\n\nIf a match wants your number early, slow down and keep talking in Tinder while you get to know them. That request alone does not prove fraud.\n\nIf a match recommends an investment or trading service, do not send money or open an account on their recommendation. Tinder’s safety advice expressly warns against this."
       ],
       [
         "What the Photo Verified badge actually proves",
-        "From 26 March 2026 Tinder began rolling Face Check out to new UK users, and describes it as required for all new UK users. You record a short video selfie in the app; Tinder's system tests that a real, physically present person took it and compares the face with the profile photos, then awards the Photo Verified badge. In earlier Face Check markets Tinder reported more than a 60 per cent fall in exposure to potential bad actors and more than a 40 per cent fall in bad-actor reports — those are Tinder's own measured results. Separately, Tinder offers an optional ID + Photo Verification process, which checks a government-issued ID against a selfie and profile likeness and confirms age; Tinder says expressly that it does not guarantee the ID's validity or a user's safety.\n\nRead the badge for exactly what it is. The badge shows that Tinder's liveness and face-matching checks succeeded. Tinder also uses Face Check to detect the same face across multiple accounts, but neither the badge nor that detection guarantees a person's name, biography, location, relationship status or intentions.\n\nThe mandatory Face Check announcement applies to new users, so an older account should not be assumed to have completed it.\n\nFace Check is a floor, not a character reference. Tinder's safety tips suggest a phone or video call as a screening step before meeting, and somebody who keeps producing reasons never to take one has told you something the badge cannot. Note, though, that Tinder's in-app Face to Face video chat has been discontinued, so any such call will run on a separate service. Arrange it if you want to, and carry on talking in Tinder afterwards rather than abandoning the in-app record."
+        "On 26 March 2026 Tinder announced Face Check for new UK users and described it as required for them. It uses an in-app video selfie to check liveness and compare the face with profile photos; successful users receive a Photo Verified badge. Tinder also says it uses Face Check to detect the same face across multiple accounts.\n\nTinder reported more than a 60 per cent reduction in exposure to potential bad actors and more than a 40 per cent reduction in bad-actor reports in earlier Face Check markets, alongside other safety initiatives. These are company-reported results, not a UK loss estimate or proof of Face Check’s effect on its own.\n\nSeparately, Tinder describes ID + Photo Verification as optional and available to some people in selected test markets. It compares a government-issued ID with the selfie and profile images and checks the date of birth. Tinder explicitly says this does not guarantee the ID’s validity or the user’s safety.\n\nDo not treat a badge as proof of someone’s biography or intentions, or assume every older account completed the new-user Face Check process.\n\nTinder recommends a phone or video call as a screening step before meeting. Its in-app Face to Face video-chat feature has been discontinued. If you choose to call elsewhere, protect your contact details and continue using Tinder’s reporting tools if concerns arise."
       ],
       [
-        "The 'get yourself verified first' link is always a scam",
-        "One pattern is close to universal on Tinder. An enthusiastic new match explains that she only meets people who are safety-verified, then sends a link to a site with a name in the style of `safe-dating-verify.com` or `datesafe-id.net`. The page imitates a background-check service. It wants your name, date of birth, email address and card number, and promises the card is only there to confirm you are an adult.\n\nAn unsolicited verification page like that may steal personal or payment information, and nothing on the page tells you which. There is no upside to filling it in.\n\nThe rule to hold on to is narrow and it is reliable. A match cannot issue or complete Tinder verification for you. Never use a verification link sent by a match. Start any genuine account or age-verification process only from Tinder's own app, site or help flow.\n\nIt is worded that way on purpose, because Tinder itself can send you outwards: an account restricted on age grounds may be directed from an in-app prompt to a third-party age-verification service. What matters is where the journey starts. A link that arrives in a chat is not a Tinder flow, and the response is to report the account rather than reason with it. If the same lure reaches you by email, forward it to report@phishing.gov.uk."
+        "A match’s verification link: pause and check independently",
+        "The FBI’s April 2024 warning describes an online-dating scam in which a contact sends a link to a supposedly free verification service. The site collects personal and card details and can lead to recurring subscription charges or misuse of the information. The warning supports this mechanism; it does not establish how common it is on Tinder in the UK.\n\nDo not use a verification link supplied by a match or enter card details into it. Start from Tinder’s app or independently opened Help Centre. Tinder says an age-restriction appeal can lead from its own app to a third-party ID-check service. A third-party destination is therefore not, by itself, proof of fraud; the important check is whether you started from Tinder’s genuine process.\n\nReport suspicious verification requests through Tinder rather than arguing with the sender."
       ],
       [
         "Tinder's safety prompts, and what they do not tell you",
-        "Several Tinder features fire on their own. Read them as safety prompts, which is what Tinder calls them — not as findings about the person you are talking to.\n\n- Contact Exchange Alerts appear when Tinder detects contact details being shared in a chat. The prompt surfaces safety information; it does not mean the app has judged the timing, or the person, abnormal.\n- Are You Sure? asks a sender to reconsider a message that looks inappropriate, and Does This Bother You? offers the person receiving it an immediate route to report.\n- Photo Verified Chat, when you enable it, restricts incoming messages to Photo Verified members. Tinder does not claim it removes any particular share of throwaway or bot accounts.\n- Block Contacts lets you pre-block people from your phone's contact list. It is best-effort by Tinder's own account: Tinder says it cannot prevent two people seeing each other if the uploaded contact details do not match the details used to create the account.\n\nNone of these stops a patient, funded operator. What they do is interrupt you for a second, which is the only thing a prompt can do — the decision still belongs to you."
+        "Contact Exchange Alerts may appear when Tinder detects contact details being shared and display safety information.\n\nAre You Sure? asks a sender to reconsider potentially inappropriate wording; Does This Bother You? helps the recipient report a concerning message.\n\nPhoto Verified users can enable Photo Verified Chat to restrict messages to other Photo Verified users.\n\nBlock Contacts can help you avoid seeing selected contacts, but Tinder says it depends on their sign-up details matching the details you supplied and does not affect existing matches or messages.\n\nTreat these as tools to help you manage contact, not a guarantee that a person is safe or a conclusion that they are a scammer."
       ],
       [
         "When Telegram and a trading app enter the conversation",
-        "The most expensive Tinder pattern is not the urgent-emergency story. It is the slow one, where there is no crisis, no request and nothing to refuse. Across several weeks a match becomes a fixture of your day, mentions in passing that an uncle or a mentor handles money for the family, and eventually shares an app or web platform with a tidy interface and a balance that ticks upward.\n\nA small opening deposit appears to grow. That screen is fabricated. Attempt a withdrawal and a charge appears: tax, a compliance fee, an account-upgrade minimum, an unlocking payment. Every one of those is another deposit into the same fraud, and paying one always reveals another.\n\nTwo details are specific to how this reaches you through Tinder. First, the chat usually leaves the app early, for WhatsApp or Telegram. Tinder holds the messages that remain in its own service and cannot review a conversation on another platform at all, so moving off-platform takes everything that follows out of Tinder's in-app moderation view unless you preserve it and supply it yourself.\n\nSecond, check the named platform on the FCA Firm Checker at `register.fca.org.uk` before any money moves, not afterwards. Look the firm up, read what it is actually authorised to do, and confirm that every contact detail you have been given matches the register. A fraudulent platform may be missing from the register altogether — but a scammer may equally impersonate an authorised firm or quote a genuine firm's real details, so a name that does appear is not a clean bill of health. Start the check from the FCA's own page, never from a link the match supplies. To pressure-test the site itself, our guide at /guides/is-this-website-a-scam/ walks through the checks. The move onto a second platform is the constant across apps — the Facebook Dating version is covered in our [Facebook Dating scam guide](/guides/facebook-dating-scam-uk/)."
+        "The FBI has described investment fraud that starts on dating or social apps: someone builds trust, directs a target to a fake investment site, and uses fictitious returns to encourage more deposits. When the target tries to withdraw, demands for taxes or extra fees can cause further losses. This is a documented mechanism, not a ranking of Tinder losses or proof about any particular match.\n\nStay in Tinder while getting to know someone, as its safety guidance recommends. Moving to another service takes the conversation outside Tinder’s on-platform safeguards, but Tinder still accepts reports about concerning off-app behaviour.\n\nDo not invest on a match’s recommendation. For a financial firm, start from the FCA’s own website and use its Firm Checker to check authorisation, relevant permissions and contact details. Scammers can impersonate authorised firms, so finding the name on a register does not authenticate the person or link you were given. For additional practical checks, see our [website-checking guide](/guides/is-this-website-a-scam/)."
       ],
       [
-        "Screenshot first, then unmatch, block and report",
-        "Order matters. Capture screenshots first: the profile, the photos, the whole chat, any usernames, numbers, links or wallet addresses. The moment you unmatch, the conversation disappears from your side of the app.\n\nThen open the three-dot menu on the profile or in the chat and choose to report — there is also a report button at the foot of every profile you can see. Follow the on-screen prompts, pick a reason, and add the details that help. Who submitted a report and what it said stay confidential, but Tinder does say a reported person may receive a generic notification that a report led to their account being reviewed, so do not assume nobody is told anything. Blocking removes their profile from your feed and stops them contacting you again.\n\nIf you unmatched first and only later realised what was happening, you have not lost the chance. Tinder's Safety Center carries an online route for reporting someone you unmatched, or who unmatched you, so the report is still possible once the connection is gone. Make it anyway: yours may be the report that closes an account currently working through dozens of other people."
+        "Record safe details and report — do not wait to collect everything",
+        "If safe, note the profile name, username, dates, payment references and relevant text before unmatching. Tinder says unmatching removes the conversation and profile connection. Do not reopen suspicious links or files to collect evidence. If sexual imagery is involved, do not copy or forward it when anyone may be under 18 or their age is uncertain; report and ask police how to handle material already on your device. You can report without first collecting screenshots.\n\nUse Report in the profile or chat’s three-dot menu, or the report button at the bottom of a profile, and follow the prompts. Tinder says reports are confidential, with possible exceptions where the law requires disclosure; a reported user may receive a generic notification. Use the appropriate block or unmatch control to end the connection, and block contact separately on any other service you used.\n\nTinder says you can still report after unmatching. If the profile is no longer available, use the reporting contact form linked from Tinder Help’s “Reporting profiles and content” page and provide the safe details you have."
       ],
       [
         "If you have already paid",
-        "Being targeted says nothing bad about your judgement. These are staffed, scripted operations run at industrial scale, working through many people at once with material that has been tested on other targets before it reached you.\n\nWork in this order.\n\n- Ring your bank today and use the phrase authorised push payment fraud. Money sent by Faster Payments or CHAPS from a UK account on or after 7 October 2024 may be reimbursable under the rules currently in force, to a maximum of £85,000, with a possible excess of up to £100 and a 13-month window to claim. Every case is assessed individually, so treat this as a claim worth making rather than a refund to expect.\n- Card payments run on a separate track: ask your issuer about disputing the transaction.\n- If you handed over identity documents or personal details and are at heightened risk of identity fraud, consider Cifas Protective Registration — apply online at `cifas.org.uk/pr`. It costs £30 for two years and places a warning flag against your name and other personal details in the National Fraud Database, prompting organisations that use Cifas data to make extra identity checks when those details are used in applications. It does not affect your credit score, but not every application will be checked.\n- Report it to Report Fraud at `reportfraud.police.uk` or on 0300 123 2040 in England, Wales and Northern Ireland. In Scotland, call Police Scotland on 101.\n\nOur [scam recovery checklist](/recovery/) sets out the full sequence, including what to preserve as evidence and who to tell in what order."
+        "If you have paid, stop sending money and contact your bank immediately.\n\nAsk about the rules for authorised push payment fraud if a scam induced you to make a UK-to-UK transfer using Faster Payments or CHAPS on or after 7 October 2024. Eligible claims have a mandatory reimbursement limit of £85,000 and must be reported within 13 months; firms can choose to pay more. A firm may apply an excess of up to £100, but not to a consumer vulnerable to that particular scam. Other eligibility conditions and exclusions apply, so ask the bank to assess the circumstances rather than assume a refund.\n\nFor card payments, ask the card issuer about disputing the transaction and the applicable deadline.\n\nIf your personal details have been compromised and you are at heightened risk of identity fraud, consider Cifas Protective Registration at `cifas.org.uk/pr`. It costs £30 for two years and places a warning against your details in the National Fraud Database, prompting extra identity checks by organisations using Cifas data. It does not affect your credit score, but not every application is checked.\n\nReport suspected fraud to Report Fraud at `reportfraud.police.uk` or on 0300 123 2040 in England, Wales or Northern Ireland; in Scotland, contact Police Scotland on 101.\n\nOur [scam recovery checklist](/recovery/) provides further practical steps."
       ]
     ],
     "faq": [
       [
         "Does a Photo Verified badge mean my Tinder match is genuine?",
-        "It means Tinder's liveness and face-matching checks succeeded — a live person recorded a selfie that matched the profile photos. It guarantees nothing about their name, biography, location, relationship status or intentions. Tinder says Face Check is required for new UK users from 26 March 2026, so the badge is now ordinary rather than remarkable."
+        "A Photo Verified badge indicates that Tinder’s face and liveness checks were completed. It is not a guarantee of someone’s biography, intentions or safety. Tinder’s March 2026 UK announcement concerns new users; do not assume every older account completed Face Check."
       ],
       [
         "A match sent a link to get me 'safety verified' before we meet. Is it real?",
-        "No. A match cannot issue or complete Tinder verification for you, so a verification link that arrives in a chat is never legitimate. The page may steal personal or payment information. Start any genuine account or age-verification process only from Tinder's own app, site or help flow, and report the account instead of replying."
+        "Do not use it or enter personal or card details. The FBI has documented fake verification links in online-dating scams. Open Tinder independently and start any verification from its app or Help Centre; a match’s message does not authenticate the link."
       ],
       [
         "Tinder showed a safety warning when we swapped numbers. Should I worry?",
-        "That is Contact Exchange Alerts working as designed. It is a safety prompt triggered by contact details being shared, not a judgement about the timing or the person, so it is not an accusation and not evidence. Use the pause it gives you: Tinder's own tips suggest staying in the app while you get to know someone."
+        "Tinder says Contact Exchange Alerts may appear when contact details are shared. Treat the prompt as a reason to review what you are sharing, not a fraud verdict or a safety guarantee. Its safety advice recommends staying in Tinder while getting to know someone."
       ],
       [
         "I unmatched before I thought about reporting. Is it too late?",
-        "No. Tinder's Safety Center has an online route covering someone you unmatched, or who unmatched you, so a report is still possible. Whatever you screenshotted beforehand will make it far more useful to their moderators."
+        "No. Tinder says reporting remains possible after unmatching. Use the reporting contact form linked from Tinder Help if you can no longer reach the profile, and provide the safe details you already have. Do not collect sensitive images just to make a report."
       ],
       [
         "My match steered me into a trading app and now I cannot withdraw. What now?",
-        "Stop paying. Withdrawal taxes, release charges and upgrade minimums are all part of the same fraud. Phone your bank the same day, look the platform up on the FCA Firm Checker starting from the FCA's own site, and report it. Recovery is uncertain, particularly with cryptocurrency, but speed genuinely improves the odds."
+        "Stop sending money and contact your bank promptly. The FBI describes fake investment schemes that demand more money when a target tries to withdraw; that pattern warrants reporting, but does not by itself prove every disputed charge is fraudulent. Use the FCA’s own site for firm checks and report the circumstances through the appropriate UK route."
       ]
     ],
     "keywords": [
@@ -1994,7 +1998,7 @@
       "romance scam UK",
       "report Tinder scam"
     ],
-    "updated": "2026-08-09",
+    "updated": "2026-10-05",
     "sources_checked": [
       [
         "Tinder press room — Face Check launches in the UK (26 March 2026)",
@@ -2043,9 +2047,37 @@
       [
         "Cifas — Protective Registration",
         "https://www.cifas.org.uk/pr"
+      ],
+      [
+        "Report Fraud — reporting a fraud, and who the service covers",
+        "https://www.reportfraud.police.uk/reporting-a-fraud/"
+      ],
+      [
+        "Police Scotland — contact us: non-emergencies on 101",
+        "https://www.scotland.police.uk/contact-us/non-emergencies/"
+      ],
+      [
+        "FBI IC3 dating verification",
+        "https://www.ic3.gov/PSA/2024/PSA240426"
+      ],
+      [
+        "Police sextortion evidence",
+        "https://www.police.uk/advice/advice-and-information/online-safety/online-safety/sextortion/sextortion-reporting-it-to-us/"
+      ],
+      [
+        "MoneyHelper card protection",
+        "https://www.moneyhelper.org.uk/en/everyday-money/credit/how-youre-protected-when-you-pay-by-card"
+      ],
+      [
+        "FBI — Cryptocurrency Investment Schemes (3 October 2022)",
+        "https://www.ic3.gov/PSA/2022/PSA221003"
+      ],
+      [
+        "Report Fraud — Ticket fraud",
+        "https://www.reportfraud.police.uk/ticket-fraud/"
       ]
     ],
-    "quick_answer": "Tinder requires Face Check for new UK users from 26 March 2026, but a Photo Verified badge shows only that a live face matched the profile photos—not that every claim is honest. Keep early conversations in Tinder, never use a verification link sent by a match, and treat requests for money or investment pitches as scams."
+    "quick_answer": "Tinder says Face Check is required for new UK users, but verification does not guarantee a match’s honesty or safety. Keep early conversations in Tinder, start verification from Tinder itself, and do not send money or invest on a match’s recommendation. Report suspicious behaviour; a warning sign alone is not proof of fraud."
   },
   {
     "title": "Debt Relief Scam UK: Spot a Fake Debt Help Company",
@@ -5267,7 +5299,7 @@
       ],
       [
         "Reporting in the UK",
-        "Use GOV.UK's Report a suspicious HMRC phone call service. Suspicious HMRC emails go to `phishing@hmrc.gov.uk`; suspicious texts go to 60599 and may be charged at the network rate. If money was lost, report the crime to Report Fraud at `reportfraud.police.uk` or 0300 123 2040 in England, Wales or Northern Ireland; in Scotland, call Police Scotland on 101."
+        "Report a suspicious HMRC phone call at `https://www.tax.service.gov.uk/submissions/new-form/report-a-suspicious-hmrc-phone-call`. Suspicious HMRC emails go to `phishing@hmrc.gov.uk`; suspicious texts go to 60599 and may be charged at the network rate. If money was lost, report the crime to Report Fraud at `reportfraud.police.uk` or 0300 123 2040 in England, Wales or Northern Ireland; in Scotland, call Police Scotland on 101."
       ]
     ],
     "faq": [
@@ -5298,7 +5330,7 @@
       "phone scam UK",
       "vishing UK"
     ],
-    "updated": "2026-08-10",
+    "updated": "2026-10-08",
     "sources_checked": [
       [
         "GOV.UK — Check if a phone call you've received from HMRC is genuine",
@@ -5307,9 +5339,13 @@
       [
         "GOV.UK — Report suspicious HMRC emails, texts, social media accounts and phone calls",
         "https://www.gov.uk/find-hmrc-contacts/report-suspicious-hmrc-emails-texts-social-media-accounts-and-phone-calls"
+      ],
+      [
+        "HMRC — Report a suspicious phone call",
+        "https://www.tax.service.gov.uk/submissions/new-form/report-a-suspicious-hmrc-phone-call"
       ]
     ],
-    "quick_answer": "A call threatening arrest or legal action over unpaid tax is a scam — HMRC does make genuine calls, but says it will never threaten arrest or leave a voicemail threatening legal action. Hang up, compare the contact with HMRC's genuine-contact lists on GOV.UK, and report it through GOV.UK's suspicious HMRC phone call service."
+    "quick_answer": "A call threatening arrest or legal action over unpaid tax is a scam — HMRC does make genuine calls, but says it will never threaten arrest or leave a voicemail threatening legal action. Hang up, compare the contact with HMRC's genuine-contact lists on GOV.UK, and report it using HMRC’s suspicious-phone-call service at `https://www.tax.service.gov.uk/submissions/new-form/report-a-suspicious-hmrc-phone-call`."
   },
   {
     "title": "BT Scam Calls: How to Spot a Fake BT Phone Call (UK)",
@@ -5670,7 +5706,7 @@
       ],
       [
         "How to report a National Insurance scam call in the UK",
-        "Report it to Report Fraud at `reportfraud.police.uk` or 0300 123 2040 if you're in England, Wales, or Northern Ireland, including the number that called and what was said. In Scotland, report to Police Scotland on 101. You can also report a suspicious HMRC-related call using the guidance at gov.uk, and forward any related text to 7726."
+        "Report it to Report Fraud at `reportfraud.police.uk` or 0300 123 2040 if you're in England, Wales, or Northern Ireland, including the number that called and what was said. In Scotland, report to Police Scotland on 101. If the suspicious call mentioned HMRC, report the call to HMRC using https://www.tax.service.gov.uk/submissions/new-form/report-a-suspicious-hmrc-phone-call. Forward any related suspicious text to 7726."
       ]
     ],
     "faq": [
@@ -5700,7 +5736,7 @@
       "phone scam UK",
       "vishing UK"
     ],
-    "updated": "2026-08-06",
+    "updated": "2026-10-09",
     "sources_checked": [
       [
         "GOV.UK — Find a lost National Insurance number",
@@ -5717,6 +5753,10 @@
       [
         "Cifas — Protective Registration",
         "https://www.cifas.org.uk/pr"
+      ],
+      [
+        "HMRC — Report suspicious HMRC phone calls",
+        "https://www.gov.uk/find-hmrc-contacts/report-suspicious-hmrc-emails-texts-social-media-accounts-and-phone-calls"
       ]
     ],
     "quick_answer": "A call claiming your National Insurance number has been 'suspended' is false from the outset — an NI number stays with you for life and cannot be suspended. Hang up without pressing anything or confirming details, and report the call to Report Fraud or Police Scotland on 101."
@@ -7794,7 +7834,7 @@
       ],
       [
         "How to report a Universal Credit scam (UK)",
-        "Report claim or advance misuse to Universal Credit through your official account, the Universal Credit helpline, or your work coach. If the scam came by text, forward it to 7726. If it came by email, forward it to the NCSC at `report@phishing.gov.uk`.\n\nIf you lost money, shared sensitive information, or were asked to move money, report it to Report Fraud at `reportfraud.police.uk` or on 0300 123 2040 if you are in England, Wales, or Northern Ireland. In Scotland, report to Police Scotland on 101. Keep everything as evidence."
+        "If someone has misused your Universal Credit claim or account, contact Universal Credit promptly. In England, Scotland or Wales, use the contact options at `https://www.gov.uk/universal-credit/contact-universal-credit`. In Northern Ireland, use `https://www.nidirect.gov.uk/articles/contact-universal-credit-help-your-claim` for your account, Jobs & Benefits office or Service Centre. If the scam came by text, forward it to 7726. If it came by email, forward it to the NCSC at `report@phishing.gov.uk`.\n\nIf you lost money, shared sensitive information, or were asked to move money, report it to Report Fraud at `reportfraud.police.uk` or on 0300 123 2040 if you are in England, Wales, or Northern Ireland. In Scotland, report to Police Scotland on 101. Keep everything as evidence."
       ]
     ],
     "faq": [
@@ -7816,7 +7856,7 @@
       ],
       [
         "How do I report a Universal Credit scam?",
-        "Report claim misuse to Universal Credit through official GOV.UK routes. Forward scam texts to 7726 and scam emails to `report@phishing.gov.uk`. If you lost money or shared sensitive details, report it to Report Fraud in England, Wales, or Northern Ireland, or to Police Scotland on 101 in Scotland."
+        "If someone has misused your Universal Credit claim or account, contact Universal Credit promptly. In England, Scotland or Wales, use the contact options at `https://www.gov.uk/universal-credit/contact-universal-credit`. In Northern Ireland, use `https://www.nidirect.gov.uk/articles/contact-universal-credit-help-your-claim` for your account, Jobs & Benefits office or Service Centre. Forward scam texts to 7726 and scam emails to `report@phishing.gov.uk`. If you lost money or shared sensitive details, report it to Report Fraud in England, Wales, or Northern Ireland, or to Police Scotland on 101 in Scotland."
       ]
     ],
     "keywords": [
@@ -7829,7 +7869,7 @@
       "Universal Credit loan scam",
       "report Universal Credit scam"
     ],
-    "updated": "2026-08-06",
+    "updated": "2026-10-08",
     "sources_checked": [
       [
         "GOV.UK — Apply for a Universal Credit advance or hardship payment",
@@ -7846,6 +7886,14 @@
       [
         "Cifas — Protective Registration",
         "https://www.cifas.org.uk/pr"
+      ],
+      [
+        "DWP — Manage your Universal Credit claim",
+        "https://www.gov.uk/guidance/manage-your-universal-credit-claim-after-you-apply"
+      ],
+      [
+        "GOV.UK — Contact Universal Credit",
+        "https://www.gov.uk/universal-credit/contact-universal-credit"
       ]
     ],
     "quick_answer": "A message offering a DWP grant through a link, or an agent offering to claim for you, is a scam — GOV.UK says Universal Credit will not ask for bank details by text or email, and an advance is repayable, not free money. Manage your claim only through GOV.UK, and forward scam texts to `7726`."
@@ -7886,7 +7934,7 @@
       ],
       [
         "How to report a TV Licence scam letter (UK)",
-        "You can report the letter to TV Licensing through the contact details on tvlicensing.co.uk. If a similar scam reached you by email, forward it to the NCSC at `report@phishing.gov.uk`; if by text, forward it to 7726.\n\nIf you lost money or shared sensitive information, report it to Report Fraud at `reportfraud.police.uk` or on 0300 123 2040 if you are in England, Wales, or Northern Ireland. In Scotland, report to Police Scotland on 101. Keep the letter and any envelope as evidence."
+        "Check TV Licensing’s scam guidance at `https://www.tvlicensing.co.uk/faqs/FAQ288` and sign in to your licence independently if you are unsure about a letter. If a similar scam reached you by email, forward it to the NCSC at `report@phishing.gov.uk`; if by text, forward it to 7726.\n\nIf you lost money or shared sensitive information, report it to Report Fraud at `reportfraud.police.uk` or on 0300 123 2040 if you are in England, Wales, or Northern Ireland. In Scotland, report to Police Scotland on 101. Keep the letter and any envelope as evidence."
       ]
     ],
     "faq": [
@@ -7908,7 +7956,7 @@
       ],
       [
         "How do I report a fake TV Licence letter?",
-        "Report it to TV Licensing through tvlicensing.co.uk. If you lost money or shared details, report it to Report Fraud in England, Wales, or Northern Ireland, or to Police Scotland on 101 in Scotland."
+        "Check TV Licensing’s scam guidance at `https://www.tvlicensing.co.uk/faqs/FAQ288` and sign in to your licence independently if you are unsure about a letter. If you lost money or shared details, report it to Report Fraud in England, Wales, or Northern Ireland, or to Police Scotland on 101 in Scotland."
       ]
     ],
     "keywords": [
@@ -7921,7 +7969,7 @@
       "fake bbc tv licence demand",
       "tv licence letter warning signs"
     ],
-    "updated": "2026-08-01",
+    "updated": "2026-10-08",
     "sources_checked": [
       [
         "TV Licensing — Helping you avoid TV Licensing scams",
@@ -7938,6 +7986,14 @@
       [
         "Police Scotland — contact us: non-emergencies on 101",
         "https://www.scotland.police.uk/contact-us/non-emergencies/"
+      ],
+      [
+        "TV Licensing — Scam guidance",
+        "https://www.tvlicensing.co.uk/faqs/FAQ288?WT.ad_id=CAP_scambanner"
+      ],
+      [
+        "TV Licensing — How to contact us",
+        "https://www.tvlicensing.co.uk/faqs/FAQ11"
       ]
     ],
     "quick_answer": "Never pay a TV Licensing demand letter on its own terms, however official it looks — check your licence status directly at tvlicensing.co.uk first. Demands for payment within days by bank transfer or gift cards are scam signs. If you have paid, tell your bank and report it to Report Fraud or Police Scotland on 101."
@@ -9590,11 +9646,11 @@
       ],
       [
         "If you already paid",
-        "Keep the shoes and the box if anything arrived, together with the order page, the advert and any tracking reference. Do not assume Nike will authenticate them for you — its public help material does not promise that its ordinary contact channels will inspect a suspected counterfeit. Report the seller through the contact route on `nike.com`, hold on to the physical evidence, and ask your nation's consumer service or your card issuer what to do next.\n\nOn the money: a Section 75 claim under the Consumer Credit Act 1974 may be available on a credit-funded purchase. It depends on the required relationship between the credit and the supplier, and on a cash price — per item, or per qualifying set — of more than £100 and no more than £30,000. A £160 pair might therefore fall inside it where the identical pair bought on a debit card does not, but the figure and the card type do not settle a claim between them; MoneyHelper is the place to read what a covered arrangement looks like. Debit purchases lean on chargeback, governed by each card scheme's own rules and deadlines rather than by statute. A bank transfer to a shop that has stopped replying needs a call to your bank immediately.\n\nCitizens Advice sets out the refund position for counterfeit goods. That guidance is published as advice for England, with its own Wales, Scotland and Northern Ireland versions, so use the one for your nation. Our [scam recovery checklist](/recovery/) puts these steps in order."
+        "Keep the shoes and the box if anything arrived, together with the order page, the advert and any tracking reference. Do not assume Nike will authenticate them for you — its public help material does not promise that its ordinary contact channels will inspect a suspected counterfeit. Hold on to the physical evidence, and ask your nation’s consumer service or your card issuer what to do next.\n\nOn the money: a Section 75 claim under the Consumer Credit Act 1974 may be available on a credit-funded purchase. It depends on the required relationship between the credit and the supplier, and on a cash price — per item, or per qualifying set — of more than £100 and no more than £30,000. A £160 pair might therefore fall inside it where the identical pair bought on a debit card does not, but the figure and the card type do not settle a claim between them; MoneyHelper is the place to read what a covered arrangement looks like. Debit purchases lean on chargeback, governed by each card scheme's own rules and deadlines rather than by statute. A bank transfer to a shop that has stopped replying needs a call to your bank immediately.\n\nCitizens Advice sets out the refund position for counterfeit goods. That guidance is published as advice for England, with its own Wales, Scotland and Northern Ireland versions, so use the one for your nation. Our [scam recovery checklist](/recovery/) puts these steps in order."
       ],
       [
         "Reporting a fake Nike shop",
-        "One limitation worth stating plainly: several third-party sites publish Nike brand-protection email addresses that we could not match against Nike's own published contacts, so we do not repeat them here. Use the contact route on `nike.com`, reached by typing the address in yourself.\n\n- The web address itself goes to the NCSC, through its scam-website reporting form.\n- Phishing emails go to `report@phishing.gov.uk`.\n- A suspicious SMS text can be forwarded to 7726, free of charge.\n- Paid adverts are the Advertising Standards Authority's remit; the platform that ran one should hear about it as well.\n- Money lost goes into a Report Fraud report — `reportfraud.police.uk`, or 0300 123 2040. In Scotland, report it to Police Scotland on 101 instead.\n- Counterfeit goods have a route of their own. The consumer service for your nation may refer or share relevant complaint information with Trading Standards or another appropriate enforcement body: Citizens Advice in England and Wales on 0808 223 1133, Advice Direct Scotland in Scotland on 0808 800 9060, or Consumerline in Northern Ireland on 0300 123 6262."
+        "One limitation worth stating plainly: several third-party sites publish Nike brand-protection email addresses that we could not match against Nike's own published contacts, so we do not repeat them here. For a suspected counterfeit seller, use the consumer-service and reporting routes below.\n\n- The web address itself goes to the NCSC, through its scam-website reporting form.\n- Phishing emails go to `report@phishing.gov.uk`.\n- A suspicious SMS text can be forwarded to 7726, free of charge.\n- Paid adverts are the Advertising Standards Authority's remit; the platform that ran one should hear about it as well.\n- Money lost goes into a Report Fraud report — `reportfraud.police.uk`, or 0300 123 2040. In Scotland, report it to Police Scotland on 101 instead.\n- Counterfeit goods have a route of their own. The consumer service for your nation may refer or share relevant complaint information with Trading Standards or another appropriate enforcement body: Citizens Advice in England and Wales on 0808 223 1133, Advice Direct Scotland in Scotland on 0808 800 9060, or Consumerline in Northern Ireland on 0300 123 6262."
       ]
     ],
     "faq": [
@@ -9620,7 +9676,7 @@
       ],
       [
         "How do I report the shop to Nike itself?",
-        "Through the contact route on `nike.com`, opened by typing the address. We print no brand-protection email address, because the ones circulating on third-party sites could not be matched against Nike's own published contacts. Do not expect Nike's ordinary contact channels to authenticate your shoes; keep them as evidence instead."
+        "We have not verified a Nike contact route for reporting a suspected counterfeit shop. Nike's general contact directory does not establish that purpose. Use the consumer-service and reporting routes in this guide, and keep the listing, payment records, shoes and box as evidence. Do not assume Nike's ordinary support channels will authenticate the shoes."
       ]
     ],
     "keywords": [
@@ -9633,7 +9689,7 @@
       "report fake nike site",
       "too cheap nike trainers scam"
     ],
-    "updated": "2026-07-30",
+    "updated": "2026-10-09",
     "sources_checked": [
       [
         "Nike Help (UK) — What is the difference between the Nike App and the SNKRS App?",
@@ -9702,6 +9758,10 @@
       [
         "GOV.UK — Consumer protection rights (the consumer service MAY refer or share complaint information with enforcement bodies)",
         "https://www.gov.uk/consumer-protection-rights"
+      ],
+      [
+        "Nike — Corporate contact directory (general support; counterfeit-reporting purpose not established)",
+        "https://www.nike.com/help/a/nike-contact-directory"
       ]
     ],
     "quick_answer": "SNKRS shows how Nike releases coveted shoes, but Nike also supplies authorised retailers and SNKRS can reserve pairs at nearby retailers. Treat an unfamiliar seller offering scarce shoes in every size far below normal prices as high risk, then verify the retailer independently. If you paid or received suspected counterfeits, preserve the listing, shoes, box and payment evidence."
@@ -9870,7 +9930,7 @@
       ],
       [
         "How to report it in the UK",
-        "- Report a suspicious website through the NCSC scam website reporting service at https://www.ncsc.gov.uk/section/about-this-website/report-scam-website.\n- Forward a suspicious email to `report@phishing.gov.uk`.\n- You can forward a suspicious SMS text to `7726` free of charge. For RCS, iMessage and app messages, use the relevant built-in reporting tool.\n- If money or information was stolen, report it to Report Fraud at https://www.reportfraud.police.uk/ or call `0300 123 2040` in England, Wales or Northern Ireland. In Scotland, report fraud to Police Scotland on `101`.\n- For consumer advice, use the service for your nation: Citizens Advice in England and Wales on 0808 223 1133, Advice Direct Scotland in Scotland on 0808 800 9060, or Consumerline in Northern Ireland on 0300 123 6262.\n- Notify UGG through the contact options on `ugg.com`; do not use contact details supplied by the suspect seller."
+        "- Report a suspicious website through the NCSC scam website reporting service at https://www.ncsc.gov.uk/section/about-this-website/report-scam-website.\n- Forward a suspicious email to `report@phishing.gov.uk`.\n- You can forward a suspicious SMS text to `7726` free of charge. For RCS, iMessage and app messages, use the relevant built-in reporting tool.\n- If money or information was stolen, report it to Report Fraud at https://www.reportfraud.police.uk/ or call `0300 123 2040` in England, Wales or Northern Ireland. In Scotland, report fraud to Police Scotland on `101`.\n- For consumer advice, use the service for your nation: Citizens Advice in England and Wales on 0808 223 1133, Advice Direct Scotland in Scotland on 0808 800 9060, or Consumerline in Northern Ireland on 0300 123 6262.\n- We have not verified a UGG contact route for reporting a suspected fake shop. Use the reporting and consumer-advice routes above, and keep the website address, messages and payment records as evidence."
       ]
     ],
     "faq": [
@@ -9892,7 +9952,7 @@
       ],
       [
         "Where should I report a fake shop?",
-        "Report the URL to the NCSC. If you lost money, use Report Fraud in England, Wales or Northern Ireland, or Police Scotland on 101 in Scotland. You can also notify UGG."
+        "Report the URL to the NCSC. If you lost money, use Report Fraud in England, Wales or Northern Ireland, or Police Scotland on 101 in Scotland. We have not verified a UGG contact route for reporting a suspected fake shop."
       ]
     ],
     "keywords": [
@@ -9904,7 +9964,7 @@
       "fake website UK",
       "scam website UK"
     ],
-    "updated": "2026-07-30",
+    "updated": "2026-10-09",
     "sources_checked": [
       [
         "UGG: Authenticity and counterfeit protection",
@@ -9941,6 +10001,10 @@
       [
         "GOV.UK — Consumer advice services for England and Wales, Scotland and Northern Ireland",
         "https://www.gov.uk/consumer-advice"
+      ],
+      [
+        "UGG UK — Customer Service",
+        "https://www.ugg.com/uk/help/"
       ]
     ],
     "quick_answer": "A padlock, UGG logo and copied product photos do not prove a shop is genuine — the official UK store is ugg.com/uk, so check the full domain before paying. If you have already paid, contact your bank or card provider straight away, and report the site to the NCSC."
@@ -10924,40 +10988,44 @@
     "slug": "viagogo-scam-uk",
     "category": "shopping",
     "excerpt": "Learn how scammers impersonate Viagogo to steal money and personal data from UK ticket buyers, and how to protect yourself.",
-    "description": "Viagogo is a real resale marketplace, not a scam company, but hidden fees and refund problems are common. What UK buyers should know before paying.",
-    "hero": "Scammers are using Viagogo's reputation to steal thousands from UK ticket buyers — here's exactly how to stay safe.",
+    "description": "Buying Viagogo tickets in the UK? Check the total price, entry restrictions and payment route, and understand the limits of refunds and card protection.",
+    "hero": "Before buying, check the full price and event terms. Verify unexpected payment requests independently instead of judging a link by its spelling alone.",
     "date": "2026-05-13",
     "content": "## What is this scam?\n\nThe Viagogo scam exploits the popularity of Viagogo, a real secondary ticket marketplace, by creating fake versions of the platform or impersonating sellers. Scammers either build replica websites that look identical to the genuine Viagogo site, or they contact buyers on the real platform posing as legitimate sellers with suspiciously cheap tickets. Once a buyer commits to purchase, the scammer requests payment via bank transfer, cryptocurrency, or gift cards — methods that are impossible to reverse. They then either disappear entirely or send fake confirmation emails and delivery updates, never providing the actual tickets. This scam is particularly effective because Viagogo itself has a reputation for variable pricing and occasional legitimate deals, which makes the fraudulent offers seem believable. UK victims often don't realise they've been scammed until the event date arrives and they have no entry tickets.\n\n## Warning signs to look for\n\n- The website URL is slightly different from viagogo.com — look for .co.uk variants, extra words, or misspellings like viag0go or viagoogo.\n- Prices are suspiciously low — 50-70% below market rate for in-demand events with no clear reason given.\n- The seller insists on payment methods that can't be reversed: bank transfer, Google Play cards, iTunes vouchers, or cryptocurrency.\n- Communication is poor quality: repeated grammar errors, odd phrasing, or responses that don't match your questions.\n- The seller pressures you to complete the transaction quickly, claiming other buyers are interested or stock is limited.\n- Payment requests come before you can verify the seller's identity or see secured buyer protection terms.\n- The confirmation email looks professionally designed but contains generic greetings or doesn't reference your specific booking details.\n- The seller asks for personal information beyond what's needed (passport number, mother's maiden name, security questions).\n\n## How this scam works step by step\n\nThe scam typically begins when you search for tickets to a popular UK event — a concert, football match, or festival. You find what appears to be a Viagogo listing (either on a fake website or via a real Viagogo seller profile) offering tickets at an unusually attractive price. You click through and are prompted to enter your email address and payment details. If it's a fake website, your data is harvested immediately. If it's a fake seller on the real site, they communicate outside the official system via email or phone. The scammer then requests payment via bank transfer, asking you to send money directly to an account (often in a different country). Some variants ask you to buy gift cards and provide the codes. A few hours later, you receive a fake confirmation email with a booking reference that looks authentic. The scammer may even send you a fake PDF 'ticket' or entry code. When you try to use your tickets at the event, you discover they're invalid or don't exist. By this point, the scammer has deleted their profile and closed the receiving bank account. Your money is gone, and Viagogo's buyer protection either doesn't cover you or takes months to investigate.\n\n## How to verify if it is genuine\n\nAlways start by checking the website URL carefully — genuine Viagogo is viagogo.com only. Type the address directly into your browser rather than clicking email links. On the real site, verify the seller's rating by clicking their profile; legitimate sellers have hundreds of reviews with consistent positive feedback and verified transaction history. If buying directly from a seller, move the conversation back to Viagogo's official messaging system — scammers will resist this and may claim technical issues. Check Viagogo's official customer service contact (help.viagogo.com) and compare any contact details you've received against this. Never accept payment requests outside the Viagogo platform. Before paying, use our guide on /guides/is-this-website-a-scam/ to verify the site's legitimacy. Look up the event's official ticketing partners — most major UK venues and promoters only sell through authorised channels like Ticketmaster, See Tickets, or the venue box office. If the deal seems too good to be true, contact the event organiser directly to confirm Viagogo is an authorised reseller.\n\n## What to do if you have already interacted\n\nIf you've visited a suspicious Viagogo site but didn't pay, stop immediately and do not enter further details. Clear your browser cache and run a malware scan using Windows Defender (free) or Malwarebytes. Change your passwords for any accounts accessed from that device. If you paid via bank transfer, contact your bank immediately — provide them with all transaction details and the receiving account information. Most UK banks can attempt to recall the payment within 24 hours if reported quickly. If payment was made via gift card codes, contact the card issuer (Google Play, Apple, Amazon) with proof of purchase; some will cancel the codes if you act within hours. Document everything: save email addresses, seller names, transaction records, and the fake website URL. Do not send any further money if the scammer makes follow-up contact claiming fees are needed to release your tickets. Report your case to Action Fraud using the details below. If your personal information (address, phone, bank details) was compromised, register for free fraud monitoring with Experian or Equifax to watch for identity theft.\n\n## Reporting this scam in the UK\n\nReport the scam immediately to Action Fraud, the UK's national fraud reporting centre, either online at actionfraud.police.uk or by phone on 0300 123 2040. Have your transaction reference, the scammer's email address or seller account, and the fake website URL ready. Forward any suspicious emails to the NCSC (National Cyber Security Centre) Suspicious Email Reporting Service at report@phishing.gov.uk — this helps them block similar phishing sites. If you received contact via SMS, forward the message to 7726 (Spam). Report the fake seller profile or website directly to Viagogo itself using their 'Report' button on the listing or seller profile page; include screenshots as evidence. Contact Citizens Advice consumer helpline on 0808 223 1133 for free guidance on your rights and next steps, especially if you've lost significant money. If you paid via your bank, your bank may also file a report with financial crime authorities on your behalf. Keep copies of all correspondence and your Action Fraud reference number, as you may need it for insurance claims or further investigation.",
     "sections": [
       [
-        "What Viagogo is — and why it has such a bad reputation",
-        "Viagogo is a secondary ticket marketplace, meaning it connects people who have tickets to sell with people who want to buy them. It is a real company that has operated in the UK since 2006. However, it built a lasting bad reputation through a practice called drip pricing: listing tickets at an attractive base price, then adding large booking fees, order processing charges, and delivery costs at the checkout stage, by which point many buyers had already committed emotionally to the purchase.\n\nIn 2018, the UK Competition and Markets Authority (CMA) secured a court order against Viagogo — one of the few times the CMA had to go to court after a company refused to offer undertakings voluntarily. The order required Viagogo to show the total ticket price upfront and to provide clearer information about sellers. The CMA subsequently monitored compliance and threatened contempt proceedings before suspending further action once changes were made. Buyer complaints about fees, refunds, and invalid tickets have continued to be reported since then."
+        "Correction",
+        "An earlier version named two lookalike domains as fraudulent without sufficient evidence, incorrectly said Viagogo used only viagogo.com, and treated every off-platform payment request as proven fraud. We have removed those accusations and replaced the rules with independent verification and qualified payment-risk advice."
+      ],
+      [
+        "What Viagogo is — and what the CMA has done",
+        "Viagogo is a secondary ticket marketplace, connecting people who have tickets to sell with people who want to buy them.\n\nIn November 2018, the UK Competition and Markets Authority secured a court order against Viagogo. The CMA said buyers must receive information including seller details and restrictions that could prevent entry. That historical order is not a guarantee that an individual ticket will admit you."
       ],
       [
         "The fees: what you actually pay versus the listed price",
-        "The advertised price and the final payable total can differ because compulsory fees and delivery charges may apply. Check the total, currency and delivery terms before entering payment details.\n\nThe CMA’s enforcement action required clearer pricing and seller information. That does not make every listing good value or every ticket valid, so compare the final total with the face value and any official resale option. Pricing is under live scrutiny again: the CMA opened a new consumer protection investigation into Viagogo on 17 November 2025, examining whether mandatory fees are included in the total price shown at the start of the purchase process. As of the CMA's 23 June 2026 case update the investigation is ongoing and no finding has been made, so it should not be assumed that Viagogo has infringed consumer protection law."
+        "Check the full amount payable, currency and delivery terms before entering payment details. Compare the total with the ticket’s face value and the venue’s official ticketing or resale options.\n\nThe CMA opened a consumer-protection investigation into Viagogo on 17 November 2025 to examine whether mandatory fees are included in the total price shown at the start of the purchase process. The case page, last updated on 23 June 2026 and checked on 2 October 2026, describes the investigation as ongoing and says no finding has been made. An investigation does not establish that Viagogo has broken consumer-protection law."
       ],
       [
         "Are Viagogo tickets valid? What can go wrong",
-        "Many buyers receive valid tickets and attend their event without issue. However, several things can go wrong:\n\n- Duplicate or cancelled tickets. A seller may list the same ticket to multiple buyers, or the original ticket may be cancelled by the promoter. Viagogo should replace these under its buyer guarantee, but the process takes time and can be difficult if the event has already passed.\n\n- Nominative or restricted tickets. Some events link tickets to the original buyer or restrict resale. The promoter’s terms may allow cancellation or refusal of entry, even where the ticket itself is genuine.\n\n- Late or non-delivery. Viagogo often releases tickets close to the event date, though timing varies by event. If tickets have not arrived, contact Viagogo support through the platform before assuming fraud."
+        "Check the event organiser’s entry and resale restrictions before buying. The CMA’s 2018 order required warnings where resale restrictions could mean a buyer would be turned away.\n\nCheck the promised delivery date and the current refund or replacement terms before paying. If a ticket has not arrived or is rejected at the venue, contact the platform through an independently opened account and record the order details and response. A delivery problem alone does not establish fraud."
       ],
       [
         "Your rights if something goes wrong",
-        "Viagogo publishes a buyer guarantee that may provide replacement tickets or a refund when a ticket is invalid, subject to its current terms and deadlines. Contact the platform promptly; disputes are harder after an event has passed.\n\nFor stronger protection:\n\n- Pay by credit card where practical. Section 75 may apply to a qualifying credit-card purchase over £100 and not more than £30,000, but the required credit and supplier relationship must be present; ask the card issuer to assess the facts.\n\n- Chargeback. If you paid by card and the seller does not deliver, contact the card issuer promptly and ask whether the card-scheme rules allow a chargeback. Time limits vary.\n\n- If a seller contacts you and asks for payment outside the Viagogo platform — by bank transfer, PayPal Friends and Family, or gift cards — stop immediately. This is a scam separate from Viagogo's own practices, and no buyer protection applies. Report it to Viagogo, and to Report Fraud in England, Wales or Northern Ireland, or to Police Scotland on 101 in Scotland."
+        "Check the current terms for your order and contact Viagogo promptly if something goes wrong. Ask which refund or replacement remedy applies and what deadline you must meet; do not assume that every problem qualifies.\n\nSection 75 may protect a qualifying credit-card purchase where the cash price of an individual ticket or qualifying set is more than £100 and no more than £30,000. Payment intermediaries and supplier arrangements can affect eligibility, so ask the card issuer to assess your purchase.\n\nIf you paid by card and the seller has not resolved the problem, ask the issuer promptly about chargeback and the applicable deadline. Chargeback is a card-scheme process, not a guaranteed refund.\n\nPause if someone asks you to pay outside the platform, especially by bank transfer to a person you do not know. Verify the request independently and do not assume that the platform’s protection covers a separate payment. If you suspect fraud after paying, contact your bank immediately and ask what protection applies to that payment method.\n\nReport suspected fraud to Report Fraud at `reportfraud.police.uk` or on 0300 123 2040 in England, Wales or Northern Ireland; in Scotland, contact Police Scotland on 101."
       ],
       [
-        "When it is definitely a scam — not just Viagogo being Viagogo",
-        "Separate from Viagogo's own controversial practices, fraudsters exploit Viagogo's reputation in specific ways:\n\n- Fake Viagogo websites. Scammers build replica sites with near-identical URLs (viag0go.com, viagogo-tickets.co.uk, or similar) to harvest payment details. Always confirm the URL is viagogo.com exactly before entering any information. Type the address directly into your browser rather than clicking a link from an email or social media.\n\n- Off-platform sellers. Someone contacts you on social media, by email, or via a classified ad claiming to have Viagogo tickets and asking for direct payment. Viagogo does not operate this way. Any seller asking you to pay outside the platform is conducting a fraud.\n\n- Fake order confirmation emails. Phishing emails can imitate booking confirmations and direct you to a lookalike sign-in or payment page. Check the order by opening Viagogo yourself rather than using the email link."
+        "How to check an unexpected Viagogo link or payment request",
+        "The CMA’s case page identifies www.viagogo.com and www.viagogo.co.uk as Viagogo websites. This is evidence for those two addresses, not a complete worldwide domain list or a guarantee about a message, seller or ticket.\n\nReport Fraud warns that ticket-fraud websites can resemble legitimate ticket sellers’ names and addresses. That general warning does not establish that a particular unfamiliar domain is fraudulent.\n\nFor an unexpected confirmation, sign-in link or payment demand, open the service independently using an address you have checked against an authoritative source, then inspect the order in your account. Contact support from that independently opened service if the details do not match. Do not enter payment details while the destination or request remains unverified."
       ]
     ],
     "faq": [
       [
         "Is Viagogo a scam or a legitimate company?",
-        "Viagogo is a real, registered company, not a scam operation. It is a secondary ticket resale marketplace that has operated since 2006 and has been subject to formal enforcement by the UK Competition and Markets Authority. The company changed some of its practices following that action. Legitimate and risk-free are not the same thing with Viagogo — buyers should understand the fee structure, refund limitations, and ticket validity risks before purchasing."
+        "Viagogo is an established secondary ticket marketplace and has been subject to CMA enforcement action. That does not guarantee an individual listing, delivery or admission, so check the price, entry restrictions and payment terms before buying."
       ],
       [
         "Are Viagogo tickets genuine and will they work at the door?",
-        "Many buyers receive valid tickets and attend without issue. However, there is a meaningful risk that tickets are invalid, duplicated, or nominative (linked to the original buyer's name, which venues can refuse). The risk is higher for very high-demand events where promoters actively cancel resold tickets."
+        "Do not assume a ticket will admit you simply because it is listed on a resale platform. Check the organiser’s resale and entry restrictions; the CMA has required Viagogo to warn buyers where those restrictions could prevent entry."
       ],
       [
         "Can I get a refund from Viagogo if the event is cancelled?",
@@ -10965,11 +11033,11 @@
       ],
       [
         "What did the CMA do about Viagogo?",
-        "In 2018, the UK Competition and Markets Authority secured a court order against Viagogo after the company refused to offer undertakings voluntarily — unlike StubHub, GetMeIn, and Seatwave, which offered undertakings at an earlier stage. The court order required Viagogo to show full prices upfront and provide clearer seller information. The CMA then monitored compliance before suspending further proceedings. The CMA case is publicly documented on gov.uk. Separately, on 17 November 2025 the CMA opened a new investigation into whether Viagogo's mandatory fees are included in the total price shown at the start of the purchase process; that investigation is ongoing and no finding has been made."
+        "In 2018 the CMA secured a court order requiring clearer information, including seller details and entry restrictions. A separate mandatory-fee investigation opened on 17 November 2025; the case page checked on 2 October 2026 still says it is ongoing and no finding has been made."
       ],
       [
         "Is there a safer alternative to Viagogo for resale tickets?",
-        "Yes. Twickets is a face-value resale platform where sellers cannot charge above the original ticket price. Ticketmaster's Fan-to-Fan exchange and the official resale functions on See Tickets and Eventim allow sellers to list tickets with verified ownership within the original platform. Buying directly from the venue or the event's official ticketing partner avoids the resale market, and with it the risks specific to resale — but check the web address carefully first, because fake “official” ticket sites exist too. The Society of Ticket Agents and Retailers (STAR) maintains a list of approved members who follow a consumer protection code of practice."
+        "Start with the venue or event organiser’s own ticketing information and any resale route it identifies. Report Fraud recommends the venue’s box office, official promoter or agent, or a well-known ticketing site, and suggests checking STAR membership. Check the particular event’s terms rather than assuming any named resale service guarantees entry or the lowest price."
       ]
     ],
     "keywords": [
@@ -10991,8 +11059,12 @@
         "https://www.gov.uk/cma-cases/viagogo-consumer-protection-enforcement-case"
       ],
       [
-        "Viagogo UK Support — What is the viagogo Guarantee?",
-        "https://support.viagogo.co.uk/articles/61000310201-what-is-the-viagogo-guarantee"
+        "Report Fraud — Ticket fraud",
+        "https://www.reportfraud.police.uk/ticket-fraud/"
+      ],
+      [
+        "MoneyHelper card protection",
+        "https://www.moneyhelper.org.uk/en/everyday-money/credit/how-youre-protected-when-you-pay-by-card"
       ],
       [
         "Report Fraud — reporting a fraud, and who the service covers",
@@ -11001,10 +11073,14 @@
       [
         "Police Scotland — contact us: non-emergencies on 101",
         "https://www.scotland.police.uk/contact-us/non-emergencies/"
+      ],
+      [
+        "Payment Systems Regulator — APP fraud reimbursement protections",
+        "https://www.psr.org.uk/information-for-consumers/app-fraud-reimbursement-protections/"
       ]
     ],
-    "quick_answer": "Viagogo is a real resale marketplace, not a scam company, but added fees, refund problems and invalid tickets are genuine risks. Check the final total before paying and confirm the URL is exactly viagogo.com — and any 'Viagogo' seller asking for payment off-platform by bank transfer is committing outright fraud.",
-    "updated": "2026-08-11"
+    "quick_answer": "Viagogo is a ticket-resale marketplace. The CMA identifies both viagogo.com and viagogo.co.uk; that is not an exhaustive list of safe links. Check the full price and entry terms, and independently verify unexpected payment requests. An unfamiliar address or off-platform request is a warning to pause, not proof of fraud.",
+    "updated": "2026-10-05"
   },
   {
     "title": "British Gas Scam Call UK: Spot a Fake Contact",
@@ -11328,7 +11404,7 @@
       ],
       [
         "How to report a fake online pharmacy (UK)",
-        "Report a suspicious online seller of medicines to the MHRA through the GOV.UK suspicious online medicine seller reporting service. If you think a medicine or medical device is fake, falsified, defective, or has caused a side effect or adverse incident, report that through MHRA Yellow Card.\n\nIf the scam reached you by email, forward it to the NCSC at `report@phishing.gov.uk`; if by text, forward it to 7726. If you lost money or shared sensitive information, report it to Report Fraud at `reportfraud.police.uk` or on 0300 123 2040 if you are in England, Wales, or Northern Ireland. In Scotland, report to Police Scotland on 101. Keep all the evidence, including any medicine received."
+        "Report suspected illegal online sales of medicines or medical devices to the MHRA at `https://report-or-check-suspicious-activity.mhra.gov.uk/report/suspect-seller`. For a suspected fake or defective medicine, or a suspected medicine side effect, use MHRA Yellow Card at `https://yellowcard.mhra.gov.uk/`. For a medical-device problem, first check the nation-specific instructions described on `https://www.gov.uk/report-problem-medicine-medical-device`.\n\nIf the scam reached you by email, forward it to the NCSC at `report@phishing.gov.uk`; if by text, forward it to 7726. If you lost money or shared sensitive information, report it to Report Fraud at `reportfraud.police.uk` or on 0300 123 2040 if you are in England, Wales, or Northern Ireland. In Scotland, report to Police Scotland on 101. Keep all the evidence, including any medicine received."
       ]
     ],
     "faq": [
@@ -11350,7 +11426,7 @@
       ],
       [
         "How do I report a fake online pharmacy?",
-        "Report suspicious online medicine sellers to the MHRA through GOV.UK. Use Yellow Card for suspected fake, falsified, defective, or side-effect/adverse incident reports. Forward scam emails to `report@phishing.gov.uk` and scam texts to 7726. If you lost money or shared details, report it to Report Fraud in England, Wales, or Northern Ireland, or to Police Scotland on 101 in Scotland."
+        "Report suspected illegal online medicine sellers to the MHRA at `https://report-or-check-suspicious-activity.mhra.gov.uk/report/suspect-seller`. Use `https://yellowcard.mhra.gov.uk/` for suspected fake or defective medicines and medicine side effects. For medical-device problems, first check the nation-specific instructions described on `https://www.gov.uk/report-problem-medicine-medical-device`. Forward scam emails to `report@phishing.gov.uk` and scam texts to 7726. If you lost money or shared details, report it to Report Fraud in England, Wales, or Northern Ireland, or to Police Scotland on 101 in Scotland."
       ]
     ],
     "keywords": [
@@ -11363,7 +11439,7 @@
       "gphc register check",
       "counterfeit medicine online uk"
     ],
-    "updated": "2026-07-23",
+    "updated": "2026-10-08",
     "sources_checked": [
       [
         "GPhC — How to check an online pharmacy is on the register",
@@ -11388,9 +11464,13 @@
       [
         "MHRA Yellow Card — What to report",
         "https://yellowcard.mhra.gov.uk/what-to-report"
+      ],
+      [
+        "GOV.UK — Report a problem with a medicine or medical device",
+        "https://www.gov.uk/report-problem-medicine-medical-device"
       ]
     ],
-    "quick_answer": "A site selling prescription-only medicine with no prescription or clinical check is unsafe — the medicine may be counterfeit and your card details harvested too. Check the pharmacy on the GPhC register (or the PSNI register in Northern Ireland) before ordering, and report suspicious sellers to the MHRA through GOV.UK."
+    "quick_answer": "A site selling prescription-only medicine with no prescription or clinical check is unsafe — the medicine may be counterfeit and your card details harvested too. Check the pharmacy on the GPhC register (or the PSNI register in Northern Ireland) before ordering, and report suspected illegal sellers to the MHRA at `https://report-or-check-suspicious-activity.mhra.gov.uk/report/suspect-seller`."
   },
   {
     "title": "Forex Trading Scam UK: Spot a Fake Broker",
@@ -12414,26 +12494,30 @@
     "slug": "deepfake-video-scam-uk",
     "category": "tech",
     "excerpt": "Scammers use AI-generated fake videos to blackmail UK residents. Learn how to identify deepfake threats and protect yourself.",
-    "description": "Criminals can use AI-generated sexual images or video in sextortion. Stop contact, do not pay, preserve evidence and use the correct UK support route.",
-    "hero": "A fake sexual image or video can still cause real harm. Stop contact, preserve the messages, report the account and seek support rather than paying.",
+    "description": "Facing deepfake sextortion? Do not pay. Record safe details, avoid copying sexual images, and get police advice on reporting and files already on your device.",
+    "hero": "A fake sexual image can still be used to threaten you. Stop contact, do not pay, and report without waiting to collect evidence. Ask police how to handle any sensitive files already on your device.",
     "date": "2026-05-20",
     "content": "## What is this scam?\n\nA deepfake video scam involves criminals using artificial intelligence to create or heavily manipulate video footage of you — typically in compromising or embarrassing situations. The scammer then contacts you by email, phone, or social media claiming they have this fake video and threatening to send it to your contacts, employer, or family unless you pay money (usually £500–£5,000) or provide personal information. The video itself is almost always completely fake, generated by AI or crudely edited, but the threat feels urgent and personal because scammers often use real details about your life, contacts, or work. These scams exploit shame and fear: they rely on you panicking rather than thinking clearly. The scammer counts on you believing the fake video is real and paying immediately to make it disappear. In reality, there is no video — or if one exists, it's not what they claim.\n\n## Warning signs to look for\n\n- You receive an unsolicited email, text, or social media message from someone claiming to have a compromising video of you, often with a suspicious or recently created email address.\n- The message includes vague threats ('I have something embarrassing' rather than specific details) or generic language that could apply to thousands of people.\n- You're asked to pay in Bitcoin, gift cards, or untraceable payment methods within a tight timeframe (24–48 hours).\n- The sender claims to have hacked your device, stolen your webcam footage, or accessed your browsing history — but provides no verifiable proof.\n- The email or message mentions real details about your life (your name, workplace, or contacts) but these are publicly available information scraped from social media or data breaches.\n- The video file itself, if provided, looks low quality, doesn't match your appearance closely, or shows obviously AI-generated features like blurred backgrounds or odd facial movements.\n- You've never interacted with the sender, but they claim to know you or have been 'watching' you.\n- The message creates artificial urgency: 'Pay in 24 hours or I'll send this to your family.'\n\n## How this scam works step by step\n\nThe scam begins when the attacker obtains your email address and possibly your phone number through public data breaches, LinkedIn, Facebook, or other social media. They then craft a mass email or message saying they have compromising video footage of you and demand payment in cryptocurrency or gift cards within 24–48 hours. Many victims receive these messages with generic content that applies to hundreds or thousands of people — the scammer is banking on some recipients panicking and paying. More sophisticated variants include stolen details (like your workplace name or a contact's email) to make the threat feel credible. Some scammers even attach low-quality AI-generated videos or old footage stolen from webcams to 'prove' they have material. Once you pay, the scammer disappears and may contact you again later with a new threat. If you don't pay and ignore the message, nothing happens — because no genuine video exists. The entire threat is manufactured to exploit fear and shame around privacy and embarrassment.\n\n## How to verify if it is genuine\n\nFirst, assume the threat is fake unless proven otherwise — deepfake scam messages are almost always bluffs. Do not pay or respond with personal details. Check if your devices have actually been compromised: run a legitimate antivirus scan (Windows Defender, Malwarebytes), update your operating system, and change your passwords from a clean device. If the sender claims to have hacked your webcam, cover it with tape and check your device's camera activity — modern systems show when cameras are in use. Look up the sender's email address online: scammers reuse the same addresses across multiple victims, so you may find complaints online. If you received the message via email, verify it wasn't spoofed by checking the full email headers (look for 'Return-Path' and compare domains). You can also ask yourself: have I actually recorded or shared any videos like this? If the answer is no, the threat is false. For related guidance on spotting fake communications, see our guide on /guides/is-this-website-a-scam/. Do not engage with any links or download files the scammer provides.\n\n## What to do if you have already interacted\n\nIf you've already replied to the scammer, stop communicating immediately — do not send money. If you've paid money via cryptocurrency or gift cards, contact the platform urgently (the exchange or gift card issuer) to attempt a reversal, though recovery is unlikely. If payment was made via bank transfer, contact your bank immediately and ask them to attempt to recall the funds. Report the scam to Action Fraud on 0300 123 2040 or online at actionfraud.police.uk with screenshots of all messages and proof of any payment. Also report the email to the NCSC's Suspicious Email Reporting Service at report@phishing.gov.uk. If the message arrived via SMS, forward it to 7726. If the threat was sent through social media, report it to that platform's safety team. Change your passwords for email, social media, and online banking from a secure device. Monitor your bank accounts and credit reports for suspicious activity using TransUnion or Experian's free services. You may also want to contact your employer or trusted contacts to let them know you've received this scam in case the attacker tries to contact them.\n\n## Reporting this scam in the UK\n\nReport deepfake video scams to Action Fraud, the UK's national fraud reporting service, by calling 0300 123 2040 (Monday–Friday, 8am–8pm; Saturday–Sunday, 9am–5pm) or filing a report online at actionfraud.police.uk. Provide screenshots of the full message, the sender's email or phone number, and details of any payment made. If the scam arrived via email, forward the entire message (including headers) to the National Cyber Security Centre at report@phishing.gov.uk. If you received an SMS, forward it to the Suspicious SMS Reporting Service on 7726 (free). For free advice and support, contact Citizens Advice consumer helpline on 0808 223 1133. If you've lost money, you can also report the incident to your bank's fraud team immediately. Keep all evidence (screenshots, emails, transaction records) for at least three months. These reports help law enforcement identify patterns and track down criminal networks. Do not feel ashamed — deepfake scams are designed to manipulate people, and reporting helps protect others in your community.",
     "sections": [
       [
+        "Correction",
+        "An earlier version told readers to keep any material sent to them without the necessary limits for sexual imagery, children and uncertain ages. We have replaced that advice with safer ways to record identifying details and guidance to report promptly and follow police instructions for sensitive material. We have also clarified that image-removal services have age and eligibility limits."
+      ],
+      [
         "What the scam is",
-        "Sextortion is a threat to share sexual images, video or information unless the target pays or does something else. Police guidance confirms that the material can be genuine, hacked, edited or created with AI. A target can therefore be a victim even if they never made or shared an intimate image.\n\nCurrent police guidance directly confirms this broader pattern, so anyone targeted should take a threat seriously regardless of how convincing the material looks."
+        "Sextortion is a threat to share sexual images, video or information unless the target pays or does something else. Police guidance confirms that the material can be genuine, hacked, edited or created with AI. A target can therefore be a victim even if they never made or shared an intimate image.\n\nTake the threat seriously and seek help regardless of how convincing the material looks."
       ],
       [
         "What to do",
-        "- Stop communicating and block the offender after preserving account details.\n- Do not pay. Payment does not guarantee deletion and may lead to further demands.\n- Keep messages, usernames, URLs, payment instructions and any material sent as evidence. You do not need to delay a police report while collecting everything.\n- Report the account and content to the platform.\n- If you paid, contact the bank immediately and do not send more.\n- Tell someone you trust; this is not the victim’s fault.\n\nAdults who possess the relevant image can consider StopNCII, which creates a hash on the device for participating platforms. People under 18 should use the child-specific routes signposted by police, Childline, CEOP or Report Remove rather than sending images to an adult service."
+        "Stop communicating and do not pay. Payment does not guarantee that threats will stop. Report to police without waiting to gather screenshots, messages or files.\n\nIf it is safe, write down usernames, account identifiers, dates, times, payment references and what was said. Keep text-only messages or notes only where this does not copy sexual imagery or require opening a suspicious link or attachment. You can record a URL as text without visiting it; do not reopen a link, download an attachment or seek out an image just to obtain evidence.\n\nFor sexual images or video, police say screenshots or recordings should only be made if you are certain everyone shown is at least 18. If anyone may be under 18, or you are unsure, do not screenshot, record or share the material, including with police. Do not create or download extra copies or forward it by email. This caution also applies when the material appears to be edited or AI-generated; tell police what you suspect without sending the image.\n\nIf you suspect the imagery is illegal for any reason, do not investigate or circulate it yourself. Describe the situation to police and ask how to handle files already on your device. Being certain someone is an adult is not a direction to make a new copy or a guarantee that every form of copying is lawful.\n\nFollow any specific police directions about preserving existing material and when to delete it; do not automatically delete everything or keep it indefinitely. If you want to stop using an account, police advise deactivating rather than deleting it while evidence may be needed. Report the account through the platform’s reporting tools; do not attach sensitive imagery to a general report unless the appropriate specialist process or police instructions tell you how to handle it safely. If you paid, contact your bank immediately. Tell someone you trust and seek support.\n\nStopNCII can help with eligible intimate images of you that already exist on your device, including synthetic images, where you were an adult in the image. It creates a digital fingerprint on your device rather than uploading the image; participating platforms use that fingerprint, so it cannot remove material from the whole internet. Do not obtain a new copy in order to use a hashing service.\n\nFor someone under 18 in the UK, Childline’s Report Remove provides a specialist route for their own sexual images or videos online, including AI fakes. If an image was taken when you were under 18, even if you are now an adult, Take It Down is a separate option for eligible files already on your device; it expressly says not to download, send or share files to use the service. Use the service’s own eligibility guidance or ask for help; do not send sensitive images to an adult service just because you are over 18 now."
       ],
       [
         "The law is not uniform across the UK",
-        "The law differs across England and Wales, Scotland and Northern Ireland.\n\nIn England and Wales, the Online Safety Act 2023 introduced offences concerning sharing or threatening to share intimate images, including deepfakes. Separately, GOV.UK states that a new offence covering the creation of non-consensual sexually explicit deepfakes — introduced by the Data (Use and Access) Act 2025, not the Online Safety Act — came into force on 6 February 2026. The exact offence depends on the image, conduct, intent, consent and date.\n\nScotland has a separate offence covering disclosure or threatened disclosure of intimate images, including deepfakes where the statutory conditions are met. The Scottish Government consulted in 2026 on new creation and request offences; the England-and-Wales creation offences do not extend to Scotland.\n\nNorthern Ireland also has separate law. Official Northern Ireland material still described a gap for sexually explicit deepfakes of adults and proposed legislation was under consideration in 2026. Do not state that the England-and-Wales creation offence applies there.\n\nLegal outcomes depend on the image, conduct, date, location, consent and intent. Report the behaviour to police rather than trying to classify the offence yourself."
+        "Do not assume the same offence applies throughout the UK.\n\nIn England and Wales, section 66B of the Sexual Offences Act 2003 covers specified sharing and threatening-to-share conduct; these provisions were inserted by the Online Safety Act 2023. Separately, section 66E’s offence of creating a purported intimate image of an adult came into force on 6 February 2026 through the Data (Use and Access) Act 2025. It has legal conditions, including intentional creation, lack of consent and lack of reasonable belief in consent, and a reasonable-excuse defence.\n\nThese cited provisions are marked as applying to England and Wales; do not read them as a statement of Scottish or Northern Irish law. Report the behaviour to your local police without waiting to identify an offence or decide whether the material is legally classified as a deepfake."
       ],
       [
         "Reporting and support",
-        "Report fraud at `reportfraud.police.uk` or on 0300 123 2040 in England, Wales or Northern Ireland; in Scotland, report to Police Scotland on 101. Threats and intimate-image abuse can also be reported directly to police; call 999 if someone is in immediate danger.\n\nThe Revenge Porn Helpline supports UK adults affected by intimate-image abuse, including synthetic sexual content, from 10:00 to 16:00 Monday to Friday excluding bank holidays. Its published number is 0345 6000 459."
+        "Report threats and intimate-image abuse directly to police; call 999 if someone is in immediate danger. For fraud reporting, use Report Fraud at `reportfraud.police.uk` or on 0300 123 2040 in England, Wales or Northern Ireland; in Scotland, contact Police Scotland on 101.\n\nThe Revenge Porn Helpline supports UK adults affected by intimate-image abuse. Its published number is 0345 6000 459 and its stated service hours are 10:00 to 16:00 Monday to Friday, excluding bank holidays; a current notice says Fridays are email-only. Check its website for current contact arrangements and explain what happened without attaching sensitive imagery to an ordinary email."
       ]
     ],
     "faq": [
@@ -12443,11 +12527,11 @@
       ],
       [
         "Is creating a non-consensual sexual deepfake illegal everywhere in the UK under the same law?",
-        "No. England and Wales have a creation offence in force from 6 February 2026; Scotland and Northern Ireland have separate legal frameworks and were considering further reforms in 2026."
+        "No. The section 66E creation offence cited here applies to England and Wales and came into force on 6 February 2026. Do not assume that it states the law in Scotland or Northern Ireland; ask local police about the conduct you are reporting."
       ],
       [
         "Should I pay to stop publication?",
-        "Police advice is not to pay. There is no guarantee it will stop the threats, and further demands may follow."
+        "Police advice is not to pay: payment does not guarantee that threats will stop."
       ]
     ],
     "keywords": [
@@ -12457,19 +12541,43 @@
       "sextortion deepfake",
       "video blackmail scam"
     ],
-    "updated": "2026-07-30",
+    "updated": "2026-10-05",
     "sources_checked": [
+      [
+        "Police sextortion evidence",
+        "https://www.police.uk/advice/advice-and-information/online-safety/online-safety/sextortion/sextortion-reporting-it-to-us/"
+      ],
+      [
+        "Police sextortion",
+        "https://www.police.uk/advice/advice-and-information/online-safety/online-safety/sextortion/"
+      ],
       [
         "legislation.gov.uk — Data (Use and Access) Act 2025, Section 138",
         "https://www.legislation.gov.uk/ukpga/2025/18/section/138"
       ],
       [
-        "Herbert Smith Freehills Kramer — Criminalising deepfakes",
-        "https://www.hsfkramer.com/notes/tmt/2024-05/criminalising-deepfakes-the-uks-new-offences-following-the-online-safety-act"
+        "Sexual Offences Act 2003 — section 66E",
+        "https://www.legislation.gov.uk/ukpga/2003/42/section/66E"
       ],
       [
-        "GOV.UK — Government crackdown on explicit deepfakes",
-        "https://www.gov.uk/government/news/government-crackdown-on-explicit-deepfakes"
+        "Sexual Offences Act 2003 — section 66B",
+        "https://www.legislation.gov.uk/ukpga/2003/42/section/66B"
+      ],
+      [
+        "StopNCII FAQ",
+        "https://stopncii.org/faq/"
+      ],
+      [
+        "Childline Report Remove",
+        "https://www.childline.org.uk/info-advice/bullying-abuse-safety/online-mobile-safety/report-remove/"
+      ],
+      [
+        "NCMEC — Take It Down",
+        "https://takeitdown.ncmec.org/"
+      ],
+      [
+        "Revenge Porn Helpline",
+        "https://revengepornhelpline.org.uk/"
       ],
       [
         "Report Fraud — reporting a fraud, and who the service covers",
@@ -12478,9 +12586,17 @@
       [
         "Police Scotland — contact us: non-emergencies on 101",
         "https://www.scotland.police.uk/contact-us/non-emergencies/"
+      ],
+      [
+        "Report Fraud — Ticket fraud",
+        "https://www.reportfraud.police.uk/ticket-fraud/"
+      ],
+      [
+        "FBI IC3 dating verification",
+        "https://www.ic3.gov/PSA/2024/PSA240426"
       ]
     ],
-    "quick_answer": "A threat to share sexual images or video of you is sextortion even when the material is AI-generated — police guidance expressly covers edited and deepfake content. Do not pay, stop contact, preserve the messages as evidence and report the account to the platform; if you paid, report it to Report Fraud or Police Scotland on 101."
+    "quick_answer": "AI-made sexual images can be used for sextortion. Do not pay or reply. Record safe identifiers without opening links or copying sexual images; if anyone may be under 18, do not screenshot or share the material. Report to police without waiting to collect evidence, and ask how to handle anything already on your device."
   },
   {
     "title": "QR Code Scam UK: Spot a Fake 'Quishing' Code",
@@ -12764,7 +12880,7 @@
       ],
       [
         "How to report it",
-        "- Submit the URL through the NCSC scam website reporting service at https://www.ncsc.gov.uk/section/about-this-website/report-scam-website.\n- Forward the original suspicious email to `report@phishing.gov.uk`.\n- You can forward a suspicious SMS text to `7726` free of charge. For RCS, iMessage and app messages, use the relevant built-in reporting tool.\n- Report suspected loss or theft to Report Fraud at https://www.reportfraud.police.uk/ or `0300 123 2040` in England, Wales or Northern Ireland. In Scotland, contact Police Scotland on `101`.\n- Notify SHEIN through the customer-service route reached from `shein.co.uk`, not through the suspect message.\n- For consumer guidance, use the service for your nation: Citizens Advice in England and Wales on 0808 223 1133, Advice Direct Scotland in Scotland on 0808 800 9060, or Consumerline in Northern Ireland on 0300 123 6262."
+        "- Submit the URL through the NCSC scam website reporting service at https://www.ncsc.gov.uk/section/about-this-website/report-scam-website.\n- Forward the original suspicious email to `report@phishing.gov.uk`.\n- You can forward a suspicious SMS text to `7726` free of charge. For RCS, iMessage and app messages, use the relevant built-in reporting tool.\n- Report suspected loss or theft to Report Fraud at https://www.reportfraud.police.uk/ or `0300 123 2040` in England, Wales or Northern Ireland. In Scotland, contact Police Scotland on `101`.\n- For a scam involving a fake SHEIN site, notify SHEIN Customer Service through https://www.shein.co.uk/contact-us.html and select Customer Service. SHEIN's UK guidance accepts scam reports whether or not money was lost. This does not replace contacting your bank or making a police report, and does not guarantee a refund.\n- For consumer guidance, use the service for your nation: Citizens Advice in England and Wales on 0808 223 1133, Advice Direct Scotland in Scotland on 0808 800 9060, or Consumerline in Northern Ireland on 0300 123 6262."
       ]
     ],
     "faq": [
@@ -12796,7 +12912,7 @@
       "SHEIN phishing scam UK",
       "how to spot fake SHEIN website"
     ],
-    "updated": "2026-07-30",
+    "updated": "2026-10-09",
     "sources_checked": [
       [
         "SHEIN UK: Terms and conditions",
@@ -12833,6 +12949,14 @@
       [
         "GOV.UK — Consumer advice services for England and Wales, Scotland and Northern Ireland",
         "https://www.gov.uk/consumer-advice"
+      ],
+      [
+        "SHEIN UK — Scam incident reporting guidance",
+        "https://www.shein.co.uk/faq/detail?id=77660"
+      ],
+      [
+        "SHEIN UK — Customer Service gateway",
+        "https://www.shein.co.uk/contact-us.html"
       ]
     ],
     "quick_answer": "A padlock and familiar branding do not prove a SHEIN page is genuine — the official UK storefront is shein.co.uk, so read the full address before logging in or paying. If a link arrived unexpectedly, type the address yourself instead, and if you entered card details, contact your bank immediately on the number on your card."
@@ -13005,7 +13129,7 @@
       ],
       [
         "How to report a fake Pandora website (UK)",
-        "Report the site to Pandora directly through its brand-protection reporting route at `pandoragroup.com`, including the web address, screenshots, and your receipt or order confirmation if you have one.\n\nFor consumer advice, contact the service GOV.UK lists for your nation: Citizens Advice in England and Wales on 0808 223 1133, Advice Direct Scotland in Scotland on 0808 800 9060, or Consumerline in Northern Ireland on 0300 123 6262. GOV.UK’s consumer-rights guidance separately says the appropriate helpline can refer a complaint to local Trading Standards or share complaint information with another enforcement authority; whether anyone investigates or takes action depends on the case. If you lost money, report the fraud to Report Fraud at `reportfraud.police.uk` or on 0300 123 2040 in England, Wales or Northern Ireland. In Scotland, report it to Police Scotland on 101."
+        "Email suspected counterfeit Pandora sites to its Brand Protection team at `brandprotection@pandora.net`. Give the link and details in English, with screenshots and purchase evidence if available.\n\nFor consumer advice, contact the service GOV.UK lists for your nation: Citizens Advice in England and Wales on 0808 223 1133, Advice Direct Scotland in Scotland on 0808 800 9060, or Consumerline in Northern Ireland on 0300 123 6262. GOV.UK’s consumer-rights guidance separately says the appropriate helpline can refer a complaint to local Trading Standards or share complaint information with another enforcement authority; whether anyone investigates or takes action depends on the case. If you lost money, report the fraud to Report Fraud at `reportfraud.police.uk` or on 0300 123 2040 in England, Wales or Northern Ireland. In Scotland, report it to Police Scotland on 101."
       ]
     ],
     "faq": [
@@ -13027,7 +13151,7 @@
       ],
       [
         "How do I report a fake Pandora website?",
-        "Report it to Pandora through its brand-protection pages at `pandoragroup.com`, to the consumer service for your nation (Citizens Advice in England and Wales on 0808 223 1133, Advice Direct Scotland in Scotland on 0808 800 9060, or Consumerline in Northern Ireland on 0300 123 6262), and to Report Fraud at `reportfraud.police.uk` or 0300 123 2040 if you lost money. Report Fraud covers England, Wales and Northern Ireland. If you live in Scotland or the crime happened there, contact Police Scotland on 101."
+        "Report the suspected counterfeit site to Pandora’s Brand Protection team at `brandprotection@pandora.net` with the link and details in English, to the consumer service for your nation (Citizens Advice in England and Wales on 0808 223 1133, Advice Direct Scotland in Scotland on 0808 800 9060, or Consumerline in Northern Ireland on 0300 123 6262), and to Report Fraud at `reportfraud.police.uk` or 0300 123 2040 if you lost money. Report Fraud covers England, Wales and Northern Ireland. If you live in Scotland or the crime happened there, contact Police Scotland on 101."
       ]
     ],
     "keywords": [
@@ -13039,7 +13163,7 @@
       "pandora fake website uk",
       "report fake pandora website"
     ],
-    "updated": "2026-07-30",
+    "updated": "2026-10-08",
     "sources_checked": [
       [
         "Which? — Section 75 of the Consumer Credit Act",
@@ -13064,6 +13188,14 @@
       [
         "GOV.UK — Consumer protection rights (referral to enforcement bodies is conditional)",
         "https://www.gov.uk/consumer-protection-rights"
+      ],
+      [
+        "Pandora — Reporting brand and product violations",
+        "https://pandoragroup.com/about-us/brand-protection/reporting-brand-and-product-violations"
+      ],
+      [
+        "Pandora — Contact us, Brand Protection team",
+        "https://pandoragroup.com/about-us/contact"
       ]
     ],
     "quick_answer": "Pandora's consumer site is pandora.net, so a Pandora shop with sitewide 50–70% discounts found through a social ad is almost certainly fake. Check the address against Pandora's authorised-retailer guidance before paying, and use a credit card where possible so Section 75 may cover a qualifying purchase over £100."
@@ -13355,7 +13487,7 @@
       ],
       [
         "How to report a fake eBay fee message (UK)",
-        "Forward it to eBay at `spoof@ebay.co.uk`. If you've lost money, also report it to Report Fraud at `reportfraud.police.uk` or 0300 123 2040 if you're in England, Wales, or Northern Ireland. In Scotland, report to Police Scotland on 101."
+        "Forward the suspicious email as an attachment to eBay at `spoof@ebay.co.uk`. If you've lost money, also report it to Report Fraud at `reportfraud.police.uk` or 0300 123 2040 if you're in England, Wales, or Northern Ireland. In Scotland, report to Police Scotland on 101."
       ]
     ],
     "faq": [
@@ -13373,11 +13505,11 @@
       ],
       [
         "Does eBay have an email address for reporting phishing?",
-        "Yes. Forward suspicious emails claiming to be from eBay to `spoof@ebay.co.uk`."
+        "Yes. Forward suspicious emails claiming to be from eBay as attachments to `spoof@ebay.co.uk`."
       ],
       [
         "How do I report a fake eBay fee message?",
-        "Forward it to `spoof@ebay.co.uk`, and report any money lost to Report Fraud at `reportfraud.police.uk` or 0300 123 2040 (Police Scotland on 101 in Scotland)."
+        "Forward the suspicious email as an attachment to `spoof@ebay.co.uk`, and report any money lost to Report Fraud at `reportfraud.police.uk` or 0300 123 2040 (Police Scotland on 101 in Scotland)."
       ]
     ],
     "keywords": [
@@ -13389,7 +13521,7 @@
       "ebay spoof email report",
       "ebay unpaid fee email scam"
     ],
-    "updated": "2026-07-06",
+    "updated": "2026-10-08",
     "sources_checked": [
       [
         "eBay — Fees for private sellers",
@@ -13400,7 +13532,7 @@
         "https://www.ebay.co.uk/help/account/protecting-account/recognising-spoof-emails?id=4195"
       ]
     ],
-    "quick_answer": "An email demanding an unpaid eBay listing fee through a payment link is a scam — real charges appear in My eBay or Seller Hub, and eBay says it never asks for your password or card number by email. Check your account directly and forward the fake to spoof@ebay.co.uk."
+    "quick_answer": "An email demanding an unpaid eBay listing fee through a payment link is a scam — real charges appear in My eBay or Seller Hub, and eBay says it never asks for your password or card number by email. Check your account directly and forward the fake as an attachment to spoof@ebay.co.uk."
   },
   {
     "title": "Shpock Scam UK: Spot a Fake Deal Safely",
@@ -15724,6 +15856,10 @@
     "content": "## What sextortion emails actually are\n\nSextortion is a mass extortion scam delivered by email. Scammers send thousands of identical or near-identical emails claiming they have recorded you on your webcam in a compromising situation and will share the footage with your contacts unless you pay, usually in Bitcoin or another cryptocurrency. The emails often include a password you've used before (harvested from a data breach) to make the threat seem credible. They may reference your real name, email address, or other personal details also sourced from public breaches. The core claim — that they have footage — is almost always false. These emails are sent indiscriminately to huge numbers of people, betting that a tiny fraction will panic and pay. The scammers have no footage, no access to your webcam, and no list of your contacts. The entire threat is a bluff designed to exploit fear and shame.\n\n## Warning signs that an email is a sextortion scam\n\n- The email claims to have video or photos of you but provides no proof, link, or sample — genuine threats would typically include evidence or a way to verify the claim.\n- It demands payment in Bitcoin, gift cards, or other hard-to-trace cryptocurrency — legitimate organisations never demand untraceable payment methods.\n- The email was sent to your email address but uses generic language like \"Dear user\" or \"Dear sir/madam\" rather than addressing you by name — mass scams use templates.\n- It includes a password you recognise from years ago or from a known data breach — scammers harvest these from public breaches, not from hacking your webcam.\n- The sender's email address is a free Gmail, Yahoo, or Outlook account, or a spoofed domain — real law enforcement or security firms use official addresses.\n- It creates artificial urgency, demanding payment within hours or days — scammers use time pressure to stop you thinking clearly.\n- The tone mixes technical jargon with poor grammar or spelling — many sextortion emails are translated or templated.\n- It threatens to contact your family, employer, or social media contacts — this is a standard intimidation tactic with no real backing.\n\n## How the scam unfolds from email to payment demand\n\nThe scam begins with a mass email campaign. Scammers purchase or compile lists of email addresses from data breaches, public sources, or bulk email databases. They craft an email that claims to have compromising footage and demands payment, often within 24 to 48 hours. To add credibility, they include a real password — one you may have used on a website that was hacked years ago. This password is not proof they have access to your webcam; it simply proves they have access to breach databases. The email may reference your location, job title, or other details also from public breaches. The scammer sends this email to thousands or tens of thousands of people at once. Most recipients delete it immediately. But some — especially those who recognise the password — panic. A small number pay the demanded amount, usually in Bitcoin. Once payment is made, the scammer disappears. No footage is ever shared because none exists. The scammer has already moved on to the next batch of emails.\n\n## How to verify if a sextortion email is real\n\nIn almost all cases, a sextortion email is not real. Here are the key checks: First, ask yourself whether you have ever used your webcam in a compromising way. If the answer is no, the threat is definitely false. Second, check whether the email provides any actual evidence — a screenshot, a video link, or a sample of footage. Genuine threats would include proof; mass scam emails never do. Third, verify the sender's email address by hovering over it (do not click). If it is a free email account (Gmail, Yahoo, Outlook) or a spoofed domain, it is not from law enforcement or a legitimate security firm. Fourth, search the password they included in a breach database like Have I Been Pwned (haveibeenpwned.com) — if it appears in a known breach, the scammer simply bought a breach list. Fifth, check whether the email was sent to you personally or to a generic recipient list. Sextortion emails are almost always sent to thousands of people with identical or templated content. If you are still uncertain, contact Citizens Advice on 0808 223 1133 for reassurance.\n\n## What to do immediately if you have already paid or shared details\n\nIf you have already sent money, act quickly. Contact your bank or payment provider immediately and explain that you have been scammed. If you paid by bank transfer, ask your bank to attempt to recall the payment — this sometimes works if the money has not yet been withdrawn. If you paid in Bitcoin or another cryptocurrency, the transaction is almost certainly irreversible, but report it anyway so your bank has a record. If you have shared personal information (your real name, address, phone number, or social media profiles), monitor your accounts for suspicious activity. Change your passwords for email and any accounts linked to the email address that received the sextortion email. Enable two-factor authentication on all important accounts. Do not respond to the scammer or send any further money — this only confirms your email is active and may lead to more scam attempts. If you are worried about your webcam, check that it is covered or disabled in your device settings. Report the email to Report Fraud on 0300 123 2040 and to the NCSC Suspicious Email Reporting Service at report@phishing.gov.uk.\n\n## How to report sextortion emails in the UK\n\nReport the email through multiple official channels to help protect others. First, forward the email to the NCSC Suspicious Email Reporting Service at report@phishing.gov.uk — this helps the NCSC track and block sextortion campaigns. Second, report it to Report Fraud by calling 0300 123 2040 or visiting their website. Provide as much detail as you can: the sender's email address, the exact time you received it, any passwords mentioned, and whether you paid or shared information. Third, report it to your email provider (Gmail, Outlook, Yahoo, etc.) by marking it as spam or phishing — use the report button in your email client. Fourth, if you paid money, also report it to Action Fraud (part of Report Fraud) so there is an official record. Keep a copy of the email for your records. Do not delete it immediately, as you may need it for evidence if you contact your bank or the police. If you are distressed or worried about the threat, contact Citizens Advice on 0808 223 1133 for support and reassurance.",
     "sections": [
       [
+        "Correction",
+        "An earlier version did not repeat the limits on forwarding emails in its reporting summary and did not fully distinguish safe text records from sensitive imagery. We have qualified that advice, clarified age limits for image-removal services, and directed readers to police for handling existing sensitive files."
+      ],
+      [
         "What the mass sextortion email scam is",
         "In the common phishing version, a criminal claims to have recorded the recipient visiting adult websites or using a webcam and threatens to share footage unless a cryptocurrency ransom is paid. The message may include technical-sounding details or a real password to make the story credible.\n\nThe National Cyber Security Centre guidance at https://www.ncsc.gov.uk/guidance/sextortion-scams-how-to-protect-yourself says the senders of these mass emails are guessing: they do not know whether the recipient has a webcam, visited an adult site or communicates in the way claimed. A quoted password was probably obtained from a historic data breach. It is not evidence that a camera was accessed.\n\nHowever, sextortion is also a real form of blackmail. Criminals can obtain genuine images through social media, dating apps, account compromise, coerced video calls, stolen material or manipulated images such as deepfakes. If the sender possesses or threatens real intimate material, follow police sextortion guidance rather than assuming it is only a bulk-email bluff."
       ],
@@ -15733,11 +15869,11 @@
       ],
       [
         "What to do when you receive one",
-        "For a typical mass-email claim with no indication that intimate material is real:\n\n1. Do not reply, pay or negotiate.\n2. Forward the email to the NCSC Suspicious Email Reporting Service at `report@phishing.gov.uk`, then delete it.\n3. Mark it as phishing or spam with your email provider.\n4. If the message quotes a password you still use, change it immediately everywhere it is used. Start with your email account and enable two-step verification.\n5. Check whether your email address appears in a known public breach using a reputable service such as Have I Been Pwned at https://haveibeenpwned.com/, which the NCSC cites. Do not type a current password into an unfamiliar breach-checking site.\n6. Review your email and social-media account sessions, recovery details and security alerts for evidence of actual access.\n\nOpening a normal email does not by itself prove that the sender has camera access. Nonetheless, “safe to open” is too absolute: messages can contain tracking content, harmful links or attachments, and software vulnerabilities exist. Use your provider's reporting function, do not enable remote content unnecessarily, and do not interact with links or files."
+        "For a typical mass-phishing email with no sexual imagery or attachments and no indication of real or AI-made intimate material:\n\n1. Do not reply, pay or negotiate.\n2. Forward the email to the NCSC Suspicious Email Reporting Service at `report@phishing.gov.uk`, then delete it.\n3. Mark it as phishing or spam with your email provider.\n4. If the message quotes a password you still use, change it immediately everywhere it is used. Start with your email account and enable two-step verification.\n5. Check whether your email address appears in a known public breach using a reputable service such as Have I Been Pwned at https://haveibeenpwned.com/, which the NCSC cites. Do not type a current password into an unfamiliar breach-checking site.\n6. Review your email and social-media account sessions, recovery details and security alerts for evidence of actual access.\n\nOpening a normal email does not by itself prove that the sender has camera access. Nonetheless, “safe to open” is too absolute: messages can contain tracking content, harmful links or attachments, and software vulnerabilities exist. Use your provider's reporting function, do not enable remote content unnecessarily, and do not interact with links or files."
       ],
       [
-        "If the threat may involve real images",
-        "Stop contact and do not pay. Police.uk says payment does not guarantee that images will be deleted and offenders may demand more. Preserve usernames, account details, payment information, message times and the conversation so police can advise on evidence.\n\nReport through your local police force's online service or call `101`; call `999` if someone is in immediate danger. If you are in Scotland, use Police Scotland. Report the account to the platform as well.\n\nBe careful when preserving evidence. Police.uk warns not to screenshot, record or share an intimate image if you are unsure whether everyone shown is 18 or over, even when reporting; tell police what exists and follow their instructions. Adults worried that an intimate image may be shared can consider StopNCII.org at https://stopncii.org/. Under-18s can use the UK Report Remove service at https://www.childline.org.uk/info-advice/bullying-abuse-safety/online-mobile-safety/report-remove/ with Childline and the Internet Watch Foundation."
+        "If the threat may involve real or AI-made images",
+        "Stop contact and do not pay. Police.uk says payment does not guarantee that images will be deleted and offenders may demand more. Report promptly without waiting to gather evidence. If safe, note usernames, account identifiers, URLs as text, payment information and message times. Keep ordinary text messages only without copying sexual imagery; do not open links or attachments to collect proof.\n\nReport through your local police force's online service or call `101`; call `999` if someone is in immediate danger. If you are in Scotland, use Police Scotland. Report the account to the platform as well.\n\nDo not screenshot, record, copy or share intimate imagery if anyone pictured may be under 18 or their age is uncertain, including when reporting to police. Tell police about existing files and follow their instructions about retention or deletion. Do not obtain new copies to report a threat, whether the imagery is real or AI-made.\n\nStopNCII.org at https://stopncii.org/ may help if you are now 18 or over, were 18 or over in the image, are the person depicted and already have the eligible file. Its hashing service works with participating platforms and does not guarantee removal everywhere. UK under-18s can seek help through Childline's Report Remove at https://www.childline.org.uk/info-advice/bullying-abuse-safety/online-mobile-safety/report-remove/, including for AI fakes. Take It Down at https://takeitdown.ncmec.org/ is a separate option for imagery taken when you were under 18, even if you are now an adult; do not obtain or share a new copy to use it."
       ],
       [
         "If you already paid or shared information",
@@ -15745,7 +15881,7 @@
       ],
       [
         "Reporting and support",
-        "- Suspicious email: forward it to `report@phishing.gov.uk`.\n- Fraud loss in England, Wales or Northern Ireland: use Report Fraud at https://www.reportfraud.police.uk/ or call `0300 123 2040`.\n- Fraud in Scotland: call Police Scotland on `101` or use its online reporting routes.\n- Real or suspected sextortion: report to your local police force; use `999` in an emergency.\n- Emotional support: In England and Wales, Victim Support's free support line is `08 08 16 89 111`. Scotland and Northern Ireland have separate victim-support services. If you are in immediate danger or feel at risk of harming yourself, call `999` or seek urgent medical help."
+        "- Ordinary mass-phishing email without sexual imagery or attachments: forward it to `report@phishing.gov.uk`. Do not forward intimate-image threats or sexual material; report those circumstances directly to police without attaching imagery.\n- Fraud loss in England, Wales or Northern Ireland: use Report Fraud at https://www.reportfraud.police.uk/ or call `0300 123 2040`.\n- Fraud in Scotland: call Police Scotland on `101` or use its online reporting routes.\n- Real or suspected sextortion: report to your local police force; use `999` in an emergency.\n- Emotional support: In England and Wales, Victim Support's free support line is `08 08 16 89 111`. Scotland and Northern Ireland have separate victim-support services. If you are in immediate danger or feel at risk of harming yourself, call `999` or seek urgent medical help."
       ]
     ],
     "faq": [
@@ -15777,7 +15913,7 @@
       "email blackmail scam",
       "how to report sextortion"
     ],
-    "updated": "2026-07-30",
+    "updated": "2026-10-05",
     "sources_checked": [
       [
         "NCSC: Sextortion emails—how to protect yourself",
@@ -15810,9 +15946,21 @@
       [
         "Police Scotland — contact us: non-emergencies on 101",
         "https://www.scotland.police.uk/contact-us/non-emergencies/"
+      ],
+      [
+        "StopNCII — eligibility and service limits",
+        "https://stopncii.org/faq/"
+      ],
+      [
+        "Childline — Report Remove",
+        "https://www.childline.org.uk/info-advice/bullying-abuse-safety/online-mobile-safety/report-remove/"
+      ],
+      [
+        "NCMEC — Take It Down eligibility and safe use",
+        "https://takeitdown.ncmec.org/faq/"
       ]
     ],
-    "quick_answer": "The mass email claiming to have webcam footage of you is a bluff: the senders are guessing, and any quoted password was probably taken from an old data breach. Do not pay or reply; change that password if you still use it and forward the email to report@phishing.gov.uk. If real intimate images are involved, contact police instead."
+    "quick_answer": "Do not pay or reply to a sextortion email. A quoted old password does not prove camera access. Only forward an ordinary mass-phishing message with no sexual imagery or attachments to report@phishing.gov.uk. For threats involving real or AI-made intimate material, report promptly to police without copying images and ask how to handle existing files."
   },
   {
     "title": "Email Account Takeover UK: Recover and Lock It Down",
@@ -17431,6 +17579,10 @@
     "content": "## What is a Facebook dating scam?\n\nA Facebook dating scam happens when a criminal creates a fake profile — often using stolen photos of an attractive person — and targets you through Facebook's dating features or direct messages. The scammer's goal is to build an emotional connection with you over weeks or months, then ask for money. The requests usually start small (a few pounds for a meal or transport) and escalate to larger sums for supposed emergencies, medical bills, business investments, or travel costs to meet you in person. Some scammers also use the relationship to trick you into sharing personal information, which they then use for identity theft or to blackmail you. The scam is particularly effective because it exploits loneliness and the natural human desire for connection. Victims often feel embarrassed to report it because they have developed genuine feelings for the fake person, even though they have never met in real life.\n\n## Warning signs of a fake Facebook dating profile\n\n- **Stolen or generic photos**: The profile picture looks professionally taken or is a stock image; reverse image search (Google Images) shows the same photo used elsewhere online or on modelling websites.\n- **Vague or inconsistent personal details**: They claim to be a doctor, engineer, or businessman but give evasive answers about their work, location, or family; their story changes slightly each time they tell it.\n- **Reluctance to video call**: They make excuses (broken camera, poor internet, work restrictions) whenever you suggest a video call, voice call, or meeting in person.\n- **Fast emotional escalation**: Within days or weeks they say they love you, want to marry you, or talk about a future together — far faster than a genuine relationship would develop.\n- **Requests for money or financial information**: They ask for cash for emergencies, travel, medical treatment, business opportunities, or to pay off debts; they may also ask for your bank details, card numbers, or passwords.\n- **Isolation tactics**: They discourage you from telling friends or family about the relationship, or they claim your friends are jealous and trying to break you up.\n- **Requests to move off Facebook**: They quickly suggest moving conversations to WhatsApp, Telegram, or email to avoid Facebook's monitoring and reporting systems.\n- **Inconsistent or poor English**: Messages contain spelling errors, awkward phrasing, or copy-paste responses that don't quite fit your question — signs the profile is run by someone for whom English is not a first language or is managed by a team.\n\n## How the scam unfolds from first contact to money loss\n\nThe scam typically begins when the fake profile sends you a message or likes your photo. They will compliment you, ask personal questions, and seem genuinely interested in getting to know you. Over the following weeks, they build rapport by messaging regularly, sharing (false) details about their life, and expressing affection. They may send you small gifts via Amazon or a delivery service to make the relationship feel real. Once they believe you are emotionally invested, they introduce a problem: a family emergency, a business deal that needs funding, medical bills, or travel costs to visit you. They ask if you can help with money — often starting with a small amount (£50–£200) to test whether you will comply. If you send money, they thank you profusely and promise to repay you, then create another emergency and ask for more. Some victims have sent thousands of pounds over months. Alternatively, the scammer may ask you to receive money into your bank account on their behalf (claiming they cannot access UK banking), which is a money laundering scheme that can make you liable to the police. Others use the relationship to extract personal information — your full name, address, date of birth, passport details — which they sell or use for identity theft.\n\n## How to verify if a Facebook dating profile is genuine\n\nIf you are unsure whether someone is real, take these steps before sharing money or personal information. First, ask them to video call you — use Facebook Messenger's video call feature or suggest WhatsApp video. Genuine people will usually agree; scammers will make excuses. Second, reverse-image search their profile photo: go to Google Images, click the camera icon, and upload or paste their photo URL. If the same image appears on modelling sites, stock photo websites, or other dating profiles, it is stolen. Third, search their name and any details they have given you (workplace, hometown, university) on Google and social media to see if a real person matches. Fourth, ask specific questions about their life and check if their answers are consistent over time — scammers often slip up or repeat scripted responses. Fifth, be wary if they claim to be a military officer, oil rig worker, or someone in a job that keeps them isolated; these are common cover stories because they explain why they cannot meet or video call easily. Finally, if they ask for money, that is a definitive red flag — genuine people do not ask strangers for cash, no matter how close you feel.\n\n## What to do immediately if you have already sent money or shared details\n\nIf you have sent money, contact your bank or payment service right away — the sooner you report it, the better the chance of recovering the funds. Call the number on the back of your card or use your banking app to report the transaction as fraudulent. If you used a money transfer service like Western Union or MoneyGram, contact them immediately to try to stop the payment. If you paid via PayPal, report it as an unauthorised transaction. Report the scam to Report Fraud on 0300 123 2040 or online at reportfraud.org.uk — this creates an official record and helps the police identify patterns. If you have shared personal information (name, address, date of birth, passport details, bank account number), contact Cifas, the UK's fraud prevention service, to register for identity theft protection. Monitor your credit file using a free service like Clearscore or Experian to spot any fraudulent accounts opened in your name. If the scammer has explicit photos or videos of you, report them to the NCSC at report@phishing.gov.uk and to Facebook directly using the report button on their profile. Do not send any more money, even if they claim they will repay you or that you owe them — this is a common manipulation tactic.\n\n## Reporting the scam in the UK\n\nReport the fake profile to Facebook immediately by clicking the three dots on their profile, selecting 'Report', and choosing 'It's a fake account' or 'It's a scam'. Facebook will investigate and may remove the profile, though this can take time. Report the scam to Report Fraud on 0300 123 2040 or at reportfraud.org.uk — they handle fraud reports for the UK and share information with law enforcement. If you received suspicious messages or links, forward them to the NCSC Suspicious Email Reporting Service at report@phishing.gov.uk. If the scammer sent you spam text messages, forward them to 7726 (spamming). Contact Citizens Advice on 0808 223 1133 if you need support understanding your rights or next steps. If you believe your identity has been stolen, report it to Action Fraud (part of Report Fraud) and ask for a crime reference number — you will need this if you want to dispute fraudulent accounts or claims. Keep all messages, screenshots, and transaction records as evidence for the police and your bank. The more people who report the same profile, the faster Facebook and law enforcement can act.",
     "sections": [
       [
+        "Correction",
+        "An earlier version recommended taking screenshots before blocking and keeping everything as evidence without the necessary safeguards for sexual imagery, children and uncertain ages. We have replaced that advice with safe identifying notes, prompt reporting and police guidance on existing files, and clarified the age limits of image-removal services."
+      ],
+      [
         "What is a Facebook dating scam?",
         "A Facebook dating scam happens when a criminal creates a fake profile — often using stolen photos — and targets you through Facebook Dating or direct messages. The scammer's goal is to build an emotional connection with you over weeks or months, then ask for money. The requests usually start small (a few pounds for a meal or transport) and escalate to larger sums for supposed emergencies, medical bills, business investments, or travel costs to meet you in person. Some scammers also use the relationship to trick you into sharing personal information, which they then use for identity theft or to blackmail you. The scam is effective because it exploits loneliness and the ordinary human desire for connection — not because victims are careless. Victims often feel embarrassed to report it because they have developed genuine feelings for a person who turned out not to exist. The criminal may rely on that embarrassment to discourage reporting."
       ],
@@ -17444,7 +17596,7 @@
       ],
       [
         "How to verify if a Facebook dating profile is genuine",
-        "If you are unsure whether someone is real, work through these checks before sending money or sharing personal information. None is conclusive alone, but together they can help you make a more informed assessment.\n\nAsk them to video call. Use Messenger's video call feature or suggest WhatsApp video. A video call does not prove identity or intentions, and some genuine people may be reluctant, but repeated excuses over time are a warning sign — especially when they appear just as the conversation turns to meeting or money.\n\nReverse-image search their profile photo. Go to Google Images, click the camera icon, and upload the photo. If it appears on modelling sites, stock libraries, or other dating profiles under different names, that is strong evidence the profile is not genuine, though it does not prove who created it or how the image was obtained. A clean result is weaker evidence than a match — it means the photo is not in the indexes, not that the person is real.\n\nSearch their name and stated details — workplace, hometown, university — and see whether a consistent real person emerges. Ask specific questions about their life and note whether answers stay consistent over weeks.\n\nLook at the shape of the account. Long posting history, tagged photos from friends, and a friends list mixing family, colleagues, and school friends are all harder to fake than a profile photo. A sparse account is common among scammers, but also among people who simply do not use Facebook much or who set up a fresh profile after a breakup — weigh it alongside everything else rather than on its own.\n\nBe cautious with cover stories that conveniently explain why someone can never meet or video call — deployed military officer, offshore oil rig worker, surgeon on an overseas contract. These are heavily used precisely because they pre-empt the obvious question.\n\nAnd if they ask for money, stop and do not pay. The request alone is enough to treat the interaction as high risk, however close you feel and however plausible the emergency sounds."
+        "If you are unsure whether someone is real, work through these checks before sending money or sharing personal information. None is conclusive alone, but together they can help you make a more informed assessment.\n\nAsk them to video call. Use Messenger's video call feature or suggest WhatsApp video. A video call does not prove identity or intentions, and some genuine people may be reluctant, but repeated excuses over time are a warning sign — especially when they appear just as the conversation turns to meeting or money.\n\nFor an ordinary, non-intimate profile photo, you can use a reverse-image search such as Google Images. Do not download or upload sexual imagery for this check. If it appears on modelling sites, stock libraries, or other dating profiles under different names, that is strong evidence the profile is not genuine, though it does not prove who created it or how the image was obtained. A clean result is weaker evidence than a match — it means the photo is not in the indexes, not that the person is real.\n\nSearch their name and stated details — workplace, hometown, university — and see whether a consistent real person emerges. Ask specific questions about their life and note whether answers stay consistent over weeks.\n\nLook at the shape of the account. Long posting history, tagged photos from friends, and a friends list mixing family, colleagues, and school friends are all harder to fake than a profile photo. A sparse account is common among scammers, but also among people who simply do not use Facebook much or who set up a fresh profile after a breakup — weigh it alongside everything else rather than on its own.\n\nBe cautious with cover stories that conveniently explain why someone can never meet or video call — deployed military officer, offshore oil rig worker, surgeon on an overseas contract. These are heavily used precisely because they pre-empt the obvious question.\n\nAnd if they ask for money, stop and do not pay. The request alone is enough to treat the interaction as high risk, however close you feel and however plausible the emergency sounds."
       ],
       [
         "What to do immediately if you have already sent money or shared details",
@@ -17452,7 +17604,7 @@
       ],
       [
         "Reporting the scam in the UK",
-        "Report the fake profile to Facebook. In Facebook Dating, open Matches or your conversations, tap through to the profile or conversation, then use Options and choose Report. For a standard Facebook profile outside Dating, use the three-dot menu on the profile and select the reporting option, choosing the fake account or scam category. Facebook will investigate and may remove the profile, though this takes time and you should not wait on it before contacting your bank.\n\nReport the crime to Report Fraud (formerly Action Fraud) on 0300 123 2040 or at reportfraud.police.uk, which handles fraud reports for England, Wales, and Northern Ireland and shares intelligence with police forces. In Scotland, report to Police Scotland on 101.\n\nIf you received suspicious emails or links, forward them to the NCSC Suspicious Email Reporting Service at report@phishing.gov.uk. If you received scam text messages, forward the text to 7726, free of charge. These routes are for suspicious messages only — they are not a route for reporting the romance scam itself, and they will not reach anyone who can act on a crime report.\n\nThe consumer service for your nation can help you understand your rights and next steps: Citizens Advice in England and Wales on 0808 223 1133, Advice Direct Scotland in Scotland on 0808 800 9060, or Consumerline in Northern Ireland on 0300 123 6262. For free, confidential emotional support, contact Victim Support in England and Wales on 0808 168 9111, Victim Support Scotland through `victimsupport.scot`, or Victim Support NI through `victimsupportni.com`. That support is offered, independently of the police, and you do not need to have reported the crime to use it.\n\nKeep everything as evidence: messages, screenshots of the profile before it disappears, the profile URL, payment references, and bank correspondence. Scammers delete accounts quickly once they are challenged, and evidence you did not capture is usually gone for good. The more people who report the same profile, the faster Facebook and law enforcement can connect it to other victims."
+        "Report the fake profile to Facebook. In Facebook Dating, open Matches or your conversations, tap through to the profile or conversation, then use Options and choose Report. For a standard Facebook profile outside Dating, use the three-dot menu on the profile and select the reporting option, choosing the fake account or scam category. Facebook will investigate and may remove the profile, though this takes time and you should not wait on it before contacting your bank.\n\nReport the crime to Report Fraud (formerly Action Fraud) on 0300 123 2040 or at reportfraud.police.uk, which handles fraud reports for England, Wales, and Northern Ireland and shares intelligence with police forces. In Scotland, report to Police Scotland on 101.\n\nFor ordinary phishing messages with no sexual imagery or attachments, forward suspicious emails to the NCSC Suspicious Email Reporting Service at report@phishing.gov.uk, or scam texts to 7726, free of charge. Do not forward intimate-image threats or sexual material to these services; report those circumstances directly to police without attaching imagery. These routes are for suspicious messages only — they are not a route for reporting the romance scam itself, and they will not reach anyone who can act on a crime report.\n\nThe consumer service for your nation can help you understand your rights and next steps: Citizens Advice in England and Wales on 0808 223 1133, Advice Direct Scotland in Scotland on 0808 800 9060, or Consumerline in Northern Ireland on 0300 123 6262. For free, confidential emotional support, contact Victim Support in England and Wales on 0808 168 9111, Victim Support Scotland through `victimsupport.scot`, or Victim Support NI through `victimsupportni.com`. That support is offered, independently of the police, and you do not need to have reported the crime to use it.\n\nKeep payment references and bank correspondence that contain no sexual imagery. Safely note identifying details already available to you. For intimate-image threats, follow the safeguards in the threat FAQ and ask police how to handle existing files. You do not need to collect everything before reporting; do not download, copy or forward sexual material to make a report."
       ]
     ],
     "faq": [
@@ -17462,7 +17614,7 @@
       ],
       [
         "What should I do if the scammer is threatening me or asking me to send explicit photos?",
-        "Do not send any images, and do not pay. Paying does not end it — it signals you will pay again.\n\nPreserve evidence before you block: screenshot the threats, the profile, and the profile URL. Once you block, you may lose access to the conversation, and the police and the platform will both want it.\n\nThen report the profile to Facebook using the reporting tools on the profile or conversation. If you are in immediate danger call 999. Otherwise call the police on 101 — in Scotland, 101 reaches Police Scotland directly. Threatening to share intimate images is a criminal offence in the UK, and the police can act on it.\n\nFor specialist help, the Revenge Porn Helpline on 0345 6000 459 supports adults facing intimate image abuse and can work with platforms to get content removed. StopNCII.org lets you create a digital fingerprint of an image from your own device — the image itself is never uploaded — which participating platforms including Facebook use to block it from being shared. If you are under 18, contact Childline's Report Remove service instead. For free emotional support, contact Victim Support in England and Wales on 0808 168 9111, Victim Support Scotland through `victimsupport.scot`, or Victim Support NI through `victimsupportni.com`.\n\nDo not report this to report@phishing.gov.uk. That inbox handles suspicious emails and nothing else — no one there can act on image abuse or a threat against you."
+        "Do not send any images, and do not pay. Payment does not guarantee that the threats will stop.\n\nStop contact and report promptly; do not wait to gather evidence before blocking. If safe, note the username, account identifier, profile URL, message times and payment references as text, without opening links or attachments or copying sexual images. Ordinary text messages can help only where they can be kept without copying sensitive imagery. If anyone pictured may be under 18, or you are unsure, do not screenshot, record or share the imagery, including with police. Tell police what already exists and ask how to handle it; follow their instructions about retention or deletion.\n\nReport the profile to Facebook using the reporting tools on the profile or conversation. If you are in immediate danger call 999. Otherwise call the police on 101 — in Scotland, 101 reaches Police Scotland directly. Threatening to share intimate images is a criminal offence in the UK, and the police can act on it.\n\nFor specialist help, the Revenge Porn Helpline on 0345 6000 459 supports adults facing intimate image abuse and can work with platforms to get content removed. StopNCII.org may help if you are now 18 or over, were 18 or over in the image, are the person depicted and already have the eligible file. It creates a hash on your device for participating services, not guaranteed removal everywhere. UK under-18s can seek help through Childline's Report Remove, including for AI fakes. Take It Down at https://takeitdown.ncmec.org/ is a separate option for imagery taken when you were under 18, even if you are now an adult; do not obtain or share a new copy to use it. For free emotional support, contact Victim Support in England and Wales on 0808 168 9111, Victim Support Scotland through `victimsupport.scot`, or Victim Support NI through `victimsupportni.com`.\n\nDo not report this to report@phishing.gov.uk. That inbox handles suspicious emails and nothing else — no one there can act on image abuse or a threat against you."
       ],
       [
         "Is it safe to meet someone from a Facebook dating profile in person?",
@@ -17470,7 +17622,7 @@
       ],
       [
         "How can I tell if someone's Facebook profile is real before I start chatting?",
-        "Look at the whole account rather than any single feature. Genuine profiles often have a history of posts and photos, tagged photos posted by other people, a friends list mixing different parts of their life, and details that stay consistent across the profile. Reverse-image search the main photo — if it turns up on modelling sites or on other dating profiles under a different name, that is strong evidence the profile is not genuine, but not proof of who created it. A friends list made up almost entirely of attractive strangers with minimal activity is a common pattern on fake accounts.\n\nNone of this is conclusive. Real people delete old posts, keep locked-down privacy settings, or start fresh profiles after a breakup, and a sparse account is not evidence of fraud on its own. Use these checks to decide how much caution to apply, not to convict someone. A video call can be a useful check, but it does not establish identity or prove the person's intentions. Any request for money is enough reason not to pay and to treat the interaction as high risk."
+        "Look at the whole account rather than any single feature. Genuine profiles often have a history of posts and photos, tagged photos posted by other people, a friends list mixing different parts of their life, and details that stay consistent across the profile. Reverse-image search only an ordinary, non-intimate profile photo; do not download or upload sexual imagery for this check. For an ordinary photo, if it turns up on modelling sites or on other dating profiles under a different name, that is strong evidence the profile is not genuine, but not proof of who created it. A friends list made up almost entirely of attractive strangers with minimal activity is a common pattern on fake accounts.\n\nNone of this is conclusive. Real people delete old posts, keep locked-down privacy settings, or start fresh profiles after a breakup, and a sparse account is not evidence of fraud on its own. Use these checks to decide how much caution to apply, not to convict someone. A video call can be a useful check, but it does not establish identity or prove the person's intentions. Any request for money is enough reason not to pay and to treat the interaction as high risk."
       ],
       [
         "What if I have already fallen in love with someone and now I am worried they might be a scammer?",
@@ -17548,10 +17700,30 @@
       [
         "Cifas — Protective Registration",
         "https://www.cifas.org.uk/pr"
+      ],
+      [
+        "Police.uk — reporting sextortion and handling evidence",
+        "https://www.police.uk/advice/advice-and-information/online-safety/online-safety/sextortion/sextortion-reporting-it-to-us/"
+      ],
+      [
+        "Meta — intimate image abuse and sextortion",
+        "https://www.meta.com/en-gb/safety/topics/bullying-harassment/ncii/"
+      ],
+      [
+        "StopNCII — eligibility and service limits",
+        "https://stopncii.org/faq/"
+      ],
+      [
+        "Childline — Report Remove",
+        "https://www.childline.org.uk/info-advice/bullying-abuse-safety/online-mobile-safety/report-remove/"
+      ],
+      [
+        "NCMEC — Take It Down eligibility and safe use",
+        "https://takeitdown.ncmec.org/faq/"
       ]
     ],
     "quick_answer": "Facebook dating scammers build an emotional connection over weeks, then invent an emergency that needs your money — a money request alone is reason to stop and treat the contact as high risk. If you already sent money, contact your bank immediately — use 159 if supported — and report it to Report Fraud or Police Scotland on 101.",
-    "updated": "2026-08-06"
+    "updated": "2026-10-05"
   },
   {
     "title": "WhatsApp Stranger Scam UK: How to Spot and Stop It",

@@ -29,6 +29,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parent))
 import corpus as _corpus_mod
 from content_gate import (_post_text, body_shingles, check_deterministic,
                           check_quick_answer_present, run_gate)
+from reporting_legacy_test_support import diagnostic_gate
 
 FAILURES: list[str] = []
 
@@ -83,7 +84,7 @@ def _shared_canon_block_fixtures(check) -> None:
     for r in edited["official_routes"]:
         r.pop("on_page", None)
     check("a canon with no on_page fields marks nothing as non-reader-facing",
-          "NOT the route reader prose names" not in canon_mod.render_verified_facts(edited))
+          "omitted from the general reporting sidebar" not in canon_mod.render_verified_facts(edited))
 
     # A canon edit must propagate, not be shadowed by a hand-typed copy.
     mutated = json.loads(json.dumps(canon))
@@ -107,12 +108,12 @@ def _search_console_schema_fixture(check) -> None:
         "faq": [["Is this example safe?", "Verify it through an official route you opened yourself."] for _ in range(3)],
     }
     post = normalise_search_console_post(draft, "example scam", "fraud", "2026-08-27")
-    check("Search Console generator emits a complete canonical post schema",
-          {"quick_answer", "sources_checked", "updated"} <= set(post))
+    check("Search Console restricted normalizer preserves all proposed data",
+          post == draft)
     check("Search Console generator passes the quick-answer publication guard",
           not check_quick_answer_present(post))
-    check("Search Console generator passes the deterministic publication gate",
-          run_gate(post, use_llm=False).passed)
+    check("Search Console marker omission fails the real publication gate",
+          not run_gate(post, use_llm=False).passed)
 
 
 def _report_mailbox_fixtures(check) -> None:
@@ -419,13 +420,98 @@ def issues_of(p: dict, check_name: str) -> list:
     return [i for i in check_deterministic(p) if i["check"] == check_name]
 
 
+def _report_fraud_attribution_fixtures(check) -> None:
+    """WP3C2: advice attribution is not a report destination (no slug waiver)."""
+    from content_gate import _CANON
+    route = next(r for r in _CANON['official_routes'] if r['key'] == 'action-fraud')
+    url = route['report_url']
+    scotland = " In Scotland, contact Police Scotland on 101."
+    valid = [
+        "Report Fraud warns that ticket-fraud websites can resemble legitimate ticket sellers’ names and addresses. "
+        "That general warning does not establish that a particular unfamiliar domain is fraudulent.",
+        "Start with the venue or event organiser’s own ticketing information and any resale route it identifies. "
+        "Report Fraud recommends the venue’s box office, official promoter or agent, or a well-known ticketing site, "
+        "and suggests checking STAR membership. Check the particular event’s terms rather than assuming any named "
+        "resale service guarantees entry or the lowest price.",
+        "Report Fraud advises buying tickets from the venue’s box office.",
+        "Report Fraud explains that criminals may imitate a ticket seller’s name.",
+        "Report Fraud says that an unsolicited ticket offer can be a warning sign.",
+        f"Report the fraud to Report Fraud at {url}." + scotland,
+    ]
+    for i, body in enumerate(valid, 1):
+        result = diagnostic_gate(post(slug='independent-fixture', sections=[['Advice', body]]), use_llm=False)
+        check(f"RF attribution positive {i}", result.passed, result.summary())
+
+    invalid = [
+        "Report Fraud recommends reporting the loss to it.",
+        "Report Fraud says you should send your evidence to us.",
+        "Report Fraud advises calling its helpline.",
+        "Report Fraud recommends buying tickets carefully and reporting losses to Report Fraud.",
+        "Report Fraud warns about ticket fraud. Submit your report to them online.",
+        "Report Fraud warns about ticket fraud. Use its online reporting form.",
+        "Report Fraud warns about ticket fraud. Report your loss to Report Fraud.",
+        "Report Fraud warns about ticket fraud. " + scotland + " Later, report the loss to Report Fraud.",
+        "Report Fraud says it is the UK-wide reporting service.",
+        "Report Fraud recommends its service for Scottish readers.",
+        "Report Fraud recommends its online form.",
+        "Report Fraud warns about ticket fraud. Call 0300 123 2040.",
+        f"Report Fraud warns about ticket fraud. Report it at {url}.",
+        "Report Fraud warns about ticket fraud. Do not call Police Scotland on 101. Report it to Report Fraud.",
+    ]
+    for i, body in enumerate(invalid, 1):
+        issues = issues_of(post(sections=[['Advice', body]]), 'scotland_routing')
+        check(f"RF misleading attribution negative {i}",
+              any(x['severity'] == 'block' for x in issues), str(issues))
+
+    # Include the correct Scottish alternative: these must fail on destination
+    # identity, not pass/fail accidentally because the jurisdiction is missing.
+    wrong_destinations = [
+        "Report it to Report Fraud at https://reports.invalid/.",
+        "Report it to Report Fraud at https://www.scotland.police.uk/contact-us/non-emergencies/.",
+        "Report Fraud recommends reporting via https://reports.invalid/.",
+        "Report Fraud says to use https://reports.invalid/.",
+        "Report Fraud recommends https://reports.invalid/.",
+        "Report it to Report Fraud at https://reportfraud.police.uk.reports.invalid/.",
+        "Report it to Report Fraud at https://www.reportfraud.police.uk@reports.invalid/.",
+        "Report it to Report Fraud at https://www.reportfraud.police.uk/invented-report-form/.",
+        'Report it to <a href="https://reports.invalid/">Report Fraud</a>.',
+        'Report it to [Report Fraud](https://reports.invalid/).',
+    ]
+    for i, body in enumerate(wrong_destinations, 1):
+        issues = issues_of(post(sections=[['Reporting', body + scotland]]), 'report_fraud_destination')
+        check(f"RF wrong destination negative {i}",
+              any(x['severity'] == 'block' for x in issues), str(issues))
+    # Separate official destinations in the same sentence must not be confused.
+    both = (f"Report it to Report Fraud at {url} in England, Wales or Northern Ireland, "
+            "or contact Police Scotland on 101 at https://www.scotland.police.uk/contact-us/non-emergencies/ in Scotland.")
+    check("RF separate official destinations pass", diagnostic_gate(post(sections=[['Reporting', both]]), use_llm=False).passed)
+    check("RF advice does not exempt another field",
+          bool(issues_of(post(hero=valid[0], quick_answer='Report it to Report Fraud.'), 'scotland_routing')))
+    check("RF advice does not exempt an invented phone",
+          bool(issues_of(post(sections=[['Advice', valid[0] + ' Call 0300 999 8888.']]), 'phone')))
+
+
 def run() -> int:
+    _report_fraud_attribution_fixtures(check)
+    from reporting_routes_selftest import run_cases
+    for result in run_cases():
+        check("WP3C3 " + result["name"], result["ok"], str(result["issues"]))
+    from reporting_clearance_selftest import run_cases as clearance_cases
+    for result in clearance_cases():
+        check("WP3C4B " + result["name"], result["ok"], str(result.get("issues", "")))
+    from reporting_final_selftest import run_cases as final_cases
+    for result in final_cases():
+        check("WP3C5 " + result["name"], result["ok"], str(result["issues"]))
     # ── extraction ───────────────────────────────────────────────────────────
     marker = "zzuniquequickanswermarker"
     check("quick_answer is extracted by _post_text",
           marker in _post_text(post(quick_answer=f"Verdict {marker} here.")))
     check("absent quick_answer does not crash extraction",
           isinstance(_post_text(post()), str))
+    from reporting_architecture_selftest import run_cases as architecture_cases
+    for row in architecture_cases():
+        check("WP3C7 " + row["name"], row["ok"], str(row.get("issues", "")))
+
 
     # ── the Scotland-routing regression this test exists for ────────────────
     bad = post(quick_answer="Report it to Report Fraud at reportfraud.police.uk or on 0300 123 2040.")
@@ -473,9 +559,9 @@ def run() -> int:
     # ── severity contract ────────────────────────────────────────────────────
     # Promoted to BLOCK on 2026-07-27: sending a whole nation to the wrong
     # reporting route is exactly what the gate exists to stop, and FLAG tier
-    # meant run_gate() still returned passed=True on all 57 live cases.
+    # meant diagnostic_gate() still returned passed=True on all 57 live cases.
     check("scotland_routing is BLOCK tier — a missing Scottish route stops a publish",
-          not run_gate(bad, use_llm=False).passed)
+          not diagnostic_gate(bad, use_llm=False).passed)
 
 
     # ── canon guards added 2026-07-27 from the operator review corrections ───
@@ -517,7 +603,7 @@ def run() -> int:
     # clean on text a human then had to catch, and because a previous commit
     # message claimed these tests existed when they did not.
     def qa(text): return post(quick_answer=text)
-    def blocks(text): return not run_gate(qa(text), use_llm=False).passed
+    def blocks(text): return not diagnostic_gate(qa(text), use_llm=False).passed
 
     check("approved compact clause passes",
           not blocks("Hang up, and report it to Report Fraud or Police Scotland on 101."))
@@ -562,9 +648,15 @@ def run() -> int:
     # usually governs a DIFFERENT clause, not the reporting route.
     check("negation on a different clause does NOT block (Don't pay ... report it)",
           not blocks("Don't pay, end the contact, and report it to Report Fraud or Police Scotland on 101."))
-    check("negation on a different clause does NOT block (never grant ... report it)",
-          not blocks("Close the tab, never grant remote access, and report it to reportphishing@apple.com "
-                     "and any loss to Report Fraud or Police Scotland on 101."))
+    # This assertion concerns the Scotland-route negation matcher. The Apple
+    # destination is independently rejected for an unsupported generic purpose;
+    # overall diagnostic acceptance was never a valid expectation for this text.
+    separate_clause = ("Close the tab, never grant remote access, and report it to reportphishing@apple.com "
+                       "and any loss to Report Fraud or Police Scotland on 101.")
+    check("negation on a different clause does NOT block the Scotland route (never grant ... report it)",
+          not issues_of(qa(separate_clause), "scotland_routing"))
+    check("separate-clause fixture still rejects the unsupported Apple purpose",
+          bool(issues_of(qa(separate_clause), "reporting_destination")) and blocks(separate_clause))
     check("the route itself being negated DOES still block",
           blocks("Do not report this to Police Scotland on 101; report it to Report Fraud."))
 
@@ -580,7 +672,7 @@ def run() -> int:
     # Without it this helper ran hubs down the GUIDE path, which is both less
     # faithful and (since the quick-answer requirement) wrong: every hub here
     # would block for want of a field hubs do not have.
-    def hub_blocks(h): return not run_gate(h, use_llm=False, is_hub=True).passed
+    def hub_blocks(h): return not diagnostic_gate(h, use_llm=False, is_hub=True).passed
     SCOPE = ("Report Fraud covers England, Wales and Northern Ireland. If you live in Scotland "
              "or the crime happened there, contact Police Scotland on 101.")
 
@@ -1001,7 +1093,7 @@ def run() -> int:
           any(i["severity"] == "block" for i in issues_of(_absent, QA_CHECK)),
           str([i["check"] for i in check_deterministic(_absent)]))
     check("...and it fails the gate end to end, not just the unit check",
-          not run_gate(_absent, use_llm=False).passed)
+          not diagnostic_gate(_absent, use_llm=False).passed)
     check("...and the detail names the two surfaces that silently vanish",
           all(s in issues_of(_absent, QA_CHECK)[0]["detail"] for s in ("answer box", "speakable")))
 
@@ -1018,7 +1110,7 @@ def run() -> int:
     check("a valid quick_answer is NOT blocked",
           not issues_of(post(quick_answer=_valid_qa), QA_CHECK))
     check("...and that guide passes the gate outright",
-          run_gate(post(quick_answer=_valid_qa), use_llm=False).passed)
+          diagnostic_gate(post(quick_answer=_valid_qa), use_llm=False).passed)
     # Deliberately NOT a length rule: the 35-60-word house standard is a drafting
     # instruction, and enforcing it here would block generate_content_claude's own
     # fallback article — the safety net used when drafting fails.
@@ -1059,7 +1151,7 @@ def run() -> int:
     # A DRAFT may not buy the exemption by declaring itself consolidated: that is
     # already consolidation_evasion (BLOCK), so the draft fails either way.
     check("a draft cannot use consolidated_into to dodge the requirement",
-          not run_gate(_cons, use_llm=False, is_draft=True).passed,
+          not diagnostic_gate(_cons, use_llm=False, is_draft=True).passed,
           "consolidation_evasion must still block it")
 
     # No false positives at corpus scale: every live public guide already

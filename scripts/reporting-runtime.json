@@ -1,0 +1,24 @@
+{
+  "version": "bts-review-runtime/v1",
+  "runtime": {
+    "implementation": "CPython",
+    "python": "3.12.15",
+    "unicode": "15.0.0",
+    "idna": "3.14",
+    "idna_distribution": "3.14",
+    "node": "22.23.3",
+    "npm": "10.9.9",
+    "utf8_mode": 1,
+    "locale": {
+      "TZ": "UTC",
+      "LC_ALL": "C",
+      "LANG": "C"
+    },
+    "timezone_offset": 0
+  },
+  "locks": {
+    "requirements-reporting.txt": "de083033c9fb17bfcdbd55ab6fc17b05cc9401293dd8d2f2bf5f7e37177334d5",
+    "requirements-reporting.lock": "394e8d2cce4f41310b9dd7673231f96e459944ed22fcb4e1e2b6ad02f09ba760",
+    "package-lock.json": "900426949aea93180b2e8d545e9521dbe45faf95336a48ef61214ace52bc88cb"
+  }
+}

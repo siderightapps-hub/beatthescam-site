@@ -23,6 +23,7 @@ from generate_content_claude import (
     Topic, claude_post, load_posts, save_posts, slugify
 )
 from content_gate import run_gate, quarantine_post, write_manifest
+import reporting_structured as structured
 
 DEFAULT_MODEL = "claude-haiku-4-5-20251001"
 
@@ -108,9 +109,12 @@ def main() -> int:
 
             # Accuracy gate — only replace the live guide if the rewrite PASSES.
             # On failure, the original guide is kept untouched (never degraded).
-            if not args.no_gate:
+            requires_structured = 'reporting_routes' in post or 'reporting_routes' in new_post
+            if requires_structured or not args.no_gate:
                 result = run_gate(new_post, client=client, model=args.model,
-                                  use_llm=not args.gate_no_llm)
+                                  use_llm=not args.gate_no_llm,
+                                  reporting_mode=(structured.STRUCTURED_REQUIRED if requires_structured
+                                                  else structured.LEGACY_DIAGNOSTIC))
                 if not result.passed:
                     quarantine_post(new_post, result, today)
                     print(f"QUARANTINED rewrite (kept original) — {result.summary()}", file=sys.stderr)
@@ -132,7 +136,8 @@ def main() -> int:
         except Exception as e:
             print(f"ERROR: {e}", file=sys.stderr)
 
-    save_posts(args.posts, posts)
+    if rewritten:
+        save_posts(args.posts, posts)
     print(f"\nDone: rewrote {rewritten}/{len(thin)} guides in {args.posts}")
     return 0
 

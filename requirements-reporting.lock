@@ -1,0 +1,2 @@
+# Verification-only wheel profile. Keep the exact version in requirements-reporting.txt.
+idna==3.14 --hash=sha256:e677eaf072e290f7b725f9acf0b3a2bd55f9fd6f7c70abe5f0e34823d0accf69

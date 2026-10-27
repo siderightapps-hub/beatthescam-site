@@ -197,6 +197,7 @@ def consolidate_recovery_copy(post: dict) -> bool:
 
 
 def main() -> None:
+    raise SystemExit('Retired direct content writer: use the authenticated restricted-action review and save_posts workflow')
     posts = json.loads(POSTS_PATH.read_text(encoding="utf-8"))
     by_slug = {post["slug"]: post for post in posts}
 

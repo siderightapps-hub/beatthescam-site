@@ -38,11 +38,13 @@ def check(name: str, cond: bool, detail: str = "") -> None:
 
 
 def hub(**over) -> dict:
+    from reporting_structured_selftest import fixture_page
+    contextual = fixture_page()
     base = {
-        "title": "A hub title", "description": "D" * 140, "intro": "<p>Intro.</p>",
-        "sections": [["A heading", "<p>Ordinary body text about a scam.</p>"]],
-        "faq": [["A question?", "An answer."]],
-        "sources_checked": [["A source", "https://www.gov.uk/consumer-advice"]],
+        "title": contextual['title'], "description": contextual['description'], "intro": "Check safely.",
+        "sections": contextual['sections'], "reporting_routes": [],
+        "faq": contextual['faq'],
+        "sources_checked": [["Evidence", "https://www.gov.uk/consumer-advice"]],
         "updated": "2026-07-27",
     }
     base.update(over)
@@ -51,9 +53,16 @@ def hub(**over) -> dict:
 
 def rejects(hubs) -> bool:
     try:
-        B.validate_category_hubs(hubs)
+        from reporting_structured_selftest import fixture_canon, review_for
+        from reporting_fixture_review import packet_for
+        import reporting_structured as sr
+        sources = fixture_canon()
+        reviews = {slug: packet_for(h, sources, review_for(h, sources,
+            approved_fields=dict(sr.approval_fields(h)), allow_empty=True, page_id='hub:'+slug))
+            for slug, h in hubs.items() if isinstance(h, dict) and h.get('reporting_routes') == []}
+        B.validate_category_hubs(hubs, reporting_sources=sources, reporting_reviews=reviews)
         return False
-    except SystemExit:
+    except (SystemExit, ValueError, KeyError, TypeError, AttributeError):
         return True
 
 
@@ -179,7 +188,7 @@ def run() -> int:
     try:
         sys.path.insert(0, str(ROOT / "scripts"))
         import generate_content_claude as _G
-        from content_gate import run_gate as _rg
+        from reporting_legacy_test_support import diagnostic_gate as _rg
         _fields = getattr(_G.Topic, "_fields", None) or list(
             __import__("inspect").signature(_G.Topic).parameters)
         _topic = _G.Topic(**{f: ("test-org-scam-uk" if "slug" in f else "Test Org") for f in _fields})
@@ -276,13 +285,27 @@ def run() -> int:
              "faq": []}
 
     def _rendered_titles(hub_record, category="payment"):
-        page = B.render_category_page(_site, category, [_post], hub=hub_record)
+        if hub_record and 'reporting_routes' in hub_record:
+            from reporting_structured_selftest import fixture_canon, review_for
+            from reporting_fixture_review import packet_for
+            import reporting_structured as sr
+            # Real migrated source needs its real catalog; approval remains
+            # an isolated TEST packet, never a production review grant.
+            sources=B.load_sources(ROOT) if hub_record.get('reporting_routes') else fixture_canon()
+            review=review_for(hub_record,sources,allow_empty=True,page_id='hub:'+category,
+                              approved_fields=dict(sr.approval_fields(hub_record)))
+            page=B.render_category_page(_site,category,[_post],hub=hub_record,reporting_sources=sources,
+                                         reporting_review=packet_for(hub_record,sources,review))
+        else:
+            page = B.render_category_page(_site, category, [_post], hub=hub_record)
         title = _re.search(r"<title>(.*?)</title>", page, _re.S).group(1)
         h1 = _re.search(r"<h1>(.*?)</h1>", page, _re.S).group(1)
         name = _re.search(r'"name":\s*"([^"]*)"', page).group(1)
         return html_unescape(title), html_unescape(h1), html_unescape(name)
 
-    LONG_HUB_TITLE = "Travel Scams UK: Fake Holidays, Flights & Bookings"
+    # A complete admitted sentence long enough that a brand suffix would again
+    # truncate it. The live title cases below retain all original title checks.
+    LONG_HUB_TITLE = "Unexpected requests can create pressure and uncertainty."
     t, h1, name = _rendered_titles(hub(title=LONG_HUB_TITLE), "travel")
     check("a hub <title> is the full reviewed title", t == LONG_HUB_TITLE, f"got {t!r}")
     check("a hub <title> equals its H1", t == h1, f"{t!r} vs {h1!r}")

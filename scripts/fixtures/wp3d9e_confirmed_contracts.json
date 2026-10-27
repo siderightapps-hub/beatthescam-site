@@ -1,0 +1,415 @@
+{
+  "review_package": "WP3D9E",
+  "review_date": "2026-10-14",
+  "review_documents": {
+    "wp3d9e-independent-targeted-evidence-review.md": "030ae52f4ae8c3e711ee316d009ad45f4649f0b5280a5c5bc3b7e5c9cf4f8224",
+    "wp3d9e-evidence/independent-targeted-dispositions.json": "47a3efdf7d58f968699c952325d03af0a42b290002e4575faf9f28044b6ef949",
+    "wp3d9e-evidence/sources.json": "c519299960f3045832bd6bbe54692ba6a26db961ced0afea02c4f19be8734b3f",
+    "wp3d9d-evidence/independent-dispositions.json": "e12837a573d844b896c1ce75119edea73dab806b36cfbdd860650dc4ecc7ae80"
+  },
+  "allowlist": [
+    "citizens-advice:consumer-advice-english",
+    "victim-support:supportline",
+    "o2-pay-monthly:customer-support",
+    "o2-payg:customer-support",
+    "own-bank:number-on-bank-card",
+    "own-bank:existing-bank-app"
+  ],
+  "contracts": {
+    "citizens-advice:consumer-advice-english": {
+      "case_id": "C02",
+      "grade": "B",
+      "disposition": "A. CONFIRMED FULL CLEARANCE",
+      "reviewed_definition": {
+        "key": "citizens-advice",
+        "owner_id": "citizens-advice",
+        "brand": "Citizens Advice",
+        "name": "Citizens Advice consumer service",
+        "phone": "0808 223 1133",
+        "source_url": "https://www.citizensadvice.org.uk/about-us/information/contact-the-consumer-service/",
+        "checked_on": "2026-10-14",
+        "actions": {
+          "consumer-advice-english": {
+            "schema_version": "restricted-actions/v2",
+            "action_type": "call",
+            "purpose": "consumer-advice",
+            "mode": "support",
+            "jurisdictions": [
+              "England",
+              "Wales"
+            ],
+            "condition_ids": [],
+            "eligibility_ids": [
+              "consumer-seeking-advice"
+            ],
+            "qualifier_ids": [
+              "free-uk-phone-call",
+              "weekday-0900-1700-excluding-bank-holidays"
+            ],
+            "limitation_ids": [
+              "support-only"
+            ],
+            "instruction": {
+              "kind": "fixed-destination",
+              "template_id": "call-consumer-advice-english",
+              "recipient_relation": "service-operator",
+              "channels": [
+                {
+                  "field": "phone",
+                  "kind": "phone",
+                  "numbering_context": "GB"
+                }
+              ]
+            },
+            "companions": [],
+            "status": "withdrawn"
+          }
+        }
+      },
+      "expected_text": "Citizens Advice consumer service — Citizens Advice; consumer advice.\n\nFor England, Wales. For people seeking consumer advice.\n\nFor consumer advice, call the English-language Citizens Advice consumer service line on Citizens Advice: 0808 223 1133.\n\nCalls from UK mobiles and landlines are free.\n\nOpen Monday to Friday, 09:00–17:00, excluding bank holidays.\n\nThis service offers support; it does not take a police crime report.",
+      "source_ids": [
+        "ca-owner",
+        "consumer",
+        "ca-english"
+      ],
+      "scope": "England and Wales; people seeking consumer advice; ordinary English voice line only."
+    },
+    "victim-support:supportline": {
+      "case_id": "C03",
+      "grade": "A",
+      "disposition": "A. CONFIRMED FULL CLEARANCE",
+      "reviewed_definition": {
+        "key": "victim-support",
+        "owner_id": "victim-support",
+        "brand": "Victim Support",
+        "name": "Victim Support Supportline",
+        "phone": "0808 168 9111",
+        "source_url": "https://www.victimsupport.org.uk/more-us/contact-us/",
+        "checked_on": "2026-10-14",
+        "actions": {
+          "supportline": {
+            "schema_version": "restricted-actions/v2",
+            "action_type": "call",
+            "purpose": "victim-support",
+            "mode": "support",
+            "jurisdictions": [
+              "England",
+              "Wales"
+            ],
+            "condition_ids": [],
+            "eligibility_ids": [
+              "person-affected-by-crime"
+            ],
+            "qualifier_ids": [
+              "free-uk-phone-call",
+              "support-24-hours-every-day",
+              "no-police-report-needed"
+            ],
+            "limitation_ids": [
+              "support-only"
+            ],
+            "instruction": {
+              "kind": "fixed-destination",
+              "template_id": "call-victim-support",
+              "recipient_relation": "service-operator",
+              "channels": [
+                {
+                  "field": "phone",
+                  "kind": "phone",
+                  "numbering_context": "GB"
+                }
+              ]
+            },
+            "companions": [],
+            "status": "withdrawn"
+          }
+        }
+      },
+      "expected_text": "Victim Support Supportline — Victim Support; support for people affected by crime.\n\nFor England, Wales. For people affected by crime.\n\nCall Victim Support Supportline on Victim Support: 0808 168 9111 for support.\n\nCalls from UK mobiles and landlines are free.\n\nSupport is available 24 hours a day, every day.\n\nYou do not need to have reported the crime to the police to receive support.\n\nThis service offers support; it does not take a police crime report.",
+      "source_ids": [
+        "victim",
+        "victim-supportline-current"
+      ],
+      "scope": "People affected by crime in England and Wales; initial phone support, not ongoing casework/counselling/legal advice."
+    },
+    "o2-pay-monthly:customer-support": {
+      "case_id": "C07",
+      "grade": "A",
+      "disposition": "B. CONFIRMED NARROWER CLEARANCE",
+      "reviewed_definition": {
+        "key": "o2-pay-monthly",
+        "owner_id": "o2",
+        "brand": "O2",
+        "name": "O2 Pay Monthly customer service",
+        "phone": "202",
+        "source_url": "https://www.o2.co.uk/contactus",
+        "checked_on": "2026-10-14",
+        "actions": {
+          "customer-support": {
+            "schema_version": "restricted-actions/v2",
+            "action_type": "call",
+            "purpose": "account-support",
+            "mode": "support",
+            "jurisdictions": [
+              "England",
+              "Wales",
+              "Scotland",
+              "Northern Ireland"
+            ],
+            "condition_ids": [],
+            "eligibility_ids": [
+              "o2-pay-monthly-origin"
+            ],
+            "qualifier_ids": [
+              "free-from-required-o2-phone",
+              "o2-personal-support-hours"
+            ],
+            "limitation_ids": [
+              "support-only"
+            ],
+            "instruction": {
+              "kind": "fixed-destination",
+              "template_id": "call-o2-personal-support",
+              "recipient_relation": "service-operator",
+              "channels": [
+                {
+                  "field": "phone",
+                  "kind": "voice-shortcode",
+                  "numbering_context": "GB",
+                  "dialling_network_id": "o2-uk"
+                }
+              ]
+            },
+            "companions": [],
+            "status": "withdrawn"
+          }
+        }
+      },
+      "expected_text": "O2 Pay Monthly customer service — O2; account support.\n\nFor England, Wales, Scotland, Northern Ireland. Call from your own O2 Pay Monthly mobile in the UK.\n\nCall O2: 202 from the eligible O2 mobile line for customer support.\n\nThe call is free from the required O2 phone.\n\nCustomer service: Monday to Friday 08:00–21:00; Saturday 08:00–20:00; Sunday 08:00–18:00.\n\nFor Pay Monthly Platinum customers: Monday to Friday 08:00–20:00; Saturday and Sunday 09:00–18:00.\n\nThis service offers support; it does not take a police crime report.",
+      "source_ids": [
+        "o2"
+      ],
+      "scope": "Personal O2 Pay Monthly customer, using own eligible O2 mobile in UK; no business/MVNO/roaming generalisation."
+    },
+    "o2-payg:customer-support": {
+      "case_id": "C08",
+      "grade": "A",
+      "disposition": "B. CONFIRMED NARROWER CLEARANCE",
+      "reviewed_definition": {
+        "key": "o2-payg",
+        "owner_id": "o2",
+        "brand": "O2",
+        "name": "O2 Pay As You Go customer service",
+        "phone": "4445",
+        "source_url": "https://www.o2.co.uk/contactus",
+        "checked_on": "2026-10-14",
+        "actions": {
+          "customer-support": {
+            "schema_version": "restricted-actions/v2",
+            "action_type": "call",
+            "purpose": "account-support",
+            "mode": "support",
+            "jurisdictions": [
+              "England",
+              "Wales",
+              "Scotland",
+              "Northern Ireland"
+            ],
+            "condition_ids": [],
+            "eligibility_ids": [
+              "o2-payg-origin"
+            ],
+            "qualifier_ids": [
+              "free-from-required-o2-phone",
+              "o2-personal-support-hours"
+            ],
+            "limitation_ids": [
+              "support-only"
+            ],
+            "instruction": {
+              "kind": "fixed-destination",
+              "template_id": "call-o2-personal-support",
+              "recipient_relation": "service-operator",
+              "channels": [
+                {
+                  "field": "phone",
+                  "kind": "voice-shortcode",
+                  "numbering_context": "GB",
+                  "dialling_network_id": "o2-uk"
+                }
+              ]
+            },
+            "companions": [],
+            "status": "withdrawn"
+          }
+        }
+      },
+      "expected_text": "O2 Pay As You Go customer service — O2; account support.\n\nFor England, Wales, Scotland, Northern Ireland. Call from your own O2 Pay As You Go mobile in the UK.\n\nCall O2: 4445 from the eligible O2 mobile line for customer support.\n\nThe call is free from the required O2 phone.\n\nCustomer service: Monday to Friday 08:00–21:00; Saturday 08:00–20:00; Sunday 08:00–18:00.\n\nThis service offers support; it does not take a police crime report.",
+      "source_ids": [
+        "o2"
+      ],
+      "scope": "Personal O2 Pay As You Go customer, using own eligible O2 mobile in UK; no other network or plan."
+    },
+    "own-bank:number-on-bank-card": {
+      "case_id": "C09",
+      "grade": "B",
+      "disposition": "B. CONFIRMED NARROWER CLEARANCE",
+      "reviewed_definition": {
+        "key": "own-bank",
+        "owner_id": "own-bank",
+        "brand": "Your own bank",
+        "name": "Your own bank",
+        "source_url": "https://stopthinkfraud.campaign.gov.uk/recovery-from-fraud/recovering-losses/what-to-do-if-youve-lost-money/",
+        "checked_on": "2026-10-14",
+        "actions": {
+          "number-on-bank-card": {
+            "schema_version": "restricted-actions/v2",
+            "action_type": "contact",
+            "purpose": "payment-recovery",
+            "mode": "support",
+            "jurisdictions": [
+              "England",
+              "Wales",
+              "Scotland",
+              "Northern Ireland"
+            ],
+            "condition_ids": [
+              "suspected-authorised-bank-transfer-to-fraudster"
+            ],
+            "eligibility_ids": [
+              "sender-own-account"
+            ],
+            "qualifier_ids": [],
+            "limitation_ids": [
+              "no-money-recovery-guarantee"
+            ],
+            "instruction": {
+              "kind": "reader-held-channel",
+              "role": "own-bank",
+              "method_id": "number-on-bank-card",
+              "recipient_relation": "sending-bank-of-affected-transfer"
+            },
+            "companions": [],
+            "status": "withdrawn"
+          }
+        }
+      },
+      "expected_text": "Bank that sent your transfer — payment recovery.\n\nFor England, Wales, Scotland, Northern Ireland. If you suspect an authorised bank transfer from your own account went to a scammer. The transfer must have been made from your own account.\n\nContact the bank that sent that transfer immediately. Use the contact number printed on that bank's card for the sending account.\n\nGetting the money back is not guaranteed.",
+      "source_ids": [
+        "bank-gov",
+        "fca-payments",
+        "psr-consumer"
+      ],
+      "scope": "UK reader’s own account; already authorised bank transfer suspected to have reached fraudster; first contact for recovery only."
+    },
+    "own-bank:existing-bank-app": {
+      "case_id": "M10",
+      "grade": "B",
+      "disposition": "B. CONFIRMED NARROWER CLEARANCE",
+      "reviewed_definition": {
+        "key": "own-bank",
+        "owner_id": "own-bank",
+        "brand": "Your own bank",
+        "name": "Your own bank",
+        "source_url": "https://stopthinkfraud.campaign.gov.uk/recovery-from-fraud/recovering-losses/what-to-do-if-youve-lost-money/",
+        "checked_on": "2026-10-14",
+        "actions": {
+          "existing-bank-app": {
+            "schema_version": "restricted-actions/v2",
+            "action_type": "contact",
+            "purpose": "payment-recovery",
+            "mode": "support",
+            "jurisdictions": [
+              "England",
+              "Wales",
+              "Scotland",
+              "Northern Ireland"
+            ],
+            "condition_ids": [
+              "suspected-authorised-bank-transfer-to-fraudster",
+              "banking-device-safe"
+            ],
+            "eligibility_ids": [
+              "sender-own-account"
+            ],
+            "qualifier_ids": [],
+            "limitation_ids": [
+              "no-money-recovery-guarantee"
+            ],
+            "instruction": {
+              "kind": "reader-held-channel",
+              "role": "own-bank",
+              "method_id": "existing-bank-app",
+              "recipient_relation": "sending-bank-of-affected-transfer"
+            },
+            "companions": [],
+            "status": "withdrawn"
+          }
+        }
+      },
+      "expected_text": "Bank that sent your transfer — payment recovery.\n\nFor England, Wales, Scotland, Northern Ireland. If you suspect an authorised bank transfer from your own account went to a scammer. Use the banking app only when the device is safe for banking. If the device may have been compromised, do not use its banking app until it is safe. The transfer must have been made from your own account.\n\nContact the bank that sent that transfer immediately through the existing banking app you already use for that sending account.\n\nGetting the money back is not guaranteed.",
+      "source_ids": [
+        "bank-gov",
+        "ofcom",
+        "fca-payments",
+        "psr-consumer"
+      ],
+      "scope": "Same own-account authorised-transfer case as C09; reader already uses that sending account’s bank app; device safe for banking."
+    }
+  },
+  "held_cases": {
+    "C01": {
+      "source_bundle": "ncsc-sers",
+      "grade": "C",
+      "disposition": "C. REMAINS INELIGIBLE — EVIDENCE INCOMPLETE",
+      "unresolved_fields": [
+        "Explicit service-owner/authoritative support for the rendered claim that this channel does not investigate financial losses; current crime-report exclusion is not equivalent."
+      ]
+    },
+    "C04": {
+      "source_bundle": "hmrc-phishing",
+      "grade": "C",
+      "disposition": "C. REMAINS INELIGIBLE — EVIDENCE INCOMPLETE",
+      "unresolved_fields": [
+        "Explicit support for mandatory evidence-only financial-loss-investigation exclusion"
+      ]
+    },
+    "C05": {
+      "source_bundle": "ee-phishing",
+      "grade": "C",
+      "disposition": "C. REMAINS INELIGIBLE — EVIDENCE INCOMPLETE",
+      "unresolved_fields": [
+        "Explicit support for mandatory evidence-only financial-loss-investigation exclusion"
+      ]
+    },
+    "C06": {
+      "source_bundle": "talktalk-phishing",
+      "grade": "C",
+      "disposition": "C. REMAINS INELIGIBLE — EVIDENCE INCOMPLETE",
+      "unresolved_fields": [
+        "Explicit support for mandatory evidence-only financial-loss-investigation exclusion"
+      ]
+    },
+    "M05": {
+      "source_bundle": "report-spam-sms",
+      "grade": "C",
+      "disposition": "D. REMAINS INELIGIBLE — MODEL GAP",
+      "unresolved_fields": [
+        "Exact participating-provider scope for caller reporting",
+        "Provider-specific formatting reconciliation",
+        "Closed representation for provider eligibility and required prefix",
+        "Complete limitation evidence for a final provider contract"
+      ]
+    },
+    "M04": {
+      "source_bundle": "natwest-phishing",
+      "grade": "C",
+      "disposition": "D. REMAINS INELIGIBLE — MODEL GAP",
+      "unresolved_fields": [
+        "Represent independent suspected-account-access escalation/exclusion",
+        "Represent prohibition on extra queries/personal-account details",
+        "Exact complete audience/brand and loss-remit evidence for final contract"
+      ]
+    }
+  }
+}

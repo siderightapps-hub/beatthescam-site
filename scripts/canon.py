@@ -27,6 +27,11 @@ from pathlib import Path
 from typing import Dict, List, Optional
 from urllib.parse import urlparse
 
+try:
+    import reporting_structured as structured
+except ImportError:
+    from scripts import reporting_structured as structured
+
 ROOT = Path(__file__).resolve().parents[1]
 CANON_PATH = ROOT / "content" / "sources.json"
 
@@ -167,6 +172,35 @@ def validate_canon(canon) -> List[str]:
             if not isinstance(c.get(field), str) or not c[field].strip():
                 problems.append(f"verified_org_contacts[{n}] has no {field!r}")
 
+    # Navigation sources have a separate contract: they never become report
+    # URLs, allowed phones or global reporting destinations.
+    number_sources = canon.get("verified_number_sources", [])
+    if not isinstance(number_sources, list):
+        problems.append("verified_number_sources must be a list")
+        number_sources = []
+    for n, source in enumerate(number_sources):
+        if not isinstance(source, dict):
+            problems.append(f"verified_number_sources[{n}] must be an object")
+            continue
+        for field in ("key", "name", "brand", "checked_on", "nation", "note"):
+            if not isinstance(source.get(field), str) or not source[field].strip():
+                problems.append(f"verified_number_sources[{n}] missing {field}")
+        if not isinstance(source.get("requires_named_owner"), bool):
+            problems.append(f"verified_number_sources[{n}] requires_named_owner must be boolean")
+        if source.get("purpose") != "fraud-phone-lookup":
+            problems.append(f"verified_number_sources[{n}] unsupported purpose")
+        for field in ("navigation_url", "source_url"):
+            value = source.get(field)
+            try:
+                parsed = urlparse(value) if isinstance(value, str) else None
+                if (not parsed or parsed.scheme != "https" or not parsed.hostname
+                        or parsed.username or parsed.password or parsed.port
+                        or parsed.query or parsed.fragment or "%" in value
+                        or "\\" in value or any(c.isspace() for c in value)):
+                    raise ValueError("unsafe URL")
+            except ValueError:
+                problems.append(f"verified_number_sources[{n}] invalid {field}")
+
     seen: Dict[str, dict] = {}
     for n, r in enumerate(routes):
         if not isinstance(r, dict):
@@ -244,6 +278,12 @@ def validate_canon(canon) -> List[str]:
                     f"no on-page {role} route serves {nation!r} — readers there would be stranded"
                 )
 
+    # WP3C8B: legacy entries remain readable, but only explicit action records
+    # grant structured permission. This also checks cross-group ID collisions.
+    try:
+        structured.catalog_from_canon(canon)
+    except structured.ReportingError as exc:
+        problems.append(f"structured reporting canon: {exc}")
     return problems
 
 
@@ -260,7 +300,7 @@ def load_canon(path: Optional[Path] = None) -> Dict:
             f"reporting route; without it the build and the accuracy gate cannot run."
         )
     try:
-        canon = json.loads(path.read_text(encoding="utf-8"))
+        canon = json.loads(path.read_text(encoding="utf-8"), object_pairs_hook=structured.unique_object)
     except Exception as exc:
         raise CanonError(f"{path} could not be parsed: {exc}")
     problems = validate_canon(canon)
@@ -268,6 +308,18 @@ def load_canon(path: Optional[Path] = None) -> Dict:
         detail = "\n".join(f"  - {p}" for p in problems)
         raise CanonError(f"{path} is structurally invalid ({len(problems)} problem(s)):\n{detail}")
     return canon
+
+
+def reporting_catalog(canon: Dict, *, expected_digest=None):
+    """The common loader boundary for structured gate/build consumers.
+
+    No policy/notes adapter: unconverted legacy records confer no action IDs.
+    Review-bound callers supply the independently approved canonical digest.
+    """
+    problems = validate_canon(canon)
+    if problems:
+        raise CanonError("; ".join(problems))
+    return structured.catalog_from_canon(canon, expected_digest=expected_digest)
 
 
 def route(canon: Dict, key: str) -> Dict:
@@ -452,6 +504,9 @@ def render_verified_facts(canon: Dict) -> str:
             bits.append(f"SMS shortcode {r['sms']}")
         if r.get("email"):
             bits.append(f"email {r['email']}")
+        for field in ("report_url", "info_url"):
+            if r.get(field):
+                bits.append(f"{field} {r[field]}")
         return ", ".join(bits)
 
     def _provenance(r: Dict) -> str:
@@ -484,17 +539,19 @@ def render_verified_facts(canon: Dict) -> str:
         # on_page because the reader-facing/allow-listed distinction is meaningless
         # for them; marking those "not the reader-facing route" is false. Only an
         # EXPLICIT `on_page: false` carries the distinction.
-        marker = ("  <- genuine and allow-listed, but NOT the route reader prose names"
+        marker = ("  <- verified for this service only; omitted from the general reporting sidebar"
                   if r.get("on_page") is False else "")
         lines.append(f"- {r.get('name', r.get('key', ''))}{scope_s} — {detail}"
-                     f"{_provenance(r)}{marker}")
+                     f"{_provenance(r)}{marker}. {r.get('note', '')}")
 
     org = [r for r in canon.get("verified_org_contacts", []) if _detail(r)]
     if org:
         lines += ["", "Organisation-specific routes (the organisation's OWN route, not a "
                       "national one; these never appear in the on-page reporting block):"]
         for r in org:
-            lines.append(f"- {r.get('name', r.get('key', ''))} — {_detail(r)}{_provenance(r)}")
+            scope = f" ({r['nation']})" if r.get('nation') else ""
+            lines.append(f"- {r.get('name', r.get('key', ''))}{scope} — "
+                         f"{_detail(r)}{_provenance(r)}. {r.get('note', '')}")
 
     emails = [e for e in canon.get("report_emails", []) if e]
     if emails:

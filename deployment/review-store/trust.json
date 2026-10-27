@@ -1,0 +1,30 @@
+{
+  "version": "bts-trust/v1",
+  "environment": "production",
+  "site": "beatthescam.com",
+  "roles": {
+    "contracts": [
+      {
+        "identity": "bts-owner-contracts-2026-10-15",
+        "public_key": "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIHtj2i68My4PiuzlaT1uX55O4bxrOIQPDiB/APEKuWXN"
+      }
+    ],
+    "context": [
+      {
+        "identity": "bts-owner-context-2026-10-15",
+        "public_key": "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIL8byE2VZUoe+js/lkm3bEYy7JCCLCkDF71GGjpN4ilf"
+      }
+    ],
+    "release": [
+      {
+        "identity": "bts-owner-release-2026-10-15",
+        "public_key": "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIODPTp8akDGZD3S++tWGKNa5nRhy+THOny3iZSAbN9x6"
+      }
+    ]
+  },
+  "pilot_page_ids": [
+    "hub:phone"
+  ],
+  "baseline_sha256": "059a9dd58ce5c5ef7b3ef7d00d0e6f33d78643298ac34b16fce7f4a2884ef18c",
+  "revocations_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+}

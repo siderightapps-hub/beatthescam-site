@@ -1,0 +1,129 @@
+{
+  "name": "Publication verification",
+  "on": {
+    "pull_request": {
+      "branches": [
+        "main"
+      ],
+      "types": [
+        "opened",
+        "synchronize",
+        "reopened",
+        "ready_for_review"
+      ]
+    },
+    "push": {
+      "branches": [
+        "main"
+      ]
+    }
+  },
+  "permissions": {
+    "contents": "read"
+  },
+  "env": {
+    "PYTHONUTF8": "1",
+    "PYTHONDONTWRITEBYTECODE": "1",
+    "TZ": "UTC",
+    "LC_ALL": "C",
+    "LANG": "C"
+  },
+  "jobs": {
+    "publication": {
+      "name": "Trusted publication verification",
+      "runs-on": "ubuntu-24.04",
+      "timeout-minutes": 20,
+      "permissions": {
+        "contents": "read"
+      },
+      "defaults": {
+        "run": {
+          "shell": "bash",
+          "working-directory": "trusted"
+        }
+      },
+      "env": {
+        "BTS_REVIEW_ENVIRONMENT": "production",
+        "BTS_PRODUCTION_TRUST_SHA256": "${{ vars.BTS_PRODUCTION_TRUST_SHA256 }}",
+        "CANDIDATE_SHA": "${{ github.event.pull_request.head.sha || github.sha }}",
+        "TRUSTED_SHA": "${{ github.event.pull_request.base.sha || github.event.before }}",
+        "APPROVAL_SHA": "${{ vars.BTS_PUBLICATION_APPROVAL_SHA }}"
+      },
+      "steps": [
+        {
+          "name": "Require exact event revisions before checkout",
+          "working-directory": ".",
+          "run": "for sha in \"$CANDIDATE_SHA\" \"$TRUSTED_SHA\"; do\n  [[ \"$sha\" =~ ^[0-9a-f]{40}$ && \"$sha\" != 0000000000000000000000000000000000000000 ]] || exit 1\ndone"
+        },
+        {
+          "name": "Checkout exact trusted base (checkout v7.0.1)",
+          "uses": "actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1",
+          "with": {
+            "ref": "${{ env.TRUSTED_SHA }}",
+            "path": "trusted",
+            "persist-credentials": false,
+            "submodules": false,
+            "lfs": false
+          }
+        },
+        {
+          "name": "Checkout exact candidate as data (checkout v7.0.1)",
+          "uses": "actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1",
+          "with": {
+            "ref": "${{ env.CANDIDATE_SHA }}",
+            "path": "candidate",
+            "persist-credentials": false,
+            "submodules": false,
+            "lfs": false
+          }
+        },
+        {
+          "name": "Trusted Python pin (setup-python v7.0.0)",
+          "uses": "actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97",
+          "with": {
+            "python-version-file": "trusted/.python-version"
+          }
+        },
+        {
+          "name": "Trusted Node pin (setup-node v6)",
+          "uses": "actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38",
+          "with": {
+            "node-version-file": "trusted/.nvmrc",
+            "package-manager-cache": false
+          }
+        },
+        {
+          "name": "Install trusted hash-locked Python dependency",
+          "run": "python -I -m pip install --require-hashes --only-binary=:all: -r requirements-reporting.lock"
+        },
+        {
+          "name": "Install trusted locked Functions dependencies without scripts",
+          "run": "npm ci --ignore-scripts --no-audit --no-fund"
+        },
+        {
+          "name": "Mandatory offline publication regressions",
+          "run": "python -I -B scripts/reporting_workflow_selftest.py\npython -I -B scripts/reporting_workflow_cli_selftest.py"
+        },
+        {
+          "name": "Require immutable detached approval identity",
+          "run": "[[ \"$APPROVAL_SHA\" =~ ^[0-9a-f]{40}$ && \"$APPROVAL_SHA\" != 0000000000000000000000000000000000000000 ]]"
+        },
+        {
+          "name": "Checkout exact detached public approval as data (checkout v7.0.1)",
+          "uses": "actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1",
+          "with": {
+            "ref": "${{ env.APPROVAL_SHA }}",
+            "path": "approval",
+            "persist-credentials": false,
+            "submodules": false,
+            "lfs": false
+          }
+        },
+        {
+          "name": "Verify exact candidate with trusted code",
+          "run": "python -I scripts/reporting_workflow.py --candidate ../candidate --candidate-sha \"$CANDIDATE_SHA\" --trusted-sha \"$TRUSTED_SHA\" --approval-repository ../approval --approval-sha \"$APPROVAL_SHA\""
+        }
+      ]
+    }
+  }
+}

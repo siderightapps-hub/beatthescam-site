@@ -2,7 +2,20 @@
 
 [build]
   publish = "dist"
-  ignore = "git diff --quiet $CACHED_COMMIT_REF $COMMIT_REF -- dist/ netlify/ netlify.toml package.json package-lock.json"
+  # WP3C9B3: verification only, never regenerate or automatically approve.
+  # Missing public review material or the external trust pin HOLD deployment.
+  command = "python3 -m pip install --require-hashes --only-binary=:all: -r requirements-reporting.lock && npm ci --ignore-scripts && python3 scripts/reporting_runtime.py && python3 scripts/reporting_pilot.py netlify-verify"
+
+[build.environment]
+  PYTHON_VERSION = "3.12.15"
+  NPM_VERSION = "10.9.9"
+  # Netlify installs packages before the command above. Do not execute package
+  # lifecycle scripts in that earlier phase; the later lock check rejects drift.
+  NPM_FLAGS = "--ignore-scripts --no-audit --no-fund"
+  PYTHONUTF8 = "1"
+  TZ = "UTC"
+  LC_ALL = "C"
+  LANG = "C"
 
 [functions]
   directory = "netlify/functions"
@@ -83,6 +96,3 @@
   from   = "/*"
   to     = "/404.html"
   status = 404
-
-[context.production.environment]
-  NODE_VERSION = "22"

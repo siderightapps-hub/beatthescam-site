@@ -20,7 +20,11 @@ A post FAILS if any layer raises a high-severity ("block") issue.
 from __future__ import annotations
 
 import json
+import hashlib
 import re
+from urllib.parse import urlsplit
+from html.parser import HTMLParser
+from html import escape as html_escape
 from datetime import date
 import sys
 from dataclasses import dataclass, field
@@ -29,7 +33,10 @@ from typing import Dict, List, Optional
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 import canon as canon_mod   # noqa: E402  — the shared canon loader/validator/renderers
+import reporting_contracts as reporting  # destination-first authorization
+import reporting_structured as structured  # explicit canon actions; no prose authorisation
 import corpus as corpus_mod  # noqa: E402  — the shared public/source corpus partition
+from reporting_syntax import INVALID_MARKDOWN_LINK_RE
 
 # ─── SHARED ACCURACY CONTRACT ────────────────────────────────────────────────
 # Single source of truth for the anti-fabrication rules, imported by BOTH
@@ -127,6 +134,10 @@ class GateResult:
     slug: str
     passed: bool
     issues: List[Dict] = field(default_factory=list)
+    reporting_mode: str = structured.LEGACY_DIAGNOSTIC
+    # Route integrity is not WP4 evidence/claim clearance. Existing callers are
+    # contained; they must adopt the reviewed-context interface before resuming.
+    publication_ready: bool = False
 
     @property
     def blocking(self) -> List[Dict]:
@@ -835,7 +846,7 @@ def _body_words(post: Dict) -> List[str]:
     parts = []
     for h, b in post.get("sections") or []:
         parts.append(f"{h} {b}")
-    for q, a in post.get("faq") or []:
+    for q, a in structured.narrative_faq(post):
         parts.append(f"{q} {a}")
     for _, figure_text in _figure_fields(post):
         parts.append(figure_text)
@@ -923,7 +934,8 @@ def check_similarity(post: Dict, corpus: Optional[List[Dict]] = None, *,
 # broke the build by failing all three live hubs (operator review, 2026-07-27).
 # The URL and phone number stay case-insensitive; they are unambiguous.
 _REPORT_FRAUD_NAMED_RE = re.compile(
-    r"Report\s+Fraud|(?i:reportfraud\.police\.uk)|0300\s*123\s*2040")
+    r"Report\s+Fraud|(?i:reportfraud\.police\.uk)|0300\s*123\s*2040"
+    r"|(?i:report\s+fraud(?=\s+(?:at|on|says|warns|advises|recommends|explains)\b))")
 # An ACTIONABLE Scottish route inside a POSITIVE reporting directive.
 #
 # Three earlier versions were each too loose, and each one reported clean on
@@ -1100,8 +1112,8 @@ _UNRENDERABLE_MARKUP_RES = (
     (re.compile(r"\*\*[^*\n]+\*\*"),
      "literal **bold** markdown — build.py has no bold renderer, so the asterisks reach "
      "the page. Use plain, emphasis-free prose."),
-    (re.compile(r"\[[^\]\n]+\]\(\s*(?!/)[^)\n]+\)"),
-     "a markdown link whose target is not root-relative — build.py renders only internal "
+    (INVALID_MARKDOWN_LINK_RE,
+     "a markdown link whose target is not a safe internal path — build.py renders only internal "
      "[text](/path/) links, so the brackets and URL reach the page. External references "
      "belong in sources_checked."),
 )
@@ -1204,19 +1216,660 @@ def _route_fields(post: Dict):
     `quick_answer`/`description` inspected none of a hub's prose — a hub whose
     section said only "Report it to Report Fraud on 0300 123 2040." passed
     `validate_category_hubs()` clean (operator review, 2026-07-27)."""
+    yield "title", str(post.get("title") or "")
     yield "quick answer", str(post.get("quick_answer") or "")
     yield "meta description", str(post.get("description") or "")
     yield "hero", str(post.get("hero") or "")
     yield "intro", str(post.get("intro") or "")
     for head, body in (post.get("sections") or []):
+        yield "section heading", str(head)
         yield f"section '{head}'", str(body)
-    for q, a in (post.get("faq") or []):
-        yield f"FAQ '{q[:40]}'", str(a)
+    for q, a in structured.narrative_faq(post):
+        # A question and its answer are one semantic field; never inherit
+        # context from a different FAQ. Short answers can carry the recipient.
+        yield f"FAQ '{q[:40]}'", str(q) + " " + str(a)
+    for idx, pair in enumerate(post.get('sources_checked', []) or []):
+        if (isinstance(pair, (list, tuple)) and len(pair) >= 2
+                and _route_instruction(str(pair[0]))
+                and (re.search(r'\b(?:you|your)\b', str(pair[0]), re.I)
+                     or not re.search(r'[—:]|\b(?:how|what|where|when)\b', str(pair[0]), re.I))):
+            # A normal source label is a citation; an imperative label still
+            # offers the actual rendered href and must pass the same boundary.
+            yield f'source[{idx}]', f'<a href="{html_escape(str(pair[1]), quote=True)}">{html_escape(str(pair[0]))}</a>'
+    for idx, item in enumerate(post.get('evidence', []) or []):
+        if isinstance(item, dict):
+            for key in ('signal', 'finding', 'basis'):
+                yield f'evidence[{idx}] {key}', str(item.get(key, ''))
+    for idx, item in enumerate(post.get('message_examples', []) or []):
+        if isinstance(item, dict):
+            # The renderer explicitly labels message as a reconstructed scam
+            # example. Its assessment and heading are editorial advice.
+            for key in ('label', 'assessment'):
+                yield f'message_examples[{idx}] {key}', str(item.get(key, ''))
     yield from _figure_fields(post)
 
 
+# WP3C3: keep classification and destination authentication separate. A publisher
+# attribution is not a field-wide waiver. All instruction destinations (including
+# actual hrefs) are authenticated, even without a named organisation.
+_ROUTE_ACTION_RE = re.compile(
+    r"\b(?:report(?:ing|ed)?|send(?:ing)?|sent|submit(?:ting|ted)?|submission|"
+    r"contact(?:ing)?|notify|notifying|call(?:ing)?|phone|telephone|dial|ring|"
+    r"upload|relay|communicate|file|filing|lodge|lodging|lodged|forward(?:ing|ed)?|email(?:ing)?|"
+    r"use|using|visit|go|make|making|get\s+in\s+touch)\b", re.I)
+_ROUTE_OBJECT_RE = re.compile(
+    r"\b(?:reports?|complaints?|loss|losses|evidence|details|fraud|scam|"
+    r"helpline|hotline|reporting|form|submission)\b", re.I)
+_ROUTE_REFERENCE_RE = re.compile(
+    r"\b(?:it|them|us|here|there|its|their|our|this|that)\b", re.I)
+_ROUTE_URL_RE = re.compile(
+    r"⟦[^⟧]*⟧|[a-z][a-z0-9+.-]*:(?![;,.!?])[^\s<>\"'`)]+|"
+    r"[^\s<>\"'`⟦⟧()]+@[^\s<>\"'`⟦⟧()]+|"
+    r"(?<![\w@])(?:[\w-]+\.)+[a-z]{2,}(?::[0-9]+)?(?:[/?#][^\s<>\"'`)]*)?", re.I)
+_ROUTE_DESCRIPTION_RE = re.compile(
+    r"^\s*(?:(?:the\s+)?(?:archive|historical\s+record|suspicious\s+message)\s+"
+    r"(?:quotes|says)\b|(?:the\s+)?(?:Report\s+Fraud|Police\s+Scotland)\s+"
+    r"(?:(?:received|recorded|handled|published|was|were)\b|"
+    r"is\s+(?:a|the)\s+(?:national\s+)?reporting\s+service\b)|"
+    r"(?:the\s+)?(?:Report\s+Fraud|Police\s+Scotland)\s+"
+    r"(?:guidance|website)\b.*\b(?:published|describes)\b)", re.I)
+_RF_ATTRIBUTION_RE = re.compile(
+    r"^\s*(?:Report\s+Fraud\s+(?:warns|recommends|advises|explains|says)\b"
+    r"|According\s+to\s+Report\s+Fraud\b)", re.I)
+
+
+class _RouteHTML(HTMLParser):
+    """Keep link targets independently of labels; decode entities and bare hrefs."""
+    def __init__(self):
+        super().__init__(convert_charrefs=True)
+        self.parts = []
+
+    def handle_starttag(self, tag, attrs):
+        self.parts.append(' ')
+        raw = self.get_starttag_text() or ''
+        if tag != 'a' and re.search(r'[:.@]', tag):
+            # Guide HTML is escaped by build._inline: angle-bracket URLs are
+            # visible text, not disposable markup. Retain their full token.
+            self.parts.append(' ⟦' + raw[1:-1] + '⟧ ')
+        if tag == 'a':
+            for key, value in attrs:
+                if key == 'href' and value:
+                    self.parts.append(' ⟦' + value + '⟧ ')
+
+    def handle_endtag(self, tag):
+        self.parts.append(' ')
+
+    def handle_data(self, data):
+        self.parts.append(data)
+
+
+def _route_text(text):
+    parser = _RouteHTML()
+    parser.feed(text or '')
+    parser.close()
+    # HTMLParser already decoded character references once, as a browser does.
+    # Decoding again could authenticate a different host from the actual href.
+    text = ''.join(parser.parts)
+    return re.sub(r'\[([^\]\n]+)\]\(([^)\n]+)\)', r'\1 ⟦\2⟧', text)
+
+
+def _route_destinations(text):
+    """Return spans and values. Consume whole URLs before looking for mail/phones."""
+    found = []
+    for m in _ROUTE_URL_RE.finditer(text):
+        value = m.group().rstrip('.,;:!')
+        kind = 'url'
+        if value.startswith('⟦'):
+            kind, value = 'link', value[1:-1]
+        if value.lower().startswith('mailto:'):
+            kind, value = 'email', value[7:]
+        elif value.lower().startswith('tel:'):
+            kind, value = 'phone', value[4:]
+        elif '@' in value and '://' not in value:
+            kind = 'email'
+        found.append((m.start(), m.end(), kind, value))
+    for m in _PHONE_RE.finditer(text):
+        if not any(a <= m.start() < b for a, b, _, _ in found):
+            found.append((m.start(), m.end(), 'phone', m.group().strip()))
+    # Reporting shortcodes need the same owner check as long phone numbers.
+    # A means phrase ("using 60599") is not covered by the legacy to-only
+    # shortcode guard. Extract directed numeric recipients, not arbitrary dates.
+    for m in re.finditer(r'\b(?:to|via|through|using|dial|call)\s+`?(\d{3,6})(?!\d)', text, re.I):
+        a, b = m.span(1)
+        if not any(x <= a < y for x, y, _, _ in found):
+            found.append((a, b, 'phone', m.group(1)))
+    return sorted(found)
+
+
+def _route_prose(text):
+    # Hosts, URL paths and the organisation's name are not reporting verbs.
+    for a, b, _, _ in reversed(_route_destinations(text)):
+        text = text[:a] + ' ' * (b - a) + text[b:]
+    return re.sub(r'\bReport\s+Fraud\b', lambda m: ' ' * len(m.group()), text, flags=re.I)
+
+
+def _route_instruction(text):
+    prose = _route_prose(text)
+    # Negating delay still instructs reporting; negate actions, not sentences.
+    prose = re.sub(r'\bdo\s+not\s+(?:wait|delay|hesitate)\s+to\s+', '', prose, flags=re.I)
+    descriptive = bool(_ROUTE_DESCRIPTION_RE.search(text))
+    # Destination-directed report objects also identify the semantic action
+    # when the verb is an unfamiliar paraphrase ("relay your complaint ...").
+    # This is deliberately grammatical, not a list of approved prose strings.
+    directed_object = re.search(
+        r'\b(?:your|a|the)\s+(?:fraud\s+)?(?:report|complaint|loss|evidence|details)\b'
+        r'.*\b(?:to|with|via|through)\s+(?:it|them|us|here|there|⟦|https?:|[\w.+-]+@)', text, re.I)
+    advisory = re.search(r'\b(?:advises|recommends|you\s+(?:should|can|must))\b', prose, re.I)
+    imperative_object = re.match(r'^\s*[a-z]+\s+your\s+(?:report|complaint|loss|evidence|details)\b', prose, re.I)
+    if (directed_object and (advisory or imperative_object)
+            and not descriptive and not _NEGATED_DIRECTIVE_RE.search(prose)):
+        return True
+    for action in _ROUTE_ACTION_RE.finditer(prose):
+        if action.group().lower() in ('phone', 'telephone') and re.match(r'\s+number\b', prose[action.end():], re.I):
+            continue
+        if action.group().lower() == 'email' and re.match(r'\s*(?:and|or|[,.;]|$)', prose[action.end():], re.I):
+            continue
+        lead = prose[:action.start()]
+        clause = re.split(r'[;,]|\b(?:but|then)\b', lead, flags=re.I)[-1]
+        if _NEGATED_DIRECTIVE_RE.search(clause):
+            continue
+        # A verb must occupy a directive/complement position. This separates
+        # "file a report" from "already have the file", and "use this form"
+        # from "check a breach using a lookup service".
+        governs = (not lead.strip(' -•(\r\n\t') or bool(re.search(
+            r"(?:[,;:]|\b(?:to|should|can|could|may|might|must|please|and|or|then|otherwise|"
+            r"advises|recommends|says|you|I|we|by|be))\s*"
+            r"(?:(?:also|still|now|directly|immediately|safely|simply|then|[a-z]+ly)\s+)*$", lead, re.I)))
+        if not governs:
+            continue
+        if descriptive and not re.search(r'\b(?:you|should|can|must|please)\b|[;,]', lead, re.I):
+            continue
+        # Emotional support and lookup/verification are different actions from
+        # submitting a report. They are not authenticated as reporting routes.
+        if (action.group().lower() in ('contact', 'call')
+                and re.search(r'\b(?:emotional\s+support|confidential\s+support)\b', lead, re.I)):
+            continue
+        return True
+    # Noun phrases explicitly offering a destination, without a finite verb.
+    return (not descriptive and not _NEGATED_DIRECTIVE_RE.search(prose)
+            and bool(_route_destinations(text)) and bool(re.search(
+                r"^\s*(?:(?:for\s+)?reporting\b|(?:its|their|our|the|this)\s+"
+                r"(?:reporting\s+(?:email|address|form)|helpline|report\s+form))"
+                r"|\b(?:recommends|advises)\s*$", prose.strip(' .'), re.I)))
+
+
+def _report_fraud_advice_only(sent: str, following: List[str]) -> bool:
+    """Only affirmative attribution/description can be exempt; ambiguity blocks.
+
+    Reporting actions are recognised independently of speech verbs, including
+    inflections and complaint/contact paraphrases. Follow-on references inherit
+    the agency context; unrelated prevention advice does not.
+    """
+    if not (_RF_ATTRIBUTION_RE.match(sent) or _ROUTE_DESCRIPTION_RE.match(sent)):
+        return False
+    if (_route_instruction(sent)
+            or re.search(r'\b(?:UK[- ]wide|Scotland|Scottish)\b|\b(?:its|their|our)\s+(?:online|form|service|website|helpline)\b', sent, re.I)):
+        return False
+    for other in following:
+        if _route_instruction(other) and (
+                _ROUTE_OBJECT_RE.search(_route_prose(other))
+                or _ROUTE_REFERENCE_RE.search(_route_prose(other))
+                or _route_destinations(other)):
+            # Explicit contact with a different actor is not an anaphoric
+            # instruction to report to the publisher of the preceding advice.
+            if re.search(r'\b(?:contact|call)\s+(?:your\s+bank|support)\b', other, re.I) and not _route_destinations(other):
+                continue
+            return False
+    return True
+
+
+def _reporting_context(text):
+    prose = _route_prose(text)
+    return bool(re.search(r'\bcontact\b.*\b(?:about|regarding)\s+(?:the\s+)?(?:fraud|scam)\b', prose, re.I) or re.search(
+        r"\b(?:report(?:ing|ed)?|forward(?:ing|ed)?|submit(?:ting|ted)?|lodge|lodging|lodged|"
+        r"suspicious\b.*\baccount|complaint|notify|notifying|get\s+in\s+touch|Scotland|Scottish)\b|"
+        r"^\s*(?:(?:you|we)\s+(?:can|should|must)\s+(?:also\s+)?)?send(?:ing)?\b"
+        r"\s+(?:(?:a|the|your|any)\s+)?(?:suspicious|phishing|scam|report|evidence|details)\b|"
+        r"\b(?:fraud|scam)\s+(?:phone\s+)?number\b|"
+        r"\b(?:this|its|their|the)\s+(?:reporting\s+)?form\b|"
+        r"\b(?:loss|evidence)\b.*\b(?:to|via|through|at|here)\b",
+        prose, re.I) or re.search(r'\bReport\s+Fraud\b', text, re.I)
+        or any(r.get('role') in ('police-report', 'phishing-report', 'website-report', 'consumer-advice')
+               for _, _, r in _route_names(text, _CANON['official_routes'])))
+
+
+def _route_names(text, routes):
+    """Organisation identities from canon prose, never substrings inside URLs."""
+    masked = text
+    for a, b, _, _ in reversed(_route_destinations(text)):
+        masked = masked[:a] + ' ' * (b - a) + masked[b:]
+    matches = []
+    for route in routes:
+        name = (reporting.POLICIES[route['key']][0] if route['key'] in reporting.POLICIES else route.get('brand')) or re.split(
+            r'\s+(?:phishing|scam[- ]|customer|general|suspicious)',
+            route['name'], maxsplit=1, flags=re.I)[0]
+        if route['key'] == 'fca-firm-checker':
+            name = 'FCA'
+        aliases = {name}
+        if route['key'] in ('ncsc-sers', 'ncsc-scam-website'):
+            aliases.add('National Cyber Security Centre')
+        if route['key'] == 'fca-firm-checker':
+            aliases.add('Financial Conduct Authority')
+        for alias in aliases:
+            for m in re.finditer(r'(?<!\w)' + re.escape(alias) + r'(?!\w)', masked, re.I):
+                matches.append((m.start(), m.end(), route))
+    # A full organisation name wins over a nested generic alias (Police).
+    matches = [m for m in matches if not any(n[0] <= m[0] and m[1] < n[1] for n in matches)]
+    return sorted(matches, key=lambda x: x[0])
+
+
+def _destination_matches(kind, value, route):
+    """Identity-only compatibility helper; never a service authorization."""
+    d = reporting.normalize(kind, value)
+    return d is not None and any(d == reporting.normalize(k, route[f])
+        for f, k in (('report_url', 'url'), ('info_url', 'url'), ('email', 'email'),
+                     ('phone', 'phone'), ('phone_welsh', 'phone'), ('sms', 'shortcode')) if route.get(f))
+
+
+def _number_source_reference(clause, start, kind):
+    """Classify number-lookup grammar; this does not establish source trust.
+
+    Match only the immediately governing noun phrase. The caller authenticates
+    the exact source URL and owner separately; actual phone values always use
+    the reporting canon. Link labels never replace their actual targets.
+    """
+    if kind not in ('url', 'link'):
+        return False
+    if not re.search(r'\b(?:call(?:ing)?|phone|telephone|dial|ring|(?:official\s+)?fraud\s+number)\b',
+                     _route_prose(clause[:start]), re.I):
+        return False
+    prefix = clause[:start].rstrip(' `')
+    adjacent = _route_destinations(prefix)
+    if adjacent:
+        a, b, previous_kind, _ = adjacent[-1]
+        if previous_kind in ('url', 'link') and not prefix[b:].strip():
+            # HTML puts the href before its label; Markdown puts it after.
+            # Both values still authenticate separately against the same
+            # number-source contract, so neither can hide a hostile partner.
+            prefix = prefix[:a].rstrip(' `')
+    return bool(re.search(
+        r'\bnumber\s+(?:published\s+(?:in\s+(?:its\s+own\s+)?'
+        r'(?:scam-reporting\s+)?guidance\s+)?)?on\s*$',
+        prefix, re.I))
+
+
+def _explicit_recipient(clause, names):
+    """Bind 'to OWNER using MEANS' before inspecting names in the means.
+
+    Return None if no named recipient is stated; an unknown named
+    recipient yields an unmatchable record rather than global canon fallback.
+    """
+    masked = clause
+    for a, b, _, _ in reversed(_route_destinations(clause)):
+        masked = masked[:a] + ' ' * (b - a) + masked[b:]
+    direct = re.search(r'\b(?:contact|notify|call|ring|phone)\s+(?:the\s+)?'
+                       r'([A-Za-z][A-Za-z ]*?)(?=\s+(?:about|regarding|using|via|through|at|on)\b|[,;]|$)', masked, re.I)
+    if direct and re.search(r'(?:^|[,;:]|\b(?:to|can|may|should|must|then|and|or))\s*$', masked[:direct.start()], re.I):
+        phrase = direct.group(1).strip()
+        if phrase.casefold() not in ('it', 'them', 'us', 'its official fraud number') and not re.search(r'\b(?:number|phone|to|by)\b', phrase, re.I):
+            identified = [r for a, b, r in names if direct.start(1) <= a < direct.end(1)]
+            return identified or [{'key': 'unverified-recipient', 'name': phrase}]
+    for m in re.finditer(r'\b(?:to|with)\s+(?:the\s+)?([^,;:.!?]+?)(?=\s+(?:using|via|through|at|on)\b|[.,;:!?]|$)', masked, re.I):
+        if not re.match(r'\s+(?:using|via|through|at|on)\b', masked[m.end(1):], re.I):
+            continue
+        identified = [r for a, b, r in names if m.start(1) <= a < m.end(1)]
+        if identified:
+            first = min(a for a, b, r in names if m.start(1) <= a < m.end(1))
+            return [r for a, b, r in names if a == first]
+        phrase = m.group(1).strip()
+        if (phrase and not re.search(r'\b(?:number|parcel|standard|report|forward)\b', phrase, re.I) and not re.match(
+                r'(?:this|that|them|it|us|me|you|here|there|get|report|police|the\s+address)$', phrase, re.I)):
+            return [{'key': 'unverified-recipient', 'name': phrase}]
+    return None
+
+
+def _request_scope(clause, previous, following, label):
+    """Prose adapter only: produce typed scope, never an authorization decision.
+
+    Local explicit objects outrank adjacent context. References may inherit at
+    most two sentences in the same field/FAQ; article titles cannot invent a
+    missing reporting purpose. Additional service claims are separate purposes.
+    """
+    prose = _route_prose(clause)
+    prose = re.sub(r'\bemail\s+(?=(?:it|them|those)\b)', 'send ', prose, flags=re.I)
+    reference = bool(re.search(
+        r'\b(?:report|forward|send|email)\s+(?:it|them|those|this|that|fakes|the\s+(?:fake|scam))'
+        r'(?=\s+(?:free\s+)?(?:to|at|with|via|through|using|as\s+an?\s+attachment)\b|[.,;:]|$)', prose, re.I))
+    scope_free = re.sub(r'^\s*(?:In|For)\b.*?,\s*(?=use\b)', '', prose, flags=re.I)
+    short = not re.sub(r'\b(?:through|via|at|using|to|on|use|this|that|the|its|form|route|service|address|is|contact|options)\b', '', scope_free, flags=re.I).strip(' .:`()')
+    bare_contact = bool(re.fullmatch(r'\s*(?:notify|contact)\s+[A-Z][A-Za-z ]*?\s+(?:through|via|using|at)\s*[ .`]*', prose, re.I))
+    context = prose
+    if re.search(r'\bReport\s+Fraud\b', clause, re.I):
+        context += ' crime'
+    local_purpose = reporting.purposes(context)
+    inherit = (reference and local_purpose <= {'crime', 'unknown'}) or short or bare_contact
+    if re.search(r'\bReport\s+Fraud\b', clause, re.I):
+        inherit = False
+    if inherit and not re.search(r'\b(?:for(?!\s+free\b)|about|regarding)\b', prose, re.I):
+        for prior in reversed(previous[-2:]):
+            candidate = _route_prose(prior)
+            if reporting.purposes(candidate) not in (frozenset({'unknown'}), frozenset({'crime'})):
+                context += ' ' + candidate
+                break
+        else:
+            context += ' ' + label
+    # Same-FAQ questions and section labels can resolve an explicit "report
+    # suspected illegal sellers", but never an explicitly different object.
+    if re.search(r'\breport\s+(?:suspected\s+)?illegal\s+sellers\s+to\b', prose, re.I):
+        context += ' ' + label + ' ' + ' '.join(_route_prose(s) for s in previous[-2:])
+    if (re.match(r'^\s*(?:to|with)\b', prose, re.I) and previous
+            and reporting.purposes(context) == frozenset({'unknown'})):
+        context += ' ' + _route_prose(previous[-1])
+        if reporting.purposes(context) == frozenset({'unknown'}):
+            context += ' ' + label
+    if reporting.purposes(prose) == frozenset({'message'}) and previous and reporting.purposes(_route_prose(previous[-1])) == frozenset({'text'}):
+        context += ' ' + _route_prose(previous[-1])
+    purpose = reporting.purposes(context)
+    if purpose == frozenset({'message'}):
+        context_subject = reporting.purposes(label)
+        if context_subject in (frozenset({'email'}), frozenset({'text'})):
+            purpose = context_subject
+    # Retain additional service/outcome assertions as separate, unsupported
+    # purposes. This is a positive grammar, not a blacklist of outcome verbs.
+    claims = []
+    ends = [b for _, b, _, _ in _route_destinations(clause)]
+    tail = prose[max(ends, default=len(prose)):]
+    outcome = re.search(r'\b(?:and|so)\b.*\b(?:will|can|shall)\b.*', tail, re.I)
+    if outcome:
+        claims.append(outcome.group())
+    trailing = re.search(r'\bto\s+(?:get|recover|claim|obtain|authenticate|verify|ensure|have)\b.*', tail, re.I)
+    if trailing:
+        claims.append(trailing.group())
+    for sentence in following[:2]:
+        if _route_destinations(sentence):
+            break  # a new route owns its own following claims
+        plain = _route_prose(sentence).strip()
+        if re.match(r'^(?:(?:then|you\s+(?:can|should|must|may))\s+)*(?:(?:this|that)\s+(?:route|service)|this\s+(?:lets|is\s+for)|it|use\s+(?:this|that)|the\s+(?:route|service)|ask\s+SHEIN|SHEIN\s+(?:will|can|shall))\b', plain, re.I):
+            claims.append(plain)
+        elif re.match(r'^(?:the\s+(?:brand|shop|company|team)|[A-Z][A-Za-z]+)\s+(?:will|can|shall)\b', plain, re.I):
+            current_names = _route_names(clause, _CANON['official_routes'] + _CANON.get('verified_org_contacts', []))
+            if plain.lower().startswith('the ') or any(re.match(re.escape(r.get('brand', '')) + r'\s+', plain, re.I) for _, _, r in current_names if r.get('brand')):
+                claims.append(plain)
+    for claim in claims:
+        if not reporting.attached_claims_supported(claim):
+            if re.search(r'\b(?:reports?\b.*\b(?:to|contact)|takes\s+reports|route\s+for\s+reporting|network\s+can\s+investigate)\b', claim, re.I):
+                extra = reporting.purposes(claim)
+                if re.search(r'\bnetwork\s+can\s+investigate\b', claim, re.I):
+                    extra = frozenset({'text'})
+                if extra == frozenset({'message'}) and purpose in (frozenset({'text'}), frozenset({'email'})):
+                    extra = purpose
+                purpose |= extra
+            else:
+                purpose |= {'unsupported-service-claim'}
+    # A local nation condition is independent of an adjacent correct route.
+    # Organisation names (Police Scotland) are not audience conditions.
+    def condition(text, *, trailing_audience=False):
+        t = _route_prose(text)
+        t = re.sub(r'\b(?:Police\s+Scotland|Advice\s+Direct\s+Scotland|Victim\s+Support\s+Scotland)\b', '', t, flags=re.I)
+        t = re.sub(r'\b(?:not|never)\s+(?:a\s+)?(?:global|worldwide|international)\b', '', t, flags=re.I)
+        pieces = re.findall(r'\b(?:Northern\s+Ireland|United\s+Kingdom|Great\s+Britain|UK|GB|NI|England|Wales|Scotland|Scottish|Scots|English|Welsh|global|worldwide|international)\b', t, re.I)
+        # Locations attached to the audience/condition, independent of the
+        # audience noun, plus residence declarations and same-FAQ questions.
+        for m in re.finditer(r'(?:(?:^|\bif)\s*(?:in|(?:for|if)\b[^,.;!?]*?\b(?:in|from|outside|of))|\b(?:live|reside|based)\s+in)\s+(?:the\s+)?([^,.;!?]+)', t, re.I):
+            place = re.split(r'\b(?:report|notify|contact|can|should|must|may)\b', m.group(1), flags=re.I)[0]
+            pieces.append(('outside ' if 'outside' in m.group().lower() else 'in ') + place)
+        for m in re.finditer(r'\bif\b[^,.;!?]*?\b(?:in|from|outside)\s+(?:the\s+)?([^,.;!?]+)', t, re.I):
+            place = re.split(r'\b(?:report|notify|contact|can|should|must|may)\b', m.group(1), flags=re.I)[0]
+            pieces.append('in ' + place)
+        result = reporting.jurisdiction(' '.join(pieces))
+        lead = re.match(r'^\s*for\s+([^,.;!?]+)', t, re.I)
+        if lead and not result and not re.search(r'\b(?:scam|fraud|phishing|email|text|SMS|report|reporting|complaint|advice|support|refund|claim|account|medicine|loss|counterfeit|free)\b', lead.group(1), re.I):
+            # Unknown explicit audience/condition is not an absent scope.
+            result = frozenset({'unknown'})
+        # A trailing audience is still a scope restriction; do not drop it
+        # merely because the destination precedes it. Apply this to the local
+        # action and its attached claims, not arbitrary earlier prevention
+        # advice such as changing account passwords from a different device.
+        if trailing_audience:
+            for m in re.finditer(r'\bfor\s+[^,.;!?]*?\b(?:in|from|outside)\s+(?:the\s+)?([^,.;!?]+)', t, re.I):
+                place = re.split(r'\b(?:report|notify|contact|can|should|must|may)\b', m.group(1), flags=re.I)[0]
+                result |= reporting.jurisdiction(('outside ' if 'outside' in m.group().lower() else 'in ') + place)
+        return result
+    nation = condition(prose, trailing_audience=True)
+    if not nation:
+        for prior in reversed(previous[-2:]):
+            # Inherit conditions, not jurisdiction belonging to a completed
+            # independent instruction with its own destination.
+            if (_route_instruction(prior) or _route_destinations(prior)) and not prior.rstrip().endswith('?'):
+                continue
+            nation = condition(prior)
+            if prior.rstrip().endswith('?') and nation == reporting.UK:
+                nation = frozenset()  # a UK-wide FAQ asks for the national alternatives
+            if nation:
+                break
+    for claim in claims:
+        if re.search(r'\b(?:for|in|global|worldwide|international)\b', claim, re.I):
+            nation |= condition(claim, trailing_audience=True)
+    return frozenset(purpose), frozenset(nation)
+
+
+def _request_owners(owners):
+    if not owners:
+        return None
+    return frozenset((reporting.POLICIES[r['key']][0] if r['key'] in reporting.POLICIES
+                      else r.get('brand', 'unknown')).casefold() for r in owners)
+
+
+def _number_owner(clause, source):
+    """The owner of a number is not the publisher of the preceding advice."""
+    prose = _route_prose(clause)
+    m = re.search(r"\b(?:call|calling|dial|ring|use|using|or)\s+(?:the\s+)?(?:official\s+)?"
+                  r"([A-Za-z][A-Za-z ]*?)(?:[’']s)?\s+(?:official\s+)?(?:fraud\s+)?number\b", prose, re.I)
+    if m:
+        owner = re.sub(r'^(?:by\s+calling|using)\s+', '', m.group(1).strip(), flags=re.I)
+        if owner.casefold() not in ('its', 'their', 'the', 'official', 'fraud', 'using the'):
+            return frozenset({owner.casefold()})
+    names = _route_names(clause, _CANON.get('verified_number_sources', []))
+    if names:
+        return frozenset(r['brand'].casefold() for _, _, r in names)
+    if source.get('requires_named_owner'):
+        return frozenset({'unknown'})
+    return None
+
+
+def check_report_fraud_destinations(post: Dict) -> List[Dict]:
+    """Authenticate all reporting instructions, retaining the old public API.
+
+    Analyse clauses in either direction and carry bounded same-field context
+    across adjacent sentences. Each new named agency owns its local clause;
+    unlabelled routes must still match a verified destination. No instruction
+    is trusted simply because an official organisation appears somewhere nearby.
+    """
+    routes = _CANON['official_routes'] + _CANON.get('verified_org_contacts', [])
+    contracts = reporting.contracts_from_canon(_CANON)
+    # Ownership metadata for the canon's two legacy, independently verified mailboxes.
+    routes += [{'key': c.service, 'brand': c.organisation, 'name': c.organisation}
+               for c in contracts if c.service.startswith('legacy-')]
+    issues = []
+    for label, raw in _route_fields(post):
+        sents = _sentences(re.sub(r'\n\s*[-•]\s*', '; ', _route_text(raw)))
+        for i, sent in enumerate(sents):
+            # Retain all branches of national alternatives; never discard the
+            # remainder after a Police Scotland mention.
+            sent = re.sub(r'\((?:or\s+)?(?=(?:in\s+Scotland|Police\s+Scotland)\b)', '; ', sent, flags=re.I)
+            clauses = re.split(
+                r';\s*|(?:—\s*|,\s*(?:(?:and|or|then)\s+)?|\s+(?:and|or)\s+)'
+                r'(?=(?:otherwise\s+)?(?:(?:in\s+Scotland|if\s+by\s+(?:email|text))\b|Citizens\s+Advice|Advice\s+Direct\s+Scotland|Consumerline|contact|notify|report|submit|send|use|call|dial|forward|email|'
+                r'(?:consider\s+reporting)|(?:any\s+)?loss|(?:a\s+)?(?:(?:scam|suspicious)\s+)?(?:SMS\s+)?texts?|'
+                r'(?:a\s+)?(?:(?:suspicious|scam|phishing)\s+)?emails?|Police\s+Scotland|to\s+\w+|log\s+the\s+case)\b)',
+                sent, flags=re.I)
+            for clause_index, clause in enumerate(clauses):
+                destinations = _route_destinations(clause)
+                if not destinations:
+                    continue
+                instruction = _route_instruction(clause)
+                if clause_index and _reporting_context(clauses[0]) and re.match(r'^\s*(?:Citizens\s+Advice|Advice\s+Direct\s+Scotland|Consumerline)\b', clause, re.I):
+                    instruction = True
+                previous = sents[max(0, i - 2):i]
+                if clause_index:
+                    previous = previous + [clauses[clause_index - 1]]
+                    # Preserve the purpose/condition of a leading dependent
+                    # clause when splitting coordinated reporting alternatives.
+                    prefix = clauses[0]
+                    if re.match(r'^\s*(?:For|If|To)\b', prefix, re.I):
+                        instruction = _route_instruction(prefix + ', ' + clause)
+                if instruction and not _reporting_context(clause):
+                    instruction = ((clause_index > 0 and _reporting_context(clauses[0])) or
+                                   (any(_reporting_context(s) for s in previous) and bool(
+                                       (re.search(r'\b(?:its|their|our|here|there|this\s+form)\b', _route_prose(clause), re.I) or
+                                        re.fullmatch(r'\s*use\s*(?:(?:this|that|the|its)\s+(?:form|route|service))?[ .`]*', _route_prose(clause), re.I)))))
+                if not instruction:
+                    # A separate destination sentence completes the previous
+                    # instruction, but a new source citation cannot inherit it.
+                    prose = _route_prose(clause).strip(' .,:;()[]`')
+                    instruction = (any(_route_instruction(s) and _reporting_context(s) for s in previous)
+                                   and (not prose or (destinations[0][0] == len(clause) - len(clause.lstrip())
+                                                      and re.fullmatch(r'in\s+Scotland[, .]*', prose, re.I)) or bool(re.match(
+                                       r'^(?:(?:through|via|at|using|to|on)\b|(?:the|its|their|our|this)\s+(?:form|address|reporting|website|email|helpline)\b)', prose, re.I))))
+                if not instruction and (not _route_prose(clause).strip(' .,:;()[]`') or
+                        re.search(r'\b(?:reporting|portal|form|address|helpline)\b', _route_prose(clause), re.I)):
+                    # An isolated link can precede the instruction referring to
+                    # it. This is the same binding as a following link, in reverse.
+                    following = sents[i + 1:i + 3]
+                    if (following and _route_instruction(following[0]) and _reporting_context(following[0])
+                            and not _route_destinations(following[0])
+                            and re.search(r'\b(?:here|there|this\s+(?:form|portal)|that\s+(?:form|portal)|their\s+site)\b', following[0], re.I)):
+                        instruction = True
+                        previous = previous + [following[0]] if not _route_names(clause, routes) else previous
+                # Offered alternatives remain instructions even in declarative form.
+                if not instruction and re.search(r'\b(?:alternatively|available\s+for\s+reports|reporting\s+(?:portal|form|address))\b', _route_prose(clause), re.I):
+                    instruction = True
+                if not instruction:
+                    continue
+                names = _route_names(clause, routes)
+                for a, b, kind, value in destinations:
+                    # The object being reported is not the recipient. Require
+                    # explicit object grammar, not a reassuring label on a link.
+                    if (kind == 'url' and re.search(r'\b(?:fake|suspicious|scam)\s*$', clause[:a], re.I)
+                            and re.match(r'\s+(?:websites?|sites?|domains?)\s+to\b', clause[b:], re.I)):
+                        continue
+                    # An explanatory citation after a completed, authenticated
+                    # recipient is distinct from using a form/number found there.
+                    if (re.search(r',\s*as\s+(?:explained|described)\s+(?:in|on)\s*$', clause[:a], re.I)
+                            and not re.search(r'\bto\s+(?:report|submit|send|forward|lodge|contact|call)\b', clause[b:], re.I)
+                            and any(x[1] <= a and any(_destination_matches(x[2], x[3], r)
+                                    for r in routes) for x in destinations)):
+                        continue
+                    # Reading/checking an explanatory guide is not submitting
+                    # evidence to it. Require descriptive grammar, not merely
+                    # a reassuring link label ("official reporting guide").
+                    if (re.search(r'\b(?:guide|checklist|dataset)\b', clause, re.I)
+                            and re.search(r'\b(?:explains|covers|sets\s+out|walks\s+through)\b', clause, re.I)
+                            and not re.search(r'\b(?:report|submit|send|forward|lodge|contact|call|upload|notify)\b', _route_prose(clause), re.I)):
+                        continue
+                    if (re.search(r'\buse\s+(?:our|the|this)\b[^.]*\b(?:guide|checklist)\s*$', clause[:a].rstrip(), re.I)
+                            and not _reporting_context(clause[:a])
+                            and not re.search(r'\bto\s+(?:report|submit|send|lodge)\b', clause[b:], re.I)):
+                        continue
+                    if (re.match(r"(?:[’']s)?\s+(?:lists|says|guidance|consumer-rights)\b", clause[b:], re.I)
+                            and not (_route_instruction(clause[:a]) and _reporting_context(clause[:a]))):
+                        continue
+                    before = [n for n in names if n[1] <= a]
+                    after = [n for n in names if n[0] >= b]
+                    # A means phrase retains the recipient of the action it modifies.
+                    actions = [m for m in _ROUTE_ACTION_RE.finditer(_route_prose(clause[:a]))
+                               if m.group().lower() != 'using']
+                    if actions:
+                        action_start = actions[-1].start()
+                        before = [n for n in before if n[0] >= action_start or
+                                  re.search(r'\b(?:says|advises|recommends|asks|their|its)\b', clause[n[1]:action_start], re.I)]
+                    owners = []
+                    if before:
+                        last = max(n[0] for n in before)
+                        owners = [n[2] for n in before if n[0] == last]
+                    elif after and not re.search(r'\b(?:and|or|then|if)\b', clause[b:after[0][0]], re.I):
+                        first = min(n[0] for n in after)
+                        owners = [n[2] for n in after if n[0] == first]
+                    elif previous and (re.search(r'\b(?:(?:to|with|via|through)\s+(?:it|them|us)|(?:its|their|our)\s+(?:online|form|service|website|email|helpline)|here|there(?!\s+is))\b', _route_prose(clause), re.I)
+                                       or (clause_index == 0 and re.match(r'^\s*(?:through|via|at|using|to|on|use)\b', clause, re.I))
+                                       or (previous[-1].rstrip().endswith('?') and re.match(r'^\s*the\s+address\b', clause, re.I))
+                                       or (re.match(r'^\s*(?:report|submit|lodge)\b', clause, re.I)
+                                           and re.search(r'\b(?:report|submit|lodge)\s+(?:it|the\s+(?:loss|complaint))\b', _route_prose(clause), re.I))):
+                        inherited = _route_names(previous[-1], routes)
+                        if inherited:
+                            last = max(n[0] for n in inherited)
+                            owners = [n[2] for n in inherited if n[0] == last]
+                    # Global mailbox membership must not bypass an evidenced
+                    # owner/service contract on the same mailbox.
+                    if after and re.match(r'\s+for\s+', clause[b:after[0][0]], re.I):
+                        first = min(n[0] for n in after)
+                        owners = [n[2] for n in after if n[0] == first]
+                    earlier = [end for start, end, _, _ in destinations if end <= a]
+                    owner_start = max(earlier, default=0)
+                    explicit = _explicit_recipient(clause[owner_start:a], [(x-owner_start,y-owner_start,r) for x,y,r in names if x >= owner_start])
+                    # Carry a recipient only into a dependent means/reference,
+                    # never into a fresh coordinated object such as an SMS.
+                    dependent = bool(re.match(
+                        r'^\s*(?:(?:using|via|through|at|on|dial|call|ring|use)\b|'
+                        r'(?:report|forward|send|email)\s+(?:it|them|this|that)\b)',
+                        _route_prose(clause), re.I))
+                    if (explicit is None and not owners and dependent and clause_index and not _route_destinations(clauses[clause_index - 1])
+                            and _route_instruction(clauses[clause_index - 1]) and _reporting_context(clauses[clause_index - 1])):
+                        prior = clauses[clause_index - 1]
+                        explicit = _explicit_recipient(prior, _route_names(prior, routes))
+                    if explicit is None and not owners and previous and re.search(r'\b(?:to\s+(?:them|it)|their\s+(?:site|form)|use)\b', _route_prose(clause), re.I):
+                        for prior in reversed(previous[-2:]):
+                            m = re.search(r'\b(?:to|contact|notify)\s+([A-Za-z][A-Za-z ]*?)\s*[.!?]?$', _route_prose(prior))
+                            if m and m.group(1).strip().casefold() not in ('it', 'them', 'us'):
+                                named = _route_names(prior, routes)
+                                owners = [r for _, _, r in named] or [{'key': 'unverified-recipient', 'name': m.group(1)}]
+                                break
+                    if explicit is not None:
+                        owners = explicit
+                    scope = clause
+                    if (clause_index == 1 and not _route_destinations(clauses[0])
+                            and not _route_instruction(clauses[0])):
+                        scope = clauses[0] + ', ' + clause
+                    if recipient_prefix := re.search(r'\bto\s+Police\s+Scotland\b', scope, re.I):
+                        if a >= recipient_prefix.end():
+                            scope = scope[recipient_prefix.start():]
+                    # An object-free dialing alternative belongs to its local
+                    # preceding instruction. Do not use a distant field/title.
+                    if (dependent and clause_index and
+                            reporting.purposes(_route_prose(scope)) == frozenset({'unknown'}) and
+                            not _route_destinations(clauses[clause_index - 1])):
+                        scope = clauses[clause_index - 1] + ', ' + scope
+                    purpose, nation = _request_scope(scope, previous, sents[i + 1:i + 3], label)
+                    recipient = _request_owners(owners)
+                    mode = 'intake'
+                    destination = reporting.normalize(kind, value)
+                    if _number_source_reference(clause, a, kind):
+                        mode = 'number-lookup'
+                        purpose = frozenset({'number-lookup'})
+                        source = next((r for r in _CANON.get('verified_number_sources', [])
+                                       if reporting.normalize('url', r['navigation_url']) == destination), {})
+                        recipient = _number_owner(clause, source)
+                        if any(_route_instruction(s) and re.search(r'\b(?:report|submit|send|forward|lodge)\b.*\b(?:there|here|this\s+route)\b', s, re.I)
+                               for s in sents[i + 1:i + 3]):
+                            purpose |= {'crime'}
+                    request = reporting.Request(destination, recipient, purpose, nation, mode)
+                    allowed, reason, services = reporting.authorize(request, contracts)
+                    rf = recipient == frozenset({'report fraud'})
+                    if reason == 'jurisdiction-mismatch' and rf and 'scotland' in nation:
+                        issues.append({'check': 'scotland_routing', 'severity': SEVERITY_BLOCK,
+                                       'span': clause, 'detail': f'the {label} directs Scottish readers to Report Fraud.'})
+                    if not allowed:
+                        issues.append({'check': 'report_fraud_destination' if rf else 'reporting_destination',
+                                       'severity': SEVERITY_BLOCK, 'span': value,
+                                       'detail': f"the {label} offers an unsupported reporting {kind}: {reason}; "
+                                                 f"owner={sorted(recipient) if recipient is not None else 'unnamed'}, "
+                                                 f"purpose={sorted(purpose)}, jurisdiction={sorted(nation)}, mode={mode}."})
+
+    return issues
+
+
 def _field_routes_scotland(text: str) -> bool:
-    """True if every sentence naming Report Fraud in this field is served by an
+    """True if every reporting mention of Report Fraud in this field is served by an
     actionable Police Scotland + 101 route, in that sentence or the one
     immediately after it.
 
@@ -1236,7 +1889,9 @@ def _field_routes_scotland(text: str) -> bool:
     The window never crosses a field, so a route buried in a later section or FAQ
     still fails.
 
-    EVERY named mention must be served. An earlier version short-circuited on the
+    EVERY reporting mention must be served. Recognised non-routing advice
+    attributions are assessed individually, not exempted field-wide.
+    An earlier version short-circuited on the
     first canonical scope+route pair and returned True for the whole field, so a
     later unpaired mention in the same field was never inspected —
 
@@ -1248,10 +1903,12 @@ def _field_routes_scotland(text: str) -> bool:
     two-sentence form via its own window, so that shortcut was redundant as well
     as unsound; it is deliberately not reinstated.
     """
-    sents = _sentences(text)
+    sents = _sentences(_route_text(text))
 
     for i, sent in enumerate(sents):
         if not _REPORT_FRAUD_NAMED_RE.search(sent):
+            continue
+        if _report_fraud_advice_only(sent, sents[i + 1:i + 3]):
             continue
         window = [sent] + (sents[i + 1:i + 3])
         served = False
@@ -1320,7 +1977,7 @@ def _clause_around(sent: str, m) -> str:
     return sent
 
 
-def check_cra_exhaustive(post: Dict) -> List[Dict]:
+def check_cra_exhaustive(post: Dict, *, fields=None) -> List[Dict]:
     """Flag credit-agency advice written as if three agencies were all of them.
 
     Experian, Equifax and TransUnion are the three MAIN agencies. A recovery
@@ -1328,7 +1985,7 @@ def check_cra_exhaustive(post: Dict) -> List[Dict]:
     agency that also holds a free statutory report.
     """
     issues: List[Dict] = []
-    for label, text in _route_fields(post):
+    for label, text in (_route_fields(post) if fields is None else fields):
         if not text.strip() or not _CRA_CONTEXT_RE.search(text):
             continue
         # PER SENTENCE. A field-wide qualification check let a correct "three
@@ -1464,7 +2121,7 @@ def check_canon_guards(post: Dict) -> List[Dict]:
                 ("meta description", str(post.get("description") or "")),
                 ("hero", str(post.get("hero") or ""))]
     bodies = [("section body", b) for _, b in (post.get("sections") or [])]
-    bodies += [("FAQ answer", a) for _, a in (post.get("faq") or [])]
+    bodies += [("FAQ answer", a) for _, a in structured.narrative_faq(post)]
 
     # 159 is not free — the caller's provider sets the price (Ofcom/Stop Scams UK).
     for label, text in surfaces + bodies:
@@ -1585,6 +2242,8 @@ def check_quick_answer_present(post: Dict, *, is_hub: bool = False) -> List[Dict
     if corpus_mod.consolidation_map([probe]):
         return []
     qa = post.get("quick_answer")
+    if isinstance(qa, dict) and qa.get('kind') == 'action-summary' and 'reporting_routes' in post:
+        return []  # The closed placement was already checked by validate_page.
     if isinstance(qa, str) and qa.strip():
         return []
     if "quick_answer" not in post:
@@ -1605,10 +2264,35 @@ def check_quick_answer_present(post: Dict, *, is_hub: bool = False) -> List[Dict
 
 
 def check_deterministic(post: Dict, *, is_draft: bool = True,
-                        is_hub: bool = False) -> List[Dict]:
-    # Note: no deterministic domain/URL check — these guides intentionally
-    # contain example scam/lookalike domains, so a domain allowlist is pure
-    # noise here. Domain plausibility is left to the LLM judge.
+                        is_hub: bool = False,
+                        reporting_mode: str = structured.LEGACY_DIAGNOSTIC,
+                        reporting_canon=None, reporting_review=None, reporting_page_id=None) -> List[Dict]:
+    # Field presence always selects strict mode, even when a caller requests
+    # compatibility. A draft cannot downgrade itself through an empty/null plan.
+    try:
+        mode = structured.page_mode(post, reporting_mode)
+        if mode == structured.STRUCTURED_REQUIRED:
+            sources = _CANON if reporting_canon is None else reporting_canon
+            catalog = canon_mod.reporting_catalog(sources,
+                expected_digest=reporting_review.canon_sha256 if isinstance(
+                    reporting_review, structured.ReviewContext) else None)
+            structured.validate_page(post, catalog, reporting_review, page_id=reporting_page_id)
+    except (structured.ReportingError, canon_mod.CanonError) as exc:
+        return [{"check": "structured_reporting", "severity": SEVERITY_BLOCK,
+                 "span": "reporting_routes", "detail": str(exc)}]
+    if mode == structured.STRUCTURED_REQUIRED:
+        # Retain ordinary factual/editorial checks, but never ask legacy prose
+        # parsers to authorise or reconstruct an already structured route.
+        return (check_banned_entities(post) + check_absolutes(post)
+                + check_legislation(post) + check_dated_events(post)
+                + check_cra_misclassification(post) + check_nfd_routing(post)
+                + check_uk_advice_flags(post) + check_recurring_accuracy(post)
+                + check_cra_exhaustive(post, fields=structured.prose_fields(post)) + check_canon_guards(post)
+                + check_text_wellformed(post) + check_unrenderable_markup(post)
+                + check_quick_answer_present(post, is_hub=is_hub)
+                + (check_consolidation_evasion(post) if is_draft else []))
+    # Reporting instructions authenticate their destinations against the canon.
+    # General citations and example scam URLs are not a global URL allowlist.
     return (check_phones(post) + check_shortcodes(post) + check_report_mailboxes(post)
             + check_banned_entities(post)
             + check_absolutes(post) + check_sources(post)
@@ -1621,6 +2305,7 @@ def check_deterministic(post: Dict, *, is_draft: bool = True,
             + check_text_wellformed(post)
             + check_unrenderable_markup(post)
             + check_ncsc_route_scope(post)
+            + check_report_fraud_destinations(post)
             + check_quick_answer_present(post, is_hub=is_hub)
             # Corpus-state assertions a DRAFT may not make about itself. Corpus
             # audits pass is_draft=False, because a live consolidated record
@@ -1797,7 +2482,9 @@ def judge_llm(post: Dict, client, model: str) -> List[Dict]:
 
 def run_gate(post: Dict, client=None, model: Optional[str] = None,
              use_llm: bool = True, corpus: Optional[List[Dict]] = None,
-             is_draft: bool = True, is_hub: bool = False) -> GateResult:
+             is_draft: bool = True, is_hub: bool = False,
+             reporting_mode: str = structured.LEGACY_DIAGNOSTIC,
+             reporting_canon=None, reporting_review=None, reporting_page_id=None) -> GateResult:
     """Run the full gate on a post. PASS unless a blocking issue is found.
 
     Pass `corpus` (the existing posts.json list) to also check the draft for
@@ -1809,12 +2496,33 @@ def run_gate(post: Dict, client=None, model: Optional[str] = None,
 
     `is_hub=True` for category hubs, which are a different surface with a
     different schema — see check_quick_answer_present()."""
-    issues = check_deterministic(post, is_draft=is_draft, is_hub=is_hub)
+    # Publication mode is external to the draft. Diagnostic parsers remain
+    # available through check_deterministic; they cannot grant publication.
+    from reporting_publication import required, review as authenticated_review
+    if required(post, reporting_page_id):
+        reporting_mode = structured.STRUCTURED_REQUIRED
+        try:
+            reporting_review = authenticated_review(post,
+                _CANON if reporting_canon is None else reporting_canon,
+                reporting_review, page_id=reporting_page_id)
+        except (ValueError, OSError, TypeError, KeyError) as exc:
+            return GateResult(slug=post.get('slug', '?'), passed=False,
+                issues=[{"check": "structured_reporting", "severity": SEVERITY_BLOCK,
+                         "span": "publication review", "detail": str(exc)}],
+                reporting_mode=structured.STRUCTURED_REQUIRED)
+    issues = check_deterministic(post, is_draft=is_draft, is_hub=is_hub,
+        reporting_mode=reporting_mode, reporting_canon=reporting_canon,
+        reporting_review=reporting_review, reporting_page_id=reporting_page_id)
     issues += check_similarity(post, corpus)
-    if use_llm and client is not None and model:
+    if use_llm and client is not None and model and not any(
+            i.get('check') == 'structured_reporting' and i.get('severity') == SEVERITY_BLOCK
+            for i in issues):
         issues += judge_llm(post, client, model)
     passed = not any(i.get("severity") == SEVERITY_BLOCK for i in issues)
-    return GateResult(slug=post.get("slug", "?"), passed=passed, issues=issues)
+    mode = (structured.STRUCTURED_REQUIRED if "reporting_routes" in post
+            else reporting_mode)
+    return GateResult(slug=post.get("slug", "?"), passed=passed, issues=issues,
+                      reporting_mode=mode)
 
 
 def quarantine_post(post: Dict, result: GateResult, today: str,
@@ -1830,7 +2538,8 @@ def quarantine_post(post: Dict, result: GateResult, today: str,
         "issues": result.issues,
         "post":   post,
     }
-    path = d / f"{today}-{post.get('slug', 'unknown')}.json"
+    safe_name = hashlib.sha256(json.dumps(post, sort_keys=True, ensure_ascii=False).encode()).hexdigest()
+    path = d / f"quarantine-{safe_name}.json"
     with open(path, "w", encoding="utf-8") as f:
         json.dump(rec, f, indent=2, ensure_ascii=False)
         f.write("\n")

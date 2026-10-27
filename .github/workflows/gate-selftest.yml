@@ -1,10 +1,10 @@
 name: Gate self-test
 
-# Two jobs with different triggers, because they cost different things.
+# Verification jobs run on every candidate; the paid suite remains manual.
 #
 # `offline` runs the deterministic self-tests — routing, canon, hub schema and
 # ad modes. No API key, no network, so it runs AUTOMATICALLY on every push and
-# pull request that touches the gate, the build, the canon or the tests. That is
+# pull request. That is
 # the release property that matters: gate/validator/hub code cannot be merged
 # while its deterministic checks are red or silently skipped (operator review,
 # 2026-07-27 — before then nothing ran these in CI at all).
@@ -13,54 +13,19 @@ name: Gate self-test
 # secret, so it can be exercised without anyone holding the key locally. It
 # spends money, so it stays manual: click "Run workflow" in the Actions tab.
 # Side-effect-free: the self-tests never write posts.json or the quarantine, and
-# neither job commits.
+# no job commits.
 
 on:
   workflow_dispatch:
+  # Always run: the manifest binds the complete candidate input tree.
   push:
-    # Every file that can change what these suites assert. A consolidation-only
-    # change used to miss this workflow entirely — scripts/corpus.py,
-    # corpus_selftest.py, similarity_report.py and content/posts.json were all
-    # absent, so the six-minute job meant to enforce the feature could be
-    # bypassed by editing the feature (operator review, 2026-07-30). Some
-    # partial-migration states are caught by the corpus self-test rather than by
-    # the validator, which makes this filter load-bearing.
-    paths: &selftest_paths
-      - 'scripts/canon.py'
-      - 'scripts/corpus.py'
-      - 'scripts/corpus_selftest.py'
-      - 'scripts/content_gate.py'
-      - 'scripts/build.py'
-      - 'scripts/gate_quickanswer_selftest.py'
-      - 'scripts/hub_selftest.py'
-      - 'scripts/gate_selftest.py'
-      - 'scripts/generate_content_claude.py'
-      - 'scripts/search_console_articles.py'
-      - 'scripts/similarity_report.py'
-      - 'scripts/audit_corpus.py'
-      - 'scripts/fact_reverify.py'
-      - 'scripts/sync_canon_js.py'
-      - 'content/posts.json'
-      - 'content/sources.json'
-      - 'content/category-hubs.json'
-      # Render inputs: a change here alters the built site, so the suites and
-      # the committed dist/ must be re-proved.
-      - 'content/site.json'
-      - 'content/affiliates.json'
-      - 'templates/base.html'
-      - 'assets/app.js'
-      - 'assets/styles.css'
-      - 'netlify/functions/**'
-      # The functions' only runtime dependency. A @netlify/blobs bump changes
-      # what they bundle — including the compare-and-set contract behind every
-      # durable rate limit — but the lockfile was absent here, so PR #107
-      # (10.7.12 -> 10.7.13) reached review with no functions-level CI at all
-      # (operator review, 2026-08-19).
-      - 'package.json'
-      - 'package-lock.json'
-      - '.github/workflows/gate-selftest.yml'
   pull_request:
-    paths: *selftest_paths
+
+env:
+  PYTHONUTF8: '1'
+  TZ: UTC
+  LC_ALL: C
+  LANG: C
 
 permissions:
   contents: read
@@ -68,17 +33,78 @@ permissions:
 jobs:
   offline:
     name: Deterministic self-tests (no API key)
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     steps:
       - name: Checkout
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
 
       - name: Setup Python
         uses: actions/setup-python@6d4fd22b20465ccc0f7354476588e8df7c9ca0e0 # v7.1.0
         with:
-          python-version: '3.12'
+          python-version-file: '.python-version'
+      - name: Setup pinned Node
+        uses: actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38 # v6
+        with:
+          node-version-file: '.nvmrc'
+          package-manager-cache: false
 
-      # Standard library only — these must not depend on requirements resolving.
+      # Only the small structured-host parser dependency; no model SDK or keys.
+      - name: Install structured reporting dependency
+        run: 'python -m pip install --require-hashes --only-binary=:all: -r requirements-reporting.lock'
+
+      - name: Publication adapter and CLI security regressions (offline TEST keys)
+        run: |
+          python -I -B scripts/reporting_workflow_selftest.py
+          python -I -B scripts/reporting_workflow_cli_selftest.py
+
+      - name: Unicode network destination regressions (offline)
+        run: python scripts/reporting_network_selftest.py
+
+      - name: Bounded v2 contract model and semantic binding (offline fake keys)
+        run: |
+          python scripts/reporting_model_extension_selftest.py
+          python scripts/reporting_model_binding_selftest.py
+
+      - name: Bounded composed SMS and authenticated binding (offline TEST keys)
+        run: |
+          python scripts/reporting_composed_sms_selftest.py
+          python scripts/reporting_composed_sms_binding_selftest.py
+
+      - name: Independently confirmed canon fidelity and binding (offline fake keys)
+        run: |
+          python scripts/reporting_confirmed_contracts_selftest.py
+          python scripts/reporting_confirmed_binding_selftest.py
+          python scripts/reporting_eligibility_separation_selftest.py
+
+      - name: Pilot eligibility, signing and exact-artifact regressions (offline fake keys)
+        run: python scripts/reporting_pilot_selftest.py
+
+      - name: Current page-scope consumption regressions (offline fake keys)
+        run: python scripts/reporting_scope_selftest.py
+
+      - name: Run structured reporting infrastructure self-test
+        run: python scripts/reporting_structured_selftest.py
+
+      - name: Restricted actions and authenticated review regressions (offline)
+        run: python scripts/reporting_restricted_selftest.py
+
+      - name: Action capability exclusivity and taxonomy regressions (offline)
+        run: python scripts/reporting_exclusivity_selftest.py
+
+      - name: Run structured security boundary regressions
+        run: python scripts/reporting_security_selftest.py
+
+      - name: Run effective output and offline writer integration regressions
+        run: python scripts/reporting_output_selftest.py
+
+      - name: Reporting provenance and prose approvals (offline)
+        run: python scripts/reporting_provenance_selftest.py
+
+      - name: Bounded R4 dependency, legacy HOLD and parser regressions (offline)
+        run: python scripts/reporting_reconciliation_selftest.py
+
       - name: Run quick-answer, routing and canon self-test
         run: python scripts/gate_quickanswer_selftest.py
 
@@ -97,23 +123,31 @@ jobs:
         run: python scripts/sync_canon_js.py --check
 
       # Pins the inseparable Report Fraud / Police Scotland pair at every input
-      # position. Uses the runner's preinstalled Node and the built-in
-      # node:test runner, so there is no action to pin and no dependency to
-      # install.
+      # position. Uses the pinned Node and its built-in node:test runner.
       - name: Run Netlify Function unit tests
         run: node --test "netlify/functions/lib/*.test.js"
 
   corpus-build:
     name: Corpus consolidation, proved against a real build
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     steps:
       - name: Checkout
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
 
       - name: Setup Python
         uses: actions/setup-python@6d4fd22b20465ccc0f7354476588e8df7c9ca0e0 # v7.1.0
         with:
-          python-version: '3.12'
+          python-version-file: '.python-version'
+      - name: Setup pinned Node
+        uses: actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38 # v6
+        with:
+          node-version-file: '.nvmrc'
+          package-manager-cache: false
+
+      - name: Install structured reporting dependency
+        run: 'python -m pip install --require-hashes --only-binary=:all: -r requirements-reporting.lock'
 
       # Renders the whole site into a TEMP directory and asserts that a
       # consolidated record produces no page, no sitemap/RSS/search/llms.txt
@@ -127,21 +161,77 @@ jobs:
       - name: Fail if the committed dist/ was modified
         run: git diff --exit-code -- dist
 
+  pilot-artifact:
+    name: Protected pilot artifact (holds until public trust enrollment)
+    runs-on: ubuntu-24.04
+    # This is a PUBLIC trust-root digest, not a signing secret. No private key
+    # or deployment credential is available to PR code, including forks.
+    env:
+      BTS_REVIEW_ENVIRONMENT: production
+      BTS_PRODUCTION_TRUST_SHA256: ${{ vars.BTS_PRODUCTION_TRUST_SHA256 }}
+    steps:
+      - name: Checkout verification inputs
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - name: Setup Python
+        uses: actions/setup-python@6d4fd22b20465ccc0f7354476588e8df7c9ca0e0 # v7.1.0
+        with:
+          python-version-file: '.python-version'
+      - name: Setup pinned Node
+        uses: actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38 # v6
+        with:
+          node-version-file: '.nvmrc'
+          package-manager-cache: false
+      - name: Install verification dependency
+        run: 'python -m pip install --require-hashes --only-binary=:all: -r requirements-reporting.lock'
+      - name: Lock-consistent Functions dependencies
+        run: npm ci --ignore-scripts
+      - name: Require measured runtime
+        run: python scripts/reporting_runtime.py
+      - name: Verify approvals and the exact committed artifact
+        run: python scripts/reporting_pilot.py netlify-verify
+
+  preactivation:
+    name: TEST signing and runtime prerequisites
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@6d4fd22b20465ccc0f7354476588e8df7c9ca0e0 # v7.1.0
+        with:
+          python-version-file: '.python-version'
+      - uses: actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38 # v6
+        with:
+          node-version-file: '.nvmrc'
+          package-manager-cache: false
+      - run: 'python -m pip install --require-hashes --only-binary=:all: -r requirements-reporting.lock'
+      - run: python scripts/reporting_runtime.py
+      - run: python scripts/reporting_preflight_selftest.py
+
   llm:
     name: Model-backed gate fixtures (manual, spends API credit)
     if: github.event_name == 'workflow_dispatch'
     needs: offline
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     env:
       ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
     steps:
       - name: Checkout
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
 
       - name: Setup Python
         uses: actions/setup-python@6d4fd22b20465ccc0f7354476588e8df7c9ca0e0 # v7.1.0
         with:
-          python-version: '3.12'
+          python-version-file: '.python-version'
+      - name: Setup pinned Node
+        uses: actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38 # v6
+        with:
+          node-version-file: '.nvmrc'
+          package-manager-cache: false
 
       - name: Install dependencies
         run: pip install -r requirements-claude.txt

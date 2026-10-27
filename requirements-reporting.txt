@@ -1,0 +1,3 @@
+# Structured-mode hostname validation: IDNA 2008 + nontransitional UTS #46.
+# Never substitute the stdlib's IDNA 2003 codec or a permissive fallback.
+idna==3.14
