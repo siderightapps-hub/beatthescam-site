@@ -3,9 +3,9 @@
     "version": "beatthescam-contract-evidence-v3",
     "environment": "production",
     "site": "beatthescam.com",
-    "decision_id": "af4e968ce9dbd5d4fdc59647366f918f",
-    "issued_at": "2026-10-26T09:20:30.155071+00:00",
-    "expires_at": "2026-11-02T09:20:30.155071+00:00",
+    "decision_id": "7ee1e8468919a13f475f035340a6e096",
+    "issued_at": "2026-11-02T15:04:05.549082+00:00",
+    "expires_at": "2026-11-09T15:04:05.549082+00:00",
     "reviewer": "bts-owner-contracts-2026-10-15",
     "claims": {
       "route_id": "own-bank:number-on-bank-card",
@@ -18,5 +18,5 @@
       "evidence_state": "verified-by-contract-reviewer"
     }
   },
-  "signature": "-----BEGIN SSH SIGNATURE-----\nU1NIU0lHAAAAAQAAADMAAAALc3NoLWVkMjU1MTkAAAAge2PaLrwzLg+K7OVpPW5fnk7hvG\ns4hA8OIH8A8Qq5Zc0AAAArYmVhdHRoZXNjYW0tY29udHJhY3QtZXZpZGVuY2UtdjM6cHJv\nZHVjdGlvbgAAAAAAAAAGc2hhNTEyAAAAUwAAAAtzc2gtZWQyNTUxOQAAAEDOW+XyQXf+zz\n2LxdPrHJZtY5Yx9Wo7tXuwwWfBdjZIZby7VJoq4YpzDPDbysWbfLhT+nXNGQUS0h4EVtDE\nziMH\n-----END SSH SIGNATURE-----\n"
+  "signature": "-----BEGIN SSH SIGNATURE-----\nU1NIU0lHAAAAAQAAADMAAAALc3NoLWVkMjU1MTkAAAAge2PaLrwzLg+K7OVpPW5fnk7hvG\ns4hA8OIH8A8Qq5Zc0AAAArYmVhdHRoZXNjYW0tY29udHJhY3QtZXZpZGVuY2UtdjM6cHJv\nZHVjdGlvbgAAAAAAAAAGc2hhNTEyAAAAUwAAAAtzc2gtZWQyNTUxOQAAAEAMVrLfdQL7tA\nF26C73Ya+c8pMw5N5xagz5xHmhojUSAqy+5gwaUPuIiiUzutEUveCowfiUv1ih3dSQ9Gg6\nijMP\n-----END SSH SIGNATURE-----\n"
 }
