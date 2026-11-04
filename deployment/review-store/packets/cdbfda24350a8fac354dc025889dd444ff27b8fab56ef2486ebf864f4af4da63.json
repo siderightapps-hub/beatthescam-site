@@ -3,9 +3,9 @@
     "version": "beatthescam-publication-v4",
     "environment": "production",
     "site": "beatthescam.com",
-    "decision_id": "9e7a0b7b92f07d87a1dd2f405183b817",
-    "issued_at": "2026-10-27T19:00:04.180688+00:00",
-    "expires_at": "2026-11-03T19:00:04.180688+00:00",
+    "decision_id": "8c029db638a9b7f53b092f7e240308eb",
+    "issued_at": "2026-11-03T20:52:23.409761+00:00",
+    "expires_at": "2026-11-10T20:52:23.409761+00:00",
     "reviewer": "bts-owner-context-2026-10-15",
     "scope": "whole-page-context-and-evidence-only",
     "page_id": "hub:phone",
@@ -70,5 +70,5 @@
     "numeric_facts": [],
     "allow_empty": false
   },
-  "signature": "-----BEGIN SSH SIGNATURE-----\nU1NIU0lHAAAAAQAAADMAAAALc3NoLWVkMjU1MTkAAAAgvxvITZVlSh76Oz+WSbdsRjLskI\nIsKQMXvUYaOk3iKV8AAAAlYmVhdHRoZXNjYW0tcHVibGljYXRpb24tdjQ6cHJvZHVjdGlv\nbgAAAAAAAAAGc2hhNTEyAAAAUwAAAAtzc2gtZWQyNTUxOQAAAEC0cX7WxtBsad3C9r9im0\n7qcwkGmRcXEUHKyX442jrpxC7ebCfWEYxd6/VyUa21vOSx3hR55wEpbDQ3ooMatKoJ\n-----END SSH SIGNATURE-----\n"
+  "signature": "-----BEGIN SSH SIGNATURE-----\nU1NIU0lHAAAAAQAAADMAAAALc3NoLWVkMjU1MTkAAAAgvxvITZVlSh76Oz+WSbdsRjLskI\nIsKQMXvUYaOk3iKV8AAAAlYmVhdHRoZXNjYW0tcHVibGljYXRpb24tdjQ6cHJvZHVjdGlv\nbgAAAAAAAAAGc2hhNTEyAAAAUwAAAAtzc2gtZWQyNTUxOQAAAEC9K0PiIL4f2NHNXqXRyy\nAdw8/pdvRxbyBYoX0TcxdU4UmlEAr+99Pf7IoCCdNmUSgRL8DSnssZlsrH7PweVjcD\n-----END SSH SIGNATURE-----\n"
 }
