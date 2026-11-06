@@ -203,9 +203,22 @@ def run(on_fixture=None):
                 with patch.dict(os.environ,{'BTS_PRODUCTION_TRUST_SHA256':t.digest(cfg)}):
                     check('negative','TEST root with matching pin cannot authorize production',lambda:w.verify_data(fixture,trusted),'schema/environment/site')
                 production={k:b for k,b in trusted.items()}
+                context_name=v.sha(p.page_identity({}, 'hub:phone').encode())+'.json'
+                production.pop('deployment/review-store/packets/'+context_name, None)
+                def missing_context_hold():
+                    try:
+                        w.verify_data(production,trusted)
+                    except ValueError as exc:
+                        cause=exc
+                        while cause is not None and not isinstance(cause,FileNotFoundError):
+                            cause=cause.__cause__ or cause.__context__
+                        return (str(exc).startswith('hub gate blocked: Category hub restricted review: authenticated publication review:')
+                                and isinstance(cause,FileNotFoundError) and cause.errno==2
+                                and Path(cause.filename).parts[-2:]==('packets',context_name))
+                    return False
                 pin=t.digest(json.loads(production['deployment/review-store/trust.json']))
                 with patch.dict(os.environ,{'BTS_PRODUCTION_TRUST_SHA256':pin}):
-                    check('negative','real frozen production candidate HOLD',lambda:w.verify_data(production,trusted),'UNESTABLISHED')
+                    check('negative','real frozen production candidate HOLD',missing_context_hold)
                     cfgbad=json.loads(production['deployment/review-store/trust.json']);cfgbad['site']='example.com'
                     production['deployment/review-store/trust.json']=t.canonical(cfgbad)
                     check('negative','production mirror mismatch',lambda:w.verify_data(production,trusted),'externally pinned')
