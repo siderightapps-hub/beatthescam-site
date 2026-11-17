@@ -27,6 +27,11 @@ from __future__ import annotations
 
 import argparse
 import copy
+from contextlib import contextmanager
+import errno
+import os
+import stat
+import subprocess
 import json
 import sys
 import tempfile
@@ -57,6 +62,244 @@ def live_posts() -> list:
     return json.loads((ROOT / "content" / "posts.json").read_text(encoding="utf-8"))
 
 
+def protected_inventory() -> dict:
+    """Canonical input/output bytes plus modes; no Git snapshot reimplementation."""
+    import reporting_pilot as pilot
+
+    result = {}
+    for name in pilot.INPUT_DIRS + ("dist",):
+        base = ROOT / name
+        if not base.exists():
+            continue
+        for rel, digest in pilot.hashes(pilot.tree(base, source=name != "dist")).items():
+            result[name + "/" + rel] = [digest, stat.S_IMODE((base / rel).stat().st_mode)]
+        for directory, dirs, _ in os.walk(base, followlinks=False):
+            if name != "dist":
+                dirs[:] = [d for d in dirs if d != "__pycache__"]
+            path = Path(directory)
+            result[path.relative_to(ROOT).as_posix() + "/"] = [None, stat.S_IMODE(path.stat().st_mode)]
+    for name in pilot.INPUT_FILES:
+        path = ROOT / name
+        result[name] = [pilot.sha(path.read_bytes()), stat.S_IMODE(path.stat().st_mode)]
+    return result
+
+
+@contextmanager
+def corpus_test_review(tmp: Path):
+    """Exactly one inherited hub, two real routes, disposable TEST authority only.
+
+    Never called by --no-build. Canonical reviewer and verification code owns
+    receipts, signatures, contract clearance and page/canon/dependency binding.
+    No release packet, agent, repository copy, Git fixture or production store.
+    """
+    import canon
+    import reporting_eligibility as eligibility
+    import reporting_pilot as pilot
+    import reporting_publication as publication
+    import reporting_reviewer as reviewer
+    import reporting_runtime as runtime
+    import reporting_trust as trust
+
+    def require(name, condition):
+        check(name, condition)
+        if not condition:
+            raise AssertionError(name)
+
+    def outside_repository(path):
+        if (not path.is_absolute() or path.resolve() != path
+                or any(p.is_symlink() for p in (path, *path.parents))
+                or path == ROOT or ROOT in path.parents
+                or any((p / ".git").exists() or (p / ".git").is_symlink()
+                       for p in (path, *path.parents))):
+            raise ValueError("corpus TEST path must be canonical and outside every repository")
+
+    outside_repository(tmp)
+    info = tmp.stat()
+    require("TEST root is owner-only and empty",
+            tmp.name.startswith("bts-corpus-test-") and stat.S_ISDIR(info.st_mode)
+            and info.st_uid == os.getuid() and stat.S_IMODE(info.st_mode) == 0o700
+            and not list(tmp.iterdir()))
+    require("no inherited signing agent", not any(os.environ.get(k)
+            for k in ("SSH_AUTH_SOCK", "SSH_AGENT_PID")))
+    require("canonical fixture modules use this exact source",
+            B.ROOT == publication.ROOT == trust.ROOT == runtime.ROOT == ROOT)
+    before = protected_inventory()
+    previous_env = dict(os.environ)
+    previous_tmp = tempfile.tempdir
+    previous_bytecode = sys.dont_write_bytecode
+    previous_umask = os.umask(0o077)
+    receipts, packets, refusals = {}, {}, {}
+    attempts = 0
+    try:
+        authority, keys_dir, output, scratch, home = (
+            tmp / name for name in ("test-authority", "test-keys", "test-output", "scratch", "home"))
+        for path in (authority, keys_dir, output, scratch, home,
+                     authority / "contracts", authority / "packets"):
+            path.mkdir(mode=0o700)
+            outside_repository(path)
+        os.environ.clear()
+        os.environ.update({k: previous_env[k] for k in
+                           ("PATH", "TZ", "LC_ALL", "LANG", "PYTHONUTF8") if k in previous_env})
+        os.environ.update(BTS_REVIEW_ENVIRONMENT="test", BTS_REVIEW_STORE=str(authority),
+                          HOME=str(home), TMPDIR=str(scratch), PYTHONDONTWRITEBYTECODE="1")
+        tempfile.tempdir = str(scratch)
+        sys.dont_write_bytecode = True
+        require("explicit TEST environment; inherited production settings excluded",
+                trust.environment() == "test" and trust.store() == authority
+                and not any(k in os.environ for k in
+                            ("BTS_RELEASE_PACKET", "BTS_PRODUCTION_TRUST_SHA256",
+                             "SSH_AUTH_SOCK", "SSH_AGENT_PID")))
+        measured = runtime.require(ROOT)
+        posts = trust.read_json(ROOT / "content/posts.json")
+        hubs = trust.read_json(ROOT / "content/category-hubs.json")
+        pages = [("guide:" + p["slug"], p) for p in posts] + [
+            ("hub:" + slug, page) for slug, page in hubs.items()]
+        required = [identity for identity, page in pages if publication.required(page, identity)]
+        require("canonical required() selects exactly hub:phone", required == ["hub:phone"])
+        routes = ["own-bank:number-on-bank-card", "citizens-advice:consumer-advice-english"]
+        phone = hubs["phone"]
+        require("exact inherited phone source and two routes",
+                pilot.sha(trust.read_file(ROOT / "content/category-hubs.json")) ==
+                "973088ed2efd3574434fe3c9e1d7e80df7529ce18939e55766a329c9271bb484"
+                and phone.get("reporting_routes") == routes)
+        sources = canon.load_canon(ROOT / "content/sources.json")
+        eligibility.require_contract_actions(sources, routes)
+
+        keys = {}
+        for role in trust.ROLES:
+            key = keys_dir / ("test-" + role)
+            outside_repository(key)
+            subprocess.run(["ssh-keygen", "-q", "-t", "ed25519", "-N", "", "-f", str(key)],
+                           stdin=subprocess.DEVNULL, capture_output=True, check=True, timeout=15)
+            key.with_suffix(".pub").chmod(0o600)
+            keys[role] = trust.key_path(key)
+        cfg = dict(version="bts-trust/v1", environment="test", site=trust.SITE,
+                   roles={role: [dict(identity="test-corpus-" + role,
+                       public_key=" ".join(trust.read_file(key.with_suffix(".pub")).decode().split()[:2]))]
+                       for role, key in keys.items()},
+                   pilot_page_ids=["hub:phone"],
+                   baseline_sha256=trust.digest(pilot.hashes(pilot.tree(ROOT / "dist"))),
+                   revocations_sha256=trust.digest([]))
+        reviewer.export(authority / "baseline.json", pilot.hashes(pilot.tree(ROOT / "dist")))
+        reviewer.export(authority / "revoked.json", [])
+        reviewer.export(authority / "trust.json", cfg)
+        require("exact TEST enrollment and baseline",
+                trust.config() == cfg and pilot.baseline(cfg) == pilot.hashes(pilot.tree(ROOT / "dist")))
+
+        def issue(role, destination, **fields):
+            nonlocal attempts
+            if role not in ("contracts", "context"):
+                raise ValueError("corpus fixture cannot issue a release")
+            outside_repository(destination)
+            require("TEST confinement before " + role + " signing",
+                    trust.environment() == "test" and trust.config() == cfg
+                    and authority in destination.parents and keys_dir in keys[role].parents
+                    and not destination.exists() and not destination.is_symlink())
+            args = argparse.Namespace(environment="test", role=role, candidate=ROOT,
+                reviewer="test-corpus-" + role, route_id=None, page=None, page_id=None,
+                audience=None, allow_empty=False, artifact=None, expected_receipt_sha256=None,
+                key_file=keys[role], output=destination, test_only=True)
+            for name, value in fields.items():
+                setattr(args, name, value)
+            receipt = reviewer.prepare(args)
+            args.expected_receipt_sha256 = trust.digest(receipt)
+            attempts += 1
+            result = reviewer.issue(args)
+            packet = trust.read_json(destination, protected=True)
+            require("canonical receipt and exported " + role + " packet match",
+                    result["receipt_sha256"] == trust.digest(receipt)
+                    and result["packet_sha256"] == trust.digest(packet)
+                    and packet["body"]["environment"] == "test")
+            receipts[destination.name] = trust.digest(receipt)
+            packets[destination.name] = pilot.sha(trust.read_file(destination, protected=True))
+            return packet
+
+        for route in routes:
+            issue("contracts", eligibility.packet_path(route), route_id=route)
+            require("eligible and signed TEST route " + route,
+                    bool(eligibility.verify_contract_eligibility(sources, route))
+                    and bool(eligibility.verify_contract(sources, route)))
+        require("exact two-route endorsed inventory",
+                eligibility.publication_endorsed_ids(sources) == tuple(sorted(routes)))
+
+        context_path = authority / "packets" / (pilot.sha(b"hub:phone") + ".json")
+        try:
+            publication.review(phone, sources, page_id="hub:phone")
+        except eligibility.s.ReportingError as exc:
+            cause = exc.__cause__
+            require("missing TEST context rejects specifically",
+                    isinstance(cause, FileNotFoundError) and cause.errno == errno.ENOENT
+                    and cause.filename == str(context_path))
+            refusals["missing_context"] = "FileNotFoundError: exact hub:phone packet absent"
+        else:
+            raise AssertionError("missing TEST context accepted")
+        phone_file = output / "phone.json"
+        reviewer.export(phone_file, phone)
+        context = issue("context", context_path, page=phone_file, page_id="hub:phone",
+                        audience=["England", "Wales", "Scotland", "Northern Ireland"])
+        require("complete valid TEST phone context through real review",
+                publication.review(phone, sources, page_id="hub:phone") is not None)
+
+        def refuse(label, packet, reason):
+            try:
+                publication.verify_packet(packet, phone, sources, page_id="hub:phone")
+            except ValueError as exc:
+                require(label, str(exc) == reason)
+                refusals[label] = str(exc)
+            else:
+                raise AssertionError(label + ": expected refusal not observed")
+
+        tampered = copy.deepcopy(context)
+        original = tampered["body"]["decision_id"]
+        tampered["body"]["decision_id"] = ("0" if original[0] != "0" else "1") + original[1:]
+        refuse("tampered TEST signature rejects", tampered, "signature authentication failed")
+        wrong_scope = copy.deepcopy(cfg)
+        wrong_scope["pilot_page_ids"] = ["hub:outside-test-scope"]
+        trust_file = authority / "trust.json"
+        try:
+            outside_repository(trust_file)
+            trust_file.write_bytes(trust.canonical(wrong_scope) + b"\n")
+            refuse("wrong enrolled page scope rejects", context, "page outside enrolled scope")
+        finally:
+            trust_file.write_bytes(trust.canonical(cfg) + b"\n")
+        try:
+            os.environ["BTS_REVIEW_ENVIRONMENT"] = "production"
+            # Even the exact TEST root digest cannot make its schema production.
+            os.environ["BTS_PRODUCTION_TRUST_SHA256"] = trust.digest(cfg)
+            refuse("production refuses TEST authority", context, "trust root schema/environment/site mismatch")
+        finally:
+            os.environ["BTS_REVIEW_ENVIRONMENT"] = "test"
+            os.environ.pop("BTS_PRODUCTION_TRUST_SHA256", None)
+        require("TEST context restored after refusal checks",
+                trust.config() == cfg and publication.review(phone, sources, page_id="hub:phone") is not None)
+        require("only two endorsements and one context; no release output",
+                len(list((authority / "contracts").iterdir())) == 2
+                and list((authority / "packets").iterdir()) == [context_path]
+                and set(packets) == {eligibility.packet_path(r).name for r in routes} | {context_path.name}
+                and attempts == 3)
+        print("CORPUS TEST FIXTURE " + json.dumps(dict(
+            environment="test", pages=required, routes=routes, runtime=measured,
+            receipts=receipts, public_packet_sha256=packets, refusals=refusals,
+            signing_attempts=attempts, release_signatures=0, production_signatures=0,
+            agents_started=0, fixture_root=str(tmp)), sort_keys=True))
+        yield
+    finally:
+        os.environ.clear()
+        os.environ.update(previous_env)
+        tempfile.tempdir = previous_tmp
+        sys.dont_write_bytecode = previous_bytecode
+        os.umask(previous_umask)
+        require("environment and temporary-runtime settings restored",
+                dict(os.environ) == previous_env and tempfile.tempdir == previous_tmp
+                and sys.dont_write_bytecode == previous_bytecode)
+        after = protected_inventory()
+        require("protected source and committed dist bytes/modes unchanged", after == before)
+        print("CORPUS PRESERVATION " + json.dumps(dict(
+            entries=len(before), before_sha256=trust.digest(before), after_sha256=trust.digest(after),
+            signing_attempts=attempts, public_packet_sha256=packets, environment_restored=True,
+            production_signatures=0, release_signatures=0, agents_started=0), sort_keys=True))
+
+
 def build_into(tmp: Path) -> Path:
     """Run the REAL build into a temp directory.
 
@@ -69,13 +312,20 @@ def build_into(tmp: Path) -> Path:
     indexes, redirects, link canonicalisation — is the real thing.
     """
     original_dist, original_og = B.DIST, B.generate_og_image
+    original_bytecode = sys.dont_write_bytecode
+    sys.dont_write_bytecode = True
     try:
-        B.DIST = tmp / "dist"
-        B.generate_og_image = lambda out_path, *a, **k: out_path.write_bytes(b"")
-        B.build()
-        return B.DIST
+        with corpus_test_review(tmp):
+            destination = tmp / "dist"
+            if destination.exists() or destination.is_symlink() or destination.resolve() != destination:
+                raise ValueError("TEST dist must be a fresh canonical child of the disposable root")
+            B.DIST = destination
+            B.generate_og_image = lambda out_path, *a, **k: out_path.write_bytes(b"")
+            B.build()
+            return B.DIST
     finally:
         B.DIST, B.generate_og_image = original_dist, original_og
+        sys.dont_write_bytecode = original_bytecode
 
 
 def run(with_build: bool = True) -> int:
@@ -198,8 +448,8 @@ def run(with_build: bool = True) -> int:
     if not with_build:
         print("\nSKIPPED (--no-build): rendering, index, redirect and internal-link proofs.")
     while with_build:
-      with tempfile.TemporaryDirectory() as td:
-          tmp = Path(td)
+      with tempfile.TemporaryDirectory(prefix="bts-corpus-test-") as td:
+          tmp = Path(td).resolve()
           dist = build_into(tmp)
           committed = ROOT / "dist"
           check("the committed dist/ was not touched",
