@@ -190,6 +190,8 @@ jobs:
       - name: Require measured runtime
         run: python scripts/reporting_runtime.py
       - name: Verify approvals and the exact committed artifact
+        env:
+          COMMIT_REF: ${{ github.sha }}
         run: python scripts/reporting_pilot.py netlify-verify
 
   preactivation:

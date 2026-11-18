@@ -218,8 +218,46 @@ def run_cases():
     check(63,'six unchanged and actually eligible; old pin and new SMS stay held',compatibility)
     def containment():
         root=Path(__file__).resolve().parents[1];cfg=json.loads((root/'deployment/review-store/trust.json').read_text())
-        assert cfg['pilot_page_ids']==['hub:phone'] and json.loads((root/'deployment/review-store/baseline.json').read_text())=={}
-        assert trust.digest(cfg)=='c5edefda52f8c9c9f7f345b217404767dca44b2aad5e8df51ecde9092ff495db'
+        baseline=json.loads((root/'deployment/review-store/baseline.json').read_text())
+        # Independent release pins: do not infer expected authority from the inputs.
+        baseline_pin='059a9dd58ce5c5ef7b3ef7d00d0e6f33d78643298ac34b16fce7f4a2884ef18c'
+        trust_pin='4f3c750ff62b5d6886d66a3d91c1bd1fe8df77dbf52e3692d8be453ea1845735'
+        def assert_authority(current_baseline,current_cfg):
+            assert isinstance(current_baseline,dict) and len(current_baseline)==453, 'S64 baseline shape/count'
+            assert all(isinstance(name,str) and name and isinstance(value,str) and re.fullmatch(r'[0-9a-f]{64}',value)
+                for name,value in current_baseline.items()), 'S64 baseline shape/count'
+            assert trust.digest(current_baseline)==baseline_pin, 'S64 baseline identity'
+            assert isinstance(current_cfg,dict) and current_cfg.get('pilot_page_ids')==['hub:phone'], 'S64 phone scope'
+            assert current_cfg.get('baseline_sha256')==baseline_pin, 'S64 baseline binding'
+            assert trust.digest(current_cfg)==trust_pin, 'S64 trust identity'
+        assert_authority(baseline,cfg)
+        key=next(iter(baseline))
+        changed=dict(baseline);changed[key]=('1' if baseline[key][0]=='0' else '0')+baseline[key][1:]
+        missing=dict(baseline);del missing[key]
+        extra=dict(baseline);assert 's64-unapproved-extra.html' not in extra
+        extra['s64-unapproved-extra.html']='0'*64
+        identity=copy.deepcopy(cfg);identity['roles']['contracts'][0]['identity']='unapproved-reviewer'
+        public_key=copy.deepcopy(cfg)
+        public_key['roles']['contracts'][0]['public_key']=cfg['roles']['context'][0]['public_key']
+        assert public_key['roles']['contracts'][0]['public_key']!=cfg['roles']['contracts'][0]['public_key']
+        negatives=[
+            ('changed baseline value',changed,cfg,'S64 baseline identity'),
+            ('missing baseline entry',missing,cfg,'S64 baseline shape/count'),
+            ('extra baseline entry',extra,cfg,'S64 baseline shape/count'),
+            ('changed authority identity',baseline,identity,'S64 trust identity'),
+            ('changed authority public key',baseline,public_key,'S64 trust identity'),
+            ('changed phone scope',baseline,dict(cfg,pilot_page_ids=['hub:email']),'S64 phone scope'),
+            ('changed baseline binding',baseline,dict(cfg,baseline_sha256='0'*64),'S64 baseline binding'),
+            ('coordinated baseline/trust change',changed,dict(cfg,baseline_sha256=trust.digest(changed)),'S64 baseline identity'),
+        ]
+        for label,bad_baseline,bad_cfg,reason in negatives:
+            try:
+                assert_authority(bad_baseline,bad_cfg)
+            except AssertionError as exc:
+                assert str(exc)==reason, (label,str(exc))
+            else:
+                raise AssertionError('S64 authority mutation accepted: '+label)
+        assert_authority(baseline,cfg)
         hubs=json.loads((root/'content/category-hubs.json').read_text())
         approved=json.loads((root/'scripts/fixtures/wp3c9k_r4_reconciliation.json').read_text())['approved_phone']
         assert s.digest(hubs['phone'])==approved['source_sha256']

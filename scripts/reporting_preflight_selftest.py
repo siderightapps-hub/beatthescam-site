@@ -135,6 +135,8 @@ def worker():
     if '.git' in [x.name for x in root.iterdir()] or not root.parent.name.startswith('bts-g1-test-'):
         raise ValueError('worker requires the isolated disposable candidate')
     runtime.require()
+    test_ids = ['guide:isolated-test-review', 'hub:phone']
+    phone_source = (root/'content/category-hubs.json').read_bytes()
     authority = root.parent/'test-authority'; authority.mkdir(mode=0o700)
     output = root.parent/'test-output'; output.mkdir(mode=0o700)
     os.environ['BTS_REVIEW_STORE'] = str(authority)
@@ -147,7 +149,7 @@ def worker():
         keys[role] = key
     cfg = {'version':'bts-trust/v1','environment':'test','site':t.SITE,
         'roles':{role:[{'identity':'test-'+role,'public_key':' '.join(key.with_suffix('.pub').read_text().split()[:2])}]
-                 for role,key in keys.items()}, 'pilot_page_ids':['guide:isolated-test-review'],
+                 for role,key in keys.items()}, 'pilot_page_ids':list(test_ids),
         'baseline_sha256':'0'*64, 'revocations_sha256':t.digest([])}
     files = v.tree(root/'dist'); base = v.hashes(files)
     cfg['baseline_sha256'] = t.digest(base)
@@ -187,21 +189,44 @@ def worker():
         quick_answer={'kind':'action-summary','route_ids':eligible},
         faq=[{'kind':'action-faq','question_id':'how-to-contact','route_ids':eligible}])
     page['reporting_routes']=eligible
-    posts=t.read_json(root/'content/posts.json');posts.append(page);write(root/'content/posts.json',posts)
+    # Keep the inherited phone source; enroll only these two explicit TEST surfaces.
+    inherited,posts,hubs=v.load_pages(root,['hub:phone'])
+    phone=hubs['phone']
+    assert phone['reporting_routes']==['own-bank:number-on-bank-card',rid]
+    check('fixture inherits exactly the structured phone hub',lambda:list(inherited)==['hub:phone'])
+    posts.append(page);write(root/'content/posts.json',posts)
     page_file=output/'page.json';write(page_file,page)
     identity='guide:'+page['slug']
+    selected,posts,hubs=v.load_pages(root,test_ids)
+    assert list(selected)==test_ids and selected[identity]==page and selected['hub:phone']==phone
+    check('exact two-surface TEST authority',lambda:t.config()['environment']=='test'
+          and t.config()['pilot_page_ids']==test_ids)
+    check('unexpected structured surface without enrollment rejects',
+          lambda:v.load_pages(root,[identity]),'unexpected/missing structured pilot surface')
+    check('missing enrolled structured surface rejects',
+          lambda:v.load_pages(root,test_ids+['guide:missing-test-review']),
+          'unexpected/missing structured pilot surface')
     context_args=args('context',page=page_file,page_id=identity,audience=['England','Wales','Scotland','Northern Ireland'])
     context=sign(context_args)
     context_path=authority/'packets'/(v.sha(identity.encode())+'.json');write(context_path,context)
     check('valid TEST context signature',lambda:bool(p.review(page,sources,context,page_id=identity)))
-    hubs=t.read_json(root/'content/category-hubs.json')
-    files.update(v.render_selected(root,{identity:page},posts,hubs,sources,files))
+    phone_file=output/'phone.json';write(phone_file,phone)
+    phone_context=sign(args('context',page=phone_file,page_id='hub:phone',
+        audience=['England','Wales','Scotland','Northern Ireland'],output=output/'phone-context.json'))
+    phone_context_path=authority/'packets'/(v.sha(b'hub:phone')+'.json')
+    write(phone_context_path,phone_context)
+    check('valid inherited phone TEST context signature',
+          lambda:bool(p.review(phone,sources,phone_context,page_id='hub:phone')))
+    files.update(v.render_selected(root,selected,posts,hubs,sources,files))
+    assert (root/'content/category-hubs.json').read_bytes()==phone_source
     for name,data in files.items():
         path=root/'dist'/name;path.parent.mkdir(parents=True,exist_ok=True);path.write_bytes(data)
     from reporting_workflow_test_support import bind
     revision=bind(root,files)
     release_args=args('release',artifact=root/'dist',candidate_sha=revision['source_commit'])
     release=sign(release_args);data=v.zip_bytes(files)
+    check('TEST release has exactly both enrolled surfaces',
+          lambda:[x['page_id'] for x in release['body']['manifest']['pages']]==test_ids)
     check('A positive exact TEST artifact',lambda:v.verify_test_bundle(release,root,data,source_revision=revision)['deployment_eligible'] is False)
     determinism=equivalent_proof(root,authority,release)
     check('equivalent verification build in two fresh candidates',lambda:determinism['fresh_candidate_copies']==2)
@@ -233,6 +258,10 @@ def worker():
     context_path.unlink()
     check('B missing context approval',lambda:v.verify_test_bundle(release,root,data,source_revision=revision),'No such file')
     write(context_path,context)
+    phone_context_path.unlink()
+    check('B missing inherited phone context approval',
+          lambda:v.verify_test_bundle(release,root,data,source_revision=revision),'No such file')
+    write(phone_context_path,phone_context)
     e.packet_path(rid).unlink()
     check('B missing contract approval',lambda:v.verify_test_bundle(release,root,data,source_revision=revision),'No such file')
     write(e.packet_path(rid),contract)
@@ -355,6 +384,8 @@ def worker():
             check('production CI signing guard',lambda:t.sign(prod_body,keys['contracts'],'contracts',e.VERSION),'forbidden')
         check('confirmation guard tests create no production signature',lambda:not ssh.called)
     check('test result never deployment authority',lambda:not v.verify_test_bundle(release,root,data,source_revision=revision)['deployment_eligible'])
+    check('inherited phone source bytes remain unchanged',
+          lambda:(root/'content/category-hubs.json').read_bytes()==phone_source)
     return {'passed':sum(r['ok'] for r in rows),'total':len(rows),'failures':[r for r in rows if not r['ok']],
             'cases':rows,'artifact_sha256':v.sha(data),'output_files':v.hashes(files),'runtime':runtime.require(),
             'agent_rehearsal':agent_result,'determinism':determinism,
