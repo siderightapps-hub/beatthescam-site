@@ -2095,7 +2095,7 @@
       ],
       [
         "Why these scams are convincing",
-        "Financial difficulty is stressful, and a confident caller offering a quick fix can feel like relief. References to a \"government scheme\" or legal-sounding terms make the pitch feel official, and the promise of writing off most of your debt is exactly what someone struggling wants to hear.\n\nThe fact that protects you: free debt advice is available in the UK from organisations such as StepChange, from National Debtline in England and Wales, and from other advisers listed through MoneyHelper's debt advice locator. A firm charging a large upfront fee before giving any real help is a serious warning sign."
+        "Financial difficulty is stressful, and a confident caller offering a quick fix can feel like relief. References to a \"government scheme\" or legal-sounding terms make the pitch feel official, and the promise of writing off most of your debt is exactly what someone struggling wants to hear.\n\nThe fact that protects you: free debt advice is available in the UK from organisations such as StepChange, from National Debtline in England, Wales and Scotland, and from other advisers listed through MoneyHelper's debt advice locator. A firm charging a large upfront fee before giving any real help is a serious warning sign."
       ],
       [
         "Signs a debt relief offer is a scam",
@@ -2107,7 +2107,7 @@
       ],
       [
         "How to find genuine debt help",
-        "Free debt advice is available in the UK - you do not need to pay an upfront fee just to get started.\n\n- Contact a free debt-advice organisation such as StepChange, or National Debtline if you are in England or Wales, before speaking to any company that contacted you.\n- Use MoneyHelper's debt advice locator if you need help finding free debt advice.\n- Check that any debt management or advice firm is authorised by the FCA and has permission for the service it is offering.\n- Be very wary of a large upfront fee, a vague \"government scheme\" claim, or pressure to sign quickly.\n- Understand any solution's real effect on your credit file and legal position before agreeing to anything.\n- Get independent advice before signing a debt management plan, IVA, or similar arrangement.\n\nIf you are unsure whether a linked site is genuine, our guide on /guides/is-this-website-a-scam/ helps, and our /guides/iva-scam-uk/ guide covers fake insolvency-related offers in more detail."
+        "Free debt advice is available in the UK - you do not need to pay an upfront fee just to get started.\n\n- Contact a free debt-advice organisation such as StepChange, or National Debtline if you are in England, Wales or Scotland, before speaking to any company that contacted you.\n- Use MoneyHelper's debt advice locator if you need help finding free debt advice.\n- Check that any debt management or advice firm is authorised by the FCA and has permission for the service it is offering.\n- Be very wary of a large upfront fee, a vague \"government scheme\" claim, or pressure to sign quickly.\n- Understand any solution's real effect on your credit file and legal position before agreeing to anything.\n- Get independent advice before signing a debt management plan, IVA, or similar arrangement.\n\nIf you are unsure whether a linked site is genuine, our guide on /guides/is-this-website-a-scam/ helps, and our /guides/iva-scam-uk/ guide covers fake insolvency-related offers in more detail."
       ],
       [
         "If you have already paid a fee",
@@ -2121,7 +2121,7 @@
     "faq": [
       [
         "Is all debt help paid for, or is free advice available?",
-        "Free debt advice is available in the UK from organisations such as StepChange, from National Debtline in England and Wales, and from others listed through MoneyHelper's debt advice locator. You do not need to pay an upfront fee just to get started or receive advice."
+        "Free debt advice is available in the UK from organisations such as StepChange, from National Debtline in England, Wales and Scotland, and from others listed through MoneyHelper's debt advice locator. You do not need to pay an upfront fee just to get started or receive advice."
       ],
       [
         "A company says it can write off most of my debt through a 'government scheme' - is that real?",
@@ -2150,7 +2150,7 @@
       "report debt relief scam",
       "debt management scam warning signs"
     ],
-    "updated": "2026-07-30",
+    "updated": "2026-11-20",
     "sources_checked": [
       [
         "GOV.UK — Get free debt advice",
@@ -2171,6 +2171,10 @@
       [
         "MoneyHelper — Debt advice locator",
         "https://www.moneyhelper.org.uk/en/money-troubles/dealing-with-debt/debt-advice-locator"
+      ],
+      [
+        "National Debtline — Who we are (England, Wales and Scotland)",
+        "https://nationaldebtline.org/about-us/who-we-are/"
       ]
     ],
     "quick_answer": "A cold call promising to wipe most of your debt through a 'government scheme' for an upfront fee is a scam. Free debt advice is available from StepChange, or through MoneyHelper's debt advice locator, so never pay just to get started. Check any firm is FCA-authorised before signing, and report scams to Report Fraud or Police Scotland on 101."
@@ -3535,7 +3539,7 @@
       ],
       [
         "The Halifax-to-Lloyds brand change: a new hook for scammers",
-        "Halifax is being rebranded as Lloyds: announced on 1 July 2026, closed to new customers since 16 July 2026, with existing customers moved to the Lloyds app and rebranded accounts in stages over the coming months. Sort codes, account numbers, cards, PINs and payments carry on unchanged.\n\nFraudsters exploit announcements like this with urgent texts: \"confirm your details for the switch\", \"re-register for the Lloyds app\". Halifax says it will only contact customers about the transition by email, letter or a banking message - it will not call or text you about it, will not ask you to log in through a link or QR code, and will not ask for your PIN.\n\nSo a text about the change that asks you to tap, log in, verify or move money is a scam. Customers who have already moved approve Halifax-card payments in the Lloyds app - type `halifax.co.uk` yourself for the current instructions."
+        "Halifax is being rebranded as Lloyds: announced on 1 July 2026, with existing customers moved to the Lloyds app and rebranded accounts in stages over the coming months. Sort codes, account numbers, cards, PINs and payments carry on unchanged.\n\nFraudsters exploit announcements like this with urgent texts: \"confirm your details for the switch\", \"re-register for the Lloyds app\". Halifax says it will only contact customers about the transition by email, letter or a banking message - it will not call or text you about it, will not ask you to log in through a link or QR code, and will not ask for your PIN.\n\nSo a text about the change that asks you to tap, log in, verify or move money is a scam. Customers who have already moved approve Halifax-card payments in the Lloyds app - type `halifax.co.uk` yourself for the current instructions."
       ],
       [
         "Signs a Halifax text is a scam",
@@ -3590,7 +3594,7 @@
       "Halifax security alert text",
       "report Halifax scam text"
     ],
-    "updated": "2026-08-06",
+    "updated": "2026-11-20",
     "sources_checked": [
       [
         "Halifax — Latest scams and the Halifax-to-Lloyds brand change",
@@ -12019,7 +12023,7 @@
     "sections": [
       [
         "TSB publishes one set of checks for email and different advice for texts",
-        "The two are routinely run together and that is how people reach the wrong answer. TSB's published SMS advice contains no identifier that marks a text as genuine. What it does say is that scam texts often carry spelling and grammar mistakes, that links may take you to a website built to steal your details, and that you should not reply or click on anything.\n\nSo the test for a text is behavioural rather than forensic. Treat a message as unverified whenever it arrives unexpectedly, carries a link, manufactures a deadline, or asks for security information — something along the lines of `TSB: a payment of £450 is pending. Cancel now: tsb-secure-login.example`, which is an illustration rather than a real campaign. Then settle it independently, away from the message: open the TSB app yourself, or go through an official contact route you already hold, such as the number printed on the back of your card.\n\nOne aside, clearly labelled because it is the part most often misapplied. TSB does publish identifiers for its genuine emails: it says an email will greet you personally by name and will include the last four digits of your TSB current account number, the last four digits of another TSB product you hold, or the last three digits of your postcode, and that its email addresses end in `tsb.co.uk`. Those are email checks. A text is not fraudulent merely because it lacks them, and finding something that looks like one inside a text proves nothing either way."
+        "The two are routinely run together and that is how people reach the wrong answer. TSB's published SMS advice contains no identifier that marks a text as genuine. What it does say is that scam texts often carry spelling and grammar mistakes, that links may take you to a website built to steal your details, and that you should not reply or click on anything.\n\nSo the test for a text is behavioural rather than forensic. Treat a message as unverified whenever it arrives unexpectedly, carries a link, manufactures a deadline, or asks for security information — something along the lines of `TSB: a payment of £450 is pending. Cancel now: tsb-secure-login.example`, which is an illustration rather than a real campaign. Then settle it independently, away from the message: open the TSB app yourself, or go through an official contact route you already hold, such as the number printed on the back of your card.\n\nOne aside, clearly labelled because it is the part most often misapplied. TSB does publish identifiers for its genuine emails: it says an email will greet you personally by name and will include the last four digits of your TSB current account number, the last four digits of another TSB product you hold, or the last three characters of your postcode, and that its email addresses end in `tsb.co.uk`. Those are email checks. A text is not fraudulent merely because it lacks them, and finding something that looks like one inside a text proves nothing either way."
       ],
       [
         "What TSB says a fraudster asks for",
@@ -12053,7 +12057,7 @@
       ],
       [
         "How do I tell a genuine TSB message from a fake?",
-        "TSB publishes its name and partial-account/postcode checks for email, not SMS. For texts, it warns about spelling or grammar errors and links that may steal details, and says not to reply or click. Check the TSB app independently, forward a suspicious text to `7726`, and send TSB a screenshot at `emailscams@tsb.co.uk`."
+        "TSB publishes its name and partial-account/postcode checks for email, not SMS. For texts, it warns about spelling or grammar errors and links that may steal details, and says not to reply or click. Check the TSB app independently. In the UK, forward a suspicious text to `7726` to report it to your mobile provider, and send TSB a screenshot at `emailscams@tsb.co.uk`."
       ],
       [
         "Someone rang claiming to be the TSB fraud team — how do I check?",
@@ -12074,7 +12078,7 @@
       "report tsb scam text",
       "tsb suspicious activity text"
     ],
-    "updated": "2026-08-06",
+    "updated": "2026-11-20",
     "sources_checked": [
       [
         "TSB — How to recognise fraud (email identifiers, separate SMS advice, screenshots to emailscams@tsb.co.uk)",
@@ -12095,6 +12099,10 @@
       [
         "Cifas — Protective Registration",
         "https://www.cifas.org.uk/pr"
+      ],
+      [
+        "TSB — Keeping your account safe (email postcode characters)",
+        "https://www.tsb.co.uk/content/dam/tsb-public/documents/fraud-prevention-centre/TSB11033_Web-keeping-your-account-safe.pdf"
       ]
     ],
     "quick_answer": "Treat an unexpected TSB text containing a link or requesting security details as unverified. Do not reply or tap it; open TSB's app, forward the text to `7726`, and email a screenshot to `emailscams@tsb.co.uk`. A text asking for your PIN or full security information, or telling you to move money to a \"safe account\", is fraudulent."
