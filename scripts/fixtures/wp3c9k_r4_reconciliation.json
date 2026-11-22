@@ -2,7 +2,7 @@
   "schema": "wp3c9k-r4-hold-regressions/v1",
   "scope": "Diagnostic preservation and fail-closed checks only; no structured semantic resolution or production approval",
   "source_dependencies": {
-    "content/posts.json": "c8f522a63499d7b4225e9d3fcea69396b81d49135bbc3ebcefa21bfebe7f189e",
+    "content/posts.json": "a09ca1047ee454442c8a04dfd3205755d2fde0dadd5b92912b8ecb6dcaf714dc",
     "content/category-hubs.json": "973088ed2efd3574434fe3c9e1d7e80df7529ce18939e55766a329c9271bb484",
     "content/sources.json": "ed9c5a4355c24be151e06cf038ed9423e3858173a130a19e43e559583579f8d2"
   },
