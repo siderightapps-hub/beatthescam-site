@@ -1,178 +1,317 @@
 #!/usr/bin/env python3
-"""Submit added, changed, and removed public URLs through IndexNow.
+"""Plan one IndexNow batch for an observed production publication or restore.
 
-The build already publishes the stable verification key. This script computes
-the URL delta between a Git ref and the current checkout, then sends one batch
-to the shared IndexNow endpoint. It has no third-party dependencies.
+The command line has no live adapter. The guard accepts no caller-supplied deploy,
+manifest, publication flag, credential, URL list or endpoint. Its external boundary
+is exercised only by offline tests. Normalized fields below are interface contracts,
+not a claim that Netlify exposes a publication journal or maintenance-window lock.
+
+A future adapter must obtain the owner decision and pre-publish site observation
+from the attributable, exclusive release window. It must independently read the
+pinned Git repository's immutable objects and the complete published artifact of
+each exact Netlify deploy. A local build, unverified ZIP or bare commit label is
+insufficient. Each authenticated read must either be complete or raise. Unknown
+history, partial artifacts, uncertain lock semantics or inability to maintain
+exclusivity through submission must keep the command on HOLD.
 """
 
-from __future__ import annotations
-
 import argparse
-import json
+import hashlib
+import io
 import re
-import subprocess
+import stat
 import sys
-import time
-from pathlib import Path
-from urllib.error import HTTPError, URLError
-from urllib.request import Request, urlopen
+import zipfile
+from dataclasses import dataclass
+from html.parser import HTMLParser
 
-
-ROOT = Path(__file__).resolve().parents[1]
 HOST = "beatthescam.com"
 ORIGIN = f"https://{HOST}"
 KEY = "b3c8e1f2a94d7056"
 KEY_LOCATION = f"{ORIGIN}/{KEY}.txt"
-DEFAULT_ENDPOINT = "https://api.indexnow.org/indexnow"
+ENDPOINT = "https://api.indexnow.org/indexnow"
+SITE = "ce7e926f-9b1a-416b-81a2-4c8ac114a5e6"
+REPOSITORY = "siderightapps-hub/beatthescam-site"
+MAX_URLS = 10_000
+MAX_ARCHIVE = 128 * 1024 * 1024
+READ_AGE = 60
+WINDOW_AGE = 900
 
 
-def git(*args: str) -> subprocess.CompletedProcess[str]:
-    return subprocess.run(
-        ["git", *args], cwd=ROOT, text=True, capture_output=True, check=False
-    )
+class Hold(Exception):
+    """No submission was authorized by the guard."""
 
 
-def posts_at(ref: str | None) -> dict[str, dict]:
-    if ref:
-        result = git("show", f"{ref}:content/posts.json")
-        if result.returncode != 0:
-            return {}
-        raw = result.stdout
-    else:
-        raw = (ROOT / "content" / "posts.json").read_text(encoding="utf-8")
-    try:
-        return {p["slug"]: p for p in json.loads(raw) if p.get("slug")}
-    except (json.JSONDecodeError, TypeError, KeyError):
-        return {}
+class Indeterminate(Exception):
+    """A request was attempted. Its disposition needs independent reconciliation."""
 
 
-def public_signature(post: dict) -> str:
-    """Ignore bookkeeping fields that cannot change the rendered guide."""
-    omitted = {"manifest", "review_notes"}
-    return json.dumps(
-        {k: v for k, v in post.items() if k not in omitted},
-        sort_keys=True,
-        ensure_ascii=False,
-    )
+def require(condition, message):
+    if not condition:
+        raise Hold(message)
 
 
-def html_path_to_url(path: str) -> str | None:
-    if not path.startswith("dist/") or not path.endswith(".html"):
-        return None
-    relative = path.removeprefix("dist/")
-    if relative == "index.html":
+@dataclass(frozen=True)
+class Target:
+    deploy: str
+    commit: str
+
+
+@dataclass(frozen=True)
+class SiteRead:
+    site: str
+    domain: str
+    repository: str
+    published: Target
+    locked: bool
+    at: int
+
+
+@dataclass(frozen=True)
+class DeployRead:
+    site: str
+    target: Target
+    context: str
+    branch: str
+    state: str
+    at: int
+
+
+@dataclass(frozen=True)
+class Decision:
+    site: str
+    before: Target
+    after: Target
+    at: int
+    expires: int
+
+
+@dataclass(frozen=True)
+class Publication:
+    before: Target
+    after: Target
+    at: int
+
+
+def timestamp(value):
+    return type(value) is int and value > 0
+
+
+def fresh(value, now, limit):
+    return timestamp(value) and timestamp(now) and 0 <= now - value <= limit
+
+
+def valid_target(target):
+    return (isinstance(target, Target)
+            and isinstance(target.deploy, str) and re.fullmatch("[0-9a-f]{24}", target.deploy)
+            and isinstance(target.commit, str) and re.fullmatch("[0-9a-f]{40}", target.commit)
+            and target.commit != "0" * 40 and target.deploy != "0" * 24)
+
+
+def site_matches(read, target):
+    return (isinstance(read, SiteRead) and read.site == SITE and read.domain == HOST
+            and read.repository == REPOSITORY and read.published == target
+            and type(read.locked) is bool)
+
+
+def check_publication(boundary, window, capture, decision):
+    """The boundary reads the fixed site/deploys, never a caller-selected URL."""
+    window.require_exclusive()
+    require(window.capture == capture and window.decision == decision, "window changed")
+    require(isinstance(decision, Decision) and decision.site == SITE
+            and valid_target(decision.before) and valid_target(decision.after)
+            and decision.before.deploy != decision.after.deploy, "owner decision")
+    require(site_matches(capture, decision.before), "prepublication observation")
+    site = boundary.site(SITE)
+    require(site_matches(site, decision.after) and site.locked is False, "published pointer or lock")
+    for target in (decision.before, decision.after):
+        deploy = boundary.deploy(SITE, target.deploy)
+        require(isinstance(deploy, DeployRead) and deploy.site == SITE and deploy.target == target
+                and (deploy.context, deploy.branch, deploy.state) == ("production", "main", "ready")
+                and fresh(deploy.at, boundary.now(), READ_AGE), "production deploy identity or state")
+
+    # Complete ordered production pointer transitions since capture. An adapter
+    # with only a build list or last-published timestamp must refuse this read.
+    events = boundary.publications(SITE, capture.at, site.at)
+    require(isinstance(events, tuple) and len(events) == 1, "predecessor not established")
+    event = events[0]
+    now = boundary.now()
+    require(fresh(site.at, now, READ_AGE) and fresh(capture.at, now, WINDOW_AGE)
+            and fresh(decision.at, now, WINDOW_AGE) and timestamp(decision.expires)
+            and decision.at <= site.at <= now < decision.expires, "stale or ambiguous window")
+    require(isinstance(event, Publication) and timestamp(event.at)
+            and (event.before, event.after) == (decision.before, decision.after)
+            and capture.at < event.at <= decision.at, "wrong publication transition")
+    window.require_exclusive()
+    return event, site.at
+
+
+def object_id(kind, raw):
+    return hashlib.sha1(kind + b" " + str(len(raw)).encode("ascii") + b"\0" + raw).hexdigest()
+
+
+def object_bytes(boundary, kind, oid):
+    actual_kind, raw = boundary.git_object(REPOSITORY, oid)
+    require(actual_kind == kind and type(raw) is bytes and object_id(kind, raw) == oid,
+            "immutable Git object mismatch")
+    return raw
+
+
+def safe_name(name):
+    require(re.fullmatch(r"[A-Za-z0-9._~-]+", name) and name not in (".", "..")
+            and name.lower() != ".git", "unsafe path component")
+
+
+def tree_entries(raw):
+    pos = 0
+    seen = set()
+    while pos < len(raw):
+        space = raw.index(b" ", pos)
+        end = raw.index(b"\0", space + 1)
+        mode = raw[pos:space]
+        name = raw[space + 1:end].decode("ascii")
+        safe_name(name)
+        require(name.lower() not in seen and end + 21 <= len(raw), "ambiguous Git tree")
+        seen.add(name.lower())
+        yield mode, name, raw[end + 1:end + 21].hex()
+        pos = end + 21
+
+
+def dist_tree(boundary, revision):
+    commit = object_bytes(boundary, b"commit", revision)
+    header, separator, _ = commit.partition(b"\n\n")
+    roots = [line[5:] for line in header.splitlines() if line.startswith(b"tree ")]
+    require(separator and len(roots) == 1 and re.fullmatch(b"[0-9a-f]{40}", roots[0]),
+            "missing or ambiguous commit tree")
+    root = object_bytes(boundary, b"tree", roots[0].decode("ascii"))
+    dist = [oid for mode, name, oid in tree_entries(root) if name == "dist" and mode == b"40000"]
+    require(len(dist) == 1, "missing dist tree")
+    files = {}
+    pending = [("", dist[0])]
+    entries_seen = 0
+    while pending:
+        prefix, oid = pending.pop()
+        for mode, name, child in tree_entries(object_bytes(boundary, b"tree", oid)):
+            entries_seen += 1
+            path = prefix + name
+            require(entries_seen <= 50_000 and len(path) <= 2048, "oversized dist inventory or path")
+            if mode == b"40000":
+                pending.append((path + "/", child))
+            else:
+                require(mode in (b"100644", b"100755"), "unsafe dist entry type")
+                files[path] = child
+    return files
+
+
+class Robots(HTMLParser):
+    noindex = False
+
+    def handle_starttag(self, tag, attrs):
+        if tag != "meta":
+            return
+        attributes = dict(attrs)
+        name = (attributes.get("name") or "").strip().lower()
+        if name in ("robots", "bingbot", "googlebot") or any(
+                k == "name" and (v or "").strip().lower() in ("robots", "bingbot", "googlebot")
+                for k, v in attrs):
+            require(len(attrs) == len(attributes) and isinstance(attributes.get("content"), str),
+                    "ambiguous robots directive")
+            tokens = re.split(r"[\s,]+", attributes["content"].strip().lower())
+            self.noindex |= bool({"noindex", "none"}.intersection(tokens))
+
+
+def public_url(path):
+    if path == "index.html":
         return ORIGIN + "/"
-    if relative == "404.html":
-        return None
-    if relative.endswith("/index.html"):
-        return ORIGIN + "/" + relative.removesuffix("index.html")
-    return ORIGIN + "/" + relative
+    if path.endswith("/index.html"):
+        return ORIGIN + "/" + path[:-len("index.html")]
+    return ORIGIN + "/" + path
 
 
-def changed_urls(before: str) -> list[str]:
-    urls: set[str] = set()
-    old_posts = posts_at(before)
-    new_posts = posts_at(None)
-    for slug in sorted(set(old_posts) | set(new_posts)):
-        old = old_posts.get(slug)
-        new = new_posts.get(slug)
-        if old is None or new is None or public_signature(old) != public_signature(new):
-            urls.add(f"{ORIGIN}/guides/{slug}/")
+def published_html(boundary, target):
+    """Bind an independent, complete, deploy-specific archive to the exact Git dist tree."""
+    expected = dist_tree(boundary, target.commit)
+    archive = boundary.published_archive(SITE, target.deploy)
+    require(type(archive) is bytes and len(archive) <= MAX_ARCHIVE, "missing or oversized artifact")
+    seen = set()
+    pages = {}
+    with zipfile.ZipFile(io.BytesIO(archive)) as z:
+        entries = z.infolist()
+        require(len(entries) == len(expected) and sum(e.file_size for e in entries) <= MAX_ARCHIVE,
+                "incomplete or oversized artifact inventory")
+        for e in entries:
+            path = e.orig_filename
+            require(path == e.filename and path in expected and path not in seen
+                    and stat.S_ISREG(e.external_attr >> 16) and not e.flag_bits & 1,
+                    "unexpected, duplicate or unsafe artifact entry")
+            seen.add(path)
+            data = z.read(e)
+            require(object_id(b"blob", data) == expected[path], "published artifact differs from Git")
+            if path == f"{KEY}.txt":
+                require(data in (KEY.encode(), (KEY + "\n").encode(), (KEY + "\r\n").encode()),
+                        "public verification key bytes")
+            if path.endswith(".html") and path != "404.html":
+                parser = Robots()
+                parser.feed(data.decode("utf-8"))
+                parser.close()
+                pages[public_url(path)] = (expected[path], not parser.noindex)
+    require(seen == set(expected) and f"{KEY}.txt" in seen, "incomplete artifact or missing key")
+    return pages
 
-    result = git("diff", "--name-status", before, "HEAD", "--", "dist")
-    if result.returncode == 0:
-        for line in result.stdout.splitlines():
-            columns = line.split("\t")
-            if len(columns) < 2:
-                continue
-            status, path = columns[0], columns[-1]
-            url = html_path_to_url(path)
-            if not url:
-                continue
-            # Deleted URLs must be submitted so engines discover the redirect
-            # or removal. Existing noindex pages are intentionally omitted.
-            local = ROOT / path
-            if not status.startswith("D") and local.exists():
-                text = local.read_text(encoding="utf-8", errors="replace")
-                if re.search(r'<meta[^>]+name="robots"[^>]+content="noindex', text, re.I):
-                    continue
-            urls.add(url)
 
+def delta(before, after):
+    # A newly noindex page is excluded. A genuinely removed page is submitted
+    # only if it was public before the transition.
+    urls = {url for url, entry in after.items() if entry[1] and before.get(url) != entry}
+    urls.update(url for url, entry in before.items() if entry[1] and url not in after)
+    require(len(urls) <= MAX_URLS and all(len(url.encode("ascii")) <= 2048 for url in urls),
+            "invalid or oversized URL batch")
     return sorted(urls)
 
 
-def all_sitemap_urls() -> list[str]:
-    text = (ROOT / "dist" / "sitemap.xml").read_text(encoding="utf-8")
-    return sorted(set(re.findall(r"<loc>(https://beatthescam\.com/[^<]*)</loc>", text)))
+class ClosedBoundary:
+    def controlled_window(self):
+        raise Hold("authenticated release window, provider evidence and submission adapter unavailable")
 
 
-def submit(urls: list[str], endpoint: str, attempts: int = 3) -> None:
-    if len(urls) > 10_000:
-        raise ValueError("IndexNow accepts at most 10,000 URLs per request")
-    payload = json.dumps({
-        "host": HOST,
-        "key": KEY,
-        "keyLocation": KEY_LOCATION,
-        "urlList": urls,
-    }).encode("utf-8")
-    request = Request(
-        endpoint,
-        data=payload,
-        headers={"Content-Type": "application/json; charset=utf-8", "User-Agent": "BeatTheScam-IndexNow/1.0"},
-        method="POST",
-    )
-    for attempt in range(1, attempts + 1):
-        try:
-            with urlopen(request, timeout=30) as response:
-                if response.status not in (200, 202):
-                    raise RuntimeError(f"unexpected IndexNow status {response.status}")
-                print(f"IndexNow accepted {len(urls)} URL(s) with HTTP {response.status}")
-                return
-        except HTTPError as exc:
-            retryable = exc.code == 429 or 500 <= exc.code < 600
-            if not retryable or attempt == attempts:
-                raise RuntimeError(f"IndexNow returned HTTP {exc.code}") from exc
-        except URLError as exc:
-            if attempt == attempts:
-                raise RuntimeError(f"IndexNow request failed: {exc.reason}") from exc
-        time.sleep(5 * attempt)
+def notify(boundary, dry_run=False):
+    """Only the test boundary can reach the recorder. No live transport is shipped."""
+    attempted = False
+    try:
+        with boundary.controlled_window() as window:
+            capture, decision = window.capture, window.decision
+            event, first_read = check_publication(boundary, window, capture, decision)
+            before = published_html(boundary, decision.before)
+            after = published_html(boundary, decision.after)
+            urls = delta(before, after)
+            if not urls or dry_run:
+                return urls
+            payload = {"host": HOST, "key": KEY, "keyLocation": KEY_LOCATION, "urlList": urls}
+            final_event, final_read = check_publication(boundary, window, capture, decision)
+            require(final_event == event and final_read >= first_read, "publication evidence changed")
+            attempted = True
+            status = boundary.post(ENDPOINT, payload)
+            if status not in (200, 202):
+                raise Indeterminate("submission attempted; reconcile independently")
+            return urls
+    except Exception as exc:
+        if attempted:
+            raise Indeterminate("submission attempted; reconcile independently") from None
+        if isinstance(exc, Hold):
+            raise
+        raise Hold("missing, malformed or unavailable authenticated evidence") from None
 
 
-def main() -> int:
-    parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--before", help="Git ref immediately before the deployed change")
-    parser.add_argument("--all", action="store_true", help="Submit every current sitemap URL")
-    parser.add_argument("--dry-run", action="store_true", help="Print URLs without notifying IndexNow")
-    parser.add_argument("--endpoint", default=DEFAULT_ENDPOINT)
-    args = parser.parse_args()
-
-    if args.all:
-        urls = all_sitemap_urls()
-    elif args.before:
-        # GitHub sends the all-zero SHA for "before" on a push that creates a
-        # branch (no prior commit exists) — not an error, just nothing to diff.
-        if set(args.before) <= {"0"}:
-            print("No prior commit (branch creation) — nothing to diff, skipping")
-            return 0
-        if git("cat-file", "-e", f"{args.before}^{{commit}}").returncode != 0:
-            # A genuinely unreachable ref (rewritten history, force-push) — degrade to
-            # notifying nothing rather than failing the whole job silently on every
-            # push until someone happens to check the Actions tab (found 2026-08-27).
-            print(f"Before-ref is unavailable: {args.before} — skipping this delta", file=sys.stderr)
-            return 0
-        urls = changed_urls(args.before)
-    else:
-        parser.error("provide --before or --all")
-
-    if not urls:
-        print("No public URL changes to submit")
-        return 0
-    if args.dry_run:
-        print("\n".join(urls))
-        print(f"Dry run: {len(urls)} URL(s)")
-        return 0
-    submit(urls, args.endpoint)
+def main(argv=None):
+    parser = argparse.ArgumentParser(description="Guarded post-publication IndexNow notification",
+                                     allow_abbrev=False)
+    parser.add_argument("--dry-run", action="store_true", help="report only")
+    args = parser.parse_args(argv)
+    try:
+        notify(ClosedBoundary(), dry_run=args.dry_run)
+    except Hold as exc:
+        print(f"HOLD: {exc}", file=sys.stderr)
+        return 2
     return 0
 
 

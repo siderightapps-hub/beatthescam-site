@@ -1,42 +1,28 @@
-name: Notify IndexNow
+name: IndexNow publication safety
 
 on:
   push:
-    branches: [main]
     paths:
-      - 'content/posts.json'
-      - 'dist/**'
+      - '.github/workflows/indexnow.yml'
+      - 'scripts/submit_indexnow.py'
+      - 'scripts/submit_indexnow_selftest.py'
+  pull_request:
+    paths:
+      - '.github/workflows/indexnow.yml'
+      - 'scripts/submit_indexnow.py'
+      - 'scripts/submit_indexnow_selftest.py'
 
 permissions:
   contents: read
 
-concurrency:
-  group: indexnow
-  cancel-in-progress: false
-
 jobs:
-  notify:
+  regression:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout deployed revision
-        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
-          # Full history, not the last 2 commits: a squash-merge can leave
-          # github.event.before unreachable in a shallow clone, which failed
-          # this job silently on every squash-merged push (found 2026-08-27 —
-          # runs on 2026-08-20 and 2026-08-23 both errored "Before-ref is
-          # unavailable" with no alerting). Full fetch makes the before-ref
-          # reachable in every case except a genuine force-push, which
-          # submit_indexnow.py now degrades out of gracefully instead of
-          # failing the job.
-          fetch-depth: 0
-
-      - name: Setup Python
-        uses: actions/setup-python@6d4fd22b20465ccc0f7354476588e8df7c9ca0e0 # v7.1.0
+          persist-credentials: false
+      - uses: actions/setup-python@6d4fd22b20465ccc0f7354476588e8df7c9ca0e0 # v7.1.0
         with:
           python-version: '3.12'
-
-      - name: Submit changed public URLs
-        env:
-          BEFORE: ${{ github.event.before }}
-        run: python scripts/submit_indexnow.py --before "$BEFORE"
+      - run: python3 -I -B scripts/submit_indexnow_selftest.py
